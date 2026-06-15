@@ -30,12 +30,120 @@ def get_history(ticker: str, period: str = "1y", interval: str = "1d") -> pd.Dat
 
 @st.cache_data(ttl=900, show_spinner=False)
 def get_info(ticker: str) -> dict:
-    """Scarica i metadati / fondamentali dell'azienda."""
+    """Metadati/fondamentali. Prova yfinance; se i dati di dettaglio mancano
+    (tipico sul cloud: Yahoo blocca le richieste dai server) e c'è una chiave FMP,
+    integra i fondamentali da Financial Modeling Prep."""
     try:
         info = yf.Ticker(ticker).info or {}
     except Exception:
         info = {}
+    # Mancano i fondamentali chiave? (tipico sul cloud, anche se la capitalizzazione c'è)
+    blocked = not (info.get("trailingPE") or info.get("returnOnEquity") or info.get("profitMargins"))
+    if blocked and _fmp_key():
+        fmp = info_from_fmp(ticker)
+        for k, v in (fmp or {}).items():
+            if info.get(k) in (None, ""):
+                info[k] = v
     return info
+
+
+# ---------------------------------------------------------------------------
+# FONTE DATI ALTERNATIVA: Financial Modeling Prep (FMP)
+# Yahoo blocca i dati di dettaglio dai server cloud → usiamo FMP come riserva.
+# Chiave in st.secrets["fmp_api_key"] o env FMP_API_KEY. Se assente, solo yfinance.
+# ---------------------------------------------------------------------------
+FMP_BASE = "https://financialmodelingprep.com/stable"
+
+
+def _fmp_key():
+    try:
+        k = st.secrets["fmp_api_key"]
+        if k:
+            return k
+    except Exception:
+        pass
+    return os.environ.get("FMP_API_KEY", "")
+
+
+@st.cache_data(ttl=900, show_spinner=False)
+def _fmp_get(path: str):
+    key = _fmp_key()
+    if not key:
+        return None
+    import requests
+    sep = "&" if "?" in path else "?"
+    try:
+        r = requests.get(f"{FMP_BASE}/{path}{sep}apikey={key}", timeout=15)
+        if r.status_code != 200:
+            return None
+        data = r.json()
+        if isinstance(data, dict) and ("Error Message" in data or "error" in data):
+            return None
+        return data
+    except Exception:
+        return None
+
+
+def _first(data):
+    return data[0] if isinstance(data, list) and data else {}
+
+
+@st.cache_data(ttl=900, show_spinner=False)
+def info_from_fmp(ticker: str) -> dict:
+    """Costruisce un dict 'info' (chiavi stile yfinance) dai nuovi endpoint FMP /stable/."""
+    prof = _first(_fmp_get(f"profile?symbol={ticker}"))
+    if not prof:
+        return {}
+    r = _first(_fmp_get(f"ratios-ttm?symbol={ticker}"))
+    m = _first(_fmp_get(f"key-metrics-ttm?symbol={ticker}"))
+    g = _first(_fmp_get(f"financial-growth?symbol={ticker}&limit=1"))
+
+    def num(x):
+        try:
+            return float(x)
+        except (TypeError, ValueError):
+            return None
+
+    qt = "ETF" if prof.get("isEtf") else ("MUTUALFUND" if prof.get("isFund") else "EQUITY")
+    info = {
+        "longName": prof.get("companyName"),
+        "shortName": prof.get("companyName"),
+        "sector": prof.get("sector"),
+        "industry": prof.get("industry"),
+        "country": prof.get("country"),
+        "currency": prof.get("currency"),
+        "exchange": prof.get("exchange"),
+        "marketCap": num(prof.get("marketCap")),
+        "beta": num(prof.get("beta")),
+        "currentPrice": num(prof.get("price")),
+        "longBusinessSummary": prof.get("description"),
+        "quoteType": qt,
+    }
+    rng = str(prof.get("range") or "")
+    if "-" in rng:
+        try:
+            lo, hi = rng.split("-")
+            info["fiftyTwoWeekLow"] = float(lo)
+            info["fiftyTwoWeekHigh"] = float(hi)
+        except Exception:
+            pass
+    info["trailingPE"] = num(r.get("priceToEarningsRatioTTM"))
+    info["priceToBook"] = num(r.get("priceToBookRatioTTM"))
+    info["pegRatio"] = num(r.get("priceToEarningsGrowthRatioTTM"))
+    info["returnOnEquity"] = num(m.get("returnOnEquityTTM"))
+    info["returnOnAssets"] = num(m.get("returnOnAssetsTTM"))
+    info["profitMargins"] = num(r.get("netProfitMarginTTM"))
+    info["operatingMargins"] = num(r.get("operatingProfitMarginTTM"))
+    d2e = num(r.get("debtToEquityRatioTTM"))
+    info["debtToEquity"] = d2e * 100 if d2e is not None else None  # ratio FMP → scala % (yfinance)
+    info["currentRatio"] = num(r.get("currentRatioTTM"))
+    info["quickRatio"] = num(r.get("quickRatioTTM"))
+    dy = num(r.get("dividendYieldTTM"))                            # FMP: frazione (0.0035)
+    info["dividendYield"] = dy * 100 if dy is not None else None   # → percento (come yfinance)
+    info["payoutRatio"] = num(r.get("dividendPayoutRatioTTM"))
+    info["revenueGrowth"] = num(g.get("revenueGrowth") or g.get("growthRevenue"))
+    info["earningsGrowth"] = num(g.get("netIncomeGrowth") or g.get("growthNetIncome"))
+    return {k: v for k, v in info.items() if v is not None}
 
 
 @st.cache_data(ttl=900, show_spinner=False)
@@ -50,9 +158,9 @@ def search_symbols(query: str, max_results: int = 8) -> list:
     query = (query or "").strip()
     if len(query) < 2:
         return []
+    out = []
     try:
         res = yf.Search(query, max_results=max_results)
-        out = []
         for q in res.quotes:
             sym = q.get("symbol")
             if not sym:
@@ -61,9 +169,23 @@ def search_symbols(query: str, max_results: int = 8) -> list:
             tipo = q.get("quoteType", "")
             borsa = q.get("exchDisp") or q.get("exchange", "")
             out.append((sym, nome, tipo, borsa))
-        return out
     except Exception:
-        return []
+        out = []
+    # Fallback FMP (Yahoo Search bloccato sul cloud)
+    if not out and _fmp_key():
+        from urllib.parse import quote
+        data = _fmp_get(f"search-name?query={quote(query)}&limit={max_results}")
+        if isinstance(data, list):
+            for q in data:
+                sym = q.get("symbol")
+                if not sym:
+                    continue
+                out.append((sym, q.get("name") or "", "",
+                            q.get("exchange") or q.get("exchangeFullName") or ""))
+    return out
+
+
+_FMP_SCREEN = {"day_gainers": "biggest-gainers", "day_losers": "biggest-losers", "most_actives": "most-actives"}
 
 
 @st.cache_data(ttl=600, show_spinner=False)
@@ -84,7 +206,28 @@ def get_screen(name: str, count: int = 15) -> pd.DataFrame:
             "Volume": q.get("regularMarketVolume"),
             "Cap.": q.get("marketCap"),
         })
-    return pd.DataFrame(rows)
+    df = pd.DataFrame(rows)
+    # Fallback FMP (Yahoo screener bloccato sul cloud) per le classifiche principali
+    if df.empty and _fmp_key() and name in _FMP_SCREEN:
+        data = _fmp_get(_FMP_SCREEN[name])
+        if isinstance(data, list):
+            frows = []
+            for q in data[:count]:
+                cp = q.get("changesPercentage", q.get("changePercentage"))
+                try:
+                    cp = float(str(cp).replace("%", "").replace("(", "-").replace(")", ""))
+                except (TypeError, ValueError):
+                    cp = None
+                frows.append({
+                    "Ticker": q.get("symbol", ""),
+                    "Nome": (q.get("name") or "")[:34],
+                    "Prezzo": q.get("price"),
+                    "Var %": cp,
+                    "Volume": None,
+                    "Cap.": None,
+                })
+            df = pd.DataFrame(frows)
+    return df
 
 
 @st.cache_data(ttl=600, show_spinner=False)
