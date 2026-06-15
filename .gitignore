@@ -1,0 +1,11 @@
+# Segreti e dati locali: NON devono finire su GitHub
+.streamlit/secrets.toml
+watchlist.json
+
+# Script di verifica/sviluppo non necessari all'app
+ml_verify.py
+
+# Cache Python
+__pycache__/
+*.pyc
+*.pyo
