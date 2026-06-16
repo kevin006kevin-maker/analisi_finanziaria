@@ -820,6 +820,21 @@ with tab_fund:
     if pos + neg + neu == 0:
         st.warning("Dati fondamentali non disponibili per questo strumento.")
 
+    # Controllo incrociato con i bilanci ufficiali SEC (verifica dei dati freschi)
+    ver = fu.verify_with_sec(ticker, info)
+    if ver:
+        if ver["coerenti"] == ver["checked"]:
+            st.success(f"🔎 **Verificato con i bilanci ufficiali SEC:** {ver['coerenti']}/{ver['checked']} valori coerenti ✓")
+        else:
+            st.warning(f"🔎 **Verifica con i bilanci ufficiali SEC:** {ver['coerenti']}/{ver['checked']} valori coerenti. "
+                       "Alcuni differiscono — di norma è **normale**: l'app mostra dati TTM (ultimi 12 mesi) "
+                       "mentre la SEC riporta l'ultimo bilancio **annuale**.")
+        with st.expander("Dettaglio verifica con dati ufficiali SEC"):
+            for label, a, s, ok in ver["rows"]:
+                st.markdown(f"{'✅' if ok else '⚠️'} **{label}** — mostrato: {a} · ufficiale SEC: {s}")
+    else:
+        st.caption("🔎 Verifica con bilanci ufficiali SEC non disponibile (titolo non USA o dati assenti).")
+
     with st.expander("📖 Glossario — cosa significano questi indicatori"):
         for label, _, _ in all_rows:
             txt = fu.help_for(label)
