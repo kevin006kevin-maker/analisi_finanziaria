@@ -542,7 +542,7 @@ if not ticker:
 
 with st.spinner(f"Scarico i dati di {ticker}…"):
     hist = fu.get_history(ticker, period=period)
-    info = fu.get_info(ticker)
+    info = fu.get_info(ticker, merge=True)   # combina tutte le fonti → meno campi «n/d»
 
 if hist.empty:
     st.error(
@@ -554,8 +554,8 @@ if hist.empty:
 hist = fu.add_indicators(hist)
 name = info.get("longName") or info.get("shortName") or ticker
 currency = info.get("currency", "")
-fund = fu.is_fund(info)
-fdata = fu.get_fund_data(ticker) if fund else None
+fund = fu.is_fund(info) or fu.is_known_etf(ticker)
+fdata = fu.get_fund_data(ticker, info) if fund else None
 
 # ---------------------------------------------------------------------------
 # INTESTAZIONE
@@ -881,16 +881,25 @@ with tab_tech:
         )
 
     st.markdown("#### Segnali tecnici attuali")
+    tsum = fu.technical_summary(hist)
+    if tsum:
+        st.markdown(
+            f"<div style='padding:10px 14px;border-radius:10px;background:{tsum['color']}14;"
+            f"border-left:6px solid {tsum['color']};margin-bottom:6px'>"
+            f"<span style='font-size:1.15em;font-weight:700;color:{tsum['color']}'>"
+            f"{tsum['emoji']} {tsum['label']}</span></div>",
+            unsafe_allow_html=True,
+        )
+        st.markdown("👉 " + tsum["line"])
+        st.caption("Sintesi dei singoli segnali qui sotto. Indicazione tecnica, **non un consiglio**.")
+
     signals = fu.technical_signals(hist)
     if signals:
+        st.write("")
         scols = st.columns(2)
         for i, (label, value, judgement) in enumerate(signals):
             with scols[i % 2]:
                 badge(label, value, judgement, fu.help_for(label))
-        pos = sum(1 for _, _, j in signals if j == "positivo")
-        neg = sum(1 for _, _, j in signals if j == "negativo")
-        st.markdown("---")
-        st.markdown(f"**Bilancio tecnico:** 🟢 {pos} rialzisti · 🔴 {neg} ribassisti")
     else:
         st.info("Storico insufficiente per calcolare i segnali (servono più dati).")
 
@@ -1052,6 +1061,9 @@ with tab_cmp:
             disp = df_cmp.copy()
             for c in ["ROE", "Margine", "Div%", "Cresc.ricavi", "Perf.1A", "Volatilità"]:
                 disp[c] = disp[c] * 100
+            # Medaglie nella colonna Ticker (bloccata a sinistra → la classifica resta sempre visibile)
+            _medals = {0: "🥇", 1: "🥈", 2: "🥉"}
+            disp.index = [f"{_medals.get(i, '')} {t}".strip() for i, t in enumerate(disp.index)]
 
             # Legenda sempre visibile delle colonne
             with st.expander("📖 Cosa significano le colonne (leggimi)", expanded=True):
@@ -1072,8 +1084,8 @@ with tab_cmp:
                 )
 
             show_all = st.checkbox(
-                "Mostra tutte le metriche", value=expert,
-                help="Disattivata mostra solo le colonne essenziali; attivala per vedere P/B, margine, debito, crescita, volatilità.",
+                "Mostra tutte le metriche", value=False,
+                help="Disattivata mostra solo le colonne essenziali (entrano nello schermo). Attivala per vedere anche P/B, margine, debito, crescita, volatilità.",
             )
             essential = ["Nome", "Punteggio", "Prezzo", "P/E", "ROE", "Div%", "Perf.1A"]
             full = ["Nome", "Punteggio", "Prezzo", "P/E", "P/B", "ROE", "Margine",
@@ -1114,13 +1126,13 @@ with tab_cmp:
                         help="Oscillazione annua del prezzo. Più alta = più rischio."),
                 },
             )
-            best = df_cmp.index[0]
-            best_name = df_cmp.loc[best, "Nome"]
-            st.success(
-                f"🏆 Punteggio sintetico più alto: **{best} — {best_name}** "
-                f"({df_cmp.loc[best, 'Punteggio']:.0f}/100). "
-                "Il punteggio è una sintesi quantitativa indicativa, non un consiglio di acquisto."
-            )
+            podio = []
+            for med, t in zip(["🥇", "🥈", "🥉"], df_cmp.index[:3]):
+                nm = df_cmp.loc[t, "Nome"]
+                sc = df_cmp.loc[t, "Punteggio"]
+                podio.append(f"{med} **{t}** ({nm}) — {sc:.0f}/100" if pd.notna(sc) else f"{med} **{t}** ({nm})")
+            st.success("🏆 **Classifica per punteggio sintetico:**  \n" + "  \n".join(podio)
+                       + "  \n\n_Sintesi quantitativa indicativa, non un consiglio di acquisto._")
 
             # Grafico performance normalizzata
             st.markdown("#### Andamento a confronto (base 100)")
