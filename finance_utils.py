@@ -41,7 +41,8 @@ def _fmp_history(ticker: str, period: str):
     df = df.rename(columns={"open": "Open", "high": "High", "low": "Low",
                             "close": "Close", "volume": "Volume"})
     cols = [c for c in ["Open", "High", "Low", "Close", "Volume"] if c in df.columns]
-    return df[cols].dropna(how="all")
+    out = df[cols]
+    return out[out["Close"].notna()]   # mai righe senza prezzo di chiusura
 
 
 @st.cache_data(ttl=900, show_spinner=False)
@@ -60,7 +61,10 @@ def get_history(ticker: str, period: str = "1y", interval: str = "1d") -> pd.Dat
         return pd.DataFrame()
     if df is None or df.empty:
         return pd.DataFrame()
-    return df.dropna(how="all")
+    df = df.dropna(how="all")
+    if "Close" in df.columns:
+        df = df[df["Close"].notna()]   # elimina l'eventuale riga finale senza prezzo (yfinance)
+    return df
 
 
 @st.cache_data(ttl=900, show_spinner=False)
