@@ -6,6 +6,7 @@ Nessuna dipendenza da TA-Lib: gli indicatori sono calcolati con pandas/numpy.
 
 import os
 import json
+import datetime
 
 import numpy as np
 import pandas as pd
@@ -17,34 +18,62 @@ import streamlit as st
 # DOWNLOAD DATI
 # ---------------------------------------------------------------------------
 
+_PERIOD_DAYS = {"5d": 8, "1mo": 31, "3mo": 93, "6mo": 186, "1y": 372,
+                "2y": 744, "5y": 1860, "max": 0}
+
+
+def _fmp_history(ticker: str, period: str):
+    """Storico prezzi giornaliero da FMP (OHLCV). Ritorna DataFrame stile yfinance."""
+    days = _PERIOD_DAYS.get(period, 372)
+    path = f"historical-price-eod/full?symbol={ticker}"
+    if days:
+        frm = (datetime.date.today() - datetime.timedelta(days=days)).isoformat()
+        path += f"&from={frm}"
+    data = _fmp_get(path)
+    if not isinstance(data, list) or not data:
+        return None
+    df = pd.DataFrame(data)
+    if df.empty or "date" not in df.columns or "close" not in df.columns:
+        return None
+    df["date"] = pd.to_datetime(df["date"])
+    df = df.sort_values("date").set_index("date")
+    df = df.rename(columns={"open": "Open", "high": "High", "low": "Low",
+                            "close": "Close", "volume": "Volume"})
+    cols = [c for c in ["Open", "High", "Low", "Close", "Volume"] if c in df.columns]
+    return df[cols].dropna(how="all")
+
+
 @st.cache_data(ttl=900, show_spinner=False)
 def get_history(ticker: str, period: str = "1y", interval: str = "1d") -> pd.DataFrame:
-    """Scarica lo storico prezzi. Cache 15 min (dati gratuiti ~15 min di ritardo)."""
-    t = yf.Ticker(ticker)
-    df = t.history(period=period, interval=interval, auto_adjust=False)
+    """Storico prezzi. Fonte primaria: FMP (affidabile dal cloud). Riserva: yfinance."""
+    if _fmp_key():
+        try:
+            df = _fmp_history(ticker, period)
+            if df is not None and not df.empty:
+                return df
+        except Exception:
+            pass
+    try:
+        df = yf.Ticker(ticker).history(period=period, interval=interval, auto_adjust=False)
+    except Exception:
+        return pd.DataFrame()
     if df is None or df.empty:
         return pd.DataFrame()
-    df = df.dropna(how="all")
-    return df
+    return df.dropna(how="all")
 
 
 @st.cache_data(ttl=900, show_spinner=False)
 def get_info(ticker: str) -> dict:
-    """Metadati/fondamentali. Prova yfinance; se i dati di dettaglio mancano
-    (tipico sul cloud: Yahoo blocca le richieste dai server) e c'è una chiave FMP,
-    integra i fondamentali da Financial Modeling Prep."""
-    try:
-        info = yf.Ticker(ticker).info or {}
-    except Exception:
-        info = {}
-    # Mancano i fondamentali chiave? (tipico sul cloud, anche se la capitalizzazione c'è)
-    blocked = not (info.get("trailingPE") or info.get("returnOnEquity") or info.get("profitMargins"))
-    if blocked and _fmp_key():
+    """Metadati/fondamentali. Fonte primaria: FMP (affidabile dal cloud).
+    Riserva: yfinance (es. indici non presenti su FMP)."""
+    if _fmp_key():
         fmp = info_from_fmp(ticker)
-        for k, v in (fmp or {}).items():
-            if info.get(k) in (None, ""):
-                info[k] = v
-    return info
+        if fmp:
+            return fmp
+    try:
+        return yf.Ticker(ticker).info or {}
+    except Exception:
+        return {}
 
 
 # ---------------------------------------------------------------------------
@@ -159,6 +188,20 @@ def search_symbols(query: str, max_results: int = 8) -> list:
     if len(query) < 2:
         return []
     out = []
+    # Fonte primaria: FMP (affidabile dal cloud)
+    if _fmp_key():
+        from urllib.parse import quote
+        data = _fmp_get(f"search-name?query={quote(query)}&limit={max_results}")
+        if isinstance(data, list):
+            for q in data:
+                sym = q.get("symbol")
+                if not sym:
+                    continue
+                out.append((sym, q.get("name") or "", "",
+                            q.get("exchange") or q.get("exchangeFullName") or ""))
+    if out:
+        return out
+    # Riserva: yfinance
     try:
         res = yf.Search(query, max_results=max_results)
         for q in res.quotes:
@@ -170,18 +213,7 @@ def search_symbols(query: str, max_results: int = 8) -> list:
             borsa = q.get("exchDisp") or q.get("exchange", "")
             out.append((sym, nome, tipo, borsa))
     except Exception:
-        out = []
-    # Fallback FMP (Yahoo Search bloccato sul cloud)
-    if not out and _fmp_key():
-        from urllib.parse import quote
-        data = _fmp_get(f"search-name?query={quote(query)}&limit={max_results}")
-        if isinstance(data, list):
-            for q in data:
-                sym = q.get("symbol")
-                if not sym:
-                    continue
-                out.append((sym, q.get("name") or "", "",
-                            q.get("exchange") or q.get("exchangeFullName") or ""))
+        pass
     return out
 
 
@@ -190,27 +222,11 @@ _FMP_SCREEN = {"day_gainers": "biggest-gainers", "day_losers": "biggest-losers",
 
 @st.cache_data(ttl=600, show_spinner=False)
 def get_screen(name: str, count: int = 15) -> pd.DataFrame:
-    """Classifica predefinita (es. 'day_gainers', 'day_losers', 'most_actives')."""
-    try:
-        res = yf.screen(name, count=count)
-        quotes = res.get("quotes", []) if isinstance(res, dict) else []
-    except Exception:
-        quotes = []
-    rows = []
-    for q in quotes:
-        rows.append({
-            "Ticker": q.get("symbol", ""),
-            "Nome": (q.get("shortName") or q.get("longName") or "")[:34],
-            "Prezzo": q.get("regularMarketPrice"),
-            "Var %": q.get("regularMarketChangePercent"),
-            "Volume": q.get("regularMarketVolume"),
-            "Cap.": q.get("marketCap"),
-        })
-    df = pd.DataFrame(rows)
-    # Fallback FMP (Yahoo screener bloccato sul cloud) per le classifiche principali
-    if df.empty and _fmp_key() and name in _FMP_SCREEN:
+    """Classifica predefinita. Fonte primaria: FMP (gainers/losers/actives); riserva yfinance."""
+    # FMP primario per le classifiche principali
+    if _fmp_key() and name in _FMP_SCREEN:
         data = _fmp_get(_FMP_SCREEN[name])
-        if isinstance(data, list):
+        if isinstance(data, list) and data:
             frows = []
             for q in data[:count]:
                 cp = q.get("changesPercentage", q.get("changePercentage"))
@@ -223,11 +239,25 @@ def get_screen(name: str, count: int = 15) -> pd.DataFrame:
                     "Nome": (q.get("name") or "")[:34],
                     "Prezzo": q.get("price"),
                     "Var %": cp,
-                    "Volume": None,
-                    "Cap.": None,
+                    "Volume": q.get("volume"),
+                    "Cap.": q.get("marketCap"),
                 })
-            df = pd.DataFrame(frows)
-    return df
+            return pd.DataFrame(frows)
+    # Riserva yfinance (e unica fonte per le classifiche non coperte da FMP)
+    try:
+        res = yf.screen(name, count=count)
+        quotes = res.get("quotes", []) if isinstance(res, dict) else []
+    except Exception:
+        quotes = []
+    rows = [{
+        "Ticker": q.get("symbol", ""),
+        "Nome": (q.get("shortName") or q.get("longName") or "")[:34],
+        "Prezzo": q.get("regularMarketPrice"),
+        "Var %": q.get("regularMarketChangePercent"),
+        "Volume": q.get("regularMarketVolume"),
+        "Cap.": q.get("marketCap"),
+    } for q in quotes]
+    return pd.DataFrame(rows)
 
 
 @st.cache_data(ttl=600, show_spinner=False)
@@ -829,7 +859,15 @@ def save_watchlist(tickers: list) -> None:
 
 @st.cache_data(ttl=300, show_spinner=False)
 def quick_quote(ticker: str) -> dict:
-    """Prezzo e variazione del giorno per la watchlist (leggero)."""
+    """Prezzo e variazione del giorno per la watchlist (leggero). Fonte: FMP quote, poi storico."""
+    if _fmp_key():
+        q = _first(_fmp_get(f"quote?symbol={ticker}"))
+        if q and q.get("price") is not None:
+            try:
+                return {"price": float(q["price"]),
+                        "change_pct": float(q.get("changePercentage") or 0.0)}
+            except (TypeError, ValueError):
+                pass
     df = get_history(ticker, period="5d")
     if df.empty:
         return {"price": None, "change_pct": None}
