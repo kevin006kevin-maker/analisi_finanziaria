@@ -1148,7 +1148,8 @@ def opportunity_row(ticker: str, with_fundamentals: bool = True) -> dict:
     rebound_pot = _nn((sma50 / price - 1) * 100) if (not np.isnan(sma50) and price) else None
     target_price = float(sma50) if not np.isnan(sma50) else None
     stop_price = float(h["Close"].tail(20).min())   # minimo delle ultime ~4 settimane
-    spark = [round(float(x), 4) for x in h["Close"].tail(60).tolist()]   # per mini-grafico
+    spark = [round(float(x), 4) for x in h["Close"].tail(60).tolist()]          # mini-grafico (prezzi)
+    spark_dates = [str(d.date()) for d in h.index[-60:]]                         # date per l'asse x
 
     # Probabilità statistiche (modello normale sui rendimenti storici, drift smorzato).
     # Orizzonte: breve ~1 mese, lungo ~1 anno. NON è una previsione: è una stima dal passato.
@@ -1166,7 +1167,8 @@ def opportunity_row(ticker: str, with_fundamentals: bool = True) -> dict:
                 perf_1m=perf_1m, perf_1y=perf_1y, below_bb=below_bb, above_sma200=above_sma200,
                 etf=etf, fscore=fscore, prob_gain=prob_gain, prob_loss=prob_loss,
                 exp_ret=exp_ret, reliab=reliab, rebound_pot=rebound_pot,
-                target_price=target_price, stop_price=stop_price, spark=spark)
+                target_price=target_price, stop_price=stop_price,
+                spark=spark, spark_dates=spark_dates)
 
 
 def _gain_loss_prob(h, horizon_days=21):
