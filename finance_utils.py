@@ -883,8 +883,9 @@ def quick_quote(ticker: str) -> dict:
 # ---------------------------------------------------------------------------
 
 @st.cache_data(ttl=900, show_spinner=False)
-def opportunity_row(ticker: str) -> dict:
-    info = get_info(ticker)
+def opportunity_row(ticker: str, with_fundamentals: bool = True) -> dict:
+    """Riga occasione. with_fundamentals=False (breve periodo) usa solo lo storico
+    (1 sola chiamata API) e salta i fondamentali → molte meno richieste."""
     h = get_history(ticker, period="1y")
     if h.empty or len(h) < 60:
         return None
@@ -898,22 +899,22 @@ def opportunity_row(ticker: str) -> dict:
         return None if (x is None or (isinstance(x, float) and np.isnan(x))) else x
 
     rsi = float(last["RSI"]) if not np.isnan(last.get("RSI", np.nan)) else None
-    try:
-        hi = float(info.get("fiftyTwoWeekHigh"))
-    except (TypeError, ValueError):
-        hi = float("nan")
-    if not hi or np.isnan(hi):
-        hi = float(h["Close"].max())
-    dd_high = _nn((price / hi - 1) * 100) if hi and not np.isnan(hi) else None
+    hi = float(h["Close"].max())   # massimo ~52 settimane dallo storico (niente chiamata extra)
+    dd_high = _nn((price / hi - 1) * 100) if hi else None
     perf_1m = _nn((price / float(h["Close"].iloc[-21]) - 1) * 100) if len(h) > 21 else None
     perf_1y = _nn((price / float(h["Close"].iloc[0]) - 1) * 100)
     bb_low = last.get("BB_low", np.nan)
     below_bb = bool(price <= bb_low) if not np.isnan(bb_low) else False
     sma200 = last.get("SMA200", np.nan)
     above_sma200 = bool(price > sma200) if not np.isnan(sma200) else None
-    etf = is_fund(info)
-    fscore = _fundamental_score(info) if not etf else None
-    name = (info.get("shortName") or info.get("longName") or ticker)[:34]
+
+    etf, fscore, name = False, None, ticker
+    if with_fundamentals:                    # solo per il lungo periodo (qualità)
+        info = get_info(ticker)
+        etf = is_fund(info)
+        fscore = _fundamental_score(info) if not etf else None
+        name = (info.get("shortName") or info.get("longName") or ticker)[:34]
+
     return dict(ticker=ticker.upper(), name=name, price=price, rsi=rsi, dd_high=dd_high,
                 perf_1m=perf_1m, perf_1y=perf_1y, below_bb=below_bb, above_sma200=above_sma200,
                 etf=etf, fscore=fscore)
@@ -998,7 +999,7 @@ def _long_reasons(r):
 
 @st.cache_data(ttl=900, show_spinner=False)
 def opportunity_candidates(kind: str) -> list:
-    """Universo di partenza dalle classifiche di mercato (yfinance)."""
+    """Universo di partenza dalle classifiche di mercato."""
     screens = (["day_losers", "most_actives", "small_cap_gainers"] if kind == "short"
                else ["undervalued_large_caps", "undervalued_growth_stocks", "day_losers"])
     names = []
@@ -1006,14 +1007,23 @@ def opportunity_candidates(kind: str) -> list:
         df = get_screen(s, 12)
         if not df.empty:
             names += [x for x in df["Ticker"].tolist() if x]
-    return list(dict.fromkeys(names))[:30]   # cap per tenere la scansione sotto i ~30s
+    # Per il breve periodo: includi anche titoli economici molto scambiati (anche < 1$),
+    # che le classifiche "biggest losers" delle borse principali non mostrano.
+    if kind == "short" and _fmp_key():
+        pen = _fmp_get("company-screener?isActivelyTrading=true&priceLowerThan=5"
+                       "&volumeMoreThan=300000&limit=25")
+        if isinstance(pen, list):
+            names += [q.get("symbol") for q in pen if q.get("symbol")]
+    # Breve = 1 chiamata/titolo (si può osare di più); Lungo = ~4 chiamate/titolo (limita la quota FMP)
+    cap = 40 if kind == "short" else 20
+    return list(dict.fromkeys(names))[:cap]
 
 
 def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
     rows = []
     for t in dict.fromkeys([x for x in tickers if x]):
         try:
-            r = opportunity_row(t)
+            r = opportunity_row(t, with_fundamentals=(kind == "long"))
         except Exception:
             r = None
         if not r:
