@@ -232,24 +232,28 @@ def get_screen(name: str, count: int = 15) -> pd.DataFrame:
 
 @st.cache_data(ttl=600, show_spinner=False)
 def get_news(ticker: str, count: int = 8) -> list:
-    """Notizie recenti legate a un ticker. Ritorna lista di dict normalizzati."""
+    """Notizie legate a un ticker, ordinate dalla più recente. Ritorna dict normalizzati.
+    Ogni voce ha 'ts' (timestamp ISO completo, per ordinare/filtrare) e 'date' (YYYY-MM-DD)."""
     try:
         raw = yf.Ticker(ticker).news or []
     except Exception:
         raw = []
     out = []
-    for item in raw[:count]:
+    for item in raw:
         c = item.get("content", item) if isinstance(item, dict) else {}
         provider = c.get("provider") or {}
         click = c.get("clickThroughUrl") or c.get("canonicalUrl") or {}
+        ts = (c.get("pubDate") or c.get("displayTime") or "")
         out.append({
             "title": c.get("title", "(senza titolo)"),
             "summary": c.get("summary") or c.get("description") or "",
             "publisher": provider.get("displayName", "") if isinstance(provider, dict) else "",
             "url": click.get("url", "") if isinstance(click, dict) else "",
-            "date": (c.get("pubDate") or c.get("displayTime") or "")[:10],
+            "ts": ts,
+            "date": ts[:10],
         })
-    return out
+    out.sort(key=lambda n: n["ts"], reverse=True)   # più recente prima (ISO → ordine lessicografico)
+    return out[:count]
 
 
 # ---------------------------------------------------------------------------
@@ -849,11 +853,22 @@ def opportunity_row(ticker: str) -> dict:
     h = add_indicators(h)
     last = h.iloc[-1]
     price = float(last["Close"])
+    if np.isnan(price):
+        return None
+
+    def _nn(x):  # NaN/None → None (evita round(NaN) e confronti ingannevoli)
+        return None if (x is None or (isinstance(x, float) and np.isnan(x))) else x
+
     rsi = float(last["RSI"]) if not np.isnan(last.get("RSI", np.nan)) else None
-    hi = info.get("fiftyTwoWeekHigh") or float(h["Close"].max())
-    dd_high = (price / hi - 1) * 100 if hi else None          # % sotto il massimo 52s (negativo)
-    perf_1m = (price / float(h["Close"].iloc[-21]) - 1) * 100 if len(h) > 21 else None
-    perf_1y = (price / float(h["Close"].iloc[0]) - 1) * 100
+    try:
+        hi = float(info.get("fiftyTwoWeekHigh"))
+    except (TypeError, ValueError):
+        hi = float("nan")
+    if not hi or np.isnan(hi):
+        hi = float(h["Close"].max())
+    dd_high = _nn((price / hi - 1) * 100) if hi and not np.isnan(hi) else None
+    perf_1m = _nn((price / float(h["Close"].iloc[-21]) - 1) * 100) if len(h) > 21 else None
+    perf_1y = _nn((price / float(h["Close"].iloc[0]) - 1) * 100)
     bb_low = last.get("BB_low", np.nan)
     below_bb = bool(price <= bb_low) if not np.isnan(bb_low) else False
     sma200 = last.get("SMA200", np.nan)
@@ -951,24 +966,25 @@ def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
             r = None
         if not r:
             continue
+        dd = r["dd_high"]
         if kind == "short":
             sc = _short_score(r)
-            if sc is None or sc < 35:          # setup da ipervenduto / zona bassa
+            if sc is None or not np.isfinite(sc) or sc < 35:   # setup da ipervenduto / zona bassa
                 continue
-            if (r["dd_high"] or 0) > -8:        # dev'essere un calo reale, non un titolo ai massimi
+            if dd is None or dd > -8:           # dev'essere un calo reale, non un titolo ai massimi
                 continue
             rows.append({"Ticker": r["ticker"], "Nome": r["name"], "Prezzo": r["price"],
-                         "RSI": r["rsi"], "% dal max": r["dd_high"], "Perf 1 mese": r["perf_1m"],
-                         "Occasione": round(sc), "Perché": _short_reasons(r)})
+                         "RSI": r["rsi"], "% dal max": dd, "Perf 1 mese": r["perf_1m"],
+                         "Occasione": int(round(sc)), "Perché": _short_reasons(r)})
         else:
             sc = _long_score(r)
-            if sc is None or sc < 50:
+            if sc is None or not np.isfinite(sc) or sc < 50:
                 continue
-            if (r["dd_high"] or 0) > -12:       # richiede uno sconto significativo dai massimi
+            if dd is None or dd > -12:          # richiede uno sconto significativo dai massimi
                 continue
             rows.append({"Ticker": r["ticker"], "Nome": r["name"], "Prezzo": r["price"],
-                         "% dal max": r["dd_high"], "Perf 1 anno": r["perf_1y"],
-                         "Occasione": round(sc), "Perché": _long_reasons(r)})
+                         "% dal max": dd, "Perf 1 anno": r["perf_1y"],
+                         "Occasione": int(round(sc)), "Perché": _long_reasons(r)})
     df = pd.DataFrame(rows)
     if not df.empty:
         df = df.sort_values("Occasione", ascending=False).set_index("Ticker")
