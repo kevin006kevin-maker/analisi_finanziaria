@@ -1143,6 +1143,13 @@ def opportunity_row(ticker: str, with_fundamentals: bool = True) -> dict:
     sma200 = last.get("SMA200", np.nan)
     above_sma200 = bool(price > sma200) if not np.isnan(sma200) else None
 
+    # Potenziale di rimbalzo e livelli operativi (bersaglio = media 50gg, stop = minimo recente)
+    sma50 = last.get("SMA50", np.nan)
+    rebound_pot = _nn((sma50 / price - 1) * 100) if (not np.isnan(sma50) and price) else None
+    target_price = float(sma50) if not np.isnan(sma50) else None
+    stop_price = float(h["Close"].tail(20).min())   # minimo delle ultime ~4 settimane
+    spark = [round(float(x), 4) for x in h["Close"].tail(60).tolist()]   # per mini-grafico
+
     # Probabilità statistiche (modello normale sui rendimenti storici, drift smorzato).
     # Orizzonte: breve ~1 mese, lungo ~1 anno. NON è una previsione: è una stima dal passato.
     prob_gain, prob_loss, exp_ret, reliab = _gain_loss_prob(
@@ -1158,7 +1165,8 @@ def opportunity_row(ticker: str, with_fundamentals: bool = True) -> dict:
     return dict(ticker=ticker.upper(), name=name, price=price, rsi=rsi, dd_high=dd_high,
                 perf_1m=perf_1m, perf_1y=perf_1y, below_bb=below_bb, above_sma200=above_sma200,
                 etf=etf, fscore=fscore, prob_gain=prob_gain, prob_loss=prob_loss,
-                exp_ret=exp_ret, reliab=reliab)
+                exp_ret=exp_ret, reliab=reliab, rebound_pot=rebound_pot,
+                target_price=target_price, stop_price=stop_price, spark=spark)
 
 
 def _gain_loss_prob(h, horizon_days=21):
@@ -1280,18 +1288,60 @@ _FALLBACK_UNIVERSE = [
 _REL_FACTOR = {"🟢 Alta": 1.0, "🟡 Media": 0.85, "🔴 Bassa": 0.7}
 
 
-def _convenience(r) -> int:
-    """Punteggio 0-100 di convenienza: combina prob. salita, guadagno atteso,
-    rischio di perdita e affidabilità. Centrato su 50; l'affidabilità bassa
-    avvicina al neutro (stima incerta → non spinge in alto né in basso)."""
+def _convenience(r, gain) -> int:
+    """Punteggio 0-100 di convenienza: combina prob. salita, guadagno (rimbalzo per il breve,
+    atteso per il lungo), rischio di perdita e affidabilità. Centrato su 50;
+    l'affidabilità bassa avvicina al neutro (stima incerta)."""
     pg = r["prob_gain"] if r["prob_gain"] is not None else 50
     pl = r["prob_loss"] if r["prob_loss"] is not None else 50
-    er = r["exp_ret"] if r["exp_ret"] is not None else 0
+    g = gain if gain is not None else 0
     rf = _REL_FACTOR.get(r["reliab"], 0.8)
-    a = (pg - pl) + max(min(er, 40), -20)     # attrattività grezza (~ -120..140)
+    a = (pg - pl) + max(min(g, 40), -20)      # attrattività grezza (~ -120..140)
     base = 50 + 0.45 * a
     conv = 50 + (base - 50) * rf              # affidabilità bassa → verso 50
     return int(round(max(0, min(100, conv))))
+
+
+_POS_WORDS = set((
+    "beat beats surge surges upgrade upgraded growth profit profits rally rallies gain gains "
+    "bullish raise raised raises strong record outperform soar soars jump jumps rise rises tops "
+    "boost boosts wins win positive optimistic recovery rebound rebounds buy approval expands"
+).split())
+_NEG_WORDS = set((
+    "miss misses plunge plunges downgrade downgraded loss losses lawsuit probe decline declines "
+    "cut cuts weak bearish warning warns warn slump slumps fraud recall layoffs falls drop drops "
+    "sink sinks tumble tumbles concern concerns risk risks slashed halt investigation negative "
+    "crash crashes sell selloff bankruptcy delays delay"
+).split())
+
+
+def news_sentiment(news: list):
+    """Tono indicativo delle notizie recenti (parole chiave, gratis). Ritorna (etichetta, score)."""
+    import re
+    text = " ".join((n.get("title", "") + " " + n.get("summary", "")) for n in news).lower()
+    words = re.findall(r"[a-z']+", text)
+    pos = sum(1 for w in words if w in _POS_WORDS)
+    neg = sum(1 for w in words if w in _NEG_WORDS)
+    score = pos - neg
+    if pos + neg == 0:
+        return "⚪ neutro", 0
+    if score >= 2:
+        return "🟢 positivo", score
+    if score <= -2:
+        return "🔴 negativo", score
+    return "🟡 misto", score
+
+
+@st.cache_data(ttl=900, show_spinner=False)
+def market_perf_1m() -> float:
+    """Performance ~1 mese dell'S&P 500, per contestualizzare i cali dei singoli titoli."""
+    h = get_history("^GSPC", period="3mo")
+    if h.empty:
+        return None
+    c = h["Close"].dropna()
+    if len(c) <= 21:
+        return None
+    return float((c.iloc[-1] / c.iloc[-21] - 1) * 100)
 
 
 @st.cache_data(ttl=900, show_spinner=False)
@@ -1336,10 +1386,11 @@ def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
                 continue
             if dd is None or dd > -8:           # dev'essere un calo reale, non un titolo ai massimi
                 continue
-            rows.append({"Ticker": r["ticker"], "Nome": r["name"], "Convenienza": _convenience(r),
+            gain = r["rebound_pot"] if r["rebound_pot"] is not None else r["exp_ret"]
+            rows.append({"Ticker": r["ticker"], "Nome": r["name"], "Convenienza": _convenience(r, gain),
                          "Prezzo": r["price"], "RSI": r["rsi"], "% dal max": dd, "Perf 1 mese": r["perf_1m"],
                          "Occasione": int(round(sc)),
-                         "Prob. salita": r["prob_gain"], "Guadagno atteso": r["exp_ret"],
+                         "Prob. salita": r["prob_gain"], "Guadagno atteso": gain,
                          "Rischio perdita": r["prob_loss"], "Affidabilità": r["reliab"],
                          "Perché": _short_reasons(r)})
         else:
@@ -1348,7 +1399,8 @@ def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
                 continue
             if dd is None or dd > -12:          # richiede uno sconto significativo dai massimi
                 continue
-            rows.append({"Ticker": r["ticker"], "Nome": r["name"], "Convenienza": _convenience(r),
+            rows.append({"Ticker": r["ticker"], "Nome": r["name"],
+                         "Convenienza": _convenience(r, r["exp_ret"]),
                          "Prezzo": r["price"], "% dal max": dd, "Perf 1 anno": r["perf_1y"],
                          "Occasione": int(round(sc)),
                          "Prob. salita": r["prob_gain"], "Guadagno atteso": r["exp_ret"],
