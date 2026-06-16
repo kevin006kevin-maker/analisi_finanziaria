@@ -945,12 +945,18 @@ def _short_score(r):
 def _short_reasons(r):
     bits = []
     if r["rsi"] is not None:
-        bits.append(f"RSI {r['rsi']:.0f}" + (" (ipervenduto)" if r["rsi"] <= 35 else ""))
+        if r["rsi"] <= 30:
+            bits.append(f"molto ipervenduto (RSI {r['rsi']:.0f}): dopo cali forti spesso arriva un rimbalzo")
+        elif r["rsi"] <= 40:
+            bits.append(f"ipervenduto (RSI {r['rsi']:.0f})")
+        else:
+            bits.append(f"RSI {r['rsi']:.0f} (zona bassa)")
     if r["dd_high"] is not None:
-        bits.append(f"{r['dd_high']:.0f}% dal massimo")
+        bits.append(f"sceso {abs(r['dd_high']):.0f}% dai massimi dell'anno")
     if r["below_bb"]:
-        bits.append("sotto banda Bollinger")
-    bits.append("trend di fondo positivo" if r["above_sma200"] else "trend di fondo debole")
+        bits.append("prezzo a un estremo (sotto la banda di Bollinger)")
+    bits.append("trend di fondo ancora positivo" if r["above_sma200"]
+                else "⚠️ trend di fondo debole (più rischioso)")
     return " · ".join(bits)
 
 
@@ -972,13 +978,16 @@ def _long_score(r):
 def _long_reasons(r):
     bits = []
     if r["etf"]:
-        bits.append("ETF diversificato")
+        bits.append("ETF diversificato in saldo")
     elif r["fscore"] is not None:
-        bits.append(f"fondamentali {r['fscore']:.0f}/100")
+        if r["fscore"] >= 60:
+            bits.append(f"buoni fondamentali (punteggio {r['fscore']:.0f}/100)")
+        else:
+            bits.append(f"fondamentali nella media ({r['fscore']:.0f}/100)")
     if r["dd_high"] is not None:
-        bits.append(f"{r['dd_high']:.0f}% sotto il massimo 52s")
+        bits.append(f"in saldo: {abs(r['dd_high']):.0f}% sotto il massimo dell'anno")
     if r["perf_1y"] is not None:
-        bits.append(f"1 anno {r['perf_1y']:+.0f}%")
+        bits.append(f"ultimo anno {r['perf_1y']:+.0f}%")
     return " · ".join(bits)
 
 
@@ -1003,6 +1012,8 @@ def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
         except Exception:
             r = None
         if not r:
+            continue
+        if r["price"] is not None and r["price"] < 1:   # esclude penny stock (segnali ingannevoli)
             continue
         dd = r["dd_high"]
         if kind == "short":
