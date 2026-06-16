@@ -217,6 +217,14 @@ if section.startswith("💎"):
             st_autorefresh(interval=(900000 if "15" in refresh_choice else 1800000), key="opp_auto")
             st.caption(f"🔄 Aggiornamento automatico **attivo** ({refresh_choice.lower()}) · "
                        f"ultimo aggiornamento: {datetime.datetime.now().strftime('%H:%M')}")
+        with st.expander("🎛️ Filtri", expanded=False):
+            fco1, fco2, fco3 = st.columns(3)
+            f_min_conv = fco1.slider("Convenienza minima", 0, 100, 0, key="f_conv")
+            f_rel = fco2.radio("Affidabilità", ["Tutte", "Almeno 🟡 Media", "Solo 🟢 Alta"], key="f_rel")
+            f_max_loss = fco3.slider("Rischio di perdita massimo (%)", 0, 100, 100, key="f_loss")
+
+        mkt_1m = fu.market_perf_1m()
+
         def render_opps(kind, header, help_txt, cols_cfg):
             st.markdown(f"### {header}")
             st.caption(help_txt)
@@ -251,6 +259,16 @@ if section.startswith("💎"):
             if df.empty:
                 st.info("Nessuna occasione che soddisfi i criteri in questo momento.")
                 return
+            # Filtri scelti dall'utente
+            df = df[df["Convenienza"] >= f_min_conv]
+            if f_rel == "Solo 🟢 Alta":
+                df = df[df["Affidabilità"] == "🟢 Alta"]
+            elif f_rel == "Almeno 🟡 Media":
+                df = df[df["Affidabilità"].isin(["🟢 Alta", "🟡 Media"])]
+            df = df[df["Rischio perdita"].isna() | (df["Rischio perdita"] <= f_max_loss)]
+            if df.empty:
+                st.info("Nessuna occasione con i filtri scelti. Allarga i criteri nei 🎛️ Filtri.")
+                return
             st.dataframe(df, use_container_width=True,
                          height=min(60 + 38 * len(df), 460), column_config=cols_cfg)
 
@@ -278,19 +296,37 @@ if section.startswith("💎"):
                             line += f"  \nAffidabilità della stima: **{rel}**"
                         line += "  \n_Stima dai dati storici, non una previsione._"
                         st.markdown(line)
-                    news = fu.get_news(tk, 3)
+                    det = fu.opportunity_row(tk, with_fundamentals=(kind == "long"))
+                    if det and det.get("spark"):
+                        st.line_chart(pd.Series(det["spark"]), height=130)
+                    if det:
+                        price = det.get("price")
+                        tgt, stp = det.get("target_price"), det.get("stop_price")
+                        lvl = []
+                        if tgt and price:
+                            lvl.append(f"🎯 Bersaglio (media 50gg): **{tgt:,.2f}** ({(tgt/price-1)*100:+.0f}%)")
+                        if stp and price:
+                            lvl.append(f"🛑 Stop indicativo (minimo recente): **{stp:,.2f}** ({(stp/price-1)*100:+.0f}%)")
+                        if lvl:
+                            st.markdown(" · ".join(lvl) + "  \n_Livelli indicativi per gestire il rischio, non consigli._")
+                        s1m = det.get("perf_1m")
+                        if mkt_1m is not None and s1m is not None:
+                            if abs(s1m - mkt_1m) <= 1:
+                                conf = "in linea col mercato"
+                            elif s1m < mkt_1m:
+                                conf = "**peggio del mercato** (calo più specifico del titolo)"
+                            else:
+                                conf = "**meglio del mercato**"
+                            st.caption(f"📊 Ultimo mese: {tk} {s1m:+.0f}% · mercato S&P 500 {mkt_1m:+.0f}% → {conf}.")
+                    news = fu.get_news(tk, 4)
                     if news:
-                        st.markdown("**Notizie recenti** (per capire cosa sta succedendo):")
-                        for n in news:
+                        sent_label, _ = fu.news_sentiment(news)
+                        st.markdown(f"**Notizie recenti** · tono indicativo: {sent_label}")
+                        for n in news[:3]:
                             title = fu.translate_text(n["title"]) if translate_news else n["title"]
                             link = f"[{title}]({n['url']})" if n["url"] else title
                             meta = f"  ·  _{n['date']}_" if n["date"] else ""
                             st.markdown(f"- {link}{meta}")
-                            brief = fu.summarize_text(n["summary"], 1)
-                            if brief:
-                                if translate_news:
-                                    brief = fu.translate_text(brief)
-                                st.caption(brief)
                     else:
                         st.caption("Nessuna notizia recente trovata per questo titolo.")
             return
@@ -309,8 +345,8 @@ if section.startswith("💎"):
                 help="Forza del setup da rimbalzo: più alto = più ipervenduto ma con trend ancora sano."),
             "Prob. salita": st.column_config.NumberColumn("📈 Prob. salita", format="%.0f%%",
                 help="Stima statistica (dai rendimenti storici, ~1 mese) della probabilità che il prezzo salga. NON è una previsione."),
-            "Guadagno atteso": st.column_config.NumberColumn("🎯 Guadagno atteso", format="%+.1f%%",
-                help="Stima del rendimento atteso (mediano) sull'orizzonte ~1 mese. Indicativo, non una previsione."),
+            "Guadagno atteso": st.column_config.NumberColumn("🎯 Potenziale rimbalzo", format="%+.1f%%",
+                help="Quanto salirebbe il titolo se tornasse alla sua media a 50 giorni (bersaglio tipico di un rimbalzo). Indicativo."),
             "Rischio perdita": st.column_config.NumberColumn("📉 Rischio perdita", format="%.0f%%",
                 help="Stima statistica della probabilità di perdere oltre il 15% (~1 mese). NON è una previsione."),
             "Affidabilità": st.column_config.TextColumn("📊 Affidabilità",
