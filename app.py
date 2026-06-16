@@ -297,6 +297,8 @@ if section.startswith("💎"):
 
         short_cfg = {
             "Nome": st.column_config.TextColumn("Azienda", width="medium"),
+            "Convenienza": st.column_config.ProgressColumn("🏅 Convenienza", min_value=0, max_value=100, format="%d",
+                help="Punteggio complessivo che combina prob. salita, guadagno atteso, rischio di perdita e affidabilità. La tabella è ordinata da qui (più alto = più conveniente)."),
             "Prezzo": st.column_config.NumberColumn("Prezzo", format="%.2f"),
             "RSI": st.column_config.NumberColumn("RSI", format="%.0f",
                 help="Sotto 30-35 = ipervenduto (possibile rimbalzo)."),
@@ -317,6 +319,8 @@ if section.startswith("💎"):
         }
         long_cfg = {
             "Nome": st.column_config.TextColumn("Azienda", width="medium"),
+            "Convenienza": st.column_config.ProgressColumn("🏅 Convenienza", min_value=0, max_value=100, format="%d",
+                help="Punteggio complessivo che combina prob. salita, guadagno atteso, rischio di perdita e affidabilità. La tabella è ordinata da qui (più alto = più conveniente)."),
             "Prezzo": st.column_config.NumberColumn("Prezzo", format="%.2f"),
             "% dal max": st.column_config.NumberColumn("% dal max", format="%.0f%%",
                 help="Sconto rispetto al massimo di 52 settimane."),
