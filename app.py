@@ -243,6 +243,40 @@ if section.startswith("💎"):
             st.dataframe(df, use_container_width=True,
                          height=min(60 + 38 * len(df), 460), column_config=cols_cfg)
 
+            orizz = "~1 anno" if kind == "long" else "~1 mese"
+            st.caption(f"📈 **Prob. salita** e 📉 **Rischio perdita** sono **stime statistiche** dai rendimenti storici "
+                       f"(orizzonte {orizz}), **non previsioni**: indicano l'ordine di grandezza del rischio/rendimento.")
+
+            st.markdown("##### 🔍 Approfondimenti — notizie recenti e perché")
+            for tk, row in df.head(6).iterrows():
+                pg, pl = row.get("Prob. salita"), row.get("Rischio perdita")
+                with st.expander(f"{tk} — {row['Nome']}   ·   💎 {int(row['Occasione'])}"):
+                    st.markdown(f"**Perché è un'occasione:** {row['Perché']}")
+                    bits = []
+                    if pg is not None and not pd.isna(pg):
+                        bits.append(f"📈 probabilità di salita **~{pg:.0f}%**")
+                    if pl is not None and not pd.isna(pl):
+                        bits.append(f"📉 rischio di perdita oltre il 15% **~{pl:.0f}%**")
+                    if bits:
+                        st.markdown(f"**Stima statistica ({orizz}):** " + " · ".join(bits)
+                                    + "  \n_Stima dai dati storici, non una previsione._")
+                    news = fu.get_news(tk, 3)
+                    if news:
+                        st.markdown("**Notizie recenti** (per capire cosa sta succedendo):")
+                        for n in news:
+                            title = fu.translate_text(n["title"]) if translate_news else n["title"]
+                            link = f"[{title}]({n['url']})" if n["url"] else title
+                            meta = f"  ·  _{n['date']}_" if n["date"] else ""
+                            st.markdown(f"- {link}{meta}")
+                            brief = fu.summarize_text(n["summary"], 1)
+                            if brief:
+                                if translate_news:
+                                    brief = fu.translate_text(brief)
+                                st.caption(brief)
+                    else:
+                        st.caption("Nessuna notizia recente trovata per questo titolo.")
+            return
+
         short_cfg = {
             "Nome": st.column_config.TextColumn("Azienda", width="medium"),
             "Prezzo": st.column_config.NumberColumn("Prezzo", format="%.2f"),
@@ -253,6 +287,10 @@ if section.startswith("💎"):
             "Perf 1 mese": st.column_config.NumberColumn("1 mese", format="%.0f%%"),
             "Occasione": st.column_config.ProgressColumn("💎 Segnale", min_value=0, max_value=100, format="%.0f",
                 help="Forza del setup da rimbalzo: più alto = più ipervenduto ma con trend ancora sano."),
+            "Prob. salita": st.column_config.NumberColumn("📈 Prob. salita", format="%.0f%%",
+                help="Stima statistica (dai rendimenti storici, ~1 mese) della probabilità che il prezzo salga. NON è una previsione."),
+            "Rischio perdita": st.column_config.NumberColumn("📉 Rischio perdita", format="%.0f%%",
+                help="Stima statistica della probabilità di perdere oltre il 15% (~1 mese). NON è una previsione."),
             "Perché": st.column_config.TextColumn("Perché", width="large"),
         }
         long_cfg = {
@@ -263,6 +301,10 @@ if section.startswith("💎"):
             "Perf 1 anno": st.column_config.NumberColumn("1 anno", format="%.0f%%"),
             "Occasione": st.column_config.ProgressColumn("💎 Valore", min_value=0, max_value=100, format="%.0f",
                 help="Combina qualità dei fondamentali e sconto dai massimi."),
+            "Prob. salita": st.column_config.NumberColumn("📈 Prob. salita", format="%.0f%%",
+                help="Stima statistica (dai rendimenti storici, ~1 anno) della probabilità che il prezzo salga. NON è una previsione."),
+            "Rischio perdita": st.column_config.NumberColumn("📉 Rischio perdita", format="%.0f%%",
+                help="Stima statistica della probabilità di perdere oltre il 15% (~1 anno). NON è una previsione."),
             "Perché": st.column_config.TextColumn("Perché", width="large"),
         }
 
