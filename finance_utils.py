@@ -68,23 +68,58 @@ def get_history(ticker: str, period: str = "1y", interval: str = "1d") -> pd.Dat
 
 
 @st.cache_data(ttl=900, show_spinner=False)
-def get_info(ticker: str) -> dict:
-    """Metadati/fondamentali. Catena di riserva: FMP → Finnhub → SEC EDGAR (USA) → yfinance."""
+def get_info(ticker: str, merge: bool = False) -> dict:
+    """Metadati/fondamentali.
+    merge=False → prima fonte utile (leggero, per lo scanner delle occasioni).
+    merge=True  → combina FMP + Finnhub + SEC + yfinance riempiendo i campi mancanti
+                  (per la pagina di analisi: meno «n/d» possibile)."""
+    if not merge:
+        if _fmp_key():
+            fmp = info_from_fmp(ticker)
+            if fmp:
+                return fmp
+        if _finnhub_key():
+            fh = info_from_finnhub(ticker)
+            if fh and len(fh) > 3:
+                return fh
+        sec = fundamentals_from_sec(ticker)
+        if sec and len(sec) > 3:
+            return sec
+        try:
+            return yf.Ticker(ticker).info or {}
+        except Exception:
+            return {}
+
+    # merge: priorità FMP > Finnhub > SEC > yfinance; ogni fonte riempie i buchi
+    sources = []
     if _fmp_key():
-        fmp = info_from_fmp(ticker)
-        if fmp:
-            return fmp
+        sources.append(info_from_fmp(ticker))
     if _finnhub_key():
-        fh = info_from_finnhub(ticker)
-        if fh and len(fh) > 3:
-            return fh
-    sec = fundamentals_from_sec(ticker)          # riserva ufficiale USA, senza chiave
-    if sec and len(sec) > 3:                      # ha davvero dei fondamentali, non solo il nome
-        return sec
+        sources.append(info_from_finnhub(ticker))
+    sources.append(fundamentals_from_sec(ticker))
     try:
-        return yf.Ticker(ticker).info or {}
+        sources.append(yf.Ticker(ticker).info or {})
     except Exception:
-        return {}
+        sources.append({})
+    out = {}
+    for src in sources:
+        if not src:
+            continue
+        for k, v in src.items():
+            if v in (None, "") or (isinstance(v, float) and v != v):   # salta None/""/NaN
+                continue
+            if out.get(k) in (None, ""):
+                out[k] = v
+    # PEG calcolato se mancante: P/E ÷ (crescita utili in %)
+    if not out.get("pegRatio"):
+        pe = out.get("trailingPE")
+        g = out.get("earningsGrowth") or out.get("revenueGrowth")
+        try:
+            if pe and g and float(g) > 0:
+                out["pegRatio"] = round(float(pe) / (float(g) * 100), 2)
+        except (TypeError, ValueError):
+            pass
+    return out
 
 
 # ---------------------------------------------------------------------------
@@ -169,6 +204,7 @@ def info_from_fmp(ticker: str) -> dict:
             pass
     info["trailingPE"] = num(r.get("priceToEarningsRatioTTM"))
     info["priceToBook"] = num(r.get("priceToBookRatioTTM"))
+    info["priceToSalesRatio"] = num(r.get("priceToSalesRatioTTM"))
     info["pegRatio"] = num(r.get("priceToEarningsGrowthRatioTTM"))
     info["returnOnEquity"] = num(m.get("returnOnEquityTTM"))
     info["returnOnAssets"] = num(m.get("returnOnAssetsTTM"))
@@ -298,6 +334,8 @@ def fundamentals_from_sec(ticker: str) -> dict:
         info["marketCap"] = price * shares
         if eq and eq > 0:
             info["priceToBook"] = price * shares / eq
+        if rev and rev > 0:
+            info["priceToSalesRatio"] = price * shares / rev
     return {k: v for k, v in info.items() if v is not None}
 
 
@@ -364,6 +402,7 @@ def info_from_finnhub(ticker: str) -> dict:
             info["marketCap"] = mc * 1e6        # Finnhub in milioni
     info["trailingPE"] = num(m.get("peTTM"))
     info["priceToBook"] = num(m.get("pbQuarterly") or m.get("pbAnnual"))
+    info["priceToSalesRatio"] = num(m.get("psTTM") or m.get("psAnnual"))
     info["returnOnEquity"] = frac(m.get("roeTTM"))
     info["returnOnAssets"] = frac(m.get("roaTTM"))
     info["profitMargins"] = frac(m.get("netProfitMarginTTM"))
@@ -559,6 +598,19 @@ def is_fund(info: dict) -> bool:
     return (info.get("quoteType") or "").upper() in ("ETF", "MUTUALFUND")
 
 
+# ETF noti (USA + i principali europei della tabella TER): riconoscimento robusto
+# anche quando la fonte non indica il tipo (es. Finnhub sul cloud).
+_KNOWN_ETFS = set(EU_ETF_TER.keys()) | {
+    "SPY", "VOO", "IVV", "QQQ", "VTI", "VEA", "VWO", "AGG", "BND", "GLD", "IWM", "EFA",
+    "VUG", "VTV", "VIG", "SCHD", "XLK", "XLF", "XLE", "XLV", "XLY", "XLP", "XLI", "XLU",
+    "ARKK", "DIA", "TLT", "HYG", "LQD", "VNQ", "VXUS", "VT", "VYM", "VGT", "SOXX", "SMH",
+}
+
+
+def is_known_etf(ticker: str) -> bool:
+    return (ticker or "").upper() in _KNOWN_ETFS
+
+
 def default_benchmark(ticker: str) -> str:
     """Indice di riferimento sensato in base alla borsa del titolo."""
     t = (ticker or "").upper()
@@ -662,24 +714,29 @@ def project_future(initial: float, monthly: float, years: float,
 
 
 @st.cache_data(ttl=900, show_spinner=False)
-def get_fund_data(ticker: str) -> dict:
-    """Dati specifici di ETF/fondi: composizione, settori, titoli, costi, patrimonio."""
+def get_fund_data(ticker: str, base_info: dict = None) -> dict:
+    """Dati specifici di ETF/fondi: composizione, settori, titoli, costi, patrimonio.
+    base_info = info già recuperato (merge) per riconoscere l'ETF e ricavare patrimonio
+    anche quando yfinance è bloccato sul cloud."""
     out = {
         "is_fund": False, "category": None, "family": None, "legal_type": None,
         "expense_ratio": None, "expense_ratio_source": None, "total_assets": None, "yield": None,
         "description": "", "asset_classes": {}, "sector_weightings": {}, "top_holdings": [],
     }
+    base_info = base_info or {}
+    info = {}
     try:
-        t = yf.Ticker(ticker)
-        info = t.info or {}
+        info = yf.Ticker(ticker).info or {}
     except Exception:
-        return out
+        info = {}
 
-    if not is_fund(info):
+    # È un fondo? (yfinance, info già recuperato, o lista nota) — robusto anche sul cloud
+    if not (is_fund(info) or is_fund(base_info) or is_known_etf(ticker)):
         return out
     out["is_fund"] = True
-    out["category"] = info.get("category")
-    out["total_assets"] = info.get("totalAssets")
+    out["category"] = info.get("category") or base_info.get("category")
+    out["total_assets"] = info.get("totalAssets") or base_info.get("marketCap")
+    out["description"] = base_info.get("longBusinessSummary") or ""
     # TER / costo: yfinance lo espone con nomi diversi (spesso assente per ETF europei)
     out["expense_ratio"] = (
         info.get("annualReportExpenseRatio")
@@ -687,6 +744,9 @@ def get_fund_data(ticker: str) -> dict:
         or info.get("expenseRatio")
         or EU_ETF_TER.get(ticker.upper())
     )
+    # Normalizza a frazione: se >0.02 è quasi certamente già in % (es. yfinance 0.0945 → 0.000945)
+    if out["expense_ratio"] is not None and out["expense_ratio"] > 0.02:
+        out["expense_ratio"] = out["expense_ratio"] / 100
     out["expense_ratio_source"] = (
         "tabella interna" if (not info.get("annualReportExpenseRatio")
                               and not info.get("netExpenseRatio")
@@ -778,6 +838,7 @@ GLOSSARY = {
     "P/E prospettico": "Come il P/E ma usando gli utili attesi per l'anno prossimo invece di quelli passati.",
     "P/B (prezzo/patrimonio)": "Prezzo rispetto al valore contabile (patrimonio netto). Sotto 1 = paghi meno del valore di libro; tipico per banche e industrie.",
     "PEG (P/E su crescita)": "P/E diviso la crescita degli utili. Sotto 1 indica un prezzo ragionevole rispetto a quanto l'azienda cresce.",
+    "P/S (prezzo/vendite)": "Prezzo rispetto ai ricavi (fatturato). Utile quando l'azienda ha pochi o nessun utile. Più basso = più conveniente; sotto 2 è contenuto, sopra 6 è alto.",
     "ROE (rendimento capitale proprio)": "Quanto utile genera l'azienda per ogni euro di capitale dei soci. Più alto = più redditizia. Sopra il 15% è buono.",
     "ROA (rendimento attività)": "Utile generato per ogni euro di attività totali. Misura l'efficienza nell'uso delle risorse.",
     "Margine netto": "Percentuale di ricavi che resta come utile finale, dopo tutti i costi e le tasse.",
@@ -1497,46 +1558,90 @@ def technical_signals(df: pd.DataFrame) -> list:
     last = df.iloc[-1]
     signals = []
 
-    # Trend rispetto alle medie mobili
+    # Trend rispetto alle medie mobili (linguaggio chiaro: il significato, non solo i numeri)
     price = last["Close"]
     if not np.isnan(last.get("SMA50", np.nan)):
         if price > last["SMA50"]:
-            signals.append(("Prezzo vs SMA50", f"{price:.2f} > {last['SMA50']:.2f}", "positivo"))
+            signals.append(("Trend di breve (media 50 gg)", "prezzo sopra la media → forza nel breve", "positivo"))
         else:
-            signals.append(("Prezzo vs SMA50", f"{price:.2f} < {last['SMA50']:.2f}", "negativo"))
+            signals.append(("Trend di breve (media 50 gg)", "prezzo sotto la media → debolezza nel breve", "negativo"))
     if not np.isnan(last.get("SMA200", np.nan)):
         if price > last["SMA200"]:
-            signals.append(("Prezzo vs SMA200 (trend lungo)", f"{price:.2f} > {last['SMA200']:.2f}", "positivo"))
+            signals.append(("Trend di fondo (media 200 gg)", "prezzo sopra la media → tendenza di lungo positiva", "positivo"))
         else:
-            signals.append(("Prezzo vs SMA200 (trend lungo)", f"{price:.2f} < {last['SMA200']:.2f}", "negativo"))
+            signals.append(("Trend di fondo (media 200 gg)", "prezzo sotto la media → tendenza di lungo negativa", "negativo"))
 
     # Golden / death cross
     if not np.isnan(last.get("SMA50", np.nan)) and not np.isnan(last.get("SMA200", np.nan)):
         if last["SMA50"] > last["SMA200"]:
-            signals.append(("SMA50 vs SMA200", "Golden cross (rialzista)", "positivo"))
+            signals.append(("Incrocio medie (50 vs 200)", "Golden cross → impostazione rialzista", "positivo"))
         else:
-            signals.append(("SMA50 vs SMA200", "Death cross (ribassista)", "negativo"))
+            signals.append(("Incrocio medie (50 vs 200)", "Death cross → impostazione ribassista", "negativo"))
 
     # RSI
     rsi_val = last.get("RSI", np.nan)
     if not np.isnan(rsi_val):
         if rsi_val >= 70:
-            signals.append(("RSI (14)", f"{rsi_val:.1f} — ipercomprato", "negativo"))
+            signals.append(("Forza relativa (RSI 14)", f"{rsi_val:.0f} → ipercomprato (può correggere)", "negativo"))
         elif rsi_val <= 30:
-            signals.append(("RSI (14)", f"{rsi_val:.1f} — ipervenduto", "positivo"))
+            signals.append(("Forza relativa (RSI 14)", f"{rsi_val:.0f} → ipervenduto (può rimbalzare)", "positivo"))
         else:
-            signals.append(("RSI (14)", f"{rsi_val:.1f} — neutro", "neutro"))
+            signals.append(("Forza relativa (RSI 14)", f"{rsi_val:.0f} → neutro", "neutro"))
 
     # MACD
     macd_val = last.get("MACD", np.nan)
     sig_val = last.get("MACD_signal", np.nan)
     if not np.isnan(macd_val) and not np.isnan(sig_val):
         if macd_val > sig_val:
-            signals.append(("MACD", "Sopra la signal (momentum positivo)", "positivo"))
+            signals.append(("Momentum (MACD)", "positivo → il movimento accelera al rialzo", "positivo"))
         else:
-            signals.append(("MACD", "Sotto la signal (momentum negativo)", "negativo"))
+            signals.append(("Momentum (MACD)", "negativo → il movimento accelera al ribasso", "negativo"))
 
     return signals
+
+
+def technical_summary(df: pd.DataFrame) -> dict:
+    """Verdetto tecnico sintetico (pesa di più il trend di fondo e l'incrocio delle medie)."""
+    if df.empty:
+        return None
+    last = df.iloc[-1]
+    price = last["Close"]
+    score = 0.0
+    long_trend = momentum = rsi_note = None
+
+    sma200 = last.get("SMA200", np.nan)
+    if not np.isnan(sma200):
+        if price > sma200:
+            score += 2; long_trend = "tendenza di fondo **positiva** (sopra la media a 200 giorni)"
+        else:
+            score -= 2; long_trend = "tendenza di fondo **negativa** (sotto la media a 200 giorni)"
+    sma50 = last.get("SMA50", np.nan)
+    if not np.isnan(sma50) and not np.isnan(sma200):
+        score += 1.5 if sma50 > sma200 else -1.5
+    if not np.isnan(sma50):
+        score += 1 if price > sma50 else -1
+    macd_val, sig_val = last.get("MACD", np.nan), last.get("MACD_signal", np.nan)
+    if not np.isnan(macd_val) and not np.isnan(sig_val):
+        if macd_val > sig_val:
+            score += 1; momentum = "momentum di breve **positivo**"
+        else:
+            score -= 1; momentum = "momentum di breve **in raffreddamento**"
+    rsi_val = last.get("RSI", np.nan)
+    if not np.isnan(rsi_val):
+        if rsi_val >= 70:
+            score -= 0.5; rsi_note = f"RSI {rsi_val:.0f} (ipercomprato)"
+        elif rsi_val <= 30:
+            score += 0.5; rsi_note = f"RSI {rsi_val:.0f} (ipervenduto)"
+
+    if score >= 1.5:
+        emoji, color, label = "🟢", "#1a7f37", "Quadro tecnico positivo (rialzista)"
+    elif score <= -1.5:
+        emoji, color, label = "🔴", "#cf222e", "Quadro tecnico negativo (ribassista)"
+    else:
+        emoji, color, label = "🟡", "#9a6700", "Quadro tecnico misto"
+    bits = [b for b in (long_trend, momentum, rsi_note) if b]
+    line = ("; ".join(bits) + ".") if bits else "Segnali contrastanti."
+    return {"emoji": emoji, "color": color, "label": label, "line": line}
 
 
 # ---------------------------------------------------------------------------
@@ -1606,7 +1711,7 @@ def fundamental_blocks(info: dict) -> dict:
         return "neutro"
 
     pe = info.get("trailingPE")
-    fpe = info.get("forwardPE")
+    psales = info.get("priceToSalesRatio")
     pb = info.get("priceToBook")
     peg = info.get("pegRatio")
     roe = info.get("returnOnEquity")
@@ -1624,9 +1729,9 @@ def fundamental_blocks(info: dict) -> dict:
     blocks = {
         "Valutazione (è caro o conveniente?)": [
             ("P/E (prezzo/utili)", _fmt(pe), judge(pe, 15, 35, higher_is_better=False)),
-            ("P/E prospettico", _fmt(fpe), judge(fpe, 15, 35, higher_is_better=False)),
             ("P/B (prezzo/patrimonio)", _fmt(pb), judge(pb, 1.5, 4, higher_is_better=False)),
             ("PEG (P/E su crescita)", _fmt(peg), judge(peg, 1, 2, higher_is_better=False)),
+            ("P/S (prezzo/vendite)", _fmt(psales), judge(psales, 2, 6, higher_is_better=False)),
         ],
         "Redditività (quanto guadagna bene?)": [
             ("ROE (rendimento capitale proprio)", _fmt(roe, pct=True), judge(roe, 0.15, 0.05)),
