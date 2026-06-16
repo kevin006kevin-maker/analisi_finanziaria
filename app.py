@@ -24,6 +24,15 @@ import finance_utils as fu
 st.set_page_config(page_title="Analisi Finanziaria", page_icon="📈", layout="wide")
 
 
+def _now_rome():
+    """Ora locale italiana (il server cloud gira in UTC)."""
+    try:
+        from zoneinfo import ZoneInfo
+        return datetime.datetime.now(ZoneInfo("Europe/Rome"))
+    except Exception:
+        return datetime.datetime.utcnow() + datetime.timedelta(hours=2)
+
+
 # ---------------------------------------------------------------------------
 # PROTEZIONE CON PASSWORD
 # La password si imposta in .streamlit/secrets.toml (locale) o nei "Secrets" di
@@ -214,7 +223,7 @@ if section.startswith("💎"):
         if refresh_choice != "Disattivato":
             st_autorefresh(interval=(900000 if "15" in refresh_choice else 1800000), key="opp_auto")
             st.caption(f"🔄 Aggiornamento automatico **attivo** ({refresh_choice.lower()}) · "
-                       f"ultimo aggiornamento: {datetime.datetime.now().strftime('%H:%M')}")
+                       f"ultimo aggiornamento: {_now_rome().strftime('%H:%M')}")
         with st.expander("🎛️ Filtri", expanded=False):
             fco1, fco2, fco3 = st.columns(3)
             f_min_conv = fco1.slider("Convenienza minima", 0, 100, 0, key="f_conv")
