@@ -1171,10 +1171,22 @@ with tab_news:
         "le trovi nella sezione **📰 Attualità** (barra laterale a sinistra)."
     )
 
+    nfc1, nfc2 = st.columns([1, 2])
+    filtra_g = nfc1.checkbox("📅 Filtra per giorno", value=False, key="ticker_news_filter")
+    giorno_t = None
+    if filtra_g:
+        giorno_t = nfc2.date_input("Giorno", value=datetime.date.today(),
+                                   max_value=datetime.date.today(), key="ticker_news_day")
+        st.caption("ℹ️ Le fonti gratuite coprono solo gli **ultimi giorni**: date più lontane potrebbero non avere risultati.")
+
     def show_news(source_ticker):
-        news = fu.get_news(source_ticker, count=10)
+        news = fu.get_news(source_ticker, count=50 if giorno_t else 10)
+        if giorno_t:
+            target = giorno_t.isoformat()
+            news = [x for x in news if x["date"] == target][:20]
         if not news:
-            st.caption("Nessuna notizia disponibile per questo titolo.")
+            st.caption("Nessuna notizia per il giorno scelto." if giorno_t
+                       else "Nessuna notizia disponibile per questo titolo.")
             return
         for n in news:
             title = n["title"]
