@@ -1268,9 +1268,35 @@ def _long_reasons(r):
     return " · ".join(bits)
 
 
+# Universo di riserva: titoli liquidi e diffusi, usato quando le classifiche di mercato
+# non sono disponibili (es. FMP esaurito) → le occasioni si calcolano comunque.
+_FALLBACK_UNIVERSE = [
+    "AAPL", "MSFT", "GOOGL", "AMZN", "NVDA", "META", "TSLA", "JPM", "V", "WMT",
+    "JNJ", "PG", "KO", "PEP", "DIS", "NFLX", "INTC", "AMD", "BA", "NKE",
+    "PFE", "MRK", "XOM", "CVX", "BAC", "CSCO", "ORCL", "CRM", "ADBE", "PYPL",
+    "UBER", "PLTR", "F", "GM", "T", "VZ", "QCOM", "TXN", "SBUX", "MCD",
+]
+
+_REL_FACTOR = {"🟢 Alta": 1.0, "🟡 Media": 0.85, "🔴 Bassa": 0.7}
+
+
+def _convenience(r) -> int:
+    """Punteggio 0-100 di convenienza: combina prob. salita, guadagno atteso,
+    rischio di perdita e affidabilità. Centrato su 50; l'affidabilità bassa
+    avvicina al neutro (stima incerta → non spinge in alto né in basso)."""
+    pg = r["prob_gain"] if r["prob_gain"] is not None else 50
+    pl = r["prob_loss"] if r["prob_loss"] is not None else 50
+    er = r["exp_ret"] if r["exp_ret"] is not None else 0
+    rf = _REL_FACTOR.get(r["reliab"], 0.8)
+    a = (pg - pl) + max(min(er, 40), -20)     # attrattività grezza (~ -120..140)
+    base = 50 + 0.45 * a
+    conv = 50 + (base - 50) * rf              # affidabilità bassa → verso 50
+    return int(round(max(0, min(100, conv))))
+
+
 @st.cache_data(ttl=900, show_spinner=False)
 def opportunity_candidates(kind: str) -> list:
-    """Universo di partenza dalle classifiche di mercato."""
+    """Universo di partenza dalle classifiche di mercato; riserva se non disponibili."""
     screens = (["day_losers", "most_actives", "small_cap_gainers"] if kind == "short"
                else ["undervalued_large_caps", "undervalued_growth_stocks", "day_losers"])
     names = []
@@ -1285,6 +1311,10 @@ def opportunity_candidates(kind: str) -> list:
                        "&volumeMoreThan=300000&limit=25")
         if isinstance(pen, list):
             names += [q.get("symbol") for q in pen if q.get("symbol")]
+    # Se le classifiche non hanno dato nulla (es. FMP esaurito), usa l'universo di riserva,
+    # così le occasioni continuano ad aggiornarsi con i dati di Finnhub/SEC/yfinance.
+    if not names:
+        names = list(_FALLBACK_UNIVERSE)
     # Breve = 1 chiamata/titolo (si può osare di più); Lungo = ~4 chiamate/titolo (limita la quota FMP)
     cap = 40 if kind == "short" else 20
     return list(dict.fromkeys(names))[:cap]
@@ -1306,8 +1336,8 @@ def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
                 continue
             if dd is None or dd > -8:           # dev'essere un calo reale, non un titolo ai massimi
                 continue
-            rows.append({"Ticker": r["ticker"], "Nome": r["name"], "Prezzo": r["price"],
-                         "RSI": r["rsi"], "% dal max": dd, "Perf 1 mese": r["perf_1m"],
+            rows.append({"Ticker": r["ticker"], "Nome": r["name"], "Convenienza": _convenience(r),
+                         "Prezzo": r["price"], "RSI": r["rsi"], "% dal max": dd, "Perf 1 mese": r["perf_1m"],
                          "Occasione": int(round(sc)),
                          "Prob. salita": r["prob_gain"], "Guadagno atteso": r["exp_ret"],
                          "Rischio perdita": r["prob_loss"], "Affidabilità": r["reliab"],
@@ -1318,15 +1348,15 @@ def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
                 continue
             if dd is None or dd > -12:          # richiede uno sconto significativo dai massimi
                 continue
-            rows.append({"Ticker": r["ticker"], "Nome": r["name"], "Prezzo": r["price"],
-                         "% dal max": dd, "Perf 1 anno": r["perf_1y"],
+            rows.append({"Ticker": r["ticker"], "Nome": r["name"], "Convenienza": _convenience(r),
+                         "Prezzo": r["price"], "% dal max": dd, "Perf 1 anno": r["perf_1y"],
                          "Occasione": int(round(sc)),
                          "Prob. salita": r["prob_gain"], "Guadagno atteso": r["exp_ret"],
                          "Rischio perdita": r["prob_loss"], "Affidabilità": r["reliab"],
                          "Perché": _long_reasons(r)})
     df = pd.DataFrame(rows)
     if not df.empty:
-        df = df.sort_values("Occasione", ascending=False).set_index("Ticker")
+        df = df.sort_values("Convenienza", ascending=False).set_index("Ticker")
     return df
 
 
