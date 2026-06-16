@@ -298,17 +298,32 @@ if section.startswith("💎"):
                         st.markdown(line)
                     det = fu.opportunity_row(tk, with_fundamentals=(kind == "long"))
                     if det and det.get("spark"):
-                        st.line_chart(pd.Series(det["spark"]), height=130)
-                    if det:
                         price = det.get("price")
                         tgt, stp = det.get("target_price"), det.get("stop_price")
+                        xs = det.get("spark_dates") or list(range(len(det["spark"])))
+                        sfig = go.Figure()
+                        sfig.add_trace(go.Scatter(x=xs, y=det["spark"], mode="lines",
+                                                  line=dict(color="#0969da", width=2), name="Prezzo"))
+                        if tgt:
+                            sfig.add_hline(y=tgt, line=dict(color="#1a7f37", dash="dash", width=1),
+                                           annotation_text="🎯 bersaglio (media 50gg)", annotation_position="top left")
+                        if stp:
+                            sfig.add_hline(y=stp, line=dict(color="#cf222e", dash="dash", width=1),
+                                           annotation_text="🛑 stop", annotation_position="bottom left")
+                        sfig.update_layout(height=230, margin=dict(t=10, b=10, l=10, r=10),
+                                           showlegend=False, yaxis_title=None, xaxis_title=None)
+                        st.plotly_chart(sfig, use_container_width=True)
                         lvl = []
                         if tgt and price:
-                            lvl.append(f"🎯 Bersaglio (media 50gg): **{tgt:,.2f}** ({(tgt/price-1)*100:+.0f}%)")
+                            lvl.append(f"🎯 Bersaglio: **{tgt:,.2f}** ({(tgt/price-1)*100:+.0f}%)")
                         if stp and price:
-                            lvl.append(f"🛑 Stop indicativo (minimo recente): **{stp:,.2f}** ({(stp/price-1)*100:+.0f}%)")
+                            lvl.append(f"🛑 Stop: **{stp:,.2f}** ({(stp/price-1)*100:+.0f}%)")
                         if lvl:
-                            st.markdown(" · ".join(lvl) + "  \n_Livelli indicativi per gestire il rischio, non consigli._")
+                            st.markdown(" · ".join(lvl))
+                        st.caption("👀 **Come leggere:** la linea blu è il prezzo degli ultimi ~3 mesi. "
+                                   "La linea **verde** è la media a 50 giorni (il *bersaglio* di un rimbalzo): "
+                                   "se il prezzo le sta **sotto**, c'è spazio per risalire. La **rossa** è lo stop "
+                                   "(sotto cui l'idea di rimbalzo salta). Livelli indicativi, non consigli.")
                         s1m = det.get("perf_1m")
                         if mkt_1m is not None and s1m is not None:
                             if abs(s1m - mkt_1m) <= 1:
