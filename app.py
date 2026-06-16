@@ -209,6 +209,30 @@ if section.startswith("💎"):
         def render_opps(kind, header, help_txt, cols_cfg):
             st.markdown(f"### {header}")
             st.caption(help_txt)
+            with st.expander("ℹ️ Come leggere queste occasioni (e i rischi)"):
+                if kind == "short":
+                    st.markdown(
+                        "**Cosa cerchiamo:** titoli **scesi molto** e tecnicamente **«ipervenduti»**. "
+                        "Storicamente, dopo cali eccessivi e improvvisi, il prezzo tende a **rimbalzare** nel breve (settimane).\n\n"
+                        "- **RSI** (0-100): misura la «foga» di vendita. Sotto 30 = ipervenduto, possibile rimbalzo.\n"
+                        "- **% dal max**: quanto è sceso dal massimo dell'ultimo anno.\n"
+                        "- **Banda di Bollinger**: se il prezzo la sfora verso il basso, è a un estremo.\n"
+                        "- **Trend di fondo**: se il prezzo è sopra la media a 200 giorni il rimbalzo è più probabile; "
+                        "se è «debole», molto più rischioso.\n"
+                        "- **💎 Segnale**: quanto è forte il setup (più alto = più ipervenduto con trend sano).\n\n"
+                        "⚠️ **Rischio:** un titolo che rimbalza dopo un calo è una *scommessa di breve*. "
+                        "Cali fortissimi possono continuare (il «coltello che cade»). Spunto da approfondire, non un segnale di acquisto."
+                    )
+                else:
+                    st.markdown(
+                        "**Cosa cerchiamo:** aziende con **buoni fondamentali** (o ETF diversificati) **scese parecchio dai massimi**: "
+                        "l'idea è comprare qualità «in saldo» e tenere per **anni**.\n\n"
+                        "- **💎 Valore**: combina la **qualità dei conti** (punteggio fondamentale) e lo **sconto** dai massimi.\n"
+                        "- **% dal max**: lo sconto rispetto al massimo dell'ultimo anno.\n"
+                        "- **Perché**: i motivi sintetici (qualità + sconto + andamento).\n\n"
+                        "⚠️ **Rischio:** uno sconto **non garantisce** la risalita. Chiediti sempre *perché* il titolo è sceso: "
+                        "difficoltà temporanea (possibile occasione) o problema strutturale (trappola di valore)?"
+                    )
             with st.spinner("Analizzo i candidati…"):
                 base = fu.opportunity_candidates(kind)
                 universe = list(dict.fromkeys(base + extra + (watchlist if inc_wl else [])))
@@ -457,17 +481,34 @@ tab_over, tab_fund, tab_tech, tab_sim, tab_cmp, tab_news = st.tabs(
 # ============================ PANORAMICA ===================================
 with tab_over:
     st.subheader("Andamento del prezzo")
+
+    # Selettore del periodo, direttamente sul grafico
+    CHART_PERIODS = {"1 settimana": "5d", "1 mese": "1mo", "6 mesi": "6mo",
+                     "1 anno": "1y", "5 anni": "5y", "Tutto": "max"}
+    cp_label = st.radio("Periodo del grafico", list(CHART_PERIODS.keys()),
+                        index=3, horizontal=True, key="chart_period")
+    hist_c = fu.add_indicators(fu.get_history(ticker, period=CHART_PERIODS[cp_label]))
+
     st.caption("👀 Ogni candela è una giornata: **verde** se ha chiuso in rialzo, **rossa** se in calo. "
-               "Le due linee sono le medie a 50 e 200 giorni: quando il prezzo sta **sopra** di esse il trend è positivo.")
-    fig = go.Figure()
-    fig.add_trace(go.Candlestick(
-        x=hist.index, open=hist["Open"], high=hist["High"],
-        low=hist["Low"], close=hist["Close"], name="Prezzo",
-    ))
-    fig.add_trace(go.Scatter(x=hist.index, y=hist["SMA50"], name="SMA 50", line=dict(width=1)))
-    fig.add_trace(go.Scatter(x=hist.index, y=hist["SMA200"], name="SMA 200", line=dict(width=1)))
-    fig.update_layout(height=480, xaxis_rangeslider_visible=False, margin=dict(t=10, b=10))
-    st.plotly_chart(fig, use_container_width=True)
+               "Le linee sono le medie a 50 e 200 giorni (compaiono sui periodi più lunghi): "
+               "quando il prezzo sta **sopra** di esse il trend è positivo.")
+    if hist_c.empty:
+        st.info("Nessun dato per il periodo scelto.")
+    else:
+        fig = go.Figure()
+        fig.add_trace(go.Candlestick(
+            x=hist_c.index, open=hist_c["Open"], high=hist_c["High"],
+            low=hist_c["Low"], close=hist_c["Close"], name="Prezzo",
+        ))
+        if hist_c["SMA50"].notna().any():
+            fig.add_trace(go.Scatter(x=hist_c.index, y=hist_c["SMA50"], name="SMA 50", line=dict(width=1)))
+        if hist_c["SMA200"].notna().any():
+            fig.add_trace(go.Scatter(x=hist_c.index, y=hist_c["SMA200"], name="SMA 200", line=dict(width=1)))
+        fig.update_layout(height=480, xaxis_rangeslider_visible=False, margin=dict(t=10, b=10),
+                          legend=dict(orientation="h"))
+        st.plotly_chart(fig, use_container_width=True)
+        perf_c = (hist_c["Close"].iloc[-1] / hist_c["Close"].iloc[0] - 1) * 100
+        st.caption(f"Variazione nel periodo «{cp_label}»: **{perf_c:+.1f}%**")
 
     colA, colB = st.columns([1, 1])
     with colA:
