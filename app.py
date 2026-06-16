@@ -268,11 +268,26 @@ if section.startswith("📰"):
                             value=", ".join(default_focus), key="news_focus")
     focus = [t.strip().upper() for t in foc_raw.replace(";", ",").split(",") if t.strip()][:15]
 
-    def render_news(src, header, n=8):
+    # --- Filtro per giorno ---
+    fc1, fc2 = st.columns([1, 2])
+    filtra_giorno = fc1.checkbox("📅 Filtra per giorno", value=False,
+                                 help="Mostra solo le notizie pubblicate in una data specifica.")
+    giorno = None
+    if filtra_giorno:
+        giorno = fc2.date_input("Giorno", value=datetime.date.today(),
+                                max_value=datetime.date.today(), key="news_day")
+        st.caption("ℹ️ Le fonti gratuite forniscono solo le notizie degli **ultimi giorni**: "
+                   "date più lontane nel tempo potrebbero non avere risultati.")
+
+    def render_news(src, header, n=8, day=None):
         st.markdown(f"#### {header}")
-        news = fu.get_news(src, count=n)
+        news = fu.get_news(src, count=50 if day else n)
+        if day:
+            target = day.isoformat()
+            news = [x for x in news if x["date"] == target][:20]
         if not news:
-            st.caption("Nessuna notizia disponibile per questo titolo.")
+            st.caption("Nessuna notizia per il giorno scelto." if day
+                       else "Nessuna notizia disponibile per questo titolo.")
             return
         for it in news:
             title = it["title"]
@@ -296,12 +311,12 @@ if section.startswith("📰"):
     labels = ["🌍 Mercato generale"] + focus
     news_tabs = st.tabs(labels)
     with news_tabs[0]:
-        render_news("^GSPC", "S&P 500 — notizie generali di mercato", 10)
+        render_news("^GSPC", "S&P 500 — notizie generali di mercato", 10, day=giorno)
     for i, t in enumerate(focus, start=1):
         with news_tabs[i]:
             info_t = fu.get_info(t)
             nm = info_t.get("shortName") or info_t.get("longName") or t
-            render_news(t, f"{nm} ({t})", 8)
+            render_news(t, f"{nm} ({t})", 8, day=giorno)
     st.stop()
 
 # ---------------------------------------------------------------------------
