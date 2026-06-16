@@ -17,6 +17,7 @@ import pandas as pd
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import streamlit as st
+from streamlit_autorefresh import st_autorefresh
 
 import finance_utils as fu
 
@@ -202,10 +203,20 @@ if section.startswith("💎"):
     extra = [t.strip().upper() for t in extra_raw.replace(";", ",").split(",") if t.strip()]
     inc_wl = st.checkbox("Includi la mia watchlist", value=bool(watchlist), key="opp_wl")
 
-    if st.button("🔎 Cerca occasioni", type="primary", key="opp_scan"):
+    bcol, rcol = st.columns([1, 1])
+    if bcol.button("🔎 Cerca occasioni", type="primary", key="opp_scan"):
         st.session_state["opp_done"] = True
+    refresh_choice = rcol.selectbox(
+        "🔄 Aggiornamento automatico", ["Disattivato", "Ogni 15 minuti", "Ogni 30 minuti"],
+        index=1, key="opp_refresh_int",
+        help="Riesegue la scansione da solo, in autonomia. I dati si rinnovano davvero ~ogni 15 minuti "
+             "(le occasioni si basano su indicatori giornalieri e le API hanno limiti).")
 
     if st.session_state.get("opp_done"):
+        if refresh_choice != "Disattivato":
+            st_autorefresh(interval=(900000 if "15" in refresh_choice else 1800000), key="opp_auto")
+            st.caption(f"🔄 Aggiornamento automatico **attivo** ({refresh_choice.lower()}) · "
+                       f"ultimo aggiornamento: {datetime.datetime.now().strftime('%H:%M')}")
         def render_opps(kind, header, help_txt, cols_cfg):
             st.markdown(f"### {header}")
             st.caption(help_txt)
@@ -255,11 +266,18 @@ if section.startswith("💎"):
                     bits = []
                     if pg is not None and not pd.isna(pg):
                         bits.append(f"📈 probabilità di salita **~{pg:.0f}%**")
+                    eg = row.get("Guadagno atteso")
+                    if eg is not None and not pd.isna(eg):
+                        bits.append(f"🎯 guadagno atteso **{eg:+.1f}%**")
                     if pl is not None and not pd.isna(pl):
                         bits.append(f"📉 rischio di perdita oltre il 15% **~{pl:.0f}%**")
+                    rel = row.get("Affidabilità")
                     if bits:
-                        st.markdown(f"**Stima statistica ({orizz}):** " + " · ".join(bits)
-                                    + "  \n_Stima dai dati storici, non una previsione._")
+                        line = f"**Stima statistica ({orizz}):** " + " · ".join(bits)
+                        if rel and not pd.isna(rel):
+                            line += f"  \nAffidabilità della stima: **{rel}**"
+                        line += "  \n_Stima dai dati storici, non una previsione._"
+                        st.markdown(line)
                     news = fu.get_news(tk, 3)
                     if news:
                         st.markdown("**Notizie recenti** (per capire cosa sta succedendo):")
@@ -289,8 +307,12 @@ if section.startswith("💎"):
                 help="Forza del setup da rimbalzo: più alto = più ipervenduto ma con trend ancora sano."),
             "Prob. salita": st.column_config.NumberColumn("📈 Prob. salita", format="%.0f%%",
                 help="Stima statistica (dai rendimenti storici, ~1 mese) della probabilità che il prezzo salga. NON è una previsione."),
+            "Guadagno atteso": st.column_config.NumberColumn("🎯 Guadagno atteso", format="%+.1f%%",
+                help="Stima del rendimento atteso (mediano) sull'orizzonte ~1 mese. Indicativo, non una previsione."),
             "Rischio perdita": st.column_config.NumberColumn("📉 Rischio perdita", format="%.0f%%",
                 help="Stima statistica della probabilità di perdere oltre il 15% (~1 mese). NON è una previsione."),
+            "Affidabilità": st.column_config.TextColumn("📊 Affidabilità",
+                help="Quanto è solida la stima: dipende da volatilità e lunghezza dello storico. 🟢 Alta · 🟡 Media · 🔴 Bassa (molto volatile)."),
             "Perché": st.column_config.TextColumn("Perché", width="large"),
         }
         long_cfg = {
@@ -303,8 +325,12 @@ if section.startswith("💎"):
                 help="Combina qualità dei fondamentali e sconto dai massimi."),
             "Prob. salita": st.column_config.NumberColumn("📈 Prob. salita", format="%.0f%%",
                 help="Stima statistica (dai rendimenti storici, ~1 anno) della probabilità che il prezzo salga. NON è una previsione."),
+            "Guadagno atteso": st.column_config.NumberColumn("🎯 Guadagno atteso", format="%+.1f%%",
+                help="Stima del rendimento atteso (mediano) sull'orizzonte ~1 anno. Indicativo, non una previsione."),
             "Rischio perdita": st.column_config.NumberColumn("📉 Rischio perdita", format="%.0f%%",
                 help="Stima statistica della probabilità di perdere oltre il 15% (~1 anno). NON è una previsione."),
+            "Affidabilità": st.column_config.TextColumn("📊 Affidabilità",
+                help="Quanto è solida la stima: dipende da volatilità e lunghezza dello storico. 🟢 Alta · 🟡 Media · 🔴 Bassa (molto volatile)."),
             "Perché": st.column_config.TextColumn("Perché", width="large"),
         }
 
