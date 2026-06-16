@@ -96,7 +96,7 @@ st.sidebar.markdown("---")
 
 # --- Livello di dettaglio ---
 livello = st.sidebar.radio(
-    "Modalità", ["🟢 Principiante", "🔵 Esperto"], horizontal=True,
+    "Modalità", ["🟢 Principiante", "🔵 Esperto"], horizontal=True, index=1,
     help="Principiante mostra solo l'essenziale spiegato a parole. Esperto aggiunge tutti gli indicatori avanzati.",
 )
 expert = livello.endswith("Esperto")
