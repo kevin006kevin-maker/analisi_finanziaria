@@ -203,16 +203,14 @@ if section.startswith("💎"):
     extra = [t.strip().upper() for t in extra_raw.replace(";", ",").split(",") if t.strip()]
     inc_wl = st.checkbox("Includi la mia watchlist", value=bool(watchlist), key="opp_wl")
 
-    bcol, rcol = st.columns([1, 1])
-    if bcol.button("🔎 Cerca occasioni", type="primary", key="opp_scan"):
-        st.session_state["opp_done"] = True
-    refresh_choice = rcol.selectbox(
+    refresh_choice = st.selectbox(
         "🔄 Aggiornamento automatico", ["Disattivato", "Ogni 15 minuti", "Ogni 30 minuti"],
         index=1, key="opp_refresh_int",
-        help="Riesegue la scansione da solo, in autonomia. I dati si rinnovano davvero ~ogni 15 minuti "
-             "(le occasioni si basano su indicatori giornalieri e le API hanno limiti).")
+        help="Le occasioni vengono cercate da sole. Con l'aggiornamento attivo si riscansionano in autonomia "
+             "(i dati si rinnovano davvero ~ogni 15 minuti: indicatori giornalieri + limiti delle API).")
 
-    if st.session_state.get("opp_done"):
+    # Le occasioni vengono cercate in automatico all'apertura della sezione (nessun pulsante)
+    if True:
         if refresh_choice != "Disattivato":
             st_autorefresh(interval=(900000 if "15" in refresh_choice else 1800000), key="opp_auto")
             st.caption(f"🔄 Aggiornamento automatico **attivo** ({refresh_choice.lower()}) · "
@@ -396,10 +394,8 @@ if section.startswith("💎"):
         render_opps("long", "🏛️ Lungo periodo — qualità in saldo",
                     "Aziende con **buoni fondamentali** (o ETF diversificati) scese parecchio **dai massimi**: "
                     "possibile occasione di valore. Orizzonte: anni.", long_cfg)
-        st.caption("👀 **Come leggere:** la barra 💎 indica la forza del segnale; la colonna **Perché** ne spiega il motivo. "
-                   "Ordinate dal segnale più forte. Per approfondire un titolo, passa a «📊 Analisi di un titolo» e cercalo.")
-    else:
-        st.info("Premi **🔎 Cerca occasioni** per analizzare il mercato (può richiedere qualche secondo).")
+        st.caption("👀 **Come leggere:** la barra 🏅 è la convenienza complessiva (la tabella è ordinata da lì). "
+                   "Per i dettagli (grafico, livelli, notizie) apri l'approfondimento di un titolo.")
     st.stop()
 
 # ===========================================================================
