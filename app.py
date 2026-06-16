@@ -433,10 +433,8 @@ if section.startswith("📰"):
 
     def render_news(src, header, n=8, day=None):
         st.markdown(f"#### {header}")
-        news = fu.get_news(src, count=50 if day else n)
-        if day:
-            target = day.isoformat()
-            news = [x for x in news if x["date"] == target][:20]
+        news = fu.get_news(src, count=20 if day else n,
+                           day=day.isoformat() if day else None)
         if not news:
             st.caption("Nessuna notizia per il giorno scelto." if day
                        else "Nessuna notizia disponibile per questo titolo.")
@@ -1180,10 +1178,8 @@ with tab_news:
         st.caption("ℹ️ Le fonti gratuite coprono solo gli **ultimi giorni**: date più lontane potrebbero non avere risultati.")
 
     def show_news(source_ticker):
-        news = fu.get_news(source_ticker, count=50 if giorno_t else 10)
-        if giorno_t:
-            target = giorno_t.isoformat()
-            news = [x for x in news if x["date"] == target][:20]
+        news = fu.get_news(source_ticker, count=20 if giorno_t else 10,
+                           day=giorno_t.isoformat() if giorno_t else None)
         if not news:
             st.caption("Nessuna notizia per il giorno scelto." if giorno_t
                        else "Nessuna notizia disponibile per questo titolo.")
