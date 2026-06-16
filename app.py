@@ -617,25 +617,31 @@ with tab_over:
                         index=3, horizontal=True, key="chart_period")
     hist_c = fu.add_indicators(fu.get_history(ticker, period=CHART_PERIODS[cp_label]))
 
-    st.caption("👀 Ogni candela è una giornata: **verde** se ha chiuso in rialzo, **rossa** se in calo. "
-               "Le linee sono le medie a 50 e 200 giorni (compaiono sui periodi più lunghi): "
-               "quando il prezzo sta **sopra** di esse il trend è positivo.")
+    st.caption("👀 La linea mostra l'andamento del prezzo nel periodo scelto: **verde** se in rialzo, "
+               "**rossa** se in calo. Cambia periodo qui sopra.")
     if hist_c.empty:
         st.info("Nessun dato per il periodo scelto.")
     else:
-        fig = go.Figure()
-        fig.add_trace(go.Candlestick(
-            x=hist_c.index, open=hist_c["Open"], high=hist_c["High"],
-            low=hist_c["Low"], close=hist_c["Close"], name="Prezzo",
+        closes = hist_c["Close"]
+        up = closes.iloc[-1] >= closes.iloc[0]
+        line_color = "#1a7f37" if up else "#cf222e"
+        fill_color = "rgba(26,127,55,0.12)" if up else "rgba(207,34,46,0.12)"
+        ymin, ymax = float(closes.min()), float(closes.max())
+        pad = (ymax - ymin) * 0.12 or (ymax * 0.02) or 1.0
+        fig = go.Figure(go.Scatter(
+            x=hist_c.index, y=closes, mode="lines",
+            line=dict(color=line_color, width=2), fill="tozeroy", fillcolor=fill_color,
+            hovertemplate="%{x|%d %b %Y} · %{y:.2f} " + str(currency) + "<extra></extra>",
         ))
-        if hist_c["SMA50"].notna().any():
-            fig.add_trace(go.Scatter(x=hist_c.index, y=hist_c["SMA50"], name="SMA 50", line=dict(width=1)))
-        if hist_c["SMA200"].notna().any():
-            fig.add_trace(go.Scatter(x=hist_c.index, y=hist_c["SMA200"], name="SMA 200", line=dict(width=1)))
-        fig.update_layout(height=480, xaxis_rangeslider_visible=False, margin=dict(t=10, b=10),
-                          legend=dict(orientation="h"))
+        fig.update_layout(
+            height=420, margin=dict(t=10, b=10, l=10, r=10),
+            xaxis_rangeslider_visible=False, hovermode="x unified", showlegend=False,
+            plot_bgcolor="rgba(0,0,0,0)",
+            yaxis=dict(range=[ymin - pad, ymax + pad], showgrid=True, gridcolor="rgba(128,128,128,0.15)"),
+            xaxis=dict(showgrid=False),
+        )
         st.plotly_chart(fig, use_container_width=True)
-        perf_c = (hist_c["Close"].iloc[-1] / hist_c["Close"].iloc[0] - 1) * 100
+        perf_c = (closes.iloc[-1] / closes.iloc[0] - 1) * 100
         st.caption(f"Variazione nel periodo «{cp_label}»: **{perf_c:+.1f}%**")
 
     colA, colB = st.columns([1, 1])
@@ -793,16 +799,28 @@ with tab_tech:
     st.subheader("Analisi tecnica")
     st.caption("Studia l'andamento di prezzo e volumi per valutare trend e momentum (utile per il timing).")
 
-    if not expert:
+    # Selettore di periodo (come nella Panoramica)
+    CHART_PERIODS_T = {"1 settimana": "5d", "1 mese": "1mo", "6 mesi": "6mo",
+                       "1 anno": "1y", "5 anni": "5y", "Tutto": "max"}
+    cpt_label = st.radio("Periodo del grafico", list(CHART_PERIODS_T.keys()),
+                         index=3, horizontal=True, key="tech_period")
+    hist_t = fu.add_indicators(fu.get_history(ticker, period=CHART_PERIODS_T[cpt_label]))
+
+    if hist_t.empty:
+        st.info("Nessun dato per il periodo scelto.")
+    elif not expert:
         # Modalità Principiante: solo prezzo + medie mobili, con spiegazione
         st.info("👀 **Cosa guardare:** la linea blu è il prezzo. Quando sta **sopra** la media a 50 giorni "
                 "(verde) il trend è positivo, quando sta **sotto** è negativo.")
         figp = go.Figure()
-        figp.add_trace(go.Scatter(x=hist.index, y=hist["Close"], name="Prezzo", line=dict(color="#0969da")))
-        figp.add_trace(go.Scatter(x=hist.index, y=hist["SMA50"], name="Media 50 giorni", line=dict(color="#1a7f37", width=1.4)))
-        figp.add_trace(go.Scatter(x=hist.index, y=hist["SMA200"], name="Media 200 giorni", line=dict(color="#d29922", width=1.4)))
+        figp.add_trace(go.Scatter(x=hist_t.index, y=hist_t["Close"], name="Prezzo", line=dict(color="#0969da")))
+        if hist_t["SMA50"].notna().any():
+            figp.add_trace(go.Scatter(x=hist_t.index, y=hist_t["SMA50"], name="Media 50 giorni", line=dict(color="#1a7f37", width=1.4)))
+        if hist_t["SMA200"].notna().any():
+            figp.add_trace(go.Scatter(x=hist_t.index, y=hist_t["SMA200"], name="Media 200 giorni", line=dict(color="#d29922", width=1.4)))
         figp.update_layout(height=420, margin=dict(t=10, b=10), legend=dict(orientation="h"))
         st.plotly_chart(figp, use_container_width=True)
+        st.caption("Su periodi brevi (1 settimana/1 mese) le medie mobili possono non comparire: servono più dati.")
     else:
         # Modalità Esperto: prezzo + Bollinger + RSI + MACD
         figp = make_subplots(
@@ -810,17 +828,17 @@ with tab_tech:
             row_heights=[0.55, 0.22, 0.23],
             subplot_titles=("Prezzo + Medie mobili + Bande di Bollinger", "RSI (14)", "MACD"),
         )
-        figp.add_trace(go.Scatter(x=hist.index, y=hist["Close"], name="Prezzo", line=dict(color="#0969da")), row=1, col=1)
-        figp.add_trace(go.Scatter(x=hist.index, y=hist["SMA20"], name="SMA 20", line=dict(width=1)), row=1, col=1)
-        figp.add_trace(go.Scatter(x=hist.index, y=hist["SMA50"], name="SMA 50", line=dict(width=1)), row=1, col=1)
-        figp.add_trace(go.Scatter(x=hist.index, y=hist["BB_up"], name="Bollinger sup", line=dict(width=0.5, dash="dot", color="gray")), row=1, col=1)
-        figp.add_trace(go.Scatter(x=hist.index, y=hist["BB_low"], name="Bollinger inf", line=dict(width=0.5, dash="dot", color="gray"), fill="tonexty", fillcolor="rgba(150,150,150,0.08)"), row=1, col=1)
-        figp.add_trace(go.Scatter(x=hist.index, y=hist["RSI"], name="RSI", line=dict(color="#8250df")), row=2, col=1)
+        figp.add_trace(go.Scatter(x=hist_t.index, y=hist_t["Close"], name="Prezzo", line=dict(color="#0969da")), row=1, col=1)
+        figp.add_trace(go.Scatter(x=hist_t.index, y=hist_t["SMA20"], name="SMA 20", line=dict(width=1)), row=1, col=1)
+        figp.add_trace(go.Scatter(x=hist_t.index, y=hist_t["SMA50"], name="SMA 50", line=dict(width=1)), row=1, col=1)
+        figp.add_trace(go.Scatter(x=hist_t.index, y=hist_t["BB_up"], name="Bollinger sup", line=dict(width=0.5, dash="dot", color="gray")), row=1, col=1)
+        figp.add_trace(go.Scatter(x=hist_t.index, y=hist_t["BB_low"], name="Bollinger inf", line=dict(width=0.5, dash="dot", color="gray"), fill="tonexty", fillcolor="rgba(150,150,150,0.08)"), row=1, col=1)
+        figp.add_trace(go.Scatter(x=hist_t.index, y=hist_t["RSI"], name="RSI", line=dict(color="#8250df")), row=2, col=1)
         figp.add_hline(y=70, line=dict(color="red", width=0.7, dash="dash"), row=2, col=1)
         figp.add_hline(y=30, line=dict(color="green", width=0.7, dash="dash"), row=2, col=1)
-        figp.add_trace(go.Bar(x=hist.index, y=hist["MACD_hist"], name="Istogramma", marker_color="#bbb"), row=3, col=1)
-        figp.add_trace(go.Scatter(x=hist.index, y=hist["MACD"], name="MACD", line=dict(color="#0969da")), row=3, col=1)
-        figp.add_trace(go.Scatter(x=hist.index, y=hist["MACD_signal"], name="Signal", line=dict(color="#cf222e")), row=3, col=1)
+        figp.add_trace(go.Bar(x=hist_t.index, y=hist_t["MACD_hist"], name="Istogramma", marker_color="#bbb"), row=3, col=1)
+        figp.add_trace(go.Scatter(x=hist_t.index, y=hist_t["MACD"], name="MACD", line=dict(color="#0969da")), row=3, col=1)
+        figp.add_trace(go.Scatter(x=hist_t.index, y=hist_t["MACD_signal"], name="Signal", line=dict(color="#cf222e")), row=3, col=1)
         figp.update_layout(height=720, margin=dict(t=30, b=10), legend=dict(orientation="h"))
         st.plotly_chart(figp, use_container_width=True)
         st.caption(
