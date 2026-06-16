@@ -90,25 +90,32 @@ def get_info(ticker: str, merge: bool = False) -> dict:
         except Exception:
             return {}
 
-    # merge: priorità FMP > Finnhub > SEC > yfinance; ogni fonte riempie i buchi
-    sources = []
-    if _fmp_key():
-        sources.append(info_from_fmp(ticker))
-    if _finnhub_key():
-        sources.append(info_from_finnhub(ticker))
-    sources.append(fundamentals_from_sec(ticker))
-    try:
-        sources.append(yf.Ticker(ticker).info or {})
-    except Exception:
-        sources.append({})
+    # merge: priorità FMP > Finnhub > SEC > yfinance; ogni fonte riempie i buchi.
+    # Ogni fonte è protetta: se una fallisce, le altre continuano (niente crash).
+    def _safe(fn):
+        try:
+            r = fn()
+            return r if isinstance(r, dict) else {}
+        except Exception:
+            return {}
+
+    sources = [
+        _safe(lambda: info_from_fmp(ticker) if _fmp_key() else {}),
+        _safe(lambda: info_from_finnhub(ticker) if _finnhub_key() else {}),
+        _safe(lambda: fundamentals_from_sec(ticker)),
+        _safe(lambda: yf.Ticker(ticker).info or {}),
+    ]
     out = {}
     for src in sources:
-        if not src:
-            continue
         for k, v in src.items():
-            if v in (None, "") or (isinstance(v, float) and v != v):   # salta None/""/NaN
+            if v is None:
                 continue
-            if out.get(k) in (None, ""):
+            if isinstance(v, float) and v != v:        # NaN
+                continue
+            if isinstance(v, str) and v.strip() == "":
+                continue
+            cur = out.get(k)
+            if cur is None or (isinstance(cur, str) and cur.strip() == ""):
                 out[k] = v
     # PEG calcolato se mancante: P/E ÷ (crescita utili in %)
     if not out.get("pegRatio"):
@@ -275,6 +282,41 @@ def _sec_instant(units):
     recs = [x for x in units if x.get("val") is not None]
     recs.sort(key=lambda x: x.get("end", ""), reverse=True)
     return recs[0]["val"] if recs else None
+
+
+def verify_with_sec(ticker: str, info: dict) -> dict:
+    """Controllo incrociato: confronta i valori mostrati (freschi) con i bilanci UFFICIALI SEC.
+    Ritorna {checked, coerenti, rows:[(label, valore_app, valore_sec, ok)]} o None (non-USA)."""
+    sec = fundamentals_from_sec(ticker)
+    if not sec or len(sec) <= 3:
+        return None
+    campi = [
+        ("returnOnEquity", "ROE", True),
+        ("profitMargins", "Margine netto", True),
+        ("debtToEquity", "Debito/Equity", False),
+        ("revenueGrowth", "Crescita ricavi", True),
+        ("priceToBook", "P/B", False),
+        ("trailingPE", "P/E", False),
+    ]
+    rows, coer, tot = [], 0, 0
+    for key, label, is_pct in campi:
+        a, s = info.get(key), sec.get(key)
+        if a is None or s is None:
+            continue
+        try:
+            a, s = float(a), float(s)
+        except (TypeError, ValueError):
+            continue
+        tot += 1
+        rel = abs(a - s) / max(abs(s), 1e-9)
+        ok = ((a >= 0) == (s >= 0)) and rel <= 0.40   # stesso segno e scarto < 40% (TTM vs annuale)
+        if ok:
+            coer += 1
+        fmt = (lambda x: f"{x * 100:.1f}%") if is_pct else (lambda x: f"{x:.2f}")
+        rows.append((label, fmt(a), fmt(s), ok))
+    if tot == 0:
+        return None
+    return {"checked": tot, "coerenti": coer, "rows": rows}
 
 
 @st.cache_data(ttl=86400, show_spinner=False)
