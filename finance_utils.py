@@ -1145,7 +1145,8 @@ def opportunity_row(ticker: str, with_fundamentals: bool = True) -> dict:
 
     # Probabilità statistiche (modello normale sui rendimenti storici, drift smorzato).
     # Orizzonte: breve ~1 mese, lungo ~1 anno. NON è una previsione: è una stima dal passato.
-    prob_gain, prob_loss = _gain_loss_prob(h, horizon_days=(252 if with_fundamentals else 21))
+    prob_gain, prob_loss, exp_ret, reliab = _gain_loss_prob(
+        h, horizon_days=(252 if with_fundamentals else 21))
 
     etf, fscore, name = False, None, ticker
     if with_fundamentals:                    # solo per il lungo periodo (qualità)
@@ -1156,28 +1157,38 @@ def opportunity_row(ticker: str, with_fundamentals: bool = True) -> dict:
 
     return dict(ticker=ticker.upper(), name=name, price=price, rsi=rsi, dd_high=dd_high,
                 perf_1m=perf_1m, perf_1y=perf_1y, below_bb=below_bb, above_sma200=above_sma200,
-                etf=etf, fscore=fscore, prob_gain=prob_gain, prob_loss=prob_loss)
+                etf=etf, fscore=fscore, prob_gain=prob_gain, prob_loss=prob_loss,
+                exp_ret=exp_ret, reliab=reliab)
 
 
 def _gain_loss_prob(h, horizon_days=21):
-    """Stima % probabilità di salita e di perdita >15% sull'orizzonte, da rendimenti storici.
-    Modello normale con drift annuo smorzato a [-25%, +30%]. Indicativo, non una previsione."""
+    """Stima probabilità salita / perdita>15%, guadagno atteso % e affidabilità della stima.
+    Modello normale con drift annuo smorzato a [-25%, +30%]. Indicativo, NON una previsione."""
     try:
         logret = np.log(h["Close"] / h["Close"].shift(1)).replace([np.inf, -np.inf], np.nan).dropna()
     except Exception:
-        return None, None
-    if len(logret) < 30:
-        return None, None
+        return None, None, None, None
+    n = len(logret)
+    if n < 30:
+        return None, None, None, None
     mu_a = float(np.clip(logret.mean() * 252, -0.25, 0.30))   # rendimento annuo atteso, smorzato
     sig_a = float(logret.std() * np.sqrt(252))
     if sig_a <= 0:
-        return None, None
+        return None, None, None, None
     f = horizon_days / 252.0
     mu_h, sig_h = mu_a * f, sig_a * np.sqrt(f)
     cdf = lambda x: 0.5 * (1 + math.erf(x / math.sqrt(2)))
-    p_gain = cdf(mu_h / sig_h) * 100                          # P(prezzo più alto a fine orizzonte)
-    p_loss = cdf((math.log(0.85) - mu_h) / sig_h) * 100       # P(perdita > 15%)
-    return round(p_gain), round(p_loss)
+    p_gain = round(cdf(mu_h / sig_h) * 100)                    # P(prezzo più alto a fine orizzonte)
+    p_loss = round(cdf((math.log(0.85) - mu_h) / sig_h) * 100)  # P(perdita > 15%)
+    exp_ret = round((math.exp(mu_h) - 1) * 100, 1)            # rendimento atteso (mediano) sull'orizzonte
+    # Affidabilità della stima: alta se poca volatilità e storico lungo, bassa se molto volatile
+    if sig_a <= 0.35 and n >= 180:
+        reliab = "🟢 Alta"
+    elif sig_a <= 0.60 and n >= 120:
+        reliab = "🟡 Media"
+    else:
+        reliab = "🔴 Bassa"
+    return p_gain, p_loss, exp_ret, reliab
 
 
 def _short_score(r):
@@ -1298,7 +1309,8 @@ def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
             rows.append({"Ticker": r["ticker"], "Nome": r["name"], "Prezzo": r["price"],
                          "RSI": r["rsi"], "% dal max": dd, "Perf 1 mese": r["perf_1m"],
                          "Occasione": int(round(sc)),
-                         "Prob. salita": r["prob_gain"], "Rischio perdita": r["prob_loss"],
+                         "Prob. salita": r["prob_gain"], "Guadagno atteso": r["exp_ret"],
+                         "Rischio perdita": r["prob_loss"], "Affidabilità": r["reliab"],
                          "Perché": _short_reasons(r)})
         else:
             sc = _long_score(r)
@@ -1309,7 +1321,8 @@ def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
             rows.append({"Ticker": r["ticker"], "Nome": r["name"], "Prezzo": r["price"],
                          "% dal max": dd, "Perf 1 anno": r["perf_1y"],
                          "Occasione": int(round(sc)),
-                         "Prob. salita": r["prob_gain"], "Rischio perdita": r["prob_loss"],
+                         "Prob. salita": r["prob_gain"], "Guadagno atteso": r["exp_ret"],
+                         "Rischio perdita": r["prob_loss"], "Affidabilità": r["reliab"],
                          "Perché": _long_reasons(r)})
     df = pd.DataFrame(rows)
     if not df.empty:
