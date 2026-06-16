@@ -100,7 +100,7 @@ st.sidebar.title("📈 Analisi Finanziaria")
 section = st.sidebar.radio(
     "Sezione", ["📊 Analisi di un titolo", "💎 Occasioni di mercato", "📰 Attualità"],
     help="«Analisi di un titolo» studia una singola azienda/ETF. «Occasioni» scansiona il mercato per cali interessanti. "
-         "«Attualità» raccoglie le notizie recenti divise per azienda/ETF.",
+         "«Attualità» raccoglie le classifiche di mercato (rialzi/ribassi/più scambiati) e le notizie recenti divise per azienda/ETF.",
 )
 st.sidebar.markdown("---")
 
@@ -463,6 +463,38 @@ if section.startswith("📰"):
     labels = ["🌍 Mercato generale"] + focus
     news_tabs = st.tabs(labels)
     with news_tabs[0]:
+        st.markdown("#### Le aziende del momento")
+        st.caption(
+            "Classifiche aggiornate del mercato USA: chi sale, chi scende e chi viene più scambiato oggi. "
+            "Clicca un ticker e incollalo nella ricerca per analizzarlo in dettaglio."
+        )
+
+        def show_screen(name, vmin_color):
+            df = fu.get_screen(name, count=12)
+            if df.empty:
+                st.info("Classifica non disponibile al momento.")
+                return
+            df = df.set_index("Ticker")
+            fmt = {"Prezzo": "{:,.2f}", "Var %": "{:+.2f}%", "Volume": "{:,.0f}", "Cap.": "{:,.0f}"}
+            sty = df.style.format(fmt, na_rep="n/d")
+            try:
+                sty = sty.background_gradient(subset=["Var %"], cmap="RdYlGn", vmin=-vmin_color, vmax=vmin_color)
+            except Exception:
+                pass
+            st.dataframe(sty, use_container_width=True)
+
+        g1, g2, g3 = st.tabs(["🚀 In crescita oggi", "📉 In perdita oggi", "🔥 Più scambiati"])
+        with g1:
+            st.markdown("**Maggiori rialzi della giornata** (day gainers)")
+            show_screen("day_gainers", 15)
+        with g2:
+            st.markdown("**Maggiori ribassi della giornata** (day losers)")
+            show_screen("day_losers", 15)
+        with g3:
+            st.markdown("**Titoli più scambiati** per volume (most actives)")
+            show_screen("most_actives", 8)
+
+        st.markdown("---")
         render_news("^GSPC", "S&P 500 — notizie generali di mercato", 10, day=giorno)
     for i, t in enumerate(focus, start=1):
         with news_tabs[i]:
@@ -603,7 +635,7 @@ with st.expander("🧠 Sintesi automatica — leggi il titolo a parole", expande
 fund_tab_label = "🧺 Composizione ETF" if fund else "💰 Analisi Fondamentale"
 tab_over, tab_fund, tab_tech, tab_sim, tab_cmp, tab_news = st.tabs(
     ["📊 Panoramica", fund_tab_label, "📈 Analisi Tecnica", "💶 Simulatore",
-     "⚖️ Confronto / Screener", "🌐 Mercati & Notizie"]
+     "⚖️ Confronto / Screener", "📰 Notizie"]
 )
 
 # ============================ PANORAMICA ===================================
@@ -1103,48 +1135,19 @@ with tab_cmp:
             figc.update_layout(height=420, margin=dict(t=10, b=10), yaxis_title="Base 100", legend=dict(orientation="h"))
             st.plotly_chart(figc, use_container_width=True)
 
-# ========================= MERCATI & NOTIZIE ==============================
+# =============================== NOTIZIE ===================================
 with tab_news:
-    st.subheader("Le aziende del momento")
+    st.subheader(f"📰 Notizie su {name}")
     st.caption(
-        "Classifiche aggiornate del mercato USA: chi sale, chi scende e chi viene più scambiato oggi. "
-        "Clicca un ticker e incollalo nella ricerca per analizzarlo in dettaglio."
+        "Le notizie più recenti che riguardano questo titolo. "
+        "Le classifiche di mercato (chi sale, chi scende, i più scambiati) e le notizie generali "
+        "le trovi nella sezione **📰 Attualità** (barra laterale a sinistra)."
     )
 
-    def show_screen(name, vmin_color):
-        df = fu.get_screen(name, count=12)
-        if df.empty:
-            st.info("Classifica non disponibile al momento.")
-            return
-        df = df.set_index("Ticker")
-        fmt = {"Prezzo": "{:,.2f}", "Var %": "{:+.2f}%", "Volume": "{:,.0f}", "Cap.": "{:,.0f}"}
-        sty = df.style.format(fmt, na_rep="n/d")
-        try:
-            sty = sty.background_gradient(subset=["Var %"], cmap="RdYlGn", vmin=-vmin_color, vmax=vmin_color)
-        except Exception:
-            pass
-        st.dataframe(sty, use_container_width=True)
-
-    g1, g2, g3 = st.tabs(["🚀 In crescita oggi", "📉 In perdita oggi", "🔥 Più scambiati"])
-    with g1:
-        st.markdown("**Maggiori rialzi della giornata** (day gainers)")
-        show_screen("day_gainers", 15)
-    with g2:
-        st.markdown("**Maggiori ribassi della giornata** (day losers)")
-        show_screen("day_losers", 15)
-    with g3:
-        st.markdown("**Titoli più scambiati** per volume (most actives)")
-        show_screen("most_actives", 8)
-
-    st.markdown("---")
-    st.subheader("📰 Notizie")
-    col_n1, col_n2 = st.columns(2)
-
-    def show_news(source_ticker, header):
-        st.markdown(f"#### {header}")
-        news = fu.get_news(source_ticker, count=6)
+    def show_news(source_ticker):
+        news = fu.get_news(source_ticker, count=10)
         if not news:
-            st.caption("Nessuna notizia disponibile.")
+            st.caption("Nessuna notizia disponibile per questo titolo.")
             return
         for n in news:
             title = n["title"]
@@ -1166,10 +1169,7 @@ with tab_news:
                 st.caption("Riassunto non disponibile — apri l'articolo per i dettagli.")
             st.markdown("<hr style='margin:4px 0;border:none;border-top:1px solid #eee'>", unsafe_allow_html=True)
 
-    with col_n1:
-        show_news(ticker, f"Su {ticker}")
-    with col_n2:
-        show_news("^GSPC", "Mercato generale (S&P 500)")
+    show_news(ticker)
 
 st.markdown("---")
 st.caption(
