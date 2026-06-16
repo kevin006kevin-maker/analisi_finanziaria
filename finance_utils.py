@@ -6,6 +6,7 @@ Nessuna dipendenza da TA-Lib: gli indicatori sono calcolati con pandas/numpy.
 
 import os
 import json
+import math
 import datetime
 
 import numpy as np
@@ -64,11 +65,15 @@ def get_history(ticker: str, period: str = "1y", interval: str = "1d") -> pd.Dat
 
 @st.cache_data(ttl=900, show_spinner=False)
 def get_info(ticker: str) -> dict:
-    """Metadati/fondamentali. Catena di riserva: FMP → SEC EDGAR (USA) → yfinance."""
+    """Metadati/fondamentali. Catena di riserva: FMP → Finnhub → SEC EDGAR (USA) → yfinance."""
     if _fmp_key():
         fmp = info_from_fmp(ticker)
         if fmp:
             return fmp
+    if _finnhub_key():
+        fh = info_from_finnhub(ticker)
+        if fh and len(fh) > 3:
+            return fh
     sec = fundamentals_from_sec(ticker)          # riserva ufficiale USA, senza chiave
     if sec and len(sec) > 3:                      # ha davvero dei fondamentali, non solo il nome
         return sec
@@ -292,6 +297,112 @@ def fundamentals_from_sec(ticker: str) -> dict:
     return {k: v for k, v in info.items() if v is not None}
 
 
+# ---------------------------------------------------------------------------
+# RISERVA: FINNHUB (fondamentali TTM + notizie). Limite al minuto, raramente esaurito.
+# Chiave in st.secrets["finnhub_api_key"] o env FINNHUB_API_KEY.
+# ---------------------------------------------------------------------------
+FINNHUB_BASE = "https://finnhub.io/api/v1"
+
+
+def _finnhub_key():
+    try:
+        k = st.secrets["finnhub_api_key"]
+        if k:
+            return k
+    except Exception:
+        pass
+    return os.environ.get("FINNHUB_API_KEY", "")
+
+
+@st.cache_data(ttl=900, show_spinner=False)
+def _finnhub_get(path: str):
+    key = _finnhub_key()
+    if not key:
+        return None
+    import requests
+    sep = "&" if "?" in path else "?"
+    try:
+        r = requests.get(f"{FINNHUB_BASE}/{path}{sep}token={key}", timeout=15)
+        return r.json() if r.status_code == 200 else None
+    except Exception:
+        return None
+
+
+@st.cache_data(ttl=900, show_spinner=False)
+def info_from_finnhub(ticker: str) -> dict:
+    prof = _finnhub_get(f"stock/profile2?symbol={ticker}") or {}
+    mraw = _finnhub_get(f"stock/metric?symbol={ticker}&metric=all") or {}
+    m = mraw.get("metric", {}) if isinstance(mraw, dict) else {}
+    if not prof and not m:
+        return {}
+
+    def num(x):
+        try:
+            return float(x)
+        except (TypeError, ValueError):
+            return None
+
+    def frac(x):                     # Finnhub dà percentuali (es. 146.69) → frazione
+        v = num(x)
+        return v / 100 if v is not None else None
+
+    info = {"quoteType": "EQUITY"}
+    if prof:
+        info["longName"] = prof.get("name")
+        info["shortName"] = prof.get("name")
+        info["sector"] = prof.get("finnhubIndustry")
+        info["industry"] = prof.get("finnhubIndustry")
+        info["country"] = prof.get("country")
+        info["currency"] = prof.get("currency")
+        info["exchange"] = prof.get("exchange")
+        mc = num(prof.get("marketCapitalization"))
+        if mc is not None:
+            info["marketCap"] = mc * 1e6        # Finnhub in milioni
+    info["trailingPE"] = num(m.get("peTTM"))
+    info["priceToBook"] = num(m.get("pbQuarterly") or m.get("pbAnnual"))
+    info["returnOnEquity"] = frac(m.get("roeTTM"))
+    info["returnOnAssets"] = frac(m.get("roaTTM"))
+    info["profitMargins"] = frac(m.get("netProfitMarginTTM"))
+    info["operatingMargins"] = frac(m.get("operatingMarginTTM"))
+    d2e = num(m.get("totalDebt/totalEquityAnnual") or m.get("totalDebt/totalEquityQuarterly"))
+    info["debtToEquity"] = d2e * 100 if d2e is not None else None
+    info["currentRatio"] = num(m.get("currentRatioAnnual") or m.get("currentRatioQuarterly"))
+    info["quickRatio"] = num(m.get("quickRatioAnnual"))
+    info["dividendYield"] = num(m.get("dividendYieldIndicatedAnnual"))   # già percento (come yfinance)
+    info["revenueGrowth"] = frac(m.get("revenueGrowthTTMYoy"))
+    info["beta"] = num(m.get("beta"))
+    info["fiftyTwoWeekHigh"] = num(m.get("52WeekHigh"))
+    info["fiftyTwoWeekLow"] = num(m.get("52WeekLow"))
+    return {k: v for k, v in info.items() if v is not None}
+
+
+def get_news_finnhub(ticker: str, count: int = 8) -> list:
+    today = datetime.date.today()
+    frm = (today - datetime.timedelta(days=21)).isoformat()
+    data = _finnhub_get(f"company-news?symbol={ticker}&from={frm}&to={today.isoformat()}")
+    if not isinstance(data, list):
+        return []
+    out = []
+    for it in data:
+        ts = it.get("datetime")
+        date = ""
+        if ts:
+            try:
+                date = datetime.datetime.utcfromtimestamp(int(ts)).strftime("%Y-%m-%d")
+            except Exception:
+                date = ""
+        out.append({
+            "title": it.get("headline", "(senza titolo)"),
+            "summary": it.get("summary", ""),
+            "publisher": it.get("source", ""),
+            "url": it.get("url", ""),
+            "ts": str(ts or ""),
+            "date": date,
+        })
+    out.sort(key=lambda n: n["ts"], reverse=True)
+    return out[:count]
+
+
 @st.cache_data(ttl=900, show_spinner=False)
 def ticker_exists(ticker: str) -> bool:
     df = get_history(ticker, period="5d")
@@ -380,7 +491,12 @@ def get_screen(name: str, count: int = 15) -> pd.DataFrame:
 @st.cache_data(ttl=600, show_spinner=False)
 def get_news(ticker: str, count: int = 8) -> list:
     """Notizie legate a un ticker, ordinate dalla più recente. Ritorna dict normalizzati.
-    Ogni voce ha 'ts' (timestamp ISO completo, per ordinare/filtrare) e 'date' (YYYY-MM-DD)."""
+    Fonte primaria: Finnhub (no Yahoo); riserva yfinance (es. indici tipo ^GSPC).
+    Ogni voce ha 'ts' (per ordinare/filtrare) e 'date' (YYYY-MM-DD)."""
+    if _finnhub_key():
+        fh = get_news_finnhub(ticker, count)
+        if fh:
+            return fh
     try:
         raw = yf.Ticker(ticker).news or []
     except Exception:
@@ -1004,6 +1120,8 @@ def opportunity_row(ticker: str, with_fundamentals: bool = True) -> dict:
     """Riga occasione. with_fundamentals=False (breve periodo) usa solo lo storico
     (1 sola chiamata API) e salta i fondamentali → molte meno richieste."""
     h = get_history(ticker, period="1y")
+    if not h.empty:
+        h = h[h["Close"].notna()]            # scarta righe senza prezzo (NaN finale di yfinance)
     if h.empty or len(h) < 60:
         return None
     h = add_indicators(h)
@@ -1025,6 +1143,10 @@ def opportunity_row(ticker: str, with_fundamentals: bool = True) -> dict:
     sma200 = last.get("SMA200", np.nan)
     above_sma200 = bool(price > sma200) if not np.isnan(sma200) else None
 
+    # Probabilità statistiche (modello normale sui rendimenti storici, drift smorzato).
+    # Orizzonte: breve ~1 mese, lungo ~1 anno. NON è una previsione: è una stima dal passato.
+    prob_gain, prob_loss = _gain_loss_prob(h, horizon_days=(252 if with_fundamentals else 21))
+
     etf, fscore, name = False, None, ticker
     if with_fundamentals:                    # solo per il lungo periodo (qualità)
         info = get_info(ticker)
@@ -1034,7 +1156,28 @@ def opportunity_row(ticker: str, with_fundamentals: bool = True) -> dict:
 
     return dict(ticker=ticker.upper(), name=name, price=price, rsi=rsi, dd_high=dd_high,
                 perf_1m=perf_1m, perf_1y=perf_1y, below_bb=below_bb, above_sma200=above_sma200,
-                etf=etf, fscore=fscore)
+                etf=etf, fscore=fscore, prob_gain=prob_gain, prob_loss=prob_loss)
+
+
+def _gain_loss_prob(h, horizon_days=21):
+    """Stima % probabilità di salita e di perdita >15% sull'orizzonte, da rendimenti storici.
+    Modello normale con drift annuo smorzato a [-25%, +30%]. Indicativo, non una previsione."""
+    try:
+        logret = np.log(h["Close"] / h["Close"].shift(1)).replace([np.inf, -np.inf], np.nan).dropna()
+    except Exception:
+        return None, None
+    if len(logret) < 30:
+        return None, None
+    mu_a = float(np.clip(logret.mean() * 252, -0.25, 0.30))   # rendimento annuo atteso, smorzato
+    sig_a = float(logret.std() * np.sqrt(252))
+    if sig_a <= 0:
+        return None, None
+    f = horizon_days / 252.0
+    mu_h, sig_h = mu_a * f, sig_a * np.sqrt(f)
+    cdf = lambda x: 0.5 * (1 + math.erf(x / math.sqrt(2)))
+    p_gain = cdf(mu_h / sig_h) * 100                          # P(prezzo più alto a fine orizzonte)
+    p_loss = cdf((math.log(0.85) - mu_h) / sig_h) * 100       # P(perdita > 15%)
+    return round(p_gain), round(p_loss)
 
 
 def _short_score(r):
@@ -1154,7 +1297,9 @@ def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
                 continue
             rows.append({"Ticker": r["ticker"], "Nome": r["name"], "Prezzo": r["price"],
                          "RSI": r["rsi"], "% dal max": dd, "Perf 1 mese": r["perf_1m"],
-                         "Occasione": int(round(sc)), "Perché": _short_reasons(r)})
+                         "Occasione": int(round(sc)),
+                         "Prob. salita": r["prob_gain"], "Rischio perdita": r["prob_loss"],
+                         "Perché": _short_reasons(r)})
         else:
             sc = _long_score(r)
             if sc is None or not np.isfinite(sc) or sc < 50:
@@ -1163,7 +1308,9 @@ def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
                 continue
             rows.append({"Ticker": r["ticker"], "Nome": r["name"], "Prezzo": r["price"],
                          "% dal max": dd, "Perf 1 anno": r["perf_1y"],
-                         "Occasione": int(round(sc)), "Perché": _long_reasons(r)})
+                         "Occasione": int(round(sc)),
+                         "Prob. salita": r["prob_gain"], "Rischio perdita": r["prob_loss"],
+                         "Perché": _long_reasons(r)})
     df = pd.DataFrame(rows)
     if not df.empty:
         df = df.sort_values("Occasione", ascending=False).set_index("Ticker")
