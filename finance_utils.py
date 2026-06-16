@@ -923,22 +923,27 @@ def _short_score(r):
     if r["rsi"] is None:
         return None
     rsi = r["rsi"]
+    # quanto è ipervenduto (0-50)
     if rsi <= 25:
-        base = 60
-    elif rsi <= 30:
         base = 50
+    elif rsi <= 30:
+        base = 42
     elif rsi <= 35:
-        base = 40
+        base = 32
     elif rsi <= 40:
-        base = 28
+        base = 22
     elif rsi <= 45:
-        base = 16
+        base = 12
     else:
         base = 0
     if r["below_bb"]:
-        base += 20
+        base += 12                           # prezzo a un estremo
     if r["above_sma200"]:
-        base += 20                           # trend di fondo intatto = rimbalzo più probabile
+        base += 13                           # trend di fondo intatto = rimbalzo più probabile
+    # possibilità di guadagno = spazio di recupero (quanto è caduto dai massimi), fino a +25
+    dd = r["dd_high"]
+    if dd is not None:
+        base += min(max(-dd, 0) / 60 * 25, 25)
     return min(base, 100)
 
 
@@ -1012,8 +1017,6 @@ def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
         except Exception:
             r = None
         if not r:
-            continue
-        if r["price"] is not None and r["price"] < 1:   # esclude penny stock (segnali ingannevoli)
             continue
         dd = r["dd_high"]
         if kind == "short":
