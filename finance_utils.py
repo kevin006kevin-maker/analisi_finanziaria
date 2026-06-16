@@ -461,10 +461,14 @@ def info_from_finnhub(ticker: str) -> dict:
     return {k: v for k, v in info.items() if v is not None}
 
 
-def get_news_finnhub(ticker: str, count: int = 8) -> list:
-    today = datetime.date.today()
-    frm = (today - datetime.timedelta(days=21)).isoformat()
-    data = _finnhub_get(f"company-news?symbol={ticker}&from={frm}&to={today.isoformat()}")
+def get_news_finnhub(ticker: str, count: int = 8, day: str = None) -> list:
+    if day:                              # un giorno specifico → chiedo direttamente quel giorno
+        frm = to = day
+    else:
+        today = datetime.date.today()
+        frm = (today - datetime.timedelta(days=21)).isoformat()
+        to = today.isoformat()
+    data = _finnhub_get(f"company-news?symbol={ticker}&from={frm}&to={to}")
     if not isinstance(data, list):
         return []
     out = []
@@ -574,12 +578,13 @@ def get_screen(name: str, count: int = 15) -> pd.DataFrame:
 
 
 @st.cache_data(ttl=600, show_spinner=False)
-def get_news(ticker: str, count: int = 8) -> list:
+def get_news(ticker: str, count: int = 8, day: str = None) -> list:
     """Notizie legate a un ticker, ordinate dalla più recente. Ritorna dict normalizzati.
     Fonte primaria: Finnhub (no Yahoo); riserva yfinance (es. indici tipo ^GSPC).
+    day = 'YYYY-MM-DD' → notizie di quel giorno specifico (interroga la fonte su quella data).
     Ogni voce ha 'ts' (per ordinare/filtrare) e 'date' (YYYY-MM-DD)."""
     if _finnhub_key():
-        fh = get_news_finnhub(ticker, count)
+        fh = get_news_finnhub(ticker, count, day=day)
         if fh:
             return fh
     try:
@@ -601,6 +606,8 @@ def get_news(ticker: str, count: int = 8) -> list:
             "date": ts[:10],
         })
     out.sort(key=lambda n: n["ts"], reverse=True)   # più recente prima (ISO → ordine lessicografico)
+    if day:                                          # riserva yfinance: filtra il giorno (solo recenti)
+        out = [x for x in out if x["date"] == day]
     return out[:count]
 
 
