@@ -64,12 +64,14 @@ def get_history(ticker: str, period: str = "1y", interval: str = "1d") -> pd.Dat
 
 @st.cache_data(ttl=900, show_spinner=False)
 def get_info(ticker: str) -> dict:
-    """Metadati/fondamentali. Fonte primaria: FMP (affidabile dal cloud).
-    Riserva: yfinance (es. indici non presenti su FMP)."""
+    """Metadati/fondamentali. Catena di riserva: FMP → SEC EDGAR (USA) → yfinance."""
     if _fmp_key():
         fmp = info_from_fmp(ticker)
         if fmp:
             return fmp
+    sec = fundamentals_from_sec(ticker)          # riserva ufficiale USA, senza chiave
+    if sec and len(sec) > 3:                      # ha davvero dei fondamentali, non solo il nome
+        return sec
     try:
         return yf.Ticker(ticker).info or {}
     except Exception:
@@ -172,6 +174,121 @@ def info_from_fmp(ticker: str) -> dict:
     info["payoutRatio"] = num(r.get("dividendPayoutRatioTTM"))
     info["revenueGrowth"] = num(g.get("revenueGrowth") or g.get("growthRevenue"))
     info["earningsGrowth"] = num(g.get("netIncomeGrowth") or g.get("growthNetIncome"))
+    return {k: v for k, v in info.items() if v is not None}
+
+
+# ---------------------------------------------------------------------------
+# RISERVA 2: SEC EDGAR (bilanci ufficiali USA, senza chiave) — usata se FMP è
+# esaurito/non disponibile. Copre solo aziende USA che depositano alla SEC.
+# ---------------------------------------------------------------------------
+_SEC_UA = {"User-Agent": "AnalisiFinanziaria - contatto ai@facco.net"}
+
+
+@st.cache_data(ttl=86400, show_spinner=False)
+def _sec_cik_map() -> dict:
+    import requests
+    try:
+        r = requests.get("https://www.sec.gov/files/company_tickers.json",
+                          headers=_SEC_UA, timeout=20)
+        if r.status_code != 200:
+            return {}
+        return {v["ticker"].upper(): str(v["cik_str"]).zfill(10) for v in r.json().values()}
+    except Exception:
+        return {}
+
+
+@st.cache_data(ttl=86400, show_spinner=False)
+def _sec_companyfacts(cik: str) -> dict:
+    import requests
+    try:
+        r = requests.get(f"https://data.sec.gov/api/xbrl/companyfacts/CIK{cik}.json",
+                          headers=_SEC_UA, timeout=25)
+        return r.json() if r.status_code == 200 else {}
+    except Exception:
+        return {}
+
+
+def _sec_annual(units, n=1):
+    """Valori annuali (10-K) più recenti, dal più nuovo."""
+    recs = [x for x in units if x.get("val") is not None and str(x.get("form", "")).startswith("10-K")]
+    recs = [x for x in recs if x.get("fp") == "FY"] or recs
+    recs.sort(key=lambda x: x.get("end", ""), reverse=True)
+    out, seen = [], set()
+    for x in recs:
+        e = x.get("end")
+        if e in seen:
+            continue
+        seen.add(e)
+        out.append(x["val"])
+        if len(out) >= n:
+            break
+    return out
+
+
+def _sec_instant(units):
+    """Valore di bilancio (stato patrimoniale) più recente."""
+    recs = [x for x in units if x.get("val") is not None]
+    recs.sort(key=lambda x: x.get("end", ""), reverse=True)
+    return recs[0]["val"] if recs else None
+
+
+@st.cache_data(ttl=86400, show_spinner=False)
+def fundamentals_from_sec(ticker: str) -> dict:
+    cik = _sec_cik_map().get(ticker.upper())
+    if not cik:
+        return {}
+    facts = _sec_companyfacts(cik)
+    gaap = (facts.get("facts") or {}).get("us-gaap", {})
+    dei = (facts.get("facts") or {}).get("dei", {})
+    if not gaap:
+        return {}
+
+    def usd(concept):
+        return (gaap.get(concept, {}).get("units", {}) or {}).get("USD", [])
+
+    ni_l = _sec_annual(usd("NetIncomeLoss"), 1)
+    ni = ni_l[0] if ni_l else None
+    eq = _sec_instant(usd("StockholdersEquity"))
+    assets = _sec_instant(usd("Assets"))
+    rev_l = (_sec_annual(usd("RevenueFromContractWithCustomerExcludingAssessedTax"), 2)
+             or _sec_annual(usd("Revenues"), 2))
+    rev = rev_l[0] if rev_l else None
+    rev_prev = rev_l[1] if len(rev_l) > 1 else None
+    eps_l = _sec_annual((gaap.get("EarningsPerShareDiluted", {}).get("units", {}) or {}).get("USD/shares", []), 1)
+    eps = eps_l[0] if eps_l else None
+    debt = _sec_instant(usd("LongTermDebt"))
+    if debt is None:
+        ltc = _sec_instant(usd("LongTermDebtNoncurrent"))
+        if ltc is not None:
+            debt = ltc + (_sec_instant(usd("LongTermDebtCurrent")) or 0)
+    shares = _sec_instant((dei.get("EntityCommonStockSharesOutstanding", {}).get("units", {}) or {}).get("shares", []))
+
+    price = None
+    h = get_history(ticker, period="5d")
+    if not h.empty:
+        closes = h["Close"].dropna()
+        if not closes.empty:
+            price = float(closes.iloc[-1])
+
+    info = {"quoteType": "EQUITY",
+            "shortName": facts.get("entityName") or ticker,
+            "longName": facts.get("entityName")}
+    if ni is not None and rev:
+        info["profitMargins"] = ni / rev
+    if ni is not None and eq and eq > 0:
+        info["returnOnEquity"] = ni / eq
+    if ni is not None and assets and assets > 0:
+        info["returnOnAssets"] = ni / assets
+    if debt is not None and eq and eq > 0:
+        info["debtToEquity"] = debt / eq * 100
+    if rev and rev_prev and rev_prev > 0:
+        info["revenueGrowth"] = rev / rev_prev - 1
+    if price and eps and eps > 0:
+        info["trailingPE"] = price / eps
+    if price and shares:
+        info["marketCap"] = price * shares
+        if eq and eq > 0:
+            info["priceToBook"] = price * shares / eq
     return {k: v for k, v in info.items() if v is not None}
 
 
