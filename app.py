@@ -105,8 +105,10 @@ st.sidebar.title("📈 Analisi Finanziaria")
 
 # --- Sezione principale ---
 section = st.sidebar.radio(
-    "Sezione", ["📊 Analisi di un titolo", "💎 Occasioni di mercato", "📰 Attualità"],
+    "Sezione", ["📊 Analisi di un titolo", "💎 Occasioni di mercato",
+                "📌 Monitoraggio", "📰 Attualità"], key="section_radio",
     help="«Analisi di un titolo» studia una singola azienda/ETF. «Occasioni» scansiona il mercato per cali interessanti. "
+         "«Monitoraggio» segue nel tempo le occasioni che hai scelto, per decidere con calma se comprarle. "
          "«Attualità» raccoglie le classifiche di mercato (rialzi/ribassi/più scambiati) e le notizie recenti divise per azienda/ETF.",
 )
 st.sidebar.markdown("---")
@@ -188,6 +190,12 @@ if watchlist:
         )
 else:
     st.sidebar.caption("Vuota. Premi ➕ per salvare il titolo che stai analizzando.")
+
+# --- Monitoraggio occasioni (conteggio) ---
+tracked = fu.load_tracking()
+if tracked:
+    st.sidebar.caption(f"📌 Stai monitorando **{len(tracked)}** occasion{'e' if len(tracked)==1 else 'i'} "
+                       "(vedi la sezione «📌 Monitoraggio»).")
 
 st.sidebar.markdown("---")
 st.sidebar.markdown(
@@ -356,6 +364,26 @@ if section.startswith("💎"):
                                 else:
                                     conf = "**meglio del mercato**"
                                 st.caption(f"📊 Ultimo mese: {tk} {s1m:+.0f}% · mercato S&P 500 {mkt_1m:+.0f}% → {conf}.")
+                        # --- Segui questa occasione nel tempo ---
+                        is_tracked = tk in tracked
+                        tlabel = ("✅ Già in monitoraggio — registra lo scatto di oggi"
+                                  if is_tracked else "📌 Segui nel tempo")
+                        if st.button(tlabel, key=f"track_{kind}_{tk}", use_container_width=True,
+                                     help="Salva questa occasione per osservarne l'evoluzione nei prossimi giorni "
+                                          "(sezione «📌 Monitoraggio»)."):
+                            snap = {
+                                "name": row["Nome"], "price": row["Prezzo"], "rsi": row.get("RSI"),
+                                "dd_high": row["% dal max"], "occasione": int(row["Occasione"]),
+                                "convenienza": int(row["Convenienza"]),
+                                "prob_gain": row.get("Prob. salita"), "prob_loss": row.get("Rischio perdita"),
+                                "exp_ret": row.get("Guadagno atteso"), "gain": row.get("Guadagno atteso"),
+                                "reliab": row.get("Affidabilità"),
+                                "target": (det or {}).get("target_price"),
+                                "stop": (det or {}).get("stop_price"),
+                            }
+                            fu.track_opportunity(tk, kind, snapshot=snap)
+                            st.success(f"📌 {tk} aggiunto al monitoraggio. Lo trovi nella sezione «📌 Monitoraggio».")
+                            st.rerun()
                         news = fu.get_news(tk, 4)
                         if news:
                             sent_label, _ = fu.news_sentiment(news)
@@ -431,6 +459,162 @@ if section.startswith("💎"):
                     "possibile occasione di valore. Orizzonte: anni.", long_cfg)
         st.caption("👀 **Come leggere:** la barra 🏅 è la convenienza complessiva (la tabella è ordinata da lì). "
                    "Per i dettagli (grafico, livelli, notizie) apri l'approfondimento di un titolo.")
+    st.stop()
+
+# ===========================================================================
+# SEZIONE: MONITORAGGIO — segui le occasioni nel tempo
+# ===========================================================================
+if section.startswith("📌"):
+    st.title("📌 Monitoraggio delle occasioni")
+    st.caption("Qui osservi nel tempo le occasioni che hai scelto di seguire (dalla sezione «💎 Occasioni di mercato»). "
+               "Ogni giorno che apri l'app viene registrato uno «scatto» dei valori: così vedi se il segnale si "
+               "rafforza o si indebolisce **prima** di decidere se comprare.")
+    st.warning("⚠️ **Non è un consiglio di acquisto.** È uno strumento per seguire un'idea per più giorni con calma. "
+               "La storia si costruisce in avanti: un punto per ogni giorno in cui apri l'app.")
+
+    tracked = fu.load_tracking()
+    if not tracked:
+        st.info("Non stai ancora monitorando nessuna occasione.\n\n"
+                "Vai su **💎 Occasioni di mercato**, apri l'approfondimento di un titolo interessante e premi "
+                "**📌 Segui nel tempo**. Tornerà qui, e da domani vedrai come si evolve.")
+        st.stop()
+
+    with st.spinner("Aggiorno gli scatti di oggi…"):
+        tracked = fu.auto_snapshot_tracked()
+
+    cc1, cc2 = st.columns([1, 3])
+    if cc1.button("🔄 Aggiorna ora", use_container_width=True,
+                  help="Forza un nuovo scatto dei valori di oggi per tutti i titoli seguiti."):
+        fu.get_history.clear()          # dati freschi
+        fu.opportunity_row.clear()
+        for tk in list(tracked):
+            snap = fu.opportunity_snapshot(tk, tracked[tk].get("kind", "short"))
+            if snap:
+                fu.track_opportunity(tk, tracked[tk].get("kind", "short"), snapshot=snap)
+        st.rerun()
+    cc2.caption(f"Ultimo accesso: **{_now_rome().strftime('%d/%m %H:%M')}** · "
+                f"i dati gratuiti si rinnovano ~ogni 15 minuti.")
+
+    def render_tracked(tk, entry):
+        snaps = entry.get("snapshots", [])
+        last = snaps[-1] if snaps else {}
+        first = snaps[0] if snaps else {}
+        nm = entry.get("name") or last.get("name") or tk
+        kind = entry.get("kind", "short")
+        kind_badge = "⚡ Breve" if kind == "short" else "🏛️ Lungo"
+        try:
+            d0 = datetime.date.fromisoformat(entry.get("added", ""))
+            giorni = (datetime.date.today() - d0).days
+        except Exception:
+            giorni = len(snaps) - 1
+        trend = fu.tracking_trend(snaps)
+
+        with st.container(border=True):
+            tc1, tc2 = st.columns([4, 1])
+            tc1.markdown(f"### {nm}  ·  `{tk}`")
+            tc1.caption(f"{kind_badge} · seguito da **{max(giorni,0)}** giorn{'o' if giorni==1 else 'i'} "
+                        f"(dal {entry.get('added','?')}) · {len(snaps)} scatt{'o' if len(snaps)==1 else 'i'}")
+            if tc2.button("🗑️ Smetti", key=f"untrack_{tk}", use_container_width=True):
+                fu.untrack_opportunity(tk)
+                st.rerun()
+
+            # Verdetto di tendenza
+            if trend:
+                arrow_p = (f" · prezzo {trend['dprice']:+.1f}%" if trend["dprice"] is not None else "")
+                st.markdown(
+                    f"<div style='padding:8px 12px;border-radius:8px;background:{trend['color']}14;"
+                    f"border-left:5px solid {trend['color']};margin-bottom:8px'>"
+                    f"<b style='color:{trend['color']}'>{trend['emoji']} {trend['label']}</b> — "
+                    f"convenienza {trend['dconv']:+.0f} punti{arrow_p} da quando lo segui.</div>",
+                    unsafe_allow_html=True)
+            else:
+                st.caption("📅 Servono almeno **2 giorni** di scatti per valutare la tendenza. Riapri l'app domani.")
+
+            # Metriche attuali con variazione dal primo scatto
+            def _delta(curr, prev):
+                if curr is None or prev is None:
+                    return None
+                return curr - prev
+            m1, m2, m3, m4 = st.columns(4)
+            price = last.get("price")
+            dprice = None
+            if price and first.get("price"):
+                dprice = (price / first["price"] - 1) * 100
+            m1.metric("Prezzo", f"{price:,.2f}" if price else "n/d",
+                      f"{dprice:+.1f}%" if dprice is not None else None)
+            conv = last.get("convenienza")
+            dc = _delta(conv, first.get("convenienza"))
+            m2.metric("🏅 Convenienza", f"{conv:.0f}/100" if conv is not None else "n/d",
+                      f"{dc:+.0f}" if dc is not None else None)
+            pg = last.get("prob_gain")
+            m3.metric("📈 Prob. salita", f"{pg:.0f}%" if pg is not None else "n/d")
+            pl = last.get("prob_loss")
+            m4.metric("📉 Rischio perdita", f"{pl:.0f}%" if pl is not None else "n/d")
+
+            rsi = last.get("rsi")
+            dd = last.get("dd_high")
+            rel = last.get("reliab")
+            extra = []
+            if rsi is not None:
+                extra.append(f"RSI **{rsi:.0f}**")
+            if dd is not None:
+                extra.append(f"**{dd:.0f}%** dal massimo")
+            if rel:
+                extra.append(f"affidabilità {rel}")
+            if extra:
+                st.caption(" · ".join(extra))
+
+            # Grafico: prezzo reale + convenienza accumulata (asse destro) + livelli
+            hc = fu.get_history(tk, period="3mo")
+            fig = go.Figure()
+            if not hc.empty:
+                fig.add_trace(go.Scatter(x=hc.index, y=hc["Close"], name="Prezzo",
+                                         line=dict(color="#0969da", width=2)))
+            cs = [(s["date"], s["convenienza"]) for s in snaps if s.get("convenienza") is not None]
+            if cs:
+                fig.add_trace(go.Scatter(
+                    x=[pd.to_datetime(d) for d, _ in cs], y=[v for _, v in cs],
+                    name="Convenienza", yaxis="y2", mode="lines+markers",
+                    line=dict(color="#8250df", width=2), marker=dict(size=8)))
+            tgt, stp = last.get("target"), last.get("stop")
+            if tgt:
+                fig.add_hline(y=tgt, line=dict(color="#1a7f37", dash="dash", width=1),
+                              annotation_text="🎯 bersaglio", annotation_position="top left")
+            if stp:
+                fig.add_hline(y=stp, line=dict(color="#cf222e", dash="dash", width=1),
+                              annotation_text="🛑 stop", annotation_position="bottom left")
+            fig.update_layout(
+                height=300, margin=dict(t=10, b=10, l=10, r=10),
+                legend=dict(orientation="h"), hovermode="x unified",
+                yaxis=dict(title="Prezzo"),
+                yaxis2=dict(title="Convenienza", overlaying="y", side="right",
+                            range=[0, 100], showgrid=False))
+            st.plotly_chart(fig, use_container_width=True)
+            st.caption("👀 **Linea blu** = prezzo reale (3 mesi). **Linea viola** = la convenienza registrata nei giorni "
+                       "in cui hai aperto l'app (sale = il segnale migliora). Verde = bersaglio, rossa = stop.")
+
+            # Nota personale + scorciatoia all'analisi
+            nc1, nc2 = st.columns([4, 1])
+            note = nc1.text_input("📝 Nota personale", value=entry.get("note", ""),
+                                  key=f"note_{tk}", placeholder="es. aspetto RSI sotto 30 / attendo trimestrale")
+            if note != entry.get("note", ""):
+                fu.set_tracking_note(tk, note)
+            if nc2.button("📊 Analizza", key=f"goto_{tk}", use_container_width=True):
+                st.session_state["ticker"] = tk
+                st.session_state["section_radio"] = "📊 Analisi di un titolo"
+                st.rerun()
+
+    short_items = [(tk, e) for tk, e in tracked.items() if e.get("kind") == "short"]
+    long_items = [(tk, e) for tk, e in tracked.items() if e.get("kind") != "short"]
+
+    if short_items:
+        st.markdown("## ⚡ Breve periodo (rimbalzo)")
+        for tk, e in short_items:
+            render_tracked(tk, e)
+    if long_items:
+        st.markdown("## 🏛️ Lungo periodo (qualità in saldo)")
+        for tk, e in long_items:
+            render_tracked(tk, e)
     st.stop()
 
 # ===========================================================================
