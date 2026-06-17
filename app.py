@@ -808,7 +808,9 @@ with tab_fund:
     for i, (block_name, rows) in enumerate(view_blocks.items()):
         with cols[i % 2]:
             st.markdown(f"#### {block_name}")
-            for label, value, judgement, reason in rows:
+            for row in rows:
+                label, value, judgement = row[0], row[1], row[2]
+                reason = row[3] if len(row) > 3 else ""
                 badge(label, value, judgement, fu.help_for(label), reason)
             st.write("")
 
