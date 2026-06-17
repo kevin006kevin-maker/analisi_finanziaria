@@ -239,6 +239,22 @@ if section.startswith("💎"):
             st_autorefresh(interval=(900000 if "15" in refresh_choice else 1800000), key="opp_auto")
             st.caption(f"🔄 Aggiornamento automatico **attivo** ({refresh_choice.lower()}) · "
                        f"ultimo aggiornamento: {_now_rome().strftime('%H:%M')}")
+
+        cloud = fu.cloud_mode()
+        if cloud:
+            st.caption("🤖 **Sistema autonomo attivo sul server**: le occasioni vengono aggiornate ogni ~15 minuti "
+                       "anche a PC spento, e le migliori (in salita da 3 giorni) finiscono da sole nel «📌 Monitoraggio». "
+                       "Qui vedi sempre l'ultimo aggiornamento del server.")
+            auto_promote_on = True
+        else:
+            auto_promote_on = st.checkbox(
+                "🤖 Salva da solo le occasioni che migliorano per 3 giorni di fila", value=True,
+                key="auto_promote",
+                help="A ogni aggiornamento il sistema registra l'evoluzione di tutte le occasioni. Quando la convenienza "
+                     "di un titolo sale per 3 giorni consecutivi, lo aggiunge da solo al «📌 Monitoraggio». "
+                     "Nota (modalità locale): il controllo avviene mentre questa pagina è aperta; i 3 giorni si contano "
+                     "sui giorni in cui apri l'app. Per renderlo automatico anche a PC spento vedi README_AUTONOMIA.md.")
+
         with st.expander("🎛️ Filtri", expanded=False):
             fco1, fco2, fco3 = st.columns(3)
             f_min_conv = fco1.slider("Convenienza minima", 0, 100, 0, key="f_conv")
@@ -247,23 +263,64 @@ if section.startswith("💎"):
 
         mkt_1m = fu.market_perf_1m()
 
-        # --- 🏆 Le migliori da seguire (shortlist automatica) ---
-        def _best_picks(kind, n=3):
+        # --- Scansione unica (poi riusata da shortlist, sistema autonomo e tabelle) ---
+        def _scan(kind):
             base = fu.opportunity_candidates(kind)
             universe = list(dict.fromkeys(base + extra + (watchlist if inc_wl else [])))
-            df = fu.scan_opportunities(universe, kind)
-            if df.empty:
+            return fu.scan_opportunities(universe, kind)
+
+        with st.spinner("Analizzo il mercato…"):
+            full_short, full_long = _scan("short"), _scan("long")
+
+        # --- 🤖 Sistema autonomo: registra l'evoluzione e promuove chi migliora da 3 giorni ---
+        # In modalità cloud è il job su GitHub Actions a registrare/promuovere (anche a PC spento);
+        # l'app si limita a LEGGERE i risultati. In locale puro, lo fa l'app a ogni refresh.
+        promoted = []
+        if auto_promote_on and not cloud:
+            fu.record_observations(full_short, "short")
+            fu.record_observations(full_long, "long")
+            promoted = fu.auto_promote_opportunities(min_days=3)
+        if promoted:
+            st.success("🤖 **Aggiunte da sole al Monitoraggio** (convenienza in salita da ≥3 giorni): "
+                       + ", ".join(f"**{t}**" for t in promoted) + ". Le trovi nella sezione «📌 Monitoraggio».")
+
+        if auto_promote_on:
+            status = [s for s in fu.observation_status() if s["run"] >= 1]
+            tracked_now = fu.load_tracking()
+            building = [s for s in status if s["run"] >= 2 and s["ticker"] not in tracked_now]
+            with st.expander(f"🤖 Sistema autonomo — {len(building)} occasion"
+                             f"{'e' if len(building)==1 else 'i'} in osservazione (vicine alla promozione)",
+                             expanded=bool(building)):
+                st.caption("Il sistema osserva l'evoluzione di **tutte** le occasioni. Quando la convenienza di un titolo "
+                           "sale per **3 giorni consecutivi** lo aggiunge da solo al Monitoraggio. Qui vedi chi sta migliorando.")
+                if building:
+                    sdf = pd.DataFrame([{
+                        "Ticker": s["ticker"], "Tipo": "⚡ Breve" if s["kind"] == "short" else "🏛️ Lungo",
+                        "Azienda": s["name"], "Giorni in salita": s["run"],
+                        "Convenienza": s["last_conv"], "Giorni osservati": s["days"],
+                    } for s in building]).set_index("Ticker")
+                    st.dataframe(sdf, use_container_width=True, column_config={
+                        "Giorni in salita": st.column_config.NumberColumn("📈 Giorni in salita", format="%d ⁄ 3",
+                            help="Giorni consecutivi con convenienza non calante. A 3 scatta la promozione automatica."),
+                        "Convenienza": st.column_config.ProgressColumn("🏅 Convenienza", min_value=0, max_value=100, format="%d"),
+                    })
+                else:
+                    st.info("Nessuna occasione in miglioramento al momento. Il sistema continua a osservare a ogni aggiornamento "
+                            "(la storia si costruisce nei giorni in cui apri l'app).")
+
+        # --- 🏆 Le migliori da seguire (shortlist automatica) ---
+        def _best_picks(df, n=3):
+            if df is None or df.empty:
                 return df
-            df = df[df["Affidabilità"].isin(["🟢 Alta", "🟡 Media"])]   # scarta le stime poco affidabili
-            return df.sort_values("Convenienza", ascending=False).head(n)
+            d = df[df["Affidabilità"].isin(["🟢 Alta", "🟡 Media"])]   # scarta le stime poco affidabili
+            return d.sort_values("Convenienza", ascending=False).head(n)
 
         with st.container(border=True):
             st.markdown("### 🏆 Le migliori da seguire")
             st.caption("Selezione automatica delle occasioni con la **convenienza più alta** e affidabilità almeno 🟡 media, "
                        "di breve e di lungo periodo. È il punto di partenza più sensato: seguile qualche giorno nel "
                        "**📌 Monitoraggio** e compra quelle il cui segnale si **rafforza** (non quelle che continuano a scendere).")
-            with st.spinner("Seleziono le migliori…"):
-                best_s, best_l = _best_picks("short"), _best_picks("long")
+            best_s, best_l = _best_picks(full_short), _best_picks(full_long)
             picks, rows_view = [], []
             for kind_b, label_b, dfb_src in [("short", "⚡ Breve", best_s), ("long", "🏛️ Lungo", best_l)]:
                 if dfb_src is None or dfb_src.empty:
@@ -300,7 +357,7 @@ if section.startswith("💎"):
                     bcol1.caption("✅ Le stai già seguendo tutte (vedi «📌 Monitoraggio»).")
         st.markdown("---")
 
-        def render_opps(kind, header, help_txt, cols_cfg):
+        def render_opps(df_full, kind, header, help_txt, cols_cfg):
             st.markdown(f"### {header}")
             st.caption(help_txt)
             with st.expander("ℹ️ Come leggere queste occasioni (e i rischi)"):
@@ -327,13 +384,10 @@ if section.startswith("💎"):
                         "⚠️ **Rischio:** uno sconto **non garantisce** la risalita. Chiediti sempre *perché* il titolo è sceso: "
                         "difficoltà temporanea (possibile occasione) o problema strutturale (trappola di valore)?"
                     )
-            with st.spinner("Analizzo i candidati…"):
-                base = fu.opportunity_candidates(kind)
-                universe = list(dict.fromkeys(base + extra + (watchlist if inc_wl else [])))
-                df = fu.scan_opportunities(universe, kind)
-            if df.empty:
+            if df_full is None or df_full.empty:
                 st.info("Nessuna occasione che soddisfi i criteri in questo momento.")
                 return
+            df = df_full.copy()
             # Filtri scelti dall'utente
             df = df[df["Convenienza"] >= f_min_conv]
             if f_rel == "Solo 🟢 Alta":
@@ -503,11 +557,11 @@ if section.startswith("💎"):
             "Perché": st.column_config.TextColumn("Perché", width="large"),
         }
 
-        render_opps("short", "⚡ Breve periodo — rimbalzo tecnico",
+        render_opps(full_short, "short", "⚡ Breve periodo — rimbalzo tecnico",
                     "Titoli **ipervenduti** (RSI basso, spesso sotto la banda di Bollinger) ma con trend di fondo "
                     "ancora sano: storicamente più inclini a un rimbalzo. Orizzonte: settimane.", short_cfg)
         st.markdown("---")
-        render_opps("long", "🏛️ Lungo periodo — qualità in saldo",
+        render_opps(full_long, "long", "🏛️ Lungo periodo — qualità in saldo",
                     "Aziende con **buoni fondamentali** (o ETF diversificati) scese parecchio **dai massimi**: "
                     "possibile occasione di valore. Orizzonte: anni.", long_cfg)
         st.caption("👀 **Come leggere:** la barra 🏅 è la convenienza complessiva (la tabella è ordinata da lì). "
@@ -564,8 +618,10 @@ if section.startswith("📌"):
 
         with st.container(border=True):
             tc1, tc2 = st.columns([4, 1])
-            tc1.markdown(f"### {nm}  ·  `{tk}`")
-            tc1.caption(f"{kind_badge} · seguito da **{max(giorni,0)}** giorn{'o' if giorni==1 else 'i'} "
+            auto_tag = " 🤖" if entry.get("auto") else ""
+            tc1.markdown(f"### {nm}  ·  `{tk}`{auto_tag}")
+            origine = "aggiunta automatica" if entry.get("auto") else "aggiunta manuale"
+            tc1.caption(f"{kind_badge} · {origine} · seguito da **{max(giorni,0)}** giorn{'o' if giorni==1 else 'i'} "
                         f"(dal {entry.get('added','?')}) · {len(snaps)} scatt{'o' if len(snaps)==1 else 'i'}")
             if tc2.button("🗑️ Smetti", key=f"untrack_{tk}", use_container_width=True):
                 fu.untrack_opportunity(tk)
