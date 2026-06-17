@@ -1578,6 +1578,18 @@ _FALLBACK_UNIVERSE = [
     "UBER", "PLTR", "F", "GM", "T", "VZ", "QCOM", "TXN", "SBUX", "MCD",
 ]
 
+# Universo Borsa Italiana / Europa (le classifiche di mercato gratuite coprono solo gli USA,
+# quindi i titoli europei li scansioniamo da questa lista curata di nomi liquidi).
+_FALLBACK_UNIVERSE_EU = [
+    # Italia (FTSE MIB)
+    "ENI.MI", "ISP.MI", "UCG.MI", "ENEL.MI", "STLAM.MI", "RACE.MI", "G.MI", "STMMI.MI",
+    "TIT.MI", "LDO.MI", "BAMI.MI", "BMED.MI", "MB.MI", "CPR.MI", "MONC.MI", "PST.MI",
+    "SRG.MI", "TRN.MI", "A2A.MI", "PIRC.MI", "UNI.MI", "AMP.MI", "BPE.MI", "FBK.MI",
+    # Europa (principali blue chip)
+    "ASML.AS", "SAP.DE", "SIE.DE", "AIR.PA", "MC.PA", "OR.PA", "SAN.PA", "TTE.PA",
+    "VOW3.DE", "BAYN.DE", "BMW.DE", "ALV.DE", "BNP.PA", "AD.AS", "ENGI.PA", "DTE.DE",
+]
+
 _REL_FACTOR = {"🟢 Alta": 1.0, "🟡 Media": 0.85, "🔴 Bassa": 0.7}
 
 
@@ -1638,8 +1650,10 @@ def market_perf_1m() -> float:
 
 
 @st.cache_data(ttl=900, show_spinner=False)
-def opportunity_candidates(kind: str) -> list:
-    """Universo di partenza dalle classifiche di mercato; riserva se non disponibili."""
+def opportunity_candidates(kind: str, include_eu: bool = True) -> list:
+    """Universo di partenza dalle classifiche di mercato (USA); riserva se non disponibili.
+    Con include_eu aggiunge una lista curata di titoli di Borsa Italiana / Europa, che le
+    classifiche gratuite (solo USA) non coprono."""
     screens = (["day_losers", "most_actives", "small_cap_gainers"] if kind == "short"
                else ["undervalued_large_caps", "undervalued_growth_stocks", "day_losers"])
     names = []
@@ -1660,7 +1674,11 @@ def opportunity_candidates(kind: str) -> list:
         names = list(_FALLBACK_UNIVERSE)
     # Breve = 1 chiamata/titolo (si può osare di più); Lungo = ~4 chiamate/titolo (limita la quota FMP)
     cap = 40 if kind == "short" else 20
-    return list(dict.fromkeys(names))[:cap]
+    out = list(dict.fromkeys(names))[:cap]
+    if include_eu:                          # aggiunge i titoli italiani/europei (lista curata)
+        eu_cap = 16 if kind == "short" else 10
+        out += _FALLBACK_UNIVERSE_EU[:eu_cap]
+    return list(dict.fromkeys(out))
 
 
 def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
@@ -1929,47 +1947,79 @@ def record_observations(df, kind: str) -> None:
     save_opp_watch(watch)
 
 
-def _trailing_increasing_run(values: list) -> int:
-    """Numero di giorni finali in cui i valori sono **non decrescenti**, con aumento netto reale.
-    Es. [55,58,62] → 3 · [60,55,62] → 0 (ha avuto un calo) · [60,60,60] → 0 (piatto)."""
-    if len(values) < 2:
+# Parametri della regola "tendenza positiva tollerante":
+_PROMO_MIN_GAIN = 5.0    # punti di convenienza guadagnati nel periodo
+_PROMO_MAX_DIP = 4.0     # massimo calo giornaliero ammesso (oltre = inversione, niente promozione)
+
+
+def _trend_progress(values: list, max_dip: float = _PROMO_MAX_DIP) -> int:
+    """Quanti giorni-dato finali formano una **tendenza positiva tollerante**: la striscia
+    continua finché un giorno non cala più di `max_dip` (le piccole oscillazioni non la spezzano).
+    Es. (max_dip=4): [55,60,58] → 3 (il -2 è tollerato) · [60,52,58] → 2 (il -8 spezza)."""
+    if not values:
         return 0
+    if len(values) < 2:
+        return 1
     run = 1
     for i in range(len(values) - 1, 0, -1):
-        if values[i] >= values[i - 1]:
+        if values[i] - values[i - 1] >= -max_dip:
             run += 1
         else:
             break
-    return run if (run >= 2 and values[-1] > values[-run]) else 0
+    return run
+
+
+def _qualifies_promotion(values: list, min_days: int = 3,
+                         min_gain: float = _PROMO_MIN_GAIN, max_dip: float = _PROMO_MAX_DIP) -> bool:
+    """True se negli ultimi `min_days` giorni la convenienza è salita **complessivamente** di almeno
+    `min_gain` punti **senza cali giornalieri** oltre `max_dip` (tollera le piccole oscillazioni)."""
+    if len(values) < min_days:
+        return False
+    v = values[-min_days:]
+    for i in range(1, len(v)):
+        if v[i] - v[i - 1] < -max_dip:      # un crollo nel mezzo = inversione → no
+            return False
+    return (v[-1] - v[0]) >= min_gain        # salita netta sufficiente sul periodo
 
 
 def auto_promote_opportunities(min_days: int = 3) -> list:
-    """Promuove al monitoraggio le occasioni con convenienza in miglioramento da >= min_days giorni
-    consecutivi (e non già seguite). Ritorna la lista dei ticker appena aggiunti."""
+    """Promuove al monitoraggio le occasioni con **tendenza positiva** della convenienza negli ultimi
+    `min_days` giorni (salita netta, tollerando piccole oscillazioni) e non già seguite.
+    Ritorna la lista dei ticker appena aggiunti."""
     watch = load_opp_watch()
     tracked = load_tracking()
     promoted = []
+    new_records = []
     for key, e in watch.items():
         tk = e.get("ticker", key.split(":")[-1])
         if tk in tracked:
             continue
         convs = [o["conv"] for o in e.get("obs", []) if o.get("conv") is not None]
-        run = _trailing_increasing_run(convs)
-        if run >= min_days:
+        if _qualifies_promotion(convs, min_days):
+            gain = convs[-1] - convs[-min_days]
             kind = e.get("kind", "short")
             track_opportunity(tk, kind,
-                              note=f"🤖 Aggiunta automatica il {_today_iso()}: convenienza in miglioramento "
-                                   f"da {run} giorni consecutivi.")
+                              note=f"🤖 Aggiunta automatica il {_today_iso()}: convenienza in salita "
+                                   f"(+{gain:.0f} punti negli ultimi {min_days} giorni).")
             tr = load_tracking()
             if tk in tr:
                 tr[tk]["auto"] = True
                 save_tracking(tr)
             promoted.append(tk)
+            obs = e.get("obs", [])
+            new_records.append({
+                "ticker": tk, "kind": kind, "date": _today_iso(),
+                "price": (obs[-1].get("price") if obs else None), "conv": convs[-1],
+                "ret_now": None, "ret_7d": None, "ret_30d": None, "last_update": _today_iso()})
+    if new_records:
+        recs = load_track_record()
+        recs.extend(new_records)
+        save_track_record(recs)
     return promoted
 
 
 def observation_status() -> list:
-    """Stato dell'osservazione autonoma: per ogni occasione, da quanti giorni migliora.
+    """Stato dell'osservazione autonoma: per ogni occasione, la tendenza recente della convenienza.
     Ordinata dai più «vicini alla promozione». Utile per mostrare che il sistema sta lavorando."""
     watch = load_opp_watch()
     out = []
@@ -1977,11 +2027,165 @@ def observation_status() -> list:
         convs = [o["conv"] for o in e.get("obs", []) if o.get("conv") is not None]
         if not convs:
             continue
+        net3 = (convs[-1] - convs[-3]) if len(convs) >= 3 else (convs[-1] - convs[0])
         out.append({"ticker": e.get("ticker", key.split(":")[-1]), "kind": e.get("kind", "short"),
-                    "name": e.get("name", ""), "run": _trailing_increasing_run(convs),
-                    "last_conv": convs[-1], "days": len(convs)})
-    out.sort(key=lambda x: (x["run"], x["last_conv"]), reverse=True)
+                    "name": e.get("name", ""), "run": _trend_progress(convs),
+                    "net3": round(net3, 1), "last_conv": convs[-1], "days": len(convs)})
+    out.sort(key=lambda x: (x["run"], x["net3"], x["last_conv"]), reverse=True)
     return out
+
+
+# ---------------------------------------------------------------------------
+# SCHEDA VOTI / TRACK RECORD — quanto hanno reso davvero le occasioni promosse.
+# Ogni promozione viene registrata (prezzo + data); poi si misura il rendimento
+# reale subito, a 7 e a 30 giorni. Dà la prova dei fatti sull'efficacia.
+# ---------------------------------------------------------------------------
+
+TRACK_RECORD_NAME = "track_record.json"
+
+
+def load_track_record() -> list:
+    data = read_data_json(TRACK_RECORD_NAME, [])
+    return data if isinstance(data, list) else []
+
+
+def save_track_record(records: list) -> None:
+    write_data_json(TRACK_RECORD_NAME, records)
+
+
+def update_track_record() -> list:
+    """Aggiorna il rendimento reale di ogni promozione: ora, e (una volta sole) a 7 e 30 giorni.
+    I rendimenti a 7/30g si calcolano dal prezzo storico relativo alla data di promozione."""
+    records = load_track_record()
+    if not records:
+        return records
+    today = _today_iso()
+    changed = False
+    for rec in records:
+        tk, base = rec.get("ticker"), rec.get("price")
+        if not tk or not base:
+            continue
+        try:
+            h = get_history(tk, "1y")
+        except Exception:
+            h = None
+        if h is None or h.empty:
+            continue
+        closes = h["Close"].dropna()
+        if closes.empty:
+            continue
+        if getattr(closes.index, "tz", None) is not None:
+            closes = closes.copy()
+            closes.index = closes.index.tz_localize(None)
+        rec["ret_now"] = round((float(closes.iloc[-1]) / base - 1) * 100, 1)
+        rec["last_update"] = today
+        try:
+            promo = datetime.date.fromisoformat(rec.get("date"))
+        except Exception:
+            promo = None
+        if promo:
+            for horizon, fld in ((7, "ret_7d"), (30, "ret_30d")):
+                if rec.get(fld) is None and (datetime.date.today() - promo).days >= horizon:
+                    target = pd.to_datetime(promo + datetime.timedelta(days=horizon))
+                    after = closes[closes.index >= target]
+                    if not after.empty:
+                        rec[fld] = round((float(after.iloc[0]) / base - 1) * 100, 1)
+        changed = True
+    if changed:
+        save_track_record(records)
+    return records
+
+
+def track_record_stats() -> dict:
+    """Statistiche aggregate sulle promozioni: rendimento medio, % di volte in positivo, migliore/peggiore."""
+    records = load_track_record()
+
+    def agg(field):
+        vals = [r[field] for r in records if r.get(field) is not None]
+        if not vals:
+            return None
+        return {"n": len(vals), "avg": round(sum(vals) / len(vals), 1),
+                "hit": round(100 * sum(1 for v in vals if v > 0) / len(vals)),
+                "best": round(max(vals), 1), "worst": round(min(vals), 1)}
+
+    return {"total": len(records), "now": agg("ret_now"),
+            "d7": agg("ret_7d"), "d30": agg("ret_30d")}
+
+
+# ---------------------------------------------------------------------------
+# PORTAFOGLIO REALE — posizioni effettivamente acquistate, con guadagno/perdita.
+# Persistito come gli altri dati (file locale + branch remoto se configurato).
+# ---------------------------------------------------------------------------
+
+PORTFOLIO_NAME = "portfolio.json"
+
+
+def load_portfolio() -> list:
+    data = read_data_json(PORTFOLIO_NAME, [])
+    return data if isinstance(data, list) else []
+
+
+def save_portfolio(positions: list) -> None:
+    write_data_json(PORTFOLIO_NAME, positions)
+
+
+def add_position(ticker, qty, buy_price, date, target=None, stop=None, note="") -> list:
+    positions = load_portfolio()
+    positions.append({
+        "ticker": str(ticker).upper(), "qty": float(qty), "buy_price": float(buy_price),
+        "date": date, "target": (float(target) if target else None),
+        "stop": (float(stop) if stop else None), "note": note,
+    })
+    save_portfolio(positions)
+    return positions
+
+
+def remove_position(index: int) -> list:
+    positions = load_portfolio()
+    if 0 <= index < len(positions):
+        positions.pop(index)
+        save_portfolio(positions)
+    return positions
+
+
+def portfolio_view():
+    """Calcola valore attuale, guadagno/perdita per posizione e totali, più gli avvisi
+    target/stop. Ritorna (righe, totali)."""
+    positions = load_portfolio()
+    rows = []
+    tot_cost = 0.0
+    tot_val = 0.0
+    val_known = True
+    for i, p in enumerate(positions):
+        tk = p.get("ticker")
+        qty = p.get("qty") or 0.0
+        buy = p.get("buy_price") or 0.0
+        q = quick_quote(tk)
+        price = q.get("price")
+        cost = qty * buy
+        val = (qty * price) if price is not None else None
+        pnl = (val - cost) if val is not None else None
+        pnl_pct = ((price / buy - 1) * 100) if (price is not None and buy) else None
+        tot_cost += cost
+        if val is not None:
+            tot_val += val
+        else:
+            val_known = False
+        tgt, stp = p.get("target"), p.get("stop")
+        status = ""
+        if price is not None:
+            if tgt and price >= tgt:
+                status = "🎯 target raggiunto"
+            elif stp and price <= stp:
+                status = "🛑 stop raggiunto"
+        rows.append({"index": i, "ticker": tk, "qty": qty, "buy_price": buy, "date": p.get("date"),
+                     "price": price, "cost": cost, "value": val, "pnl": pnl, "pnl_pct": pnl_pct,
+                     "target": tgt, "stop": stp, "note": p.get("note", ""), "status": status})
+    totals = {"cost": tot_cost,
+              "value": (tot_val if val_known else None),
+              "pnl": (tot_val - tot_cost) if val_known else None,
+              "pnl_pct": ((tot_val / tot_cost - 1) * 100) if (val_known and tot_cost) else None}
+    return rows, totals
 
 
 # ---------------------------------------------------------------------------
