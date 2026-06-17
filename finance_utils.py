@@ -1744,6 +1744,15 @@ def _today_iso() -> str:
         return datetime.date.today().isoformat()
 
 
+def _now_iso() -> str:
+    """Data e ora correnti (fuso Italia), es. '2026-06-17 16:57'."""
+    try:
+        from zoneinfo import ZoneInfo
+        return datetime.datetime.now(ZoneInfo("Europe/Rome")).strftime("%Y-%m-%d %H:%M")
+    except Exception:
+        return datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M")
+
+
 def _jsonable(v):
     """Converte numpy/NaN in tipi JSON puri (None se mancante)."""
     if v is None:
@@ -2141,6 +2150,31 @@ def add_position(ticker, qty, buy_price, date, target=None, stop=None, note="", 
     return positions
 
 
+def add_position_by_amount(ticker, amount, target_pct=None, stop_pct=None, note="",
+                           horizon="lungo", when=None):
+    """Registra un acquisto indicando solo l'IMPORTO investito: prezzo e quantità vengono
+    ricavati dal prezzo di mercato attuale, e si memorizza data+ora. Bersaglio/stop si possono
+    dare come percentuali (+x% / -y%). Ritorna la posizione creata, o None se manca il prezzo."""
+    tk = str(ticker).upper()
+    q = quick_quote(tk)
+    price = q.get("price")
+    if price is None or price <= 0 or not amount or amount <= 0:
+        return None
+    qty = float(amount) / float(price)
+    target = round(price * (1 + float(target_pct) / 100), 4) if target_pct else None
+    stop = round(price * (1 - float(stop_pct) / 100), 4) if stop_pct else None
+    when = when or _now_iso()
+    positions = load_portfolio()
+    positions.append({
+        "ticker": tk, "qty": qty, "buy_price": float(price), "amount": float(amount),
+        "datetime": when, "date": when[:10],
+        "target": target, "stop": stop, "note": note,
+        "horizon": ("breve" if str(horizon).startswith("breve") else "lungo"),
+    })
+    save_portfolio(positions)
+    return positions[-1]
+
+
 def remove_position(index: int) -> list:
     positions = load_portfolio()
     if 0 <= index < len(positions):
@@ -2180,6 +2214,8 @@ def portfolio_view():
             elif stp and price <= stp:
                 status = "🛑 stop raggiunto"
         rows.append({"index": i, "ticker": tk, "qty": qty, "buy_price": buy, "date": p.get("date"),
+                     "datetime": p.get("datetime") or p.get("date"),
+                     "amount": p.get("amount", cost),
                      "price": price, "cost": cost, "value": val, "pnl": pnl, "pnl_pct": pnl_pct,
                      "target": tgt, "stop": stp, "note": p.get("note", ""), "status": status,
                      "horizon": ("breve" if str(p.get("horizon", "lungo")).startswith("breve") else "lungo")})
