@@ -1095,8 +1095,8 @@ def generate_commentary(ticker: str, info: dict, hist: pd.DataFrame, period_labe
     # --- Sintesi finale dai segnali fondamentali ---
     blocks = fundamental_blocks(info)
     all_rows = [r for rows in blocks.values() for r in rows]
-    pos = sum(1 for _, _, j in all_rows if j == "positivo")
-    neg = sum(1 for _, _, j in all_rows if j == "negativo")
+    pos = sum(1 for r in all_rows if r[2] == "positivo")
+    neg = sum(1 for r in all_rows if r[2] == "negativo")
     if pos + neg > 0:
         if pos > neg * 1.5:
             verdict = "Nel complesso i fondamentali appaiono **prevalentemente favorevoli**."
@@ -1128,8 +1128,8 @@ def _technical_score(hist: pd.DataFrame):
 def _fundamental_score(info: dict):
     blocks = fundamental_blocks(info)
     rows = [r for rs in blocks.values() for r in rs]
-    pos = sum(1 for _, _, j in rows if j == "positivo")
-    neg = sum(1 for _, _, j in rows if j == "negativo")
+    pos = sum(1 for r in rows if r[2] == "positivo")
+    neg = sum(1 for r in rows if r[2] == "negativo")
     if pos + neg == 0:
         return None
     return pos / (pos + neg) * 100
@@ -1775,31 +1775,132 @@ def fundamental_blocks(info: dict) -> dict:
     rev_growth = info.get("revenueGrowth")
     earn_growth = info.get("earningsGrowth")
 
+    # L'azienda è in perdita? (serve a spiegare i campi "n/d" come P/E)
+    in_loss = any(x is not None and x < 0 for x in (pmargin, roe, omargin, roa))
+
+    def r_pe(v, j):
+        if v is None:
+            return "in perdita: senza utili il P/E non si calcola" if in_loss else "dato non disponibile"
+        if j == "positivo":
+            return "basso: valutazione conveniente sugli utili"
+        if j == "negativo":
+            return "alto: paghi molto gli utili (il mercato sconta forte crescita)"
+        return "nella norma"
+
+    def r_pb(v, j):
+        if v is None:
+            return "dato non disponibile"
+        if j == "positivo":
+            return "basso: paghi poco rispetto al patrimonio"
+        if j == "negativo":
+            return "alto: molto sopra il valore di libro (caro)"
+        return "nella norma"
+
+    def r_peg(v, j):
+        if v is None:
+            return "richiede P/E e crescita degli utili (qui mancano)"
+        if j == "positivo":
+            return "sotto 1: prezzo giustificato dalla crescita"
+        if j == "negativo":
+            return "alto: caro rispetto a quanto cresce"
+        return "accettabile"
+
+    def r_ps(v, j):
+        if v is None:
+            return "dato non disponibile"
+        if j == "positivo":
+            return "contenuto: valutazione bassa sui ricavi"
+        if j == "negativo":
+            return "alto: valutazione elevata sui ricavi"
+        return "nella media"
+
+    def r_profit(v, j, perdita_txt):
+        if v is None:
+            return "dato non disponibile"
+        if v < 0:
+            return f"negativo: {perdita_txt}"
+        if j == "positivo":
+            return "elevato: molto redditizia"
+        if j == "negativo":
+            return "basso: poco redditizia"
+        return "discreto"
+
+    def r_d2e(v, j):
+        if v is None:
+            return "dato non disponibile"
+        if j == "positivo":
+            return "basso: poco indebitata, finanziariamente solida"
+        if j == "negativo":
+            return "alto: molto indebitata (più rischio)"
+        return "indebitamento nella media"
+
+    def r_liq(v, j):
+        if v is None:
+            return "dato non disponibile"
+        if j == "positivo":
+            return "sopra 1: copre bene i debiti a breve"
+        if j == "negativo":
+            return "sotto 1: liquidità tirata"
+        return "liquidità sufficiente"
+
+    def r_growth(v, j):
+        if v is None:
+            return "utili negativi: crescita non significativa" if in_loss else "dato non disponibile"
+        if v < 0:
+            return "in calo rispetto all'anno prima"
+        if j == "positivo":
+            return "in forte crescita"
+        return "in lieve crescita"
+
+    def r_dyield(v, j):
+        if v is None or v == 0:
+            return "non paga dividendi (o dato assente)"
+        if j == "positivo":
+            return "rendimento da dividendo interessante"
+        return "dividendo modesto"
+
+    def r_payout(v, j):
+        if v is None:
+            return "non distribuisce dividendi"
+        if j == "positivo":
+            return "prudente: distribuisce una quota sostenibile degli utili"
+        if j == "negativo":
+            return "alto: distribuisce quasi tutti gli utili (poco margine)"
+        return "nella norma"
+
+    j_pe, j_pb, j_peg, j_ps = (judge(pe, 15, 35, False), judge(pb, 1.5, 4, False),
+                               judge(peg, 1, 2, False), judge(psales, 2, 6, False))
+    j_roe, j_roa = judge(roe, 0.15, 0.05), judge(roa, 0.08, 0.02)
+    j_pm, j_om = judge(pmargin, 0.10, 0.02), judge(omargin, 0.12, 0.03)
+    j_d2e, j_cr, j_qr = judge(d2e, 100, 250, False), judge(cratio, 1.5, 1), judge(qratio, 1, 0.7)
+    j_rg, j_eg = judge(rev_growth, 0.10, 0), judge(earn_growth, 0.10, 0)
+    j_dy, j_po = judge(dyield, 0.03, 0), judge(payout, 0.6, 0.9, False)
+
     blocks = {
         "Valutazione (è caro o conveniente?)": [
-            ("P/E (prezzo/utili)", _fmt(pe), judge(pe, 15, 35, higher_is_better=False)),
-            ("P/B (prezzo/patrimonio)", _fmt(pb), judge(pb, 1.5, 4, higher_is_better=False)),
-            ("PEG (P/E su crescita)", _fmt(peg), judge(peg, 1, 2, higher_is_better=False)),
-            ("P/S (prezzo/vendite)", _fmt(psales), judge(psales, 2, 6, higher_is_better=False)),
+            ("P/E (prezzo/utili)", _fmt(pe), j_pe, r_pe(pe, j_pe)),
+            ("P/B (prezzo/patrimonio)", _fmt(pb), j_pb, r_pb(pb, j_pb)),
+            ("PEG (P/E su crescita)", _fmt(peg), j_peg, r_peg(peg, j_peg)),
+            ("P/S (prezzo/vendite)", _fmt(psales), j_ps, r_ps(psales, j_ps)),
         ],
         "Redditività (quanto guadagna bene?)": [
-            ("ROE (rendimento capitale proprio)", _fmt(roe, pct=True), judge(roe, 0.15, 0.05)),
-            ("ROA (rendimento attività)", _fmt(roa, pct=True), judge(roa, 0.08, 0.02)),
-            ("Margine netto", _fmt(pmargin, pct=True), judge(pmargin, 0.10, 0.02)),
-            ("Margine operativo", _fmt(omargin, pct=True), judge(omargin, 0.12, 0.03)),
+            ("ROE (rendimento capitale proprio)", _fmt(roe, pct=True), j_roe, r_profit(roe, j_roe, "perde sul capitale dei soci")),
+            ("ROA (rendimento attività)", _fmt(roa, pct=True), j_roa, r_profit(roa, j_roa, "perde sulle proprie attività")),
+            ("Margine netto", _fmt(pmargin, pct=True), j_pm, r_profit(pmargin, j_pm, "perde su ogni euro di ricavi")),
+            ("Margine operativo", _fmt(omargin, pct=True), j_om, r_profit(omargin, j_om, "gestione operativa in perdita")),
         ],
         "Solidità finanziaria (quanto è esposta?)": [
-            ("Debito/Equity", _fmt(d2e), judge(d2e, 100, 250, higher_is_better=False)),
-            ("Current ratio (liquidità)", _fmt(cratio), judge(cratio, 1.5, 1)),
-            ("Quick ratio", _fmt(qratio), judge(qratio, 1, 0.7)),
+            ("Debito/Equity", _fmt(d2e), j_d2e, r_d2e(d2e, j_d2e)),
+            ("Current ratio (liquidità)", _fmt(cratio), j_cr, r_liq(cratio, j_cr)),
+            ("Quick ratio", _fmt(qratio), j_qr, r_liq(qratio, j_qr)),
         ],
         "Crescita": [
-            ("Crescita ricavi (anno)", _fmt(rev_growth, pct=True), judge(rev_growth, 0.10, 0)),
-            ("Crescita utili (anno)", _fmt(earn_growth, pct=True), judge(earn_growth, 0.10, 0)),
+            ("Crescita ricavi (anno)", _fmt(rev_growth, pct=True), j_rg, r_growth(rev_growth, j_rg)),
+            ("Crescita utili (anno)", _fmt(earn_growth, pct=True), j_eg, r_growth(earn_growth, j_eg)),
         ],
         "Dividendo": [
-            ("Rendimento dividendo", _fmt(dyield, pct=True), judge(dyield, 0.03, 0)),
-            ("Payout ratio (utili distribuiti)", _fmt(payout, pct=True), judge(payout, 0.6, 0.9, higher_is_better=False)),
+            ("Rendimento dividendo", _fmt(dyield, pct=True), j_dy, r_dyield(dyield, j_dy)),
+            ("Payout ratio (utili distribuiti)", _fmt(payout, pct=True), j_po, r_payout(payout, j_po)),
         ],
     }
     return blocks
