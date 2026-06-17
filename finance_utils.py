@@ -1313,6 +1313,36 @@ def write_data_json(name: str, obj) -> None:
 
 
 # ---------------------------------------------------------------------------
+# NOTIFICHE — Telegram (gratis, push istantaneo sul telefono).
+# Token e chat_id in st.secrets o env: telegram_bot_token / telegram_chat_id
+# (TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID). Usato dal job autonomo per avvisare
+# quando un'occasione viene promossa automaticamente.
+# ---------------------------------------------------------------------------
+
+def _telegram_cfg():
+    return (_cfg("telegram_bot_token", "TELEGRAM_BOT_TOKEN", ""),
+            _cfg("telegram_chat_id", "TELEGRAM_CHAT_ID", ""))
+
+
+def send_telegram(text: str) -> bool:
+    """Invia un messaggio Telegram. Ritorna True se inviato. No-op se non configurato."""
+    token, chat_id = _telegram_cfg()
+    if not (token and chat_id):
+        return False
+    import requests
+    try:
+        r = requests.post(
+            f"https://api.telegram.org/bot{token}/sendMessage",
+            json={"chat_id": chat_id, "text": text, "parse_mode": "HTML",
+                  "disable_web_page_preview": True},
+            timeout=12,
+        )
+        return r.status_code == 200
+    except Exception:
+        return False
+
+
+# ---------------------------------------------------------------------------
 # WATCHLIST (preferiti) — salvataggio locale su file JSON
 # ---------------------------------------------------------------------------
 
