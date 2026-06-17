@@ -55,6 +55,23 @@ def notify_promotions(tickers):
         else "Notifica Telegram NON inviata (token/chat_id assenti o errore).")
 
 
+def notify_sales(fired):
+    """Notifica Telegram quando conviene valutare la vendita di un titolo del portafoglio."""
+    righe = ["💰 <b>Consiglio di vendita</b>", ""]
+    for f in fired:
+        p, adv = f["position"], f["advice"]
+        tk = html.escape(str(p.get("ticker")))
+        gp = f" — guadagno {adv['gain_pct']:+.1f}%" if adv.get("gain_pct") is not None else ""
+        righe.append(f"🔔 <b>{tk}</b>{gp}")
+        for motivo in adv.get("reasons", []):
+            righe.append("• " + html.escape(motivo))
+        righe.append("")
+    righe.append("Apri l'app → 💰 Portafoglio per i dettagli. (Non è un consiglio di investimento.)")
+    ok = fu.send_telegram("\n".join(righe))
+    log("Notifica di vendita inviata." if ok
+        else "Notifica di vendita NON inviata (Telegram non configurato o errore).")
+
+
 def main():
     if not (fu._fmp_key() or fu._finnhub_key()):
         log("ATTENZIONE: nessuna chiave API (FMP/Finnhub) impostata. I dati potrebbero essere assenti.")
@@ -110,12 +127,24 @@ def main():
     except Exception:
         pass
 
-    # Garantisce che entrambi i file esistano in locale per la pubblicazione del workflow
+    # Consulente di vendita: avvisa quando conviene incassare un titolo del portafoglio
+    try:
+        fired = fu.evaluate_portfolio_sales()
+        if fired:
+            log(f"Avvisi di vendita: {', '.join(f['position'].get('ticker', '?') for f in fired)}")
+            notify_sales(fired)
+        else:
+            log("Nessun nuovo avviso di vendita.")
+    except Exception as e:
+        log(f"Errore consulente di vendita: {e!r}")
+
+    # Garantisce che i file esistano in locale per la pubblicazione del workflow
     # (se un giro non produce novità, ripubblica lo stato corrente senza perdere lo storico).
     fu.save_opp_watch(fu.load_opp_watch())
     fu.save_tracking(fu.load_tracking())
     fu.save_track_record(fu.load_track_record())
-    fu.save_portfolio(fu.load_portfolio())   # preserva il portafoglio (lo gestisce l'app)
+    fu.save_portfolio(fu.load_portfolio())          # preserva il portafoglio (lo gestisce l'app)
+    fu.save_sell_alerts(fu.load_sell_alerts())      # stato avvisi di vendita (deduplica)
 
     log(f"Fatto. Totale occasioni viste: {total}.")
     return 0
