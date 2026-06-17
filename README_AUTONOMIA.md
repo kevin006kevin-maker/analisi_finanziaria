@@ -73,3 +73,34 @@ solo le scelte manuali fatte sul telefono potrebbero azzerarsi al riavvio dell'a
   usa le fonti di riserva (Finnhub/SEC/yfinance), come già fa l'app.
 - In **locale** (senza `data_repo` configurato) l'app continua a funzionare come prima:
   il motore gira mentre la pagina Occasioni è aperta.
+
+---
+
+## 🔔 Notifiche su Telegram (occasioni promosse)
+
+Quando un'occasione viene promossa automaticamente (in salita da 3 giorni), il sistema
+ti manda un **messaggio Telegram** sul telefono. Gratis. Configurazione una tantum:
+
+### 1) Crea il bot
+- Sul telefono apri **Telegram** → cerca **@BotFather** → avvia la chat.
+- Scrivi `/newbot` e segui le istruzioni (nome a piacere; lo *username* deve finire con `bot`).
+- BotFather ti dà un **token** tipo `123456789:AAH...` → copialo.
+
+### 2) Trova il tuo chat_id
+- Su Telegram cerca **@userinfobot** → avvia → ti risponde con **Id: 123456789**.
+  Quel numero è il tuo **chat_id**.
+- ⚠️ Importante: apri anche la chat con **il TUO bot** (quello creato al punto 1) e premi
+  **Avvia/Start**, altrimenti il bot non può scriverti.
+
+### 3) Metti i due valori nei Secret del repo
+GitHub → repo → **Settings → Secrets and variables → Actions → New repository secret**:
+- `TELEGRAM_BOT_TOKEN` = il token del punto 1
+- `TELEGRAM_CHAT_ID` = il numero del punto 2
+
+### 4) Prova che funzioni
+GitHub → **Actions** → workflow **«Aggiornamento autonomo occasioni»** → **Run workflow** →
+spunta la casella **«Invia solo una notifica Telegram di prova»** → **Run workflow**.
+Dopo pochi secondi dovresti ricevere su Telegram il messaggio di prova ✅.
+
+Fatto questo, riceverai una notifica ogni volta che un titolo viene promosso automaticamente.
+Senza questi Secret, il sistema funziona comunque: semplicemente non invia notifiche.
