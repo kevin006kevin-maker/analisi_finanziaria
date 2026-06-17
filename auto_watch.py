@@ -61,9 +61,15 @@ def main():
 
     # Percorso di prova: avvio manuale con "test_notifica" → manda solo un messaggio di verifica
     if os.environ.get("TEST_NOTIFICA") == "true":
-        ok = fu.send_telegram("✅ Notifica di prova dal sistema Occasioni.\n"
-                              "Se leggi questo messaggio, le notifiche funzionano correttamente!")
-        log("Test notifica: " + ("inviata ✓" if ok else "NON inviata (controlla token/chat_id nei Secret)."))
+        tok, cid = fu._telegram_cfg()
+        log(f"Diagnostica notifiche → token impostato: {'SI' if tok else 'NO'} · "
+            f"chat_id impostato: {'SI' if cid else 'NO'}"
+            + (f" (chat_id di {len(str(cid))} cifre)" if cid else ""))
+        ok, dettaglio = fu.send_telegram_verbose(
+            "✅ Notifica di prova dal sistema Occasioni.\n"
+            "Se leggi questo messaggio, le notifiche funzionano correttamente!")
+        log(f"Risposta Telegram: {dettaglio}")
+        log("Test notifica: " + ("inviata ✓" if ok else "NON inviata"))
         return 0
 
     total = 0
