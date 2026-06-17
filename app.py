@@ -316,22 +316,26 @@ if section.startswith("💎"):
                             line += "  \n_Stima dai dati storici, non una previsione._"
                             st.markdown(line)
                         det = fu.opportunity_row(tk, with_fundamentals=(kind == "long"))
-                        if det and det.get("spark"):
+                        if det:
                             price = det.get("price")
                             tgt, stp = det.get("target_price"), det.get("stop_price")
-                            xs = det.get("spark_dates") or list(range(len(det["spark"])))
-                            sfig = go.Figure()
-                            sfig.add_trace(go.Scatter(x=xs, y=det["spark"], mode="lines",
-                                                      line=dict(color="#0969da", width=2), name="Prezzo"))
-                            if tgt:
-                                sfig.add_hline(y=tgt, line=dict(color="#1a7f37", dash="dash", width=1),
-                                               annotation_text="🎯 bersaglio (media 50gg)", annotation_position="top left")
-                            if stp:
-                                sfig.add_hline(y=stp, line=dict(color="#cf222e", dash="dash", width=1),
-                                               annotation_text="🛑 stop", annotation_position="bottom left")
-                            sfig.update_layout(height=230, margin=dict(t=10, b=10, l=10, r=10),
-                                               showlegend=False, yaxis_title=None, xaxis_title=None)
-                            st.plotly_chart(sfig, use_container_width=True)
+                            cper = {"1 settimana": "5d", "1 mese": "1mo", "1 anno": "1y", "Tutto": "max"}
+                            csel = st.radio("Periodo del grafico", list(cper.keys()), index=2,
+                                            horizontal=True, key=f"oppchart_{kind}_{tk}")
+                            hc = fu.get_history(tk, period=cper[csel])
+                            if not hc.empty:
+                                sfig = go.Figure()
+                                sfig.add_trace(go.Scatter(x=hc.index, y=hc["Close"], mode="lines",
+                                                          line=dict(color="#0969da", width=2), name="Prezzo"))
+                                if tgt:
+                                    sfig.add_hline(y=tgt, line=dict(color="#1a7f37", dash="dash", width=1),
+                                                   annotation_text="🎯 bersaglio (media 50gg)", annotation_position="top left")
+                                if stp:
+                                    sfig.add_hline(y=stp, line=dict(color="#cf222e", dash="dash", width=1),
+                                                   annotation_text="🛑 stop", annotation_position="bottom left")
+                                sfig.update_layout(height=230, margin=dict(t=10, b=10, l=10, r=10),
+                                                   showlegend=False, yaxis_title=None, xaxis_title=None)
+                                st.plotly_chart(sfig, use_container_width=True)
                             lvl = []
                             if tgt and price:
                                 lvl.append(f"🎯 Bersaglio: **{tgt:,.2f}** ({(tgt/price-1)*100:+.0f}%)")
