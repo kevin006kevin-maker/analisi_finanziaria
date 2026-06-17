@@ -283,81 +283,96 @@ if section.startswith("💎"):
             if df.empty:
                 st.info("Nessuna occasione con i filtri scelti. Allarga i criteri nei 🎛️ Filtri.")
                 return
-            st.dataframe(df, use_container_width=True,
-                         height=min(60 + 38 * len(df), 460), column_config=cols_cfg)
-
             orizz = "~1 anno" if kind == "long" else "~1 mese"
-            st.caption(f"📈 **Prob. salita** e 📉 **Rischio perdita** sono **stime statistiche** dai rendimenti storici "
-                       f"(orizzonte {orizz}), **non previsioni**: indicano l'ordine di grandezza del rischio/rendimento.")
 
-            st.markdown("##### 🔍 Approfondimenti — notizie recenti e perché")
-            for tk, row in df.head(6).iterrows():
-                pg, pl = row.get("Prob. salita"), row.get("Rischio perdita")
-                with st.expander(f"{tk} — {row['Nome']}   ·   💎 {int(row['Occasione'])}"):
-                    st.markdown(f"**Perché è un'occasione:** {row['Perché']}")
-                    bits = []
-                    if pg is not None and not pd.isna(pg):
-                        bits.append(f"📈 probabilità di salita **~{pg:.0f}%**")
-                    eg = row.get("Guadagno atteso")
-                    if eg is not None and not pd.isna(eg):
-                        bits.append(f"🎯 guadagno atteso **{eg:+.1f}%**")
-                    if pl is not None and not pd.isna(pl):
-                        bits.append(f"📉 rischio di perdita oltre il 15% **~{pl:.0f}%**")
-                    rel = row.get("Affidabilità")
-                    if bits:
-                        line = f"**Stima statistica ({orizz}):** " + " · ".join(bits)
-                        if rel and not pd.isna(rel):
-                            line += f"  \nAffidabilità della stima: **{rel}**"
-                        line += "  \n_Stima dai dati storici, non una previsione._"
-                        st.markdown(line)
-                    det = fu.opportunity_row(tk, with_fundamentals=(kind == "long"))
-                    if det and det.get("spark"):
-                        price = det.get("price")
-                        tgt, stp = det.get("target_price"), det.get("stop_price")
-                        xs = det.get("spark_dates") or list(range(len(det["spark"])))
-                        sfig = go.Figure()
-                        sfig.add_trace(go.Scatter(x=xs, y=det["spark"], mode="lines",
-                                                  line=dict(color="#0969da", width=2), name="Prezzo"))
-                        if tgt:
-                            sfig.add_hline(y=tgt, line=dict(color="#1a7f37", dash="dash", width=1),
-                                           annotation_text="🎯 bersaglio (media 50gg)", annotation_position="top left")
-                        if stp:
-                            sfig.add_hline(y=stp, line=dict(color="#cf222e", dash="dash", width=1),
-                                           annotation_text="🛑 stop", annotation_position="bottom left")
-                        sfig.update_layout(height=230, margin=dict(t=10, b=10, l=10, r=10),
-                                           showlegend=False, yaxis_title=None, xaxis_title=None)
-                        st.plotly_chart(sfig, use_container_width=True)
-                        lvl = []
-                        if tgt and price:
-                            lvl.append(f"🎯 Bersaglio: **{tgt:,.2f}** ({(tgt/price-1)*100:+.0f}%)")
-                        if stp and price:
-                            lvl.append(f"🛑 Stop: **{stp:,.2f}** ({(stp/price-1)*100:+.0f}%)")
-                        if lvl:
-                            st.markdown(" · ".join(lvl))
-                        st.caption("👀 **Come leggere:** la linea blu è il prezzo degli ultimi ~3 mesi. "
-                                   "La linea **verde** è la media a 50 giorni (il *bersaglio* di un rimbalzo): "
-                                   "se il prezzo le sta **sotto**, c'è spazio per risalire. La **rossa** è lo stop "
-                                   "(sotto cui l'idea di rimbalzo salta). Livelli indicativi, non consigli.")
-                        s1m = det.get("perf_1m")
-                        if mkt_1m is not None and s1m is not None:
-                            if abs(s1m - mkt_1m) <= 1:
-                                conf = "in linea col mercato"
-                            elif s1m < mkt_1m:
-                                conf = "**peggio del mercato** (calo più specifico del titolo)"
-                            else:
-                                conf = "**meglio del mercato**"
-                            st.caption(f"📊 Ultimo mese: {tk} {s1m:+.0f}% · mercato S&P 500 {mkt_1m:+.0f}% → {conf}.")
-                    news = fu.get_news(tk, 4)
-                    if news:
-                        sent_label, _ = fu.news_sentiment(news)
-                        st.markdown(f"**Notizie recenti** · tono indicativo: {sent_label}")
-                        for n in news[:3]:
-                            title = fu.translate_text(n["title"]) if translate_news else n["title"]
-                            link = f"[{title}]({n['url']})" if n["url"] else title
-                            meta = f"  ·  _{n['date']}_" if n["date"] else ""
-                            st.markdown(f"- {link}{meta}")
-                    else:
-                        st.caption("Nessuna notizia recente trovata per questo titolo.")
+            def _block(df_sub, subtitle=None):
+                if subtitle:
+                    st.markdown(f"**{subtitle}**")
+                if df_sub.empty:
+                    st.caption("Nessun titolo in questa fascia con i filtri scelti.")
+                    return
+                st.dataframe(df_sub, use_container_width=True,
+                             height=min(60 + 38 * len(df_sub), 460), column_config=cols_cfg)
+                st.caption(f"📈 **Prob. salita** e 📉 **Rischio perdita** sono **stime statistiche** dai rendimenti "
+                           f"storici (orizzonte {orizz}), **non previsioni**.")
+                st.markdown("###### 🔍 Approfondimenti — notizie recenti e perché")
+                for tk, row in df_sub.head(5).iterrows():
+                    pg, pl = row.get("Prob. salita"), row.get("Rischio perdita")
+                    with st.expander(f"{tk} — {row['Nome']}   ·   💎 {int(row['Occasione'])}"):
+                        st.markdown(f"**Perché è un'occasione:** {row['Perché']}")
+                        bits = []
+                        if pg is not None and not pd.isna(pg):
+                            bits.append(f"📈 probabilità di salita **~{pg:.0f}%**")
+                        eg = row.get("Guadagno atteso")
+                        if eg is not None and not pd.isna(eg):
+                            bits.append(f"🎯 guadagno atteso **{eg:+.1f}%**")
+                        if pl is not None and not pd.isna(pl):
+                            bits.append(f"📉 rischio di perdita oltre il 15% **~{pl:.0f}%**")
+                        rel = row.get("Affidabilità")
+                        if bits:
+                            line = f"**Stima statistica ({orizz}):** " + " · ".join(bits)
+                            if rel and not pd.isna(rel):
+                                line += f"  \nAffidabilità della stima: **{rel}**"
+                            line += "  \n_Stima dai dati storici, non una previsione._"
+                            st.markdown(line)
+                        det = fu.opportunity_row(tk, with_fundamentals=(kind == "long"))
+                        if det and det.get("spark"):
+                            price = det.get("price")
+                            tgt, stp = det.get("target_price"), det.get("stop_price")
+                            xs = det.get("spark_dates") or list(range(len(det["spark"])))
+                            sfig = go.Figure()
+                            sfig.add_trace(go.Scatter(x=xs, y=det["spark"], mode="lines",
+                                                      line=dict(color="#0969da", width=2), name="Prezzo"))
+                            if tgt:
+                                sfig.add_hline(y=tgt, line=dict(color="#1a7f37", dash="dash", width=1),
+                                               annotation_text="🎯 bersaglio (media 50gg)", annotation_position="top left")
+                            if stp:
+                                sfig.add_hline(y=stp, line=dict(color="#cf222e", dash="dash", width=1),
+                                               annotation_text="🛑 stop", annotation_position="bottom left")
+                            sfig.update_layout(height=230, margin=dict(t=10, b=10, l=10, r=10),
+                                               showlegend=False, yaxis_title=None, xaxis_title=None)
+                            st.plotly_chart(sfig, use_container_width=True)
+                            lvl = []
+                            if tgt and price:
+                                lvl.append(f"🎯 Bersaglio: **{tgt:,.2f}** ({(tgt/price-1)*100:+.0f}%)")
+                            if stp and price:
+                                lvl.append(f"🛑 Stop: **{stp:,.2f}** ({(stp/price-1)*100:+.0f}%)")
+                            if lvl:
+                                st.markdown(" · ".join(lvl))
+                            st.caption("👀 **Come leggere:** la linea blu è il prezzo degli ultimi ~3 mesi. "
+                                       "La linea **verde** è la media a 50 giorni (il *bersaglio* di un rimbalzo): "
+                                       "se il prezzo le sta **sotto**, c'è spazio per risalire. La **rossa** è lo stop "
+                                       "(sotto cui l'idea di rimbalzo salta). Livelli indicativi, non consigli.")
+                            s1m = det.get("perf_1m")
+                            if mkt_1m is not None and s1m is not None:
+                                if abs(s1m - mkt_1m) <= 1:
+                                    conf = "in linea col mercato"
+                                elif s1m < mkt_1m:
+                                    conf = "**peggio del mercato** (calo più specifico del titolo)"
+                                else:
+                                    conf = "**meglio del mercato**"
+                                st.caption(f"📊 Ultimo mese: {tk} {s1m:+.0f}% · mercato S&P 500 {mkt_1m:+.0f}% → {conf}.")
+                        news = fu.get_news(tk, 4)
+                        if news:
+                            sent_label, _ = fu.news_sentiment(news)
+                            st.markdown(f"**Notizie recenti** · tono indicativo: {sent_label}")
+                            for n in news[:3]:
+                                title = fu.translate_text(n["title"]) if translate_news else n["title"]
+                                link = f"[{title}]({n['url']})" if n["url"] else title
+                                meta = f"  ·  _{n['date']}_" if n["date"] else ""
+                                st.markdown(f"- {link}{meta}")
+                        else:
+                            st.caption("Nessuna notizia recente trovata per questo titolo.")
+
+            if kind == "short":
+                soglia = 10
+                _block(df[df["Prezzo"] < soglia],
+                       f"💰 Titoli economici (sotto i {soglia}$) — più speculativi")
+                st.markdown("---")
+                _block(df[df["Prezzo"] >= soglia],
+                       f"🏢 Titoli a prezzo più alto (da {soglia}$ in su)")
+            else:
+                _block(df)
             return
 
         short_cfg = {
