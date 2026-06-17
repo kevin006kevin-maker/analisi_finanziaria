@@ -678,13 +678,32 @@ if section.startswith("📌"):
             if extra:
                 st.caption(" · ".join(extra))
 
-            # Grafico: prezzo reale + convenienza accumulata (asse destro) + livelli
-            hc = fu.get_history(tk, period="3mo")
+            # Grafico: prezzo reale + convenienza accumulata (asse destro) + livelli.
+            # Periodo selezionabile: dai giorni di monitoraggio fino al massimo storico.
+            TPER = {"📅 Da quando lo seguo": "track", "Settimane": "1mo",
+                    "Mesi": "6mo", "Anno": "1y", "Massimo": "max"}
+            tsel = st.radio("Periodo del grafico", list(TPER.keys()), index=0,
+                            horizontal=True, key=f"trackper_{tk}")
+            sel = TPER[tsel]
+            start = None
+            if sel == "track":
+                start = pd.to_datetime(entry.get("added")) if entry.get("added") else None
+                # scarica abbastanza storico da coprire la finestra di monitoraggio
+                gp = "1mo" if (giorni or 0) <= 25 else ("3mo" if giorni <= 80 else "1y")
+            else:
+                gp = sel
+            hc = fu.get_history(tk, period=gp)
+            if start is not None and not hc.empty:
+                hc = hc[hc.index >= start]
             fig = go.Figure()
             if not hc.empty:
                 fig.add_trace(go.Scatter(x=hc.index, y=hc["Close"], name="Prezzo",
                                          line=dict(color="#0969da", width=2)))
-            cs = [(s["date"], s["convenienza"]) for s in snaps if s.get("convenienza") is not None]
+            # punti di convenienza: solo quelli dentro la finestra mostrata
+            x_min = hc.index.min() if not hc.empty else None
+            cs = [(s["date"], s["convenienza"]) for s in snaps
+                  if s.get("convenienza") is not None
+                  and (x_min is None or pd.to_datetime(s["date"]) >= x_min)]
             if cs:
                 fig.add_trace(go.Scatter(
                     x=[pd.to_datetime(d) for d, _ in cs], y=[v for _, v in cs],
@@ -703,9 +722,13 @@ if section.startswith("📌"):
                 yaxis=dict(title="Prezzo"),
                 yaxis2=dict(title="Convenienza", overlaying="y", side="right",
                             range=[0, 100], showgrid=False))
-            st.plotly_chart(fig, use_container_width=True)
-            st.caption("👀 **Linea blu** = prezzo reale (3 mesi). **Linea viola** = la convenienza registrata nei giorni "
-                       "in cui hai aperto l'app (sale = il segnale migliora). Verde = bersaglio, rossa = stop.")
+            if hc.empty:
+                st.caption("Nessun dato di prezzo per il periodo scelto.")
+            else:
+                st.plotly_chart(fig, use_container_width=True)
+            st.caption("👀 **Linea blu** = prezzo reale nel periodo scelto qui sopra. **Linea viola** = la convenienza "
+                       "registrata nei giorni in cui il sistema ha osservato il titolo (sale = il segnale migliora). "
+                       "Verde = bersaglio, rossa = stop.")
 
             # Nota personale + scorciatoia all'analisi
             nc1, nc2 = st.columns([4, 1])
