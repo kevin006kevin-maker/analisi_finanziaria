@@ -73,7 +73,7 @@ COLORS = {"positivo": "#1a7f37", "negativo": "#cf222e", "neutro": "#9a6700", Non
 ICONS = {"positivo": "🟢", "negativo": "🔴", "neutro": "🟡", None: "⚪"}
 
 
-def badge(label, value, judgement, help_text=""):
+def badge(label, value, judgement, help_text="", reason=""):
     color = COLORS.get(judgement, "#57606a")
     icon = ICONS.get(judgement, "⚪")
     info_icon = ""
@@ -83,10 +83,17 @@ def badge(label, value, judgement, help_text=""):
             f" <span title=\"{safe}\" "
             f"style='cursor:help;color:#0969da;font-size:0.85em'>&#9432;</span>"
         )
+    reason_html = ""
+    if reason:
+        reason_html = (
+            f"<div style='font-size:0.82em;color:#666;margin-left:1.5em;margin-top:1px'>"
+            f"↳ {reason}</div>"
+        )
     st.markdown(
         f"<div style='padding:6px 0;border-bottom:1px solid #eee;'>"
         f"{icon} <b>{label}</b>{info_icon}: "
-        f"<span style='color:{color};font-weight:600'>{value}</span></div>",
+        f"<span style='color:{color};font-weight:600'>{value}</span>"
+        f"{reason_html}</div>",
         unsafe_allow_html=True,
     )
 
@@ -801,15 +808,15 @@ with tab_fund:
     for i, (block_name, rows) in enumerate(view_blocks.items()):
         with cols[i % 2]:
             st.markdown(f"#### {block_name}")
-            for label, value, judgement in rows:
-                badge(label, value, judgement, fu.help_for(label))
+            for label, value, judgement, reason in rows:
+                badge(label, value, judgement, fu.help_for(label), reason)
             st.write("")
 
     # Sintesi conteggio segnali (sempre su tutti i blocchi)
     all_rows = [r for rows in blocks.values() for r in rows]
-    pos = sum(1 for _, _, j in all_rows if j == "positivo")
-    neg = sum(1 for _, _, j in all_rows if j == "negativo")
-    neu = sum(1 for _, _, j in all_rows if j == "neutro")
+    pos = sum(1 for r in all_rows if r[2] == "positivo")
+    neg = sum(1 for r in all_rows if r[2] == "negativo")
+    neu = sum(1 for r in all_rows if r[2] == "neutro")
     st.markdown("---")
     st.markdown(
         f"**Bilancio dei segnali fondamentali:** "
@@ -834,7 +841,7 @@ with tab_fund:
         st.caption("🔎 Verifica con bilanci ufficiali SEC non disponibile (titolo non USA o dati assenti).")
 
     with st.expander("📖 Glossario — cosa significano questi indicatori"):
-        for label, _, _ in all_rows:
+        for label, *_ in all_rows:
             txt = fu.help_for(label)
             if txt:
                 st.markdown(f"**{label}** — {txt}")
