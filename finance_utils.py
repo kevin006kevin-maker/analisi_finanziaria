@@ -2129,12 +2129,13 @@ def save_portfolio(positions: list) -> None:
     write_data_json(PORTFOLIO_NAME, positions)
 
 
-def add_position(ticker, qty, buy_price, date, target=None, stop=None, note="") -> list:
+def add_position(ticker, qty, buy_price, date, target=None, stop=None, note="", horizon="lungo") -> list:
     positions = load_portfolio()
     positions.append({
         "ticker": str(ticker).upper(), "qty": float(qty), "buy_price": float(buy_price),
         "date": date, "target": (float(target) if target else None),
         "stop": (float(stop) if stop else None), "note": note,
+        "horizon": ("breve" if str(horizon).startswith("breve") else "lungo"),
     })
     save_portfolio(positions)
     return positions
@@ -2180,12 +2181,157 @@ def portfolio_view():
                 status = "🛑 stop raggiunto"
         rows.append({"index": i, "ticker": tk, "qty": qty, "buy_price": buy, "date": p.get("date"),
                      "price": price, "cost": cost, "value": val, "pnl": pnl, "pnl_pct": pnl_pct,
-                     "target": tgt, "stop": stp, "note": p.get("note", ""), "status": status})
+                     "target": tgt, "stop": stp, "note": p.get("note", ""), "status": status,
+                     "horizon": ("breve" if str(p.get("horizon", "lungo")).startswith("breve") else "lungo")})
     totals = {"cost": tot_cost,
               "value": (tot_val if val_known else None),
               "pnl": (tot_val - tot_cost) if val_known else None,
               "pnl_pct": ((tot_val / tot_cost - 1) * 100) if (val_known and tot_cost) else None}
     return rows, totals
+
+
+# ---------------------------------------------------------------------------
+# CONSULENTE DI VENDITA — quando conviene incassare un titolo acquistato.
+# NON prevede il futuro: applica regole (bersaglio, stop, trailing stop dal
+# massimo toccato, ipercomprato, rottura del trend) per segnalare un buon
+# momento per prendere profitto o tagliare le perdite. Onesto, non infallibile.
+# ---------------------------------------------------------------------------
+
+def _last_val(series):
+    try:
+        v = float(series.iloc[-1])
+        return None if np.isnan(v) else v
+    except Exception:
+        return None
+
+
+def sell_advice(position: dict) -> dict:
+    """Valuta se conviene vendere una posizione. Ritorna verdetto (sell/watch/hold),
+    etichetta, motivi, prezzo, guadagno% e picco dall'acquisto."""
+    tk = position.get("ticker")
+    buy = position.get("buy_price") or 0
+    horizon = "breve" if str(position.get("horizon", "lungo")).startswith("breve") else "lungo"
+    target, stop = position.get("target"), position.get("stop")
+    hold = {"verdict": "hold", "label": "Mantieni", "emoji": "✅", "reasons": [],
+            "price": None, "gain_pct": None, "peak": None}
+    if not (tk and buy):
+        return hold
+    try:
+        h = get_history(tk, "1y")
+    except Exception:
+        h = None
+    if h is None or h.empty:
+        return hold
+    h = h[h["Close"].notna()]
+    if h.empty:
+        return hold
+    h = add_indicators(h)
+    closes = h["Close"]
+    if getattr(closes.index, "tz", None) is not None:
+        closes = closes.copy()
+        closes.index = closes.index.tz_localize(None)
+        h = h.copy()
+        h.index = closes.index
+    price = float(closes.iloc[-1])
+    gain_pct = (price / buy - 1) * 100
+    try:
+        buy_date = pd.to_datetime(position.get("date"))
+    except Exception:
+        buy_date = None
+    since = closes[closes.index >= buy_date] if buy_date is not None else closes
+    peak = float(since.max()) if not since.empty else price
+    dd_peak = (price / peak - 1) * 100 if peak else 0.0
+    last = h.iloc[-1]
+    rsi = _last_val(h["RSI"]) if "RSI" in h else None
+    sma50 = _last_val(h["SMA50"]) if "SMA50" in h else None
+    sma200 = _last_val(h["SMA200"]) if "SMA200" in h else None
+    macd = last.get("MACD", np.nan)
+    macd_sig = last.get("MACD_signal", np.nan)
+    macd_down = (not np.isnan(macd) and not np.isnan(macd_sig) and macd < macd_sig)
+
+    order = {"hold": 0, "watch": 1, "sell": 2}
+    verdict = "hold"
+    reasons = []
+
+    def bump(v):
+        nonlocal verdict
+        if order[v] > order[verdict]:
+            verdict = v
+
+    if stop and price <= stop:
+        bump("sell")
+        reasons.append(f"🛑 Prezzo sotto lo stop di protezione ({stop:.2f}): valuta di uscire per limitare la perdita.")
+    if target and price >= target:
+        bump("sell")
+        reasons.append(f"🎯 Bersaglio {target:.2f} raggiunto (sei a {gain_pct:+.1f}%): valuta di incassare.")
+    trail = 8 if horizon == "breve" else 15
+    if gain_pct > 3 and dd_peak <= -trail:
+        bump("sell")
+        reasons.append(f"🪤 Sceso {abs(dd_peak):.0f}% dal massimo toccato ({peak:.2f}) restando in guadagno "
+                       f"({gain_pct:+.1f}%): conviene incassare prima che il guadagno si riduca.")
+    if horizon == "breve":
+        if sma50 and price >= sma50 and gain_pct > 0:
+            bump("watch")
+            reasons.append("Il prezzo è risalito sulla media a 50 giorni (l'obiettivo tipico di un rimbalzo): "
+                           "il grosso del recupero potrebbe essere fatto.")
+        if rsi is not None and rsi >= 68 and gain_pct > 0:
+            bump("watch")
+            reasons.append(f"📈 RSI {rsi:.0f} (ipercomprato): il rimbalzo di breve potrebbe essere quasi esaurito.")
+        if macd_down and gain_pct > 2:
+            bump("watch")
+            reasons.append("Lo slancio (MACD) sta girando verso il basso.")
+    else:
+        if sma200 and price < sma200:
+            bump("watch")
+            reasons.append("Il prezzo è sceso sotto la media a 200 giorni: il trend di fondo si è indebolito.")
+        if rsi is not None and rsi >= 78:
+            bump("watch")
+            reasons.append(f"📈 RSI {rsi:.0f}: molto ipercomprato, possibile presa di profitto.")
+
+    if not reasons:
+        reasons.append("Nessun segnale di vendita: per ora il titolo si mantiene.")
+    labels = {"sell": "Valuta la vendita", "watch": "Tieni d'occhio", "hold": "Mantieni"}
+    emojis = {"sell": "🔔", "watch": "👀", "hold": "✅"}
+    return {"verdict": verdict, "label": labels[verdict], "emoji": emojis[verdict],
+            "reasons": reasons, "price": round(price, 2), "gain_pct": round(gain_pct, 1),
+            "peak": round(peak, 2)}
+
+
+SELL_ALERTS_NAME = "sell_alerts.json"
+
+
+def load_sell_alerts() -> dict:
+    data = read_data_json(SELL_ALERTS_NAME, {})
+    return data if isinstance(data, dict) else {}
+
+
+def save_sell_alerts(d: dict) -> None:
+    write_data_json(SELL_ALERTS_NAME, d)
+
+
+def _position_key(p: dict) -> str:
+    return f"{p.get('ticker')}|{p.get('date')}|{p.get('buy_price')}"
+
+
+def evaluate_portfolio_sales() -> list:
+    """Per ogni posizione calcola il consiglio di vendita; ritorna le posizioni appena passate
+    a «vendi» (non ancora notificate). Aggiorna lo stato per non ripetere la notifica."""
+    positions = load_portfolio()
+    if not positions:
+        return []
+    alerted = load_sell_alerts()
+    fired = []
+    new_alerted = {}
+    for p in positions:
+        key = _position_key(p)
+        adv = sell_advice(p)
+        if adv["verdict"] == "sell":
+            new_alerted[key] = True
+            if not alerted.get(key):
+                fired.append({"position": p, "advice": adv})
+        # se non è più «vendi», la chiave non viene riportata → un futuro «vendi» riavvisa
+    save_sell_alerts(new_alerted)
+    return fired
 
 
 # ---------------------------------------------------------------------------
