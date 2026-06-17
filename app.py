@@ -828,12 +828,17 @@ if section.startswith("💰"):
             p_date = pf4.date_input("Data acquisto", value=datetime.date.today(), max_value=datetime.date.today())
             p_tgt = pf5.number_input("Bersaglio (opzionale)", min_value=0.0, step=0.01, value=0.0, format="%.2f")
             p_stp = pf6.number_input("Stop (opzionale)", min_value=0.0, step=0.01, value=0.0, format="%.2f")
-            p_note = st.text_input("Nota (opzionale)", placeholder="es. lungo termine, dividendo")
+            pf7, pf8 = st.columns([1, 2])
+            p_hor = pf7.radio("Orizzonte", ["⚡ Breve termine", "🏛️ Lungo termine"], index=1,
+                              help="«Breve» = scommessa di rimbalzo (incassare presto). «Lungo» = investimento da tenere; "
+                                   "il consulente di vendita è più paziente.")
+            p_note = pf8.text_input("Nota (opzionale)", placeholder="es. rimbalzo, dividendo, lungo termine")
             submitted = st.form_submit_button("➕ Aggiungi al portafoglio", use_container_width=True)
             if submitted:
                 if p_tk and p_qty > 0 and p_buy > 0:
                     fu.add_position(p_tk, p_qty, p_buy, p_date.isoformat(),
-                                    target=(p_tgt or None), stop=(p_stp or None), note=p_note)
+                                    target=(p_tgt or None), stop=(p_stp or None), note=p_note,
+                                    horizon=("breve" if p_hor.endswith("Breve termine") else "lungo"))
                     st.success(f"Aggiunto {p_qty:g} × {p_tk} a {p_buy:.2f}.")
                     st.rerun()
                 else:
@@ -868,10 +873,12 @@ if section.startswith("💰"):
 
     # --- Tabella posizioni ---
     dfp = pd.DataFrame([{
-        "Ticker": r["ticker"], "Q.tà": r["qty"], "Acquisto": r["buy_price"], "Prezzo ora": r["price"],
+        "Ticker": r["ticker"], "Orizz.": "⚡" if r["horizon"] == "breve" else "🏛️",
+        "Q.tà": r["qty"], "Acquisto": r["buy_price"], "Prezzo ora": r["price"],
         "Valore": r["value"], "G/P": r["pnl"], "G/P %": r["pnl_pct"], "Stato": r["status"] or "—",
     } for r in rows]).set_index("Ticker")
     st.dataframe(dfp, use_container_width=True, column_config={
+        "Orizz.": st.column_config.TextColumn("Orizz.", help="⚡ breve termine · 🏛️ lungo termine"),
         "Q.tà": st.column_config.NumberColumn("Q.tà", format="%g"),
         "Acquisto": st.column_config.NumberColumn("Acquisto", format="%.2f"),
         "Prezzo ora": st.column_config.NumberColumn("Prezzo ora", format="%.2f"),
@@ -879,6 +886,33 @@ if section.startswith("💰"):
         "G/P": st.column_config.NumberColumn("Guadagno/Perdita", format="%+.2f"),
         "G/P %": st.column_config.NumberColumn("G/P %", format="%+.1f%%"),
     })
+
+    # --- 🔔 Consigli di vendita ---
+    st.markdown("### 🔔 Consigli di vendita")
+    st.caption("Per ogni titolo il sistema valuta **se conviene incassare ora**, in base a bersaglio, stop, "
+               "trailing stop (calo dal massimo toccato), ipercomprato e trend. **Non prevede il futuro** e non "
+               "garantisce il massimo guadagno: è un aiuto a non farsi scappare un buon momento e a tagliare le perdite.")
+    if fu.cloud_mode():
+        st.caption("📲 Quando un titolo passa a «🔔 Valuta la vendita», ricevi anche una **notifica Telegram** (il sistema "
+                   "controlla ogni ~15 minuti, anche a PC spento).")
+    with st.spinner("Valuto i titoli…"):
+        positions = fu.load_portfolio()
+        advices = [(p, fu.sell_advice(p)) for p in positions]
+    order = {"sell": 0, "watch": 1, "hold": 2}
+    for p, adv in sorted(advices, key=lambda x: order.get(x[1]["verdict"], 3)):
+        colore = {"sell": "#cf222e", "watch": "#9a6700", "hold": "#1a7f37"}[adv["verdict"]]
+        gp = f"{adv['gain_pct']:+.1f}%" if adv["gain_pct"] is not None else "n/d"
+        hor = "⚡ breve" if str(p.get("horizon", "lungo")).startswith("breve") else "🏛️ lungo"
+        st.markdown(
+            f"<div style='padding:8px 12px;border-radius:8px;background:{colore}14;"
+            f"border-left:5px solid {colore};margin-bottom:6px'>"
+            f"<b style='color:{colore}'>{adv['emoji']} {p.get('ticker')} — {adv['label']}</b> "
+            f"<span style='color:#666'>· {hor} · guadagno attuale {gp}</span></div>",
+            unsafe_allow_html=True)
+        for motivo in adv["reasons"]:
+            st.markdown(f"<div style='margin-left:14px;color:#444;font-size:0.9em'>↳ {motivo}</div>",
+                        unsafe_allow_html=True)
+    st.caption("⚠️ Spunti automatici, non consigli di investimento. La decisione finale è sempre tua.")
 
     # --- Rimozione posizioni ---
     st.markdown("###### Gestisci le posizioni")
