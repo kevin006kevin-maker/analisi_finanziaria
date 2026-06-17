@@ -20,6 +20,7 @@ NB: NON impostare GITHUB_TOKEN per questo script: la pubblicazione la fa il work
 
 import os
 import sys
+import html
 import datetime
 
 import finance_utils as fu
@@ -30,9 +31,40 @@ def log(msg):
     print(f"[{ts}Z] {msg}", flush=True)
 
 
+def notify_promotions(tickers):
+    """Manda una notifica Telegram per le occasioni appena promosse automaticamente."""
+    tr = fu.load_tracking()
+    righe = ["🤖 <b>Nuove occasioni promosse</b>", "(convenienza in salita da 3 giorni di fila)", ""]
+    for tk in tickers:
+        e = tr.get(tk, {})
+        snaps = e.get("snapshots", [])
+        last = snaps[-1] if snaps else {}
+        nm = html.escape(str(e.get("name") or tk))
+        kind = "⚡ Breve" if e.get("kind") == "short" else "🏛️ Lungo"
+        conv = last.get("convenienza")
+        pg = last.get("prob_gain")
+        bits = [f"<b>{html.escape(tk)}</b> — {nm} ({kind})"]
+        if conv is not None:
+            bits.append(f"convenienza {conv}")
+        if pg is not None:
+            bits.append(f"prob. salita {pg}%")
+        righe.append("• " + " · ".join(bits))
+    righe += ["", "Aprila nell'app → sezione 📌 Monitoraggio."]
+    ok = fu.send_telegram("\n".join(righe))
+    log("Notifica Telegram inviata." if ok
+        else "Notifica Telegram NON inviata (token/chat_id assenti o errore).")
+
+
 def main():
     if not (fu._fmp_key() or fu._finnhub_key()):
         log("ATTENZIONE: nessuna chiave API (FMP/Finnhub) impostata. I dati potrebbero essere assenti.")
+
+    # Percorso di prova: avvio manuale con "test_notifica" → manda solo un messaggio di verifica
+    if os.environ.get("TEST_NOTIFICA") == "true":
+        ok = fu.send_telegram("✅ Notifica di prova dal sistema Occasioni.\n"
+                              "Se leggi questo messaggio, le notifiche funzionano correttamente!")
+        log("Test notifica: " + ("inviata ✓" if ok else "NON inviata (controlla token/chat_id nei Secret)."))
+        return 0
 
     total = 0
     for kind in ("short", "long"):
@@ -50,6 +82,7 @@ def main():
         promoted = fu.auto_promote_opportunities(min_days=3)
         if promoted:
             log(f"PROMOSSE automaticamente al monitoraggio (in salita da ≥3 giorni): {', '.join(promoted)}")
+            notify_promotions(promoted)
         else:
             log("Nessuna nuova promozione in questo giro.")
     except Exception as e:
