@@ -347,8 +347,7 @@ if section.startswith("💎"):
                 if new_picks:
                     if bcol1.button(f"📌 Segui tutte ({len(new_picks)})", use_container_width=True, type="primary",
                                     key="follow_best"):
-                        for tk, k in new_picks:
-                            fu.track_opportunity(tk, k)
+                        fu.track_many(new_picks)   # un'unica scrittura: le salva tutte (anche sul cloud)
                         st.success(f"📌 Aggiunte {len(new_picks)} occasioni al Monitoraggio.")
                         st.rerun()
                     bcol2.caption("Le aggiunge tutte alla sezione «📌 Monitoraggio» con lo scatto di oggi. "
