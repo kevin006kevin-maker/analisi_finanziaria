@@ -103,6 +103,12 @@ def badge(label, value, judgement, help_text="", reason=""):
 # ---------------------------------------------------------------------------
 st.sidebar.title("📈 Analisi Finanziaria")
 
+# Cambio sezione programmatico (es. bottone "📊 Analizza" dal Monitoraggio):
+# va impostato PRIMA che il widget radio venga creato, altrimenti Streamlit
+# vieta di modificare la chiave del widget già istanziato.
+if "_goto_section" in st.session_state:
+    st.session_state["section_radio"] = st.session_state.pop("_goto_section")
+
 # --- Sezione principale ---
 section = st.sidebar.radio(
     "Sezione", ["📊 Analisi di un titolo", "💎 Occasioni di mercato",
@@ -709,7 +715,7 @@ if section.startswith("📌"):
                 fu.set_tracking_note(tk, note)
             if nc2.button("📊 Analizza", key=f"goto_{tk}", use_container_width=True):
                 st.session_state["ticker"] = tk
-                st.session_state["section_radio"] = "📊 Analisi di un titolo"
+                st.session_state["_goto_section"] = "📊 Analisi di un titolo"
                 st.rerun()
 
     short_items = [(tk, e) for tk, e in tracked.items() if e.get("kind") == "short"]
