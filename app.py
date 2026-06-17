@@ -687,12 +687,19 @@ if section.startswith("📌"):
             sel = TPER[tsel]
             start = None
             if sel == "track":
-                start = pd.to_datetime(entry.get("added")) if entry.get("added") else None
+                try:
+                    start = pd.to_datetime(entry.get("added")) if entry.get("added") else None
+                except Exception:
+                    start = None
                 # scarica abbastanza storico da coprire la finestra di monitoraggio
                 gp = "1mo" if (giorni or 0) <= 25 else ("3mo" if giorni <= 80 else "1y")
             else:
                 gp = sel
             hc = fu.get_history(tk, period=gp)
+            # normalizza l'indice a tz-naive (get_history è in cache → copia prima di modificare)
+            if not hc.empty and getattr(hc.index, "tz", None) is not None:
+                hc = hc.copy()
+                hc.index = hc.index.tz_localize(None)
             if start is not None and not hc.empty:
                 hc = hc[hc.index >= start]
             fig = go.Figure()
