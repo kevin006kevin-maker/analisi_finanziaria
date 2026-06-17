@@ -680,10 +680,11 @@ if section.startswith("📌"):
 
             # Grafico: prezzo reale + convenienza accumulata (asse destro) + livelli.
             # Periodo selezionabile: dai giorni di monitoraggio fino al massimo storico.
-            TPER = {"📅 Da quando lo seguo": "track", "Settimane": "1mo",
-                    "Mesi": "6mo", "Anno": "1y", "Massimo": "max"}
+            TPER = {"Giorni": "track", "1 settimana": "5d", "1 mese": "1mo",
+                    "6 mesi": "6mo", "1 anno": "1y", "Max": "max"}
             tsel = st.radio("Periodo del grafico", list(TPER.keys()), index=0,
-                            horizontal=True, key=f"trackper_{tk}")
+                            horizontal=True, key=f"trackper_{tk}",
+                            help="«Giorni» mostra solo da quando hai iniziato a seguire il titolo; gli altri allargano lo storico del prezzo.")
             sel = TPER[tsel]
             start = None
             if sel == "track":
