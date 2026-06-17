@@ -112,9 +112,9 @@ if "_goto_section" in st.session_state:
 # --- Sezione principale ---
 section = st.sidebar.radio(
     "Sezione", ["📊 Analisi di un titolo", "💎 Occasioni di mercato",
-                "📌 Monitoraggio", "📰 Attualità"], key="section_radio",
+                "📌 Monitoraggio", "💰 Portafoglio", "📰 Attualità"], key="section_radio",
     help="«Analisi di un titolo» studia una singola azienda/ETF. «Occasioni» scansiona il mercato per cali interessanti. "
-         "«Monitoraggio» segue nel tempo le occasioni che hai scelto, per decidere con calma se comprarle. "
+         "«Monitoraggio» segue nel tempo le occasioni che hai scelto. «Portafoglio» registra i tuoi acquisti veri e mostra il guadagno/perdita. "
          "«Attualità» raccoglie le classifiche di mercato (rialzi/ribassi/più scambiati) e le notizie recenti divise per azienda/ETF.",
 )
 st.sidebar.markdown("---")
@@ -231,7 +231,11 @@ if section.startswith("💎"):
     extra_raw = st.text_area("Ticker extra da includere (separati da virgola, opzionale)",
                              value="", height=68, key="opp_extra")
     extra = [t.strip().upper() for t in extra_raw.replace(";", ",").split(",") if t.strip()]
-    inc_wl = st.checkbox("Includi la mia watchlist", value=bool(watchlist), key="opp_wl")
+    ic1, ic2 = st.columns(2)
+    inc_wl = ic1.checkbox("Includi la mia watchlist", value=bool(watchlist), key="opp_wl")
+    inc_eu = ic2.checkbox("🇮🇹🇪🇺 Includi Borsa Italiana / Europa", value=True, key="opp_eu",
+                          help="Aggiunge alla ricerca i principali titoli di Milano e d'Europa (le classifiche "
+                               "automatiche gratuite coprono solo gli USA).")
 
     refresh_choice = st.selectbox(
         "🔄 Aggiornamento automatico", ["Disattivato", "Ogni 15 minuti", "Ogni 30 minuti"],
@@ -271,7 +275,7 @@ if section.startswith("💎"):
 
         # --- Scansione unica (poi riusata da shortlist, sistema autonomo e tabelle) ---
         def _scan(kind):
-            base = fu.opportunity_candidates(kind)
+            base = fu.opportunity_candidates(kind, include_eu=inc_eu)
             universe = list(dict.fromkeys(base + extra + (watchlist if inc_wl else [])))
             return fu.scan_opportunities(universe, kind)
 
@@ -287,7 +291,7 @@ if section.startswith("💎"):
             fu.record_observations(full_long, "long")
             promoted = fu.auto_promote_opportunities(min_days=3)
         if promoted:
-            st.success("🤖 **Aggiunte da sole al Monitoraggio** (convenienza in salita da ≥3 giorni): "
+            st.success("🤖 **Aggiunte da sole al Monitoraggio** (convenienza in salita negli ultimi 3 giorni): "
                        + ", ".join(f"**{t}**" for t in promoted) + ". Le trovi nella sezione «📌 Monitoraggio».")
 
         if auto_promote_on:
@@ -297,17 +301,20 @@ if section.startswith("💎"):
             with st.expander(f"🤖 Sistema autonomo — {len(building)} occasion"
                              f"{'e' if len(building)==1 else 'i'} in osservazione (vicine alla promozione)",
                              expanded=bool(building)):
-                st.caption("Il sistema osserva l'evoluzione di **tutte** le occasioni. Quando la convenienza di un titolo "
-                           "sale per **3 giorni consecutivi** lo aggiunge da solo al Monitoraggio. Qui vedi chi sta migliorando.")
+                st.caption("Il sistema osserva l'evoluzione di **tutte** le occasioni. Promuove al Monitoraggio quelle la cui "
+                           "convenienza, in **3 giorni**, è **salita complessivamente** (almeno ~5 punti) **senza cali bruschi** "
+                           "nel mezzo (le piccole oscillazioni sono tollerate). Qui vedi chi sta migliorando.")
                 if building:
                     sdf = pd.DataFrame([{
                         "Ticker": s["ticker"], "Tipo": "⚡ Breve" if s["kind"] == "short" else "🏛️ Lungo",
-                        "Azienda": s["name"], "Giorni in salita": s["run"],
-                        "Convenienza": s["last_conv"], "Giorni osservati": s["days"],
+                        "Azienda": s["name"], "Giorni in tendenza": s["run"],
+                        "Salita 3g": s.get("net3"), "Convenienza": s["last_conv"], "Giorni osservati": s["days"],
                     } for s in building]).set_index("Ticker")
                     st.dataframe(sdf, use_container_width=True, column_config={
-                        "Giorni in salita": st.column_config.NumberColumn("📈 Giorni in salita", format="%d ⁄ 3",
-                            help="Giorni consecutivi con convenienza non calante. A 3 scatta la promozione automatica."),
+                        "Giorni in tendenza": st.column_config.NumberColumn("📈 Giorni in tendenza", format="%d",
+                            help="Giorni consecutivi senza cali bruschi della convenienza (le piccole oscillazioni non spezzano la striscia)."),
+                        "Salita 3g": st.column_config.NumberColumn("⬆️ Salita 3g", format="%+.0f",
+                            help="Variazione netta della convenienza negli ultimi 3 giorni. A +5 o più (senza crolli nel mezzo) scatta la promozione."),
                         "Convenienza": st.column_config.ProgressColumn("🏅 Convenienza", min_value=0, max_value=100, format="%d"),
                     })
                 else:
@@ -584,6 +591,45 @@ if section.startswith("📌"):
     st.warning("⚠️ **Non è un consiglio di acquisto.** È uno strumento per seguire un'idea per più giorni con calma. "
                "La storia si costruisce in avanti: un punto per ogni giorno in cui apri l'app.")
 
+    # --- 📊 Scheda voti del sistema (track record delle promozioni automatiche) ---
+    if not fu.cloud_mode():
+        fu.update_track_record()        # in locale aggiorna i rendimenti reali (sul cloud lo fa il job)
+    rstats = fu.track_record_stats()
+    if rstats["total"]:
+        with st.expander(f"📊 Scheda voti del sistema — {rstats['total']} promozioni automatiche finora",
+                         expanded=False):
+            st.caption("Quanto hanno **reso davvero** le occasioni promosse dal sistema: una misura onesta dell'efficacia. "
+                       "Non è una garanzia sul futuro, ma ti dice quanto fidarti dei segnali.")
+            rc1, rc2, rc3 = st.columns(3)
+            for col, key, label in [(rc1, "now", "Ad oggi"), (rc2, "d7", "Dopo 7 giorni"),
+                                    (rc3, "d30", "Dopo 30 giorni")]:
+                s = rstats[key]
+                with col:
+                    if s:
+                        st.metric(f"{label} — rendimento medio", f"{s['avg']:+.1f}%")
+                        st.caption(f"🎯 In positivo **{s['hit']}%** ({s['n']} casi) · "
+                                   f"migliore {s['best']:+.1f}% · peggiore {s['worst']:+.1f}%")
+                    else:
+                        st.metric(f"{label} — rendimento medio", "—")
+                        st.caption("Servono più giorni di dati.")
+            recs = fu.load_track_record()
+            if recs:
+                dfr = pd.DataFrame([{
+                    "Ticker": r.get("ticker"), "Tipo": "⚡ Breve" if r.get("kind") == "short" else "🏛️ Lungo",
+                    "Promossa il": r.get("date"), "Conv. iniziale": r.get("conv"),
+                    "Oggi": r.get("ret_now"), "Dopo 7g": r.get("ret_7d"), "Dopo 30g": r.get("ret_30d"),
+                } for r in reversed(recs)]).set_index("Ticker")
+                st.dataframe(dfr, use_container_width=True, column_config={
+                    "Conv. iniziale": st.column_config.NumberColumn("Conv. iniziale", format="%d"),
+                    "Oggi": st.column_config.NumberColumn("Oggi", format="%+.1f%%",
+                        help="Rendimento dal prezzo di promozione a oggi."),
+                    "Dopo 7g": st.column_config.NumberColumn("Dopo 7g", format="%+.1f%%"),
+                    "Dopo 30g": st.column_config.NumberColumn("Dopo 30g", format="%+.1f%%"),
+                })
+            st.caption("Le occasioni promosse vengono registrate col prezzo di partenza; il rendimento a 7 e 30 giorni "
+                       "si fissa al raggiungimento di quei traguardi. Stima sui dati reali, non una promessa.")
+        st.markdown("---")
+
     tracked = fu.load_tracking()
     if not tracked:
         st.info("Non stai ancora monitorando nessuna occasione.\n\n"
@@ -760,6 +806,89 @@ if section.startswith("📌"):
         st.markdown("## 🏛️ Lungo periodo (qualità in saldo)")
         for tk, e in long_items:
             render_tracked(tk, e)
+    st.stop()
+
+# ===========================================================================
+# SEZIONE: PORTAFOGLIO — acquisti reali con guadagno/perdita
+# ===========================================================================
+if section.startswith("💰"):
+    st.title("💰 Il mio portafoglio")
+    st.caption("Registra gli acquisti che hai fatto davvero (titolo, quantità, prezzo) e vedi in tempo reale "
+               "il guadagno/perdita. Puoi impostare un **bersaglio** e uno **stop**: l'app ti avvisa quando vengono toccati.")
+    st.warning("⚠️ Strumento di monitoraggio personale, **non** è collegato a nessun conto o broker: "
+               "i dati li inserisci tu a mano. Non è consulenza finanziaria.")
+
+    with st.expander("➕ Aggiungi un acquisto", expanded=not fu.load_portfolio()):
+        with st.form("add_pos", clear_on_submit=True):
+            pf1, pf2, pf3 = st.columns(3)
+            p_tk = pf1.text_input("Ticker", placeholder="es. AAPL, ENI.MI").strip().upper()
+            p_qty = pf2.number_input("Quantità", min_value=0.0, step=1.0, value=0.0)
+            p_buy = pf3.number_input("Prezzo di acquisto", min_value=0.0, step=0.01, value=0.0, format="%.2f")
+            pf4, pf5, pf6 = st.columns(3)
+            p_date = pf4.date_input("Data acquisto", value=datetime.date.today(), max_value=datetime.date.today())
+            p_tgt = pf5.number_input("Bersaglio (opzionale)", min_value=0.0, step=0.01, value=0.0, format="%.2f")
+            p_stp = pf6.number_input("Stop (opzionale)", min_value=0.0, step=0.01, value=0.0, format="%.2f")
+            p_note = st.text_input("Nota (opzionale)", placeholder="es. lungo termine, dividendo")
+            submitted = st.form_submit_button("➕ Aggiungi al portafoglio", use_container_width=True)
+            if submitted:
+                if p_tk and p_qty > 0 and p_buy > 0:
+                    fu.add_position(p_tk, p_qty, p_buy, p_date.isoformat(),
+                                    target=(p_tgt or None), stop=(p_stp or None), note=p_note)
+                    st.success(f"Aggiunto {p_qty:g} × {p_tk} a {p_buy:.2f}.")
+                    st.rerun()
+                else:
+                    st.error("Inserisci almeno **ticker**, **quantità** e **prezzo di acquisto** (maggiori di zero).")
+
+    with st.spinner("Calcolo il valore attuale…"):
+        rows, totals = fu.portfolio_view()
+
+    if not rows:
+        st.info("Portafoglio vuoto. Aggiungi il tuo primo acquisto qui sopra.")
+        st.stop()
+
+    # --- Totali ---
+    mt1, mt2, mt3 = st.columns(3)
+    mt1.metric("Investito", f"{totals['cost']:,.2f}")
+    if totals["value"] is not None:
+        mt2.metric("Valore attuale", f"{totals['value']:,.2f}")
+        delta = f"{totals['pnl']:+,.2f} ({totals['pnl_pct']:+.1f}%)" if totals["pnl_pct"] is not None else None
+        mt3.metric("Guadagno / Perdita", f"{totals['pnl']:+,.2f}", delta)
+    else:
+        mt2.metric("Valore attuale", "n/d")
+        mt3.metric("Guadagno / Perdita", "n/d")
+    st.caption("Valori nella valuta di ciascun titolo (non convertiti): per un totale corretto, confronta titoli nella stessa valuta.")
+
+    # --- Avvisi target/stop ---
+    alerts = [r for r in rows if r["status"]]
+    for r in alerts:
+        if "target" in r["status"]:
+            st.success(f"🎯 **{r['ticker']}** ha raggiunto il bersaglio ({r['target']:.2f}) — prezzo {r['price']:.2f}. Valuta se vendere.")
+        else:
+            st.error(f"🛑 **{r['ticker']}** ha toccato lo stop ({r['stop']:.2f}) — prezzo {r['price']:.2f}. Valuta se uscire.")
+
+    # --- Tabella posizioni ---
+    dfp = pd.DataFrame([{
+        "Ticker": r["ticker"], "Q.tà": r["qty"], "Acquisto": r["buy_price"], "Prezzo ora": r["price"],
+        "Valore": r["value"], "G/P": r["pnl"], "G/P %": r["pnl_pct"], "Stato": r["status"] or "—",
+    } for r in rows]).set_index("Ticker")
+    st.dataframe(dfp, use_container_width=True, column_config={
+        "Q.tà": st.column_config.NumberColumn("Q.tà", format="%g"),
+        "Acquisto": st.column_config.NumberColumn("Acquisto", format="%.2f"),
+        "Prezzo ora": st.column_config.NumberColumn("Prezzo ora", format="%.2f"),
+        "Valore": st.column_config.NumberColumn("Valore", format="%.2f"),
+        "G/P": st.column_config.NumberColumn("Guadagno/Perdita", format="%+.2f"),
+        "G/P %": st.column_config.NumberColumn("G/P %", format="%+.1f%%"),
+    })
+
+    # --- Rimozione posizioni ---
+    st.markdown("###### Gestisci le posizioni")
+    for r in rows:
+        rc1, rc2 = st.columns([5, 1])
+        gp = f"{r['pnl']:+,.2f} ({r['pnl_pct']:+.1f}%)" if r["pnl_pct"] is not None else "n/d"
+        rc1.markdown(f"**{r['ticker']}** · {r['qty']:g} × {r['buy_price']:.2f} (dal {r['date']}) · G/P: {gp}")
+        if rc2.button("🗑️ Togli", key=f"rmpos_{r['index']}", use_container_width=True):
+            fu.remove_position(r["index"])
+            st.rerun()
     st.stop()
 
 # ===========================================================================
