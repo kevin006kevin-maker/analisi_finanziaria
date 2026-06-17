@@ -1324,11 +1324,14 @@ def _telegram_cfg():
             _cfg("telegram_chat_id", "TELEGRAM_CHAT_ID", ""))
 
 
-def send_telegram(text: str) -> bool:
-    """Invia un messaggio Telegram. Ritorna True se inviato. No-op se non configurato."""
+def send_telegram_verbose(text: str):
+    """Invia un messaggio Telegram. Ritorna (ok, dettaglio) per la diagnosi.
+    Il dettaglio NON contiene mai il token (sicuro da scrivere nei log)."""
     token, chat_id = _telegram_cfg()
-    if not (token and chat_id):
-        return False
+    if not token:
+        return False, "token mancante (Secret TELEGRAM_BOT_TOKEN non impostato)"
+    if not chat_id:
+        return False, "chat_id mancante (Secret TELEGRAM_CHAT_ID non impostato)"
     import requests
     try:
         r = requests.post(
@@ -1337,9 +1340,21 @@ def send_telegram(text: str) -> bool:
                   "disable_web_page_preview": True},
             timeout=12,
         )
-        return r.status_code == 200
-    except Exception:
-        return False
+        try:
+            j = r.json()
+        except Exception:
+            j = {}
+        if r.status_code == 200 and j.get("ok"):
+            return True, "inviato correttamente"
+        return False, f"HTTP {r.status_code}: {j.get('description', (r.text or '')[:140])}"
+    except Exception as e:
+        return False, f"eccezione di rete: {e!r}"
+
+
+def send_telegram(text: str) -> bool:
+    """Invia un messaggio Telegram. Ritorna True se inviato. No-op se non configurato."""
+    ok, _ = send_telegram_verbose(text)
+    return ok
 
 
 # ---------------------------------------------------------------------------
