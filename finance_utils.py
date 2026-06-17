@@ -1762,6 +1762,29 @@ def track_opportunity(ticker: str, kind: str, snapshot: dict = None, note: str =
     return data
 
 
+def track_many(picks) -> list:
+    """Segue più occasioni con UNA sola scrittura (un solo commit sul cloud), così
+    si evita che salvataggi successivi si sovrascrivano. picks = lista di (ticker, kind).
+    Ritorna i ticker effettivamente aggiunti (nuovi)."""
+    data = load_tracking()
+    today = _today_iso()
+    added = []
+    for tk, kind in picks:
+        tk = tk.upper()
+        is_new = tk not in data
+        if is_new:
+            data[tk] = {"kind": kind, "added": today, "note": "", "name": tk, "snapshots": []}
+        else:
+            data[tk]["kind"] = kind
+        snap = opportunity_snapshot(tk, kind)
+        if snap:
+            _append_snapshot(data[tk], today, snap)
+        if is_new:
+            added.append(tk)
+    save_tracking(data)
+    return added
+
+
 def untrack_opportunity(ticker: str) -> dict:
     data = load_tracking()
     data.pop(ticker.upper(), None)
