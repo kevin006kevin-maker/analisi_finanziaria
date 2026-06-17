@@ -23,44 +23,85 @@ import finance_utils as fu
 
 st.set_page_config(page_title="Analisi Finanziaria", page_icon="📈", layout="wide")
 
-# --- Stile: tema scuro "antracite" + ritocchi per un aspetto più curato ---
+# --- Stile: aspetto sobrio e professionale (tipografia Inter, palette scura raffinata) ---
 st.markdown("""
 <style>
-.stApp { background: #181a1d; }
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+html, body, [class*="css"], .stApp, button, input, textarea, select {
+    font-family: 'Inter', -apple-system, "Segoe UI", system-ui, sans-serif;
+}
+.stApp { background: #13151a; color: #e8eaed; }
+
+/* Rimuove gli elementi "da demo" di Streamlit per un aspetto da prodotto */
+#MainMenu { visibility: hidden; }
+[data-testid="stToolbar"] { display: none; }
+[data-testid="stDecoration"] { display: none; }
+footer { visibility: hidden; }
+header[data-testid="stHeader"] { background: transparent; }
+.block-container { padding-top: 2.4rem; max-width: 1250px; }
+
+/* Sidebar */
 section[data-testid="stSidebar"] {
-    background: #1c1f24;
-    border-right: 1px solid rgba(255,255,255,0.07);
+    background: #101216;
+    border-right: 1px solid rgba(255,255,255,0.06);
 }
-/* Metriche come schede */
+section[data-testid="stSidebar"] .stRadio [role="radiogroup"] { gap: 2px; }
+
+/* Tipografia titoli: sobria, non gridata */
+h1 { font-weight: 700; font-size: 1.85rem; letter-spacing: -0.022em; }
+h2 { font-weight: 600; letter-spacing: -0.012em; margin-top: 0.4rem; }
+h3 { font-weight: 600; letter-spacing: -0.01em; color: #f2f4f7; }
+h4, h5, h6 { font-weight: 600; color: #cdd3db; }
+
+/* Metriche come schede eleganti */
 [data-testid="stMetric"] {
-    background: #23262c;
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 12px;
-    padding: 12px 16px;
+    background: linear-gradient(180deg, #1b1e25, #16181d);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    padding: 14px 18px;
 }
-[data-testid="stMetricValue"] { font-weight: 700; }
-/* Contenitori con bordo ed expander più morbidi */
-div[data-testid="stVerticalBlockBorderWrapper"] { border-radius: 14px; }
+[data-testid="stMetricLabel"] { opacity: 0.72; font-weight: 500; }
+[data-testid="stMetricValue"] { font-weight: 700; letter-spacing: -0.01em; }
+
+/* Contenitori, expander, tabelle */
+div[data-testid="stVerticalBlockBorderWrapper"] { border-radius: 16px; }
 [data-testid="stExpander"] {
     border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.07);
+    background: #15171c;
 }
-[data-testid="stExpander"] summary:hover { color: #4c9aff; }
-/* Bottoni arrotondati */
+[data-testid="stExpander"] summary { font-weight: 500; }
+[data-testid="stExpander"] summary:hover { color: #6ea8fe; }
+[data-testid="stDataFrame"] {
+    border-radius: 12px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.06);
+}
+
+/* Bottoni raffinati */
 .stButton > button, .stDownloadButton > button, .stFormSubmitButton > button {
-    border-radius: 10px;
+    border-radius: 9px;
     border: 1px solid rgba(255,255,255,0.12);
+    background: #1b1e24;
+    font-weight: 500;
+    transition: all .15s ease;
 }
-.stButton > button:hover { border-color: #4c9aff; color: #4c9aff; }
-/* Tabelle arrotondate */
-[data-testid="stDataFrame"] { border-radius: 10px; overflow: hidden; }
-/* Titoli un filo più compatti */
-h1, h2, h3 { letter-spacing: -0.01em; }
-h1 { font-weight: 800; }
-/* Radio/tab leggermente più ariosi */
-.stTabs [data-baseweb="tab-list"] { gap: 4px; }
-/* Link nel colore accento */
-a, a:visited { color: #4c9aff; }
+.stButton > button:hover, .stDownloadButton > button:hover {
+    border-color: #6ea8fe; color: #cfe0ff; background: #1f2530;
+}
+.stButton > button[kind="primary"], .stFormSubmitButton > button {
+    background: #2f6fed; border-color: #2f6fed; color: #fff;
+}
+.stButton > button[kind="primary"]:hover { background: #2a63d4; border-color: #2a63d4; color: #fff; }
+
+/* Tab e link */
+.stTabs [data-baseweb="tab-list"] { gap: 2px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+.stTabs [data-baseweb="tab"] { font-weight: 500; }
+a, a:visited { color: #6ea8fe; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Didascalie un filo più tenui */
+[data-testid="stCaptionContainer"] { opacity: 0.82; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -142,7 +183,7 @@ def badge(label, value, judgement, help_text="", reason=""):
 # ---------------------------------------------------------------------------
 # SIDEBAR
 # ---------------------------------------------------------------------------
-st.sidebar.title("📈 Analisi Finanziaria")
+st.sidebar.title("Analisi Finanziaria")
 
 # Cambio sezione programmatico (es. bottone "📊 Analizza" dal Monitoraggio):
 # va impostato PRIMA che il widget radio venga creato, altrimenti Streamlit
@@ -152,8 +193,8 @@ if "_goto_section" in st.session_state:
 
 # --- Sezione principale ---
 section = st.sidebar.radio(
-    "Sezione", ["📊 Analisi di un titolo", "💎 Occasioni di mercato",
-                "📌 Monitoraggio", "💰 Portafoglio", "📰 Attualità"], key="section_radio",
+    "Sezione", ["Analisi di un titolo", "Occasioni di mercato",
+                "Monitoraggio", "Portafoglio", "Attualità"], key="section_radio",
     help="«Analisi di un titolo» studia una singola azienda/ETF. «Occasioni» scansiona il mercato per cali interessanti. "
          "«Monitoraggio» segue nel tempo le occasioni che hai scelto. «Portafoglio» registra i tuoi acquisti veri e mostra il guadagno/perdita. "
          "«Attualità» raccoglie le classifiche di mercato (rialzi/ribassi/più scambiati) e le notizie recenti divise per azienda/ETF.",
@@ -242,7 +283,7 @@ else:
 tracked = fu.load_tracking()
 if tracked:
     st.sidebar.caption(f"📌 Stai monitorando **{len(tracked)}** occasion{'e' if len(tracked)==1 else 'i'} "
-                       "(vedi la sezione «📌 Monitoraggio»).")
+                       "(vedi la sezione «Monitoraggio»).")
 
 st.sidebar.markdown("---")
 st.sidebar.markdown(
@@ -261,8 +302,8 @@ st.sidebar.caption(
 # ===========================================================================
 # SEZIONE: OCCASIONI DI MERCATO (pagina a sé, indipendente dal titolo)
 # ===========================================================================
-if section.startswith("💎"):
-    st.title("💎 Occasioni di mercato")
+if section.startswith("Occasioni"):
+    st.title("Occasioni di mercato")
     st.warning("⚠️ **Non sono previsioni né consigli.** Sono titoli/ETF in calo che mostrano segnali tipici "
                "da potenziale rimbalzo o sconto. Un calo può anche **continuare** ('coltello che cade'): "
                "usa questi spunti solo come punto di partenza per approfondire.")
@@ -294,7 +335,7 @@ if section.startswith("💎"):
         cloud = fu.cloud_mode()
         if cloud:
             st.caption("🤖 **Sistema autonomo attivo sul server**: le occasioni vengono aggiornate ogni ~15 minuti "
-                       "anche a PC spento, e le migliori (in salita da 3 giorni) finiscono da sole nel «📌 Monitoraggio». "
+                       "anche a PC spento, e le migliori (in salita da 3 giorni) finiscono da sole nel «Monitoraggio». "
                        "Qui vedi sempre l'ultimo aggiornamento del server.")
             auto_promote_on = True
         else:
@@ -302,7 +343,7 @@ if section.startswith("💎"):
                 "🤖 Salva da solo le occasioni che migliorano per 3 giorni di fila", value=True,
                 key="auto_promote",
                 help="A ogni aggiornamento il sistema registra l'evoluzione di tutte le occasioni. Quando la convenienza "
-                     "di un titolo sale per 3 giorni consecutivi, lo aggiunge da solo al «📌 Monitoraggio». "
+                     "di un titolo sale per 3 giorni consecutivi, lo aggiunge da solo al «Monitoraggio». "
                      "Nota (modalità locale): il controllo avviene mentre questa pagina è aperta; i 3 giorni si contano "
                      "sui giorni in cui apri l'app. Per renderlo automatico anche a PC spento vedi README_AUTONOMIA.md.")
 
@@ -333,7 +374,7 @@ if section.startswith("💎"):
             promoted = fu.auto_promote_opportunities(min_days=3)
         if promoted:
             st.success("🤖 **Aggiunte da sole al Monitoraggio** (convenienza in salita negli ultimi 3 giorni): "
-                       + ", ".join(f"**{t}**" for t in promoted) + ". Le trovi nella sezione «📌 Monitoraggio».")
+                       + ", ".join(f"**{t}**" for t in promoted) + ". Le trovi nella sezione «Monitoraggio».")
 
         if auto_promote_on:
             status = [s for s in fu.observation_status() if s["run"] >= 1]
@@ -370,7 +411,7 @@ if section.startswith("💎"):
             return d.sort_values("Convenienza", ascending=False).head(n)
 
         with st.container(border=True):
-            st.markdown("### 🏆 Le migliori da seguire")
+            st.markdown("### Le migliori da seguire")
             st.caption("Selezione automatica delle occasioni con la **convenienza più alta** e affidabilità almeno 🟡 media, "
                        "di breve e di lungo periodo. È il punto di partenza più sensato: seguile qualche giorno nel "
                        "**📌 Monitoraggio** e compra quelle il cui segnale si **rafforza** (non quelle che continuano a scendere).")
@@ -404,10 +445,10 @@ if section.startswith("💎"):
                         fu.track_many(new_picks)   # un'unica scrittura: le salva tutte (anche sul cloud)
                         st.success(f"📌 Aggiunte {len(new_picks)} occasioni al Monitoraggio.")
                         st.rerun()
-                    bcol2.caption("Le aggiunge tutte alla sezione «📌 Monitoraggio» con lo scatto di oggi. "
+                    bcol2.caption("Le aggiunge tutte alla sezione «Monitoraggio» con lo scatto di oggi. "
                                   "Potrai sempre toglierne qualcuna lì.")
                 else:
-                    bcol1.caption("✅ Le stai già seguendo tutte (vedi «📌 Monitoraggio»).")
+                    bcol1.caption("✅ Le stai già seguendo tutte (vedi «Monitoraggio»).")
         st.markdown("---")
 
         def render_opps(df_full, kind, header, help_txt, cols_cfg):
@@ -463,7 +504,7 @@ if section.startswith("💎"):
                              height=min(60 + 38 * len(df_sub), 460), column_config=cols_cfg)
                 st.caption(f"📈 **Prob. salita** e 📉 **Rischio perdita** sono **stime statistiche** dai rendimenti "
                            f"storici (orizzonte {orizz}), **non previsioni**.")
-                st.markdown("###### 🔍 Approfondimenti — notizie recenti e perché")
+                st.markdown("###### Approfondimenti — notizie recenti e perché")
                 for tk, row in df_sub.head(5).iterrows():
                     pg, pl = row.get("Prob. salita"), row.get("Rischio perdita")
                     with st.expander(f"{tk} — {row['Nome']}   ·   💎 {int(row['Occasione'])}"):
@@ -530,7 +571,7 @@ if section.startswith("💎"):
                                   if is_tracked else "📌 Segui nel tempo")
                         if st.button(tlabel, key=f"track_{kind}_{tk}", use_container_width=True,
                                      help="Salva questa occasione per osservarne l'evoluzione nei prossimi giorni "
-                                          "(sezione «📌 Monitoraggio»)."):
+                                          "(sezione «Monitoraggio»)."):
                             snap = {
                                 "name": row["Nome"], "price": row["Prezzo"], "rsi": row.get("RSI"),
                                 "dd_high": row["% dal max"], "occasione": int(row["Occasione"]),
@@ -542,7 +583,7 @@ if section.startswith("💎"):
                                 "stop": (det or {}).get("stop_price"),
                             }
                             fu.track_opportunity(tk, kind, snapshot=snap)
-                            st.success(f"📌 {tk} aggiunto al monitoraggio. Lo trovi nella sezione «📌 Monitoraggio».")
+                            st.success(f"📌 {tk} aggiunto al monitoraggio. Lo trovi nella sezione «Monitoraggio».")
                             st.rerun()
                         news = fu.get_news(tk, 4)
                         if news:
@@ -624,9 +665,9 @@ if section.startswith("💎"):
 # ===========================================================================
 # SEZIONE: MONITORAGGIO — segui le occasioni nel tempo
 # ===========================================================================
-if section.startswith("📌"):
-    st.title("📌 Monitoraggio delle occasioni")
-    st.caption("Qui osservi nel tempo le occasioni che hai scelto di seguire (dalla sezione «💎 Occasioni di mercato»). "
+if section.startswith("Monitoraggio"):
+    st.title("Monitoraggio delle occasioni")
+    st.caption("Qui osservi nel tempo le occasioni che hai scelto di seguire (dalla sezione «Occasioni di mercato»). "
                "Ogni giorno che apri l'app viene registrato uno «scatto» dei valori: così vedi se il segnale si "
                "rafforza o si indebolisce **prima** di decidere se comprare.")
     st.warning("⚠️ **Non è un consiglio di acquisto.** È uno strumento per seguire un'idea per più giorni con calma. "
@@ -833,18 +874,18 @@ if section.startswith("📌"):
                 fu.set_tracking_note(tk, note)
             if nc2.button("📊 Analizza", key=f"goto_{tk}", use_container_width=True):
                 st.session_state["ticker"] = tk
-                st.session_state["_goto_section"] = "📊 Analisi di un titolo"
+                st.session_state["_goto_section"] = "Analisi di un titolo"
                 st.rerun()
 
     short_items = [(tk, e) for tk, e in tracked.items() if e.get("kind") == "short"]
     long_items = [(tk, e) for tk, e in tracked.items() if e.get("kind") != "short"]
 
     if short_items:
-        st.markdown("## ⚡ Breve periodo (rimbalzo)")
+        st.markdown("## Breve periodo (rimbalzo)")
         for tk, e in short_items:
             render_tracked(tk, e)
     if long_items:
-        st.markdown("## 🏛️ Lungo periodo (qualità in saldo)")
+        st.markdown("## Lungo periodo (qualità in saldo)")
         for tk, e in long_items:
             render_tracked(tk, e)
     st.stop()
@@ -852,8 +893,8 @@ if section.startswith("📌"):
 # ===========================================================================
 # SEZIONE: PORTAFOGLIO — acquisti reali con guadagno/perdita
 # ===========================================================================
-if section.startswith("💰"):
-    st.title("💰 Il mio portafoglio")
+if section.startswith("Portafoglio"):
+    st.title("Il mio portafoglio")
     st.caption("Registra gli acquisti che hai fatto davvero (titolo, quantità, prezzo) e vedi in tempo reale "
                "il guadagno/perdita. Puoi impostare un **bersaglio** e uno **stop**: l'app ti avvisa quando vengono toccati.")
     st.warning("⚠️ Strumento di monitoraggio personale, **non** è collegato a nessun conto o broker: "
@@ -939,7 +980,7 @@ if section.startswith("💰"):
     })
 
     # --- 🔔 Consigli di vendita ---
-    st.markdown("### 🔔 Consigli di vendita")
+    st.markdown("### Consigli di vendita")
     st.caption("Per ogni titolo il sistema valuta **se conviene incassare ora**, in base a bersaglio, stop, "
                "trailing stop (calo dal massimo toccato), ipercomprato e trend. **Non prevede il futuro** e non "
                "garantisce il massimo guadagno: è un aiuto a non farsi scappare un buon momento e a tagliare le perdite.")
@@ -980,8 +1021,8 @@ if section.startswith("💰"):
 # ===========================================================================
 # SEZIONE: ATTUALITÀ — notizie recenti divise per azienda/ETF
 # ===========================================================================
-if section.startswith("📰"):
-    st.title("📰 Attualità — notizie dei mercati")
+if section.startswith("Attualità"):
+    st.title("Attualità — notizie dei mercati")
     st.caption("Le notizie più recenti, divise per azienda/ETF. Una scheda per ciascun titolo più una per il mercato generale. "
                "Aggiungi i titoli che vuoi seguire; la traduzione in italiano segue l'interruttore nella barra laterale.")
 
@@ -1075,7 +1116,7 @@ if section.startswith("📰"):
 # CARICAMENTO DATI
 # ---------------------------------------------------------------------------
 if not ticker:
-    st.title("📈 Analisi Finanziaria")
+    st.title("Analisi Finanziaria")
     st.markdown(
         "Benvenuto! Questo strumento ti aiuta a **capire un'azienda, un ETF o un indice** "
         "e a valutarne la convenienza, con spiegazioni a parole semplici.\n\n"
