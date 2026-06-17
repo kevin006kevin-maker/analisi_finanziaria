@@ -94,6 +94,13 @@ def main():
     except Exception as e:
         log(f"Errore durante la promozione automatica: {e!r}")
 
+    # Aggiorna la "scheda voti": rendimento reale delle promozioni (ora / 7g / 30g)
+    try:
+        recs = fu.update_track_record()
+        log(f"Scheda voti aggiornata: {len(recs)} promozioni registrate.")
+    except Exception as e:
+        log(f"Errore aggiornamento scheda voti: {e!r}")
+
     # Diagnostica: quante occasioni sono 'in osservazione' (vicine alla promozione)
     try:
         status = [s for s in fu.observation_status() if s["run"] >= 2]
@@ -107,6 +114,8 @@ def main():
     # (se un giro non produce novità, ripubblica lo stato corrente senza perdere lo storico).
     fu.save_opp_watch(fu.load_opp_watch())
     fu.save_tracking(fu.load_tracking())
+    fu.save_track_record(fu.load_track_record())
+    fu.save_portfolio(fu.load_portfolio())   # preserva il portafoglio (lo gestisce l'app)
 
     log(f"Fatto. Totale occasioni viste: {total}.")
     return 0
