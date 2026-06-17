@@ -6,7 +6,12 @@ name: Aggiornamento autonomo occasioni
 on:
   schedule:
     - cron: "*/15 * * * *"   # ogni 15 minuti
-  workflow_dispatch: {}        # avvio manuale dalla scheda "Actions"
+  workflow_dispatch:           # avvio manuale dalla scheda "Actions"
+    inputs:
+      test_notifica:
+        description: "Invia solo una notifica Telegram di prova (per verificare la configurazione)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write              # serve per pubblicare i dati sul branch auto-data
@@ -38,9 +43,13 @@ jobs:
           DATA_REPO: ${{ github.repository }}
           DATA_BRANCH: auto-data
           DATA_LOCAL_FIRST: "1"
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TEST_NOTIFICA: ${{ inputs.test_notifica }}
         run: python auto_watch.py
 
       - name: Pubblica i dati sul branch auto-data
+        if: ${{ inputs.test_notifica != 'true' }}
         run: |
           git config user.name "auto-watch[bot]"
           git config user.email "auto-watch@users.noreply.github.com"
