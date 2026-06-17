@@ -1,0 +1,50 @@
+name: Aggiornamento autonomo occasioni
+
+# Gira sui server di GitHub (anche a PC spento). Il cron è "best-effort":
+# GitHub può ritardare o saltare qualche giro sotto carico, ma per seguire
+# l'evoluzione su più giorni va benissimo.
+on:
+  schedule:
+    - cron: "*/15 * * * *"   # ogni 15 minuti
+  workflow_dispatch: {}        # avvio manuale dalla scheda "Actions"
+
+permissions:
+  contents: write              # serve per pubblicare i dati sul branch auto-data
+
+concurrency:
+  group: auto-watch
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scarica il codice
+        uses: actions/checkout@v4
+
+      - name: Prepara Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Installa le dipendenze
+        run: pip install -r requirements.txt
+
+      - name: Aggiorna le occasioni (scan + osservazioni + promozione)
+        env:
+          FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
+          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+          DATA_REPO: ${{ github.repository }}
+          DATA_BRANCH: auto-data
+          DATA_LOCAL_FIRST: "1"
+        run: python auto_watch.py
+
+      - name: Pubblica i dati sul branch auto-data
+        run: |
+          git config user.name "auto-watch[bot]"
+          git config user.email "auto-watch@users.noreply.github.com"
+          git switch --orphan auto-data
+          git add -f opp_watch.json tracking.json
+          git commit -m "auto-update occasioni [skip ci]" || echo "Nessuna modifica da pubblicare"
+          git push -f origin auto-data
