@@ -1181,6 +1181,138 @@ def overall_verdict(info: dict, hist: pd.DataFrame, fund: bool = False, fdata: d
 
 
 # ---------------------------------------------------------------------------
+# DATA LAYER — persistenza condivisa tra l'app (anche da telefono) e il job
+# autonomo che gira su GitHub Actions ogni 15 min (anche a PC spento).
+#
+# Modello: il job scrive i dati (occasioni osservate + monitoraggio) su un
+# branch dedicato del repo (default "auto-data"); l'app li LEGGE da lì via URL
+# raw, così vede sempre l'ultimo aggiornamento ovunque. In locale (senza repo
+# configurato) tutto resta su file, come prima.
+#
+# Configurazione (st.secrets o variabili d'ambiente):
+#   data_repo   = "utente/repo"   (DATA_REPO)   → attiva la modalità cloud in lettura
+#   data_branch = "auto-data"     (DATA_BRANCH) → branch dei dati (default auto-data)
+#   github_token = "ghp_..."      (GITHUB_TOKEN)→ opzionale: permette all'app di
+#                                   salvare anche da telefono (commit via API)
+# ---------------------------------------------------------------------------
+
+APPDIR = os.path.dirname(os.path.abspath(__file__))
+
+
+def _cfg(secret_key, env_key, default=""):
+    try:
+        v = st.secrets[secret_key]
+        if v:
+            return v
+    except Exception:
+        pass
+    return os.environ.get(env_key, default)
+
+
+def _data_repo():
+    return _cfg("data_repo", "DATA_REPO", "")
+
+
+def _data_branch():
+    return _cfg("data_branch", "DATA_BRANCH", "auto-data")
+
+
+def _github_token():
+    return _cfg("github_token", "GITHUB_TOKEN", "")
+
+
+def cloud_mode() -> bool:
+    """True se è configurato un repo dati: l'app legge i dati aggiornati dal job
+    autonomo invece di calcolarli da sola."""
+    return bool(_data_repo())
+
+
+@st.cache_data(ttl=120, show_spinner=False)
+def _fetch_remote_json(url: str):
+    import requests
+    r = requests.get(url, timeout=10)
+    if r.status_code == 200:
+        return r.json()
+    return None
+
+
+def _read_local_json(name: str):
+    try:
+        with open(os.path.join(APPDIR, name), "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return None
+
+
+def read_data_json(name: str, default):
+    """Legge un file dati. Normalmente preferisce il branch remoto (cache 2 min)
+    con fallback locale. Nel job autonomo (env DATA_LOCAL_FIRST=1) preferisce il
+    file locale, così legge ciò che ha appena scritto (read-your-writes),
+    usando il remoto solo come storico iniziale."""
+    local_first = os.environ.get("DATA_LOCAL_FIRST") == "1"
+    if local_first:
+        d = _read_local_json(name)
+        if d is not None:
+            return d
+    repo = _data_repo()
+    if repo:
+        url = f"https://raw.githubusercontent.com/{repo}/{_data_branch()}/{name}"
+        try:
+            data = _fetch_remote_json(url)
+            if data is not None:
+                return data
+        except Exception:
+            pass
+    d = _read_local_json(name)
+    return d if d is not None else default
+
+
+def _commit_to_github(name: str, content_str: str) -> bool:
+    """Salva il file sul branch dati via API GitHub (serve un token con permesso
+    'contents'). Ritorna True se ok. Usato dall'app per rendere persistenti da
+    telefono le scelte manuali (segui/smetti)."""
+    repo, token, branch = _data_repo(), _github_token(), _data_branch()
+    if not (repo and token):
+        return False
+    import base64
+    import requests
+    api = f"https://api.github.com/repos/{repo}/contents/{name}"
+    headers = {"Authorization": f"Bearer {token}", "Accept": "application/vnd.github+json"}
+    try:
+        # SHA attuale del file sul branch (necessario per aggiornarlo)
+        sha = None
+        g = requests.get(f"{api}?ref={branch}", headers=headers, timeout=10)
+        if g.status_code == 200:
+            sha = g.json().get("sha")
+        body = {"message": f"app update {name}", "branch": branch,
+                "content": base64.b64encode(content_str.encode("utf-8")).decode("ascii")}
+        if sha:
+            body["sha"] = sha
+        p = requests.put(api, headers=headers, json=body, timeout=12)
+        return p.status_code in (200, 201)
+    except Exception:
+        return False
+
+
+def write_data_json(name: str, obj) -> None:
+    """Scrive un file dati: sempre su file locale; se in modalità cloud con token,
+    anche sul branch remoto (così la modifica persiste e si vede dal telefono)."""
+    content = json.dumps(obj, ensure_ascii=False, indent=0)
+    try:
+        with open(os.path.join(APPDIR, name), "w", encoding="utf-8") as f:
+            f.write(content)
+    except Exception:
+        pass
+    if _data_repo() and _github_token():
+        _commit_to_github(name, content)
+    # invalida la cache di lettura remota così la modifica si vede subito
+    try:
+        _fetch_remote_json.clear()
+    except Exception:
+        pass
+
+
+# ---------------------------------------------------------------------------
 # WATCHLIST (preferiti) — salvataggio locale su file JSON
 # ---------------------------------------------------------------------------
 
@@ -1537,6 +1669,7 @@ def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
 # ---------------------------------------------------------------------------
 
 TRACKING_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tracking.json")
+TRACKING_NAME = "tracking.json"
 
 
 def _today_iso() -> str:
@@ -1567,20 +1700,12 @@ def _jsonable(v):
 
 
 def load_tracking() -> dict:
-    try:
-        with open(TRACKING_FILE, "r", encoding="utf-8") as f:
-            data = json.load(f)
-            return data if isinstance(data, dict) else {}
-    except Exception:
-        return {}
+    data = read_data_json(TRACKING_NAME, {})
+    return data if isinstance(data, dict) else {}
 
 
 def save_tracking(data: dict) -> None:
-    try:
-        with open(TRACKING_FILE, "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False, indent=0)
-    except Exception:
-        pass
+    write_data_json(TRACKING_NAME, data)
 
 
 def opportunity_snapshot(ticker: str, kind: str) -> dict:
@@ -1690,6 +1815,105 @@ def tracking_trend(snapshots: list) -> dict:
         label, emoji, color = "Segnale stabile", "➡️", "#9a6700"
     return {"label": label, "emoji": emoji, "color": color,
             "dconv": dconv, "dprice": dprice, "days": len(snaps)}
+
+
+# ---------------------------------------------------------------------------
+# SISTEMA AUTONOMO — osserva l'evoluzione di TUTTE le occasioni e promuove
+# automaticamente quelle in miglioramento per più giorni consecutivi.
+# Registra un'osservazione/giorno per ogni occasione scansionata (non solo
+# quelle seguite); quando la convenienza sale per N giorni di fila, il titolo
+# viene aggiunto da solo al monitoraggio (tracking.json).
+# ---------------------------------------------------------------------------
+
+OPP_WATCH_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "opp_watch.json")
+OPP_WATCH_NAME = "opp_watch.json"
+
+
+def load_opp_watch() -> dict:
+    data = read_data_json(OPP_WATCH_NAME, {})
+    return data if isinstance(data, dict) else {}
+
+
+def save_opp_watch(data: dict) -> None:
+    write_data_json(OPP_WATCH_NAME, data)
+
+
+def record_observations(df, kind: str) -> None:
+    """Registra l'osservazione di oggi (max 1/giorno) per ogni occasione del df scansionato.
+    Le osservazioni sono separate per orizzonte (short/long) perché la convenienza si calcola
+    su orizzonti diversi. Mantiene ~10 giorni per titolo."""
+    if df is None or df.empty:
+        return
+    watch = load_opp_watch()
+    today = _today_iso()
+    for tk, r in df.iterrows():
+        key = f"{kind}:{tk}"
+        e = watch.setdefault(key, {"ticker": tk, "kind": kind, "name": tk, "obs": []})
+        e["ticker"], e["kind"] = tk, kind
+        e["name"] = r.get("Nome", tk)
+        rec = {"date": today, "conv": _jsonable(r.get("Convenienza")),
+               "price": _jsonable(r.get("Prezzo")), "occ": _jsonable(r.get("Occasione")),
+               "prob_gain": _jsonable(r.get("Prob. salita"))}
+        obs = [o for o in e.get("obs", []) if o.get("date") != today]
+        obs.append(rec)
+        obs.sort(key=lambda o: o.get("date", ""))
+        e["obs"] = obs[-10:]
+    save_opp_watch(watch)
+
+
+def _trailing_increasing_run(values: list) -> int:
+    """Numero di giorni finali in cui i valori sono **non decrescenti**, con aumento netto reale.
+    Es. [55,58,62] → 3 · [60,55,62] → 0 (ha avuto un calo) · [60,60,60] → 0 (piatto)."""
+    if len(values) < 2:
+        return 0
+    run = 1
+    for i in range(len(values) - 1, 0, -1):
+        if values[i] >= values[i - 1]:
+            run += 1
+        else:
+            break
+    return run if (run >= 2 and values[-1] > values[-run]) else 0
+
+
+def auto_promote_opportunities(min_days: int = 3) -> list:
+    """Promuove al monitoraggio le occasioni con convenienza in miglioramento da >= min_days giorni
+    consecutivi (e non già seguite). Ritorna la lista dei ticker appena aggiunti."""
+    watch = load_opp_watch()
+    tracked = load_tracking()
+    promoted = []
+    for key, e in watch.items():
+        tk = e.get("ticker", key.split(":")[-1])
+        if tk in tracked:
+            continue
+        convs = [o["conv"] for o in e.get("obs", []) if o.get("conv") is not None]
+        run = _trailing_increasing_run(convs)
+        if run >= min_days:
+            kind = e.get("kind", "short")
+            track_opportunity(tk, kind,
+                              note=f"🤖 Aggiunta automatica il {_today_iso()}: convenienza in miglioramento "
+                                   f"da {run} giorni consecutivi.")
+            tr = load_tracking()
+            if tk in tr:
+                tr[tk]["auto"] = True
+                save_tracking(tr)
+            promoted.append(tk)
+    return promoted
+
+
+def observation_status() -> list:
+    """Stato dell'osservazione autonoma: per ogni occasione, da quanti giorni migliora.
+    Ordinata dai più «vicini alla promozione». Utile per mostrare che il sistema sta lavorando."""
+    watch = load_opp_watch()
+    out = []
+    for key, e in watch.items():
+        convs = [o["conv"] for o in e.get("obs", []) if o.get("conv") is not None]
+        if not convs:
+            continue
+        out.append({"ticker": e.get("ticker", key.split(":")[-1]), "kind": e.get("kind", "short"),
+                    "name": e.get("name", ""), "run": _trailing_increasing_run(convs),
+                    "last_conv": convs[-1], "days": len(convs)})
+    out.sort(key=lambda x: (x["run"], x["last_conv"]), reverse=True)
+    return out
 
 
 # ---------------------------------------------------------------------------
