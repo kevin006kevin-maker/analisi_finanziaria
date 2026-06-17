@@ -247,6 +247,59 @@ if section.startswith("💎"):
 
         mkt_1m = fu.market_perf_1m()
 
+        # --- 🏆 Le migliori da seguire (shortlist automatica) ---
+        def _best_picks(kind, n=3):
+            base = fu.opportunity_candidates(kind)
+            universe = list(dict.fromkeys(base + extra + (watchlist if inc_wl else [])))
+            df = fu.scan_opportunities(universe, kind)
+            if df.empty:
+                return df
+            df = df[df["Affidabilità"].isin(["🟢 Alta", "🟡 Media"])]   # scarta le stime poco affidabili
+            return df.sort_values("Convenienza", ascending=False).head(n)
+
+        with st.container(border=True):
+            st.markdown("### 🏆 Le migliori da seguire")
+            st.caption("Selezione automatica delle occasioni con la **convenienza più alta** e affidabilità almeno 🟡 media, "
+                       "di breve e di lungo periodo. È il punto di partenza più sensato: seguile qualche giorno nel "
+                       "**📌 Monitoraggio** e compra quelle il cui segnale si **rafforza** (non quelle che continuano a scendere).")
+            with st.spinner("Seleziono le migliori…"):
+                best_s, best_l = _best_picks("short"), _best_picks("long")
+            picks, rows_view = [], []
+            for kind_b, label_b, dfb_src in [("short", "⚡ Breve", best_s), ("long", "🏛️ Lungo", best_l)]:
+                if dfb_src is None or dfb_src.empty:
+                    continue
+                for tk, r in dfb_src.iterrows():
+                    picks.append((tk, kind_b))
+                    rows_view.append({"Tipo": label_b, "Ticker": tk, "Azienda": r["Nome"],
+                                      "Conv.": int(r["Convenienza"]), "Prob. salita": r.get("Prob. salita"),
+                                      "Rischio": r.get("Rischio perdita"), "Affid.": r["Affidabilità"]})
+            if not rows_view:
+                st.info("Al momento nessuna occasione con affidabilità almeno media. Guarda comunque le tabelle qui sotto.")
+            else:
+                dfb = pd.DataFrame(rows_view).set_index("Ticker")
+                st.dataframe(dfb, use_container_width=True, column_config={
+                    "Conv.": st.column_config.ProgressColumn("🏅 Convenienza", min_value=0, max_value=100, format="%d",
+                        help="Più alto = prospettive migliori (fonde prob. salita, guadagno atteso, rischio e affidabilità)."),
+                    "Prob. salita": st.column_config.NumberColumn("📈 Prob. salita", format="%.0f%%"),
+                    "Rischio": st.column_config.NumberColumn("📉 Rischio perdita", format="%.0f%%"),
+                    "Affid.": st.column_config.TextColumn("📊 Affidabilità"),
+                })
+                already = fu.load_tracking()
+                new_picks = [(tk, k) for tk, k in picks if tk not in already]
+                bcol1, bcol2 = st.columns([1, 2])
+                if new_picks:
+                    if bcol1.button(f"📌 Segui tutte ({len(new_picks)})", use_container_width=True, type="primary",
+                                    key="follow_best"):
+                        for tk, k in new_picks:
+                            fu.track_opportunity(tk, k)
+                        st.success(f"📌 Aggiunte {len(new_picks)} occasioni al Monitoraggio.")
+                        st.rerun()
+                    bcol2.caption("Le aggiunge tutte alla sezione «📌 Monitoraggio» con lo scatto di oggi. "
+                                  "Potrai sempre toglierne qualcuna lì.")
+                else:
+                    bcol1.caption("✅ Le stai già seguendo tutte (vedi «📌 Monitoraggio»).")
+        st.markdown("---")
+
         def render_opps(kind, header, help_txt, cols_cfg):
             st.markdown(f"### {header}")
             st.caption(help_txt)
