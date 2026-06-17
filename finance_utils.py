@@ -1529,6 +1529,170 @@ def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
 
 
 # ---------------------------------------------------------------------------
+# MONITORAGGIO OCCASIONI NEL TEMPO
+# Salva i titoli "seguiti" e uno "scatto" (snapshot) dei loro valori per ogni
+# giorno: così si può osservarne l'evoluzione per più giorni prima di decidere.
+# Persistenza su file JSON (come la watchlist): affidabile in locale; sul cloud
+# il file è effimero (si azzera ai riavvii dell'istanza).
+# ---------------------------------------------------------------------------
+
+TRACKING_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tracking.json")
+
+
+def _today_iso() -> str:
+    """Data odierna (fuso Italia: il server cloud gira in UTC)."""
+    try:
+        from zoneinfo import ZoneInfo
+        return datetime.datetime.now(ZoneInfo("Europe/Rome")).date().isoformat()
+    except Exception:
+        return datetime.date.today().isoformat()
+
+
+def _jsonable(v):
+    """Converte numpy/NaN in tipi JSON puri (None se mancante)."""
+    if v is None:
+        return None
+    if isinstance(v, (np.floating, float)):
+        v = float(v)
+        return None if math.isnan(v) else round(v, 4)
+    if isinstance(v, (np.integer,)):
+        return int(v)
+    if isinstance(v, (int, str, bool)):
+        return v
+    try:
+        f = float(v)
+        return None if math.isnan(f) else round(f, 4)
+    except (TypeError, ValueError):
+        return v
+
+
+def load_tracking() -> dict:
+    try:
+        with open(TRACKING_FILE, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
+
+
+def save_tracking(data: dict) -> None:
+    try:
+        with open(TRACKING_FILE, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=0)
+    except Exception:
+        pass
+
+
+def opportunity_snapshot(ticker: str, kind: str) -> dict:
+    """Calcola uno «scatto» dei valori di un'occasione (ricalcolando con i dati freschi).
+    Usato dallo snapshot automatico giornaliero. Ritorna None se i dati non bastano."""
+    try:
+        r = opportunity_row(ticker, with_fundamentals=(kind == "long"))
+    except Exception:
+        r = None
+    if not r:
+        return None
+    if kind == "short":
+        sc = _short_score(r)
+        gain = r["rebound_pot"] if r["rebound_pot"] is not None else r["exp_ret"]
+    else:
+        sc = _long_score(r)
+        gain = r["exp_ret"]
+    occ = int(round(sc)) if (sc is not None and np.isfinite(sc)) else None
+    return {k: _jsonable(v) for k, v in {
+        "name": r["name"], "price": r["price"], "rsi": r["rsi"], "dd_high": r["dd_high"],
+        "occasione": occ, "convenienza": _convenience(r, gain),
+        "prob_gain": r["prob_gain"], "prob_loss": r["prob_loss"],
+        "exp_ret": r["exp_ret"], "gain": gain, "reliab": r["reliab"],
+        "target": r["target_price"], "stop": r["stop_price"],
+    }.items()}
+
+
+def _append_snapshot(entry: dict, day: str, snapshot: dict) -> None:
+    """Aggiunge lo snapshot del giorno (max 1/giorno: sostituisce quello odierno se c'è)."""
+    snaps = entry.setdefault("snapshots", [])
+    snap = {k: _jsonable(v) for k, v in snapshot.items()}
+    snap["date"] = day
+    snaps[:] = [s for s in snaps if s.get("date") != day]
+    snaps.append(snap)
+    snaps.sort(key=lambda s: s.get("date", ""))
+    if snapshot.get("name") and not entry.get("name"):
+        entry["name"] = snapshot["name"]
+
+
+def track_opportunity(ticker: str, kind: str, snapshot: dict = None, note: str = "") -> dict:
+    """Inizia a seguire un titolo (o aggiunge lo scatto di oggi se già seguito)."""
+    ticker = ticker.upper()
+    data = load_tracking()
+    if ticker not in data:
+        data[ticker] = {"kind": kind, "added": _today_iso(), "note": note,
+                        "name": (snapshot or {}).get("name", ticker), "snapshots": []}
+    else:
+        data[ticker]["kind"] = kind
+    if snapshot is None:
+        snapshot = opportunity_snapshot(ticker, kind)
+    if snapshot:
+        _append_snapshot(data[ticker], _today_iso(), snapshot)
+    save_tracking(data)
+    return data
+
+
+def untrack_opportunity(ticker: str) -> dict:
+    data = load_tracking()
+    data.pop(ticker.upper(), None)
+    save_tracking(data)
+    return data
+
+
+def set_tracking_note(ticker: str, note: str) -> None:
+    data = load_tracking()
+    if ticker.upper() in data:
+        data[ticker.upper()]["note"] = note
+        save_tracking(data)
+
+
+def auto_snapshot_tracked() -> dict:
+    """Registra lo scatto di oggi per ogni titolo seguito che non ne ha ancora uno (max 1/giorno).
+    Costruisce la storia in avanti man mano che si apre l'app nei giorni."""
+    data = load_tracking()
+    if not data:
+        return data
+    today = _today_iso()
+    changed = False
+    for tk, entry in data.items():
+        if any(s.get("date") == today for s in entry.get("snapshots", [])):
+            continue
+        snap = opportunity_snapshot(tk, entry.get("kind", "short"))
+        if snap:
+            _append_snapshot(entry, today, snap)
+            changed = True
+    if changed:
+        save_tracking(data)
+    return data
+
+
+def tracking_trend(snapshots: list) -> dict:
+    """Verdetto di tendenza dai punti di convenienza accumulati: rafforzamento/stabile/indebolimento.
+    Ritorna None se ci sono meno di 2 scatti utili."""
+    snaps = [s for s in snapshots if s.get("convenienza") is not None]
+    if len(snaps) < 2:
+        return None
+    first, last = snaps[0], snaps[-1]
+    dconv = last["convenienza"] - first["convenienza"]
+    dprice = None
+    if first.get("price") and last.get("price"):
+        dprice = (last["price"] / first["price"] - 1) * 100
+    if dconv >= 6:
+        label, emoji, color = "Segnale in rafforzamento", "📈", "#1a7f37"
+    elif dconv <= -6:
+        label, emoji, color = "Segnale in indebolimento", "📉", "#cf222e"
+    else:
+        label, emoji, color = "Segnale stabile", "➡️", "#9a6700"
+    return {"label": label, "emoji": emoji, "color": color,
+            "dconv": dconv, "dprice": dprice, "days": len(snaps)}
+
+
+# ---------------------------------------------------------------------------
 # INDICATORI TECNICI
 # ---------------------------------------------------------------------------
 
