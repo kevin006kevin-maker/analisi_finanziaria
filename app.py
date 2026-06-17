@@ -23,6 +23,47 @@ import finance_utils as fu
 
 st.set_page_config(page_title="Analisi Finanziaria", page_icon="📈", layout="wide")
 
+# --- Stile: tema scuro "antracite" + ritocchi per un aspetto più curato ---
+st.markdown("""
+<style>
+.stApp { background: #181a1d; }
+section[data-testid="stSidebar"] {
+    background: #1c1f24;
+    border-right: 1px solid rgba(255,255,255,0.07);
+}
+/* Metriche come schede */
+[data-testid="stMetric"] {
+    background: #23262c;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px;
+    padding: 12px 16px;
+}
+[data-testid="stMetricValue"] { font-weight: 700; }
+/* Contenitori con bordo ed expander più morbidi */
+div[data-testid="stVerticalBlockBorderWrapper"] { border-radius: 14px; }
+[data-testid="stExpander"] {
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.08);
+}
+[data-testid="stExpander"] summary:hover { color: #4c9aff; }
+/* Bottoni arrotondati */
+.stButton > button, .stDownloadButton > button, .stFormSubmitButton > button {
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.12);
+}
+.stButton > button:hover { border-color: #4c9aff; color: #4c9aff; }
+/* Tabelle arrotondate */
+[data-testid="stDataFrame"] { border-radius: 10px; overflow: hidden; }
+/* Titoli un filo più compatti */
+h1, h2, h3 { letter-spacing: -0.01em; }
+h1 { font-weight: 800; }
+/* Radio/tab leggermente più ariosi */
+.stTabs [data-baseweb="tab-list"] { gap: 4px; }
+/* Link nel colore accento */
+a, a:visited { color: #4c9aff; }
+</style>
+""", unsafe_allow_html=True)
+
 
 def _now_rome():
     """Ora locale italiana (il server cloud gira in UTC)."""
@@ -69,12 +110,12 @@ check_password()
 # ---------------------------------------------------------------------------
 # STILE GIUDIZI
 # ---------------------------------------------------------------------------
-COLORS = {"positivo": "#1a7f37", "negativo": "#cf222e", "neutro": "#9a6700", None: "#57606a"}
+COLORS = {"positivo": "#1a7f37", "negativo": "#cf222e", "neutro": "#9a6700", None: "#8b949e"}
 ICONS = {"positivo": "🟢", "negativo": "🔴", "neutro": "🟡", None: "⚪"}
 
 
 def badge(label, value, judgement, help_text="", reason=""):
-    color = COLORS.get(judgement, "#57606a")
+    color = COLORS.get(judgement, "#8b949e")
     icon = ICONS.get(judgement, "⚪")
     info_icon = ""
     if help_text:
@@ -86,11 +127,11 @@ def badge(label, value, judgement, help_text="", reason=""):
     reason_html = ""
     if reason:
         reason_html = (
-            f"<div style='font-size:0.82em;color:#666;margin-left:1.5em;margin-top:1px'>"
+            f"<div style='font-size:0.82em;color:#a9b1ba;margin-left:1.5em;margin-top:1px'>"
             f"↳ {reason}</div>"
         )
     st.markdown(
-        f"<div style='padding:6px 0;border-bottom:1px solid #eee;'>"
+        f"<div style='padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.12);'>"
         f"{icon} <b>{label}</b>{info_icon}: "
         f"<span style='color:{color};font-weight:600'>{value}</span>"
         f"{reason_html}</div>",
@@ -819,30 +860,37 @@ if section.startswith("💰"):
                "i dati li inserisci tu a mano. Non è consulenza finanziaria.")
 
     with st.expander("➕ Aggiungi un acquisto", expanded=not fu.load_portfolio()):
+        st.caption("Inserisci **quanti soldi** hai investito: il sistema ricava da solo prezzo attuale e quantità, "
+                   "e registra **data e ora**. 👉 Inseriscilo **subito dopo l'acquisto**, così il prezzo coincide col tuo.")
         with st.form("add_pos", clear_on_submit=True):
-            pf1, pf2, pf3 = st.columns(3)
-            p_tk = pf1.text_input("Ticker", placeholder="es. AAPL, ENI.MI").strip().upper()
-            p_qty = pf2.number_input("Quantità", min_value=0.0, step=1.0, value=0.0)
-            p_buy = pf3.number_input("Prezzo di acquisto", min_value=0.0, step=0.01, value=0.0, format="%.2f")
-            pf4, pf5, pf6 = st.columns(3)
-            p_date = pf4.date_input("Data acquisto", value=datetime.date.today(), max_value=datetime.date.today())
-            p_tgt = pf5.number_input("Bersaglio (opzionale)", min_value=0.0, step=0.01, value=0.0, format="%.2f")
-            p_stp = pf6.number_input("Stop (opzionale)", min_value=0.0, step=0.01, value=0.0, format="%.2f")
-            pf7, pf8 = st.columns([1, 2])
-            p_hor = pf7.radio("Orizzonte", ["⚡ Breve termine", "🏛️ Lungo termine"], index=1,
+            pf1, pf2, pf3 = st.columns([2, 2, 2])
+            p_tk = pf1.text_input("Titolo / marchio (ticker)", placeholder="es. AAPL, ENI.MI").strip().upper()
+            p_amt = pf2.number_input("Soldi investiti", min_value=0.0, step=50.0, value=0.0, format="%.2f",
+                                     help="L'importo che hai messo su questo titolo (nella valuta del titolo).")
+            p_hor = pf3.radio("Orizzonte", ["⚡ Breve termine", "🏛️ Lungo termine"], index=1,
                               help="«Breve» = scommessa di rimbalzo (incassare presto). «Lungo» = investimento da tenere; "
                                    "il consulente di vendita è più paziente.")
-            p_note = pf8.text_input("Nota (opzionale)", placeholder="es. rimbalzo, dividendo, lungo termine")
+            pf4, pf5, pf6 = st.columns(3)
+            p_tgt = pf4.number_input("Vendi a +% (opzionale)", min_value=0.0, step=1.0, value=0.0, format="%.0f",
+                                     help="Bersaglio di guadagno: es. 20 = avvisami a +20%.")
+            p_stp = pf5.number_input("Stop a −% (opzionale)", min_value=0.0, step=1.0, value=0.0, format="%.0f",
+                                     help="Limite di perdita: es. 10 = avvisami a −10%.")
+            p_note = pf6.text_input("Nota (opzionale)", placeholder="es. rimbalzo, dividendo")
             submitted = st.form_submit_button("➕ Aggiungi al portafoglio", use_container_width=True)
             if submitted:
-                if p_tk and p_qty > 0 and p_buy > 0:
-                    fu.add_position(p_tk, p_qty, p_buy, p_date.isoformat(),
-                                    target=(p_tgt or None), stop=(p_stp or None), note=p_note,
-                                    horizon=("breve" if p_hor.endswith("Breve termine") else "lungo"))
-                    st.success(f"Aggiunto {p_qty:g} × {p_tk} a {p_buy:.2f}.")
-                    st.rerun()
+                if p_tk and p_amt > 0:
+                    pos = fu.add_position_by_amount(
+                        p_tk, p_amt, target_pct=(p_tgt or None), stop_pct=(p_stp or None),
+                        note=p_note, horizon=("breve" if p_hor.endswith("Breve termine") else "lungo"))
+                    if pos:
+                        st.success(f"Aggiunto: **{p_amt:,.2f}** di **{p_tk}** a {pos['buy_price']:.2f} "
+                                   f"(≈ {pos['qty']:.4f} quote) il {pos['datetime']}.")
+                        st.rerun()
+                    else:
+                        st.error(f"Non riesco a recuperare il prezzo attuale di **{p_tk}**. "
+                                 "Controlla il ticker (Milano: aggiungi `.MI`) e riprova tra poco.")
                 else:
-                    st.error("Inserisci almeno **ticker**, **quantità** e **prezzo di acquisto** (maggiori di zero).")
+                    st.error("Inserisci almeno **titolo** e **soldi investiti** (maggiore di zero).")
 
     with st.spinner("Calcolo il valore attuale…"):
         rows, totals = fu.portfolio_view()
@@ -874,13 +922,16 @@ if section.startswith("💰"):
     # --- Tabella posizioni ---
     dfp = pd.DataFrame([{
         "Ticker": r["ticker"], "Orizz.": "⚡" if r["horizon"] == "breve" else "🏛️",
-        "Q.tà": r["qty"], "Acquisto": r["buy_price"], "Prezzo ora": r["price"],
-        "Valore": r["value"], "G/P": r["pnl"], "G/P %": r["pnl_pct"], "Stato": r["status"] or "—",
+        "Investito": r["amount"], "Quando": r["datetime"], "Prezzo acq.": r["buy_price"],
+        "Q.tà": r["qty"], "Prezzo ora": r["price"], "Valore": r["value"],
+        "G/P": r["pnl"], "G/P %": r["pnl_pct"], "Stato": r["status"] or "—",
     } for r in rows]).set_index("Ticker")
     st.dataframe(dfp, use_container_width=True, column_config={
         "Orizz.": st.column_config.TextColumn("Orizz.", help="⚡ breve termine · 🏛️ lungo termine"),
-        "Q.tà": st.column_config.NumberColumn("Q.tà", format="%g"),
-        "Acquisto": st.column_config.NumberColumn("Acquisto", format="%.2f"),
+        "Investito": st.column_config.NumberColumn("Investito", format="%.2f"),
+        "Quando": st.column_config.TextColumn("Acquisto (data e ora)"),
+        "Prezzo acq.": st.column_config.NumberColumn("Prezzo acq.", format="%.2f"),
+        "Q.tà": st.column_config.NumberColumn("Q.tà", format="%.4f"),
         "Prezzo ora": st.column_config.NumberColumn("Prezzo ora", format="%.2f"),
         "Valore": st.column_config.NumberColumn("Valore", format="%.2f"),
         "G/P": st.column_config.NumberColumn("Guadagno/Perdita", format="%+.2f"),
@@ -907,10 +958,10 @@ if section.startswith("💰"):
             f"<div style='padding:8px 12px;border-radius:8px;background:{colore}14;"
             f"border-left:5px solid {colore};margin-bottom:6px'>"
             f"<b style='color:{colore}'>{adv['emoji']} {p.get('ticker')} — {adv['label']}</b> "
-            f"<span style='color:#666'>· {hor} · guadagno attuale {gp}</span></div>",
+            f"<span style='color:#a9b1ba'>· {hor} · guadagno attuale {gp}</span></div>",
             unsafe_allow_html=True)
         for motivo in adv["reasons"]:
-            st.markdown(f"<div style='margin-left:14px;color:#444;font-size:0.9em'>↳ {motivo}</div>",
+            st.markdown(f"<div style='margin-left:14px;color:#c9d1d9;font-size:0.9em'>↳ {motivo}</div>",
                         unsafe_allow_html=True)
     st.caption("⚠️ Spunti automatici, non consigli di investimento. La decisione finale è sempre tua.")
 
@@ -919,7 +970,8 @@ if section.startswith("💰"):
     for r in rows:
         rc1, rc2 = st.columns([5, 1])
         gp = f"{r['pnl']:+,.2f} ({r['pnl_pct']:+.1f}%)" if r["pnl_pct"] is not None else "n/d"
-        rc1.markdown(f"**{r['ticker']}** · {r['qty']:g} × {r['buy_price']:.2f} (dal {r['date']}) · G/P: {gp}")
+        rc1.markdown(f"**{r['ticker']}** · {r['amount']:,.2f} investiti il {r['datetime']} "
+                     f"(≈ {r['qty']:.4f} quote a {r['buy_price']:.2f}) · G/P: {gp}")
         if rc2.button("🗑️ Togli", key=f"rmpos_{r['index']}", use_container_width=True):
             fu.remove_position(r["index"])
             st.rerun()
@@ -974,7 +1026,7 @@ if section.startswith("📰"):
                 st.markdown(f"📝 **In breve:** {brief}")
             else:
                 st.caption("Riassunto non disponibile — apri l'articolo per i dettagli.")
-            st.markdown("<hr style='margin:4px 0;border:none;border-top:1px solid #eee'>", unsafe_allow_html=True)
+            st.markdown("<hr style='margin:4px 0;border:none;border-top:1px solid rgba(255,255,255,0.12)'>", unsafe_allow_html=True)
 
     labels = ["🌍 Mercato generale"] + focus
     news_tabs = st.tabs(labels)
@@ -1129,7 +1181,7 @@ with vcol2:
         f"border-left:6px solid {verdict['color']}'>"
         f"<div style='font-size:1.25em;font-weight:700;color:{verdict['color']}'>"
         f"{verdict['emoji']} {verdict['label']}</div>"
-        f"<div style='margin-top:6px;color:#444'>{verdict['line']}</div></div>",
+        f"<div style='margin-top:6px;color:#c9d1d9'>{verdict['line']}</div></div>",
         unsafe_allow_html=True,
     )
     st.caption("Verdetto sintetico calcolato dai segnali analizzati. **Non è un consiglio di investimento.**")
@@ -1722,7 +1774,7 @@ with tab_news:
                 st.markdown(f"📝 **In breve:** {brief}")
             else:
                 st.caption("Riassunto non disponibile — apri l'articolo per i dettagli.")
-            st.markdown("<hr style='margin:4px 0;border:none;border-top:1px solid #eee'>", unsafe_allow_html=True)
+            st.markdown("<hr style='margin:4px 0;border:none;border-top:1px solid rgba(255,255,255,0.12)'>", unsafe_allow_html=True)
 
     show_news(ticker)
 
