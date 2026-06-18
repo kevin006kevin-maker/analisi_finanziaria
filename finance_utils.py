@@ -1507,11 +1507,50 @@ def opportunity_row(ticker: str, with_fundamentals: bool = True) -> dict:
     sma200 = last.get("SMA200", np.nan)
     above_sma200 = bool(price > sma200) if not np.isnan(sma200) else None
 
-    # Potenziale di rimbalzo e livelli operativi (bersaglio = media 50gg, stop = minimo recente)
+    # Potenziale di rimbalzo e bersaglio (ritorno alla media a 50 giorni)
     sma50 = last.get("SMA50", np.nan)
     rebound_pot = _nn((sma50 / price - 1) * 100) if (not np.isnan(sma50) and price) else None
     target_price = float(sma50) if not np.isnan(sma50) else None
-    stop_price = float(h["Close"].tail(20).min())   # minimo delle ultime ~4 settimane
+
+    # --- ATR e livelli operativi tarati sulla volatilità reale del titolo ---
+    # Stop = prezzo − k·ATR (anziché il minimo a 20gg, che ignora la volatilità):
+    # setup confrontabili e dimensionabili. Bersaglio = media 50gg (mean reversion).
+    atr_ser = atr(h, 14)
+    atr_val = float(atr_ser.iloc[-1]) if not np.isnan(atr_ser.iloc[-1]) else None
+    atr_pct = _nn(atr_val / price * 100) if (atr_val and price) else None
+    if atr_val and atr_val > 0:
+        stop_price = price - _ATR_STOP_K * atr_val
+    else:
+        stop_price = float(h["Close"].tail(20).min())     # ripiego se ATR non calcolabile
+    # Rapporto Rischio/Rendimento: reward = (bersaglio − prezzo), risk = (prezzo − stop)
+    rr = None
+    if target_price and stop_price and price > stop_price and target_price > price:
+        rr = round((target_price - price) / (price - stop_price), 2)
+
+    # --- Volume / RVOL: il dato più sottoutilizzato. Conferma capitolazione + ripartenza ---
+    rvol = avg_dollar_vol = None
+    if "Volume" in h.columns:
+        vol = pd.to_numeric(h["Volume"], errors="coerce")
+        avg20 = float(vol.tail(20).mean()) if vol.tail(20).notna().any() else None
+        last_vol = float(vol.iloc[-1]) if not np.isnan(vol.iloc[-1]) else None
+        if avg20 and avg20 > 0 and last_vol is not None:
+            rvol = round(last_vol / avg20, 2)
+        if avg20 and avg20 > 0:
+            avg_dollar_vol = avg20 * price                 # liquidità ~ $ scambiati al giorno
+
+    # --- Conferma d'inversione: non chiamarlo "rimbalzo" finché non ha GIRATO ---
+    prev = h.iloc[-2] if len(h) >= 2 else None
+    prev_close = float(prev["Close"]) if (prev is not None and not np.isnan(prev["Close"])) else None
+    green_day = bool(prev_close is not None and price > prev_close)     # primo giorno verde
+    prev_rsi = float(prev["RSI"]) if (prev is not None and not np.isnan(prev.get("RSI", np.nan))) else None
+    rsi_rising = bool(rsi is not None and prev_rsi is not None and rsi > prev_rsi)
+    prev_bb_low = float(prev["BB_low"]) if (prev is not None and not np.isnan(prev.get("BB_low", np.nan))) else None
+    back_in_bb = bool(prev_close is not None and prev_bb_low is not None
+                      and prev_close <= prev_bb_low and not np.isnan(bb_low) and price > bb_low)
+    reversal_confirmed = bool(green_day and (rsi_rising or back_in_bb))
+    # Crollo verticale ancora in caduta (coltello che cade): −15% in 5gg e oggi ancora giù
+    vertical_crash = bool(perf_5d is not None and perf_5d < -15 and not green_day)
+
     spark = [round(float(x), 4) for x in h["Close"].tail(60).tolist()]          # mini-grafico (prezzi)
     spark_dates = [str(d.date()) for d in h.index[-60:]]                         # date per l'asse x
 
@@ -1520,18 +1559,33 @@ def opportunity_row(ticker: str, with_fundamentals: bool = True) -> dict:
     prob_gain, prob_loss, exp_ret, reliab = _gain_loss_prob(
         h, horizon_days=(252 if with_fundamentals else 21))
 
+    # Fattori di rischio/qualità dalla serie storica + affidabilità continua
+    rfac = _risk_factors(h)
+    reliab_factor = _reliab_factor(rfac.get("sig_a"), rfac.get("n"))
+
     etf, fscore, name = False, None, ticker
+    sector, pe, pb, ps = None, None, None, None
     if with_fundamentals:                    # solo per il lungo periodo (qualità)
         info = get_info(ticker)
         etf = is_fund(info) or is_known_etf(ticker)   # riconosce gli ETF anche sul cloud
         fscore = _fundamental_score(info) if not etf else None
         name = (info.get("shortName") or info.get("longName") or ticker)[:34]
+        sector = info.get("sector")
+        pe = _nn(info.get("trailingPE"))
+        pb = _nn(info.get("priceToBook"))
+        ps = _nn(info.get("priceToSalesRatio"))
 
     return dict(ticker=ticker.upper(), name=name, price=price, rsi=rsi, dd_high=dd_high,
                 perf_1m=perf_1m, perf_5d=perf_5d, perf_1y=perf_1y, below_bb=below_bb,
                 above_sma200=above_sma200,
                 etf=etf, fscore=fscore, prob_gain=prob_gain, prob_loss=prob_loss,
-                exp_ret=exp_ret, reliab=reliab, rebound_pot=rebound_pot,
+                exp_ret=exp_ret, reliab=reliab, reliab_factor=reliab_factor, rebound_pot=rebound_pot,
+                sharpe=rfac.get("sharpe"), sortino=rfac.get("sortino"), ulcer=rfac.get("ulcer"),
+                maxdd=rfac.get("maxdd"), hist_z=rfac.get("hist_z"),
+                sector=sector, pe=pe, pb=pb, ps=ps,
+                atr=atr_val, atr_pct=atr_pct, rr=rr, rvol=rvol, avg_dollar_vol=avg_dollar_vol,
+                green_day=green_day, rsi_rising=rsi_rising, back_in_bb=back_in_bb,
+                reversal_confirmed=reversal_confirmed, vertical_crash=vertical_crash,
                 target_price=target_price, stop_price=stop_price,
                 spark=spark, spark_dates=spark_dates)
 
@@ -1566,7 +1620,58 @@ def _gain_loss_prob(h, horizon_days=21):
     return p_gain, p_loss, exp_ret, reliab
 
 
-def _short_score(r):
+def _risk_factors(h) -> dict:
+    """Fattori rischio/qualità dalla serie prezzi: Sharpe, Sortino, Ulcer index, max drawdown,
+    z-score del prezzo vs la propria storia (negativo = sotto la sua media = a sconto),
+    volatilità annua e n. osservazioni. Tutto dai dati già scaricati (nessuna chiamata extra)."""
+    out = {"sharpe": None, "sortino": None, "ulcer": None, "maxdd": None,
+           "hist_z": None, "sig_a": None, "n": 0}
+    try:
+        closes = h["Close"].dropna()
+        logret = np.log(closes / closes.shift(1)).replace([np.inf, -np.inf], np.nan).dropna()
+    except Exception:
+        return out
+    n = len(logret)
+    out["n"] = n
+    if n < 30:
+        return out
+    dmean, dstd = float(logret.mean()), float(logret.std())
+    out["sig_a"] = dstd * (252 ** 0.5)
+    rf_daily = 0.03 / 252.0                      # risk-free ~3% annuo
+    if dstd > 0:
+        out["sharpe"] = round(((dmean - rf_daily) * 252) / (dstd * (252 ** 0.5)), 2)
+    downside = logret[logret < 0]
+    dd_std = float(downside.std()) if len(downside) > 2 else dstd
+    if dd_std > 0:
+        out["sortino"] = round(((dmean - rf_daily) * 252) / (dd_std * (252 ** 0.5)), 2)
+    runmax = closes.cummax()
+    ddser = (closes / runmax - 1.0) * 100.0      # drawdown % (<= 0)
+    out["maxdd"] = round(float(ddser.min()), 1)
+    out["ulcer"] = round(float(((ddser ** 2).mean()) ** 0.5), 2)   # Ulcer Index (penalità dolore)
+    pmean, pstd = float(closes.mean()), float(closes.std())
+    if pstd > 0:
+        out["hist_z"] = round((float(closes.iloc[-1]) - pmean) / pstd, 2)
+    return out
+
+
+def _reliab_factor(sig_a, n) -> float:
+    """Affidabilità CONTINUA in [0.6, 1.0] (niente gradini con soglie dure): alta con bassa
+    volatilità e storico lungo. Smorza la convenienza verso 50 quando la stima è incerta."""
+    if sig_a is None or not n:
+        return 0.75
+    vol_score = max(0.5, min(1.0, 1.0 - max(0.0, sig_a - 0.30) / 0.90))   # vol 30%→1.0, 120%→0.5
+    hist_score = max(0.5, min(1.0, n / 250.0))
+    return round(max(0.6, min(1.0, vol_score * 0.7 + hist_score * 0.3)), 3)
+
+
+# --- Parametri operativi del breve periodo (rimbalzo / ipervenduto) ---
+_ATR_STOP_K = 2.0          # stop = prezzo − k·ATR (volatilità reale, non minimo a 20gg)
+_RR_MIN = 1.5              # scarta i setup con Rischio/Rendimento sotto questa soglia
+_MIN_PRICE = 3.0           # sotto questo prezzo l'RSI è inaffidabile (penny) → escluso
+_MIN_DOLLAR_VOL = 1_000_000  # liquidità minima (~$ scambiati/giorno) → niente illiquidi
+
+
+def _short_score(r, regime=1.0):
     if r["rsi"] is None:
         return None
     rsi = r["rsi"]
@@ -1591,7 +1696,25 @@ def _short_score(r):
     dd = r["dd_high"]
     if dd is not None:
         base += min(max(-dd, 0) / 60 * 25, 25)
-    return min(base, 100)
+
+    # --- Conferma d'inversione: premia chi ha GIÀ girato, penalizza chi sta ancora scendendo ---
+    if r.get("reversal_confirmed"):
+        base += 14                           # chiusura verde + RSI in risalita / rientro in Bollinger
+    elif r.get("green_day") is False:
+        base -= 18                           # ancora in calo oggi → non segnalare BUY (coltello che cade)
+    # --- Conferma di volume (capitolazione + ripartenza): il dato più sottoutilizzato ---
+    rv = r.get("rvol")
+    if rv is not None and r.get("green_day"):
+        if rv >= 1.5:
+            base += 10                       # forte volume sul giorno verde = ripartenza credibile
+        elif rv >= 1.2:
+            base += 5
+    # --- Crollo verticale ancora in caduta: declassa (non è un saldo, è una frana) ---
+    if r.get("vertical_crash"):
+        base -= 22
+
+    base = max(0.0, min(base, 100))
+    return base * float(regime)              # regime di volatilità: in un crash il rimbalzo è meno affidabile
 
 
 def _short_reasons(r):
@@ -1607,9 +1730,34 @@ def _short_reasons(r):
         bits.append(f"sceso {abs(r['dd_high']):.0f}% dai massimi dell'anno")
     if r["below_bb"]:
         bits.append("prezzo a un estremo (sotto la banda di Bollinger)")
+    # Conferma d'inversione (il rimedio al «coltello che cade»)
+    if r.get("vertical_crash"):
+        bits.append("⚠️ crollo verticale ancora in caduta (coltello che cade)")
+    elif r.get("reversal_confirmed"):
+        bits.append("✅ inversione confermata (giorno verde + RSI in risalita / rientro in Bollinger)")
+    elif r.get("green_day") is False:
+        bits.append("⏳ ancora in calo: nessuna conferma di rimbalzo")
+    # Conferma di volume
+    rv = r.get("rvol")
+    if rv is not None and r.get("green_day") and rv >= 1.2:
+        bits.append(f"volume {rv:.1f}× la media (ripartenza con scambi sopra la norma)")
+    # Rischio/Rendimento
+    if r.get("rr") is not None:
+        bits.append(f"rapporto rischio/rendimento ~{r['rr']:.1f}")
     bits.append("trend di fondo ancora positivo" if r["above_sma200"]
                 else "⚠️ trend di fondo debole (più rischioso)")
     return " · ".join(bits)
+
+
+def _short_confirm_label(r) -> str:
+    """Etichetta sintetica dello stato di conferma dell'inversione (per la tabella)."""
+    if r.get("vertical_crash"):
+        return "⚠️ in caduta"
+    if r.get("reversal_confirmed"):
+        return "✅ confermata"
+    if r.get("green_day"):
+        return "🟢 1° verde"
+    return "⏳ non ancora"
 
 
 def _discount_score(dd_high):
@@ -1676,24 +1824,145 @@ _ETF_UNIVERSE = [
 _REL_FACTOR = {"🟢 Alta": 1.0, "🟡 Media": 0.85, "🔴 Bassa": 0.7}
 
 
-def _convenience(r, gain) -> int:
-    """Punteggio 0-100 di convenienza «da saldo»: quanto conviene COMPRARE ora.
-    Combina prob. salita, guadagno (rimbalzo per il breve, atteso per il lungo), rischio di perdita,
-    **lo sconto di prezzo recente** e l'affidabilità. Centrato su 50; affidabilità bassa → verso 50.
-    Logica valore: se il prezzo è SCESO di recente è PIÙ conveniente (saldo); se è salito, meno."""
-    pg = r["prob_gain"] if r["prob_gain"] is not None else 50
-    pl = r["prob_loss"] if r["prob_loss"] is not None else 50
-    g = gain if gain is not None else 0
-    # Sconto di prezzo recente (~5 giorni, ripiego 1 mese): prezzo giù → bonus, prezzo su → malus.
+# ---------------------------------------------------------------------------
+# CONVENIENZA v2 — punteggio 0-100 «da saldo» costruito su fattori STANDARDIZZATI
+# con z-score robusti (mediana/MAD) cross-sezionali sull'universo scansionato, con
+# valutazione relativa al SETTORE e allo STORICO del titolo, fattori di rischio
+# (Sharpe/Sortino/Ulcer) e affidabilità continua. Pesi su fattori comparabili (z-score).
+# ---------------------------------------------------------------------------
+
+CONV_STATS_NAME = "conv_stats.json"   # statistiche dell'ultimo scan (per la versione single-ticker)
+
+_CONV_WEIGHTS = {
+    "short": {"oversold": 1.0, "rebound": 0.8, "momentum": 0.7, "discount": 0.5,
+              "riskadj": 0.4, "ddpen": 0.5, "histcheap": 0.4, "trend": 0.4, "prob": 0.2},
+    "long":  {"quality": 1.0, "valcheap": 0.9, "discount": 0.6, "histcheap": 0.5,
+              "riskadj": 0.4, "ddpen": 0.4, "momentum": 0.4, "prob": 0.4},
+}
+_CONV_K = 11.0   # scala z-score → punti di convenienza
+
+
+def _robust(vals):
+    """(mediana, MAD scalato) robusti agli outlier; fallback a deviazione std, poi a 1.0."""
+    arr = [v for v in vals if v is not None and not (isinstance(v, float) and math.isnan(v))]
+    if len(arr) < 3:
+        return (0.0, 1.0)
+    med = float(np.median(arr))
+    mad = float(np.median([abs(x - med) for x in arr])) * 1.4826
+    if mad <= 1e-9:
+        sd = float(np.std(arr))
+        mad = sd if sd > 1e-9 else 1.0
+    return (med, mad)
+
+
+def _zc(x, stats):
+    """z-score robusto limitato a ±3 (None → 0 = neutro)."""
+    if x is None or stats is None:
+        return 0.0
+    med, mad = stats
+    try:
+        return max(-3.0, min(3.0, (float(x) - med) / mad))
+    except (TypeError, ValueError):
+        return 0.0
+
+
+def _factor_values(r, kind) -> dict:
+    """Valori GREZZI dei fattori (più alto = più conveniente). valcheap (settoriale) si riempie a parte."""
+    dd = r.get("dd_high")
     mom = r.get("perf_5d")
-    if mom is None:
-        mom = r.get("perf_1m")
-    mom = max(min(mom if mom is not None else 0.0, 25), -25)
-    rf = _REL_FACTOR.get(r["reliab"], 0.8)
-    a = (pg - pl) + max(min(g, 40), -20) - 0.8 * mom   # −mom: più scende, più conviene (saldo)
-    base = 50 + 0.42 * a
-    conv = 50 + (base - 50) * rf                        # affidabilità bassa → verso 50
+    mom = r.get("perf_1m") if mom is None else mom
+    prob = (r["prob_gain"] - r["prob_loss"]) if (r.get("prob_gain") is not None and r.get("prob_loss") is not None) else None
+    f = {
+        "discount": (-dd) if dd is not None else None,          # più sceso = più a sconto
+        "histcheap": (-r["hist_z"]) if r.get("hist_z") is not None else None,  # sotto la propria media
+        "riskadj": r.get("sortino"),                            # sale "pulito"
+        "ddpen": (-r["ulcer"]) if r.get("ulcer") is not None else None,        # meno dolore (Ulcer)
+        "momentum": (-mom) if mom is not None else None,        # valore: prezzo giù = bonus
+        "prob": prob,
+    }
+    if kind == "short":
+        f["oversold"] = (-r["rsi"]) if r.get("rsi") is not None else None
+        f["rebound"] = r.get("rebound_pot")
+        av = r.get("above_sma200")
+        f["trend"] = 1.0 if av else (-1.0 if av is False else None)
+    else:
+        f["quality"] = r.get("fscore")
+        f["valcheap"] = None    # riempito da _fill_valcheap (z relativo al settore)
+    return f
+
+
+def _fill_valcheap(items, facs):
+    """Per il lungo: 'convenienza di valutazione' = z robusto, RELATIVO AL SETTORE, della
+    convenienza dei multipli (-P/E, -P/B, -P/S). Settori con <5 titoli → statistica globale."""
+    def cheap(m):
+        return (-m) if (m is not None and m > 0) else None
+    glob = {k: _robust([cheap(r.get(k)) for r in items]) for k in ("pe", "pb", "ps")}
+    by_sec = {}
+    for r in items:
+        by_sec.setdefault(r.get("sector") or "_NA_", []).append(r)
+    sec_stats = {sec: {k: _robust([cheap(r.get(k)) for r in rs]) for k in ("pe", "pb", "ps")}
+                 for sec, rs in by_sec.items() if len(rs) >= 5}
+    for r, f in zip(items, facs):
+        st = sec_stats.get(r.get("sector") or "_NA_", glob)
+        zs = [_zc(cheap(r.get(k)), st.get(k, glob[k])) for k in ("pe", "pb", "ps") if cheap(r.get(k)) is not None]
+        f["valcheap"] = (sum(zs) / len(zs)) if zs else None
+
+
+def _conv_from_factors(f, weights, stats, k, reliab_factor) -> int:
+    raw = sum(weights[fk] * _zc(f.get(fk), stats.get(fk)) for fk in weights)
+    conv = 50 + k * raw
+    conv = 50 + (conv - 50) * (reliab_factor or 0.75)     # affidabilità continua → verso 50
     return int(round(max(0, min(100, conv))))
+
+
+def _load_conv_stats() -> dict:
+    try:
+        with open(os.path.join(APPDIR, CONV_STATS_NAME), "r", encoding="utf-8") as fp:
+            d = json.load(fp)
+            return d if isinstance(d, dict) else {}
+    except Exception:
+        return {}
+
+
+def _save_conv_stats(kind, payload) -> None:
+    d = _load_conv_stats()
+    d[kind] = payload
+    try:   # solo file locale (NON sul repo): serve a questo processo per gli snapshot single-ticker
+        with open(os.path.join(APPDIR, CONV_STATS_NAME), "w", encoding="utf-8") as fp:
+            json.dump(d, fp, ensure_ascii=False)
+    except Exception:
+        pass
+
+
+def _score_universe(rlist, kind):
+    """Calcola la convenienza per TUTTI i titoli dell'universo (z-score robusti cross-sezionali).
+    Ritorna {ticker: convenienza}. Salva le statistiche per la versione single-ticker."""
+    items = [r for r in rlist if r]
+    weights = _CONV_WEIGHTS[kind]
+    if not items:
+        return {}
+    facs = [_factor_values(r, kind) for r in items]
+    if kind == "long":
+        _fill_valcheap(items, facs)
+    stats = {fk: _robust([f.get(fk) for f in facs]) for fk in weights}
+    convmap = {}
+    for r, f in zip(items, facs):
+        convmap[r["ticker"]] = _conv_from_factors(f, weights, stats, _CONV_K, r.get("reliab_factor"))
+    _save_conv_stats(kind, {"weights": weights, "k": _CONV_K,
+                            "stats": {fk: list(stats[fk]) for fk in stats}})
+    return convmap
+
+
+def _convenience_single(r, kind) -> int:
+    """Convenienza per un singolo titolo (snapshot) usando le statistiche dell'ultimo scan.
+    Se non disponibili → 50 (neutro); la valutazione settoriale qui non si applica."""
+    payload = _load_conv_stats().get(kind)
+    if not payload or "stats" not in payload:
+        return 50
+    weights = payload.get("weights", _CONV_WEIGHTS[kind])
+    stats = {fk: tuple(v) for fk, v in payload.get("stats", {}).items()}
+    f = _factor_values(r, kind)
+    return _conv_from_factors(f, weights, stats, payload.get("k", _CONV_K), r.get("reliab_factor"))
 
 
 _POS_WORDS = set((
@@ -1726,6 +1995,30 @@ def news_sentiment(news: list):
     return "🟡 misto", score
 
 
+# Parole-spia di problemi STRUTTURALI (non rumore di mercato): su un titolo già ipervenduto
+# una frode/causa/indagine fresca è un PROBLEMA, non un saldo. Usate come flag DIFENSIVO,
+# mai come bonus di acquisto.
+_RED_FLAG_WORDS = set((
+    "fraud fraudulent lawsuit lawsuits sued suing subpoena investigation probe sec doj "
+    "bankruptcy bankrupt insolvency insolvent default defaults delisting delisted delist "
+    "restatement accounting scandal misconduct halted suspension suspended recall recalls "
+    "fda-rejection probe indictment indicted settlement"
+).split())
+
+
+def news_red_flags(news: list) -> list:
+    """Notizie con segnali strutturali (legale/contabile) — flag difensivo, non un bonus.
+    Ritorna la lista dei termini-spia trovati (vuota se nessuno)."""
+    import re
+    found = set()
+    for n in news or []:
+        text = (n.get("title", "") + " " + n.get("summary", "")).lower()
+        for w in re.findall(r"[a-z']+", text):
+            if w in _RED_FLAG_WORDS:
+                found.add(w)
+    return sorted(found)
+
+
 @st.cache_data(ttl=900, show_spinner=False)
 def market_perf_1m() -> float:
     """Performance ~1 mese dell'S&P 500, per contestualizzare i cali dei singoli titoli."""
@@ -1736,6 +2029,56 @@ def market_perf_1m() -> float:
     if len(c) <= 21:
         return None
     return float((c.iloc[-1] / c.iloc[-21] - 1) * 100)
+
+
+@st.cache_data(ttl=900, show_spinner=False)
+def volatility_regime() -> dict:
+    """Regime di volatilità del mercato (VIX se disponibile, altrimenti vol. realizzata dell'S&P 500).
+    Il mean-reversion (rimbalzo da ipervenduto) si ROMPE nei crash: in regime di alta volatilità
+    il `factor` < 1 declassa globalmente i punteggi del breve periodo.
+    Ritorna {factor, label, vix} con factor in [0.55, 1.0]."""
+    vix = None
+    hv = get_history("^VIX", period="3mo")
+    if not hv.empty:
+        c = hv["Close"].dropna()
+        if len(c):
+            vix = float(c.iloc[-1])
+    if vix is None:        # ripiego: vol. realizzata annualizzata dell'S&P 500 (~scala del VIX)
+        hs = get_history("^GSPC", period="3mo")
+        if not hs.empty:
+            r = np.log(hs["Close"] / hs["Close"].shift(1)).replace([np.inf, -np.inf], np.nan).dropna()
+            if len(r) >= 10:
+                vix = float(r.tail(20).std() * np.sqrt(252) * 100)
+    if vix is None:
+        return {"factor": 1.0, "label": "⚪ ignoto", "vix": None}
+    if vix < 18:
+        return {"factor": 1.0, "label": "🟢 calmo", "vix": vix}
+    if vix < 26:
+        return {"factor": 0.90, "label": "🟡 mosso", "vix": vix}
+    if vix < 35:
+        return {"factor": 0.75, "label": "🟠 teso", "vix": vix}
+    return {"factor": 0.55, "label": "🔴 turbolento (crash)", "vix": vix}
+
+
+def position_size(capital, risk_pct, price, stop):
+    """Dimensionamento a rischio fisso: quante azioni comprare rischiando una frazione data
+    del capitale. qty = capitale·risk% / (prezzo − stop). Ritorna None se i dati non bastano."""
+    try:
+        capital, risk_pct, price, stop = float(capital), float(risk_pct), float(price), float(stop)
+    except (TypeError, ValueError):
+        return None
+    if capital <= 0 or risk_pct <= 0 or price <= 0 or price <= stop:
+        return None
+    risk_per_share = price - stop
+    risk_budget = capital * risk_pct / 100.0
+    qty = risk_budget / risk_per_share
+    value = qty * price
+    if value > capital:           # non investire più del capitale disponibile
+        qty = capital / price
+        value = qty * price
+        risk_budget = qty * risk_per_share
+    return {"qty": qty, "value": value, "risk_eur": risk_budget,
+            "risk_per_share": risk_per_share, "stop_pct": (stop / price - 1) * 100}
 
 
 @st.cache_data(ttl=900, show_spinner=False)
@@ -1774,25 +2117,44 @@ def opportunity_candidates(kind: str, include_eu: bool = True, include_etf: bool
 
 
 def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
-    rows = []
+    # PASSO 1 — scarica i dati di tutti i candidati (universo per gli z-score)
+    rmap = {}
     for t in dict.fromkeys([x for x in tickers if x]):
         try:
             r = opportunity_row(t, with_fundamentals=(kind == "long"))
         except Exception:
             r = None
-        if not r:
-            continue
+        if r:
+            rmap[r["ticker"]] = r
+    # PASSO 2 — convenienza con z-score robusti sull'intero universo
+    convmap = _score_universe(list(rmap.values()), kind)
+    # Regime di volatilità (solo breve): moltiplicatore globale che declassa i rimbalzi nei crash
+    regime = volatility_regime()["factor"] if kind == "short" else 1.0
+    # PASSO 3 — filtra le vere occasioni e costruisci la tabella
+    rows = []
+    for tk, r in rmap.items():
         dd = r["dd_high"]
+        conv = convmap.get(tk, 50)
         if kind == "short":
-            sc = _short_score(r)
+            # Filtro liquidità/penny: sotto ~3$ o pochi scambi l'RSI è inaffidabile → escludi
+            if r["price"] < _MIN_PRICE:
+                continue
+            liq = r.get("avg_dollar_vol")
+            if liq is not None and liq < _MIN_DOLLAR_VOL:
+                continue
+            sc = _short_score(r, regime=regime)
             if sc is None or not np.isfinite(sc) or sc < 35:   # setup da ipervenduto / zona bassa
                 continue
             if dd is None or dd > -8:           # dev'essere un calo reale, non un titolo ai massimi
                 continue
+            # Filtro Rischio/Rendimento: via i setup asimmetrici perdenti (R:R < 1,5)
+            if r.get("rr") is not None and r["rr"] < _RR_MIN:
+                continue
             gain = r["rebound_pot"] if r["rebound_pot"] is not None else r["exp_ret"]
-            rows.append({"Ticker": r["ticker"], "Nome": r["name"], "Convenienza": _convenience(r, gain),
+            rows.append({"Ticker": r["ticker"], "Nome": r["name"], "Convenienza": conv,
                          "Prezzo": r["price"], "RSI": r["rsi"], "% dal max": dd, "Perf 1 mese": r["perf_1m"],
-                         "Occasione": int(round(sc)),
+                         "Occasione": int(round(sc)), "Conferma": _short_confirm_label(r),
+                         "RVOL": r.get("rvol"), "R:R": r.get("rr"),
                          "Prob. salita": r["prob_gain"], "Guadagno atteso": gain,
                          "Rischio perdita": r["prob_loss"], "Affidabilità": r["reliab"],
                          "Perché": _short_reasons(r)})
@@ -1802,8 +2164,7 @@ def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
                 continue
             if dd is None or dd > -12:          # richiede uno sconto significativo dai massimi
                 continue
-            rows.append({"Ticker": r["ticker"], "Nome": r["name"],
-                         "Convenienza": _convenience(r, r["exp_ret"]),
+            rows.append({"Ticker": r["ticker"], "Nome": r["name"], "Convenienza": conv,
                          "Prezzo": r["price"], "% dal max": dd, "Perf 1 anno": r["perf_1y"],
                          "Occasione": int(round(sc)),
                          "Prob. salita": r["prob_gain"], "Guadagno atteso": r["exp_ret"],
@@ -1890,7 +2251,7 @@ def opportunity_snapshot(ticker: str, kind: str) -> dict:
     occ = int(round(sc)) if (sc is not None and np.isfinite(sc)) else None
     return {k: _jsonable(v) for k, v in {
         "name": r["name"], "price": r["price"], "rsi": r["rsi"], "dd_high": r["dd_high"],
-        "occasione": occ, "convenienza": _convenience(r, gain),
+        "occasione": occ, "convenienza": _convenience_single(r, kind),
         "prob_gain": r["prob_gain"], "prob_loss": r["prob_loss"],
         "exp_ret": r["exp_ret"], "gain": gain, "reliab": r["reliab"],
         "target": r["target_price"], "stop": r["stop_price"],
@@ -2605,6 +2966,22 @@ def bollinger(series: pd.Series, window: int = 20, n_std: float = 2.0):
     upper = mid + n_std * std
     lower = mid - n_std * std
     return mid, upper, lower
+
+
+def atr(df: pd.DataFrame, window: int = 14) -> pd.Series:
+    """Average True Range (Wilder): ampiezza media del movimento giornaliero, in valore assoluto.
+    Serve a tarare stop e bersagli sulla volatilità reale del titolo. Usa High/Low/Close;
+    se High/Low mancano ripiega sulla variazione assoluta delle chiusure."""
+    close = df["Close"]
+    if "High" in df.columns and "Low" in df.columns:
+        high, low = df["High"], df["Low"]
+        prev = close.shift(1)
+        tr = pd.concat([(high - low).abs(),
+                        (high - prev).abs(),
+                        (low - prev).abs()], axis=1).max(axis=1)
+    else:
+        tr = close.diff().abs()
+    return tr.ewm(alpha=1 / window, min_periods=window, adjust=False).mean()
 
 
 def annualized_volatility(series: pd.Series, periods_per_year: int = 252) -> float:
