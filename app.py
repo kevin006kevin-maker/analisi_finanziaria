@@ -420,11 +420,14 @@ if section.startswith("Occasioni"):
     extra_raw = st.text_area("Ticker extra da includere (separati da virgola, opzionale)",
                              value="", height=68, key="opp_extra")
     extra = [t.strip().upper() for t in extra_raw.replace(";", ",").split(",") if t.strip()]
-    ic1, ic2 = st.columns(2)
+    ic1, ic2, ic3 = st.columns(3)
     inc_wl = ic1.checkbox("Includi la mia watchlist", value=bool(watchlist), key="opp_wl")
-    inc_eu = ic2.checkbox("🇮🇹🇪🇺 Includi Borsa Italiana / Europa", value=True, key="opp_eu",
+    inc_eu = ic2.checkbox("Includi Borsa Italiana / Europa", value=True, key="opp_eu",
                           help="Aggiunge alla ricerca i principali titoli di Milano e d'Europa (le classifiche "
                                "automatiche gratuite coprono solo gli USA).")
+    inc_etf = ic3.checkbox("Includi ETF", value=True, key="opp_etf",
+                           help="Aggiunge alla ricerca i principali ETF (USA e UCITS europei): "
+                                "anche un ETF può essere un'occasione quando scende parecchio.")
 
     refresh_choice = st.selectbox(
         "🔄 Aggiornamento automatico", ["Disattivato", "Ogni 15 minuti", "Ogni 30 minuti"],
@@ -464,7 +467,7 @@ if section.startswith("Occasioni"):
 
         # --- Scansione unica (poi riusata da shortlist, sistema autonomo e tabelle) ---
         def _scan(kind):
-            base = fu.opportunity_candidates(kind, include_eu=inc_eu)
+            base = fu.opportunity_candidates(kind, include_eu=inc_eu, include_etf=inc_etf)
             universe = list(dict.fromkeys(base + extra + (watchlist if inc_wl else [])))
             return fu.scan_opportunities(universe, kind)
 
