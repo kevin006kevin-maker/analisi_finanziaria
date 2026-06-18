@@ -110,6 +110,14 @@ def main():
             n = 0 if df is None or df.empty else len(df)
             total += n
             fu.record_observations(df, kind)
+            # Calibrazione: registra la P(salita) di ogni occasione (1/giorno) per il backtest
+            if df is not None and not df.empty:
+                horizon = 21 if kind == "short" else 252
+                for tk_f, rr in df.iterrows():
+                    try:
+                        fu.log_forecast(tk_f, horizon, rr.get("Prob. salita"), rr.get("Prezzo"))
+                    except Exception:
+                        pass
             log(f"{kind}: {n} occasioni scansionate e registrate.")
         except Exception as e:
             log(f"{kind}: errore durante la scansione: {e!r}")
@@ -146,6 +154,13 @@ def main():
     except Exception as e:
         log(f"Errore aggiornamento scheda voti: {e!r}")
 
+    # Calibrazione: risolve le previsioni mature (prezzo a scadenza vs prezzo iniziale)
+    try:
+        nres = fu.resolve_forecasts()
+        log(f"Calibrazione: {nres} previsioni risolte.")
+    except Exception as e:
+        log(f"Errore calibrazione previsioni: {e!r}")
+
     # Diagnostica: quante occasioni sono 'in osservazione' (vicine alla promozione)
     try:
         status = [s for s in fu.observation_status() if s["run"] >= 2]
@@ -173,6 +188,7 @@ def main():
     fu.save_track_record(fu.load_track_record())
     fu.save_portfolio(fu.load_portfolio())          # preserva il portafoglio (lo gestisce l'app)
     fu.save_sell_alerts(fu.load_sell_alerts())      # stato avvisi di vendita (deduplica)
+    fu.write_data_json(fu.FORECAST_LOG_NAME, fu.read_data_json(fu.FORECAST_LOG_NAME, []))  # log calibrazione
 
     log(f"Fatto. Totale occasioni viste: {total}.")
     return 0
