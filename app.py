@@ -500,7 +500,8 @@ if section.startswith("Occasioni"):
         if auto_promote_on:
             status = fu.observation_status()
             tracked_now = fu.load_tracking()
-            building = [s for s in status if s["ticker"] not in tracked_now and s["ret"] > 0]
+            building = [s for s in status
+                        if s.get("ticker") not in tracked_now and s.get("ret", 0) > 0]
             with st.expander(f"🤖 Sistema autonomo — {len(building)} occasion"
                              f"{'e' if len(building)==1 else 'i'} in osservazione (andamento positivo)",
                              expanded=bool(building)):
@@ -509,9 +510,9 @@ if section.startswith("Occasioni"):
                            "Qui vedi quelle che finora stanno andando bene.")
                 if building:
                     sdf = pd.DataFrame([{
-                        "Ticker": s["ticker"], "Tipo": "⚡ Breve" if s["kind"] == "short" else "🏛️ Lungo",
-                        "Azienda": s["name"], "Giorni osservata": s["days"],
-                        "Rendimento": s["ret"], "Mancano": s["remaining"],
+                        "Ticker": s.get("ticker"), "Tipo": "⚡ Breve" if s.get("kind") == "short" else "🏛️ Lungo",
+                        "Azienda": s.get("name", ""), "Giorni osservata": s.get("days", 0),
+                        "Rendimento": s.get("ret", 0.0), "Mancano": s.get("remaining", 0),
                     } for s in building]).set_index("Ticker")
                     st.dataframe(sdf, use_container_width=True, column_config={
                         "Giorni osservata": st.column_config.NumberColumn("📅 Giorni osservata", format="%d"),
