@@ -31,6 +31,25 @@ def log(msg):
     print(f"[{ts}Z] {msg}", flush=True)
 
 
+def notify_promotions(tickers):
+    """Notifica quando una o più occasioni vengono INSERITE nel Monitoraggio (promozione automatica)."""
+    tr = fu.load_tracking()
+    righe = ["🆕 <b>Nuove occasioni nel Monitoraggio</b>", ""]
+    for tk in tickers:
+        e = tr.get(tk, {})
+        nm = html.escape(str(e.get("name") or tk))
+        term = "breve termine" if e.get("kind") == "short" else "lungo termine"
+        snaps = e.get("snapshots", [])
+        price = snaps[-1].get("price") if snaps else None
+        extra = f" · prezzo {price:,.2f}" if price else ""
+        righe.append(f"📌 <b>{html.escape(str(tk))}</b> — {nm} ({term}){extra}")
+    righe += ["", "Inserite in automatico dopo la fase di osservazione. Aprile nell'app → Monitoraggio.",
+              "(Strumento informativo, non è un consiglio.)"]
+    ok = fu.send_telegram("\n".join(righe))
+    log("Notifica inserimento inviata." if ok
+        else "Notifica inserimento NON inviata (Telegram non configurato o errore).")
+
+
 def notify_monitoring(items):
     """Prima notifica per le occasioni che confermano l'andamento positivo nel monitoraggio
     (breve: dopo 3 giorni positivi · lungo: dopo 7 giorni positivi)."""
@@ -41,7 +60,7 @@ def notify_monitoring(items):
         nm = html.escape(str(it.get("name") or tk))
         term = "breve termine" if it.get("kind") == "short" else "lungo termine"
         righe.append(f"🔔 <b>{tk}</b> — {nm}")
-        righe.append(f"   {term} · convenienza +{it.get('dconv', 0):.0f} in {it.get('days', 0)} giorni di monitoraggio")
+        righe.append(f"   {term} · +{it.get('ret', 0):.1f}% in {it.get('days', 0)} giorni di monitoraggio")
     righe += ["", "Possibile opportunità di investimento — apri l'app → Monitoraggio.",
               "(Strumento informativo, non è un consiglio.)"]
     ok = fu.send_telegram("\n".join(righe))
@@ -95,11 +114,14 @@ def main():
         except Exception as e:
             log(f"{kind}: errore durante la scansione: {e!r}")
 
-    # FASE 1 — promozione (silenziosa): occasioni con osservazione positiva (breve 3g / lungo 7g)
+    # FASE 1 — promozione: occasioni con osservazione positiva (breve 3g / lungo 7g) → notifica inserimento
     try:
         promoted = fu.auto_promote_opportunities()
-        log(f"PROMOSSE al Monitoraggio (osservazione positiva): {', '.join(promoted)}"
-            if promoted else "Nessuna nuova promozione in questo giro.")
+        if promoted:
+            log(f"PROMOSSE al Monitoraggio (osservazione positiva): {', '.join(promoted)}")
+            notify_promotions(promoted)
+        else:
+            log("Nessuna nuova promozione in questo giro.")
     except Exception as e:
         log(f"Errore durante la promozione automatica: {e!r}")
 
