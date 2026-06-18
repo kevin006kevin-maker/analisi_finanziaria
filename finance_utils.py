@@ -653,6 +653,7 @@ _KNOWN_ETFS = set(EU_ETF_TER.keys()) | {
     "SPY", "VOO", "IVV", "QQQ", "VTI", "VEA", "VWO", "AGG", "BND", "GLD", "IWM", "EFA",
     "VUG", "VTV", "VIG", "SCHD", "XLK", "XLF", "XLE", "XLV", "XLY", "XLP", "XLI", "XLU",
     "ARKK", "DIA", "TLT", "HYG", "LQD", "VNQ", "VXUS", "VT", "VYM", "VGT", "SOXX", "SMH",
+    "EEM", "SLV", "VUSA.MI",
 }
 
 
@@ -762,6 +763,65 @@ def project_future(initial: float, monthly: float, years: float,
     }
 
 
+def _fund_data_from_fmp(ticker: str, out: dict) -> None:
+    """Riempie composizione ETF (settori, principali titoli, TER, patrimonio) da FMP quando
+    yfinance non la fornisce (es. sul cloud). Best effort: silenzioso se la quota è esaurita
+    o l'endpoint non risponde."""
+    if not _fmp_key():
+        return
+    sym = ticker.upper()
+
+    if out["expense_ratio"] is None or not out["total_assets"]:
+        einfo = _first(_fmp_get(f"etf-info?symbol={sym}"))
+        if isinstance(einfo, dict) and einfo:
+            er = einfo.get("expenseRatio") or einfo.get("netExpenseRatio")
+            if er and out["expense_ratio"] is None:
+                try:
+                    er = float(er)
+                    out["expense_ratio"] = er / 100 if er > 0.02 else er
+                    out["expense_ratio_source"] = "FMP"
+                except (TypeError, ValueError):
+                    pass
+            out["total_assets"] = out["total_assets"] or einfo.get("assetsUnderManagement") or einfo.get("aum")
+            out["category"] = out["category"] or einfo.get("category")
+            out["family"] = out["family"] or einfo.get("etfCompanyName") or einfo.get("domicile")
+            out["description"] = out["description"] or einfo.get("description") or ""
+
+    def _pct(w):
+        try:
+            return round(float(str(w).replace("%", "").strip()) / 100, 4)
+        except (TypeError, ValueError):
+            return None
+
+    if not out["sector_weightings"]:
+        sw = _fmp_get(f"etf-sector-weightings?symbol={sym}")
+        if isinstance(sw, list):
+            d = {}
+            for s in sw:
+                if not isinstance(s, dict):
+                    continue
+                nm = s.get("sector") or s.get("industry")
+                v = _pct(s.get("weightPercentage", s.get("weight")))
+                if nm and v is not None:
+                    d[nm] = v
+            if d:
+                out["sector_weightings"] = d
+
+    if not out["top_holdings"]:
+        h = _fmp_get(f"etf-holdings?symbol={sym}")
+        if isinstance(h, list) and h:
+            rows = []
+            for x in h[:10]:
+                if not isinstance(x, dict):
+                    continue
+                s = x.get("asset") or x.get("symbol") or ""
+                nm = x.get("name") or ""
+                v = _pct(x.get("weightPercentage", x.get("pctVal", x.get("weight"))))
+                rows.append((s, nm, v if v is not None else 0.0))
+            if rows:
+                out["top_holdings"] = rows
+
+
 @st.cache_data(ttl=900, show_spinner=False)
 def get_fund_data(ticker: str, base_info: dict = None) -> dict:
     """Dati specifici di ETF/fondi: composizione, settori, titoli, costi, patrimonio.
@@ -773,9 +833,11 @@ def get_fund_data(ticker: str, base_info: dict = None) -> dict:
         "description": "", "asset_classes": {}, "sector_weightings": {}, "top_holdings": [],
     }
     base_info = base_info or {}
+    t = None
     info = {}
     try:
-        info = yf.Ticker(ticker).info or {}
+        t = yf.Ticker(ticker)            # BUGFIX: serve l'oggetto Ticker per funds_data (prima mancava)
+        info = t.info or {}
     except Exception:
         info = {}
 
@@ -804,23 +866,33 @@ def get_fund_data(ticker: str, base_info: dict = None) -> dict:
     )
     out["yield"] = info.get("yield")
 
-    try:
-        fd = t.funds_data
-        ov = fd.fund_overview or {}
-        out["category"] = out["category"] or ov.get("categoryName")
-        out["family"] = ov.get("family")
-        out["legal_type"] = ov.get("legalType")
-        out["description"] = fd.description or ""
-        out["asset_classes"] = {k: v for k, v in (fd.asset_classes or {}).items() if v}
-        out["sector_weightings"] = fd.sector_weightings or {}
-        th = fd.top_holdings
-        if th is not None and not th.empty:
-            for sym, row in th.iterrows():
-                out["top_holdings"].append(
-                    (sym, row.get("Name", ""), float(row.get("Holding Percent", 0)))
-                )
-    except Exception:
-        pass
+    # Composizione da yfinance (funziona in locale; spesso bloccata sul cloud)
+    if t is not None:
+        try:
+            fd = t.funds_data
+            ov = fd.fund_overview or {}
+            out["category"] = out["category"] or ov.get("categoryName")
+            out["family"] = ov.get("family")
+            out["legal_type"] = ov.get("legalType")
+            out["description"] = fd.description or out["description"]
+            out["asset_classes"] = {k: v for k, v in (fd.asset_classes or {}).items() if v}
+            out["sector_weightings"] = fd.sector_weightings or {}
+            th = fd.top_holdings
+            if th is not None and not th.empty:
+                for sym, row in th.iterrows():
+                    out["top_holdings"].append(
+                        (sym, row.get("Name", ""), float(row.get("Holding Percent", 0)))
+                    )
+        except Exception:
+            pass
+
+    # Fallback FMP quando la composizione resta vuota (es. cloud): best effort,
+    # funziona solo se la quota FMP non è esaurita.
+    if not out["sector_weightings"] or not out["top_holdings"]:
+        try:
+            _fund_data_from_fmp(ticker, out)
+        except Exception:
+            pass
     return out
 
 
@@ -1450,7 +1522,7 @@ def opportunity_row(ticker: str, with_fundamentals: bool = True) -> dict:
     etf, fscore, name = False, None, ticker
     if with_fundamentals:                    # solo per il lungo periodo (qualità)
         info = get_info(ticker)
-        etf = is_fund(info)
+        etf = is_fund(info) or is_known_etf(ticker)   # riconosce gli ETF anche sul cloud
         fscore = _fundamental_score(info) if not etf else None
         name = (info.get("shortName") or info.get("longName") or ticker)[:34]
 
@@ -1590,6 +1662,15 @@ _FALLBACK_UNIVERSE_EU = [
     "VOW3.DE", "BAYN.DE", "BMW.DE", "ALV.DE", "BNP.PA", "AD.AS", "ENGI.PA", "DTE.DE",
 ]
 
+# ETF liquidi (USA + UCITS europei) inclusi nella ricerca occasioni: le classifiche di
+# mercato gratuite contengono soprattutto azioni, quindi gli ETF vanno aggiunti a parte.
+_ETF_UNIVERSE = [
+    "SPY", "QQQ", "VOO", "VTI", "IWM", "DIA", "VEA", "VWO", "EFA", "EEM",
+    "XLK", "XLF", "XLE", "XLV", "XLY", "XLI", "XLU", "SMH", "SOXX", "ARKK",
+    "GLD", "SLV", "TLT", "HYG", "LQD", "AGG", "BND", "VNQ", "SCHD", "VYM",
+    "CSSPX.MI", "SWDA.MI", "VWCE.DE", "EIMI.MI", "EUNL.DE", "AGGH.MI",
+]
+
 _REL_FACTOR = {"🟢 Alta": 1.0, "🟡 Media": 0.85, "🔴 Bassa": 0.7}
 
 
@@ -1650,10 +1731,10 @@ def market_perf_1m() -> float:
 
 
 @st.cache_data(ttl=900, show_spinner=False)
-def opportunity_candidates(kind: str, include_eu: bool = True) -> list:
+def opportunity_candidates(kind: str, include_eu: bool = True, include_etf: bool = True) -> list:
     """Universo di partenza dalle classifiche di mercato (USA); riserva se non disponibili.
-    Con include_eu aggiunge una lista curata di titoli di Borsa Italiana / Europa, che le
-    classifiche gratuite (solo USA) non coprono."""
+    Con include_eu aggiunge titoli di Borsa Italiana / Europa; con include_etf aggiunge ETF
+    liquidi (USA + UCITS) — entrambe le categorie non sono coperte dalle classifiche gratuite."""
     screens = (["day_losers", "most_actives", "small_cap_gainers"] if kind == "short"
                else ["undervalued_large_caps", "undervalued_growth_stocks", "day_losers"])
     names = []
@@ -1678,6 +1759,9 @@ def opportunity_candidates(kind: str, include_eu: bool = True) -> list:
     if include_eu:                          # aggiunge i titoli italiani/europei (lista curata)
         eu_cap = 16 if kind == "short" else 10
         out += _FALLBACK_UNIVERSE_EU[:eu_cap]
+    if include_etf:                         # aggiunge ETF liquidi (USA + UCITS europei)
+        etf_cap = 18 if kind == "short" else 14
+        out += _ETF_UNIVERSE[:etf_cap]
     return list(dict.fromkeys(out))
 
 
