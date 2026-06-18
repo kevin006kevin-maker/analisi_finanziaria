@@ -473,6 +473,28 @@ if section.startswith("Occasioni"):
             f_rel = fco2.radio("Affidabilità", ["Tutte", "Almeno 🟡 Media", "Solo 🟢 Alta"], key="f_rel")
             f_max_loss = fco3.slider("Rischio di perdita massimo (%)", 0, 100, 100, key="f_loss")
 
+        with st.expander("📐 Dimensionamento posizione (rischio fisso)", expanded=False):
+            st.caption("Per ogni occasione di breve calcola **quante azioni** comprare rischiando una quota fissa "
+                       "del capitale, dato lo **stop = prezzo − 2×ATR**. Regola d'oro: non rischiare più dell'1-2% "
+                       "del capitale per singola operazione.")
+            psc1, psc2 = st.columns(2)
+            pos_capital = psc1.number_input("Capitale da impiegare (€)", min_value=0.0, value=10000.0,
+                                            step=500.0, key="pos_capital")
+            pos_risk = psc2.slider("Rischio per operazione (%)", 0.25, 5.0, 1.0, 0.25, key="pos_risk")
+
+        # Regime di volatilità: moltiplicatore globale del breve (il rimbalzo si rompe nei crash)
+        regime = fu.volatility_regime()
+        rg_factor, rg_label, rg_vix = regime["factor"], regime["label"], regime["vix"]
+        rgvix = f" · VIX ~{rg_vix:.0f}" if rg_vix is not None else ""
+        if rg_factor >= 1.0:
+            st.success(f"🌡️ **Regime di volatilità: {rg_label}**{rgvix} — condizioni normali per i rimbalzi da ipervenduto.")
+        elif rg_factor >= 0.75:
+            st.warning(f"🌡️ **Regime di volatilità: {rg_label}**{rgvix} — i punteggi di breve sono **ridotti** "
+                       f"(×{rg_factor:.2f}): nei mercati nervosi il rimbalzo è meno affidabile.")
+        else:
+            st.error(f"🌡️ **Regime di volatilità: {rg_label}**{rgvix} — punteggi di breve **fortemente ridotti** "
+                     f"(×{rg_factor:.2f}): in un crash il mean-reversion (rimbalzo) tende a rompersi. Prudenza.")
+
         mkt_1m = fu.market_perf_1m()
 
         # --- Scansione unica (poi riusata da shortlist, sistema autonomo e tabelle) ---
@@ -587,9 +609,16 @@ if section.startswith("Occasioni"):
                         "- **RSI** (0-100): misura la «foga» di vendita. Sotto 30 = ipervenduto, possibile rimbalzo.\n"
                         "- **% dal max**: quanto è sceso dal massimo dell'ultimo anno.\n"
                         "- **Banda di Bollinger**: se il prezzo la sfora verso il basso, è a un estremo.\n"
-                        "- **Trend di fondo**: se il prezzo è sopra la media a 200 giorni il rimbalzo è più probabile; "
-                        "se è «debole», molto più rischioso.\n"
-                        "- **💎 Segnale**: quanto è forte il setup (più alto = più ipervenduto con trend sano).\n\n"
+                        "- **🔄 Conferma d'inversione**: non segnaliamo un rimbalzo finché il titolo **non ha girato** "
+                        "(chiusura verde, RSI in risalita o rientro dentro le bande). È il rimedio diretto al «coltello che cade».\n"
+                        "- **🔊 RVOL** (volume relativo): un giorno verde con volume sopra la media segnala "
+                        "**capitolazione + ripartenza** credibile.\n"
+                        "- **⚖️ R:R** (rischio/rendimento): bersaglio (media 50gg) vs **stop = prezzo − 2×ATR**. "
+                        "Mostriamo solo setup con R:R **≥ 1,5** (scartiamo le scommesse asimmetriche).\n"
+                        "- **🌡️ Regime di volatilità**: nei mercati turbolenti (VIX alto) i punteggi del breve sono ridotti, "
+                        "perché il rimbalzo da ipervenduto si rompe nei crash.\n"
+                        "- **Trend di fondo**: se il prezzo è sopra la media a 200 giorni il rimbalzo è più probabile.\n"
+                        "- **💎 Segnale**: forza del setup (ipervenduto + trend sano + inversione confermata + volume).\n\n"
                         "⚠️ **Rischio:** un titolo che rimbalza dopo un calo è una *scommessa di breve*. "
                         "Cali fortissimi possono continuare (il «coltello che cade»). Spunto da approfondire, non un segnale di acquisto."
                     )
@@ -675,12 +704,33 @@ if section.startswith("Occasioni"):
                                 lvl.append(f"🎯 Bersaglio: **{tgt:,.2f}** ({(tgt/price-1)*100:+.0f}%)")
                             if stp and price:
                                 lvl.append(f"🛑 Stop: **{stp:,.2f}** ({(stp/price-1)*100:+.0f}%)")
+                            rr_v = det.get("rr")
+                            if rr_v is not None:
+                                lvl.append(f"⚖️ R:R **{rr_v:.1f}**")
+                            atrp = det.get("atr_pct")
+                            if atrp is not None:
+                                lvl.append(f"📐 ATR **{atrp:.1f}%**")
+                            rvol_v = det.get("rvol")
+                            if rvol_v is not None:
+                                lvl.append(f"🔊 RVOL **{rvol_v:.1f}×**")
                             if lvl:
                                 st.markdown(" · ".join(lvl))
                             st.caption("👀 **Come leggere:** la linea blu è il prezzo degli ultimi ~3 mesi. "
                                        "La linea **verde** è la media a 50 giorni (il *bersaglio* di un rimbalzo): "
                                        "se il prezzo le sta **sotto**, c'è spazio per risalire. La **rossa** è lo stop "
-                                       "(sotto cui l'idea di rimbalzo salta). Livelli indicativi, non consigli.")
+                                       "(**prezzo − 2×ATR**, tarato sulla volatilità del titolo): sotto di esso l'idea di "
+                                       "rimbalzo salta. Livelli indicativi, non consigli.")
+                            # --- Dimensionamento a rischio fisso (solo breve, con stop ATR) ---
+                            if kind == "short" and stp and price:
+                                ps = fu.position_size(pos_capital, pos_risk, price, stp)
+                                if ps:
+                                    st.markdown(
+                                        f"📐 **Quanto comprare** (rischio {pos_risk:.2f}% di € {pos_capital:,.0f}): "
+                                        f"**{ps['qty']:.2f}** azioni ≈ **€ {ps['value']:,.0f}** investiti · "
+                                        f"perdita massima allo stop ≈ **€ {ps['risk_eur']:,.0f}** "
+                                        f"({ps['stop_pct']:+.1f}% dal prezzo).")
+                                    st.caption("Calcolo a rischio fisso: qty = capitale × rischio% / (prezzo − stop). "
+                                               "Così ogni operazione mette a rischio la **stessa** cifra, qualunque sia la volatilità.")
                             s1m = det.get("perf_1m")
                             if mkt_1m is not None and s1m is not None:
                                 if abs(s1m - mkt_1m) <= 1:
@@ -712,8 +762,17 @@ if section.startswith("Occasioni"):
                             st.rerun()
                         news = fu.get_news(tk, 4)
                         if news:
+                            # Flag DIFENSIVO (non un bonus): frode/causa/indagine fresca su un
+                            # titolo già ipervenduto è un problema reale, non un saldo.
+                            flags = fu.news_red_flags(news)
+                            if flags:
+                                st.error("⚠️ **Allarme difensivo:** nelle notizie compaiono termini di tipo "
+                                         f"legale/contabile ({', '.join(flags)}). Su un titolo già ipervenduto questo è "
+                                         "spesso il **motivo del calo**, non un'occasione: il prezzo può continuare a "
+                                         "scendere. Approfondisci la causa prima di considerarlo.")
                             sent_label, _ = fu.news_sentiment(news)
-                            st.markdown(f"**Notizie recenti** · tono indicativo: {sent_label}")
+                            st.markdown(f"**Notizie recenti** · tono indicativo: {sent_label} "
+                                        "_(spunto di contesto, non un segnale di acquisto)_")
                             for n in news[:3]:
                                 title = fu.translate_text(n["title"]) if translate_news else n["title"]
                                 link = f"[{title}]({n['url']})" if n["url"] else title
@@ -744,7 +803,13 @@ if section.startswith("Occasioni"):
                 help="Quanto è sceso dal massimo di 52 settimane."),
             "Perf 1 mese": st.column_config.NumberColumn("1 mese", format="%.0f%%"),
             "Occasione": st.column_config.ProgressColumn("💎 Segnale", min_value=0, max_value=100, format="%.0f",
-                help="Forza del setup da rimbalzo: più alto = più ipervenduto ma con trend ancora sano."),
+                help="Forza del setup da rimbalzo: più alto = più ipervenduto, con trend sano, inversione confermata e volume. Ridotto dal regime di volatilità."),
+            "Conferma": st.column_config.TextColumn("🔄 Conferma",
+                help="Stato dell'inversione: ✅ confermata (giorno verde + RSI in risalita o rientro in Bollinger) · 🟢 1° verde · ⏳ ancora in calo · ⚠️ in caduta verticale. Non si segnala un rimbalzo finché non ha girato."),
+            "RVOL": st.column_config.NumberColumn("🔊 RVOL", format="%.1f×",
+                help="Volume di oggi rispetto alla media di 20 sedute. Sopra 1,2-1,5× su un giorno verde = capitolazione + ripartenza credibile."),
+            "R:R": st.column_config.NumberColumn("⚖️ R:R", format="%.1f",
+                help="Rapporto Rischio/Rendimento: (bersaglio − prezzo) / (prezzo − stop ATR). Mostrati solo i setup con R:R ≥ 1,5."),
             "Prob. salita": st.column_config.NumberColumn("📈 Prob. salita", format="%.0f%%",
                 help="Stima statistica (dai rendimenti storici, ~1 mese) della probabilità che il prezzo salga. NON è una previsione."),
             "Guadagno atteso": st.column_config.NumberColumn("🎯 Potenziale rimbalzo", format="%+.1f%%",
