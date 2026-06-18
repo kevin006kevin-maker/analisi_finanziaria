@@ -164,10 +164,12 @@ def page_header(title: str, subtitle: str = ""):
     )
 
 
-def show_chart(fig, use_container_width=True, config=None, **kw):
+def show_chart(fig, use_container_width=True, config=None, key=None, **kw):
     """Grafico ottimizzato per il telefono: niente zoom fastidioso al tocco; toccando un punto
     della linea compare il valore con una linea-guida verticale. Dove il browser mobile lo
-    consente, il valore segue anche il trascinamento del dito."""
+    consente, il valore segue anche il trascinamento del dito.
+    Assegna una chiave univoca a ogni grafico per evitare collisioni di ID (es. stesso titolo
+    nelle occasioni di breve e di lungo)."""
     try:
         fig.update_layout(dragmode=False, hovermode="x unified", hoverdistance=120, spikedistance=1000)
         fig.update_xaxes(fixedrange=True, showspikes=True, spikemode="across",
@@ -178,7 +180,11 @@ def show_chart(fig, use_container_width=True, config=None, **kw):
     cfg = {"displayModeBar": False, "scrollZoom": False, "doubleClick": False}
     if config:
         cfg.update(config)
-    st.plotly_chart(fig, use_container_width=use_container_width, config=cfg, **kw)
+    if key is None:
+        _n = st.session_state.get("_chart_seq", 0) + 1
+        st.session_state["_chart_seq"] = _n
+        key = f"_chart_{_n}"
+    st.plotly_chart(fig, use_container_width=use_container_width, config=cfg, key=key, **kw)
 
 
 def _now_rome():
@@ -222,6 +228,10 @@ def check_password():
 
 
 check_password()
+
+# Azzera a ogni esecuzione il contatore delle chiavi dei grafici (vedi show_chart):
+# garantisce ID univoci e stabili per ogni grafico nella stessa pagina.
+st.session_state["_chart_seq"] = 0
 
 # ---------------------------------------------------------------------------
 # STILE GIUDIZI
@@ -1488,6 +1498,42 @@ with tab_fund:
         )
         st.caption(f"I primi {len(df_th)} titoli pesano circa il {conc:.1f}% del fondo "
                    f"({'concentrazione elevata' if conc > 50 else 'buona diversificazione'}).")
+
+        # --- Andamento dei titoli che compongono l'ETF ---
+        st.markdown("#### Andamento dei titoli che lo compongono")
+        st.caption("👀 Come si sono mossi i principali titoli del fondo nel periodo scelto, confrontati a parità "
+                   "di partenza (base 100): una linea per ciascun titolo.")
+        HPER = {"1 mese": "1mo", "6 mesi": "6mo", "1 anno": "1y", "Tutto": "max"}
+        hsel = st.radio("Periodo", list(HPER.keys()), index=2, horizontal=True, key="etf_holdings_period")
+        with st.spinner("Scarico l'andamento dei titoli…"):
+            figh = go.Figure()
+            perf_rows = []
+            for s, n, p in th[:10]:
+                if not s:
+                    continue
+                hh = fu.get_history(s, period=HPER[hsel])
+                if hh.empty:
+                    continue
+                cc = hh["Close"].dropna()
+                if cc.empty or float(cc.iloc[0]) == 0:
+                    continue
+                base100 = cc / float(cc.iloc[0]) * 100
+                figh.add_trace(go.Scatter(x=cc.index, y=base100, mode="lines", name=s))
+                perf_rows.append({"Ticker": s, "Nome": n, "Peso %": p * 100,
+                                  "Performance %": (float(cc.iloc[-1]) / float(cc.iloc[0]) - 1) * 100})
+        if perf_rows:
+            figh.update_layout(height=380, margin=dict(t=10, b=10, l=10, r=10),
+                               legend=dict(orientation="h"), yaxis_title="Base 100")
+            show_chart(figh)
+            dfp = pd.DataFrame(perf_rows).set_index("Ticker").sort_values("Performance %", ascending=False)
+            st.dataframe(dfp, use_container_width=True, column_config={
+                "Peso %": st.column_config.NumberColumn("Peso %", format="%.2f%%"),
+                "Performance %": st.column_config.NumberColumn(f"Performance ({hsel})", format="%+.1f%%"),
+            })
+            st.caption("Performance dei singoli titoli nel periodo (ordinati dal migliore). "
+                       "Per l'analisi dettagliata di uno di essi, cercane il ticker nella barra a sinistra.")
+        else:
+            st.caption("Andamento dei titoli non disponibile al momento (dati non recuperabili).")
     else:
         st.caption("Elenco titoli non disponibile.")
 
