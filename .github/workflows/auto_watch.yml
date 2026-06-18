@@ -58,6 +58,6 @@ jobs:
           git config user.name "auto-watch[bot]"
           git config user.email "auto-watch@users.noreply.github.com"
           git switch --orphan auto-data
-          git add -f opp_watch.json tracking.json track_record.json portfolio.json sell_alerts.json
+          git add -f opp_watch.json tracking.json track_record.json portfolio.json sell_alerts.json forecast_log.json
           git commit -m "auto-update occasioni [skip ci]" || echo "Nessuna modifica da pubblicare"
           git push -f origin auto-data
