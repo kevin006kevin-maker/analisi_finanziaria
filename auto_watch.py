@@ -41,7 +41,7 @@ def notify_monitoring(items):
         nm = html.escape(str(it.get("name") or tk))
         term = "breve termine" if it.get("kind") == "short" else "lungo termine"
         righe.append(f"🔔 <b>{tk}</b> — {nm}")
-        righe.append(f"   {term} · +{it.get('ret', 0):.1f}% in {it.get('days', 0)} giorni di monitoraggio")
+        righe.append(f"   {term} · convenienza +{it.get('dconv', 0):.0f} in {it.get('days', 0)} giorni di monitoraggio")
     righe += ["", "Possibile opportunità di investimento — apri l'app → Monitoraggio.",
               "(Strumento informativo, non è un consiglio.)"]
     ok = fu.send_telegram("\n".join(righe))
