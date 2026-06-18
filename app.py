@@ -21,7 +21,8 @@ from streamlit_autorefresh import st_autorefresh
 
 import finance_utils as fu
 
-st.set_page_config(page_title="Analisi Finanziaria", page_icon="📈", layout="wide")
+st.set_page_config(page_title="Analisi Finanziaria", page_icon="📈", layout="wide",
+                   initial_sidebar_state="expanded")
 
 # --- Stile: aspetto sobrio e professionale (tipografia Inter, palette scura raffinata) ---
 st.markdown("""
@@ -180,13 +181,15 @@ def page_header(title: str, subtitle: str = ""):
 
 
 def show_chart(fig, use_container_width=True, config=None, **kw):
-    """Mostra un grafico Plotly disattivando lo zoom (fastidioso da telefono): un tocco
-    sulla linea mostra il valore in quel punto, senza zoomare. Niente barra strumenti."""
+    """Grafico Plotly ottimizzato per il tocco: assi bloccati (niente zoom) così, trascinando
+    il dito lungo la linea SENZA staccarlo, il valore segue il dito (tooltip continuo)."""
     try:
-        fig.update_layout(dragmode=False)
+        fig.update_xaxes(fixedrange=True)
+        fig.update_yaxes(fixedrange=True)
+        fig.update_layout(hovermode="x unified", hoverdistance=80)
     except Exception:
         pass
-    cfg = {"displayModeBar": False, "scrollZoom": False, "doubleClick": False, "staticPlot": False}
+    cfg = {"displayModeBar": False, "scrollZoom": False, "doubleClick": False}
     if config:
         cfg.update(config)
     st.plotly_chart(fig, use_container_width=use_container_width, config=cfg, **kw)
