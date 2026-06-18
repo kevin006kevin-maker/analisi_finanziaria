@@ -1500,6 +1500,7 @@ def opportunity_row(ticker: str, with_fundamentals: bool = True) -> dict:
     hi = float(h["Close"].max())   # massimo ~52 settimane dallo storico (niente chiamata extra)
     dd_high = _nn((price / hi - 1) * 100) if hi else None
     perf_1m = _nn((price / float(h["Close"].iloc[-21]) - 1) * 100) if len(h) > 21 else None
+    perf_5d = _nn((price / float(h["Close"].iloc[-6]) - 1) * 100) if len(h) > 5 else None  # momentum recente
     perf_1y = _nn((price / float(h["Close"].iloc[0]) - 1) * 100)
     bb_low = last.get("BB_low", np.nan)
     below_bb = bool(price <= bb_low) if not np.isnan(bb_low) else False
@@ -1527,7 +1528,8 @@ def opportunity_row(ticker: str, with_fundamentals: bool = True) -> dict:
         name = (info.get("shortName") or info.get("longName") or ticker)[:34]
 
     return dict(ticker=ticker.upper(), name=name, price=price, rsi=rsi, dd_high=dd_high,
-                perf_1m=perf_1m, perf_1y=perf_1y, below_bb=below_bb, above_sma200=above_sma200,
+                perf_1m=perf_1m, perf_5d=perf_5d, perf_1y=perf_1y, below_bb=below_bb,
+                above_sma200=above_sma200,
                 etf=etf, fscore=fscore, prob_gain=prob_gain, prob_loss=prob_loss,
                 exp_ret=exp_ret, reliab=reliab, rebound_pot=rebound_pot,
                 target_price=target_price, stop_price=stop_price,
@@ -1676,15 +1678,21 @@ _REL_FACTOR = {"🟢 Alta": 1.0, "🟡 Media": 0.85, "🔴 Bassa": 0.7}
 
 def _convenience(r, gain) -> int:
     """Punteggio 0-100 di convenienza: combina prob. salita, guadagno (rimbalzo per il breve,
-    atteso per il lungo), rischio di perdita e affidabilità. Centrato su 50;
-    l'affidabilità bassa avvicina al neutro (stima incerta)."""
+    atteso per il lungo), rischio di perdita, **momentum di prezzo recente** e affidabilità.
+    Centrato su 50; l'affidabilità bassa avvicina al neutro (stima incerta).
+    Il momentum fa variare la convenienza al variare del prezzo (non solo gli altri fattori)."""
     pg = r["prob_gain"] if r["prob_gain"] is not None else 50
     pl = r["prob_loss"] if r["prob_loss"] is not None else 50
     g = gain if gain is not None else 0
+    # Momentum di prezzo: variazione recente (~5 giorni), ripiego su 1 mese. Limitata a ±25.
+    mom = r.get("perf_5d")
+    if mom is None:
+        mom = r.get("perf_1m")
+    mom = max(min(mom if mom is not None else 0.0, 25), -25)
     rf = _REL_FACTOR.get(r["reliab"], 0.8)
-    a = (pg - pl) + max(min(g, 40), -20)      # attrattività grezza (~ -120..140)
-    base = 50 + 0.45 * a
-    conv = 50 + (base - 50) * rf              # affidabilità bassa → verso 50
+    a = (pg - pl) + max(min(g, 40), -20) + 0.8 * mom   # +componente di prezzo (~ -140..160)
+    base = 50 + 0.42 * a
+    conv = 50 + (base - 50) * rf                        # affidabilità bassa → verso 50
     return int(round(max(0, min(100, conv))))
 
 
@@ -1889,14 +1897,58 @@ def opportunity_snapshot(ticker: str, kind: str) -> dict:
     }.items()}
 
 
-def _append_snapshot(entry: dict, day: str, snapshot: dict) -> None:
-    """Aggiunge lo snapshot del giorno (max 1/giorno: sostituisce quello odierno se c'è)."""
+# Campionamento: si misura più volte al giorno (non più 1/giorno), ma solo se il valore cambia
+# ed è passato un minimo di tempo → niente punti ridondanti (es. mercati chiusi) e dati contenuti.
+_OBS_GAP_MIN = 60       # opp_watch: al più ogni 60 min
+_OBS_MAX_DAYS = 12
+_OBS_MAX_KEEP = 220
+_SNAP_GAP_MIN = 15      # monitoraggio: al più ogni 15 min
+_SNAP_MAX_DAYS = 22
+_SNAP_MAX_KEEP = 700
+
+
+def _parse_dt(s):
+    s = str(s)
+    for fmt in ("%Y-%m-%d %H:%M", "%Y-%m-%d %H:%M:%S", "%Y-%m-%d"):
+        try:
+            return datetime.datetime.strptime(s, fmt)
+        except ValueError:
+            continue
+    return None
+
+
+def _minutes_since(ts) -> float:
+    a, b = _parse_dt(ts), _parse_dt(_now_iso())
+    return (b - a).total_seconds() / 60.0 if (a and b) else 1e9
+
+
+def _should_sample(records, conv, price, gap_min, conv_field) -> bool:
+    """True se va registrato un nuovo punto: nessun record, oppure valore cambiato E trascorso gap_min."""
+    if not records:
+        return True
+    last = records[-1]
+    if _minutes_since(last.get("date")) < gap_min:
+        return False
+    return not (last.get(conv_field) == conv and last.get("price") == price)
+
+
+def _trim_records(records, max_days, max_keep):
+    """Tiene gli ultimi `max_days` giorni e al più `max_keep` punti."""
+    now = _parse_dt(_now_iso())
+    if now:
+        cutoff = now - datetime.timedelta(days=max_days)
+        records = [r for r in records if (_parse_dt(r.get("date")) or now) >= cutoff]
+    return records[-max_keep:]
+
+
+def _append_snapshot(entry: dict, snapshot: dict) -> None:
+    """Aggiunge uno snapshot del monitoraggio (con data+ora); più punti al giorno, con tetto."""
     snaps = entry.setdefault("snapshots", [])
     snap = {k: _jsonable(v) for k, v in snapshot.items()}
-    snap["date"] = day
-    snaps[:] = [s for s in snaps if s.get("date") != day]
+    snap["date"] = _now_iso()
     snaps.append(snap)
     snaps.sort(key=lambda s: s.get("date", ""))
+    entry["snapshots"] = _trim_records(snaps, _SNAP_MAX_DAYS, _SNAP_MAX_KEEP)
     if snapshot.get("name") and not entry.get("name"):
         entry["name"] = snapshot["name"]
 
@@ -1913,7 +1965,7 @@ def track_opportunity(ticker: str, kind: str, snapshot: dict = None, note: str =
     if snapshot is None:
         snapshot = opportunity_snapshot(ticker, kind)
     if snapshot:
-        _append_snapshot(data[ticker], _today_iso(), snapshot)
+        _append_snapshot(data[ticker], snapshot)
     save_tracking(data)
     return data
 
@@ -1934,7 +1986,7 @@ def track_many(picks) -> list:
             data[tk]["kind"] = kind
         snap = opportunity_snapshot(tk, kind)
         if snap:
-            _append_snapshot(data[tk], today, snap)
+            _append_snapshot(data[tk], snap)
         if is_new:
             added.append(tk)
     save_tracking(data)
@@ -1956,19 +2008,19 @@ def set_tracking_note(ticker: str, note: str) -> None:
 
 
 def auto_snapshot_tracked() -> dict:
-    """Registra lo scatto di oggi per ogni titolo seguito che non ne ha ancora uno (max 1/giorno).
-    Costruisce la storia in avanti man mano che si apre l'app nei giorni."""
+    """Registra le variazioni dei titoli seguiti più volte al giorno (al più ogni ~15 min, e solo
+    se convenienza o prezzo sono cambiati). Costruisce la storia man mano che il sistema gira."""
     data = load_tracking()
     if not data:
         return data
-    today = _today_iso()
     changed = False
     for tk, entry in data.items():
-        if any(s.get("date") == today for s in entry.get("snapshots", [])):
-            continue
         snap = opportunity_snapshot(tk, entry.get("kind", "short"))
-        if snap:
-            _append_snapshot(entry, today, snap)
+        if not snap:
+            continue
+        if _should_sample(entry.get("snapshots", []), snap.get("convenienza"),
+                          snap.get("price"), _SNAP_GAP_MIN, "convenienza"):
+            _append_snapshot(entry, snap)
             changed = True
     if changed:
         save_tracking(data)
@@ -2018,25 +2070,25 @@ def save_opp_watch(data: dict) -> None:
 
 
 def record_observations(df, kind: str) -> None:
-    """Registra l'osservazione di oggi (max 1/giorno) per ogni occasione del df scansionato.
-    Le osservazioni sono separate per orizzonte (short/long) perché la convenienza si calcola
-    su orizzonti diversi. Mantiene ~10 giorni per titolo."""
+    """Registra la convenienza di ogni occasione scansionata più volte al giorno (al più ogni ~60 min,
+    e solo se convenienza o prezzo sono cambiati). Separata per orizzonte (short/long). Tetto per titolo."""
     if df is None or df.empty:
         return
     watch = load_opp_watch()
-    today = _today_iso()
+    now = _now_iso()
     for tk, r in df.iterrows():
         key = f"{kind}:{tk}"
         e = watch.setdefault(key, {"ticker": tk, "kind": kind, "name": tk, "obs": []})
         e["ticker"], e["kind"] = tk, kind
         e["name"] = r.get("Nome", tk)
-        rec = {"date": today, "conv": _jsonable(r.get("Convenienza")),
-               "price": _jsonable(r.get("Prezzo")), "occ": _jsonable(r.get("Occasione")),
-               "prob_gain": _jsonable(r.get("Prob. salita"))}
-        obs = [o for o in e.get("obs", []) if o.get("date") != today]
-        obs.append(rec)
-        obs.sort(key=lambda o: o.get("date", ""))
-        e["obs"] = obs[-10:]
+        conv = _jsonable(r.get("Convenienza"))
+        price = _jsonable(r.get("Prezzo"))
+        obs = e.get("obs", [])
+        if _should_sample(obs, conv, price, _OBS_GAP_MIN, "conv"):
+            obs.append({"date": now, "conv": conv, "price": price,
+                        "occ": _jsonable(r.get("Occasione")), "prob_gain": _jsonable(r.get("Prob. salita"))})
+            obs.sort(key=lambda o: o.get("date", ""))
+            e["obs"] = _trim_records(obs, _OBS_MAX_DAYS, _OBS_MAX_KEEP)
     save_opp_watch(watch)
 
 
