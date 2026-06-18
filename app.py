@@ -491,37 +491,38 @@ if section.startswith("Occasioni"):
         if auto_promote_on and not cloud:
             fu.record_observations(full_short, "short")
             fu.record_observations(full_long, "long")
-            promoted = fu.auto_promote_opportunities(min_days=3)
+            promoted = fu.auto_promote_opportunities()
+            fu.manage_monitoring()      # rimozioni delle perdenti + (eventuali) prime notifiche
         if promoted:
-            st.success("🤖 **Aggiunte da sole al Monitoraggio** (convenienza in salita negli ultimi 3 giorni): "
+            st.success("🤖 **Aggiunte da sole al Monitoraggio** (andamento positivo dopo la fase di osservazione): "
                        + ", ".join(f"**{t}**" for t in promoted) + ". Le trovi nella sezione «Monitoraggio».")
 
         if auto_promote_on:
-            status = [s for s in fu.observation_status() if s["run"] >= 1]
+            status = fu.observation_status()
             tracked_now = fu.load_tracking()
-            building = [s for s in status if s["run"] >= 2 and s["ticker"] not in tracked_now]
+            building = [s for s in status if s["ticker"] not in tracked_now and s["ret"] > 0]
             with st.expander(f"🤖 Sistema autonomo — {len(building)} occasion"
-                             f"{'e' if len(building)==1 else 'i'} in osservazione (vicine alla promozione)",
+                             f"{'e' if len(building)==1 else 'i'} in osservazione (andamento positivo)",
                              expanded=bool(building)):
-                st.caption("Il sistema osserva l'evoluzione di **tutte** le occasioni. Promuove al Monitoraggio quelle la cui "
-                           "convenienza, in **3 giorni**, è **salita complessivamente** (almeno ~5 punti) **senza cali bruschi** "
-                           "nel mezzo (le piccole oscillazioni sono tollerate). Qui vedi chi sta migliorando.")
+                st.caption("Ogni occasione viene osservata per una finestra (**breve: 3 giorni**, **lungo: 7 giorni**): "
+                           "se alla fine l'andamento del prezzo è **positivo**, viene promossa nel Monitoraggio. "
+                           "Qui vedi quelle che finora stanno andando bene.")
                 if building:
                     sdf = pd.DataFrame([{
                         "Ticker": s["ticker"], "Tipo": "⚡ Breve" if s["kind"] == "short" else "🏛️ Lungo",
-                        "Azienda": s["name"], "Giorni in tendenza": s["run"],
-                        "Salita 3g": s.get("net3"), "Convenienza": s["last_conv"], "Giorni osservati": s["days"],
+                        "Azienda": s["name"], "Giorni osservata": s["days"],
+                        "Rendimento": s["ret"], "Mancano": s["remaining"],
                     } for s in building]).set_index("Ticker")
                     st.dataframe(sdf, use_container_width=True, column_config={
-                        "Giorni in tendenza": st.column_config.NumberColumn("📈 Giorni in tendenza", format="%d",
-                            help="Giorni consecutivi senza cali bruschi della convenienza (le piccole oscillazioni non spezzano la striscia)."),
-                        "Salita 3g": st.column_config.NumberColumn("⬆️ Salita 3g", format="%+.0f",
-                            help="Variazione netta della convenienza negli ultimi 3 giorni. A +5 o più (senza crolli nel mezzo) scatta la promozione."),
-                        "Convenienza": st.column_config.ProgressColumn("🏅 Convenienza", min_value=0, max_value=100, format="%d"),
+                        "Giorni osservata": st.column_config.NumberColumn("📅 Giorni osservata", format="%d"),
+                        "Rendimento": st.column_config.NumberColumn("📈 Rendimento", format="%+.1f%%",
+                            help="Variazione del prezzo dal primo giorno di osservazione."),
+                        "Mancano": st.column_config.NumberColumn("⏳ Mancano (gg)", format="%d",
+                            help="Giorni che mancano al termine della finestra (breve 3 / lungo 7); a 0 viene valutata per la promozione."),
                     })
                 else:
-                    st.info("Nessuna occasione in miglioramento al momento. Il sistema continua a osservare a ogni aggiornamento "
-                            "(la storia si costruisce nei giorni in cui apri l'app).")
+                    st.info("Nessuna occasione con andamento positivo in osservazione al momento. "
+                            "Il sistema continua a osservare a ogni aggiornamento.")
 
         # --- 🏆 Le migliori da seguire (shortlist automatica) ---
         def _best_picks(df, n=3):
