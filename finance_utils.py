@@ -1677,20 +1677,20 @@ _REL_FACTOR = {"🟢 Alta": 1.0, "🟡 Media": 0.85, "🔴 Bassa": 0.7}
 
 
 def _convenience(r, gain) -> int:
-    """Punteggio 0-100 di convenienza: combina prob. salita, guadagno (rimbalzo per il breve,
-    atteso per il lungo), rischio di perdita, **momentum di prezzo recente** e affidabilità.
-    Centrato su 50; l'affidabilità bassa avvicina al neutro (stima incerta).
-    Il momentum fa variare la convenienza al variare del prezzo (non solo gli altri fattori)."""
+    """Punteggio 0-100 di convenienza «da saldo»: quanto conviene COMPRARE ora.
+    Combina prob. salita, guadagno (rimbalzo per il breve, atteso per il lungo), rischio di perdita,
+    **lo sconto di prezzo recente** e l'affidabilità. Centrato su 50; affidabilità bassa → verso 50.
+    Logica valore: se il prezzo è SCESO di recente è PIÙ conveniente (saldo); se è salito, meno."""
     pg = r["prob_gain"] if r["prob_gain"] is not None else 50
     pl = r["prob_loss"] if r["prob_loss"] is not None else 50
     g = gain if gain is not None else 0
-    # Momentum di prezzo: variazione recente (~5 giorni), ripiego su 1 mese. Limitata a ±25.
+    # Sconto di prezzo recente (~5 giorni, ripiego 1 mese): prezzo giù → bonus, prezzo su → malus.
     mom = r.get("perf_5d")
     if mom is None:
         mom = r.get("perf_1m")
     mom = max(min(mom if mom is not None else 0.0, 25), -25)
     rf = _REL_FACTOR.get(r["reliab"], 0.8)
-    a = (pg - pl) + max(min(g, 40), -20) + 0.8 * mom   # +componente di prezzo (~ -140..160)
+    a = (pg - pl) + max(min(g, 40), -20) - 0.8 * mom   # −mom: più scende, più conviene (saldo)
     base = 50 + 0.42 * a
     conv = 50 + (base - 50) * rf                        # affidabilità bassa → verso 50
     return int(round(max(0, min(100, conv))))
@@ -2144,9 +2144,9 @@ def _days_between(d1, d2) -> int:
 
 
 def auto_promote_opportunities() -> list:
-    """FASE 1 — osservazione. Ogni occasione è osservata per una finestra (breve 3 giorni,
-    lungo 7 giorni); se alla fine la CONVENIENZA è migliorata (salita dal primo giorno osservato)
-    viene inserita nel Monitoraggio. Ritorna i ticker appena promossi."""
+    """FASE 1 — osservazione. Ogni occasione (saldo individuato in «Occasioni») è osservata per una
+    finestra (breve 3 giorni, lungo 7 giorni); se alla fine il PREZZO è salito dal primo giorno
+    osservato (la ripresa è iniziata) viene inserita nel Monitoraggio. Ritorna i ticker promossi."""
     watch = load_opp_watch()
     tracked = load_tracking()
     promoted = []
@@ -2156,16 +2156,16 @@ def auto_promote_opportunities() -> list:
         if tk in tracked:
             continue
         kind = e.get("kind", "short")
-        obs = [o for o in e.get("obs", []) if o.get("conv") is not None]
+        obs = [o for o in e.get("obs", []) if o.get("price")]
         if len(obs) < 2:
             continue
         days = _days_between(obs[0]["date"], obs[-1]["date"])
         window = _OBS_WINDOW.get(kind, 3)
-        dconv = obs[-1]["conv"] - obs[0]["conv"]      # variazione di convenienza nel periodo
-        if days >= window and dconv > 0:
+        ret = (obs[-1]["price"] / obs[0]["price"] - 1) * 100 if obs[0]["price"] else 0.0
+        if days >= window and ret > 0:
             track_opportunity(tk, kind,
                               note=f"🤖 Promossa il {_today_iso()}: dopo {days} giorni di osservazione "
-                                   f"la convenienza è migliorata ({dconv:+.0f} punti).")
+                                   f"il prezzo è salito ({ret:+.1f}%).")
             tr = load_tracking()
             if tk in tr:
                 tr[tk]["auto"] = True
@@ -2184,9 +2184,9 @@ def auto_promote_opportunities() -> list:
 
 def manage_monitoring() -> tuple:
     """FASE 2 — monitoraggio (solo occasioni auto-promosse; le scelte manuali non si toccano).
-    Valutazione in base alla CONVENIENZA rispetto al primo giorno di monitoraggio:
-    - rimuove quelle con convenienza in calo oltre la finestra (breve 5 giorni, lungo 10 giorni);
-    - segnala (prima notifica) quelle con convenienza in salita oltre la finestra (breve 3, lungo 7).
+    Valutazione in base al PREZZO rispetto al primo giorno di monitoraggio (l'investimento rende?):
+    - rimuove quelle in perdita oltre la finestra (breve 5 giorni, lungo 10 giorni);
+    - segnala (prima notifica) quelle in guadagno oltre la finestra (breve 3, lungo 7).
     Ritorna (da_notificare, rimosse)."""
     tracked = load_tracking()
     if not tracked:
@@ -2197,23 +2197,24 @@ def manage_monitoring() -> tuple:
         e = tracked[tk]
         if not e.get("auto"):
             continue
-        snaps = [s for s in e.get("snapshots", []) if s.get("convenienza") is not None]
+        snaps = [s for s in e.get("snapshots", []) if s.get("price")]
         if not snaps:
             continue
         kind = e.get("kind", "short")
         added = e.get("added") or snaps[0].get("date")
         days = _days_between(added, _today_iso())
-        dconv = snaps[-1]["convenienza"] - snaps[0]["convenienza"]   # variazione di convenienza
-        if days >= _REMOVE_WINDOW.get(kind, 5) and dconv < 0:
+        base = snaps[0]["price"]
+        ret = (snaps[-1]["price"] / base - 1) * 100 if base else 0.0   # rendimento dal giorno di promozione
+        if days >= _REMOVE_WINDOW.get(kind, 5) and ret <= 0:
             del tracked[tk]
             removed.append(tk)
             changed = True
             continue
-        if days >= _NOTIFY_WINDOW.get(kind, 3) and dconv > 0 and not e.get("notified"):
+        if days >= _NOTIFY_WINDOW.get(kind, 3) and ret > 0 and not e.get("notified"):
             e["notified"] = True
             changed = True
             to_notify.append({"ticker": tk, "kind": kind, "days": days,
-                              "dconv": round(dconv, 1), "name": e.get("name", tk)})
+                              "ret": round(ret, 1), "name": e.get("name", tk)})
     if changed:
         save_tracking(tracked)
     return to_notify, removed
@@ -2221,22 +2222,22 @@ def manage_monitoring() -> tuple:
 
 def observation_status() -> list:
     """Stato della FASE 1: per ogni occasione in osservazione, da quanti giorni è seguita,
-    la variazione di CONVENIENZA dal primo giorno e quanti giorni mancano alla promozione."""
+    il rendimento di PREZZO dal primo giorno e quanti giorni mancano alla promozione."""
     watch = load_opp_watch()
     out = []
     for key, e in watch.items():
-        obs = [o for o in e.get("obs", []) if o.get("conv") is not None]
+        obs = [o for o in e.get("obs", []) if o.get("price")]
         if not obs:
             continue
         kind = e.get("kind", "short")
         days = _days_between(obs[0]["date"], obs[-1]["date"])
-        dconv = (obs[-1]["conv"] - obs[0]["conv"]) if len(obs) >= 2 else 0.0
+        ret = (obs[-1]["price"] / obs[0]["price"] - 1) * 100 if (len(obs) >= 2 and obs[0]["price"]) else 0.0
         window = _OBS_WINDOW.get(kind, 3)
         out.append({"ticker": e.get("ticker", key.split(":")[-1]), "kind": kind,
-                    "name": e.get("name", ""), "days": days, "dconv": round(dconv, 1),
+                    "name": e.get("name", ""), "days": days, "ret": round(ret, 1),
                     "last_conv": obs[-1].get("conv"), "window": window,
                     "remaining": max(0, window - days)})
-    out.sort(key=lambda x: x["dconv"], reverse=True)
+    out.sort(key=lambda x: x["ret"], reverse=True)
     return out
 
 
