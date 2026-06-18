@@ -1499,15 +1499,14 @@ with tab_fund:
         st.caption(f"I primi {len(df_th)} titoli pesano circa il {conc:.1f}% del fondo "
                    f"({'concentrazione elevata' if conc > 50 else 'buona diversificazione'}).")
 
-        # --- Andamento dei titoli che compongono l'ETF ---
+        # --- Andamento dei titoli che compongono l'ETF (un grafico per titolo) ---
         st.markdown("#### Andamento dei titoli che lo compongono")
-        st.caption("👀 Come si sono mossi i principali titoli del fondo nel periodo scelto, confrontati a parità "
-                   "di partenza (base 100): una linea per ciascun titolo.")
+        st.caption("👀 Un grafico per ciascun titolo principale del fondo, ognuno con la propria scala, "
+                   "con la performance nel periodo scelto.")
         HPER = {"1 mese": "1mo", "6 mesi": "6mo", "1 anno": "1y", "Tutto": "max"}
         hsel = st.radio("Periodo", list(HPER.keys()), index=2, horizontal=True, key="etf_holdings_period")
         with st.spinner("Scarico l'andamento dei titoli…"):
-            figh = go.Figure()
-            perf_rows = []
+            hdata = []
             for s, n, p in th[:10]:
                 if not s:
                     continue
@@ -1517,21 +1516,27 @@ with tab_fund:
                 cc = hh["Close"].dropna()
                 if cc.empty or float(cc.iloc[0]) == 0:
                     continue
-                base100 = cc / float(cc.iloc[0]) * 100
-                figh.add_trace(go.Scatter(x=cc.index, y=base100, mode="lines", name=s))
-                perf_rows.append({"Ticker": s, "Nome": n, "Peso %": p * 100,
-                                  "Performance %": (float(cc.iloc[-1]) / float(cc.iloc[0]) - 1) * 100})
-        if perf_rows:
-            figh.update_layout(height=380, margin=dict(t=10, b=10, l=10, r=10),
-                               legend=dict(orientation="h"), yaxis_title="Base 100")
-            show_chart(figh)
-            dfp = pd.DataFrame(perf_rows).set_index("Ticker").sort_values("Performance %", ascending=False)
-            st.dataframe(dfp, use_container_width=True, column_config={
-                "Peso %": st.column_config.NumberColumn("Peso %", format="%.2f%%"),
-                "Performance %": st.column_config.NumberColumn(f"Performance ({hsel})", format="%+.1f%%"),
-            })
-            st.caption("Performance dei singoli titoli nel periodo (ordinati dal migliore). "
-                       "Per l'analisi dettagliata di uno di essi, cercane il ticker nella barra a sinistra.")
+                perf = (float(cc.iloc[-1]) / float(cc.iloc[0]) - 1) * 100
+                hdata.append((s, n, p, cc, perf))
+        if hdata:
+            hcols = st.columns(2)
+            for i, (s, n, p, cc, perf) in enumerate(hdata):
+                with hcols[i % 2]:
+                    col = "#1a7f37" if perf >= 0 else "#cf222e"
+                    nm = (n or "")[:26].replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+                    st.markdown(
+                        f"<b>{s}</b> <span style='color:#8b94a3;font-size:0.85em'>{nm}</span><br>"
+                        f"<span style='color:#8b94a3;font-size:0.85em'>peso {p*100:.1f}%</span> · "
+                        f"<span style='color:{col};font-weight:600'>{perf:+.1f}%</span>",
+                        unsafe_allow_html=True)
+                    fg = go.Figure(go.Scatter(x=cc.index, y=cc, mode="lines",
+                                              line=dict(color=col, width=1.8)))
+                    fg.update_layout(height=170, margin=dict(t=6, b=6, l=6, r=6), showlegend=False,
+                                     yaxis_title=None, xaxis_title=None,
+                                     plot_bgcolor="rgba(0,0,0,0)")
+                    show_chart(fg)
+            st.caption("Performance dal primo giorno del periodo. Per l'analisi dettagliata di un titolo, "
+                       "cercane il ticker nella barra a sinistra.")
         else:
             st.caption("Andamento dei titoli non disponibile al momento (dati non recuperabili).")
     else:
