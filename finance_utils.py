@@ -226,6 +226,19 @@ def info_from_fmp(ticker: str) -> dict:
     info["payoutRatio"] = num(r.get("dividendPayoutRatioTTM"))
     info["revenueGrowth"] = num(g.get("revenueGrowth") or g.get("growthRevenue"))
     info["earningsGrowth"] = num(g.get("netIncomeGrowth") or g.get("growthNetIncome"))
+
+    # --- Metriche "serie" per la qualità in saldo (dove FMP le espone gratis) ---
+    info["roic"] = num(m.get("returnOnInvestedCapitalTTM") or m.get("roicTTM"))           # ROIC (frazione)
+    info["grossMargins"] = num(r.get("grossProfitMarginTTM"))                             # margine lordo
+    info["interestCoverage"] = num(r.get("interestCoverageTTM"))
+    info["evToEbitda"] = num(m.get("enterpriseValueOverEBITDATTM") or r.get("enterpriseValueMultipleTTM"))
+    fy = num(m.get("freeCashFlowYieldTTM"))                                                # frazione (0.05)
+    if fy is not None:
+        info["fcfYield"] = round(fy * 100, 2)                                              # → % del prezzo
+    elif num(r.get("priceToFreeCashFlowsRatioTTM")):
+        pfcf = num(r.get("priceToFreeCashFlowsRatioTTM"))
+        if pfcf and pfcf > 0:
+            info["fcfYield"] = round(100.0 / pfcf, 2)
     return {k: v for k, v in info.items() if v is not None}
 
 
@@ -381,6 +394,55 @@ def fundamentals_from_sec(ticker: str) -> dict:
     return {k: v for k, v in info.items() if v is not None}
 
 
+@st.cache_data(ttl=86400, show_spinner=False)
+def altman_z_from_sec(ticker: str) -> dict:
+    """Altman Z-Score dai bilanci ufficiali SEC (solo USA, modello per le INDUSTRIALI; banche/REIT
+    esclusi a monte). Misura il rischio di dissesto. Ritorna {z, zone, note} o None se i dati mancano.
+    Z = 1,2·(CCN/Att) + 1,4·(UtiliReinv/Att) + 3,3·(EBIT/Att) + 0,6·(CapMkt/Pass) + 1,0·(Ricavi/Att)."""
+    cik = _sec_cik_map().get(ticker.upper())
+    if not cik:
+        return None
+    facts = _sec_companyfacts(cik)
+    gaap = (facts.get("facts") or {}).get("us-gaap", {})
+    if not gaap:
+        return None
+
+    def usd(c):
+        return (gaap.get(c, {}).get("units", {}) or {}).get("USD", [])
+
+    ta = _sec_instant(usd("Assets"))
+    ca = _sec_instant(usd("AssetsCurrent"))
+    cl = _sec_instant(usd("LiabilitiesCurrent"))
+    tl = _sec_instant(usd("Liabilities"))
+    re = _sec_instant(usd("RetainedEarningsAccumulatedDeficit"))
+    ebit_l = _sec_annual(usd("OperatingIncomeLoss"), 1)
+    ebit = ebit_l[0] if ebit_l else None
+    rev_l = (_sec_annual(usd("RevenueFromContractWithCustomerExcludingAssessedTax"), 1)
+             or _sec_annual(usd("Revenues"), 1))
+    rev = rev_l[0] if rev_l else None
+    dei = (facts.get("facts") or {}).get("dei", {})
+    shares = _sec_instant((dei.get("EntityCommonStockSharesOutstanding", {}).get("units", {}) or {}).get("shares", []))
+    price = None
+    h = get_history(ticker, period="5d")
+    if not h.empty:
+        c = h["Close"].dropna()
+        if not c.empty:
+            price = float(c.iloc[-1])
+    mve = price * shares if (price and shares) else None
+    if any(x is None for x in (ta, ca, cl, tl, re, ebit, rev, mve)) or ta <= 0 or tl <= 0:
+        return None
+    wc = ca - cl
+    z = (1.2 * (wc / ta) + 1.4 * (re / ta) + 3.3 * (ebit / ta)
+         + 0.6 * (mve / tl) + 1.0 * (rev / ta))
+    if z > 2.99:
+        zone, note = "🟢 solida", "rischio di dissesto basso"
+    elif z >= 1.81:
+        zone, note = "🟡 zona grigia", "da monitorare"
+    else:
+        zone, note = "🔴 a rischio", "rischio di dissesto elevato"
+    return {"z": round(z, 2), "zone": zone, "note": note}
+
+
 # ---------------------------------------------------------------------------
 # RISERVA: FINNHUB (fondamentali TTM + notizie). Limite al minuto, raramente esaurito.
 # Chiave in st.secrets["finnhub_api_key"] o env FINNHUB_API_KEY.
@@ -455,9 +517,31 @@ def info_from_finnhub(ticker: str) -> dict:
     info["quickRatio"] = num(m.get("quickRatioAnnual"))
     info["dividendYield"] = num(m.get("dividendYieldIndicatedAnnual"))   # già percento (come yfinance)
     info["revenueGrowth"] = frac(m.get("revenueGrowthTTMYoy"))
+    info["earningsGrowth"] = frac(m.get("epsGrowthTTMYoy") or m.get("epsGrowthQuarterlyYoy"))
     info["beta"] = num(m.get("beta"))
     info["fiftyTwoWeekHigh"] = num(m.get("52WeekHigh"))
     info["fiftyTwoWeekLow"] = num(m.get("52WeekLow"))
+    info["payoutRatio"] = frac(m.get("payoutRatioTTM") or m.get("payoutRatioAnnual"))
+
+    # --- Metriche "serie" per la qualità in saldo (Finnhub metric=all è il bacino gratis più ricco) ---
+    def _firstk(*keys):
+        for k in keys:
+            if m.get(k) is not None:
+                return m.get(k)
+        return None
+    info["roic"] = frac(_firstk("roicTTM", "roiTTM", "roicAnnual", "roiAnnual"))         # ROIC (frazione)
+    info["grossMargins"] = frac(_firstk("grossMarginTTM", "grossMarginAnnual"))          # margine lordo
+    info["operatingMargins"] = info.get("operatingMargins")
+    info["interestCoverage"] = num(_firstk("netInterestCoverageTTM", "netInterestCoverageAnnual"))
+    info["evToEbitda"] = num(_firstk("currentEv/ebitdaTTM", "currentEv/ebitdaAnnual"))   # EV/EBITDA
+    pfcf = num(_firstk("pfcfShareTTM", "pfcfShareAnnual"))                                 # prezzo / FCF per azione
+    if pfcf and pfcf > 0:
+        info["fcfYield"] = round(100.0 / pfcf, 2)                                          # FCF yield (% del prezzo)
+    info["revenueGrowth3Y"] = frac(_firstk("revenueGrowth3Y"))                            # CAGR 3 anni (frazione)
+    info["revenueGrowth5Y"] = frac(_firstk("revenueGrowth5Y"))
+    info["epsGrowth3Y"] = frac(_firstk("epsGrowth3Y"))
+    info["epsGrowth5Y"] = frac(_firstk("epsGrowth5Y"))
+    info["netMargin5Y"] = frac(_firstk("netProfitMargin5Y", "netMargin5Y"))              # margine netto medio 5 anni
     return {k: v for k, v in info.items() if v is not None}
 
 
@@ -1197,7 +1281,212 @@ def _technical_score(hist: pd.DataFrame):
     return pos / (pos + neg) * 100
 
 
+# ---------------------------------------------------------------------------
+# QUALITÀ IN SALDO v2 — punteggio a PILASTRI pesati + radar + anti-trappola.
+# Sostituisce il conteggio di "pallini" (dove la qualità del business pesava quanto
+# il P/S, con soglie uguali per ogni settore) con pilastri pesati, un radar di
+# qualità (stile Simply Wall St) e un controllo anti-trappola di valore.
+# ---------------------------------------------------------------------------
+
+# Settori "finanziari" dove ROIC / EV-EBIT / Altman non hanno senso (modello diverso)
+_FIN_SECTORS = ("financ", "bank", "insurance", "real estate", "realestate", "reit", "mortgage")
+_WACC_PROXY = 9.0   # costo del capitale di riferimento (%) per confrontare il ROIC
+_PILLAR_WEIGHTS = {"Qualità": 0.35, "Salute": 0.25, "Valore": 0.25, "Crescita": 0.15}
+
+
+def _is_financial_sector(sector) -> bool:
+    s = (sector or "").lower()
+    return any(k in s for k in _FIN_SECTORS)
+
+
+def _lin(v, lo, hi, higher=True):
+    """Mappa v in 0-100 fra lo e hi (clampato). higher=False → più basso è meglio."""
+    if v is None or (isinstance(v, float) and math.isnan(v)):
+        return None
+    try:
+        v = float(v)
+    except (TypeError, ValueError):
+        return None
+    if higher:
+        if v <= lo:
+            return 0.0
+        if v >= hi:
+            return 100.0
+        return (v - lo) / (hi - lo) * 100.0
+    if v <= lo:
+        return 100.0
+    if v >= hi:
+        return 0.0
+    return (hi - v) / (hi - lo) * 100.0
+
+
+def _avg_scores(scores):
+    vals = [s for s in scores if s is not None]
+    return round(sum(vals) / len(vals), 1) if vals else None
+
+
+def _div_fcf_cover(info: dict):
+    """Copertura del dividendo col FREE CASH FLOW (non col solo utile): FCF yield ÷ dividend yield
+    = FCF / dividendi. ≥ ~1,5 = dividendo ben coperto. None se manca un dato."""
+    fy, dyp = info.get("fcfYield"), info.get("dividendYield")
+    if fy is not None and dyp and dyp > 0:
+        return round(fy / dyp, 2)
+    return None
+
+
+def _health_fscore(info: dict):
+    """Indice di salute 0-9 in stile **Piotroski (SEMPLIFICATO)**: usa i dati aggregati gratuiti,
+    NON i 9 test originali anno-su-anno (che richiederebbero due bilanci completi). Più alto = più sano."""
+    roa, pm, roe = info.get("returnOnAssets"), info.get("profitMargins"), info.get("returnOnEquity")
+    fcfy, d2e, cr = info.get("fcfYield"), info.get("debtToEquity"), info.get("currentRatio")
+    gm, rg, eg = info.get("grossMargins"), info.get("revenueGrowth"), info.get("earningsGrowth")
+    roic = info.get("roic")
+    pts, tot = 0, 0
+
+    def chk(cond):
+        nonlocal pts, tot
+        if cond is None:
+            return
+        tot += 1
+        if cond:
+            pts += 1
+
+    chk(None if roa is None else roa > 0)
+    chk(None if pm is None else pm > 0)
+    chk(None if fcfy is None else fcfy > 0)
+    chk(None if roe is None else roe > 0.08)
+    chk(None if roic is None else roic > _WACC_PROXY / 100.0)
+    chk(None if d2e is None else d2e < 150)
+    chk(None if cr is None else cr > 1.0)
+    chk(None if gm is None else gm > 0.25)
+    chk(None if rg is None else rg > 0)
+    chk(None if eg is None else eg > 0)
+    if tot < 4:
+        return None
+    return round(pts / tot * 9, 1)
+
+
+def quality_radar(info: dict) -> dict:
+    """Cinque assi di qualità (stile Simply Wall St) 0-100: Valore, Qualità, Salute, Crescita, Dividendo.
+    Ogni asse è la media dei sotto-criteri disponibili (None se i dati mancano)."""
+    pe, pb, ps = info.get("trailingPE"), info.get("priceToBook"), info.get("priceToSalesRatio")
+    ev_ebit, fcfy = info.get("evToEbitda"), info.get("fcfYield")
+    roe, roa, roic = info.get("returnOnEquity"), info.get("returnOnAssets"), info.get("roic")
+    pm, om, gm = info.get("profitMargins"), info.get("operatingMargins"), info.get("grossMargins")
+    d2e, cr, icov = info.get("debtToEquity"), info.get("currentRatio"), info.get("interestCoverage")
+    rg, rg3 = info.get("revenueGrowth"), info.get("revenueGrowth3Y")
+    eg, eg3 = info.get("earningsGrowth"), info.get("epsGrowth3Y")
+    dy, payout = info.get("dividendYield"), info.get("payoutRatio")
+    fin = _is_financial_sector(info.get("sector"))
+    fscore = _health_fscore(info)
+
+    # PEG con la crescita a 3 anni (CAGR), non solo quella passata di 1 anno
+    peg = info.get("pegRatioCagr")
+    if peg is None and pe and eg3 and eg3 > 0:
+        peg = pe / (eg3 * 100)
+    if peg is None:
+        peg = info.get("pegRatio")
+
+    def pct(x):
+        return x * 100 if x is not None else None
+
+    valore = _avg_scores([
+        _lin(pe, 10, 35, False) if (pe and pe > 0) else None,
+        _lin(pb, 1, 6, False) if (pb and pb > 0) else None,
+        _lin(ps, 1, 8, False) if (ps and ps > 0) else None,
+        _lin(ev_ebit, 8, 25, False) if (ev_ebit and ev_ebit > 0) else None,
+        _lin(fcfy, 2, 8, True),
+        _lin(peg, 0.8, 2.5, False) if (peg and peg > 0) else None,
+    ])
+    qaxes = [_lin(pct(roe), 8, 25, True), _lin(pct(pm), 3, 20, True),
+             _lin(pct(om), 5, 25, True), _lin(pct(gm), 20, 60, True), _lin(pct(roa), 2, 12, True)]
+    if roic is not None and not fin:
+        qaxes.append(_lin(pct(roic) - _WACC_PROXY, 0, 12, True))   # ROIC oltre il costo del capitale
+    qualita = _avg_scores(qaxes)
+    salute = _avg_scores([
+        _lin(d2e, 40, 200, False) if d2e is not None else None,
+        _lin(cr, 1.0, 2.5, True),
+        _lin(icov, 2, 12, True),
+        _lin(fscore, 3, 8, True) if fscore is not None else None,
+    ])
+    crescita = _avg_scores([_lin(pct(rg), 0, 18, True), _lin(pct(rg3), 0, 18, True),
+                            _lin(pct(eg), 0, 18, True), _lin(pct(eg3), 0, 18, True)])
+    if dy and dy > 0:
+        dy_score = _lin(dy, 1.5, 6, True)
+        if dy > 9:                       # rendimento sospettosamente alto = rischio taglio
+            dy_score = 40.0
+        dividendo = _avg_scores([dy_score,
+                                 _lin(payout, 0.4, 0.95, False) if payout is not None else None,
+                                 _lin(_div_fcf_cover(info), 1.0, 2.5, True)])
+    else:
+        dividendo = None
+    return {"Valore": valore, "Qualità": qualita, "Salute": salute,
+            "Crescita": crescita, "Dividendo": dividendo}
+
+
+def fundamental_score_v2(info: dict):
+    """Punteggio fondamentale 0-100 a PILASTRI pesati (Qualità 35% / Solidità 25% / Valutazione 25% /
+    Crescita 15%), non più conteggio di pallini. None se i dati non bastano (< 2 pilastri)."""
+    radar = quality_radar(info)
+    num = den = 0.0
+    used = 0
+    for pillar, w in _PILLAR_WEIGHTS.items():
+        s = radar.get(pillar)
+        if s is not None:
+            num += s * w
+            den += w
+            used += 1
+    if den <= 0 or used < 2:
+        return None
+    return round(num / den, 1)
+
+
+def value_trap_check(info: dict) -> dict:
+    """Anti-trappola di valore (la protezione n°1): guarda il TREND dei fondamentali.
+    Ricavi / utili / margini stabili o in crescita = i conti tengono → vera occasione;
+    in calo = probabile trappola. Lo sconto di prezzo è valutato a parte (% dal max).
+    Ritorna {verdict, factor, label, reasons}."""
+    rg, rg3 = info.get("revenueGrowth"), info.get("revenueGrowth3Y")
+    eg, eg3 = info.get("earningsGrowth"), info.get("epsGrowth3Y")
+    pm, pm5 = info.get("profitMargins"), info.get("netMargin5Y")
+    signals, reasons = 0, []
+
+    rgv = rg if rg is not None else rg3
+    if rgv is not None:
+        if rgv >= 0.03:
+            signals += 1; reasons.append("ricavi in crescita")
+        elif rgv <= -0.05:
+            signals -= 1; reasons.append("ricavi in calo")
+    egv = eg if eg is not None else eg3
+    if egv is not None:
+        if egv >= 0.03:
+            signals += 1; reasons.append("utili in crescita")
+        elif egv <= -0.10:
+            signals -= 1; reasons.append("utili in forte calo")
+    if pm is not None and pm5 is not None:
+        if pm >= pm5 - 0.005:
+            signals += 1; reasons.append("margini stabili o in miglioramento")
+        elif pm < pm5 - 0.03:
+            signals -= 1; reasons.append("margini in erosione")
+    elif pm is not None and pm < 0:
+        signals -= 1; reasons.append("attualmente in perdita")
+
+    if signals >= 1:
+        return {"verdict": "occasione", "factor": 1.08,
+                "label": "✅ conti che tengono", "reasons": reasons}
+    if signals <= -1:
+        return {"verdict": "trappola", "factor": 0.75,
+                "label": "🛑 fondamentali in peggioramento (possibile trappola)", "reasons": reasons}
+    return {"verdict": "neutro", "factor": 1.0,
+            "label": "⚠️ trend incerto", "reasons": reasons or ["trend dei fondamentali poco leggibile"]}
+
+
 def _fundamental_score(info: dict):
+    """Qualità del business 0-100. Usa i pilastri pesati (v2); ripiega sul vecchio
+    conteggio di pallini solo se i pilastri non hanno dati sufficienti."""
+    v2 = fundamental_score_v2(info)
+    if v2 is not None:
+        return v2
     blocks = fundamental_blocks(info)
     rows = [r for rs in blocks.values() for r in rs]
     pos = sum(1 for r in rows if r[2] == "positivo")
@@ -1565,6 +1854,9 @@ def opportunity_row(ticker: str, with_fundamentals: bool = True) -> dict:
 
     etf, fscore, name = False, None, ticker
     sector, pe, pb, ps = None, None, None, None
+    radar = trap = None
+    roic = ev_ebit = fcf_yield = gross_m = icov = div_cov = None
+    rev_cagr3 = eps_cagr3 = fscore_health = None
     if with_fundamentals:                    # solo per il lungo periodo (qualità)
         info = get_info(ticker)
         etf = is_fund(info) or is_known_etf(ticker)   # riconosce gli ETF anche sul cloud
@@ -1574,6 +1866,18 @@ def opportunity_row(ticker: str, with_fundamentals: bool = True) -> dict:
         pe = _nn(info.get("trailingPE"))
         pb = _nn(info.get("priceToBook"))
         ps = _nn(info.get("priceToSalesRatio"))
+        if not etf:
+            radar = quality_radar(info)              # 5 assi di qualità (display)
+            trap = value_trap_check(info)            # anti-trappola di valore (protezione n°1)
+            roic = _nn(info.get("roic"))
+            ev_ebit = _nn(info.get("evToEbitda"))
+            fcf_yield = _nn(info.get("fcfYield"))
+            gross_m = _nn(info.get("grossMargins"))
+            icov = _nn(info.get("interestCoverage"))
+            div_cov = _div_fcf_cover(info)
+            rev_cagr3 = _nn(info.get("revenueGrowth3Y"))
+            eps_cagr3 = _nn(info.get("epsGrowth3Y"))
+            fscore_health = _health_fscore(info)
 
     return dict(ticker=ticker.upper(), name=name, price=price, rsi=rsi, dd_high=dd_high,
                 perf_1m=perf_1m, perf_5d=perf_5d, perf_1y=perf_1y, below_bb=below_bb,
@@ -1583,6 +1887,9 @@ def opportunity_row(ticker: str, with_fundamentals: bool = True) -> dict:
                 sharpe=rfac.get("sharpe"), sortino=rfac.get("sortino"), ulcer=rfac.get("ulcer"),
                 maxdd=rfac.get("maxdd"), hist_z=rfac.get("hist_z"),
                 sector=sector, pe=pe, pb=pb, ps=ps,
+                radar=radar, trap=trap, roic=roic, ev_ebit=ev_ebit, fcf_yield=fcf_yield,
+                gross_m=gross_m, interest_cov=icov, div_cov=div_cov,
+                rev_cagr3=rev_cagr3, eps_cagr3=eps_cagr3, fscore_health=fscore_health,
                 atr=atr_val, atr_pct=atr_pct, rr=rr, rvol=rvol, avg_dollar_vol=avg_dollar_vol,
                 green_day=green_day, rsi_rising=rsi_rising, back_in_bb=back_in_bb,
                 reversal_confirmed=reversal_confirmed, vertical_crash=vertical_crash,
@@ -1669,6 +1976,7 @@ _ATR_STOP_K = 2.0          # stop = prezzo − k·ATR (volatilità reale, non mi
 _RR_MIN = 1.5              # scarta i setup con Rischio/Rendimento sotto questa soglia
 _MIN_PRICE = 3.0           # sotto questo prezzo l'RSI è inaffidabile (penny) → escluso
 _MIN_DOLLAR_VOL = 1_000_000  # liquidità minima (~$ scambiati/giorno) → niente illiquidi
+_SECTOR_CAP_LONG = 4       # max occasioni di lungo per settore (no liste tutte-banche)
 
 
 def _short_score(r, regime=1.0):
@@ -1772,7 +2080,10 @@ def _long_score(r):
         return min(disc, 100)
     if r["fscore"] is None:
         return None
-    return r["fscore"] * 0.6 + disc * 0.4
+    base = r["fscore"] * 0.6 + disc * 0.4       # qualità del business (pilastri) + sconto
+    trap = r.get("trap") or {}
+    base *= trap.get("factor", 1.0)             # anti-trappola: declassa i fondamentali in peggioramento
+    return max(0.0, min(100.0, base))
 
 
 def _long_reasons(r):
@@ -1780,13 +2091,18 @@ def _long_reasons(r):
     if r["etf"]:
         bits.append("ETF diversificato in saldo")
     elif r["fscore"] is not None:
-        if r["fscore"] >= 60:
-            bits.append(f"buoni fondamentali (punteggio {r['fscore']:.0f}/100)")
-        else:
-            bits.append(f"fondamentali nella media ({r['fscore']:.0f}/100)")
+        bits.append(f"qualità del business {r['fscore']:.0f}/100" if r["fscore"] >= 60
+                    else f"qualità nella media {r['fscore']:.0f}/100")
+    trap = r.get("trap")
+    if trap and not r["etf"]:
+        bits.append(trap["label"])              # ✅ conti che tengono / ⚠️ incerto / 🛑 trappola
+    if r.get("roic") is not None and not r["etf"]:
+        bits.append(f"ROIC {r['roic'] * 100:.0f}%")
     if r["dd_high"] is not None:
         bits.append(f"in saldo: {abs(r['dd_high']):.0f}% sotto il massimo dell'anno")
-    if r["perf_1y"] is not None:
+    if r.get("rev_cagr3") is not None:
+        bits.append(f"ricavi 3 anni {r['rev_cagr3'] * 100:+.0f}%/anno")
+    elif r["perf_1y"] is not None:
         bits.append(f"ultimo anno {r['perf_1y']:+.0f}%")
     return " · ".join(bits)
 
@@ -2165,6 +2481,8 @@ def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
             if dd is None or dd > -12:          # richiede uno sconto significativo dai massimi
                 continue
             rows.append({"Ticker": r["ticker"], "Nome": r["name"], "Convenienza": conv,
+                         "Settore": r.get("sector"),
+                         "Qualità trend": (r.get("trap") or {}).get("label"),
                          "Prezzo": r["price"], "% dal max": dd, "Perf 1 anno": r["perf_1y"],
                          "Occasione": int(round(sc)),
                          "Prob. salita": r["prob_gain"], "Guadagno atteso": r["exp_ret"],
@@ -2172,7 +2490,13 @@ def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
                          "Perché": _long_reasons(r)})
     df = pd.DataFrame(rows)
     if not df.empty:
-        df = df.sort_values("Convenienza", ascending=False).set_index("Ticker")
+        df = df.sort_values("Convenienza", ascending=False)
+        # Cap per settore (solo lungo): evita liste tutte-banche o tutte-stesso-settore
+        if kind == "long" and "Settore" in df.columns:
+            df["_sec"] = df["Settore"].fillna("—")
+            df = df.groupby("_sec", group_keys=False, sort=False).head(_SECTOR_CAP_LONG)
+            df = df.drop(columns="_sec")
+        df = df.set_index("Ticker")
     return df
 
 
