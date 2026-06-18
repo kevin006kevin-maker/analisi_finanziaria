@@ -885,6 +885,29 @@ if section.startswith("Monitoraggio"):
                     else:
                         st.metric(f"{label} — rendimento medio", "—")
                         st.caption("Servono più giorni di dati.")
+
+            # --- Calibrazione: la convenienza alta rende più della bassa? ---
+            cal = fu.track_record_calibration()
+            st.markdown("###### La convenienza funziona? Resa reale per fascia")
+            band_rows = [{
+                "Fascia": fa["banda"], "Promozioni": fa["count"],
+                "Resa 7g": (fa["d7"]["avg"] if fa["d7"] else None),
+                "Resa 30g": (fa["d30"]["avg"] if fa["d30"] else None),
+                "In positivo 30g": (fa["d30"]["hit"] if fa["d30"] else None),
+            } for fa in cal["fasce"]]
+            st.dataframe(pd.DataFrame(band_rows).set_index("Fascia"), use_container_width=True, column_config={
+                "Promozioni": st.column_config.NumberColumn("Promozioni", format="%d"),
+                "Resa 7g": st.column_config.NumberColumn("Resa media 7g", format="%+.1f%%"),
+                "Resa 30g": st.column_config.NumberColumn("Resa media 30g", format="%+.1f%%"),
+                "In positivo 30g": st.column_config.NumberColumn("In positivo 30g", format="%d%%"),
+            })
+            if cal["ok"] is True:
+                st.success(cal["verdetto"])
+            elif cal["ok"] is False:
+                st.warning(cal["verdetto"])
+            else:
+                st.caption("ℹ️ " + cal["verdetto"])
+
             recs = fu.load_track_record()
             if recs:
                 dfr = pd.DataFrame([{
