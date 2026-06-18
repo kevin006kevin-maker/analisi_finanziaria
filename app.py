@@ -41,6 +41,20 @@ footer { visibility: hidden; }
 header[data-testid="stHeader"] { background: transparent; }
 .block-container { padding-top: 2.4rem; max-width: 1250px; }
 
+/* Pulsante per aprire la barra laterale: sempre visibile e ben cliccabile (soprattutto da telefono) */
+[data-testid="stSidebarCollapsedControl"], [data-testid="collapsedControl"] {
+    display: flex !important; visibility: visible !important; opacity: 1 !important;
+    z-index: 1000000 !important; top: 0.6rem !important; left: 0.6rem !important;
+}
+[data-testid="stSidebarCollapsedControl"] button, [data-testid="collapsedControl"] button {
+    background: #1b1e24 !important;
+    border: 1px solid rgba(255,255,255,0.18) !important;
+    border-radius: 9px !important;
+    color: #e8eaed !important;
+    width: 2.4rem; height: 2.4rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+}
+
 /* Sidebar */
 section[data-testid="stSidebar"] {
     background: #101216;
@@ -163,6 +177,19 @@ def page_header(title: str, subtitle: str = ""):
         f"<div class='ph-title'>{safe}</div>{sub}</div>",
         unsafe_allow_html=True,
     )
+
+
+def show_chart(fig, use_container_width=True, config=None, **kw):
+    """Mostra un grafico Plotly disattivando lo zoom (fastidioso da telefono): un tocco
+    sulla linea mostra il valore in quel punto, senza zoomare. Niente barra strumenti."""
+    try:
+        fig.update_layout(dragmode=False)
+    except Exception:
+        pass
+    cfg = {"displayModeBar": False, "scrollZoom": False, "doubleClick": False, "staticPlot": False}
+    if config:
+        cfg.update(config)
+    st.plotly_chart(fig, use_container_width=use_container_width, config=cfg, **kw)
 
 
 def _now_rome():
@@ -608,7 +635,7 @@ if section.startswith("Occasioni"):
                                                    annotation_text="🛑 stop", annotation_position="bottom left")
                                 sfig.update_layout(height=230, margin=dict(t=10, b=10, l=10, r=10),
                                                    showlegend=False, yaxis_title=None, xaxis_title=None)
-                                st.plotly_chart(sfig, use_container_width=True)
+                                show_chart(sfig, use_container_width=True)
                             lvl = []
                             if tgt and price:
                                 lvl.append(f"🎯 Bersaglio: **{tgt:,.2f}** ({(tgt/price-1)*100:+.0f}%)")
@@ -926,7 +953,7 @@ if section.startswith("Monitoraggio"):
             if hc.empty:
                 st.caption("Nessun dato di prezzo per il periodo scelto.")
             else:
-                st.plotly_chart(fig, use_container_width=True)
+                show_chart(fig, use_container_width=True)
             st.caption("👀 **Linea blu** = prezzo reale nel periodo scelto qui sopra. **Linea viola** = la convenienza "
                        "registrata nei giorni in cui il sistema ha osservato il titolo (sale = il segnale migliora). "
                        "Verde = bersaglio, rossa = stop.")
@@ -1279,7 +1306,7 @@ with vcol1:
             },
         ))
         gauge.update_layout(height=180, margin=dict(t=10, b=10, l=20, r=20))
-        st.plotly_chart(gauge, use_container_width=True)
+        show_chart(gauge, use_container_width=True)
     else:
         st.markdown(f"<div style='font-size:2.4em;text-align:center'>{verdict['emoji']}</div>",
                     unsafe_allow_html=True)
@@ -1348,7 +1375,7 @@ with tab_over:
             yaxis=dict(range=[ymin - pad, ymax + pad], showgrid=True, gridcolor="rgba(128,128,128,0.15)"),
             xaxis=dict(showgrid=False),
         )
-        st.plotly_chart(fig, use_container_width=True)
+        show_chart(fig, use_container_width=True)
         perf_c = (closes.iloc[-1] / closes.iloc[0] - 1) * 100
         st.caption(f"Variazione nel periodo «{cp_label}»: **{perf_c:+.1f}%**")
 
@@ -1404,7 +1431,7 @@ with tab_fund:
             figa = go.Figure(go.Pie(labels=labels, values=vals, hole=0.45, sort=True))
             figa.update_traces(textinfo="label+percent")
             figa.update_layout(height=320, margin=dict(t=10, b=10), showlegend=False)
-            st.plotly_chart(figa, use_container_width=True)
+            show_chart(figa, use_container_width=True)
         else:
             st.caption("Dati di composizione non disponibili.")
 
@@ -1421,7 +1448,7 @@ with tab_fund:
                 orientation="h", marker_color="#0969da",
             ))
             figs.update_layout(height=320, margin=dict(t=10, b=10), xaxis_title="%")
-            st.plotly_chart(figs, use_container_width=True)
+            show_chart(figs, use_container_width=True)
         else:
             st.caption("Ripartizione settoriale non disponibile.")
 
@@ -1544,7 +1571,7 @@ with tab_tech:
         if hist_t["SMA200"].notna().any():
             figp.add_trace(go.Scatter(x=hist_t.index, y=hist_t["SMA200"], name="Media 200 giorni", line=dict(color="#d29922", width=1.4)))
         figp.update_layout(height=420, margin=dict(t=10, b=10), legend=dict(orientation="h"))
-        st.plotly_chart(figp, use_container_width=True)
+        show_chart(figp, use_container_width=True)
         st.caption("Su periodi brevi (1 settimana/1 mese) le medie mobili possono non comparire: servono più dati.")
     else:
         # Modalità Esperto: prezzo + Bollinger + RSI + MACD
@@ -1565,7 +1592,7 @@ with tab_tech:
         figp.add_trace(go.Scatter(x=hist_t.index, y=hist_t["MACD"], name="MACD", line=dict(color="#0969da")), row=3, col=1)
         figp.add_trace(go.Scatter(x=hist_t.index, y=hist_t["MACD_signal"], name="Signal", line=dict(color="#cf222e")), row=3, col=1)
         figp.update_layout(height=720, margin=dict(t=30, b=10), legend=dict(orientation="h"))
-        st.plotly_chart(figp, use_container_width=True)
+        show_chart(figp, use_container_width=True)
         st.caption(
             "👀 **Come leggere i tre riquadri:** "
             "**1) Prezzo** con medie mobili e bande di Bollinger (il prezzo che tocca la banda esterna è un estremo). "
@@ -1648,7 +1675,7 @@ with tab_sim:
                            annotation_text="Capitale iniziale")
             figv.update_layout(height=420, margin=dict(t=10, b=10), legend=dict(orientation="h"),
                                yaxis_title=f"Valore ({currency})")
-            st.plotly_chart(figv, use_container_width=True)
+            show_chart(figv, use_container_width=True)
 
             # Sintesi a parole + confronto col mercato
             verb = "guadagnato" if res["gain"] >= 0 else "perso"
@@ -1717,7 +1744,7 @@ with tab_sim:
         figf.add_trace(go.Scatter(x=x, y=proj["invested"], name="Totale versato", line=dict(color="gray", dash="dash")))
         figf.update_layout(height=440, margin=dict(t=10, b=10), legend=dict(orientation="h"),
                            xaxis_title="Anni da oggi", yaxis_title=f"Valore ({currency})")
-        st.plotly_chart(figf, use_container_width=True)
+        show_chart(figf, use_container_width=True)
         st.caption("👀 **Cosa guardare:** la linea blu è l'andamento **mediano** simulato; la **fascia azzurra** "
                    "racchiude l'80% degli scenari possibili (tra il bordo rosso = prudente e quello verde = ottimistico). "
                    "La linea grigia è quanto hai versato in totale: dove la fascia ci sta sopra, sei in guadagno. "
@@ -1838,7 +1865,7 @@ with tab_cmp:
                     norm = h["Close"] / h["Close"].iloc[0] * 100
                     figc.add_trace(go.Scatter(x=h.index, y=norm, name=t))
             figc.update_layout(height=420, margin=dict(t=10, b=10), yaxis_title="Base 100", legend=dict(orientation="h"))
-            st.plotly_chart(figc, use_container_width=True)
+            show_chart(figc, use_container_width=True)
 
 # =============================== NOTIZIE ===================================
 with tab_news:
