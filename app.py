@@ -626,9 +626,14 @@ if section.startswith("Occasioni"):
                     st.markdown(
                         "**Cosa cerchiamo:** aziende con **buoni fondamentali** (o ETF diversificati) **scese parecchio dai massimi**: "
                         "l'idea è comprare qualità «in saldo» e tenere per **anni**.\n\n"
-                        "- **💎 Valore**: combina la **qualità dei conti** (punteggio fondamentale) e lo **sconto** dai massimi.\n"
-                        "- **% dal max**: lo sconto rispetto al massimo dell'ultimo anno.\n"
-                        "- **Perché**: i motivi sintetici (qualità + sconto + andamento).\n\n"
+                        "- **🧭 Qualità (trend) — anti-trappola di valore**: incrociamo il calo di prezzo col **trend dei conti**. "
+                        "Prezzo giù + ricavi/utili/margini stabili = vera occasione; prezzo giù + conti in calo = **trappola**. È la protezione n°1.\n"
+                        "- **💎 Valore**: qualità del business a **pilastri pesati** (Qualità 35% / Solidità 25% / Valutazione 25% / Crescita 15%) "
+                        "— non più un conteggio di pallini dove il P/S pesava quanto la redditività — combinata con lo sconto dai massimi.\n"
+                        "- **Radar qualità** (nel dettaglio): Valore / Qualità / Salute / Crescita / Dividendo, 0-100.\n"
+                        "- **Metriche serie** (nel dettaglio): **ROIC** vs costo del capitale, **EV/EBITDA**, **FCF yield**, "
+                        "**copertura del dividendo col flusso di cassa**, indice di salute (Piotroski semplificato), **Altman Z** (industriali USA).\n"
+                        "- **Settore**: limitiamo le occasioni a poche per settore (niente liste tutte-banche).\n\n"
                         "⚠️ **Rischio:** uno sconto **non garantisce** la risalita. Chiediti sempre *perché* il titolo è sceso: "
                         "difficoltà temporanea (possibile occasione) o problema strutturale (trappola di valore)?"
                     )
@@ -740,6 +745,65 @@ if section.startswith("Occasioni"):
                                 else:
                                     conf = "**meglio del mercato**"
                                 st.caption(f"📊 Ultimo mese: {tk} {s1m:+.0f}% · mercato S&P 500 {mkt_1m:+.0f}% → {conf}.")
+                            # --- Qualità in saldo: anti-trappola, radar, metriche serie (solo lungo) ---
+                            if kind == "long":
+                                trap = det.get("trap")
+                                if trap:
+                                    msg = f"**Anti-trappola di valore:** {trap['label']}"
+                                    if trap.get("reasons"):
+                                        msg += " — " + ", ".join(trap["reasons"])
+                                    v = trap.get("verdict")
+                                    (st.success if v == "occasione" else
+                                     st.error if v == "trappola" else st.warning)(msg)
+                                    st.caption("Incrocia il **calo di prezzo** col **trend dei fondamentali**: prezzo giù + "
+                                               "conti stabili = occasione; prezzo giù + conti in calo = trappola. "
+                                               "È la protezione più importante: uno sconto da solo non basta.")
+                                radar = det.get("radar") or {}
+                                rvals = [(k, radar.get(k)) for k in
+                                         ["Valore", "Qualità", "Salute", "Crescita", "Dividendo"]
+                                         if radar.get(k) is not None]
+                                if len(rvals) >= 3:
+                                    cats = [k for k, _ in rvals] + [rvals[0][0]]
+                                    vals = [val for _, val in rvals] + [rvals[0][1]]
+                                    rfig = go.Figure()
+                                    rfig.add_trace(go.Scatterpolar(r=vals, theta=cats, fill="toself",
+                                                                   line=dict(color="#3b82f6"), name="Qualità"))
+                                    rfig.update_layout(height=300, margin=dict(t=30, b=30, l=40, r=40),
+                                                       polar=dict(radialaxis=dict(range=[0, 100])),
+                                                       showlegend=False)
+                                    show_chart(rfig, use_container_width=True)
+                                    st.caption("👀 **Radar qualità** (0-100, più ampio = meglio): "
+                                               "Valore = a buon prezzo · Qualità = redditività/ROIC · "
+                                               "Salute = solidità finanziaria · Crescita = ricavi/utili · "
+                                               "Dividendo = rendimento sostenibile.")
+                                mbits = []
+                                if det.get("roic") is not None:
+                                    mbits.append(f"**ROIC** {det['roic'] * 100:.0f}% (vs costo capitale ~9%)")
+                                if det.get("ev_ebit") is not None:
+                                    mbits.append(f"**EV/EBITDA** {det['ev_ebit']:.1f}")
+                                if det.get("fcf_yield") is not None:
+                                    mbits.append(f"**FCF yield** {det['fcf_yield']:.1f}%")
+                                if det.get("gross_m") is not None:
+                                    mbits.append(f"**Margine lordo** {det['gross_m'] * 100:.0f}%")
+                                if det.get("interest_cov") is not None:
+                                    mbits.append(f"**Copertura interessi** {det['interest_cov']:.1f}×")
+                                if det.get("fscore_health") is not None:
+                                    mbits.append(f"**Salute (Piotroski sempl.)** {det['fscore_health']:.0f}/9")
+                                if det.get("div_cov") is not None:
+                                    mbits.append(f"**Dividendo coperto dal FCF** {det['div_cov']:.1f}×")
+                                if det.get("rev_cagr3") is not None:
+                                    mbits.append(f"**Ricavi 3 anni** {det['rev_cagr3'] * 100:+.0f}%/anno")
+                                if det.get("eps_cagr3") is not None:
+                                    mbits.append(f"**Utili 3 anni** {det['eps_cagr3'] * 100:+.0f}%/anno")
+                                if mbits:
+                                    st.markdown("**Metriche di qualità**  \n" + " · ".join(mbits))
+                                if not fu._is_financial_sector(det.get("sector")):
+                                    az = fu.altman_z_from_sec(tk)
+                                    if az:
+                                        st.markdown(f"**Altman Z-Score:** {az['z']} → {az['zone']} ({az['note']}) "
+                                                    "  \n_Rischio di dissesto; modello per le industriali, dai bilanci SEC (USA)._")
+                                st.caption("ℹ️ Niente «valore equo» a numero singolo (falsa precisione): qui contano i multipli "
+                                           "rispetto a settore e storia, la qualità a pilastri e la copertura del dividendo col flusso di cassa.")
                         # --- Segui questa occasione nel tempo ---
                         is_tracked = tk in tracked
                         tlabel = ("✅ Già in monitoraggio — registra lo scatto di oggi"
@@ -822,6 +886,10 @@ if section.startswith("Occasioni"):
         }
         long_cfg = {
             "Nome": st.column_config.TextColumn("Azienda", width="medium"),
+            "Settore": st.column_config.TextColumn("Settore", width="small",
+                help="Settore di appartenenza. Le occasioni sono limitate a poche per settore, così la lista non è tutta-banche o tutta-stesso-settore."),
+            "Qualità trend": st.column_config.TextColumn("🧭 Qualità (trend)",
+                help="Anti-trappola di valore: ✅ conti che tengono (ricavi/utili/margini stabili o in crescita) · ⚠️ trend incerto · 🛑 fondamentali in peggioramento (possibile trappola di valore). È la protezione più importante: uno sconto NON basta."),
             "Convenienza": st.column_config.ProgressColumn("🏅 Convenienza", min_value=0, max_value=100, format="%d",
                 help="Punteggio complessivo che combina prob. salita, guadagno atteso, rischio di perdita e affidabilità. La tabella è ordinata da qui (più alto = più conveniente)."),
             "Prezzo": st.column_config.NumberColumn("Prezzo", format="%.2f"),
@@ -829,7 +897,7 @@ if section.startswith("Occasioni"):
                 help="Sconto rispetto al massimo di 52 settimane."),
             "Perf 1 anno": st.column_config.NumberColumn("1 anno", format="%.0f%%"),
             "Occasione": st.column_config.ProgressColumn("💎 Valore", min_value=0, max_value=100, format="%.0f",
-                help="Combina qualità dei fondamentali e sconto dai massimi."),
+                help="Qualità del business (pilastri pesati: Qualità 35% / Solidità 25% / Valutazione 25% / Crescita 15%) combinata con lo sconto dai massimi, e declassata se i fondamentali peggiorano."),
             "Prob. salita": st.column_config.NumberColumn("📈 Prob. salita", format="%.0f%%",
                 help="Stima statistica (dai rendimenti storici, ~1 anno) della probabilità che il prezzo salga. NON è una previsione."),
             "Guadagno atteso": st.column_config.NumberColumn("🎯 Guadagno atteso", format="%+.1f%%",
