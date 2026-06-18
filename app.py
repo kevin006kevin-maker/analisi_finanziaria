@@ -129,6 +129,27 @@ a:hover { text-decoration: underline; }
 }
 .hero h2 { margin: 0; font-size: 1.7rem; font-weight: 750; color: #f3f5f8; }
 .hero p { margin: 10px 0 0; color: #aab3c0; max-width: 680px; line-height: 1.5; }
+
+/* ---- Adattamento per telefono (schermi stretti) ---- */
+@media (max-width: 640px) {
+    .block-container { padding-top: 1.3rem; padding-left: 0.8rem; padding-right: 0.8rem; }
+    /* Le colonne si impilano in verticale invece di restare strette affiancate */
+    [data-testid="stHorizontalBlock"] { flex-direction: column !important; gap: 0.5rem !important; }
+    [data-testid="stHorizontalBlock"] > div,
+    [data-testid="stColumn"], [data-testid="column"] {
+        width: 100% !important; flex: 1 1 100% !important; min-width: 0 !important;
+    }
+    /* Intestazioni e titoli più contenuti */
+    .page-header { padding: 15px 16px; }
+    .page-header .ph-title { font-size: 1.35rem; }
+    .hero { padding: 22px 18px; }
+    .hero h2 { font-size: 1.4rem; }
+    .hero p { font-size: 0.92rem; }
+    h1 { font-size: 1.45rem; }
+    h2 { font-size: 1.25rem; }
+    [data-testid="stMetric"] { padding: 10px 13px; }
+    [data-testid="stMetricValue"] { font-size: 1.4rem; }
+}
 </style>
 """, unsafe_allow_html=True)
 
