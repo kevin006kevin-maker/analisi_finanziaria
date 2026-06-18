@@ -34,27 +34,11 @@ html, body, [class*="css"], .stApp, button, input, textarea, select {
 }
 .stApp { background: #13151a; color: #e8eaed; }
 
-/* Rimuove gli elementi "da demo" di Streamlit per un aspetto da prodotto */
-#MainMenu { visibility: hidden; }
-[data-testid="stToolbar"] { display: none; }
+/* Nasconde solo gli elementi superflui SENZA toccare la barra in alto di Streamlit,
+   così resta SEMPRE il pulsante nativo per aprire/chiudere il menu laterale (anche da telefono). */
 [data-testid="stDecoration"] { display: none; }
 footer { visibility: hidden; }
-header[data-testid="stHeader"] { background: transparent; }
-.block-container { padding-top: 2.4rem; max-width: 1250px; }
-
-/* Pulsante per aprire la barra laterale: sempre visibile e ben cliccabile (soprattutto da telefono) */
-[data-testid="stSidebarCollapsedControl"], [data-testid="collapsedControl"] {
-    display: flex !important; visibility: visible !important; opacity: 1 !important;
-    z-index: 1000000 !important; top: 0.6rem !important; left: 0.6rem !important;
-}
-[data-testid="stSidebarCollapsedControl"] button, [data-testid="collapsedControl"] button {
-    background: #1b1e24 !important;
-    border: 1px solid rgba(255,255,255,0.18) !important;
-    border-radius: 9px !important;
-    color: #e8eaed !important;
-    width: 2.4rem; height: 2.4rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.35);
-}
+.block-container { padding-top: 2.2rem; max-width: 1250px; }
 
 /* Sidebar */
 section[data-testid="stSidebar"] {
