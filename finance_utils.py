@@ -2075,10 +2075,26 @@ def _qualifies_promotion(values: list, min_days: int = 3,
     return (v[-1] - v[0]) >= min_gain        # salita netta sufficiente sul periodo
 
 
-def auto_promote_opportunities(min_days: int = 3) -> list:
-    """Promuove al monitoraggio le occasioni con **tendenza positiva** della convenienza negli ultimi
-    `min_days` giorni (salita netta, tollerando piccole oscillazioni) e non già seguite.
-    Ritorna la lista dei ticker appena aggiunti."""
+# Finestre del ciclo automatico (in giorni), per tipo di occasione:
+_OBS_WINDOW = {"short": 3, "long": 7}      # osservazione prima della promozione
+_REMOVE_WINDOW = {"short": 5, "long": 10}  # dopo quanti giorni, se in perdita, si toglie dal monitoraggio
+_NOTIFY_WINDOW = {"short": 3, "long": 7}   # giorni di monitoraggio positivo per la prima notifica
+
+
+def _days_between(d1, d2) -> int:
+    """Giorni di calendario tra due date in formato ISO (YYYY-MM-DD...)."""
+    try:
+        a = datetime.date.fromisoformat(str(d1)[:10])
+        b = datetime.date.fromisoformat(str(d2)[:10])
+        return (b - a).days
+    except Exception:
+        return 0
+
+
+def auto_promote_opportunities() -> list:
+    """FASE 1 — osservazione. Ogni occasione è osservata per una finestra (breve 3 giorni,
+    lungo 7 giorni); se alla fine l'andamento è POSITIVO (prezzo salito dal primo giorno osservato)
+    viene inserita nel Monitoraggio. Ritorna i ticker appena promossi."""
     watch = load_opp_watch()
     tracked = load_tracking()
     promoted = []
@@ -2087,23 +2103,26 @@ def auto_promote_opportunities(min_days: int = 3) -> list:
         tk = e.get("ticker", key.split(":")[-1])
         if tk in tracked:
             continue
-        convs = [o["conv"] for o in e.get("obs", []) if o.get("conv") is not None]
-        if _qualifies_promotion(convs, min_days):
-            gain = convs[-1] - convs[-min_days]
-            kind = e.get("kind", "short")
+        kind = e.get("kind", "short")
+        obs = [o for o in e.get("obs", []) if o.get("price")]
+        if len(obs) < 2:
+            continue
+        days = _days_between(obs[0]["date"], obs[-1]["date"])
+        window = _OBS_WINDOW.get(kind, 3)
+        ret = (obs[-1]["price"] / obs[0]["price"] - 1) * 100 if obs[0]["price"] else 0.0
+        if days >= window and ret > 0:
             track_opportunity(tk, kind,
-                              note=f"🤖 Aggiunta automatica il {_today_iso()}: convenienza in salita "
-                                   f"(+{gain:.0f} punti negli ultimi {min_days} giorni).")
+                              note=f"🤖 Promossa il {_today_iso()}: dopo {days} giorni di osservazione "
+                                   f"l'andamento è positivo ({ret:+.1f}%).")
             tr = load_tracking()
             if tk in tr:
                 tr[tk]["auto"] = True
+                tr[tk]["notified"] = False
                 save_tracking(tr)
             promoted.append(tk)
-            obs = e.get("obs", [])
-            new_records.append({
-                "ticker": tk, "kind": kind, "date": _today_iso(),
-                "price": (obs[-1].get("price") if obs else None), "conv": convs[-1],
-                "ret_now": None, "ret_7d": None, "ret_30d": None, "last_update": _today_iso()})
+            new_records.append({"ticker": tk, "kind": kind, "date": _today_iso(),
+                                "price": obs[-1].get("price"), "conv": obs[-1].get("conv"),
+                                "ret_now": None, "ret_7d": None, "ret_30d": None, "last_update": _today_iso()})
     if new_records:
         recs = load_track_record()
         recs.extend(new_records)
@@ -2111,20 +2130,60 @@ def auto_promote_opportunities(min_days: int = 3) -> list:
     return promoted
 
 
+def manage_monitoring() -> tuple:
+    """FASE 2 — monitoraggio (solo occasioni auto-promosse; le scelte manuali non si toccano).
+    - Rimuove quelle in perdita oltre la finestra (breve 5 giorni, lungo 10 giorni).
+    - Segnala (prima notifica) quelle in guadagno oltre la finestra (breve 3 giorni, lungo 7 giorni).
+    Ritorna (da_notificare, rimosse)."""
+    tracked = load_tracking()
+    if not tracked:
+        return [], []
+    to_notify, removed = [], []
+    changed = False
+    for tk in list(tracked.keys()):
+        e = tracked[tk]
+        if not e.get("auto"):
+            continue
+        snaps = [s for s in e.get("snapshots", []) if s.get("price")]
+        if not snaps:
+            continue
+        kind = e.get("kind", "short")
+        added = e.get("added") or snaps[0].get("date")
+        days = _days_between(added, _today_iso())
+        base = snaps[0]["price"]
+        ret = (snaps[-1]["price"] / base - 1) * 100 if base else 0.0
+        if days >= _REMOVE_WINDOW.get(kind, 5) and ret <= 0:
+            del tracked[tk]
+            removed.append(tk)
+            changed = True
+            continue
+        if days >= _NOTIFY_WINDOW.get(kind, 3) and ret > 0 and not e.get("notified"):
+            e["notified"] = True
+            changed = True
+            to_notify.append({"ticker": tk, "kind": kind, "days": days,
+                              "ret": round(ret, 1), "name": e.get("name", tk)})
+    if changed:
+        save_tracking(tracked)
+    return to_notify, removed
+
+
 def observation_status() -> list:
-    """Stato dell'osservazione autonoma: per ogni occasione, la tendenza recente della convenienza.
-    Ordinata dai più «vicini alla promozione». Utile per mostrare che il sistema sta lavorando."""
+    """Stato della FASE 1: per ogni occasione in osservazione, da quanti giorni è seguita,
+    il rendimento dal primo giorno e quanti giorni mancano alla valutazione per la promozione."""
     watch = load_opp_watch()
     out = []
     for key, e in watch.items():
-        convs = [o["conv"] for o in e.get("obs", []) if o.get("conv") is not None]
-        if not convs:
+        obs = [o for o in e.get("obs", []) if o.get("price")]
+        if not obs:
             continue
-        net3 = (convs[-1] - convs[-3]) if len(convs) >= 3 else (convs[-1] - convs[0])
-        out.append({"ticker": e.get("ticker", key.split(":")[-1]), "kind": e.get("kind", "short"),
-                    "name": e.get("name", ""), "run": _trend_progress(convs),
-                    "net3": round(net3, 1), "last_conv": convs[-1], "days": len(convs)})
-    out.sort(key=lambda x: (x["run"], x["net3"], x["last_conv"]), reverse=True)
+        kind = e.get("kind", "short")
+        days = _days_between(obs[0]["date"], obs[-1]["date"])
+        ret = (obs[-1]["price"] / obs[0]["price"] - 1) * 100 if (len(obs) >= 2 and obs[0]["price"]) else 0.0
+        window = _OBS_WINDOW.get(kind, 3)
+        out.append({"ticker": e.get("ticker", key.split(":")[-1]), "kind": kind,
+                    "name": e.get("name", ""), "days": days, "ret": round(ret, 1),
+                    "window": window, "remaining": max(0, window - days)})
+    out.sort(key=lambda x: x["ret"], reverse=True)
     return out
 
 
