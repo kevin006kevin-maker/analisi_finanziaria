@@ -513,6 +513,11 @@ if section.startswith("Occasioni"):
         if auto_promote_on and not cloud:
             fu.record_observations(full_short, "short")
             fu.record_observations(full_long, "long")
+            # Calibrazione (locale): registra la P(salita) di ogni occasione per il backtest
+            for _df, _h in ((full_short, 21), (full_long, 252)):
+                if _df is not None and not _df.empty:
+                    for _tk, _rr in _df.iterrows():
+                        fu.log_forecast(_tk, _h, _rr.get("Prob. salita"), _rr.get("Prezzo"))
             promoted = fu.auto_promote_opportunities()
             fu.manage_monitoring()      # rimozioni delle perdenti + (eventuali) prime notifiche
         if promoted:
@@ -736,6 +741,15 @@ if section.startswith("Occasioni"):
                                         f"({ps['stop_pct']:+.1f}% dal prezzo).")
                                     st.caption("Calcolo a rischio fisso: qty = capitale × rischio% / (prezzo − stop). "
                                                "Così ogni operazione mette a rischio la **stessa** cifra, qualunque sia la volatilità.")
+                                # First-passage: P(il prezzo tocca lo stop lungo il percorso, ~1 mese)
+                                if stp and price and price > stp:
+                                    hp = fu.get_history(tk, period="1y")
+                                    fp = fu.forecast_paths(hp, 21, stop_pct=(stp / price - 1))
+                                    if fp and fp.get("p_touch_stop") is not None:
+                                        st.caption(f"🎲 **Probabilità di toccare lo stop entro ~1 mese: ~{fp['p_touch_stop']}%** "
+                                                   f"· ventaglio rendimento a 1 mese: da {fp['ret_p10']:+.0f}% (sfortuna) "
+                                                   f"a {fp['ret_p90']:+.0f}% (fortuna), mediana {fp['ret_p50']:+.0f}%. "
+                                                   "Stima da block bootstrap dei rendimenti reali (code grasse), non una previsione.")
                             s1m = det.get("perf_1m")
                             if mkt_1m is not None and s1m is not None:
                                 if abs(s1m - mkt_1m) <= 1:
@@ -802,8 +816,24 @@ if section.startswith("Occasioni"):
                                     if az:
                                         st.markdown(f"**Altman Z-Score:** {az['z']} → {az['zone']} ({az['note']}) "
                                                     "  \n_Rischio di dissesto; modello per le industriali, dai bilanci SEC (USA)._")
+                                # DCF inversa + rendimento atteso dai fondamentali (no fair value a numero singolo)
+                                _fi = {"trailingPE": det.get("pe"), "epsGrowth3Y": det.get("eps_cagr3"),
+                                       "revenueGrowth": det.get("rev_cagr3")}
+                                rdcf = fu.reverse_dcf_growth(_fi)
+                                fdr = fu.fundamental_drift(_fi)
+                                fvbits = []
+                                if rdcf is not None:
+                                    fvbits.append(f"📐 **DCF inversa:** al prezzo attuale il mercato sconta una crescita "
+                                                  f"perpetua implicita di **~{rdcf:+.1f}%/anno** (Gordon, r=9%). "
+                                                  f"Confrontala con la crescita che ritieni realistica.")
+                                if fdr is not None:
+                                    fvbits.append(f"🧮 **Rendimento atteso dai fondamentali** (earnings yield + crescita): "
+                                                  f"~**{fdr * 100:.0f}%/anno** — un'ancora ragionata, non una previsione.")
+                                if fvbits:
+                                    st.markdown("  \n".join(fvbits))
                                 st.caption("ℹ️ Niente «valore equo» a numero singolo (falsa precisione): qui contano i multipli "
-                                           "rispetto a settore e storia, la qualità a pilastri e la copertura del dividendo col flusso di cassa.")
+                                           "rispetto a settore e storia, la qualità a pilastri, la copertura del dividendo col "
+                                           "flusso di cassa e la **crescita implicita** (DCF inversa).")
                         # --- Segui questa occasione nel tempo ---
                         is_tracked = tk in tracked
                         tlabel = ("✅ Già in monitoraggio — registra lo scatto di oggi"
@@ -992,6 +1022,35 @@ if section.startswith("Monitoraggio"):
                 })
             st.caption("Le occasioni promosse vengono registrate col prezzo di partenza; il rendimento a 7 e 30 giorni "
                        "si fissa al raggiungimento di quei traguardi. Stima sui dati reali, non una promessa.")
+        st.markdown("---")
+
+    # --- 🎯 Calibrazione delle probabilità (Brier score) ---
+    if not fu.cloud_mode():
+        fu.resolve_forecasts()          # in locale risolve le previsioni mature (sul cloud lo fa il job)
+    crep = fu.calibration_report()
+    if crep is not None:
+        with st.expander(f"🎯 Quanto sono oneste le probabilità (calibrazione) — "
+                         f"{crep['n_resolved']} previsioni verificate", expanded=False):
+            st.caption("Degli eventi a cui diamo **~70%**, quanti si avverano davvero? Questa scheda confronta la "
+                       "**probabilità di salita predetta** con quella **realizzata**. Non serve a indovinare il prezzo, "
+                       "ma a misurare se le nostre percentuali sono affidabili. Si popola nel tempo.")
+            if crep["n_resolved"] == 0:
+                st.info(f"Nessuna previsione ancora verificata (servono ~1 mese per il breve, ~1 anno per il lungo). "
+                        f"Registrate finora: {crep['n_total']}. Torna più avanti.")
+            else:
+                if crep["brier"] is not None:
+                    bs = crep["brier"]
+                    tone = st.success if bs <= 0.20 else st.warning if bs <= 0.25 else st.error
+                    tone(f"**Brier score: {bs:.3f}** (più basso = meglio; 0,25 = come tirare a caso, "
+                         "<0,20 = previsioni utili).")
+                if crep["buckets"]:
+                    st.dataframe(pd.DataFrame(crep["buckets"]).set_index("range"),
+                                 use_container_width=True, column_config={
+                        "n": st.column_config.NumberColumn("Casi", format="%d"),
+                        "predetto": st.column_config.NumberColumn("Prob. predetta", format="%d%%"),
+                        "realizzato": st.column_config.NumberColumn("Salite reali", format="%d%%",
+                            help="Se 'predetta' e 'realizzato' sono vicine, le probabilità sono ben calibrate."),
+                    })
         st.markdown("---")
 
     tracked = fu.load_tracking()
@@ -1938,9 +1997,16 @@ with tab_sim:
 
     base_hist = hsim if not hsim.empty else hist
     ann_ret_hist, vol_hist = fu.hist_return_vol(base_hist)
+    # Volatilità EWMA (più reattiva: cattura il volatility clustering) — usata per la fascia
+    try:
+        _lr = np.log(base_hist["Close"] / base_hist["Close"].shift(1)).dropna().values
+        ewma_v = fu.ewma_vol(_lr)
+    except Exception:
+        ewma_v = None
     if ann_ret_hist is None:
         st.info("Storico insufficiente per una proiezione.")
     else:
+        vol_used = ewma_v if ewma_v else vol_hist
         default_ret = float(np.clip(ann_ret_hist * 100, -15.0, 25.0))
         pc1, pc2, pc3, pc4 = st.columns(4)
         f_initial = pc1.number_input("Capitale iniziale (€)", min_value=0.0, value=1000.0, step=100.0, key="proj_init")
@@ -1949,9 +2015,22 @@ with tab_sim:
         f_years = pc3.slider("Orizzonte (anni)", 1, 30, 10, key="proj_years")
         f_ret = pc4.slider("Rendimento annuo atteso (%)", -10.0, 30.0, round(default_ret, 1), 0.5, key="proj_ret",
                            help=f"Default = rendimento storico annuo ({ann_ret_hist*100:.1f}%), limitato per prudenza. "
-                                "Spostalo per testare le tue ipotesi.")
+                                "Spostalo per testare le tue ipotesi. Decide solo il *centro* del ventaglio, non la sua forma.")
 
-        proj = fu.project_future(f_initial, f_monthly, f_years, f_ret / 100.0, vol_hist)
+        method_label = st.radio(
+            "Modello di incertezza", ["Bootstrap reale (consigliato)", "t-Student (code grasse)", "Normale (gaussiana)"],
+            horizontal=True, key="proj_method",
+            help="Come viene disegnata la FORMA dell'incertezza (non la direzione). Il **bootstrap dei rendimenti reali** "
+                 "ricampiona la storia vera del titolo → cattura code grasse e periodi turbolenti, dando probabilità più "
+                 "oneste. La normale sottostima gli estremi.")
+        method = {"Bootstrap reale (consigliato)": "bootstrap", "t-Student (code grasse)": "tstudent",
+                  "Normale (gaussiana)": "normale"}[method_label]
+        mlr = fu.monthly_logrets(base_hist)
+        if method == "bootstrap" and mlr is None:
+            st.caption("ℹ️ Storico mensile insufficiente per il bootstrap: uso il modello normale.")
+
+        proj = fu.project_future(f_initial, f_monthly, f_years, f_ret / 100.0, vol_used,
+                                 method=method, month_logrets=mlr)
         tot = proj["total_invested"]
         # Scenari coerenti col ventaglio Monte Carlo: prudente=10°, base=mediana, ottimistico=90°
         end_pru, end_base, end_opt = proj["p10"][-1], proj["p50"][-1], proj["p90"][-1]
@@ -1964,6 +2043,12 @@ with tab_sim:
                   f"{(end_pru/tot-1)*100:+.0f}%" if tot else None)
         q4.metric("🟢 Ottimistico (10%)", f"{end_opt:,.0f} {currency}",
                   f"{(end_opt/tot-1)*100:+.0f}%" if tot else None)
+
+        pb = proj.get("p_below_invested")
+        if pb is not None:
+            tone = st.success if pb <= 20 else st.warning if pb <= 40 else st.error
+            tone(f"📉 **Probabilità di finire SOTTO il totale versato a {f_years} anni: ~{pb}%** "
+                 f"_(modello: {proj['method_label']})_. Più alta = più rischio di chiudere in perdita.")
 
         x = proj["x_years"]
         figf = go.Figure()
