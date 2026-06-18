@@ -31,28 +31,22 @@ def log(msg):
     print(f"[{ts}Z] {msg}", flush=True)
 
 
-def notify_promotions(tickers):
-    """Manda una notifica Telegram per le occasioni appena promosse automaticamente."""
-    tr = fu.load_tracking()
-    righe = ["🤖 <b>Nuove occasioni promosse</b>", "(convenienza in salita da 3 giorni di fila)", ""]
-    for tk in tickers:
-        e = tr.get(tk, {})
-        snaps = e.get("snapshots", [])
-        last = snaps[-1] if snaps else {}
-        nm = html.escape(str(e.get("name") or tk))
-        kind = "⚡ Breve" if e.get("kind") == "short" else "🏛️ Lungo"
-        conv = last.get("convenienza")
-        pg = last.get("prob_gain")
-        bits = [f"<b>{html.escape(tk)}</b> — {nm} ({kind})"]
-        if conv is not None:
-            bits.append(f"convenienza {conv}")
-        if pg is not None:
-            bits.append(f"prob. salita {pg}%")
-        righe.append("• " + " · ".join(bits))
-    righe += ["", "Aprila nell'app → sezione 📌 Monitoraggio."]
+def notify_monitoring(items):
+    """Prima notifica per le occasioni che confermano l'andamento positivo nel monitoraggio
+    (breve: dopo 3 giorni positivi · lungo: dopo 7 giorni positivi)."""
+    righe = ["📈 <b>Occasioni confermate</b>",
+             "(andamento positivo dopo la fase di monitoraggio)", ""]
+    for it in items:
+        tk = html.escape(str(it.get("ticker")))
+        nm = html.escape(str(it.get("name") or tk))
+        term = "breve termine" if it.get("kind") == "short" else "lungo termine"
+        righe.append(f"🔔 <b>{tk}</b> — {nm}")
+        righe.append(f"   {term} · +{it.get('ret', 0):.1f}% in {it.get('days', 0)} giorni di monitoraggio")
+    righe += ["", "Possibile opportunità di investimento — apri l'app → Monitoraggio.",
+              "(Strumento informativo, non è un consiglio.)"]
     ok = fu.send_telegram("\n".join(righe))
-    log("Notifica Telegram inviata." if ok
-        else "Notifica Telegram NON inviata (token/chat_id assenti o errore).")
+    log("Notifica opportunità inviata." if ok
+        else "Notifica opportunità NON inviata (Telegram non configurato o errore).")
 
 
 def notify_sales(fired):
@@ -101,15 +95,27 @@ def main():
         except Exception as e:
             log(f"{kind}: errore durante la scansione: {e!r}")
 
+    # FASE 1 — promozione (silenziosa): occasioni con osservazione positiva (breve 3g / lungo 7g)
     try:
-        promoted = fu.auto_promote_opportunities(min_days=3)
-        if promoted:
-            log(f"PROMOSSE automaticamente al monitoraggio (in salita da ≥3 giorni): {', '.join(promoted)}")
-            notify_promotions(promoted)
-        else:
-            log("Nessuna nuova promozione in questo giro.")
+        promoted = fu.auto_promote_opportunities()
+        log(f"PROMOSSE al Monitoraggio (osservazione positiva): {', '.join(promoted)}"
+            if promoted else "Nessuna nuova promozione in questo giro.")
     except Exception as e:
         log(f"Errore durante la promozione automatica: {e!r}")
+
+    # FASE 2 — monitoraggio: rimuove le perdenti oltre la finestra (breve 5g / lungo 10g) e
+    # invia la prima notifica per quelle confermate positive (breve 3g / lungo 7g).
+    try:
+        to_notify, removed = fu.manage_monitoring()
+        if removed:
+            log(f"Rimosse dal monitoraggio (in perdita oltre la finestra): {', '.join(removed)}")
+        if to_notify:
+            log(f"Notifica opportunità confermate: {', '.join(x['ticker'] for x in to_notify)}")
+            notify_monitoring(to_notify)
+        else:
+            log("Nessuna nuova notifica di opportunità.")
+    except Exception as e:
+        log(f"Errore gestione monitoraggio: {e!r}")
 
     # Aggiorna la "scheda voti": rendimento reale delle promozioni (ora / 7g / 30g)
     try:
