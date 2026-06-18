@@ -2679,6 +2679,48 @@ def track_record_stats() -> dict:
             "d7": agg("ret_7d"), "d30": agg("ret_30d")}
 
 
+def track_record_calibration() -> dict:
+    """Calibrazione ONESTA e in avanti del punteggio: resa reale delle promozioni divisa per
+    FASCIA di convenienza (alta/media/bassa al momento della promozione). Risponde a:
+    'la convenienza alta rende davvero più della bassa?'. Ritorna fasce + un verdetto."""
+    records = load_track_record()
+    bande = [("🟢 Alta (≥70)", lambda c: c is not None and c >= 70),
+             ("🟡 Media (50–69)", lambda c: c is not None and 50 <= c < 70),
+             ("🔴 Bassa (<50)", lambda c: c is not None and c < 50)]
+
+    def agg(sub, field):
+        vals = [r[field] for r in sub if r.get(field) is not None]
+        if not vals:
+            return None
+        return {"n": len(vals), "avg": round(sum(vals) / len(vals), 1),
+                "hit": round(100 * sum(1 for v in vals if v > 0) / len(vals))}
+
+    fasce = []
+    for label, cond in bande:
+        sub = [r for r in records if cond(r.get("conv"))]
+        fasce.append({"banda": label, "count": len(sub),
+                      "now": agg(sub, "ret_now"), "d7": agg(sub, "ret_7d"), "d30": agg(sub, "ret_30d")})
+
+    # Verdetto: la fascia alta rende più della bassa? (su un orizzonte con dati a sufficienza)
+    verdetto, ok = "Dati ancora insufficienti per dire se il punteggio discrimina.", None
+    for key in ("d30", "d7", "now"):
+        alta = next((f[key] for f in fasce if f["banda"].startswith("🟢") and f[key]), None)
+        bassa = next((f[key] for f in fasce if f["banda"].startswith("🔴") and f[key]), None)
+        media = next((f[key] for f in fasce if f["banda"].startswith("🟡") and f[key]), None)
+        rif = bassa or media
+        if alta and rif and (alta["n"] >= 3 and rif["n"] >= 3):
+            if alta["avg"] > rif["avg"]:
+                verdetto = (f"✅ La convenienza discrimina: le promozioni ad alta convenienza rendono di più "
+                            f"({alta['avg']:+.1f}% vs {rif['avg']:+.1f}% delle altre).")
+                ok = True
+            else:
+                verdetto = (f"⚠️ Finora la convenienza alta NON ha rese migliori "
+                            f"({alta['avg']:+.1f}% vs {rif['avg']:+.1f}%): pesi da rivedere o servono più dati.")
+                ok = False
+            break
+    return {"fasce": fasce, "verdetto": verdetto, "ok": ok, "total": len(records)}
+
+
 # ---------------------------------------------------------------------------
 # PORTAFOGLIO REALE — posizioni effettivamente acquistate, con guadagno/perdita.
 # Persistito come gli altri dati (file locale + branch remoto se configurato).
