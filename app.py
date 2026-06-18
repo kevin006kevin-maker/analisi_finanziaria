@@ -102,8 +102,46 @@ a:hover { text-decoration: underline; }
 
 /* Didascalie un filo più tenui */
 [data-testid="stCaptionContainer"] { opacity: 0.82; }
+
+/* Intestazione di pagina (banner) */
+.page-header {
+    padding: 20px 24px; margin: 0 0 20px 0; border-radius: 16px;
+    background: linear-gradient(135deg, #1d2330 0%, #15181e 70%);
+    border: 1px solid rgba(255,255,255,0.07);
+    box-shadow: 0 6px 22px rgba(0,0,0,0.25);
+}
+.page-header .ph-title { font-size: 1.7rem; font-weight: 700; letter-spacing: -0.02em; color: #f3f5f8; }
+.page-header .ph-sub { margin-top: 6px; color: #9aa4b2; font-size: 0.95rem; line-height: 1.4; }
+.page-header .ph-accent { display:inline-block; width:34px; height:3px; border-radius:3px;
+    background: linear-gradient(90deg,#3b82f6,#22d3ee); margin-bottom:12px; }
+
+/* Testata di marca nella sidebar */
+.app-brand { padding: 6px 2px 14px; }
+.app-brand .ab-name { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em; color: #f3f5f8; }
+.app-brand .ab-name span { color: #3b82f6; }
+.app-brand .ab-tag { font-size: 0.78rem; color: #8b94a3; margin-top: 2px; }
+
+/* Schermata iniziale (hero) */
+.hero {
+    padding: 30px 28px; border-radius: 18px; margin-bottom: 22px;
+    background: radial-gradient(1200px 240px at 0% 0%, rgba(59,130,246,0.16), transparent 60%), #16191f;
+    border: 1px solid rgba(255,255,255,0.07);
+}
+.hero h2 { margin: 0; font-size: 1.7rem; font-weight: 750; color: #f3f5f8; }
+.hero p { margin: 10px 0 0; color: #aab3c0; max-width: 680px; line-height: 1.5; }
 </style>
 """, unsafe_allow_html=True)
+
+
+def page_header(title: str, subtitle: str = ""):
+    """Intestazione di pagina con banner (sostituisce il semplice st.title)."""
+    safe = str(title).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+    sub = f"<div class='ph-sub'>{subtitle}</div>" if subtitle else ""
+    st.markdown(
+        f"<div class='page-header'><div class='ph-accent'></div>"
+        f"<div class='ph-title'>{safe}</div>{sub}</div>",
+        unsafe_allow_html=True,
+    )
 
 
 def _now_rome():
@@ -183,7 +221,11 @@ def badge(label, value, judgement, help_text="", reason=""):
 # ---------------------------------------------------------------------------
 # SIDEBAR
 # ---------------------------------------------------------------------------
-st.sidebar.title("Analisi Finanziaria")
+st.sidebar.markdown(
+    "<div class='app-brand'><div class='ab-name'>Analisi<span>·</span>Finanziaria</div>"
+    "<div class='ab-tag'>Analisi titoli · occasioni · portafoglio</div></div>",
+    unsafe_allow_html=True,
+)
 
 # Cambio sezione programmatico (es. bottone "📊 Analizza" dal Monitoraggio):
 # va impostato PRIMA che il widget radio venga creato, altrimenti Streamlit
@@ -303,7 +345,8 @@ st.sidebar.caption(
 # SEZIONE: OCCASIONI DI MERCATO (pagina a sé, indipendente dal titolo)
 # ===========================================================================
 if section.startswith("Occasioni"):
-    st.title("Occasioni di mercato")
+    page_header("Occasioni di mercato",
+                "Titoli ed ETF in calo con segnali tipici da rimbalzo o sconto — spunti da approfondire, non consigli.")
     st.warning("⚠️ **Non sono previsioni né consigli.** Sono titoli/ETF in calo che mostrano segnali tipici "
                "da potenziale rimbalzo o sconto. Un calo può anche **continuare** ('coltello che cade'): "
                "usa questi spunti solo come punto di partenza per approfondire.")
@@ -666,7 +709,8 @@ if section.startswith("Occasioni"):
 # SEZIONE: MONITORAGGIO — segui le occasioni nel tempo
 # ===========================================================================
 if section.startswith("Monitoraggio"):
-    st.title("Monitoraggio delle occasioni")
+    page_header("Monitoraggio delle occasioni",
+                "Segui nel tempo le occasioni scelte e decidi con calma quando comprare.")
     st.caption("Qui osservi nel tempo le occasioni che hai scelto di seguire (dalla sezione «Occasioni di mercato»). "
                "Ogni giorno che apri l'app viene registrato uno «scatto» dei valori: così vedi se il segnale si "
                "rafforza o si indebolisce **prima** di decidere se comprare.")
@@ -894,7 +938,8 @@ if section.startswith("Monitoraggio"):
 # SEZIONE: PORTAFOGLIO — acquisti reali con guadagno/perdita
 # ===========================================================================
 if section.startswith("Portafoglio"):
-    st.title("Il mio portafoglio")
+    page_header("Il mio portafoglio",
+                "I tuoi acquisti reali: guadagno/perdita in tempo reale e consigli su quando vendere.")
     st.caption("Registra gli acquisti che hai fatto davvero (titolo, quantità, prezzo) e vedi in tempo reale "
                "il guadagno/perdita. Puoi impostare un **bersaglio** e uno **stop**: l'app ti avvisa quando vengono toccati.")
     st.warning("⚠️ Strumento di monitoraggio personale, **non** è collegato a nessun conto o broker: "
@@ -1022,7 +1067,8 @@ if section.startswith("Portafoglio"):
 # SEZIONE: ATTUALITÀ — notizie recenti divise per azienda/ETF
 # ===========================================================================
 if section.startswith("Attualità"):
-    st.title("Attualità — notizie dei mercati")
+    page_header("Attualità",
+                "Le notizie più recenti dei mercati, divise per azienda ed ETF.")
     st.caption("Le notizie più recenti, divise per azienda/ETF. Una scheda per ciascun titolo più una per il mercato generale. "
                "Aggiungi i titoli che vuoi seguire; la traduzione in italiano segue l'interruttore nella barra laterale.")
 
@@ -1116,13 +1162,11 @@ if section.startswith("Attualità"):
 # CARICAMENTO DATI
 # ---------------------------------------------------------------------------
 if not ticker:
-    st.title("Analisi Finanziaria")
     st.markdown(
-        "Benvenuto! Questo strumento ti aiuta a **capire un'azienda, un ETF o un indice** "
-        "e a valutarne la convenienza, con spiegazioni a parole semplici.\n\n"
-        "**Come iniziare:** cerca un nome nella barra a sinistra (es. *Apple*, *Eni*), "
-        "oppure scegli uno dei suggerimenti qui sotto. "
-        "Se è la prima volta, lascia attiva la modalità **🟢 Principiante**."
+        "<div class='hero'><h2>Analisi Finanziaria</h2>"
+        "<p>Capisci un'azienda, un ETF o un indice e valutane la convenienza, con spiegazioni in parole "
+        "semplici. Cerca un nome nella barra a sinistra, oppure parti da uno dei suggerimenti qui sotto.</p></div>",
+        unsafe_allow_html=True,
     )
 
     def suggestion_grid(title, items):
@@ -1133,17 +1177,17 @@ if not ticker:
                 st.session_state["ticker"] = sym
                 st.rerun()
 
-    suggestion_grid("🏢 Azioni famose", [
-        ("AAPL", "🍎 Apple"), ("MSFT", "🪟 Microsoft"),
-        ("NVDA", "🎮 Nvidia"), ("ENI.MI", "⛽ Eni"), ("ISP.MI", "🏦 Intesa SP"),
+    suggestion_grid("Azioni famose", [
+        ("AAPL", "Apple"), ("MSFT", "Microsoft"),
+        ("NVDA", "Nvidia"), ("ENI.MI", "Eni"), ("ISP.MI", "Intesa Sanpaolo"),
     ])
-    suggestion_grid("🧺 ETF popolari", [
-        ("VWCE.DE", "🌍 Vanguard All-World"), ("CSSPX.MI", "🇺🇸 S&P 500"),
-        ("SWDA.MI", "🌐 MSCI World"), ("EIMI.MI", "🌏 Mercati Emergenti"),
+    suggestion_grid("ETF popolari", [
+        ("VWCE.DE", "Vanguard All-World"), ("CSSPX.MI", "S&P 500"),
+        ("SWDA.MI", "MSCI World"), ("EIMI.MI", "Mercati Emergenti"),
     ])
-    suggestion_grid("📊 Indici di mercato", [
-        ("^GSPC", "🇺🇸 S&P 500"), ("^FTSEMIB.MI", "🇮🇹 FTSE MIB"),
-        ("^IXIC", "💻 Nasdaq"), ("^STOXX50E", "🇪🇺 Euro Stoxx 50"),
+    suggestion_grid("Indici di mercato", [
+        ("^GSPC", "S&P 500"), ("^FTSEMIB.MI", "FTSE MIB"),
+        ("^IXIC", "Nasdaq"), ("^STOXX50E", "Euro Stoxx 50"),
     ])
     st.markdown("---")
     st.caption("⚠️ Strumento a scopo informativo. **Non è consulenza finanziaria.**")
@@ -1169,8 +1213,10 @@ fdata = fu.get_fund_data(ticker, info) if fund else None
 # ---------------------------------------------------------------------------
 # INTESTAZIONE
 # ---------------------------------------------------------------------------
-st.title(f"{name}")
-st.caption(f"Ticker: **{ticker}**  ·  {info.get('exchange', '')}  ·  Valuta: {currency}")
+_exch = info.get("exchange", "") or ""
+page_header(name, f"<b>{ticker}</b>"
+            + (f" · {_exch}" if _exch else "")
+            + (f" · Valuta: {currency}" if currency else ""))
 
 last_close = hist["Close"].iloc[-1]
 prev_close = hist["Close"].iloc[-2] if len(hist) > 1 else last_close
