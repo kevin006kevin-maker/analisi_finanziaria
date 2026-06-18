@@ -805,46 +805,244 @@ def hist_return_vol(hist: pd.DataFrame):
     return float(annual_return), float(sigma)
 
 
-def _scenario_series(initial, monthly, months, annual_return):
-    r = (1 + annual_return) ** (1 / 12) - 1
-    val = initial
-    series = [val]
-    for _ in range(months):
-        val = val * (1 + r) + monthly
-        series.append(val)
-    return np.array(series)
+def ewma_vol(logret, lam: float = 0.94):
+    """Volatilità annualizzata EWMA (RiskMetrics): pesa di più i giorni recenti → cattura il
+    *volatility clustering* (la volatilità si raggruppa). Più reattiva della deviazione standard piatta."""
+    r = np.asarray(logret, dtype=float)
+    r = r[~np.isnan(r)]
+    if len(r) < 20:
+        return None
+    var = float(r[0] ** 2)
+    for x in r[1:]:
+        var = lam * var + (1 - lam) * x * x
+    return float(np.sqrt(var * 252))
+
+
+def _block_bootstrap(src, horizon, n_sims, block, rng):
+    """Ricampiona BLOCCHI contigui dei rendimenti reali → percorsi (n_sims, horizon).
+    Conserva code grasse e clustering di volatilità (cosa che la normale cancella)."""
+    n = len(src)
+    nb = int(np.ceil(horizon / block))
+    starts = rng.integers(0, max(1, n - block), size=(n_sims, nb))
+    idx = (starts[:, :, None] + np.arange(block)[None, None, :]).reshape(n_sims, nb * block)[:, :horizon]
+    idx = np.clip(idx, 0, n - 1)
+    return src[idx]
+
+
+def _simulate_returns(logret_arr, horizon_days, n_sims=800, demean=False,
+                      drift_annual=None, block=10, seed=42):
+    """Distribuzione dei rendimenti su `horizon_days` via block bootstrap dei rendimenti reali.
+    - demean=True (BREVE) → drift ≈ 0: niente estrapolazione del trend recente.
+    - drift_annual dato (LUNGO da fondamentali) → ricentra su quel drift.
+    - altrimenti usa il drift storico, clampato a [-25%, +30%] annuo.
+    Ritorna {final, cum_min, sigma_ewma} (rendimenti LOG cumulati e minimo lungo il percorso)."""
+    src = np.asarray(logret_arr, dtype=float)
+    src = src[~np.isnan(src)]
+    n = len(src)
+    if n < 40:
+        return None
+    mean_day = float(src.mean())
+    if drift_annual is not None:
+        target_day = float(drift_annual) / 252.0
+    elif demean:
+        target_day = 0.0
+    else:
+        target_day = float(np.clip(mean_day * 252, -0.25, 0.30)) / 252.0
+    src_c = src - mean_day + target_day              # ricentra il drift, conserva forma/tails/clustering
+    rng = np.random.default_rng(seed)
+    paths = _block_bootstrap(src_c, horizon_days, n_sims, block, rng)
+    cum = np.cumsum(paths, axis=1)                   # rendimento log cumulato giorno per giorno
+    return {"final": cum[:, -1], "cum_min": cum.min(axis=1), "sigma_ewma": ewma_vol(src)}
+
+
+def forecast_paths(hist, horizon_days, stop_pct=None, demean=None, drift_annual=None):
+    """Statistiche di percorso oneste (NON una previsione del prezzo): P(salita), P(perdita>15%),
+    ventaglio p10/p50/p90 del rendimento e — se dato `stop_pct` (es. -0.08) — **P(tocca lo stop
+    lungo il percorso)** via first-passage (minimo del cammino), non solo a scadenza."""
+    try:
+        logret = np.log(hist["Close"] / hist["Close"].shift(1)).replace([np.inf, -np.inf], np.nan).dropna()
+    except Exception:
+        return None
+    if demean is None:
+        demean = horizon_days <= 63
+    sim = _simulate_returns(logret.values, horizon_days, n_sims=1500, demean=demean, drift_annual=drift_annual)
+    if sim is None:
+        return None
+    final, cmin = sim["final"], sim["cum_min"]
+    out = {
+        "p_up": round(float((final > 0).mean()) * 100),
+        "p_loss15": round(float((final < math.log(0.85)).mean()) * 100),
+        "ret_p10": round((math.exp(float(np.percentile(final, 10))) - 1) * 100, 1),
+        "ret_p50": round((math.exp(float(np.percentile(final, 50))) - 1) * 100, 1),
+        "ret_p90": round((math.exp(float(np.percentile(final, 90))) - 1) * 100, 1),
+        "sigma_ewma": sim.get("sigma_ewma"),
+    }
+    if stop_pct is not None and stop_pct < 0:
+        out["p_touch_stop"] = round(float((cmin <= math.log(1 + stop_pct)).mean()) * 100)
+    return out
+
+
+def monthly_logrets(hist):
+    """Rendimenti logaritmici MENSILI dallo storico (per il bootstrap della proiezione PAC)."""
+    if hist is None or hist.empty or "Close" not in hist:
+        return None
+    c = hist["Close"].dropna()
+    if len(c) < 40:
+        return None
+    try:
+        m = c.resample("ME").last().dropna()
+    except Exception:
+        m = c.iloc[::21]
+    lr = np.log(m / m.shift(1)).replace([np.inf, -np.inf], np.nan).dropna()
+    return lr.values if len(lr) >= 12 else None
 
 
 def project_future(initial: float, monthly: float, years: float,
-                   annual_return: float, sigma: float, n_sims: int = 500) -> dict:
-    """Proiezione a scenari + ventaglio Monte Carlo. NON è una previsione."""
+                   annual_return: float, sigma: float, n_sims: int = 600,
+                   method: str = "bootstrap", month_logrets=None) -> dict:
+    """Proiezione PAC a ventaglio (fan chart p10/p50/p90). NON è una previsione del prezzo.
+    method: 'bootstrap' (rendimenti reali a blocchi, code grasse + clustering — consigliato),
+            'tstudent' (code grasse, ν=5), 'normale' (gaussiana). Il rendimento atteso scelto
+            dall'utente fissa il drift; il metodo decide la FORMA dell'incertezza."""
     months = max(int(round(years * 12)), 1)
     invested = initial + monthly * np.arange(months + 1)
-
-    # Scenari deterministici (prudente / base / ottimistico)
-    base = _scenario_series(initial, monthly, months, annual_return)
-    prudente = _scenario_series(initial, monthly, months, annual_return - sigma)
-    ottimistico = _scenario_series(initial, monthly, months, annual_return + sigma)
-
-    # Monte Carlo (moto browniano geometrico, passi mensili) — seed fisso per stabilità
-    mu_log = np.log(1 + annual_return)
-    dt = 1 / 12
-    drift = (mu_log - 0.5 * sigma ** 2) * dt
-    vol = sigma * np.sqrt(dt)
     rng = np.random.default_rng(42)
+    mu_m = np.log(1 + annual_return) / 12.0
+    sig_m = sigma / np.sqrt(12.0)
+
+    if method == "bootstrap" and month_logrets is not None and len(month_logrets) >= 12:
+        src = np.asarray(month_logrets, dtype=float)
+        src = src - src.mean() + mu_m               # forma reale, drift = rendimento atteso scelto
+        steps = _block_bootstrap(src, months, n_sims, block=3, rng=rng)
+        label = "block bootstrap dei rendimenti reali (code grasse + clustering)"
+    elif method == "tstudent":
+        nu = 5
+        t = rng.standard_t(nu, size=(n_sims, months)) / np.sqrt(nu / (nu - 2))   # varianza normalizzata a 1
+        steps = (mu_m - 0.5 * sig_m ** 2) + sig_m * t
+        label = "t-Student (code grasse, ν=5)"
+    else:
+        z = rng.standard_normal((n_sims, months))
+        steps = (mu_m - 0.5 * sig_m ** 2) + sig_m * z
+        label = "normale (gaussiana — code sottili)"
+
+    growth = np.exp(steps)
     paths = np.empty((n_sims, months + 1))
     paths[:, 0] = initial
     for m in range(1, months + 1):
-        z = rng.standard_normal(n_sims)
-        paths[:, m] = paths[:, m - 1] * np.exp(drift + vol * z) + monthly
+        paths[:, m] = paths[:, m - 1] * growth[:, m - 1] + monthly
     pct = {p: np.percentile(paths, p, axis=0) for p in (10, 50, 90)}
-
+    end = paths[:, -1]
     return {
         "months": months, "x_years": np.arange(months + 1) / 12,
         "invested": invested, "total_invested": float(invested[-1]),
-        "base": base, "prudente": prudente, "ottimistico": ottimistico,
         "p10": pct[10], "p50": pct[50], "p90": pct[90],
+        "method_label": label,
+        "p_below_invested": round(float((end < invested[-1]).mean()) * 100),
     }
+
+
+def fundamental_drift(info: dict):
+    """Rendimento annuo atteso (proxy) dai FONDAMENTALI, per il drift del LUNGO periodo:
+    earnings yield (1/PE) + crescita attesa, clampato. None se i dati non bastano.
+    NON è una previsione: è un'ancora ragionata al posto del trend storico estrapolato."""
+    pe = info.get("trailingPE")
+    g = info.get("epsGrowth3Y")
+    if g is None:
+        g = info.get("earningsGrowth")
+    if g is None:
+        g = info.get("revenueGrowth")
+    ey = (1.0 / pe) if (pe and pe > 0) else None
+    if ey is None and g is None:
+        return None
+    drift = (ey if ey is not None else 0.04) + min(max(g if g is not None else 0.0, -0.05), 0.15)
+    return float(np.clip(drift, -0.10, 0.20))
+
+
+def reverse_dcf_growth(info: dict, discount: float = 0.09):
+    """DCF INVERSA (niente fair value a numero singolo = falsa precisione): la crescita perpetua
+    che il prezzo attuale sta scontando, modello di Gordon g = r − 1/PE. Indicativo."""
+    pe = info.get("trailingPE")
+    if not pe or pe <= 0:
+        return None
+    return round((discount - 1.0 / pe) * 100, 1)
+
+
+# ---------------------------------------------------------------------------
+# CALIBRAZIONE DELLE PREVISIONI — non per indovinare il prezzo, ma per misurare l'ONESTÀ
+# delle probabilità: degli eventi a cui diamo ~70%, quanti si avverano davvero?
+# (Brier score + tabella per fasce). Si popola NEL TEMPO: ogni P(salita) viene registrata
+# e "risolta" a scadenza confrontando il prezzo. Persistenza sul data layer (come il tracking).
+# ---------------------------------------------------------------------------
+FORECAST_LOG_NAME = "forecast_log.json"
+
+
+def log_forecast(ticker, horizon_days, p_up, price):
+    """Registra una previsione P(salita) per il backtest di calibrazione (max 1/giorno per ticker+orizzonte)."""
+    if p_up is None or not price:
+        return
+    rec = read_data_json(FORECAST_LOG_NAME, [])
+    if not isinstance(rec, list):
+        rec = []
+    today, tk, hh = _today_iso(), ticker.upper(), int(horizon_days)
+    for r in rec:
+        if r.get("ticker") == tk and r.get("h") == hh and r.get("date") == today:
+            return
+    rec.append({"date": today, "ticker": tk, "h": hh,
+                "p_up": float(p_up), "price": float(price), "outcome": None})
+    write_data_json(FORECAST_LOG_NAME, rec[-3000:])
+
+
+def resolve_forecasts():
+    """Assegna l'esito (0/1) alle previsioni mature: prezzo a scadenza vs prezzo iniziale. Per il job."""
+    rec = read_data_json(FORECAST_LOG_NAME, [])
+    if not isinstance(rec, list) or not rec:
+        return 0
+    today = _parse_dt(_today_iso())
+    changed, hist_cache = 0, {}
+    for r in rec:
+        if r.get("outcome") is not None:
+            continue
+        d0 = _parse_dt(r.get("date"))
+        if not d0 or not r.get("price") or (today - d0).days < r.get("h", 21):
+            continue
+        tk = r["ticker"]
+        if tk not in hist_cache:
+            hist_cache[tk] = get_history(tk, period="1y")
+        h = hist_cache[tk]
+        if h is None or h.empty:
+            continue
+        try:
+            after = h["Close"][h.index.tz_localize(None) >= (d0 + datetime.timedelta(days=r["h"]))].dropna() \
+                if getattr(h.index, "tz", None) is not None else \
+                h["Close"][h.index >= (d0 + datetime.timedelta(days=r["h"]))].dropna()
+            if after.empty:
+                continue
+            r["outcome"] = 1 if float(after.iloc[0]) > r["price"] else 0
+            changed += 1
+        except Exception:
+            continue
+    if changed:
+        write_data_json(FORECAST_LOG_NAME, rec)
+    return changed
+
+
+def calibration_report():
+    """Brier score + tabella per fasce di probabilità (predetto vs realizzato). None se vuoto."""
+    rec = read_data_json(FORECAST_LOG_NAME, [])
+    if not isinstance(rec, list):
+        return None
+    done = [r for r in rec if r.get("outcome") is not None and r.get("p_up") is not None]
+    if not done:
+        return {"n_total": len(rec) if isinstance(rec, list) else 0, "n_resolved": 0, "brier": None, "buckets": []}
+    brier = sum(((r["p_up"] / 100.0) - r["outcome"]) ** 2 for r in done) / len(done)
+    buckets = []
+    for lo, hi in [(0, 40), (40, 55), (55, 70), (70, 101)]:
+        grp = [r for r in done if lo <= r["p_up"] < hi]
+        if grp:
+            buckets.append({"range": f"{lo}-{min(hi, 100)}%", "n": len(grp),
+                            "predetto": round(sum(r["p_up"] for r in grp) / len(grp)),
+                            "realizzato": round(sum(r["outcome"] for r in grp) / len(grp) * 100)})
+    return {"n_total": len(rec), "n_resolved": len(done), "brier": round(brier, 3), "buckets": buckets}
 
 
 def _fund_data_from_fmp(ticker: str, out: dict) -> None:
@@ -1897,9 +2095,32 @@ def opportunity_row(ticker: str, with_fundamentals: bool = True) -> dict:
                 spark=spark, spark_dates=spark_dates)
 
 
+def _reliab_label(sig_a, n):
+    """Affidabilità a 3 livelli: alta con bassa volatilità e storico lungo, bassa se molto volatile."""
+    if sig_a <= 0.35 and n >= 180:
+        return "🟢 Alta"
+    if sig_a <= 0.60 and n >= 120:
+        return "🟡 Media"
+    return "🔴 Bassa"
+
+
+def _gain_loss_prob_normal(logret, horizon_days, sig_a, n):
+    """Ripiego: modello normale (usato solo se lo storico è troppo corto per il bootstrap)."""
+    mu_a = float(np.clip(logret.mean() * 252, -0.25, 0.30))
+    f = horizon_days / 252.0
+    mu_h, sig_h = mu_a * f, sig_a * np.sqrt(f)
+    cdf = lambda x: 0.5 * (1 + math.erf(x / math.sqrt(2)))
+    p_gain = round(cdf(mu_h / sig_h) * 100)
+    p_loss = round(cdf((math.log(0.85) - mu_h) / sig_h) * 100)
+    exp_ret = round((math.exp(mu_h) - 1) * 100, 1)
+    return p_gain, p_loss, exp_ret, _reliab_label(sig_a, n)
+
+
 def _gain_loss_prob(h, horizon_days=21):
-    """Stima probabilità salita / perdita>15%, guadagno atteso % e affidabilità della stima.
-    Modello normale con drift annuo smorzato a [-25%, +30%]. Indicativo, NON una previsione."""
+    """P(salita), P(perdita>15%), guadagno atteso % e affidabilità — da **BLOCK BOOTSTRAP dei
+    rendimenti reali** (code grasse + volatility clustering), non più da una normale: le
+    probabilità sono molto più oneste. Drift ≈ 0 sul breve (niente trend estrapolato), storico
+    clampato sul lungo. Ripiego al modello normale se lo storico è troppo corto. NON è una previsione."""
     try:
         logret = np.log(h["Close"] / h["Close"].shift(1)).replace([np.inf, -np.inf], np.nan).dropna()
     except Exception:
@@ -1907,24 +2128,17 @@ def _gain_loss_prob(h, horizon_days=21):
     n = len(logret)
     if n < 30:
         return None, None, None, None
-    mu_a = float(np.clip(logret.mean() * 252, -0.25, 0.30))   # rendimento annuo atteso, smorzato
     sig_a = float(logret.std() * np.sqrt(252))
     if sig_a <= 0:
         return None, None, None, None
-    f = horizon_days / 252.0
-    mu_h, sig_h = mu_a * f, sig_a * np.sqrt(f)
-    cdf = lambda x: 0.5 * (1 + math.erf(x / math.sqrt(2)))
-    p_gain = round(cdf(mu_h / sig_h) * 100)                    # P(prezzo più alto a fine orizzonte)
-    p_loss = round(cdf((math.log(0.85) - mu_h) / sig_h) * 100)  # P(perdita > 15%)
-    exp_ret = round((math.exp(mu_h) - 1) * 100, 1)            # rendimento atteso (mediano) sull'orizzonte
-    # Affidabilità della stima: alta se poca volatilità e storico lungo, bassa se molto volatile
-    if sig_a <= 0.35 and n >= 180:
-        reliab = "🟢 Alta"
-    elif sig_a <= 0.60 and n >= 120:
-        reliab = "🟡 Media"
-    else:
-        reliab = "🔴 Bassa"
-    return p_gain, p_loss, exp_ret, reliab
+    sim = _simulate_returns(logret.values, horizon_days, n_sims=800, demean=(horizon_days <= 63))
+    if sim is None:
+        return _gain_loss_prob_normal(logret, horizon_days, sig_a, n)
+    final = sim["final"]
+    p_gain = round(float((final > 0).mean()) * 100)
+    p_loss = round(float((final < math.log(0.85)).mean()) * 100)
+    exp_ret = round((math.exp(float(np.median(final))) - 1) * 100, 1)
+    return p_gain, p_loss, exp_ret, _reliab_label(sig_a, n)
 
 
 def _risk_factors(h) -> dict:
@@ -2567,7 +2781,8 @@ def opportunity_snapshot(ticker: str, kind: str) -> dict:
     if not r:
         return None
     if kind == "short":
-        sc = _short_score(r)
+        # stesso regime di volatilità della pagina Occasioni → punteggi coerenti col monitoraggio
+        sc = _short_score(r, regime=volatility_regime()["factor"])
         gain = r["rebound_pot"] if r["rebound_pot"] is not None else r["exp_ret"]
     else:
         sc = _long_score(r)
