@@ -165,12 +165,14 @@ def page_header(title: str, subtitle: str = ""):
 
 
 def show_chart(fig, use_container_width=True, config=None, **kw):
-    """Grafico Plotly ottimizzato per il tocco: assi bloccati (niente zoom) così, trascinando
-    il dito lungo la linea SENZA staccarlo, il valore segue il dito (tooltip continuo)."""
+    """Grafico ottimizzato per il telefono: niente zoom fastidioso al tocco; toccando un punto
+    della linea compare il valore con una linea-guida verticale. Dove il browser mobile lo
+    consente, il valore segue anche il trascinamento del dito."""
     try:
-        fig.update_xaxes(fixedrange=True)
+        fig.update_layout(dragmode=False, hovermode="x unified", hoverdistance=120, spikedistance=1000)
+        fig.update_xaxes(fixedrange=True, showspikes=True, spikemode="across",
+                         spikethickness=1, spikedash="dot", spikecolor="rgba(255,255,255,0.5)")
         fig.update_yaxes(fixedrange=True)
-        fig.update_layout(hovermode="x unified", hoverdistance=80)
     except Exception:
         pass
     cfg = {"displayModeBar": False, "scrollZoom": False, "doubleClick": False}
@@ -375,6 +377,33 @@ st.sidebar.caption(
     "⚠️ Strumento di analisi a scopo informativo. **Non è consulenza finanziaria.** "
     "I dati gratuiti possono avere ritardo o essere incompleti."
 )
+
+# ---------------------------------------------------------------------------
+# NAVIGAZIONE "INDIETRO" INTERNA
+# Il tasto indietro del telefono uscirebbe dall'app; questo pulsante riporta in
+# modo affidabile alla schermata precedente (sezione + titolo) dentro l'app.
+# ---------------------------------------------------------------------------
+_cur_view = (section, ticker)
+if st.session_state.pop("_nav_back", False):
+    st.session_state["_nav_current"] = _cur_view            # arrivo da "Indietro": non impilare
+else:
+    _prev = st.session_state.get("_nav_current")
+    if _prev is not None and _prev != _cur_view:
+        _stack = st.session_state.setdefault("_nav_stack", [])
+        if not _stack or _stack[-1] != _prev:
+            _stack.append(_prev)
+        del _stack[:-30]                                     # conserva solo le ultime 30 schermate
+    st.session_state["_nav_current"] = _cur_view
+
+if st.session_state.get("_nav_stack"):
+    _bcol, _ = st.columns([1, 4])
+    if _bcol.button("← Indietro", use_container_width=True, key="nav_back_btn",
+                    help="Torna alla schermata precedente. Usa questo invece del tasto «indietro» del telefono."):
+        _dest_section, _dest_ticker = st.session_state["_nav_stack"].pop()
+        st.session_state["_goto_section"] = _dest_section
+        st.session_state["ticker"] = _dest_ticker
+        st.session_state["_nav_back"] = True
+        st.rerun()
 
 # ===========================================================================
 # SEZIONE: OCCASIONI DI MERCATO (pagina a sé, indipendente dal titolo)
