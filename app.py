@@ -1299,8 +1299,9 @@ if section.startswith("Portafoglio"):
         with st.form("add_pos", clear_on_submit=True):
             pf1, pf2, pf3 = st.columns([2, 2, 2])
             p_tk = pf1.text_input("Titolo / marchio (ticker)", placeholder="es. AAPL, ENI.MI").strip().upper()
-            p_amt = pf2.number_input("Soldi investiti", min_value=0.0, step=50.0, value=0.0, format="%.2f",
-                                     help="L'importo che hai messo su questo titolo (nella valuta del titolo).")
+            p_amt = pf2.number_input("Soldi investiti (€)", min_value=0.0, step=50.0, value=0.0, format="%.2f",
+                                     help="Quanti EURO hai messo su questo titolo. Per i titoli in dollari/altra "
+                                          "valuta la quantità di azioni viene calcolata convertendo l'importo al cambio.")
             p_hor = pf3.radio("Orizzonte", ["⚡ Breve termine", "🏛️ Lungo termine"], index=1,
                               help="«Breve» = scommessa di rimbalzo (incassare presto). «Lungo» = investimento da tenere; "
                                    "il consulente di vendita è più paziente.")
