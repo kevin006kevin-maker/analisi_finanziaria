@@ -3582,16 +3582,19 @@ def remove_position(index: int) -> list:
     return positions
 
 
-def portfolio_view(base: str = "EUR"):
-    """Calcola valore attuale, guadagno/perdita per posizione e totali, più gli avvisi target/stop.
-    I TOTALI sono convertiti nella valuta base (EUR di default) così posizioni in valute diverse
-    (USD/EUR/CHF…) si sommano correttamente. Le righe mostrano anche i valori nativi + la valuta.
-    Ritorna (righe, totali). totals['complete']=False se qualche posizione è esclusa dal totale
-    (prezzo o cambio non disponibili)."""
+CAPITAL_GAINS_TAX = 0.26   # tassa italiana sulle plusvalenze (rendite finanziarie)
+
+
+def portfolio_view(base: str = "EUR", tax_rate: float = CAPITAL_GAINS_TAX, fee: float = 1.0):
+    """Calcola valore attuale, guadagno/perdita (lordo e NETTO) per posizione e totali, più gli
+    avvisi target/stop. I TOTALI sono convertiti in valuta base (EUR) così valute diverse si
+    sommano correttamente. Il **netto** = guadagno lordo − tassa del `tax_rate` sulla plusvalenza
+    (solo se in utile) − `fee` € di commissioni (per posizione). Stima: la tassa è calcolata per
+    singola posizione (non considera la compensazione delle minusvalenze). Ritorna (righe, totali);
+    totals['complete']=False se qualche posizione è esclusa dal totale (prezzo o cambio mancanti)."""
     positions = load_portfolio()
     rows = []
-    tot_cost_eur = 0.0
-    tot_val_eur = 0.0
+    tot_cost_eur = tot_val_eur = tot_net_eur = tot_tax_eur = tot_fee_eur = 0.0
     complete = True
     currencies = set()
     for i, p in enumerate(positions):
@@ -3607,13 +3610,25 @@ def portfolio_view(base: str = "EUR"):
         val = (qty * price) if price is not None else None
         pnl = (val - cost) if val is not None else None
         pnl_pct = ((price / buy - 1) * 100) if (price is not None and buy) else None
-        # Conversione in valuta base per i totali
+        # Conversione in valuta base (EUR) per totali e calcolo fiscale
         usable = (fx is not None and price is not None)
         cost_eur = (cost * fx) if fx is not None else None
         val_eur = (val * fx) if (val is not None and fx is not None) else None
+        # Netto: lordo − tassa (solo su utile, al netto delle commissioni) − commissioni
+        gross_eur = (val_eur - cost_eur) if (val_eur is not None and cost_eur is not None) else None
+        tax_eur = net_eur = net_value_eur = net_pct = None
+        if gross_eur is not None:
+            taxable = max(gross_eur - fee, 0.0)           # la tassa colpisce solo la plusvalenza netta
+            tax_eur = tax_rate * taxable
+            net_eur = gross_eur - fee - tax_eur
+            net_value_eur = cost_eur + net_eur            # quanto incasseresti davvero
+            net_pct = (net_eur / cost_eur * 100) if cost_eur else None
         if usable:
             tot_cost_eur += cost_eur
             tot_val_eur += val_eur
+            tot_tax_eur += tax_eur or 0.0
+            tot_fee_eur += fee
+            tot_net_eur += net_eur if net_eur is not None else 0.0
         else:
             complete = False
         tgt, stp = p.get("target"), p.get("stop")
@@ -3627,13 +3642,19 @@ def portfolio_view(base: str = "EUR"):
                      "datetime": p.get("datetime") or p.get("date"),
                      "amount": p.get("amount", cost), "ccy": ccy,
                      "price": price, "cost": cost, "value": val, "pnl": pnl, "pnl_pct": pnl_pct,
-                     "value_eur": val_eur, "cost_eur": cost_eur,
+                     "value_eur": val_eur, "cost_eur": cost_eur, "gross_eur": gross_eur,
+                     "tax_eur": tax_eur, "net_eur": net_eur, "net_value_eur": net_value_eur,
+                     "net_pct": net_pct,
                      "target": tgt, "stop": stp, "note": p.get("note", ""), "status": status,
                      "horizon": ("breve" if str(p.get("horizon", "lungo")).startswith("breve") else "lungo")})
     totals = {"base": base, "currencies": sorted(currencies), "complete": complete,
+              "tax_rate": tax_rate, "fee": fee,
               "cost": tot_cost_eur, "value": tot_val_eur,
               "pnl": (tot_val_eur - tot_cost_eur),
-              "pnl_pct": ((tot_val_eur / tot_cost_eur - 1) * 100) if tot_cost_eur else None}
+              "pnl_pct": ((tot_val_eur / tot_cost_eur - 1) * 100) if tot_cost_eur else None,
+              "tax": tot_tax_eur, "fee_total": tot_fee_eur, "net_pnl": tot_net_eur,
+              "net_pnl_pct": ((tot_net_eur / tot_cost_eur) * 100) if tot_cost_eur else None,
+              "net_value": (tot_cost_eur + tot_net_eur)}
     return rows, totals
 
 
