@@ -3551,21 +3551,28 @@ def add_position(ticker, qty, buy_price, date, target=None, stop=None, note="", 
 
 def add_position_by_amount(ticker, amount, target_pct=None, stop_pct=None, note="",
                            horizon="lungo", when=None):
-    """Registra un acquisto indicando solo l'IMPORTO investito: prezzo e quantità vengono
-    ricavati dal prezzo di mercato attuale, e si memorizza data+ora. Bersaglio/stop si possono
-    dare come percentuali (+x% / -y%). Ritorna la posizione creata, o None se manca il prezzo."""
+    """Registra un acquisto indicando solo l'IMPORTO investito **in EUR** (i soldi dell'utente):
+    prezzo e quantità si ricavano dal prezzo di mercato attuale. Per i titoli in altra valuta
+    l'importo EUR viene convertito al prezzo nativo, così «Investito (€)» coincide con quanto
+    immesso. Bersaglio/stop come percentuali (+x% / -y%). Ritorna la posizione, o None se manca il prezzo."""
     tk = str(ticker).upper()
     q = quick_quote(tk)
     price = q.get("price")
     if price is None or price <= 0 or not amount or amount <= 0:
         return None
-    qty = float(amount) / float(price)
+    # L'importo è in EUR: converto nella valuta del titolo per ricavare la quantità reale
+    ccy = ticker_currency(tk)
+    fx = fx_to_eur(ccy) or 1.0                      # native→EUR (1.0 se EUR o cambio ignoto)
+    amount_native = float(amount) / fx              # EUR → valuta del titolo
+    qty = amount_native / float(price)
     target = round(price * (1 + float(target_pct) / 100), 4) if target_pct else None
     stop = round(price * (1 - float(stop_pct) / 100), 4) if stop_pct else None
     when = when or _now_iso()
     positions = load_portfolio()
     positions.append({
-        "ticker": tk, "qty": qty, "buy_price": float(price), "amount": float(amount),
+        "ticker": tk, "qty": qty, "buy_price": float(price),
+        "amount": round(amount_native, 4),          # investito nella valuta del titolo (per la colonna "nativo")
+        "amount_eur": float(amount), "ccy": ccy,     # investito in EUR (i soldi immessi)
         "datetime": when, "date": when[:10],
         "target": target, "stop": stop, "note": note,
         "horizon": ("breve" if str(horizon).startswith("breve") else "lungo"),
