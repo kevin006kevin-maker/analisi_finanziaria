@@ -121,7 +121,10 @@ def get_info(ticker: str, merge: bool = False) -> dict:
         if sec and len(sec) > 3:
             return sec
         try:
-            return yf.Ticker(ticker).info or {}
+            d = yf.Ticker(ticker).info or {}
+            if d:
+                d["_source"] = "Yahoo"
+            return d
         except Exception:
             return {}
 
@@ -161,6 +164,10 @@ def get_info(ticker: str, merge: bool = False) -> dict:
                 out["pegRatio"] = round(float(pe) / (float(g) * 100), 2)
         except (TypeError, ValueError):
             pass
+    # Trasparenza dati: elenca le fonti che hanno realmente contribuito (per l'indicatore in UI)
+    named = [("FMP", sources[0]), ("Finnhub", sources[1]), ("SEC", sources[2]), ("Yahoo", sources[3])]
+    contrib = [nm for nm, s in named if any(k != "_source" for k in s)]
+    out["_source"] = " + ".join(contrib) if contrib else "—"
     return out
 
 
@@ -182,23 +189,57 @@ def _fmp_key():
     return os.environ.get("FMP_API_KEY", "")
 
 
+# Stato dell'ultima chiamata FMP (per l'indicatore "trasparenza dati" in UI). Module-global:
+# persiste tra i rerun di Streamlit e funziona anche nel job (nessuna dipendenza da st.session_state).
+_FMP_STATE = {"status": None}
+
+
 @st.cache_data(ttl=900, show_spinner=False)
 def _fmp_get(path: str):
     key = _fmp_key()
     if not key:
+        _FMP_STATE["status"] = "no_key"
         return None
     import requests
     sep = "&" if "?" in path else "?"
     try:
         r = requests.get(f"{FMP_BASE}/{path}{sep}apikey={key}", timeout=15)
         if r.status_code != 200:
+            # 429 = quota giornaliera esaurita / rate limit (il caso più frequente sul piano free)
+            _FMP_STATE["status"] = "exhausted" if r.status_code == 429 else f"http_{r.status_code}"
             return None
         data = r.json()
         if isinstance(data, dict) and ("Error Message" in data or "error" in data):
+            _FMP_STATE["status"] = "exhausted"   # FMP segnala il limite anche con 200 + messaggio
             return None
+        _FMP_STATE["status"] = "ok"
         return data
     except Exception:
+        _FMP_STATE["status"] = "error"
         return None
+
+
+def fmp_status_label() -> str:
+    """Etichetta leggibile dello stato FMP per l'indicatore di trasparenza dati."""
+    if not _fmp_key():
+        return "FMP non configurato"
+    return {"ok": "FMP attivo", "exhausted": "⚠️ FMP quota esaurita",
+            "error": "FMP irraggiungibile", "no_key": "FMP non configurato",
+            None: "FMP pronto"}.get(_FMP_STATE.get("status"), f"FMP {_FMP_STATE.get('status')}")
+
+
+def data_status_line(info: dict, hist=None) -> str:
+    """Riga «trasparenza dati» per la UI: da quale fonte arrivano i fondamentali, qual è la data
+    dell'ultimo prezzo e lo stato di FMP. Trasforma i fallback silenziosi in informazione."""
+    src = (info or {}).get("_source") or "—"
+    parts = [f"fondamentali: **{src}**"]
+    try:
+        if hist is not None and not hist.empty:
+            parts.append(f"ultimo prezzo: **{hist.index[-1].strftime('%d/%m/%Y')}**")
+    except Exception:
+        pass
+    parts.append(fmp_status_label())
+    return "📡 " + " · ".join(parts)
 
 
 def _first(data):
@@ -274,6 +315,7 @@ def info_from_fmp(ticker: str) -> dict:
         pfcf = num(r.get("priceToFreeCashFlowsRatioTTM"))
         if pfcf and pfcf > 0:
             info["fcfYield"] = round(100.0 / pfcf, 2)
+    info["_source"] = "FMP"
     return {k: v for k, v in info.items() if v is not None}
 
 
@@ -441,6 +483,7 @@ def fundamentals_from_sec(ticker: str) -> dict:
             info["priceToBook"] = price * shares / eq
         if rev and rev > 0:
             info["priceToSalesRatio"] = price * shares / rev
+    info["_source"] = "SEC"
     return {k: v for k, v in info.items() if v is not None}
 
 
@@ -700,6 +743,7 @@ def info_from_finnhub(ticker: str) -> dict:
     info["epsGrowth3Y"] = frac(_firstk("epsGrowth3Y"))
     info["epsGrowth5Y"] = frac(_firstk("epsGrowth5Y"))
     info["netMargin5Y"] = frac(_firstk("netProfitMargin5Y", "netMargin5Y"))              # margine netto medio 5 anni
+    info["_source"] = "Finnhub"
     return {k: v for k, v in info.items() if v is not None}
 
 
@@ -2199,11 +2243,6 @@ def opportunity_row(ticker: str, with_fundamentals: bool = True) -> dict:
     spark = [round(float(x), 4) for x in h["Close"].tail(60).tolist()]          # mini-grafico (prezzi)
     spark_dates = [str(d.date()) for d in h.index[-60:]]                         # date per l'asse x
 
-    # Probabilità statistiche (modello normale sui rendimenti storici, drift smorzato).
-    # Orizzonte: breve ~1 mese, lungo ~1 anno. NON è una previsione: è una stima dal passato.
-    prob_gain, prob_loss, exp_ret, reliab = _gain_loss_prob(
-        h, horizon_days=(252 if with_fundamentals else 21))
-
     # Fattori di rischio/qualità dalla serie storica + affidabilità continua
     rfac = _risk_factors(h)
     reliab_factor = _reliab_factor(rfac.get("sig_a"), rfac.get("n"))
@@ -2213,6 +2252,7 @@ def opportunity_row(ticker: str, with_fundamentals: bool = True) -> dict:
     radar = trap = None
     roic = ev_ebit = fcf_yield = gross_m = icov = div_cov = None
     rev_cagr3 = eps_cagr3 = fscore_health = None
+    fdr = None                               # rendimento atteso dai fondamentali (drift del lungo)
     if with_fundamentals:                    # solo per il lungo periodo (qualità)
         info = get_info(ticker)
         etf = is_fund(info) or is_known_etf(ticker)   # riconosce gli ETF anche sul cloud
@@ -2234,6 +2274,14 @@ def opportunity_row(ticker: str, with_fundamentals: bool = True) -> dict:
             rev_cagr3 = _nn(info.get("revenueGrowth3Y"))
             eps_cagr3 = _nn(info.get("epsGrowth3Y"))
             fscore_health = _health_fscore(info)
+            fdr = fundamental_drift(info)            # earnings yield + crescita → drift del lungo
+
+    # Probabilità statistiche (block bootstrap dei rendimenti reali). Orizzonte: breve ~1 mese
+    # (drift ≈ 0), lungo ~1 anno (drift dai FONDAMENTALI se disponibile, altrimenti storico).
+    # NON è una previsione: è una stima della distribuzione dei rendimenti passati.
+    prob_gain, prob_loss, exp_ret, reliab = _gain_loss_prob(
+        h, horizon_days=(252 if with_fundamentals else 21),
+        drift_annual=(fdr if with_fundamentals else None))
 
     return dict(ticker=ticker.upper(), name=name, price=price, rsi=rsi, dd_high=dd_high,
                 perf_1m=perf_1m, perf_5d=perf_5d, perf_1y=perf_1y, below_bb=below_bb,
@@ -2274,11 +2322,12 @@ def _gain_loss_prob_normal(logret, horizon_days, sig_a, n):
     return p_gain, p_loss, exp_ret, _reliab_label(sig_a, n)
 
 
-def _gain_loss_prob(h, horizon_days=21):
+def _gain_loss_prob(h, horizon_days=21, drift_annual=None):
     """P(salita), P(perdita>15%), guadagno atteso % e affidabilità — da **BLOCK BOOTSTRAP dei
     rendimenti reali** (code grasse + volatility clustering), non più da una normale: le
-    probabilità sono molto più oneste. Drift ≈ 0 sul breve (niente trend estrapolato), storico
-    clampato sul lungo. Ripiego al modello normale se lo storico è troppo corto. NON è una previsione."""
+    probabilità sono molto più oneste. Drift ≈ 0 sul breve (niente trend estrapolato); sul LUNGO
+    usa `drift_annual` se fornito (ancora dai FONDAMENTALI: earnings yield + crescita), altrimenti
+    il drift storico clampato. Ripiego al modello normale se lo storico è troppo corto. NON è una previsione."""
     try:
         logret = np.log(h["Close"] / h["Close"].shift(1)).replace([np.inf, -np.inf], np.nan).dropna()
     except Exception:
@@ -2289,7 +2338,10 @@ def _gain_loss_prob(h, horizon_days=21):
     sig_a = float(logret.std() * np.sqrt(252))
     if sig_a <= 0:
         return None, None, None, None
-    sim = _simulate_returns(logret.values, horizon_days, n_sims=800, demean=(horizon_days <= 63))
+    # breve → drift 0 (demean); lungo → drift dai fondamentali se dato, altrimenti storico clampato
+    sim = _simulate_returns(logret.values, horizon_days, n_sims=800,
+                            demean=(horizon_days <= 63 and drift_annual is None),
+                            drift_annual=drift_annual)
     if sim is None:
         return _gain_loss_prob_normal(logret, horizon_days, sig_a, n)
     final = sim["final"]
@@ -3435,6 +3487,47 @@ def track_record_calibration() -> dict:
 PORTFOLIO_NAME = "portfolio.json"
 
 
+# --- Valute: i titoli quotano in valute diverse (EUR/USD/GBP…). Per un totale di portafoglio
+# corretto convertiamo tutto in EUR (valuta base). ---
+_CCY_BY_SUFFIX = {
+    ".MI": "EUR", ".PA": "EUR", ".DE": "EUR", ".F": "EUR", ".MU": "EUR", ".AS": "EUR",
+    ".MC": "EUR", ".BR": "EUR", ".LS": "EUR", ".VI": "EUR", ".HE": "EUR", ".IR": "EUR",
+    ".SW": "CHF", ".L": "GBP", ".TO": "CAD", ".HK": "HKD", ".T": "JPY", ".AX": "AUD",
+    ".ST": "SEK", ".OL": "NOK", ".CO": "DKK",
+}
+
+
+def ticker_currency(ticker, info=None) -> str:
+    """Valuta di quotazione: dal suffisso della borsa (.MI→EUR, .SW→CHF…), poi da info, poi USD."""
+    t = (ticker or "").upper()
+    for suf, ccy in _CCY_BY_SUFFIX.items():
+        if t.endswith(suf):
+            return ccy
+    if info and info.get("currency"):
+        return str(info["currency"]).upper()
+    return "USD"
+
+
+@st.cache_data(ttl=3600, show_spinner=False)
+def fx_to_eur(ccy: str):
+    """Moltiplicatore per convertire un importo da `ccy` a EUR (valuta base). 1.0 per EUR;
+    None se il cambio non è disponibile. NB: i titoli di Londra (.L) quotano spesso in pence (GBp):
+    quei valori vanno verificati a mano."""
+    ccy = (ccy or "EUR").upper()
+    if ccy in ("EUR", ""):
+        return 1.0
+    for sym, invert in ((f"{ccy}EUR=X", False), (f"EUR{ccy}=X", True)):
+        try:
+            h = get_history(sym, "5d")
+            if not h.empty:
+                v = float(h["Close"].dropna().iloc[-1])
+                if v > 0:
+                    return (1.0 / v) if invert else v
+        except Exception:
+            pass
+    return None
+
+
 def load_portfolio() -> list:
     data = read_data_json(PORTFOLIO_NAME, [])
     return data if isinstance(data, list) else []
@@ -3489,29 +3582,40 @@ def remove_position(index: int) -> list:
     return positions
 
 
-def portfolio_view():
-    """Calcola valore attuale, guadagno/perdita per posizione e totali, più gli avvisi
-    target/stop. Ritorna (righe, totali)."""
+def portfolio_view(base: str = "EUR"):
+    """Calcola valore attuale, guadagno/perdita per posizione e totali, più gli avvisi target/stop.
+    I TOTALI sono convertiti nella valuta base (EUR di default) così posizioni in valute diverse
+    (USD/EUR/CHF…) si sommano correttamente. Le righe mostrano anche i valori nativi + la valuta.
+    Ritorna (righe, totali). totals['complete']=False se qualche posizione è esclusa dal totale
+    (prezzo o cambio non disponibili)."""
     positions = load_portfolio()
     rows = []
-    tot_cost = 0.0
-    tot_val = 0.0
-    val_known = True
+    tot_cost_eur = 0.0
+    tot_val_eur = 0.0
+    complete = True
+    currencies = set()
     for i, p in enumerate(positions):
         tk = p.get("ticker")
         qty = p.get("qty") or 0.0
         buy = p.get("buy_price") or 0.0
         q = quick_quote(tk)
         price = q.get("price")
-        cost = qty * buy
+        ccy = ticker_currency(tk)
+        currencies.add(ccy)
+        fx = fx_to_eur(ccy) if base == "EUR" else 1.0
+        cost = qty * buy                                  # valori NATIVI (valuta del titolo)
         val = (qty * price) if price is not None else None
         pnl = (val - cost) if val is not None else None
         pnl_pct = ((price / buy - 1) * 100) if (price is not None and buy) else None
-        tot_cost += cost
-        if val is not None:
-            tot_val += val
+        # Conversione in valuta base per i totali
+        usable = (fx is not None and price is not None)
+        cost_eur = (cost * fx) if fx is not None else None
+        val_eur = (val * fx) if (val is not None and fx is not None) else None
+        if usable:
+            tot_cost_eur += cost_eur
+            tot_val_eur += val_eur
         else:
-            val_known = False
+            complete = False
         tgt, stp = p.get("target"), p.get("stop")
         status = ""
         if price is not None:
@@ -3521,14 +3625,15 @@ def portfolio_view():
                 status = "🛑 stop raggiunto"
         rows.append({"index": i, "ticker": tk, "qty": qty, "buy_price": buy, "date": p.get("date"),
                      "datetime": p.get("datetime") or p.get("date"),
-                     "amount": p.get("amount", cost),
+                     "amount": p.get("amount", cost), "ccy": ccy,
                      "price": price, "cost": cost, "value": val, "pnl": pnl, "pnl_pct": pnl_pct,
+                     "value_eur": val_eur, "cost_eur": cost_eur,
                      "target": tgt, "stop": stp, "note": p.get("note", ""), "status": status,
                      "horizon": ("breve" if str(p.get("horizon", "lungo")).startswith("breve") else "lungo")})
-    totals = {"cost": tot_cost,
-              "value": (tot_val if val_known else None),
-              "pnl": (tot_val - tot_cost) if val_known else None,
-              "pnl_pct": ((tot_val / tot_cost - 1) * 100) if (val_known and tot_cost) else None}
+    totals = {"base": base, "currencies": sorted(currencies), "complete": complete,
+              "cost": tot_cost_eur, "value": tot_val_eur,
+              "pnl": (tot_val_eur - tot_cost_eur),
+              "pnl_pct": ((tot_val_eur / tot_cost_eur - 1) * 100) if tot_cost_eur else None}
     return rows, totals
 
 
