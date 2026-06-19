@@ -68,6 +68,38 @@ def get_history(ticker: str, period: str = "1y", interval: str = "1d") -> pd.Dat
 
 
 @st.cache_data(ttl=900, show_spinner=False)
+def get_chart_history(ticker: str, period: str = "5d") -> pd.DataFrame:
+    """Storico per i GRAFICI a breve termine: barre INTRADAY (~15 min, ripiego 1 ora) per i periodi
+    giornaliero/settimanale ('1d'/'5d'), così il prezzo si aggiorna entro ~15 minuti durante le
+    contrattazioni. Per i periodi più lunghi torna ai dati GIORNALIERI (get_history): un valore al
+    giorno. NON usata per i calcoli (indicatori/probabilità), che restano su dati daily.
+    Ritorna anche l'attributo .attrs['intraday'] = True/False."""
+    if period not in ("1d", "5d"):
+        df = get_history(ticker, period)
+        df.attrs["intraday"] = False
+        return df
+    for interval in ("15m", "60m"):                  # 15 min; se non disponibile, 1 ora
+        try:
+            df = yf.Ticker(ticker).history(period=period, interval=interval, auto_adjust=False)
+        except Exception:
+            df = None
+        if df is not None and not df.empty:
+            df = df.dropna(how="all")
+            if "Close" in df.columns:
+                df = df[df["Close"].notna()]
+            if not df.empty:
+                try:
+                    df.index = df.index.tz_localize(None)   # tz-aware → naive (confronti/plot semplici)
+                except (TypeError, AttributeError):
+                    pass
+                df.attrs["intraday"] = True
+                return df
+    df = get_history(ticker, "5d")                    # ripiego: giornaliero, meglio di niente
+    df.attrs["intraday"] = False
+    return df
+
+
+@st.cache_data(ttl=900, show_spinner=False)
 def get_info(ticker: str, merge: bool = False) -> dict:
     """Metadati/fondamentali.
     merge=False → prima fonte utile (leggero, per lo scanner delle occasioni).
@@ -274,9 +306,24 @@ def _sec_companyfacts(cik: str) -> dict:
 
 
 def _sec_annual(units, n=1):
-    """Valori annuali (10-K) più recenti, dal più nuovo."""
+    """Valori annuali (10-K) più recenti, dal più nuovo. Per i FLUSSI (conto economico/cassa, con
+    'start') preferisce la durata ANNUALE (~365g), evitando di pescare un trimestre o un cumulato
+    parziale; gli istantanei (stato patrimoniale, senza 'start') sono tenuti così come sono."""
     recs = [x for x in units if x.get("val") is not None and str(x.get("form", "")).startswith("10-K")]
     recs = [x for x in recs if x.get("fp") == "FY"] or recs
+
+    def _annualish(x):
+        s, e = x.get("start"), x.get("end")
+        if not s or not e:
+            return True                       # voce istantanea (bilancio) → tieni
+        try:
+            d0 = datetime.datetime.strptime(s, "%Y-%m-%d")
+            d1 = datetime.datetime.strptime(e, "%Y-%m-%d")
+            return 280 <= (d1 - d0).days <= 400
+        except Exception:
+            return True
+
+    recs = [x for x in recs if _annualish(x)] or recs
     recs.sort(key=lambda x: x.get("end", ""), reverse=True)
     out, seen = [], set()
     for x in recs:
@@ -441,6 +488,114 @@ def altman_z_from_sec(ticker: str) -> dict:
     else:
         zone, note = "🔴 a rischio", "rischio di dissesto elevato"
     return {"z": round(z, 2), "zone": zone, "note": note}
+
+
+def _sec_gaap_dei(ticker: str):
+    """(facts, us-gaap, dei) dai companyfacts SEC; (None, None, None) se non disponibili.
+    La companyfacts è in cache: Altman/EV-EBIT/Piotroski sullo stesso titolo NON ripetono la rete."""
+    cik = _sec_cik_map().get(ticker.upper())
+    if not cik:
+        return None, None, None
+    facts = _sec_companyfacts(cik)
+    gaap = (facts.get("facts") or {}).get("us-gaap", {})
+    dei = (facts.get("facts") or {}).get("dei", {})
+    return facts, gaap, dei
+
+
+def _sec_price_shares(ticker, dei):
+    """(prezzo, azioni in circolazione) per la capitalizzazione (mercato), dai dati SEC + ultimo prezzo."""
+    shares = _sec_instant((dei.get("EntityCommonStockSharesOutstanding", {}).get("units", {}) or {}).get("shares", []))
+    price = None
+    h = get_history(ticker, period="5d")
+    if not h.empty:
+        c = h["Close"].dropna()
+        if not c.empty:
+            price = float(c.iloc[-1])
+    return price, shares
+
+
+@st.cache_data(ttl=86400, show_spinner=False)
+def ev_ebit_from_sec(ticker: str):
+    """EV/EBIT REALE dai bilanci SEC (USA). Meglio di EV/EBITDA: include ammortamenti/svalutazioni,
+    quindi non «abbellisce» le aziende capital-intensive. None se EBIT≤0 o dati mancanti."""
+    facts, gaap, dei = _sec_gaap_dei(ticker)
+    if not gaap:
+        return None
+
+    def usd(c):
+        return (gaap.get(c, {}).get("units", {}) or {}).get("USD", [])
+
+    ebit_l = _sec_annual(usd("OperatingIncomeLoss"), 1)        # EBIT = reddito operativo
+    ebit = ebit_l[0] if ebit_l else None
+    if not ebit or ebit <= 0:
+        return None
+    debt = _sec_instant(usd("LongTermDebt"))
+    if debt is None:
+        ltc = _sec_instant(usd("LongTermDebtNoncurrent"))
+        debt = (ltc + (_sec_instant(usd("LongTermDebtCurrent")) or 0)) if ltc is not None else 0
+    cash = _sec_instant(usd("CashAndCashEquivalentsAtCarryingValue")) or 0
+    price, shares = _sec_price_shares(ticker, dei)
+    if not (price and shares):
+        return None
+    ev = price * shares + (debt or 0) - cash                   # enterprise value
+    if ev <= 0:
+        return None
+    return round(ev / ebit, 1)
+
+
+@st.cache_data(ttl=86400, show_spinner=False)
+def piotroski_from_sec(ticker: str):
+    """Piotroski F-Score REALE (i 9 test originali anno-su-anno) dai bilanci SEC (USA): validato per
+    separare i value sani dalle trappole. Ritorna {score, max, details:[(test, superato)]} o None.
+    ≥7 = solido · ≤3 = debole. (max < 9 se qualche voce di bilancio non è disponibile.)"""
+    facts, gaap, dei = _sec_gaap_dei(ticker)
+    if not gaap:
+        return None
+
+    def usd(c):
+        return (gaap.get(c, {}).get("units", {}) or {}).get("USD", [])
+
+    def sh_u(c):
+        return (gaap.get(c, {}).get("units", {}) or {}).get("shares", [])
+
+    ni = _sec_annual(usd("NetIncomeLoss"), 2)
+    cfo = _sec_annual(usd("NetCashProvidedByUsedInOperatingActivities"), 2)
+    assets = _sec_annual(usd("Assets"), 2)
+    ca = _sec_annual(usd("AssetsCurrent"), 2)
+    cl = _sec_annual(usd("LiabilitiesCurrent"), 2)
+    ltd = _sec_annual(usd("LongTermDebt"), 2) or _sec_annual(usd("LongTermDebtNoncurrent"), 2)
+    rev = _sec_annual(usd("RevenueFromContractWithCustomerExcludingAssessedTax"), 2) or _sec_annual(usd("Revenues"), 2)
+    gp = _sec_annual(usd("GrossProfit"), 2)
+    sh = _sec_annual(sh_u("WeightedAverageNumberOfDilutedSharesOutstanding"), 2) \
+        or _sec_annual(sh_u("WeightedAverageNumberOfSharesOutstandingBasic"), 2)
+
+    def g(lst, i):
+        return lst[i] if (lst and len(lst) > i) else None
+
+    def div(a, b):
+        return (a / b) if (a is not None and b not in (None, 0)) else None
+
+    roa0, roa1 = div(g(ni, 0), g(assets, 0)), div(g(ni, 1), g(assets, 1))
+    lev0, lev1 = div(g(ltd, 0), g(assets, 0)), div(g(ltd, 1), g(assets, 1))
+    cr0, cr1 = div(g(ca, 0), g(cl, 0)), div(g(ca, 1), g(cl, 1))
+    gm0, gm1 = div(g(gp, 0), g(rev, 0)), div(g(gp, 1), g(rev, 1))
+    at0, at1 = div(g(rev, 0), g(assets, 0)), div(g(rev, 1), g(assets, 1))
+
+    tests = [
+        ("Utile positivo (ROA > 0)", None if roa0 is None else roa0 > 0),
+        ("Cash flow operativo positivo", None if not cfo else g(cfo, 0) > 0),
+        ("Redditività in aumento (ROA ↑)", None if (roa0 is None or roa1 is None) else roa0 > roa1),
+        ("Utili di qualità (cassa > utile)", None if (not cfo or not ni) else g(cfo, 0) > g(ni, 0)),
+        ("Debito a lungo in calo (leva ↓)", None if (lev0 is None or lev1 is None) else lev0 < lev1),
+        ("Liquidità corrente in aumento", None if (cr0 is None or cr1 is None) else cr0 > cr1),
+        ("Nessuna diluizione azioni", None if len(sh) < 2 else g(sh, 0) <= g(sh, 1) * 1.01),
+        ("Margine lordo in aumento", None if (gm0 is None or gm1 is None) else gm0 > gm1),
+        ("Efficienza dell'attivo in aumento", None if (at0 is None or at1 is None) else at0 > at1),
+    ]
+    details = [(label, bool(ok)) for label, ok in tests if ok is not None]
+    if len(details) < 5:
+        return None
+    return {"score": sum(1 for _, ok in details if ok), "max": len(details), "details": details}
 
 
 # ---------------------------------------------------------------------------
@@ -2788,8 +2943,17 @@ def opportunity_snapshot(ticker: str, kind: str) -> dict:
         sc = _long_score(r)
         gain = r["exp_ret"]
     occ = int(round(sc)) if (sc is not None and np.isfinite(sc)) else None
+    # Prezzo LIVE (quote intraday, cache 15 min) così cambia anche infragiornata → lo snapshot
+    # viene registrato ogni ora durante le contrattazioni (non resta fermo alla chiusura del giorno).
+    price = r["price"]
+    try:
+        q = quick_quote(ticker)
+        if isinstance(q, dict) and q.get("price"):
+            price = float(q["price"])
+    except Exception:
+        pass
     return {k: _jsonable(v) for k, v in {
-        "name": r["name"], "price": r["price"], "rsi": r["rsi"], "dd_high": r["dd_high"],
+        "name": r["name"], "price": price, "rsi": r["rsi"], "dd_high": r["dd_high"],
         "occasione": occ, "convenienza": _convenience_single(r, kind),
         "prob_gain": r["prob_gain"], "prob_loss": r["prob_loss"],
         "exp_ret": r["exp_ret"], "gain": gain, "reliab": r["reliab"],
@@ -2802,7 +2966,7 @@ def opportunity_snapshot(ticker: str, kind: str) -> dict:
 _OBS_GAP_MIN = 60       # opp_watch: al più ogni 60 min
 _OBS_MAX_DAYS = 12
 _OBS_MAX_KEEP = 220
-_SNAP_GAP_MIN = 15      # monitoraggio: al più ogni 15 min
+_SNAP_GAP_MIN = 60      # monitoraggio: al più ogni 60 min (1 punto/ora)
 _SNAP_MAX_DAYS = 22
 _SNAP_MAX_KEEP = 700
 
