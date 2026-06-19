@@ -692,10 +692,12 @@ if section.startswith("Occasioni"):
                         if det:
                             price = det.get("price")
                             tgt, stp = det.get("target_price"), det.get("stop_price")
-                            cper = {"1 settimana": "5d", "1 mese": "1mo", "1 anno": "1y", "Tutto": "max"}
-                            csel = st.radio("Periodo del grafico", list(cper.keys()), index=2,
+                            cper = {"1 giorno": "1d", "1 settimana": "5d", "1 mese": "1mo",
+                                    "1 anno": "1y", "Tutto": "max"}
+                            csel = st.radio("Periodo del grafico", list(cper.keys()), index=3,
                                             horizontal=True, key=f"oppchart_{kind}_{tk}")
-                            hc = fu.get_history(tk, period=cper[csel])
+                            # giorno/settimana → prezzo intraday ~15 min; altri → un valore al giorno
+                            hc = fu.get_chart_history(tk, period=cper[csel])
                             if not hc.empty:
                                 sfig = go.Figure()
                                 sfig.add_trace(go.Scatter(x=hc.index, y=hc["Close"], mode="lines",
@@ -709,6 +711,9 @@ if section.startswith("Occasioni"):
                                 sfig.update_layout(height=230, margin=dict(t=10, b=10, l=10, r=10),
                                                    showlegend=False, yaxis_title=None, xaxis_title=None)
                                 show_chart(sfig, use_container_width=True)
+                                _id = bool(hc.attrs.get("intraday"))
+                                st.caption(f"📅 Ultimo dato: {hc.index[-1].strftime('%d/%m/%Y %H:%M' if _id else '%d/%m/%Y')}"
+                                           + (" · prezzo intraday ~15 min" if _id else " · chiusura giornaliera"))
                             lvl = []
                             if tgt and price:
                                 lvl.append(f"🎯 Bersaglio: **{tgt:,.2f}** ({(tgt/price-1)*100:+.0f}%)")
@@ -790,10 +795,17 @@ if section.startswith("Occasioni"):
                                                "Valore = a buon prezzo · Qualità = redditività/ROIC · "
                                                "Salute = solidità finanziaria · Crescita = ricavi/utili · "
                                                "Dividendo = rendimento sostenibile.")
+                                # Metriche serie dai bilanci ufficiali SEC (USA, on-demand; stessa
+                                # companyfacts in cache → una sola chiamata di rete per Altman/EV-EBIT/Piotroski)
+                                is_fin = fu._is_financial_sector(det.get("sector"))
+                                ev_ebit_real = fu.ev_ebit_from_sec(tk) if not is_fin else None
+                                piotroski = fu.piotroski_from_sec(tk) if not is_fin else None
                                 mbits = []
                                 if det.get("roic") is not None:
                                     mbits.append(f"**ROIC** {det['roic'] * 100:.0f}% (vs costo capitale ~9%)")
-                                if det.get("ev_ebit") is not None:
+                                if ev_ebit_real is not None:
+                                    mbits.append(f"**EV/EBIT** {ev_ebit_real:.1f} (SEC)")
+                                elif det.get("ev_ebit") is not None:
                                     mbits.append(f"**EV/EBITDA** {det['ev_ebit']:.1f}")
                                 if det.get("fcf_yield") is not None:
                                     mbits.append(f"**FCF yield** {det['fcf_yield']:.1f}%")
@@ -801,7 +813,9 @@ if section.startswith("Occasioni"):
                                     mbits.append(f"**Margine lordo** {det['gross_m'] * 100:.0f}%")
                                 if det.get("interest_cov") is not None:
                                     mbits.append(f"**Copertura interessi** {det['interest_cov']:.1f}×")
-                                if det.get("fscore_health") is not None:
+                                if piotroski is not None:
+                                    mbits.append(f"**Piotroski F-Score** {piotroski['score']}/{piotroski['max']} (SEC)")
+                                elif det.get("fscore_health") is not None:
                                     mbits.append(f"**Salute (Piotroski sempl.)** {det['fscore_health']:.0f}/9")
                                 if det.get("div_cov") is not None:
                                     mbits.append(f"**Dividendo coperto dal FCF** {det['div_cov']:.1f}×")
@@ -811,7 +825,14 @@ if section.startswith("Occasioni"):
                                     mbits.append(f"**Utili 3 anni** {det['eps_cagr3'] * 100:+.0f}%/anno")
                                 if mbits:
                                     st.markdown("**Metriche di qualità**  \n" + " · ".join(mbits))
-                                if not fu._is_financial_sector(det.get("sector")):
+                                if piotroski is not None:
+                                    with st.expander(f"📋 Piotroski F-Score {piotroski['score']}/{piotroski['max']} — "
+                                                     "i 9 test (dai bilanci SEC)"):
+                                        for label, ok in piotroski["details"]:
+                                            st.markdown(f"- {'✅' if ok else '❌'} {label}")
+                                        st.caption("F-Score validato da Piotroski (2000): ≥7 = bilancio solido · "
+                                                   "≤3 = debole. Calcolato dai bilanci ufficiali anno-su-anno.")
+                                if not is_fin:
                                     az = fu.altman_z_from_sec(tk)
                                     if az:
                                         st.markdown(f"**Altman Z-Score:** {az['z']} → {az['zone']} ({az['note']}) "
@@ -1165,8 +1186,9 @@ if section.startswith("Monitoraggio"):
                 gp = "1mo" if (giorni or 0) <= 25 else ("3mo" if giorni <= 80 else "1y")
             else:
                 gp = sel
-            hc = fu.get_history(tk, period=gp)
-            # normalizza l'indice a tz-naive (get_history è in cache → copia prima di modificare)
+            # «1 settimana» → prezzo intraday ~15 min; gli altri periodi → un valore al giorno
+            hc = fu.get_chart_history(tk, period=gp)
+            # normalizza l'indice a tz-naive (cache → copia prima di modificare)
             if not hc.empty and getattr(hc.index, "tz", None) is not None:
                 hc = hc.copy()
                 hc.index = hc.index.tz_localize(None)
@@ -1203,6 +1225,9 @@ if section.startswith("Monitoraggio"):
                 st.caption("Nessun dato di prezzo per il periodo scelto.")
             else:
                 show_chart(fig, use_container_width=True)
+                _idt = bool(hc.attrs.get("intraday"))
+                st.caption(f"📅 Ultimo prezzo: {hc.index[-1].strftime('%d/%m/%Y %H:%M' if _idt else '%d/%m/%Y')}"
+                           + (" (intraday ~15 min)" if _idt else " (chiusura giornaliera)"))
             st.caption("👀 **Linea blu** = prezzo reale nel periodo scelto qui sopra. **Linea viola** = la convenienza "
                        "registrata nei giorni in cui il sistema ha osservato il titolo (sale = il segnale migliora). "
                        "Verde = bersaglio, rossa = stop.")
@@ -1595,14 +1620,19 @@ with tab_over:
     st.subheader("Andamento del prezzo")
 
     # Selettore del periodo, direttamente sul grafico
-    CHART_PERIODS = {"1 settimana": "5d", "1 mese": "1mo", "6 mesi": "6mo",
+    CHART_PERIODS = {"1 giorno": "1d", "1 settimana": "5d", "1 mese": "1mo", "6 mesi": "6mo",
                      "1 anno": "1y", "5 anni": "5y", "Tutto": "max"}
     cp_label = st.radio("Periodo del grafico", list(CHART_PERIODS.keys()),
-                        index=3, horizontal=True, key="chart_period")
-    hist_c = fu.add_indicators(fu.get_history(ticker, period=CHART_PERIODS[cp_label]))
+                        index=4, horizontal=True, key="chart_period")
+    # Periodi brevi (giorno/settimana) → prezzo intraday ~15 min; periodi lunghi → un valore al giorno
+    hist_c = fu.get_chart_history(ticker, period=CHART_PERIODS[cp_label])
+    _intraday_c = bool(hist_c.attrs.get("intraday"))
 
     st.caption("👀 La linea mostra l'andamento del prezzo nel periodo scelto: **verde** se in rialzo, "
-               "**rossa** se in calo. Cambia periodo qui sopra.")
+               "**rossa** se in calo. Cambia periodo qui sopra. "
+               + ("Nei periodi **giorno/settimana** il prezzo si aggiorna ogni ~15 minuti (intraday); "
+                  "negli altri è un valore al giorno (chiusura)." if _intraday_c
+                  else "In questo periodo è un valore al giorno (chiusura)."))
     if hist_c.empty:
         st.info("Nessun dato per il periodo scelto.")
     else:
@@ -1612,10 +1642,11 @@ with tab_over:
         fill_color = "rgba(26,127,55,0.12)" if up else "rgba(207,34,46,0.12)"
         ymin, ymax = float(closes.min()), float(closes.max())
         pad = (ymax - ymin) * 0.12 or (ymax * 0.02) or 1.0
+        _htfmt = "%d %b %H:%M" if _intraday_c else "%d %b %Y"
         fig = go.Figure(go.Scatter(
             x=hist_c.index, y=closes, mode="lines",
             line=dict(color=line_color, width=2), fill="tozeroy", fillcolor=fill_color,
-            hovertemplate="%{x|%d %b %Y} · %{y:.2f} " + str(currency) + "<extra></extra>",
+            hovertemplate="%{x|" + _htfmt + "} · %{y:.2f} " + str(currency) + "<extra></extra>",
         ))
         fig.update_layout(
             height=420, margin=dict(t=10, b=10, l=10, r=10),
@@ -1626,7 +1657,8 @@ with tab_over:
         )
         show_chart(fig, use_container_width=True)
         perf_c = (closes.iloc[-1] / closes.iloc[0] - 1) * 100
-        st.caption(f"Variazione nel periodo «{cp_label}»: **{perf_c:+.1f}%**")
+        _last_lbl = hist_c.index[-1].strftime("%d/%m/%Y %H:%M" if _intraday_c else "%d/%m/%Y")
+        st.caption(f"Variazione nel periodo «{cp_label}»: **{perf_c:+.1f}%** · 📅 ultimo dato: {_last_lbl}")
 
     colA, colB = st.columns([1, 1])
     with colA:
