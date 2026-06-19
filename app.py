@@ -187,6 +187,21 @@ def show_chart(fig, use_container_width=True, config=None, key=None, **kw):
     st.plotly_chart(fig, use_container_width=use_container_width, config=cfg, key=key, **kw)
 
 
+def chart_history(ticker, period):
+    """Storico per i grafici (intraday sui periodi brevi). Robusto alla finestra push→reboot di
+    Streamlit Cloud: se il modulo in cache è ancora vecchio (senza get_chart_history) ripiega su
+    get_history (giornaliero) invece di far crashare l'app."""
+    fn = getattr(fu, "get_chart_history", None)
+    if fn is not None:
+        return fn(ticker, period)
+    df = fu.get_history(ticker, period)
+    try:
+        df.attrs["intraday"] = False
+    except Exception:
+        pass
+    return df
+
+
 def _now_rome():
     """Ora locale italiana (il server cloud gira in UTC)."""
     try:
@@ -697,7 +712,7 @@ if section.startswith("Occasioni"):
                             csel = st.radio("Periodo del grafico", list(cper.keys()), index=3,
                                             horizontal=True, key=f"oppchart_{kind}_{tk}")
                             # giorno/settimana → prezzo intraday ~15 min; altri → un valore al giorno
-                            hc = fu.get_chart_history(tk, period=cper[csel])
+                            hc = chart_history(tk, cper[csel])
                             if not hc.empty:
                                 sfig = go.Figure()
                                 sfig.add_trace(go.Scatter(x=hc.index, y=hc["Close"], mode="lines",
@@ -1187,7 +1202,7 @@ if section.startswith("Monitoraggio"):
             else:
                 gp = sel
             # «1 settimana» → prezzo intraday ~15 min; gli altri periodi → un valore al giorno
-            hc = fu.get_chart_history(tk, period=gp)
+            hc = chart_history(tk, gp)
             # normalizza l'indice a tz-naive (cache → copia prima di modificare)
             if not hc.empty and getattr(hc.index, "tz", None) is not None:
                 hc = hc.copy()
@@ -1625,7 +1640,7 @@ with tab_over:
     cp_label = st.radio("Periodo del grafico", list(CHART_PERIODS.keys()),
                         index=4, horizontal=True, key="chart_period")
     # Periodi brevi (giorno/settimana) → prezzo intraday ~15 min; periodi lunghi → un valore al giorno
-    hist_c = fu.get_chart_history(ticker, period=CHART_PERIODS[cp_label])
+    hist_c = chart_history(ticker, CHART_PERIODS[cp_label])
     _intraday_c = bool(hist_c.attrs.get("intraday"))
 
     st.caption("👀 La linea mostra l'andamento del prezzo nel periodo scelto: **verde** se in rialzo, "
