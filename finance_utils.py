@@ -2005,12 +2005,18 @@ def _read_local_json(name: str):
         return None
 
 
+# File che QUESTA sessione dell'app ha modificato: per essi la lettura preferisce il locale
+# (read-your-writes), perché il branch remoto di GitHub si aggiorna con ritardo dopo il commit.
+# Senza questo, un'eliminazione/aggiunta dal telefono "ricompariva" leggendo il remoto stantio.
+_LOCAL_WRITES = set()
+
+
 def read_data_json(name: str, default):
     """Legge un file dati. Normalmente preferisce il branch remoto (cache 2 min)
-    con fallback locale. Nel job autonomo (env DATA_LOCAL_FIRST=1) preferisce il
-    file locale, così legge ciò che ha appena scritto (read-your-writes),
-    usando il remoto solo come storico iniziale."""
-    local_first = os.environ.get("DATA_LOCAL_FIRST") == "1"
+    con fallback locale. Nel job autonomo (env DATA_LOCAL_FIRST=1) — e per i file che l'app
+    ha appena scritto in questa sessione (_LOCAL_WRITES) — preferisce il file locale, così
+    legge ciò che ha appena scritto (read-your-writes); il remoto resta lo storico iniziale."""
+    local_first = (os.environ.get("DATA_LOCAL_FIRST") == "1") or (name in _LOCAL_WRITES)
     if local_first:
         d = _read_local_json(name)
         if d is not None:
@@ -2062,6 +2068,7 @@ def write_data_json(name: str, obj) -> None:
     try:
         with open(os.path.join(APPDIR, name), "w", encoding="utf-8") as f:
             f.write(content)
+        _LOCAL_WRITES.add(name)        # read-your-writes: d'ora in poi leggi il locale per questo file
     except Exception:
         pass
     if _data_repo() and _github_token():
