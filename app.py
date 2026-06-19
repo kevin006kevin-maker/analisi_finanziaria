@@ -1333,17 +1333,22 @@ if section.startswith("Portafoglio"):
         st.info("Portafoglio vuoto. Aggiungi il tuo primo acquisto qui sopra.")
         st.stop()
 
-    # --- Totali ---
+    # --- Totali (convertiti in EUR, valuta base) ---
     mt1, mt2, mt3 = st.columns(3)
-    mt1.metric("Investito", f"{totals['cost']:,.2f}")
-    if totals["value"] is not None:
-        mt2.metric("Valore attuale", f"{totals['value']:,.2f}")
-        delta = f"{totals['pnl']:+,.2f} ({totals['pnl_pct']:+.1f}%)" if totals["pnl_pct"] is not None else None
-        mt3.metric("Guadagno / Perdita", f"{totals['pnl']:+,.2f}", delta)
+    mt1.metric("Investito (€)", f"{totals['cost']:,.2f}")
+    mt2.metric("Valore attuale (€)", f"{totals['value']:,.2f}")
+    delta = f"{totals['pnl']:+,.2f} ({totals['pnl_pct']:+.1f}%)" if totals.get("pnl_pct") is not None else None
+    mt3.metric("Guadagno / Perdita (€)", f"{totals['pnl']:+,.2f}", delta)
+    ccys = totals.get("currencies", [])
+    if len(ccys) > 1:
+        st.caption("💱 Totali convertiti in **EUR** (valuta base) — posizioni in: "
+                   + ", ".join(ccys) + ". Cambi aggiornati ~1 volta l'ora. "
+                   "I valori per riga restano nella valuta del titolo (vedi colonna «Valuta»).")
     else:
-        mt2.metric("Valore attuale", "n/d")
-        mt3.metric("Guadagno / Perdita", "n/d")
-    st.caption("Valori nella valuta di ciascun titolo (non convertiti): per un totale corretto, confronta titoli nella stessa valuta.")
+        st.caption(f"Totali in **EUR**. Tutte le posizioni sono in {ccys[0] if ccys else 'EUR'}.")
+    if not totals.get("complete", True):
+        st.warning("⚠️ Alcune posizioni sono **escluse dal totale**: manca il prezzo aggiornato o il "
+                   "tasso di cambio (per Londra `.L` i prezzi sono spesso in pence — verifica a mano).")
 
     # --- Avvisi target/stop ---
     alerts = [r for r in rows if r["status"]]
@@ -1356,13 +1361,15 @@ if section.startswith("Portafoglio"):
     # --- Tabella posizioni ---
     dfp = pd.DataFrame([{
         "Ticker": r["ticker"], "Orizz.": "⚡" if r["horizon"] == "breve" else "🏛️",
+        "Valuta": r.get("ccy", ""),
         "Investito": r["amount"], "Quando": r["datetime"], "Prezzo acq.": r["buy_price"],
         "Q.tà": r["qty"], "Prezzo ora": r["price"], "Valore": r["value"],
         "G/P": r["pnl"], "G/P %": r["pnl_pct"], "Stato": r["status"] or "—",
     } for r in rows]).set_index("Ticker")
     st.dataframe(dfp, use_container_width=True, column_config={
         "Orizz.": st.column_config.TextColumn("Orizz.", help="⚡ breve termine · 🏛️ lungo termine"),
-        "Investito": st.column_config.NumberColumn("Investito", format="%.2f"),
+        "Valuta": st.column_config.TextColumn("Valuta", help="Valuta di quotazione del titolo. I totali in alto sono convertiti in EUR."),
+        "Investito": st.column_config.NumberColumn("Investito (nativo)", format="%.2f"),
         "Quando": st.column_config.TextColumn("Acquisto (data e ora)"),
         "Prezzo acq.": st.column_config.NumberColumn("Prezzo acq.", format="%.2f"),
         "Q.tà": st.column_config.NumberColumn("Q.tà", format="%.4f"),
@@ -1585,6 +1592,10 @@ if fund:
 else:
     c4.metric("Capitalizzazione", fu._fmt_big(info.get("marketCap")),
               help=fu.help_for("Capitalizzazione"))
+
+# --- Trasparenza dati: fonte dei fondamentali, data ultimo prezzo, stato FMP ---
+st.caption(fu.data_status_line(info, hist)
+           + "  ·  _i dati gratuiti possono avere ritardo (chiusura del giorno) o ripiegare su altre fonti._")
 
 # --- Semaforo / verdetto sintetico ---
 verdict = fu.overall_verdict(info, hist, fund, fdata)
