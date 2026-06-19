@@ -69,16 +69,19 @@ def get_history(ticker: str, period: str = "1y", interval: str = "1d") -> pd.Dat
 
 @st.cache_data(ttl=900, show_spinner=False)
 def get_chart_history(ticker: str, period: str = "5d") -> pd.DataFrame:
-    """Storico per i GRAFICI a breve termine: barre INTRADAY (~15 min, ripiego 1 ora) per i periodi
-    giornaliero/settimanale ('1d'/'5d'), così il prezzo si aggiorna entro ~15 minuti durante le
-    contrattazioni. Per i periodi più lunghi torna ai dati GIORNALIERI (get_history): un valore al
-    giorno. NON usata per i calcoli (indicatori/probabilità), che restano su dati daily.
+    """Storico per i GRAFICI a breve termine, con granularità INTRADAY diversa per periodo:
+      - '1d' (giornaliero) → barre ogni ~15 min (ripiego 1 ora);
+      - '5d' (settimanale) → barre ogni ~1 ora.
+    Solo durante le contrattazioni esistono barre intraday (a mercato chiuso non ci sono scambi).
+    Per i periodi più lunghi torna ai dati GIORNALIERI (get_history): un valore al giorno.
+    NON usata per i calcoli (indicatori/probabilità), che restano su dati daily.
     Ritorna anche l'attributo .attrs['intraday'] = True/False."""
-    if period not in ("1d", "5d"):
+    interval_for = {"1d": ("15m", "60m"), "5d": ("60m",)}   # giorno=15min · settimana=1 ora
+    if period not in interval_for:
         df = get_history(ticker, period)
         df.attrs["intraday"] = False
         return df
-    for interval in ("15m", "60m"):                  # 15 min; se non disponibile, 1 ora
+    for interval in interval_for[period]:
         try:
             df = yf.Ticker(ticker).history(period=period, interval=interval, auto_adjust=False)
         except Exception:
