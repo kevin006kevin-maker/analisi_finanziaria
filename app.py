@@ -711,7 +711,7 @@ if section.startswith("Occasioni"):
                                     "1 anno": "1y", "Tutto": "max"}
                             csel = st.radio("Periodo del grafico", list(cper.keys()), index=3,
                                             horizontal=True, key=f"oppchart_{kind}_{tk}")
-                            # giorno/settimana → prezzo intraday ~15 min; altri → un valore al giorno
+                            # giorno → intraday ~15 min · settimana → intraday ~1 ora · altri → 1/giorno
                             hc = chart_history(tk, cper[csel])
                             if not hc.empty:
                                 sfig = go.Figure()
@@ -727,8 +727,9 @@ if section.startswith("Occasioni"):
                                                    showlegend=False, yaxis_title=None, xaxis_title=None)
                                 show_chart(sfig, use_container_width=True)
                                 _id = bool(hc.attrs.get("intraday"))
+                                _gran = "~15 min" if cper[csel] == "1d" else "~1 ora"
                                 st.caption(f"📅 Ultimo dato: {hc.index[-1].strftime('%d/%m/%Y %H:%M' if _id else '%d/%m/%Y')}"
-                                           + (" · prezzo intraday ~15 min" if _id else " · chiusura giornaliera"))
+                                           + (f" · prezzo intraday {_gran}" if _id else " · chiusura giornaliera"))
                             lvl = []
                             if tgt and price:
                                 lvl.append(f"🎯 Bersaglio: **{tgt:,.2f}** ({(tgt/price-1)*100:+.0f}%)")
@@ -1201,7 +1202,7 @@ if section.startswith("Monitoraggio"):
                 gp = "1mo" if (giorni or 0) <= 25 else ("3mo" if giorni <= 80 else "1y")
             else:
                 gp = sel
-            # «1 settimana» → prezzo intraday ~15 min; gli altri periodi → un valore al giorno
+            # «1 settimana» → prezzo intraday ~1 ora; gli altri periodi → un valore al giorno
             hc = chart_history(tk, gp)
             # normalizza l'indice a tz-naive (cache → copia prima di modificare)
             if not hc.empty and getattr(hc.index, "tz", None) is not None:
@@ -1242,7 +1243,7 @@ if section.startswith("Monitoraggio"):
                 show_chart(fig, use_container_width=True)
                 _idt = bool(hc.attrs.get("intraday"))
                 st.caption(f"📅 Ultimo prezzo: {hc.index[-1].strftime('%d/%m/%Y %H:%M' if _idt else '%d/%m/%Y')}"
-                           + (" (intraday ~15 min)" if _idt else " (chiusura giornaliera)"))
+                           + (" (intraday ~1 ora)" if _idt else " (chiusura giornaliera)"))
             st.caption("👀 **Linea blu** = prezzo reale nel periodo scelto qui sopra. **Linea viola** = la convenienza "
                        "registrata nei giorni in cui il sistema ha osservato il titolo (sale = il segnale migliora). "
                        "Verde = bersaglio, rossa = stop.")
@@ -1645,8 +1646,9 @@ with tab_over:
 
     st.caption("👀 La linea mostra l'andamento del prezzo nel periodo scelto: **verde** se in rialzo, "
                "**rossa** se in calo. Cambia periodo qui sopra. "
-               + ("Nei periodi **giorno/settimana** il prezzo si aggiorna ogni ~15 minuti (intraday); "
-                  "negli altri è un valore al giorno (chiusura)." if _intraday_c
+               + ("Nei periodi brevi il prezzo è **intraday** (giorno ~15 min · settimana ~1 ora); "
+                  "negli altri è un valore al giorno (chiusura). I dati esistono solo nelle ore di "
+                  "apertura della borsa: a mercato chiuso non ci sono scambi." if _intraday_c
                   else "In questo periodo è un valore al giorno (chiusura)."))
     if hist_c.empty:
         st.info("Nessun dato per il periodo scelto.")
