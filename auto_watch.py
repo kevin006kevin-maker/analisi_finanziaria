@@ -147,6 +147,15 @@ def main():
     except Exception as e:
         log(f"Errore gestione monitoraggio: {e!r}")
 
+    # Snapshot dei titoli SEGUITI (monitoraggio): registra un punto ~ogni ora (gap 60 min) con il
+    # prezzo live, così la storia si costruisce da sola anche a PC spento (prima avveniva solo
+    # all'apertura dell'app → ~12 ore tra un punto e l'altro).
+    try:
+        tracked = fu.auto_snapshot_tracked()
+        log(f"Monitoraggio: snapshot aggiornati ({len(tracked)} titoli seguiti).")
+    except Exception as e:
+        log(f"Errore snapshot monitoraggio: {e!r}")
+
     # Aggiorna la "scheda voti": rendimento reale delle promozioni (ora / 7g / 30g)
     try:
         recs = fu.update_track_record()
