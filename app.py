@@ -1192,36 +1192,46 @@ if section.startswith("Monitoraggio"):
                             horizontal=True, key=f"trackper_{tk}",
                             help="«Giorni» mostra solo da quando hai iniziato a seguire il titolo; gli altri allargano lo storico del prezzo.")
             sel = TPER[tsel]
-            start = None
+            fig = go.Figure()
+            x_min = None
+            last_dt = None
+            price_note = ""
             if sel == "track":
+                # «Giorni» = da quando segui il titolo: prezzo E convenienza dai NOSTRI snapshot
+                # (registrati ~ogni ora con il prezzo live), così condividono la stessa griglia
+                # temporale e la linea del prezzo non è un punto isolato del daily.
                 try:
                     start = pd.to_datetime(entry.get("added")) if entry.get("added") else None
                 except Exception:
                     start = None
-                # scarica abbastanza storico da coprire la finestra di monitoraggio
-                gp = "1mo" if (giorni or 0) <= 25 else ("3mo" if giorni <= 80 else "1y")
+                pp = [(pd.to_datetime(s["date"]), s["price"]) for s in snaps
+                      if s.get("price") is not None
+                      and (start is None or pd.to_datetime(s["date"]) >= start)]
+                if pp:
+                    fig.add_trace(go.Scatter(x=[d for d, _ in pp], y=[v for _, v in pp], name="Prezzo",
+                                             mode="lines+markers", line=dict(color="#0969da", width=2)))
+                    x_min, last_dt = pp[0][0], pp[-1][0]
+                    price_note = " (snapshot del monitoraggio, ~1/ora)"
+                has_price = bool(pp)
             else:
-                gp = sel
-            # «1 settimana» → prezzo intraday ~1 ora; gli altri periodi → un valore al giorno
-            hc = chart_history(tk, gp)
-            # normalizza l'indice a tz-naive (cache → copia prima di modificare)
-            if not hc.empty and getattr(hc.index, "tz", None) is not None:
-                hc = hc.copy()
-                hc.index = hc.index.tz_localize(None)
-            if start is not None and not hc.empty:
-                hc = hc[hc.index >= start]
-            fig = go.Figure()
-            if not hc.empty:
-                fig.add_trace(go.Scatter(x=hc.index, y=hc["Close"], name="Prezzo",
-                                         line=dict(color="#0969da", width=2)))
+                # periodi più ampi: storico di mercato (settimana → intraday ~1 ora; altri → daily)
+                hc = chart_history(tk, sel)
+                if not hc.empty and getattr(hc.index, "tz", None) is not None:
+                    hc = hc.copy()
+                    hc.index = hc.index.tz_localize(None)
+                if not hc.empty:
+                    fig.add_trace(go.Scatter(x=hc.index, y=hc["Close"], name="Prezzo",
+                                             line=dict(color="#0969da", width=2)))
+                    x_min, last_dt = hc.index.min(), hc.index[-1]
+                    price_note = " (intraday ~1 ora)" if hc.attrs.get("intraday") else " (chiusura giornaliera)"
+                has_price = not hc.empty
             # punti di convenienza: solo quelli dentro la finestra mostrata
-            x_min = hc.index.min() if not hc.empty else None
-            cs = [(s["date"], s["convenienza"]) for s in snaps
+            cs = [(pd.to_datetime(s["date"]), s["convenienza"]) for s in snaps
                   if s.get("convenienza") is not None
                   and (x_min is None or pd.to_datetime(s["date"]) >= x_min)]
             if cs:
                 fig.add_trace(go.Scatter(
-                    x=[pd.to_datetime(d) for d, _ in cs], y=[v for _, v in cs],
+                    x=[d for d, _ in cs], y=[v for _, v in cs],
                     name="Convenienza", yaxis="y2", mode="lines+markers",
                     line=dict(color="#8250df", width=2), marker=dict(size=8)))
             tgt, stp = last.get("target"), last.get("stop")
@@ -1237,15 +1247,15 @@ if section.startswith("Monitoraggio"):
                 yaxis=dict(title="Prezzo"),
                 yaxis2=dict(title="Convenienza", overlaying="y", side="right",
                             range=[0, 100], showgrid=False))
-            if hc.empty:
-                st.caption("Nessun dato di prezzo per il periodo scelto.")
+            if not has_price and not cs:
+                st.caption("Ancora nessun dato per il periodo scelto: la storia si costruisce man mano "
+                           "(un punto circa ogni ora mentre la borsa è aperta).")
             else:
                 show_chart(fig, use_container_width=True)
-                _idt = bool(hc.attrs.get("intraday"))
-                st.caption(f"📅 Ultimo prezzo: {hc.index[-1].strftime('%d/%m/%Y %H:%M' if _idt else '%d/%m/%Y')}"
-                           + (" (intraday ~1 ora)" if _idt else " (chiusura giornaliera)"))
-            st.caption("👀 **Linea blu** = prezzo reale nel periodo scelto qui sopra. **Linea viola** = la convenienza "
-                       "registrata nei giorni in cui il sistema ha osservato il titolo (sale = il segnale migliora). "
+                if last_dt is not None:
+                    st.caption(f"📅 Ultimo prezzo: {last_dt.strftime('%d/%m/%Y %H:%M')}{price_note}")
+            st.caption("👀 **Linea blu** = prezzo del titolo nel periodo scelto qui sopra. **Linea viola** = la convenienza "
+                       "registrata mentre il sistema osserva il titolo (sale = il segnale migliora). "
                        "Verde = bersaglio, rossa = stop.")
 
             # Nota personale + scorciatoia all'analisi
