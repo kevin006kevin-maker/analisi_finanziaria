@@ -1326,19 +1326,28 @@ if section.startswith("Portafoglio"):
                 else:
                     st.error("Inserisci almeno **titolo** e **soldi investiti** (maggiore di zero).")
 
+    pf_fee = st.number_input("Commissioni per operazione (€)", min_value=0.0, value=1.0, step=0.5, key="pf_fee",
+                             help="Costo di compravendita sottratto dal guadagno netto, oltre alla tassa del 26% "
+                                  "sulla plusvalenza. Imposta quello del tuo broker.")
     with st.spinner("Calcolo il valore attuale…"):
-        rows, totals = fu.portfolio_view()
+        rows, totals = fu.portfolio_view(fee=pf_fee)
 
     if not rows:
         st.info("Portafoglio vuoto. Aggiungi il tuo primo acquisto qui sopra.")
         st.stop()
 
-    # --- Totali (convertiti in EUR, valuta base) ---
-    mt1, mt2, mt3 = st.columns(3)
+    # --- Totali (convertiti in EUR, valuta base) — lordo e NETTO (tassa 26% + commissioni) ---
+    mt1, mt2, mt3, mt4 = st.columns(4)
     mt1.metric("Investito (€)", f"{totals['cost']:,.2f}")
     mt2.metric("Valore attuale (€)", f"{totals['value']:,.2f}")
-    delta = f"{totals['pnl']:+,.2f} ({totals['pnl_pct']:+.1f}%)" if totals.get("pnl_pct") is not None else None
-    mt3.metric("Guadagno / Perdita (€)", f"{totals['pnl']:+,.2f}", delta)
+    d_gross = f"{totals['pnl_pct']:+.1f}%" if totals.get("pnl_pct") is not None else None
+    mt3.metric("G/P lordo (€)", f"{totals['pnl']:+,.2f}", d_gross)
+    d_net = f"{totals['net_pnl_pct']:+.1f}%" if totals.get("net_pnl_pct") is not None else None
+    mt4.metric("G/P netto (€)", f"{totals['net_pnl']:+,.2f}", d_net,
+               help="Quanto ti resterebbe vendendo ora: dopo la tassa del 26% sulla plusvalenza e le commissioni.")
+    st.caption(f"💰 **Netto** = lordo − **€ {totals['tax']:,.2f}** di tassa (26% sulla plusvalenza, solo se in utile) "
+               f"− **€ {totals['fee_total']:,.2f}** di commissioni → vendendo ora incasseresti **€ {totals['net_value']:,.2f}**. "
+               "Stima: la tassa è calcolata per singola posizione (non compensa le minusvalenze).")
     ccys = totals.get("currencies", [])
     if len(ccys) > 1:
         st.caption("💱 Totali convertiti in **EUR** (valuta base) — posizioni in: "
@@ -1364,19 +1373,26 @@ if section.startswith("Portafoglio"):
         "Valuta": r.get("ccy", ""),
         "Investito": r["amount"], "Quando": r["datetime"], "Prezzo acq.": r["buy_price"],
         "Q.tà": r["qty"], "Prezzo ora": r["price"], "Valore": r["value"],
-        "G/P": r["pnl"], "G/P %": r["pnl_pct"], "Stato": r["status"] or "—",
+        "G/P": r["pnl"], "G/P %": r["pnl_pct"],
+        "Tassa 26%": r.get("tax_eur"), "G/P netto": r.get("net_eur"), "Netto %": r.get("net_pct"),
+        "Stato": r["status"] or "—",
     } for r in rows]).set_index("Ticker")
     st.dataframe(dfp, use_container_width=True, column_config={
         "Orizz.": st.column_config.TextColumn("Orizz.", help="⚡ breve termine · 🏛️ lungo termine"),
-        "Valuta": st.column_config.TextColumn("Valuta", help="Valuta di quotazione del titolo. I totali in alto sono convertiti in EUR."),
+        "Valuta": st.column_config.TextColumn("Valuta", help="Valuta di quotazione del titolo. Tassa e netto sono in EUR."),
         "Investito": st.column_config.NumberColumn("Investito (nativo)", format="%.2f"),
         "Quando": st.column_config.TextColumn("Acquisto (data e ora)"),
         "Prezzo acq.": st.column_config.NumberColumn("Prezzo acq.", format="%.2f"),
         "Q.tà": st.column_config.NumberColumn("Q.tà", format="%.4f"),
         "Prezzo ora": st.column_config.NumberColumn("Prezzo ora", format="%.2f"),
         "Valore": st.column_config.NumberColumn("Valore", format="%.2f"),
-        "G/P": st.column_config.NumberColumn("Guadagno/Perdita", format="%+.2f"),
-        "G/P %": st.column_config.NumberColumn("G/P %", format="%+.1f%%"),
+        "G/P": st.column_config.NumberColumn("G/P lordo", format="%+.2f"),
+        "G/P %": st.column_config.NumberColumn("G/P % lordo", format="%+.1f%%"),
+        "Tassa 26%": st.column_config.NumberColumn("Tassa 26% (€)", format="%.2f",
+            help="26% sulla plusvalenza (solo se in utile), in EUR."),
+        "G/P netto": st.column_config.NumberColumn("G/P netto (€)", format="%+.2f",
+            help="Guadagno dopo tassa del 26% e commissioni — quanto incassi vendendo ora."),
+        "Netto %": st.column_config.NumberColumn("Netto %", format="%+.1f%%"),
     })
 
     # --- 🔔 Consigli di vendita ---
