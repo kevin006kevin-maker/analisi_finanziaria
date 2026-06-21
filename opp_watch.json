@@ -1,0 +1,2291 @@
+{
+"short:CBOE": {
+"ticker": "CBOE",
+"kind": "short",
+"name": "CBOE",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 83,
+"price": 265.24,
+"occ": 44,
+"prob_gain": 56
+}
+]
+},
+"short:GIL": {
+"ticker": "GIL",
+"kind": "short",
+"name": "GIL",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 73,
+"price": 50.34,
+"occ": 57,
+"prob_gain": 52
+}
+]
+},
+"short:NFLX": {
+"ticker": "NFLX",
+"kind": "short",
+"name": "NFLX",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 72,
+"price": 78.72,
+"occ": 59,
+"prob_gain": 41
+},
+{
+"date": "2026-06-21 12:48",
+"conv": 83,
+"price": 77.38,
+"occ": 84,
+"prob_gain": 44
+},
+{
+"date": "2026-06-21 18:59",
+"conv": 85,
+"price": 77.38,
+"occ": 84,
+"prob_gain": 44
+}
+]
+},
+"short:CMTL": {
+"ticker": "CMTL",
+"kind": "short",
+"name": "CMTL",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 71,
+"price": 2.99,
+"occ": 53,
+"prob_gain": 53
+}
+]
+},
+"short:HUN": {
+"ticker": "HUN",
+"kind": "short",
+"name": "HUN",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 68,
+"price": 13.18,
+"occ": 54,
+"prob_gain": 54
+}
+]
+},
+"short:GPRO": {
+"ticker": "GPRO",
+"kind": "short",
+"name": "GPRO",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 68,
+"price": 0.75,
+"occ": 57,
+"prob_gain": 49
+}
+]
+},
+"short:NFE": {
+"ticker": "NFE",
+"kind": "short",
+"name": "NFE",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 63,
+"price": 0.491,
+"occ": 47,
+"prob_gain": 48
+}
+]
+},
+"short:LUNR": {
+"ticker": "LUNR",
+"kind": "short",
+"name": "LUNR",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 63,
+"price": 25.76,
+"occ": 43,
+"prob_gain": 53
+}
+]
+},
+"short:CERT": {
+"ticker": "CERT",
+"kind": "short",
+"name": "CERT",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 60,
+"price": 5.21,
+"occ": 37,
+"prob_gain": 45
+}
+]
+},
+"short:ACHR": {
+"ticker": "ACHR",
+"kind": "short",
+"name": "ACHR",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 59,
+"price": 5.55,
+"occ": 37,
+"prob_gain": 46
+}
+]
+},
+"long:CVE": {
+"ticker": "CVE",
+"kind": "long",
+"name": "Cenovus Energy Incorporation",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 98,
+"price": 25.79,
+"occ": 67,
+"prob_gain": 80
+}
+]
+},
+"long:PBR": {
+"ticker": "PBR",
+"kind": "long",
+"name": "Petroleo Brasileiro SA Petrobras",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 95,
+"price": 16.93,
+"occ": 72,
+"prob_gain": 79
+},
+{
+"date": "2026-06-18 14:32",
+"conv": 94,
+"price": 16.79,
+"occ": 73,
+"prob_gain": 79
+},
+{
+"date": "2026-06-19 14:37",
+"conv": 77,
+"price": 16.79,
+"occ": 68,
+"prob_gain": 77
+},
+{
+"date": "2026-06-20 00:41",
+"conv": 77,
+"price": 16.75,
+"occ": 68,
+"prob_gain": 76
+},
+{
+"date": "2026-06-20 12:15",
+"conv": 78,
+"price": 16.75,
+"occ": 68,
+"prob_gain": 76
+},
+{
+"date": "2026-06-21 18:59",
+"conv": 77,
+"price": 16.75,
+"occ": 68,
+"prob_gain": 76
+}
+]
+},
+"long:CNQ": {
+"ticker": "CNQ",
+"kind": "long",
+"name": "Canadian Natural Resources Ltd",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 92,
+"price": 42.5401,
+"occ": 63,
+"prob_gain": 78
+},
+{
+"date": "2026-06-18 14:32",
+"conv": 93,
+"price": 42.42,
+"occ": 63,
+"prob_gain": 79
+},
+{
+"date": "2026-06-19 14:37",
+"conv": 55,
+"price": 42.42,
+"occ": 60,
+"prob_gain": 82
+},
+{
+"date": "2026-06-20 12:15",
+"conv": 67,
+"price": 41.05,
+"occ": 63,
+"prob_gain": 82
+},
+{
+"date": "2026-06-21 18:59",
+"conv": 58,
+"price": 41.05,
+"occ": 63,
+"prob_gain": 82
+}
+]
+},
+"long:ITUB": {
+"ticker": "ITUB",
+"kind": "long",
+"name": "Itau Unibanco Holding SA",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 89,
+"price": 8.075,
+"occ": 61,
+"prob_gain": 75
+},
+{
+"date": "2026-06-18 14:32",
+"conv": 85,
+"price": 7.97,
+"occ": 62,
+"prob_gain": 75
+},
+{
+"date": "2026-06-19 14:37",
+"conv": 39,
+"price": 7.97,
+"occ": 51,
+"prob_gain": 67
+},
+{
+"date": "2026-06-20 00:41",
+"conv": 45,
+"price": 7.79,
+"occ": 53,
+"prob_gain": 70
+},
+{
+"date": "2026-06-20 12:15",
+"conv": 54,
+"price": 7.79,
+"occ": 53,
+"prob_gain": 70
+},
+{
+"date": "2026-06-21 18:59",
+"conv": 44,
+"price": 7.79,
+"occ": 53,
+"prob_gain": 70
+}
+]
+},
+"long:NEM": {
+"ticker": "NEM",
+"kind": "long",
+"name": "Newmont Corporation",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 85,
+"price": 108.48,
+"occ": 78,
+"prob_gain": 73
+},
+{
+"date": "2026-06-18 14:32",
+"conv": 79,
+"price": 105.67,
+"occ": 80,
+"prob_gain": 73
+},
+{
+"date": "2026-06-19 14:37",
+"conv": 66,
+"price": 105.67,
+"occ": 81,
+"prob_gain": 64
+},
+{
+"date": "2026-06-20 00:41",
+"conv": 68,
+"price": 103.79,
+"occ": 83,
+"prob_gain": 65
+},
+{
+"date": "2026-06-21 18:59",
+"conv": 67,
+"price": 103.79,
+"occ": 83,
+"prob_gain": 65
+}
+]
+},
+"long:AA": {
+"ticker": "AA",
+"kind": "long",
+"name": "Alcoa Corp",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 83,
+"price": 64.16,
+"occ": 59,
+"prob_gain": 71
+}
+]
+},
+"long:CDE": {
+"ticker": "CDE",
+"kind": "long",
+"name": "Coeur Mining, Inc",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 74,
+"price": 18.485,
+"occ": 85,
+"prob_gain": 66
+},
+{
+"date": "2026-06-18 14:32",
+"conv": 69,
+"price": 17.53,
+"occ": 89,
+"prob_gain": 66
+},
+{
+"date": "2026-06-19 14:37",
+"conv": 55,
+"price": 17.53,
+"occ": 91,
+"prob_gain": 59
+},
+{
+"date": "2026-06-20 00:41",
+"conv": 55,
+"price": 17.51,
+"occ": 91,
+"prob_gain": 60
+},
+{
+"date": "2026-06-20 12:15",
+"conv": 52,
+"price": 17.51,
+"occ": 91,
+"prob_gain": 60
+},
+{
+"date": "2026-06-21 18:59",
+"conv": 54,
+"price": 17.51,
+"occ": 91,
+"prob_gain": 60
+}
+]
+},
+"long:BBD": {
+"ticker": "BBD",
+"kind": "long",
+"name": "Banco Bradesco SA",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 74,
+"price": 3.4601,
+"occ": 64,
+"prob_gain": 63
+},
+{
+"date": "2026-06-18 14:32",
+"conv": 71,
+"price": 3.43,
+"occ": 65,
+"prob_gain": 62
+},
+{
+"date": "2026-06-19 14:37",
+"conv": 61,
+"price": 3.43,
+"occ": 59,
+"prob_gain": 72
+},
+{
+"date": "2026-06-20 00:41",
+"conv": 66,
+"price": 3.36,
+"occ": 61,
+"prob_gain": 74
+},
+{
+"date": "2026-06-20 12:15",
+"conv": 65,
+"price": 3.36,
+"occ": 61,
+"prob_gain": 74
+}
+]
+},
+"long:AXTI": {
+"ticker": "AXTI",
+"kind": "long",
+"name": "AXT Inc",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 68,
+"price": 93.04,
+"occ": 52,
+"prob_gain": 59
+}
+]
+},
+"long:GIL": {
+"ticker": "GIL",
+"kind": "long",
+"name": "Gildan Activewear Inc",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 63,
+"price": 50.34,
+"occ": 79,
+"prob_gain": 56
+}
+]
+},
+"long:NU": {
+"ticker": "NU",
+"kind": "long",
+"name": "Nu Holdings Ltd.",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 67,
+"price": 13.325,
+"occ": 59,
+"prob_gain": 60
+},
+{
+"date": "2026-06-18 14:32",
+"conv": 58,
+"price": 12.89,
+"occ": 61,
+"prob_gain": 55
+},
+{
+"date": "2026-06-19 14:37",
+"conv": 26,
+"price": 12.89,
+"occ": 72,
+"prob_gain": 58
+},
+{
+"date": "2026-06-20 00:41",
+"conv": 30,
+"price": 12.71,
+"occ": 73,
+"prob_gain": 60
+},
+{
+"date": "2026-06-20 12:15",
+"conv": 32,
+"price": 12.71,
+"occ": 73,
+"prob_gain": 60
+},
+{
+"date": "2026-06-21 18:59",
+"conv": 29,
+"price": 12.71,
+"occ": 73,
+"prob_gain": 60
+}
+]
+},
+"long:SMCI": {
+"ticker": "SMCI",
+"kind": "long",
+"name": "Super Micro Computer Inc",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 39,
+"price": 28.74,
+"occ": 100,
+"prob_gain": 39
+},
+{
+"date": "2026-06-18 14:32",
+"conv": 41,
+"price": 27.78,
+"occ": 100,
+"prob_gain": 39
+},
+{
+"date": "2026-06-19 14:37",
+"conv": 64,
+"price": 27.78,
+"occ": 85,
+"prob_gain": 68
+},
+{
+"date": "2026-06-20 00:41",
+"conv": 60,
+"price": 30.66,
+"occ": 85,
+"prob_gain": 60
+}
+]
+},
+"long:VG": {
+"ticker": "VG",
+"kind": "long",
+"name": "Venture Global Inc",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 39,
+"price": 11.12,
+"occ": 80,
+"prob_gain": 38
+},
+{
+"date": "2026-06-18 14:32",
+"conv": 43,
+"price": 11.05,
+"occ": 80,
+"prob_gain": 38
+},
+{
+"date": "2026-06-19 14:37",
+"conv": 51,
+"price": 11.05,
+"occ": 81,
+"prob_gain": 72
+},
+{
+"date": "2026-06-20 00:41",
+"conv": 51,
+"price": 11.02,
+"occ": 81,
+"prob_gain": 71
+},
+{
+"date": "2026-06-20 12:15",
+"conv": 54,
+"price": 11.02,
+"occ": 81,
+"prob_gain": 71
+},
+{
+"date": "2026-06-21 18:59",
+"conv": 51,
+"price": 11.02,
+"occ": 81,
+"prob_gain": 71
+}
+]
+},
+"long:T": {
+"ticker": "T",
+"kind": "long",
+"name": "AT&T Inc.",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 22,
+"price": 22.325,
+"occ": 76,
+"prob_gain": 17
+},
+{
+"date": "2026-06-18",
+"conv": 20,
+"price": 22.44,
+"occ": 79,
+"prob_gain": 15
+},
+{
+"date": "2026-06-18 14:32",
+"conv": 26,
+"price": 22.44,
+"occ": 76,
+"prob_gain": 18
+},
+{
+"date": "2026-06-18 23:29",
+"conv": 60,
+"price": 22.01,
+"occ": 69,
+"prob_gain": 22
+},
+{
+"date": "2026-06-19 14:37",
+"conv": 69,
+"price": 22.44,
+"occ": 66,
+"prob_gain": 77
+},
+{
+"date": "2026-06-19 21:17",
+"conv": 70,
+"price": 22.01,
+"occ": 69,
+"prob_gain": 84
+},
+{
+"date": "2026-06-20 00:41",
+"conv": 68,
+"price": 22.01,
+"occ": 68,
+"prob_gain": 79
+},
+{
+"date": "2026-06-20 12:15",
+"conv": 67,
+"price": 22.01,
+"occ": 68,
+"prob_gain": 79
+},
+{
+"date": "2026-06-20 22:53",
+"conv": 70,
+"price": 22.01,
+"occ": 69,
+"prob_gain": 83
+},
+{
+"date": "2026-06-21 12:49",
+"conv": 67,
+"price": 22.01,
+"occ": 68,
+"prob_gain": 79
+},
+{
+"date": "2026-06-22 00:02",
+"conv": 80,
+"price": 22.01,
+"occ": 69,
+"prob_gain": 82
+}
+]
+},
+"short:ENI.MI": {
+"ticker": "ENI.MI",
+"kind": "short",
+"name": "ENI.MI",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 82,
+"price": 21.83,
+"occ": 52,
+"prob_gain": 64
+},
+{
+"date": "2026-06-18",
+"conv": 81,
+"price": 22.01,
+"occ": 52,
+"prob_gain": 64
+},
+{
+"date": "2026-06-18 14:31",
+"conv": 84,
+"price": 21.46,
+"occ": 63,
+"prob_gain": 64
+},
+{
+"date": "2026-06-18 23:28",
+"conv": 93,
+"price": 21.14,
+"occ": 45,
+"prob_gain": 53
+},
+{
+"date": "2026-06-20 00:40",
+"conv": 100,
+"price": 21.14,
+"occ": 45,
+"prob_gain": 54
+}
+]
+},
+"short:NDAQ": {
+"ticker": "NDAQ",
+"kind": "short",
+"name": "NDAQ",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 74,
+"price": 82.57,
+"occ": 42,
+"prob_gain": 48
+}
+]
+},
+"short:SNAP": {
+"ticker": "SNAP",
+"kind": "short",
+"name": "SNAP",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 66,
+"price": 4.865,
+"occ": 56,
+"prob_gain": 45
+},
+{
+"date": "2026-06-18 14:31",
+"conv": 69,
+"price": 4.74,
+"occ": 67,
+"prob_gain": 45
+}
+]
+},
+"short:STLAM.MI": {
+"ticker": "STLAM.MI",
+"kind": "short",
+"name": "STLAM.MI",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 66,
+"price": 5.777,
+"occ": 41,
+"prob_gain": 45
+},
+{
+"date": "2026-06-18 14:31",
+"conv": 68,
+"price": 5.506,
+"occ": 52,
+"prob_gain": 45
+},
+{
+"date": "2026-06-19 14:37",
+"conv": 84,
+"price": 5.592,
+"occ": 65,
+"prob_gain": 53
+},
+{
+"date": "2026-06-19 21:17",
+"conv": 79,
+"price": 5.572,
+"occ": 65,
+"prob_gain": 53
+},
+{
+"date": "2026-06-20 12:15",
+"conv": 85,
+"price": 5.572,
+"occ": 65,
+"prob_gain": 53
+},
+{
+"date": "2026-06-20 17:58",
+"conv": 84,
+"price": 5.572,
+"occ": 65,
+"prob_gain": 53
+},
+{
+"date": "2026-06-20 22:52",
+"conv": 77,
+"price": 5.572,
+"occ": 65,
+"prob_gain": 53
+},
+{
+"date": "2026-06-21 12:48",
+"conv": 81,
+"price": 5.572,
+"occ": 65,
+"prob_gain": 53
+},
+{
+"date": "2026-06-22 00:01",
+"conv": 78,
+"price": 5.572,
+"occ": 65,
+"prob_gain": 53
+}
+]
+},
+"short:ANNX": {
+"ticker": "ANNX",
+"kind": "short",
+"name": "ANNX",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 66,
+"price": 4.78,
+"occ": 38,
+"prob_gain": 55
+},
+{
+"date": "2026-06-18",
+"conv": 65,
+"price": 4.94,
+"occ": 37,
+"prob_gain": 55
+}
+]
+},
+"short:RGC": {
+"ticker": "RGC",
+"kind": "short",
+"name": "RGC",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 65,
+"price": 14.7,
+"occ": 87,
+"prob_gain": 48
+},
+{
+"date": "2026-06-18 14:31",
+"conv": 70,
+"price": 14.82,
+"occ": 87,
+"prob_gain": 48
+},
+{
+"date": "2026-06-19 14:37",
+"conv": 92,
+"price": 14.82,
+"occ": 47,
+"prob_gain": 58
+},
+{
+"date": "2026-06-20 00:40",
+"conv": 96,
+"price": 12.01,
+"occ": 47,
+"prob_gain": 59
+},
+{
+"date": "2026-06-20 12:15",
+"conv": 94,
+"price": 12.01,
+"occ": 47,
+"prob_gain": 59
+},
+{
+"date": "2026-06-20 17:58",
+"conv": 93,
+"price": 12.01,
+"occ": 47,
+"prob_gain": 59
+},
+{
+"date": "2026-06-21 12:48",
+"conv": 92,
+"price": 12.01,
+"occ": 47,
+"prob_gain": 59
+}
+]
+},
+"short:SNBR": {
+"ticker": "SNBR",
+"kind": "short",
+"name": "SNBR",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 65,
+"price": 0.4211,
+"occ": 57,
+"prob_gain": 49
+},
+{
+"date": "2026-06-18",
+"conv": 65,
+"price": 0.39,
+"occ": 57,
+"prob_gain": 49
+},
+{
+"date": "2026-06-18 14:31",
+"conv": 70,
+"price": 0.39,
+"occ": 57,
+"prob_gain": 49
+}
+]
+},
+"short:GOSS": {
+"ticker": "GOSS",
+"kind": "short",
+"name": "GOSS",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 65,
+"price": 0.1761,
+"occ": 47,
+"prob_gain": 49
+},
+{
+"date": "2026-06-18",
+"conv": 65,
+"price": 0.179,
+"occ": 47,
+"prob_gain": 49
+},
+{
+"date": "2026-06-18 14:31",
+"conv": 61,
+"price": 0.179,
+"occ": 47,
+"prob_gain": 49
+}
+]
+},
+"short:UAMY": {
+"ticker": "UAMY",
+"kind": "short",
+"name": "UAMY",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 65,
+"price": 7.545,
+"occ": 36,
+"prob_gain": 53
+},
+{
+"date": "2026-06-18",
+"conv": 64,
+"price": 7.66,
+"occ": 35,
+"prob_gain": 53
+},
+{
+"date": "2026-06-18 14:31",
+"conv": 60,
+"price": 7.66,
+"occ": 35,
+"prob_gain": 53
+}
+]
+},
+"short:PLUG": {
+"ticker": "PLUG",
+"kind": "short",
+"name": "PLUG",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 64,
+"price": 2.795,
+"occ": 49,
+"prob_gain": 53
+},
+{
+"date": "2026-06-18 14:31",
+"conv": 67,
+"price": 2.65,
+"occ": 60,
+"prob_gain": 53
+}
+]
+},
+"short:TNYA": {
+"ticker": "TNYA",
+"kind": "short",
+"name": "TNYA",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 60,
+"price": 0.7151,
+"occ": 37,
+"prob_gain": 52
+}
+]
+},
+"long:ENI.MI": {
+"ticker": "ENI.MI",
+"kind": "long",
+"name": "ENI",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 100,
+"price": 21.83,
+"occ": 57,
+"prob_gain": 89
+},
+{
+"date": "2026-06-18 14:32",
+"conv": 100,
+"price": 21.46,
+"occ": 59,
+"prob_gain": 89
+}
+]
+},
+"long:AGNC": {
+"ticker": "AGNC",
+"kind": "long",
+"name": "AGNC Investment Corp",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 86,
+"price": 10.415,
+"occ": 50,
+"prob_gain": 74
+},
+{
+"date": "2026-06-18 14:32",
+"conv": 80,
+"price": 10.3,
+"occ": 51,
+"prob_gain": 71
+},
+{
+"date": "2026-06-19 14:37",
+"conv": 64,
+"price": 10.3,
+"occ": 57,
+"prob_gain": 85
+},
+{
+"date": "2026-06-20 00:41",
+"conv": 61,
+"price": 10.38,
+"occ": 56,
+"prob_gain": 85
+},
+{
+"date": "2026-06-21 18:59",
+"conv": 60,
+"price": 10.38,
+"occ": 56,
+"prob_gain": 85
+}
+]
+},
+"long:CVNA": {
+"ticker": "CVNA",
+"kind": "long",
+"name": "Carvana Co",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 59,
+"price": 63.72,
+"occ": 76,
+"prob_gain": 55
+},
+{
+"date": "2026-06-18 14:32",
+"conv": 56,
+"price": 62.86,
+"occ": 77,
+"prob_gain": 51
+}
+]
+},
+"long:RGC": {
+"ticker": "RGC",
+"kind": "long",
+"name": "Regencell Bioscience Holdings Ltd",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 41,
+"price": 14.7,
+"occ": 70,
+"prob_gain": 44
+},
+{
+"date": "2026-06-18 14:32",
+"conv": 48,
+"price": 14.82,
+"occ": 70,
+"prob_gain": 44
+},
+{
+"date": "2026-06-19 14:37",
+"conv": 27,
+"price": 14.82,
+"occ": 52,
+"prob_gain": 75
+},
+{
+"date": "2026-06-20 00:41",
+"conv": 26,
+"price": 12.01,
+"occ": 52,
+"prob_gain": 78
+},
+{
+"date": "2026-06-20 12:15",
+"conv": 22,
+"price": 12.01,
+"occ": 52,
+"prob_gain": 78
+},
+{
+"date": "2026-06-20 17:58",
+"conv": 21,
+"price": 12.01,
+"occ": 52,
+"prob_gain": 78
+},
+{
+"date": "2026-06-21 18:59",
+"conv": 26,
+"price": 12.01,
+"occ": 52,
+"prob_gain": 78
+}
+]
+},
+"long:SLBT": {
+"ticker": "SLBT",
+"kind": "long",
+"name": "SL Science Holding Limited Ordinar",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 41,
+"price": 6.2601,
+"occ": 60,
+"prob_gain": 44
+}
+]
+},
+"long:STLAM.MI": {
+"ticker": "STLAM.MI",
+"kind": "long",
+"name": "STELLANTIS",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 33,
+"price": 5.777,
+"occ": 57,
+"prob_gain": 32
+},
+{
+"date": "2026-06-18 14:32",
+"conv": 35,
+"price": 5.506,
+"occ": 57,
+"prob_gain": 32
+},
+{
+"date": "2026-06-19 14:37",
+"conv": 43,
+"price": 5.592,
+"occ": 61,
+"prob_gain": 58
+},
+{
+"date": "2026-06-20 00:41",
+"conv": 47,
+"price": 5.565,
+"occ": 61,
+"prob_gain": 60
+},
+{
+"date": "2026-06-20 12:15",
+"conv": 47,
+"price": 5.572,
+"occ": 61,
+"prob_gain": 58
+},
+{
+"date": "2026-06-20 17:58",
+"conv": 48,
+"price": 5.572,
+"occ": 61,
+"prob_gain": 58
+},
+{
+"date": "2026-06-21 18:59",
+"conv": 47,
+"price": 5.572,
+"occ": 61,
+"prob_gain": 58
+}
+]
+},
+"long:RACE.MI": {
+"ticker": "RACE.MI",
+"kind": "long",
+"name": "FERRARI",
+"obs": [
+{
+"date": "2026-06-17",
+"conv": 29,
+"price": 310.7,
+"occ": 78,
+"prob_gain": 25
+},
+{
+"date": "2026-06-18 14:32",
+"conv": 31,
+"price": 311.25,
+"occ": 77,
+"prob_gain": 25
+},
+{
+"date": "2026-06-19 14:37",
+"conv": 20,
+"price": 312.2,
+"occ": 70,
+"prob_gain": 48
+},
+{
+"date": "2026-06-20 00:41",
+"conv": 21,
+"price": 313.35,
+"occ": 69,
+"prob_gain": 48
+},
+{
+"date": "2026-06-20 12:15",
+"conv": 17,
+"price": 307.5,
+"occ": 71,
+"prob_gain": 51
+},
+{
+"date": "2026-06-21 18:59",
+"conv": 22,
+"price": 307.5,
+"occ": 71,
+"prob_gain": 51
+}
+]
+},
+"short:LILA": {
+"ticker": "LILA",
+"kind": "short",
+"name": "LILA",
+"obs": [
+{
+"date": "2026-06-18",
+"conv": 78,
+"price": 5.3,
+"occ": 79,
+"prob_gain": 49
+}
+]
+},
+"short:HSPT": {
+"ticker": "HSPT",
+"kind": "short",
+"name": "HSPT",
+"obs": [
+{
+"date": "2026-06-18",
+"conv": 67,
+"price": 5.33,
+"occ": 58,
+"prob_gain": 47
+}
+]
+},
+"short:SOXS": {
+"ticker": "SOXS",
+"kind": "short",
+"name": "SOXS",
+"obs": [
+{
+"date": "2026-06-18",
+"conv": 67,
+"price": 4.46,
+"occ": 57,
+"prob_gain": 48
+}
+]
+},
+"short:VRXA": {
+"ticker": "VRXA",
+"kind": "short",
+"name": "VRXA",
+"obs": [
+{
+"date": "2026-06-18",
+"conv": 67,
+"price": 5.86,
+"occ": 47,
+"prob_gain": 48
+}
+]
+},
+"short:BITO": {
+"ticker": "BITO",
+"kind": "short",
+"name": "BITO",
+"obs": [
+{
+"date": "2026-06-18",
+"conv": 67,
+"price": 8.73,
+"occ": 47,
+"prob_gain": 44
+},
+{
+"date": "2026-06-18 23:28",
+"conv": 66,
+"price": 8.56,
+"occ": 39,
+"prob_gain": 49
+},
+{
+"date": "2026-06-19 21:17",
+"conv": 67,
+"price": 8.56,
+"occ": 39,
+"prob_gain": 49
+}
+]
+},
+"short:SPRO": {
+"ticker": "SPRO",
+"kind": "short",
+"name": "SPRO",
+"obs": [
+{
+"date": "2026-06-18",
+"conv": 66,
+"price": 2.11,
+"occ": 57,
+"prob_gain": 45
+}
+]
+},
+"short:FLZH": {
+"ticker": "FLZH",
+"kind": "short",
+"name": "FLZH",
+"obs": [
+{
+"date": "2026-06-18",
+"conv": 65,
+"price": 2.61,
+"occ": 47,
+"prob_gain": 49
+}
+]
+},
+"short:ADTX": {
+"ticker": "ADTX",
+"kind": "short",
+"name": "ADTX",
+"obs": [
+{
+"date": "2026-06-18",
+"conv": 65,
+"price": 0.0044,
+"occ": 75,
+"prob_gain": 49
+}
+]
+},
+"short:FMFC": {
+"ticker": "FMFC",
+"kind": "short",
+"name": "FMFC",
+"obs": [
+{
+"date": "2026-06-18",
+"conv": 65,
+"price": 0.2524,
+"occ": 79,
+"prob_gain": 48
+}
+]
+},
+"short:TZA": {
+"ticker": "TZA",
+"kind": "short",
+"name": "TZA",
+"obs": [
+{
+"date": "2026-06-18",
+"conv": 65,
+"price": 4.27,
+"occ": 37,
+"prob_gain": 45
+}
+]
+},
+"short:ALXO": {
+"ticker": "ALXO",
+"kind": "short",
+"name": "ALXO",
+"obs": [
+{
+"date": "2026-06-18",
+"conv": 65,
+"price": 1.45,
+"occ": 40,
+"prob_gain": 53
+}
+]
+},
+"short:INLF": {
+"ticker": "INLF",
+"kind": "short",
+"name": "INLF",
+"obs": [
+{
+"date": "2026-06-18",
+"conv": 64,
+"price": 0.4374,
+"occ": 87,
+"prob_gain": 49
+}
+]
+},
+"short:WTO": {
+"ticker": "WTO",
+"kind": "short",
+"name": "WTO",
+"obs": [
+{
+"date": "2026-06-18",
+"conv": 64,
+"price": 0.7071,
+"occ": 69,
+"prob_gain": 49
+}
+]
+},
+"short:GDC": {
+"ticker": "GDC",
+"kind": "short",
+"name": "GDC",
+"obs": [
+{
+"date": "2026-06-18",
+"conv": 64,
+"price": 0.0213,
+"occ": 79,
+"prob_gain": 49
+}
+]
+},
+"short:GPUS": {
+"ticker": "GPUS",
+"kind": "short",
+"name": "GPUS",
+"obs": [
+{
+"date": "2026-06-18",
+"conv": 47,
+"price": 0.3979,
+"occ": 38,
+"prob_gain": 48
+}
+]
+},
+"short:YMAT": {
+"ticker": "YMAT",
+"kind": "short",
+"name": "YMAT",
+"obs": [
+{
+"date": "2026-06-18",
+"conv": 46,
+"price": 0.75,
+"occ": 38,
+"prob_gain": 49
+}
+]
+},
+"long:CCL": {
+"ticker": "CCL",
+"kind": "long",
+"name": "Carnival Corp",
+"obs": [
+{
+"date": "2026-06-18",
+"conv": 75,
+"price": 29.91,
+"occ": 60,
+"prob_gain": 66
+},
+{
+"date": "2026-06-18 14:32",
+"conv": 73,
+"price": 29.91,
+"occ": 55,
+"prob_gain": 69
+}
+]
+},
+"short:XLE": {
+"ticker": "XLE",
+"kind": "short",
+"name": "XLE",
+"obs": [
+{
+"date": "2026-06-18 14:31",
+"conv": 80,
+"price": 54.67,
+"occ": 52,
+"prob_gain": 62
+}
+]
+},
+"short:ENLT": {
+"ticker": "ENLT",
+"kind": "short",
+"name": "ENLT",
+"obs": [
+{
+"date": "2026-06-18 14:31",
+"conv": 73,
+"price": 80.53,
+"occ": 57,
+"prob_gain": 56
+}
+]
+},
+"short:BLSH": {
+"ticker": "BLSH",
+"kind": "short",
+"name": "BLSH",
+"obs": [
+{
+"date": "2026-06-18 14:31",
+"conv": 69,
+"price": 23.86,
+"occ": 67,
+"prob_gain": 46
+}
+]
+},
+"short:MBLY": {
+"ticker": "MBLY",
+"kind": "short",
+"name": "MBLY",
+"obs": [
+{
+"date": "2026-06-18 14:31",
+"conv": 63,
+"price": 8.73,
+"occ": 57,
+"prob_gain": 45
+}
+]
+},
+"short:BTGO": {
+"ticker": "BTGO",
+"kind": "short",
+"name": "BTGO",
+"obs": [
+{
+"date": "2026-06-18 14:31",
+"conv": 62,
+"price": 5.91,
+"occ": 37,
+"prob_gain": 47
+}
+]
+},
+"long:PBR-A": {
+"ticker": "PBR-A",
+"kind": "long",
+"name": "Petroleo Brasileiro SA Petrobras",
+"obs": [
+{
+"date": "2026-06-18 14:32",
+"conv": 92,
+"price": 15.02,
+"occ": 74,
+"prob_gain": 78
+},
+{
+"date": "2026-06-19 14:37",
+"conv": 78,
+"price": 15.02,
+"occ": 69,
+"prob_gain": 78
+},
+{
+"date": "2026-06-20 00:41",
+"conv": 79,
+"price": 14.99,
+"occ": 69,
+"prob_gain": 77
+},
+{
+"date": "2026-06-20 12:15",
+"conv": 80,
+"price": 14.99,
+"occ": 69,
+"prob_gain": 77
+},
+{
+"date": "2026-06-21 18:59",
+"conv": 78,
+"price": 14.99,
+"occ": 69,
+"prob_gain": 77
+}
+]
+},
+"long:KGC": {
+"ticker": "KGC",
+"kind": "long",
+"name": "Kinross Gold Corp",
+"obs": [
+{
+"date": "2026-06-18 14:32",
+"conv": 77,
+"price": 27.28,
+"occ": 88,
+"prob_gain": 72
+},
+{
+"date": "2026-06-19 14:37",
+"conv": 67,
+"price": 27.28,
+"occ": 90,
+"prob_gain": 63
+}
+]
+},
+"long:MBLY": {
+"ticker": "MBLY",
+"kind": "long",
+"name": "Mobileye Global Inc",
+"obs": [
+{
+"date": "2026-06-18 14:32",
+"conv": 35,
+"price": 8.73,
+"occ": 70,
+"prob_gain": 32
+}
+]
+},
+"short:NVDA": {
+"ticker": "NVDA",
+"kind": "short",
+"name": "NVDA",
+"obs": [
+{
+"date": "2026-06-18 23:28",
+"conv": 53,
+"price": 210.69,
+"occ": 36,
+"prob_gain": 46
+},
+{
+"date": "2026-06-19 21:17",
+"conv": 54,
+"price": 210.69,
+"occ": 36,
+"prob_gain": 48
+},
+{
+"date": "2026-06-20 00:40",
+"conv": 59,
+"price": 210.69,
+"occ": 36,
+"prob_gain": 45
+},
+{
+"date": "2026-06-20 12:15",
+"conv": 55,
+"price": 210.69,
+"occ": 36,
+"prob_gain": 45
+},
+{
+"date": "2026-06-20 22:52",
+"conv": 53,
+"price": 210.69,
+"occ": 36,
+"prob_gain": 47
+},
+{
+"date": "2026-06-21 12:48",
+"conv": 55,
+"price": 210.69,
+"occ": 36,
+"prob_gain": 45
+},
+{
+"date": "2026-06-21 18:59",
+"conv": 56,
+"price": 210.69,
+"occ": 36,
+"prob_gain": 45
+},
+{
+"date": "2026-06-22 00:01",
+"conv": 54,
+"price": 210.69,
+"occ": 36,
+"prob_gain": 49
+}
+]
+},
+"short:ENVX": {
+"ticker": "ENVX",
+"kind": "short",
+"name": "ENVX",
+"obs": [
+{
+"date": "2026-06-18 23:28",
+"conv": 38,
+"price": 7.08,
+"occ": 37,
+"prob_gain": 46
+}
+]
+},
+"short:SG": {
+"ticker": "SG",
+"kind": "short",
+"name": "SG",
+"obs": [
+{
+"date": "2026-06-18 23:28",
+"conv": 37,
+"price": 8.97,
+"occ": 46,
+"prob_gain": 46
+},
+{
+"date": "2026-06-20 12:15",
+"conv": 38,
+"price": 8.97,
+"occ": 46,
+"prob_gain": 46
+}
+]
+},
+"short:BIRD": {
+"ticker": "BIRD",
+"kind": "short",
+"name": "BIRD",
+"obs": [
+{
+"date": "2026-06-18 23:28",
+"conv": 22,
+"price": 5.97,
+"occ": 62,
+"prob_gain": 39
+},
+{
+"date": "2026-06-19 14:37",
+"conv": 25,
+"price": 5.48,
+"occ": 62,
+"prob_gain": 40
+},
+{
+"date": "2026-06-19 21:17",
+"conv": 22,
+"price": 5.97,
+"occ": 62,
+"prob_gain": 39
+},
+{
+"date": "2026-06-20 00:40",
+"conv": 23,
+"price": 5.97,
+"occ": 62,
+"prob_gain": 39
+},
+{
+"date": "2026-06-20 12:15",
+"conv": 21,
+"price": 5.97,
+"occ": 62,
+"prob_gain": 39
+},
+{
+"date": "2026-06-20 22:52",
+"conv": 22,
+"price": 5.97,
+"occ": 62,
+"prob_gain": 39
+},
+{
+"date": "2026-06-21 12:48",
+"conv": 21,
+"price": 5.97,
+"occ": 62,
+"prob_gain": 39
+},
+{
+"date": "2026-06-22 00:01",
+"conv": 22,
+"price": 5.97,
+"occ": 62,
+"prob_gain": 39
+}
+]
+},
+"short:TDOC": {
+"ticker": "TDOC",
+"kind": "short",
+"name": "TDOC",
+"obs": [
+{
+"date": "2026-06-18 23:28",
+"conv": 20,
+"price": 8.07,
+"occ": 38,
+"prob_gain": 51
+},
+{
+"date": "2026-06-19 14:37",
+"conv": 24,
+"price": 7.59,
+"occ": 35,
+"prob_gain": 50
+},
+{
+"date": "2026-06-19 21:17",
+"conv": 19,
+"price": 8.07,
+"occ": 38,
+"prob_gain": 51
+},
+{
+"date": "2026-06-20 00:40",
+"conv": 18,
+"price": 8.07,
+"occ": 38,
+"prob_gain": 51
+},
+{
+"date": "2026-06-20 12:15",
+"conv": 11,
+"price": 8.07,
+"occ": 38,
+"prob_gain": 51
+},
+{
+"date": "2026-06-20 17:58",
+"conv": 14,
+"price": 8.07,
+"occ": 38,
+"prob_gain": 51
+},
+{
+"date": "2026-06-20 22:52",
+"conv": 18,
+"price": 8.07,
+"occ": 38,
+"prob_gain": 51
+},
+{
+"date": "2026-06-21 12:48",
+"conv": 16,
+"price": 8.07,
+"occ": 38,
+"prob_gain": 51
+},
+{
+"date": "2026-06-21 18:59",
+"conv": 17,
+"price": 8.07,
+"occ": 38,
+"prob_gain": 51
+},
+{
+"date": "2026-06-22 00:01",
+"conv": 19,
+"price": 8.07,
+"occ": 38,
+"prob_gain": 51
+}
+]
+},
+"short:ACN": {
+"ticker": "ACN",
+"kind": "short",
+"name": "ACN",
+"obs": [
+{
+"date": "2026-06-19 14:37",
+"conv": 93,
+"price": 156.01,
+"occ": 46,
+"prob_gain": 55
+},
+{
+"date": "2026-06-20 00:40",
+"conv": 100,
+"price": 127.98,
+"occ": 46,
+"prob_gain": 60
+}
+]
+},
+"short:EPAM": {
+"ticker": "EPAM",
+"kind": "short",
+"name": "EPAM",
+"obs": [
+{
+"date": "2026-06-19 14:37",
+"conv": 91,
+"price": 87.7,
+"occ": 51,
+"prob_gain": 56
+},
+{
+"date": "2026-06-20 00:40",
+"conv": 100,
+"price": 76.64,
+"occ": 47,
+"prob_gain": 58
+}
+]
+},
+"short:LEGN": {
+"ticker": "LEGN",
+"kind": "short",
+"name": "LEGN",
+"obs": [
+{
+"date": "2026-06-19 14:37",
+"conv": 35,
+"price": 33.52,
+"occ": 37,
+"prob_gain": 46
+}
+]
+},
+"long:ACN": {
+"ticker": "ACN",
+"kind": "long",
+"name": "Accenture PLC",
+"obs": [
+{
+"date": "2026-06-19 14:37",
+"conv": 67,
+"price": 156.01,
+"occ": 86,
+"prob_gain": 71
+},
+{
+"date": "2026-06-20 00:41",
+"conv": 76,
+"price": 127.98,
+"occ": 86,
+"prob_gain": 85
+},
+{
+"date": "2026-06-21 18:59",
+"conv": 75,
+"price": 127.98,
+"occ": 86,
+"prob_gain": 85
+}
+]
+},
+"long:LEGN": {
+"ticker": "LEGN",
+"kind": "long",
+"name": "Legend Biotech Corp",
+"obs": [
+{
+"date": "2026-06-19 14:37",
+"conv": 18,
+"price": 33.52,
+"occ": 55,
+"prob_gain": 61
+}
+]
+},
+"short:GCTS": {
+"ticker": "GCTS",
+"kind": "short",
+"name": "GCTS",
+"obs": [
+{
+"date": "2026-06-19 21:17",
+"conv": 9,
+"price": 3.18,
+"occ": 38,
+"prob_gain": 40
+},
+{
+"date": "2026-06-20 12:15",
+"conv": 3,
+"price": 3.18,
+"occ": 38,
+"prob_gain": 40
+},
+{
+"date": "2026-06-20 17:58",
+"conv": 4,
+"price": 3.18,
+"occ": 38,
+"prob_gain": 40
+},
+{
+"date": "2026-06-20 22:52",
+"conv": 9,
+"price": 3.18,
+"occ": 38,
+"prob_gain": 40
+},
+{
+"date": "2026-06-21 12:48",
+"conv": 6,
+"price": 3.18,
+"occ": 38,
+"prob_gain": 40
+},
+{
+"date": "2026-06-21 18:59",
+"conv": 8,
+"price": 3.18,
+"occ": 38,
+"prob_gain": 40
+},
+{
+"date": "2026-06-22 00:01",
+"conv": 9,
+"price": 3.18,
+"occ": 38,
+"prob_gain": 40
+}
+]
+},
+"short:CTSH": {
+"ticker": "CTSH",
+"kind": "short",
+"name": "CTSH",
+"obs": [
+{
+"date": "2026-06-20 00:40",
+"conv": 100,
+"price": 43.7,
+"occ": 57,
+"prob_gain": 58
+}
+]
+},
+"short:INFY": {
+"ticker": "INFY",
+"kind": "short",
+"name": "INFY",
+"obs": [
+{
+"date": "2026-06-20 00:40",
+"conv": 100,
+"price": 10.57,
+"occ": 46,
+"prob_gain": 56
+},
+{
+"date": "2026-06-21 12:48",
+"conv": 95,
+"price": 10.57,
+"occ": 46,
+"prob_gain": 56
+},
+{
+"date": "2026-06-21 18:59",
+"conv": 94,
+"price": 10.57,
+"occ": 46,
+"prob_gain": 56
+}
+]
+},
+"short:KR": {
+"ticker": "KR",
+"kind": "short",
+"name": "KR",
+"obs": [
+{
+"date": "2026-06-20 00:40",
+"conv": 100,
+"price": 56.61,
+"occ": 46,
+"prob_gain": 54
+}
+]
+},
+"short:FLEX": {
+"ticker": "FLEX",
+"kind": "short",
+"name": "FLEX",
+"obs": [
+{
+"date": "2026-06-20 00:40",
+"conv": 46,
+"price": 147.61,
+"occ": 41,
+"prob_gain": 42
+},
+{
+"date": "2026-06-20 12:15",
+"conv": 41,
+"price": 147.61,
+"occ": 41,
+"prob_gain": 42
+},
+{
+"date": "2026-06-20 17:58",
+"conv": 43,
+"price": 147.61,
+"occ": 41,
+"prob_gain": 42
+}
+]
+},
+"short:QS": {
+"ticker": "QS",
+"kind": "short",
+"name": "QS",
+"obs": [
+{
+"date": "2026-06-20 00:40",
+"conv": 38,
+"price": 8.04,
+"occ": 47,
+"prob_gain": 40
+},
+{
+"date": "2026-06-20 12:15",
+"conv": 35,
+"price": 8.04,
+"occ": 47,
+"prob_gain": 40
+}
+]
+},
+"long:CHTR": {
+"ticker": "CHTR",
+"kind": "long",
+"name": "Charter Communications Inc",
+"obs": [
+{
+"date": "2026-06-20 00:41",
+"conv": 55,
+"price": 126.23,
+"occ": 74,
+"prob_gain": 65
+},
+{
+"date": "2026-06-20 12:15",
+"conv": 58,
+"price": 126.23,
+"occ": 74,
+"prob_gain": 65
+},
+{
+"date": "2026-06-21 18:59",
+"conv": 55,
+"price": 126.23,
+"occ": 74,
+"prob_gain": 65
+}
+]
+},
+"short:REAL": {
+"ticker": "REAL",
+"kind": "short",
+"name": "REAL",
+"obs": [
+{
+"date": "2026-06-20 12:15",
+"conv": 17,
+"price": 12.45,
+"occ": 48,
+"prob_gain": 48
+},
+{
+"date": "2026-06-20 17:58",
+"conv": 19,
+"price": 12.45,
+"occ": 48,
+"prob_gain": 48
+},
+{
+"date": "2026-06-20 22:52",
+"conv": 20,
+"price": 12.45,
+"occ": 48,
+"prob_gain": 48
+},
+{
+"date": "2026-06-21 12:48",
+"conv": 19,
+"price": 12.45,
+"occ": 48,
+"prob_gain": 48
+}
+]
+},
+"short:F": {
+"ticker": "F",
+"kind": "short",
+"name": "F",
+"obs": [
+{
+"date": "2026-06-21 12:48",
+"conv": 66,
+"price": 14.06,
+"occ": 40,
+"prob_gain": 51
+},
+{
+"date": "2026-06-21 18:59",
+"conv": 68,
+"price": 14.06,
+"occ": 40,
+"prob_gain": 51
+}
+]
+}
+}
