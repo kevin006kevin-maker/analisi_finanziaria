@@ -3195,6 +3195,41 @@ def save_opp_watch(data: dict) -> None:
     write_data_json(OPP_WATCH_NAME, data)
 
 
+# Config della sezione Occasioni (ticker extra + watchlist + preferenze EU/ETF) salvata dall'app
+# sul data-layer, così il JOB autonomo osserva lo STESSO universo che vedi nella sezione
+# (non solo l'universo standard): tutte le occasioni della sezione finiscono sotto osservazione.
+OPP_CONFIG_NAME = "opp_config.json"
+_OPP_CONFIG_DEFAULT = {"extra": [], "include_eu": True, "include_etf": True}
+
+
+def load_opp_config() -> dict:
+    data = read_data_json(OPP_CONFIG_NAME, dict(_OPP_CONFIG_DEFAULT))
+    if not isinstance(data, dict):
+        return dict(_OPP_CONFIG_DEFAULT)
+    return {"extra": list(data.get("extra", [])),
+            "include_eu": bool(data.get("include_eu", True)),
+            "include_etf": bool(data.get("include_etf", True))}
+
+
+def save_opp_config(extra, include_eu: bool, include_etf: bool) -> bool:
+    """Salva la config delle Occasioni SOLO se è cambiata (evita commit GitHub inutili).
+    Ritorna True se ha scritto."""
+    cfg = {"extra": list(dict.fromkeys([str(t).upper() for t in (extra or []) if t])),
+           "include_eu": bool(include_eu), "include_etf": bool(include_etf)}
+    if cfg == load_opp_config():
+        return False
+    write_data_json(OPP_CONFIG_NAME, cfg)
+    return True
+
+
+def opportunity_universe(kind: str) -> list:
+    """Universo COMPLETO della sezione Occasioni per il job autonomo: classifiche/universo standard
+    (con le preferenze EU/ETF salvate) + i ticker extra e la watchlist aggiunti dall'utente."""
+    cfg = load_opp_config()
+    base = opportunity_candidates(kind, include_eu=cfg["include_eu"], include_etf=cfg["include_etf"])
+    return list(dict.fromkeys(list(base) + list(cfg["extra"])))
+
+
 def record_observations(df, kind: str) -> None:
     """Registra la convenienza di ogni occasione scansionata più volte al giorno (al più ogni ~60 min,
     e solo se convenienza o prezzo sono cambiati). Separata per orizzonte (short/long). Tetto per titolo."""
