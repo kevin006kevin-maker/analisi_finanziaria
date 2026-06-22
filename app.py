@@ -549,33 +549,44 @@ if section.startswith("Occasioni"):
         if auto_promote_on:
             status = fu.observation_status()
             tracked_now = fu.load_tracking()
-            building = [s for s in status
-                        if s.get("ticker") not in tracked_now and s.get("ret", 0) > 0]
-            with st.expander(f"🤖 Sistema autonomo — {len(building)} occasion"
-                             f"{'e' if len(building)==1 else 'i'} in osservazione (prezzo in ripresa)",
-                             expanded=bool(building)):
-                st.caption("Le occasioni (titoli a sconto) vengono osservate per una finestra (**breve: 3 giorni**, "
-                           "**lungo: 7 giorni**): se alla fine il **prezzo è in ripresa**, vengono promosse nel "
-                           "Monitoraggio. Qui vedi quelle che finora stanno recuperando.")
-                if building:
-                    sdf = pd.DataFrame([{
-                        "Ticker": s.get("ticker"), "Tipo": "⚡ Breve" if s.get("kind") == "short" else "🏛️ Lungo",
-                        "Azienda": s.get("name", ""), "Giorni osservata": s.get("days", 0),
-                        "Rendimento": s.get("ret", 0.0), "Convenienza": s.get("last_conv"),
-                        "Mancano": s.get("remaining", 0),
-                    } for s in building]).set_index("Ticker")
-                    st.dataframe(sdf, use_container_width=True, column_config={
-                        "Giorni osservata": st.column_config.NumberColumn("📅 Giorni osservata", format="%d"),
-                        "Rendimento": st.column_config.NumberColumn("📈 Rendimento", format="%+.1f%%",
-                            help="Variazione del prezzo dal primo giorno di osservazione."),
-                        "Convenienza": st.column_config.ProgressColumn("🏅 Convenienza (saldo)", min_value=0, max_value=100, format="%d",
-                            help="Quanto è conveniente comprarla ora (più alta = più a sconto / interessante)."),
-                        "Mancano": st.column_config.NumberColumn("⏳ Mancano (gg)", format="%d",
-                            help="Giorni che mancano al termine della finestra (breve 3 / lungo 7); a 0 viene valutata per la promozione."),
-                    })
-                else:
-                    st.info("Nessuna occasione con prezzo in ripresa in osservazione al momento. "
-                            "Il sistema continua a osservare a ogni aggiornamento.")
+            obs_all = [s for s in status if s.get("ticker") not in tracked_now]   # TUTTE, non solo ripresa
+            obs_short = [s for s in obs_all if s.get("kind") == "short"]
+            obs_long = [s for s in obs_all if s.get("kind") != "short"]
+            _obs_cols = {
+                "Azienda": st.column_config.TextColumn("Azienda", width="medium"),
+                "Giorni osservata": st.column_config.NumberColumn("📅 Giorni", format="%d",
+                    help="Giorni da cui il sistema osserva questa occasione."),
+                "Rendimento": st.column_config.NumberColumn("📈 Rendimento", format="%+.1f%%",
+                    help="Variazione del PREZZO dal primo giorno di osservazione. Negativo = sta ancora scendendo "
+                         "(non verrà promossa finché non torna positivo)."),
+                "Convenienza": st.column_config.ProgressColumn("🏅 Convenienza (saldo)", min_value=0, max_value=100, format="%d",
+                    help="Quanto è conveniente comprarla ora (più alta = più a sconto / interessante)."),
+                "Mancano": st.column_config.NumberColumn("⏳ Mancano (gg)", format="%d",
+                    help="Giorni al termine della finestra (breve 3 / lungo 7); a 0 viene valutata per la promozione."),
+            }
+
+            def _obs_table(items, titolo):
+                st.markdown(f"**{titolo}** — {len(items)} in osservazione")
+                if not items:
+                    st.caption("Nessuna occasione in osservazione al momento.")
+                    return
+                df_obs = pd.DataFrame([{
+                    "Ticker": s.get("ticker"), "Azienda": s.get("name", ""),
+                    "Giorni osservata": s.get("days", 0), "Rendimento": s.get("ret", 0.0),
+                    "Convenienza": s.get("last_conv"), "Mancano": s.get("remaining", 0),
+                } for s in items]).set_index("Ticker")
+                st.dataframe(df_obs, use_container_width=True,
+                             height=min(60 + 36 * len(items), 460), column_config=_obs_cols)
+
+            with st.expander(f"🤖 Sistema autonomo — {len(obs_all)} occasioni in osservazione",
+                             expanded=bool(obs_all)):
+                st.caption("**Tutte** le occasioni della sezione vengono osservate per una finestra (**breve: 3 giorni**, "
+                           "**lungo: 7 giorni**). Vengono promosse nel Monitoraggio **solo quelle col prezzo in ripresa** "
+                           "al termine della finestra (le regole non cambiano). Qui sotto ci sono tutte quelle in osservazione, "
+                           "anche se per ora il prezzo sta ancora scendendo.")
+                _obs_table(obs_short, "⚡ Breve termine")
+                st.markdown("---")
+                _obs_table(obs_long, "🏛️ Lungo termine")
 
         # --- 🏆 Le migliori da seguire (shortlist automatica) ---
         def _best_picks(df, n=3):
