@@ -105,8 +105,10 @@ def main():
     total = 0
     for kind in ("short", "long"):
         try:
-            candidates = fu.opportunity_candidates(kind)
-            df = fu.scan_opportunities(candidates, kind)
+            # Universo COMPLETO della sezione Occasioni (standard + EU/ETF + extra/watchlist
+            # dell'utente, dalla config salvata dall'app): osserva TUTTE le occasioni della sezione.
+            universe = fu.opportunity_universe(kind)
+            df = fu.scan_opportunities(universe, kind)
             n = 0 if df is None or df.empty else len(df)
             total += n
             fu.record_observations(df, kind)
@@ -198,6 +200,7 @@ def main():
     fu.save_portfolio(fu.load_portfolio())          # preserva il portafoglio (lo gestisce l'app)
     fu.save_sell_alerts(fu.load_sell_alerts())      # stato avvisi di vendita (deduplica)
     fu.write_data_json(fu.FORECAST_LOG_NAME, fu.read_data_json(fu.FORECAST_LOG_NAME, []))  # log calibrazione
+    fu.write_data_json(fu.OPP_CONFIG_NAME, fu.read_data_json(fu.OPP_CONFIG_NAME, fu._OPP_CONFIG_DEFAULT))  # config occasioni
 
     log(f"Fatto. Totale occasioni viste: {total}.")
     return 0
