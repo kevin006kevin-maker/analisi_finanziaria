@@ -457,6 +457,10 @@ if section.startswith("Occasioni"):
                            help="Aggiunge alla ricerca i principali ETF (USA e UCITS europei): "
                                 "anche un ETF può essere un'occasione quando scende parecchio.")
 
+    # Salva la config (ticker extra + watchlist + preferenze EU/ETF) sul data-layer: così il
+    # SISTEMA AUTONOMO osserva lo STESSO universo che vedi qui, non solo quello standard.
+    fu.save_opp_config(extra + (watchlist if inc_wl else []), inc_eu, inc_etf)
+
     refresh_choice = st.selectbox(
         "🔄 Aggiornamento automatico", ["Disattivato", "Ogni 15 minuti", "Ogni 30 minuti"],
         index=1, key="opp_refresh_int",
