@@ -228,7 +228,10 @@ def check_password():
         return
 
     def _verify():
-        if hmac.compare_digest(str(st.session_state.get("pwd_in", "")), str(pwd)):
+        # .strip() su entrambi i lati: evita il classico "password giusta rifiutata" per uno
+        # spazio o un a-capo in coda (nel secret o in un incolla dal telefono).
+        typed = str(st.session_state.get("pwd_in", "")).strip()
+        if hmac.compare_digest(typed, str(pwd).strip()):
             st.session_state["auth_ok"] = True
             st.session_state.pop("pwd_in", None)
         else:
