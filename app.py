@@ -301,8 +301,9 @@ if "_goto_section" in st.session_state:
 # --- Sezione principale ---
 section = st.sidebar.radio(
     "Sezione", ["Analisi di un titolo", "Occasioni di mercato",
-                "Monitoraggio", "Portafoglio", "Attualità"], key="section_radio",
+                "In osservazione", "Monitoraggio", "Portafoglio", "Attualità"], key="section_radio",
     help="«Analisi di un titolo» studia una singola azienda/ETF. «Occasioni» scansiona il mercato per cali interessanti. "
+         "«In osservazione» mostra le occasioni che il sistema sta seguendo verso un'eventuale promozione. "
          "«Monitoraggio» segue nel tempo le occasioni che hai scelto. «Portafoglio» registra i tuoi acquisti veri e mostra il guadagno/perdita. "
          "«Attualità» raccoglie le classifiche di mercato (rialzi/ribassi/più scambiati) e le notizie recenti divise per azienda/ETF.",
 )
@@ -393,14 +394,6 @@ if tracked:
                        "(vedi la sezione «Monitoraggio»).")
 
 st.sidebar.markdown("---")
-st.sidebar.markdown(
-    "**Esempi di ticker**\n\n"
-    "- USA: `AAPL`, `MSFT`, `NVDA`\n"
-    "- Milano: `ENI.MI`, `ISP.MI`, `STLAM.MI`\n"
-    "- Indici: `^GSPC` (S&P500), `^FTSEMIB.MI`\n"
-    "- ETF: `VWCE.DE`, `CSSPX.MI`"
-)
-st.sidebar.markdown("---")
 st.sidebar.caption(
     "⚠️ Strumento di analisi a scopo informativo. **Non è consulenza finanziaria.** "
     "I dati gratuiti possono avere ritardo o essere incompleti."
@@ -439,9 +432,6 @@ if st.session_state.get("_nav_stack"):
 if section.startswith("Occasioni"):
     page_header("Occasioni di mercato",
                 "Titoli ed ETF in calo con segnali tipici da rimbalzo o sconto — spunti da approfondire, non consigli.")
-    st.warning("⚠️ **Non sono previsioni né consigli.** Sono titoli/ETF in calo che mostrano segnali tipici "
-               "da potenziale rimbalzo o sconto. Un calo può anche **continuare** ('coltello che cade'): "
-               "usa questi spunti solo come punto di partenza per approfondire.")
     st.caption("Parto dalle classifiche di mercato (USA). Puoi aggiungere ticker tuoi (anche .MI / ETF europei) "
                "e includere la watchlist, così copre qualsiasi titolo.")
 
@@ -511,8 +501,8 @@ if section.startswith("Occasioni"):
         if rg_factor >= 1.0:
             st.success(f"🌡️ **Regime di volatilità: {rg_label}**{rgvix} — condizioni normali per i rimbalzi da ipervenduto.")
         elif rg_factor >= 0.75:
-            st.warning(f"🌡️ **Regime di volatilità: {rg_label}**{rgvix} — i punteggi di breve sono **ridotti** "
-                       f"(×{rg_factor:.2f}): nei mercati nervosi il rimbalzo è meno affidabile.")
+            st.info(f"🌡️ **Regime di volatilità: {rg_label}**{rgvix} — i punteggi di breve sono **ridotti** "
+                    f"(×{rg_factor:.2f}): nei mercati nervosi il rimbalzo è meno affidabile.")
         else:
             st.error(f"🌡️ **Regime di volatilità: {rg_label}**{rgvix} — punteggi di breve **fortemente ridotti** "
                      f"(×{rg_factor:.2f}): in un crash il mean-reversion (rimbalzo) tende a rompersi. Prudenza.")
@@ -546,50 +536,7 @@ if section.startswith("Occasioni"):
             st.success("🤖 **Aggiunte da sole al Monitoraggio** (prezzo in ripresa dopo la fase di osservazione): "
                        + ", ".join(f"**{t}**" for t in promoted) + ". Le trovi nella sezione «Monitoraggio».")
 
-        if auto_promote_on:
-            status = fu.observation_status()
-            tracked_now = fu.load_tracking()
-            obs_all = [s for s in status if s.get("ticker") not in tracked_now]   # TUTTE, non solo ripresa
-            # Ordine: prima quelle più vicine alla promozione (meno giorni mancanti); a parità,
-            # quelle col rendimento migliore in cima.
-            _obs_key = lambda s: (s.get("remaining", 0), -(s.get("ret") or 0.0))
-            obs_short = sorted([s for s in obs_all if s.get("kind") == "short"], key=_obs_key)
-            obs_long = sorted([s for s in obs_all if s.get("kind") != "short"], key=_obs_key)
-            _obs_cols = {
-                "Azienda": st.column_config.TextColumn("Azienda", width="medium"),
-                "Giorni osservata": st.column_config.NumberColumn("📅 Giorni", format="%d",
-                    help="Giorni da cui il sistema osserva questa occasione."),
-                "Rendimento": st.column_config.NumberColumn("📈 Rendimento", format="%+.1f%%",
-                    help="Variazione del PREZZO dal primo giorno di osservazione. Negativo = sta ancora scendendo "
-                         "(non verrà promossa finché non torna positivo)."),
-                "Convenienza": st.column_config.ProgressColumn("🏅 Convenienza (saldo)", min_value=0, max_value=100, format="%d",
-                    help="Quanto è conveniente comprarla ora (più alta = più a sconto / interessante)."),
-                "Mancano": st.column_config.NumberColumn("⏳ Mancano (gg)", format="%d",
-                    help="Giorni al termine della finestra (breve 3 / lungo 7); a 0 viene valutata per la promozione."),
-            }
-
-            def _obs_table(items, titolo):
-                st.markdown(f"**{titolo}** — {len(items)} in osservazione")
-                if not items:
-                    st.caption("Nessuna occasione in osservazione al momento.")
-                    return
-                df_obs = pd.DataFrame([{
-                    "Ticker": s.get("ticker"), "Azienda": s.get("name", ""),
-                    "Giorni osservata": s.get("days", 0), "Rendimento": s.get("ret", 0.0),
-                    "Convenienza": s.get("last_conv"), "Mancano": s.get("remaining", 0),
-                } for s in items]).set_index("Ticker")
-                st.dataframe(df_obs, use_container_width=True,
-                             height=min(60 + 36 * len(items), 460), column_config=_obs_cols)
-
-            with st.expander(f"🤖 Sistema autonomo — {len(obs_all)} occasioni in osservazione",
-                             expanded=bool(obs_all)):
-                st.caption("**Tutte** le occasioni della sezione vengono osservate per una finestra (**breve: 3 giorni**, "
-                           "**lungo: 7 giorni**). Vengono promosse nel Monitoraggio **solo quelle col prezzo in ripresa** "
-                           "al termine della finestra (le regole non cambiano). Qui sotto ci sono tutte quelle in osservazione, "
-                           "anche se per ora il prezzo sta ancora scendendo.")
-                _obs_table(obs_short, "⚡ Breve termine")
-                st.markdown("---")
-                _obs_table(obs_long, "🏛️ Lungo termine")
+        # (Le occasioni «in osservazione» hanno ora una sezione dedicata nel menu: «In osservazione».)
 
         # --- 🏆 Le migliori da seguire (shortlist automatica) ---
         def _best_picks(df, n=3):
@@ -1009,6 +956,60 @@ if section.startswith("Occasioni"):
     st.stop()
 
 # ===========================================================================
+# SEZIONE: IN OSSERVAZIONE — occasioni che il sistema segue verso la promozione
+# ===========================================================================
+if section.startswith("In osservazione"):
+    page_header("In osservazione",
+                "Le occasioni che il sistema sta seguendo verso un'eventuale promozione nel Monitoraggio.")
+    st.caption("**Tutte** le occasioni trovate in «Occasioni di mercato» vengono osservate per una finestra "
+               "(**breve: 3 giorni**, **lungo: 7 giorni**). Al termine vengono promosse nel «Monitoraggio» **solo "
+               "quelle col prezzo in ripresa** (le regole non cambiano). Qui sotto ci sono tutte quelle in osservazione, "
+               "anche se per ora il prezzo sta ancora scendendo. Ordinate per **giorni mancanti** alla valutazione.")
+    if fu.cloud_mode():
+        st.caption("🤖 Aggiornate dal sistema autonomo sul server (~ogni 15 min, anche a PC spento).")
+
+    _status = fu.observation_status()
+    _tracked_now = fu.load_tracking()
+    obs_all = [s for s in _status if s.get("ticker") not in _tracked_now]
+    _obs_key = lambda s: (s.get("remaining", 0), -(s.get("ret") or 0.0))
+    obs_short = sorted([s for s in obs_all if s.get("kind") == "short"], key=_obs_key)
+    obs_long = sorted([s for s in obs_all if s.get("kind") != "short"], key=_obs_key)
+    _obs_cols = {
+        "Azienda": st.column_config.TextColumn("Azienda", width="medium"),
+        "Giorni osservata": st.column_config.NumberColumn("📅 Giorni", format="%d",
+            help="Giorni da cui il sistema osserva questa occasione."),
+        "Rendimento": st.column_config.NumberColumn("📈 Rendimento", format="%+.1f%%",
+            help="Variazione del PREZZO dal primo giorno di osservazione. Negativo = sta ancora scendendo "
+                 "(non verrà promossa finché non torna positivo)."),
+        "Convenienza": st.column_config.ProgressColumn("🏅 Convenienza (saldo)", min_value=0, max_value=100, format="%d",
+            help="Quanto è conveniente comprarla ora (più alta = più a sconto / interessante)."),
+        "Mancano": st.column_config.NumberColumn("⏳ Mancano (gg)", format="%d",
+            help="Giorni al termine della finestra (breve 3 / lungo 7); a 0 viene valutata per la promozione."),
+    }
+
+    def _obs_table(items):
+        if not items:
+            st.caption("Nessuna occasione in osservazione in questa categoria.")
+            return
+        df_obs = pd.DataFrame([{
+            "Ticker": s.get("ticker"), "Azienda": s.get("name", ""),
+            "Giorni osservata": s.get("days", 0), "Rendimento": s.get("ret", 0.0),
+            "Convenienza": s.get("last_conv"), "Mancano": s.get("remaining", 0),
+        } for s in items]).set_index("Ticker")
+        st.dataframe(df_obs, use_container_width=True,
+                     height=min(60 + 36 * len(items), 600), column_config=_obs_cols)
+
+    if not obs_all:
+        st.info("Nessuna occasione in osservazione al momento. Apri «Occasioni di mercato» per popolarla, "
+                "oppure attendi il prossimo aggiornamento del sistema autonomo.")
+    else:
+        st.markdown(f"### ⚡ Breve termine — {len(obs_short)} in osservazione")
+        _obs_table(obs_short)
+        st.markdown(f"### 🏛️ Lungo termine — {len(obs_long)} in osservazione")
+        _obs_table(obs_long)
+    st.stop()
+
+# ===========================================================================
 # SEZIONE: MONITORAGGIO — segui le occasioni nel tempo
 # ===========================================================================
 if section.startswith("Monitoraggio"):
@@ -1017,7 +1018,7 @@ if section.startswith("Monitoraggio"):
     st.caption("Qui osservi nel tempo le occasioni che hai scelto di seguire (dalla sezione «Occasioni di mercato»). "
                "Ogni giorno che apri l'app viene registrato uno «scatto» dei valori: così vedi se il segnale si "
                "rafforza o si indebolisce **prima** di decidere se comprare.")
-    st.warning("⚠️ **Non è un consiglio di acquisto.** È uno strumento per seguire un'idea per più giorni con calma. "
+    st.caption("Strumento per seguire un'idea per più giorni con calma; non è un consiglio di acquisto. "
                "La storia si costruisce in avanti: un punto per ogni giorno in cui apri l'app.")
 
     # --- 📊 Scheda voti del sistema (track record delle promozioni automatiche) ---
@@ -1060,7 +1061,7 @@ if section.startswith("Monitoraggio"):
             if cal["ok"] is True:
                 st.success(cal["verdetto"])
             elif cal["ok"] is False:
-                st.warning(cal["verdetto"])
+                st.info(cal["verdetto"])
             else:
                 st.caption("ℹ️ " + cal["verdetto"])
 
@@ -1311,8 +1312,8 @@ if section.startswith("Portafoglio"):
                 "I tuoi acquisti reali: guadagno/perdita in tempo reale e consigli su quando vendere.")
     st.caption("Registra gli acquisti che hai fatto davvero (titolo, quantità, prezzo) e vedi in tempo reale "
                "il guadagno/perdita. Puoi impostare un **bersaglio** e uno **stop**: l'app ti avvisa quando vengono toccati.")
-    st.warning("⚠️ Strumento di monitoraggio personale, **non** è collegato a nessun conto o broker: "
-               "i dati li inserisci tu a mano. Non è consulenza finanziaria.")
+    st.caption("Strumento di monitoraggio personale, non collegato a nessun conto o broker: "
+               "i dati li inserisci tu a mano.")
 
     with st.expander("➕ Aggiungi un acquisto", expanded=not fu.load_portfolio()):
         st.caption("Inserisci **quanti soldi** hai investito: il sistema ricava da solo prezzo attuale e quantità, "
@@ -1378,7 +1379,7 @@ if section.startswith("Portafoglio"):
     else:
         st.caption(f"Totali in **EUR**. Tutte le posizioni sono in {ccys[0] if ccys else 'EUR'}.")
     if not totals.get("complete", True):
-        st.warning("⚠️ Alcune posizioni sono **escluse dal totale**: manca il prezzo aggiornato o il "
+        st.caption("ℹ️ Alcune posizioni sono escluse dal totale: manca il prezzo aggiornato o il "
                    "tasso di cambio (per Londra `.L` i prezzi sono spesso in pence — verifica a mano).")
 
     # --- Avvisi target/stop ---
@@ -1540,6 +1541,9 @@ if section.startswith("Attualità"):
             show_screen("day_losers", 15)
         with g3:
             st.markdown("**Titoli più scambiati** per volume (most actives)")
+            st.caption("Sono i titoli con il **maggior numero di scambi** oggi (volume più alto): tanti compratori "
+                       "e venditori, quindi molto **movimento e attenzione** del momento — spesso per una notizia. "
+                       "«Più scambiato» **non** vuol dire buono o cattivo: indica solo che oggi se ne parla e si muove molto.")
             show_screen("most_actives", 8)
 
         st.markdown("---")
@@ -1921,22 +1925,11 @@ with tab_fund:
         f"🟢 {pos} favorevoli · 🟡 {neu} neutri · 🔴 {neg} sfavorevoli"
     )
     if pos + neg + neu == 0:
-        st.warning("Dati fondamentali non disponibili per questo strumento.")
+        st.info("Dati fondamentali non disponibili per questo strumento.")
 
-    # Controllo incrociato con i bilanci ufficiali SEC (verifica dei dati freschi)
-    ver = fu.verify_with_sec(ticker, info)
-    if ver:
-        if ver["coerenti"] == ver["checked"]:
-            st.success(f"🔎 **Verificato con i bilanci ufficiali SEC:** {ver['coerenti']}/{ver['checked']} valori coerenti ✓")
-        else:
-            st.warning(f"🔎 **Verifica con i bilanci ufficiali SEC:** {ver['coerenti']}/{ver['checked']} valori coerenti. "
-                       "Alcuni differiscono — di norma è **normale**: l'app mostra dati TTM (ultimi 12 mesi) "
-                       "mentre la SEC riporta l'ultimo bilancio **annuale**.")
-        with st.expander("Dettaglio verifica con dati ufficiali SEC"):
-            for label, a, s, ok in ver["rows"]:
-                st.markdown(f"{'✅' if ok else '⚠️'} **{label}** — mostrato: {a} · ufficiale SEC: {s}")
-    else:
-        st.caption("🔎 Verifica con bilanci ufficiali SEC non disponibile (titolo non USA o dati assenti).")
+    # (Rimosso il confronto con i bilanci SEC: metteva a confronto dati TTM con dati annuali,
+    # quindi mostrava sempre valori "differiti" e talvolta numeri incoerenti. I valori mostrati
+    # restano quelli delle fonti indicate nell'indicatore «📡 dati» in cima alla pagina.)
 
     with st.expander("📖 Glossario — cosa significano questi indicatori"):
         for label, *_ in all_rows:
@@ -1991,11 +1984,18 @@ with tab_tech:
         figp.add_trace(go.Scatter(x=hist_t.index, y=hist_t["MACD_signal"], name="Signal", line=dict(color="#cf222e")), row=3, col=1)
         figp.update_layout(height=720, margin=dict(t=30, b=10), legend=dict(orientation="h"))
         show_chart(figp, use_container_width=True)
-        st.caption(
-            "👀 **Come leggere i tre riquadri:** "
-            "**1) Prezzo** con medie mobili e bande di Bollinger (il prezzo che tocca la banda esterna è un estremo). "
-            "**2) RSI**: sopra 70 = ipercomprato (caro), sotto 30 = ipervenduto (occasione). "
-            "**3) MACD**: quando la linea blu supera quella rossa il momentum è positivo, viceversa negativo."
+        st.markdown(
+            "**Cosa mostra ogni grafico (in parole semplici):**\n\n"
+            "- **📈 Prezzo + medie + Bollinger** *(grafico in alto)*: la linea blu è il **prezzo**; le medie mobili "
+            "(20 e 50 giorni) indicano la **direzione del trend**; le due linee grigie tratteggiate (bande di "
+            "Bollinger) sono la fascia «normale» — quando il prezzo le **tocca o le sfora** è a un estremo "
+            "(insolitamente alto o basso).\n"
+            "- **📊 RSI** *(grafico centrale, 0-100)*: misura la **foga** di acquisti/vendite. **Sopra 70** = "
+            "ipercomprato (caro, può correggere); **sotto 30** = ipervenduto (sceso molto, può rimbalzare); "
+            "in mezzo = neutro.\n"
+            "- **📉 MACD** *(grafico in basso)*: misura lo **slancio** (momentum). Quando la **linea blu supera la "
+            "rossa** lo slancio diventa positivo (possibile rialzo); quando le scende sotto, negativo. "
+            "Le barre grigie mostrano quanto è forte lo slancio."
         )
 
     st.markdown("#### Segnali tecnici attuali")
@@ -2053,7 +2053,7 @@ with tab_sim:
 
         res = fu.simulate_investment(ticker, amount, start, benchmark)
         if not res:
-            st.warning("Nessun dato disponibile per la data scelta. Prova una data più recente.")
+            st.info("Nessun dato disponibile per la data scelta. Prova una data più recente.")
         else:
             r1, r2, r3, r4 = st.columns(4)
             r1.metric("Valore oggi", f"{res['final']:,.0f} {currency}")
@@ -2099,9 +2099,8 @@ with tab_sim:
     # ---------------- PROIEZIONE FUTURA (scenari ipotetici) ----------------
     st.markdown("---")
     st.markdown("### 🔮 Proiezione futura — scenari ipotetici")
-    st.warning("⚠️ **Questa NON è una previsione.** Sono scenari ipotetici costruiti dal rendimento e dalla "
-               "volatilità **storici** del titolo. Il futuro può essere molto diverso: servono solo a dare "
-               "un'idea degli ordini di grandezza, non a indovinare il prezzo.")
+    st.caption("Scenari ipotetici costruiti dai dati storici del titolo: danno un'idea degli ordini di grandezza, "
+               "non sono una previsione del prezzo.")
 
     base_hist = hsim if not hsim.empty else hist
     ann_ret_hist, vol_hist = fu.hist_return_vol(base_hist)
@@ -2116,14 +2115,28 @@ with tab_sim:
     else:
         vol_used = ewma_v if ewma_v else vol_hist
         default_ret = float(np.clip(ann_ret_hist * 100, -15.0, 25.0))
+        # Rendimento atteso "automatico": per le azioni dai fondamentali (earnings yield + crescita),
+        # per ETF/indici dallo storico. Clampato per prudenza.
+        _fdr = fu.fundamental_drift(info) if not fund else None
+        auto_ret = float(np.clip((_fdr * 100) if _fdr is not None else default_ret, -15.0, 25.0))
+        auto_src = "fondamentali (earnings yield + crescita)" if _fdr is not None else "storico"
         pc1, pc2, pc3, pc4 = st.columns(4)
         f_initial = pc1.number_input("Capitale iniziale (€)", min_value=0.0, value=1000.0, step=100.0, key="proj_init")
         f_monthly = pc2.number_input("Versamento mensile (€)", min_value=0.0, value=0.0, step=50.0, key="proj_month",
                                      help="PAC: quanto aggiungi ogni mese. Lascia 0 per un investimento una tantum.")
         f_years = pc3.slider("Orizzonte (anni)", 1, 30, 10, key="proj_years")
-        f_ret = pc4.slider("Rendimento annuo atteso (%)", -10.0, 30.0, round(default_ret, 1), 0.5, key="proj_ret",
-                           help=f"Default = rendimento storico annuo ({ann_ret_hist*100:.1f}%), limitato per prudenza. "
-                                "Spostalo per testare le tue ipotesi. Decide solo il *centro* del ventaglio, non la sua forma.")
+        with pc4:
+            auto_on = st.checkbox("🤖 Rendimento automatico", value=True, key="proj_auto",
+                                  help="Stima da sola il rendimento annuo atteso: dai fondamentali per le azioni, "
+                                       "dallo storico per ETF/indici. Togli la spunta per impostarlo a mano.")
+            if auto_on:
+                f_ret = auto_ret
+                st.metric("Rendimento annuo atteso", f"{f_ret:.1f}%")
+                st.caption(f"calcolato da: {auto_src}")
+            else:
+                f_ret = st.slider("Rendimento annuo atteso (%)", -10.0, 30.0, round(default_ret, 1), 0.5,
+                                  key="proj_ret",
+                                  help=f"Storico annuo: {ann_ret_hist*100:.1f}%. Decide solo il *centro* del ventaglio, non la sua forma.")
 
         method_label = st.radio(
             "Modello di incertezza", ["Bootstrap reale (consigliato)", "t-Student (code grasse)", "Normale (gaussiana)"],
@@ -2133,6 +2146,17 @@ with tab_sim:
                  "oneste. La normale sottostima gli estremi.")
         method = {"Bootstrap reale (consigliato)": "bootstrap", "t-Student (code grasse)": "tstudent",
                   "Normale (gaussiana)": "normale"}[method_label]
+        with st.expander("ℹ️ Cosa sono i modelli di incertezza?"):
+            st.markdown(
+                "Tutti e tre partono dallo **stesso rendimento atteso** (il centro del ventaglio): cambia solo "
+                "**come disegnano l'incertezza** attorno, cioè quanto considerano probabili gli scenari estremi.\n\n"
+                "- **Bootstrap reale (consigliato):** ricampiona a caso pezzi della **storia vera** del titolo. "
+                "Riproduce code grasse e periodi turbolenti come sono successi davvero → probabilità più oneste, "
+                "soprattutto sul rischio di forti perdite.\n"
+                "- **t-Student (code grasse):** una campana con le **code più spesse** della normale → dà più peso "
+                "agli estremi (crolli e balzi), ma senza usare la storia specifica del titolo.\n"
+                "- **Normale (gaussiana):** la classica campana. Semplice, ma **sottostima gli eventi estremi** "
+                "(nella realtà i crolli capitano più spesso) → la fascia può sembrare troppo stretta.")
         mlr = fu.monthly_logrets(base_hist)
         if method == "bootstrap" and mlr is None:
             st.caption("ℹ️ Storico mensile insufficiente per il bootstrap: uso il modello normale.")
@@ -2196,7 +2220,7 @@ with tab_cmp:
                 except Exception as e:
                     errors.append(f"{t}: {e}")
         if errors:
-            st.warning("Alcuni ticker non sono stati caricati: " + " · ".join(errors))
+            st.caption("Alcuni ticker non sono stati caricati: " + " · ".join(errors))
         if rows:
             df_cmp = pd.DataFrame(rows).set_index("Ticker")
             df_cmp = df_cmp.sort_values("Punteggio", ascending=False, na_position="last")
