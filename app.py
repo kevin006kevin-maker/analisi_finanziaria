@@ -550,8 +550,11 @@ if section.startswith("Occasioni"):
             status = fu.observation_status()
             tracked_now = fu.load_tracking()
             obs_all = [s for s in status if s.get("ticker") not in tracked_now]   # TUTTE, non solo ripresa
-            obs_short = [s for s in obs_all if s.get("kind") == "short"]
-            obs_long = [s for s in obs_all if s.get("kind") != "short"]
+            # Ordine: prima quelle più vicine alla promozione (meno giorni mancanti); a parità,
+            # quelle col rendimento migliore in cima.
+            _obs_key = lambda s: (s.get("remaining", 0), -(s.get("ret") or 0.0))
+            obs_short = sorted([s for s in obs_all if s.get("kind") == "short"], key=_obs_key)
+            obs_long = sorted([s for s in obs_all if s.get("kind") != "short"], key=_obs_key)
             _obs_cols = {
                 "Azienda": st.column_config.TextColumn("Azienda", width="medium"),
                 "Giorni osservata": st.column_config.NumberColumn("📅 Giorni", format="%d",
