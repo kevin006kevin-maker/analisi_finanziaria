@@ -983,9 +983,18 @@ if section.startswith("In osservazione"):
                  "(non verrà promossa finché non torna positivo)."),
         "Convenienza": st.column_config.ProgressColumn("🏅 Convenienza (saldo)", min_value=0, max_value=100, format="%d",
             help="Quanto è conveniente comprarla ora (più alta = più a sconto / interessante)."),
+        "Tendenza": st.column_config.TextColumn("🧭 Tendenza",
+            help="Andamento della convenienza sui giorni osservati (mediana giornaliera, così un calo di mezza "
+                 "giornata non conta): Δ punti dal 1° giorno e giorni consecutivi di salita tollerante."),
         "Mancano": st.column_config.NumberColumn("⏳ Mancano (gg)", format="%d",
             help="Giorni al termine della finestra (breve 3 / lungo 7); a 0 viene valutata per la promozione."),
     }
+
+    def _trend_label(s):
+        d = s.get("dconv", 0) or 0
+        run = s.get("run", 0) or 0
+        icon = "📈" if d >= 6 else "📉" if d <= -6 else "➡️"
+        return f"{icon} {d:+.0f} ({run}g)"
 
     def _obs_table(items):
         if not items:
@@ -994,7 +1003,8 @@ if section.startswith("In osservazione"):
         df_obs = pd.DataFrame([{
             "Ticker": s.get("ticker"), "Azienda": s.get("name", ""),
             "Giorni osservata": s.get("days", 0), "Rendimento": s.get("ret", 0.0),
-            "Convenienza": s.get("last_conv"), "Mancano": s.get("remaining", 0),
+            "Convenienza": s.get("last_conv"), "Tendenza": _trend_label(s),
+            "Mancano": s.get("remaining", 0),
         } for s in items]).set_index("Ticker")
         st.dataframe(df_obs, use_container_width=True,
                      height=min(60 + 36 * len(items), 600), column_config=_obs_cols)
