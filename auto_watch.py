@@ -172,14 +172,14 @@ def main():
     except Exception as e:
         log(f"Errore calibrazione previsioni: {e!r}")
 
-    # Diagnostica: quante occasioni sono 'in osservazione' (vicine alla promozione)
+    # Diagnostica: quante occasioni sono 'in osservazione' con convenienza in salita
     try:
-        status = [s for s in fu.observation_status() if s["run"] >= 2]
+        status = [s for s in fu.observation_status() if s.get("run", 0) >= 2]
         if status:
-            log("In osservazione (giorni in salita): "
-                + ", ".join(f"{s['ticker']}={s['run']}" for s in status[:15]))
-    except Exception:
-        pass
+            log("In osservazione (giorni di convenienza in salita): "
+                + ", ".join(f"{s['ticker']}={s.get('run', 0)}g(dconv{s.get('dconv', 0):+.0f})" for s in status[:15]))
+    except Exception as e:
+        log(f"Errore diagnostica osservazione: {e!r}")
 
     # Consulente di vendita: avvisa quando conviene incassare un titolo del portafoglio
     try:
