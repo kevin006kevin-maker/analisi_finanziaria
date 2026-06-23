@@ -3222,12 +3222,35 @@ def save_opp_config(extra, include_eu: bool, include_etf: bool) -> bool:
     return True
 
 
+_STICKY_CAP = 80   # tetto ai ticker "sticky" re-iniettati nello scan (contiene la quota API)
+
+
+def sticky_watch_tickers(kind: str) -> list:
+    """Ticker GIÀ in osservazione (opp_watch) con la FINESTRA ancora aperta: vanno ri-scansionati
+    ad ogni giro anche se sono usciti dagli screener giornalieri di mercato. Così la lista
+    «in osservazione» è STABILE — chi entra resta osservato per tutta la sua finestra (breve 3 /
+    lungo 7 giorni) e accumula punti su più giorni — invece di sparire dopo un solo giorno."""
+    watch = load_opp_watch()
+    window = _OBS_WINDOW.get(kind, 3)
+    out = []
+    for e in watch.values():
+        if e.get("kind") != kind:
+            continue
+        obs = [o for o in e.get("obs", []) if o.get("price")]
+        if not obs:
+            continue
+        if _days_between(obs[0]["date"], _today_iso()) < window + 1:   # finestra non ancora conclusa
+            out.append(e.get("ticker"))
+    return list(dict.fromkeys([t for t in out if t]))[:_STICKY_CAP]
+
+
 def opportunity_universe(kind: str) -> list:
     """Universo COMPLETO della sezione Occasioni per il job autonomo: classifiche/universo standard
-    (con le preferenze EU/ETF salvate) + i ticker extra e la watchlist aggiunti dall'utente."""
+    (con le preferenze EU/ETF salvate) + i ticker extra/watchlist dell'utente + i ticker già in
+    osservazione con finestra aperta (sticky watch → lista stabile, niente rotazione giornaliera)."""
     cfg = load_opp_config()
     base = opportunity_candidates(kind, include_eu=cfg["include_eu"], include_etf=cfg["include_etf"])
-    return list(dict.fromkeys(list(base) + list(cfg["extra"])))
+    return list(dict.fromkeys(list(base) + list(cfg["extra"]) + sticky_watch_tickers(kind)))
 
 
 def record_observations(df, kind: str) -> None:
@@ -3288,6 +3311,26 @@ def _qualifies_promotion(values: list, min_days: int = 3,
     return (v[-1] - v[0]) >= min_gain        # salita netta sufficiente sul periodo
 
 
+_PROMO_USE_CONV_TREND = False   # se True la promozione richiede ANCHE un trend di convenienza positivo
+_OBS_MIN_DAYS_FOR_TREND = 2     # minimo di giorni distinti per emettere un verdetto di trend
+
+
+def _daily_conv_values(obs) -> list:
+    """Convenienza aggregata PER GIORNO di calendario (MEDIANA dei punti intraday del giorno).
+    La mediana assorbe i cali temporanei di mezza giornata: un dip intraday non sposta il valore
+    del giorno, così il trend si giudica sull'andamento GIORNALIERO e non sul rumore infragiornaliero.
+    Esempio: mezza giornata giù ma il resto su → il giorno resta alto → la finestra è tenuta."""
+    buckets = {}
+    for o in (obs or []):
+        c = o.get("conv")
+        if c is None:
+            continue
+        day = str(o.get("date", ""))[:10]
+        if day:
+            buckets.setdefault(day, []).append(c)
+    return [float(np.median(buckets[d])) for d in sorted(buckets)]
+
+
 # Finestre del ciclo automatico (in giorni), per tipo di occasione:
 _OBS_WINDOW = {"short": 3, "long": 7}      # osservazione prima della promozione
 _REMOVE_WINDOW = {"short": 5, "long": 10}  # dopo quanti giorni, se in perdita, si toglie dal monitoraggio
@@ -3323,7 +3366,11 @@ def auto_promote_opportunities() -> list:
         days = _days_between(obs[0]["date"], obs[-1]["date"])
         window = _OBS_WINDOW.get(kind, 3)
         ret = (obs[-1]["price"] / obs[0]["price"] - 1) * 100 if obs[0]["price"] else 0.0
-        if days >= window and ret > 0:
+        # Regola INVARIATA (prezzo). Solo se _PROMO_USE_CONV_TREND è attivo si richiede ANCHE che
+        # il trend di convenienza (giornaliero, tollerante ai cali) sia positivo.
+        trend_ok = (not _PROMO_USE_CONV_TREND) or _qualifies_promotion(
+            _daily_conv_values(e.get("obs", [])), window, _PROMO_MIN_GAIN, _PROMO_MAX_DIP)
+        if days >= window and ret > 0 and trend_ok:
             track_opportunity(tk, kind,
                               note=f"🤖 Promossa il {_today_iso()}: dopo {days} giorni di osservazione "
                                    f"il prezzo è salito ({ret:+.1f}%).")
@@ -3394,10 +3441,18 @@ def observation_status() -> list:
         days = _days_between(obs[0]["date"], obs[-1]["date"])
         ret = (obs[-1]["price"] / obs[0]["price"] - 1) * 100 if (len(obs) >= 2 and obs[0]["price"]) else 0.0
         window = _OBS_WINDOW.get(kind, 3)
+        # Trend di CONVENIENZA su valori GIORNALIERI (mediana), tollerante ai cali temporanei:
+        # run = giorni consecutivi di tendenza positiva tollerante; trend_ok = salita netta sulla finestra.
+        vals = _daily_conv_values(e.get("obs", []))
+        run = _trend_progress(vals, _PROMO_MAX_DIP)
+        trend_ok = (_qualifies_promotion(vals, _OBS_WINDOW.get(kind, 3), _PROMO_MIN_GAIN, _PROMO_MAX_DIP)
+                    if len(vals) >= _OBS_MIN_DAYS_FOR_TREND else False)
+        dconv = round(vals[-1] - vals[0], 1) if len(vals) >= 2 else 0.0
         out.append({"ticker": e.get("ticker", key.split(":")[-1]), "kind": kind,
                     "name": e.get("name", ""), "days": days, "ret": round(ret, 1),
                     "last_conv": obs[-1].get("conv"), "window": window,
-                    "remaining": max(0, window - days)})
+                    "remaining": max(0, window - days),
+                    "run": run, "trend_ok": trend_ok, "dconv": dconv, "n_days": len(vals)})
     out.sort(key=lambda x: x["ret"], reverse=True)
     return out
 
