@@ -3316,6 +3316,7 @@ def record_sticky_observations(kind: str, scanned_df) -> None:
 # Parametri della regola "tendenza positiva tollerante":
 _PROMO_MIN_GAIN = 5.0    # punti di convenienza guadagnati nel periodo
 _PROMO_MAX_DIP = 4.0     # massimo calo giornaliero ammesso (oltre = inversione, niente promozione)
+_PROMO_MIN_RET = 2.0     # rialzo MINIMO del prezzo (%) sulla finestra per promuovere (no rumore: +0,1% non basta)
 
 
 def _trend_progress(values: list, max_dip: float = _PROMO_MAX_DIP) -> int:
@@ -3403,14 +3404,14 @@ def auto_promote_opportunities() -> list:
         days = _days_between(obs[0]["date"], obs[-1]["date"])
         window = _OBS_WINDOW.get(kind, 3)
         ret = (obs[-1]["price"] / obs[0]["price"] - 1) * 100 if obs[0]["price"] else 0.0
-        # Regola INVARIATA (prezzo). Solo se _PROMO_USE_CONV_TREND è attivo si richiede ANCHE che
-        # il trend di convenienza (giornaliero, tollerante ai cali) sia positivo.
+        # Promozione: finestra conclusa E rimbalzo REALE del prezzo (≥ _PROMO_MIN_RET %, non rumore).
+        # Solo se _PROMO_USE_CONV_TREND è attivo si richiede ANCHE un trend di convenienza positivo.
         trend_ok = (not _PROMO_USE_CONV_TREND) or _qualifies_promotion(
             _daily_conv_values(e.get("obs", [])), window, _PROMO_MIN_GAIN, _PROMO_MAX_DIP)
-        if days >= window and ret > 0 and trend_ok:
+        if days >= window and ret >= _PROMO_MIN_RET and trend_ok:
             track_opportunity(tk, kind,
                               note=f"🤖 Promossa il {_today_iso()}: dopo {days} giorni di osservazione "
-                                   f"il prezzo è salito ({ret:+.1f}%).")
+                                   f"il prezzo è risalito di {ret:+.1f}% (rimbalzo confermato).")
             tr = load_tracking()
             if tk in tr:
                 tr[tk]["auto"] = True
