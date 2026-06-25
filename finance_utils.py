@@ -3276,6 +3276,43 @@ def record_observations(df, kind: str) -> None:
     save_opp_watch(watch)
 
 
+def record_sticky_observations(kind: str, scanned_df) -> None:
+    """Per i ticker GIÀ in osservazione con la FINESTRA ancora aperta che OGGI non sono tra le
+    occasioni (non superano più i filtri): registra comunque il PREZZO del giorno (convenienza None)
+    così i GIORNI di osservazione avanzano e la finestra può concludersi → la promozione resta
+    POSSIBILE (ma sempre condizionata alla ripresa del prezzo, regola invariata). Riusa
+    opportunity_row già in cache dallo scan → nessuna chiamata API extra."""
+    watch = load_opp_watch()
+    window = _OBS_WINDOW.get(kind, 3)
+    scanned = set(scanned_df.index) if (scanned_df is not None and not scanned_df.empty) else set()
+    now = _now_iso()
+    changed = False
+    for e in watch.values():
+        if e.get("kind") != kind:
+            continue
+        tk = e.get("ticker")
+        if not tk or tk in scanned:                    # già registrato dallo scan di oggi
+            continue
+        obs_p = [o for o in e.get("obs", []) if o.get("price")]
+        if not obs_p or _days_between(obs_p[0]["date"], _today_iso()) >= window + 1:
+            continue                                   # niente storia valida o finestra già conclusa
+        try:
+            r = opportunity_row(tk, with_fundamentals=(kind == "long"))   # cache dallo scan
+        except Exception:
+            r = None
+        price = _jsonable(r.get("price")) if r else None
+        if not price:
+            continue
+        full = e.get("obs", [])
+        if _should_sample(full, None, price, _OBS_GAP_MIN, "conv"):
+            full.append({"date": now, "conv": None, "price": price, "stale": True})
+            full.sort(key=lambda o: o.get("date", ""))
+            e["obs"] = _trim_records(full, _OBS_MAX_DAYS, _OBS_MAX_KEEP)
+            changed = True
+    if changed:
+        save_opp_watch(watch)
+
+
 # Parametri della regola "tendenza positiva tollerante":
 _PROMO_MIN_GAIN = 5.0    # punti di convenienza guadagnati nel periodo
 _PROMO_MAX_DIP = 4.0     # massimo calo giornaliero ammesso (oltre = inversione, niente promozione)
@@ -3448,9 +3485,11 @@ def observation_status() -> list:
         trend_ok = (_qualifies_promotion(vals, _OBS_WINDOW.get(kind, 3), _PROMO_MIN_GAIN, _PROMO_MAX_DIP)
                     if len(vals) >= _OBS_MIN_DAYS_FOR_TREND else False)
         dconv = round(vals[-1] - vals[0], 1) if len(vals) >= 2 else 0.0
+        # ultima convenienza NOTA (i punti "stale" giornalieri hanno conv=None)
+        last_conv = next((o.get("conv") for o in reversed(e.get("obs", [])) if o.get("conv") is not None), None)
         out.append({"ticker": e.get("ticker", key.split(":")[-1]), "kind": kind,
                     "name": e.get("name", ""), "days": days, "ret": round(ret, 1),
-                    "last_conv": obs[-1].get("conv"), "window": window,
+                    "last_conv": last_conv, "window": window,
                     "remaining": max(0, window - days),
                     "run": run, "trend_ok": trend_ok, "dconv": dconv, "n_days": len(vals)})
     out.sort(key=lambda x: x["ret"], reverse=True)
