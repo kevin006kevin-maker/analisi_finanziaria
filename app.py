@@ -512,7 +512,10 @@ if section.startswith("Occasioni"):
         # --- Scansione unica (poi riusata da shortlist, sistema autonomo e tabelle) ---
         def _scan(kind):
             base = fu.opportunity_candidates(kind, include_eu=inc_eu, include_etf=inc_etf)
-            universe = list(dict.fromkeys(base + extra + (watchlist if inc_wl else [])))
+            # + sticky watch: ri-scansiona i titoli già in osservazione con finestra aperta,
+            # così non spariscono dopo un giorno e possono maturare verso il Monitoraggio.
+            universe = list(dict.fromkeys(base + extra + (watchlist if inc_wl else [])
+                                          + fu.sticky_watch_tickers(kind)))
             return fu.scan_opportunities(universe, kind)
 
         with st.spinner("Analizzo il mercato…"):
@@ -525,6 +528,10 @@ if section.startswith("Occasioni"):
         if auto_promote_on and not cloud:
             fu.record_observations(full_short, "short")
             fu.record_observations(full_long, "long")
+            # Sticky: per i titoli già in osservazione (finestra aperta) NON tra le occasioni di oggi,
+            # registra comunque il prezzo → i giorni avanzano e la promozione resta possibile.
+            fu.record_sticky_observations("short", full_short)
+            fu.record_sticky_observations("long", full_long)
             # Calibrazione (locale): registra la P(salita) di ogni occasione per il backtest
             for _df, _h in ((full_short, 21), (full_long, 252)):
                 if _df is not None and not _df.empty:
