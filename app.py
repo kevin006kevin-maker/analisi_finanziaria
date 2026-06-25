@@ -970,8 +970,9 @@ if section.startswith("In osservazione"):
                 "Le occasioni che il sistema sta seguendo verso un'eventuale promozione nel Monitoraggio.")
     st.caption("**Tutte** le occasioni trovate in «Occasioni di mercato» vengono osservate per una finestra "
                "(**breve: 3 giorni**, **lungo: 7 giorni**). Al termine vengono promosse nel «Monitoraggio» **solo "
-               "quelle col prezzo in ripresa** (le regole non cambiano). Qui sotto ci sono tutte quelle in osservazione, "
-               "anche se per ora il prezzo sta ancora scendendo. Ordinate per **giorni mancanti** alla valutazione.")
+               "quelle col prezzo risalito di almeno il 2%** (un rimbalzo reale, non rumore). Qui sotto ci sono tutte "
+               "quelle in osservazione, anche se per ora il prezzo è piatto o sta ancora scendendo. "
+               "Ordinate per **giorni mancanti** alla valutazione.")
     if fu.cloud_mode():
         st.caption("🤖 Aggiornate dal sistema autonomo sul server (~ogni 15 min, anche a PC spento).")
 
