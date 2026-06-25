@@ -112,6 +112,12 @@ def main():
             n = 0 if df is None or df.empty else len(df)
             total += n
             fu.record_observations(df, kind)
+            # Sticky: per i titoli già in osservazione (finestra aperta) non più tra le occasioni di
+            # oggi, registra comunque il prezzo → i giorni avanzano e la promozione resta possibile.
+            try:
+                fu.record_sticky_observations(kind, df)
+            except Exception as e:
+                log(f"{kind}: errore record_sticky: {e!r}")
             # Calibrazione: registra la P(salita) di ogni occasione (1/giorno) per il backtest
             if df is not None and not df.empty:
                 horizon = 21 if kind == "short" else 252
