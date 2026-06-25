@@ -58,6 +58,9 @@ jobs:
           git config user.name "auto-watch[bot]"
           git config user.email "auto-watch@users.noreply.github.com"
           git switch --orphan auto-data
-          git add -f opp_watch.json tracking.json track_record.json portfolio.json sell_alerts.json forecast_log.json opp_config.json
+          # Aggiunge SOLO i file dati presenti: se uno manca non deve far fallire l'intero step.
+          for f in opp_watch.json tracking.json track_record.json portfolio.json sell_alerts.json forecast_log.json opp_config.json conv_stats.json; do
+            if [ -f "$f" ]; then git add -f "$f"; fi
+          done
           git commit -m "auto-update occasioni [skip ci]" || echo "Nessuna modifica da pubblicare"
           git push -f origin auto-data
