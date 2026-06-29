@@ -2050,7 +2050,16 @@ def _commit_to_github(name: str, content_str: str) -> bool:
         sha = None
         g = requests.get(f"{api}?ref={branch}", headers=headers, timeout=10)
         if g.status_code == 200:
-            sha = g.json().get("sha")
+            j = g.json()
+            sha = j.get("sha")
+            # Se il contenuto sul branch è IDENTICO a quello da scrivere, niente commit:
+            # evita decine di commit inutili a ogni giro del job (storia pulita).
+            try:
+                existing = base64.b64decode("".join(j.get("content", "").split())).decode("utf-8")
+                if existing == content_str:
+                    return True
+            except Exception:
+                pass
         body = {"message": f"app update {name}", "branch": branch,
                 "content": base64.b64encode(content_str.encode("utf-8")).decode("ascii")}
         if sha:
