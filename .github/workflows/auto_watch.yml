@@ -43,24 +43,19 @@ jobs:
           DATA_REPO: ${{ github.repository }}
           DATA_BRANCH: auto-data
           DATA_LOCAL_FIRST: "1"
+          # Token automatico di Actions (permesso contents:write dal blocco "permissions"):
+          # con questo lo script salva i dati DIRETTAMENTE sul branch via API GitHub (come fa
+          # l'app), in modo affidabile. Sostituisce il vecchio git-push (che falliva → le
+          # promozioni venivano notificate ma mai salvate, causando notifiche duplicate).
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           TEST_NOTIFICA: ${{ inputs.test_notifica }}
         run: python auto_watch.py
 
-      - name: Pubblica i dati sul branch auto-data
+      # I dati vengono ora salvati sul branch auto-data DIRETTAMENTE dallo script (via API
+      # GitHub, passo precedente) usando GITHUB_TOKEN. Non serve più il vecchio git-push
+      # con branch orfano (che falliva e impediva alle promozioni di essere salvate).
+      - name: Conferma persistenza
         if: ${{ !inputs.test_notifica }}
-        run: |
-          if [ ! -f opp_watch.json ] || [ ! -f tracking.json ]; then
-            echo "File dati non presenti: niente da pubblicare in questo giro."
-            exit 0
-          fi
-          git config user.name "auto-watch[bot]"
-          git config user.email "auto-watch@users.noreply.github.com"
-          git switch --orphan auto-data
-          # Aggiunge SOLO i file dati presenti: se uno manca non deve far fallire l'intero step.
-          for f in opp_watch.json tracking.json track_record.json portfolio.json sell_alerts.json forecast_log.json opp_config.json conv_stats.json; do
-            if [ -f "$f" ]; then git add -f "$f"; fi
-          done
-          git commit -m "auto-update occasioni [skip ci]" || echo "Nessuna modifica da pubblicare"
-          git push -f origin auto-data
+        run: echo "Persistenza dati gestita dallo script via API GitHub (branch auto-data)."
