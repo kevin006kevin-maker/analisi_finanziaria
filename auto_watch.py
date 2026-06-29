@@ -69,6 +69,22 @@ def notify_monitoring(items):
         else "Notifica opportunità NON inviata (Telegram non configurato o errore).")
 
 
+def notify_exit(items):
+    """Notifica quando la TESI di un'occasione monitorata è esaurita (avviso di uscita, NON un ordine)."""
+    righe = ["🚪 <b>Tesi esaurita — valuta l'uscita</b>", ""]
+    for it in items:
+        tk = html.escape(str(it.get("ticker")))
+        nm = html.escape(str(it.get("name") or tk))
+        righe.append(f"🔔 <b>{tk}</b> — {nm}")
+        for motivo in it.get("reasons", []):
+            righe.append("• " + html.escape(str(motivo)))
+        righe.append("")
+    righe.append("Apri l'app → Monitoraggio. (Strumento informativo, non è un consiglio di vendita.)")
+    ok = fu.send_telegram("\n".join(righe))
+    log("Notifica uscita inviata." if ok
+        else "Notifica uscita NON inviata (Telegram non configurato o errore).")
+
+
 def notify_sales(fired):
     """Notifica Telegram quando conviene valutare la vendita di un titolo del portafoglio."""
     righe = ["💰 <b>Consiglio di vendita</b>", ""]
@@ -163,6 +179,17 @@ def main():
     except Exception as e:
         log(f"Errore gestione monitoraggio: {e!r}")
 
+    # FASE 2b — avvisi di USCITA: tesi esaurita (ipercomprato / bersaglio / fondamentali peggiorati)
+    try:
+        exits = fu.monitoring_exit_alerts()
+        if exits:
+            log(f"Avvisi di uscita: {', '.join(x['ticker'] for x in exits)}")
+            notify_exit(exits)
+        else:
+            log("Nessun nuovo avviso di uscita.")
+    except Exception as e:
+        log(f"Errore avvisi di uscita: {e!r}")
+
     # Snapshot dei titoli SEGUITI (monitoraggio): registra un punto ~ogni ora (gap 60 min) con il
     # prezzo live, così la storia si costruisce da sola anche a PC spento (prima avveniva solo
     # all'apertura dell'app → ~12 ore tra un punto e l'altro).
@@ -185,6 +212,15 @@ def main():
         log(f"Calibrazione: {nres} previsioni risolte.")
     except Exception as e:
         log(f"Errore calibrazione previsioni: {e!r}")
+
+    # Loop di feedback: risolve la resa forward del log convenienza e ri-stima i pesi (se ci sono dati)
+    try:
+        nrc = fu.resolve_convenience_log()
+        learned = fu.update_conv_weights()
+        log(f"Pesi convenienza: {nrc} rese risolte · appresi per: "
+            + (", ".join(sorted(learned.keys())) if learned else "nessuno (dati ancora insufficienti)"))
+    except Exception as e:
+        log(f"Errore loop di feedback pesi: {e!r}")
 
     # Diagnostica: quante occasioni sono 'in osservazione' con convenienza in salita
     try:
