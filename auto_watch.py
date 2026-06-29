@@ -7,15 +7,16 @@ Pensato per girare su GitHub Actions ogni ~15 minuti (anche a PC spento):
 3. promuove al monitoraggio quelle in salita da 3 giorni consecutivi.
 
 I dati precedenti vengono letti dal branch remoto (raw URL) e quelli aggiornati
-salvati su file locali (opp_watch.json, tracking.json), che il workflow pubblica
-poi sul branch dei dati. L'app legge da lì, così funziona ovunque, anche da telefono.
+salvati sia su file locale sia DIRETTAMENTE sul branch dei dati via API GitHub
+(come fa l'app). L'app legge da lì, così funziona ovunque, anche da telefono.
 
 Chiavi/config da variabili d'ambiente:
   FMP_API_KEY, FINNHUB_API_KEY  → dati di mercato
-  DATA_REPO = "utente/repo"     → per leggere i dati precedenti dal branch remoto
+  DATA_REPO = "utente/repo"     → branch remoto da cui leggere/scrivere i dati
   DATA_BRANCH = "auto-data"     → branch dei dati (default auto-data)
-NB: NON impostare GITHUB_TOKEN per questo script: la pubblicazione la fa il workflow
-    con git push (così non si scrive due volte).
+  GITHUB_TOKEN                  → token (contents:write) per salvare i dati via API.
+NB: la persistenza la fa lo SCRIPT via API (non più il git-push del workflow): così le
+    promozioni vengono salvate subito e non si ripetono a ogni giro (niente notifiche doppie).
 """
 
 import os
@@ -43,7 +44,7 @@ def notify_promotions(tickers):
         price = snaps[-1].get("price") if snaps else None
         extra = f" · prezzo {price:,.2f}" if price else ""
         righe.append(f"📌 <b>{html.escape(str(tk))}</b> — {nm} ({term}){extra}")
-    righe += ["", "Inserite in automatico dopo la fase di osservazione. Aprile nell'app → Monitoraggio.",
+    righe += ["", "Inserite in automatico dopo la fase di osservazione. Apri l'app → Monitoraggio.",
               "(Strumento informativo, non è un consiglio.)"]
     ok = fu.send_telegram("\n".join(righe))
     log("Notifica inserimento inviata." if ok
@@ -88,6 +89,13 @@ def notify_sales(fired):
 def main():
     if not (fu._fmp_key() or fu._finnhub_key()):
         log("ATTENZIONE: nessuna chiave API (FMP/Finnhub) impostata. I dati potrebbero essere assenti.")
+
+    # Persistenza: i dati si salvano sul branch via API GitHub. Senza repo+token NON si salva nulla
+    # (le promozioni verrebbero notificate ma non memorizzate → notifiche duplicate). Lo segnaliamo.
+    if not os.environ.get("TEST_NOTIFICA") == "true":
+        repo_ok, token_ok = bool(fu._data_repo()), bool(fu._github_token())
+        log(f"Persistenza cloud → repo: {'SI' if repo_ok else 'NO'} · token: {'SI' if token_ok else 'NO'}"
+            + ("" if (repo_ok and token_ok) else "  ⚠️ DATI NON SALVATI: controlla DATA_REPO/GITHUB_TOKEN nel workflow."))
 
     # Percorso di prova: avvio manuale con "test_notifica" → manda solo un messaggio di verifica
     if os.environ.get("TEST_NOTIFICA") == "true":
