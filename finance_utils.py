@@ -1057,6 +1057,16 @@ def _simulate_returns(logret_arr, horizon_days, n_sims=800, demean=False,
     return {"final": cum[:, -1], "cum_min": cum.min(axis=1), "sigma_ewma": ewma_vol(src)}
 
 
+def _seed_from(arr) -> int:
+    """Seed deterministico ma DIVERSO per serie diverse: un seed fisso (42) faceva sembrare le
+    probabilità 'stabili'/identiche tra titoli e giri. Riproducibile a parità di dati."""
+    try:
+        return int(abs(hash((len(arr), round(float(arr[-1]), 6),
+                             round(float(np.nansum(arr)), 4)))) % (2 ** 31))
+    except Exception:
+        return 42
+
+
 def forecast_paths(hist, horizon_days, stop_pct=None, demean=None, drift_annual=None):
     """Statistiche di percorso oneste (NON una previsione del prezzo): P(salita), P(perdita>15%),
     ventaglio p10/p50/p90 del rendimento e — se dato `stop_pct` (es. -0.08) — **P(tocca lo stop
@@ -1071,9 +1081,18 @@ def forecast_paths(hist, horizon_days, stop_pct=None, demean=None, drift_annual=
     if sim is None:
         return None
     final, cmin = sim["final"], sim["cum_min"]
+    n = len(final)
+    p_up = float((final > 0).mean())
+    # Intervallo di confidenza (binomiale) su P(salita): rende esplicito l'errore Monte Carlo
+    # (half-width ≈ 1.96·√(p(1−p)/n)), così non si legge una % come fosse esatta.
+    ci = 1.96 * math.sqrt(max(p_up * (1.0 - p_up), 1e-9) / n)
     out = {
-        "p_up": round(float((final > 0).mean()) * 100),
+        "p_up": round(p_up * 100),
+        "p_up_lo": round(max(0.0, p_up - ci) * 100),
+        "p_up_hi": round(min(1.0, p_up + ci) * 100),
         "p_loss15": round(float((final < math.log(0.85)).mean()) * 100),
+        "p_gain5": round(float((final > math.log(1.05)).mean()) * 100),   # P(guadagno > +5%)
+        "expectancy": round((float(np.mean(np.exp(final))) - 1.0) * 100, 1),  # rendimento atteso (media)
         "ret_p10": round((math.exp(float(np.percentile(final, 10))) - 1) * 100, 1),
         "ret_p50": round((math.exp(float(np.percentile(final, 50))) - 1) * 100, 1),
         "ret_p90": round((math.exp(float(np.percentile(final, 90))) - 1) * 100, 1),
@@ -1735,12 +1754,13 @@ def _div_fcf_cover(info: dict):
 
 
 def _health_fscore(info: dict):
-    """Indice di salute 0-9 in stile **Piotroski (SEMPLIFICATO)**: usa i dati aggregati gratuiti,
-    NON i 9 test originali anno-su-anno (che richiederebbero due bilanci completi). Più alto = più sano."""
-    roa, pm, roe = info.get("returnOnAssets"), info.get("profitMargins"), info.get("returnOnEquity")
-    fcfy, d2e, cr = info.get("fcfYield"), info.get("debtToEquity"), info.get("currentRatio")
-    gm, rg, eg = info.get("grossMargins"), info.get("revenueGrowth"), info.get("earningsGrowth")
-    roic = info.get("roic")
+    """Indice di SALUTE 0-9 (Piotroski semplificato, dati aggregati gratuiti — non i 9 test YoY).
+    NON ripete la redditività (ROE/ROA/margini/ROIC), che pesa già nel pilastro QUALITÀ: qui contano
+    la generazione di CASSA e il TREND (ricavi/utili/margini in miglioramento). Così si elimina il
+    doppio conteggio cross-pilastro e Salute diventa sensibile al peggioramento (anti-trappola)."""
+    fcfy = info.get("fcfYield")
+    rg, eg = info.get("revenueGrowth"), info.get("earningsGrowth")
+    pm, pm5 = info.get("profitMargins"), info.get("netMargin5Y")
     pts, tot = 0, 0
 
     def chk(cond):
@@ -1751,17 +1771,11 @@ def _health_fscore(info: dict):
         if cond:
             pts += 1
 
-    chk(None if roa is None else roa > 0)
-    chk(None if pm is None else pm > 0)
-    chk(None if fcfy is None else fcfy > 0)
-    chk(None if roe is None else roe > 0.08)
-    chk(None if roic is None else roic > _WACC_PROXY / 100.0)
-    chk(None if d2e is None else d2e < 150)
-    chk(None if cr is None else cr > 1.0)
-    chk(None if gm is None else gm > 0.25)
-    chk(None if rg is None else rg > 0)
-    chk(None if eg is None else eg > 0)
-    if tot < 4:
+    chk(None if fcfy is None else fcfy > 0)                          # genera cassa libera
+    chk(None if rg is None else rg > 0)                              # ricavi in crescita
+    chk(None if eg is None else eg > 0)                              # utili in crescita
+    chk(None if (pm is None or pm5 is None) else pm >= pm5 - 0.005)  # margini non in erosione (trend)
+    if tot < 2:
         return None
     return round(pts / tot * 9, 1)
 
@@ -2362,7 +2376,7 @@ def _gain_loss_prob(h, horizon_days=21, drift_annual=None):
     # breve → drift 0 (demean); lungo → drift dai fondamentali se dato, altrimenti storico clampato
     sim = _simulate_returns(logret.values, horizon_days, n_sims=800,
                             demean=(horizon_days <= 63 and drift_annual is None),
-                            drift_annual=drift_annual)
+                            drift_annual=drift_annual, seed=_seed_from(logret.values))
     if sim is None:
         return _gain_loss_prob_normal(logret, horizon_days, sig_a, n)
     final = sim["final"]
@@ -2416,6 +2430,23 @@ def _reliab_factor(sig_a, n) -> float:
     return round(max(0.6, min(1.0, vol_score * 0.7 + hist_score * 0.3)), 3)
 
 
+# ===========================================================================
+# INDICE DEI PARAMETRI CONFIGURABILI (tutte le "manopole" del sistema occasioni)
+# Sono definite vicino alla logica che le usa; qui l'elenco unico per ritrovarle.
+#   FILTRI SCAN:        _MIN_PRICE / _MIN_DOLLAR_VOL (breve) · _MIN_PRICE_LONG / _MIN_DOLLAR_VOL_LONG
+#                       (lungo) · _RR_MIN · _ATR_STOP_K · _SECTOR_CAP_LONG
+#   CONVENIENZA:        _CONV_WEIGHTS (pesi per fattore, breve/lungo) · _CONV_K (scala tanh) ·
+#                       pesi APPRESI in conv_weights.json (override, vedi _active_weights/fit_conv_weights)
+#   FONDAMENTALI:       _WACC_PROXY · _PILLAR_WEIGHTS (vicino a quality_radar)
+#   OSSERVAZIONE:       _OBS_ENTRY_CONV (ingresso) · _OBS_WINDOW (giorni di Borsa) · _OBS_GAP_MIN ·
+#                       _OBS_MAX_DAYS/_OBS_MAX_KEEP · _STICKY_CAP
+#   PROMOZIONE:         _PROMO_MIN_RET (+% prezzo) · _PROMO_MIN_CONV · _PROMO_MAX_CONV_DECAY ·
+#                       _PROMO_USE_CONV_TREND (+ _PROMO_MIN_GAIN/_PROMO_MAX_DIP)
+#   MONITORAGGIO:       _REMOVE_WINDOW · _NOTIFY_WINDOW · _NOTIFY_MIN_RET · _SNAP_GAP_MIN/_SNAP_MAX_*
+#   FEEDBACK PESI:      _FIT_MIN_SAMPLES · _FIT_MAX_LEARNED (vicino a fit_conv_weights)
+#   FISCALITÀ:          CAPITAL_GAINS_TAX (26%, usata da net_return_pct e portfolio_view)
+# ===========================================================================
+
 # --- Parametri operativi del breve periodo (rimbalzo / ipervenduto) ---
 _ATR_STOP_K = 2.0          # stop = prezzo − k·ATR (volatilità reale, non minimo a 20gg)
 _RR_MIN = 1.5              # scarta i setup con Rischio/Rendimento sotto questa soglia
@@ -2432,19 +2463,9 @@ def _short_score(r, regime=1.0):
     if r["rsi"] is None:
         return None
     rsi = r["rsi"]
-    # quanto è ipervenduto (0-50)
-    if rsi <= 25:
-        base = 50
-    elif rsi <= 30:
-        base = 42
-    elif rsi <= 35:
-        base = 32
-    elif rsi <= 40:
-        base = 22
-    elif rsi <= 45:
-        base = 12
-    else:
-        base = 0
+    # quanto è ipervenduto (0-50) in modo CONTINUO (niente gradini/cliff arbitrari):
+    # ~12 a RSI 45, ~50 a RSI 25, →0 oltre ~48; ricalca i vecchi scalini ma senza salti.
+    base = max(0.0, min(50.0, 12.0 + (45.0 - rsi) * 1.9))
     if r["below_bb"]:
         base += 12                           # prezzo a un estremo
     if r["above_sma200"]:
@@ -2526,7 +2547,19 @@ def _discount_score(dd_high):
 def _long_score(r):
     disc = _discount_score(r["dd_high"])
     if r["etf"]:
-        return min(disc, 100)
+        # ETF: non solo lo sconto. Combina sconto + rischio-aggiustato (Sortino) + tendenza (SMA200)
+        # − dolore (Ulcer): così un ETF obbligazionario stabile e uno azionario in caduta non hanno
+        # lo stesso metro del solo "quanto è sceso".
+        sc = 0.60 * disc
+        so = r.get("sortino")
+        if so is not None:
+            sc += max(-1.5, min(1.5, so)) / 1.5 * 22.0
+        av = r.get("above_sma200")
+        sc += 13.0 if av is True else (-10.0 if av is False else 0.0)
+        ul = r.get("ulcer")
+        if ul is not None:
+            sc -= min(max(ul, 0.0), 25.0) / 25.0 * 10.0
+        return max(0.0, min(100.0, sc))
     if r["fscore"] is None:
         return None
     base = r["fscore"] * 0.6 + disc * 0.4       # qualità del business (pilastri) + sconto
@@ -2600,7 +2633,8 @@ CONV_STATS_NAME = "conv_stats.json"   # statistiche dell'ultimo scan (per la ver
 
 _CONV_WEIGHTS = {
     "short": {"oversold": 1.0, "rebound": 0.8, "momentum": 0.7, "discount": 0.5,
-              "riskadj": 0.4, "ddpen": 0.5, "histcheap": 0.4, "trend": 0.4, "prob": 0.2},
+              "riskadj": 0.4, "ddpen": 0.5, "histcheap": 0.4, "trend": 0.4, "prob": 0.2,
+              "relstrength": 0.5},
     "long":  {"quality": 1.0, "valcheap": 0.9, "discount": 0.6, "histcheap": 0.5,
               "riskadj": 0.4, "ddpen": 0.4, "momentum": 0.4, "prob": 0.4, "trappen": 0.6},
 }
@@ -2650,6 +2684,10 @@ def _factor_values(r, kind) -> dict:
         f["rebound"] = r.get("rebound_pot")
         av = r.get("above_sma200")
         f["trend"] = 1.0 if av else (-1.0 if av is False else None)
+        # forza relativa: rendimento del titolo − indice (positivo = regge meglio del mercato →
+        # rimbalzo più credibile; in un sell-off non premia chi scende solo perché scende tutto)
+        bm = r.get("bench_5d") if r.get("perf_5d") is not None else r.get("bench_1m")
+        f["relstrength"] = (mom - bm) if (mom is not None and bm is not None) else None
     else:
         f["quality"] = r.get("fscore")
         f["valcheap"] = None    # riempito da _fill_valcheap (z relativo al settore)
@@ -2678,9 +2716,11 @@ def _fill_valcheap(items, facs):
 
 def _conv_from_factors(f, weights, stats, k, reliab_factor) -> int:
     raw = sum(weights[fk] * _zc(f.get(fk), stats.get(fk)) for fk in weights)
-    conv = 50 + k * raw
-    conv = 50 + (conv - 50) * (reliab_factor or 0.75)     # affidabilità continua → verso 50
-    return int(round(max(0, min(100, conv))))
+    # Squashing morbido (tanh) invece del taglio netto a [0,100]: un titolo solo un po' migliore
+    # della mediana NON satura più a 100 e l'informazione agli estremi resta leggibile.
+    conv = 50.0 + 50.0 * math.tanh(k * raw / 50.0)
+    conv = 50.0 + (conv - 50.0) * (reliab_factor or 0.75)   # affidabilità continua → verso 50
+    return int(round(max(0.0, min(100.0, conv))))
 
 
 def _load_conv_stats() -> dict:
@@ -2706,7 +2746,7 @@ def _score_universe(rlist, kind):
     """Calcola la convenienza per TUTTI i titoli dell'universo (z-score robusti cross-sezionali).
     Ritorna {ticker: convenienza}. Salva le statistiche per la versione single-ticker."""
     items = [r for r in rlist if r]
-    weights = _CONV_WEIGHTS[kind]
+    weights = _active_weights(kind)     # pesi appresi dai rendimenti se disponibili, altrimenti prior
     if not items:
         return {}
     facs = [_factor_values(r, kind) for r in items]
@@ -2722,15 +2762,170 @@ def _score_universe(rlist, kind):
 
 
 def _convenience_single(r, kind) -> int:
-    """Convenienza per un singolo titolo (snapshot) usando le statistiche dell'ultimo scan.
-    Se non disponibili → 50 (neutro); la valutazione settoriale qui non si applica."""
-    payload = _load_conv_stats().get(kind)
-    if not payload or "stats" not in payload:
-        return 50
-    weights = payload.get("weights", _CONV_WEIGHTS[kind])
-    stats = {fk: tuple(v) for fk, v in payload.get("stats", {}).items()}
-    f = _factor_values(r, kind)
-    return _conv_from_factors(f, weights, stats, payload.get("k", _CONV_K), r.get("reliab_factor"))
+    """Convenienza 'a sconto rispetto a SÉ' per un singolo titolo (snapshot di monitoraggio):
+    ANCORATA alla storia del titolo, NON all'universo di uno scan (che cambierebbe il voto a seconda
+    di cosa altro è stato scansionato, ereditando statistiche scorrelate). Combina sconto dai massimi,
+    posizione vs media storica (hist_z), ipervenduto (breve), rischio (Sortino/Ulcer), qualità (lungo)
+    e vantaggio di probabilità. Stabile nel tempo → NON confrontabile con la colonna dello scan."""
+    score = 50.0
+    dd = r.get("dd_high")
+    if dd is not None:
+        score += min(max(-dd, 0.0), 40.0) / 40.0 * 18.0          # −40% dai massimi → +18
+    hz = r.get("hist_z")
+    if hz is not None:
+        score += max(-2.0, min(2.0, -hz)) * 6.0                  # sotto la propria media = a sconto
+    rsi = r.get("rsi")
+    if kind == "short" and rsi is not None:
+        score += max(-1.0, min(1.0, (45.0 - rsi) / 25.0)) * 10.0  # ipervenduto = +
+    so = r.get("sortino")
+    if so is not None:
+        score += max(-1.5, min(1.5, so)) * 4.0
+    ul = r.get("ulcer")
+    if ul is not None:
+        score -= min(max(ul, 0.0), 25.0) / 25.0 * 6.0            # più "dolore" = −
+    pg, pl = r.get("prob_gain"), r.get("prob_loss")
+    if pg is not None and pl is not None:
+        score += max(-40.0, min(40.0, pg - pl)) / 40.0 * 8.0
+    if kind == "long" and r.get("fscore") is not None:
+        score += (r["fscore"] - 50.0) / 50.0 * 10.0              # qualità del business
+        if (r.get("trap") or {}).get("strong"):
+            score -= 12.0                                        # trappola conclamata
+    rf = r.get("reliab_factor") or 0.75
+    score = 50.0 + (score - 50.0) * rf                           # smorza verso 50 se stima incerta
+    return int(round(max(0.0, min(100.0, score))))
+
+
+# ---------------------------------------------------------------------------
+# LOOP DI FEEDBACK — logga convenienza + fattori vs RESA FORWARD (5/21 giorni) e, quando ci sono
+# abbastanza esiti, stima i pesi della convenienza con una regressione RIDGE fusa con i pesi a mano
+# (prior). Resta DORMIENTE (usa i prior) finché i campioni risolti non bastano: niente overfitting.
+# ---------------------------------------------------------------------------
+CONV_LOG_NAME = "conv_log.json"          # storia: fattori + resa forward, per stimare i pesi
+CONV_WEIGHTS_NAME = "conv_weights.json"  # pesi APPRESI (override dei prior quando validi)
+_FIT_MIN_SAMPLES = 150                   # esiti risolti minimi per attivare i pesi appresi
+_FIT_MAX_LEARNED = 0.6                   # quota massima dei pesi appresi (il resto resta prior)
+
+
+def _log_convenience(kind, items, convmap) -> None:
+    """Logga (1/giorno per ticker+kind) i fattori grezzi + convenienza + prezzo, per calibrare poi i
+    pesi dai rendimenti realizzati. Chiamata SOLO dal job (vedi scan_opportunities)."""
+    items = [r for r in items if r]
+    if not items:
+        return
+    rec = read_data_json(CONV_LOG_NAME, [])
+    if not isinstance(rec, list):
+        rec = []
+    today = _today_iso()
+    have = {(x.get("ticker"), x.get("kind"), x.get("date")) for x in rec}
+    facs = [_factor_values(r, kind) for r in items]
+    if kind == "long":
+        _fill_valcheap(items, facs)
+    added = False
+    for r, f in zip(items, facs):
+        if (r["ticker"], kind, today) in have:
+            continue
+        rec.append({"date": today, "ticker": r["ticker"], "kind": kind,
+                    "price": _jsonable(r.get("price")), "conv": _jsonable(convmap.get(r["ticker"])),
+                    "factors": {k: _jsonable(v) for k, v in f.items()},
+                    "ret_5d": None, "ret_21d": None})
+        added = True
+    if added:
+        write_data_json(CONV_LOG_NAME, rec[-6000:])
+
+
+def resolve_convenience_log() -> int:
+    """Riempie la resa forward (5/21 giorni di Borsa) delle righe mature, dal prezzo storico. Per il job."""
+    rec = read_data_json(CONV_LOG_NAME, [])
+    if not isinstance(rec, list) or not rec:
+        return 0
+    changed, cache = 0, {}
+    for x in rec:
+        if not x.get("price") or x.get("ret_21d") is not None:
+            continue
+        tk = x.get("ticker")
+        for h_days, fld in ((5, "ret_5d"), (21, "ret_21d")):
+            if x.get(fld) is not None or _trading_days_between(x.get("date"), _today_iso()) < h_days:
+                continue
+            if tk not in cache:
+                try:
+                    cache[tk] = get_history(tk, "1y")
+                except Exception:
+                    cache[tk] = None
+            h = cache[tk]
+            if h is None or h.empty:
+                continue
+            closes = h["Close"].dropna()
+            if getattr(closes.index, "tz", None) is not None:
+                closes = closes.copy()
+                closes.index = closes.index.tz_localize(None)
+            try:
+                start = datetime.date.fromisoformat(str(x["date"])[:10])
+                target = pd.to_datetime(start + datetime.timedelta(days=round(h_days * 7 / 5)))
+                after = closes[closes.index >= target]
+                if not after.empty:
+                    x[fld] = round((float(after.iloc[0]) / x["price"] - 1) * 100, 2)
+                    changed += 1
+            except Exception:
+                continue
+    if changed:
+        write_data_json(CONV_LOG_NAME, rec)
+    return changed
+
+
+def fit_conv_weights(kind: str):
+    """Stima i pesi della convenienza dai rendimenti realizzati (resa forward 21g) con regressione
+    RIDGE sui fattori standardizzati, FUSA con i pesi a mano (prior) in base alla numerosità.
+    Ritorna None finché i campioni risolti non bastano (niente overfitting su pochi dati)."""
+    rec = read_data_json(CONV_LOG_NAME, [])
+    if not isinstance(rec, list):
+        return None
+    rows = [x for x in rec if x.get("kind") == kind and x.get("ret_21d") is not None and x.get("factors")]
+    if len(rows) < _FIT_MIN_SAMPLES:
+        return None
+    keys = list(_CONV_WEIGHTS[kind].keys())
+    stats = {k: _robust([x["factors"].get(k) for x in rows]) for k in keys}
+    X = np.array([[_zc(x["factors"].get(k), stats[k]) for k in keys] for x in rows], dtype=float)
+    y = np.array([float(x["ret_21d"]) for x in rows], dtype=float)
+    y = y - y.mean()
+    try:
+        w = np.linalg.solve(X.T @ X + 5.0 * np.eye(X.shape[1]), X.T @ y)   # ridge
+    except Exception:
+        return None
+    prior = np.array([_CONV_WEIGHTS[kind][k] for k in keys], dtype=float)
+    if np.sum(np.abs(w)) > 1e-9:
+        w = w / np.sum(np.abs(w)) * np.sum(np.abs(prior))   # scala comparabile ai prior
+    alpha = min(_FIT_MAX_LEARNED, len(rows) / 1000.0)        # più dati → più peso all'appreso
+    blended = np.clip((1 - alpha) * prior + alpha * w, 0.0, None)   # niente pesi negativi
+    return {k: round(float(v), 3) for k, v in zip(keys, blended)}
+
+
+def update_conv_weights() -> dict:
+    """Aggiorna (se possibile) i pesi appresi per breve e lungo. Chiamata dal job. Salva conv_weights.json."""
+    learned = read_data_json(CONV_WEIGHTS_NAME, {})
+    if not isinstance(learned, dict):
+        learned = {}
+    changed = False
+    for kind in ("short", "long"):
+        w = fit_conv_weights(kind)
+        if w:
+            learned[kind] = w
+            changed = True
+    if changed:
+        write_data_json(CONV_WEIGHTS_NAME, learned)
+    return learned
+
+
+def _active_weights(kind: str) -> dict:
+    """Pesi della convenienza: quelli APPRESI dai rendimenti realizzati se disponibili e validi,
+    altrimenti i prior a mano. Mantiene SEMPRE le stesse chiavi dei prior (niente chiavi spurie)."""
+    base = dict(_CONV_WEIGHTS[kind])
+    learned = read_data_json(CONV_WEIGHTS_NAME, {})
+    if isinstance(learned, dict) and isinstance(learned.get(kind), dict):
+        for k in base:
+            v = learned[kind].get(k)
+            if isinstance(v, (int, float)) and v >= 0:
+                base[k] = float(v)
+    return base
 
 
 _POS_WORDS = set((
@@ -2797,6 +2992,19 @@ def market_perf_1m() -> float:
     if len(c) <= 21:
         return None
     return float((c.iloc[-1] / c.iloc[-21] - 1) * 100)
+
+
+@st.cache_data(ttl=900, show_spinner=False)
+def _benchmark_perf(symbol: str = "^GSPC") -> dict:
+    """Rendimento ~5 giorni e ~1 mese dell'indice di riferimento, per la FORZA RELATIVA del breve.
+    Una sola chiamata per scan (cache 15 min): non viola il design 'breve = 1 chiamata per titolo'."""
+    try:
+        c = get_history(symbol, period="3mo")["Close"].dropna()
+    except Exception:
+        return {"perf_5d": None, "perf_1m": None}
+    p5 = float(c.iloc[-1] / c.iloc[-6] - 1) * 100 if len(c) > 6 else None
+    p1m = float(c.iloc[-1] / c.iloc[-21] - 1) * 100 if len(c) > 21 else None
+    return {"perf_5d": p5, "perf_1m": p1m}
 
 
 @st.cache_data(ttl=900, show_spinner=False)
@@ -2894,8 +3102,18 @@ def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
             r = None
         if r:
             rmap[r["ticker"]] = r
+    # Forza relativa (solo breve): rendimento dell'indice condiviso attaccato a ogni riga (1 chiamata)
+    if kind == "short":
+        _b = _benchmark_perf()
+        for _r in rmap.values():
+            _r["bench_5d"], _r["bench_1m"] = _b.get("perf_5d"), _b.get("perf_1m")
     # PASSO 2 — convenienza con z-score robusti sull'intero universo
     convmap = _score_universe(list(rmap.values()), kind)
+    if os.environ.get("DATA_LOCAL_FIRST") == "1":   # SOLO nel job autonomo: logga per calibrare i pesi
+        try:
+            _log_convenience(kind, list(rmap.values()), convmap)
+        except Exception:
+            pass
     # Regime di volatilità (solo breve): moltiplicatore globale che declassa i rimbalzi nei crash
     regime = volatility_regime()["factor"] if kind == "short" else 1.0
     # PASSO 3 — filtra le vere occasioni e costruisci la tabella
@@ -2918,12 +3136,20 @@ def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
             # Filtro Rischio/Rendimento: via i setup asimmetrici perdenti (R:R < 1,5)
             if r.get("rr") is not None and r["rr"] < _RR_MIN:
                 continue
+            # In regime di alta volatilità scarta chi crolla MOLTO più del mercato (coltello che cade
+            # beta-driven): pretende forza relativa non troppo negativa vs l'indice.
+            if regime < 0.85:
+                _mom = r.get("perf_5d") if r.get("perf_5d") is not None else r.get("perf_1m")
+                _bm = r.get("bench_5d") if r.get("perf_5d") is not None else r.get("bench_1m")
+                if _mom is not None and _bm is not None and (_mom - _bm) < -3.0:
+                    continue
             gain = r["rebound_pot"] if r["rebound_pot"] is not None else r["exp_ret"]
             rows.append({"Ticker": r["ticker"], "Nome": r["name"], "Convenienza": conv,
                          "Prezzo": r["price"], "RSI": r["rsi"], "% dal max": dd, "Perf 1 mese": r["perf_1m"],
                          "Occasione": int(round(sc)), "Conferma": _short_confirm_label(r),
                          "RVOL": r.get("rvol"), "R:R": r.get("rr"),
                          "Prob. salita": r["prob_gain"], "Guadagno atteso": gain,
+                         "Guadagno netto": net_return_pct(gain),
                          "Rischio perdita": r["prob_loss"], "Affidabilità": r["reliab"],
                          "Perché": _short_reasons(r)})
         else:
@@ -2947,6 +3173,7 @@ def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
                          "Prezzo": r["price"], "% dal max": dd, "Perf 1 anno": r["perf_1y"],
                          "Occasione": int(round(sc)),
                          "Prob. salita": r["prob_gain"], "Guadagno atteso": r["exp_ret"],
+                         "Guadagno netto": net_return_pct(r["exp_ret"]),
                          "Rischio perdita": r["prob_loss"], "Affidabilità": r["reliab"],
                          "Perché": _long_reasons(r)})
     df = pd.DataFrame(rows)
@@ -3293,6 +3520,7 @@ def record_observations(df, kind: str) -> None:
         return
     watch = load_opp_watch()
     now = _now_iso()
+    mkt = _jsonable(market_perf_1m())   # contesto di mercato (~1 mese indice): per stimare poi l'alpha
     for tk, r in df.iterrows():
         key = f"{kind}:{tk}"
         conv = _jsonable(r.get("Convenienza"))
@@ -3306,7 +3534,7 @@ def record_observations(df, kind: str) -> None:
         price = _jsonable(r.get("Prezzo"))
         obs = e.get("obs", [])
         if _should_sample(obs, conv, price, _OBS_GAP_MIN, "conv"):
-            obs.append({"date": now, "conv": conv, "price": price,
+            obs.append({"date": now, "conv": conv, "price": price, "mkt": mkt,
                         "occ": _jsonable(r.get("Occasione")), "prob_gain": _jsonable(r.get("Prob. salita"))})
             obs.sort(key=lambda o: o.get("date", ""))
             e["obs"] = _trim_records(obs, _OBS_MAX_DAYS, _OBS_MAX_KEEP)
@@ -3414,6 +3642,7 @@ def _daily_conv_values(obs) -> list:
 _OBS_WINDOW = {"short": 3, "long": 7}      # osservazione prima della promozione
 _REMOVE_WINDOW = {"short": 5, "long": 10}  # dopo quanti giorni, se in perdita, si toglie dal monitoraggio
 _NOTIFY_WINDOW = {"short": 3, "long": 7}   # giorni di monitoraggio positivo per la prima notifica
+_NOTIFY_MIN_RET = 3.0   # guadagno minimo (%) per la notifica di conferma (niente notifiche banali a +0,1%)
 
 
 def _days_between(d1, d2) -> int:
@@ -3554,7 +3783,7 @@ def manage_monitoring() -> tuple:
             removed.append(tk)
             changed = True
             continue
-        if days >= _NOTIFY_WINDOW.get(kind, 3) and ret > 0 and not e.get("notified"):
+        if days >= _NOTIFY_WINDOW.get(kind, 3) and ret >= _NOTIFY_MIN_RET and not e.get("notified"):
             e["notified"] = True
             changed = True
             to_notify.append({"ticker": tk, "kind": kind, "days": days,
@@ -3562,6 +3791,54 @@ def manage_monitoring() -> tuple:
     if changed:
         save_tracking(tracked)
     return to_notify, removed
+
+
+def exit_signals(r, kind) -> dict:
+    """Tesi di USCITA dal monitoraggio: motivi per cui l'idea è (probabilmente) esaurita — NON è un
+    ordine di vendita, è un avviso. Ipercomprato (RSI alto) / bersaglio raggiunto / (lungo) fondamentali
+    in peggioramento. Ritorna {exit: bool, reasons: [...]}"""
+    reasons = []
+    rsi = r.get("rsi")
+    thr = 75 if kind == "long" else 70
+    if rsi is not None and rsi >= thr:
+        reasons.append(f"RSI {rsi:.0f}: ipercomprato (rimbalzo forse esaurito)")
+    price, target = r.get("price"), r.get("target_price")
+    if kind == "short" and price and target and price >= target:
+        reasons.append("bersaglio raggiunto (prezzo ≥ media 50gg)")
+    if kind == "long":
+        trap = r.get("trap") or {}
+        if trap.get("strong") or trap.get("factor", 1.0) <= 0.75:
+            reasons.append("fondamentali in peggioramento (possibile trappola)")
+    return {"exit": bool(reasons), "reasons": reasons}
+
+
+def monitoring_exit_alerts() -> list:
+    """Avviso di USCITA (una volta sola) per le occasioni in monitoraggio la cui tesi è esaurita;
+    si ri-arma se il segnale rientra. Ritorna [{ticker, name, reasons}]."""
+    tracked = load_tracking()
+    if not tracked:
+        return []
+    out, changed = [], False
+    for tk, e in tracked.items():
+        if not e.get("snapshots"):
+            continue
+        try:
+            r = opportunity_row(tk, with_fundamentals=(e.get("kind") == "long"))
+        except Exception:
+            r = None
+        if not r:
+            continue
+        ex = exit_signals(r, e.get("kind", "short"))
+        if ex["exit"] and not e.get("exit_notified"):
+            e["exit_notified"] = True
+            changed = True
+            out.append({"ticker": tk, "name": e.get("name", tk), "reasons": ex["reasons"]})
+        elif not ex["exit"] and e.get("exit_notified"):
+            e["exit_notified"] = False     # ri-arma per un eventuale avviso futuro
+            changed = True
+    if changed:
+        save_tracking(tracked)
+    return out
 
 
 def observation_status() -> list:
@@ -3825,6 +4102,19 @@ def remove_position(index: int) -> list:
 
 
 CAPITAL_GAINS_TAX = 0.26   # tassa italiana sulle plusvalenze (rendite finanziarie)
+
+
+def net_return_pct(gross_pct, tax: float = CAPITAL_GAINS_TAX):
+    """Rendimento NETTO stimato (%) da un lordo %: in Italia la plusvalenza è tassata al 26%.
+    La tassa si applica solo se in guadagno (le perdite non generano imposta). Le commissioni sono
+    importi fissi e si contano a livello di posizione (Portafoglio), non su una % attesa."""
+    if gross_pct is None:
+        return None
+    try:
+        g = float(gross_pct)
+    except (TypeError, ValueError):
+        return None
+    return round(g * (1.0 - tax), 1) if g > 0 else round(g, 1)
 
 
 def portfolio_view(base: str = "EUR", tax_rate: float = CAPITAL_GAINS_TAX, fee: float = 1.0):
