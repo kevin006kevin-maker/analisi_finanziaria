@@ -705,13 +705,6 @@
 "name": "ENI.MI",
 "obs": [
 {
-"date": "2026-06-17",
-"conv": 82,
-"price": 21.83,
-"occ": 52,
-"prob_gain": 64
-},
-{
 "date": "2026-06-18",
 "conv": 81,
 "price": 22.01,
@@ -738,6 +731,13 @@
 "price": 21.14,
 "occ": 45,
 "prob_gain": 54
+},
+{
+"date": "2026-06-29 09:37",
+"conv": 82,
+"price": 20.53,
+"occ": 60,
+"prob_gain": 51
 }
 ]
 },
@@ -781,13 +781,6 @@
 "kind": "short",
 "name": "STLAM.MI",
 "obs": [
-{
-"date": "2026-06-17",
-"conv": 66,
-"price": 5.777,
-"occ": 41,
-"prob_gain": 45
-},
 {
 "date": "2026-06-18 14:31",
 "conv": 68,
@@ -843,6 +836,13 @@
 "price": 5.572,
 "occ": 65,
 "prob_gain": 53
+},
+{
+"date": "2026-06-29 09:37",
+"conv": 84,
+"price": 5.04,
+"occ": 70,
+"prob_gain": 51
 }
 ]
 },
@@ -2285,6 +2285,62 @@
 "price": 14.06,
 "occ": 40,
 "prob_gain": 51
+}
+]
+},
+"short:ASAN": {
+"ticker": "ASAN",
+"kind": "short",
+"name": "ASAN",
+"obs": [
+{
+"date": "2026-06-29 09:37",
+"conv": 33,
+"price": 6.97,
+"occ": 42,
+"prob_gain": 50
+}
+]
+},
+"short:KEEL": {
+"ticker": "KEEL",
+"kind": "short",
+"name": "KEEL",
+"obs": [
+{
+"date": "2026-06-29 09:37",
+"conv": 19,
+"price": 6.03,
+"occ": 37,
+"prob_gain": 42
+}
+]
+},
+"short:RXRX": {
+"ticker": "RXRX",
+"kind": "short",
+"name": "RXRX",
+"obs": [
+{
+"date": "2026-06-29 09:37",
+"conv": 19,
+"price": 3.52,
+"occ": 40,
+"prob_gain": 46
+}
+]
+},
+"short:GT": {
+"ticker": "GT",
+"kind": "short",
+"name": "GT",
+"obs": [
+{
+"date": "2026-06-29 09:37",
+"conv": 5,
+"price": 6.84,
+"occ": 37,
+"prob_gain": 53
 }
 ]
 }
