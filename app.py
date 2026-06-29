@@ -742,8 +742,11 @@ if section.startswith("Occasioni"):
                                     hp = fu.get_history(tk, period="1y")
                                     fp = fu.forecast_paths(hp, 21, stop_pct=(stp / price - 1))
                                     if fp and fp.get("p_touch_stop") is not None:
+                                        _net = fu.net_return_pct(fp.get("expectancy"))
                                         st.caption(f"🎲 **Probabilità di toccare lo stop entro ~1 mese: ~{fp['p_touch_stop']}%** "
-                                                   f"· ventaglio rendimento a 1 mese: da {fp['ret_p10']:+.0f}% (sfortuna) "
+                                                   f"· P(salita) ~{fp['p_up']}% (intervallo {fp['p_up_lo']}–{fp['p_up_hi']}%) "
+                                                   f"· rendimento atteso ~{fp['expectancy']:+.1f}% (netto ~{_net:+.1f}%) "
+                                                   f"· ventaglio a 1 mese: da {fp['ret_p10']:+.0f}% (sfortuna) "
                                                    f"a {fp['ret_p90']:+.0f}% (fortuna), mediana {fp['ret_p50']:+.0f}%. "
                                                    "Stima da block bootstrap dei rendimenti reali (code grasse), non una previsione.")
                             s1m = det.get("perf_1m")
@@ -901,7 +904,7 @@ if section.startswith("Occasioni"):
         short_cfg = {
             "Nome": st.column_config.TextColumn("Azienda", width="medium"),
             "Convenienza": st.column_config.ProgressColumn("🏅 Convenienza", min_value=0, max_value=100, format="%d",
-                help="Punteggio complessivo che combina prob. salita, guadagno atteso, rischio di perdita e affidabilità. La tabella è ordinata da qui (più alto = più conveniente)."),
+                help="Punteggio RELATIVO alle occasioni di QUESTO scan (z-score): confronta il titolo con gli altri trovati ORA, non è un voto assoluto. Combina sconto/qualità, rischio, momentum e probabilità. La tabella è ordinata da qui (più alto = più conveniente dei pari)."),
             "Prezzo": st.column_config.NumberColumn("Prezzo", format="%.2f"),
             "RSI": st.column_config.NumberColumn("RSI", format="%.0f",
                 help="Sotto 30-35 = ipervenduto (possibile rimbalzo)."),
@@ -920,6 +923,8 @@ if section.startswith("Occasioni"):
                 help="Stima statistica (dai rendimenti storici, ~1 mese) della probabilità che il prezzo salga. NON è una previsione."),
             "Guadagno atteso": st.column_config.NumberColumn("🎯 Potenziale rimbalzo", format="%+.1f%%",
                 help="Quanto salirebbe il titolo se tornasse alla sua media a 50 giorni (bersaglio tipico di un rimbalzo). Indicativo."),
+            "Guadagno netto": st.column_config.NumberColumn("💶 Netto", format="%+.1f%%",
+                help="Guadagno atteso al NETTO della tassa italiana 26% sulle plusvalenze (le perdite non sono tassate). Le commissioni sono importi fissi e contano nel Portafoglio."),
             "Rischio perdita": st.column_config.NumberColumn("📉 Rischio perdita", format="%.0f%%",
                 help="Stima statistica della probabilità di perdere oltre il 15% (~1 mese). NON è una previsione."),
             "Affidabilità": st.column_config.TextColumn("📊 Affidabilità",
@@ -933,7 +938,7 @@ if section.startswith("Occasioni"):
             "Qualità trend": st.column_config.TextColumn("🧭 Qualità (trend)",
                 help="Anti-trappola di valore: ✅ conti che tengono (ricavi/utili/margini stabili o in crescita) · ⚠️ trend incerto · 🛑 fondamentali in peggioramento (possibile trappola di valore). È la protezione più importante: uno sconto NON basta."),
             "Convenienza": st.column_config.ProgressColumn("🏅 Convenienza", min_value=0, max_value=100, format="%d",
-                help="Punteggio complessivo che combina prob. salita, guadagno atteso, rischio di perdita e affidabilità. La tabella è ordinata da qui (più alto = più conveniente)."),
+                help="Punteggio RELATIVO alle occasioni di QUESTO scan (z-score): confronta il titolo con gli altri trovati ORA, non è un voto assoluto. Combina sconto/qualità, rischio, momentum e probabilità. La tabella è ordinata da qui (più alto = più conveniente dei pari)."),
             "Prezzo": st.column_config.NumberColumn("Prezzo", format="%.2f"),
             "% dal max": st.column_config.NumberColumn("% dal max", format="%.0f%%",
                 help="Sconto rispetto al massimo di 52 settimane."),
@@ -944,6 +949,8 @@ if section.startswith("Occasioni"):
                 help="Stima statistica (dai rendimenti storici, ~1 anno) della probabilità che il prezzo salga. NON è una previsione."),
             "Guadagno atteso": st.column_config.NumberColumn("🎯 Guadagno atteso", format="%+.1f%%",
                 help="Stima del rendimento atteso (mediano) sull'orizzonte ~1 anno. Indicativo, non una previsione."),
+            "Guadagno netto": st.column_config.NumberColumn("💶 Netto", format="%+.1f%%",
+                help="Guadagno atteso al NETTO della tassa italiana 26% sulle plusvalenze. Indicativo."),
             "Rischio perdita": st.column_config.NumberColumn("📉 Rischio perdita", format="%.0f%%",
                 help="Stima statistica della probabilità di perdere oltre il 15% (~1 anno). NON è una previsione."),
             "Affidabilità": st.column_config.TextColumn("📊 Affidabilità",
@@ -990,7 +997,7 @@ if section.startswith("In osservazione"):
             help="Variazione del PREZZO dal primo giorno di osservazione. Negativo = sta ancora scendendo "
                  "(non verrà promossa finché non torna positivo)."),
         "Convenienza": st.column_config.ProgressColumn("🏅 Convenienza (saldo)", min_value=0, max_value=100, format="%d",
-            help="Quanto è conveniente comprarla ora (più alta = più a sconto / interessante)."),
+            help="Convenienza relativa alle occasioni dello scan (più alta = più a sconto/interessante dei pari). Ultima nota durante l'osservazione."),
         "Tendenza": st.column_config.TextColumn("🧭 Tendenza",
             help="Andamento della convenienza sui giorni osservati (mediana giornaliera, così un calo di mezza "
                  "giornata non conta): Δ punti dal 1° giorno e giorni consecutivi di salita tollerante."),
@@ -1129,6 +1136,59 @@ if section.startswith("Monitoraggio"):
                             help="Se 'predetta' e 'realizzato' sono vicine, le probabilità sono ben calibrate."),
                     })
         st.markdown("---")
+
+    # --- 🧪 Validazione del sistema (backtest tecnico + verifica ML) — su richiesta, pesanti ---
+    with st.expander("🧪 Validazione del sistema (backtest + verifica ML)", expanded=False):
+        st.caption("Prove di efficacia su dati storici, avviate su richiesta (pesanti). Il backtest "
+                   "valida il ramo TECNICO/prezzo del breve: i fondamentali point-in-time non sono "
+                   "ricostruibili da fonti gratuite, quindi il ramo 'qualità' non è incluso.")
+        bcol1, bcol2 = st.columns(2)
+        if bcol1.button("▶️ Backtest occasioni (breve)", key="run_backtest", use_container_width=True):
+            with st.spinner("Backtest walk-forward in corso… (~1-2 min)"):
+                try:
+                    import backtest as _bt
+                    st.session_state["_bt_res"] = _bt.run_backtest(horizon=21, max_tickers=25)
+                except Exception as e:
+                    st.session_state["_bt_res"] = {"errore": str(e)}
+        if bcol2.button("▶️ Verifica ML vs metodi semplici", key="run_mlverify", use_container_width=True):
+            with st.spinner("Verifica ML in corso… (~1-2 min, richiede scikit-learn)"):
+                try:
+                    import ml_verify as _mlv
+                    st.session_state["_ml_res"] = _mlv.run_ml_verify()
+                except Exception as e:
+                    st.session_state["_ml_res"] = {"errore": str(e)}
+        _btr = st.session_state.get("_bt_res")
+        if _btr:
+            if _btr.get("errore"):
+                st.error("Backtest non riuscito: " + _btr["errore"])
+            elif not _btr.get("n_trades"):
+                st.info("Nessun trade simulato (dati insufficienti).")
+            else:
+                vb1, vb2, vb3 = st.columns(3)
+                vb1.metric("Trade simulati", _btr["n_trades"])
+                vb2.metric("In positivo", f"{_btr['hit_rate']}%")
+                vb3.metric("Resa netta media", f"{_btr['avg_net']:+.2f}%")
+                _bench = _btr.get("bench_avg")
+                st.caption(f"Orizzonte {_btr['horizon']} gg di Borsa · mediana netta {_btr['median_net']:+.2f}%"
+                           + (f" · compra-e-tieni indice {_bench:+.2f}%" if _bench is not None else ""))
+                if _btr.get("by_band"):
+                    st.dataframe(pd.DataFrame(_btr["by_band"]).set_index("banda"), use_container_width=True,
+                                 column_config={
+                                     "n": st.column_config.NumberColumn("Trade", format="%d"),
+                                     "avg_net": st.column_config.NumberColumn("Resa netta media", format="%+.2f%%"),
+                                     "hit": st.column_config.NumberColumn("In positivo", format="%d%%")})
+                st.caption("Walk-forward: ogni ingresso usa solo i dati fino a quel giorno. Stima storica, non una promessa.")
+        _mlr = st.session_state.get("_ml_res")
+        if _mlr:
+            if _mlr.get("errore"):
+                st.error("Verifica ML non riuscita (scikit-learn installato?): " + _mlr["errore"])
+            elif not _mlr.get("count"):
+                st.info("Dati insufficienti per la verifica ML.")
+            else:
+                st.caption(f"Errore medio (MAE, più basso = meglio): ML {_mlr['ml_mae']}% · drift {_mlr['drift_mae']}% · "
+                           f"naive {_mlr['naive_mae']}% — ML batte il naive in {_mlr['ml_beats_naive']}/{_mlr['count']} titoli.")
+                (st.success if _mlr["verdict"].startswith("✅") else st.info)(_mlr["verdict"])
+    st.markdown("---")
 
     tracked = fu.load_tracking()
     if not tracked:
