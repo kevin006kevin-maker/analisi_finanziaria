@@ -738,6 +738,14 @@
 "price": 20.53,
 "occ": 60,
 "prob_gain": 51
+},
+{
+"date": "2026-06-29 16:52",
+"conv": 83,
+"price": 20.485,
+"mkt": -2.3359,
+"occ": 64,
+"prob_gain": 53
 }
 ]
 },
@@ -843,6 +851,14 @@
 "price": 5.04,
 "occ": 70,
 "prob_gain": 51
+},
+{
+"date": "2026-06-29 16:52",
+"conv": 81,
+"price": 4.9535,
+"mkt": -2.3359,
+"occ": 48,
+"prob_gain": 53
 }
 ]
 },
@@ -2397,6 +2413,36 @@
 "price": 46.08,
 "occ": 54,
 "prob_gain": 64
+}
+]
+},
+"short:STRC": {
+"ticker": "STRC",
+"kind": "short",
+"name": "STRC",
+"obs": [
+{
+"date": "2026-06-29 16:52",
+"conv": 89,
+"price": 78.795,
+"mkt": -2.3359,
+"occ": 64,
+"prob_gain": 68
+}
+]
+},
+"short:TMUS": {
+"ticker": "TMUS",
+"kind": "short",
+"name": "TMUS",
+"obs": [
+{
+"date": "2026-06-29 16:52",
+"conv": 70,
+"price": 171.0,
+"mkt": -2.3359,
+"occ": 39,
+"prob_gain": 52
 }
 ]
 }
