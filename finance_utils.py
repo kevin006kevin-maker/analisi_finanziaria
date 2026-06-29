@@ -1205,7 +1205,7 @@ def resolve_forecasts():
         if r.get("outcome") is not None:
             continue
         d0 = _parse_dt(r.get("date"))
-        if not d0 or not r.get("price") or (today - d0).days < r.get("h", 21):
+        if not d0 or not r.get("price") or _trading_days_between(r.get("date"), _today_iso()) < r.get("h", 21):
             continue
         tk = r["ticker"]
         if tk not in hist_cache:
@@ -1214,9 +1214,9 @@ def resolve_forecasts():
         if h is None or h.empty:
             continue
         try:
-            after = h["Close"][h.index.tz_localize(None) >= (d0 + datetime.timedelta(days=r["h"]))].dropna() \
+            after = h["Close"][h.index.tz_localize(None) >= (d0 + datetime.timedelta(days=round(r["h"] * 7 / 5)))].dropna() \
                 if getattr(h.index, "tz", None) is not None else \
-                h["Close"][h.index >= (d0 + datetime.timedelta(days=r["h"]))].dropna()
+                h["Close"][h.index >= (d0 + datetime.timedelta(days=round(r["h"] * 7 / 5)))].dropna()
             if after.empty:
                 continue
             r["outcome"] = 1 if float(after.iloc[0]) > r["price"] else 0
@@ -1871,13 +1871,18 @@ def value_trap_check(info: dict) -> dict:
     elif pm is not None and pm < 0:
         signals -= 1; reasons.append("attualmente in perdita")
 
+    # Trappola CONCLAMATA ("forte"): va ESCLUSA del tutto, non solo declassata. Due o più segnali
+    # negativi, oppure attualmente in perdita CON margini in erosione.
+    pm_eroding = (pm is not None and pm5 is not None and pm < pm5 - 0.03)
+    unprofitable = (pm is not None and pm < 0)
+    strong = bool(signals <= -2 or (unprofitable and pm_eroding))
     if signals >= 1:
-        return {"verdict": "occasione", "factor": 1.08,
+        return {"verdict": "occasione", "factor": 1.08, "signals": signals, "strong": False,
                 "label": "✅ conti che tengono", "reasons": reasons}
     if signals <= -1:
-        return {"verdict": "trappola", "factor": 0.75,
+        return {"verdict": "trappola", "factor": 0.75, "signals": signals, "strong": strong,
                 "label": "🛑 fondamentali in peggioramento (possibile trappola)", "reasons": reasons}
-    return {"verdict": "neutro", "factor": 1.0,
+    return {"verdict": "neutro", "factor": 1.0, "signals": signals, "strong": False,
             "label": "⚠️ trend incerto", "reasons": reasons or ["trend dei fondamentali poco leggibile"]}
 
 
@@ -2417,6 +2422,10 @@ _RR_MIN = 1.5              # scarta i setup con Rischio/Rendimento sotto questa 
 _MIN_PRICE = 3.0           # sotto questo prezzo l'RSI è inaffidabile (penny) → escluso
 _MIN_DOLLAR_VOL = 1_000_000  # liquidità minima (~$ scambiati/giorno) → niente illiquidi
 _SECTOR_CAP_LONG = 4       # max occasioni di lungo per settore (no liste tutte-banche)
+# Filtri liquidità/prezzo anche sul LUNGO (prima assenti): soglia più bassa del breve, così
+# restano incluse small/mid cap europee legittime ma si escludono penny/illiquidi inaffidabili.
+_MIN_PRICE_LONG = 1.0        # prezzo minimo per le occasioni di lungo
+_MIN_DOLLAR_VOL_LONG = 300_000  # liquidità minima sul lungo (~$ scambiati/giorno)
 
 
 def _short_score(r, regime=1.0):
@@ -2593,7 +2602,7 @@ _CONV_WEIGHTS = {
     "short": {"oversold": 1.0, "rebound": 0.8, "momentum": 0.7, "discount": 0.5,
               "riskadj": 0.4, "ddpen": 0.5, "histcheap": 0.4, "trend": 0.4, "prob": 0.2},
     "long":  {"quality": 1.0, "valcheap": 0.9, "discount": 0.6, "histcheap": 0.5,
-              "riskadj": 0.4, "ddpen": 0.4, "momentum": 0.4, "prob": 0.4},
+              "riskadj": 0.4, "ddpen": 0.4, "momentum": 0.4, "prob": 0.4, "trappen": 0.6},
 }
 _CONV_K = 11.0   # scala z-score → punti di convenienza
 
@@ -2644,6 +2653,9 @@ def _factor_values(r, kind) -> dict:
     else:
         f["quality"] = r.get("fscore")
         f["valcheap"] = None    # riempito da _fill_valcheap (z relativo al settore)
+        # anti-trappola come fattore: segnali negativi (fondamentali in peggioramento) abbassano
+        # la convenienza; positivi ("conti che tengono") la alzano. None per ETF → neutro.
+        f["trappen"] = (r.get("trap") or {}).get("signals")
     return f
 
 
@@ -2915,6 +2927,15 @@ def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
                          "Rischio perdita": r["prob_loss"], "Affidabilità": r["reliab"],
                          "Perché": _short_reasons(r)})
         else:
+            # Liquidità/prezzo anche sul lungo (prima assenti): via penny/illiquidi inaffidabili
+            if r["price"] < _MIN_PRICE_LONG:
+                continue
+            liq = r.get("avg_dollar_vol")
+            if liq is not None and liq < _MIN_DOLLAR_VOL_LONG:
+                continue
+            # Trappola di valore CONCLAMATA: esclusa del tutto (non solo declassata del 25%)
+            if (r.get("trap") or {}).get("strong"):
+                continue
             sc = _long_score(r)
             if sc is None or not np.isfinite(sc) or sc < 50:
                 continue
@@ -3037,6 +3058,9 @@ def opportunity_snapshot(ticker: str, kind: str) -> dict:
 _OBS_GAP_MIN = 60       # opp_watch: al più ogni 60 min
 _OBS_MAX_DAYS = 12
 _OBS_MAX_KEEP = 220
+# Ingresso selettivo in osservazione: una NUOVA occasione entra solo se abbastanza conveniente
+# (riduce il rumore della watchlist); quelle GIÀ osservate continuano comunque ad aggiornarsi.
+_OBS_ENTRY_CONV = 60    # convenienza minima per ENTRARE in osservazione
 _SNAP_GAP_MIN = 60      # monitoraggio: al più ogni 60 min (1 punto/ora)
 _SNAP_MAX_DAYS = 22
 _SNAP_MAX_KEEP = 700
@@ -3248,7 +3272,7 @@ def sticky_watch_tickers(kind: str) -> list:
         obs = [o for o in e.get("obs", []) if o.get("price")]
         if not obs:
             continue
-        if _days_between(obs[0]["date"], _today_iso()) < window + 1:   # finestra non ancora conclusa
+        if _trading_days_between(obs[0]["date"], _today_iso()) < window + 1:   # finestra non ancora conclusa
             out.append(e.get("ticker"))
     return list(dict.fromkeys([t for t in out if t]))[:_STICKY_CAP]
 
@@ -3271,10 +3295,14 @@ def record_observations(df, kind: str) -> None:
     now = _now_iso()
     for tk, r in df.iterrows():
         key = f"{kind}:{tk}"
+        conv = _jsonable(r.get("Convenienza"))
+        # Ingresso selettivo: una NUOVA occasione entra in osservazione solo se abbastanza
+        # conveniente (meno rumore); quelle GIÀ osservate continuano comunque ad aggiornarsi.
+        if key not in watch and (conv is None or conv < _OBS_ENTRY_CONV):
+            continue
         e = watch.setdefault(key, {"ticker": tk, "kind": kind, "name": tk, "obs": []})
         e["ticker"], e["kind"] = tk, kind
         e["name"] = r.get("Nome", tk)
-        conv = _jsonable(r.get("Convenienza"))
         price = _jsonable(r.get("Prezzo"))
         obs = e.get("obs", [])
         if _should_sample(obs, conv, price, _OBS_GAP_MIN, "conv"):
@@ -3303,7 +3331,7 @@ def record_sticky_observations(kind: str, scanned_df) -> None:
         if not tk or tk in scanned:                    # già registrato dallo scan di oggi
             continue
         obs_p = [o for o in e.get("obs", []) if o.get("price")]
-        if not obs_p or _days_between(obs_p[0]["date"], _today_iso()) >= window + 1:
+        if not obs_p or _trading_days_between(obs_p[0]["date"], _today_iso()) >= window + 1:
             continue                                   # niente storia valida o finestra già conclusa
         try:
             r = opportunity_row(tk, with_fundamentals=(kind == "long"))   # cache dallo scan
@@ -3326,6 +3354,10 @@ def record_sticky_observations(kind: str, scanned_df) -> None:
 _PROMO_MIN_GAIN = 5.0    # punti di convenienza guadagnati nel periodo
 _PROMO_MAX_DIP = 4.0     # massimo calo giornaliero ammesso (oltre = inversione, niente promozione)
 _PROMO_MIN_RET = 2.0     # rialzo MINIMO del prezzo (%) sulla finestra per promuovere (no rumore: +0,1% non basta)
+# Quality-gate "tesi ancora viva": la promozione NON deve basarsi solo sul +2% di prezzo, ma anche
+# sulla CONVENIENZA (tutto il motore di scoring). Si promuove solo se la tesi regge ancora.
+_PROMO_MIN_CONV = 55     # convenienza ATTUALE minima per promuovere (sotto = tesi troppo debole)
+_PROMO_MAX_CONV_DECAY = 10  # massimo calo di convenienza tollerato sulla finestra (oltre = tesi decaduta)
 
 
 def _trend_progress(values: list, max_dip: float = _PROMO_MAX_DIP) -> int:
@@ -3394,6 +3426,38 @@ def _days_between(d1, d2) -> int:
         return 0
 
 
+def _trading_days_between(d1, d2) -> int:
+    """Giorni di BORSA (lun-ven, weekend esclusi) tra due date ISO. Le finestre di osservazione/
+    monitoraggio (3/7 giorni, ecc.) sono giorni di mercato: contare i giorni di calendario faceva
+    'scadere' le finestre nei weekend, senza nuovi dati. Approssimazione: esclude i sabati/domeniche
+    (non i festivi di Borsa), comunque molto più corretta del calendario."""
+    try:
+        a = datetime.date.fromisoformat(str(d1)[:10])
+        b = datetime.date.fromisoformat(str(d2)[:10])
+    except Exception:
+        return 0
+    if b < a:
+        a, b = b, a
+    days, cur = 0, a
+    while cur < b:
+        cur += datetime.timedelta(days=1)
+        if cur.weekday() < 5:        # 0-4 = lun-ven
+            days += 1
+    return days
+
+
+def _is_value_trap_now(ticker: str) -> bool:
+    """True se i fondamentali del titolo risultano ORA in peggioramento (trappola conclamata):
+    serve a NON promuovere un'occasione di lungo la cui tesi è decaduta. Usa opportunity_row (in
+    cache dallo scan dello stesso giro → di norma nessuna chiamata extra). ETF → mai trappola."""
+    try:
+        r = opportunity_row(ticker, with_fundamentals=True)
+    except Exception:
+        return False
+    trap = (r or {}).get("trap") or {}
+    return bool(trap.get("strong")) or (trap.get("factor", 1.0) <= 0.75)
+
+
 def auto_promote_opportunities() -> list:
     """FASE 1 — osservazione. Ogni occasione (saldo individuato in «Occasioni») è osservata per una
     finestra (breve 3 giorni, lungo 7 giorni); se alla fine il PREZZO è salito dal primo giorno
@@ -3410,26 +3474,41 @@ def auto_promote_opportunities() -> list:
         obs = [o for o in e.get("obs", []) if o.get("price")]
         if len(obs) < 2:
             continue
-        days = _days_between(obs[0]["date"], obs[-1]["date"])
+        days = _trading_days_between(obs[0]["date"], obs[-1]["date"])
         window = _OBS_WINDOW.get(kind, 3)
         ret = (obs[-1]["price"] / obs[0]["price"] - 1) * 100 if obs[0]["price"] else 0.0
-        # Promozione: finestra conclusa E rimbalzo REALE del prezzo (≥ _PROMO_MIN_RET %, non rumore).
-        # Solo se _PROMO_USE_CONV_TREND è attivo si richiede ANCHE un trend di convenienza positivo.
-        trend_ok = (not _PROMO_USE_CONV_TREND) or _qualifies_promotion(
-            _daily_conv_values(e.get("obs", [])), window, _PROMO_MIN_GAIN, _PROMO_MAX_DIP)
-        if days >= window and ret >= _PROMO_MIN_RET and trend_ok:
-            track_opportunity(tk, kind,
-                              note=f"🤖 Promossa il {_today_iso()}: dopo {days} giorni di osservazione "
-                                   f"il prezzo è risalito di {ret:+.1f}% (rimbalzo confermato).")
-            tr = load_tracking()
-            if tk in tr:
-                tr[tk]["auto"] = True
-                tr[tk]["notified"] = False
-                save_tracking(tr)
-            promoted.append(tk)
-            new_records.append({"ticker": tk, "kind": kind, "date": _today_iso(),
-                                "price": obs[-1].get("price"), "conv": obs[-1].get("conv"),
-                                "ret_now": None, "ret_7d": None, "ret_30d": None, "last_update": _today_iso()})
+        # Finestra conclusa E rimbalzo REALE del prezzo (≥ _PROMO_MIN_RET %, non rumore)
+        if not (days >= window and ret >= _PROMO_MIN_RET):
+            continue
+        # --- Quality-gate "tesi ancora viva": qui entra la CONVENIENZA, non solo il +2% di prezzo ---
+        # 1) livello: ultima convenienza NOTA ≥ soglia (se ignota, non promuovere alla cieca)
+        last_conv = next((o.get("conv") for o in reversed(e.get("obs", []))
+                          if o.get("conv") is not None), None)
+        if last_conv is None or last_conv < _PROMO_MIN_CONV:
+            continue
+        # 2) non-decadimento: convenienza non crollata sulla finestra (mediana giornaliera)
+        vals = _daily_conv_values(e.get("obs", []))
+        if len(vals) >= 2 and (vals[-1] - vals[0]) < -_PROMO_MAX_CONV_DECAY:
+            continue
+        # 3) (lungo) fondamentali non in peggioramento: niente trappole conclamate
+        if kind == "long" and _is_value_trap_now(tk):
+            continue
+        # 4) (opzionale) trend di convenienza positivo, solo se attivato
+        if _PROMO_USE_CONV_TREND and not _qualifies_promotion(
+                vals, window, _PROMO_MIN_GAIN, _PROMO_MAX_DIP):
+            continue
+        track_opportunity(tk, kind,
+                          note=f"🤖 Promossa il {_today_iso()}: dopo {days} giorni di Borsa di osservazione "
+                               f"il prezzo è risalito di {ret:+.1f}% e la convenienza ({last_conv:.0f}) regge.")
+        tr = load_tracking()
+        if tk in tr:
+            tr[tk]["auto"] = True
+            tr[tk]["notified"] = False
+            save_tracking(tr)
+        promoted.append(tk)
+        new_records.append({"ticker": tk, "kind": kind, "date": _today_iso(),
+                            "price": obs[-1].get("price"), "conv": obs[-1].get("conv"),
+                            "ret_now": None, "ret_7d": None, "ret_30d": None, "last_update": _today_iso()})
     if new_records:
         recs = load_track_record()
         recs.extend(new_records)
@@ -3457,10 +3536,20 @@ def manage_monitoring() -> tuple:
             continue
         kind = e.get("kind", "short")
         added = e.get("added") or snaps[0].get("date")
-        days = _days_between(added, _today_iso())
+        days = _trading_days_between(added, _today_iso())
         base = snaps[0]["price"]
-        ret = (snaps[-1]["price"] / base - 1) * 100 if base else 0.0   # rendimento dal giorno di promozione
-        if days >= _REMOVE_WINDOW.get(kind, 5) and ret <= 0:
+        last_price = snaps[-1]["price"]
+        ret = (last_price / base - 1) * 100 if base else 0.0   # rendimento dal giorno di promozione
+        # Rimozione su STOP DI VOLATILITÀ (ATR), non sulla soglia 0%: si esce quando il prezzo viola
+        # lo stop calcolato alla promozione (prezzo − 2·ATR), non per un semplice rumore sotto zero.
+        stop = snaps[0].get("stop")
+        if stop is not None and last_price <= stop:
+            del tracked[tk]
+            removed.append(tk)
+            changed = True
+            continue
+        # Ripiego per voci vecchie senza stop salvato: vecchia regola tempo + perdita.
+        if stop is None and days >= _REMOVE_WINDOW.get(kind, 5) and ret <= 0:
             del tracked[tk]
             removed.append(tk)
             changed = True
@@ -3485,7 +3574,7 @@ def observation_status() -> list:
         if not obs:
             continue
         kind = e.get("kind", "short")
-        days = _days_between(obs[0]["date"], obs[-1]["date"])
+        days = _trading_days_between(obs[0]["date"], obs[-1]["date"])
         ret = (obs[-1]["price"] / obs[0]["price"] - 1) * 100 if (len(obs) >= 2 and obs[0]["price"]) else 0.0
         window = _OBS_WINDOW.get(kind, 3)
         # Trend di CONVENIENZA su valori GIORNALIERI (mediana), tollerante ai cali temporanei:
