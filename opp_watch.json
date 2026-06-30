@@ -775,15 +775,8 @@
 "long:T": {
 "ticker": "T",
 "kind": "long",
-"name": "AT&T Inc",
+"name": "AT&T Inc.",
 "obs": [
-{
-"date": "2026-06-18 23:29",
-"conv": 60,
-"price": 22.01,
-"occ": 69,
-"prob_gain": 22
-},
 {
 "date": "2026-06-19 14:37",
 "conv": 69,
@@ -871,6 +864,14 @@
 "mkt": -1.4332,
 "occ": 73,
 "prob_gain": 88
+},
+{
+"date": "2026-07-01 00:04",
+"conv": 89,
+"price": 20.7,
+"mkt": -1.3637,
+"occ": 75,
+"prob_gain": 83
 }
 ]
 },
@@ -1827,7 +1828,7 @@
 "long:CCL": {
 "ticker": "CCL",
 "kind": "long",
-"name": "Carnival Corp",
+"name": "Carnival Corporation & plc",
 "obs": [
 {
 "date": "2026-06-29 09:37",
@@ -1867,6 +1868,14 @@
 "mkt": -1.4332,
 "occ": 56,
 "prob_gain": 72
+},
+{
+"date": "2026-07-01 00:04",
+"conv": 61,
+"price": 28.57,
+"mkt": -1.3637,
+"occ": 55,
+"prob_gain": 62
 }
 ]
 },
@@ -2935,6 +2944,14 @@
 "conv": null,
 "price": 12.34,
 "stale": true
+},
+{
+"date": "2026-07-01 00:04",
+"conv": 43,
+"price": 13.0,
+"mkt": -1.3637,
+"occ": 67,
+"prob_gain": 61
 }
 ]
 },
@@ -2979,6 +2996,14 @@
 "mkt": -1.4332,
 "occ": 55,
 "prob_gain": 68
+},
+{
+"date": "2026-07-01 00:04",
+"conv": 72,
+"price": 55.5,
+"mkt": -1.3637,
+"occ": 56,
+"prob_gain": 72
 }
 ]
 },
@@ -3146,7 +3171,7 @@
 "long:SSRM": {
 "ticker": "SSRM",
 "kind": "long",
-"name": "SSR MINING INC.",
+"name": "SSR Mining Inc",
 "obs": [
 {
 "date": "2026-06-29 16:52",
@@ -3179,6 +3204,14 @@
 "mkt": -1.4332,
 "occ": 73,
 "prob_gain": 69
+},
+{
+"date": "2026-07-01 00:04",
+"conv": 68,
+"price": 28.28,
+"mkt": -1.3637,
+"occ": 68,
+"prob_gain": 65
 }
 ]
 },
@@ -3280,7 +3313,7 @@
 "long:XLE": {
 "ticker": "XLE",
 "kind": "long",
-"name": "State Street Energy Select Sect",
+"name": "XLE",
 "obs": [
 {
 "date": "2026-06-30 10:49",
@@ -3297,6 +3330,14 @@
 "mkt": -1.4332,
 "occ": 54,
 "prob_gain": 85
+},
+{
+"date": "2026-07-01 00:04",
+"conv": 60,
+"price": 53.11,
+"mkt": -1.3637,
+"occ": 54,
+"prob_gain": 86
 }
 ]
 },
