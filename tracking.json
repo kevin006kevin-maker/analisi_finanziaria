@@ -340,6 +340,22 @@
 "target": 307.0941,
 "stop": 224.0177,
 "date": "2026-07-01 20:25"
+},
+{
+"name": "CBOE",
+"price": 247.72,
+"rsi": 35.5123,
+"dd_high": -32.4461,
+"occasione": 58,
+"convenienza": 78,
+"prob_gain": 59,
+"prob_loss": 9,
+"exp_ret": 1.8,
+"gain": 23.9466,
+"reliab": "🟢 Alta",
+"target": 307.0404,
+"stop": 221.3327,
+"date": "2026-07-02 00:52"
 }
 ]
 },
@@ -780,6 +796,22 @@
 "target": 57.3556,
 "stop": 46.8578,
 "date": "2026-07-01 20:25"
+},
+{
+"name": "GIL",
+"price": 51.64,
+"rsi": 39.5183,
+"dd_high": -28.8509,
+"occasione": 48,
+"convenienza": 76,
+"prob_gain": 54,
+"prob_loss": 5,
+"exp_ret": 0.8,
+"gain": 11.0635,
+"reliab": "🟡 Media",
+"target": 57.3532,
+"stop": 46.7378,
+"date": "2026-07-02 00:52"
 }
 ]
 },
@@ -1236,6 +1268,22 @@
 "target": 84.4183,
 "stop": 69.195,
 "date": "2026-07-01 20:25"
+},
+{
+"name": "NFLX",
+"price": 74.19,
+"rsi": 37.5201,
+"dd_high": -42.8067,
+"occasione": 58,
+"convenienza": 76,
+"prob_gain": 47,
+"prob_loss": 3,
+"exp_ret": -0.9,
+"gain": 13.786,
+"reliab": "🟢 Alta",
+"target": 84.4178,
+"stop": 69.1682,
+"date": "2026-07-02 00:52"
 }
 ]
 },
@@ -1388,6 +1436,22 @@
 "target": 33.495,
 "stop": 21.9974,
 "date": "2026-07-01 20:25"
+},
+{
+"name": "Super Micro Computer, Inc.",
+"price": 27.65,
+"rsi": 40.3791,
+"dd_high": -54.4556,
+"occasione": null,
+"convenienza": 58,
+"prob_gain": 40,
+"prob_loss": 52,
+"exp_ret": -19.2,
+"gain": -19.2,
+"reliab": "🔴 Bassa",
+"target": 33.4848,
+"stop": 21.4874,
+"date": "2026-07-02 00:52"
 }
 ],
 "auto": true,
@@ -1542,6 +1606,22 @@
 "target": 299.761,
 "stop": 312.5019,
 "date": "2026-07-01 20:25"
+},
+{
+"name": "Ferrari N.V.",
+"price": 324.35,
+"rsi": 62.9745,
+"dd_high": -26.4346,
+"occasione": null,
+"convenienza": 46,
+"prob_gain": 19,
+"prob_loss": 66,
+"exp_ret": -26.5,
+"gain": -26.5,
+"reliab": "🟡 Media",
+"target": 299.317,
+"stop": 305.2906,
+"date": "2026-07-02 00:52"
 }
 ],
 "auto": true,
@@ -1568,6 +1648,22 @@
 "target": 3.577,
 "stop": 3.255,
 "date": "2026-07-01 20:25"
+},
+{
+"name": "Banco Bradesco S.A.",
+"price": 3.48,
+"rsi": 50.8954,
+"dd_high": -17.3397,
+"occasione": null,
+"convenienza": 65,
+"prob_gain": 64,
+"prob_loss": 19,
+"exp_ret": 12.9,
+"gain": 12.9,
+"reliab": "🟢 Alta",
+"target": 3.5776,
+"stop": 3.2829,
+"date": "2026-07-02 00:52"
 }
 ],
 "auto": true,
@@ -1621,6 +1717,8 @@
 "stop": 79.6807,
 "date": "2026-07-02 00:52"
 }
-]
+],
+"auto": true,
+"notified": false
 }
 }
