@@ -3795,16 +3795,15 @@ def manage_monitoring() -> tuple:
 
 def exit_signals(r, kind) -> dict:
     """Tesi di USCITA dal monitoraggio: motivi per cui l'idea è (probabilmente) esaurita — NON è un
-    ordine di vendita, è un avviso. Ipercomprato (RSI alto) / bersaglio raggiunto / (lungo) fondamentali
-    in peggioramento. Ritorna {exit: bool, reasons: [...]}"""
+    ordine di vendita, è un avviso. Ipercomprato (RSI alto) / (lungo) fondamentali in peggioramento.
+    NB: il ritorno alla media 50gg (SMA50) NON è più un'uscita — il backtest su 5 anni mostra che
+    incassare al bersaglio CAPPA i vincitori e azzera il rendimento; l'SMA50 resta solo un livello
+    indicativo di potenziale, mentre la protezione dalle perdite è lo stop 2×ATR. Ritorna {exit, reasons}."""
     reasons = []
     rsi = r.get("rsi")
     thr = 75 if kind == "long" else 70
     if rsi is not None and rsi >= thr:
         reasons.append(f"RSI {rsi:.0f}: ipercomprato (rimbalzo forse esaurito)")
-    price, target = r.get("price"), r.get("target_price")
-    if kind == "short" and price and target and price >= target:
-        reasons.append("bersaglio raggiunto (prezzo ≥ media 50gg)")
     if kind == "long":
         trap = r.get("trap") or {}
         if trap.get("strong") or trap.get("factor", 1.0) <= 0.75:
