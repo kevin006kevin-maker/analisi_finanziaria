@@ -324,6 +324,22 @@
 "target": 308.174,
 "stop": 215.9053,
 "date": "2026-07-01 00:04"
+},
+{
+"name": "CBOE",
+"price": 250.405,
+"rsi": 37.1117,
+"dd_high": -31.7139,
+"occasione": 54,
+"convenienza": 77,
+"prob_gain": 56,
+"prob_loss": 9,
+"exp_ret": 1.1,
+"gain": 22.639,
+"reliab": "🟢 Alta",
+"target": 307.0941,
+"stop": 224.0177,
+"date": "2026-07-01 20:25"
 }
 ]
 },
@@ -748,6 +764,22 @@
 "target": 57.5142,
 "stop": 46.4969,
 "date": "2026-07-01 00:04"
+},
+{
+"name": "GIL",
+"price": 51.76,
+"rsi": 39.9098,
+"dd_high": -28.6856,
+"occasione": 48,
+"convenienza": 76,
+"prob_gain": 55,
+"prob_loss": 3,
+"exp_ret": 1.1,
+"gain": 10.8107,
+"reliab": "🟡 Media",
+"target": 57.3556,
+"stop": 46.8578,
+"date": "2026-07-01 20:25"
 }
 ]
 },
@@ -1188,6 +1220,22 @@
 "target": 84.8306,
 "stop": 66.498,
 "date": "2026-07-01 00:04"
+},
+{
+"name": "NFLX",
+"price": 74.215,
+"rsi": 37.5963,
+"dd_high": -42.7877,
+"occasione": 58,
+"convenienza": 76,
+"prob_gain": 43,
+"prob_loss": 3,
+"exp_ret": -2.0,
+"gain": 13.7489,
+"reliab": "🟢 Alta",
+"target": 84.4183,
+"stop": 69.195,
+"date": "2026-07-01 20:25"
 }
 ]
 },
@@ -1324,6 +1372,22 @@
 "target": 33.508,
 "stop": 22.978,
 "date": "2026-07-01 12:58"
+},
+{
+"name": "Super Micro Computer Inc",
+"price": 28.195,
+"rsi": 41.0848,
+"dd_high": -53.6155,
+"occasione": 84,
+"convenienza": 65,
+"prob_gain": 61,
+"prob_loss": 33,
+"exp_ret": 29.0,
+"gain": 29.0,
+"reliab": "🔴 Bassa",
+"target": 33.495,
+"stop": 21.9974,
+"date": "2026-07-01 20:25"
 }
 ],
 "auto": true,
@@ -1462,6 +1526,22 @@
 "target": 299.614,
 "stop": 305.7234,
 "date": "2026-07-01 12:58"
+},
+{
+"name": "FERRARI",
+"price": 331.5,
+"rsi": 66.7483,
+"dd_high": -24.8129,
+"occasione": 65,
+"convenienza": 57,
+"prob_gain": 47,
+"prob_loss": 34,
+"exp_ret": -3.1,
+"gain": -3.1,
+"reliab": "🟡 Media",
+"target": 299.761,
+"stop": 312.5019,
+"date": "2026-07-01 20:25"
 }
 ],
 "auto": true,
@@ -1489,6 +1569,8 @@
 "stop": 3.255,
 "date": "2026-07-01 20:25"
 }
-]
+],
+"auto": true,
+"notified": false
 }
 }
