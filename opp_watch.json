@@ -250,6 +250,14 @@
 "conv": null,
 "price": 24.65,
 "stale": true
+},
+{
+"date": "2026-07-03 22:36",
+"conv": 64,
+"price": 24.65,
+"mkt": -0.9324,
+"occ": 59,
+"prob_gain": 53
 }
 ]
 },
@@ -955,7 +963,7 @@
 "long:T": {
 "ticker": "T",
 "kind": "long",
-"name": "AT&T Inc",
+"name": "AT&T Inc.",
 "obs": [
 {
 "date": "2026-06-22 00:02",
@@ -1074,6 +1082,14 @@
 "mkt": -0.9325,
 "occ": 74,
 "prob_gain": 85
+},
+{
+"date": "2026-07-03 22:36",
+"conv": 87,
+"price": 20.58,
+"mkt": -0.9324,
+"occ": 75,
+"prob_gain": 84
 }
 ]
 },
@@ -2204,7 +2220,7 @@
 "long:CCL": {
 "ticker": "CCL",
 "kind": "long",
-"name": "Carnival Corp",
+"name": "Carnival Corporation & plc",
 "obs": [
 {
 "date": "2026-06-29 09:37",
@@ -2316,6 +2332,14 @@
 "mkt": -0.9325,
 "occ": 58,
 "prob_gain": 76
+},
+{
+"date": "2026-07-03 22:36",
+"conv": 60,
+"price": 27.91,
+"mkt": -0.9324,
+"occ": 57,
+"prob_gain": 63
 }
 ]
 },
@@ -3669,6 +3693,14 @@
 "conv": null,
 "price": 15.03,
 "stale": true
+},
+{
+"date": "2026-07-03 22:36",
+"conv": 41,
+"price": 15.03,
+"mkt": -0.9324,
+"occ": 57,
+"prob_gain": 44
 }
 ]
 },
@@ -3785,6 +3817,14 @@
 "mkt": -0.9325,
 "occ": 57,
 "prob_gain": 65
+},
+{
+"date": "2026-07-03 22:36",
+"conv": 61,
+"price": 52.78,
+"mkt": -0.9324,
+"occ": 61,
+"prob_gain": 75
 }
 ]
 },
@@ -4106,13 +4146,21 @@
 "conv": null,
 "price": 6.92,
 "stale": true
+},
+{
+"date": "2026-07-03 22:36",
+"conv": 76,
+"price": 6.92,
+"mkt": -0.9324,
+"occ": 59,
+"prob_gain": 85
 }
 ]
 },
 "long:SSRM": {
 "ticker": "SSRM",
 "kind": "long",
-"name": "SSR MINING INC.",
+"name": "SSR Mining Inc",
 "obs": [
 {
 "date": "2026-06-29 16:52",
@@ -4216,6 +4264,14 @@
 "price": 30.62,
 "mkt": -0.9325,
 "occ": 65,
+"prob_gain": 64
+},
+{
+"date": "2026-07-03 22:36",
+"conv": 52,
+"price": 30.62,
+"mkt": -0.9324,
+"occ": 61,
 "prob_gain": 64
 }
 ]
@@ -4462,7 +4518,7 @@
 "long:XLE": {
 "ticker": "XLE",
 "kind": "long",
-"name": "State Street Energy Select Sect",
+"name": "XLE",
 "obs": [
 {
 "date": "2026-06-30 10:49",
@@ -4549,6 +4605,14 @@
 "conv": 63,
 "price": 53.22,
 "mkt": -0.9325,
+"occ": 52,
+"prob_gain": 84
+},
+{
+"date": "2026-07-03 22:36",
+"conv": 61,
+"price": 53.22,
+"mkt": -0.9324,
 "occ": 52,
 "prob_gain": 84
 }
