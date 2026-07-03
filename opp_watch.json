@@ -319,6 +319,14 @@
 "mkt": -1.5317,
 "occ": 72,
 "prob_gain": 70
+},
+{
+"date": "2026-07-03 10:40",
+"conv": 75,
+"price": 16.11,
+"mkt": -0.9325,
+"occ": 71,
+"prob_gain": 76
 }
 ]
 },
@@ -327,13 +335,6 @@
 "kind": "long",
 "name": "Canadian Natural Resources Ltd",
 "obs": [
-{
-"date": "2026-06-20 12:15",
-"conv": 67,
-"price": 41.05,
-"occ": 63,
-"prob_gain": 82
-},
 {
 "date": "2026-06-21 18:59",
 "conv": 58,
@@ -348,6 +349,14 @@
 "mkt": -1.4446,
 "occ": 68,
 "prob_gain": 71
+},
+{
+"date": "2026-07-03 10:40",
+"conv": 56,
+"price": 39.64,
+"mkt": -0.9325,
+"occ": 66,
+"prob_gain": 73
 }
 ]
 },
@@ -480,6 +489,14 @@
 "mkt": -1.5317,
 "occ": 89,
 "prob_gain": 73
+},
+{
+"date": "2026-07-03 10:40",
+"conv": 77,
+"price": 97.04,
+"mkt": -0.9325,
+"occ": 89,
+"prob_gain": 72
 }
 ]
 },
@@ -489,11 +506,12 @@
 "name": "Alcoa Corp",
 "obs": [
 {
-"date": "2026-06-17",
-"conv": 83,
-"price": 64.16,
-"occ": 59,
-"prob_gain": 71
+"date": "2026-07-03 10:40",
+"conv": 63,
+"price": 48.68,
+"mkt": -0.9325,
+"occ": 73,
+"prob_gain": 74
 }
 ]
 },
@@ -577,6 +595,14 @@
 "mkt": -1.5317,
 "occ": 93,
 "prob_gain": 62
+},
+{
+"date": "2026-07-03 10:40",
+"conv": 54,
+"price": 17.3,
+"mkt": -0.9325,
+"occ": 92,
+"prob_gain": 58
 }
 ]
 },
@@ -659,6 +685,14 @@
 "conv": null,
 "price": 3.45,
 "stale": true
+},
+{
+"date": "2026-07-03 10:40",
+"conv": 66,
+"price": 3.45,
+"mkt": -0.9325,
+"occ": 60,
+"prob_gain": 76
 }
 ]
 },
@@ -818,6 +852,14 @@
 "conv": null,
 "price": 27.22,
 "stale": true
+},
+{
+"date": "2026-07-03 10:40",
+"conv": 63,
+"price": 27.22,
+"mkt": -0.9325,
+"occ": 85,
+"prob_gain": 63
 }
 ]
 },
@@ -826,20 +868,6 @@
 "kind": "long",
 "name": "Venture Global Inc",
 "obs": [
-{
-"date": "2026-06-20 00:41",
-"conv": 51,
-"price": 11.02,
-"occ": 81,
-"prob_gain": 71
-},
-{
-"date": "2026-06-20 12:15",
-"conv": 54,
-"price": 11.02,
-"occ": 81,
-"prob_gain": 71
-},
 {
 "date": "2026-06-21 18:59",
 "conv": 51,
@@ -883,21 +911,22 @@
 "mkt": -1.4446,
 "occ": 80,
 "prob_gain": 55
+},
+{
+"date": "2026-07-03 10:40",
+"conv": 41,
+"price": 11.13,
+"mkt": -0.9325,
+"occ": 81,
+"prob_gain": 57
 }
 ]
 },
 "long:T": {
 "ticker": "T",
 "kind": "long",
-"name": "AT&T Inc.",
+"name": "AT&T Inc",
 "obs": [
-{
-"date": "2026-06-20 22:53",
-"conv": 70,
-"price": 22.01,
-"occ": 69,
-"prob_gain": 83
-},
 {
 "date": "2026-06-21 12:49",
 "conv": 67,
@@ -1006,6 +1035,14 @@
 "mkt": -1.0067,
 "occ": 75,
 "prob_gain": 80
+},
+{
+"date": "2026-07-03 10:40",
+"conv": 77,
+"price": 20.58,
+"mkt": -0.9325,
+"occ": 74,
+"prob_gain": 85
 }
 ]
 },
@@ -1539,53 +1576,19 @@
 "name": "Regencell Bioscience Holdings Ltd",
 "obs": [
 {
-"date": "2026-06-17",
-"conv": 41,
-"price": 14.7,
-"occ": 70,
-"prob_gain": 44
-},
-{
-"date": "2026-06-18 14:32",
-"conv": 48,
-"price": 14.82,
-"occ": 70,
-"prob_gain": 44
-},
-{
-"date": "2026-06-19 14:37",
-"conv": 27,
-"price": 14.82,
-"occ": 52,
-"prob_gain": 75
-},
-{
-"date": "2026-06-20 00:41",
-"conv": 26,
-"price": 12.01,
-"occ": 52,
-"prob_gain": 78
-},
-{
-"date": "2026-06-20 12:15",
-"conv": 22,
-"price": 12.01,
-"occ": 52,
-"prob_gain": 78
-},
-{
-"date": "2026-06-20 17:58",
-"conv": 21,
-"price": 12.01,
-"occ": 52,
-"prob_gain": 78
-},
-{
 "date": "2026-06-21 18:59",
 "conv": 26,
 "price": 12.01,
 "occ": 52,
 "prob_gain": 78
+},
+{
+"date": "2026-07-03 10:40",
+"conv": 25,
+"price": 6.37,
+"mkt": -0.9325,
+"occ": 58,
+"prob_gain": 60
 }
 ]
 },
@@ -1683,6 +1686,14 @@
 "mkt": -1.5317,
 "occ": 63,
 "prob_gain": 60
+},
+{
+"date": "2026-07-03 10:40",
+"conv": 42,
+"price": 5.085,
+"mkt": -0.9325,
+"occ": 63,
+"prob_gain": 63
 }
 ]
 },
@@ -1766,6 +1777,14 @@
 "mkt": -1.5317,
 "occ": 64,
 "prob_gain": 47
+},
+{
+"date": "2026-07-03 10:40",
+"conv": 12,
+"price": 334.25,
+"mkt": -0.9325,
+"occ": 64,
+"prob_gain": 48
 }
 ]
 },
@@ -2105,7 +2124,7 @@
 "long:CCL": {
 "ticker": "CCL",
 "kind": "long",
-"name": "Carnival Corporation & plc",
+"name": "Carnival Corp",
 "obs": [
 {
 "date": "2026-06-29 09:37",
@@ -2201,6 +2220,14 @@
 "mkt": -1.0067,
 "occ": 57,
 "prob_gain": 63
+},
+{
+"date": "2026-07-03 10:40",
+"conv": 53,
+"price": 27.91,
+"mkt": -0.9325,
+"occ": 58,
+"prob_gain": 76
 }
 ]
 },
@@ -2450,6 +2477,14 @@
 "conv": 84,
 "price": 24.71,
 "mkt": -1.0067,
+"occ": 98,
+"prob_gain": 70
+},
+{
+"date": "2026-07-03 10:40",
+"conv": 76,
+"price": 24.71,
+"mkt": -0.9325,
 "occ": 98,
 "prob_gain": 70
 }
@@ -3616,6 +3651,14 @@
 "mkt": -1.0067,
 "occ": 60,
 "prob_gain": 75
+},
+{
+"date": "2026-07-03 10:40",
+"conv": 45,
+"price": 52.78,
+"mkt": -0.9325,
+"occ": 57,
+"prob_gain": 65
 }
 ]
 },
@@ -3925,7 +3968,7 @@
 "long:SSRM": {
 "ticker": "SSRM",
 "kind": "long",
-"name": "SSR Mining Inc",
+"name": "SSR MINING INC.",
 "obs": [
 {
 "date": "2026-06-29 16:52",
@@ -4013,6 +4056,14 @@
 "price": 30.62,
 "mkt": -1.0067,
 "occ": 61,
+"prob_gain": 64
+},
+{
+"date": "2026-07-03 10:40",
+"conv": 47,
+"price": 30.62,
+"mkt": -0.9325,
+"occ": 65,
 "prob_gain": 64
 }
 ]
@@ -4243,7 +4294,7 @@
 "long:XLE": {
 "ticker": "XLE",
 "kind": "long",
-"name": "XLE",
+"name": "State Street Energy Select Sect",
 "obs": [
 {
 "date": "2026-06-30 10:49",
@@ -4314,6 +4365,14 @@
 "conv": 59,
 "price": 53.22,
 "mkt": -1.0067,
+"occ": 52,
+"prob_gain": 84
+},
+{
+"date": "2026-07-03 10:40",
+"conv": 62,
+"price": 53.22,
+"mkt": -0.9325,
 "occ": 52,
 "prob_gain": 84
 }
