@@ -358,13 +358,6 @@
 "name": "Canadian Natural Resources Ltd",
 "obs": [
 {
-"date": "2026-06-21 18:59",
-"conv": 58,
-"price": 41.05,
-"occ": 63,
-"prob_gain": 82
-},
-{
 "date": "2026-07-01 20:25",
 "conv": 64,
 "price": 39.03,
@@ -383,6 +376,14 @@
 {
 "date": "2026-07-03 17:59",
 "conv": 57,
+"price": 39.64,
+"mkt": -0.9325,
+"occ": 66,
+"prob_gain": 73
+},
+{
+"date": "2026-07-04 09:31",
+"conv": 53,
 "price": 39.64,
 "mkt": -0.9325,
 "occ": 66,
@@ -444,13 +445,6 @@
 "kind": "long",
 "name": "Newmont Corporation",
 "obs": [
-{
-"date": "2026-06-21 18:59",
-"conv": 67,
-"price": 103.79,
-"occ": 83,
-"prob_gain": 65
-},
 {
 "date": "2026-06-29 09:37",
 "conv": 86,
@@ -527,6 +521,14 @@
 "mkt": -0.9325,
 "occ": 89,
 "prob_gain": 72
+},
+{
+"date": "2026-07-04 09:31",
+"conv": 75,
+"price": 97.04,
+"mkt": -0.9325,
+"occ": 89,
+"prob_gain": 72
 }
 ]
 },
@@ -556,6 +558,14 @@
 "conv": null,
 "price": 48.68,
 "stale": true
+},
+{
+"date": "2026-07-04 09:31",
+"conv": 59,
+"price": 48.68,
+"mkt": -0.9325,
+"occ": 73,
+"prob_gain": 74
 }
 ]
 },
@@ -564,13 +574,6 @@
 "kind": "long",
 "name": "Coeur Mining, Inc",
 "obs": [
-{
-"date": "2026-06-21 18:59",
-"conv": 54,
-"price": 17.51,
-"occ": 91,
-"prob_gain": 60
-},
 {
 "date": "2026-06-29 09:37",
 "conv": 69,
@@ -643,6 +646,14 @@
 {
 "date": "2026-07-03 10:40",
 "conv": 54,
+"price": 17.3,
+"mkt": -0.9325,
+"occ": 92,
+"prob_gain": 58
+},
+{
+"date": "2026-07-04 09:31",
+"conv": 53,
 "price": 17.3,
 "mkt": -0.9325,
 "occ": 92,
@@ -743,6 +754,14 @@
 "conv": null,
 "price": 3.45,
 "stale": true
+},
+{
+"date": "2026-07-04 09:31",
+"conv": 64,
+"price": 3.45,
+"mkt": -0.9325,
+"occ": 60,
+"prob_gain": 76
 }
 ]
 },
@@ -916,6 +935,14 @@
 "conv": null,
 "price": 27.22,
 "stale": true
+},
+{
+"date": "2026-07-04 09:31",
+"conv": 60,
+"price": 27.22,
+"mkt": -0.9325,
+"occ": 84,
+"prob_gain": 63
 }
 ]
 },
@@ -981,15 +1008,8 @@
 "long:T": {
 "ticker": "T",
 "kind": "long",
-"name": "AT&T Inc.",
+"name": "AT&T Inc",
 "obs": [
-{
-"date": "2026-06-22 00:02",
-"conv": 80,
-"price": 22.01,
-"occ": 69,
-"prob_gain": 82
-},
 {
 "date": "2026-06-29 09:37",
 "conv": 65,
@@ -1108,6 +1128,14 @@
 "mkt": -0.9324,
 "occ": 75,
 "prob_gain": 84
+},
+{
+"date": "2026-07-04 09:31",
+"conv": 74,
+"price": 20.58,
+"mkt": -0.9325,
+"occ": 74,
+"prob_gain": 85
 }
 ]
 },
@@ -1711,13 +1739,6 @@
 "name": "STELLANTIS",
 "obs": [
 {
-"date": "2026-06-21 18:59",
-"conv": 47,
-"price": 5.572,
-"occ": 61,
-"prob_gain": 58
-},
-{
 "date": "2026-06-29 09:37",
 "conv": 59,
 "price": 5.04,
@@ -1801,6 +1822,14 @@
 "mkt": -0.9325,
 "occ": 63,
 "prob_gain": 62
+},
+{
+"date": "2026-07-04 09:31",
+"conv": 38,
+"price": 4.9335,
+"mkt": -0.9325,
+"occ": 62,
+"prob_gain": 61
 }
 ]
 },
@@ -1809,13 +1838,6 @@
 "kind": "long",
 "name": "FERRARI",
 "obs": [
-{
-"date": "2026-06-21 18:59",
-"conv": 22,
-"price": 307.5,
-"occ": 71,
-"prob_gain": 51
-},
 {
 "date": "2026-06-29 09:37",
 "conv": 7,
@@ -1896,6 +1918,14 @@
 {
 "date": "2026-07-03 17:59",
 "conv": 13,
+"price": 331.15,
+"mkt": -0.9325,
+"occ": 65,
+"prob_gain": 49
+},
+{
+"date": "2026-07-04 09:31",
+"conv": 12,
 "price": 331.15,
 "mkt": -0.9325,
 "occ": 65,
@@ -2247,7 +2277,7 @@
 "long:CCL": {
 "ticker": "CCL",
 "kind": "long",
-"name": "Carnival Corporation & plc",
+"name": "Carnival Corp",
 "obs": [
 {
 "date": "2026-06-29 09:37",
@@ -2367,6 +2397,14 @@
 "mkt": -0.9324,
 "occ": 57,
 "prob_gain": 63
+},
+{
+"date": "2026-07-04 09:31",
+"conv": 52,
+"price": 27.91,
+"mkt": -0.9325,
+"occ": 58,
+"prob_gain": 76
 }
 ]
 },
@@ -2664,6 +2702,14 @@
 "conv": null,
 "price": 24.71,
 "stale": true
+},
+{
+"date": "2026-07-04 09:31",
+"conv": 74,
+"price": 24.71,
+"mkt": -0.9325,
+"occ": 98,
+"prob_gain": 70
 }
 ]
 },
@@ -3866,6 +3912,14 @@
 "mkt": -0.9324,
 "occ": 61,
 "prob_gain": 75
+},
+{
+"date": "2026-07-04 09:31",
+"conv": 42,
+"price": 52.78,
+"mkt": -0.9325,
+"occ": 57,
+"prob_gain": 65
 }
 ]
 },
@@ -4201,7 +4255,7 @@
 "long:SSRM": {
 "ticker": "SSRM",
 "kind": "long",
-"name": "SSR Mining Inc",
+"name": "SSR MINING INC.",
 "obs": [
 {
 "date": "2026-06-29 16:52",
@@ -4313,6 +4367,14 @@
 "price": 30.62,
 "mkt": -0.9324,
 "occ": 61,
+"prob_gain": 64
+},
+{
+"date": "2026-07-04 09:31",
+"conv": 47,
+"price": 30.62,
+"mkt": -0.9325,
+"occ": 65,
 "prob_gain": 64
 }
 ]
@@ -4567,7 +4629,7 @@
 "long:XLE": {
 "ticker": "XLE",
 "kind": "long",
-"name": "XLE",
+"name": "State Street Energy Select Sect",
 "obs": [
 {
 "date": "2026-06-30 10:49",
