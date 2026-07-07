@@ -1300,13 +1300,19 @@ if section.startswith("Monitoraggio"):
             if extra:
                 st.caption(" · ".join(extra))
 
-            # Guadagno atteso comprando ORA e arrivando al bersaglio (INFO sul potenziale, non un'uscita)
+            # Guadagno atteso comprando ORA e arrivando al bersaglio (INFO sul potenziale, non un'uscita).
+            # L'importo è inseribile: il guadagno in € si ricalcola sull'importo scelto.
             tgt_now = last.get("target")
             if tgt_now and price and tgt_now > price:
                 pot = (tgt_now / price - 1) * 100
-                eur_net = round(1000 * (fu.net_return_pct(pot) or 0) / 100)
-                st.caption(f"🎯 Comprando ora, al bersaglio ({tgt_now:,.2f}) il guadagno atteso è "
-                           f"**+{pot:.1f}%** ≈ **€{eur_net}** netti (tassa 26%) su €1.000 investiti. Indicativo.")
+                pot_net = fu.net_return_pct(pot) or 0.0
+                cimp, _sp = st.columns([1, 2])
+                amt = cimp.number_input("💶 Importo da investire (€)", min_value=0, value=1000, step=100,
+                                        key=f"amt_{tk}",
+                                        help="Quanto investiresti ORA su questo titolo: il guadagno atteso qui sotto si aggiorna.")
+                eur_net = round(amt * pot_net / 100)
+                st.markdown(f"🎯 Al bersaglio (**{tgt_now:,.2f}**): **+{pot:.1f}%** → guadagno atteso "
+                            f"≈ **€{eur_net:,}** netti (tassa 26%) su €{amt:,.0f} investiti. *Indicativo, non una previsione.*")
 
             # Grafico: prezzo reale + convenienza accumulata (asse destro) + livelli.
             # Periodo selezionabile: dai giorni di monitoraggio fino al massimo storico.
