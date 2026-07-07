@@ -312,6 +312,14 @@
 "conv": null,
 "price": 25.0199,
 "stale": true
+},
+{
+"date": "2026-07-08 00:40",
+"conv": 42,
+"price": 25.21,
+"mkt": 1.6268,
+"occ": 57,
+"prob_gain": 56
 }
 ]
 },
@@ -909,6 +917,14 @@
 "mkt": 1.8136,
 "occ": 90,
 "prob_gain": 69
+},
+{
+"date": "2026-07-08 00:40",
+"conv": 67,
+"price": 49.01,
+"mkt": 1.6268,
+"occ": 73,
+"prob_gain": 70
 }
 ]
 },
@@ -1549,7 +1565,7 @@
 "long:T": {
 "ticker": "T",
 "kind": "long",
-"name": "AT&T Inc",
+"name": "AT&T Inc.",
 "obs": [
 {
 "date": "2026-06-29 09:37",
@@ -1764,6 +1780,14 @@
 "price": 20.965,
 "mkt": 1.8136,
 "occ": 72,
+"prob_gain": 82
+},
+{
+"date": "2026-07-08 00:40",
+"conv": 80,
+"price": 21.09,
+"mkt": 1.6268,
+"occ": 73,
 "prob_gain": 82
 }
 ]
@@ -3342,7 +3366,7 @@
 "long:CCL": {
 "ticker": "CCL",
 "kind": "long",
-"name": "Carnival Corp",
+"name": "Carnival Corporation & plc",
 "obs": [
 {
 "date": "2026-06-29 09:37",
@@ -3550,6 +3574,14 @@
 "mkt": 1.8136,
 "occ": 61,
 "prob_gain": 75
+},
+{
+"date": "2026-07-08 00:40",
+"conv": 66,
+"price": 26.68,
+"mkt": 1.6268,
+"occ": 61,
+"prob_gain": 73
 }
 ]
 },
@@ -5732,13 +5764,21 @@
 "conv": null,
 "price": 6.785,
 "stale": true
+},
+{
+"date": "2026-07-08 00:40",
+"conv": 75,
+"price": 6.77,
+"mkt": 1.6268,
+"occ": 61,
+"prob_gain": 88
 }
 ]
 },
 "long:SSRM": {
 "ticker": "SSRM",
 "kind": "long",
-"name": "SSR MINING INC.",
+"name": "SSR Mining Inc",
 "obs": [
 {
 "date": "2026-06-29 16:52",
@@ -5939,6 +5979,14 @@
 "mkt": 1.8136,
 "occ": 67,
 "prob_gain": 69
+},
+{
+"date": "2026-07-08 00:40",
+"conv": 57,
+"price": 29.91,
+"mkt": 1.6268,
+"occ": 63,
+"prob_gain": 61
 }
 ]
 },
@@ -7117,7 +7165,7 @@
 "long:BCE": {
 "ticker": "BCE",
 "kind": "long",
-"name": "BCE, Inc.",
+"name": "BCE Inc",
 "obs": [
 {
 "date": "2026-07-05 20:54",
@@ -7170,6 +7218,14 @@
 "mkt": 1.8136,
 "occ": 56,
 "prob_gain": 85
+},
+{
+"date": "2026-07-08 00:40",
+"conv": 87,
+"price": 21.4,
+"mkt": 1.6268,
+"occ": 63,
+"prob_gain": 88
 }
 ]
 },
