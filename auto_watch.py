@@ -165,8 +165,8 @@ def main():
     except Exception as e:
         log(f"Errore durante la promozione automatica: {e!r}")
 
-    # FASE 2 — monitoraggio: NON rimuove più per stop/perdita (segnala soltanto, campo `warn`);
-    # rimuove SOLO per crollo/delisting (>90%). Prima notifica per quelle confermate positive.
+    # FASE 2 — monitoraggio: rimozione autonoma PRUDENTE (solo se il deterioramento persiste alcuni
+    # giorni di Borsa, non al primo calo) + crollo/delisting (>90%) subito. Prima notifica per le confermate.
     try:
         to_notify, removed = fu.manage_monitoring()
         if removed:
