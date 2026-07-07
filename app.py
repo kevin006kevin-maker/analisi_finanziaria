@@ -975,11 +975,13 @@ if section.startswith("Occasioni"):
 if section.startswith("In osservazione"):
     page_header("In osservazione",
                 "Le occasioni che il sistema sta seguendo verso un'eventuale promozione nel Monitoraggio.")
-    st.caption("**Tutte** le occasioni trovate in «Occasioni di mercato» vengono osservate per una finestra "
-               "(**breve: 3 giorni**, **lungo: 7 giorni**). Al termine vengono promosse nel «Monitoraggio» **solo "
-               "quelle col prezzo risalito di almeno il 2%** (un rimbalzo reale, non rumore). Qui sotto ci sono tutte "
-               "quelle in osservazione, anche se per ora il prezzo è piatto o sta ancora scendendo. "
-               "Ordinate per **giorni mancanti** alla valutazione.")
+    st.caption("Qui vedi le occasioni **prima** che entrino nel Monitoraggio: è il posto per coglierle in "
+               "anticipo. Tutte quelle trovate in «Occasioni di mercato» vengono osservate per una finestra "
+               "(**breve: 3 giorni di Borsa**, **lungo: 7**). Al termine passano nel «Monitoraggio» **solo se "
+               "la tesi regge**: prezzo risalito ≥2%, convenienza ancora alta (≥55) e non in calo e — sul lungo "
+               "— fondamentali non peggiorati. Guarda **Rendimento** (quanto è già salita), **Tendenza** (se il "
+               "segnale si rafforza) e **Mancano** (giorni alla valutazione): se una sta già salendo bene puoi "
+               "seguirla a mano dalle «Occasioni» senza aspettare la promozione. Ordinate per giorni mancanti.")
     if fu.cloud_mode():
         st.caption("🤖 Aggiornate dal sistema autonomo sul server (~ogni 15 min, anche a PC spento).")
 
@@ -1139,9 +1141,16 @@ if section.startswith("Monitoraggio"):
 
     # --- 🧪 Validazione del sistema (backtest tecnico + verifica ML) — su richiesta, pesanti ---
     with st.expander("🧪 Validazione del sistema (backtest + verifica ML)", expanded=False):
-        st.caption("Prove di efficacia su dati storici, avviate su richiesta (pesanti). Il backtest "
-                   "valida il ramo TECNICO/prezzo del breve: i fondamentali point-in-time non sono "
-                   "ricostruibili da fonti gratuite, quindi il ramo 'qualità' non è incluso.")
+        st.caption("Mette alla prova il sistema sui DATI STORICI (non sui soldi veri). Il **backtest** "
+                   "ricostruisce le regole delle occasioni giorno per giorno usando solo i dati "
+                   "disponibili fino a quel momento (walk-forward, niente 'senno di poi') e simula gli "
+                   "acquisti, mostrando: quanti finiscono in positivo (**hit-rate**), il **guadagno medio "
+                   "NETTO** (tassa 26%), il confronto col semplice **compra-e-tieni l'indice**, e la resa "
+                   "per **fascia di convenienza** (verifica se la convenienza alta rende davvero di più). "
+                   "La **verifica ML** controlla se un modello di machine learning batte i metodi semplici "
+                   "(di norma no: i mercati sono ~imprevedibili). Sono pesanti → si avviano col pulsante. "
+                   "Limite onesto: valida solo il ramo TECNICO/prezzo del breve (i fondamentali storici "
+                   "non sono ricostruibili da fonti gratuite).")
         bcol1, bcol2 = st.columns(2)
         if bcol1.button("▶️ Backtest occasioni (breve)", key="run_backtest", use_container_width=True):
             with st.spinner("Backtest walk-forward in corso… (~1-2 min)"):
@@ -1250,6 +1259,13 @@ if section.startswith("Monitoraggio"):
             else:
                 st.caption("📅 Servono almeno **2 giorni** di scatti per valutare la tendenza. Riapri l'app domani.")
 
+            # Avviso (il sistema NON rimuove più da solo, tranne i crolli >90%: qui segnala e basta)
+            if entry.get("warn"):
+                st.markdown(
+                    f"<div style='padding:6px 10px;border-radius:8px;background:#cf222e14;"
+                    f"border-left:5px solid #cf222e;margin-bottom:8px'>⚠️ <b>Attenzione:</b> "
+                    f"{entry['warn']}.</div>", unsafe_allow_html=True)
+
             # Metriche attuali con variazione dal primo scatto
             def _delta(curr, prev):
                 if curr is None or prev is None:
@@ -1283,6 +1299,14 @@ if section.startswith("Monitoraggio"):
                 extra.append(f"affidabilità {rel}")
             if extra:
                 st.caption(" · ".join(extra))
+
+            # Guadagno atteso comprando ORA e arrivando al bersaglio (INFO sul potenziale, non un'uscita)
+            tgt_now = last.get("target")
+            if tgt_now and price and tgt_now > price:
+                pot = (tgt_now / price - 1) * 100
+                eur_net = round(1000 * (fu.net_return_pct(pot) or 0) / 100)
+                st.caption(f"🎯 Comprando ora, al bersaglio ({tgt_now:,.2f}) il guadagno atteso è "
+                           f"**+{pot:.1f}%** ≈ **€{eur_net}** netti (tassa 26%) su €1.000 investiti. Indicativo.")
 
             # Grafico: prezzo reale + convenienza accumulata (asse destro) + livelli.
             # Periodo selezionabile: dai giorni di monitoraggio fino al massimo storico.
@@ -1369,8 +1393,17 @@ if section.startswith("Monitoraggio"):
                 st.session_state["_goto_section"] = "Analisi di un titolo"
                 st.rerun()
 
-    short_items = [(tk, e) for tk, e in tracked.items() if e.get("kind") == "short"]
-    long_items = [(tk, e) for tk, e in tracked.items() if e.get("kind") != "short"]
+    # Ordine: prima le occasioni presenti da PIÙ TEMPO (added crescente → si segue l'evoluzione),
+    # poi per AFFIDABILITÀ (🟢 Alta prima di 🟡 Media prima di 🔴 Bassa).
+    def _mon_sort_key(item):
+        tk, e = item
+        snaps = e.get("snapshots") or []
+        rel = (snaps[-1].get("reliab") if snaps else "") or ""
+        rel_rank = 0 if "Alta" in rel else (1 if "Media" in rel else 2)
+        return (str(e.get("added") or "9999-99-99"), rel_rank, tk)
+
+    short_items = sorted([(tk, e) for tk, e in tracked.items() if e.get("kind") == "short"], key=_mon_sort_key)
+    long_items = sorted([(tk, e) for tk, e in tracked.items() if e.get("kind") != "short"], key=_mon_sort_key)
 
     if short_items:
         st.markdown("## Breve periodo (rimbalzo)")
