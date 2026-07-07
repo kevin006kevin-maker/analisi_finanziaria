@@ -1224,7 +1224,7 @@ def resolve_forecasts():
         if r.get("outcome") is not None:
             continue
         d0 = _parse_dt(r.get("date"))
-        if not d0 or not r.get("price") or _trading_days_between(r.get("date"), _today_iso()) < r.get("h", 21):
+        if not d0 or not r.get("price") or _trading_days_between(r.get("date"), _today_iso(), r.get("ticker")) < r.get("h", 21):
             continue
         tk = r["ticker"]
         if tk not in hist_cache:
@@ -2844,7 +2844,7 @@ def resolve_convenience_log() -> int:
             continue
         tk = x.get("ticker")
         for h_days, fld in ((5, "ret_5d"), (21, "ret_21d")):
-            if x.get(fld) is not None or _trading_days_between(x.get("date"), _today_iso()) < h_days:
+            if x.get(fld) is not None or _trading_days_between(x.get("date"), _today_iso(), x.get("ticker")) < h_days:
                 continue
             if tk not in cache:
                 try:
@@ -3499,7 +3499,7 @@ def sticky_watch_tickers(kind: str) -> list:
         obs = [o for o in e.get("obs", []) if o.get("price")]
         if not obs:
             continue
-        if _trading_days_between(obs[0]["date"], _today_iso()) < window + 1:   # finestra non ancora conclusa
+        if _trading_days_between(obs[0]["date"], _today_iso(), e.get("ticker")) < window + 1:   # finestra non ancora conclusa
             out.append(e.get("ticker"))
     return list(dict.fromkeys([t for t in out if t]))[:_STICKY_CAP]
 
@@ -3559,7 +3559,7 @@ def record_sticky_observations(kind: str, scanned_df) -> None:
         if not tk or tk in scanned:                    # già registrato dallo scan di oggi
             continue
         obs_p = [o for o in e.get("obs", []) if o.get("price")]
-        if not obs_p or _trading_days_between(obs_p[0]["date"], _today_iso()) >= window + 1:
+        if not obs_p or _trading_days_between(obs_p[0]["date"], _today_iso(), tk) >= window + 1:
             continue                                   # niente storia valida o finestra già conclusa
         try:
             r = opportunity_row(tk, with_fundamentals=(kind == "long"))   # cache dallo scan
@@ -3660,22 +3660,59 @@ def _days_between(d1, d2) -> int:
         return 0
 
 
-def _trading_days_between(d1, d2) -> int:
-    """Giorni di BORSA (lun-ven, weekend esclusi) tra due date ISO. Le finestre di osservazione/
-    monitoraggio (3/7 giorni, ecc.) sono giorni di mercato: contare i giorni di calendario faceva
-    'scadere' le finestre nei weekend, senza nuovi dati. Approssimazione: esclude i sabati/domeniche
-    (non i festivi di Borsa), comunque molto più corretta del calendario."""
+# --- Calendario di Borsa: le finestre a giorni contano i giorni di MERCATO (weekend E festivi esclusi),
+# col calendario dell'exchange del titolo (dal suffisso). Se la libreria manca/fallisce → giorni feriali. ---
+_MIC_BY_SUFFIX = {".MI": "XMIL", ".DE": "XETR", ".PA": "XPAR", ".AS": "XAMS", ".SW": "XSWX",
+                  ".L": "XLON", ".MC": "XMAD", ".BR": "XBRU", ".LS": "XLIS", ".VI": "XWBO",
+                  ".HE": "XHEL", ".ST": "XSTO", ".OL": "XOSL", ".CO": "XCSE", ".TO": "XTSE",
+                  ".AX": "XASX", ".T": "XTKS", ".HK": "XHKG"}
+_CAL_CACHE = {}
+
+
+def _exchange_for(ticker) -> str:
+    """Codice MIC del mercato di un ticker dal suffisso (default XNYS = NYSE per i titoli USA)."""
+    t = str(ticker or "").upper()
+    for suf, mic in _MIC_BY_SUFFIX.items():
+        if t.endswith(suf):
+            return mic
+    return "XNYS"
+
+
+def _market_calendar(code):
+    """Calendario di Borsa (cached) con margini attorno all'anno corrente (indipendente dall'orologio
+    di sistema). Solleva se la libreria non è disponibile → gestito dal chiamante col ripiego."""
+    if code not in _CAL_CACHE:
+        import exchange_calendars as xcals
+        import pandas as _pd
+        y = int(_today_iso()[:4])
+        _CAL_CACHE[code] = xcals.get_calendar(
+            code, start=_pd.Timestamp(f"{y - 6}-01-01"), end=_pd.Timestamp(f"{y + 2}-12-31"))
+    return _CAL_CACHE[code]
+
+
+def _trading_days_between(d1, d2, ticker=None) -> int:
+    """Giorni di BORSA tra due date ISO, esclusivo su d1 e inclusivo su d2. Usa il vero calendario
+    dell'exchange del `ticker` (weekend E festivi esclusi); ripiega ai soli giorni feriali (lun-ven,
+    festivi NON esclusi) se la libreria del calendario non è disponibile o fallisce."""
     try:
         a = datetime.date.fromisoformat(str(d1)[:10])
         b = datetime.date.fromisoformat(str(d2)[:10])
     except Exception:
         return 0
+    if b == a:
+        return 0
     if b < a:
         a, b = b, a
-    days, cur = 0, a
+    try:  # 1) vero calendario di Borsa (weekend + festivi del mercato del titolo)
+        import pandas as _pd
+        cal = _market_calendar(_exchange_for(ticker))
+        return int(len(cal.sessions_in_range(_pd.Timestamp(a) + _pd.Timedelta(days=1), _pd.Timestamp(b))))
+    except Exception:
+        pass
+    days, cur = 0, a   # 2) ripiego: giorni feriali (weekend esclusi, festivi no)
     while cur < b:
         cur += datetime.timedelta(days=1)
-        if cur.weekday() < 5:        # 0-4 = lun-ven
+        if cur.weekday() < 5:
             days += 1
     return days
 
@@ -3711,7 +3748,7 @@ def auto_promote_opportunities() -> list:
         obs = [o for o in e.get("obs", []) if o.get("price")]
         if len(obs) < 2:
             continue
-        days = _trading_days_between(obs[0]["date"], obs[-1]["date"])
+        days = _trading_days_between(obs[0]["date"], obs[-1]["date"], tk)
         window = _OBS_WINDOW.get(kind, 3)
         ret = (obs[-1]["price"] / obs[0]["price"] - 1) * 100 if obs[0]["price"] else 0.0
         # Finestra conclusa E rimbalzo REALE del prezzo (≥ _PROMO_MIN_RET %, non rumore)
@@ -3753,7 +3790,7 @@ def auto_promote_opportunities() -> list:
     return promoted
 
 
-def _collapsed_or_stale(entry: dict):
+def _collapsed_or_stale(entry: dict, ticker=None):
     """Rileva un titolo CROLLATO/delistato o con DATI FERMI, dagli scatti di monitoraggio.
     - "collapse": perdita > 90% dal primo scatto (fallimento/delisting) → va rimosso.
     - "stale": l'ultimo scatto con prezzo è vecchio di ≥3 giorni di Borsa (il titolo non riceve
@@ -3764,12 +3801,12 @@ def _collapsed_or_stale(entry: dict):
     base, last = snaps[0].get("price"), snaps[-1].get("price")
     if base and last is not None and (last / base - 1) <= -0.90:
         return "collapse"
-    if snaps[-1].get("date") and _trading_days_between(snaps[-1]["date"], _now_iso()) >= 3:
+    if snaps[-1].get("date") and _trading_days_between(snaps[-1]["date"], _now_iso(), ticker) >= 3:
         return "stale"
     return None
 
 
-def monitoring_warn(entry):
+def monitoring_warn(entry, ticker=None):
     """Motivo per cui un'occasione monitorata sarebbe DA VALUTARE PER L'USCITA (o None): è ciò che il
     sistema, coi vecchi criteri, avrebbe tolto da solo (sotto lo stop, in perdita da troppo, dati fermi,
     crollo). NON rimuove nulla. Calcolato dagli scatti già in memoria (nessuna chiamata di rete), così
@@ -3777,14 +3814,14 @@ def monitoring_warn(entry):
     snaps = [s for s in entry.get("snapshots", []) if s.get("price")]
     if not snaps:
         return None
-    state = _collapsed_or_stale(entry)
+    state = _collapsed_or_stale(entry, ticker)
     if state == "collapse":
         return "crollo/delisting (perdita >90%)"
     if state == "stale":
         return "dati non aggiornati (possibile delisting)"
     kind = entry.get("kind", "short")
     added = entry.get("added") or snaps[0].get("date")
-    days = _trading_days_between(added, _today_iso())
+    days = _trading_days_between(added, _today_iso(), ticker)
     base, last_price = snaps[0].get("price"), snaps[-1].get("price")
     ret = (last_price / base - 1) * 100 if base else 0.0
     stop = snaps[0].get("stop")
@@ -3804,14 +3841,14 @@ def _in_exit_cooldown(tk: str, cooldown: dict = None) -> bool:
     """True se il ticker è stato tolto di recente (entro _EXIT_COOLDOWN_DAYS): non ri-promuoverlo (anti-churn)."""
     d = cooldown if cooldown is not None else _load_exit_cooldown()
     v = d.get(str(tk).upper())
-    return bool(v and _trading_days_between(v, _today_iso()) < _EXIT_COOLDOWN_DAYS)
+    return bool(v and _trading_days_between(v, _today_iso(), tk) < _EXIT_COOLDOWN_DAYS)
 
 
 def _mark_exit_cooldown(tk: str) -> None:
     """Registra un ticker appena tolto dal monitoraggio (per non ri-promuoverlo subito) e pota i vecchi."""
     d = _load_exit_cooldown()
     d[str(tk).upper()] = _today_iso()
-    d = {k: v for k, v in d.items() if _trading_days_between(v, _today_iso()) < _EXIT_COOLDOWN_DAYS}
+    d = {k: v for k, v in d.items() if _trading_days_between(v, _today_iso(), k) < _EXIT_COOLDOWN_DAYS}
     write_data_json(EXIT_COOLDOWN_NAME, d)
 
 
@@ -3836,12 +3873,12 @@ def manage_monitoring() -> tuple:
             continue
         kind = e.get("kind", "short")
         added = e.get("added") or snaps[0].get("date")
-        days = _trading_days_between(added, _today_iso())
+        days = _trading_days_between(added, _today_iso(), tk)
         base = snaps[0]["price"]
         last_price = snaps[-1]["price"]
         ret = (last_price / base - 1) * 100 if base else 0.0   # rendimento dal giorno di promozione
         # Crollo estremo / delisting (>90%): rimozione IMMEDIATA + cooldown.
-        if _collapsed_or_stale(e) == "collapse":
+        if _collapsed_or_stale(e, tk) == "collapse":
             del tracked[tk]
             removed.append(tk)
             _mark_exit_cooldown(tk)
@@ -3850,7 +3887,7 @@ def manage_monitoring() -> tuple:
         # Deterioramento: si SEGNALA (`warn`) e si tiene traccia da QUANDO (`warn_since`). La rimozione
         # autonoma scatta SOLO se il deterioramento PERSISTE per _EXIT_CONFIRM_DAYS giorni di Borsa
         # (conferma, non al primo calo). Se recupera → si azzera tutto (niente churn).
-        warn = monitoring_warn(e)
+        warn = monitoring_warn(e, tk)
         if warn:
             if not e.get("warn_since"):
                 e["warn_since"] = _today_iso()
@@ -3858,7 +3895,7 @@ def manage_monitoring() -> tuple:
             if e.get("warn") != warn:
                 e["warn"] = warn
                 changed = True
-            if _trading_days_between(e["warn_since"], _today_iso()) >= _EXIT_CONFIRM_DAYS.get(kind, 5):
+            if _trading_days_between(e["warn_since"], _today_iso(), tk) >= _EXIT_CONFIRM_DAYS.get(kind, 5):
                 del tracked[tk]
                 removed.append(tk)
                 _mark_exit_cooldown(tk)
@@ -3935,7 +3972,7 @@ def observation_status() -> list:
         if not obs:
             continue
         kind = e.get("kind", "short")
-        days = _trading_days_between(obs[0]["date"], obs[-1]["date"])
+        days = _trading_days_between(obs[0]["date"], obs[-1]["date"], e.get("ticker"))
         ret = (obs[-1]["price"] / obs[0]["price"] - 1) * 100 if (len(obs) >= 2 and obs[0]["price"]) else 0.0
         window = _OBS_WINDOW.get(kind, 3)
         # Trend di CONVENIENZA su valori GIORNALIERI (mediana), tollerante ai cali temporanei:
