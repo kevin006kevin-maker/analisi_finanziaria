@@ -1231,7 +1231,7 @@ if section.startswith("Monitoraggio"):
         kind_badge = "⚡ Breve" if kind == "short" else "🏛️ Lungo"
         try:
             d0 = datetime.date.fromisoformat(entry.get("added", ""))
-            giorni = (datetime.date.today() - d0).days
+            giorni = fu._trading_days_between(entry.get("added", ""), fu._today_iso(), tk)
         except Exception:
             giorni = len(snaps) - 1
         trend = fu.tracking_trend(snaps)
@@ -1241,7 +1241,7 @@ if section.startswith("Monitoraggio"):
             auto_tag = " 🤖" if entry.get("auto") else ""
             tc1.markdown(f"### {nm}  ·  `{tk}`{auto_tag}")
             origine = "aggiunta automatica" if entry.get("auto") else "aggiunta manuale"
-            tc1.caption(f"{kind_badge} · {origine} · seguito da **{max(giorni,0)}** giorn{'o' if giorni==1 else 'i'} "
+            tc1.caption(f"{kind_badge} · {origine} · seguito da **{max(giorni,0)}** giorn{'o' if giorni==1 else 'i'} di Borsa "
                         f"(dal {entry.get('added','?')}) · {len(snaps)} scatt{'o' if len(snaps)==1 else 'i'}")
             if tc2.button("🗑️ Smetti", key=f"untrack_{tk}", use_container_width=True):
                 fu.untrack_opportunity(tk)
@@ -1425,9 +1425,9 @@ if section.startswith("Monitoraggio"):
     short_items = sorted([(tk, e) for tk, e in healthy if e.get("kind") == "short"], key=_mon_sort_key)
     long_items = sorted([(tk, e) for tk, e in healthy if e.get("kind") != "short"], key=_mon_sort_key)
 
-    # --- 🚪 Candidate all'uscita: quelle che il sistema AVREBBE tolto da solo (ora decidi tu) ---
+    # --- 🚪 Candidate all'uscita: SEMPRE visibile (con stato "nessuna" quando è tutto in salute) ---
+    st.markdown(f"## 🚪 Candidate all'uscita — {len(exit_items)}")
     if exit_items:
-        st.markdown(f"## 🚪 Candidate all'uscita — {len(exit_items)}")
         st.caption("Occasioni che stanno **smettendo di esserlo** (sotto lo stop, in perdita da troppo, "
                    "o dati fermi/possibile delisting). Il sistema le rimuove **da solo SOLO se restano "
                    "così per alcuni giorni** (conferma, non al primo calo: ~4 breve / ~10 lungo giorni di "
@@ -1442,12 +1442,12 @@ if section.startswith("Monitoraggio"):
             pr, ba = last.get("price"), first.get("price")
             ret = (pr / ba - 1) * 100 if (pr and ba) else None
             try:
-                gg = (datetime.date.today() - datetime.date.fromisoformat(e.get("added", ""))).days
+                gg = fu._trading_days_between(e.get("added", ""), fu._today_iso(), tk)
             except Exception:
                 gg = len(snaps) - 1
             with st.container(border=True):
                 xa, xb = st.columns([4, 1])
-                xa.markdown(f"**{nm}**  ·  `{tk}`  ·  {kb}  ·  seguito da {max(gg, 0)} giorni")
+                xa.markdown(f"**{nm}**  ·  `{tk}`  ·  {kb}  ·  seguito da {max(gg, 0)} giorni di Borsa")
                 xa.markdown(
                     f"<div style='padding:6px 10px;border-radius:8px;background:#cf222e14;"
                     f"border-left:5px solid #cf222e'>⚠️ <b>{e.get('warn')}</b>"
@@ -1460,7 +1460,10 @@ if section.startswith("Monitoraggio"):
                     st.session_state["ticker"] = tk
                     st.session_state["_goto_section"] = "Analisi di un titolo"
                     st.rerun()
-        st.markdown("---")
+    else:
+        st.caption("✅ Nessuna al momento: tutte le occasioni monitorate sono in salute. Una comparirà "
+                   "qui appena inizia a indebolirsi (sotto lo stop, in perdita da troppo o con dati fermi).")
+    st.markdown("---")
 
     if short_items:
         st.markdown("## Breve periodo (rimbalzo)")
