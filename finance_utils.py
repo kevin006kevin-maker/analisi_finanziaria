@@ -3745,12 +3745,28 @@ def auto_promote_opportunities() -> list:
     return promoted
 
 
+def _collapsed_or_stale(entry: dict):
+    """Rileva un titolo CROLLATO/delistato o con DATI FERMI, dagli scatti di monitoraggio.
+    - "collapse": perdita > 90% dal primo scatto (fallimento/delisting) → va rimosso.
+    - "stale": l'ultimo scatto con prezzo è vecchio di ≥3 giorni di Borsa (il titolo non riceve
+      più dati: possibile delisting) → si segnala soltanto. None se tutto regolare."""
+    snaps = [s for s in entry.get("snapshots", []) if s.get("price")]
+    if not snaps:
+        return None
+    base, last = snaps[0].get("price"), snaps[-1].get("price")
+    if base and last is not None and (last / base - 1) <= -0.90:
+        return "collapse"
+    if snaps[-1].get("date") and _trading_days_between(snaps[-1]["date"], _now_iso()) >= 3:
+        return "stale"
+    return None
+
+
 def manage_monitoring() -> tuple:
     """FASE 2 — monitoraggio (solo occasioni auto-promosse; le scelte manuali non si toccano).
-    Valutazione in base al PREZZO rispetto al primo giorno di monitoraggio (l'investimento rende?):
-    - rimuove quelle in perdita oltre la finestra (breve 5 giorni, lungo 10 giorni);
-    - segnala (prima notifica) quelle in guadagno oltre la finestra (breve 3, lungo 7).
-    Ritorna (da_notificare, rimosse)."""
+    NON rimuove più in automatico per stop/perdita: SEGNALA soltanto (campo `warn`), lasciando
+    decidere all'utente (così le occasioni non 'spariscono' né rientrano da capo azzerando i giorni).
+    UNICA rimozione automatica: crollo estremo/delisting (perdita > 90%). Invia la prima notifica
+    quando l'occasione è in guadagno oltre la finestra. Ritorna (da_notificare, rimosse)."""
     tracked = load_tracking()
     if not tracked:
         return [], []
@@ -3769,20 +3785,29 @@ def manage_monitoring() -> tuple:
         base = snaps[0]["price"]
         last_price = snaps[-1]["price"]
         ret = (last_price / base - 1) * 100 if base else 0.0   # rendimento dal giorno di promozione
-        # Rimozione su STOP DI VOLATILITÀ (ATR), non sulla soglia 0%: si esce quando il prezzo viola
-        # lo stop calcolato alla promozione (prezzo − 2·ATR), non per un semplice rumore sotto zero.
+        # UNICA rimozione automatica: crollo estremo / delisting (perdita > 90%).
+        state = _collapsed_or_stale(e)
+        if state == "collapse":
+            del tracked[tk]
+            removed.append(tk)
+            changed = True
+            continue
+        # Tutto il resto NON viene rimosso: si SEGNALA soltanto (campo `warn`), l'utente decide.
         stop = snaps[0].get("stop")
-        if stop is not None and last_price <= stop:
-            del tracked[tk]
-            removed.append(tk)
+        if state == "stale":
+            warn = "dati non aggiornati (possibile delisting)"
+        elif stop is not None and last_price <= stop:
+            warn = "sceso sotto lo stop (−2×ATR): valuta l'uscita"
+        elif days >= _REMOVE_WINDOW.get(kind, 5) and ret <= 0:
+            warn = f"in perdita da {days} giorni di Borsa: valuta l'uscita"
+        else:
+            warn = None
+        if e.get("warn") != warn:
+            if warn:
+                e["warn"] = warn
+            else:
+                e.pop("warn", None)
             changed = True
-            continue
-        # Ripiego per voci vecchie senza stop salvato: vecchia regola tempo + perdita.
-        if stop is None and days >= _REMOVE_WINDOW.get(kind, 5) and ret <= 0:
-            del tracked[tk]
-            removed.append(tk)
-            changed = True
-            continue
         if days >= _NOTIFY_WINDOW.get(kind, 3) and ret >= _NOTIFY_MIN_RET and not e.get("notified"):
             e["notified"] = True
             changed = True
