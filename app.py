@@ -1313,6 +1313,10 @@ if section.startswith("Monitoraggio"):
                 eur_net = round(amt * pot_net / 100)
                 st.markdown(f"🎯 Al bersaglio (**{tgt_now:,.2f}**): **+{pot:.1f}%** → guadagno atteso "
                             f"≈ **€{eur_net:,}** netti (tassa 26%) su €{amt:,.0f} investiti. *Indicativo, non una previsione.*")
+            elif tgt_now and price and tgt_now <= price:
+                st.caption(f"🎯 Bersaglio del rimbalzo (media 50gg ≈ {tgt_now:,.2f}) **già raggiunto/superato**: "
+                           f"il prezzo ({price:,.2f}) è salito oltre l'obiettivo, quindi non c'è un guadagno atteso "
+                           f"«fino al bersaglio» da mostrare (occasione promossa dopo un forte rialzo).")
 
             # Grafico: prezzo reale + convenienza accumulata (asse destro) + livelli.
             # Periodo selezionabile: dai giorni di monitoraggio fino al massimo storico.
@@ -1408,8 +1412,54 @@ if section.startswith("Monitoraggio"):
         rel_rank = 0 if "Alta" in rel else (1 if "Media" in rel else 2)
         return (str(e.get("added") or "9999-99-99"), rel_rank, tk)
 
-    short_items = sorted([(tk, e) for tk, e in tracked.items() if e.get("kind") == "short"], key=_mon_sort_key)
-    long_items = sorted([(tk, e) for tk, e in tracked.items() if e.get("kind") != "short"], key=_mon_sort_key)
+    # Il sistema NON rimuove più da solo: calcola dal vivo (senza chiamate di rete) quali AVREBBE
+    # tolto e le raccoglie in "Candidate all'uscita"; le altre restano nelle liste normali.
+    for _tk, _e in tracked.items():
+        _w = fu.monitoring_warn(_e)
+        if _w:
+            _e["warn"] = _w
+        else:
+            _e.pop("warn", None)
+    exit_items = sorted([(tk, e) for tk, e in tracked.items() if e.get("warn")], key=_mon_sort_key)
+    healthy = [(tk, e) for tk, e in tracked.items() if not e.get("warn")]
+    short_items = sorted([(tk, e) for tk, e in healthy if e.get("kind") == "short"], key=_mon_sort_key)
+    long_items = sorted([(tk, e) for tk, e in healthy if e.get("kind") != "short"], key=_mon_sort_key)
+
+    # --- 🚪 Candidate all'uscita: quelle che il sistema AVREBBE tolto da solo (ora decidi tu) ---
+    if exit_items:
+        st.markdown(f"## 🚪 Candidate all'uscita — {len(exit_items)}")
+        st.caption("Il sistema **non rimuove più da solo**: raccoglie qui le occasioni che coi vecchi "
+                   "criteri avrebbe eliminato — sotto lo stop, in perdita da troppo, o dati fermi / "
+                   "possibile delisting. Decidi tu: 🗑️ toglile o tienile. (I crolli oltre il 90% "
+                   "vengono invece rimossi in automatico.)")
+        for tk, e in exit_items:
+            snaps = e.get("snapshots", [])
+            last = snaps[-1] if snaps else {}
+            first = snaps[0] if snaps else {}
+            nm = e.get("name") or last.get("name") or tk
+            kb = "⚡ Breve" if e.get("kind") == "short" else "🏛️ Lungo"
+            pr, ba = last.get("price"), first.get("price")
+            ret = (pr / ba - 1) * 100 if (pr and ba) else None
+            try:
+                gg = (datetime.date.today() - datetime.date.fromisoformat(e.get("added", ""))).days
+            except Exception:
+                gg = len(snaps) - 1
+            with st.container(border=True):
+                xa, xb = st.columns([4, 1])
+                xa.markdown(f"**{nm}**  ·  `{tk}`  ·  {kb}  ·  seguito da {max(gg, 0)} giorni")
+                xa.markdown(
+                    f"<div style='padding:6px 10px;border-radius:8px;background:#cf222e14;"
+                    f"border-left:5px solid #cf222e'>⚠️ <b>{e.get('warn')}</b>"
+                    + (f" · rendimento <b>{ret:+.1f}%</b> da quando lo segui" if ret is not None else "")
+                    + "</div>", unsafe_allow_html=True)
+                if xb.button("🗑️ Smetti", key=f"exit_untrack_{tk}", use_container_width=True):
+                    fu.untrack_opportunity(tk)
+                    st.rerun()
+                if xb.button("📊 Analizza", key=f"exit_goto_{tk}", use_container_width=True):
+                    st.session_state["ticker"] = tk
+                    st.session_state["_goto_section"] = "Analisi di un titolo"
+                    st.rerun()
+        st.markdown("---")
 
     if short_items:
         st.markdown("## Breve periodo (rimbalzo)")
