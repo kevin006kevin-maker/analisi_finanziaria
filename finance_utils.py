@@ -3643,6 +3643,11 @@ _OBS_WINDOW = {"short": 3, "long": 7}      # osservazione prima della promozione
 _REMOVE_WINDOW = {"short": 5, "long": 10}  # dopo quanti giorni, se in perdita, si toglie dal monitoraggio
 _NOTIFY_WINDOW = {"short": 3, "long": 7}   # giorni di monitoraggio positivo per la prima notifica
 _NOTIFY_MIN_RET = 3.0   # guadagno minimo (%) per la notifica di conferma (niente notifiche banali a +0,1%)
+# Rimozione autonoma PRUDENTE: si toglie un'occasione solo se il deterioramento (`warn`) PERSISTE per
+# questi giorni di Borsa (CONFERMA, non al primo calo). Se recupera, il conto si azzera → niente churn.
+_EXIT_CONFIRM_DAYS = {"short": 4, "long": 10}
+_EXIT_COOLDOWN_DAYS = 5           # giorni di Borsa in cui un titolo tolto NON si ri-promuove (anti-churn)
+EXIT_COOLDOWN_NAME = "exit_cooldown.json"
 
 
 def _days_between(d1, d2) -> int:
@@ -3693,12 +3698,15 @@ def auto_promote_opportunities() -> list:
     osservato (la ripresa è iniziata) viene inserita nel Monitoraggio. Ritorna i ticker promossi."""
     watch = load_opp_watch()
     tracked = load_tracking()
+    cooldown = _load_exit_cooldown()
     promoted = []
     new_records = []
     for key, e in watch.items():
         tk = e.get("ticker", key.split(":")[-1])
         if tk in tracked:
             continue
+        if _in_exit_cooldown(tk, cooldown):
+            continue   # tolta di recente per deterioramento confermato: niente ri-promozione (anti-churn)
         kind = e.get("kind", "short")
         obs = [o for o in e.get("obs", []) if o.get("price")]
         if len(obs) < 2:
@@ -3787,12 +3795,33 @@ def monitoring_warn(entry):
     return None
 
 
+def _load_exit_cooldown() -> dict:
+    d = read_data_json(EXIT_COOLDOWN_NAME, {})
+    return d if isinstance(d, dict) else {}
+
+
+def _in_exit_cooldown(tk: str, cooldown: dict = None) -> bool:
+    """True se il ticker è stato tolto di recente (entro _EXIT_COOLDOWN_DAYS): non ri-promuoverlo (anti-churn)."""
+    d = cooldown if cooldown is not None else _load_exit_cooldown()
+    v = d.get(str(tk).upper())
+    return bool(v and _trading_days_between(v, _today_iso()) < _EXIT_COOLDOWN_DAYS)
+
+
+def _mark_exit_cooldown(tk: str) -> None:
+    """Registra un ticker appena tolto dal monitoraggio (per non ri-promuoverlo subito) e pota i vecchi."""
+    d = _load_exit_cooldown()
+    d[str(tk).upper()] = _today_iso()
+    d = {k: v for k, v in d.items() if _trading_days_between(v, _today_iso()) < _EXIT_COOLDOWN_DAYS}
+    write_data_json(EXIT_COOLDOWN_NAME, d)
+
+
 def manage_monitoring() -> tuple:
     """FASE 2 — monitoraggio (solo occasioni auto-promosse; le scelte manuali non si toccano).
-    NON rimuove più in automatico per stop/perdita: SEGNALA soltanto (campo `warn`), lasciando
-    decidere all'utente (così le occasioni non 'spariscono' né rientrano da capo azzerando i giorni).
-    UNICA rimozione automatica: crollo estremo/delisting (perdita > 90%). Invia la prima notifica
-    quando l'occasione è in guadagno oltre la finestra. Ritorna (da_notificare, rimosse)."""
+    Rimozione autonoma PRUDENTE: un'occasione viene tolta solo se il deterioramento (`warn`) PERSISTE
+    per alcuni giorni di Borsa (_EXIT_CONFIRM_DAYS: breve 4 / lungo 10) — NON al primo calo — oppure
+    subito in caso di crollo/delisting (>90%). Se recupera, il conto (`warn_since`) si azzera → niente
+    churn; i titoli tolti vanno in cooldown per non essere ri-promossi subito. Invia la prima notifica
+    per le occasioni in guadagno oltre la finestra. Ritorna (da_notificare, rimosse)."""
     tracked = load_tracking()
     if not tracked:
         return [], []
@@ -3811,20 +3840,33 @@ def manage_monitoring() -> tuple:
         base = snaps[0]["price"]
         last_price = snaps[-1]["price"]
         ret = (last_price / base - 1) * 100 if base else 0.0   # rendimento dal giorno di promozione
-        # UNICA rimozione automatica: crollo estremo / delisting (perdita > 90%).
-        state = _collapsed_or_stale(e)
-        if state == "collapse":
+        # Crollo estremo / delisting (>90%): rimozione IMMEDIATA + cooldown.
+        if _collapsed_or_stale(e) == "collapse":
             del tracked[tk]
             removed.append(tk)
+            _mark_exit_cooldown(tk)
             changed = True
             continue
-        # Tutto il resto NON viene rimosso: si SEGNALA soltanto (campo `warn`), l'utente decide.
+        # Deterioramento: si SEGNALA (`warn`) e si tiene traccia da QUANDO (`warn_since`). La rimozione
+        # autonoma scatta SOLO se il deterioramento PERSISTE per _EXIT_CONFIRM_DAYS giorni di Borsa
+        # (conferma, non al primo calo). Se recupera → si azzera tutto (niente churn).
         warn = monitoring_warn(e)
-        if e.get("warn") != warn:
-            if warn:
+        if warn:
+            if not e.get("warn_since"):
+                e["warn_since"] = _today_iso()
+                changed = True
+            if e.get("warn") != warn:
                 e["warn"] = warn
-            else:
-                e.pop("warn", None)
+                changed = True
+            if _trading_days_between(e["warn_since"], _today_iso()) >= _EXIT_CONFIRM_DAYS.get(kind, 5):
+                del tracked[tk]
+                removed.append(tk)
+                _mark_exit_cooldown(tk)
+                changed = True
+                continue
+        elif e.get("warn") is not None or e.get("warn_since") is not None:
+            e.pop("warn", None)
+            e.pop("warn_since", None)
             changed = True
         if days >= _NOTIFY_WINDOW.get(kind, 3) and ret >= _NOTIFY_MIN_RET and not e.get("notified"):
             e["notified"] = True
