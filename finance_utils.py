@@ -3761,6 +3761,32 @@ def _collapsed_or_stale(entry: dict):
     return None
 
 
+def monitoring_warn(entry):
+    """Motivo per cui un'occasione monitorata sarebbe DA VALUTARE PER L'USCITA (o None): è ciò che il
+    sistema, coi vecchi criteri, avrebbe tolto da solo (sotto lo stop, in perdita da troppo, dati fermi,
+    crollo). NON rimuove nulla. Calcolato dagli scatti già in memoria (nessuna chiamata di rete), così
+    sia il job sia l'app possono usarlo (l'app lo mostra dal vivo nella sezione 'Candidate all'uscita')."""
+    snaps = [s for s in entry.get("snapshots", []) if s.get("price")]
+    if not snaps:
+        return None
+    state = _collapsed_or_stale(entry)
+    if state == "collapse":
+        return "crollo/delisting (perdita >90%)"
+    if state == "stale":
+        return "dati non aggiornati (possibile delisting)"
+    kind = entry.get("kind", "short")
+    added = entry.get("added") or snaps[0].get("date")
+    days = _trading_days_between(added, _today_iso())
+    base, last_price = snaps[0].get("price"), snaps[-1].get("price")
+    ret = (last_price / base - 1) * 100 if base else 0.0
+    stop = snaps[0].get("stop")
+    if stop is not None and last_price is not None and last_price <= stop:
+        return "sceso sotto lo stop (−2×ATR): valuta l'uscita"
+    if days >= _REMOVE_WINDOW.get(kind, 5) and ret <= 0:
+        return f"in perdita da {days} giorni di Borsa: valuta l'uscita"
+    return None
+
+
 def manage_monitoring() -> tuple:
     """FASE 2 — monitoraggio (solo occasioni auto-promosse; le scelte manuali non si toccano).
     NON rimuove più in automatico per stop/perdita: SEGNALA soltanto (campo `warn`), lasciando
@@ -3793,15 +3819,7 @@ def manage_monitoring() -> tuple:
             changed = True
             continue
         # Tutto il resto NON viene rimosso: si SEGNALA soltanto (campo `warn`), l'utente decide.
-        stop = snaps[0].get("stop")
-        if state == "stale":
-            warn = "dati non aggiornati (possibile delisting)"
-        elif stop is not None and last_price <= stop:
-            warn = "sceso sotto lo stop (−2×ATR): valuta l'uscita"
-        elif days >= _REMOVE_WINDOW.get(kind, 5) and ret <= 0:
-            warn = f"in perdita da {days} giorni di Borsa: valuta l'uscita"
-        else:
-            warn = None
+        warn = monitoring_warn(e)
         if e.get("warn") != warn:
             if warn:
                 e["warn"] = warn
