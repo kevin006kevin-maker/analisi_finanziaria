@@ -85,19 +85,6 @@ def notify_exit(items):
         else "Notifica uscita NON inviata (Telegram non configurato o errore).")
 
 
-def notify_delisting(tickers):
-    """Notifica quando un'occasione viene RIMOSSA dal Monitoraggio per crollo estremo/delisting (>90%)."""
-    if not tickers:
-        return
-    righe = ["🗑️ <b>Rimosse dal Monitoraggio (crollo/delisting)</b>", ""]
-    for tk in tickers:
-        righe.append(f"• <b>{html.escape(str(tk))}</b> — crollo oltre il 90% (probabile delisting/fallimento)")
-    righe += ["", "Tolte in automatico perché i dati indicano un crollo estremo. (Non è un consiglio.)"]
-    ok = fu.send_telegram("\n".join(righe))
-    log("Notifica delisting inviata." if ok
-        else "Notifica delisting NON inviata (Telegram non configurato o errore).")
-
-
 def notify_sales(fired):
     """Notifica Telegram quando conviene valutare la vendita di un titolo del portafoglio."""
     righe = ["💰 <b>Consiglio di vendita</b>", ""]
@@ -183,8 +170,7 @@ def main():
     try:
         to_notify, removed = fu.manage_monitoring()
         if removed:
-            log(f"Rimosse per crollo/delisting (>90%): {', '.join(removed)}")
-            notify_delisting(removed)
+            log(f"Rimosse per crollo/delisting (>90%): {', '.join(removed)}")  # rimozione silenziosa (nessuna notifica)
         if to_notify:
             log(f"Notifica opportunità confermate: {', '.join(x['ticker'] for x in to_notify)}")
             notify_monitoring(to_notify)
