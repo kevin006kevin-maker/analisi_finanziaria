@@ -1428,10 +1428,11 @@ if section.startswith("Monitoraggio"):
     # --- 🚪 Candidate all'uscita: quelle che il sistema AVREBBE tolto da solo (ora decidi tu) ---
     if exit_items:
         st.markdown(f"## 🚪 Candidate all'uscita — {len(exit_items)}")
-        st.caption("Il sistema **non rimuove più da solo**: raccoglie qui le occasioni che coi vecchi "
-                   "criteri avrebbe eliminato — sotto lo stop, in perdita da troppo, o dati fermi / "
-                   "possibile delisting. Decidi tu: 🗑️ toglile o tienile. (I crolli oltre il 90% "
-                   "vengono invece rimossi in automatico.)")
+        st.caption("Occasioni che stanno **smettendo di esserlo** (sotto lo stop, in perdita da troppo, "
+                   "o dati fermi/possibile delisting). Il sistema le rimuove **da solo SOLO se restano "
+                   "così per alcuni giorni** (conferma, non al primo calo: ~4 breve / ~10 lungo giorni di "
+                   "Borsa); se recuperano, restano. Qui le vedi in anticipo → 🗑️ puoi toglierle subito. "
+                   "(I crolli oltre il 90% vengono rimossi subito.)")
         for tk, e in exit_items:
             snaps = e.get("snapshots", [])
             last = snaps[-1] if snaps else {}
