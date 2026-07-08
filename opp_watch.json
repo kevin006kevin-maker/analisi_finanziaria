@@ -2393,6 +2393,14 @@
 "mkt": 1.6267,
 "occ": 47,
 "prob_gain": 51
+},
+{
+"date": "2026-07-08 20:54",
+"conv": 82,
+"price": 4.6955,
+"mkt": 0.9842,
+"occ": 49,
+"prob_gain": 52
 }
 ]
 },
@@ -2531,6 +2539,14 @@
 "mkt": 1.6267,
 "occ": 89,
 "prob_gain": 57
+},
+{
+"date": "2026-07-08 20:54",
+"conv": 72,
+"price": 6.481,
+"mkt": 0.9842,
+"occ": 97,
+"prob_gain": 56
 }
 ]
 },
@@ -6902,6 +6918,14 @@
 "mkt": -0.6181,
 "occ": 38,
 "prob_gain": 50
+},
+{
+"date": "2026-07-08 20:54",
+"conv": 77,
+"price": 21.175,
+"mkt": 0.9842,
+"occ": 54,
+"prob_gain": 52
 }
 ]
 },
@@ -7372,6 +7396,14 @@
 "mkt": 1.6267,
 "occ": 47,
 "prob_gain": 65
+},
+{
+"date": "2026-07-08 20:54",
+"conv": 82,
+"price": 8.93,
+"mkt": 0.9842,
+"occ": 86,
+"prob_gain": 62
 }
 ]
 },
@@ -7471,6 +7503,14 @@
 "conv": null,
 "price": 2.8,
 "stale": true
+},
+{
+"date": "2026-07-08 20:54",
+"conv": 75,
+"price": 3.54,
+"mkt": 0.9842,
+"occ": 66,
+"prob_gain": 64
 }
 ]
 },
@@ -7608,6 +7648,51 @@
 "mkt": 1.6267,
 "occ": 38,
 "prob_gain": 76
+}
+]
+},
+"short:ORCL": {
+"ticker": "ORCL",
+"kind": "short",
+"name": "ORCL",
+"obs": [
+{
+"date": "2026-07-08 20:54",
+"conv": 77,
+"price": 139.23,
+"mkt": 0.9842,
+"occ": 50,
+"prob_gain": 47
+}
+]
+},
+"short:WMT": {
+"ticker": "WMT",
+"kind": "short",
+"name": "WMT",
+"obs": [
+{
+"date": "2026-07-08 20:54",
+"conv": 71,
+"price": 112.89,
+"mkt": 0.9842,
+"occ": 41,
+"prob_gain": 49
+}
+]
+},
+"short:SMH": {
+"ticker": "SMH",
+"kind": "short",
+"name": "SMH",
+"obs": [
+{
+"date": "2026-07-08 20:54",
+"conv": 63,
+"price": 592.61,
+"mkt": 0.9842,
+"occ": 39,
+"prob_gain": 52
 }
 ]
 }
