@@ -568,6 +568,14 @@
 "mkt": 2.1275,
 "occ": 67,
 "prob_gain": 68
+},
+{
+"date": "2026-07-10 12:37",
+"conv": 59,
+"price": 17.03,
+"mkt": 2.1253,
+"occ": 67,
+"prob_gain": 68
 }
 ]
 },
@@ -739,6 +747,14 @@
 "conv": null,
 "price": 41.88,
 "stale": true
+},
+{
+"date": "2026-07-10 12:37",
+"conv": 39,
+"price": 41.88,
+"mkt": 2.1253,
+"occ": 61,
+"prob_gain": 60
 }
 ]
 },
@@ -998,6 +1014,14 @@
 "mkt": 2.1275,
 "occ": 91,
 "prob_gain": 71
+},
+{
+"date": "2026-07-10 12:37",
+"conv": 75,
+"price": 94.81,
+"mkt": 2.1253,
+"occ": 91,
+"prob_gain": 72
 }
 ]
 },
@@ -1173,6 +1197,14 @@
 "mkt": 2.1252,
 "occ": 73,
 "prob_gain": 73
+},
+{
+"date": "2026-07-10 12:37",
+"conv": 57,
+"price": 48.72,
+"mkt": 2.1253,
+"occ": 90,
+"prob_gain": 71
 }
 ]
 },
@@ -1383,6 +1415,14 @@
 "mkt": 2.1275,
 "occ": 97,
 "prob_gain": 59
+},
+{
+"date": "2026-07-10 12:37",
+"conv": 65,
+"price": 16.02,
+"mkt": 2.1253,
+"occ": 96,
+"prob_gain": 63
 }
 ]
 },
@@ -1597,6 +1637,14 @@
 "mkt": 2.1275,
 "occ": 59,
 "prob_gain": 77
+},
+{
+"date": "2026-07-10 12:37",
+"conv": 69,
+"price": 3.48,
+"mkt": 2.1253,
+"occ": 59,
+"prob_gain": 73
 }
 ]
 },
@@ -1880,6 +1928,14 @@
 "mkt": 2.1275,
 "occ": 84,
 "prob_gain": 62
+},
+{
+"date": "2026-07-10 12:37",
+"conv": 48,
+"price": 28.24,
+"mkt": 2.1253,
+"occ": 84,
+"prob_gain": 58
 }
 ]
 },
@@ -1888,13 +1944,6 @@
 "kind": "long",
 "name": "Venture Global Inc",
 "obs": [
-{
-"date": "2026-06-21 18:59",
-"conv": 51,
-"price": 11.02,
-"occ": 81,
-"prob_gain": 71
-},
 {
 "date": "2026-06-29 09:37",
 "conv": 42,
@@ -1939,13 +1988,21 @@
 "mkt": -0.9325,
 "occ": 81,
 "prob_gain": 57
+},
+{
+"date": "2026-07-10 12:37",
+"conv": 33,
+"price": 12.53,
+"mkt": 2.1253,
+"occ": 72,
+"prob_gain": 52
 }
 ]
 },
 "long:T": {
 "ticker": "T",
 "kind": "long",
-"name": "AT&T Inc.",
+"name": "AT&T Inc",
 "obs": [
 {
 "date": "2026-06-29 09:37",
@@ -2217,6 +2274,14 @@
 "mkt": 2.1252,
 "occ": 73,
 "prob_gain": 80
+},
+{
+"date": "2026-07-10 12:37",
+"conv": 61,
+"price": 21.04,
+"mkt": 2.1253,
+"occ": 72,
+"prob_gain": 78
 }
 ]
 },
@@ -3366,6 +3431,14 @@
 "mkt": 2.1275,
 "occ": 63,
 "prob_gain": 66
+},
+{
+"date": "2026-07-10 12:37",
+"conv": 51,
+"price": 4.745,
+"mkt": 2.1253,
+"occ": 63,
+"prob_gain": 65
 }
 ]
 },
@@ -3570,6 +3643,14 @@
 "mkt": 2.1275,
 "occ": 66,
 "prob_gain": 52
+},
+{
+"date": "2026-07-10 12:37",
+"conv": 14,
+"price": 330.5,
+"mkt": 2.1253,
+"occ": 65,
+"prob_gain": 54
 }
 ]
 },
@@ -4024,7 +4105,7 @@
 "long:CCL": {
 "ticker": "CCL",
 "kind": "long",
-"name": "Carnival Corporation & plc",
+"name": "Carnival Corp",
 "obs": [
 {
 "date": "2026-06-29 09:37",
@@ -4296,6 +4377,14 @@
 "mkt": 2.1252,
 "occ": 61,
 "prob_gain": 75
+},
+{
+"date": "2026-07-10 12:37",
+"conv": 63,
+"price": 26.72,
+"mkt": 2.1253,
+"occ": 62,
+"prob_gain": 71
 }
 ]
 },
@@ -4754,6 +4843,14 @@
 "mkt": 2.1275,
 "occ": 100,
 "prob_gain": 67
+},
+{
+"date": "2026-07-10 12:37",
+"conv": 73,
+"price": 24.2,
+"mkt": 2.1253,
+"occ": 99,
+"prob_gain": 65
 }
 ]
 },
@@ -6166,6 +6263,14 @@
 "conv": null,
 "price": 56.945,
 "stale": true
+},
+{
+"date": "2026-07-10 12:37",
+"conv": 37,
+"price": 57.2,
+"mkt": 2.1253,
+"occ": 53,
+"prob_gain": 65
 }
 ]
 },
@@ -8146,7 +8251,7 @@
 "long:BCE": {
 "ticker": "BCE",
 "kind": "long",
-"name": "BCE Inc",
+"name": "BCE, Inc.",
 "obs": [
 {
 "date": "2026-07-05 20:54",
@@ -8255,6 +8360,14 @@
 "mkt": 2.1252,
 "occ": 63,
 "prob_gain": 90
+},
+{
+"date": "2026-07-10 12:37",
+"conv": 58,
+"price": 21.32,
+"mkt": 2.1253,
+"occ": 57,
+"prob_gain": 89
 }
 ]
 },
@@ -8763,6 +8876,21 @@
 "mkt": 2.1253,
 "occ": 50,
 "prob_gain": 55
+}
+]
+},
+"long:SYF": {
+"ticker": "SYF",
+"kind": "long",
+"name": "Synchrony Financial",
+"obs": [
+{
+"date": "2026-07-10 12:37",
+"conv": 77,
+"price": 71.57,
+"mkt": 2.1253,
+"occ": 68,
+"prob_gain": 84
 }
 ]
 }
