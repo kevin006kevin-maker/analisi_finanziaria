@@ -1433,33 +1433,11 @@ if section.startswith("Monitoraggio"):
                    "così per alcuni giorni** (conferma, non al primo calo: ~4 breve / ~10 lungo giorni di "
                    "Borsa); se recuperano, restano. Qui le vedi in anticipo → 🗑️ puoi toglierle subito. "
                    "(I crolli oltre il 90% vengono rimossi subito.)")
+        # Card COMPLETA (grafico + metriche + badge "⚠️ Attenzione" + guadagno al bersaglio +
+        # "📊 Analizza" / "🗑️ Smetti"): così vedi subito l'andamento della candidata, senza dover
+        # cambiare pagina. render_tracked mostra già l'avviso da entry["warn"].
         for tk, e in exit_items:
-            snaps = e.get("snapshots", [])
-            last = snaps[-1] if snaps else {}
-            first = snaps[0] if snaps else {}
-            nm = e.get("name") or last.get("name") or tk
-            kb = "⚡ Breve" if e.get("kind") == "short" else "🏛️ Lungo"
-            pr, ba = last.get("price"), first.get("price")
-            ret = (pr / ba - 1) * 100 if (pr and ba) else None
-            try:
-                gg = fu._trading_days_between(e.get("added", ""), fu._today_iso(), tk)
-            except Exception:
-                gg = len(snaps) - 1
-            with st.container(border=True):
-                xa, xb = st.columns([4, 1])
-                xa.markdown(f"**{nm}**  ·  `{tk}`  ·  {kb}  ·  seguito da {max(gg, 0)} giorni di Borsa")
-                xa.markdown(
-                    f"<div style='padding:6px 10px;border-radius:8px;background:#cf222e14;"
-                    f"border-left:5px solid #cf222e'>⚠️ <b>{e.get('warn')}</b>"
-                    + (f" · rendimento <b>{ret:+.1f}%</b> da quando lo segui" if ret is not None else "")
-                    + "</div>", unsafe_allow_html=True)
-                if xb.button("🗑️ Smetti", key=f"exit_untrack_{tk}", use_container_width=True):
-                    fu.untrack_opportunity(tk)
-                    st.rerun()
-                if xb.button("📊 Analizza", key=f"exit_goto_{tk}", use_container_width=True):
-                    st.session_state["ticker"] = tk
-                    st.session_state["_goto_section"] = "Analisi di un titolo"
-                    st.rerun()
+            render_tracked(tk, e)
     else:
         st.caption("✅ Nessuna al momento: tutte le occasioni monitorate sono in salute. Una comparirà "
                    "qui appena inizia a indebolirsi (sotto lo stop, in perdita da troppo o con dati fermi).")
