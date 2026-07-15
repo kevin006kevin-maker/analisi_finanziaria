@@ -263,9 +263,7 @@
 }
 ],
 "auto": true,
-"notified": true,
-"warn_since": "2026-07-14",
-"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
+"notified": true
 },
 "STRC": {
 "kind": "short",
@@ -1241,7 +1239,7 @@
 "auto": true,
 "notified": false,
 "warn_since": "2026-07-13",
-"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
+"warn": "sceso sotto lo stop (−2×ATR): valuta l'uscita"
 },
 "SOC": {
 "kind": "short",
@@ -2947,6 +2945,8 @@
 "stop": 4.6611,
 "date": "2026-07-15 14:10"
 }
-]
+],
+"auto": true,
+"notified": false
 }
 }
