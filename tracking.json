@@ -263,7 +263,8 @@
 }
 ],
 "auto": true,
-"notified": true
+"notified": true,
+"exit_notified": true
 },
 "STRC": {
 "kind": "short",
@@ -1911,7 +1912,8 @@
 }
 ],
 "auto": true,
-"notified": true
+"notified": true,
+"exit_notified": true
 },
 "XLE": {
 "kind": "short",
@@ -3013,6 +3015,8 @@
 "stop": 5.2221,
 "date": "2026-07-15 18:56"
 }
-]
+],
+"auto": true,
+"notified": false
 }
 }
