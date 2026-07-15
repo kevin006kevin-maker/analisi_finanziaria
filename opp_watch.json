@@ -576,6 +576,14 @@
 "mkt": 0.2368,
 "occ": 63,
 "prob_gain": 60
+},
+{
+"date": "2026-07-15 22:44",
+"conv": 62,
+"price": 17.86,
+"mkt": 0.2397,
+"occ": 63,
+"prob_gain": 59
 }
 ]
 },
@@ -897,6 +905,14 @@
 "mkt": 0.2368,
 "occ": 59,
 "prob_gain": 60
+},
+{
+"date": "2026-07-15 22:44",
+"conv": 49,
+"price": 42.73,
+"mkt": 0.2397,
+"occ": 59,
+"prob_gain": 61
 }
 ]
 },
@@ -1716,6 +1732,14 @@
 "mkt": 0.2368,
 "occ": 97,
 "prob_gain": 62
+},
+{
+"date": "2026-07-15 22:44",
+"conv": 66,
+"price": 15.91,
+"mkt": 0.2397,
+"occ": 97,
+"prob_gain": 65
 }
 ]
 },
@@ -1724,12 +1748,6 @@
 "kind": "long",
 "name": "Banco Bradesco SA",
 "obs": [
-{
-"date": "2026-07-03 22:36",
-"conv": null,
-"price": 3.45,
-"stale": true
-},
 {
 "date": "2026-07-04 09:31",
 "conv": 64,
@@ -1955,6 +1973,14 @@
 "mkt": 0.2368,
 "occ": 55,
 "prob_gain": 70
+},
+{
+"date": "2026-07-15 22:44",
+"conv": 60,
+"price": 3.62,
+"mkt": 0.2397,
+"occ": 56,
+"prob_gain": 72
 }
 ]
 },
@@ -2040,12 +2066,6 @@
 "kind": "long",
 "name": "Super Micro Computer Inc",
 "obs": [
-{
-"date": "2026-07-03 22:36",
-"conv": null,
-"price": 27.22,
-"stale": true
-},
 {
 "date": "2026-07-04 09:31",
 "conv": 60,
@@ -2301,6 +2321,14 @@
 "mkt": 0.2368,
 "occ": 84,
 "prob_gain": 62
+},
+{
+"date": "2026-07-15 22:44",
+"conv": 60,
+"price": 26.89,
+"mkt": 0.2397,
+"occ": 84,
+"prob_gain": 58
 }
 ]
 },
@@ -2398,22 +2426,22 @@
 "conv": null,
 "price": 13.05,
 "stale": true
+},
+{
+"date": "2026-07-15 22:44",
+"conv": 34,
+"price": 12.91,
+"mkt": 0.2397,
+"occ": 67,
+"prob_gain": 57
 }
 ]
 },
 "long:T": {
 "ticker": "T",
 "kind": "long",
-"name": "AT&T Inc.",
+"name": "AT&T Inc",
 "obs": [
-{
-"date": "2026-07-03 22:36",
-"conv": 87,
-"price": 20.58,
-"mkt": -0.9324,
-"occ": 75,
-"prob_gain": 84
-},
 {
 "date": "2026-07-04 09:31",
 "conv": 74,
@@ -2757,6 +2785,14 @@
 "mkt": 0.0995,
 "occ": 72,
 "prob_gain": 80
+},
+{
+"date": "2026-07-15 22:44",
+"conv": 68,
+"price": 21.43,
+"mkt": 0.2397,
+"occ": 71,
+"prob_gain": 70
 }
 ]
 },
@@ -4084,6 +4120,14 @@
 "mkt": -0.1818,
 "occ": 63,
 "prob_gain": 57
+},
+{
+"date": "2026-07-15 22:44",
+"conv": 35,
+"price": 5.166,
+"mkt": 0.2397,
+"occ": 63,
+"prob_gain": 57
 }
 ]
 },
@@ -4321,6 +4365,14 @@
 "conv": 22,
 "price": 329.15,
 "mkt": 0.2368,
+"occ": 65,
+"prob_gain": 50
+},
+{
+"date": "2026-07-15 22:44",
+"conv": 20,
+"price": 329.15,
+"mkt": 0.2397,
 "occ": 65,
 "prob_gain": 50
 }
@@ -4785,16 +4837,8 @@
 "long:CCL": {
 "ticker": "CCL",
 "kind": "long",
-"name": "Carnival Corporation & plc",
+"name": "Carnival Corp",
 "obs": [
-{
-"date": "2026-07-03 22:36",
-"conv": 60,
-"price": 27.91,
-"mkt": -0.9324,
-"occ": 57,
-"prob_gain": 63
-},
 {
 "date": "2026-07-04 09:31",
 "conv": 52,
@@ -5138,6 +5182,14 @@
 "mkt": 0.0995,
 "occ": 61,
 "prob_gain": 67
+},
+{
+"date": "2026-07-15 22:44",
+"conv": 51,
+"price": 26.59,
+"mkt": 0.2397,
+"occ": 62,
+"prob_gain": 64
 }
 ]
 },
@@ -5456,6 +5508,14 @@
 "conv": null,
 "price": 16.03,
 "stale": true
+},
+{
+"date": "2026-07-15 22:44",
+"conv": 64,
+"price": 16.01,
+"mkt": 0.2397,
+"occ": 63,
+"prob_gain": 62
 }
 ]
 },
@@ -11134,6 +11194,14 @@
 "conv": null,
 "price": 74.25,
 "stale": true
+},
+{
+"date": "2026-07-15 22:44",
+"conv": 55,
+"price": 74.04,
+"mkt": 0.2397,
+"occ": 65,
+"prob_gain": 72
 }
 ]
 },
@@ -11888,7 +11956,7 @@
 "long:IBM": {
 "ticker": "IBM",
 "kind": "long",
-"name": "International Business Machines Co",
+"name": "INTERNATIONAL BUSINESS MACHINES CO",
 "obs": [
 {
 "date": "2026-07-15 01:39",
@@ -11927,6 +11995,14 @@
 "mkt": 0.0995,
 "occ": 78,
 "prob_gain": 88
+},
+{
+"date": "2026-07-15 22:44",
+"conv": 47,
+"price": 211.2,
+"mkt": 0.2397,
+"occ": 68,
+"prob_gain": 83
 }
 ]
 },
@@ -12063,6 +12139,21 @@
 "mkt": 0.2397,
 "occ": 47,
 "prob_gain": 65
+}
+]
+},
+"long:PNR": {
+"ticker": "PNR",
+"kind": "long",
+"name": "Pentair PLC",
+"obs": [
+{
+"date": "2026-07-15 22:44",
+"conv": 76,
+"price": 64.33,
+"mkt": 0.2397,
+"occ": 83,
+"prob_gain": 90
 }
 ]
 }
