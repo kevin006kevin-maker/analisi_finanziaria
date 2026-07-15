@@ -3001,14 +3001,6 @@
 "name": "STLAM.MI",
 "obs": [
 {
-"date": "2026-07-03 17:58",
-"conv": 69,
-"price": 4.9335,
-"mkt": -0.9325,
-"occ": 44,
-"prob_gain": 51
-},
-{
 "date": "2026-07-03 22:35",
 "conv": 75,
 "price": 4.9335,
@@ -3303,6 +3295,14 @@
 "mkt": 1.6369,
 "occ": 51,
 "prob_gain": 51
+},
+{
+"date": "2026-07-15 18:55",
+"conv": 45,
+"price": 5.166,
+"mkt": -0.1818,
+"occ": 46,
+"prob_gain": 49
 }
 ]
 },
@@ -10484,6 +10484,14 @@
 "mkt": 1.6369,
 "occ": 82,
 "prob_gain": 50
+},
+{
+"date": "2026-07-15 18:55",
+"conv": 76,
+"price": 10.71,
+"mkt": -0.1818,
+"occ": 54,
+"prob_gain": 52
 }
 ]
 },
@@ -10605,6 +10613,14 @@
 "mkt": 1.6369,
 "occ": 41,
 "prob_gain": 61
+},
+{
+"date": "2026-07-15 18:55",
+"conv": 71,
+"price": 3.65,
+"mkt": -0.1818,
+"occ": 82,
+"prob_gain": 59
 }
 ]
 },
@@ -11026,6 +11042,14 @@
 "conv": null,
 "price": 50.46,
 "stale": true
+},
+{
+"date": "2026-07-15 18:55",
+"conv": 76,
+"price": 51.81,
+"mkt": -0.1818,
+"occ": 47,
+"prob_gain": 52
 }
 ]
 },
@@ -11232,6 +11256,14 @@
 "mkt": 1.6369,
 "occ": 42,
 "prob_gain": 72
+},
+{
+"date": "2026-07-15 18:55",
+"conv": 65,
+"price": 3.485,
+"mkt": -0.1818,
+"occ": 73,
+"prob_gain": 70
 }
 ]
 },
@@ -11303,6 +11335,14 @@
 "mkt": 1.6369,
 "occ": 83,
 "prob_gain": 46
+},
+{
+"date": "2026-07-15 18:55",
+"conv": 69,
+"price": 3.4376,
+"mkt": -0.1818,
+"occ": 70,
+"prob_gain": 45
 }
 ]
 },
@@ -11340,6 +11380,14 @@
 "conv": null,
 "price": 11.72,
 "stale": true
+},
+{
+"date": "2026-07-15 18:55",
+"conv": 77,
+"price": 9.985,
+"mkt": -0.1818,
+"occ": 38,
+"prob_gain": 51
 }
 ]
 },
@@ -11482,6 +11530,51 @@
 "conv": null,
 "price": 290.23,
 "stale": true
+}
+]
+},
+"short:PNR": {
+"ticker": "PNR",
+"kind": "short",
+"name": "PNR",
+"obs": [
+{
+"date": "2026-07-15 18:55",
+"conv": 84,
+"price": 63.045,
+"mkt": -0.1818,
+"occ": 61,
+"prob_gain": 66
+}
+]
+},
+"short:NOK": {
+"ticker": "NOK",
+"kind": "short",
+"name": "NOK",
+"obs": [
+{
+"date": "2026-07-15 18:55",
+"conv": 79,
+"price": 10.935,
+"mkt": -0.1818,
+"occ": 52,
+"prob_gain": 56
+}
+]
+},
+"short:AAOI": {
+"ticker": "AAOI",
+"kind": "short",
+"name": "AAOI",
+"obs": [
+{
+"date": "2026-07-15 18:55",
+"conv": 72,
+"price": 108.985,
+"mkt": -0.1818,
+"occ": 41,
+"prob_gain": 49
 }
 ]
 }
