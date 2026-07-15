@@ -2398,7 +2398,7 @@
 "long:T": {
 "ticker": "T",
 "kind": "long",
-"name": "AT&T Inc",
+"name": "AT&T Inc.",
 "obs": [
 {
 "date": "2026-07-03 22:36",
@@ -2743,6 +2743,14 @@
 "mkt": 0.2368,
 "occ": 71,
 "prob_gain": 73
+},
+{
+"date": "2026-07-15 21:38",
+"conv": 82,
+"price": 21.335,
+"mkt": 0.0995,
+"occ": 72,
+"prob_gain": 80
 }
 ]
 },
@@ -4763,7 +4771,7 @@
 "long:CCL": {
 "ticker": "CCL",
 "kind": "long",
-"name": "Carnival Corp",
+"name": "Carnival Corporation & plc",
 "obs": [
 {
 "date": "2026-07-03 22:36",
@@ -5108,6 +5116,14 @@
 "mkt": 0.2368,
 "occ": 62,
 "prob_gain": 65
+},
+{
+"date": "2026-07-15 21:38",
+"conv": 44,
+"price": 26.675,
+"mkt": 0.0995,
+"occ": 61,
+"prob_gain": 67
 }
 ]
 },
@@ -11762,13 +11778,21 @@
 "conv": null,
 "price": 10.035,
 "stale": true
+},
+{
+"date": "2026-07-15 21:38",
+"conv": 82,
+"price": 10.005,
+"mkt": 0.0995,
+"occ": 71,
+"prob_gain": 83
 }
 ]
 },
 "long:IBM": {
 "ticker": "IBM",
 "kind": "long",
-"name": "INTERNATIONAL BUSINESS MACHINES CO",
+"name": "International Business Machines Co",
 "obs": [
 {
 "date": "2026-07-15 01:39",
@@ -11799,6 +11823,14 @@
 "mkt": 0.2368,
 "occ": 67,
 "prob_gain": 83
+},
+{
+"date": "2026-07-15 21:38",
+"conv": 66,
+"price": 212.84,
+"mkt": 0.0995,
+"occ": 78,
+"prob_gain": 88
 }
 ]
 },
