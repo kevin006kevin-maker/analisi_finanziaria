@@ -2801,7 +2801,7 @@
 "long:T": {
 "ticker": "T",
 "kind": "long",
-"name": "AT&T Inc",
+"name": "AT&T Inc.",
 "obs": [
 {
 "date": "2026-07-04 22:16",
@@ -3210,6 +3210,14 @@
 "mkt": 0.3521,
 "occ": 68,
 "prob_gain": 65
+},
+{
+"date": "2026-07-16 21:22",
+"conv": 70,
+"price": 22.1085,
+"mkt": 0.149,
+"occ": 69,
+"prob_gain": 72
 }
 ]
 },
@@ -5448,7 +5456,7 @@
 "long:CCL": {
 "ticker": "CCL",
 "kind": "long",
-"name": "Carnival Corp",
+"name": "Carnival Corporation & plc",
 "obs": [
 {
 "date": "2026-07-04 22:16",
@@ -5865,6 +5873,14 @@
 "mkt": 0.4644,
 "occ": 63,
 "prob_gain": 69
+},
+{
+"date": "2026-07-16 21:22",
+"conv": 54,
+"price": 26.68,
+"mkt": 0.149,
+"occ": 61,
+"prob_gain": 70
 }
 ]
 },
@@ -6270,6 +6286,14 @@
 "price": 15.84,
 "mkt": 0.3521,
 "occ": 64,
+"prob_gain": 63
+},
+{
+"date": "2026-07-16 21:22",
+"conv": 60,
+"price": 15.725,
+"mkt": 0.149,
+"occ": 65,
 "prob_gain": 63
 }
 ]
@@ -12029,6 +12053,14 @@
 "mkt": 0.3521,
 "occ": 56,
 "prob_gain": 66
+},
+{
+"date": "2026-07-16 21:22",
+"conv": 64,
+"price": 73.965,
+"mkt": 0.149,
+"occ": 65,
+"prob_gain": 71
 }
 ]
 },
@@ -12961,13 +12993,21 @@
 "conv": null,
 "price": 9.865,
 "stale": true
+},
+{
+"date": "2026-07-16 21:22",
+"conv": 82,
+"price": 9.885,
+"mkt": 0.149,
+"occ": 73,
+"prob_gain": 83
 }
 ]
 },
 "long:IBM": {
 "ticker": "IBM",
 "kind": "long",
-"name": "INTERNATIONAL BUSINESS MACHINES CO",
+"name": "International Business Machines Co",
 "obs": [
 {
 "date": "2026-07-15 01:39",
@@ -13094,6 +13134,14 @@
 "mkt": 0.3521,
 "occ": 66,
 "prob_gain": 80
+},
+{
+"date": "2026-07-16 21:22",
+"conv": 72,
+"price": 218.21,
+"mkt": 0.149,
+"occ": 76,
+"prob_gain": 87
 }
 ]
 },
@@ -13444,7 +13492,7 @@
 "long:PNR": {
 "ticker": "PNR",
 "kind": "long",
-"name": "Pentair plc",
+"name": "Pentair PLC",
 "obs": [
 {
 "date": "2026-07-15 22:44",
@@ -13533,6 +13581,14 @@
 "mkt": 0.3521,
 "occ": 80,
 "prob_gain": 81
+},
+{
+"date": "2026-07-16 21:22",
+"conv": 85,
+"price": 66.02,
+"mkt": 0.149,
+"occ": 85,
+"prob_gain": 86
 }
 ]
 },
@@ -13604,6 +13660,14 @@
 "mkt": 0.3521,
 "occ": 86,
 "prob_gain": 54
+},
+{
+"date": "2026-07-16 21:22",
+"conv": 73,
+"price": 17.365,
+"mkt": 0.149,
+"occ": 85,
+"prob_gain": 53
 }
 ]
 },
