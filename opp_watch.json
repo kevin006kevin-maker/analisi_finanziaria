@@ -33,25 +33,12 @@
 "name": "NFLX",
 "obs": [
 {
-"date": "2026-06-17",
-"conv": 72,
-"price": 78.72,
-"occ": 59,
-"prob_gain": 41
-},
-{
-"date": "2026-06-21 12:48",
-"conv": 83,
-"price": 77.38,
-"occ": 84,
-"prob_gain": 44
-},
-{
-"date": "2026-06-21 18:59",
-"conv": 85,
-"price": 77.38,
-"occ": 84,
-"prob_gain": 44
+"date": "2026-07-17 16:18",
+"conv": 71,
+"price": 67.755,
+"mkt": 0.9823,
+"occ": 50,
+"prob_gain": 46
 }
 ]
 },
@@ -13308,6 +13295,14 @@
 "mkt": 0.2985,
 "occ": 36,
 "prob_gain": 53
+},
+{
+"date": "2026-07-17 16:18",
+"conv": 78,
+"price": 9.925,
+"mkt": 0.9823,
+"occ": 53,
+"prob_gain": 54
 }
 ]
 },
@@ -13441,6 +13436,14 @@
 "conv": null,
 "price": 6.65,
 "stale": true
+},
+{
+"date": "2026-07-17 16:18",
+"conv": 70,
+"price": 6.475,
+"mkt": 0.9823,
+"occ": 35,
+"prob_gain": 50
 }
 ]
 },
@@ -14046,6 +14049,14 @@
 "conv": null,
 "price": 10.38,
 "stale": true
+},
+{
+"date": "2026-07-17 16:18",
+"conv": 83,
+"price": 10.19,
+"mkt": 0.9823,
+"occ": 35,
+"prob_gain": 59
 }
 ]
 },
@@ -14121,6 +14132,14 @@
 "conv": null,
 "price": 100.24,
 "stale": true
+},
+{
+"date": "2026-07-17 16:18",
+"conv": 74,
+"price": 100.705,
+"mkt": 0.9823,
+"occ": 71,
+"prob_gain": 52
 }
 ]
 },
@@ -14539,6 +14558,14 @@
 "mkt": 0.2985,
 "occ": 39,
 "prob_gain": 56
+},
+{
+"date": "2026-07-17 16:18",
+"conv": 74,
+"price": 22.29,
+"mkt": 0.9823,
+"occ": 72,
+"prob_gain": 54
 }
 ]
 },
@@ -14568,6 +14595,51 @@
 "conv": null,
 "price": 7.02,
 "stale": true
+}
+]
+},
+"short:RPT": {
+"ticker": "RPT",
+"kind": "short",
+"name": "RPT",
+"obs": [
+{
+"date": "2026-07-17 16:18",
+"conv": 86,
+"price": 11.405,
+"mkt": 0.9823,
+"occ": 77,
+"prob_gain": 62
+}
+]
+},
+"short:ISRG": {
+"ticker": "ISRG",
+"kind": "short",
+"name": "ISRG",
+"obs": [
+{
+"date": "2026-07-17 16:18",
+"conv": 74,
+"price": 359.6,
+"mkt": 0.9823,
+"occ": 41,
+"prob_gain": 53
+}
+]
+},
+"short:SNPS": {
+"ticker": "SNPS",
+"kind": "short",
+"name": "SNPS",
+"obs": [
+{
+"date": "2026-07-17 16:18",
+"conv": 73,
+"price": 376.94,
+"mkt": 0.9823,
+"occ": 35,
+"prob_gain": 53
 }
 ]
 }
