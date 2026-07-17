@@ -3318,16 +3318,8 @@
 "long:T": {
 "ticker": "T",
 "kind": "long",
-"name": "AT&T Inc",
+"name": "AT&T Inc.",
 "obs": [
-{
-"date": "2026-07-05 20:54",
-"conv": 76,
-"price": 20.58,
-"mkt": -0.9325,
-"occ": 74,
-"prob_gain": 85
-},
 {
 "date": "2026-07-06 00:37",
 "conv": 87,
@@ -3806,6 +3798,14 @@
 "price": 21.82,
 "mkt": 0.5544,
 "occ": 69,
+"prob_gain": 72
+},
+{
+"date": "2026-07-17 21:50",
+"conv": 57,
+"price": 21.825,
+"mkt": 0.4484,
+"occ": 70,
 "prob_gain": 72
 }
 ]
@@ -6173,16 +6173,8 @@
 "long:CCL": {
 "ticker": "CCL",
 "kind": "long",
-"name": "Carnival Corp",
+"name": "Carnival Corporation & plc",
 "obs": [
-{
-"date": "2026-07-05 20:54",
-"conv": 51,
-"price": 27.91,
-"mkt": -0.9325,
-"occ": 58,
-"prob_gain": 76
-},
 {
 "date": "2026-07-06 00:37",
 "conv": 58,
@@ -6670,6 +6662,14 @@
 "mkt": 0.5544,
 "occ": 63,
 "prob_gain": 68
+},
+{
+"date": "2026-07-17 21:50",
+"conv": 45,
+"price": 26.385,
+"mkt": 0.4484,
+"occ": 62,
+"prob_gain": 68
 }
 ]
 },
@@ -6863,7 +6863,7 @@
 "long:PBR-A": {
 "ticker": "PBR-A",
 "kind": "long",
-"name": "PETROBRAS - PETROLEO BRASILEIRO SA",
+"name": "Petroleo Brasileiro SA Petrobras",
 "obs": [
 {
 "date": "2026-07-09 12:39",
@@ -7172,6 +7172,14 @@
 "mkt": 0.5544,
 "occ": 79,
 "prob_gain": 78
+},
+{
+"date": "2026-07-17 21:50",
+"conv": 48,
+"price": 16.02,
+"mkt": 0.4484,
+"occ": 63,
+"prob_gain": 62
 }
 ]
 },
@@ -13006,6 +13014,14 @@
 "mkt": 0.5544,
 "occ": 56,
 "prob_gain": 67
+},
+{
+"date": "2026-07-17 21:50",
+"conv": 58,
+"price": 73.56,
+"mkt": 0.4484,
+"occ": 65,
+"prob_gain": 76
 }
 ]
 },
@@ -14166,13 +14182,21 @@
 "conv": null,
 "price": 9.845,
 "stale": true
+},
+{
+"date": "2026-07-17 21:50",
+"conv": 78,
+"price": 9.855,
+"mkt": 0.4484,
+"occ": 73,
+"prob_gain": 85
 }
 ]
 },
 "long:IBM": {
 "ticker": "IBM",
 "kind": "long",
-"name": "INTERNATIONAL BUSINESS MACHINES CO",
+"name": "International Business Machines Co",
 "obs": [
 {
 "date": "2026-07-15 01:39",
@@ -14355,6 +14379,14 @@
 "conv": null,
 "price": 211.22,
 "stale": true
+},
+{
+"date": "2026-07-17 21:50",
+"conv": 71,
+"price": 212.06,
+"mkt": 0.4484,
+"occ": 78,
+"prob_gain": 84
 }
 ]
 },
@@ -14891,7 +14923,7 @@
 "long:PNR": {
 "ticker": "PNR",
 "kind": "long",
-"name": "Pentair plc",
+"name": "Pentair PLC",
 "obs": [
 {
 "date": "2026-07-15 22:44",
@@ -15076,13 +15108,21 @@
 "mkt": 0.5544,
 "occ": 80,
 "prob_gain": 84
+},
+{
+"date": "2026-07-17 21:50",
+"conv": 85,
+"price": 62.515,
+"mkt": 0.4484,
+"occ": 85,
+"prob_gain": 92
 }
 ]
 },
 "long:AEO": {
 "ticker": "AEO",
 "kind": "long",
-"name": "AMERICAN EAGLE OUTFITTERS INC",
+"name": "American Eagle Outfitters Inc",
 "obs": [
 {
 "date": "2026-07-16 06:29",
@@ -15233,6 +15273,14 @@
 "mkt": 0.5544,
 "occ": 80,
 "prob_gain": 51
+},
+{
+"date": "2026-07-17 21:50",
+"conv": 67,
+"price": 16.985,
+"mkt": 0.4484,
+"occ": 87,
+"prob_gain": 57
 }
 ]
 },
@@ -15579,6 +15627,14 @@
 "mkt": 0.5544,
 "occ": 91,
 "prob_gain": 90
+},
+{
+"date": "2026-07-17 21:50",
+"conv": 86,
+"price": 347.03,
+"mkt": 0.4484,
+"occ": 91,
+"prob_gain": 87
 }
 ]
 },
@@ -15631,6 +15687,14 @@
 "conv": null,
 "price": 69.305,
 "stale": true
+},
+{
+"date": "2026-07-17 21:50",
+"conv": 83,
+"price": 68.685,
+"mkt": 0.4484,
+"occ": 93,
+"prob_gain": 75
 }
 ]
 }
