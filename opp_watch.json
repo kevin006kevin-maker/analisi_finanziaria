@@ -389,12 +389,6 @@
 "name": "Petroleo Brasileiro SA Petrobras",
 "obs": [
 {
-"date": "2026-07-06 21:26",
-"conv": null,
-"price": 16.235,
-"stale": true
-},
-{
 "date": "2026-07-07 01:41",
 "conv": 79,
 "price": 16.26,
@@ -903,6 +897,14 @@
 "mkt": 0.5066,
 "occ": 62,
 "prob_gain": 57
+},
+{
+"date": "2026-07-18 22:55",
+"conv": 59,
+"price": 17.97,
+"mkt": 0.5066,
+"occ": 62,
+"prob_gain": 57
 }
 ]
 },
@@ -911,12 +913,6 @@
 "kind": "long",
 "name": "Canadian Natural Resources Ltd",
 "obs": [
-{
-"date": "2026-07-06 21:26",
-"conv": null,
-"price": 39.3,
-"stale": true
-},
 {
 "date": "2026-07-07 01:41",
 "conv": 60,
@@ -1424,6 +1420,14 @@
 {
 "date": "2026-07-18 18:39",
 "conv": 42,
+"price": 43.89,
+"mkt": 0.5066,
+"occ": 57,
+"prob_gain": 56
+},
+{
+"date": "2026-07-18 22:55",
+"conv": 40,
 "price": 43.89,
 "mkt": 0.5066,
 "occ": 57,
@@ -1964,12 +1968,6 @@
 "name": "Coeur Mining, Inc",
 "obs": [
 {
-"date": "2026-07-06 21:26",
-"conv": null,
-"price": 17.075,
-"stale": true
-},
-{
 "date": "2026-07-07 01:41",
 "conv": 51,
 "price": 16.99,
@@ -2384,6 +2382,14 @@
 "mkt": 0.5066,
 "occ": 98,
 "prob_gain": 68
+},
+{
+"date": "2026-07-18 22:55",
+"conv": 69,
+"price": 14.35,
+"mkt": 0.5066,
+"occ": 98,
+"prob_gain": 68
 }
 ]
 },
@@ -2392,12 +2398,6 @@
 "kind": "long",
 "name": "Banco Bradesco SA",
 "obs": [
-{
-"date": "2026-07-06 21:26",
-"conv": null,
-"price": 3.4914,
-"stale": true
-},
 {
 "date": "2026-07-07 01:41",
 "conv": 65,
@@ -2813,6 +2813,14 @@
 "mkt": 0.5066,
 "occ": 58,
 "prob_gain": 74
+},
+{
+"date": "2026-07-18 22:55",
+"conv": 68,
+"price": 3.54,
+"mkt": 0.5066,
+"occ": 58,
+"prob_gain": 74
 }
 ]
 },
@@ -2898,12 +2906,6 @@
 "kind": "long",
 "name": "Super Micro Computer Inc",
 "obs": [
-{
-"date": "2026-07-06 21:26",
-"conv": null,
-"price": 26.95,
-"stale": true
-},
 {
 "date": "2026-07-07 01:41",
 "conv": 60,
@@ -3357,6 +3359,14 @@
 "mkt": 0.5066,
 "occ": 85,
 "prob_gain": 59
+},
+{
+"date": "2026-07-18 22:55",
+"conv": 62,
+"price": 24.18,
+"mkt": 0.5066,
+"occ": 85,
+"prob_gain": 59
 }
 ]
 },
@@ -3670,13 +3680,21 @@
 "conv": null,
 "price": 13.8,
 "stale": true
+},
+{
+"date": "2026-07-18 22:55",
+"conv": 27,
+"price": 13.8,
+"mkt": 0.5066,
+"occ": 61,
+"prob_gain": 56
 }
 ]
 },
 "long:T": {
 "ticker": "T",
 "kind": "long",
-"name": "AT&T Inc.",
+"name": "AT&T Inc",
 "obs": [
 {
 "date": "2026-07-07 01:41",
@@ -4221,6 +4239,14 @@
 "mkt": 0.5065,
 "occ": 70,
 "prob_gain": 73
+},
+{
+"date": "2026-07-18 22:55",
+"conv": 57,
+"price": 21.81,
+"mkt": 0.5066,
+"occ": 69,
+"prob_gain": 70
 }
 ]
 },
@@ -5428,12 +5454,6 @@
 "name": "STELLANTIS",
 "obs": [
 {
-"date": "2026-07-06 21:26",
-"conv": null,
-"price": 5.021,
-"stale": true
-},
-{
 "date": "2026-07-07 01:41",
 "conv": 47,
 "price": 4.9335,
@@ -5858,6 +5878,14 @@
 {
 "date": "2026-07-18 18:39",
 "conv": 38,
+"price": 5.086,
+"mkt": 0.5066,
+"occ": 62,
+"prob_gain": 56
+},
+{
+"date": "2026-07-18 22:55",
+"conv": 36,
 "price": 5.086,
 "mkt": 0.5066,
 "occ": 62,
@@ -6695,7 +6723,7 @@
 "long:CCL": {
 "ticker": "CCL",
 "kind": "long",
-"name": "Carnival Corporation & plc",
+"name": "Carnival Corp",
 "obs": [
 {
 "date": "2026-07-07 01:41",
@@ -7256,6 +7284,14 @@
 "mkt": 0.5065,
 "occ": 62,
 "prob_gain": 65
+},
+{
+"date": "2026-07-18 22:55",
+"conv": 53,
+"price": 26.41,
+"mkt": 0.5066,
+"occ": 63,
+"prob_gain": 69
 }
 ]
 },
@@ -7449,7 +7485,7 @@
 "long:PBR-A": {
 "ticker": "PBR-A",
 "kind": "long",
-"name": "Petroleo Brasileiro SA Petrobras",
+"name": "PETROBRAS - PETROLEO BRASILEIRO SA",
 "obs": [
 {
 "date": "2026-07-09 12:39",
@@ -7846,6 +7882,14 @@
 "mkt": 0.5065,
 "occ": 64,
 "prob_gain": 58
+},
+{
+"date": "2026-07-18 22:55",
+"conv": 79,
+"price": 16.0,
+"mkt": 0.5066,
+"occ": 79,
+"prob_gain": 75
 }
 ]
 },
@@ -7854,12 +7898,6 @@
 "kind": "long",
 "name": "Kinross Gold Corp",
 "obs": [
-{
-"date": "2026-07-06 21:26",
-"conv": null,
-"price": 24.795,
-"stale": true
-},
 {
 "date": "2026-07-07 01:41",
 "conv": 71,
@@ -8207,6 +8245,14 @@
 {
 "date": "2026-07-18 18:39",
 "conv": 81,
+"price": 22.57,
+"mkt": 0.5066,
+"occ": 100,
+"prob_gain": 69
+},
+{
+"date": "2026-07-18 22:55",
+"conv": 77,
 "price": 22.57,
 "mkt": 0.5066,
 "occ": 100,
@@ -13854,6 +13900,14 @@
 "mkt": 0.5065,
 "occ": 65,
 "prob_gain": 74
+},
+{
+"date": "2026-07-18 22:55",
+"conv": 48,
+"price": 73.62,
+"mkt": 0.5066,
+"occ": 56,
+"prob_gain": 64
 }
 ]
 },
@@ -15060,7 +15114,7 @@
 "long:IBM": {
 "ticker": "IBM",
 "kind": "long",
-"name": "International Business Machines Co",
+"name": "INTERNATIONAL BUSINESS MACHINES CO",
 "obs": [
 {
 "date": "2026-07-15 01:39",
@@ -15329,6 +15383,14 @@
 "mkt": 0.5065,
 "occ": 78,
 "prob_gain": 86
+},
+{
+"date": "2026-07-18 22:55",
+"conv": 49,
+"price": 212.67,
+"mkt": 0.5066,
+"occ": 67,
+"prob_gain": 81
 }
 ]
 },
@@ -16013,7 +16075,7 @@
 "long:PNR": {
 "ticker": "PNR",
 "kind": "long",
-"name": "Pentair PLC",
+"name": "Pentair plc",
 "obs": [
 {
 "date": "2026-07-15 22:44",
@@ -16262,6 +16324,14 @@
 "mkt": 0.5065,
 "occ": 85,
 "prob_gain": 92
+},
+{
+"date": "2026-07-18 22:55",
+"conv": 72,
+"price": 62.45,
+"mkt": 0.5066,
+"occ": 80,
+"prob_gain": 85
 }
 ]
 },
@@ -17109,6 +17179,14 @@
 "mkt": 0.5065,
 "occ": 91,
 "prob_gain": 92
+},
+{
+"date": "2026-07-18 22:55",
+"conv": 65,
+"price": 345.42,
+"mkt": 0.5066,
+"occ": 91,
+"prob_gain": 92
 }
 ]
 },
@@ -17447,6 +17525,14 @@
 "conv": null,
 "price": 848.95,
 "stale": true
+},
+{
+"date": "2026-07-18 22:55",
+"conv": 65,
+"price": 848.95,
+"mkt": 0.5066,
+"occ": 80,
+"prob_gain": 66
 }
 ]
 }
