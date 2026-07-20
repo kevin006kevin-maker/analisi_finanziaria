@@ -1802,14 +1802,6 @@
 "name": "Newmont Corporation",
 "obs": [
 {
-"date": "2026-07-08 20:55",
-"conv": 77,
-"price": 93.07,
-"mkt": 0.9842,
-"occ": 92,
-"prob_gain": 70
-},
-{
 "date": "2026-07-09 00:44",
 "conv": null,
 "price": 93.2,
@@ -1990,6 +1982,14 @@
 "mkt": -0.2208,
 "occ": 95,
 "prob_gain": 70
+},
+{
+"date": "2026-07-21 00:43",
+"conv": 83,
+"price": 89.2,
+"mkt": -0.7639,
+"occ": 95,
+"prob_gain": 75
 }
 ]
 },
@@ -6589,14 +6589,6 @@
 "name": "FERRARI",
 "obs": [
 {
-"date": "2026-07-08 20:55",
-"conv": 15,
-"price": 327.6,
-"mkt": 0.9842,
-"occ": 66,
-"prob_gain": 51
-},
-{
 "date": "2026-07-09 12:39",
 "conv": 15,
 "price": 324.9,
@@ -7034,6 +7026,14 @@
 "price": 326.9,
 "mkt": -0.2208,
 "occ": 66,
+"prob_gain": 56
+},
+{
+"date": "2026-07-21 00:43",
+"conv": 17,
+"price": 328.85,
+"mkt": -0.7639,
+"occ": 65,
 "prob_gain": 56
 }
 ]
@@ -16507,7 +16507,7 @@
 "long:IBM": {
 "ticker": "IBM",
 "kind": "long",
-"name": "International Business Machines Co",
+"name": "INTERNATIONAL BUSINESS MACHINES CO",
 "obs": [
 {
 "date": "2026-07-15 01:39",
