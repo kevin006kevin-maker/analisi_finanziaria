@@ -2137,7 +2137,7 @@
 "long:NEM": {
 "ticker": "NEM",
 "kind": "long",
-"name": "Newmont Corporation",
+"name": "NEWMONT CORPORATION",
 "obs": [
 {
 "date": "2026-07-16 09:05",
@@ -2488,6 +2488,14 @@
 "mkt": 0.7688,
 "occ": 91,
 "prob_gain": 63
+},
+{
+"date": "2026-07-23 18:17",
+"conv": 68,
+"price": 94.15,
+"mkt": 0.7191,
+"occ": 88,
+"prob_gain": 68
 }
 ]
 },
@@ -7157,14 +7165,6 @@
 "name": "STELLANTIS",
 "obs": [
 {
-"date": "2026-07-11 16:38",
-"conv": 55,
-"price": 4.834,
-"mkt": 4.2438,
-"occ": 63,
-"prob_gain": 63
-},
-{
 "date": "2026-07-11 19:44",
 "conv": 53,
 "price": 4.834,
@@ -7807,6 +7807,14 @@
 "mkt": 0.7688,
 "occ": 62,
 "prob_gain": 62
+},
+{
+"date": "2026-07-23 18:17",
+"conv": 53,
+"price": 5.02,
+"mkt": 0.7191,
+"occ": 62,
+"prob_gain": 64
 }
 ]
 },
@@ -8398,6 +8406,14 @@
 "mkt": 0.7688,
 "occ": 68,
 "prob_gain": 62
+},
+{
+"date": "2026-07-23 18:17",
+"conv": 33,
+"price": 315.45,
+"mkt": 0.7191,
+"occ": 69,
+"prob_gain": 63
 }
 ]
 },
@@ -20605,6 +20621,14 @@
 "mkt": 0.7688,
 "occ": 80,
 "prob_gain": 74
+},
+{
+"date": "2026-07-23 18:17",
+"conv": 72,
+"price": 62.29,
+"mkt": 0.7191,
+"occ": 80,
+"prob_gain": 76
 }
 ]
 },
@@ -21052,6 +21076,14 @@
 "mkt": 0.7688,
 "occ": 78,
 "prob_gain": 52
+},
+{
+"date": "2026-07-23 18:17",
+"conv": 54,
+"price": 17.31,
+"mkt": 0.7191,
+"occ": 78,
+"prob_gain": 51
 }
 ]
 },
@@ -22914,6 +22946,14 @@
 "mkt": 0.7688,
 "occ": 81,
 "prob_gain": 85
+},
+{
+"date": "2026-07-23 18:17",
+"conv": 54,
+"price": 332.355,
+"mkt": 0.7191,
+"occ": 81,
+"prob_gain": 84
 }
 ]
 },
@@ -23273,7 +23313,7 @@
 "long:NFLX": {
 "ticker": "NFLX",
 "kind": "long",
-"name": "NETFLIX INC",
+"name": "Netflix Inc",
 "obs": [
 {
 "date": "2026-07-17 19:20",
@@ -23694,6 +23734,14 @@
 "mkt": 0.7688,
 "occ": 91,
 "prob_gain": 70
+},
+{
+"date": "2026-07-23 18:17",
+"conv": 77,
+"price": 68.415,
+"mkt": 0.7191,
+"occ": 93,
+"prob_gain": 73
 }
 ]
 },
@@ -25743,6 +25791,14 @@
 "mkt": 0.7688,
 "occ": 83,
 "prob_gain": 67
+},
+{
+"date": "2026-07-23 18:17",
+"conv": 66,
+"price": 22.7,
+"mkt": 0.7191,
+"occ": 84,
+"prob_gain": 64
 }
 ]
 },
@@ -26221,6 +26277,126 @@
 "mkt": 0.7191,
 "occ": 35,
 "prob_gain": 51
+}
+]
+},
+"long:GOOGL": {
+"ticker": "GOOGL",
+"kind": "long",
+"name": "Alphabet Inc",
+"obs": [
+{
+"date": "2026-07-23 18:17",
+"conv": 83,
+"price": 320.91,
+"mkt": 0.7191,
+"occ": 73,
+"prob_gain": 80
+}
+]
+},
+"long:DIS": {
+"ticker": "DIS",
+"kind": "long",
+"name": "Walt Disney Co",
+"obs": [
+{
+"date": "2026-07-23 18:17",
+"conv": 80,
+"price": 92.96,
+"mkt": 0.7191,
+"occ": 64,
+"prob_gain": 90
+}
+]
+},
+"long:META": {
+"ticker": "META",
+"kind": "long",
+"name": "Meta Platforms Inc",
+"obs": [
+{
+"date": "2026-07-23 18:17",
+"conv": 77,
+"price": 602.77,
+"mkt": 0.7191,
+"occ": 78,
+"prob_gain": 74
+}
+]
+},
+"long:MSFT": {
+"ticker": "MSFT",
+"kind": "long",
+"name": "Microsoft Corp",
+"obs": [
+{
+"date": "2026-07-23 18:17",
+"conv": 72,
+"price": 380.235,
+"mkt": 0.7191,
+"occ": 79,
+"prob_gain": 72
+}
+]
+},
+"long:PEP": {
+"ticker": "PEP",
+"kind": "long",
+"name": "PepsiCo Inc",
+"obs": [
+{
+"date": "2026-07-23 18:17",
+"conv": 66,
+"price": 134.75,
+"mkt": 0.7191,
+"occ": 57,
+"prob_gain": 63
+}
+]
+},
+"long:PG": {
+"ticker": "PG",
+"kind": "long",
+"name": "Procter & Gamble Co",
+"obs": [
+{
+"date": "2026-07-23 18:17",
+"conv": 66,
+"price": 146.45,
+"mkt": 0.7191,
+"occ": 53,
+"prob_gain": 80
+}
+]
+},
+"long:AMZN": {
+"ticker": "AMZN",
+"kind": "long",
+"name": "Amazon.com Inc",
+"obs": [
+{
+"date": "2026-07-23 18:17",
+"conv": 64,
+"price": 234.16,
+"mkt": 0.7191,
+"occ": 53,
+"prob_gain": 76
+}
+]
+},
+"long:WMT": {
+"ticker": "WMT",
+"kind": "long",
+"name": "Walmart Inc",
+"obs": [
+{
+"date": "2026-07-23 18:17",
+"conv": 61,
+"price": 107.93,
+"mkt": 0.7191,
+"occ": 52,
+"prob_gain": 78
 }
 ]
 }
