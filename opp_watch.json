@@ -6212,14 +6212,6 @@
 "name": "STLAM.MI",
 "obs": [
 {
-"date": "2026-07-11 08:25",
-"conv": 80,
-"price": 4.6755,
-"mkt": 4.2438,
-"occ": 50,
-"prob_gain": 55
-},
-{
 "date": "2026-07-11 12:44",
 "conv": 71,
 "price": 4.834,
@@ -6530,6 +6522,14 @@
 "mkt": 1.8125,
 "occ": 50,
 "prob_gain": 51
+},
+{
+"date": "2026-07-23 12:01",
+"conv": 57,
+"price": 5.11,
+"mkt": 1.8125,
+"occ": 47,
+"prob_gain": 52
 }
 ]
 },
@@ -25606,6 +25606,14 @@
 "mkt": 1.8125,
 "occ": 90,
 "prob_gain": 68
+},
+{
+"date": "2026-07-23 12:01",
+"conv": 67,
+"price": 4.29,
+"mkt": 1.8125,
+"occ": 90,
+"prob_gain": 68
 }
 ]
 },
@@ -25637,6 +25645,21 @@
 "mkt": 1.8125,
 "occ": 37,
 "prob_gain": 91
+}
+]
+},
+"short:STMMI.MI": {
+"ticker": "STMMI.MI",
+"kind": "short",
+"name": "STMMI.MI",
+"obs": [
+{
+"date": "2026-07-23 12:01",
+"conv": 79,
+"price": 50.45,
+"mkt": 1.8125,
+"occ": 50,
+"prob_gain": 56
 }
 ]
 }
