@@ -2228,7 +2228,7 @@
 "auto": true,
 "notified": false,
 "warn_since": "2026-07-22",
-"warn": "in perdita da 14 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 15 giorni di Borsa: valuta l'uscita"
 },
 "TMUS": {
 "kind": "short",
@@ -9076,7 +9076,7 @@
 "auto": true,
 "notified": false,
 "warn_since": "2026-07-26",
-"warn": "in perdita da 10 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 11 giorni di Borsa: valuta l'uscita"
 },
 "KGC": {
 "kind": "long",
@@ -10272,7 +10272,7 @@
 "auto": true,
 "notified": false,
 "warn_since": "2026-07-24",
-"warn": "in perdita da 10 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 11 giorni di Borsa: valuta l'uscita"
 },
 "PUMP": {
 "kind": "short",
@@ -11164,7 +11164,7 @@
 "auto": true,
 "notified": false,
 "warn_since": "2026-07-23",
-"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
+"warn": "sceso sotto lo stop (−2×ATR): valuta l'uscita"
 },
 "STLAM.MI": {
 "kind": "short",
@@ -11928,7 +11928,7 @@
 "auto": true,
 "notified": false,
 "warn_since": "2026-07-23",
-"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "ROAD": {
 "kind": "short",
@@ -15664,7 +15664,7 @@
 }
 ],
 "auto": true,
-"notified": false,
+"notified": true,
 "exit_notified": false
 },
 "PBR-A": {
