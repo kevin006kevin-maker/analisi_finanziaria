@@ -3022,7 +3022,9 @@
 }
 ],
 "auto": true,
-"notified": true
+"notified": true,
+"warn_since": "2026-07-26",
+"warn": "in perdita da 14 giorni di Borsa: valuta l'uscita"
 },
 "SOC": {
 "kind": "short",
@@ -8162,9 +8164,7 @@
 }
 ],
 "auto": true,
-"notified": false,
-"warn_since": "2026-07-26",
-"warn": "in perdita da 10 giorni di Borsa: valuta l'uscita"
+"notified": false
 },
 "KGC": {
 "kind": "long",
@@ -10012,7 +10012,7 @@
 "auto": true,
 "notified": false,
 "warn_since": "2026-07-23",
-"warn": "sceso sotto lo stop (−2×ATR): valuta l'uscita"
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "STLAM.MI": {
 "kind": "short",
