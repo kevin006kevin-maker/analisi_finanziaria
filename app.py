@@ -1288,110 +1288,8 @@ if section.startswith("Monitoraggio"):
     st.caption("Strumento per seguire un'idea per più giorni con calma; non è un consiglio di acquisto. "
                "La storia si costruisce in avanti: un punto per ogni giorno in cui apri l'app.")
 
-    # --- 📊 Scheda voti del sistema (track record delle promozioni automatiche) ---
-    if not fu.cloud_mode():
-        fu.update_track_record()        # in locale aggiorna i rendimenti reali (sul cloud lo fa il job)
-    rstats = fu.track_record_stats()
-    if rstats["total"]:
-        with st.expander(f"📊 Scheda voti del sistema — {rstats['total']} promozioni automatiche finora",
-                         expanded=False):
-            st.caption("Quanto hanno **reso davvero** le occasioni promosse dal sistema: una misura onesta dell'efficacia. "
-                       "Non è una garanzia sul futuro, ma ti dice quanto fidarti dei segnali.")
-            rc1, rc2, rc3 = st.columns(3)
-            for col, key, label in [(rc1, "now", "Ad oggi"), (rc2, "d7", "Dopo 7 giorni"),
-                                    (rc3, "d30", "Dopo 30 giorni")]:
-                s = rstats[key]
-                with col:
-                    if s:
-                        st.metric(f"{label} — rendimento medio", f"{s['avg']:+.1f}%")
-                        st.caption(f"🎯 In positivo **{s['hit']}%** ({s['n']} casi) · "
-                                   f"migliore {s['best']:+.1f}% · peggiore {s['worst']:+.1f}%")
-                    else:
-                        st.metric(f"{label} — rendimento medio", "—")
-                        st.caption("Servono più giorni di dati.")
-
-            # --- Calibrazione: la convenienza alta rende più della bassa? ---
-            cal = fu.track_record_calibration()
-            st.markdown("###### La convenienza funziona? Resa reale per fascia")
-            band_rows = [{
-                "Fascia": fa["banda"], "Promozioni": fa["count"],
-                "Resa 7g": (fa["d7"]["avg"] if fa["d7"] else None),
-                "Resa 30g": (fa["d30"]["avg"] if fa["d30"] else None),
-                "In positivo 30g": (fa["d30"]["hit"] if fa["d30"] else None),
-            } for fa in cal["fasce"]]
-            st.dataframe(pd.DataFrame(band_rows).set_index("Fascia"), use_container_width=True, column_config={
-                "Promozioni": st.column_config.NumberColumn("Promozioni", format="%d"),
-                "Resa 7g": st.column_config.NumberColumn("Resa media 7g", format="%+.1f%%"),
-                "Resa 30g": st.column_config.NumberColumn("Resa media 30g", format="%+.1f%%"),
-                "In positivo 30g": st.column_config.NumberColumn("In positivo 30g", format="%d%%"),
-            })
-            if cal["ok"] is True:
-                st.success(cal["verdetto"])
-            elif cal["ok"] is False:
-                st.info(cal["verdetto"])
-            else:
-                st.caption("ℹ️ " + cal["verdetto"])
-
-            recs = fu.load_track_record()
-            if recs:
-                dfr = pd.DataFrame([{
-                    "Ticker": r.get("ticker"), "Tipo": "⚡ Breve" if r.get("kind") == "short" else "🏛️ Lungo",
-                    "Promossa il": r.get("date"), "Conv. iniziale": r.get("conv"),
-                    "Oggi": r.get("ret_now"), "Dopo 7g": r.get("ret_7d"), "Dopo 30g": r.get("ret_30d"),
-                } for r in reversed(recs)]).set_index("Ticker")
-                st.dataframe(dfr, use_container_width=True, column_config={
-                    "Conv. iniziale": st.column_config.NumberColumn("Conv. iniziale", format="%d"),
-                    "Oggi": st.column_config.NumberColumn("Oggi", format="%+.1f%%",
-                        help="Rendimento dal prezzo di promozione a oggi."),
-                    "Dopo 7g": st.column_config.NumberColumn("Dopo 7g", format="%+.1f%%"),
-                    "Dopo 30g": st.column_config.NumberColumn("Dopo 30g", format="%+.1f%%"),
-                })
-            st.caption("Le occasioni promosse vengono registrate col prezzo di partenza; il rendimento a 7 e 30 giorni "
-                       "si fissa al raggiungimento di quei traguardi. Stima sui dati reali, non una promessa.")
-            # Confronto onesto tra i due possibili momenti d'ingresso (si popola con le nuove promozioni)
-            _cmp = fu.track_record_entry_comparison()
-            if _cmp.get("n", 0) >= 3:
-                st.caption(f"🔭 **Entrare prima conviene?** Sulle ultime {_cmp['n']} promozioni: comprando a "
-                           f"**inizio osservazione** saresti a **{_cmp['avg_obs']:+.1f}%** in media, comprando "
-                           f"**alla promozione** a **{_cmp['avg_promo']:+.1f}%**. Il rimbalzo medio già avvenuto "
-                           f"aspettando la conferma è **{_cmp['avg_head_start']:+.1f}%**.")
-            else:
-                st.caption("🔭 Il confronto «ingresso a inizio osservazione vs alla promozione» si popolerà "
-                           "da solo con le prossime promozioni.")
-        st.markdown("---")
-
-    # --- 🎯 Calibrazione delle probabilità (Brier score) ---
-    if not fu.cloud_mode():
-        fu.resolve_forecasts()          # in locale risolve le previsioni mature (sul cloud lo fa il job)
-        try:
-            fu.resolve_scenarios()      # idem per gli scenari acquisto/vendita
-        except Exception:
-            pass
-    crep = fu.calibration_report()
-    if crep is not None:
-        with st.expander(f"🎯 Quanto sono oneste le probabilità (calibrazione) — "
-                         f"{crep['n_resolved']} previsioni verificate", expanded=False):
-            st.caption("Degli eventi a cui diamo **~70%**, quanti si avverano davvero? Questa scheda confronta la "
-                       "**probabilità di salita predetta** con quella **realizzata**. Non serve a indovinare il prezzo, "
-                       "ma a misurare se le nostre percentuali sono affidabili. Si popola nel tempo.")
-            if crep["n_resolved"] == 0:
-                st.info(f"Nessuna previsione ancora verificata (servono ~1 mese per il breve, ~1 anno per il lungo). "
-                        f"Registrate finora: {crep['n_total']}. Torna più avanti.")
-            else:
-                if crep["brier"] is not None:
-                    bs = crep["brier"]
-                    tone = st.success if bs <= 0.20 else st.warning if bs <= 0.25 else st.error
-                    tone(f"**Brier score: {bs:.3f}** (più basso = meglio; 0,25 = come tirare a caso, "
-                         "<0,20 = previsioni utili).")
-                if crep["buckets"]:
-                    st.dataframe(pd.DataFrame(crep["buckets"]).set_index("range"),
-                                 use_container_width=True, column_config={
-                        "n": st.column_config.NumberColumn("Casi", format="%d"),
-                        "predetto": st.column_config.NumberColumn("Prob. predetta", format="%d%%"),
-                        "realizzato": st.column_config.NumberColumn("Salite reali", format="%d%%",
-                            help="Se 'predetta' e 'realizzato' sono vicine, le probabilità sono ben calibrate."),
-                    })
-        st.markdown("---")
+    # (La «Scheda voti» e la «Calibrazione delle probabilità» sono nella sezione «Scenari»,
+    #  insieme agli altri strumenti di misura del sistema.)
 
     # --- 🧪 Validazione del sistema (backtest tecnico + verifica ML) — su richiesta, pesanti ---
     with st.expander("🧪 Validazione del sistema (backtest + verifica ML)", expanded=False):
@@ -1694,14 +1592,17 @@ if section.startswith("Monitoraggio"):
                 st.session_state["_goto_section"] = "Analisi di un titolo"
                 st.rerun()
 
-    # Ordine: prima le occasioni presenti da PIÙ TEMPO (added crescente → si segue l'evoluzione),
-    # poi per AFFIDABILITÀ (🟢 Alta prima di 🟡 Media prima di 🔴 Bassa).
+    # Ordine (richiesta utente): prima le PIÙ CONVENIENTI (ultima convenienza nota, decrescente),
+    # a parità di convenienza per affidabilità (🟢 prima di 🟡 prima di 🔴), poi per anzianità.
     def _mon_sort_key(item):
         tk, e = item
         snaps = e.get("snapshots") or []
+        conv = next((s.get("convenienza") for s in reversed(snaps)
+                     if s.get("convenienza") is not None), None)
         rel = (snaps[-1].get("reliab") if snaps else "") or ""
         rel_rank = 0 if "Alta" in rel else (1 if "Media" in rel else 2)
-        return (str(e.get("added") or "9999-99-99"), rel_rank, tk)
+        return (-(conv if conv is not None else -1), rel_rank,
+                str(e.get("added") or "9999-99-99"), tk)
 
     # Il sistema NON rimuove più da solo: calcola dal vivo (senza chiamate di rete) quali AVREBBE
     # tolto e le raccoglie in "Candidate all'uscita"; le altre restano nelle liste normali.
@@ -1928,22 +1829,97 @@ if section.startswith("Portafoglio"):
 if section.startswith("Scenari"):
     page_header("Scenari",
                 "Quanto avresti guadagnato con le occasioni reali, e quale momento di acquisto/vendita rende di più.")
-    st.caption("Due strumenti complementari: il **simulatore** rigioca le promozioni passate con l'importo e le "
-               "commissioni che scegli tu; la **tabella degli scenari** misura nel tempo, promozione dopo "
-               "promozione, quale combinazione di acquisto e vendita è la più affidabile.")
+    st.caption("Tutti gli strumenti di **misura** del sistema in un posto solo: la **scheda voti** (quanto "
+               "hanno reso davvero le promozioni), il **simulatore** (quanto avresti guadagnato con importo e "
+               "commissioni tuoi), la **tabella degli scenari** (quale momento di acquisto/vendita rende di "
+               "più) e la **calibrazione** (le probabilità dichiarate sono oneste?).")
     if not fu.cloud_mode():
         try:
-            fu.resolve_scenarios()      # in locale risolve le celle mature (sul cloud lo fa il job)
+            fu.update_track_record()    # in locale aggiorna i rendimenti reali (sul cloud lo fa il job)
+            fu.resolve_forecasts()      # previsioni mature (per la calibrazione)
+            fu.resolve_scenarios()      # celle mature degli scenari
         except Exception:
             pass
+
+    # --- 📊 Scheda voti del sistema (track record delle promozioni automatiche) ---
+    rstats = fu.track_record_stats()
+    if rstats["total"]:
+        with st.expander(f"📊 Scheda voti del sistema — {rstats['total']} promozioni automatiche finora",
+                         expanded=False):
+            st.caption("Quanto hanno **reso davvero** le occasioni promosse dal sistema: una misura onesta dell'efficacia. "
+                       "Non è una garanzia sul futuro, ma ti dice quanto fidarti dei segnali.")
+            rc1, rc2, rc3 = st.columns(3)
+            for col, key, label in [(rc1, "now", "Ad oggi"), (rc2, "d7", "Dopo 7 giorni"),
+                                    (rc3, "d30", "Dopo 30 giorni")]:
+                s = rstats[key]
+                with col:
+                    if s:
+                        st.metric(f"{label} — rendimento medio", f"{s['avg']:+.1f}%")
+                        st.caption(f"🎯 In positivo **{s['hit']}%** ({s['n']} casi) · "
+                                   f"migliore {s['best']:+.1f}% · peggiore {s['worst']:+.1f}%")
+                    else:
+                        st.metric(f"{label} — rendimento medio", "—")
+                        st.caption("Servono più giorni di dati.")
+
+            # --- Calibrazione: la convenienza alta rende più della bassa? ---
+            cal = fu.track_record_calibration()
+            st.markdown("###### La convenienza funziona? Resa reale per fascia")
+            band_rows = [{
+                "Fascia": fa["banda"], "Promozioni": fa["count"],
+                "Resa 7g": (fa["d7"]["avg"] if fa["d7"] else None),
+                "Resa 30g": (fa["d30"]["avg"] if fa["d30"] else None),
+                "In positivo 30g": (fa["d30"]["hit"] if fa["d30"] else None),
+            } for fa in cal["fasce"]]
+            st.dataframe(pd.DataFrame(band_rows).set_index("Fascia"), use_container_width=True, column_config={
+                "Promozioni": st.column_config.NumberColumn("Promozioni", format="%d"),
+                "Resa 7g": st.column_config.NumberColumn("Resa media 7g", format="%+.1f%%"),
+                "Resa 30g": st.column_config.NumberColumn("Resa media 30g", format="%+.1f%%"),
+                "In positivo 30g": st.column_config.NumberColumn("In positivo 30g", format="%d%%"),
+            })
+            if cal["ok"] is True:
+                st.success(cal["verdetto"])
+            elif cal["ok"] is False:
+                st.info(cal["verdetto"])
+            else:
+                st.caption("ℹ️ " + cal["verdetto"])
+
+            recs = fu.load_track_record()
+            if recs:
+                dfr = pd.DataFrame([{
+                    "Ticker": r.get("ticker"), "Tipo": "⚡ Breve" if r.get("kind") == "short" else "🏛️ Lungo",
+                    "Promossa il": r.get("date"), "Conv. iniziale": r.get("conv"),
+                    "Oggi": r.get("ret_now"), "Dopo 7g": r.get("ret_7d"), "Dopo 30g": r.get("ret_30d"),
+                } for r in reversed(recs)]).set_index("Ticker")
+                st.dataframe(dfr, use_container_width=True, column_config={
+                    "Conv. iniziale": st.column_config.NumberColumn("Conv. iniziale", format="%d"),
+                    "Oggi": st.column_config.NumberColumn("Oggi", format="%+.1f%%",
+                        help="Rendimento dal prezzo di promozione a oggi."),
+                    "Dopo 7g": st.column_config.NumberColumn("Dopo 7g", format="%+.1f%%"),
+                    "Dopo 30g": st.column_config.NumberColumn("Dopo 30g", format="%+.1f%%"),
+                })
+            st.caption("Le occasioni promosse vengono registrate col prezzo di partenza; il rendimento a 7 e 30 giorni "
+                       "si fissa al raggiungimento di quei traguardi. Stima sui dati reali, non una promessa.")
+            # Confronto onesto tra i due possibili momenti d'ingresso (si popola con le nuove promozioni)
+            _cmp = fu.track_record_entry_comparison()
+            if _cmp.get("n", 0) >= 3:
+                st.caption(f"🔭 **Entrare prima conviene?** Sulle ultime {_cmp['n']} promozioni: comprando a "
+                           f"**inizio osservazione** saresti a **{_cmp['avg_obs']:+.1f}%** in media, comprando "
+                           f"**alla promozione** a **{_cmp['avg_promo']:+.1f}%**. Il rimbalzo medio già avvenuto "
+                           f"aspettando la conferma è **{_cmp['avg_head_start']:+.1f}%**.")
+            else:
+                st.caption("🔭 Il confronto «ingresso a inizio osservazione vs alla promozione» si popolerà "
+                           "da solo con le prossime promozioni.")
+        st.markdown("---")
 
     # --- 💶 Quanto avrei guadagnato: rigioca le promozioni REALI (incluse le rimosse) ---
     st.markdown("## 💶 Quanto avrei guadagnato")
     st.caption("Rigioca **tutte** le occasioni entrate nel Monitoraggio (anche quelle poi rimosse, "
                "grazie allo storico delle uscite: niente «sopravvissute e basta») come se le avessi "
-               "comprate alla promozione con l'importo scelto. Confronta tre regole di uscita: "
-               "**tenere**, **vendere al bersaglio**, **uscire quando il sistema rimuove**. "
-               "Stima storica sui dati reali, non una promessa; cambio ignorato; tassa 26% sui guadagni.")
+               "comprate alla promozione con l'importo scelto. **Ogni riga della tabella è una regola "
+               "di vendita** — tenere · vendere al bersaglio · uscire quando il sistema rimuove — "
+               "applicata alle **stesse identiche occasioni** (l'elenco completo, titolo per titolo, "
+               "è nel pannello in fondo). Stima storica sui dati reali, non una promessa; cambio "
+               "ignorato; tassa 26% sui guadagni.")
     si1, si2, si3 = st.columns([1, 1, 1.4])
     sim_amt = si1.number_input("Importo per occasione (€)", min_value=1.0, value=30.0, step=10.0,
                                key="sim_amt")
@@ -1986,7 +1962,25 @@ if section.startswith("Scenari"):
                        f"(commissione fissa su importo piccolo). Prova a cambiare l'importo per vedere "
                        f"quanto cambia il risultato a parità di scelte.")
             if _sr.get("skipped"):
-                st.caption("Saltate (dati mancanti o oltre il limite): " + ", ".join(_sr["skipped"][:12]))
+                st.caption("Saltate (prezzi non confrontabili per raggruppamenti azionari, dati mancanti "
+                           "o oltre il limite): " + ", ".join(_sr["skipped"][:12]))
+            with st.expander(f"📄 Le occasioni rigiocate, titolo per titolo ({_sr['n_positions']})",
+                             expanded=False):
+                st.caption("Ogni riga qui è UNA occasione: le tre regole della tabella sopra sono "
+                           "applicate a tutte queste. «Tenendo» = rendimento se non vendessi mai; "
+                           "«Al bersaglio» = vendendo quando tocca il bersaglio registrato all'ingresso.")
+                st.dataframe(pd.DataFrame([{
+                    "Ticker": r["ticker"],
+                    "Tipo": "⚡ Breve" if r["kind"] == "short" else "🏛️ Lungo",
+                    "Stato": "aperta" if r["aperta"] else "rimossa",
+                    "Promossa il": r["ingresso"], "Prezzo ingresso": r["p_in"],
+                    "Tenendo": r["ret_hold"], "Al bersaglio": r["ret_target"],
+                    "Uscita": r["uscita"],
+                } for r in _sr["rows"]]).set_index("Ticker"), use_container_width=True,
+                    column_config={
+                        "Tenendo": st.column_config.NumberColumn("Tenendo", format="%+.2f%%"),
+                        "Al bersaglio": st.column_config.NumberColumn("Al bersaglio", format="%+.2f%%"),
+                    })
     st.markdown("---")
 
     # --- 🧭 Scenari acquisto/vendita: la misura NEL TEMPO di quale combinazione rende ---
@@ -2077,6 +2071,33 @@ if section.startswith("Scenari"):
                        "(uguali per tutti gli scenari, quindi non cambiano l'ordine).")
         else:
             st.caption("Per il grafico servono scenari con almeno un caso verificato nel filtro scelto.")
+    st.markdown("---")
+
+    # --- 🎯 Calibrazione delle probabilità (Brier score) ---
+    crep = fu.calibration_report()
+    if crep is not None:
+        with st.expander(f"🎯 Quanto sono oneste le probabilità (calibrazione) — "
+                         f"{crep['n_resolved']} previsioni verificate", expanded=False):
+            st.caption("Degli eventi a cui diamo **~70%**, quanti si avverano davvero? Questa scheda confronta la "
+                       "**probabilità di salita predetta** con quella **realizzata**. Non serve a indovinare il prezzo, "
+                       "ma a misurare se le nostre percentuali sono affidabili. Si popola nel tempo.")
+            if crep["n_resolved"] == 0:
+                st.info(f"Nessuna previsione ancora verificata (servono ~1 mese per il breve, ~1 anno per il lungo). "
+                        f"Registrate finora: {crep['n_total']}. Torna più avanti.")
+            else:
+                if crep["brier"] is not None:
+                    bs = crep["brier"]
+                    tone = st.success if bs <= 0.20 else st.warning if bs <= 0.25 else st.error
+                    tone(f"**Brier score: {bs:.3f}** (più basso = meglio; 0,25 = come tirare a caso, "
+                         "<0,20 = previsioni utili).")
+                if crep["buckets"]:
+                    st.dataframe(pd.DataFrame(crep["buckets"]).set_index("range"),
+                                 use_container_width=True, column_config={
+                        "n": st.column_config.NumberColumn("Casi", format="%d"),
+                        "predetto": st.column_config.NumberColumn("Prob. predetta", format="%d%%"),
+                        "realizzato": st.column_config.NumberColumn("Salite reali", format="%d%%",
+                            help="Se 'predetta' e 'realizzato' sono vicine, le probabilità sono ben calibrate."),
+                    })
     st.stop()
 
 # ===========================================================================
