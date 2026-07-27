@@ -4251,22 +4251,165 @@ def resolve_scenarios() -> int:
 
 
 def scenario_stats() -> dict:
-    """Aggrega gli scenari risolti: per tipo (breve/lungo) e per combinazione acquisto|vendita
-    → {n, avg, hit}. È la risposta, misurata nel tempo, a 'quale momento di acquisto/vendita
-    funziona meglio?'."""
+    """Aggrega gli scenari risolti: per tipo (breve/lungo/tutte) e per combinazione
+    acquisto|vendita → {n, avg, hit, med, best, worst}. È la risposta, misurata nel tempo,
+    a 'quale momento di acquisto/vendita funziona meglio?'."""
     rows = [r for r in load_scenario_log() if not r.get("bad_data")]
     out = {"n_rows": len(rows)}
-    for kind in ("short", "long"):
-        sel = [r for r in rows if r.get("kind") == kind]
+    for kind in ("short", "long", "tutte"):
+        sel = rows if kind == "tutte" else [r for r in rows if r.get("kind") == kind]
         m = {}
         for bk in _SCENARIO_BUYS:
             for sk in _SCENARIO_SELLS:
                 key = f"{bk}|{sk}"
-                vals = [r["res"][key] for r in sel if r.get("res", {}).get(key) is not None]
+                vals = sorted(r["res"][key] for r in sel if r.get("res", {}).get(key) is not None)
                 if vals:
-                    m[key] = {"n": len(vals), "avg": round(sum(vals) / len(vals), 2),
-                              "hit": round(100 * sum(1 for v in vals if v > 0) / len(vals))}
+                    n = len(vals)
+                    med = vals[n // 2] if n % 2 else (vals[n // 2 - 1] + vals[n // 2]) / 2
+                    m[key] = {"n": n, "avg": round(sum(vals) / n, 2),
+                              "hit": round(100 * sum(1 for v in vals if v > 0) / n),
+                              "med": round(med, 2), "best": round(vals[-1], 2),
+                              "worst": round(vals[0], 2)}
         out[kind] = m
+    return out
+
+
+def scenario_series() -> list:
+    """Tutti i punti risolti degli scenari, in ordine di data: [{ticker, kind, date, combo, ret}].
+    Serve al grafico 'scenari a confronto nel tempo' (somma cumulata per combinazione)."""
+    out = []
+    for r in load_scenario_log():
+        if r.get("bad_data"):
+            continue
+        for k, v in (r.get("res") or {}).items():
+            if v is not None:
+                out.append({"ticker": r.get("ticker"), "kind": r.get("kind", "short"),
+                            "date": str(r.get("date"))[:10], "combo": k, "ret": v})
+    out.sort(key=lambda p: p["date"])
+    return out
+
+
+# ---------------------------------------------------------------------------
+# PRE-SEGNALE — affidabilità misurata nel tempo. Ogni giorno il job registra le candidate
+# "più solide" ancora in osservazione (stessi criteri della sezione «In anticipo») e, dopo
+# 7 e 30 giorni, ne verifica l'esito reale: così anche il pre-segnale ha la sua scheda voti.
+# ---------------------------------------------------------------------------
+PRESIGNAL_NAME = "presignal_log.json"
+_PRESIGNAL_MAX = 500
+_PRE_MIN_CONV = 65        # convenienza minima per dire "solida" (l'osservazione parte da 60)
+_PRE_MIN_DAYS = 1         # almeno 2 giorni di osservazione (via il rumore delle appena entrate)
+
+
+def solid_presignals() -> list:
+    """Le occasioni in osservazione considerate PIÙ SOLIDE dal pre-segnale: convenienza ≥65,
+    tendenza della convenienza non in calo, almeno 2 giorni di osservazione; escluse quelle già
+    seguite o in cooldown. Ordinate: prima il breve poi il lungo, dentro il gruppo per convenienza.
+    Usata sia dalla sezione «In anticipo» sia dal registro di affidabilità (stessi criteri)."""
+    tracked = load_tracking()
+    cooldown = _load_exit_cooldown()
+    out = []
+    for s in observation_status():
+        tk = s.get("ticker")
+        if not tk or tk in tracked or _in_exit_cooldown(tk, cooldown):
+            continue
+        if (s.get("last_conv") or 0) >= _PRE_MIN_CONV and (s.get("dconv") or 0) >= 0 \
+                and (s.get("days") or 0) >= _PRE_MIN_DAYS:
+            out.append(s)
+    out.sort(key=lambda s: (0 if s.get("kind") == "short" else 1, -(s.get("last_conv") or 0)))
+    return out
+
+
+def load_presignal_log() -> list:
+    data = read_data_json(PRESIGNAL_NAME, [])
+    return data if isinstance(data, list) else []
+
+
+def record_presignals() -> list:
+    """Registra i NUOVI pre-segnali solidi di oggi (prezzo e convenienza del momento), per poterne
+    misurare l'esito. Dedup: uno stesso kind:ticker non viene ri-registrato entro 30 giorni."""
+    solid = solid_presignals()
+    if not solid:
+        return []
+    rows = load_presignal_log()
+    today = _today_iso()
+    recenti = {f"{r.get('kind')}:{r.get('ticker')}" for r in rows
+               if 0 <= _days_between(r.get("date"), today) <= 30}
+    added = []
+    for s in solid:
+        key = f"{s.get('kind')}:{s.get('ticker')}"
+        if key in recenti or not s.get("last_price"):
+            continue
+        rows.append({"ticker": s["ticker"], "kind": s.get("kind", "short"), "date": today,
+                     "price": s["last_price"], "conv": s.get("last_conv"),
+                     "ret_7d": None, "ret_30d": None})
+        added.append(s["ticker"])
+    if added:
+        write_data_json(PRESIGNAL_NAME, rows[-_PRESIGNAL_MAX:])
+    return added
+
+
+def resolve_presignals() -> int:
+    """Verifica i pre-segnali maturi: fissa ret_7d/ret_30d (giorni di calendario) dal prezzo di
+    registrazione. Guardia anti-split come per gli scenari. Ritorna quanti campi ha risolto."""
+    rows = load_presignal_log()
+    if not rows:
+        return 0
+    today = datetime.date.fromisoformat(_today_iso())
+    changed = 0
+    for r in rows:
+        if r.get("bad_data"):
+            continue
+        try:
+            d0 = datetime.date.fromisoformat(str(r.get("date"))[:10])
+        except Exception:
+            continue
+        age = (today - d0).days
+        if not ((age >= 7 and r.get("ret_7d") is None) or (age >= 30 and r.get("ret_30d") is None)):
+            continue
+        base = r.get("price")
+        if not base or age > 120:
+            r["bad_data"] = True
+            changed += 1
+            continue
+        try:
+            closes = get_history(r["ticker"], period="6mo")["Close"].dropna()
+            try:
+                closes.index = closes.index.tz_localize(None)
+            except (TypeError, AttributeError):
+                pass
+        except Exception:
+            continue
+        after = closes[closes.index > pd.Timestamp(d0)]
+        if after.empty:
+            continue
+        if abs(float(after.iloc[0]) / float(base) - 1) > 0.25:   # split/raggruppamento
+            r["bad_data"] = True
+            changed += 1
+            continue
+        for h, fld in ((7, "ret_7d"), (30, "ret_30d")):
+            if r.get(fld) is None and age >= h:
+                s = closes[closes.index >= pd.Timestamp(d0 + datetime.timedelta(days=h))]
+                if not s.empty:
+                    r[fld] = round((float(s.iloc[0]) / float(base) - 1) * 100, 2)
+                    changed += 1
+    if changed:
+        write_data_json(PRESIGNAL_NAME, rows[-_PRESIGNAL_MAX:])
+    return changed
+
+
+def presignal_stats() -> dict:
+    """Affidabilità del pre-segnale finora: per tipo → esito medio e % positivi a 7 e 30 giorni."""
+    rows = [r for r in load_presignal_log() if not r.get("bad_data")]
+    out = {"n_rows": len(rows)}
+    for kind in ("short", "long"):
+        sel = [r for r in rows if r.get("kind") == kind]
+        k = {}
+        for fld, lab in (("ret_7d", "d7"), ("ret_30d", "d30")):
+            vals = [r[fld] for r in sel if r.get(fld) is not None]
+            if vals:
+                k[lab] = {"n": len(vals), "avg": round(sum(vals) / len(vals), 2),
+                          "hit": round(100 * sum(1 for v in vals if v > 0) / len(vals))}
+        out[kind] = k
     return out
 
 

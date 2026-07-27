@@ -249,6 +249,15 @@ def main():
     except Exception as e:
         log(f"Errore scenari acquisto/vendita: {e!r}")
 
+    # Pre-segnale: registra le "più solide" di oggi e ne verifica l'esito quando maturo,
+    # così anche l'affidabilità del pre-segnale viene misurata nel tempo.
+    try:
+        nuovi_pre = fu.record_presignals()
+        npre = fu.resolve_presignals()
+        log(f"Pre-segnale: {len(nuovi_pre)} nuovi registrati · {npre} esiti verificati.")
+    except Exception as e:
+        log(f"Errore registro pre-segnale: {e!r}")
+
     # Loop di feedback: risolve la resa forward del log convenienza e ri-stima i pesi (se ci sono dati)
     try:
         nrc = fu.resolve_convenience_log()
@@ -289,6 +298,7 @@ def main():
     fu.write_data_json(fu.OPP_CONFIG_NAME, fu.read_data_json(fu.OPP_CONFIG_NAME, fu._OPP_CONFIG_DEFAULT))  # config occasioni
     fu.write_data_json(fu.EXIT_HISTORY_NAME, fu.load_exit_history())  # lapidi delle rimosse (anti-survivorship)
     fu.write_data_json(fu.SCENARIO_LOG_NAME, fu.load_scenario_log())  # scenari acquisto/vendita
+    fu.write_data_json(fu.PRESIGNAL_NAME, fu.load_presignal_log())    # affidabilità pre-segnale
 
     log(f"Fatto. Totale occasioni viste: {total}.")
     return 0

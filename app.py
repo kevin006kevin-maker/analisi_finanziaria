@@ -1060,6 +1060,33 @@ if section.startswith("In anticipo"):
                "candidate **prima**: segnale **anticipato e più rischioso** — il rimbalzo non è confermato e "
                "il prezzo può ancora scendere. Con «📌 Segui ora» la porti subito nel Monitoraggio al prezzo "
                "di adesso (scelta tua: non verrà mai rimossa in automatico).")
+    if not fu.cloud_mode():
+        try:
+            fu.record_presignals()      # in locale registra/verifica il pre-segnale (sul cloud lo fa il job)
+            fu.resolve_presignals()
+        except Exception:
+            pass
+
+    # 📏 Affidabilità del pre-segnale: l'esito REALE dei segnali "solidi" registrati finora
+    _pst = fu.presignal_stats()
+    _aff = []
+    for _k, _kl in (("short", "⚡ Breve"), ("long", "🏛️ Lungo")):
+        _d = _pst.get(_k) or {}
+        _pezzi = []
+        for _lab, _titolo in (("d7", "dopo 7 giorni"), ("d30", "dopo 30 giorni")):
+            _x = _d.get(_lab)
+            if _x:
+                _pezzi.append(f"{_titolo} **{_x['avg']:+.1f}%** ({_x['hit']}% positivi, {_x['n']} casi)")
+        if _pezzi:
+            _aff.append(f"**{_kl}**: " + " · ".join(_pezzi))
+    if _aff:
+        st.info("📏 **Quanto è affidabile il pre-segnale?** Esito reale dei segnali «solidi» registrati "
+                "nei giorni scorsi:\n\n" + "\n\n".join(_aff))
+    else:
+        st.caption(f"📏 L'**affidabilità del pre-segnale** si sta misurando da sola: ogni giorno il sistema "
+                   f"registra le candidate più solide ({_pst.get('n_rows', 0)} registrate finora) e dopo 7 e "
+                   "30 giorni ne verifica l'esito reale. I primi numeri compariranno qui tra circa una settimana.")
+
     _tracked_pre = fu.load_tracking()
     try:
         _pre_cool = fu._load_exit_cooldown()
@@ -1068,50 +1095,123 @@ if section.startswith("In anticipo"):
                    and not fu._in_exit_cooldown(s["ticker"], _pre_cool)]
     except Exception:
         pre_all = []
-    # Di serie SOLO le più solide (via il rumore): convenienza ≥65, tendenza della convenienza
-    # non in calo, almeno 2 giorni di osservazione. Massimo 15, in ordine di convenienza.
-    solide = [s for s in pre_all if (s.get("last_conv") or 0) >= 65
-              and (s.get("dconv") or 0) >= 0 and (s.get("days") or 0) >= 1]
-    solide.sort(key=lambda s: (-(s.get("last_conv") or 0), s.get("remaining", 9)))
-    mostra_tutte = st.checkbox(f"Mostra tutte le {len(pre_all)} in osservazione (anche le meno solide)",
-                               value=False,
-                               help="Di serie si mostrano solo le più solide: convenienza ≥65, tendenza "
-                                    "non in calo e almeno 2 giorni di osservazione — al massimo 15.")
-    if mostra_tutte:
-        items = sorted(pre_all, key=lambda s: (-(s.get("last_conv") or 0), s.get("remaining", 9)))
-        st.markdown(f"## 🔭 Tutte — {len(items)}")
-    else:
-        items = solide[:15]
-        st.markdown(f"## 🔭 Le più solide — {len(items)} su {len(pre_all)} osservate")
-        st.caption("Criteri: convenienza **≥65** (l'ingresso in osservazione parte da 60), tendenza della "
-                   "convenienza **non in calo** e **almeno 2 giorni** di osservazione. Ordinate per convenienza.")
-    if not items:
-        st.caption("Nessuna candidata solida al momento. Spunta la casella qui sopra per vedere comunque "
-                   "tutte le osservate.")
-    for s in items:
+    solide = fu.solid_presignals()      # stessi criteri del registro di affidabilità (coerenza)
+    _watch_pre = fu.load_opp_watch()
+
+    def _pre_card(s):
+        """Scheda COMPLETA stile Monitoraggio: metriche + grafico prezzo/convenienza + azioni."""
         tk = s["ticker"]
         knd = s.get("kind", "short")
-        kb = "⚡ Breve" if knd == "short" else "🏛️ Lungo"
+        wobs = [o for o in (_watch_pre.get(f"{knd}:{tk}") or {}).get("obs", []) if o.get("price")]
         with st.container(border=True):
-            pa, pb = st.columns([4, 1])
+            c1, c2 = st.columns([4, 1])
             nm = s.get("name") or tk
-            prezzo = f"{s['last_price']:,.2f}" if s.get("last_price") else "n/d"
-            conv_txt = f"{s['last_conv']:.0f}" if s.get("last_conv") is not None else "n/d"
-            pa.markdown(f"**{nm}**  ·  `{tk}`  ·  {kb}")
-            pa.caption(f"Osservata da **{s.get('days', 0)}** giorni di Borsa su {s.get('window', '?')} "
-                       f"(**mancano ~{s.get('remaining', '?')}** alla valutazione) · prezzo **{prezzo}** · "
-                       f"da inizio osservazione **{(s.get('ret') or 0):+.1f}%** · convenienza **{conv_txt}**")
-            if pb.button("📌 Segui ora", key=f"pre_track_{knd}_{tk}", use_container_width=True,
+            c1.markdown(f"### {nm}  ·  `{tk}`")
+            c1.caption(f"{'⚡ Breve' if knd == 'short' else '🏛️ Lungo'} · pre-segnale (rimbalzo NON confermato) · "
+                       f"osservata da **{s.get('days', 0)}** giorni di Borsa su {s.get('window', '?')} "
+                       f"(**mancano ~{s.get('remaining', '?')}** alla valutazione)")
+            if c2.button("📌 Segui ora", key=f"pre_track_{knd}_{tk}", use_container_width=True,
                          help="Ingresso ANTICIPATO: entra nel Monitoraggio al prezzo di adesso, "
                               "prima della conferma del rimbalzo (più rischio, prezzo più basso)."):
                 fu.track_opportunity(tk, knd,
                                      note=f"📍 Ingresso anticipato (pre-segnale) il {datetime.date.today().isoformat()}: "
                                           f"scelto PRIMA della conferma del rimbalzo.")
                 st.rerun()
-            if pb.button("📊 Analizza", key=f"pre_goto_{knd}_{tk}", use_container_width=True):
+            if c2.button("📊 Analizza", key=f"pre_goto_{knd}_{tk}", use_container_width=True):
                 st.session_state["ticker"] = tk
                 st.session_state["_goto_section"] = "Analisi di un titolo"
                 st.rerun()
+            m1, m2, m3 = st.columns(3)
+            m1.metric("Prezzo", f"{s['last_price']:,.2f}" if s.get("last_price") else "n/d")
+            m2.metric("Convenienza", f"{s['last_conv']:.0f}" if s.get("last_conv") is not None else "n/d",
+                      delta=(f"{s.get('dconv'):+.1f} da inizio oss." if s.get("dconv") is not None else None))
+            m3.metric("Prezzo da inizio oss.", f"{(s.get('ret') or 0):+.1f}%")
+            # Grafico: prezzo (3 mesi) + punti registrati in osservazione + convenienza (asse destro)
+            try:
+                hc = chart_history(tk, "3mo")
+            except Exception:
+                hc = None
+            figp = go.Figure()
+            if hc is not None and not hc.empty:
+                hx = hc.copy()
+                try:
+                    hx.index = hx.index.tz_localize(None)
+                except (TypeError, AttributeError):
+                    pass
+                figp.add_trace(go.Scatter(x=hx.index, y=hx["Close"], name="Prezzo",
+                                          line=dict(color="#0969da", width=2)))
+            if wobs:
+                figp.add_trace(go.Scatter(x=[o["date"] for o in wobs], y=[o["price"] for o in wobs],
+                                          name="Osservazioni", mode="markers",
+                                          marker=dict(size=7, color="#d29922")))
+                _cvs = [(o["date"], o["conv"]) for o in wobs if o.get("conv") is not None]
+                if _cvs:
+                    figp.add_trace(go.Scatter(x=[d for d, _ in _cvs], y=[v for _, v in _cvs],
+                                              name="Convenienza", yaxis="y2", mode="lines+markers",
+                                              line=dict(color="#8250df", width=2), marker=dict(size=6)))
+            if figp.data:
+                figp.update_layout(height=280, margin=dict(t=10, b=10, l=10, r=10),
+                                   legend=dict(orientation="h"), hovermode="x unified",
+                                   yaxis=dict(title="Prezzo"),
+                                   yaxis2=dict(title="Convenienza", overlaying="y", side="right",
+                                               range=[0, 100], showgrid=False))
+                show_chart(figp, use_container_width=True)
+                st.caption("👀 **Linea blu** = prezzo (3 mesi). **Punti gialli** = i prezzi registrati durante "
+                           "l'osservazione. **Linea viola** = la convenienza durante l'osservazione "
+                           "(sale = il segnale si sta rafforzando).")
+            else:
+                st.caption("Grafico non disponibile al momento (dati di prezzo mancanti).")
+
+    mostra_tutte = st.checkbox(f"Mostra anche le altre {max(0, len(pre_all) - len(solide))} in osservazione "
+                               "(meno solide, in forma compatta)", value=False,
+                               help="Di serie si mostrano solo le più solide, con la scheda completa: "
+                                    "convenienza ≥65, tendenza non in calo e almeno 2 giorni di "
+                                    "osservazione (max 8 per tipo).")
+    _sol_short = [s for s in solide if s.get("kind") == "short"][:8]
+    _sol_long = [s for s in solide if s.get("kind") != "short"][:8]
+    st.markdown(f"## 🔭 Le più solide — {len(_sol_short) + len(_sol_long)} su {len(pre_all)} osservate")
+    st.caption("Criteri: convenienza **≥65** (l'ingresso in osservazione parte da 60), tendenza della "
+               "convenienza **non in calo**, **almeno 2 giorni** di osservazione. Prima il **breve** poi il "
+               "**lungo** termine; dentro il gruppo, per convenienza. L'esito di queste scelte viene "
+               "registrato ogni giorno → vedi il riquadro «affidabilità» qui sopra.")
+    if not (_sol_short or _sol_long):
+        st.caption("Nessuna candidata solida al momento. Spunta la casella qui sopra per vedere comunque "
+                   "tutte le osservate.")
+    if _sol_short:
+        st.markdown(f"### ⚡ Breve termine — {len(_sol_short)}")
+        for s in _sol_short:
+            _pre_card(s)
+    if _sol_long:
+        st.markdown(f"### 🏛️ Lungo termine — {len(_sol_long)}")
+        for s in _sol_long:
+            _pre_card(s)
+
+    if mostra_tutte:
+        st.markdown("---")
+        _ids_sol = {(x.get("kind"), x.get("ticker")) for x in _sol_short + _sol_long}
+        _resto = sorted([s for s in pre_all if (s.get("kind"), s.get("ticker")) not in _ids_sol],
+                        key=lambda s: (0 if s.get("kind") == "short" else 1, -(s.get("last_conv") or 0)))
+        st.markdown(f"## Tutte le altre — {len(_resto)}")
+        for s in _resto:
+            tk = s["ticker"]
+            knd = s.get("kind", "short")
+            with st.container(border=True):
+                pa, pb = st.columns([4, 1])
+                _pz = f"{s['last_price']:,.2f}" if s.get("last_price") else "n/d"
+                _cv = f"{s['last_conv']:.0f}" if s.get("last_conv") is not None else "n/d"
+                pa.markdown(f"**{s.get('name') or tk}**  ·  `{tk}`  ·  "
+                            f"{'⚡ Breve' if knd == 'short' else '🏛️ Lungo'}")
+                pa.caption(f"Osservata da {s.get('days', 0)} gg su {s.get('window', '?')} "
+                           f"(mancano ~{s.get('remaining', '?')}) · prezzo {_pz} · "
+                           f"da inizio oss. {(s.get('ret') or 0):+.1f}% · convenienza {_cv}")
+                if pb.button("📌 Segui ora", key=f"all_track_{knd}_{tk}", use_container_width=True):
+                    fu.track_opportunity(tk, knd,
+                                         note=f"📍 Ingresso anticipato (pre-segnale) il {datetime.date.today().isoformat()}.")
+                    st.rerun()
+                if pb.button("📊 Analizza", key=f"all_goto_{knd}_{tk}", use_container_width=True):
+                    st.session_state["ticker"] = tk
+                    st.session_state["_goto_section"] = "Analisi di un titolo"
+                    st.rerun()
     st.stop()
 
 # ===========================================================================
@@ -1807,39 +1907,87 @@ if section.startswith("Scenari"):
                "**inizio osservazione** / **alla promozione** / **il giorno dopo** × vendere "
                "**dopo 7 giorni** / **dopo 30 giorni** / **al bersaglio** (se toccato entro 30, "
                "altrimenti a 30). Le vendite sono ancorate alla data di promozione, così gli "
-               "ingressi si confrontano ad armi pari. Col tempo questa tabella dice quale "
-               "combinazione è la più affidabile — misurata, non a sensazione.")
+               "ingressi si confrontano ad armi pari.")
     _sst = fu.scenario_stats()
-    _lb = {"osservazione": "Compro a inizio osservazione", "promozione": "Compro alla promozione",
-           "giorno_dopo": "Compro il giorno dopo"}
-    _ls = {"7g": "Vendo dopo 7g", "30g": "Vendo dopo 30g", "bersaglio": "Vendo al bersaglio (≤30g)"}
-    _shown = False
-    for _k, _kl in (("short", "⚡ Breve periodo"), ("long", "🏛️ Lungo periodo")):
-        _m = _sst.get(_k) or {}
-        if not _m:
-            continue
-        _rows2 = []
-        for _bk, _bl in _lb.items():
-            _row = {"Ingresso": _bl}
-            _has = False
-            for _sk, _sl in _ls.items():
-                _cell = _m.get(f"{_bk}|{_sk}")
-                _row[_sl] = (f"{_cell['avg']:+.1f}% · {_cell['hit']}% ✓ ({_cell['n']})" if _cell else "—")
-                _has = _has or bool(_cell)
-            if _has:
-                _rows2.append(_row)
-        if _rows2:
-            _shown = True
-            st.markdown(f"**{_kl}**")
-            st.dataframe(pd.DataFrame(_rows2).set_index("Ingresso"), use_container_width=True)
-    if _shown:
-        st.caption("Lettura: **media % · % di volte in positivo (numero di casi)**. Le celle si "
-                   "riempiono da sole: le vendite a 7 giorni compaiono una settimana dopo ogni "
-                   "promozione, quelle a 30 dopo un mese. Servono molti casi prima di fidarsi.")
+    _serie_sc = fu.scenario_series()
+    _lbb = {"osservazione": "Compro a inizio osservazione", "promozione": "Compro alla promozione",
+            "giorno_dopo": "Compro il giorno dopo"}
+    _lbs = {"7g": "vendo dopo 7 giorni", "30g": "vendo dopo 30 giorni",
+            "bersaglio": "vendo al bersaglio (entro 30g)"}
+    _combo_lb = {f"{_b}|{_s}": f"{_lbb[_b]} → {_lbs[_s]}" for _b in _lbb for _s in _lbs}
+
+    if not _serie_sc:
+        st.info(f"Ancora nessuno scenario risolto ({_sst.get('n_rows', 0)} promozioni registrate finora): "
+                "i primi risultati compariranno ~7 giorni dopo le prossime promozioni, il quadro completo "
+                "dopo 30. Si riempie tutto da solo, senza fare niente.")
     else:
-        st.caption(f"Ancora nessuno scenario risolto ({_sst.get('n_rows', 0)} promozioni registrate "
-                   "finora): le prime celle compariranno ~7 giorni dopo le prossime promozioni, "
-                   "il quadro completo dopo 30. Si riempie tutto da solo, senza fare niente.")
+        _avail = [k for k in _combo_lb if any(p["combo"] == k for p in _serie_sc)]
+
+        # --- Scheda del singolo scenario: precisione, attendibilità, breve/lungo ---
+        _sel = st.selectbox("Scegli lo scenario da esaminare", _avail,
+                            format_func=lambda k: _combo_lb[k], key="scen_sel")
+
+        def _affidabilita(n):
+            return "🟢 Alta" if n >= 20 else ("🟡 Media" if n >= 8 else "🔴 Bassa (pochi casi)")
+
+        _cts = st.columns(3)
+        for _c, (_k, _kl) in zip(_cts, (("tutte", "Tutti i titoli"), ("short", "⚡ Breve"), ("long", "🏛️ Lungo"))):
+            _cell = (_sst.get(_k) or {}).get(_sel)
+            with _c:
+                if _cell:
+                    st.metric(_kl, f"{_cell['avg']:+.2f}%",
+                              help="Rendimento medio dello scenario sulle promozioni verificate.")
+                    st.caption(f"Precisione: **{_cell['hit']}% positivi** · mediana {_cell['med']:+.1f}% · "
+                               f"migliore {_cell['best']:+.1f}% / peggiore {_cell['worst']:+.1f}% · "
+                               f"{_cell['n']} casi · attendibilità {_affidabilita(_cell['n'])}")
+                else:
+                    st.metric(_kl, "—")
+                    st.caption("Nessun caso verificato ancora.")
+        with st.expander("📄 I casi dietro questo scenario (più recenti)", expanded=False):
+            _pts_sel = sorted([p for p in _serie_sc if p["combo"] == _sel],
+                              key=lambda p: p["date"], reverse=True)
+            if _pts_sel:
+                st.dataframe(pd.DataFrame([{
+                    "Ticker": p["ticker"],
+                    "Tipo": "⚡ Breve" if p["kind"] == "short" else "🏛️ Lungo",
+                    "Promossa il": p["date"], "Rendimento": p["ret"]} for p in _pts_sel[:20]]
+                ).set_index("Ticker"), use_container_width=True, column_config={
+                    "Rendimento": st.column_config.NumberColumn("Rendimento", format="%+.2f%%")})
+            else:
+                st.caption("Nessun caso.")
+
+        # --- Confronto veloce e immediato: gli scenari nel tempo ---
+        st.markdown("### 📈 Scenari a confronto nel tempo")
+        _kf = st.radio("Titoli considerati", ["Tutti", "⚡ Breve", "🏛️ Lungo"],
+                       horizontal=True, key="scen_kind")
+        _def = [k for k in ("promozione|30g", "osservazione|30g", "giorno_dopo|30g") if k in _avail] or _avail[:3]
+        _chosen = st.multiselect("Scenari da confrontare", _avail, default=_def,
+                                 format_func=lambda k: _combo_lb[k], key="scen_multi")
+        figsc = go.Figure()
+        for _ck in _chosen:
+            _pts = [p for p in _serie_sc if p["combo"] == _ck
+                    and (_kf == "Tutti" or (p["kind"] == "short") == (_kf == "⚡ Breve"))]
+            _pts.sort(key=lambda p: p["date"])
+            if not _pts:
+                continue
+            _cum, _xs, _ys = 0.0, [], []
+            for p in _pts:
+                _cum += p["ret"]
+                _xs.append(p["date"])
+                _ys.append(round(_cum, 2))
+            figsc.add_trace(go.Scatter(x=_xs, y=_ys, mode="lines+markers", name=_combo_lb[_ck]))
+        if figsc.data:
+            figsc.add_hline(y=0, line=dict(color="gray", width=1, dash="dash"))
+            figsc.update_layout(height=380, margin=dict(t=10, b=10, l=10, r=10),
+                                legend=dict(orientation="h"), hovermode="x unified",
+                                yaxis_title="Somma dei rendimenti (%)")
+            show_chart(figsc, use_container_width=True)
+            st.caption("👀 Ogni linea somma, promozione dopo promozione (in ordine di data), i rendimenti "
+                       "dello scenario: **la linea più in alto è lo scenario che avrebbe reso di più fin qui**; "
+                       "sopra lo zero = in guadagno complessivo. Confronto al lordo di commissioni e tasse "
+                       "(uguali per tutti gli scenari, quindi non cambiano l'ordine).")
+        else:
+            st.caption("Per il grafico servono scenari con almeno un caso verificato nel filtro scelto.")
     st.stop()
 
 # ===========================================================================
