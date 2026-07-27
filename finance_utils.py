@@ -3381,7 +3381,10 @@ def track_many(picks) -> list:
 
 def untrack_opportunity(ticker: str) -> dict:
     data = load_tracking()
-    data.pop(ticker.upper(), None)
+    tk = ticker.upper()
+    if tk in data:
+        _append_exit_record(tk, data[tk], "rimozione manuale")   # lapide anche per le uscite manuali
+    data.pop(tk, None)
     save_tracking(data)
     return data
 
@@ -3649,6 +3652,38 @@ _EXIT_CONFIRM_DAYS = {"short": 4, "long": 10}
 _EXIT_COOLDOWN_DAYS = 5           # giorni di Borsa in cui un titolo tolto NON si ri-promuove (anti-churn)
 EXIT_COOLDOWN_NAME = "exit_cooldown.json"
 
+# --- Storico delle occasioni RIMOSSE dal Monitoraggio (lapidi anti-survivorship): senza di questo
+# ogni simulazione retrospettiva vede solo le sopravvissute e i risultati sembrano migliori del vero. ---
+EXIT_HISTORY_NAME = "exit_history.json"
+_EXIT_HISTORY_MAX = 400           # tetto: file piccolo, anni di rimozioni
+
+
+def load_exit_history() -> list:
+    data = read_data_json(EXIT_HISTORY_NAME, [])
+    return data if isinstance(data, list) else []
+
+
+def _append_exit_record(tk: str, entry: dict, reason: str) -> None:
+    """Registra una 'lapide' quando un'occasione esce dal Monitoraggio (rimozione automatica o
+    manuale): ticker, periodo, prezzi primo/ultimo e livelli iniziali. Tollerante ai dati mancanti
+    (la rimozione va registrata comunque). Usata dal simulatore per includere anche le perdenti."""
+    try:
+        snaps = [s for s in entry.get("snapshots", []) if s.get("price")]
+        first = snaps[0] if snaps else {}
+        last = snaps[-1] if snaps else {}
+        hist = load_exit_history()
+        hist.append({
+            "ticker": str(tk).upper(), "kind": entry.get("kind", "short"),
+            "added": entry.get("added"), "removed": _today_iso(), "reason": reason,
+            "auto": bool(entry.get("auto")),
+            "first_price": first.get("price"), "last_price": last.get("price"),
+            "first_target": first.get("target"), "first_stop": first.get("stop"),
+            "my_target_price": entry.get("my_target_price"),
+        })
+        write_data_json(EXIT_HISTORY_NAME, hist[-_EXIT_HISTORY_MAX:])
+    except Exception:
+        pass   # la lapide non deve mai bloccare la rimozione
+
 
 def _days_between(d1, d2) -> int:
     """Giorni di calendario tra due date in formato ISO (YYYY-MM-DD...)."""
@@ -3779,9 +3814,18 @@ def auto_promote_opportunities() -> list:
             tr[tk]["auto"] = True
             tr[tk]["notified"] = False
             save_tracking(tr)
+        # Ancoraggi per gli SCENARI acquisto/vendita (bersaglio/stop dal 1° scatto appena creato)
+        snap0 = (tr.get(tk, {}).get("snapshots") or [{}])[0]
+        _log_promotion_scenario(tk, kind, promo_price=obs[-1].get("price"),
+                                obs_price=obs[0].get("price"),
+                                obs_date=str(obs[0].get("date", ""))[:10],
+                                target=snap0.get("target"), stop=snap0.get("stop"))
         promoted.append(tk)
         new_records.append({"ticker": tk, "kind": kind, "date": _today_iso(),
                             "price": obs[-1].get("price"), "conv": obs[-1].get("conv"),
+                            # prezzo/data di INIZIO osservazione: servono a misurare quanto rimbalzo
+                            # "si perde" aspettando la conferma (confronto ingresso anticipato vs promozione)
+                            "obs_price": obs[0].get("price"), "obs_date": str(obs[0].get("date", ""))[:10],
                             "ret_now": None, "ret_7d": None, "ret_30d": None, "last_update": _today_iso()})
     if new_records:
         recs = load_track_record()
@@ -3879,6 +3923,7 @@ def manage_monitoring() -> tuple:
         ret = (last_price / base - 1) * 100 if base else 0.0   # rendimento dal giorno di promozione
         # Crollo estremo / delisting (>90%): rimozione IMMEDIATA + cooldown.
         if _collapsed_or_stale(e, tk) == "collapse":
+            _append_exit_record(tk, e, "crollo/delisting (perdita >90%)")
             del tracked[tk]
             removed.append(tk)
             _mark_exit_cooldown(tk)
@@ -3896,6 +3941,7 @@ def manage_monitoring() -> tuple:
                 e["warn"] = warn
                 changed = True
             if _trading_days_between(e["warn_since"], _today_iso(), tk) >= _EXIT_CONFIRM_DAYS.get(kind, 5):
+                _append_exit_record(tk, e, e.get("warn") or "deterioramento confermato")
                 del tracked[tk]
                 removed.append(tk)
                 _mark_exit_cooldown(tk)
@@ -3988,6 +4034,7 @@ def observation_status() -> list:
                     "name": e.get("name", ""), "days": days, "ret": round(ret, 1),
                     "last_conv": last_conv, "window": window,
                     "remaining": max(0, window - days),
+                    "last_price": obs[-1].get("price"),   # per la sezione "In anticipo" (pre-segnale)
                     "run": run, "trend_ok": trend_ok, "dconv": dconv, "n_days": len(vals)})
     out.sort(key=lambda x: x["ret"], reverse=True)
     return out
@@ -4068,6 +4115,159 @@ def track_record_stats() -> dict:
 
     return {"total": len(records), "now": agg("ret_now"),
             "d7": agg("ret_7d"), "d30": agg("ret_30d")}
+
+
+def track_record_entry_comparison() -> dict:
+    """Confronta 'ingresso a INIZIO OSSERVAZIONE' vs 'ingresso alla PROMOZIONE' sulle promozioni
+    che hanno registrato entrambi i prezzi (campo obs_price, presente sui record nuovi). Nessuna
+    chiamata di rete: il prezzo attuale è ricavato da price*(1+ret_now/100). Ritorna
+    {n, avg_promo, avg_obs, avg_head_start} dove head_start = rimbalzo medio già avvenuto tra
+    l'inizio dell'osservazione e la promozione ("quanto si paga l'attesa della conferma").
+    Con meno di 3 campioni ritorna solo {n} (troppo poco per dire qualcosa)."""
+    promo_rets, obs_rets, heads = [], [], []
+    for r in load_track_record():
+        op, p, rn = r.get("obs_price"), r.get("price"), r.get("ret_now")
+        if not op or not p or op <= 0 or p <= 0 or rn is None:
+            continue
+        last = p * (1 + rn / 100.0)
+        promo_rets.append(rn)
+        obs_rets.append((last / op - 1) * 100.0)
+        heads.append((p / op - 1) * 100.0)
+    n = len(promo_rets)
+    if n < 3:
+        return {"n": n}
+    return {"n": n,
+            "avg_promo": round(sum(promo_rets) / n, 2),
+            "avg_obs": round(sum(obs_rets) / n, 2),
+            "avg_head_start": round(sum(heads) / n, 2)}
+
+
+# ---------------------------------------------------------------------------
+# SCENARI ACQUISTO/VENDITA — per ogni promozione il sistema registra i prezzi chiave e poi,
+# maturando i giorni, calcola DA SOLO il rendimento di 9 combinazioni (3 momenti d'acquisto ×
+# 3 regole di vendita). Nel tempo dice QUALE combinazione è più precisa/affidabile, coi dati
+# veri e senza senno di poi. Le vendite sono ancorate alla data di PROMOZIONE, così gli
+# ingressi si confrontano ad armi pari (stessa uscita, entrata diversa).
+# ---------------------------------------------------------------------------
+SCENARIO_LOG_NAME = "scenario_log.json"
+_SCENARIO_MAX = 600                     # tetto righe (file piccolo, anni di promozioni)
+_SCENARIO_BUYS = ("osservazione", "promozione", "giorno_dopo")
+_SCENARIO_SELLS = ("7g", "30g", "bersaglio")
+
+
+def load_scenario_log() -> list:
+    data = read_data_json(SCENARIO_LOG_NAME, [])
+    return data if isinstance(data, list) else []
+
+
+def _log_promotion_scenario(tk, kind, promo_price, obs_price, obs_date, target, stop) -> None:
+    """Registra gli 'ancoraggi' di una promozione (prezzi di osservazione/promozione, bersaglio,
+    stop): i rendimenti dei 9 scenari verranno risolti nei giorni successivi da resolve_scenarios."""
+    try:
+        rows = load_scenario_log()
+        rows.append({"ticker": str(tk).upper(), "kind": kind, "date": _today_iso(),
+                     "promo_price": promo_price, "obs_price": obs_price, "obs_date": obs_date,
+                     "target": target, "stop": stop, "res": {}})
+        write_data_json(SCENARIO_LOG_NAME, rows[-_SCENARIO_MAX:])
+    except Exception:
+        pass   # il log degli scenari non deve mai bloccare una promozione
+
+
+def resolve_scenarios() -> int:
+    """Risolve gli scenari maturi: a +7 giorni di calendario dalla promozione fissa le vendite
+    '7g', a +30 le vendite '30g' e 'bersaglio' (bersaglio = prezzo target se una chiusura lo
+    tocca entro 30 giorni, altrimenti la chiusura a 30g). Acquisti: prezzo di inizio
+    osservazione / di promozione / prima chiusura del giorno dopo. Guardia anti-split: se la
+    prima chiusura post-promozione dista >25% dal prezzo registrato, la riga è marcata
+    inutilizzabile (raggruppamenti azioni). Ritorna quante celle ha risolto."""
+    rows = load_scenario_log()
+    if not rows:
+        return 0
+    today = datetime.date.fromisoformat(_today_iso())
+    changed = 0
+    for r in rows:
+        if r.get("bad_data"):
+            continue
+        try:
+            promo = datetime.date.fromisoformat(str(r.get("date"))[:10])
+        except Exception:
+            continue
+        age = (today - promo).days
+        res = r.setdefault("res", {})
+        need7 = age >= 7 and any(f"{b}|7g" not in res for b in _SCENARIO_BUYS)
+        need30 = age >= 30 and any(f"{b}|{s}" not in res for b in _SCENARIO_BUYS
+                                   for s in ("30g", "bersaglio"))
+        if not (need7 or need30):
+            continue
+        if age > 120:                      # troppo vecchia e ancora irrisolvibile: smetti di provare
+            r["bad_data"] = True
+            changed += 1
+            continue
+        try:
+            closes = get_history(r["ticker"], period="6mo")["Close"].dropna()
+            try:
+                closes.index = closes.index.tz_localize(None)
+            except (TypeError, AttributeError):
+                pass
+        except Exception:
+            continue
+        after = closes[closes.index > pd.Timestamp(promo)]
+        if after.empty:
+            continue
+        first_after = float(after.iloc[0])
+        pp = r.get("promo_price")
+        if pp and abs(first_after / float(pp) - 1) > 0.25:      # split/raggruppamento
+            r["bad_data"] = True
+            changed += 1
+            continue
+        buys = {"osservazione": r.get("obs_price"), "promozione": pp, "giorno_dopo": first_after}
+
+        def _close_at(days):
+            s = closes[closes.index >= pd.Timestamp(promo + datetime.timedelta(days=days))]
+            return float(s.iloc[0]) if not s.empty else None
+
+        sells = {}
+        if age >= 7:
+            sells["7g"] = _close_at(7)
+        if age >= 30:
+            s30 = _close_at(30)
+            sells["30g"] = s30
+            tgt = r.get("target")
+            if tgt and s30 is not None:
+                win = after[after.index <= pd.Timestamp(promo + datetime.timedelta(days=30))]
+                sells["bersaglio"] = float(tgt) if bool((win >= float(tgt)).any()) else s30
+        for sk, sp in sells.items():
+            if sp is None:
+                continue
+            for bk, bp in buys.items():
+                key = f"{bk}|{sk}"
+                if key in res or not bp or float(bp) <= 0:
+                    continue
+                res[key] = round((float(sp) / float(bp) - 1) * 100, 2)
+                changed += 1
+    if changed:
+        write_data_json(SCENARIO_LOG_NAME, rows[-_SCENARIO_MAX:])
+    return changed
+
+
+def scenario_stats() -> dict:
+    """Aggrega gli scenari risolti: per tipo (breve/lungo) e per combinazione acquisto|vendita
+    → {n, avg, hit}. È la risposta, misurata nel tempo, a 'quale momento di acquisto/vendita
+    funziona meglio?'."""
+    rows = [r for r in load_scenario_log() if not r.get("bad_data")]
+    out = {"n_rows": len(rows)}
+    for kind in ("short", "long"):
+        sel = [r for r in rows if r.get("kind") == kind]
+        m = {}
+        for bk in _SCENARIO_BUYS:
+            for sk in _SCENARIO_SELLS:
+                key = f"{bk}|{sk}"
+                vals = [r["res"][key] for r in sel if r.get("res", {}).get(key) is not None]
+                if vals:
+                    m[key] = {"n": len(vals), "avg": round(sum(vals) / len(vals), 2),
+                              "hit": round(100 * sum(1 for v in vals if v > 0) / len(vals))}
+        out[kind] = m
+    return out
 
 
 def track_record_calibration() -> dict:
@@ -4236,6 +4436,83 @@ def net_return_pct(gross_pct, tax: float = CAPITAL_GAINS_TAX):
     except (TypeError, ValueError):
         return None
     return round(g * (1.0 - tax), 1) if g > 0 else round(g, 1)
+
+
+def personal_levels(price, amount_eur, fee_eur, desired_net_eur=None, tax: float = CAPITAL_GAINS_TAX):
+    """Livelli PERSONALI di vendita, calcolati dai TUOI numeri (importo e commissioni) invece che
+    da un livello tecnico: - pareggio = prezzo che copre le sole commissioni;
+    - soglia = prezzo che, venduto, lascia in tasca `desired_net_eur` € NETTI (dopo commissioni e
+      tassa del 26% sulla plusvalenza). Formula: per N € netti serve un lordo G = fee + N/(1−tax)
+      → in percentuale target_pct = G/importo*100. Percentuali nella valuta del titolo applicate al
+      nominale in EUR: l'oscillazione del cambio è ignorata (trascurabile su importi piccoli e
+      pochi giorni rispetto alle commissioni). Ritorna {break_even, be_pct, target, target_pct}
+      (target None se desired_net_eur non è dato) oppure None su input non validi."""
+    try:
+        p, a, f = float(price), float(amount_eur), float(fee_eur)
+    except (TypeError, ValueError):
+        return None
+    if p <= 0 or a <= 0 or f < 0 or not (0 <= tax < 1):
+        return None
+    be_pct = f / a * 100.0
+    out = {"break_even": round(p * (1 + be_pct / 100.0), 4), "be_pct": round(be_pct, 2),
+           "target": None, "target_pct": None}
+    if desired_net_eur is not None:
+        try:
+            n = float(desired_net_eur)
+        except (TypeError, ValueError):
+            return out
+        if n > 0:
+            target_pct = (f + n / (1.0 - tax)) / a * 100.0
+            out["target"] = round(p * (1 + target_pct / 100.0), 4)
+            out["target_pct"] = round(target_pct, 2)
+    return out
+
+
+def set_my_target(ticker: str, price) -> None:
+    """Imposta (o rimuove, con price falsy) la SOGLIA PERSONALE di vendita di un'occasione seguita.
+    Azzera sempre il flag di avviso così la notifica si ri-arma sulla nuova soglia."""
+    data = load_tracking()
+    tk = str(ticker).upper()
+    if tk not in data:
+        return
+    e = data[tk]
+    if price:
+        e["my_target_price"] = round(float(price), 4)
+        e["my_target_set"] = _today_iso()
+    else:
+        e.pop("my_target_price", None)
+        e.pop("my_target_set", None)
+    e.pop("my_target_notified", None)
+    save_tracking(data)
+
+
+def my_target_alerts() -> list:
+    """Avviso (una volta sola) quando il prezzo di un'occasione seguita raggiunge la SOGLIA
+    PERSONALE impostata dall'utente; si ri-arma se il prezzo torna sotto. Stesso schema one-shot
+    di monitoring_exit_alerts. Ritorna [{ticker, name, price, target}]."""
+    tracked = load_tracking()
+    if not tracked:
+        return []
+    out, changed = [], False
+    for tk, e in tracked.items():
+        tgt = e.get("my_target_price")
+        if not tgt:
+            continue
+        snaps = [s for s in e.get("snapshots", []) if s.get("price")]
+        if not snaps:
+            continue
+        last_price = snaps[-1]["price"]
+        if last_price >= tgt and not e.get("my_target_notified"):
+            e["my_target_notified"] = True
+            changed = True
+            out.append({"ticker": tk, "name": e.get("name", tk),
+                        "price": last_price, "target": tgt})
+        elif last_price < tgt and e.get("my_target_notified"):
+            e["my_target_notified"] = False    # ri-arma per un eventuale nuovo superamento
+            changed = True
+    if changed:
+        save_tracking(tracked)
+    return out
 
 
 def portfolio_view(base: str = "EUR", tax_rate: float = CAPITAL_GAINS_TAX, fee: float = 1.0):

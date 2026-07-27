@@ -85,6 +85,23 @@ def notify_exit(items):
         else "Notifica uscita NON inviata (Telegram non configurato o errore).")
 
 
+def notify_my_target(items):
+    """Notifica quando un'occasione seguita raggiunge la SOGLIA PERSONALE impostata dall'utente
+    (il prezzo che copre commissioni + guadagno netto desiderato)."""
+    righe = ["🎯 <b>Soglia personale raggiunta</b>", ""]
+    for it in items:
+        tk = html.escape(str(it.get("ticker")))
+        nm = html.escape(str(it.get("name") or tk))
+        righe.append(f"🔔 <b>{tk}</b> — {nm}")
+        righe.append(f"• prezzo <b>{it.get('price'):,.2f}</b> ≥ la tua soglia <b>{it.get('target'):,.2f}</b>")
+        righe.append("• commissioni e guadagno netto desiderato coperti: valuta l'incasso")
+        righe.append("")
+    righe.append("Apri l'app → Monitoraggio. (Strumento informativo, non è un consiglio di vendita.)")
+    ok = fu.send_telegram("\n".join(righe))
+    log("Notifica soglia personale inviata." if ok
+        else "Notifica soglia personale NON inviata (Telegram non configurato o errore).")
+
+
 def notify_sales(fired):
     """Notifica Telegram quando conviene valutare la vendita di un titolo del portafoglio."""
     righe = ["💰 <b>Consiglio di vendita</b>", ""]
@@ -199,6 +216,18 @@ def main():
     except Exception as e:
         log(f"Errore snapshot monitoraggio: {e!r}")
 
+    # FASE 2c — Soglie PERSONALI: avvisa quando il prezzo copre commissioni + netto desiderato.
+    # DOPO gli snapshot, così valuta il prezzo di OGGI e non quello del giro precedente.
+    try:
+        hits = fu.my_target_alerts()
+        if hits:
+            log(f"Soglie personali raggiunte: {', '.join(h['ticker'] for h in hits)}")
+            notify_my_target(hits)
+        else:
+            log("Nessuna soglia personale raggiunta.")
+    except Exception as e:
+        log(f"Errore soglie personali: {e!r}")
+
     # Aggiorna la "scheda voti": rendimento reale delle promozioni (ora / 7g / 30g)
     try:
         recs = fu.update_track_record()
@@ -212,6 +241,13 @@ def main():
         log(f"Calibrazione: {nres} previsioni risolte.")
     except Exception as e:
         log(f"Errore calibrazione previsioni: {e!r}")
+
+    # Scenari acquisto/vendita: risolve le combinazioni mature (7g / 30g / bersaglio)
+    try:
+        nsc = fu.resolve_scenarios()
+        log(f"Scenari acquisto/vendita: {nsc} celle risolte.")
+    except Exception as e:
+        log(f"Errore scenari acquisto/vendita: {e!r}")
 
     # Loop di feedback: risolve la resa forward del log convenienza e ri-stima i pesi (se ci sono dati)
     try:
@@ -251,6 +287,8 @@ def main():
     fu.save_sell_alerts(fu.load_sell_alerts())      # stato avvisi di vendita (deduplica)
     fu.write_data_json(fu.FORECAST_LOG_NAME, fu.read_data_json(fu.FORECAST_LOG_NAME, []))  # log calibrazione
     fu.write_data_json(fu.OPP_CONFIG_NAME, fu.read_data_json(fu.OPP_CONFIG_NAME, fu._OPP_CONFIG_DEFAULT))  # config occasioni
+    fu.write_data_json(fu.EXIT_HISTORY_NAME, fu.load_exit_history())  # lapidi delle rimosse (anti-survivorship)
+    fu.write_data_json(fu.SCENARIO_LOG_NAME, fu.load_scenario_log())  # scenari acquisto/vendita
 
     log(f"Fatto. Totale occasioni viste: {total}.")
     return 0

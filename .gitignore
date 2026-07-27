@@ -1,5 +1,8 @@
 # Segreti e dati locali: NON devono finire su GitHub
 .streamlit/secrets.toml
+CREDENZIALI-PRIVATE.txt
+exit_history.json
+scenario_log.json
 watchlist.json
 tracking.json
 opp_watch.json
@@ -16,3 +19,6 @@ ml_verify.py
 __pycache__/
 *.pyc
 *.pyo
+
+# Ambiente virtuale creato da installa.bat (NON portabile tra PC: si ricrea da solo)
+.venv/

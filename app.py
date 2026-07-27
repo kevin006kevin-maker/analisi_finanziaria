@@ -171,10 +171,20 @@ def show_chart(fig, use_container_width=True, config=None, key=None, **kw):
     Assegna una chiave univoca a ogni grafico per evitare collisioni di ID (es. stesso titolo
     nelle occasioni di breve e di lungo)."""
     try:
-        fig.update_layout(dragmode=False, hovermode="x unified", hoverdistance=120, spikedistance=1000)
+        fig.update_layout(autosize=True, dragmode=False, hovermode="x unified",
+                          hoverdistance=120, spikedistance=1000)
         fig.update_xaxes(fixedrange=True, showspikes=True, spikemode="across",
                          spikethickness=1, spikedash="dot", spikecolor="rgba(255,255,255,0.5)")
         fig.update_yaxes(fixedrange=True)
+        # Su telefono (schermo stretto) una legenda ORIZZONTALE va a capo su 2-3 righe e, coi
+        # margini stretti, finisce sopra il grafico schiacciandolo. Le riservo spazio in alto e
+        # aggancio la legenda appena sopra l'area, così non si sovrappone.
+        leg = getattr(fig.layout, "legend", None)
+        if getattr(leg, "orientation", None) == "h":
+            cur_t = fig.layout.margin.t if (fig.layout.margin and fig.layout.margin.t is not None) else 0
+            fig.update_layout(margin_t=max(cur_t, 64),
+                              legend=dict(orientation="h", yanchor="bottom", y=1.02,
+                                          xanchor="left", x=0))
     except Exception:
         pass
     cfg = {"displayModeBar": False, "scrollZoom": False, "doubleClick": False}
@@ -1108,11 +1118,25 @@ if section.startswith("Monitoraggio"):
                 })
             st.caption("Le occasioni promosse vengono registrate col prezzo di partenza; il rendimento a 7 e 30 giorni "
                        "si fissa al raggiungimento di quei traguardi. Stima sui dati reali, non una promessa.")
+            # Confronto onesto tra i due possibili momenti d'ingresso (si popola con le nuove promozioni)
+            _cmp = fu.track_record_entry_comparison()
+            if _cmp.get("n", 0) >= 3:
+                st.caption(f"🔭 **Entrare prima conviene?** Sulle ultime {_cmp['n']} promozioni: comprando a "
+                           f"**inizio osservazione** saresti a **{_cmp['avg_obs']:+.1f}%** in media, comprando "
+                           f"**alla promozione** a **{_cmp['avg_promo']:+.1f}%**. Il rimbalzo medio già avvenuto "
+                           f"aspettando la conferma è **{_cmp['avg_head_start']:+.1f}%**.")
+            else:
+                st.caption("🔭 Il confronto «ingresso a inizio osservazione vs alla promozione» si popolerà "
+                           "da solo con le prossime promozioni.")
         st.markdown("---")
 
     # --- 🎯 Calibrazione delle probabilità (Brier score) ---
     if not fu.cloud_mode():
         fu.resolve_forecasts()          # in locale risolve le previsioni mature (sul cloud lo fa il job)
+        try:
+            fu.resolve_scenarios()      # idem per gli scenari acquisto/vendita
+        except Exception:
+            pass
     crep = fu.calibration_report()
     if crep is not None:
         with st.expander(f"🎯 Quanto sono oneste le probabilità (calibrazione) — "
@@ -1197,6 +1221,99 @@ if section.startswith("Monitoraggio"):
                 st.caption(f"Errore medio (MAE, più basso = meglio): ML {_mlr['ml_mae']}% · drift {_mlr['drift_mae']}% · "
                            f"naive {_mlr['naive_mae']}% — ML batte il naive in {_mlr['ml_beats_naive']}/{_mlr['count']} titoli.")
                 (st.success if _mlr["verdict"].startswith("✅") else st.info)(_mlr["verdict"])
+    st.markdown("---")
+
+    # --- 💶 Quanto avrei guadagnato: rigioca le promozioni REALI (incluse le rimosse) ---
+    with st.expander("💶 Quanto avrei guadagnato — simulatore sulle promozioni reali", expanded=False):
+        st.caption("Rigioca **tutte** le occasioni entrate nel Monitoraggio (anche quelle poi rimosse, "
+                   "grazie allo storico delle uscite: niente «sopravvissute e basta») come se le avessi "
+                   "comprate alla promozione con l'importo scelto. Confronta tre regole di uscita: "
+                   "**tenere**, **vendere al bersaglio**, **uscire quando il sistema rimuove**. "
+                   "Stima storica sui dati reali, non una promessa; cambio ignorato; tassa 26% sui guadagni.")
+        si1, si2, si3 = st.columns([1, 1, 1.4])
+        sim_amt = si1.number_input("Importo per occasione (€)", min_value=1.0, value=30.0, step=10.0,
+                                   key="sim_amt")
+        sim_fee = si2.number_input("Commissioni per acquisto (€)", min_value=0.0, value=1.0, step=0.5,
+                                   key="sim_fee")
+        if si3.button("▶️ Calcola", key="run_sim", use_container_width=True):
+            with st.spinner("Rigioco le promozioni sui prezzi reali… (30-60 secondi)"):
+                try:
+                    import strategy_sim as _ssim
+                    st.session_state["_sim_res"] = _ssim.run_strategy_replay(importo=sim_amt, fee=sim_fee)
+                except Exception as e:
+                    st.session_state["_sim_res"] = {"errore": str(e)}
+        _sr = st.session_state.get("_sim_res")
+        if _sr:
+            if _sr.get("errore"):
+                st.error("Simulazione non riuscita: " + _sr["errore"])
+            elif not _sr.get("n_positions"):
+                st.info("Nessuna posizione da rigiocare (il Monitoraggio è vuoto).")
+            else:
+                st.caption(f"{_sr['n_positions']} posizioni ({_sr['n_open']} aperte + {_sr['n_closed']} rimosse) · "
+                           f"€{_sr['importo']:.0f} + €{_sr['fee']:.2f} di commissioni ciascuna.")
+                _rows = []
+                for _k, _s in _sr["strategies"].items():
+                    if not _s.get("n"):
+                        continue
+                    _rows.append({"Strategia": _s["label"], "Posizioni": _s["n"],
+                                  "Var. media": _s["avg_ret"], "Netto totale €": _s["tot_net_eur"],
+                                  "In utile %": _s["hit"],
+                                  "Breve €": (_s["by_kind"]["short"].get("tot_net_eur") if _s["by_kind"]["short"].get("n") else None),
+                                  "Lungo €": (_s["by_kind"]["long"].get("tot_net_eur") if _s["by_kind"]["long"].get("n") else None)})
+                st.dataframe(pd.DataFrame(_rows).set_index("Strategia"), use_container_width=True,
+                             column_config={
+                                 "Var. media": st.column_config.NumberColumn("Var. media", format="%+.2f%%"),
+                                 "Netto totale €": st.column_config.NumberColumn("Netto totale €", format="%+.2f"),
+                                 "In utile %": st.column_config.NumberColumn("In utile", format="%d%%"),
+                                 "Breve €": st.column_config.NumberColumn("di cui Breve €", format="%+.2f"),
+                                 "Lungo €": st.column_config.NumberColumn("di cui Lungo €", format="%+.2f")})
+                _be = _sr["fee"] / _sr["importo"] * 100 if _sr["importo"] else 0
+                st.caption(f"⚖️ Con questi numeri il **pareggio** richiede **+{_be:.1f}%** a posizione "
+                           f"(commissione fissa su importo piccolo). Prova a cambiare l'importo per vedere "
+                           f"quanto cambia il risultato a parità di scelte.")
+                if _sr.get("skipped"):
+                    st.caption("Saltate (dati mancanti o oltre il limite): " + ", ".join(_sr["skipped"][:12]))
+
+    # --- 🧭 Scenari acquisto/vendita: la misura NEL TEMPO di quale combinazione rende ---
+    with st.expander("🧭 Scenari: quale momento di acquisto e di vendita rende di più?", expanded=False):
+        st.caption("Da ogni promozione il sistema registra i prezzi chiave e, man mano che i giorni "
+                   "maturano, calcola **da solo** il rendimento di **9 combinazioni**: comprare a "
+                   "**inizio osservazione** / **alla promozione** / **il giorno dopo** × vendere "
+                   "**dopo 7 giorni** / **dopo 30 giorni** / **al bersaglio** (se toccato entro 30, "
+                   "altrimenti a 30). Le vendite sono ancorate alla data di promozione, così gli "
+                   "ingressi si confrontano ad armi pari. Col tempo questa tabella dice quale "
+                   "combinazione è la più affidabile — misurata, non a sensazione.")
+        _sst = fu.scenario_stats()
+        _lb = {"osservazione": "Compro a inizio osservazione", "promozione": "Compro alla promozione",
+               "giorno_dopo": "Compro il giorno dopo"}
+        _ls = {"7g": "Vendo dopo 7g", "30g": "Vendo dopo 30g", "bersaglio": "Vendo al bersaglio (≤30g)"}
+        _shown = False
+        for _k, _kl in (("short", "⚡ Breve periodo"), ("long", "🏛️ Lungo periodo")):
+            _m = _sst.get(_k) or {}
+            if not _m:
+                continue
+            _rows2 = []
+            for _bk, _bl in _lb.items():
+                _row = {"Ingresso": _bl}
+                _has = False
+                for _sk, _sl in _ls.items():
+                    _cell = _m.get(f"{_bk}|{_sk}")
+                    _row[_sl] = (f"{_cell['avg']:+.1f}% · {_cell['hit']}% ✓ ({_cell['n']})" if _cell else "—")
+                    _has = _has or bool(_cell)
+                if _has:
+                    _rows2.append(_row)
+            if _rows2:
+                _shown = True
+                st.markdown(f"**{_kl}**")
+                st.dataframe(pd.DataFrame(_rows2).set_index("Ingresso"), use_container_width=True)
+        if _shown:
+            st.caption("Lettura: **media % · % di volte in positivo (numero di casi)**. Le celle si "
+                       "riempiono da sole: le vendite a 7 giorni compaiono una settimana dopo ogni "
+                       "promozione, quelle a 30 dopo un mese. Servono molti casi prima di fidarsi.")
+        else:
+            st.caption(f"Ancora nessuno scenario risolto ({_sst.get('n_rows', 0)} promozioni registrate "
+                       "finora): le prime celle compariranno ~7 giorni dopo le prossime promozioni, "
+                       "il quadro completo dopo 30. Si riempie tutto da solo, senza fare niente.")
     st.markdown("---")
 
     tracked = fu.load_tracking()
@@ -1300,23 +1417,57 @@ if section.startswith("Monitoraggio"):
             if extra:
                 st.caption(" · ".join(extra))
 
-            # Guadagno atteso comprando ORA e arrivando al bersaglio (INFO sul potenziale, non un'uscita).
-            # L'importo è inseribile: il guadagno in € si ricalcola sull'importo scelto.
+            # --- 💶 LA MIA SOGLIA: pareggio e prezzo di vendita calcolati dai TUOI numeri ---
+            # (Le simulazioni hanno mostrato che con importi piccoli la commissione fissa domina:
+            # €1 su €30 = +3,3% solo per pareggiare. Qui lo vedi subito, e imposti una soglia TUA.)
+            if price:
+                ci1, ci2, ci3, ci4 = st.columns([1.2, 1, 0.7, 1])
+                amt = ci1.number_input("💶 Importo da investire (€)", min_value=0.0, value=30.0, step=10.0,
+                                       key=f"amt_{tk}",
+                                       help="Quanto investiresti su questo titolo. Con importi piccoli le "
+                                            "commissioni fisse pesano molto: il pareggio qui sotto lo mostra.")
+                fee = ci2.number_input("Commissioni totali (€)", min_value=0.0, value=1.0, step=0.5,
+                                       key=f"fee_{tk}",
+                                       help="Commissioni complessive per la posizione (acquisto, ed eventuale "
+                                            "vendita se la paghi). Es. 1 € .")
+                gmode = ci3.radio("Obiettivo", ["€", "%"], horizontal=True, key=f"goalmode_{tk}",
+                                  help="Il guadagno netto desiderato: in euro o in % dell'importo.")
+                if gmode == "€":
+                    goal = ci4.number_input("Netto desiderato (€)", min_value=0.0, value=2.0, step=0.5,
+                                            key=f"goal_{tk}")
+                    desired_net = goal
+                else:
+                    goalp = ci4.number_input("Netto desiderato (%)", min_value=0.0, value=5.0, step=1.0,
+                                             key=f"goalp_{tk}")
+                    desired_net = amt * goalp / 100.0
+                lv = fu.personal_levels(price, amt, fee, desired_net)
+                if lv:
+                    st.markdown(f"⚖️ Pareggio: **{lv['break_even']:,.2f}** (+{lv['be_pct']:.1f}% solo per "
+                                f"coprire le commissioni)"
+                                + (f" · 🎯 per **€{desired_net:,.2f} netti** serve **{lv['target']:,.2f}** "
+                                   f"(+{lv['target_pct']:.1f}%)" if lv.get("target") else ""))
+                    st.caption("Tassa 26% solo sui guadagni; oscillazione del cambio ignorata "
+                               "(trascurabile rispetto alle commissioni su importi piccoli).")
+                    sb1, sb2 = st.columns([1, 3])
+                    if lv.get("target") and sb1.button("🔔 Avvisami a questa soglia", key=f"savetgt_{tk}",
+                                                       use_container_width=True,
+                                                       help="Salva la soglia: il sistema ti manda un Telegram "
+                                                            "quando il prezzo la raggiunge."):
+                        fu.set_my_target(tk, lv["target"])
+                        st.rerun()
+                    if entry.get("my_target_price"):
+                        sb2.caption(f"🔔 Soglia salvata: **{entry['my_target_price']:,.2f}** "
+                                    f"(dal {entry.get('my_target_set', '?')}) — Telegram ti avvisa al raggiungimento.")
+                        if sb2.button("Rimuovi soglia", key=f"deltgt_{tk}"):
+                            fu.set_my_target(tk, None)
+                            st.rerun()
+            # L'SMA50 resta solo come INFO di potenziale: nei test venderci ha PEGGIORATO i risultati.
             tgt_now = last.get("target")
-            if tgt_now and price and tgt_now > price:
+            if tgt_now and price:
                 pot = (tgt_now / price - 1) * 100
-                pot_net = fu.net_return_pct(pot) or 0.0
-                cimp, _sp = st.columns([1, 2])
-                amt = cimp.number_input("💶 Importo da investire (€)", min_value=0, value=1000, step=100,
-                                        key=f"amt_{tk}",
-                                        help="Quanto investiresti ORA su questo titolo: il guadagno atteso qui sotto si aggiorna.")
-                eur_net = round(amt * pot_net / 100)
-                st.markdown(f"🎯 Al bersaglio (**{tgt_now:,.2f}**): **+{pot:.1f}%** → guadagno atteso "
-                            f"≈ **€{eur_net:,}** netti (tassa 26%) su €{amt:,.0f} investiti. *Indicativo, non una previsione.*")
-            elif tgt_now and price and tgt_now <= price:
-                st.caption(f"🎯 Bersaglio del rimbalzo (media 50gg ≈ {tgt_now:,.2f}) **già raggiunto/superato**: "
-                           f"il prezzo ({price:,.2f}) è salito oltre l'obiettivo, quindi non c'è un guadagno atteso "
-                           f"«fino al bersaglio» da mostrare (occasione promossa dopo un forte rialzo).")
+                st.caption(f"ℹ️ Media 50 giorni ≈ {tgt_now:,.2f} ({pot:+.1f}% da qui): livello **indicativo** "
+                           f"del potenziale di rimbalzo. **Non usarla come livello di vendita**: nei test, "
+                           f"vendere lì ha peggiorato i risultati (taglia i guadagni migliori).")
 
             # Grafico: prezzo reale + convenienza accumulata (asse destro) + livelli.
             # Periodo selezionabile: dai giorni di monitoraggio fino al massimo storico.
@@ -1375,6 +1526,9 @@ if section.startswith("Monitoraggio"):
             if stp:
                 fig.add_hline(y=stp, line=dict(color="#cf222e", dash="dash", width=1),
                               annotation_text="🛑 stop", annotation_position="bottom left")
+            if entry.get("my_target_price"):
+                fig.add_hline(y=entry["my_target_price"], line=dict(color="#8250df", dash="dot", width=1.4),
+                              annotation_text="🔔 mia soglia", annotation_position="top right")
             fig.update_layout(
                 height=300, margin=dict(t=10, b=10, l=10, r=10),
                 legend=dict(orientation="h"), hovermode="x unified",
@@ -1441,6 +1595,53 @@ if section.startswith("Monitoraggio"):
     else:
         st.caption("✅ Nessuna al momento: tutte le occasioni monitorate sono in salute. Una comparirà "
                    "qui appena inizia a indebolirsi (sotto lo stop, in perdita da troppo o con dati fermi).")
+    st.markdown("---")
+
+    # --- 🔭 In anticipo (pre-segnale): le occasioni ANCORA in osservazione, viste da qui ---
+    # Risponde a "quando arriva la conferma il rimbalzo è già avvenuto": qui le vedi PRIMA della
+    # promozione e puoi decidere tu di entrare in anticipo (a un prezzo più basso, ma senza conferma).
+    try:
+        _pre_cool = fu._load_exit_cooldown()
+        pre_items = [s for s in fu.observation_status()
+                     if s.get("ticker") and s["ticker"] not in tracked
+                     and not fu._in_exit_cooldown(s["ticker"], _pre_cool)]
+    except Exception:
+        pre_items = []
+    pre_items.sort(key=lambda s: (s.get("remaining", 9), -(s.get("ret") or 0)))
+    st.markdown(f"## 🔭 In anticipo (pre-segnale) — {len(pre_items)}")
+    if pre_items:
+        st.caption("Occasioni **ancora in osservazione**: il sistema NON le ha ancora promosse. "
+                   "Segnale **anticipato e più rischioso** — il rimbalzo **non è confermato** e il prezzo "
+                   "può ancora scendere. In compenso entri **prima**, senza pagare il rimbalzo che di solito "
+                   "avviene durante l'attesa della conferma. Con «📌 Segui ora» la porti subito nel "
+                   "Monitoraggio al prezzo di adesso (ingresso anticipato, scelta tua: non verrà mai "
+                   "rimossa in automatico).")
+        for s in pre_items:
+            tk = s["ticker"]
+            kb = "⚡ Breve" if s.get("kind") == "short" else "🏛️ Lungo"
+            with st.container(border=True):
+                pa, pb = st.columns([4, 1])
+                nm = s.get("name") or tk
+                prezzo = f"{s['last_price']:,.2f}" if s.get("last_price") else "n/d"
+                conv_txt = f"{s['last_conv']:.0f}" if s.get("last_conv") is not None else "n/d"
+                pa.markdown(f"**{nm}**  ·  `{tk}`  ·  {kb}")
+                pa.caption(f"Osservata da **{s.get('days', 0)}** giorni di Borsa su {s.get('window', '?')} "
+                           f"(**mancano ~{s.get('remaining', '?')}** alla valutazione) · prezzo **{prezzo}** · "
+                           f"da inizio osservazione **{(s.get('ret') or 0):+.1f}%** · convenienza **{conv_txt}**")
+                if pb.button("📌 Segui ora", key=f"pre_track_{tk}", use_container_width=True,
+                             help="Ingresso ANTICIPATO: entra nel Monitoraggio al prezzo di adesso, "
+                                  "prima della conferma del rimbalzo (più rischio, prezzo più basso)."):
+                    fu.track_opportunity(tk, s.get("kind", "short"),
+                                         note=f"📍 Ingresso anticipato (pre-segnale) il {datetime.date.today().isoformat()}: "
+                                              f"scelto PRIMA della conferma del rimbalzo.")
+                    st.rerun()
+                if pb.button("📊 Analizza", key=f"pre_goto_{tk}", use_container_width=True):
+                    st.session_state["ticker"] = tk
+                    st.session_state["_goto_section"] = "Analisi di un titolo"
+                    st.rerun()
+    else:
+        st.caption("Nessuna occasione in osservazione al momento: qui compaiono le candidate PRIMA "
+                   "della promozione, appena il sistema inizia a osservarle.")
     st.markdown("---")
 
     if short_items:
