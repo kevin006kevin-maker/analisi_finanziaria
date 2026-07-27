@@ -1099,76 +1099,136 @@ if section.startswith("In anticipo"):
     _watch_pre = fu.load_opp_watch()
 
     def _pre_card(s):
-        """Scheda COMPLETA stile Monitoraggio: metriche + grafico prezzo/convenienza + azioni."""
+        """Scheda COMPLETA, identica a quelle del Monitoraggio: verdetto di tendenza, metriche con
+        variazione da inizio osservazione, grafico con selettore del periodo. Al posto degli scatti
+        del monitoraggio usa le OSSERVAZIONI registrate dal sistema (prezzo + convenienza)."""
         tk = s["ticker"]
         knd = s.get("kind", "short")
         wobs = [o for o in (_watch_pre.get(f"{knd}:{tk}") or {}).get("obs", []) if o.get("price")]
+        first = wobs[0] if wobs else {}
+        last = wobs[-1] if wobs else {}
+        # pseudo-scatti nel formato del Monitoraggio → stesso verdetto di tendenza delle card normali
+        psnaps = [{"date": o.get("date"), "price": o.get("price"), "convenienza": o.get("conv")}
+                  for o in wobs]
+        trend = fu.tracking_trend(psnaps)
+
         with st.container(border=True):
-            c1, c2 = st.columns([4, 1])
+            tc1, tc2 = st.columns([4, 1])
             nm = s.get("name") or tk
-            c1.markdown(f"### {nm}  ·  `{tk}`")
-            c1.caption(f"{'⚡ Breve' if knd == 'short' else '🏛️ Lungo'} · pre-segnale (rimbalzo NON confermato) · "
-                       f"osservata da **{s.get('days', 0)}** giorni di Borsa su {s.get('window', '?')} "
-                       f"(**mancano ~{s.get('remaining', '?')}** alla valutazione)")
-            if c2.button("📌 Segui ora", key=f"pre_track_{knd}_{tk}", use_container_width=True,
-                         help="Ingresso ANTICIPATO: entra nel Monitoraggio al prezzo di adesso, "
-                              "prima della conferma del rimbalzo (più rischio, prezzo più basso)."):
+            tc1.markdown(f"### {nm}  ·  `{tk}` 🔭")
+            tc1.caption(f"{'⚡ Breve' if knd == 'short' else '🏛️ Lungo'} · pre-segnale (rimbalzo NON confermato) · "
+                        f"osservata da **{s.get('days', 0)}** giorn{'o' if s.get('days') == 1 else 'i'} di Borsa "
+                        f"su {s.get('window', '?')} (**mancano ~{s.get('remaining', '?')}** alla valutazione) · "
+                        f"{len(wobs)} osservazion{'e' if len(wobs) == 1 else 'i'}")
+            if tc2.button("📌 Segui ora", key=f"pre_track_{knd}_{tk}", use_container_width=True,
+                          help="Ingresso ANTICIPATO: entra nel Monitoraggio al prezzo di adesso, "
+                               "prima della conferma del rimbalzo (più rischio, prezzo più basso)."):
                 fu.track_opportunity(tk, knd,
                                      note=f"📍 Ingresso anticipato (pre-segnale) il {datetime.date.today().isoformat()}: "
                                           f"scelto PRIMA della conferma del rimbalzo.")
                 st.rerun()
-            if c2.button("📊 Analizza", key=f"pre_goto_{knd}_{tk}", use_container_width=True):
+            if tc2.button("📊 Analizza", key=f"pre_goto_{knd}_{tk}", use_container_width=True):
                 st.session_state["ticker"] = tk
                 st.session_state["_goto_section"] = "Analisi di un titolo"
                 st.rerun()
-            m1, m2, m3 = st.columns(3)
-            m1.metric("Prezzo", f"{s['last_price']:,.2f}" if s.get("last_price") else "n/d")
-            m2.metric("Convenienza", f"{s['last_conv']:.0f}" if s.get("last_conv") is not None else "n/d",
-                      delta=(f"{s.get('dconv'):+.1f} da inizio oss." if s.get("dconv") is not None else None))
-            m3.metric("Prezzo da inizio oss.", f"{(s.get('ret') or 0):+.1f}%")
-            # Grafico: prezzo (3 mesi) + punti registrati in osservazione + convenienza (asse destro)
-            try:
-                hc = chart_history(tk, "3mo")
-            except Exception:
-                hc = None
-            figp = go.Figure()
-            if hc is not None and not hc.empty:
-                hx = hc.copy()
-                try:
-                    hx.index = hx.index.tz_localize(None)
-                except (TypeError, AttributeError):
-                    pass
-                figp.add_trace(go.Scatter(x=hx.index, y=hx["Close"], name="Prezzo",
-                                          line=dict(color="#0969da", width=2)))
-            if wobs:
-                figp.add_trace(go.Scatter(x=[o["date"] for o in wobs], y=[o["price"] for o in wobs],
-                                          name="Osservazioni", mode="markers",
-                                          marker=dict(size=7, color="#d29922")))
-                _cvs = [(o["date"], o["conv"]) for o in wobs if o.get("conv") is not None]
-                if _cvs:
-                    figp.add_trace(go.Scatter(x=[d for d, _ in _cvs], y=[v for _, v in _cvs],
-                                              name="Convenienza", yaxis="y2", mode="lines+markers",
-                                              line=dict(color="#8250df", width=2), marker=dict(size=6)))
-            if figp.data:
-                figp.update_layout(height=280, margin=dict(t=10, b=10, l=10, r=10),
-                                   legend=dict(orientation="h"), hovermode="x unified",
-                                   yaxis=dict(title="Prezzo"),
-                                   yaxis2=dict(title="Convenienza", overlaying="y", side="right",
-                                               range=[0, 100], showgrid=False))
-                show_chart(figp, use_container_width=True)
-                st.caption("👀 **Linea blu** = prezzo (3 mesi). **Punti gialli** = i prezzi registrati durante "
-                           "l'osservazione. **Linea viola** = la convenienza durante l'osservazione "
-                           "(sale = il segnale si sta rafforzando).")
-            else:
-                st.caption("Grafico non disponibile al momento (dati di prezzo mancanti).")
 
-    mostra_tutte = st.checkbox(f"Mostra anche le altre {max(0, len(pre_all) - len(solide))} in osservazione "
-                               "(meno solide, in forma compatta)", value=False,
-                               help="Di serie si mostrano solo le più solide, con la scheda completa: "
-                                    "convenienza ≥65, tendenza non in calo e almeno 2 giorni di "
-                                    "osservazione (max 8 per tipo).")
-    _sol_short = [s for s in solide if s.get("kind") == "short"][:8]
-    _sol_long = [s for s in solide if s.get("kind") != "short"][:8]
+            # Verdetto di tendenza (stesso riquadro del Monitoraggio)
+            if trend:
+                arrow_p = (f" · prezzo {trend['dprice']:+.1f}%" if trend["dprice"] is not None else "")
+                st.markdown(
+                    f"<div style='padding:8px 12px;border-radius:8px;background:{trend['color']}14;"
+                    f"border-left:5px solid {trend['color']};margin-bottom:8px'>"
+                    f"<b style='color:{trend['color']}'>{trend['emoji']} {trend['label']}</b> — "
+                    f"convenienza {trend['dconv']:+.0f} punti{arrow_p} da inizio osservazione.</div>",
+                    unsafe_allow_html=True)
+            else:
+                st.caption("📅 Servono almeno **2 giorni** di osservazioni per valutare la tendenza.")
+
+            # Metriche attuali con variazione dalla prima osservazione (come nel Monitoraggio)
+            m1, m2, m3, m4 = st.columns(4)
+            price = last.get("price")
+            dprice = (price / first["price"] - 1) * 100 if (price and first.get("price")) else None
+            m1.metric("Prezzo", f"{price:,.2f}" if price else "n/d",
+                      f"{dprice:+.1f}%" if dprice is not None else None)
+            conv = s.get("last_conv")
+            m2.metric("🏅 Convenienza", f"{conv:.0f}/100" if conv is not None else "n/d",
+                      f"{s['dconv']:+.0f}" if s.get("dconv") is not None else None)
+            occ = last.get("occ")
+            docc = (occ - first["occ"]) if (occ is not None and first.get("occ") is not None) else None
+            m3.metric("Occasione", f"{occ:.0f}/100" if occ is not None else "n/d",
+                      f"{docc:+.0f}" if docc is not None else None)
+            pg = last.get("prob_gain")
+            m4.metric("📈 Prob. salita", f"{pg:.0f}%" if pg is not None else "n/d")
+
+            # Grafico con selettore del periodo (identico al Monitoraggio)
+            TPRE = {"Giorni": "track", "1 settimana": "5d", "1 mese": "1mo",
+                    "6 mesi": "6mo", "1 anno": "1y", "Max": "max"}
+            tsel = st.radio("Periodo del grafico", list(TPRE.keys()), index=0,
+                            horizontal=True, key=f"preper_{knd}_{tk}",
+                            help="«Giorni» mostra solo il periodo di osservazione; gli altri allargano lo storico del prezzo.")
+            sel = TPRE[tsel]
+            fig = go.Figure()
+            x_min = None
+            last_dt = None
+            price_note = ""
+            if sel == "track":
+                # «Giorni» = il periodo di osservazione: prezzo E convenienza dalle osservazioni
+                pp = [(pd.to_datetime(o["date"]), o["price"]) for o in wobs]
+                if pp:
+                    fig.add_trace(go.Scatter(x=[d for d, _ in pp], y=[v for _, v in pp], name="Prezzo",
+                                             mode="lines+markers", line=dict(color="#0969da", width=2)))
+                    x_min, last_dt = pp[0][0], pp[-1][0]
+                    price_note = " (osservazioni del sistema, ~1/ora)"
+                has_price = bool(pp)
+            else:
+                # periodi più ampi: storico di mercato (settimana → intraday ~1 ora; altri → daily)
+                hc = chart_history(tk, sel)
+                if not hc.empty and getattr(hc.index, "tz", None) is not None:
+                    hc = hc.copy()
+                    hc.index = hc.index.tz_localize(None)
+                if not hc.empty:
+                    fig.add_trace(go.Scatter(x=hc.index, y=hc["Close"], name="Prezzo",
+                                             line=dict(color="#0969da", width=2)))
+                    x_min, last_dt = hc.index.min(), hc.index[-1]
+                    price_note = " (intraday ~1 ora)" if hc.attrs.get("intraday") else " (chiusura giornaliera)"
+                has_price = not hc.empty
+            # punti di convenienza: solo quelli dentro la finestra mostrata
+            cs = [(pd.to_datetime(o["date"]), o["conv"]) for o in wobs
+                  if o.get("conv") is not None
+                  and (x_min is None or pd.to_datetime(o["date"]) >= x_min)]
+            if cs:
+                fig.add_trace(go.Scatter(
+                    x=[d for d, _ in cs], y=[v for _, v in cs],
+                    name="Convenienza", yaxis="y2", mode="lines+markers",
+                    line=dict(color="#8250df", width=2), marker=dict(size=8)))
+            fig.update_layout(
+                height=300, margin=dict(t=10, b=10, l=10, r=10),
+                legend=dict(orientation="h"), hovermode="x unified",
+                yaxis=dict(title="Prezzo"),
+                yaxis2=dict(title="Convenienza", overlaying="y", side="right",
+                            range=[0, 100], showgrid=False))
+            if not has_price and not cs:
+                st.caption("Ancora nessun dato per il periodo scelto: le osservazioni si accumulano "
+                           "man mano (un punto circa ogni ora mentre la borsa è aperta).")
+            else:
+                show_chart(fig, use_container_width=True)
+                if last_dt is not None:
+                    st.caption(f"📅 Ultimo prezzo: {last_dt.strftime('%d/%m/%Y %H:%M')}{price_note}")
+            st.caption("👀 **Linea blu** = prezzo del titolo nel periodo scelto qui sopra. **Linea viola** = la "
+                       "convenienza registrata mentre il sistema osserva il titolo (sale = il segnale migliora).")
+
+    _fc1, _fc2 = st.columns([1.4, 2])
+    _fpre = _fc1.radio("Mostra", ["Tutte", "⚡ Solo breve", "🏛️ Solo lungo"],
+                       horizontal=True, key="pre_kind_filter",
+                       help="Filtra le candidate per tipo: rimbalzo di breve periodo o qualità in "
+                            "saldo di lungo periodo.")
+    mostra_tutte = _fc2.checkbox(f"Mostra anche le altre {max(0, len(pre_all) - len(solide))} in osservazione "
+                                 "(meno solide, in forma compatta)", value=False,
+                                 help="Di serie si mostrano solo le più solide, con la scheda completa: "
+                                      "convenienza ≥65, tendenza non in calo e almeno 2 giorni di "
+                                      "osservazione (max 8 per tipo).")
+    _sol_short = [s for s in solide if s.get("kind") == "short"][:8] if _fpre != "🏛️ Solo lungo" else []
+    _sol_long = [s for s in solide if s.get("kind") != "short"][:8] if _fpre != "⚡ Solo breve" else []
     st.markdown(f"## 🔭 Le più solide — {len(_sol_short) + len(_sol_long)} su {len(pre_all)} osservate")
     st.caption("Criteri: convenienza **≥65** (l'ingresso in osservazione parte da 60), tendenza della "
                "convenienza **non in calo**, **almeno 2 giorni** di osservazione. Prima il **breve** poi il "
@@ -1189,7 +1249,9 @@ if section.startswith("In anticipo"):
     if mostra_tutte:
         st.markdown("---")
         _ids_sol = {(x.get("kind"), x.get("ticker")) for x in _sol_short + _sol_long}
-        _resto = sorted([s for s in pre_all if (s.get("kind"), s.get("ticker")) not in _ids_sol],
+        _resto = sorted([s for s in pre_all if (s.get("kind"), s.get("ticker")) not in _ids_sol
+                         and (_fpre == "Tutte"
+                              or (s.get("kind") == "short") == _fpre.startswith("⚡"))],
                         key=lambda s: (0 if s.get("kind") == "short" else 1, -(s.get("last_conv") or 0)))
         st.markdown(f"## Tutte le altre — {len(_resto)}")
         for s in _resto:
@@ -1654,27 +1716,54 @@ if section.startswith("Monitoraggio"):
     short_items = sorted([(tk, e) for tk, e in healthy if e.get("kind") == "short"], key=_mon_sort_key)
     long_items = sorted([(tk, e) for tk, e in healthy if e.get("kind") != "short"], key=_mon_sort_key)
 
-    # --- 🚪 Candidate all'uscita: sezione APRIBILE (il conteggio nel titolo dice se guardarci) ---
-    with st.expander(f"🚪 Candidate all'uscita — {len(exit_items)}", expanded=False):
+    # --- Filtro di visualizzazione: tipo di occasione, o solo quelle in indebolimento ---
+    _fmon = st.radio("Mostra", ["Tutte", "⚡ Solo breve", "🏛️ Solo lungo", "⚠️ Solo in indebolimento"],
+                     horizontal=True, key="mon_kind_filter",
+                     help="Filtra le occasioni monitorate: solo il breve periodo (rimbalzo), solo il "
+                          "lungo (qualità in saldo), oppure solo quelle che stanno mostrando segnali "
+                          "di indebolimento (le candidate all'uscita).")
+
+    if _fmon == "⚠️ Solo in indebolimento":
+        st.markdown(f"## ⚠️ Con segnali di indebolimento — {len(exit_items)}")
         if exit_items:
             st.caption("Occasioni che stanno **smettendo di esserlo** (sotto lo stop, in perdita da troppo, "
                        "o dati fermi/possibile delisting). Il sistema le rimuove **da solo SOLO se restano "
                        "così per alcuni giorni** (conferma, non al primo calo: ~4 breve / ~10 lungo giorni di "
                        "Borsa); se recuperano, restano. Qui le vedi in anticipo → 🗑️ puoi toglierle subito. "
                        "(I crolli oltre il 90% vengono rimossi subito.)")
-            # Card COMPLETA (grafico + metriche + badge "⚠️ Attenzione") come nelle liste normali.
             for tk, e in exit_items:
+                render_tracked(tk, e)
+        else:
+            st.caption("✅ Nessuna al momento: tutte le occasioni monitorate sono in salute. Una comparirà "
+                       "qui appena inizia a indebolirsi (sotto lo stop, in perdita da troppo o con dati fermi).")
+        st.stop()
+
+    _show_short = _fmon in ("Tutte", "⚡ Solo breve")
+    _show_long = _fmon in ("Tutte", "🏛️ Solo lungo")
+    exit_view = [(tk, e) for tk, e in exit_items
+                 if ((e.get("kind") == "short") and _show_short) or ((e.get("kind") != "short") and _show_long)]
+
+    # --- 🚪 Candidate all'uscita: sezione APRIBILE (il conteggio nel titolo dice se guardarci) ---
+    with st.expander(f"🚪 Candidate all'uscita — {len(exit_view)}", expanded=False):
+        if exit_view:
+            st.caption("Occasioni che stanno **smettendo di esserlo** (sotto lo stop, in perdita da troppo, "
+                       "o dati fermi/possibile delisting). Il sistema le rimuove **da solo SOLO se restano "
+                       "così per alcuni giorni** (conferma, non al primo calo: ~4 breve / ~10 lungo giorni di "
+                       "Borsa); se recuperano, restano. Qui le vedi in anticipo → 🗑️ puoi toglierle subito. "
+                       "(I crolli oltre il 90% vengono rimossi subito.)")
+            # Card COMPLETA (grafico + metriche + badge "⚠️ Attenzione") come nelle liste normali.
+            for tk, e in exit_view:
                 render_tracked(tk, e)
         else:
             st.caption("✅ Nessuna al momento: tutte le occasioni monitorate sono in salute. Una comparirà "
                        "qui appena inizia a indebolirsi (sotto lo stop, in perdita da troppo o con dati fermi).")
     st.markdown("---")
 
-    if short_items:
+    if _show_short and short_items:
         st.markdown("## Breve periodo (rimbalzo)")
         for tk, e in short_items:
             render_tracked(tk, e)
-    if long_items:
+    if _show_long and long_items:
         st.markdown("## Lungo periodo (qualità in saldo)")
         for tk, e in long_items:
             render_tracked(tk, e)
