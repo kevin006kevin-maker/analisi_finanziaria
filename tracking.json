@@ -3390,7 +3390,9 @@
 }
 ],
 "auto": true,
-"notified": true
+"notified": true,
+"warn_since": "2026-07-27",
+"warn": "in perdita da 15 giorni di Borsa: valuta l'uscita"
 },
 "SOC": {
 "kind": "short",
@@ -9154,9 +9156,7 @@
 }
 ],
 "auto": true,
-"notified": false,
-"warn_since": "2026-07-26",
-"warn": "in perdita da 11 giorni di Borsa: valuta l'uscita"
+"notified": false
 },
 "KGC": {
 "kind": "long",
