@@ -3742,7 +3742,7 @@
 "auto": true,
 "notified": true,
 "warn_since": "2026-07-27",
-"warn": "in perdita da 15 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 16 giorni di Borsa: valuta l'uscita"
 },
 "SOC": {
 "kind": "short",
@@ -11406,7 +11406,7 @@
 "auto": true,
 "notified": false,
 "warn_since": "2026-07-24",
-"warn": "in perdita da 11 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 12 giorni di Borsa: valuta l'uscita"
 },
 "PUMP": {
 "kind": "short",
@@ -13222,7 +13222,7 @@
 "auto": true,
 "notified": false,
 "warn_since": "2026-07-23",
-"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 9 giorni di Borsa: valuta l'uscita"
 },
 "ROAD": {
 "kind": "short",
@@ -19869,7 +19869,9 @@
 }
 ],
 "auto": true,
-"notified": false
+"notified": false,
+"warn_since": "2026-07-28",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "JOBY": {
 "kind": "short",
@@ -24477,7 +24479,7 @@
 }
 ],
 "auto": true,
-"notified": false
+"notified": true
 },
 "AAON": {
 "kind": "short",
