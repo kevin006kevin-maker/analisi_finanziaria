@@ -2165,14 +2165,6 @@
 "name": "Newmont Corporation",
 "obs": [
 {
-"date": "2026-07-17 00:40",
-"conv": 85,
-"price": 90.83,
-"mkt": 0.2985,
-"occ": 94,
-"prob_gain": 70
-},
-{
 "date": "2026-07-17 06:29",
 "conv": 83,
 "price": 90.83,
@@ -2877,6 +2869,14 @@
 {
 "date": "2026-07-28 23:41",
 "conv": 76,
+"price": 91.52,
+"mkt": -0.1566,
+"occ": 94,
+"prob_gain": 70
+},
+{
+"date": "2026-07-29 01:44",
+"conv": 77,
 "price": 91.52,
 "mkt": -0.1566,
 "occ": 94,
@@ -5647,14 +5647,6 @@
 "name": "Venture Global Inc",
 "obs": [
 {
-"date": "2026-07-17 00:40",
-"conv": 39,
-"price": 12.67,
-"mkt": 0.2985,
-"occ": 69,
-"prob_gain": 59
-},
-{
 "date": "2026-07-17 06:29",
 "conv": 36,
 "price": 12.67,
@@ -6405,6 +6397,14 @@
 {
 "date": "2026-07-28 23:41",
 "conv": 45,
+"price": 12.17,
+"mkt": -0.1566,
+"occ": 72,
+"prob_gain": 66
+},
+{
+"date": "2026-07-29 01:44",
+"conv": 47,
 "price": 12.17,
 "mkt": -0.1566,
 "occ": 72,
@@ -10722,14 +10722,6 @@
 "name": "Carnival Corp",
 "obs": [
 {
-"date": "2026-07-17 00:40",
-"conv": 57,
-"price": 26.86,
-"mkt": 0.2985,
-"occ": 61,
-"prob_gain": 66
-},
-{
 "date": "2026-07-17 06:29",
 "conv": 51,
 "price": 26.86,
@@ -11628,6 +11620,14 @@
 {
 "date": "2026-07-28 23:41",
 "conv": 43,
+"price": 28.23,
+"mkt": -0.1566,
+"occ": 57,
+"prob_gain": 64
+},
+{
+"date": "2026-07-29 01:44",
+"conv": 45,
 "price": 28.23,
 "mkt": -0.1566,
 "occ": 57,
@@ -14662,7 +14662,7 @@
 "long:CHTR": {
 "ticker": "CHTR",
 "kind": "long",
-"name": "Charter Communications, Inc.",
+"name": "Charter Communications Inc",
 "obs": [
 {
 "date": "2026-07-24 15:54",
@@ -35305,7 +35305,7 @@
 "long:GOOGL": {
 "ticker": "GOOGL",
 "kind": "long",
-"name": "GOOGL",
+"name": "Alphabet Inc.",
 "obs": [
 {
 "date": "2026-07-23 18:17",
@@ -35768,7 +35768,7 @@
 "long:DIS": {
 "ticker": "DIS",
 "kind": "long",
-"name": "Walt Disney Co",
+"name": "WALT DISNEY CO/",
 "obs": [
 {
 "date": "2026-07-23 18:17",
@@ -36199,7 +36199,7 @@
 "long:META": {
 "ticker": "META",
 "kind": "long",
-"name": "Meta Platforms Inc",
+"name": "Meta Platforms, Inc.",
 "obs": [
 {
 "date": "2026-07-23 18:17",
