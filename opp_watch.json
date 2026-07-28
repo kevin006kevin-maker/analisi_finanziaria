@@ -6453,16 +6453,8 @@
 "long:T": {
 "ticker": "T",
 "kind": "long",
-"name": "AT&T Inc",
+"name": "AT&T Inc.",
 "obs": [
-{
-"date": "2026-07-16 21:22",
-"conv": 70,
-"price": 22.1085,
-"mkt": 0.149,
-"occ": 69,
-"prob_gain": 72
-},
 {
 "date": "2026-07-16 22:28",
 "conv": 63,
@@ -7342,6 +7334,14 @@
 "mkt": -0.0637,
 "occ": 59,
 "prob_gain": 63
+},
+{
+"date": "2026-07-28 22:20",
+"conv": 49,
+"price": 24.67,
+"mkt": -0.1649,
+"occ": 60,
+"prob_gain": 62
 }
 ]
 },
@@ -10775,16 +10775,8 @@
 "long:CCL": {
 "ticker": "CCL",
 "kind": "long",
-"name": "Carnival Corp",
+"name": "Carnival Corporation & plc",
 "obs": [
-{
-"date": "2026-07-16 21:22",
-"conv": 54,
-"price": 26.68,
-"mkt": 0.149,
-"occ": 61,
-"prob_gain": 70
-},
 {
 "date": "2026-07-16 22:28",
 "conv": 55,
@@ -11695,6 +11687,14 @@
 "price": 28.03,
 "mkt": -0.0637,
 "occ": 57,
+"prob_gain": 62
+},
+{
+"date": "2026-07-28 22:20",
+"conv": 47,
+"price": 28.23,
+"mkt": -0.1649,
+"occ": 56,
 "prob_gain": 62
 }
 ]
@@ -14170,6 +14170,14 @@
 "conv": null,
 "price": 19.05,
 "stale": true
+},
+{
+"date": "2026-07-28 22:20",
+"conv": 61,
+"price": 19.04,
+"mkt": -0.1649,
+"occ": 79,
+"prob_gain": 76
 }
 ]
 },
@@ -26823,7 +26831,7 @@
 "long:ISRG": {
 "ticker": "ISRG",
 "kind": "long",
-"name": "Intuitive Surgical, Inc.",
+"name": "Intuitive Surgical Inc",
 "obs": [
 {
 "date": "2026-07-17 16:19",
@@ -27488,6 +27496,14 @@
 "conv": null,
 "price": 364.15,
 "stale": true
+},
+{
+"date": "2026-07-28 22:20",
+"conv": 56,
+"price": 361.8,
+"mkt": -0.1649,
+"occ": 90,
+"prob_gain": 70
 }
 ]
 },
@@ -27855,7 +27871,7 @@
 "long:NFLX": {
 "ticker": "NFLX",
 "kind": "long",
-"name": "NETFLIX INC",
+"name": "Netflix Inc",
 "obs": [
 {
 "date": "2026-07-17 19:20",
@@ -28552,6 +28568,14 @@
 "conv": null,
 "price": 73.155,
 "stale": true
+},
+{
+"date": "2026-07-28 22:20",
+"conv": 60,
+"price": 72.39,
+"mkt": -0.1649,
+"occ": 92,
+"prob_gain": 63
 }
 ]
 },
@@ -28829,7 +28853,7 @@
 "long:MU": {
 "ticker": "MU",
 "kind": "long",
-"name": "Micron Technology, Inc.",
+"name": "Micron Technology Inc",
 "obs": [
 {
 "date": "2026-07-18 05:36",
@@ -29448,6 +29472,14 @@
 "conv": null,
 "price": 818.525,
 "stale": true
+},
+{
+"date": "2026-07-28 22:20",
+"conv": 71,
+"price": 820.53,
+"mkt": -0.1649,
+"occ": 83,
+"prob_gain": 64
 }
 ]
 },
@@ -31702,7 +31734,7 @@
 "long:HBM": {
 "ticker": "HBM",
 "kind": "long",
-"name": "Hudbay Minerals Inc.",
+"name": "Hudbay Minerals Inc",
 "obs": [
 {
 "date": "2026-07-22 11:18",
@@ -32235,6 +32267,14 @@
 "mkt": -0.0637,
 "occ": 88,
 "prob_gain": 69
+},
+{
+"date": "2026-07-28 22:20",
+"conv": 68,
+"price": 21.78,
+"mkt": -0.1649,
+"occ": 82,
+"prob_gain": 67
 }
 ]
 },
@@ -35341,7 +35381,7 @@
 "long:GOOGL": {
 "ticker": "GOOGL",
 "kind": "long",
-"name": "Alphabet Inc.",
+"name": "Alphabet Inc",
 "obs": [
 {
 "date": "2026-07-23 18:17",
@@ -35774,13 +35814,21 @@
 "mkt": -0.0637,
 "occ": 65,
 "prob_gain": 71
+},
+{
+"date": "2026-07-28 22:20",
+"conv": 83,
+"price": 333.71,
+"mkt": -0.1649,
+"occ": 71,
+"prob_gain": 77
 }
 ]
 },
 "long:DIS": {
 "ticker": "DIS",
 "kind": "long",
-"name": "WALT DISNEY CO/",
+"name": "Walt Disney Co",
 "obs": [
 {
 "date": "2026-07-23 18:17",
@@ -36181,13 +36229,21 @@
 "mkt": -0.0637,
 "occ": 60,
 "prob_gain": 68
+},
+{
+"date": "2026-07-28 22:20",
+"conv": 65,
+"price": 98.89,
+"mkt": -0.1649,
+"occ": 57,
+"prob_gain": 84
 }
 ]
 },
 "long:META": {
 "ticker": "META",
 "kind": "long",
-"name": "Meta Platforms, Inc.",
+"name": "Meta Platforms Inc",
 "obs": [
 {
 "date": "2026-07-23 18:17",
@@ -36604,6 +36660,14 @@
 "mkt": -0.0637,
 "occ": 82,
 "prob_gain": 68
+},
+{
+"date": "2026-07-28 22:20",
+"conv": 75,
+"price": 593.41,
+"mkt": -0.1649,
+"occ": 80,
+"prob_gain": 67
 }
 ]
 },
@@ -36915,6 +36979,14 @@
 "conv": null,
 "price": 397.56,
 "stale": true
+},
+{
+"date": "2026-07-28 22:20",
+"conv": 58,
+"price": 393.35,
+"mkt": -0.1649,
+"occ": 76,
+"prob_gain": 68
 }
 ]
 },
@@ -37228,6 +37300,14 @@
 "conv": null,
 "price": 142.35,
 "stale": true
+},
+{
+"date": "2026-07-28 22:20",
+"conv": 45,
+"price": 142.86,
+"mkt": -0.1649,
+"occ": 52,
+"prob_gain": 47
 }
 ]
 },
@@ -37507,7 +37587,7 @@
 "long:AMZN": {
 "ticker": "AMZN",
 "kind": "long",
-"name": "AMAZON COM INC",
+"name": "Amazon.com Inc",
 "obs": [
 {
 "date": "2026-07-23 18:17",
@@ -37880,6 +37960,14 @@
 "conv": null,
 "price": 231.47,
 "stale": true
+},
+{
+"date": "2026-07-28 22:20",
+"conv": 62,
+"price": 230.86,
+"mkt": -0.1649,
+"occ": 55,
+"prob_gain": 82
 }
 ]
 },
@@ -40201,7 +40289,7 @@
 "long:FSM": {
 "ticker": "FSM",
 "kind": "long",
-"name": "Fortuna Mining Corp.",
+"name": "Fortuna Mining Corp",
 "obs": [
 {
 "date": "2026-07-25 04:58",
@@ -40480,6 +40568,14 @@
 "mkt": -0.0637,
 "occ": 100,
 "prob_gain": 70
+},
+{
+"date": "2026-07-28 22:20",
+"conv": 74,
+"price": 8.42,
+"mkt": -0.1649,
+"occ": 97,
+"prob_gain": 68
 }
 ]
 },
@@ -40553,7 +40649,7 @@
 "long:XLK": {
 "ticker": "XLK",
 "kind": "long",
-"name": "State Street Technology Select ",
+"name": "XLK",
 "obs": [
 {
 "date": "2026-07-27 17:08",
@@ -40620,6 +40716,14 @@
 "conv": 64,
 "price": 171.195,
 "mkt": -0.0637,
+"occ": 51,
+"prob_gain": 93
+},
+{
+"date": "2026-07-28 22:20",
+"conv": 59,
+"price": 171.09,
+"mkt": -0.1649,
 "occ": 51,
 "prob_gain": 93
 }
