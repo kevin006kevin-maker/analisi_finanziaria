@@ -6527,16 +6527,8 @@
 "long:T": {
 "ticker": "T",
 "kind": "long",
-"name": "AT&T Inc",
+"name": "AT&T Inc.",
 "obs": [
-{
-"date": "2026-07-17 20:36",
-"conv": 54,
-"price": 21.82,
-"mkt": 0.5544,
-"occ": 69,
-"prob_gain": 72
-},
 {
 "date": "2026-07-17 21:50",
 "conv": 57,
@@ -7416,6 +7408,14 @@
 "mkt": 0.3745,
 "occ": 60,
 "prob_gain": 65
+},
+{
+"date": "2026-07-29 21:37",
+"conv": 57,
+"price": 23.91,
+"mkt": -1.66,
+"occ": 63,
+"prob_gain": 69
 }
 ]
 },
@@ -10911,16 +10911,8 @@
 "long:CCL": {
 "ticker": "CCL",
 "kind": "long",
-"name": "Carnival Corp",
+"name": "Carnival Corporation & plc",
 "obs": [
-{
-"date": "2026-07-17 20:36",
-"conv": 50,
-"price": 26.3682,
-"mkt": 0.5544,
-"occ": 63,
-"prob_gain": 68
-},
 {
 "date": "2026-07-17 21:50",
 "conv": 45,
@@ -11832,6 +11824,14 @@
 "mkt": 0.3745,
 "occ": 58,
 "prob_gain": 66
+},
+{
+"date": "2026-07-29 21:37",
+"conv": 47,
+"price": 27.96,
+"mkt": -1.66,
+"occ": 57,
+"prob_gain": 64
 }
 ]
 },
@@ -14402,6 +14402,14 @@
 "conv": null,
 "price": 18.88,
 "stale": true
+},
+{
+"date": "2026-07-29 21:37",
+"conv": 62,
+"price": 18.85,
+"mkt": -1.66,
+"occ": 79,
+"prob_gain": 74
 }
 ]
 },
@@ -15357,6 +15365,14 @@
 "conv": null,
 "price": 144.73,
 "stale": true
+},
+{
+"date": "2026-07-29 21:37",
+"conv": 47,
+"price": 146.24,
+"mkt": -1.66,
+"occ": 76,
+"prob_gain": 62
 }
 ]
 },
@@ -16536,6 +16552,14 @@
 "mkt": 0.3745,
 "occ": 67,
 "prob_gain": 91
+},
+{
+"date": "2026-07-29 21:37",
+"conv": 82,
+"price": 6.565,
+"mkt": -1.66,
+"occ": 68,
+"prob_gain": 90
 }
 ]
 },
@@ -32038,7 +32062,7 @@
 "long:HBM": {
 "ticker": "HBM",
 "kind": "long",
-"name": "Hudbay Minerals Inc.",
+"name": "Hudbay Minerals Inc",
 "obs": [
 {
 "date": "2026-07-22 11:18",
@@ -32651,6 +32675,14 @@
 "mkt": 0.3745,
 "occ": 86,
 "prob_gain": 71
+},
+{
+"date": "2026-07-29 21:37",
+"conv": 72,
+"price": 22.36,
+"mkt": -1.66,
+"occ": 80,
+"prob_gain": 68
 }
 ]
 },
@@ -35805,7 +35837,7 @@
 "long:GOOGL": {
 "ticker": "GOOGL",
 "kind": "long",
-"name": "Alphabet Inc.",
+"name": "Alphabet Inc",
 "obs": [
 {
 "date": "2026-07-23 18:17",
@@ -36318,13 +36350,21 @@
 "mkt": 0.3745,
 "occ": 64,
 "prob_gain": 74
+},
+{
+"date": "2026-07-29 21:37",
+"conv": 77,
+"price": 336.415,
+"mkt": -1.66,
+"occ": 70,
+"prob_gain": 72
 }
 ]
 },
 "long:DIS": {
 "ticker": "DIS",
 "kind": "long",
-"name": "WALT DISNEY CO/",
+"name": "Walt Disney Co",
 "obs": [
 {
 "date": "2026-07-23 18:17",
@@ -36799,13 +36839,21 @@
 "conv": null,
 "price": 98.54,
 "stale": true
+},
+{
+"date": "2026-07-29 21:37",
+"conv": 66,
+"price": 98.27,
+"mkt": -1.66,
+"occ": 57,
+"prob_gain": 88
 }
 ]
 },
 "long:META": {
 "ticker": "META",
 "kind": "long",
-"name": "Meta Platforms, Inc.",
+"name": "Meta Platforms Inc",
 "obs": [
 {
 "date": "2026-07-23 18:17",
@@ -37310,6 +37358,14 @@
 "mkt": 0.3745,
 "occ": 82,
 "prob_gain": 67
+},
+{
+"date": "2026-07-29 21:37",
+"conv": 70,
+"price": 588.76,
+"mkt": -1.66,
+"occ": 81,
+"prob_gain": 68
 }
 ]
 },
@@ -37685,6 +37741,14 @@
 "conv": null,
 "price": 396.33,
 "stale": true
+},
+{
+"date": "2026-07-29 21:37",
+"conv": 54,
+"price": 395.355,
+"mkt": -1.66,
+"occ": 76,
+"prob_gain": 67
 }
 ]
 },
@@ -38062,6 +38126,14 @@
 "conv": null,
 "price": 144.34,
 "stale": true
+},
+{
+"date": "2026-07-29 21:37",
+"conv": 43,
+"price": 143.005,
+"mkt": -1.66,
+"occ": 52,
+"prob_gain": 46
 }
 ]
 },
@@ -38377,6 +38449,14 @@
 "conv": null,
 "price": 145.035,
 "stale": true
+},
+{
+"date": "2026-07-29 21:37",
+"conv": 60,
+"price": 144.93,
+"mkt": -1.66,
+"occ": 54,
+"prob_gain": 78
 }
 ]
 },
@@ -38820,6 +38900,14 @@
 "conv": null,
 "price": 230.45,
 "stale": true
+},
+{
+"date": "2026-07-29 21:37",
+"conv": 62,
+"price": 228.94,
+"mkt": -1.66,
+"occ": 55,
+"prob_gain": 79
 }
 ]
 },
@@ -41207,7 +41295,7 @@
 "long:FSM": {
 "ticker": "FSM",
 "kind": "long",
-"name": "Fortuna Mining Corp.",
+"name": "Fortuna Mining Corp",
 "obs": [
 {
 "date": "2026-07-25 04:58",
@@ -41574,6 +41662,14 @@
 "mkt": 0.3745,
 "occ": 100,
 "prob_gain": 66
+},
+{
+"date": "2026-07-29 21:37",
+"conv": 76,
+"price": 8.445,
+"mkt": -1.66,
+"occ": 97,
+"prob_gain": 68
 }
 ]
 },
@@ -41713,7 +41809,7 @@
 "long:XLK": {
 "ticker": "XLK",
 "kind": "long",
-"name": "State Street Technology Select ",
+"name": "XLK",
 "obs": [
 {
 "date": "2026-07-27 17:08",
@@ -41870,6 +41966,14 @@
 "mkt": 0.3745,
 "occ": 51,
 "prob_gain": 93
+},
+{
+"date": "2026-07-29 21:37",
+"conv": 59,
+"price": 168.77,
+"mkt": -1.66,
+"occ": 52,
+"prob_gain": 91
 }
 ]
 },
@@ -42954,7 +43058,7 @@
 "long:AMKR": {
 "ticker": "AMKR",
 "kind": "long",
-"name": "AMKOR TECHNOLOGY, INC.",
+"name": "Amkor Technology Inc",
 "obs": [
 {
 "date": "2026-07-28 23:41",
@@ -43019,6 +43123,14 @@
 "mkt": 0.3745,
 "occ": 76,
 "prob_gain": 84
+},
+{
+"date": "2026-07-29 21:37",
+"conv": 69,
+"price": 44.23,
+"mkt": -1.66,
+"occ": 73,
+"prob_gain": 75
 }
 ]
 },
