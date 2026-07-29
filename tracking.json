@@ -11058,7 +11058,9 @@
 }
 ],
 "auto": true,
-"notified": false
+"notified": false,
+"warn_since": "2026-07-29",
+"warn": "in perdita da 13 giorni di Borsa: valuta l'uscita"
 },
 "KGC": {
 "kind": "long",
@@ -13688,7 +13690,9 @@
 }
 ],
 "auto": true,
-"notified": true
+"notified": true,
+"warn_since": "2026-07-29",
+"warn": "in perdita da 10 giorni di Borsa: valuta l'uscita"
 },
 "OEC": {
 "kind": "short",
@@ -26891,7 +26895,9 @@
 }
 ],
 "auto": true,
-"notified": false
+"notified": false,
+"warn_since": "2026-07-29",
+"warn": "sceso sotto lo stop (−2×ATR): valuta l'uscita"
 },
 "IMSR": {
 "kind": "short",
