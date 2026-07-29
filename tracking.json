@@ -2578,9 +2578,7 @@
 }
 ],
 "auto": true,
-"notified": false,
-"warn_since": "2026-07-28",
-"warn": "in perdita da 17 giorni di Borsa: valuta l'uscita"
+"notified": false
 },
 "TMUS": {
 "kind": "short",
@@ -3886,7 +3884,9 @@
 }
 ],
 "auto": true,
-"notified": true
+"notified": true,
+"warn_since": "2026-07-29",
+"warn": "in perdita da 17 giorni di Borsa: valuta l'uscita"
 },
 "SOC": {
 "kind": "short",
@@ -10658,9 +10658,7 @@
 }
 ],
 "auto": true,
-"notified": false,
-"warn_since": "2026-07-28",
-"warn": "in perdita da 13 giorni di Borsa: valuta l'uscita"
+"notified": false
 },
 "KGC": {
 "kind": "long",
