@@ -13850,9 +13850,7 @@
 }
 ],
 "auto": true,
-"notified": true,
-"warn_since": "2026-07-29",
-"warn": "in perdita da 10 giorni di Borsa: valuta l'uscita"
+"notified": true
 },
 "OEC": {
 "kind": "short",
@@ -24483,7 +24481,9 @@
 }
 ],
 "auto": true,
-"notified": false
+"notified": false,
+"warn_since": "2026-07-29",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "RPT": {
 "kind": "short",
