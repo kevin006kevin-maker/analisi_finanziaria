@@ -682,6 +682,14 @@
 "mkt": 0.7569,
 "occ": 40,
 "prob_gain": 54
+},
+{
+"date": "2026-07-29 16:59",
+"conv": 20,
+"price": 7.935,
+"mkt": 0.2223,
+"occ": 40,
+"prob_gain": 51
 }
 ]
 },
@@ -18569,80 +18577,12 @@
 "name": "SMH",
 "obs": [
 {
-"date": "2026-07-08 20:54",
-"conv": 63,
-"price": 592.61,
-"mkt": 0.9842,
-"occ": 39,
+"date": "2026-07-29 16:59",
+"conv": 66,
+"price": 513.15,
+"mkt": 0.2223,
+"occ": 44,
 "prob_gain": 52
-},
-{
-"date": "2026-07-09 00:43",
-"conv": 60,
-"price": 593.0,
-"mkt": 1.0396,
-"occ": 39,
-"prob_gain": 54
-},
-{
-"date": "2026-07-09 12:39",
-"conv": 63,
-"price": 593.0,
-"mkt": 1.0395,
-"occ": 39,
-"prob_gain": 54
-},
-{
-"date": "2026-07-09 19:34",
-"conv": null,
-"price": 614.2,
-"stale": true
-},
-{
-"date": "2026-07-10 00:50",
-"conv": null,
-"price": 607.73,
-"stale": true
-},
-{
-"date": "2026-07-10 19:25",
-"conv": null,
-"price": 612.75,
-"stale": true
-},
-{
-"date": "2026-07-10 23:35",
-"conv": null,
-"price": 611.03,
-"stale": true
-},
-{
-"date": "2026-07-13 19:03",
-"conv": null,
-"price": 588.445,
-"stale": true
-},
-{
-"date": "2026-07-13 22:43",
-"conv": null,
-"price": 585.62,
-"stale": true
-},
-{
-"date": "2026-07-14 18:49",
-"conv": 49,
-"price": 599.98,
-"mkt": 1.4253,
-"occ": 35,
-"prob_gain": 49
-},
-{
-"date": "2026-07-14 22:43",
-"conv": 51,
-"price": 600.31,
-"mkt": 1.5184,
-"occ": 35,
-"prob_gain": 50
 }
 ]
 },
@@ -41405,6 +41345,14 @@
 "conv": null,
 "price": 48.49,
 "stale": true
+},
+{
+"date": "2026-07-29 16:59",
+"conv": 69,
+"price": 44.915,
+"mkt": 0.2223,
+"occ": 44,
+"prob_gain": 56
 }
 ]
 },
@@ -41663,6 +41611,14 @@
 "mkt": 0.7569,
 "occ": 43,
 "prob_gain": 55
+},
+{
+"date": "2026-07-29 16:59",
+"conv": 71,
+"price": 103.22,
+"mkt": 0.2223,
+"occ": 37,
+"prob_gain": 57
 }
 ]
 },
@@ -41766,6 +41722,14 @@
 "mkt": 0.7569,
 "occ": 42,
 "prob_gain": 77
+},
+{
+"date": "2026-07-29 16:59",
+"conv": 73,
+"price": 14.93,
+"mkt": 0.2223,
+"occ": 89,
+"prob_gain": 63
 }
 ]
 },
@@ -41899,6 +41863,14 @@
 "conv": 77,
 "price": 7.0,
 "mkt": 0.7569,
+"occ": 42,
+"prob_gain": 43
+},
+{
+"date": "2026-07-29 16:59",
+"conv": 72,
+"price": 7.0,
+"mkt": 0.2223,
 "occ": 42,
 "prob_gain": 43
 }
@@ -42073,6 +42045,14 @@
 "conv": null,
 "price": 634.63,
 "stale": true
+},
+{
+"date": "2026-07-29 16:59",
+"conv": 69,
+"price": 525.0,
+"mkt": 0.2223,
+"occ": 40,
+"prob_gain": 46
 }
 ]
 },
@@ -42120,6 +42100,14 @@
 "conv": null,
 "price": 1278.23,
 "stale": true
+},
+{
+"date": "2026-07-29 16:59",
+"conv": 75,
+"price": 1021.01,
+"mkt": 0.2223,
+"occ": 39,
+"prob_gain": 58
 }
 ]
 },
@@ -42210,6 +42198,14 @@
 "conv": null,
 "price": 7.79,
 "stale": true
+},
+{
+"date": "2026-07-29 16:59",
+"conv": 88,
+"price": 5.57,
+"mkt": 0.2223,
+"occ": 38,
+"prob_gain": 99
 }
 ]
 },
@@ -42261,6 +42257,14 @@
 "conv": null,
 "price": 8.63,
 "stale": true
+},
+{
+"date": "2026-07-29 16:59",
+"conv": 66,
+"price": 5.04,
+"mkt": 0.2223,
+"occ": 41,
+"prob_gain": 51
 }
 ]
 },
@@ -42443,6 +42447,51 @@
 "mkt": 0.7569,
 "occ": 68,
 "prob_gain": 51
+}
+]
+},
+"short:AAUC": {
+"ticker": "AAUC",
+"kind": "short",
+"name": "AAUC",
+"obs": [
+{
+"date": "2026-07-29 16:59",
+"conv": 74,
+"price": 17.18,
+"mkt": 0.2223,
+"occ": 37,
+"prob_gain": 54
+}
+]
+},
+"short:PSN": {
+"ticker": "PSN",
+"kind": "short",
+"name": "PSN",
+"obs": [
+{
+"date": "2026-07-29 16:59",
+"conv": 70,
+"price": 37.17,
+"mkt": 0.2223,
+"occ": 41,
+"prob_gain": 64
+}
+]
+},
+"short:EEM": {
+"ticker": "EEM",
+"kind": "short",
+"name": "EEM",
+"obs": [
+{
+"date": "2026-07-29 16:59",
+"conv": 61,
+"price": 61.105,
+"mkt": 0.2223,
+"occ": 39,
+"prob_gain": 54
 }
 ]
 }
