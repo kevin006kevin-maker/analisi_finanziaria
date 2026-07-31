@@ -14890,9 +14890,7 @@
 }
 ],
 "auto": true,
-"notified": true,
-"warn_since": "2026-07-30",
-"warn": "in perdita da 12 giorni di Borsa: valuta l'uscita"
+"notified": true
 },
 "OEC": {
 "kind": "short",
@@ -29827,7 +29825,9 @@
 }
 ],
 "auto": true,
-"notified": true
+"notified": true,
+"warn_since": "2026-07-31",
+"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
 },
 "AAON": {
 "kind": "short",
@@ -32165,9 +32165,7 @@
 }
 ],
 "auto": true,
-"notified": false,
-"warn_since": "2026-07-31",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"notified": true
 },
 "ELTX": {
 "kind": "short",
@@ -35617,7 +35615,7 @@
 }
 ],
 "auto": true,
-"notified": false
+"notified": true
 },
 "XLY": {
 "kind": "short",
