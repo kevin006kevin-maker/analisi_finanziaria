@@ -1,4 +1,4 @@
-streamlit>=1.30
+streamlit>=1.47      # servono st.dataframe(on_select=...) e st.segmented_control(required=...) — tabelle del Monitoraggio
 yfinance>=0.2
 pandas>=2.0
 numpy>=1.24

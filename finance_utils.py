@@ -3538,7 +3538,9 @@ def record_observations(df, kind: str) -> None:
         obs = e.get("obs", [])
         if _should_sample(obs, conv, price, _OBS_GAP_MIN, "conv"):
             obs.append({"date": now, "conv": conv, "price": price, "mkt": mkt,
-                        "occ": _jsonable(r.get("Occasione")), "prob_gain": _jsonable(r.get("Prob. salita"))})
+                        "occ": _jsonable(r.get("Occasione")), "prob_gain": _jsonable(r.get("Prob. salita")),
+                        # servono ai filtri di qualità delle sezioni Osservazione/Anticipo
+                        "prob_loss": _jsonable(r.get("Rischio perdita")), "reliab": r.get("Affidabilità")})
             obs.sort(key=lambda o: o.get("date", ""))
             e["obs"] = _trim_records(obs, _OBS_MAX_DAYS, _OBS_MAX_KEEP)
     save_opp_watch(watch)
@@ -3819,7 +3821,10 @@ def auto_promote_opportunities() -> list:
         _log_promotion_scenario(tk, kind, promo_price=obs[-1].get("price"),
                                 obs_price=obs[0].get("price"),
                                 obs_date=str(obs[0].get("date", ""))[:10],
-                                target=snap0.get("target"), stop=snap0.get("stop"))
+                                target=snap0.get("target"), stop=snap0.get("stop"),
+                                # qualità del segnale al momento dell'acquisto: serve ai filtri
+                                reliab=snap0.get("reliab"), prob_gain=snap0.get("prob_gain"),
+                                prob_loss=snap0.get("prob_loss"), conv=snap0.get("convenienza"))
         promoted.append(tk)
         new_records.append({"ticker": tk, "kind": kind, "date": _today_iso(),
                             "price": obs[-1].get("price"), "conv": obs[-1].get("conv"),
@@ -4030,11 +4035,17 @@ def observation_status() -> list:
         dconv = round(vals[-1] - vals[0], 1) if len(vals) >= 2 else 0.0
         # ultima convenienza NOTA (i punti "stale" giornalieri hanno conv=None)
         last_conv = next((o.get("conv") for o in reversed(e.get("obs", [])) if o.get("conv") is not None), None)
+        # ultimi valori NOTI di qualità (i punti "stale" non li hanno): servono ai filtri
+        def _ultimo(campo):
+            return next((o.get(campo) for o in reversed(e.get("obs", []))
+                         if o.get(campo) is not None), None)
         out.append({"ticker": e.get("ticker", key.split(":")[-1]), "kind": kind,
                     "name": e.get("name", ""), "days": days, "ret": round(ret, 1),
                     "last_conv": last_conv, "window": window,
                     "remaining": max(0, window - days),
                     "last_price": obs[-1].get("price"),   # per la sezione "In anticipo" (pre-segnale)
+                    "reliab": _ultimo("reliab"), "prob_gain": _ultimo("prob_gain"),
+                    "prob_loss": _ultimo("prob_loss"), "occ": _ultimo("occ"),
                     "run": run, "trend_ok": trend_ok, "dconv": dconv, "n_days": len(vals)})
     out.sort(key=lambda x: x["ret"], reverse=True)
     return out
@@ -4151,8 +4162,24 @@ def track_record_entry_comparison() -> dict:
 # ---------------------------------------------------------------------------
 SCENARIO_LOG_NAME = "scenario_log.json"
 _SCENARIO_MAX = 600                     # tetto righe (file piccolo, anni di promozioni)
-_SCENARIO_BUYS = ("osservazione", "promozione", "giorno_dopo")
-_SCENARIO_SELLS = ("7g", "30g", "bersaglio")
+# MOMENTI D'ACQUISTO: quando entra in «In anticipo» (pre-segnale solido) · a inizio osservazione ·
+# alla promozione (regola attuale) · dopo il periodo di conferma (5 gg di Borsa breve, 10 lungo).
+_SCENARIO_BUYS = ("anticipo", "osservazione", "promozione", "conferma")
+# REGOLE DI VENDITA: al bersaglio (se toccato entro 30 gg, altrimenti si vende a 30 gg) · a 7 giorni ·
+# a 30 giorni · a 1 anno. Quali mostrare dipende dal tipo (vedi SCENARIO_SELLS_PER_TIPO).
+_SCENARIO_SELLS = ("bersaglio", "7g", "30g", "365g")
+_SELL_DAYS = {"7g": 7, "30g": 30, "bersaglio": 30, "365g": 365}
+_CONF_DAYS = {"short": 5, "long": 10}   # giorni di Borsa del "periodo di conferma" (= _REMOVE_WINDOW)
+# Cosa si mostra nella matrice: 3 acquisti × 3 vendite, con orizzonti diversi per tipo.
+SCENARIO_BUYS_UI = ("anticipo", "promozione", "conferma")
+SCENARIO_SELLS_PER_TIPO = {"short": ("bersaglio", "7g", "30g"),
+                           "long": ("bersaglio", "30g", "365g")}
+SCENARIO_ETICHETTE = {
+    "anticipo": "🔭 All'ingresso in «In anticipo»", "osservazione": "👀 A inizio osservazione",
+    "promozione": "📌 All'ingresso in Monitoraggio", "conferma": "⏳ Dopo il periodo di conferma",
+    "bersaglio": "🎯 Alla soglia", "7g": "📅 Dopo 1 settimana",
+    "30g": "📅 Dopo 1 mese", "365g": "📅 Dopo 1 anno",
+}
 
 
 def load_scenario_log() -> list:
@@ -4160,24 +4187,65 @@ def load_scenario_log() -> list:
     return data if isinstance(data, list) else []
 
 
-def _log_promotion_scenario(tk, kind, promo_price, obs_price, obs_date, target, stop) -> None:
-    """Registra gli 'ancoraggi' di una promozione (prezzi di osservazione/promozione, bersaglio,
-    stop): i rendimenti dei 9 scenari verranno risolti nei giorni successivi da resolve_scenarios."""
+def _rel_rank(reliab) -> int:
+    """Affidabilità in numero: 2 = 🟢 Alta, 1 = 🟡 Media, 0 = 🔴 Bassa/ignota."""
+    s = str(reliab or "")
+    return 2 if "Alta" in s else (1 if "Media" in s else 0)
+
+
+def _pre_entry_for(tk, kind, entro_data):
+    """Prima comparsa di un titolo tra i pre-segnali SOLIDI (sezione «In anticipo») prima della
+    promozione: ritorna (prezzo, data) oppure (None, None) se non c'è mai passato."""
     try:
+        cand = [r for r in load_presignal_log()
+                if str(r.get("ticker", "")).upper() == str(tk).upper()
+                and r.get("kind") == kind and r.get("price")
+                and str(r.get("date", ""))[:10] <= str(entro_data)[:10]]
+        if not cand:
+            return None, None
+        primo = min(cand, key=lambda r: str(r.get("date")))
+        return float(primo["price"]), str(primo.get("date"))[:10]
+    except Exception:
+        return None, None
+
+
+def _log_promotion_scenario(tk, kind, promo_price, obs_price, obs_date, target, stop,
+                            reliab=None, prob_gain=None, prob_loss=None, conv=None) -> None:
+    """Registra gli 'ancoraggi' di una promozione: i prezzi dei momenti d'acquisto (pre-segnale,
+    inizio osservazione, promozione — quello dopo la conferma si risolve nei giorni seguenti),
+    bersaglio/stop e la QUALITÀ del segnale al momento dell'acquisto (affidabilità, probabilità,
+    convenienza), che serve ai filtri «comprerei solo se…»."""
+    try:
+        pre_price, pre_date = _pre_entry_for(tk, kind, _today_iso())
         rows = load_scenario_log()
         rows.append({"ticker": str(tk).upper(), "kind": kind, "date": _today_iso(),
                      "promo_price": promo_price, "obs_price": obs_price, "obs_date": obs_date,
-                     "target": target, "stop": stop, "res": {}})
+                     "pre_price": pre_price, "pre_date": pre_date,
+                     "conf_price": None, "conf_date": None,
+                     "target": target, "stop": stop,
+                     "reliab": reliab, "prob_gain": prob_gain, "prob_loss": prob_loss, "conv": conv,
+                     "res": {}})
         write_data_json(SCENARIO_LOG_NAME, rows[-_SCENARIO_MAX:])
     except Exception:
         pass   # il log degli scenari non deve mai bloccare una promozione
 
 
+def _data_dopo_giorni_borsa(dal, n, ticker=None):
+    """Data di calendario che cade `n` giorni di BORSA dopo `dal` (per il periodo di conferma)."""
+    base = dal if isinstance(dal, datetime.date) else datetime.date.fromisoformat(str(dal)[:10])
+    for i in range(1, 60):
+        cand = base + datetime.timedelta(days=i)
+        if _trading_days_between(base.isoformat(), cand.isoformat(), ticker) >= n:
+            return cand
+    return None
+
+
 def resolve_scenarios() -> int:
-    """Risolve gli scenari maturi: a +7 giorni di calendario dalla promozione fissa le vendite
-    '7g', a +30 le vendite '30g' e 'bersaglio' (bersaglio = prezzo target se una chiusura lo
-    tocca entro 30 giorni, altrimenti la chiusura a 30g). Acquisti: prezzo di inizio
-    osservazione / di promozione / prima chiusura del giorno dopo. Guardia anti-split: se la
+    """Risolve le combinazioni mature di ogni promozione. VENDITE (giorni di calendario dalla
+    promozione): 7g · 30g · 365g · bersaglio (= prezzo target se una chiusura lo tocca entro 30
+    giorni, altrimenti la chiusura a 30 giorni). ACQUISTI: pre-segnale «In anticipo», inizio
+    osservazione, promozione, e dopo il PERIODO DI CONFERMA (5 giorni di Borsa per il breve, 10 per
+    il lungo) — quest'ultimo prezzo viene ricavato qui e memorizzato. Guardia anti-split: se la
     prima chiusura post-promozione dista >25% dal prezzo registrato, la riga è marcata
     inutilizzabile (raggruppamenti azioni). Ritorna quante celle ha risolto."""
     rows = load_scenario_log()
@@ -4194,17 +4262,23 @@ def resolve_scenarios() -> int:
             continue
         age = (today - promo).days
         res = r.setdefault("res", {})
-        need7 = age >= 7 and any(f"{b}|7g" not in res for b in _SCENARIO_BUYS)
-        need30 = age >= 30 and any(f"{b}|{s}" not in res for b in _SCENARIO_BUYS
-                                   for s in ("30g", "bersaglio"))
-        if not (need7 or need30):
+        kind = r.get("kind", "short")
+        tk = r.get("ticker")
+        # celle che POTREBBERO essere risolte ora (vendita matura e combinazione ancora vuota)
+        attese = [(bk, sk) for sk, gg in _SELL_DAYS.items() if age >= gg
+                  for bk in _SCENARIO_BUYS if f"{bk}|{sk}" not in res]
+        # prezzo del "dopo la conferma": si può ricavare appena passata la finestra di Borsa
+        serve_conf = (r.get("conf_price") is None and not r.get("conf_na")
+                      and _trading_days_between(promo.isoformat(), _today_iso(), tk)
+                      >= _CONF_DAYS.get(kind, 5))
+        if not attese and not serve_conf:
             continue
-        if age > 120:                      # troppo vecchia e ancora irrisolvibile: smetti di provare
+        if age > 400:                      # troppo vecchia e ancora irrisolvibile: smetti di provare
             r["bad_data"] = True
             changed += 1
             continue
         try:
-            closes = get_history(r["ticker"], period="6mo")["Close"].dropna()
+            closes = get_history(tk, period=("6mo" if age < 150 else "2y"))["Close"].dropna()
             try:
                 closes.index = closes.index.tz_localize(None)
             except (TypeError, AttributeError):
@@ -4214,17 +4288,28 @@ def resolve_scenarios() -> int:
         after = closes[closes.index > pd.Timestamp(promo)]
         if after.empty:
             continue
-        first_after = float(after.iloc[0])
         pp = r.get("promo_price")
-        if pp and abs(first_after / float(pp) - 1) > 0.25:      # split/raggruppamento
+        if pp and abs(float(after.iloc[0]) / float(pp) - 1) > 0.25:      # split/raggruppamento
             r["bad_data"] = True
             changed += 1
             continue
-        buys = {"osservazione": r.get("obs_price"), "promozione": pp, "giorno_dopo": first_after}
 
         def _close_at(days):
             s = closes[closes.index >= pd.Timestamp(promo + datetime.timedelta(days=days))]
             return float(s.iloc[0]) if not s.empty else None
+
+        if serve_conf:
+            d_conf = _data_dopo_giorni_borsa(promo, _CONF_DAYS.get(kind, 5), tk)
+            s = closes[closes.index >= pd.Timestamp(d_conf)] if d_conf else None
+            if s is not None and not s.empty:
+                r["conf_price"] = float(s.iloc[0])
+                r["conf_date"] = d_conf.isoformat()
+                changed += 1
+            elif age > 60:
+                r["conf_na"] = True         # non ricavabile: smetti di riprovare
+                changed += 1
+        buys = {"anticipo": r.get("pre_price"), "osservazione": r.get("obs_price"),
+                "promozione": pp, "conferma": r.get("conf_price")}
 
         sells = {}
         if age >= 7:
@@ -4236,6 +4321,8 @@ def resolve_scenarios() -> int:
             if tgt and s30 is not None:
                 win = after[after.index <= pd.Timestamp(promo + datetime.timedelta(days=30))]
                 sells["bersaglio"] = float(tgt) if bool((win >= float(tgt)).any()) else s30
+        if age >= 365:
+            sells["365g"] = _close_at(365)
         for sk, sp in sells.items():
             if sp is None:
                 continue
@@ -4250,43 +4337,53 @@ def resolve_scenarios() -> int:
     return changed
 
 
-def scenario_stats() -> dict:
-    """Aggrega gli scenari risolti: per tipo (breve/lungo/tutte) e per combinazione
-    acquisto|vendita → {n, avg, hit, med, best, worst}. È la risposta, misurata nel tempo,
-    a 'quale momento di acquisto/vendita funziona meglio?'."""
-    rows = [r for r in load_scenario_log() if not r.get("bad_data")]
-    out = {"n_rows": len(rows)}
-    for kind in ("short", "long", "tutte"):
-        sel = rows if kind == "tutte" else [r for r in rows if r.get("kind") == kind]
-        m = {}
-        for bk in _SCENARIO_BUYS:
-            for sk in _SCENARIO_SELLS:
-                key = f"{bk}|{sk}"
-                vals = sorted(r["res"][key] for r in sel if r.get("res", {}).get(key) is not None)
-                if vals:
-                    n = len(vals)
-                    med = vals[n // 2] if n % 2 else (vals[n // 2 - 1] + vals[n // 2]) / 2
-                    m[key] = {"n": n, "avg": round(sum(vals) / n, 2),
-                              "hit": round(100 * sum(1 for v in vals if v > 0) / n),
-                              "med": round(med, 2), "best": round(vals[-1], 2),
-                              "worst": round(vals[0], 2)}
-        out[kind] = m
-    return out
+def scenario_report(kind: str = "short", min_rel: int = 0, min_pg: int = 0,
+                    max_pl: int = 100, min_conv: int = 0) -> dict:
+    """La «pagella» degli scenari per un tipo di occasione, con i filtri di qualità applicati al
+    momento dell'ACQUISTO (affidabilità minima, probabilità di salita minima, rischio massimo,
+    convenienza minima). Ritorna:
+      {n_tot, n_casi, maturi, celle: {"acquisto|vendita": {n, avg, hit, med, best, worst}},
+       casi: {"acquisto|vendita": [{ticker, date, reliab, prob_gain, prob_loss, conv, ret}, …]}}
+    I «casi» sono in ordine di data: servono sia all'elenco di dettaglio sia al grafico cumulato."""
+    tutte = [r for r in load_scenario_log() if not r.get("bad_data") and r.get("kind") == kind]
+    sel = [r for r in tutte
+           if _rel_rank(r.get("reliab")) >= min_rel
+           and (r.get("prob_gain") is None or r["prob_gain"] >= min_pg)
+           and (r.get("prob_loss") is None or r["prob_loss"] <= max_pl)
+           and (r.get("conv") is None or r["conv"] >= min_conv)]
+    sel.sort(key=lambda r: str(r.get("date")))
+    celle, casi = {}, {}
+    for bk in SCENARIO_BUYS_UI:
+        for sk in SCENARIO_SELLS_PER_TIPO.get(kind, SCENARIO_SELLS_PER_TIPO["short"]):
+            key = f"{bk}|{sk}"
+            punti = [{"ticker": r.get("ticker"), "date": str(r.get("date"))[:10],
+                      "reliab": r.get("reliab"), "prob_gain": r.get("prob_gain"),
+                      "prob_loss": r.get("prob_loss"), "conv": r.get("conv"),
+                      "ret": r["res"][key]}
+                     for r in sel if r.get("res", {}).get(key) is not None]
+            if not punti:
+                continue
+            vals = sorted(p["ret"] for p in punti)
+            n = len(vals)
+            med = vals[n // 2] if n % 2 else (vals[n // 2 - 1] + vals[n // 2]) / 2
+            celle[key] = {"n": n, "avg": round(sum(vals) / n, 2),
+                          "hit": round(100 * sum(1 for v in vals if v > 0) / n),
+                          "med": round(med, 2), "best": round(vals[-1], 2), "worst": round(vals[0], 2)}
+            casi[key] = punti
+    return {"n_tot": len(tutte), "n_casi": len(sel), "celle": celle, "casi": casi,
+            "n_totale_log": len([r for r in load_scenario_log() if not r.get("bad_data")])}
 
 
-def scenario_series() -> list:
-    """Tutti i punti risolti degli scenari, in ordine di data: [{ticker, kind, date, combo, ret}].
-    Serve al grafico 'scenari a confronto nel tempo' (somma cumulata per combinazione)."""
-    out = []
-    for r in load_scenario_log():
-        if r.get("bad_data"):
-            continue
-        for k, v in (r.get("res") or {}).items():
-            if v is not None:
-                out.append({"ticker": r.get("ticker"), "kind": r.get("kind", "short"),
-                            "date": str(r.get("date"))[:10], "combo": k, "ret": v})
-    out.sort(key=lambda p: p["date"])
-    return out
+def net_eur(ret_pct, importo: float = 30.0, fee: float = 1.0, tax=None):
+    """Guadagno NETTO in euro di una posizione: lordo − commissioni − 26% sulla plusvalenza
+    (stessa formula del Portafoglio). È il numero che dice se l'operazione conviene DAVVERO:
+    con importi piccoli la commissione fissa può mangiarsi un rendimento positivo.
+    (`tax` si risolve a runtime: CAPITAL_GAINS_TAX è definita più in basso nel file.)"""
+    if ret_pct is None:
+        return None
+    t = CAPITAL_GAINS_TAX if tax is None else tax
+    g = float(importo) * float(ret_pct) / 100.0
+    return round(g - fee - t * max(g - fee, 0.0), 2)
 
 
 # ---------------------------------------------------------------------------
