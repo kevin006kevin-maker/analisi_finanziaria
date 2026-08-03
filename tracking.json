@@ -4350,7 +4350,7 @@
 "auto": true,
 "notified": true,
 "warn_since": "2026-07-29",
-"warn": "in perdita da 20 giorni di Borsa: valuta l'uscita"
+"warn": "sceso sotto lo stop (−2×ATR): valuta l'uscita"
 },
 "SOC": {
 "kind": "short",
@@ -35573,7 +35573,7 @@
 }
 ],
 "auto": true,
-"notified": false
+"notified": true
 },
 "MONC.MI": {
 "kind": "short",
