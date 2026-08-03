@@ -9237,22 +9237,6 @@
 "name": "BBD",
 "snapshots": [
 {
-"name": "Banco Bradesco S.A.",
-"price": 3.65,
-"rsi": 61.6002,
-"dd_high": -13.3017,
-"occasione": null,
-"convenienza": 62,
-"prob_gain": 73,
-"prob_loss": 13,
-"exp_ret": 20.2,
-"gain": 20.2,
-"reliab": "🟢 Alta",
-"target": 3.52,
-"stop": 3.4487,
-"date": "2026-07-12 23:35"
-},
-{
 "name": "Banco Bradesco SA",
 "price": 3.65,
 "rsi": 61.6002,
@@ -10963,6 +10947,22 @@
 "target": 3.5004,
 "stop": 3.4415,
 "date": "2026-08-03 22:16"
+},
+{
+"name": "Banco Bradesco SA",
+"price": 3.62,
+"rsi": 53.9935,
+"dd_high": -14.0143,
+"occasione": 56,
+"convenienza": 66,
+"prob_gain": 68,
+"prob_loss": 16,
+"exp_ret": 15.8,
+"gain": 15.8,
+"reliab": "🟢 Alta",
+"target": 3.5004,
+"stop": 3.4415,
+"date": "2026-08-04 00:46"
 }
 ],
 "auto": true,
@@ -32254,6 +32254,22 @@
 "target": 51.8888,
 "stop": 46.9199,
 "date": "2026-08-03 18:35"
+},
+{
+"name": "MONC.MI",
+"price": 48.78,
+"rsi": 42.5167,
+"dd_high": -16.7008,
+"occasione": 38,
+"convenienza": 71,
+"prob_gain": 50,
+"prob_loss": 0,
+"exp_ret": -0.0,
+"gain": 6.5945,
+"reliab": "🟢 Alta",
+"target": 51.9968,
+"stop": 45.5545,
+"date": "2026-08-04 00:46"
 }
 ],
 "auto": true,
@@ -33586,6 +33602,22 @@
 "target": 16.5304,
 "stop": 13.6931,
 "date": "2026-08-03 23:37"
+},
+{
+"name": "Coeur Mining, Inc",
+"price": 15.56,
+"rsi": 49.1488,
+"dd_high": -42.6888,
+"occasione": 97,
+"convenienza": 69,
+"prob_gain": 50,
+"prob_loss": 39,
+"exp_ret": -1.5,
+"gain": -1.5,
+"reliab": "🔴 Bassa",
+"target": 16.5304,
+"stop": 13.6931,
+"date": "2026-08-04 00:46"
 }
 ],
 "auto": true,
