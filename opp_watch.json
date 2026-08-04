@@ -906,22 +906,6 @@
 "name": "Petroleo Brasileiro SA Petrobras",
 "obs": [
 {
-"date": "2026-07-23 19:52",
-"conv": 51,
-"price": 19.185,
-"mkt": 0.6319,
-"occ": 56,
-"prob_gain": 58
-},
-{
-"date": "2026-07-23 22:38",
-"conv": 51,
-"price": 19.0,
-"mkt": 0.6806,
-"occ": 57,
-"prob_gain": 55
-},
-{
 "date": "2026-07-23 23:47",
 "conv": 52,
 "price": 19.0,
@@ -1616,6 +1600,16 @@
 "prob_gain": 66,
 "prob_loss": 20,
 "reliab": "🟢 Alta"
+},
+{
+"date": "2026-08-04 22:46",
+"conv": 63,
+"price": 18.72,
+"mkt": 3.1007,
+"occ": 59,
+"prob_gain": 71,
+"prob_loss": 18,
+"reliab": "🟢 Alta"
 }
 ]
 },
@@ -1990,6 +1984,16 @@
 "conv": null,
 "price": 8.22,
 "stale": true
+},
+{
+"date": "2026-08-04 22:46",
+"conv": 58,
+"price": 8.19,
+"mkt": 3.1007,
+"occ": 60,
+"prob_gain": 69,
+"prob_loss": 15,
+"reliab": "🟢 Alta"
 }
 ]
 },
@@ -3019,22 +3023,6 @@
 "name": "Coeur Mining, Inc",
 "obs": [
 {
-"date": "2026-07-23 19:52",
-"conv": 64,
-"price": 15.335,
-"mkt": 0.6319,
-"occ": 97,
-"prob_gain": 62
-},
-{
-"date": "2026-07-23 22:38",
-"conv": 61,
-"price": 15.24,
-"mkt": 0.6806,
-"occ": 97,
-"prob_gain": 65
-},
-{
 "date": "2026-07-23 23:47",
 "conv": 63,
 "price": 15.24,
@@ -3947,6 +3935,16 @@
 "prob_gain": 50,
 "prob_loss": 42,
 "reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-04 22:46",
+"conv": 56,
+"price": 16.21,
+"mkt": 3.1007,
+"occ": 96,
+"prob_gain": 50,
+"prob_loss": 42,
+"reliab": "🔴 Bassa"
 }
 ]
 },
@@ -3955,22 +3953,6 @@
 "kind": "long",
 "name": "Banco Bradesco SA",
 "obs": [
-{
-"date": "2026-07-23 19:52",
-"conv": 63,
-"price": 3.66,
-"mkt": 0.6319,
-"occ": 55,
-"prob_gain": 74
-},
-{
-"date": "2026-07-23 22:38",
-"conv": 66,
-"price": 3.66,
-"mkt": 0.6806,
-"occ": 55,
-"prob_gain": 72
-},
 {
 "date": "2026-07-24 00:44",
 "conv": 65,
@@ -4882,6 +4864,16 @@
 "prob_gain": 72,
 "prob_loss": 14,
 "reliab": "🟢 Alta"
+},
+{
+"date": "2026-08-04 22:46",
+"conv": 73,
+"price": 3.49,
+"mkt": 3.1007,
+"occ": 59,
+"prob_gain": 73,
+"prob_loss": 14,
+"reliab": "🟢 Alta"
 }
 ]
 },
@@ -4967,22 +4959,6 @@
 "kind": "long",
 "name": "Super Micro Computer Inc",
 "obs": [
-{
-"date": "2026-07-23 19:52",
-"conv": 40,
-"price": 31.82,
-"mkt": 0.6319,
-"occ": 84,
-"prob_gain": 44
-},
-{
-"date": "2026-07-23 22:38",
-"conv": 41,
-"price": 31.2,
-"mkt": 0.6806,
-"occ": 84,
-"prob_gain": 49
-},
 {
 "date": "2026-07-24 01:44",
 "conv": 42,
@@ -5888,6 +5864,16 @@
 "prob_gain": 61,
 "prob_loss": 31,
 "reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-04 22:46",
+"conv": 43,
+"price": 31.69,
+"mkt": 3.1007,
+"occ": 84,
+"prob_gain": 63,
+"prob_loss": 29,
+"reliab": "🔴 Bassa"
 }
 ]
 },
@@ -5896,28 +5882,6 @@
 "kind": "long",
 "name": "Venture Global Inc",
 "obs": [
-{
-"date": "2026-07-23 19:52",
-"conv": 27,
-"price": 15.28,
-"mkt": 0.6319,
-"occ": 52,
-"prob_gain": 52
-},
-{
-"date": "2026-07-23 21:25",
-"conv": null,
-"price": 15.2757,
-"stale": true
-},
-{
-"date": "2026-07-23 22:38",
-"conv": 22,
-"price": 15.16,
-"mkt": 0.6806,
-"occ": 53,
-"prob_gain": 51
-},
 {
 "date": "2026-07-23 23:47",
 "conv": 23,
@@ -6781,13 +6745,23 @@
 "prob_gain": 69,
 "prob_loss": 25,
 "reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-04 22:46",
+"conv": 37,
+"price": 12.84,
+"mkt": 3.1007,
+"occ": 68,
+"prob_gain": 66,
+"prob_loss": 27,
+"reliab": "🔴 Bassa"
 }
 ]
 },
 "long:T": {
 "ticker": "T",
 "kind": "long",
-"name": "AT&T Inc.",
+"name": "AT&T Inc",
 "obs": [
 {
 "date": "2026-07-24 03:13",
@@ -7846,6 +7820,16 @@
 "prob_gain": 73,
 "prob_loss": 12,
 "reliab": "🟢 Alta"
+},
+{
+"date": "2026-08-04 22:46",
+"conv": 68,
+"price": 23.38,
+"mkt": 3.1007,
+"occ": 64,
+"prob_gain": 73,
+"prob_loss": 12,
+"reliab": "🟢 Alta"
 }
 ]
 },
@@ -8758,42 +8742,6 @@
 "name": "AGNC Investment Corp",
 "obs": [
 {
-"date": "2026-07-23 16:35",
-"conv": 84,
-"price": 10.525,
-"mkt": 0.7688,
-"occ": 59,
-"prob_gain": 91
-},
-{
-"date": "2026-07-23 18:17",
-"conv": null,
-"price": 10.5199,
-"stale": true
-},
-{
-"date": "2026-07-23 19:52",
-"conv": 80,
-"price": 10.4899,
-"mkt": 0.6319,
-"occ": 59,
-"prob_gain": 91
-},
-{
-"date": "2026-07-23 21:25",
-"conv": null,
-"price": 10.565,
-"stale": true
-},
-{
-"date": "2026-07-23 22:38",
-"conv": 79,
-"price": 10.56,
-"mkt": 0.6806,
-"occ": 59,
-"prob_gain": 91
-},
-{
 "date": "2026-07-24 00:44",
 "conv": 80,
 "price": 10.56,
@@ -9626,6 +9574,16 @@
 "conv": 73,
 "price": 10.64,
 "mkt": 0.8368,
+"occ": 58,
+"prob_gain": 87,
+"prob_loss": 2,
+"reliab": "🟢 Alta"
+},
+{
+"date": "2026-08-04 22:46",
+"conv": 77,
+"price": 10.64,
+"mkt": 3.1007,
 "occ": 58,
 "prob_gain": 87,
 "prob_loss": 2,
@@ -10718,22 +10676,6 @@
 "name": "FERRARI",
 "obs": [
 {
-"date": "2026-07-23 19:52",
-"conv": 22,
-"price": 315.45,
-"mkt": 0.6319,
-"occ": 69,
-"prob_gain": 63
-},
-{
-"date": "2026-07-23 22:38",
-"conv": 19,
-"price": 315.45,
-"mkt": 0.6806,
-"occ": 69,
-"prob_gain": 63
-},
-{
 "date": "2026-07-23 23:47",
 "conv": 22,
 "price": 315.45,
@@ -11690,6 +11632,16 @@
 "prob_gain": 58,
 "prob_loss": 26,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-08-04 22:46",
+"conv": 25,
+"price": 348.2,
+"mkt": 3.1007,
+"occ": 61,
+"prob_gain": 58,
+"prob_loss": 26,
+"reliab": "🟡 Media"
 }
 ]
 },
@@ -12104,24 +12056,8 @@
 "long:CCL": {
 "ticker": "CCL",
 "kind": "long",
-"name": "Carnival Corporation & plc",
+"name": "Carnival Corp",
 "obs": [
-{
-"date": "2026-07-23 21:25",
-"conv": 62,
-"price": 25.435,
-"mkt": 0.4932,
-"occ": 65,
-"prob_gain": 72
-},
-{
-"date": "2026-07-23 22:38",
-"conv": 63,
-"price": 25.27,
-"mkt": 0.6806,
-"occ": 66,
-"prob_gain": 71
-},
 {
 "date": "2026-07-23 23:47",
 "conv": 64,
@@ -13134,6 +13070,16 @@
 "occ": 51,
 "prob_gain": 61,
 "prob_loss": 25,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-08-04 22:46",
+"conv": 45,
+"price": 29.59,
+"mkt": 3.1007,
+"occ": 52,
+"prob_gain": 59,
+"prob_loss": 28,
 "reliab": "🟡 Media"
 }
 ]
@@ -32097,26 +32043,6 @@
 "name": "Micron Technology Inc",
 "obs": [
 {
-"date": "2026-07-23 19:52",
-"conv": null,
-"price": 998.1198,
-"stale": true
-},
-{
-"date": "2026-07-23 21:25",
-"conv": 48,
-"price": 988.63,
-"mkt": 0.4932,
-"occ": 67,
-"prob_gain": 52
-},
-{
-"date": "2026-07-23 22:38",
-"conv": null,
-"price": 990.21,
-"stale": true
-},
-{
 "date": "2026-07-24 12:00",
 "conv": 42,
 "price": 990.21,
@@ -32754,6 +32680,16 @@
 "occ": 76,
 "prob_gain": 50,
 "prob_loss": 40,
+"reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-04 22:46",
+"conv": 50,
+"price": 892.67,
+"mkt": 3.1007,
+"occ": 76,
+"prob_gain": 48,
+"prob_loss": 42,
 "reliab": "🔴 Bassa"
 }
 ]
@@ -46940,7 +46876,7 @@
 "long:FSM": {
 "ticker": "FSM",
 "kind": "long",
-"name": "Fortuna Mining Corp",
+"name": "Fortuna Mining Corp.",
 "obs": [
 {
 "date": "2026-07-25 04:58",
@@ -47816,6 +47752,16 @@
 "occ": 91,
 "prob_gain": 60,
 "prob_loss": 29,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-08-04 22:46",
+"conv": 73,
+"price": 9.05,
+"mkt": 3.1007,
+"occ": 99,
+"prob_gain": 63,
+"prob_loss": 24,
 "reliab": "🟡 Media"
 }
 ]
@@ -50525,7 +50471,7 @@
 "long:AMKR": {
 "ticker": "AMKR",
 "kind": "long",
-"name": "Amkor Technology Inc",
+"name": "AMKOR TECHNOLOGY, INC.",
 "obs": [
 {
 "date": "2026-07-28 23:41",
@@ -51067,6 +51013,16 @@
 "occ": 74,
 "prob_gain": 50,
 "prob_loss": 42,
+"reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-04 22:46",
+"conv": 33,
+"price": 55.87,
+"mkt": 3.1007,
+"occ": 74,
+"prob_gain": 53,
+"prob_loss": 38,
 "reliab": "🔴 Bassa"
 }
 ]
@@ -53235,7 +53191,7 @@
 "long:LII": {
 "ticker": "LII",
 "kind": "long",
-"name": "Lennox International Inc",
+"name": "LENNOX INTERNATIONAL INC",
 "obs": [
 {
 "date": "2026-07-29 23:40",
@@ -53815,6 +53771,16 @@
 "occ": 68,
 "prob_gain": 83,
 "prob_loss": 9,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-08-04 22:46",
+"conv": 47,
+"price": 446.74,
+"mkt": 3.1007,
+"occ": 62,
+"prob_gain": 64,
+"prob_loss": 21,
 "reliab": "🟡 Media"
 }
 ]
@@ -54585,7 +54551,7 @@
 "long:RTO": {
 "ticker": "RTO",
 "kind": "long",
-"name": "Rentokil Initial PLC",
+"name": "Rentokil Initial plc",
 "obs": [
 {
 "date": "2026-07-30 16:12",
@@ -55135,6 +55101,16 @@
 "occ": 59,
 "prob_gain": 70,
 "prob_loss": 12,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-08-04 22:46",
+"conv": 44,
+"price": 25.06,
+"mkt": 3.1007,
+"occ": 54,
+"prob_gain": 68,
+"prob_loss": 15,
 "reliab": "🟡 Media"
 }
 ]
@@ -55766,7 +55742,7 @@
 "long:AGI": {
 "ticker": "AGI",
 "kind": "long",
-"name": "Alamos Gold Inc",
+"name": "Alamos Gold Inc.",
 "obs": [
 {
 "date": "2026-07-31 09:40",
@@ -56229,6 +56205,16 @@
 "mkt": 3.2295,
 "occ": 97,
 "prob_gain": 64,
+"prob_loss": 24,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-08-04 22:46",
+"conv": 77,
+"price": 28.76,
+"mkt": 3.1007,
+"occ": 100,
+"prob_gain": 68,
 "prob_loss": 24,
 "reliab": "🟡 Media"
 }
@@ -57512,7 +57498,7 @@
 "long:RDDT": {
 "ticker": "RDDT",
 "kind": "long",
-"name": "Reddit Inc",
+"name": "Reddit, Inc.",
 "obs": [
 {
 "date": "2026-07-31 23:30",
@@ -57907,6 +57893,16 @@
 "prob_gain": 60,
 "prob_loss": 30,
 "reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-04 22:46",
+"conv": 38,
+"price": 159.97,
+"mkt": 3.1007,
+"occ": 81,
+"prob_gain": 53,
+"prob_loss": 37,
+"reliab": "🔴 Bassa"
 }
 ]
 },
@@ -58196,13 +58192,23 @@
 "conv": null,
 "price": 43.265,
 "stale": true
+},
+{
+"date": "2026-08-04 22:46",
+"conv": 68,
+"price": 44.26,
+"mkt": 3.1007,
+"occ": 88,
+"prob_gain": 72,
+"prob_loss": 14,
+"reliab": "🟢 Alta"
 }
 ]
 },
 "long:VCYT": {
 "ticker": "VCYT",
 "kind": "long",
-"name": "Veracyte Inc",
+"name": "VERACYTE, INC.",
 "obs": [
 {
 "date": "2026-08-03 13:30",
@@ -58344,6 +58350,16 @@
 "occ": 65,
 "prob_gain": 70,
 "prob_loss": 18,
+"reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-04 22:46",
+"conv": 41,
+"price": 46.41,
+"mkt": 3.1007,
+"occ": 60,
+"prob_gain": 72,
+"prob_loss": 19,
 "reliab": "🔴 Bassa"
 }
 ]
