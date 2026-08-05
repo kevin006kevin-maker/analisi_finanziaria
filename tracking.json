@@ -13378,7 +13378,7 @@
 }
 ],
 "auto": true,
-"notified": false
+"notified": true
 },
 "ROAD": {
 "kind": "short",
@@ -30317,7 +30317,9 @@
 }
 ],
 "auto": true,
-"notified": false
+"notified": false,
+"warn_since": "2026-08-05",
+"warn": "in perdita da 9 giorni di Borsa: valuta l'uscita"
 },
 "AXTI": {
 "kind": "short",
@@ -37305,7 +37307,9 @@
 }
 ],
 "auto": true,
-"notified": false
+"notified": false,
+"warn_since": "2026-08-05",
+"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
 },
 "GOOGL": {
 "kind": "short",
