@@ -3,9 +3,18 @@ name: Aggiornamento autonomo occasioni
 # Gira sui server di GitHub (anche a PC spento). Il cron è "best-effort":
 # GitHub può ritardare o saltare qualche giro sotto carico, ma per seguire
 # l'evoluzione su più giorni va benissimo.
+#
+# PERCHÉ OGNI 30 MINUTI (e non 15, come prima): i due campionatori dello script hanno un
+# intervallo minimo di 60 minuti (_OBS_GAP_MIN e _SNAP_GAP_MIN in finance_utils), quindi con
+# un giro ogni 15 minuti 3 giri su 4 NON registravano alcun dato: bruciavano solo minuti di
+# runner e chiamate API (la quota FMP è già esaurita). A 30 minuti non si perde nessun dato,
+# si dimezzano le chiamate e si riduce l'esposizione all'errore saltuario di GitHub
+# "The job was not acquired by Runner of type hosted" (capacità dei runner gratuiti esaurita:
+# il job viene annullato senza eseguire alcuno step — non è un problema del nostro codice).
+# Resta un margine di sicurezza: se GitHub salta un giro, ne resta comunque uno nell'ora.
 on:
   schedule:
-    - cron: "*/15 * * * *"   # ogni 15 minuti
+    - cron: "*/30 * * * *"   # ogni 30 minuti
   workflow_dispatch:           # avvio manuale dalla scheda "Actions"
     inputs:
       test_notifica:
