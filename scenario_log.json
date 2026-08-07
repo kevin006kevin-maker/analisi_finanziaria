@@ -166,7 +166,13 @@
 "obs_date": "2026-07-28",
 "target": 766.5216,
 "stop": 460.5618,
-"res": {}
+"res": {
+"osservazione|7g": -2.61,
+"promozione|7g": -8.14,
+"conferma|7g": 0.0
+},
+"conf_price": 533.4349975585938,
+"conf_date": "2026-08-07"
 },
 {
 "ticker": "AMKR",
@@ -177,7 +183,13 @@
 "obs_date": "2026-07-28",
 "target": 71.4736,
 "stop": 35.1726,
-"res": {}
+"res": {
+"osservazione|7g": 18.56,
+"promozione|7g": 13.28,
+"conferma|7g": 0.0
+},
+"conf_price": 54.66999816894531,
+"conf_date": "2026-08-07"
 },
 {
 "ticker": "MU",
@@ -188,7 +200,10 @@
 "obs_date": "2026-07-19",
 "target": 962.3594,
 "stop": 697.0092,
-"res": {}
+"res": {
+"osservazione|7g": 2.04,
+"promozione|7g": -0.96
+}
 },
 {
 "ticker": "MTDR",
@@ -199,15 +214,20 @@
 "obs_date": "2026-07-28",
 "pre_price": 46.12,
 "pre_date": "2026-07-29",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 47.970001220703125,
+"conf_date": "2026-08-07",
 "target": 52.2966,
 "stop": 45.0021,
 "reliab": "🟡 Media",
 "prob_gain": 53,
 "prob_loss": 6,
 "conv": 65,
-"res": {}
+"res": {
+"anticipo|7g": 4.01,
+"osservazione|7g": 1.7,
+"promozione|7g": -1.88,
+"conferma|7g": 0.0
+}
 },
 {
 "ticker": "SNDK",
@@ -218,15 +238,20 @@
 "obs_date": "2026-07-28",
 "pre_price": 1278.23,
 "pre_date": "2026-07-29",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 1223.8499755859375,
+"conf_date": "2026-08-07",
 "target": 1710.051,
 "stop": 859.715,
 "reliab": "🔴 Bassa",
 "prob_gain": 52,
 "prob_loss": 27,
 "conv": 64,
-"res": {}
+"res": {
+"anticipo|7g": -4.25,
+"osservazione|7g": 12.27,
+"promozione|7g": -2.61,
+"conferma|7g": 0.0
+}
 },
 {
 "ticker": "REPL",
@@ -237,15 +262,20 @@
 "obs_date": "2026-07-28",
 "pre_price": 5.35,
 "pre_date": "2026-07-29",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 11.999899864196777,
+"conf_date": "2026-08-07",
 "target": 9.2539,
 "stop": 8.2102,
 "reliab": "🔴 Bassa",
 "prob_gain": 50,
 "prob_loss": 30,
 "conv": 41,
-"res": {}
+"res": {
+"anticipo|7g": 124.3,
+"osservazione|7g": 124.3,
+"promozione|7g": 8.3,
+"conferma|7g": 0.0
+}
 },
 {
 "ticker": "LGN",
@@ -256,15 +286,20 @@
 "obs_date": "2026-07-28",
 "pre_price": 59.21,
 "pre_date": "2026-07-29",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 65.0459976196289,
+"conf_date": "2026-08-07",
 "target": 77.9103,
 "stop": 53.0542,
 "reliab": "🔴 Bassa",
 "prob_gain": 50,
 "prob_loss": 16,
 "conv": 66,
-"res": {}
+"res": {
+"anticipo|7g": 9.86,
+"osservazione|7g": 9.86,
+"promozione|7g": 1.31,
+"conferma|7g": 0.0
+}
 },
 {
 "ticker": "AAUC",
