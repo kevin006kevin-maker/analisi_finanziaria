@@ -1592,7 +1592,9 @@
 ],
 "auto": true,
 "notified": true,
-"exit_notified": false
+"exit_notified": false,
+"warn_since": "2026-08-07",
+"warn": "in perdita da 24 giorni di Borsa: valuta l'uscita"
 },
 "STRC": {
 "kind": "short",
@@ -6087,7 +6089,9 @@
 ],
 "auto": true,
 "notified": true,
-"exit_notified": false
+"exit_notified": false,
+"warn_since": "2026-08-07",
+"warn": "in perdita da 23 giorni di Borsa: valuta l'uscita"
 },
 "XLE": {
 "kind": "short",
@@ -14636,7 +14640,9 @@
 }
 ],
 "auto": true,
-"notified": true
+"notified": true,
+"warn_since": "2026-08-07",
+"warn": "in perdita da 17 giorni di Borsa: valuta l'uscita"
 },
 "OEC": {
 "kind": "short",
@@ -26435,7 +26441,9 @@
 }
 ],
 "auto": true,
-"notified": true
+"notified": true,
+"warn_since": "2026-08-07",
+"warn": "in perdita da 12 giorni di Borsa: valuta l'uscita"
 },
 "NFLX": {
 "kind": "short",
@@ -28775,7 +28783,9 @@
 }
 ],
 "auto": true,
-"notified": true
+"notified": true,
+"warn_since": "2026-08-07",
+"warn": "in perdita da 12 giorni di Borsa: valuta l'uscita"
 },
 "IMSR": {
 "kind": "short",
@@ -41431,7 +41441,9 @@
 }
 ],
 "auto": true,
-"notified": true
+"notified": true,
+"warn_since": "2026-08-07",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "AAUC": {
 "kind": "short",
@@ -46165,7 +46177,7 @@
 }
 ],
 "auto": true,
-"notified": false
+"notified": true
 },
 "TSLL": {
 "kind": "short",
