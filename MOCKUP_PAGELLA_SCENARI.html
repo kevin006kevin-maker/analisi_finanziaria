@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anteprima — Pagella e Scenari</title>
+<style>
+  :root{
+    --bg:#13151a; --card:#1b1e24; --card2:#22262e; --line:rgba(255,255,255,.09);
+    --ink:#e6e9ef; --ink2:#a9b1ba; --ink3:#8b949e;
+    --s1:#3987e5; --s2:#d95926; --s3:#199e70;   /* palette validata (CVD-safe, tema scuro) */
+    --pos:#3fb950; --neg:#f85149; --warn:#d29922;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 Inter,-apple-system,"Segoe UI",system-ui,sans-serif;padding-bottom:60px}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+  header{padding:24px 0 6px}
+  h1{font-size:1.5rem;margin:0 0 6px} h2{font-size:1.12rem;margin:22px 0 8px}
+  .badge{display:inline-block;background:#3987e51f;border:1px solid #3987e555;color:#a8cbf7;border-radius:99px;padding:3px 12px;font-size:.8rem;font-weight:600;margin-bottom:8px}
+  .muted{color:var(--ink2)} .small{font-size:.85rem;color:var(--ink3)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 17px;margin:12px 0}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .seg{display:inline-flex;background:var(--card2);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .seg button{background:none;border:0;color:var(--ink2);padding:9px 15px;font:inherit;font-size:.9rem;cursor:pointer}
+  .seg button.on{background:#3987e533;color:#cfe1ff;font-weight:650}
+  .fbox{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px;align-items:end}
+  label.lb{display:block;font-size:.82rem;color:var(--ink2);margin-bottom:4px}
+  input[type=range]{width:100%;accent-color:var(--s1)}
+  select{background:var(--card2);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:7px 10px;font:inherit;width:100%}
+  .chip{display:inline-block;background:var(--card2);border:1px solid var(--line);border-radius:99px;padding:3px 11px;font-size:.8rem;color:var(--ink2);cursor:pointer}
+  .chip:hover{border-color:#3987e588}
+  table{width:100%;border-collapse:separate;border-spacing:3px}
+  th{color:var(--ink3);font-weight:600;text-align:left;padding:6px 9px;font-size:.85rem;vertical-align:bottom}
+  td{padding:0}
+  td.rowh{color:var(--ink);font-size:.9rem;padding:9px;background:var(--card2);border-radius:9px;width:250px}
+  td.rowh .sub{font-size:.76rem;color:var(--ink3)}
+  .cell{border:1px solid var(--line);border-radius:9px;padding:9px 10px;cursor:pointer;background:var(--card2);min-height:64px}
+  .cell:hover{border-color:#3987e5aa}
+  .cell.sel{border-color:var(--s1);box-shadow:0 0 0 1px var(--s1) inset}
+  .cell .big{font-size:1.12rem;font-weight:680}
+  .cell .sml{font-size:.76rem;color:var(--ink3)}
+  .cell.na{opacity:.5;cursor:default} .cell.na:hover{border-color:var(--line)}
+  .pos{color:var(--pos)} .neg{color:var(--neg)}
+  .legend{font-size:.82rem;color:var(--ink3);margin-top:6px}
+  .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}
+  .kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:9px;margin:10px 0}
+  .kv .k{background:var(--card2);border:1px solid var(--line);border-radius:9px;padding:8px 11px}
+  .kv .k .l{font-size:.75rem;color:var(--ink3)} .kv .k .v{font-size:1.05rem;font-weight:650}
+  .note{background:#d2992214;border-left:4px solid var(--warn);border-radius:8px;padding:10px 13px;font-size:.88rem;margin:10px 0}
+  .ok{background:#3fb95014;border-left:4px solid var(--pos)}
+  .lst{width:100%;border-collapse:collapse;font-size:.86rem;margin-top:6px}
+  .lst th{border-bottom:1px solid var(--line);padding:6px 8px}
+  .lst td{padding:6px 8px;border-bottom:1px solid rgba(255,255,255,.05)}
+  .tip{position:fixed;pointer-events:none;background:#0d0f13;border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-size:.82rem;display:none;z-index:99}
+</style>
+</head>
+<body data-palette="#3987e5,#d95926,#199e70">
+<div class="wrap">
+<header>
+  <div class="badge">ANTEPRIMA — l'app NON è modificata · numeri simulati per farti vedere la struttura</div>
+  <h1>📊 Pagella e Scenari — come la struttureresti</h1>
+  <div class="muted">Tre momenti d'acquisto × tre regole di vendita, con i filtri di qualità che hai chiesto.
+  Tutto è <b>cliccabile</b>: cambia i filtri e guarda come si muovono i numeri.</div>
+</header>
+
+<!-- FILTRI -->
+<div class="card">
+  <div class="row" style="justify-content:space-between">
+    <div>
+      <label class="lb">Tipo di occasione <span class="small">(cambia gli orizzonti di vendita)</span></label>
+      <div class="seg" id="segKind">
+        <button class="on" data-k="short">⚡ Breve periodo</button>
+        <button data-k="long">🏛️ Lungo periodo</button>
+      </div>
+    </div>
+    <div class="small" id="conteggio" style="text-align:right"></div>
+  </div>
+
+  <hr style="border:0;border-top:1px solid var(--line);margin:14px 0">
+
+  <div class="row" style="justify-content:space-between;margin-bottom:10px">
+    <b style="font-size:.95rem">🎚️ Filtri di qualità <span class="small">— «comprerei solo se…»</span></b>
+    <div>
+      <span class="chip" onclick="preset('best')">⭐ Solo le migliori</span>
+      <span class="chip" onclick="preset('all')">↺ Tutte</span>
+    </div>
+  </div>
+  <div class="fbox">
+    <div>
+      <label class="lb">Affidabilità minima</label>
+      <select id="fRel" onchange="draw()">
+        <option value="0">Tutte</option>
+        <option value="1">🟡 Media o superiore</option>
+        <option value="2">🟢 Solo Alta</option>
+      </select>
+    </div>
+    <div>
+      <label class="lb">Probabilità di salita ≥ <b id="lPg">0</b>%</label>
+      <input type="range" id="fPg" min="0" max="80" step="5" value="0" oninput="draw()">
+    </div>
+    <div>
+      <label class="lb">Rischio di perdita ≤ <b id="lPl">100</b>%</label>
+      <input type="range" id="fPl" min="0" max="100" step="5" value="100" oninput="draw()">
+    </div>
+    <div>
+      <label class="lb">Convenienza minima <b id="lCv">0</b></label>
+      <input type="range" id="fCv" min="0" max="90" step="5" value="0" oninput="draw()">
+    </div>
+  </div>
+
+  <hr style="border:0;border-top:1px solid var(--line);margin:14px 0">
+  <div class="row" style="gap:16px;align-items:flex-end">
+    <b style="font-size:.95rem">💶 I miei importi</b>
+    <div><label class="lb">Investo per occasione (€)</label>
+      <input type="number" id="dImp" min="1" step="10" value="30" oninput="draw()"
+             style="width:120px;background:var(--card2);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:7px 10px;font:inherit"></div>
+    <div><label class="lb">Commissioni (€)</label>
+      <input type="number" id="dFee" min="0" step="0.5" value="1" oninput="draw()"
+             style="width:120px;background:var(--card2);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:7px 10px;font:inherit"></div>
+    <div class="small" id="pareggioLine"></div>
+  </div>
+</div>
+
+<!-- MATRICE -->
+<h2>Quale combinazione avrebbe reso di più?</h2>
+<div class="card">
+  <table id="matrice"></table>
+  <div class="legend">In ogni casella: <b>rendimento medio</b> · <b>% di volte in positivo</b> · <span class="small">(numero di casi)</span>.
+  Clicca una casella per il dettaglio. Al lordo di commissioni e tasse (uguali per tutti: non cambiano la classifica).</div>
+</div>
+
+<!-- DETTAGLIO -->
+<div class="card" id="dettaglio"></div>
+
+<!-- GRAFICO -->
+<h2>Confronto nel tempo — i tre momenti d'acquisto</h2>
+<div class="card">
+  <div class="row" style="justify-content:space-between;margin-bottom:8px">
+    <div class="small">Regola di vendita mostrata: <b id="chartRule"></b></div>
+    <div class="legend">
+      <span class="dot" style="background:var(--s1)"></span>All'ingresso in «In anticipo» &nbsp;
+      <span class="dot" style="background:var(--s2)"></span>All'ingresso in Monitoraggio &nbsp;
+      <span class="dot" style="background:var(--s3)"></span>Dopo il periodo di conferma
+    </div>
+  </div>
+  <svg id="chart" viewBox="0 0 900 300" width="100%" height="300" role="img"
+       aria-label="Somma dei rendimenti nel tempo per i tre momenti d'acquisto"></svg>
+  <div class="legend">Ogni linea somma i rendimenti caso dopo caso, in ordine di data: <b>la linea più in alto è
+  il momento d'acquisto che avrebbe reso di più</b>; sopra lo zero = in guadagno complessivo.</div>
+</div>
+
+<!-- COSA SERVE -->
+<h2>Cosa serve per riempirla davvero</h2>
+<div class="card">
+  <div class="note"><b>Da registrare in più</b> (oggi non c'è, va aggiunto al momento della promozione — poi si popola da solo):
+    <ul style="margin:6px 0 0 18px">
+      <li><b>prezzo all'ingresso in «In anticipo»</b> e <b>prezzo dopo il periodo di conferma</b> (oggi si salvano solo inizio-osservazione e promozione);</li>
+      <li><b>affidabilità, probabilità di salita e rischio</b> del momento dell'acquisto — servono ai filtri di qualità;</li>
+      <li>esiti a <b>1 settimana / 1 mese / 1 anno</b> e al <b>bersaglio</b>.</li>
+    </ul>
+  </div>
+  <div class="note"><b>Tempi di maturazione</b> (onestà): 1 settimana → prime risposte dopo ~7 giorni · 1 mese → dopo ~30 giorni ·
+  <b>1 anno → i primi risultati arrivano solo tra 12 mesi</b>. Le caselle non ancora mature restano grigie con la data prevista, mai vuote e mai finte.</div>
+  <div class="note ok"><b>Già pronto</b>: acquisto alla promozione, vendita a 7 e 30 giorni, vendita al bersaglio, protezione contro i frazionamenti azionari.</div>
+</div>
+</div>
+<div class="tip" id="tip"></div>
+
+<script>
+/* ---------- dati simulati, deterministici ---------- */
+let seed = 20260731;
+function rnd(){ seed = (seed*1103515245 + 12345) & 0x7fffffff; return seed/0x7fffffff; }
+function gauss(m,s){ return m + s*(rnd()+rnd()+rnd()+rnd()-2)/1.1; }
+const TK = ["SOC","PBR","XLE","OEC","TMUS","AA","ROAD","CNQ","T","KGC","BBD","PL","RPT","SNPS","AAON",
+            "NFLX","JOBY","IMSR","LENZ","AXTI","ELTX","CCL","PUMP","STRC","MPLT","SNEX","RGC","PBR-A",
+            "TZA","ACI","LDO.MI","STLAM.MI","ENI.MI","ISP.MI","SAP.DE","ASML.AS","VWCE.DE","KO","MO","VZ"];
+const CASI = [];
+for (let i=0;i<TK.length;i++){
+  const kind = i%3===2 ? "long" : "short";
+  const rel  = rnd()<0.3 ? 2 : (rnd()<0.6 ? 1 : 0);          // 2=Alta 1=Media 0=Bassa
+  const pg   = Math.round(gauss(rel===2?60:52, 9));
+  const pl   = Math.max(0, Math.round(gauss(rel===2?8:14, 6)));
+  const cv   = Math.round(gauss(66, 9));
+  const qual = (rel*0.5) + (pg-50)/22 - (pl-10)/26;           // "bontà" latente
+  // percorso prezzi: anticipo -> promozione -> dopo conferma
+  const p0 = 100;
+  const p1 = p0*(1+gauss(2.6,1.9)/100);                       // rimbalzo pagato aspettando la promozione
+  const p2 = p1*(1+gauss(1.7,2.4)/100);                       // altro rimbalzo pagato aspettando la conferma
+  const drift = gauss(qual*0.9, 1.0);
+  const e1w = p1*(1+gauss(drift*0.5, 3.4)/100);
+  const e1m = p1*(1+gauss(drift*1.6, 6.2)/100);
+  const e1y = p1*(1+gauss(drift*4.0, 17)/100);
+  const tgt = p1*(1+Math.max(3, gauss(11,5))/100);
+  const toccato = rnd() < (0.30 + Math.max(0,qual)*0.13);
+  const eSog = toccato ? tgt : e1m;                            // se non tocca, si valuta a 1 mese
+  const g = new Date(2026,3+Math.floor(rnd()*4),1+Math.floor(rnd()*27));
+  CASI.push({tk:TK[i],kind,rel,pg,pl,cv,p0,p1,p2,e1w,e1m,e1y,eSog,toccato,
+             data:g.toISOString().slice(0,10)});
+}
+CASI.sort((a,b)=>a.data<b.data?-1:1);
+
+const BUY = [
+  {k:"anticipo",  lab:"🔭 All'ingresso in «In anticipo»", sub:"pre-segnale, rimbalzo NON confermato", px:c=>c.p0, col:"var(--s1)"},
+  {k:"promoz",    lab:"📌 All'ingresso in Monitoraggio",   sub:"alla promozione (regola attuale)",     px:c=>c.p1, col:"var(--s2)"},
+  {k:"conferma",  lab:"⏳ Dopo il periodo di conferma",    sub:"5 giorni di Borsa (breve) · 10 (lungo)", px:c=>c.p2, col:"var(--s3)"},
+];
+const SELL = {
+  short:[{k:"sog",lab:"🎯 Alla soglia",sub:"bersaglio",px:c=>c.eSog},
+         {k:"a",lab:"📅 Dopo 1 settimana",sub:"",px:c=>c.e1w},
+         {k:"b",lab:"📅 Dopo 1 mese",sub:"",px:c=>c.e1m}],
+  long: [{k:"sog",lab:"🎯 Alla soglia",sub:"bersaglio",px:c=>c.eSog},
+         {k:"a",lab:"📅 Dopo 1 mese",sub:"",px:c=>c.e1m},
+         {k:"b",lab:"📅 Dopo 1 anno",sub:"matura nel 2027",px:c=>c.e1y,futuro:true}]
+};
+let KIND="short", SEL={b:1,s:2};
+
+function filtra(){
+  const rel=+fRel.value, pg=+fPg.value, pl=+fPl.value, cv=+fCv.value;
+  return CASI.filter(c=>c.kind===KIND && c.rel>=rel && c.pg>=pg && c.pl<=pl && c.cv>=cv);
+}
+function stat(cs,b,s){
+  const r = cs.map(c=> (s.px(c)/b.px(c)-1)*100 );
+  if(!r.length) return null;
+  const m = r.reduce((a,x)=>a+x,0)/r.length;
+  return {n:r.length, avg:m, hit:Math.round(100*r.filter(x=>x>0).length/r.length),
+          best:Math.max(...r), worst:Math.min(...r), vals:r};
+}
+const f1=x=>(x>=0?"+":"")+x.toFixed(1)+"%";
+
+function draw(){
+  lPg.textContent=fPg.value; lPl.textContent=fPl.value; lCv.textContent=fCv.value;
+  const _I=Math.max(1,+dImp.value||30), _F=Math.max(0,+dFee.value||0);
+  pareggioLine.innerHTML=`Con questi numeri il <b>pareggio</b> è a <b>+${(_F/_I*100).toFixed(1)}%</b> `
+    + `<span class="small">(commissione fissa su importo piccolo)</span>`;
+  const cs=filtra(), tot=CASI.filter(c=>c.kind===KIND).length;
+  conteggio.innerHTML=`<b>${cs.length}</b> occasioni su ${tot} passano i filtri`+
+     (cs.length<5?` <span style="color:var(--warn)">— troppo poche per fidarsi</span>`:``);
+  const sells=SELL[KIND];
+  let h=`<tr><th>Compro…</th>`+sells.map(s=>`<th>${s.lab}<div class="small">${s.sub||"&nbsp;"}</div></th>`).join("")+`</tr>`;
+  BUY.forEach((b,bi)=>{
+    h+=`<tr><td class="rowh"><b>${b.lab}</b><div class="sub">${b.sub}</div></td>`;
+    sells.forEach((s,si)=>{
+      if(s.futuro){ h+=`<td><div class="cell na"><div class="big">⏳</div><div class="sml">i primi risultati<br>a metà 2027</div></div></td>`; return; }
+      const st=stat(cs,b,s);
+      const sel=(SEL.b===bi&&SEL.s===si)?" sel":"";
+      if(st){
+        const ne = st.vals.reduce((a,x)=>a+netEur(x,_I,_F),0)/st.n;
+        h+=`<td><div class="cell${sel}" onclick="pick(${bi},${si})">
+            <div class="big ${st.avg>=0?'pos':'neg'}">${f1(st.avg)}</div>
+            <div class="sml">${st.hit}% in positivo · (${st.n})</div>
+            <div class="sml" style="margin-top:3px">su €${_I}: <b class="${ne>=0?'pos':'neg'}">${fe(ne)}</b> netti</div>
+            </div></td>`;
+      } else {
+        h+=`<td><div class="cell na"><div class="big">—</div><div class="sml">nessun caso</div></div></td>`;
+      }
+    });
+    h+=`</tr>`;
+  });
+  matrice.innerHTML=h;
+  if(SELL[KIND][SEL.s].futuro) SEL.s=1;
+  dettaglio_(cs); grafico(cs);
+}
+function pick(b,s){ SEL={b,s}; draw(); }
+/* guadagno NETTO in euro: lordo − commissione − 26% sulla plusvalenza (come nel Portafoglio) */
+function netEur(retPct, imp, fee){
+  const g = imp*retPct/100;
+  return g - fee - 0.26*Math.max(g-fee, 0);
+}
+const fe = x => (x>=0?"+":"−")+"€"+Math.abs(x).toFixed(2);
+
+function dettaglio_(cs){
+  const b=BUY[SEL.b], s=SELL[KIND][SEL.s], st=stat(cs,b,s);
+  if(!st){ dettaglio.innerHTML=`<b>Nessun caso con questi filtri.</b>`; return; }
+  const IMP=Math.max(1, +dImp.value||30), FEE=Math.max(0, +dFee.value||0);
+  const aff = st.n>=20?"🟢 Alta":(st.n>=8?"🟡 Media":"🔴 Bassa (pochi casi)");
+  const med = [...st.vals].sort((a,b)=>a-b)[Math.floor(st.n/2)];
+  const righe=cs.map((c,i)=>({c,r:(s.px(c)/b.px(c)-1)*100})).sort((a,b)=>b.r-a.r);
+  const netMedio = st.vals.reduce((a,x)=>a+netEur(x,IMP,FEE),0)/st.n;   // media dei netti per posizione
+  const netTot   = st.vals.reduce((a,x)=>a+netEur(x,IMP,FEE),0);
+  const inUtile  = st.vals.filter(x=>netEur(x,IMP,FEE)>0).length;
+  const pareggio = FEE/IMP*100;
+  dettaglio.innerHTML=`
+   <b style="font-size:1.02rem">${b.lab} → ${s.lab}</b>
+   <div class="kv">
+     <div class="k"><div class="l">Rendimento medio</div><div class="v ${st.avg>=0?'pos':'neg'}">${f1(st.avg)}</div>
+       <div class="l" style="margin-top:2px">≈ <b class="${netMedio>=0?'pos':'neg'}">${fe(netMedio)}</b> netti su €${IMP}</div></div>
+     <div class="k"><div class="l">Se le avessi comprate tutte</div><div class="v ${netTot>=0?'pos':'neg'}">${fe(netTot)}</div>
+       <div class="l" style="margin-top:2px">${st.n} × €${IMP} = €${(st.n*IMP).toFixed(0)} impiegati</div></div>
+     <div class="k"><div class="l">In utile dopo i costi</div><div class="v">${inUtile}/${st.n}</div>
+       <div class="l" style="margin-top:2px">a fronte di ${st.hit}% in positivo</div></div>
+     <div class="k"><div class="l">Mediana</div><div class="v">${f1(med)}</div>
+       <div class="l" style="margin-top:2px">≈ ${fe(netEur(med,IMP,FEE))} netti</div></div>
+     <div class="k"><div class="l">Migliore / peggiore</div><div class="v" style="font-size:.92rem">${f1(st.best)} / ${f1(st.worst)}</div>
+       <div class="l" style="margin-top:2px">${fe(netEur(st.best,IMP,FEE))} / ${fe(netEur(st.worst,IMP,FEE))}</div></div>
+     <div class="k"><div class="l">Casi · Attendibilità</div><div class="v" style="font-size:.92rem">${st.n} · ${aff}</div></div>
+   </div>
+   ${st.avg>0 && netMedio<=0 ? `<div class="note" style="margin:4px 0 10px">⚠️ <b>Attenzione</b>: il rendimento medio è positivo
+      (${f1(st.avg)}) ma <b>in euro ci rimetti</b> (${fe(netMedio)} a posizione): con €${IMP} investiti e €${FEE} di
+      commissioni servono almeno <b>+${pareggio.toFixed(1)}%</b> solo per pareggiare.</div>`
+     : `<div class="small" style="margin:-4px 0 10px">Netto = rendimento − €${FEE} di commissioni − 26% di tassa sulla plusvalenza.
+        Con questi importi il pareggio è a <b>+${pareggio.toFixed(1)}%</b>.</div>`}
+   <details><summary class="small" style="cursor:pointer">📄 I casi dietro questo numero (${st.n})</summary>
+     <table class="lst"><tr><th>Titolo</th><th>Data</th><th>Affid.</th><th>Salita</th><th>Perdita</th>
+       <th style="text-align:right">Rendimento</th><th style="text-align:right">Su €${IMP} (netti)</th></tr>
+     ${righe.slice(0,14).map(x=>{const ne=netEur(x.r,IMP,FEE);return `<tr><td><b>${x.c.tk}</b></td><td>${x.c.data}</td>
+        <td>${["🔴 Bassa","🟡 Media","🟢 Alta"][x.c.rel]}</td><td>${x.c.pg}%</td><td>${x.c.pl}%</td>
+        <td style="text-align:right" class="${x.r>=0?'pos':'neg'}">${f1(x.r)}</td>
+        <td style="text-align:right" class="${ne>=0?'pos':'neg'}"><b>${fe(ne)}</b></td></tr>`;}).join("")}
+     </table>${st.n>14?`<div class="small">…e altri ${st.n-14}</div>`:""}
+   </details>`;
+}
+function grafico(cs){
+  const s=SELL[KIND][SEL.s]; chartRule.textContent=s.lab;
+  const W=900,H=300,L=52,R=180,T=16,B=30;
+  if(cs.length<2){ chart.innerHTML=`<text x="20" y="40" fill="#8b949e">Servono almeno 2 casi.</text>`; return; }
+  const serie=BUY.map(b=>{let c=0;return {b,pts:cs.map(x=>{c+=(s.px(x)/b.px(x)-1)*100;return c;})};});
+  const all=serie.flatMap(x=>x.pts).concat([0]);
+  const mn=Math.min(...all), mx=Math.max(...all), pad=(mx-mn)*0.12||1;
+  const X=i=>L+i*(W-L-R)/Math.max(1,cs.length-1);
+  const Y=v=>T+(H-T-B)*(1-(v-(mn-pad))/((mx+pad)-(mn-pad)));
+  let g=`<line x1="${L}" y1="${Y(0)}" x2="${W-R}" y2="${Y(0)}" stroke="#ffffff30" stroke-dasharray="5 5"/>`;
+  [mn,(mn+mx)/2,mx].forEach(v=>{g+=`<text x="${L-8}" y="${Y(v)+4}" fill="#8b949e" font-size="11" text-anchor="end">${v.toFixed(0)}%</text>`;});
+  g+=`<text x="${L}" y="${H-8}" fill="#8b949e" font-size="11">${cs[0].data}</text>
+      <text x="${W-R}" y="${H-8}" fill="#8b949e" font-size="11" text-anchor="end">${cs[cs.length-1].data}</text>`;
+  serie.forEach(sr=>{
+    g+=`<polyline points="${sr.pts.map((v,i)=>X(i)+","+Y(v)).join(" ")}" fill="none" stroke="${sr.b.col}" stroke-width="2.5"/>`;
+    sr.pts.forEach((v,i)=>{g+=`<circle cx="${X(i)}" cy="${Y(v)}" r="3.4" fill="${sr.b.col}" stroke="#13151a" stroke-width="1.5"
+        onmousemove="tp(event,'${sr.b.lab.replace(/'/g,"")}<br>${cs[i].tk} · ${cs[i].data}<br><b>totale ${v.toFixed(1)}%</b>')" onmouseleave="tip.style.display='none'"/>`;});
+    const last=sr.pts[sr.pts.length-1];
+    g+=`<text x="${W-R+10}" y="${Y(last)+4}" fill="${sr.b.col}" font-size="12" font-weight="650">${last>=0?"+":""}${last.toFixed(0)}% · ${sr.b.lab.slice(0,2)}</text>
+        <text x="${W-R+10}" y="${Y(last)+19}" fill="#8b949e" font-size="10.5">${sr.b.lab.replace(/^..\s/,"").slice(0,26)}</text>`;
+  });
+  chart.innerHTML=g;
+}
+function tp(e,html){ tip.innerHTML=html; tip.style.display="block"; tip.style.left=(e.clientX+14)+"px"; tip.style.top=(e.clientY-10)+"px"; }
+function preset(w){
+  if(w==="best"){ fRel.value="2"; fPg.value="60"; fPl.value="10"; fCv.value="0"; }
+  else { fRel.value="0"; fPg.value="0"; fPl.value="100"; fCv.value="0"; }
+  draw();
+}
+document.querySelectorAll("#segKind button").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll("#segKind button").forEach(x=>x.classList.remove("on"));
+  b.classList.add("on"); KIND=b.dataset.k; SEL={b:1,s:KIND==="long"?1:2}; draw();
+});
+draw();
+</script>
+</body>
+</html>
