@@ -14800,9 +14800,7 @@
 }
 ],
 "auto": true,
-"notified": true,
-"warn_since": "2026-08-07",
-"warn": "in perdita da 17 giorni di Borsa: valuta l'uscita"
+"notified": true
 },
 "OEC": {
 "kind": "short",
@@ -30235,9 +30233,7 @@
 }
 ],
 "auto": true,
-"notified": false,
-"warn_since": "2026-08-05",
-"warn": "in perdita da 11 giorni di Borsa: valuta l'uscita"
+"notified": true
 },
 "AXTI": {
 "kind": "short",
@@ -41725,7 +41721,9 @@
 }
 ],
 "auto": true,
-"notified": true
+"notified": true,
+"warn_since": "2026-08-07",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "REPL": {
 "kind": "short",
@@ -42417,9 +42415,7 @@
 }
 ],
 "auto": true,
-"notified": true,
-"warn_since": "2026-08-07",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"notified": true
 },
 "AAUC": {
 "kind": "short",
