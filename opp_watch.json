@@ -2134,6 +2134,16 @@
 "prob_gain": 78,
 "prob_loss": 10,
 "reliab": "🟢 Alta"
+},
+{
+"date": "2026-08-08 05:23",
+"conv": 76,
+"price": 7.94,
+"mkt": 2.4058,
+"occ": 63,
+"prob_gain": 78,
+"prob_loss": 10,
+"reliab": "🟢 Alta"
 }
 ]
 },
@@ -2142,518 +2152,6 @@
 "kind": "long",
 "name": "Newmont Corporation",
 "obs": [
-{
-"date": "2026-07-18 02:11",
-"conv": 79,
-"price": 89.7,
-"mkt": 0.5066,
-"occ": 95,
-"prob_gain": 70
-},
-{
-"date": "2026-07-18 05:36",
-"conv": 77,
-"price": 89.7,
-"mkt": 0.5066,
-"occ": 95,
-"prob_gain": 70
-},
-{
-"date": "2026-07-18 17:39",
-"conv": 78,
-"price": 89.7,
-"mkt": 0.5066,
-"occ": 95,
-"prob_gain": 70
-},
-{
-"date": "2026-07-20 09:31",
-"conv": 79,
-"price": 89.7,
-"mkt": 0.5066,
-"occ": 95,
-"prob_gain": 70
-},
-{
-"date": "2026-07-20 17:15",
-"conv": 80,
-"price": 90.155,
-"mkt": -0.3614,
-"occ": 95,
-"prob_gain": 72
-},
-{
-"date": "2026-07-20 18:48",
-"conv": 81,
-"price": 90.115,
-"mkt": -0.2208,
-"occ": 95,
-"prob_gain": 70
-},
-{
-"date": "2026-07-21 00:43",
-"conv": 83,
-"price": 89.2,
-"mkt": -0.7639,
-"occ": 95,
-"prob_gain": 75
-},
-{
-"date": "2026-07-21 06:35",
-"conv": 81,
-"price": 89.2,
-"mkt": -0.7639,
-"occ": 95,
-"prob_gain": 75
-},
-{
-"date": "2026-07-21 09:23",
-"conv": 82,
-"price": 89.2,
-"mkt": -0.7639,
-"occ": 95,
-"prob_gain": 75
-},
-{
-"date": "2026-07-21 14:02",
-"conv": 83,
-"price": 89.2,
-"mkt": -0.7639,
-"occ": 95,
-"prob_gain": 75
-},
-{
-"date": "2026-07-21 16:26",
-"conv": 81,
-"price": 91.71,
-"mkt": 0.1762,
-"occ": 93,
-"prob_gain": 66
-},
-{
-"date": "2026-07-21 18:04",
-"conv": 80,
-"price": 92.325,
-"mkt": 0.4269,
-"occ": 93,
-"prob_gain": 67
-},
-{
-"date": "2026-07-21 19:47",
-"conv": 80,
-"price": 92.25,
-"mkt": 0.52,
-"occ": 93,
-"prob_gain": 66
-},
-{
-"date": "2026-07-21 21:38",
-"conv": null,
-"price": 91.925,
-"stale": true
-},
-{
-"date": "2026-07-21 22:50",
-"conv": 77,
-"price": 92.49,
-"mkt": 0.4872,
-"occ": 93,
-"prob_gain": 69
-},
-{
-"date": "2026-07-22 00:09",
-"conv": 79,
-"price": 92.49,
-"mkt": 0.4872,
-"occ": 93,
-"prob_gain": 69
-},
-{
-"date": "2026-07-22 01:15",
-"conv": 76,
-"price": 92.49,
-"mkt": 0.4872,
-"occ": 93,
-"prob_gain": 69
-},
-{
-"date": "2026-07-22 05:49",
-"conv": 81,
-"price": 92.49,
-"mkt": 0.4872,
-"occ": 93,
-"prob_gain": 69
-},
-{
-"date": "2026-07-22 11:18",
-"conv": 79,
-"price": 92.49,
-"mkt": 0.4872,
-"occ": 93,
-"prob_gain": 69
-},
-{
-"date": "2026-07-22 13:26",
-"conv": 80,
-"price": 92.49,
-"mkt": 0.4872,
-"occ": 93,
-"prob_gain": 69
-},
-{
-"date": "2026-07-22 17:19",
-"conv": 72,
-"price": 96.44,
-"mkt": 1.993,
-"occ": 86,
-"prob_gain": 64
-},
-{
-"date": "2026-07-22 18:58",
-"conv": 72,
-"price": 95.69,
-"mkt": 2.1661,
-"occ": 87,
-"prob_gain": 64
-},
-{
-"date": "2026-07-22 20:16",
-"conv": 80,
-"price": 95.35,
-"mkt": 1.908,
-"occ": 90,
-"prob_gain": 66
-},
-{
-"date": "2026-07-22 21:51",
-"conv": 83,
-"price": 95.63,
-"mkt": 1.8231,
-"occ": 90,
-"prob_gain": 64
-},
-{
-"date": "2026-07-22 23:15",
-"conv": 73,
-"price": 95.75,
-"mkt": 1.8125,
-"occ": 86,
-"prob_gain": 67
-},
-{
-"date": "2026-07-23 00:19",
-"conv": 75,
-"price": 95.75,
-"mkt": 1.8125,
-"occ": 90,
-"prob_gain": 67
-},
-{
-"date": "2026-07-23 03:16",
-"conv": 82,
-"price": 95.75,
-"mkt": 1.8125,
-"occ": 90,
-"prob_gain": 67
-},
-{
-"date": "2026-07-23 06:42",
-"conv": 80,
-"price": 95.75,
-"mkt": 1.8125,
-"occ": 90,
-"prob_gain": 67
-},
-{
-"date": "2026-07-23 12:01",
-"conv": 81,
-"price": 95.75,
-"mkt": 1.8125,
-"occ": 90,
-"prob_gain": 67
-},
-{
-"date": "2026-07-23 14:04",
-"conv": 80,
-"price": 95.75,
-"mkt": 1.8125,
-"occ": 90,
-"prob_gain": 67
-},
-{
-"date": "2026-07-23 16:35",
-"conv": 79,
-"price": 94.225,
-"mkt": 0.7688,
-"occ": 91,
-"prob_gain": 63
-},
-{
-"date": "2026-07-23 18:17",
-"conv": 68,
-"price": 94.15,
-"mkt": 0.7191,
-"occ": 88,
-"prob_gain": 68
-},
-{
-"date": "2026-07-23 19:52",
-"conv": 77,
-"price": 94.27,
-"mkt": 0.6319,
-"occ": 91,
-"prob_gain": 69
-},
-{
-"date": "2026-07-23 21:25",
-"conv": null,
-"price": 94.495,
-"stale": true
-},
-{
-"date": "2026-07-23 22:38",
-"conv": 75,
-"price": 94.72,
-"mkt": 0.6806,
-"occ": 91,
-"prob_gain": 66
-},
-{
-"date": "2026-07-23 23:47",
-"conv": 76,
-"price": 94.72,
-"mkt": 0.6806,
-"occ": 91,
-"prob_gain": 66
-},
-{
-"date": "2026-07-24 01:44",
-"conv": 74,
-"price": 94.72,
-"mkt": 0.6806,
-"occ": 91,
-"prob_gain": 66
-},
-{
-"date": "2026-07-24 03:13",
-"conv": 76,
-"price": 94.72,
-"mkt": 0.6806,
-"occ": 91,
-"prob_gain": 66
-},
-{
-"date": "2026-07-24 09:21",
-"conv": 77,
-"price": 94.72,
-"mkt": 0.6806,
-"occ": 91,
-"prob_gain": 66
-},
-{
-"date": "2026-07-24 12:00",
-"conv": 74,
-"price": 94.72,
-"mkt": 0.6806,
-"occ": 91,
-"prob_gain": 66
-},
-{
-"date": "2026-07-24 13:50",
-"conv": 76,
-"price": 94.72,
-"mkt": 0.6806,
-"occ": 91,
-"prob_gain": 66
-},
-{
-"date": "2026-07-24 15:54",
-"conv": 75,
-"price": 94.18,
-"mkt": 0.6153,
-"occ": 91,
-"prob_gain": 64
-},
-{
-"date": "2026-07-24 17:29",
-"conv": 76,
-"price": 95.05,
-"mkt": 1.3166,
-"occ": 90,
-"prob_gain": 65
-},
-{
-"date": "2026-07-24 19:10",
-"conv": 75,
-"price": 94.089,
-"mkt": 0.965,
-"occ": 91,
-"prob_gain": 67
-},
-{
-"date": "2026-07-24 20:47",
-"conv": 78,
-"price": 93.085,
-"mkt": 0.689,
-"occ": 92,
-"prob_gain": 66
-},
-{
-"date": "2026-07-24 22:24",
-"conv": null,
-"price": 93.19,
-"stale": true
-},
-{
-"date": "2026-07-24 23:39",
-"conv": 78,
-"price": 93.19,
-"mkt": 0.7406,
-"occ": 92,
-"prob_gain": 72
-},
-{
-"date": "2026-07-25 04:58",
-"conv": 77,
-"price": 93.19,
-"mkt": 0.7406,
-"occ": 92,
-"prob_gain": 72
-},
-{
-"date": "2026-07-25 12:04",
-"conv": 75,
-"price": 94.72,
-"mkt": 0.6806,
-"occ": 91,
-"prob_gain": 70
-},
-{
-"date": "2026-07-25 13:36",
-"conv": 77,
-"price": 93.19,
-"mkt": 0.7406,
-"occ": 92,
-"prob_gain": 72
-},
-{
-"date": "2026-07-25 16:41",
-"conv": 75,
-"price": 94.72,
-"mkt": 0.6806,
-"occ": 91,
-"prob_gain": 70
-},
-{
-"date": "2026-07-25 20:10",
-"conv": 77,
-"price": 93.19,
-"mkt": 0.7406,
-"occ": 92,
-"prob_gain": 72
-},
-{
-"date": "2026-07-25 21:38",
-"conv": null,
-"price": 94.72,
-"stale": true
-},
-{
-"date": "2026-07-25 23:39",
-"conv": 77,
-"price": 93.19,
-"mkt": 0.7406,
-"occ": 92,
-"prob_gain": 72
-},
-{
-"date": "2026-07-26 03:19",
-"conv": 75,
-"price": 94.72,
-"mkt": 0.6806,
-"occ": 91,
-"prob_gain": 70
-},
-{
-"date": "2026-07-26 07:02",
-"conv": 77,
-"price": 93.19,
-"mkt": 0.7406,
-"occ": 92,
-"prob_gain": 72
-},
-{
-"date": "2026-07-26 11:49",
-"conv": 77,
-"price": 94.72,
-"mkt": 0.6806,
-"occ": 91,
-"prob_gain": 70
-},
-{
-"date": "2026-07-26 14:41",
-"conv": 75,
-"price": 94.72,
-"mkt": 0.6806,
-"occ": 91,
-"prob_gain": 70
-},
-{
-"date": "2026-07-26 16:19",
-"conv": 76,
-"price": 93.19,
-"mkt": 0.7406,
-"occ": 92,
-"prob_gain": 72
-},
-{
-"date": "2026-07-26 17:42",
-"conv": 77,
-"price": 93.19,
-"mkt": 0.7406,
-"occ": 92,
-"prob_gain": 72
-},
-{
-"date": "2026-07-26 20:48",
-"conv": 75,
-"price": 94.72,
-"mkt": 0.6806,
-"occ": 91,
-"prob_gain": 70
-},
-{
-"date": "2026-07-26 22:14",
-"conv": 76,
-"price": 93.19,
-"mkt": 0.7407,
-"occ": 92,
-"prob_gain": 72
-},
-{
-"date": "2026-07-26 23:15",
-"conv": 77,
-"price": 93.19,
-"mkt": 0.7406,
-"occ": 92,
-"prob_gain": 72
-},
-{
-"date": "2026-07-27 01:32",
-"conv": 74,
-"price": 93.19,
-"mkt": 0.7406,
-"occ": 92,
-"prob_gain": 72
-},
-{
-"date": "2026-07-27 03:15",
-"conv": 76,
-"price": 94.72,
-"mkt": 0.6806,
-"occ": 91,
-"prob_gain": 70
-},
 {
 "date": "2026-07-27 06:56",
 "conv": 77,
@@ -2883,6 +2381,16 @@
 "mkt": -2.443,
 "occ": 94,
 "prob_gain": 64
+},
+{
+"date": "2026-08-08 05:23",
+"conv": 64,
+"price": 112.98,
+"mkt": 2.4058,
+"occ": 76,
+"prob_gain": 56,
+"prob_loss": 29,
+"reliab": "🟡 Media"
 }
 ]
 },
@@ -4079,6 +3587,16 @@
 {
 "date": "2026-08-08 03:42",
 "conv": 51,
+"price": 17.39,
+"mkt": 2.4058,
+"occ": 90,
+"prob_gain": 56,
+"prob_loss": 34,
+"reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-08 05:23",
+"conv": 57,
 "price": 17.39,
 "mkt": 2.4058,
 "occ": 90,
@@ -5990,6 +5508,16 @@
 "prob_gain": 56,
 "prob_loss": 38,
 "reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-08 05:23",
+"conv": 49,
+"price": 31.13,
+"mkt": 2.4058,
+"occ": 84,
+"prob_gain": 56,
+"prob_loss": 38,
+"reliab": "🔴 Bassa"
 }
 ]
 },
@@ -6869,6 +6397,16 @@
 {
 "date": "2026-08-08 03:42",
 "conv": 37,
+"price": 13.26,
+"mkt": 2.4058,
+"occ": 66,
+"prob_gain": 57,
+"prob_loss": 37,
+"reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-08 05:23",
+"conv": 42,
 "price": 13.26,
 "mkt": 2.4058,
 "occ": 66,
@@ -7948,6 +7486,16 @@
 {
 "date": "2026-08-08 03:42",
 "conv": 60,
+"price": 23.79,
+"mkt": 2.4058,
+"occ": 62,
+"prob_gain": 70,
+"prob_loss": 14,
+"reliab": "🟢 Alta"
+},
+{
+"date": "2026-08-08 05:23",
+"conv": 65,
 "price": 23.79,
 "mkt": 2.4058,
 "occ": 62,
@@ -10777,6 +10325,16 @@
 "prob_gain": 63,
 "prob_loss": 25,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-08-08 05:23",
+"conv": 58,
+"price": 4.87,
+"mkt": 2.4058,
+"occ": 66,
+"prob_gain": 61,
+"prob_loss": 26,
+"reliab": "🟡 Media"
 }
 ]
 },
@@ -10785,14 +10343,6 @@
 "kind": "long",
 "name": "FERRARI",
 "obs": [
-{
-"date": "2026-07-27 03:15",
-"conv": 25,
-"price": 318.15,
-"mkt": 0.6806,
-"occ": 68,
-"prob_gain": 64
-},
 {
 "date": "2026-07-27 06:56",
 "conv": 23,
@@ -11762,6 +11312,16 @@
 "prob_gain": 57,
 "prob_loss": 26,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-08-08 05:23",
+"conv": 27,
+"price": 355.7,
+"mkt": 2.4058,
+"occ": 59,
+"prob_gain": 59,
+"prob_loss": 24,
+"reliab": "🟡 Media"
 }
 ]
 },
@@ -12178,14 +11738,6 @@
 "kind": "long",
 "name": "Carnival Corp",
 "obs": [
-{
-"date": "2026-07-27 03:15",
-"conv": 59,
-"price": 26.33,
-"mkt": 0.6806,
-"occ": 63,
-"prob_gain": 67
-},
 {
 "date": "2026-07-27 06:56",
 "conv": 58,
@@ -13205,6 +12757,16 @@
 "prob_gain": 62,
 "prob_loss": 27,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-08-08 05:23",
+"conv": 53,
+"price": 28.99,
+"mkt": 2.4058,
+"occ": 54,
+"prob_gain": 62,
+"prob_loss": 27,
+"reliab": "🟡 Media"
 }
 ]
 },
@@ -13497,7 +13059,7 @@
 "long:PBR-A": {
 "ticker": "PBR-A",
 "kind": "long",
-"name": "Petroleo Brasileiro SA Petrobras",
+"name": "PETROBRAS - PETROLEO BRASILEIRO SA",
 "obs": [
 {
 "date": "2026-08-08 03:42",
@@ -13508,13 +13070,23 @@
 "prob_gain": 69,
 "prob_loss": 15,
 "reliab": "🟢 Alta"
+},
+{
+"date": "2026-08-08 05:23",
+"conv": 90,
+"price": 16.06,
+"mkt": 2.4058,
+"occ": 79,
+"prob_gain": 85,
+"prob_loss": 6,
+"reliab": "🟢 Alta"
 }
 ]
 },
 "long:KGC": {
 "ticker": "KGC",
 "kind": "long",
-"name": "Kinross Gold Corp",
+"name": "Kinross Gold Corporation",
 "obs": [
 {
 "date": "2026-07-30 06:23",
@@ -14064,6 +13636,16 @@
 "price": 27.64,
 "mkt": 2.4058,
 "occ": 89,
+"prob_gain": 55,
+"prob_loss": 35,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-08-08 05:23",
+"conv": 67,
+"price": 27.64,
+"mkt": 2.4058,
+"occ": 91,
 "prob_gain": 55,
 "prob_loss": 35,
 "reliab": "🟡 Media"
@@ -55969,6 +55551,16 @@
 "prob_gain": 69,
 "prob_loss": 16,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-08-08 05:23",
+"conv": 35,
+"price": 24.21,
+"mkt": 2.4058,
+"occ": 56,
+"prob_gain": 69,
+"prob_loss": 16,
+"reliab": "🟡 Media"
 }
 ]
 },
@@ -57390,6 +56982,16 @@
 {
 "date": "2026-08-08 03:42",
 "conv": 64,
+"price": 33.15,
+"mkt": 2.4058,
+"occ": 100,
+"prob_gain": 59,
+"prob_loss": 30,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-08-08 05:23",
+"conv": 70,
 "price": 33.15,
 "mkt": 2.4058,
 "occ": 100,
@@ -63545,6 +63147,16 @@
 "prob_gain": 66,
 "prob_loss": 22,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-08-08 05:23",
+"conv": 49,
+"price": 23.85,
+"mkt": 2.4058,
+"occ": 71,
+"prob_gain": 66,
+"prob_loss": 22,
+"reliab": "🟡 Media"
 }
 ]
 },
@@ -64262,6 +63874,16 @@
 {
 "date": "2026-08-08 03:42",
 "conv": 53,
+"price": 27.39,
+"mkt": 2.4058,
+"occ": 64,
+"prob_gain": 56,
+"prob_loss": 33,
+"reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-08 05:23",
+"conv": 54,
 "price": 27.39,
 "mkt": 2.4058,
 "occ": 64,
@@ -65643,6 +65265,16 @@
 "prob_gain": 68,
 "prob_loss": 24,
 "reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-08 05:23",
+"conv": 64,
+"price": 346.8,
+"mkt": 2.4058,
+"occ": 84,
+"prob_gain": 68,
+"prob_loss": 24,
+"reliab": "🔴 Bassa"
 }
 ]
 },
@@ -65791,6 +65423,16 @@
 {
 "date": "2026-08-08 03:42",
 "conv": 73,
+"price": 13.8,
+"mkt": 2.4058,
+"occ": 94,
+"prob_gain": 83,
+"prob_loss": 9,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-08-08 05:23",
+"conv": 76,
 "price": 13.8,
 "mkt": 2.4058,
 "occ": 94,
@@ -65981,6 +65623,23 @@
 "occ": 93,
 "prob_gain": 61,
 "prob_loss": 12,
+"reliab": "🔴 Bassa"
+}
+]
+},
+"long:SEZL": {
+"ticker": "SEZL",
+"kind": "long",
+"name": "Sezzle Inc",
+"obs": [
+{
+"date": "2026-08-08 05:23",
+"conv": 60,
+"price": 118.02,
+"mkt": 2.4058,
+"occ": 90,
+"prob_gain": 78,
+"prob_loss": 16,
 "reliab": "🔴 Bassa"
 }
 ]
