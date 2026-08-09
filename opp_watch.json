@@ -2363,14 +2363,6 @@
 "name": "Newmont Corporation",
 "obs": [
 {
-"date": "2026-07-28 19:13",
-"conv": 79,
-"price": 92.115,
-"mkt": 1.1734,
-"occ": 94,
-"prob_gain": 70
-},
-{
 "date": "2026-07-28 20:49",
 "conv": 79,
 "price": 91.48,
@@ -2583,6 +2575,16 @@
 {
 "date": "2026-08-09 18:34",
 "conv": 60,
+"price": 112.98,
+"mkt": 2.4058,
+"occ": 76,
+"prob_gain": 56,
+"prob_loss": 29,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-08-09 20:01",
+"conv": 59,
 "price": 112.98,
 "mkt": 2.4058,
 "occ": 76,
@@ -2868,30 +2870,6 @@
 "kind": "long",
 "name": "Coeur Mining, Inc",
 "obs": [
-{
-"date": "2026-07-28 15:03",
-"conv": 58,
-"price": 15.36,
-"mkt": 0.8045,
-"occ": 97,
-"prob_gain": 58
-},
-{
-"date": "2026-07-28 17:37",
-"conv": 65,
-"price": 15.0301,
-"mkt": 0.0058,
-"occ": 97,
-"prob_gain": 60
-},
-{
-"date": "2026-07-28 19:13",
-"conv": 65,
-"price": 15.015,
-"mkt": 1.1734,
-"occ": 97,
-"prob_gain": 63
-},
 {
 "date": "2026-07-28 20:49",
 "conv": 65,
@@ -3875,6 +3853,16 @@
 {
 "date": "2026-08-09 13:56",
 "conv": 51,
+"price": 17.39,
+"mkt": 2.4058,
+"occ": 90,
+"prob_gain": 56,
+"prob_loss": 34,
+"reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-09 20:01",
+"conv": 50,
 "price": 17.39,
 "mkt": 2.4058,
 "occ": 90,
@@ -12437,14 +12425,6 @@
 "name": "Carnival Corp",
 "obs": [
 {
-"date": "2026-07-28 19:13",
-"conv": 47,
-"price": 28.2103,
-"mkt": 1.1734,
-"occ": 57,
-"prob_gain": 63
-},
-{
 "date": "2026-07-28 20:49",
 "conv": 46,
 "price": 28.03,
@@ -13555,6 +13535,16 @@
 "prob_gain": 62,
 "prob_loss": 27,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-08-09 20:01",
+"conv": 47,
+"price": 28.99,
+"mkt": 2.4058,
+"occ": 54,
+"prob_gain": 62,
+"prob_loss": 27,
+"reliab": "🟡 Media"
 }
 ]
 },
@@ -14094,7 +14084,7 @@
 "long:KGC": {
 "ticker": "KGC",
 "kind": "long",
-"name": "Kinross Gold Corp",
+"name": "Kinross Gold Corporation",
 "obs": [
 {
 "date": "2026-07-30 06:23",
@@ -14864,6 +14854,16 @@
 "price": 27.64,
 "mkt": 2.4058,
 "occ": 89,
+"prob_gain": 55,
+"prob_loss": 35,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-08-09 20:01",
+"conv": 61,
+"price": 27.64,
+"mkt": 2.4058,
+"occ": 91,
 "prob_gain": 55,
 "prob_loss": 35,
 "reliab": "🟡 Media"
@@ -32698,18 +32698,6 @@
 "name": "Micron Technology Inc",
 "obs": [
 {
-"date": "2026-07-28 17:37",
-"conv": null,
-"price": 821.95,
-"stale": true
-},
-{
-"date": "2026-07-28 19:13",
-"conv": null,
-"price": 818.92,
-"stale": true
-},
-{
 "date": "2026-07-28 20:49",
 "conv": null,
 "price": 818.525,
@@ -33444,6 +33432,16 @@
 {
 "date": "2026-08-09 13:56",
 "conv": 53,
+"price": 877.57,
+"mkt": 2.4058,
+"occ": 77,
+"prob_gain": 52,
+"prob_loss": 39,
+"reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-09 20:01",
+"conv": 52,
 "price": 877.57,
 "mkt": 2.4058,
 "occ": 77,
@@ -57141,6 +57139,16 @@
 "prob_gain": 69,
 "prob_loss": 16,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-08-09 20:01",
+"conv": 28,
+"price": 24.21,
+"mkt": 2.4058,
+"occ": 57,
+"prob_gain": 69,
+"prob_loss": 16,
+"reliab": "🟡 Media"
 }
 ]
 },
@@ -58762,6 +58770,16 @@
 {
 "date": "2026-08-09 18:34",
 "conv": 64,
+"price": 33.15,
+"mkt": 2.4058,
+"occ": 100,
+"prob_gain": 59,
+"prob_loss": 30,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-08-09 20:01",
+"conv": 63,
 "price": 33.15,
 "mkt": 2.4058,
 "occ": 100,
@@ -67136,6 +67154,16 @@
 "prob_gain": 56,
 "prob_loss": 33,
 "reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-09 20:01",
+"conv": 48,
+"price": 27.39,
+"mkt": 2.4058,
+"occ": 64,
+"prob_gain": 56,
+"prob_loss": 33,
+"reliab": "🔴 Bassa"
 }
 ]
 },
@@ -70884,6 +70912,33 @@
 "prob_gain": 75,
 "prob_loss": 18,
 "reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-09 20:01",
+"conv": 65,
+"price": 434.3,
+"mkt": 2.4058,
+"occ": 87,
+"prob_gain": 75,
+"prob_loss": 18,
+"reliab": "🔴 Bassa"
+}
+]
+},
+"long:OXY": {
+"ticker": "OXY",
+"kind": "long",
+"name": "Occidental Petroleum Corp",
+"obs": [
+{
+"date": "2026-08-09 20:01",
+"conv": 61,
+"price": 55.91,
+"mkt": 2.4058,
+"occ": 62,
+"prob_gain": 59,
+"prob_loss": 26,
+"reliab": "🟡 Media"
 }
 ]
 }
