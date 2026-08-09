@@ -5840,6 +5840,16 @@
 "prob_gain": 56,
 "prob_loss": 38,
 "reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-09 22:00",
+"conv": 41,
+"price": 31.13,
+"mkt": 2.4058,
+"occ": 84,
+"prob_gain": 56,
+"prob_loss": 38,
+"reliab": "🔴 Bassa"
 }
 ]
 },
@@ -6841,13 +6851,23 @@
 "prob_gain": 57,
 "prob_loss": 37,
 "reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-09 22:00",
+"conv": 40,
+"price": 13.26,
+"mkt": 2.4058,
+"occ": 66,
+"prob_gain": 57,
+"prob_loss": 37,
+"reliab": "🔴 Bassa"
 }
 ]
 },
 "long:T": {
 "ticker": "T",
 "kind": "long",
-"name": "AT&T Inc.",
+"name": "AT&T Inc",
 "obs": [
 {
 "date": "2026-07-28 22:20",
@@ -8008,6 +8028,16 @@
 {
 "date": "2026-08-09 20:53",
 "conv": 58,
+"price": 23.79,
+"mkt": 2.4058,
+"occ": 62,
+"prob_gain": 70,
+"prob_loss": 14,
+"reliab": "🟢 Alta"
+},
+{
+"date": "2026-08-09 22:00",
+"conv": 56,
 "price": 23.79,
 "mkt": 2.4058,
 "occ": 62,
@@ -10967,6 +10997,16 @@
 "prob_gain": 61,
 "prob_loss": 28,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-08-09 22:00",
+"conv": 44,
+"price": 4.789,
+"mkt": 2.4058,
+"occ": 66,
+"prob_gain": 61,
+"prob_loss": 28,
+"reliab": "🟡 Media"
 }
 ]
 },
@@ -12032,6 +12072,16 @@
 "prob_gain": 57,
 "prob_loss": 27,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-08-09 22:00",
+"conv": 22,
+"price": 355.65,
+"mkt": 2.4058,
+"occ": 59,
+"prob_gain": 59,
+"prob_loss": 23,
+"reliab": "🟡 Media"
 }
 ]
 },
@@ -12446,7 +12496,7 @@
 "long:CCL": {
 "ticker": "CCL",
 "kind": "long",
-"name": "Carnival Corporation & plc",
+"name": "Carnival Corp",
 "obs": [
 {
 "date": "2026-07-28 22:20",
@@ -13863,7 +13913,7 @@
 "long:PBR-A": {
 "ticker": "PBR-A",
 "kind": "long",
-"name": "Petroleo Brasileiro SA Petrobras",
+"name": "PETROBRAS - PETROLEO BRASILEIRO SA",
 "obs": [
 {
 "date": "2026-08-08 03:42",
@@ -14108,6 +14158,16 @@
 {
 "date": "2026-08-09 20:53",
 "conv": 89,
+"price": 16.06,
+"mkt": 2.4058,
+"occ": 79,
+"prob_gain": 85,
+"prob_loss": 6,
+"reliab": "🟢 Alta"
+},
+{
+"date": "2026-08-09 22:00",
+"conv": 87,
 "price": 16.06,
 "mkt": 2.4058,
 "occ": 79,
@@ -56130,7 +56190,7 @@
 "long:RTO": {
 "ticker": "RTO",
 "kind": "long",
-"name": "Rentokil Initial PLC",
+"name": "Rentokil Initial plc",
 "obs": [
 {
 "date": "2026-07-30 16:12",
@@ -57923,7 +57983,7 @@
 "long:AGI": {
 "ticker": "AGI",
 "kind": "long",
-"name": "Alamos Gold Inc",
+"name": "Alamos Gold Inc.",
 "obs": [
 {
 "date": "2026-07-31 09:40",
@@ -66951,7 +67011,7 @@
 "long:TDC": {
 "ticker": "TDC",
 "kind": "long",
-"name": "Teradata Corp",
+"name": "TERADATA CORPORATION",
 "obs": [
 {
 "date": "2026-08-05 17:42",
@@ -69586,7 +69646,7 @@
 "long:APP": {
 "ticker": "APP",
 "kind": "long",
-"name": "Applovin Corp",
+"name": "AppLovin Corporation",
 "obs": [
 {
 "date": "2026-08-07 05:18",
@@ -70190,7 +70250,7 @@
 "long:TTD": {
 "ticker": "TTD",
 "kind": "long",
-"name": "Trade Desk Inc",
+"name": "TRADE DESK, INC.",
 "obs": [
 {
 "date": "2026-08-07 15:55",
