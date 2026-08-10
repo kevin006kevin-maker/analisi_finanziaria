@@ -9264,9 +9264,7 @@
 }
 ],
 "auto": true,
-"notified": true,
-"warn_since": "2026-08-08",
-"warn": "in perdita da 22 giorni di Borsa: valuta l'uscita"
+"notified": true
 },
 "BBD": {
 "kind": "long",
@@ -11214,7 +11212,7 @@
 "auto": true,
 "notified": false,
 "warn_since": "2026-07-29",
-"warn": "in perdita da 21 giorni di Borsa: valuta l'uscita"
+"warn": "sceso sotto lo stop (−2×ATR): valuta l'uscita"
 },
 "KGC": {
 "kind": "long",
@@ -40235,7 +40233,7 @@
 }
 ],
 "auto": true,
-"notified": false
+"notified": true
 },
 "GOOGL": {
 "kind": "short",
@@ -44895,7 +44893,7 @@
 }
 ],
 "auto": true,
-"notified": false
+"notified": true
 },
 "SNDK": {
 "kind": "short",
@@ -48869,7 +48867,9 @@
 }
 ],
 "auto": true,
-"notified": false
+"notified": false,
+"warn_since": "2026-08-10",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "EEM": {
 "kind": "short",
@@ -53963,7 +53963,7 @@
 }
 ],
 "auto": true,
-"notified": false
+"notified": true
 },
 "BIOA": {
 "kind": "short",
@@ -54399,7 +54399,7 @@
 }
 ],
 "auto": true,
-"notified": false
+"notified": true
 },
 "ORCL-PD": {
 "kind": "short",
