@@ -3986,6 +3986,16 @@
 "prob_gain": 52,
 "prob_loss": 38,
 "reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-10 22:39",
+"conv": 49,
+"price": 18.15,
+"mkt": 3.1638,
+"occ": 87,
+"prob_gain": 52,
+"prob_loss": 39,
+"reliab": "🔴 Bassa"
 }
 ]
 },
@@ -4793,6 +4803,16 @@
 "mkt": 3.1571,
 "occ": 63,
 "prob_gain": 77,
+"prob_loss": 10,
+"reliab": "🟢 Alta"
+},
+{
+"date": "2026-08-10 22:39",
+"conv": 80,
+"price": 3.33,
+"mkt": 3.1638,
+"occ": 63,
+"prob_gain": 76,
 "prob_loss": 10,
 "reliab": "🟢 Alta"
 }
@@ -5983,6 +6003,16 @@
 "prob_gain": 54,
 "prob_loss": 38,
 "reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-10 22:39",
+"conv": 40,
+"price": 31.46,
+"mkt": 3.1638,
+"occ": 84,
+"prob_gain": 54,
+"prob_loss": 38,
+"reliab": "🔴 Bassa"
 }
 ]
 },
@@ -7004,13 +7034,23 @@
 "prob_gain": 52,
 "prob_loss": 42,
 "reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-10 22:39",
+"conv": 30,
+"price": 14.26,
+"mkt": 3.1638,
+"occ": 59,
+"prob_gain": 52,
+"prob_loss": 39,
+"reliab": "🔴 Bassa"
 }
 ]
 },
 "long:T": {
 "ticker": "T",
 "kind": "long",
-"name": "AT&T Inc.",
+"name": "AT&T Inc",
 "obs": [
 {
 "date": "2026-07-29 22:39",
@@ -12533,7 +12573,7 @@
 "long:CCL": {
 "ticker": "CCL",
 "kind": "long",
-"name": "Carnival Corporation & plc",
+"name": "Carnival Corp",
 "obs": [
 {
 "date": "2026-07-29 22:39",
@@ -13974,7 +14014,7 @@
 "long:PBR-A": {
 "ticker": "PBR-A",
 "kind": "long",
-"name": "Petroleo Brasileiro SA Petrobras",
+"name": "PETROBRAS - PETROLEO BRASILEIRO SA",
 "obs": [
 {
 "date": "2026-08-08 03:42",
@@ -14321,7 +14361,7 @@
 "long:KGC": {
 "ticker": "KGC",
 "kind": "long",
-"name": "Kinross Gold Corp",
+"name": "Kinross Gold Corporation",
 "obs": [
 {
 "date": "2026-07-30 06:23",
@@ -56629,7 +56669,7 @@
 "long:RTO": {
 "ticker": "RTO",
 "kind": "long",
-"name": "Rentokil Initial PLC",
+"name": "Rentokil Initial plc",
 "obs": [
 {
 "date": "2026-07-30 16:12",
@@ -58542,7 +58582,7 @@
 "long:AGI": {
 "ticker": "AGI",
 "kind": "long",
-"name": "Alamos Gold Inc",
+"name": "Alamos Gold Inc.",
 "obs": [
 {
 "date": "2026-07-31 09:40",
@@ -68172,7 +68212,7 @@
 "long:TDC": {
 "ticker": "TDC",
 "kind": "long",
-"name": "Teradata Corp",
+"name": "TERADATA CORPORATION",
 "obs": [
 {
 "date": "2026-08-05 17:42",
@@ -71559,7 +71599,7 @@
 "long:APP": {
 "ticker": "APP",
 "kind": "long",
-"name": "Applovin Corp",
+"name": "AppLovin Corporation",
 "obs": [
 {
 "date": "2026-08-07 05:18",
@@ -72363,7 +72403,7 @@
 "long:TTD": {
 "ticker": "TTD",
 "kind": "long",
-"name": "Trade Desk Inc",
+"name": "TRADE DESK, INC.",
 "obs": [
 {
 "date": "2026-08-07 15:55",
