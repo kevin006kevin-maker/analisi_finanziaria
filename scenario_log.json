@@ -10,8 +10,11 @@
 "stop": 16.2113,
 "res": {
 "osservazione|7g": 1.32,
-"promozione|7g": -0.73
-}
+"promozione|7g": -0.73,
+"conferma|7g": -0.2
+},
+"conf_price": 17.905000686645508,
+"conf_date": "2026-08-10"
 },
 {
 "ticker": "QS",
@@ -310,15 +313,20 @@
 "obs_date": "2026-07-29",
 "pre_price": 17.03,
 "pre_date": "2026-07-30",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 21.56999969482422,
+"conf_date": "2026-08-10",
 "target": 23.7866,
 "stop": 15.8735,
 "reliab": "🟡 Media",
 "prob_gain": 53,
 "prob_loss": 10,
 "conv": 80,
-"res": {}
+"res": {
+"anticipo|7g": 26.66,
+"osservazione|7g": 25.55,
+"promozione|7g": 18.32,
+"conferma|7g": 0.0
+}
 },
 {
 "ticker": "VRTL",
@@ -329,15 +337,20 @@
 "obs_date": "2026-07-29",
 "pre_price": 21.2649,
 "pre_date": "2026-07-30",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 30.390100479125977,
+"conf_date": "2026-08-10",
 "target": 44.553,
 "stop": 13.6159,
 "reliab": "🔴 Bassa",
 "prob_gain": 56,
 "prob_loss": 26,
 "conv": 68,
-"res": {}
+"res": {
+"anticipo|7g": 42.91,
+"osservazione|7g": 42.81,
+"promozione|7g": 22.36,
+"conferma|7g": 0.0
+}
 },
 {
 "ticker": "AGNC",
@@ -356,7 +369,11 @@
 "prob_gain": 85,
 "prob_loss": 3,
 "conv": 65,
-"res": {}
+"res": {
+"anticipo|7g": 0.99,
+"osservazione|7g": 2.04,
+"promozione|7g": -0.09
+}
 },
 {
 "ticker": "SMH",
@@ -367,15 +384,20 @@
 "obs_date": "2026-07-29",
 "pre_price": 504.22,
 "pre_date": "2026-07-30",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 578.7899780273438,
+"conf_date": "2026-08-10",
 "target": 595.5206,
 "stop": 478.1414,
 "reliab": "🟡 Media",
 "prob_gain": 48,
 "prob_loss": 4,
 "conv": 66,
-"res": {}
+"res": {
+"anticipo|7g": 14.79,
+"osservazione|7g": 12.79,
+"promozione|7g": 8.75,
+"conferma|7g": 0.0
+}
 },
 {
 "ticker": "DIS",
@@ -394,7 +416,10 @@
 "prob_gain": 85,
 "prob_loss": 2,
 "conv": 67,
-"res": {}
+"res": {
+"osservazione|7g": 11.54,
+"promozione|7g": 5.24
+}
 },
 {
 "ticker": "SANM",
@@ -405,15 +430,19 @@
 "obs_date": "2026-07-29",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 202.8699951171875,
+"conf_date": "2026-08-10",
 "target": 230.6882,
 "stop": 152.4486,
 "reliab": "🔴 Bassa",
 "prob_gain": 48,
 "prob_loss": 20,
 "conv": 64,
-"res": {}
+"res": {
+"osservazione|7g": 17.65,
+"promozione|7g": 10.11,
+"conferma|7g": 0.0
+}
 },
 {
 "ticker": "PSN",
@@ -424,15 +453,19 @@
 "obs_date": "2026-07-29",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 46.369998931884766,
+"conf_date": "2026-08-10",
 "target": 54.8684,
 "stop": 39.2443,
 "reliab": "🔴 Bassa",
 "prob_gain": 53,
 "prob_loss": 16,
 "conv": 70,
-"res": {}
+"res": {
+"osservazione|7g": 24.75,
+"promozione|7g": -1.34,
+"conferma|7g": 0.0
+}
 },
 {
 "ticker": "EEM",
@@ -443,15 +476,19 @@
 "obs_date": "2026-07-29",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 65.13500213623047,
+"conf_date": "2026-08-10",
 "target": 66.5041,
 "stop": 60.5044,
 "reliab": "🟢 Alta",
 "prob_gain": 52,
 "prob_loss": 0,
 "conv": 61,
-"res": {}
+"res": {
+"osservazione|7g": 6.6,
+"promozione|7g": 2.28,
+"conferma|7g": 0.0
+}
 },
 {
 "ticker": "WSO",
@@ -462,15 +499,20 @@
 "obs_date": "2026-07-29",
 "pre_price": 310.73,
 "pre_date": "2026-07-31",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 329.32501220703125,
+"conf_date": "2026-08-10",
 "target": 377.3353,
 "stop": 286.3337,
 "reliab": "🟢 Alta",
 "prob_gain": 50,
 "prob_loss": 3,
 "conv": 82,
-"res": {}
+"res": {
+"anticipo|7g": 5.98,
+"osservazione|7g": 6.75,
+"promozione|7g": 4.16,
+"conferma|7g": 0.0
+}
 },
 {
 "ticker": "QQQ",
@@ -481,15 +523,20 @@
 "obs_date": "2026-07-29",
 "pre_price": 661.73,
 "pre_date": "2026-07-30",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 722.1099853515625,
+"conf_date": "2026-08-10",
 "target": 714.6804,
 "stop": 663.3203,
 "reliab": "🟢 Alta",
 "prob_gain": 48,
 "prob_loss": 0,
 "conv": 58,
-"res": {}
+"res": {
+"anticipo|7g": 9.12,
+"osservazione|7g": 8.46,
+"promozione|7g": 4.24,
+"conferma|7g": 0.0
+}
 },
 {
 "ticker": "SOXL",
@@ -520,15 +567,19 @@
 "obs_date": "2026-07-29",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 187.77000427246094,
+"conf_date": "2026-08-10",
 "target": 182.9316,
 "stop": 164.3968,
 "reliab": "🟢 Alta",
 "prob_gain": 45,
 "prob_loss": 0,
 "conv": 60,
-"res": {}
+"res": {
+"osservazione|7g": 12.73,
+"promozione|7g": 7.17,
+"conferma|7g": 0.0
+}
 },
 {
 "ticker": "NVTS",
@@ -539,15 +590,19 @@
 "obs_date": "2026-07-29",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 13.8100004196167,
+"conf_date": "2026-08-10",
 "target": 18.695,
 "stop": 8.6048,
 "reliab": "🔴 Bassa",
 "prob_gain": 46,
 "prob_loss": 36,
 "conv": 61,
-"res": {}
+"res": {
+"osservazione|7g": 21.03,
+"promozione|7g": 18.39,
+"conferma|7g": 0.0
+}
 },
 {
 "ticker": "ALNY",
