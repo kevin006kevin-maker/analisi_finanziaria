@@ -7388,16 +7388,8 @@
 "long:T": {
 "ticker": "T",
 "kind": "long",
-"name": "AT&T Inc",
+"name": "AT&T Inc.",
 "obs": [
-{
-"date": "2026-07-30 21:40",
-"conv": 69,
-"price": 23.245,
-"mkt": -0.5522,
-"occ": 65,
-"prob_gain": 76
-},
 {
 "date": "2026-07-30 22:48",
 "conv": 68,
@@ -8638,6 +8630,16 @@
 "occ": 60,
 "prob_gain": 65,
 "prob_loss": 16,
+"reliab": "🟢 Alta"
+},
+{
+"date": "2026-08-11 22:03",
+"conv": 51,
+"price": 24.495,
+"mkt": 2.4368,
+"occ": 61,
+"prob_gain": 70,
+"prob_loss": 12,
 "reliab": "🟢 Alta"
 }
 ]
@@ -11494,6 +11496,16 @@
 "prob_gain": 63,
 "prob_loss": 26,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-08-11 22:03",
+"conv": 49,
+"price": 4.7505,
+"mkt": 2.4368,
+"occ": 61,
+"prob_gain": 63,
+"prob_loss": 26,
+"reliab": "🟡 Media"
 }
 ]
 },
@@ -11502,14 +11514,6 @@
 "kind": "long",
 "name": "FERRARI",
 "obs": [
-{
-"date": "2026-07-30 18:03",
-"conv": 15,
-"price": 343.65,
-"mkt": -1.1087,
-"occ": 61,
-"prob_gain": 65
-},
 {
 "date": "2026-07-30 22:48",
 "conv": 16,
@@ -12645,6 +12649,16 @@
 "prob_gain": 57,
 "prob_loss": 27,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-08-11 22:03",
+"conv": 20,
+"price": 355.6,
+"mkt": 2.4368,
+"occ": 59,
+"prob_gain": 57,
+"prob_loss": 27,
+"reliab": "🟡 Media"
 }
 ]
 },
@@ -13059,16 +13073,8 @@
 "long:CCL": {
 "ticker": "CCL",
 "kind": "long",
-"name": "Carnival Corp",
+"name": "Carnival Corporation & plc",
 "obs": [
-{
-"date": "2026-07-30 21:40",
-"conv": 50,
-"price": 27.78,
-"mkt": -0.5522,
-"occ": 58,
-"prob_gain": 67
-},
 {
 "date": "2026-07-30 22:48",
 "conv": 47,
@@ -14256,6 +14262,16 @@
 "prob_gain": 65,
 "prob_loss": 23,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-08-11 22:03",
+"conv": 56,
+"price": 27.725,
+"mkt": 2.4368,
+"occ": 58,
+"prob_gain": 70,
+"prob_loss": 18,
+"reliab": "🟡 Media"
 }
 ]
 },
@@ -14548,7 +14564,7 @@
 "long:PBR-A": {
 "ticker": "PBR-A",
 "kind": "long",
-"name": "PETROBRAS - PETROLEO BRASILEIRO SA",
+"name": "Petroleo Brasileiro SA Petrobras",
 "obs": [
 {
 "date": "2026-08-08 03:42",
@@ -15018,6 +15034,16 @@
 "occ": 80,
 "prob_gain": 86,
 "prob_loss": 6,
+"reliab": "🟢 Alta"
+},
+{
+"date": "2026-08-11 22:03",
+"conv": 72,
+"price": 16.07,
+"mkt": 2.4368,
+"occ": 63,
+"prob_gain": 69,
+"prob_loss": 14,
 "reliab": "🟢 Alta"
 }
 ]
@@ -16005,6 +16031,16 @@
 "occ": 90,
 "prob_gain": 60,
 "prob_loss": 29,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-08-11 22:03",
+"conv": 59,
+"price": 27.25,
+"mkt": 2.4368,
+"occ": 90,
+"prob_gain": 61,
+"prob_loss": 27,
 "reliab": "🟡 Media"
 }
 ]
@@ -59334,7 +59370,7 @@
 "long:AGI": {
 "ticker": "AGI",
 "kind": "long",
-"name": "Alamos Gold Inc.",
+"name": "Alamos Gold Inc",
 "obs": [
 {
 "date": "2026-07-31 09:40",
@@ -60543,6 +60579,16 @@
 "mkt": 2.4161,
 "occ": 100,
 "prob_gain": 58,
+"prob_loss": 31,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-08-11 22:03",
+"conv": 51,
+"price": 33.451,
+"mkt": 2.4368,
+"occ": 96,
+"prob_gain": 57,
 "prob_loss": 31,
 "reliab": "🟡 Media"
 }
@@ -62216,7 +62262,7 @@
 "long:RDDT": {
 "ticker": "RDDT",
 "kind": "long",
-"name": "Reddit, Inc.",
+"name": "Reddit Inc",
 "obs": [
 {
 "date": "2026-07-31 23:30",
@@ -63027,6 +63073,16 @@
 "conv": null,
 "price": 156.9,
 "stale": true
+},
+{
+"date": "2026-08-11 22:03",
+"conv": 41,
+"price": 156.035,
+"mkt": 2.4368,
+"occ": 92,
+"prob_gain": 64,
+"prob_loss": 27,
+"reliab": "🔴 Bassa"
 }
 ]
 },
@@ -63690,6 +63746,16 @@
 "conv": null,
 "price": 42.88,
 "stale": true
+},
+{
+"date": "2026-08-11 22:03",
+"conv": 72,
+"price": 42.755,
+"mkt": 2.4368,
+"occ": 92,
+"prob_gain": 78,
+"prob_loss": 10,
+"reliab": "🟢 Alta"
 }
 ]
 },
@@ -64281,6 +64347,16 @@
 "conv": null,
 "price": 46.45,
 "stale": true
+},
+{
+"date": "2026-08-11 22:03",
+"conv": 45,
+"price": 46.41,
+"mkt": 2.4368,
+"occ": 65,
+"prob_gain": 71,
+"prob_loss": 19,
+"reliab": "🔴 Bassa"
 }
 ]
 },
@@ -65271,6 +65347,16 @@
 "conv": null,
 "price": 18.775,
 "stale": true
+},
+{
+"date": "2026-08-11 22:03",
+"conv": 64,
+"price": 18.817,
+"mkt": 2.4368,
+"occ": 73,
+"prob_gain": 78,
+"prob_loss": 10,
+"reliab": "🟡 Media"
 }
 ]
 },
@@ -68324,6 +68410,16 @@
 "conv": null,
 "price": 24.4,
 "stale": true
+},
+{
+"date": "2026-08-11 22:03",
+"conv": 24,
+"price": 24.4,
+"mkt": 2.4368,
+"occ": 61,
+"prob_gain": 49,
+"prob_loss": 37,
+"reliab": "🟡 Media"
 }
 ]
 },
@@ -69370,7 +69466,7 @@
 "long:TDC": {
 "ticker": "TDC",
 "kind": "long",
-"name": "TERADATA CORPORATION",
+"name": "Teradata Corp",
 "obs": [
 {
 "date": "2026-08-05 17:42",
@@ -70068,6 +70164,16 @@
 "occ": 65,
 "prob_gain": 56,
 "prob_loss": 32,
+"reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-11 22:03",
+"conv": 68,
+"price": 26.86,
+"mkt": 2.4368,
+"occ": 80,
+"prob_gain": 68,
+"prob_loss": 21,
 "reliab": "🔴 Bassa"
 }
 ]
@@ -73295,7 +73401,7 @@
 "long:APP": {
 "ticker": "APP",
 "kind": "long",
-"name": "AppLovin Corporation",
+"name": "Applovin Corp",
 "obs": [
 {
 "date": "2026-08-07 05:18",
@@ -73816,6 +73922,16 @@
 "prob_gain": 72,
 "prob_loss": 20,
 "reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-11 22:03",
+"conv": 62,
+"price": 318.68,
+"mkt": 2.4368,
+"occ": 91,
+"prob_gain": 74,
+"prob_loss": 18,
+"reliab": "🔴 Bassa"
 }
 ]
 },
@@ -74309,7 +74425,7 @@
 "long:TTD": {
 "ticker": "TTD",
 "kind": "long",
-"name": "TRADE DESK, INC.",
+"name": "Trade Desk Inc",
 "obs": [
 {
 "date": "2026-08-07 15:55",
@@ -74869,6 +74985,16 @@
 "occ": 92,
 "prob_gain": 79,
 "prob_loss": 12,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-08-11 22:03",
+"conv": 69,
+"price": 13.56,
+"mkt": 2.4368,
+"occ": 92,
+"prob_gain": 77,
+"prob_loss": 16,
 "reliab": "🟡 Media"
 }
 ]
@@ -76224,6 +76350,16 @@
 "conv": null,
 "price": 128.8199,
 "stale": true
+},
+{
+"date": "2026-08-11 22:03",
+"conv": 51,
+"price": 128.27,
+"mkt": 2.4368,
+"occ": 87,
+"prob_gain": 70,
+"prob_loss": 23,
+"reliab": "🔴 Bassa"
 }
 ]
 },
@@ -77002,6 +77138,16 @@
 "conv": null,
 "price": 40.365,
 "stale": true
+},
+{
+"date": "2026-08-11 22:03",
+"conv": 70,
+"price": 40.13,
+"mkt": 2.4368,
+"occ": 86,
+"prob_gain": 64,
+"prob_loss": 23,
+"reliab": "🟡 Media"
 }
 ]
 },
@@ -77265,6 +77411,16 @@
 "conv": null,
 "price": 18.115,
 "stale": true
+},
+{
+"date": "2026-08-11 22:03",
+"conv": 57,
+"price": 18.145,
+"mkt": 2.4368,
+"occ": 84,
+"prob_gain": 53,
+"prob_loss": 37,
+"reliab": "🔴 Bassa"
 }
 ]
 },
