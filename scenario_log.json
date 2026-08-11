@@ -61,8 +61,11 @@
 "stop": 86.448,
 "res": {
 "osservazione|7g": 7.44,
-"promozione|7g": 4.4
-}
+"promozione|7g": 4.4,
+"conferma|7g": -16.05
+},
+"conf_price": 116.41000366210938,
+"conf_date": "2026-08-11"
 },
 {
 "ticker": "CDE",
@@ -75,8 +78,11 @@
 "stop": 13.4783,
 "res": {
 "osservazione|7g": 8.98,
-"promozione|7g": 5.83
-}
+"promozione|7g": 5.83,
+"conferma|7g": -10.84
+},
+"conf_price": 18.18000030517578,
+"conf_date": "2026-08-11"
 },
 {
 "ticker": "ACI",
@@ -613,15 +619,20 @@
 "obs_date": "2026-07-30",
 "pre_price": 205.48,
 "pre_date": "2026-07-31",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 221.5449981689453,
+"conf_date": "2026-08-11",
 "target": 286.5644,
 "stop": 186.3101,
 "reliab": "🟡 Media",
 "prob_gain": 57,
 "prob_loss": 5,
 "conv": 78,
-"res": {}
+"res": {
+"anticipo|7g": 7.82,
+"osservazione|7g": 5.91,
+"promozione|7g": 0.55,
+"conferma|7g": 0.0
+}
 },
 {
 "ticker": "TE",
@@ -632,15 +643,20 @@
 "obs_date": "2026-07-30",
 "pre_price": 4.195,
 "pre_date": "2026-07-31",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 5.332399845123291,
+"conf_date": "2026-08-11",
 "target": 7.9544,
 "stop": 3.3721,
 "reliab": "🔴 Bassa",
 "prob_gain": 48,
 "prob_loss": 36,
 "conv": 66,
-"res": {}
+"res": {
+"anticipo|7g": 27.11,
+"osservazione|7g": 26.36,
+"promozione|7g": 7.94,
+"conferma|7g": 0.0
+}
 },
 {
 "ticker": "LKQ",
@@ -651,15 +667,20 @@
 "obs_date": "2026-07-30",
 "pre_price": 22.315,
 "pre_date": "2026-07-31",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 24.84000015258789,
+"conf_date": "2026-08-11",
 "target": 25.7302,
 "stop": 21.0575,
 "reliab": "🟡 Media",
 "prob_gain": 56,
 "prob_loss": 2,
 "conv": 79,
-"res": {}
+"res": {
+"anticipo|7g": 11.32,
+"osservazione|7g": 12.02,
+"promozione|7g": 6.38,
+"conferma|7g": 0.0
+}
 },
 {
 "ticker": "CCB",
@@ -670,15 +691,20 @@
 "obs_date": "2026-07-30",
 "pre_price": 39.91,
 "pre_date": "2026-07-31",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 49.58000183105469,
+"conf_date": "2026-08-11",
 "target": 72.1797,
 "stop": 33.1528,
 "reliab": "🔴 Bassa",
 "prob_gain": 67,
 "prob_loss": 6,
 "conv": 76,
-"res": {}
+"res": {
+"anticipo|7g": 24.23,
+"osservazione|7g": 21.73,
+"promozione|7g": 16.3,
+"conferma|7g": 0.0
+}
 },
 {
 "ticker": "FSM",
@@ -697,7 +723,11 @@
 "prob_gain": 62,
 "prob_loss": 27,
 "conv": 74,
-"res": {}
+"res": {
+"anticipo|7g": 24.99,
+"osservazione|7g": 25.29,
+"promozione|7g": 19.89
+}
 },
 {
 "ticker": "WOLF",
@@ -708,15 +738,19 @@
 "obs_date": "2026-07-23",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 29.385000228881836,
+"conf_date": "2026-08-11",
 "target": 42.7097,
 "stop": 18.8818,
 "reliab": "🔴 Bassa",
 "prob_gain": 44,
 "prob_loss": 39,
 "conv": 60,
-"res": {}
+"res": {
+"osservazione|7g": 12.31,
+"promozione|7g": 9.95,
+"conferma|7g": 0.0
+}
 },
 {
 "ticker": "TSLL",
@@ -727,15 +761,20 @@
 "obs_date": "2026-07-23",
 "pre_price": 7.24,
 "pre_date": "2026-07-28",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 8.270000457763672,
+"conf_date": "2026-08-11",
 "target": 12.1991,
 "stop": 6.3005,
 "reliab": "🔴 Bassa",
 "prob_gain": 46,
 "prob_loss": 24,
 "conv": 69,
-"res": {}
+"res": {
+"anticipo|7g": 14.23,
+"osservazione|7g": 5.82,
+"promozione|7g": 1.58,
+"conferma|7g": 0.0
+}
 },
 {
 "ticker": "PUMP",
