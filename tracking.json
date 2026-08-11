@@ -9984,7 +9984,9 @@
 }
 ],
 "auto": true,
-"notified": true
+"notified": true,
+"warn_since": "2026-08-11",
+"warn": "in perdita da 23 giorni di Borsa: valuta l'uscita"
 },
 "BBD": {
 "kind": "long",
@@ -37399,7 +37401,9 @@
 }
 ],
 "auto": true,
-"notified": true
+"notified": true,
+"warn_since": "2026-08-11",
+"warn": "in perdita da 11 giorni di Borsa: valuta l'uscita"
 },
 "QS": {
 "kind": "short",
@@ -49384,9 +49388,7 @@
 }
 ],
 "auto": true,
-"notified": true,
-"warn_since": "2026-08-10",
-"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
+"notified": true
 },
 "REPL": {
 "kind": "short",
@@ -57210,7 +57212,9 @@
 }
 ],
 "auto": true,
-"notified": true
+"notified": true,
+"warn_since": "2026-08-11",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "TE": {
 "kind": "short",
@@ -60230,7 +60234,7 @@
 }
 ],
 "auto": true,
-"notified": false
+"notified": true
 },
 "PUMP": {
 "kind": "short",
