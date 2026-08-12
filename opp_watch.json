@@ -7668,7 +7668,7 @@
 "long:T": {
 "ticker": "T",
 "kind": "long",
-"name": "AT&T Inc",
+"name": "AT&T Inc.",
 "obs": [
 {
 "date": "2026-07-31 22:06",
@@ -8978,6 +8978,16 @@
 "occ": 61,
 "prob_gain": 66,
 "prob_loss": 16,
+"reliab": "🟢 Alta"
+},
+{
+"date": "2026-08-12 21:40",
+"conv": 50,
+"price": 24.315,
+"mkt": 2.3681,
+"occ": 61,
+"prob_gain": 70,
+"prob_loss": 12,
 "reliab": "🟢 Alta"
 }
 ]
@@ -11866,6 +11876,16 @@
 "prob_gain": 65,
 "prob_loss": 24,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-08-12 21:40",
+"conv": 54,
+"price": 4.629,
+"mkt": 2.3681,
+"occ": 61,
+"prob_gain": 65,
+"prob_loss": 24,
+"reliab": "🟡 Media"
 }
 ]
 },
@@ -13063,6 +13083,16 @@
 "prob_gain": 57,
 "prob_loss": 27,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-08-12 21:40",
+"conv": 27,
+"price": 351.6,
+"mkt": 2.3681,
+"occ": 60,
+"prob_gain": 57,
+"prob_loss": 27,
+"reliab": "🟡 Media"
 }
 ]
 },
@@ -13477,7 +13507,7 @@
 "long:CCL": {
 "ticker": "CCL",
 "kind": "long",
-"name": "Carnival Corp",
+"name": "Carnival Corporation & plc",
 "obs": [
 {
 "date": "2026-07-31 22:06",
@@ -14728,6 +14758,16 @@
 "prob_gain": 72,
 "prob_loss": 18,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-08-12 21:40",
+"conv": 59,
+"price": 27.75,
+"mkt": 2.3681,
+"occ": 58,
+"prob_gain": 70,
+"prob_loss": 18,
+"reliab": "🟡 Media"
 }
 ]
 },
@@ -15020,7 +15060,7 @@
 "long:PBR-A": {
 "ticker": "PBR-A",
 "kind": "long",
-"name": "PETROBRAS - PETROLEO BRASILEIRO SA",
+"name": "Petroleo Brasileiro SA Petrobras",
 "obs": [
 {
 "date": "2026-08-08 03:42",
@@ -15600,6 +15640,16 @@
 "occ": 79,
 "prob_gain": 84,
 "prob_loss": 7,
+"reliab": "🟢 Alta"
+},
+{
+"date": "2026-08-12 21:40",
+"conv": 72,
+"price": 15.995,
+"mkt": 2.3681,
+"occ": 64,
+"prob_gain": 73,
+"prob_loss": 15,
 "reliab": "🟢 Alta"
 }
 ]
@@ -23715,6 +23765,16 @@
 "conv": null,
 "price": 23.025,
 "stale": true
+},
+{
+"date": "2026-08-12 21:40",
+"conv": 61,
+"price": 23.0501,
+"mkt": 2.3681,
+"occ": 56,
+"prob_gain": 78,
+"prob_loss": 6,
+"reliab": "🟢 Alta"
 }
 ]
 },
@@ -64951,6 +65011,16 @@
 "conv": null,
 "price": 45.21,
 "stale": true
+},
+{
+"date": "2026-08-12 21:40",
+"conv": 52,
+"price": 44.51,
+"mkt": 2.3681,
+"occ": 68,
+"prob_gain": 69,
+"prob_loss": 21,
+"reliab": "🔴 Bassa"
 }
 ]
 },
@@ -65997,6 +66067,16 @@
 "conv": null,
 "price": 18.57,
 "stale": true
+},
+{
+"date": "2026-08-12 21:40",
+"conv": 68,
+"price": 18.525,
+"mkt": 2.3681,
+"occ": 74,
+"prob_gain": 74,
+"prob_loss": 13,
+"reliab": "🟡 Media"
 }
 ]
 },
@@ -69118,6 +69198,16 @@
 "conv": null,
 "price": 24.012,
 "stale": true
+},
+{
+"date": "2026-08-12 21:40",
+"conv": 27,
+"price": 23.84,
+"mkt": 2.3681,
+"occ": 61,
+"prob_gain": 50,
+"prob_loss": 37,
+"reliab": "🟡 Media"
 }
 ]
 },
@@ -70164,7 +70254,7 @@
 "long:TDC": {
 "ticker": "TDC",
 "kind": "long",
-"name": "TERADATA CORPORATION",
+"name": "Teradata Corp",
 "obs": [
 {
 "date": "2026-08-05 17:42",
@@ -70957,6 +71047,16 @@
 "conv": null,
 "price": 26.965,
 "stale": true
+},
+{
+"date": "2026-08-12 21:40",
+"conv": 68,
+"price": 26.89,
+"mkt": 2.3681,
+"occ": 80,
+"prob_gain": 69,
+"prob_loss": 17,
+"reliab": "🔴 Bassa"
 }
 ]
 },
@@ -74499,7 +74599,7 @@
 "long:APP": {
 "ticker": "APP",
 "kind": "long",
-"name": "AppLovin Corporation",
+"name": "Applovin Corp",
 "obs": [
 {
 "date": "2026-08-07 05:18",
@@ -75120,6 +75220,16 @@
 "prob_gain": 72,
 "prob_loss": 22,
 "reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-12 21:40",
+"conv": 70,
+"price": 304.96,
+"mkt": 2.3681,
+"occ": 91,
+"prob_gain": 73,
+"prob_loss": 20,
+"reliab": "🔴 Bassa"
 }
 ]
 },
@@ -75701,7 +75811,7 @@
 "long:TTD": {
 "ticker": "TTD",
 "kind": "long",
-"name": "TRADE DESK, INC.",
+"name": "Trade Desk Inc",
 "obs": [
 {
 "date": "2026-08-07 15:55",
@@ -76371,6 +76481,16 @@
 "occ": 92,
 "prob_gain": 77,
 "prob_loss": 15,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-08-12 21:40",
+"conv": 72,
+"price": 13.615,
+"mkt": 2.3681,
+"occ": 92,
+"prob_gain": 76,
+"prob_loss": 17,
 "reliab": "🟡 Media"
 }
 ]
@@ -77904,6 +78024,16 @@
 "conv": null,
 "price": 124.575,
 "stale": true
+},
+{
+"date": "2026-08-12 21:40",
+"conv": 55,
+"price": 124.975,
+"mkt": 2.3681,
+"occ": 88,
+"prob_gain": 71,
+"prob_loss": 23,
+"reliab": "🔴 Bassa"
 }
 ]
 },
@@ -78305,6 +78435,16 @@
 "conv": null,
 "price": 458.19,
 "stale": true
+},
+{
+"date": "2026-08-12 21:40",
+"conv": 73,
+"price": 457.29,
+"mkt": 2.3681,
+"occ": 85,
+"prob_gain": 70,
+"prob_loss": 22,
+"reliab": "🔴 Bassa"
 }
 ]
 },
@@ -78765,7 +78905,7 @@
 "long:B": {
 "ticker": "B",
 "kind": "long",
-"name": "BARRICK MINING CORP",
+"name": "Barrick Mining Corp",
 "obs": [
 {
 "date": "2026-08-10 15:56",
@@ -78945,6 +79085,16 @@
 "occ": 66,
 "prob_gain": 68,
 "prob_loss": 20,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-08-12 21:40",
+"conv": 74,
+"price": 41.445,
+"mkt": 2.3681,
+"occ": 84,
+"prob_gain": 64,
+"prob_loss": 24,
 "reliab": "🟡 Media"
 }
 ]
