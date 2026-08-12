@@ -48356,7 +48356,7 @@
 }
 ],
 "auto": true,
-"notified": false
+"notified": true
 },
 "MTDR": {
 "kind": "short",
@@ -49704,9 +49704,7 @@
 }
 ],
 "auto": true,
-"notified": true,
-"warn_since": "2026-08-12",
-"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
+"notified": true
 },
 "REPL": {
 "kind": "short",
@@ -55412,9 +55410,7 @@
 }
 ],
 "auto": true,
-"notified": false,
-"warn_since": "2026-08-12",
-"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
+"notified": false
 },
 "EEM": {
 "kind": "short",
@@ -56570,7 +56566,9 @@
 }
 ],
 "auto": true,
-"notified": true
+"notified": true,
+"warn_since": "2026-08-12",
+"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
 },
 "QQQ": {
 "kind": "short",
@@ -63065,7 +63063,9 @@
 }
 ],
 "auto": true,
-"notified": true
+"notified": true,
+"warn_since": "2026-08-12",
+"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
 },
 "PUMP": {
 "kind": "short",
@@ -64013,7 +64013,9 @@
 }
 ],
 "auto": true,
-"notified": true
+"notified": true,
+"warn_since": "2026-08-12",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "BIOA": {
 "kind": "short",
@@ -64471,7 +64473,9 @@
 }
 ],
 "auto": true,
-"notified": true
+"notified": true,
+"warn_since": "2026-08-12",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "ACDC": {
 "kind": "short",
@@ -67885,7 +67889,7 @@
 }
 ],
 "auto": true,
-"notified": false
+"notified": true
 },
 "STMMI.MI": {
 "kind": "short",
