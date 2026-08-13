@@ -20587,7 +20587,7 @@
 "auto": true,
 "notified": true,
 "warn_since": "2026-08-11",
-"warn": "sceso sotto lo stop (−2×ATR): valuta l'uscita"
+"warn": "in perdita da 18 giorni di Borsa: valuta l'uscita"
 },
 "CCL": {
 "kind": "long",
@@ -64720,9 +64720,7 @@
 }
 ],
 "auto": true,
-"notified": true,
-"warn_since": "2026-08-12",
-"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
+"notified": true
 },
 "BIOA": {
 "kind": "short",
@@ -67992,9 +67990,7 @@
 }
 ],
 "auto": true,
-"notified": false,
-"warn_since": "2026-08-12",
-"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
+"notified": false
 },
 "TU": {
 "kind": "short",
