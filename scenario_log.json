@@ -146,8 +146,11 @@
 "stop": 20.7668,
 "res": {
 "osservazione|7g": 21.51,
-"promozione|7g": 14.32
-}
+"promozione|7g": 14.32,
+"conferma|7g": -26.09
+},
+"conf_price": 39.75,
+"conf_date": "2026-08-13"
 },
 {
 "ticker": "MPLT",
@@ -975,15 +978,20 @@
 "obs_date": "2026-08-03",
 "pre_price": 169.64,
 "pre_date": "2026-08-04",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 157.33999633789062,
+"conf_date": "2026-08-13",
 "target": 179.0658,
 "stop": 150.1135,
 "reliab": "🟢 Alta",
 "prob_gain": 50,
 "prob_loss": 3,
 "conv": 78,
-"res": {}
+"res": {
+"anticipo|7g": -7.25,
+"osservazione|7g": 1.87,
+"promozione|7g": -2.58,
+"conferma|7g": 0.0
+}
 },
 {
 "ticker": "PLTZ",
