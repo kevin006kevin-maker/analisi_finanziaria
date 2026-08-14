@@ -214,8 +214,11 @@
 "stop": 697.0092,
 "res": {
 "osservazione|7g": 2.04,
-"promozione|7g": -0.96
-}
+"promozione|7g": -0.96,
+"conferma|7g": -9.67
+},
+"conf_price": 971.5151977539062,
+"conf_date": "2026-08-14"
 },
 {
 "ticker": "MTDR",
@@ -1002,15 +1005,20 @@
 "obs_date": "2026-08-04",
 "pre_price": 11.87,
 "pre_date": "2026-08-05",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 9.5600004196167,
+"conf_date": "2026-08-14",
 "target": 28.6167,
 "stop": 5.88,
 "reliab": "🔴 Bassa",
 "prob_gain": 58,
 "prob_loss": 22,
 "conv": 73,
-"res": {}
+"res": {
+"anticipo|7g": -19.46,
+"osservazione|7g": -16.87,
+"promozione|7g": -25.6,
+"conferma|7g": 0.0
+}
 },
 {
 "ticker": "NOK",
@@ -1021,15 +1029,20 @@
 "obs_date": "2026-07-26",
 "pre_price": 9.035,
 "pre_date": "2026-07-27",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 10.628700256347656,
+"conf_date": "2026-08-14",
 "target": 12.3447,
 "stop": 8.1843,
 "reliab": "🟡 Media",
 "prob_gain": 53,
 "prob_loss": 18,
 "conv": 71,
-"res": {}
+"res": {
+"anticipo|7g": 17.64,
+"osservazione|7g": 16.8,
+"promozione|7g": 12.29,
+"conferma|7g": 0.0
+}
 },
 {
 "ticker": "STMMI.MI",
@@ -1064,15 +1077,20 @@
 "obs_date": "2026-08-04",
 "pre_price": 47.72,
 "pre_date": "2026-08-05",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 49.560001373291016,
+"conf_date": "2026-08-14",
 "target": 61.0232,
 "stop": 43.9858,
 "reliab": "🟡 Media",
 "prob_gain": 46,
 "prob_loss": 8,
 "conv": 79,
-"res": {}
+"res": {
+"anticipo|7g": 3.86,
+"osservazione|7g": 4.13,
+"promozione|7g": 0.81,
+"conferma|7g": 0.0
+}
 },
 {
 "ticker": "CC",
