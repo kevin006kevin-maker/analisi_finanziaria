@@ -20907,7 +20907,7 @@
 "auto": true,
 "notified": true,
 "warn_since": "2026-08-11",
-"warn": "in perdita da 19 giorni di Borsa: valuta l'uscita"
+"warn": "sceso sotto lo stop (−2×ATR): valuta l'uscita"
 },
 "CCL": {
 "kind": "long",
@@ -49377,9 +49377,7 @@
 }
 ],
 "auto": true,
-"notified": true,
-"warn_since": "2026-08-13",
-"warn": "in perdita da 10 giorni di Borsa: valuta l'uscita"
+"notified": true
 },
 "AAUC": {
 "kind": "short",
@@ -61643,9 +61641,7 @@
 }
 ],
 "auto": true,
-"notified": true,
-"warn_since": "2026-08-13",
-"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
+"notified": true
 },
 "LKQ": {
 "kind": "short",
@@ -67034,7 +67030,7 @@
 }
 ],
 "auto": true,
-"notified": false
+"notified": true
 },
 "RBLX": {
 "kind": "short",
