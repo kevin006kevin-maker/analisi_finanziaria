@@ -5757,16 +5757,6 @@
 "name": "Super Micro Computer Inc",
 "obs": [
 {
-"date": "2026-08-03 01:14",
-"conv": 57,
-"price": 28.4,
-"mkt": 0.0866,
-"occ": 84,
-"prob_gain": 64,
-"prob_loss": 29,
-"reliab": "🔴 Bassa"
-},
-{
 "date": "2026-08-03 06:03",
 "conv": 61,
 "price": 28.4,
@@ -6971,6 +6961,16 @@
 "conv": 31,
 "price": 39.84,
 "mkt": 4.3991,
+"occ": 75,
+"prob_gain": 51,
+"prob_loss": 41,
+"reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-15 01:47",
+"conv": 33,
+"price": 39.84,
+"mkt": 3.2103,
 "occ": 75,
 "prob_gain": 51,
 "prob_loss": 41,
@@ -12555,16 +12555,6 @@
 "name": "FERRARI",
 "obs": [
 {
-"date": "2026-08-03 01:14",
-"conv": 22,
-"price": 340.1,
-"mkt": 0.0866,
-"occ": 63,
-"prob_gain": 60,
-"prob_loss": 22,
-"reliab": "🟡 Media"
-},
-{
 "date": "2026-08-03 06:03",
 "conv": 25,
 "price": 340.1,
@@ -13852,6 +13842,16 @@
 "occ": 59,
 "prob_gain": 62,
 "prob_loss": 21,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-08-15 01:47",
+"conv": 23,
+"price": 355.25,
+"mkt": 3.2103,
+"occ": 59,
+"prob_gain": 62,
+"prob_loss": 22,
 "reliab": "🟡 Media"
 }
 ]
@@ -81233,7 +81233,7 @@
 "long:INTR": {
 "ticker": "INTR",
 "kind": "long",
-"name": "Inter & Co. Inc.",
+"name": "Inter & Co Inc",
 "obs": [
 {
 "date": "2026-08-11 05:19",
@@ -84540,7 +84540,7 @@
 "long:PAAS": {
 "ticker": "PAAS",
 "kind": "long",
-"name": "Pan American Silver Corp.",
+"name": "Pan American Silver Corp",
 "obs": [
 {
 "date": "2026-08-14 08:57",
