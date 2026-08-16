@@ -6549,36 +6549,6 @@
 "name": "Super Micro Computer Inc",
 "obs": [
 {
-"date": "2026-08-04 04:53",
-"conv": 56,
-"price": 28.64,
-"mkt": 0.8368,
-"occ": 84,
-"prob_gain": 64,
-"prob_loss": 30,
-"reliab": "🔴 Bassa"
-},
-{
-"date": "2026-08-04 07:54",
-"conv": 57,
-"price": 28.4,
-"mkt": 0.0866,
-"occ": 84,
-"prob_gain": 67,
-"prob_loss": 27,
-"reliab": "🔴 Bassa"
-},
-{
-"date": "2026-08-04 10:45",
-"conv": 59,
-"price": 28.4,
-"mkt": 0.0866,
-"occ": 84,
-"prob_gain": 67,
-"prob_loss": 27,
-"reliab": "🔴 Bassa"
-},
-{
 "date": "2026-08-04 13:12",
 "conv": 60,
 "price": 28.4,
@@ -7853,6 +7823,16 @@
 "conv": 32,
 "price": 39.84,
 "mkt": 4.3991,
+"occ": 75,
+"prob_gain": 51,
+"prob_loss": 41,
+"reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-16 11:52",
+"conv": 31,
+"price": 39.84,
+"mkt": 3.2103,
 "occ": 75,
 "prob_gain": 51,
 "prob_loss": 41,
@@ -12290,16 +12270,6 @@
 "name": "STELLANTIS",
 "obs": [
 {
-"date": "2026-08-04 10:45",
-"conv": 56,
-"price": 4.8875,
-"mkt": 0.0866,
-"occ": 66,
-"prob_gain": 64,
-"prob_loss": 23,
-"reliab": "🟡 Media"
-},
-{
 "date": "2026-08-04 13:12",
 "conv": 53,
 "price": 4.9235,
@@ -13784,6 +13754,16 @@
 "conv": 38,
 "price": 4.62,
 "mkt": 4.3991,
+"occ": 61,
+"prob_gain": 66,
+"prob_loss": 24,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-08-16 11:52",
+"conv": 43,
+"price": 4.62,
+"mkt": 3.2103,
 "occ": 61,
 "prob_gain": 66,
 "prob_loss": 24,
@@ -18393,6 +18373,16 @@
 "prob_gain": 83,
 "prob_loss": 8,
 "reliab": "🟢 Alta"
+},
+{
+"date": "2026-08-16 11:52",
+"conv": 83,
+"price": 16.07,
+"mkt": 3.2103,
+"occ": 79,
+"prob_gain": 83,
+"prob_loss": 8,
+"reliab": "🟢 Alta"
 }
 ]
 },
@@ -18401,46 +18391,6 @@
 "kind": "long",
 "name": "Kinross Gold Corp",
 "obs": [
-{
-"date": "2026-08-04 00:44",
-"conv": 75,
-"price": 23.43,
-"mkt": 0.8368,
-"occ": 100,
-"prob_gain": 59,
-"prob_loss": 27,
-"reliab": "🟡 Media"
-},
-{
-"date": "2026-08-04 04:53",
-"conv": 79,
-"price": 23.43,
-"mkt": 0.8368,
-"occ": 100,
-"prob_gain": 59,
-"prob_loss": 27,
-"reliab": "🟡 Media"
-},
-{
-"date": "2026-08-04 07:54",
-"conv": 77,
-"price": 23.1,
-"mkt": 0.0866,
-"occ": 100,
-"prob_gain": 63,
-"prob_loss": 26,
-"reliab": "🟡 Media"
-},
-{
-"date": "2026-08-04 10:45",
-"conv": 79,
-"price": 23.1,
-"mkt": 0.0866,
-"occ": 100,
-"prob_gain": 63,
-"prob_loss": 26,
-"reliab": "🟡 Media"
-},
 {
 "date": "2026-08-04 15:13",
 "conv": 76,
@@ -19322,6 +19272,16 @@
 "conv": 73,
 "price": 27.31,
 "mkt": 4.3991,
+"occ": 91,
+"prob_gain": 62,
+"prob_loss": 26,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-08-16 11:52",
+"conv": 71,
+"price": 27.31,
+"mkt": 3.2103,
 "occ": 91,
 "prob_gain": 62,
 "prob_loss": 26,
@@ -33931,6 +33891,16 @@
 "mkt": 4.3991,
 "occ": 80,
 "prob_gain": 63,
+"prob_loss": 28,
+"reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-16 11:52",
+"conv": 60,
+"price": 16.17,
+"mkt": 3.2103,
+"occ": 80,
+"prob_gain": 62,
 "prob_loss": 28,
 "reliab": "🔴 Bassa"
 }
@@ -83085,7 +83055,7 @@
 "long:INTR": {
 "ticker": "INTR",
 "kind": "long",
-"name": "Inter & Co Inc",
+"name": "Inter & Co. Inc.",
 "obs": [
 {
 "date": "2026-08-11 05:19",
@@ -83811,6 +83781,16 @@
 "price": 5.19,
 "mkt": 4.3991,
 "occ": 83,
+"prob_gain": 73,
+"prob_loss": 17,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-08-16 11:52",
+"conv": 80,
+"price": 5.19,
+"mkt": 3.2103,
+"occ": 96,
 "prob_gain": 73,
 "prob_loss": 17,
 "reliab": "🟡 Media"
@@ -87901,6 +87881,16 @@
 "prob_gain": 64,
 "prob_loss": 25,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-08-16 11:52",
+"conv": 72,
+"price": 47.42,
+"mkt": 3.2103,
+"occ": 89,
+"prob_gain": 64,
+"prob_loss": 25,
+"reliab": "🟡 Media"
 }
 ]
 },
@@ -88467,7 +88457,7 @@
 "long:DUOL": {
 "ticker": "DUOL",
 "kind": "long",
-"name": "Duolingo Inc",
+"name": "Duolingo, Inc.",
 "obs": [
 {
 "date": "2026-08-16 07:24",
