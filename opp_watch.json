@@ -93,6 +93,16 @@
 "conv": null,
 "price": 4.6,
 "stale": true
+},
+{
+"date": "2026-08-17 15:37",
+"conv": 77,
+"price": 4.554,
+"mkt": 4.4982,
+"occ": 41,
+"prob_gain": 49,
+"prob_loss": 13,
+"reliab": "🟡 Media"
 }
 ]
 },
@@ -199,6 +209,16 @@
 "occ": 84,
 "prob_gain": 44,
 "prob_loss": 33,
+"reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-17 15:37",
+"conv": 69,
+"price": 7.08,
+"mkt": 4.4982,
+"occ": 69,
+"prob_gain": 43,
+"prob_loss": 31,
 "reliab": "🔴 Bassa"
 }
 ]
@@ -1160,6 +1180,16 @@
 "prob_gain": 50,
 "prob_loss": 12,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-08-17 15:37",
+"conv": 79,
+"price": 47.91,
+"mkt": 4.4982,
+"occ": 57,
+"prob_gain": 51,
+"prob_loss": 15,
+"reliab": "🟡 Media"
 }
 ]
 },
@@ -1292,6 +1322,74 @@
 "prob_gain": 68,
 "prob_loss": 15,
 "reliab": "🟢 Alta"
+}
+]
+},
+"short:MNSO": {
+"ticker": "MNSO",
+"kind": "short",
+"name": "MNSO",
+"obs": [
+{
+"date": "2026-08-17 15:37",
+"conv": 80,
+"price": 10.96,
+"mkt": 4.4982,
+"occ": 60,
+"prob_gain": 50,
+"prob_loss": 4,
+"reliab": "🟡 Media"
+}
+]
+},
+"short:BBAR": {
+"ticker": "BBAR",
+"kind": "short",
+"name": "BBAR",
+"obs": [
+{
+"date": "2026-08-17 15:37",
+"conv": 73,
+"price": 15.3,
+"mkt": 4.4982,
+"occ": 36,
+"prob_gain": 53,
+"prob_loss": 19,
+"reliab": "🔴 Bassa"
+}
+]
+},
+"short:STUB": {
+"ticker": "STUB",
+"kind": "short",
+"name": "STUB",
+"obs": [
+{
+"date": "2026-08-17 15:37",
+"conv": 70,
+"price": 7.725,
+"mkt": 4.4982,
+"occ": 36,
+"prob_gain": 60,
+"prob_loss": 24,
+"reliab": "🔴 Bassa"
+}
+]
+},
+"short:YSS": {
+"ticker": "YSS",
+"kind": "short",
+"name": "YSS",
+"obs": [
+{
+"date": "2026-08-17 15:37",
+"conv": 70,
+"price": 11.4145,
+"mkt": 4.4982,
+"occ": 73,
+"prob_gain": 48,
+"prob_loss": 28,
+"reliab": "🔴 Bassa"
 }
 ]
 }
