@@ -287,18 +287,16 @@ def main():
     except Exception as e:
         log(f"Errore consulente di vendita: {e!r}")
 
-    # Garantisce che i file esistano in locale per la pubblicazione del workflow
-    # (se un giro non produce novità, ripubblica lo stato corrente senza perdere lo storico).
-    fu.save_opp_watch(fu.load_opp_watch())
-    fu.save_tracking(fu.load_tracking())
-    fu.save_track_record(fu.load_track_record())
-    fu.save_portfolio(fu.load_portfolio())          # preserva il portafoglio (lo gestisce l'app)
-    fu.save_sell_alerts(fu.load_sell_alerts())      # stato avvisi di vendita (deduplica)
-    fu.write_data_json(fu.FORECAST_LOG_NAME, fu.read_data_json(fu.FORECAST_LOG_NAME, []))  # log calibrazione
-    fu.write_data_json(fu.OPP_CONFIG_NAME, fu.read_data_json(fu.OPP_CONFIG_NAME, fu._OPP_CONFIG_DEFAULT))  # config occasioni
-    fu.write_data_json(fu.EXIT_HISTORY_NAME, fu.load_exit_history())  # lapidi delle rimosse (anti-survivorship)
-    fu.write_data_json(fu.SCENARIO_LOG_NAME, fu.load_scenario_log())  # scenari acquisto/vendita
-    fu.write_data_json(fu.PRESIGNAL_NAME, fu.load_presignal_log())    # affidabilità pre-segnale
+    # NIENTE ri-salvataggi "di sicurezza" alla fine del giro.
+    # Servivano al vecchio sistema di pubblicazione con `git push` (che richiedeva i file presenti
+    # in locale). Da quando la persistenza avviene via API GitHub dentro write_data_json, ogni
+    # funzione salva già da sé quando i dati cambiano davvero: quelle righe erano inutili e
+    # PERICOLOSE. Il 16/08/2026 hanno azzerato scenario_log (26 KB → 2 byte) ed exit_history
+    # (4,7 KB → 2 byte): erano nella forma `write(load())` e, quando la lettura dal branch
+    # falliva, `load()` restituiva [] (valore di ripiego) e la scrittura lo salvava sopra lo
+    # storico. Si sono svuotati esattamente i due registri che quel giro non aveva scritto in
+    # locale (presignal_log, scritto durante il giro, si è salvato). Ora write_data_json ha
+    # comunque una protezione anti-cancellazione come seconda rete di sicurezza.
 
     log(f"Fatto. Totale occasioni viste: {total}.")
     return 0

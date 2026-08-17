@@ -2089,9 +2089,34 @@ def _commit_to_github(name: str, content_str: str) -> bool:
         return False
 
 
-def write_data_json(name: str, obj) -> None:
+# Registri che solo CRESCONO (storici): in condizioni normali non possono diventare vuoti.
+# Una lista vuota su questi file è il sintomo di una LETTURA FALLITA (read_data_json ritorna il
+# valore di ripiego quando la richiesta al branch non riesce), non di un dato reale: scriverla
+# cancellerebbe lo storico. Nomi scritti a mano perché le costanti sono definite più sotto nel file
+# (test di coerenza: vedi il controllo che confronta questo insieme con le costanti).
+_REGISTRI_APPEND_ONLY = frozenset({
+    "track_record.json", "forecast_log.json", "conv_log.json",
+    "exit_history.json", "scenario_log.json", "presignal_log.json",
+})
+
+
+def write_data_json(name: str, obj, allow_empty: bool = False) -> None:
     """Scrive un file dati: sempre su file locale; se in modalità cloud con token,
-    anche sul branch remoto (così la modifica persiste e si vede dal telefono)."""
+    anche sul branch remoto (così la modifica persiste e si vede dal telefono).
+
+    PROTEZIONE ANTI-CANCELLAZIONE: per i registri storici (_REGISTRI_APPEND_ONLY) rifiuta di
+    sovrascrivere dati esistenti con un contenuto VUOTO — è così che il 16/08/2026 sono stati
+    azzerati scenario_log (26 KB) ed exit_history (4,7 KB): una lettura remota fallita restituiva
+    [] e il salvataggio successivo lo scriveva sopra i dati buoni. Per svuotare davvero un
+    registro serve allow_empty=True (scelta esplicita, non un effetto collaterale)."""
+    if (not allow_empty) and name in _REGISTRI_APPEND_ONLY \
+            and isinstance(obj, (list, dict)) and len(obj) == 0:
+        try:
+            esistente = read_data_json(name, None)
+        except Exception:
+            esistente = None
+        if esistente:
+            return          # c'è già uno storico: NON lo sovrascrivo con il vuoto
     content = json.dumps(obj, ensure_ascii=False, indent=0)
     try:
         with open(os.path.join(APPDIR, name), "w", encoding="utf-8") as f:
