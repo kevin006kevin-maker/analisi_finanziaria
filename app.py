@@ -379,45 +379,53 @@ section = st.sidebar.radio(
 )
 st.sidebar.markdown("---")
 
-# --- Livello di dettaglio ---
-livello = st.sidebar.radio(
-    "Modalità", ["🟢 Principiante", "🔵 Esperto"], horizontal=True, index=1,
-    help="Principiante mostra solo l'essenziale spiegato a parole. Esperto aggiunge tutti gli indicatori avanzati.",
-)
-expert = livello.endswith("Esperto")
+# Impostazioni FISSE (prima erano interruttori nella barra laterale, tolti perché inutili):
+# - sempre modalità completa: tutti gli indicatori e i blocchi avanzati, senza scelte da fare;
+# - traduzione in italiano SEMPRE attiva (notizie e descrizioni);
+# - periodo storico fisso a 1 anno: i grafici che contano hanno già il loro selettore di periodo.
+expert = True
+translate_news = True
+period_label, period = "1 anno", "1y"
 
-st.sidebar.caption("Cerca un'azienda per **nome** oppure inserisci il simbolo.")
+# --- Ricerca: nome O sigla, anche parziale (sostituisce la vecchia casella "Ticker da analizzare") ---
+st.sidebar.caption("Scrivi il **nome** dell'azienda o la sua **sigla**, anche parziale.")
+query = st.sidebar.text_input("🔎 Cerca un titolo", key="ricerca_titolo",
+                              placeholder="es. Apple, AAPL, Eni, micro, S&P 500",
+                              help="Cerca per nome o per sigla, anche scrivendone solo una parte. "
+                                   "Poi scegli dall'elenco dei risultati.")
+_q = (query or "").strip()
+_scelte = []                                    # [(sigla, etichetta da mostrare)]
+if len(_q) >= 2:
+    try:
+        for _s, _n, _t, _b in fu.search_symbols(_q):
+            _et = f"{_s} — {_n}  ·  {_b or _t}" if _n else str(_s)
+            _scelte.append((_s, _et))
+    except Exception:
+        pass
+    # La sigla scritta a mano resta sempre utilizzabile, anche se la ricerca non la trova
+    # (utile per ETF e titoli esteri: VWCE.DE, ISP.MI, ^GSPC…).
+    _grezzo = _q.upper()
+    if all(c.isalnum() or c in ".-^=" for c in _grezzo) \
+            and _grezzo not in [s for s, _ in _scelte]:
+        _scelte.append((_grezzo, f"{_grezzo} — usa questa sigla esatta"))
 
-# --- Ricerca per nome (con suggerimenti) ---
-query = st.sidebar.text_input("🔎 Cerca", placeholder="es. Apple, Eni, S&P 500, Tesla")
-if query and len(query.strip()) >= 2:
-    results = fu.search_symbols(query)
-    if results:
-        labels = [f"{s} — {n}  ·  {b or t}" for s, n, t, b in results]
-        idx = st.sidebar.selectbox(
-            "Risultati della ricerca", range(len(labels)),
-            format_func=lambda i: labels[i],
-        )
-        if st.sidebar.button("✅ Analizza questo", use_container_width=True):
-            st.session_state["ticker"] = results[idx][0]
-    else:
-        st.sidebar.caption("Nessun risultato — prova un altro termine.")
+if _scelte:
+    # La chiave contiene la ricerca: a ogni nuova ricerca la scelta riparte dal PRIMO risultato
+    # (il più pertinente) invece di restare sulla posizione selezionata nella ricerca precedente.
+    _i = st.sidebar.selectbox("Risultati", range(len(_scelte)), key=f"ris_{_q.upper()}",
+                              format_func=lambda i: _scelte[i][1])
+    _scelto = _scelte[min(_i, len(_scelte) - 1)][0]
+    # Applica la scelta SOLO quando cambia davvero: così il ticker impostato da altre sezioni
+    # (bottone «📊 Analizza») non viene sovrascritto dalla ricerca rimasta scritta nella casella.
+    if st.session_state.get("_ultima_ricerca") != (_q.upper(), _scelto):
+        st.session_state["_ultima_ricerca"] = (_q.upper(), _scelto)
+        st.session_state["ticker"] = _scelto
+elif len(_q) >= 2:
+    st.sidebar.caption("Nessun risultato — prova con meno lettere o con la sigla.")
 
-ticker = st.sidebar.text_input(
-    "Ticker da analizzare",
-    value=st.session_state.get("ticker", ""),
-    help="Es: AAPL, MSFT, ENI.MI, ISP.MI, ^GSPC, VWCE.DE",
-).strip().upper()
-st.session_state["ticker"] = ticker
-
-PERIOD_OPTIONS = {
-    "1 mese": "1mo", "3 mesi": "3mo", "6 mesi": "6mo",
-    "1 anno": "1y", "2 anni": "2y", "5 anni": "5y", "Massimo": "max",
-}
-period_label = st.sidebar.selectbox("Periodo storico", list(PERIOD_OPTIONS.keys()), index=3)
-period = PERIOD_OPTIONS[period_label]
-
-translate_news = st.sidebar.checkbox("🇮🇹 Traduci testi in italiano (notizie e descrizioni)", value=True)
+ticker = (st.session_state.get("ticker") or "").strip().upper()
+if ticker:
+    st.sidebar.caption(f"📌 In analisi: **{ticker}**")
 
 # --- Watchlist (preferiti) ---
 st.sidebar.markdown("---")

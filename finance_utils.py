@@ -1210,7 +1210,10 @@ def log_forecast(ticker, horizon_days, p_up, price):
             return
     rec.append({"date": today, "ticker": tk, "h": hh,
                 "p_up": float(p_up), "price": float(price), "outcome": None})
-    write_data_json(FORECAST_LOG_NAME, rec[-3000:])
+    # tetto ALTO + archivio: le righe che escono dal vivo vanno in archivio, non nel cestino.
+    # Le previsioni restano vive almeno 400 giorni (l'orizzonte lungo è 252 giorni di Borsa).
+    write_data_json(FORECAST_LOG_NAME,
+                    _archivia_e_pota(FORECAST_LOG_NAME, rec, _FORECAST_MAX, giorni_protetti=400))
 
 
 def resolve_forecasts():
@@ -1248,8 +1251,9 @@ def resolve_forecasts():
 
 
 def calibration_report():
-    """Brier score + tabella per fasce di probabilità (predetto vs realizzato). None se vuoto."""
-    rec = read_data_json(FORECAST_LOG_NAME, [])
+    """Brier score + tabella per fasce di probabilità (predetto vs realizzato). None se vuoto.
+    Legge lo storico COMPLETO (archivio + vivo): la calibrazione migliora accumulando casi."""
+    rec = load_registro_completo(FORECAST_LOG_NAME)
     if not isinstance(rec, list):
         return None
     done = [r for r in rec if r.get("outcome") is not None and r.get("p_up") is not None]
@@ -2108,14 +2112,25 @@ _REGISTRI_APPEND_ONLY = frozenset({
     "exit_history.json", "scenario_log.json", "presignal_log.json",
 })
 
+# TETTI del file VIVO, calibrati sulla dimensione REALE di una riga (misurata sul branch) perché
+# ogni file vivo deve restare sotto ~600 KB: oltre 1 MB l'API GitHub non restituisce più il
+# contenuto e la protezione anti-cancellazione si spegnerebbe in silenzio. Tutto ciò che esce dal
+# tetto NON viene buttato: va negli archivi annuali (vedi _archivia_e_pota / load_registro_completo).
+_SCENARIO_MAX_LIVE = 2000      # ~330 byte/riga → ~660 KB
+_PRESIGNAL_MAX_LIVE = 4000     # ~122 byte/riga → ~490 KB
+_EXIT_HISTORY_MAX_LIVE = 2000  # ~278 byte/riga → ~555 KB
+_FORECAST_MAX = 5000           # ~113 byte/riga → ~565 KB
+_CONV_LOG_MAX = 2000           # ~310 byte/riga → ~620 KB
+_TRACK_RECORD_MAX = 2500       # ~212 byte/riga → ~530 KB
+
 
 def _riduce_storico(name: str, nuovo_str: str, vecchio_str: str, force: bool = False) -> bool:
     """True se scrivere `nuovo_str` su un REGISTRO STORICO ne ridurrebbe il numero di elementi.
     Uno storico che si accorcia non è un dato reale: è il sintomo di una lettura fallita a monte
     (chi legge riceve il valore di ripiego, ci aggiunge una riga e riscrive tutto). I casi legittimi
-    non riducono nulla: un append aumenta di 1, e il tetto FIFO al massimo mantiene la lunghezza.
-    Per ridurre davvero (es. una pulizia voluta) si passa force=True."""
-    if force or name not in _REGISTRI_APPEND_ONLY:
+    non riducono nulla: un append aumenta di 1, e lo spostamento in archivio riscrive il file vivo
+    con `force=True`. Vale anche per i file d'archivio (archivio/...), che non si toccano più."""
+    if force or (name not in _REGISTRI_APPEND_ONLY and not name.startswith("archivio/")):
         return False
     try:
         nuovo, vecchio = json.loads(nuovo_str), json.loads(vecchio_str)
@@ -2138,7 +2153,7 @@ def write_data_json(name: str, obj, force: bool = False) -> None:
     una lettura remota fallita restituiva [] e il salvataggio lo scriveva sopra i dati buoni.
     Per ridurre davvero un registro serve force=True (scelta esplicita, non un effetto collaterale)."""
     content = json.dumps(obj, ensure_ascii=False, indent=0)
-    if not force and name in _REGISTRI_APPEND_ONLY:
+    if not force and (name in _REGISTRI_APPEND_ONLY or name.startswith("archivio/")):
         try:
             esistente = read_data_json(name, None)
         except Exception:
@@ -2147,7 +2162,13 @@ def write_data_json(name: str, obj, force: bool = False) -> None:
                 name, content, json.dumps(esistente, ensure_ascii=False, indent=0)):
             return          # non riduco lo storico
     try:
-        with open(os.path.join(APPDIR, name), "w", encoding="utf-8") as f:
+        percorso = os.path.join(APPDIR, name)
+        # i file d'archivio stanno in una sottocartella (archivio/…): va creata, altrimenti la
+        # scrittura fallirebbe in silenzio e l'archiviazione non partirebbe mai.
+        cartella = os.path.dirname(percorso)
+        if cartella:
+            os.makedirs(cartella, exist_ok=True)
+        with open(percorso, "w", encoding="utf-8") as f:
             f.write(content)
         _LOCAL_WRITES.add(name)        # read-your-writes: d'ora in poi leggi il locale per questo file
     except Exception:
@@ -2159,6 +2180,108 @@ def write_data_json(name: str, obj, force: bool = False) -> None:
         _fetch_remote_json.clear()
     except Exception:
         pass
+
+
+# ---------------------------------------------------------------------------
+# ARCHIVIO STORICO — nessuna riga viene MAI buttata.
+#
+# Perché i registri "vivi" hanno comunque un tetto: a ogni aggiunta il file viene riletto e
+# riscritto INTERO (è un JSON su un branch GitHub), e soprattutto l'API dei contenuti di GitHub
+# NON restituisce il contenuto dei file oltre ~1 MB: superata quella soglia si perderebbero il
+# confronto anti-duplicato e — cosa grave — la PROTEZIONE anti-cancellazione di _commit_to_github.
+# Quindi: file vivo piccolo e veloce (~600 KB al massimo), e tutto ciò che esce dal tetto finisce
+# in un archivio per ANNO (archivio/<registro>_<anno>.json) che non viene più potato né riscritto.
+# Le statistiche leggono archivio + vivo (load_registro_completo), così il quadro resta COMPLETO
+# per sempre; i risolutori lavorano solo sul vivo (le righe archiviate sono già mature).
+# ---------------------------------------------------------------------------
+ARCHIVIO_DIR = "archivio"
+_ANNO_INIZIO_ARCHIVIO = 2026        # primo anno del progetto: prima non esistono dati
+
+
+def _nome_archivio(name: str, anno) -> str:
+    base = name[:-5] if name.endswith(".json") else name
+    return f"{ARCHIVIO_DIR}/{base}_{anno}.json"
+
+
+def _anno_di(riga) -> str:
+    """Anno di una riga di registro, dal primo campo-data disponibile."""
+    if isinstance(riga, dict):
+        for k in ("date", "removed", "added", "obs_date", "pre_date"):
+            v = riga.get(k)
+            if v and len(str(v)) >= 4 and str(v)[:4].isdigit():
+                return str(v)[:4]
+    return "senza-data"
+
+
+def _riga_giovane(riga, giorni: int) -> bool:
+    """True se la riga è più recente di `giorni`: non va archiviata perché i suoi esiti
+    potrebbero non essere ancora maturi (i risolutori vedono solo il file vivo)."""
+    try:
+        d = datetime.date.fromisoformat(str(_anno_di(riga)) + "-01-01")  # fallback se manca il giorno
+        for k in ("date", "removed", "added"):
+            v = (riga or {}).get(k)
+            if v:
+                d = datetime.date.fromisoformat(str(v)[:10])
+                break
+        return d >= datetime.date.fromisoformat(_today_iso()) - datetime.timedelta(days=giorni)
+    except Exception:
+        return True          # data illeggibile: nel dubbio la tengo viva
+
+
+def _archivia_e_pota(name: str, rows: list, live_max: int, giorni_protetti: int = 0) -> list:
+    """Tiene il registro vivo entro `live_max` righe SPOSTANDO le più vecchie negli archivi
+    annuali (niente viene perso). Le righe più recenti di `giorni_protetti` restano vive anche se
+    oltre il tetto (i loro esiti devono ancora maturare). Se l'archiviazione non riesce, NON pota
+    nulla: meglio un file vivo più grande che dati buttati. Ritorna le righe da tenere vive."""
+    if not isinstance(rows, list) or len(rows) <= live_max:
+        return rows
+    taglio = len(rows) - live_max
+    candidati, resto = rows[:taglio], rows[taglio:]
+    if giorni_protetti:
+        protette = [r for r in candidati if _riga_giovane(r, giorni_protetti)]
+        candidati = [r for r in candidati if not _riga_giovane(r, giorni_protetti)]
+    else:
+        protette = []
+    if not candidati:
+        return rows
+    per_anno = {}
+    for r in candidati:
+        per_anno.setdefault(_anno_di(r), []).append(r)
+    for anno, righe in per_anno.items():
+        arc = _nome_archivio(name, anno)
+        try:
+            esistenti = read_data_json(arc, [])
+            if not isinstance(esistenti, list):
+                esistenti = []
+            nuovo = esistenti + righe
+            write_data_json(arc, nuovo)
+            verifica = read_data_json(arc, None)
+            if not isinstance(verifica, list) or len(verifica) < len(nuovo):
+                return rows          # archivio non confermato: non poto il vivo
+        except Exception:
+            return rows
+    return protette + resto
+
+
+def load_archivio(name: str) -> list:
+    """Tutte le righe archiviate di un registro (tutti gli anni disponibili)."""
+    out = []
+    anni = [str(a) for a in range(_ANNO_INIZIO_ARCHIVIO, int(_today_iso()[:4]) + 1)] + ["senza-data"]
+    for anno in anni:
+        d = read_data_json(_nome_archivio(name, anno), None)
+        if isinstance(d, list) and d:
+            out.extend(d)
+    return out
+
+
+def load_registro_completo(name: str, vivo=None) -> list:
+    """Registro COMPLETO = archivio + file vivo (in quest'ordine, cioè cronologico).
+    È quello che devono usare le STATISTICHE, così il quadro non si accorcia mai."""
+    if vivo is None:
+        vivo = read_data_json(name, [])
+    if not isinstance(vivo, list):
+        vivo = []
+    return load_archivio(name) + vivo
 
 
 # ---------------------------------------------------------------------------
@@ -2883,7 +3006,11 @@ def _log_convenience(kind, items, convmap) -> None:
                     "ret_5d": None, "ret_21d": None})
         added = True
     if added:
-        write_data_json(CONV_LOG_NAME, rec[-6000:])
+        # NB: il vecchio tetto di 6000 righe superava 1,8 MB — oltre il limite in cui l'API GitHub
+        # smette di restituire il contenuto (e quindi la protezione anti-cancellazione). Ora il
+        # file vivo è più piccolo ma NIENTE si perde: l'eccedenza va in archivio.
+        write_data_json(CONV_LOG_NAME,
+                        _archivia_e_pota(CONV_LOG_NAME, rec, _CONV_LOG_MAX, giorni_protetti=60))
 
 
 def resolve_convenience_log() -> int:
@@ -3710,7 +3837,7 @@ EXIT_COOLDOWN_NAME = "exit_cooldown.json"
 # --- Storico delle occasioni RIMOSSE dal Monitoraggio (lapidi anti-survivorship): senza di questo
 # ogni simulazione retrospettiva vede solo le sopravvissute e i risultati sembrano migliori del vero. ---
 EXIT_HISTORY_NAME = "exit_history.json"
-_EXIT_HISTORY_MAX = 400           # tetto: file piccolo, anni di rimozioni
+_EXIT_HISTORY_MAX = _EXIT_HISTORY_MAX_LIVE   # tetto del file VIVO; l'eccedenza va in archivio
 
 
 def load_exit_history() -> list:
@@ -3735,7 +3862,8 @@ def _append_exit_record(tk: str, entry: dict, reason: str) -> None:
             "first_target": first.get("target"), "first_stop": first.get("stop"),
             "my_target_price": entry.get("my_target_price"),
         })
-        write_data_json(EXIT_HISTORY_NAME, hist[-_EXIT_HISTORY_MAX:])
+        write_data_json(EXIT_HISTORY_NAME,
+                        _archivia_e_pota(EXIT_HISTORY_NAME, hist, _EXIT_HISTORY_MAX))
     except Exception:
         pass   # la lapide non deve mai bloccare la rimozione
 
@@ -4119,7 +4247,11 @@ def load_track_record() -> list:
 
 
 def save_track_record(records: list) -> None:
-    write_data_json(TRACK_RECORD_NAME, records)
+    # prima non aveva tetto: crescendo avrebbe superato 1 MB, spegnendo la protezione
+    # anti-cancellazione. Ora il vivo è limitato e l'eccedenza va in archivio (niente si perde).
+    write_data_json(TRACK_RECORD_NAME,
+                    _archivia_e_pota(TRACK_RECORD_NAME, records, _TRACK_RECORD_MAX,
+                                     giorni_protetti=60))
 
 
 def update_track_record() -> list:
@@ -4166,8 +4298,9 @@ def update_track_record() -> list:
 
 
 def track_record_stats() -> dict:
-    """Statistiche aggregate sulle promozioni: rendimento medio, % di volte in positivo, migliore/peggiore."""
-    records = load_track_record()
+    """Statistiche aggregate sulle promozioni: rendimento medio, % di volte in positivo,
+    migliore/peggiore. Su TUTTO lo storico (archivio + file vivo)."""
+    records = load_registro_completo(TRACK_RECORD_NAME, load_track_record())
 
     def agg(field):
         vals = [r[field] for r in records if r.get(field) is not None]
@@ -4189,7 +4322,7 @@ def track_record_entry_comparison() -> dict:
     l'inizio dell'osservazione e la promozione ("quanto si paga l'attesa della conferma").
     Con meno di 3 campioni ritorna solo {n} (troppo poco per dire qualcosa)."""
     promo_rets, obs_rets, heads = [], [], []
-    for r in load_track_record():
+    for r in load_registro_completo(TRACK_RECORD_NAME, load_track_record()):
         op, p, rn = r.get("obs_price"), r.get("price"), r.get("ret_now")
         if not op or not p or op <= 0 or p <= 0 or rn is None:
             continue
@@ -4214,7 +4347,7 @@ def track_record_entry_comparison() -> dict:
 # ingressi si confrontano ad armi pari (stessa uscita, entrata diversa).
 # ---------------------------------------------------------------------------
 SCENARIO_LOG_NAME = "scenario_log.json"
-_SCENARIO_MAX = 600                     # tetto righe (file piccolo, anni di promozioni)
+_SCENARIO_MAX = _SCENARIO_MAX_LIVE      # tetto del file VIVO; l'eccedenza va in archivio
 # MOMENTI D'ACQUISTO: quando entra in «In anticipo» (pre-segnale solido) · a inizio osservazione ·
 # alla promozione (regola attuale) · dopo il periodo di conferma (5 gg di Borsa breve, 10 lungo).
 _SCENARIO_BUYS = ("anticipo", "osservazione", "promozione", "conferma")
@@ -4278,7 +4411,8 @@ def _log_promotion_scenario(tk, kind, promo_price, obs_price, obs_date, target, 
                      "target": target, "stop": stop,
                      "reliab": reliab, "prob_gain": prob_gain, "prob_loss": prob_loss, "conv": conv,
                      "res": {}})
-        write_data_json(SCENARIO_LOG_NAME, rows[-_SCENARIO_MAX:])
+        write_data_json(SCENARIO_LOG_NAME,
+                        _archivia_e_pota(SCENARIO_LOG_NAME, rows, _SCENARIO_MAX, giorni_protetti=400))
     except Exception:
         pass   # il log degli scenari non deve mai bloccare una promozione
 
@@ -4386,7 +4520,8 @@ def resolve_scenarios() -> int:
                 res[key] = round((float(sp) / float(bp) - 1) * 100, 2)
                 changed += 1
     if changed:
-        write_data_json(SCENARIO_LOG_NAME, rows[-_SCENARIO_MAX:])
+        write_data_json(SCENARIO_LOG_NAME,
+                        _archivia_e_pota(SCENARIO_LOG_NAME, rows, _SCENARIO_MAX, giorni_protetti=400))
     return changed
 
 
@@ -4398,7 +4533,9 @@ def scenario_report(kind: str = "short", min_rel: int = 0, min_pg: int = 0,
       {n_tot, n_casi, maturi, celle: {"acquisto|vendita": {n, avg, hit, med, best, worst}},
        casi: {"acquisto|vendita": [{ticker, date, reliab, prob_gain, prob_loss, conv, ret}, …]}}
     I «casi» sono in ordine di data: servono sia all'elenco di dettaglio sia al grafico cumulato."""
-    tutte = [r for r in load_scenario_log() if not r.get("bad_data") and r.get("kind") == kind]
+    # STORICO COMPLETO (archivio + vivo): il quadro non si accorcia mai col passare del tempo
+    tutte = [r for r in load_registro_completo(SCENARIO_LOG_NAME, load_scenario_log())
+             if not r.get("bad_data") and r.get("kind") == kind]
     sel = [r for r in tutte
            if _rel_rank(r.get("reliab")) >= min_rel
            and (r.get("prob_gain") is None or r["prob_gain"] >= min_pg)
@@ -4445,7 +4582,7 @@ def net_eur(ret_pct, importo: float = 30.0, fee: float = 1.0, tax=None):
 # 7 e 30 giorni, ne verifica l'esito reale: così anche il pre-segnale ha la sua scheda voti.
 # ---------------------------------------------------------------------------
 PRESIGNAL_NAME = "presignal_log.json"
-_PRESIGNAL_MAX = 500
+_PRESIGNAL_MAX = _PRESIGNAL_MAX_LIVE    # tetto del file VIVO; l'eccedenza va in archivio
 _PRE_MIN_CONV = 65        # convenienza minima per dire "solida" (l'osservazione parte da 60)
 _PRE_MIN_DAYS = 1         # almeno 2 giorni di osservazione (via il rumore delle appena entrate)
 
@@ -4494,7 +4631,8 @@ def record_presignals() -> list:
                      "ret_7d": None, "ret_30d": None})
         added.append(s["ticker"])
     if added:
-        write_data_json(PRESIGNAL_NAME, rows[-_PRESIGNAL_MAX:])
+        write_data_json(PRESIGNAL_NAME,
+                        _archivia_e_pota(PRESIGNAL_NAME, rows, _PRESIGNAL_MAX, giorni_protetti=60))
     return added
 
 
@@ -4543,13 +4681,15 @@ def resolve_presignals() -> int:
                     r[fld] = round((float(s.iloc[0]) / float(base) - 1) * 100, 2)
                     changed += 1
     if changed:
-        write_data_json(PRESIGNAL_NAME, rows[-_PRESIGNAL_MAX:])
+        write_data_json(PRESIGNAL_NAME,
+                        _archivia_e_pota(PRESIGNAL_NAME, rows, _PRESIGNAL_MAX, giorni_protetti=60))
     return changed
 
 
 def presignal_stats() -> dict:
     """Affidabilità del pre-segnale finora: per tipo → esito medio e % positivi a 7 e 30 giorni."""
-    rows = [r for r in load_presignal_log() if not r.get("bad_data")]
+    rows = [r for r in load_registro_completo(PRESIGNAL_NAME, load_presignal_log())
+            if not r.get("bad_data")]          # archivio + vivo: statistica su TUTTO lo storico
     out = {"n_rows": len(rows)}
     for kind in ("short", "long"):
         sel = [r for r in rows if r.get("kind") == kind]
@@ -4563,11 +4703,11 @@ def presignal_stats() -> dict:
     return out
 
 
-def track_record_calibration() -> dict:
+def track_record_calibration() -> dict:      # NB: legge lo storico completo (archivio + vivo)
     """Calibrazione ONESTA e in avanti del punteggio: resa reale delle promozioni divisa per
     FASCIA di convenienza (alta/media/bassa al momento della promozione). Risponde a:
     'la convenienza alta rende davvero più della bassa?'. Ritorna fasce + un verdetto."""
-    records = load_track_record()
+    records = load_registro_completo(TRACK_RECORD_NAME, load_track_record())
     bande = [("🟢 Alta (≥70)", lambda c: c is not None and c >= 70),
              ("🟡 Media (50–69)", lambda c: c is not None and 50 <= c < 70),
              ("🔴 Bassa (<50)", lambda c: c is not None and c < 50)]

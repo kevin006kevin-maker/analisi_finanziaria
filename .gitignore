@@ -12,6 +12,11 @@ portfolio.json
 sell_alerts.json
 forecast_log.json
 opp_config.json
+conv_log.json
+conv_weights.json
+# Archivi storici dei registri (archivio/<registro>_<anno>.json): sono DATI, vivono sul branch
+# auto-data e non devono finire nel repository del codice.
+archivio/
 
 # Script di verifica/sviluppo non necessari all'app
 ml_verify.py

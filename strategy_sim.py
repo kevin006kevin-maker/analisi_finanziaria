@@ -85,7 +85,8 @@ def _positions():
                     "target": snaps[0].get("target"),
                     "p_last": float(snaps[-1]["price"]),
                     "entry": e, "removed": None, "reason": None})
-    for r in fu.load_exit_history():
+    # storico completo (archivio + vivo): includo TUTTE le rimozioni, anche quelle vecchie
+    for r in fu.load_registro_completo(fu.EXIT_HISTORY_NAME, fu.load_exit_history()):
         if not r.get("first_price"):
             continue
         out.append({"ticker": r.get("ticker"), "kind": r.get("kind", "short"), "open": False,
