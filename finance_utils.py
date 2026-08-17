@@ -3080,6 +3080,19 @@ CONV_LOG_NAME = "conv_log.json"          # storia: fattori + resa forward, per s
 CONV_WEIGHTS_NAME = "conv_weights.json"  # pesi APPRESI (override dei prior quando validi)
 _FIT_MIN_SAMPLES = 150                   # esiti risolti minimi per attivare i pesi appresi
 _FIT_MAX_LEARNED = 0.6                   # quota massima dei pesi appresi (il resto resta prior)
+# Le righe di uno STESSO giorno non sono prove indipendenti: condividono il mercato di quel giorno.
+# Il registro cresce di ~120 righe al giorno, quindi 150 righe possono essere UN SOLO giorno di
+# scansione. Serve una soglia su qualcosa di indipendente: le giornate distinte.
+_FIT_MIN_GIORNI = 15
+# Le rese estreme si TAGLIANO (non si buttano) prima della regressione: se un frazionamento sfugge
+# alla guardia, non deve decidere lui i pesi. Il taglio è doppio: un limite fisso (±50%) e uno
+# ricavato dai dati (mediana ± k volte la dispersione tipica), perché un limite fisso da solo non
+# basta — una riga tagliata a +50% resta enorme rispetto a rese che si muovono di qualche punto.
+_FIT_WINSOR = 50.0
+_FIT_WINSOR_K = 5.0
+_FIT_TEST_QUOTA = 0.30      # ultima parte delle GIORNATE, usata solo per verificare (mai per imparare)
+_FIT_MARGINE = 0.010        # di quanto i pesi appresi devono battere quelli a mano per essere adottati
+_FIT_VERSIONE = 2           # timbro: i pesi scritti prima della verifica fuori campione non si usano
 
 
 def _log_convenience(kind, items, convmap) -> None:
@@ -3113,34 +3126,79 @@ def _log_convenience(kind, items, convmap) -> None:
         salva_registro(CONV_LOG_NAME, rec, _CONV_LOG_MAX, giorni_protetti=35)
 
 
+_SPLIT_TOLL = 0.25        # scostamento oltre il quale il prezzo registrato è su un'altra SCALA
+_RESA_IMPOSSIBILE = 100.0  # oltre questa resa si sospetta un frazionamento e si va a verificare
+
+
 def resolve_convenience_log() -> int:
     """Riempie la resa forward (5/21 giorni di Borsa) delle righe mature, dal prezzo storico. Per il job.
     Lavora su archivi + file vivo: questo registro cresce di ~120 righe al giorno, quindi una riga
     può finire in archivio prima dei 21 giorni di Borsa e senza questo resterebbe senza esito —
-    cioè inutile all'apprendimento dei pesi della convenienza."""
+    cioè inutile all'apprendimento dei pesi della convenienza.
+
+    GUARDIA ANTI-FRAZIONAMENTO (aggiunta ago 2026). Era l'unico dei quattro risolutori senza questo
+    controllo, e le conseguenze erano gravi: dopo un raggruppamento di azioni lo storico viene
+    riscalato mentre il prezzo registrato no, quindi la resa risultava assurda (misurato: +50.421%
+    su DFNS, +16.854% su INLF, 81 righe oltre il +100%). E questo registro non è una vetrina: le sue
+    rese sono il BERSAGLIO con cui si imparano i pesi della convenienza, e la regressione minimizza
+    l'errore al QUADRATO — quindi quelle poche righe decidevano quali fattori contano. Qui le righe
+    fuori scala vengono marcate `bad_data` (non cancellate: restano visibili) e le già risolte con
+    valori impossibili vengono ri-verificate contro lo storico e marcate a loro volta."""
     cache = {}
+
+    def _storico(tk):
+        if tk not in cache:
+            try:
+                cache[tk] = get_history(tk, "1y")
+            except Exception:
+                cache[tk] = None
+        h = cache[tk]
+        if h is None or getattr(h, "empty", True):
+            return None
+        closes = h["Close"].dropna()
+        if getattr(closes.index, "tz", None) is not None:
+            closes = closes.copy()
+            closes.index = closes.index.tz_localize(None)
+        return closes
+
+    def _fuori_scala(closes, x):
+        """True se il prezzo registrato non è sulla stessa scala della chiusura di quel giorno."""
+        try:
+            s0 = closes[closes.index >= pd.Timestamp(str(x["date"])[:10])]
+            return (not s0.empty) and abs(float(s0.iloc[0]) / float(x["price"]) - 1) > _SPLIT_TOLL
+        except Exception:
+            return False
 
     def _risolvi(rec):
         changed = 0
         for x in rec:
-            if not x.get("price") or x.get("ret_21d") is not None:
+            if x.get("bad_data") or not x.get("price"):
                 continue
-            tk = x.get("ticker")
-            for h_days, fld in ((5, "ret_5d"), (21, "ret_21d")):
-                if x.get(fld) is not None or _trading_days_between(x.get("date"), _today_iso(), x.get("ticker")) < h_days:
-                    continue
-                if tk not in cache:
-                    try:
-                        cache[tk] = get_history(tk, "1y")
-                    except Exception:
-                        cache[tk] = None
-                h = cache[tk]
-                if h is None or h.empty:
-                    continue
-                closes = h["Close"].dropna()
-                if getattr(closes.index, "tz", None) is not None:
-                    closes = closes.copy()
-                    closes.index = closes.index.tz_localize(None)
+            rese = [abs(x[c]) for c in ("ret_5d", "ret_21d") if x.get(c) is not None]
+            # 1) riparazione delle righe GIÀ risolte con valori impossibili (scritte prima di questa
+            #    guardia): si va a controllare la scala e, se è cambiata, si marcano.
+            if rese and max(rese) > _RESA_IMPOSSIBILE:
+                closes = _storico(x.get("ticker"))
+                if closes is not None and _fuori_scala(closes, x):
+                    x["bad_data"] = True
+                    changed += 1
+                continue
+            if x.get("ret_21d") is not None:
+                continue
+            # 2) risoluzione normale, con il controllo di scala PRIMA di scrivere qualsiasi resa
+            attesi = [(h, f) for h, f in ((5, "ret_5d"), (21, "ret_21d"))
+                      if x.get(f) is None
+                      and _trading_days_between(x.get("date"), _today_iso(), x.get("ticker")) >= h]
+            if not attesi:
+                continue
+            closes = _storico(x.get("ticker"))
+            if closes is None:
+                continue
+            if _fuori_scala(closes, x):
+                x["bad_data"] = True
+                changed += 1
+                continue
+            for h_days, fld in attesi:
                 try:
                     start = datetime.date.fromisoformat(str(x["date"])[:10])
                     target = pd.to_datetime(start + datetime.timedelta(days=round(h_days * 7 / 5)))
@@ -3155,60 +3213,180 @@ def resolve_convenience_log() -> int:
     return aggiorna_registro_completo(CONV_LOG_NAME, _risolvi)
 
 
-def fit_conv_weights(kind: str):
-    """Stima i pesi della convenienza dai rendimenti realizzati (resa forward 21g) con regressione
-    RIDGE sui fattori standardizzati, FUSA con i pesi a mano (prior) in base alla numerosità.
-    Ritorna None finché i campioni risolti non bastano (niente overfitting su pochi dati).
-    Impara su TUTTO lo storico (archivi + vivo): più casi risolti, pesi più stabili."""
-    rec = load_registro_completo(CONV_LOG_NAME)
-    if not isinstance(rec, list):
-        return None
-    rows = [x for x in rec if x.get("kind") == kind and x.get("ret_21d") is not None and x.get("factors")]
-    if len(rows) < _FIT_MIN_SAMPLES:
-        return None
-    keys = list(_CONV_WEIGHTS[kind].keys())
+def _giorno_di(x) -> str:
+    return str((x or {}).get("date") or "")[:10]
+
+
+def _limiti_resa(valori):
+    """Limiti entro cui tagliare le rese: mediana ± k volte la dispersione tipica, mai oltre il
+    limite fisso. La dispersione si misura con lo scarto MEDIANO (non la deviazione standard, che
+    sarebbe già rovinata dai valori assurdi che vogliamo tagliare)."""
+    v = np.asarray([float(x) for x in valori], dtype=float)
+    med = float(np.median(v))
+    mad = float(np.median(np.abs(v - med)))
+    if mad > 0:
+        largo = _FIT_WINSOR_K * 1.4826 * mad
+        return max(-_FIT_WINSOR, med - largo), min(_FIT_WINSOR, med + largo)
+    return -_FIT_WINSOR, _FIT_WINSOR
+
+
+def _ridge_pesi(rows, keys, prior):
+    """Pesi grezzi dalla regressione ridge, con due accorgimenti che prima mancavano:
+    - la resa si demedia GIORNO PER GIORNO, non una volta su tutto: altrimenti i pesi imparano
+      l'andamento generale del mercato (se un giorno sale tutto, sale anche chi era peggio) invece
+      di imparare a distinguere i titoli fra loro, che è l'unica cosa che serve alla selezione;
+    - la resa si taglia a ±_FIT_WINSOR: la ridge minimizza l'errore al quadrato, quindi senza il
+      taglio una sola riga da +2000% (raggruppamento sfuggito) deciderebbe tutti i pesi.
+    Ritorna i pesi riscalati alla stessa grandezza dei prior, oppure None."""
     stats = {k: _robust([x["factors"].get(k) for x in rows]) for k in keys}
     X = np.array([[_zc(x["factors"].get(k), stats[k]) for k in keys] for x in rows], dtype=float)
-    y = np.array([float(x["ret_21d"]) for x in rows], dtype=float)
-    y = y - y.mean()
+    lo, hi = _limiti_resa([x["ret_21d"] for x in rows])
+    y = np.array([float(np.clip(x["ret_21d"], lo, hi)) for x in rows], dtype=float)
+    giorni = np.array([_giorno_di(x) for x in rows])
+    for g in np.unique(giorni):
+        m = giorni == g
+        y[m] = y[m] - y[m].mean()
     try:
-        w = np.linalg.solve(X.T @ X + 5.0 * np.eye(X.shape[1]), X.T @ y)   # ridge
+        w = np.linalg.solve(X.T @ X + 5.0 * np.eye(X.shape[1]), X.T @ y)
     except Exception:
-        return None
-    prior = np.array([_CONV_WEIGHTS[kind][k] for k in keys], dtype=float)
+        return None, stats
     if np.sum(np.abs(w)) > 1e-9:
-        w = w / np.sum(np.abs(w)) * np.sum(np.abs(prior))   # scala comparabile ai prior
-    alpha = min(_FIT_MAX_LEARNED, len(rows) / 1000.0)        # più dati → più peso all'appreso
-    blended = np.clip((1 - alpha) * prior + alpha * w, 0.0, None)   # niente pesi negativi
-    return {k: round(float(v), 3) for k, v in zip(keys, blended)}
+        w = w / np.sum(np.abs(w)) * np.sum(np.abs(prior))
+    return w, stats
+
+
+def _ic_medio(rows, keys, pesi, stats) -> float:
+    """Quanto bene un insieme di pesi ORDINA i titoli: correlazione di rango fra punteggio e resa
+    calcolata DENTRO ogni giornata (mai fra giornate diverse, altrimenti misurerebbe il mercato),
+    poi media fra le giornate. È il metro con cui si decide se i pesi appresi valgono qualcosa."""
+    per_giorno = {}
+    for x in rows:
+        per_giorno.setdefault(_giorno_di(x), []).append(x)
+    lo, hi = _limiti_resa([x["ret_21d"] for x in rows])
+    ic = []
+    for _g, gr in per_giorno.items():
+        if len(gr) < 8:
+            continue
+        punt = [sum(pesi[i] * _zc(x["factors"].get(k), stats[k]) for i, k in enumerate(keys)) for x in gr]
+        rese = [float(np.clip(x["ret_21d"], lo, hi)) for x in gr]
+        if len(set(punt)) < 3:
+            continue
+        c = pd.Series(punt).corr(pd.Series(rese), method="spearman")
+        if c is not None and not np.isnan(c):
+            ic.append(float(c))
+    return float(np.mean(ic)) if ic else float("nan")
+
+
+def fit_conv_weights(kind: str):
+    """Stima i pesi della convenienza dai rendimenti realizzati (resa a 21 giorni di Borsa) con
+    regressione RIDGE sui fattori standardizzati, FUSA con i pesi a mano in base alla numerosità.
+
+    NOVITÀ (ago 2026) — I PESI DEVONO DIMOSTRARE DI FUNZIONARE. Prima venivano adottati senza alcuna
+    verifica: imparati e giudicati sugli stessi dati, con l'unico controllo «almeno 150 righe».
+    Misurato: fuori campione non aggiungevano nulla sul breve e sul lungo erano PEGGIORI dei pesi
+    impostati a mano. Ora: si impara sulle giornate più VECCHIE, si verifica su quelle più recenti
+    (che il calcolo non ha visto) e si adottano solo se ordinano i titoli meglio dei pesi a mano.
+    Si escludono le righe marcate `bad_data` (frazionamenti) e si richiedono abbastanza GIORNATE
+    distinte, non solo righe.
+
+    Ritorna (pesi | None, diagnostica): None significa «tengo i pesi impostati a mano», e la
+    diagnostica dice perché — va salvata, altrimenti la scelta resta invisibile."""
+    rec = load_registro_completo(CONV_LOG_NAME)
+    audit = {"versione": _FIT_VERSIONE, "data": _today_iso(), "adottati": False}
+    if not isinstance(rec, list):
+        audit["esito"] = "registro non leggibile"
+        return None, audit
+    rows = [x for x in rec if x.get("kind") == kind and x.get("ret_21d") is not None
+            and x.get("factors") and not x.get("bad_data")]
+    giorni = sorted({_giorno_di(x) for x in rows if _giorno_di(x)})
+    audit.update({"righe": len(rows), "giorni": len(giorni),
+                  "scartate_frazionamenti": sum(1 for x in rec if x.get("kind") == kind and x.get("bad_data"))})
+    if len(rows) < _FIT_MIN_SAMPLES or len(giorni) < _FIT_MIN_GIORNI:
+        audit["esito"] = (f"servono almeno {_FIT_MIN_SAMPLES} righe e {_FIT_MIN_GIORNI} giornate "
+                          f"distinte: ho {len(rows)} righe in {len(giorni)} giornate")
+        return None, audit
+    keys = list(_CONV_WEIGHTS[kind].keys())
+    prior = np.array([_CONV_WEIGHTS[kind][k] for k in keys], dtype=float)
+    confine = giorni[max(1, int(len(giorni) * (1 - _FIT_TEST_QUOTA)))]
+    train = [x for x in rows if _giorno_di(x) < confine]
+    test = [x for x in rows if _giorno_di(x) >= confine]
+    audit.update({"confine": confine, "righe_train": len(train), "righe_verifica": len(test)})
+    if len(train) < _FIT_MIN_SAMPLES // 2 or len(test) < 50:
+        audit["esito"] = "dati insufficienti per separare apprendimento e verifica"
+        return None, audit
+    w_tr, stats_tr = _ridge_pesi(train, keys, prior)
+    if w_tr is None:
+        audit["esito"] = "la regressione non ha prodotto un risultato"
+        return None, audit
+    alpha_tr = min(_FIT_MAX_LEARNED, len(train) / 1000.0)
+    fusi_tr = np.clip((1 - alpha_tr) * prior + alpha_tr * w_tr, 0.0, None)
+    ic_app = _ic_medio(test, keys, fusi_tr, stats_tr)
+    ic_prior = _ic_medio(test, keys, prior, stats_tr)
+    audit.update({"ordina_meglio_appresi": None if np.isnan(ic_app) else round(ic_app, 4),
+                  "ordina_meglio_a_mano": None if np.isnan(ic_prior) else round(ic_prior, 4)})
+    # L'asticella non è «meglio dei pesi a mano», è «meglio dei pesi a mano E utile in assoluto»:
+    # se sulle giornate di verifica entrambi ordinano al CONTRARIO (correlazione negativa), essere
+    # «meno peggio» non significa niente e adottare i pesi imparati sarebbe una scelta a caso.
+    asticella = max(0.0, ic_prior) + _FIT_MARGINE
+    audit["asticella"] = round(asticella, 4)
+    if np.isnan(ic_app) or np.isnan(ic_prior) or not (ic_app > asticella):
+        audit["esito"] = ("sulle giornate di verifica i pesi imparati non ordinano i titoli meglio di "
+                          "quelli impostati a mano (o non li ordinano affatto): tengo quelli a mano")
+        return None, audit
+    # Superata la verifica: si ri-stima su TUTTE le giornate (più dati = pesi più stabili) e si adotta.
+    w_all, _ = _ridge_pesi(rows, keys, prior)
+    if w_all is None:
+        audit["esito"] = "verifica superata ma la stima finale è fallita"
+        return None, audit
+    alpha = min(_FIT_MAX_LEARNED, len(rows) / 1000.0)
+    blended = np.clip((1 - alpha) * prior + alpha * w_all, 0.0, None)
+    spenti = [k for k, v in zip(keys, blended) if v <= 0]
+    audit.update({"esito": "adottati: ordinano meglio dei pesi a mano", "adottati": True,
+                  "quota_appresa": round(alpha, 2), "fattori_spenti": spenti})
+    return {k: round(float(v), 3) for k, v in zip(keys, blended)}, audit
 
 
 def update_conv_weights() -> dict:
-    """Aggiorna (se possibile) i pesi appresi per breve e lungo. Chiamata dal job. Salva conv_weights.json."""
+    """Aggiorna (se possibile) i pesi appresi per breve e lungo. Chiamata dal job.
+    Salva SEMPRE la diagnostica in conv_weights.json sotto "_audit", anche quando i pesi vengono
+    rifiutati: così «perché sto usando i pesi a mano» è una domanda con risposta scritta."""
     learned = read_data_json(CONV_WEIGHTS_NAME, {})
     if not isinstance(learned, dict):
         learned = {}
+    audit_tot = learned.get("_audit") if isinstance(learned.get("_audit"), dict) else {}
     changed = False
     for kind in ("short", "long"):
-        w = fit_conv_weights(kind)
+        w, audit = fit_conv_weights(kind)
+        audit_tot[kind] = audit
         if w:
             learned[kind] = w
-            changed = True
+        else:
+            learned.pop(kind, None)      # niente pesi non verificati in giro
+        changed = True
     if changed:
+        learned["_audit"] = audit_tot
         write_data_json(CONV_WEIGHTS_NAME, learned)
     return learned
 
 
 def _active_weights(kind: str) -> dict:
-    """Pesi della convenienza: quelli APPRESI dai rendimenti realizzati se disponibili e validi,
-    altrimenti i prior a mano. Mantiene SEMPRE le stesse chiavi dei prior (niente chiavi spurie)."""
+    """Pesi della convenienza: quelli APPRESI se hanno superato la verifica fuori campione,
+    altrimenti quelli impostati a mano. Mantiene SEMPRE le stesse chiavi (niente chiavi spurie).
+
+    I pesi appresi si usano SOLO se portano il timbro della versione con verifica: quelli scritti
+    prima (ago 2026) erano tarati su rese falsate dai frazionamenti — bastava il 3,8% delle righe per
+    spostarli del 173% — e non erano mai stati messi alla prova. Senza timbro si ignorano."""
     base = dict(_CONV_WEIGHTS[kind])
     learned = read_data_json(CONV_WEIGHTS_NAME, {})
-    if isinstance(learned, dict) and isinstance(learned.get(kind), dict):
-        for k in base:
-            v = learned[kind].get(k)
-            if isinstance(v, (int, float)) and v >= 0:
-                base[k] = float(v)
+    if not isinstance(learned, dict) or not isinstance(learned.get(kind), dict):
+        return base
+    audit = (learned.get("_audit") or {}).get(kind) if isinstance(learned.get("_audit"), dict) else None
+    if not (isinstance(audit, dict) and audit.get("versione") == _FIT_VERSIONE and audit.get("adottati")):
+        return base
+    for k in base:
+        v = learned[kind].get(k)
+        if isinstance(v, (int, float)) and v >= 0:
+            base[k] = float(v)
     return base
 
 
@@ -3628,11 +3806,49 @@ def _append_snapshot(entry: dict, snapshot: dict) -> None:
         entry.update({"entry_price": snap.get("price"), "entry_target": snap.get("target"),
                       "entry_stop": snap.get("stop"), "entry_conv": snap.get("convenienza"),
                       "entry_date": snap["date"], "entry_src": "scatto"})
+    # MASSIMO RAGGIUNTO, aggiornato a ogni scatto e conservato fuori dalla lista potata: serve alla
+    # presa di profitto («quanto sei sceso dal massimo»). Senza questo, per le posizioni seguite da
+    # più di qualche settimana il massimo non era più ricostruibile da nessun dato salvato.
+    if snap.get("price") is not None:
+        try:
+            p = float(snap["price"])
+            if entry.get("max_price") is None or p > float(entry["max_price"]):
+                entry["max_price"], entry["max_date"] = round(p, 4), snap["date"]
+        except (TypeError, ValueError):
+            pass
     snaps.append(snap)
     snaps.sort(key=lambda s: s.get("date", ""))
     entry["snapshots"] = _trim_records(snaps, _SNAP_MAX_DAYS, _SNAP_MAX_KEEP)
     if snapshot.get("name") and not entry.get("name"):
         entry["name"] = snapshot["name"]
+
+
+def _livelli_validi(prezzo, target, stop):
+    """Scarta i livelli IMPOSSIBILI, restituendo (target, stop) con None al posto dei non plausibili.
+    Serve perché su titoli molto volatili il calcolo produce livelli senza senso e nessuno se ne
+    accorgeva: misurato sui dati veri, un titolo aveva lo stop a −3,95 (un prezzo NEGATIVO: non
+    poteva scattare per definizione, ed è infatti uscito solo per la regola del tempo dopo 28 giorni
+    di perdita) e 7 titoli su 83 avevano il bersaglio SOTTO il prezzo d'ingresso, cioè un obiettivo
+    già raggiunto il giorno dell'acquisto. Un livello che mente è peggio di un livello assente."""
+    try:
+        p = float(prezzo) if prezzo else None
+    except (TypeError, ValueError):
+        p = None
+    def _num(v):
+        try:
+            return float(v) if v is not None else None
+        except (TypeError, ValueError):
+            return None
+    t, s = _num(target), _num(stop)
+    if p:
+        if t is not None and t <= p:      # un bersaglio già raggiunto non è un bersaglio
+            t = None
+        if s is not None and (s <= 0 or s >= p):   # stop negativo, o sopra il prezzo pagato
+            s = None
+    else:
+        if s is not None and s <= 0:
+            s = None
+    return t, s
 
 
 def _ingresso(entry: dict) -> dict:
@@ -3645,13 +3861,15 @@ def _ingresso(entry: dict) -> dict:
     snaps = [s for s in (entry.get("snapshots") or []) if s.get("price")]
     s0 = snaps[0] if snaps else {}
     if entry.get("entry_price"):
-        return {"price": entry.get("entry_price"), "target": entry.get("entry_target"),
-                "stop": entry.get("entry_stop"), "conv": entry.get("entry_conv"),
+        t, s = _livelli_validi(entry.get("entry_price"), entry.get("entry_target"), entry.get("entry_stop"))
+        return {"price": entry.get("entry_price"), "target": t, "stop": s,
+                "conv": entry.get("entry_conv"),
                 "date": entry.get("entry_date") or entry.get("added"),
                 "sicuro": True, "src": entry.get("entry_src") or "scatto"}
     added = str(entry.get("added") or "")[:10]
     coerente = bool(s0) and bool(added) and str(s0.get("date"))[:10] <= added
-    return {"price": s0.get("price"), "target": s0.get("target"), "stop": s0.get("stop"),
+    t, s = _livelli_validi(s0.get("price"), s0.get("target"), s0.get("stop"))
+    return {"price": s0.get("price"), "target": t, "stop": s,
             "conv": s0.get("convenienza"), "date": s0.get("date"),
             "sicuro": coerente, "src": "scatto" if coerente else "potato"}
 
@@ -3939,18 +4157,34 @@ def opportunity_universe(kind: str) -> list:
 
 def record_observations(df, kind: str) -> None:
     """Registra la convenienza di ogni occasione scansionata più volte al giorno (al più ogni ~60 min,
-    e solo se convenienza o prezzo sono cambiati). Separata per orizzonte (short/long). Tetto per titolo."""
+    e solo se convenienza o prezzo sono cambiati). Separata per orizzonte (short/long). Tetto per titolo.
+
+    LE OSSERVAZIONI SCADONO (ago 2026). Un'occasione che smette di comparire fra quelle scansionate
+    congelava la propria storia: il primo e l'ultimo punto restavano quelli di settimane prima, e la
+    regola «il prezzo è risalito del 2% nella finestra di 3 giorni» diventava «il prezzo di oggi è più
+    alto di quello di un mese fa» — vera per sempre e senza alcun rimbalzo in corso. Misurato sui dati
+    veri: 11 promozioni su 60 di breve termine avevano una finestra più lunga del previsto, e un titolo
+    è stato promosso l'11 agosto con osservazioni iniziate il 29 giugno, a un prezzo identico alla
+    seconda cifra decimale a quello della promozione precedente. Ora, se l'osservazione si è interrotta
+    per più della finestra, la storia riparte da zero e va ri-superato il cancello d'ingresso."""
     if df is None or df.empty:
         return
     watch = load_opp_watch()
     now = _now_iso()
+    finestra = _OBS_WINDOW.get(kind, 3)
     mkt = _jsonable(market_perf_1m())   # contesto di mercato (~1 mese indice): per stimare poi l'alpha
     for tk, r in df.iterrows():
         key = f"{kind}:{tk}"
         conv = _jsonable(r.get("Convenienza"))
-        # Ingresso selettivo: una NUOVA occasione entra in osservazione solo se abbastanza
-        # conveniente (meno rumore); quelle GIÀ osservate continuano comunque ad aggiornarsi.
-        if key not in watch and (conv is None or conv < _OBS_ENTRY_CONV):
+        vecchia = watch.get(key)
+        if vecchia and (vecchia.get("obs") or []):
+            ultima = str((vecchia["obs"][-1] or {}).get("date") or "")
+            if ultima and _trading_days_between(ultima, _today_iso(), tk) > finestra + 2:
+                vecchia["obs"] = []                 # storia interrotta: si riparte da capo
+                vecchia["ripartita"] = _today_iso()
+        # Ingresso selettivo: una NUOVA occasione (o una ripartita) entra in osservazione solo se
+        # abbastanza conveniente (meno rumore); quelle già in corso continuano ad aggiornarsi.
+        if not (watch.get(key) or {}).get("obs") and (conv is None or conv < _OBS_ENTRY_CONV):
             continue
         e = watch.setdefault(key, {"ticker": tk, "kind": kind, "name": tk, "obs": []})
         e["ticker"], e["kind"] = tk, kind
@@ -4072,6 +4306,10 @@ _NOTIFY_MIN_RET = 3.0   # guadagno minimo (%) per la notifica di conferma (nient
 # Rimozione autonoma PRUDENTE: si toglie un'occasione solo se il deterioramento (`warn`) PERSISTE per
 # questi giorni di Borsa (CONFERMA, non al primo calo). Se recupera, il conto si azzera → niente churn.
 _EXIT_CONFIRM_DAYS = {"short": 4, "long": 10}
+# ...TRANNE quando il motivo è lo STOP: un livello di prezzo è già la conferma di sé stesso, e
+# aspettare fa uscire molto più in basso del livello che doveva proteggere (misurato: fino al 10,6%
+# sotto il proprio stop). La conferma serve dove il tempo è l'informazione, non dove lo è il prezzo.
+_SUBITO_ALLO_STOP = True
 _EXIT_COOLDOWN_DAYS = 5           # giorni di Borsa in cui un titolo tolto NON si ri-promuove (anti-churn)
 EXIT_COOLDOWN_NAME = "exit_cooldown.json"
 
@@ -4214,8 +4452,8 @@ def auto_promote_opportunities() -> list:
         days = _trading_days_between(obs[0]["date"], obs[-1]["date"], tk)
         window = _OBS_WINDOW.get(kind, 3)
         ret = (obs[-1]["price"] / obs[0]["price"] - 1) * 100 if obs[0]["price"] else 0.0
-        # Finestra conclusa E rimbalzo REALE del prezzo (≥ _PROMO_MIN_RET %, non rumore)
-        if not (days >= window and ret >= _PROMO_MIN_RET):
+        # La FINESTRA deve essere conclusa: senza questo non c'è nulla da valutare.
+        if days < window:
             continue
         # --- Quality-gate "tesi ancora viva": qui entra la CONVENIENZA, non solo il +2% di prezzo ---
         # 1) livello: ultima convenienza NOTA ≥ soglia (se ignota, non promuovere alla cieca)
@@ -4233,6 +4471,16 @@ def auto_promote_opportunities() -> list:
         # 4) (opzionale) trend di convenienza positivo, solo se attivato
         if _PROMO_USE_CONV_TREND and not _qualifies_promotion(
                 vals, window, _PROMO_MIN_GAIN, _PROMO_MAX_DIP):
+            continue
+        # RIMBALZO REALE DEL PREZZO (≥ _PROMO_MIN_RET %, non rumore): è l'ULTIMO cancello, e da qui in
+        # poi le due strade si separano. Chi lo supera viene promosso. Chi lo manca — avendo superato
+        # tutto il resto — NON viene promosso, ma viene REGISTRATO negli scenari come «candidata che il
+        # +2% ha scartato»: è l'unico modo di rispondere alla domanda «e se il +2% non ci fosse?», che
+        # la matrice degli scenari da sola non può affrontare, perché contiene solo i titoli promossi
+        # (cioè solo quelli che il +2% ha già ammesso). Serve perché i numeri dicono che la soglia
+        # arriva tardi: al momento della promozione metà del movimento è già avvenuto.
+        if ret < _PROMO_MIN_RET:
+            _log_scenario_senza_soglia(tk, kind, obs, ret, last_conv)
             continue
         track_opportunity(tk, kind,
                           note=f"🤖 Promossa il {_today_iso()}: dopo {days} giorni di Borsa di osservazione "
@@ -4266,6 +4514,149 @@ def auto_promote_opportunities() -> list:
         recs.extend(new_records)
         save_track_record(recs)
     return promoted
+
+
+# ---------------------------------------------------------------------------
+# PRESA DI PROFITTO — l'altra metà del monitoraggio, che prima non esisteva.
+#
+# Perché serve. Il sistema aveva QUATTRO modi di dire «questa sta perdendo» (crollo, dati fermi,
+# sotto lo stop, in perdita da troppi giorni) e NESSUNO di dire «questa ha già dato quello che
+# doveva dare». Non è una sfumatura: essendo tutte le regole di rimozione dei motivi di perdita, il
+# registro delle uscite non poteva contenere un vincitore — e infatti le prime 18 uscite sono 18
+# perdite. Intanto, sui titoli seguiti, il guadagno massimo toccato era in media +12,5% contro
+# +8,9% attuale: 3,6 punti restituiti per posizione, e in tre casi un guadagno oltre il 5% è
+# diventato una perdita. Il bersaglio d'ingresso è stato toccato da 31 titoli su 83 senza che
+# succedesse nulla.
+#
+# Come funziona. Nessuna chiamata di rete (come monitoring_warn): si guardano il prezzo d'ingresso
+# congelato, l'ultimo scatto e il MASSIMO raggiunto (che ora si memorizza sull'occasione, perché gli
+# scatti si conservano poche settimane e per le posizioni vecchie il massimo non era più
+# ricostruibile). Questa funzione NON vende e non rimuove niente: segnala.
+# ---------------------------------------------------------------------------
+_TRAIL_DAL_MAX = {"short": 8.0, "long": 15.0}   # quanto si tollera di scendere dal massimo toccato
+_TRAIL_MIN_GAIN = 3.0        # sotto questo guadagno non è «proteggere un utile», è normale oscillare
+_RSI_CALDO = {"short": 68.0, "long": 78.0}      # ipercomprato: il rimbalzo potrebbe essere esaurito
+
+
+def _massimo_raggiunto(entry: dict):
+    """Massimo prezzo toccato dall'ingresso: dal valore memorizzato sull'occasione, con ripiego sugli
+    scatti ancora in memoria. Ritorna (prezzo, data) oppure (None, None)."""
+    mx, md = entry.get("max_price"), entry.get("max_date")
+    snaps = [s for s in (entry.get("snapshots") or []) if s.get("price")]
+    if snaps:
+        s = max(snaps, key=lambda x: float(x["price"]))
+        if mx is None or float(s["price"]) > float(mx):
+            mx, md = s["price"], s.get("date")
+    return (float(mx), md) if mx is not None else (None, None)
+
+
+def presa_profitto(entry: dict, ticker=None):
+    """Motivo per cui un'occasione seguita sarebbe DA VALUTARE PER L'INCASSO (o None).
+    Quattro motivi, dal più netto al più prudente: bersaglio raggiunto · soglia personale raggiunta ·
+    guadagno che si sta sgonfiando dal massimo · rimbalzo forse esaurito (ipercomprato).
+    Non rimuove nulla: come monitoring_warn, è una diagnosi. Ritorna un dizionario con motivo,
+    urgenza ("incassa" o "tieni d'occhio"), guadagno attuale, massimo toccato e discesa dal massimo."""
+    snaps = [s for s in (entry.get("snapshots") or []) if s.get("price")]
+    if not snaps:
+        return None
+    ing = _ingresso(entry)
+    base, last = ing.get("price"), snaps[-1].get("price")
+    if not (base and last and ing.get("sicuro")):
+        return None          # senza un prezzo d'ingresso affidabile non si parla di guadagno
+    gain = (last / base - 1) * 100
+    kind = entry.get("kind", "short")
+    mx, md = _massimo_raggiunto(entry)
+    giu = ((last / mx - 1) * 100) if mx else None
+    esito = {"gain": round(gain, 1), "max": (round(mx, 4) if mx else None), "max_date": md,
+             "giu_dal_max": (round(giu, 1) if giu is not None else None)}
+    tgt = ing.get("target")
+    mio = entry.get("my_target_price")
+    if mio and last >= float(mio):
+        return dict(esito, motivo=f"soglia personale raggiunta ({float(mio):,.2f}): incassa",
+                    urgenza="incassa", tipo="soglia")
+    if tgt and last >= float(tgt):
+        return dict(esito, motivo=f"bersaglio {float(tgt):,.2f} raggiunto (sei a {gain:+.1f}%): "
+                                  f"valuta di incassare", urgenza="incassa", tipo="bersaglio")
+    trail = _TRAIL_DAL_MAX.get(kind, 8.0)
+    if gain > _TRAIL_MIN_GAIN and giu is not None and giu <= -trail:
+        return dict(esito, motivo=f"scesa {abs(giu):.0f}% dal massimo ({mx:,.2f}) restando in guadagno "
+                                  f"({gain:+.1f}%): il guadagno si sta sgonfiando",
+                    urgenza="incassa", tipo="sgonfia")
+    rsi = snaps[-1].get("rsi")
+    if rsi is not None and gain > 0 and float(rsi) >= _RSI_CALDO.get(kind, 68.0):
+        return dict(esito, motivo=f"ipercomprato (RSI {float(rsi):.0f}) con {gain:+.1f}% di guadagno: "
+                                  f"il rimbalzo potrebbe essere quasi esaurito",
+                    urgenza="tieni d'occhio", tipo="ipercomprato")
+    return None
+
+
+def aggiorna_presa_profitto() -> list:
+    """Per il job: aggiorna il verdetto di incasso su ogni occasione seguita e ritorna quelle da
+    NOTIFICARE (una volta sola, e l'avviso si ri-arma se il motivo rientra). Non rimuove nulla:
+    la decisione di vendere resta all'utente, perché il sistema non sa quanto hai comprato."""
+    tracked = load_tracking()
+    if not tracked:
+        return []
+    da_notificare, changed = [], False
+    for tk, e in tracked.items():
+        p = presa_profitto(e, tk)
+        if p:
+            if e.get("incasso", {}).get("motivo") != p["motivo"]:
+                changed = True
+            e["incasso"] = p
+            if p["urgenza"] == "incassa" and not e.get("incasso_notified"):
+                e["incasso_notified"] = True
+                changed = True
+                da_notificare.append({"ticker": tk, "name": e.get("name", tk),
+                                      "kind": e.get("kind", "short"), **p})
+        else:
+            if e.pop("incasso", None) is not None or e.pop("incasso_notified", None) is not None:
+                changed = True
+    if changed:
+        save_tracking(tracked)
+    return da_notificare
+
+
+_PRE_GIA_CORSA = 8.0      # risalita (%) dall'inizio dell'osservazione oltre la quale il grosso è fatto
+_PRE_RITRACCIA = 5.0      # quanto può scendere dal proprio massimo prima di dire «si sta sgonfiando»
+
+
+def gia_corsa(e_watch: dict, stato: dict = None):
+    """Per la sezione «In anticipo»: questa candidata ha GIÀ FATTO il movimento?
+    È il gemello di presa_profitto sul lato opposto — qui non hai comprato, quindi «è al massimo e
+    potrebbe scendere» non vuol dire «incassa» ma «troppo tardi per entrare». Serve perché il sistema
+    consegna metà del rimbalzo prima di segnalare (misurato: +4,8% mediano già avvenuto al momento
+    della promozione), e senza questo avviso si finisce per comprare la coda del movimento.
+
+    Si usa solo ciò che le osservazioni contengono (prezzo e convenienza: non c'è né il bersaglio né
+    l'RSI). Due motivi: la risalita dall'inizio dell'osservazione è già ampia, oppure il prezzo ha
+    già ritracciato dal proprio massimo restando in risalita. None se non è il caso."""
+    obs = [o for o in ((e_watch or {}).get("obs") or []) if o.get("price")]
+    if len(obs) < 2:
+        return None
+    try:
+        primo = float(obs[0]["price"])
+        ultimo = float(obs[-1]["price"])
+        mx = max(float(o["price"]) for o in obs)
+    except (TypeError, ValueError):
+        return None
+    if not primo or not mx:
+        return None
+    salita = (ultimo / primo - 1) * 100      # dove sta ADESSO rispetto all'inizio
+    corsa = (mx / primo - 1) * 100           # quanto ha corso al MASSIMO: è il movimento avvenuto
+    giu = (ultimo / mx - 1) * 100            # quanto ha già restituito da lì
+    base = {"salita": round(salita, 1), "corsa": round(corsa, 1), "max": round(mx, 4),
+            "giu_dal_max": round(giu, 1),
+            "kind": (e_watch or {}).get("kind") or (stato or {}).get("kind")}
+    if salita >= _PRE_GIA_CORSA:
+        return dict(base, motivo=f"già risalita {salita:+.1f}% da quando è osservata: il grosso del "
+                                 f"movimento è avvenuto", tipo="salita")
+    # Il movimento si misura fino al MASSIMO, non al prezzo di adesso: un titolo salito dell'8% e poi
+    # ripiegato al +2% ha già fatto la sua corsa, e guardando solo il +2% non si vedrebbe.
+    if corsa >= _PRE_GIA_CORSA * 0.6 and giu <= -_PRE_RITRACCIA:
+        return dict(base, motivo=f"era arrivata a {corsa:+.1f}% e ha già restituito {abs(giu):.0f}% dal "
+                                 f"massimo ({mx:,.2f}): il movimento si sta sgonfiando", tipo="ritraccia")
+    return None
 
 
 def _collapsed_or_stale(entry: dict, ticker=None):
@@ -4388,6 +4779,19 @@ def manage_monitoring() -> tuple:
             if e.get("warn") != warn:
                 e["warn"] = warn
                 changed = True
+            # LO STOP NON CHIEDE CONFERMA. Un motivo basato su un LIVELLO di prezzo è già la propria
+            # conferma: aspettare altri 4 giorni significa uscire molto più in basso del livello che
+            # avrebbe dovuto proteggere. Misurato sulle 4 uscite per stop: due hanno perso circa il
+            # doppio di quanto lo stop prometteva (una è uscita il 10,6% sotto il proprio stop).
+            # Le altre cause (perdita prolungata, dati fermi) restano con il periodo di conferma,
+            # perché lì il tempo È l'informazione.
+            if _SUBITO_ALLO_STOP and "stop" in warn.lower():
+                _append_exit_record(tk, e, warn)
+                del tracked[tk]
+                removed.append(tk)
+                _mark_exit_cooldown(tk)
+                changed = True
+                continue
             if _trading_days_between(e["warn_since"], _today_iso(), tk) >= _EXIT_CONFIRM_DAYS.get(kind, 5):
                 _append_exit_record(tk, e, e.get("warn") or "deterioramento confermato")
                 del tracked[tk]
@@ -4704,6 +5108,43 @@ def _log_promotion_scenario(tk, kind, promo_price, obs_price, obs_date, target, 
         pass   # il log degli scenari non deve mai bloccare una promozione
 
 
+_VARIANTE_DEDUP_GG = 30      # uno stesso titolo non si ri-registra come scartato entro un mese
+
+
+def _log_scenario_senza_soglia(tk, kind, obs, salita, conv=None) -> None:
+    """Registra una candidata che ha superato TUTTI i cancelli TRANNE il rimbalzo minimo del +2%.
+
+    Non viene promossa e non finisce nel monitoraggio: viene solo messa a verbale negli scenari con
+    `promossa=False`, così fra qualche settimana si potrà rispondere con i fatti alla domanda «e se il
+    +2% non ci fosse?». Prima non era possibile: la matrice degli scenari confronta i momenti in cui
+    COMPRARE, ma contiene solo i titoli che il +2% aveva già ammesso — cioè non poteva dire nulla su
+    quelli che scarta. Bersaglio e stop restano vuoti (li calcola track_opportunity, che qui non
+    viene chiamata): per queste righe la vendita «al bersaglio» non si potrà valutare, mentre quelle
+    a 7 / 30 / 365 giorni sì, e sono le più utili al confronto."""
+    try:
+        rows = load_scenario_log()
+        oggi = _today_iso()
+        recenti = {f"{r.get('kind')}:{r.get('ticker')}" for r in rows
+                   if 0 <= _days_between(r.get("date"), oggi) <= _VARIANTE_DEDUP_GG}
+        if f"{kind}:{str(tk).upper()}" in recenti:
+            return
+        ultimo = obs[-1] if obs else {}
+        rows.append({"ticker": str(tk).upper(), "kind": kind, "date": oggi,
+                     "promossa": False, "salita": round(float(salita), 2),
+                     "promo_price": ultimo.get("price"),
+                     "obs_price": (obs[0].get("price") if obs else None),
+                     "obs_date": str((obs[0].get("date") if obs else "") or "")[:10],
+                     "pre_price": None, "pre_date": None,
+                     "conf_price": None, "conf_date": None,
+                     "target": None, "stop": None,
+                     "reliab": ultimo.get("reliab"), "prob_gain": ultimo.get("prob_gain"),
+                     "prob_loss": ultimo.get("prob_loss"), "conv": conv,
+                     "res": {}})
+        salva_registro(SCENARIO_LOG_NAME, rows, _SCENARIO_MAX, giorni_protetti=400)
+    except Exception:
+        pass   # il verbale non deve mai disturbare il ciclo delle promozioni
+
+
 def _data_dopo_giorni_borsa(dal, n, ticker=None):
     """Data di calendario che cade `n` giorni di BORSA dopo `dal` (per il periodo di conferma)."""
     base = dal if isinstance(dal, datetime.date) else datetime.date.fromisoformat(str(dal)[:10])
@@ -4838,17 +5279,33 @@ def resolve_scenarios() -> int:
     return changed
 
 
+SCENARIO_VARIANTI = {
+    "reale": "Come fa adesso (aspetta il +2%)",
+    "senza_soglia": "Come se il +2% non esistesse",
+}
+
+
 def scenario_report(kind: str = "short", min_rel: int = 0, min_pg: int = 0,
-                    max_pl: int = 100, min_conv: int = 0) -> dict:
+                    max_pl: int = 100, min_conv: int = 0, variante: str = "reale") -> dict:
     """La «pagella» degli scenari per un tipo di occasione, con i filtri di qualità applicati al
     momento dell'ACQUISTO (affidabilità minima, probabilità di salita minima, rischio massimo,
     convenienza minima). Ritorna:
       {n_tot, n_casi, maturi, celle: {"acquisto|vendita": {n, avg, hit, med, best, worst}},
        casi: {"acquisto|vendita": [{ticker, date, reliab, prob_gain, prob_loss, conv, ret}, …]}}
-    I «casi» sono in ordine di data: servono sia all'elenco di dettaglio sia al grafico cumulato."""
+    I «casi» sono in ordine di data: servono sia all'elenco di dettaglio sia al grafico cumulato.
+
+    `variante` sceglie QUALI candidate entrano nel conto, senza cambiare nulla della matrice:
+      "reale"        → solo le occasioni davvero promosse (comportamento di sempre);
+      "senza_soglia" → anche quelle che avevano superato tutti i controlli TRANNE il rimbalzo minimo
+                       del +2%, cioè la matrice «come se quella soglia non esistesse». Le righe delle
+                       scartate hanno `promossa=False` e non hanno bersaglio, quindi la colonna «alla
+                       soglia» resta popolata solo dalle promosse: il confronto onesto è sulle colonne
+                       a 7 / 30 / 365 giorni.
+    Le righe registrate prima di questa modifica non hanno il campo `promossa` e contano come promosse."""
     # STORICO COMPLETO (archivio + vivo): il quadro non si accorcia mai col passare del tempo
     tutte = [r for r in load_registro_completo(SCENARIO_LOG_NAME, load_scenario_log())
-             if not r.get("bad_data") and r.get("kind") == kind]
+             if not r.get("bad_data") and r.get("kind") == kind
+             and (variante == "senza_soglia" or r.get("promossa", True))]
     sel = [r for r in tutte
            if _rel_rank(r.get("reliab")) >= min_rel
            and (r.get("prob_gain") is None or r["prob_gain"] >= min_pg)
@@ -4874,19 +5331,131 @@ def scenario_report(kind: str = "short", min_rel: int = 0, min_pg: int = 0,
                           "med": round(med, 2), "best": round(vals[-1], 2), "worst": round(vals[0], 2)}
             casi[key] = punti
     return {"n_tot": len(tutte), "n_casi": len(sel), "celle": celle, "casi": casi,
+            "variante": variante,
+            "n_scartate": sum(1 for r in tutte if r.get("promossa") is False),
             "n_totale_log": len([r for r in load_scenario_log() if not r.get("bad_data")])}
 
 
-def net_eur(ret_pct, importo: float = 30.0, fee: float = 1.0, tax=None):
-    """Guadagno NETTO in euro di una posizione: lordo − commissioni − 26% sulla plusvalenza
-    (stessa formula del Portafoglio). È il numero che dice se l'operazione conviene DAVVERO:
-    con importi piccoli la commissione fissa può mangiarsi un rendimento positivo.
+def universo_benchmark(kind: str = "short", orizzonte: str = "21g", dal=None, al=None) -> dict:
+    """IL TERMINE DI CONFRONTO che mancava: «+4% rispetto a cosa?».
+
+    Prende TUTTI i titoli che il sistema ha guardato nel periodo (il registro della convenienza
+    contiene anche gli scartati, non solo i promossi: è l'unico campione raccolto senza pregiudizio) e
+    dice come sono andati nello stesso orizzonte. Senza questo numero non si può sapere se la
+    selezione aggiunge qualcosa: misurato una volta, le promozioni facevano +4,01% a 7 giorni contro
+    +2,65% dei titoli semplicemente guardati, cioè +1,4 punti e la stessa percentuale di volte in
+    positivo. È la differenza fra «il sistema funziona» e «il mercato saliva».
+
+    Si usa la MEDIANA come numero principale: la media di questo registro è dominata da pochi casi
+    estremi. Le righe marcate `bad_data` (frazionamenti) sono escluse."""
+    campo = {"5g": "ret_5d", "7g": "ret_5d", "21g": "ret_21d", "30g": "ret_21d"}.get(orizzonte, "ret_21d")
+    righe = [x for x in load_registro_completo(CONV_LOG_NAME)
+             if x.get("kind") == kind and not x.get("bad_data") and x.get(campo) is not None]
+    if dal:
+        righe = [x for x in righe if _giorno_di(x) >= str(dal)[:10]]
+    if al:
+        righe = [x for x in righe if _giorno_di(x) <= str(al)[:10]]
+    if not righe:
+        return {"n": 0, "campo": campo}
+    v = sorted(float(x[campo]) for x in righe)
+    n = len(v)
+    med = v[n // 2] if n % 2 else (v[n // 2 - 1] + v[n // 2]) / 2
+    giorni = {_giorno_di(x) for x in righe}
+    return {"n": n, "giorni": len(giorni), "titoli": len({x.get("ticker") for x in righe}),
+            "campo": campo, "orizzonte": orizzonte,
+            "med": round(med, 2), "avg": round(sum(v) / n, 2),
+            "hit": round(100 * sum(1 for x in v if x > 0) / n),
+            "dal": min(giorni), "al": max(giorni)}
+
+
+def resa_regole_sistema(importo: float = 30.0, fee: float = 1.0) -> dict:
+    """LA MISURA CHE MANCAVA: quanto avrebbe reso seguire il sistema ALLA LETTERA.
+
+    Nessuno dei registri lo diceva. La scheda voti misura «quanto si è mosso il prezzo dopo la
+    promozione» (e continua a seguire anche i titoli che il sistema ha già tolto, migliorando le
+    perdite); la matrice degli scenari vende a 7 / 30 / 365 giorni o al bersaglio, cioè con regole che
+    il sistema non applica. Lo stop e la regola «in perdita da troppi giorni» non erano MAI misurati,
+    pur essendo le uniche due che agiscono davvero.
+
+    Qui la strategia è quella eseguibile: compro alla promozione, vendo quando il sistema toglie
+    l'occasione. Le posizioni ancora aperte si valutano al prezzo di oggi e sono contate a parte,
+    perché una posizione aperta non è un risultato: è una scommessa in corso.
+    Il netto in euro conta DUE commissioni (acquisto e vendita)."""
+    chiuse, aperte = [], []
+    for r in load_registro_completo(EXIT_HISTORY_NAME, load_exit_history()):
+        p_in, p_out = r.get("first_price"), r.get("last_price")
+        if not p_in or not p_out:
+            continue
+        ret = (float(p_out) / float(p_in) - 1) * 100
+        chiuse.append({"ticker": r.get("ticker"), "kind": r.get("kind", "short"), "ret": ret,
+                       "motivo": r.get("reason"), "dal": r.get("added"), "al": r.get("removed"),
+                       "ingresso_certo": r.get("first_sicuro", None)})
+    for tk, e in load_tracking().items():
+        snaps = [s for s in (e.get("snapshots") or []) if s.get("price")]
+        ing = _ingresso(e)
+        if not (snaps and ing.get("price") and ing.get("sicuro")):
+            continue
+        aperte.append({"ticker": tk, "kind": e.get("kind", "short"),
+                       "ret": (float(snaps[-1]["price"]) / float(ing["price"]) - 1) * 100,
+                       "dal": e.get("added")})
+
+    def _agg(items):
+        if not items:
+            return {"n": 0}
+        v = sorted(x["ret"] for x in items)
+        n = len(v)
+        med = v[n // 2] if n % 2 else (v[n // 2 - 1] + v[n // 2]) / 2
+        netti = [net_eur(x, importo, fee) for x in v]
+        return {"n": n, "med": round(med, 2), "avg": round(sum(v) / n, 2),
+                "hit": round(100 * sum(1 for x in v if x > 0) / n),
+                "netto_medio": round(sum(netti) / n, 2), "netto_totale": round(sum(netti), 2),
+                "in_utile": sum(1 for x in netti if x > 0),
+                "peggiore": round(v[0], 2), "migliore": round(v[-1], 2)}
+
+    per_motivo = {}
+    for x in chiuse:
+        m = str(x.get("motivo") or "?")
+        etichetta = ("sotto lo stop" if "stop" in m.lower() else
+                     "in perdita da troppo" if "perdita" in m.lower() else
+                     "crollo/delisting" if "crollo" in m.lower() else
+                     "dati fermi" if "dati" in m.lower() else
+                     "scelta tua" if "manuale" in m.lower() else m[:28])
+        per_motivo.setdefault(etichetta, []).append(x)
+    return {"importo": importo, "fee": fee, "pareggio_pct": round(pareggio_pct(importo, fee), 2),
+            "chiuse": _agg(chiuse), "aperte": _agg(aperte),
+            "per_motivo": {k: _agg(v) for k, v in sorted(per_motivo.items(),
+                                                         key=lambda kv: -len(kv[1]))},
+            "righe_chiuse": sorted(chiuse, key=lambda x: str(x.get("al") or ""), reverse=True)}
+
+
+_LATI_OPERAZIONE = 2      # un'operazione completa paga la commissione DUE volte: comprare e vendere
+
+
+def net_eur(ret_pct, importo: float = 30.0, fee: float = 1.0, tax=None, lati: int = _LATI_OPERAZIONE):
+    """Guadagno NETTO in euro di un'operazione completa: lordo − commissioni − 26% sulla plusvalenza.
+    È il numero che dice se l'operazione conviene DAVVERO: con importi piccoli la commissione fissa
+    può mangiarsi un rendimento positivo.
+
+    ATTENZIONE, correzione di ago 2026: `fee` è la commissione di UNA operazione (un ordine), e
+    un'andata e ritorno ne paga DUE (`lati`). Prima se ne contava una sola, quindi ogni «guadagno
+    netto» mostrato era ottimista di circa un euro e il punto di pareggio sembrava la metà di quello
+    vero: con 30 € e 1 € di commissione il pareggio non è +3,3% ma +6,7%.
     (`tax` si risolve a runtime: CAPITAL_GAINS_TAX è definita più in basso nel file.)"""
     if ret_pct is None:
         return None
     t = CAPITAL_GAINS_TAX if tax is None else tax
     g = float(importo) * float(ret_pct) / 100.0
-    return round(g - fee - t * max(g - fee, 0.0), 2)
+    costo = float(fee) * int(lati)
+    return round(g - costo - t * max(g - costo, 0.0), 2)
+
+
+def pareggio_pct(importo: float = 30.0, fee: float = 1.0, lati: int = _LATI_OPERAZIONE) -> float:
+    """Rendimento LORDO minimo perché un'operazione non perda soldi: copre solo le commissioni
+    (sotto quella soglia non c'è plusvalenza, quindi la tassa non entra). Da mostrare accanto a
+    qualunque media di rendimento: senza questo numero un +2% sembra un guadagno e non lo è."""
+    if not importo:
+        return float("inf")
+    return float(fee) * int(lati) / float(importo) * 100.0
 
 
 # ---------------------------------------------------------------------------
@@ -5184,17 +5753,20 @@ def net_return_pct(gross_pct, tax: float = CAPITAL_GAINS_TAX):
     return round(g * (1.0 - tax), 1) if g > 0 else round(g, 1)
 
 
-def personal_levels(price, amount_eur, fee_eur, desired_net_eur=None, tax: float = CAPITAL_GAINS_TAX):
+def personal_levels(price, amount_eur, fee_eur, desired_net_eur=None, tax: float = CAPITAL_GAINS_TAX,
+                    lati: int = _LATI_OPERAZIONE):
     """Livelli PERSONALI di vendita, calcolati dai TUOI numeri (importo e commissioni) invece che
     da un livello tecnico: - pareggio = prezzo che copre le sole commissioni;
     - soglia = prezzo che, venduto, lascia in tasca `desired_net_eur` € NETTI (dopo commissioni e
-      tassa del 26% sulla plusvalenza). Formula: per N € netti serve un lordo G = fee + N/(1−tax)
-      → in percentuale target_pct = G/importo*100. Percentuali nella valuta del titolo applicate al
-      nominale in EUR: l'oscillazione del cambio è ignorata (trascurabile su importi piccoli e
-      pochi giorni rispetto alle commissioni). Ritorna {break_even, be_pct, target, target_pct}
-      (target None se desired_net_eur non è dato) oppure None su input non validi."""
+      tassa del 26% sulla plusvalenza). Formula: per N € netti serve un lordo G = commissioni +
+      N/(1−tax) → in percentuale target_pct = G/importo*100. Percentuali nella valuta del titolo
+      applicate al nominale in EUR: l'oscillazione del cambio è ignorata (trascurabile su importi
+      piccoli e pochi giorni rispetto alle commissioni).
+    `fee_eur` è la commissione di UNA operazione: comprare e vendere ne paga `lati` (2).
+      Ritorna {break_even, be_pct, target, target_pct} (target None se desired_net_eur non è dato)
+      oppure None su input non validi."""
     try:
-        p, a, f = float(price), float(amount_eur), float(fee_eur)
+        p, a, f = float(price), float(amount_eur), float(fee_eur) * int(lati)
     except (TypeError, ValueError):
         return None
     if p <= 0 or a <= 0 or f < 0 or not (0 <= tax < 1):
@@ -5261,13 +5833,16 @@ def my_target_alerts() -> list:
     return out
 
 
-def portfolio_view(base: str = "EUR", tax_rate: float = CAPITAL_GAINS_TAX, fee: float = 1.0):
+def portfolio_view(base: str = "EUR", tax_rate: float = CAPITAL_GAINS_TAX, fee: float = 1.0,
+                   lati: int = _LATI_OPERAZIONE):
     """Calcola valore attuale, guadagno/perdita (lordo e NETTO) per posizione e totali, più gli
     avvisi target/stop. I TOTALI sono convertiti in valuta base (EUR) così valute diverse si
     sommano correttamente. Il **netto** = guadagno lordo − tassa del `tax_rate` sulla plusvalenza
-    (solo se in utile) − `fee` € di commissioni (per posizione). Stima: la tassa è calcolata per
+    (solo se in utile) − le commissioni. `fee` è la commissione di UNA operazione: la posizione ne
+    paga `lati` (2), perché per incassare devi anche vendere. Stima: la tassa è calcolata per
     singola posizione (non considera la compensazione delle minusvalenze). Ritorna (righe, totali);
     totals['complete']=False se qualche posizione è esclusa dal totale (prezzo o cambio mancanti)."""
+    fee = float(fee) * int(lati)
     positions = load_portfolio()
     rows = []
     tot_cost_eur = tot_val_eur = tot_net_eur = tot_tax_eur = tot_fee_eur = 0.0

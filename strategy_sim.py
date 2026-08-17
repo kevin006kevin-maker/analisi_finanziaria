@@ -32,11 +32,13 @@ STRATEGY_LABELS = {
 
 
 def _net_eur(gross_pct, importo, fee, tax):
-    """Netto in EUR di una posizione: come portfolio_view (tassa solo sull'utile post-commissioni)."""
+    """Netto in EUR di un'operazione completa: `fee` è la commissione di UN ordine e comprare +
+    vendere ne paga due (stessa correzione di fu.net_eur, ago 2026)."""
     if gross_pct is None:
         return None
     g = importo * float(gross_pct) / 100.0
-    return round(g - fee - tax * max(g - fee, 0.0), 2)
+    costo = fee * fu._LATI_OPERAZIONE
+    return round(g - costo - tax * max(g - costo, 0.0), 2)
 
 
 def _series_for(tk, entry, added):

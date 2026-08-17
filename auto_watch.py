@@ -102,6 +102,27 @@ def notify_my_target(items):
         else "Notifica soglia personale NON inviata (Telegram non configurato o errore).")
 
 
+def notify_profit(items):
+    """Notifica quando un'occasione seguita ha già dato quello che doveva dare: bersaglio raggiunto,
+    soglia personale raggiunta, oppure guadagno che si sta sgonfiando dal massimo. È l'unico avviso
+    sul lato GUADAGNO: prima il sistema sapeva segnalare solo le perdite."""
+    righe = ["💰 <b>Da valutare per l'incasso</b>", ""]
+    for it in items:
+        tk = html.escape(str(it.get("ticker")))
+        nm = html.escape(str(it.get("name") or tk))
+        righe.append(f"🔔 <b>{tk}</b> — {nm}")
+        righe.append("• " + html.escape(str(it.get("motivo"))))
+        if it.get("max") is not None and it.get("giu_dal_max") is not None:
+            righe.append(f"• guadagno ora <b>{it.get('gain'):+.1f}%</b> · massimo toccato "
+                         f"{it.get('max'):,.2f} ({it.get('giu_dal_max'):+.1f}% da lì)")
+        righe.append("")
+    righe.append("Apri l'app → Monitoraggio → «Da incassare». "
+                 "(Strumento informativo, non è un consiglio di vendita.)")
+    ok = fu.send_telegram("\n".join(righe))
+    log("Notifica incasso inviata." if ok
+        else "Notifica incasso NON inviata (Telegram non configurato o errore).")
+
+
 def notify_sales(fired):
     """Notifica Telegram quando conviene valutare la vendita di un titolo del portafoglio."""
     righe = ["💰 <b>Consiglio di vendita</b>", ""]
@@ -182,10 +203,20 @@ def main():
     except Exception as e:
         log(f"Errore durante la promozione automatica: {e!r}")
 
-    # PRIMA delle decisioni: congela/verifica i PREZZI D'INGRESSO delle occasioni seguite. Deve stare
-    # qui perché avvisi, rimozioni e notifiche della FASE 2 misurano il rendimento dall'ingresso: se
-    # quel prezzo viene dedotto dagli scatti (che si conservano poche settimane) il sistema "vede"
-    # perdite che non esistono e finisce per rimuovere posizioni sane.
+    # PREZZI FRESCHI PRIMA DI DECIDERE. Questo passaggio stava DOPO le decisioni di uscita, quindi
+    # ogni rimozione veniva decisa sul prezzo del giro precedente (mezz'ora prima) e il ritardo si
+    # sommava ai giorni di conferma: è la ragione per cui un titolo è uscito il 10,6% sotto il
+    # proprio stop invece che sul livello. Ora si aggiorna prima e si decide dopo.
+    try:
+        tracked = fu.auto_snapshot_tracked()
+        log(f"Monitoraggio: snapshot aggiornati ({len(tracked)} titoli seguiti).")
+    except Exception as e:
+        log(f"Errore snapshot monitoraggio: {e!r}")
+
+    # POI: congela/verifica i PREZZI D'INGRESSO delle occasioni seguite. Deve stare prima della FASE 2
+    # perché avvisi, rimozioni e notifiche misurano il rendimento dall'ingresso: se quel prezzo viene
+    # dedotto dagli scatti (che si conservano poche settimane) il sistema "vede" perdite che non
+    # esistono e finisce per rimuovere posizioni sane.
     try:
         anc = fu.ancora_ingressi()
         if anc.get("ancorati") or anc.get("riancorati") or anc.get("ignoti"):
@@ -221,14 +252,18 @@ def main():
     except Exception as e:
         log(f"Errore avvisi di uscita: {e!r}")
 
-    # Snapshot dei titoli SEGUITI (monitoraggio): registra un punto ~ogni ora (gap 60 min) con il
-    # prezzo live, così la storia si costruisce da sola anche a PC spento (prima avveniva solo
-    # all'apertura dell'app → ~12 ore tra un punto e l'altro).
+    # FASE 2d — PRESA DI PROFITTO: le occasioni che hanno già dato quello che dovevano dare
+    # (bersaglio raggiunto, o guadagno che si sta sgonfiando dal massimo). È l'unica porta d'uscita
+    # sul lato GUADAGNO: prima esistevano solo quattro modi di dire "sta perdendo".
     try:
-        tracked = fu.auto_snapshot_tracked()
-        log(f"Monitoraggio: snapshot aggiornati ({len(tracked)} titoli seguiti).")
+        incassi = fu.aggiorna_presa_profitto()
+        if incassi:
+            log(f"Da valutare per l'incasso: {', '.join(x['ticker'] for x in incassi)}")
+            notify_profit(incassi)
+        else:
+            log("Nessuna occasione da incassare in questo giro.")
     except Exception as e:
-        log(f"Errore snapshot monitoraggio: {e!r}")
+        log(f"Errore presa di profitto: {e!r}")
 
     # FASE 2c — Soglie PERSONALI: avvisa quando il prezzo copre commissioni + netto desiderato.
     # DOPO gli snapshot, così valuta il prezzo di OGGI e non quello del giro precedente.
