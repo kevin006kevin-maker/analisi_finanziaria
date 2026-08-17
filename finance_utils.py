@@ -2116,12 +2116,14 @@ _REGISTRI_APPEND_ONLY = frozenset({
     "exit_history.json", "scenario_log.json", "presignal_log.json",
 })
 
-# File a DIZIONARIO (chiave = titolo) che contengono lo stato vivo del sistema: i titoli seguiti
-# con tutta la loro storia e le occasioni in osservazione. Qui le rimozioni SONO legittime — una o
-# due alla volta — ma un crollo improvviso (svuotamento, o meno della metà da un giro all'altro)
-# non è un dato reale: è la stessa lettura fallita che il 16/08/2026 ha azzerato i registri, e qui
-# costerebbe l'intero monitoraggio. Sono i due file più importanti e finora erano senza protezione.
-_REGISTRI_DIZIONARIO = frozenset({"tracking.json", "opp_watch.json"})
+# File di STATO VIVO: contengono la situazione corrente (titoli seguiti con la loro storia,
+# occasioni in osservazione, posizioni in portafoglio, preferenze). Qui le rimozioni SONO legittime
+# — una o due alla volta — ma un crollo improvviso (svuotamento, o meno della metà da un giro
+# all'altro) non è un dato reale: è la stessa lettura fallita che il 16/08/2026 ha azzerato i
+# registri, e qui costerebbe il monitoraggio intero o il portafoglio. Chi rimuove DAVVERO passa
+# force=True: una scelta esplicita, mai un effetto collaterale.
+# NON stanno qui exit_cooldown.json e sell_alerts.json: si svuotano da soli per scadenza, è normale.
+_FILE_STATO_VIVO = frozenset({"tracking.json", "opp_watch.json", "portfolio.json", "opp_config.json"})
 _CROLLO_MIN_VOCI = 8      # sotto questa dimensione si blocca solo lo svuotamento totale
 
 # TETTI del file VIVO, calibrati sulla dimensione REALE di una riga (misurata sul branch) perché
@@ -2157,19 +2159,22 @@ def _riduce_storico(name: str, nuovo_str: str, vecchio_str: str, force: bool = F
     return len(nuovo) < len(vecchio)
 
 
-def _crollo_dizionario(name: str, nuovo_str: str, vecchio_str: str, force: bool = False) -> bool:
-    """True se la scrittura farebbe CROLLARE uno dei file a dizionario (titoli seguiti, osservazioni):
-    svuotarlo, oppure ridurlo a meno della metà in un colpo. Le rimozioni normali passano: togliere
-    uno o due titoli su decine non attiva nulla. Sotto _CROLLO_MIN_VOCI si blocca solo lo
-    svuotamento, così un monitoraggio di pochi titoli resta gestibile."""
-    if force or name not in _REGISTRI_DIZIONARIO:
+def _crollo_stato(name: str, nuovo_str: str, vecchio_str: str, force: bool = False) -> bool:
+    """True se la scrittura farebbe CROLLARE un file di stato vivo (titoli seguiti, osservazioni,
+    portafoglio, preferenze): svuotarlo, oppure ridurlo a meno della metà in un colpo. Le rimozioni
+    normali passano: togliere una o due voci su decine non attiva nulla. Sotto _CROLLO_MIN_VOCI si
+    blocca soltanto lo svuotamento, così un portafoglio di poche posizioni resta gestibile.
+    Vale sia per i file a dizionario sia per quelli a lista (il portafoglio è una lista)."""
+    if force or name not in _FILE_STATO_VIVO:
         return False
     try:
         nuovo, vecchio = json.loads(nuovo_str), json.loads(vecchio_str)
     except Exception:
         return False
-    if not isinstance(nuovo, dict) or not isinstance(vecchio, dict) or not vecchio:
+    if not isinstance(nuovo, (dict, list)) or not isinstance(vecchio, (dict, list)) or not vecchio:
         return False
+    if type(nuovo) is not type(vecchio):
+        return False                     # cambio di forma: non è un confronto sensato
     if not nuovo:
         return True                      # da "pieno" a "vuoto" non è mai un dato reale
     return len(vecchio) >= _CROLLO_MIN_VOCI and len(nuovo) * 2 < len(vecchio)
@@ -2177,9 +2182,9 @@ def _crollo_dizionario(name: str, nuovo_str: str, vecchio_str: str, force: bool 
 
 def _scrittura_pericolosa(name: str, nuovo_str: str, vecchio_str: str, force: bool = False) -> bool:
     """Vero se questa scrittura distruggerebbe dati: uno storico che si accorcia (registri e
-    archivi) o un dizionario che crolla (titoli seguiti, osservazioni)."""
+    archivi) o un file di stato vivo che crolla (titoli seguiti, osservazioni, portafoglio)."""
     return (_riduce_storico(name, nuovo_str, vecchio_str, force)
-            or _crollo_dizionario(name, nuovo_str, vecchio_str, force))
+            or _crollo_stato(name, nuovo_str, vecchio_str, force))
 
 
 def write_data_json(name: str, obj, force: bool = False) -> None:
@@ -2198,7 +2203,7 @@ def write_data_json(name: str, obj, force: bool = False) -> None:
     una lettura remota fallita restituiva [] e il salvataggio lo scriveva sopra i dati buoni.
     Per ridurre davvero un registro serve force=True (scelta esplicita, non un effetto collaterale)."""
     content = json.dumps(obj, ensure_ascii=False, indent=0)
-    if not force and (name in _REGISTRI_APPEND_ONLY or name in _REGISTRI_DIZIONARIO
+    if not force and (name in _REGISTRI_APPEND_ONLY or name in _FILE_STATO_VIVO
                       or name.startswith("archivio/")):
         try:
             esistente = read_data_json(name, None)
@@ -4537,6 +4542,20 @@ def update_track_record() -> list:
         if getattr(closes.index, "tz", None) is not None:
             closes = closes.copy()
             closes.index = closes.index.tz_localize(None)
+        # GUARDIA ANTI-FRAZIONAMENTO. Lo storico viene riscalato retroattivamente dopo un
+        # frazionamento o un raggruppamento, il prezzo registrato no: il rendimento diventa
+        # fantasioso. È il caso degli ETF a leva, che raggruppano spesso (SOXS registrato a 3,86
+        # contro una chiusura vera di 45,10 → +1081% inventato, che da solo portava la media delle
+        # promozioni da +3% a +32%). Qui il prezzo si riporta sulla scala nuova e gli orizzonti già
+        # fissati si ricalcolano, invece di scartare il caso (che falserebbe il campione).
+        s0 = closes[closes.index >= pd.Timestamp(str(rec.get("date"))[:10])]
+        if not s0.empty and abs(float(s0.iloc[0]) / base - 1) > 0.25:
+            nuovo = round(float(s0.iloc[0]), 4)
+            if rec.get("obs_price"):
+                rec["obs_price"] = round(float(rec["obs_price"]) * nuovo / base, 4)
+            rec["price"], rec["price_src"] = nuovo, "riancorato"
+            rec["ret_7d"] = rec["ret_30d"] = None      # erano calcolati sulla scala sbagliata
+            base = nuovo
         rec["ret_now"] = round((float(closes.iloc[-1]) / base - 1) * 100, 1)
         rec["last_update"] = today
         try:
@@ -4557,16 +4576,20 @@ def update_track_record() -> list:
 
 
 def track_record_stats() -> dict:
-    """Statistiche aggregate sulle promozioni: rendimento medio, % di volte in positivo,
-    migliore/peggiore. Su TUTTO lo storico (archivio + file vivo)."""
+    """Statistiche aggregate sulle promozioni: rendimento medio e MEDIANO, % di volte in positivo,
+    migliore/peggiore. Su TUTTO lo storico (archivio + file vivo).
+    La mediana c'è perché la media è fragile: un singolo caso fuori scala (o un titolo che
+    decuplica) la sposta di decine di punti, mentre la mediana dice com'è andata «di solito»."""
     records = load_registro_completo(TRACK_RECORD_NAME, load_track_record())
 
     def agg(field):
-        vals = [r[field] for r in records if r.get(field) is not None]
+        vals = sorted(r[field] for r in records if r.get(field) is not None)
         if not vals:
             return None
-        return {"n": len(vals), "avg": round(sum(vals) / len(vals), 1),
-                "hit": round(100 * sum(1 for v in vals if v > 0) / len(vals)),
+        n = len(vals)
+        med = vals[n // 2] if n % 2 else (vals[n // 2 - 1] + vals[n // 2]) / 2
+        return {"n": n, "avg": round(sum(vals) / n, 1), "med": round(med, 1),
+                "hit": round(100 * sum(1 for v in vals if v > 0) / n),
                 "best": round(max(vals), 1), "worst": round(min(vals), 1)}
 
     return {"total": len(records), "now": agg("ret_now"),
@@ -4615,6 +4638,12 @@ _SCENARIO_BUYS = ("anticipo", "osservazione", "promozione", "conferma")
 _SCENARIO_SELLS = ("bersaglio", "7g", "30g", "365g")
 _SELL_DAYS = {"7g": 7, "30g": 30, "bersaglio": 30, "365g": 365}
 _CONF_DAYS = {"short": 5, "long": 10}   # giorni di Borsa del "periodo di conferma" (= _REMOVE_WINDOW)
+# COMBINAZIONI SENZA SENSO per costruzione, da non calcolare e da ripulire se già registrate.
+# Per il breve il periodo di conferma dura 5 giorni di Borsa, cioè ~7 giorni di calendario: comprare
+# «dopo la conferma» e vendere «dopo 1 settimana» significa comprare e vendere LO STESSO GIORNO —
+# 0% lordo e −1€ di commissione. In tabella si leggeva «media +0,00%, in positivo 0%», cioè come una
+# strategia che perde sempre: non lo è, è una casella che non esiste.
+_SCENARI_ESCLUSI = {("short", "conferma", "7g")}
 # Cosa si mostra nella matrice: 3 acquisti × 3 vendite, con orizzonti diversi per tipo.
 SCENARIO_BUYS_UI = ("anticipo", "promozione", "conferma")
 SCENARIO_SELLS_PER_TIPO = {"short": ("bersaglio", "7g", "30g"),
@@ -4709,9 +4738,16 @@ def resolve_scenarios() -> int:
         res = r.setdefault("res", {})
         kind = r.get("kind", "short")
         tk = r.get("ticker")
+        # ripulisce le combinazioni escluse per costruzione: non serve la rete né le date, dipende
+        # solo dal tipo, quindi si può fare anche sulle righe già completate (che altrimenti la
+        # riga sotto salterebbe, lasciando per sempre le caselle senza senso già registrate).
+        for _k, _b, _s in _SCENARI_ESCLUSI:
+            if _k == kind and res.pop(f"{_b}|{_s}", None) is not None:
+                changed += 1
         # celle che POTREBBERO essere risolte ora (vendita matura e combinazione ancora vuota)
         attese = [(bk, sk) for sk, gg in _SELL_DAYS.items() if age >= gg
-                  for bk in _SCENARIO_BUYS if f"{bk}|{sk}" not in res]
+                  for bk in _SCENARIO_BUYS
+                  if f"{bk}|{sk}" not in res and (kind, bk, sk) not in _SCENARI_ESCLUSI]
         # prezzo del "dopo la conferma": si può ricavare appena passata la finestra di Borsa
         serve_conf = (r.get("conf_price") is None and not r.get("conf_na")
                       and _trading_days_between(promo.isoformat(), _today_iso(), tk)
@@ -4741,7 +4777,9 @@ def resolve_scenarios() -> int:
 
         def _close_at(days):
             s = closes[closes.index >= pd.Timestamp(promo + datetime.timedelta(days=days))]
-            return float(s.iloc[0]) if not s.empty else None
+            # ritorna anche la DATA della chiusura usata: serve a scartare le combinazioni in cui
+            # l'acquisto non precede la vendita (vedi sotto)
+            return (float(s.iloc[0]), s.index[0].date().isoformat()) if not s.empty else (None, None)
 
         if serve_conf:
             d_conf = _data_dopo_giorni_borsa(promo, _CONF_DAYS.get(kind, 5), tk)
@@ -4760,19 +4798,37 @@ def resolve_scenarios() -> int:
         if age >= 7:
             sells["7g"] = _close_at(7)
         if age >= 30:
-            s30 = _close_at(30)
-            sells["30g"] = s30
+            s30, d30 = _close_at(30)
+            sells["30g"] = (s30, d30)
             tgt = r.get("target")
             if tgt and s30 is not None:
                 win = after[after.index <= pd.Timestamp(promo + datetime.timedelta(days=30))]
-                sells["bersaglio"] = float(tgt) if bool((win >= float(tgt)).any()) else s30
+                tocchi = win[win >= float(tgt)]
+                # la data della vendita al bersaglio è quella del TOCCO, non quella dei 30 giorni:
+                # così la regola «l'acquisto deve precedere la vendita» esclude i casi in cui il
+                # bersaglio era già stato toccato prima che il periodo di conferma finisse.
+                sells["bersaglio"] = ((float(tgt), tocchi.index[0].date().isoformat())
+                                      if not tocchi.empty else (s30, d30))
         if age >= 365:
             sells["365g"] = _close_at(365)
-        for sk, sp in sells.items():
+        # data di ogni momento d'ACQUISTO: una combinazione ha senso solo se l'acquisto PRECEDE la
+        # vendita. Per il breve, «dopo il periodo di conferma» (5 giorni di Borsa) cade proprio sui
+        # 7 giorni di calendario della vendita «dopo 1 settimana»: si comprerebbe e si venderebbe lo
+        # stesso giorno, cioè 0% lordo e −1€ di commissione. Mostrata in tabella diventava «media
+        # +0,00%, in positivo 0%», che si legge come «questa strategia perde sempre». Non è una
+        # strategia: è una casella senza senso, e va tolta (anche dalle righe già registrate).
+        date_acq = {"anticipo": r.get("pre_date"), "osservazione": r.get("obs_date"),
+                    "promozione": str(r.get("date"))[:10], "conferma": r.get("conf_date")}
+        for sk, (sp, sd) in sells.items():
             if sp is None:
                 continue
             for bk, bp in buys.items():
                 key = f"{bk}|{sk}"
+                bd = date_acq.get(bk)
+                if (kind, bk, sk) in _SCENARI_ESCLUSI or (bd and sd and str(bd)[:10] >= str(sd)[:10]):
+                    if res.pop(key, None) is not None:
+                        changed += 1
+                    continue
                 if key in res or not bp or float(bp) <= 0:
                     continue
                 res[key] = round((float(sp) / float(bp) - 1) * 100, 2)
@@ -5054,8 +5110,10 @@ def load_portfolio() -> list:
     return data if isinstance(data, list) else []
 
 
-def save_portfolio(positions: list) -> None:
-    write_data_json(PORTFOLIO_NAME, positions)
+def save_portfolio(positions: list, force: bool = False) -> None:
+    """Salva le posizioni. `force=True` solo da chi ha appena TOLTO una posizione: è l'unico caso in
+    cui l'elenco può legittimamente accorciarsi molto o svuotarsi (vedi _crollo_stato)."""
+    write_data_json(PORTFOLIO_NAME, positions, force=force)
 
 
 def add_position(ticker, qty, buy_price, date, target=None, stop=None, note="", horizon="lungo") -> list:
@@ -5106,7 +5164,7 @@ def remove_position(index: int) -> list:
     positions = load_portfolio()
     if 0 <= index < len(positions):
         positions.pop(index)
-        save_portfolio(positions)
+        save_portfolio(positions, force=True)   # scelta esplicita: può anche svuotare il portafoglio
     return positions
 
 

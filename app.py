@@ -2116,11 +2116,17 @@ if section.startswith("Scenari"):
                 s = rstats[key]
                 with col:
                     if s:
-                        st.metric(f"{label} — rendimento medio", f"{s['avg']:+.1f}%")
+                        # Si mostra la MEDIANA come numero principale: la media basta che un solo
+                        # titolo decuplichi per raccontare una storia che non è mai capitata.
+                        st.metric(f"{label} — caso tipico", f"{s.get('med', s['avg']):+.1f}%",
+                                  help="È la mediana: metà delle promozioni ha fatto meglio, metà "
+                                       "peggio. La media è qui sotto — se le due sono molto diverse, "
+                                       "vuol dire che il risultato dipende da pochi casi estremi.")
                         st.caption(f"🎯 In positivo **{s['hit']}%** ({s['n']} casi) · "
+                                   f"media {s['avg']:+.1f}% · "
                                    f"migliore {s['best']:+.1f}% · peggiore {s['worst']:+.1f}%")
                     else:
-                        st.metric(f"{label} — rendimento medio", "—")
+                        st.metric(f"{label} — caso tipico", "—")
                         st.caption("Servono più giorni di dati.")
 
             # --- Calibrazione: la convenienza alta rende più della bassa? ---
