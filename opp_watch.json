@@ -281,6 +281,16 @@
 "prob_gain": 79,
 "prob_loss": 10,
 "reliab": "🟢 Alta"
+},
+{
+"date": "2026-08-17 13:25",
+"conv": 82,
+"price": 3.14,
+"mkt": 4.3991,
+"occ": 68,
+"prob_gain": 80,
+"prob_loss": 10,
+"reliab": "🟢 Alta"
 }
 ]
 },
@@ -364,7 +374,7 @@
 "long:KGC": {
 "ticker": "KGC",
 "kind": "long",
-"name": "Kinross Gold Corporation",
+"name": "Kinross Gold Corp",
 "obs": [
 {
 "date": "2026-08-16 21:44",
@@ -552,13 +562,23 @@
 "prob_gain": 69,
 "prob_loss": 18,
 "reliab": "🟢 Alta"
+},
+{
+"date": "2026-08-17 13:25",
+"conv": 67,
+"price": 17.88,
+"mkt": 4.3991,
+"occ": 63,
+"prob_gain": 69,
+"prob_loss": 18,
+"reliab": "🟢 Alta"
 }
 ]
 },
 "long:DDS": {
 "ticker": "DDS",
 "kind": "long",
-"name": "DILLARD’S, INC.",
+"name": "Dillard's Inc",
 "obs": [
 {
 "date": "2026-08-16 21:44",
@@ -655,7 +675,7 @@
 "long:INTR": {
 "ticker": "INTR",
 "kind": "long",
-"name": "Inter & Co Inc",
+"name": "Inter & Co. Inc.",
 "obs": [
 {
 "date": "2026-08-16 22:17",
@@ -736,6 +756,16 @@
 "prob_gain": 73,
 "prob_loss": 17,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-08-17 13:25",
+"conv": 83,
+"price": 5.19,
+"mkt": 4.3991,
+"occ": 96,
+"prob_gain": 73,
+"prob_loss": 17,
+"reliab": "🟡 Media"
 }
 ]
 },
@@ -813,13 +843,23 @@
 "prob_gain": 65,
 "prob_loss": 22,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-08-17 13:25",
+"conv": 57,
+"price": 28.12,
+"mkt": 4.3991,
+"occ": 57,
+"prob_gain": 65,
+"prob_loss": 22,
+"reliab": "🟡 Media"
 }
 ]
 },
 "long:DUOL": {
 "ticker": "DUOL",
 "kind": "long",
-"name": "Duolingo, Inc.",
+"name": "Duolingo Inc",
 "obs": [
 {
 "date": "2026-08-16 22:17",
@@ -926,7 +966,7 @@
 "long:PBR-A": {
 "ticker": "PBR-A",
 "kind": "long",
-"name": "PETROBRAS - PETROLEO BRASILEIRO SA",
+"name": "Petroleo Brasileiro SA Petrobras",
 "obs": [
 {
 "date": "2026-08-17 05:28",
@@ -967,6 +1007,16 @@
 "prob_gain": 83,
 "prob_loss": 8,
 "reliab": "🟢 Alta"
+},
+{
+"date": "2026-08-17 13:25",
+"conv": 67,
+"price": 16.07,
+"mkt": 4.3991,
+"occ": 63,
+"prob_gain": 67,
+"prob_loss": 17,
+"reliab": "🟢 Alta"
 }
 ]
 },
@@ -1003,6 +1053,57 @@
 "occ": 53,
 "prob_gain": 52,
 "prob_loss": 15,
+"reliab": "🟡 Media"
+}
+]
+},
+"long:STLAM.MI": {
+"ticker": "STLAM.MI",
+"kind": "long",
+"name": "STELLANTIS",
+"obs": [
+{
+"date": "2026-08-17 13:25",
+"conv": 66,
+"price": 4.6255,
+"mkt": 4.3991,
+"occ": 61,
+"prob_gain": 67,
+"prob_loss": 22,
+"reliab": "🟡 Media"
+}
+]
+},
+"long:CDE": {
+"ticker": "CDE",
+"kind": "long",
+"name": "Coeur Mining, Inc",
+"obs": [
+{
+"date": "2026-08-17 13:25",
+"conv": 61,
+"price": 18.81,
+"mkt": 4.3991,
+"occ": 84,
+"prob_gain": 56,
+"prob_loss": 34,
+"reliab": "🔴 Bassa"
+}
+]
+},
+"long:STMMI.MI": {
+"ticker": "STMMI.MI",
+"kind": "long",
+"name": "STMICROELECTRONICS",
+"obs": [
+{
+"date": "2026-08-17 13:25",
+"conv": 60,
+"price": 48.585,
+"mkt": 4.3991,
+"occ": 69,
+"prob_gain": 59,
+"prob_loss": 30,
 "reliab": "🟡 Media"
 }
 ]
