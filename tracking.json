@@ -18671,7 +18671,7 @@
 "auto": true,
 "notified": true,
 "warn_since": "2026-08-11",
-"warn": "in perdita da 20 giorni di Borsa: valuta l'uscita"
+"warn": "sceso sotto lo stop (−2×ATR): valuta l'uscita"
 },
 "CCL": {
 "kind": "long",
@@ -81264,9 +81264,7 @@
 }
 ],
 "auto": true,
-"notified": false,
-"warn_since": "2026-08-14",
-"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
+"notified": false
 },
 "APTV": {
 "kind": "short",
