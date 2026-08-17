@@ -450,7 +450,7 @@
 "long:KGC": {
 "ticker": "KGC",
 "kind": "long",
-"name": "Kinross Gold Corp",
+"name": "Kinross Gold Corporation",
 "obs": [
 {
 "date": "2026-08-16 21:44",
@@ -801,7 +801,7 @@
 "long:INTR": {
 "ticker": "INTR",
 "kind": "long",
-"name": "Inter & Co. Inc.",
+"name": "Inter & Co Inc",
 "obs": [
 {
 "date": "2026-08-16 22:17",
@@ -1152,7 +1152,7 @@
 "long:PBR-A": {
 "ticker": "PBR-A",
 "kind": "long",
-"name": "Petroleo Brasileiro SA Petrobras",
+"name": "PETROBRAS - PETROLEO BRASILEIRO SA",
 "obs": [
 {
 "date": "2026-08-17 05:28",
@@ -1590,6 +1590,23 @@
 "occ": 40,
 "prob_gain": 56,
 "prob_loss": 8,
+"reliab": "🔴 Bassa"
+}
+]
+},
+"long:SMCI": {
+"ticker": "SMCI",
+"kind": "long",
+"name": "Super Micro Computer Inc",
+"obs": [
+{
+"date": "2026-08-17 16:23",
+"conv": 60,
+"price": 38.59,
+"mkt": 4.4206,
+"occ": 77,
+"prob_gain": 54,
+"prob_loss": 38,
 "reliab": "🔴 Bassa"
 }
 ]
