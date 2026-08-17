@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-08-04",
-"ticker": "ONDS",
-"kind": "short",
-"price": 7.49,
-"conv": 54,
-"factors": {
-"discount": 46.5382,
-"histcheap": 0.51,
-"riskadj": 1.52,
-"ddpen": -28.81,
-"momentum": 3.9744,
-"prob": 20,
-"oversold": -46.6865,
-"rebound": 17.9092,
-"trend": -1.0,
-"relstrength": -5.0232
-},
-"ret_5d": 24.05,
-"ret_21d": null
-},
-{
-"date": "2026-08-04",
 "ticker": "TLRY",
 "kind": "short",
 "price": 4.54,
@@ -53765,6 +53744,26 @@
 "rebound": -22.9502,
 "trend": 1.0,
 "relstrength": 19.3599
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-17",
+"ticker": "HBM",
+"kind": "long",
+"price": 27.325,
+"conv": 60,
+"factors": {
+"discount": 14.2611,
+"histcheap": -1.31,
+"riskadj": 1.94,
+"ddpen": -15.44,
+"momentum": 2.096,
+"prob": 31,
+"quality": 69.9,
+"valcheap": -1.3969,
+"trappen": 3
 },
 "ret_5d": null,
 "ret_21d": null
