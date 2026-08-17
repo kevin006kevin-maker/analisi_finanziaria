@@ -44917,6 +44917,22 @@
 "target": 10.6951,
 "stop": 11.4238,
 "date": "2026-08-17 15:39"
+},
+{
+"name": "REPL",
+"price": 14.355,
+"rsi": 63.5456,
+"dd_high": -5.8071,
+"occasione": 0,
+"convenienza": 39,
+"prob_gain": 51,
+"prob_loss": 30,
+"exp_ret": 0.5,
+"gain": -25.4908,
+"reliab": "🔴 Bassa",
+"target": 10.6958,
+"stop": 11.4445,
+"date": "2026-08-17 18:23"
 }
 ],
 "auto": true,
@@ -44928,7 +44944,9 @@
 "entry_conv": 41,
 "entry_date": "2026-07-31 17:04",
 "entry_src": "scatto",
-"entry_check": "2026-08-17"
+"entry_check": "2026-08-17",
+"max_price": 14.355,
+"max_date": "2026-08-17 18:23"
 },
 "LGN": {
 "kind": "short",
