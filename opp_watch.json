@@ -374,7 +374,7 @@
 "long:KGC": {
 "ticker": "KGC",
 "kind": "long",
-"name": "Kinross Gold Corp",
+"name": "Kinross Gold Corporation",
 "obs": [
 {
 "date": "2026-08-16 21:44",
@@ -578,7 +578,7 @@
 "long:DDS": {
 "ticker": "DDS",
 "kind": "long",
-"name": "Dillard's Inc",
+"name": "DILLARD’S, INC.",
 "obs": [
 {
 "date": "2026-08-16 21:44",
@@ -675,7 +675,7 @@
 "long:INTR": {
 "ticker": "INTR",
 "kind": "long",
-"name": "Inter & Co. Inc.",
+"name": "Inter & Co Inc",
 "obs": [
 {
 "date": "2026-08-16 22:17",
@@ -859,7 +859,7 @@
 "long:DUOL": {
 "ticker": "DUOL",
 "kind": "long",
-"name": "Duolingo Inc",
+"name": "Duolingo, Inc.",
 "obs": [
 {
 "date": "2026-08-16 22:17",
@@ -966,7 +966,7 @@
 "long:PBR-A": {
 "ticker": "PBR-A",
 "kind": "long",
-"name": "Petroleo Brasileiro SA Petrobras",
+"name": "PETROBRAS - PETROLEO BRASILEIRO SA",
 "obs": [
 {
 "date": "2026-08-17 05:28",
@@ -1105,6 +1105,57 @@
 "prob_gain": 59,
 "prob_loss": 30,
 "reliab": "🟡 Media"
+}
+]
+},
+"long:UMC": {
+"ticker": "UMC",
+"kind": "long",
+"name": "United Microelectronics Corp",
+"obs": [
+{
+"date": "2026-08-17 13:50",
+"conv": 63,
+"price": 19.15,
+"mkt": 4.3991,
+"occ": 63,
+"prob_gain": 51,
+"prob_loss": 40,
+"reliab": "🔴 Bassa"
+}
+]
+},
+"long:BSBR": {
+"ticker": "BSBR",
+"kind": "long",
+"name": "Banco Santander Brasil SA",
+"obs": [
+{
+"date": "2026-08-17 13:50",
+"conv": 60,
+"price": 5.77,
+"mkt": 4.3991,
+"occ": 52,
+"prob_gain": 59,
+"prob_loss": 24,
+"reliab": "🟡 Media"
+}
+]
+},
+"long:T": {
+"ticker": "T",
+"kind": "long",
+"name": "AT&T Inc",
+"obs": [
+{
+"date": "2026-08-17 13:50",
+"conv": 60,
+"price": 24.89,
+"mkt": 4.3991,
+"occ": 58,
+"prob_gain": 68,
+"prob_loss": 15,
+"reliab": "🟢 Alta"
 }
 ]
 }
