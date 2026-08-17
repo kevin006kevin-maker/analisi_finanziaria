@@ -2053,10 +2053,11 @@ def read_data_json(name: str, default):
     return d if d is not None else default
 
 
-def _commit_to_github(name: str, content_str: str) -> bool:
+def _commit_to_github(name: str, content_str: str, force: bool = False) -> bool:
     """Salva il file sul branch dati via API GitHub (serve un token con permesso
     'contents'). Ritorna True se ok. Usato dall'app per rendere persistenti da
-    telefono le scelte manuali (segui/smetti)."""
+    telefono le scelte manuali (segui/smetti). Con force=False rifiuta di ridurre
+    un registro storico (vedi _riduce_storico)."""
     repo, token, branch = _data_repo(), _github_token(), _data_branch()
     if not (repo and token):
         return False
@@ -2077,6 +2078,14 @@ def _commit_to_github(name: str, content_str: str) -> bool:
                 existing = base64.b64decode("".join(j.get("content", "").split())).decode("utf-8")
                 if existing == content_str:
                     return True
+                # PROTEZIONE DEFINITIVA dello storico: qui conosciamo con certezza il contenuto
+                # attuale del branch (lo abbiamo appena letto), quindi possiamo rifiutare in modo
+                # affidabile una scrittura che RIDURREBBE un registro storico. Copre anche il caso
+                # che la guardia locale non vede: lettura fallita → lista vuota → append di 1
+                # elemento → 1 riga scritta sopra centinaia. Se questa GET non riuscisse, `sha`
+                # resterebbe None e l'aggiornamento fallirebbe da sé: nessun danno possibile.
+                if _riduce_storico(name, content_str, existing, force):
+                    return False
             except Exception:
                 pass
         body = {"message": f"app update {name}", "branch": branch,
@@ -2100,24 +2109,43 @@ _REGISTRI_APPEND_ONLY = frozenset({
 })
 
 
-def write_data_json(name: str, obj, allow_empty: bool = False) -> None:
+def _riduce_storico(name: str, nuovo_str: str, vecchio_str: str, force: bool = False) -> bool:
+    """True se scrivere `nuovo_str` su un REGISTRO STORICO ne ridurrebbe il numero di elementi.
+    Uno storico che si accorcia non è un dato reale: è il sintomo di una lettura fallita a monte
+    (chi legge riceve il valore di ripiego, ci aggiunge una riga e riscrive tutto). I casi legittimi
+    non riducono nulla: un append aumenta di 1, e il tetto FIFO al massimo mantiene la lunghezza.
+    Per ridurre davvero (es. una pulizia voluta) si passa force=True."""
+    if force or name not in _REGISTRI_APPEND_ONLY:
+        return False
+    try:
+        nuovo, vecchio = json.loads(nuovo_str), json.loads(vecchio_str)
+    except Exception:
+        return False
+    if not isinstance(nuovo, (list, dict)) or not isinstance(vecchio, (list, dict)):
+        return False
+    return len(nuovo) < len(vecchio)
+
+
+def write_data_json(name: str, obj, force: bool = False) -> None:
     """Scrive un file dati: sempre su file locale; se in modalità cloud con token,
     anche sul branch remoto (così la modifica persiste e si vede dal telefono).
 
-    PROTEZIONE ANTI-CANCELLAZIONE: per i registri storici (_REGISTRI_APPEND_ONLY) rifiuta di
-    sovrascrivere dati esistenti con un contenuto VUOTO — è così che il 16/08/2026 sono stati
-    azzerati scenario_log (26 KB) ed exit_history (4,7 KB): una lettura remota fallita restituiva
-    [] e il salvataggio successivo lo scriveva sopra i dati buoni. Per svuotare davvero un
-    registro serve allow_empty=True (scelta esplicita, non un effetto collaterale)."""
-    if (not allow_empty) and name in _REGISTRI_APPEND_ONLY \
-            and isinstance(obj, (list, dict)) and len(obj) == 0:
+    PROTEZIONE ANTI-CANCELLAZIONE (due livelli): per i registri storici
+    (_REGISTRI_APPEND_ONLY) una scrittura che ne RIDURREBBE il contenuto viene rifiutata —
+    qui in base a quel che si riesce a leggere in locale/remoto, e in modo definitivo dentro
+    _commit_to_github, che il contenuto attuale del branch lo conosce con certezza.
+    È così che il 16/08/2026 sono stati azzerati scenario_log (26 KB) ed exit_history (4,7 KB):
+    una lettura remota fallita restituiva [] e il salvataggio lo scriveva sopra i dati buoni.
+    Per ridurre davvero un registro serve force=True (scelta esplicita, non un effetto collaterale)."""
+    content = json.dumps(obj, ensure_ascii=False, indent=0)
+    if not force and name in _REGISTRI_APPEND_ONLY:
         try:
             esistente = read_data_json(name, None)
         except Exception:
             esistente = None
-        if esistente:
-            return          # c'è già uno storico: NON lo sovrascrivo con il vuoto
-    content = json.dumps(obj, ensure_ascii=False, indent=0)
+        if isinstance(esistente, (list, dict)) and _riduce_storico(
+                name, content, json.dumps(esistente, ensure_ascii=False, indent=0)):
+            return          # non riduco lo storico
     try:
         with open(os.path.join(APPDIR, name), "w", encoding="utf-8") as f:
             f.write(content)
@@ -2125,7 +2153,7 @@ def write_data_json(name: str, obj, allow_empty: bool = False) -> None:
     except Exception:
         pass
     if _data_repo() and _github_token():
-        _commit_to_github(name, content)
+        _commit_to_github(name, content, force)
     # invalida la cache di lettura remota così la modifica si vede subito
     try:
         _fetch_remote_json.clear()
