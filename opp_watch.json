@@ -61,6 +61,16 @@
 "prob_gain": 52,
 "prob_loss": 11,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-08-17 10:07",
+"conv": 77,
+"price": 4.6475,
+"mkt": 3.2103,
+"occ": 66,
+"prob_gain": 51,
+"prob_loss": 16,
+"reliab": "🟡 Media"
 }
 ]
 },
@@ -127,6 +137,16 @@
 "occ": 84,
 "prob_gain": 44,
 "prob_loss": 33,
+"reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-17 10:07",
+"conv": 74,
+"price": 6.65,
+"mkt": 3.2103,
+"occ": 85,
+"prob_gain": 45,
+"prob_loss": 31,
 "reliab": "🔴 Bassa"
 }
 ]
@@ -711,6 +731,23 @@
 "prob_gain": 83,
 "prob_loss": 8,
 "reliab": "🟢 Alta"
+}
+]
+},
+"short:STMMI.MI": {
+"ticker": "STMMI.MI",
+"kind": "short",
+"name": "STMMI.MI",
+"obs": [
+{
+"date": "2026-08-17 10:07",
+"conv": 80,
+"price": 48.38,
+"mkt": 3.2103,
+"occ": 54,
+"prob_gain": 54,
+"prob_loss": 13,
+"reliab": "🟡 Media"
 }
 ]
 }
