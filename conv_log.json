@@ -1,48 +1,6 @@
 [
 {
 "date": "2026-08-04",
-"ticker": "MYGN",
-"kind": "short",
-"price": 2.86,
-"conv": 77,
-"factors": {
-"discount": 65.0367,
-"histcheap": 2.35,
-"riskadj": -0.37,
-"ddpen": -31.31,
-"momentum": 49.0196,
-"prob": 38,
-"oversold": -21.6743,
-"rebound": 76.1469,
-"trend": -1.0,
-"relstrength": -50.0685
-},
-"ret_5d": 11.19,
-"ret_21d": null
-},
-{
-"date": "2026-08-04",
-"ticker": "VCYT",
-"kind": "short",
-"price": 46.32,
-"conv": 70,
-"factors": {
-"discount": 23.4254,
-"histcheap": -0.76,
-"riskadj": 1.47,
-"ddpen": -17.84,
-"momentum": 18.177,
-"prob": 43,
-"oversold": -34.0576,
-"rebound": 15.0991,
-"trend": 1.0,
-"relstrength": -19.2258
-},
-"ret_5d": -0.89,
-"ret_21d": null
-},
-{
-"date": "2026-08-04",
 "ticker": "ALHC",
 "kind": "short",
 "price": 14.85,
@@ -53762,6 +53720,46 @@
 "rebound": 10.8635,
 "trend": 1.0,
 "relstrength": 6.4247
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-17",
+"ticker": "PLBL",
+"kind": "long",
+"price": 6.48,
+"conv": 21,
+"factors": {
+"discount": 44.8511,
+"histcheap": 1.35,
+"riskadj": -0.69,
+"ddpen": -30.08,
+"momentum": -13.6842,
+"prob": 4,
+"quality": 17.6,
+"valcheap": -3.0,
+"trappen": 0
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-17",
+"ticker": "WING",
+"kind": "long",
+"price": 116.06,
+"conv": 47,
+"factors": {
+"discount": 65.8275,
+"histcheap": 1.68,
+"riskadj": -3.12,
+"ddpen": -40.64,
+"momentum": 1.2423,
+"prob": 31,
+"quality": 70.4,
+"valcheap": -1.8677,
+"trappen": 0
 },
 "ret_5d": null,
 "ret_21d": null
