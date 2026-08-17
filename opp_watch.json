@@ -530,7 +530,7 @@
 "long:KGC": {
 "ticker": "KGC",
 "kind": "long",
-"name": "Kinross Gold Corp",
+"name": "Kinross Gold Corporation",
 "obs": [
 {
 "date": "2026-08-16 21:44",
@@ -941,7 +941,7 @@
 "long:INTR": {
 "ticker": "INTR",
 "kind": "long",
-"name": "Inter & Co. Inc.",
+"name": "Inter & Co Inc",
 "obs": [
 {
 "date": "2026-08-16 22:17",
@@ -1352,7 +1352,7 @@
 "long:PBR-A": {
 "ticker": "PBR-A",
 "kind": "long",
-"name": "Petroleo Brasileiro SA Petrobras",
+"name": "PETROBRAS - PETROLEO BRASILEIRO SA",
 "obs": [
 {
 "date": "2026-08-17 05:28",
@@ -2102,6 +2102,16 @@
 "prob_gain": 55,
 "prob_loss": 39,
 "reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-17 18:55",
+"conv": 40,
+"price": 38.215,
+"mkt": 4.3764,
+"occ": 78,
+"prob_gain": 56,
+"prob_loss": 36,
+"reliab": "🔴 Bassa"
 }
 ]
 },
@@ -2155,6 +2165,23 @@
 "occ": 69,
 "prob_gain": 32,
 "prob_loss": 59,
+"reliab": "🔴 Bassa"
+}
+]
+},
+"long:HBM": {
+"ticker": "HBM",
+"kind": "long",
+"name": "Hudbay Minerals Inc",
+"obs": [
+{
+"date": "2026-08-17 18:55",
+"conv": 60,
+"price": 27.325,
+"mkt": 4.3764,
+"occ": 61,
+"prob_gain": 61,
+"prob_loss": 30,
 "reliab": "🔴 Bassa"
 }
 ]
