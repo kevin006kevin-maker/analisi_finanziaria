@@ -76789,7 +76789,9 @@
 "entry_conv": 76,
 "entry_date": "2026-08-05 17:42",
 "entry_src": "scatto",
-"entry_check": "2026-08-17"
+"entry_check": "2026-08-17",
+"warn_since": "2026-08-17",
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "TU": {
 "kind": "short",
@@ -81118,7 +81120,9 @@
 "entry_conv": 66,
 "entry_date": "2026-08-07 15:55",
 "entry_src": "scatto",
-"entry_check": "2026-08-17"
+"entry_check": "2026-08-17",
+"warn_since": "2026-08-17",
+"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
 },
 "APTV": {
 "kind": "short",
@@ -85471,8 +85475,6 @@
 ],
 "auto": true,
 "notified": false,
-"warn_since": "2026-08-17",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita",
 "entry_price": 35.41,
 "entry_target": 48.097,
 "entry_stop": 27.4621,
@@ -85905,7 +85907,7 @@
 }
 ],
 "auto": true,
-"notified": false,
+"notified": true,
 "entry_price": 178.2,
 "entry_target": 181.9704,
 "entry_stop": 165.4126,
