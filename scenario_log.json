@@ -354,8 +354,8 @@
 "obs_date": "2026-07-23",
 "pre_price": 10.635,
 "pre_date": "2026-07-27",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 10.944999694824219,
+"conf_date": "2026-08-17",
 "target": 10.6588,
 "stop": 10.2919,
 "reliab": "🟢 Alta",
@@ -400,8 +400,8 @@
 "obs_date": "2026-07-23",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 106.00499725341797,
+"conf_date": "2026-08-17",
 "target": 99.0404,
 "stop": 93.8805,
 "reliab": "🟢 Alta",
@@ -1055,15 +1055,19 @@
 "obs_date": "2026-08-05",
 "pre_price": 14.59,
 "pre_date": "2026-08-06",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 15.770000457763672,
+"conf_date": "2026-08-17",
 "target": 19.3232,
 "stop": 13.5293,
 "reliab": "🔴 Bassa",
 "prob_gain": 47,
 "prob_loss": 17,
 "conv": 68,
-"res": {}
+"res": {
+"anticipo|7g": 8.09,
+"osservazione|7g": 5.41,
+"promozione|7g": 0.13
+}
 },
 {
 "ticker": "SUJA",
@@ -1074,15 +1078,19 @@
 "obs_date": "2026-08-05",
 "pre_price": 6.135,
 "pre_date": "2026-08-06",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 6.300000190734863,
+"conf_date": "2026-08-17",
 "target": 10.6586,
 "stop": 4.103,
 "reliab": "🔴 Bassa",
 "prob_gain": 72,
 "prob_loss": 15,
 "conv": 69,
-"res": {}
+"res": {
+"anticipo|7g": 2.69,
+"osservazione|7g": 2.69,
+"promozione|7g": 0.64
+}
 },
 {
 "ticker": "USNA",
@@ -1093,15 +1101,19 @@
 "obs_date": "2026-08-05",
 "pre_price": 14.99,
 "pre_date": "2026-08-06",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 13.15999984741211,
+"conf_date": "2026-08-17",
 "target": 20.3094,
 "stop": 12.6801,
 "reliab": "🔴 Bassa",
 "prob_gain": 64,
 "prob_loss": 12,
 "conv": 73,
-"res": {}
+"res": {
+"anticipo|7g": -12.21,
+"osservazione|7g": -12.21,
+"promozione|7g": -14.93
+}
 },
 {
 "ticker": "VSH",
@@ -1112,15 +1124,19 @@
 "obs_date": "2026-08-05",
 "pre_price": 33.18,
 "pre_date": "2026-08-06",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 35.46500015258789,
+"conf_date": "2026-08-17",
 "target": 48.097,
 "stop": 27.4621,
 "reliab": "🔴 Bassa",
 "prob_gain": 51,
 "prob_loss": 22,
 "conv": 66,
-"res": {}
+"res": {
+"anticipo|7g": 6.89,
+"osservazione|7g": 6.89,
+"promozione|7g": 0.16
+}
 },
 {
 "ticker": "TMUS",
