@@ -1211,43 +1211,47 @@ def log_forecast(ticker, horizon_days, p_up, price):
     rec.append({"date": today, "ticker": tk, "h": hh,
                 "p_up": float(p_up), "price": float(price), "outcome": None})
     # tetto ALTO + archivio: le righe che escono dal vivo vanno in archivio, non nel cestino.
-    # Le previsioni restano vive almeno 400 giorni (l'orizzonte lungo è 252 giorni di Borsa).
-    write_data_json(FORECAST_LOG_NAME,
-                    _archivia_e_pota(FORECAST_LOG_NAME, rec, _FORECAST_MAX, giorni_protetti=400))
+    # Si prova a tenerle vive 400 giorni (l'orizzonte lungo è 252 giorni di Borsa); se il file
+    # sfonda il tetto invalicabile vanno in archivio comunque, dove resolve_forecasts le trova.
+    salva_registro(FORECAST_LOG_NAME, rec, _FORECAST_MAX, giorni_protetti=400)
 
 
 def resolve_forecasts():
-    """Assegna l'esito (0/1) alle previsioni mature: prezzo a scadenza vs prezzo iniziale. Per il job."""
-    rec = read_data_json(FORECAST_LOG_NAME, [])
-    if not isinstance(rec, list) or not rec:
-        return 0
-    today = _parse_dt(_today_iso())
-    changed, hist_cache = 0, {}
-    for r in rec:
-        if r.get("outcome") is not None:
-            continue
-        d0 = _parse_dt(r.get("date"))
-        if not d0 or not r.get("price") or _trading_days_between(r.get("date"), _today_iso(), r.get("ticker")) < r.get("h", 21):
-            continue
-        tk = r["ticker"]
-        if tk not in hist_cache:
-            hist_cache[tk] = get_history(tk, period="1y")
-        h = hist_cache[tk]
-        if h is None or h.empty:
-            continue
-        try:
-            after = h["Close"][h.index.tz_localize(None) >= (d0 + datetime.timedelta(days=round(r["h"] * 7 / 5)))].dropna() \
-                if getattr(h.index, "tz", None) is not None else \
-                h["Close"][h.index >= (d0 + datetime.timedelta(days=round(r["h"] * 7 / 5)))].dropna()
-            if after.empty:
+    """Assegna l'esito (0/1) alle previsioni mature: prezzo a scadenza vs prezzo iniziale. Per il job.
+    Lavora su TUTTO il registro (archivi annuali + file vivo): l'orizzonte più lungo è 252 giorni di
+    Borsa e una riga può essere finita in archivio prima di maturare — deve restare risolvibile."""
+    hist_cache = {}
+
+    def _risolvi(rec):
+        changed = 0
+        for r in rec:
+            if r.get("outcome") is not None:
                 continue
-            r["outcome"] = 1 if float(after.iloc[0]) > r["price"] else 0
-            changed += 1
-        except Exception:
-            continue
-    if changed:
-        write_data_json(FORECAST_LOG_NAME, rec)
-    return changed
+            d0 = _parse_dt(r.get("date"))
+            if not d0 or not r.get("price") or _trading_days_between(r.get("date"), _today_iso(), r.get("ticker")) < r.get("h", 21):
+                continue
+            tk = r["ticker"]
+            if tk not in hist_cache:
+                try:
+                    hist_cache[tk] = get_history(tk, period="2y")
+                except Exception:
+                    hist_cache[tk] = None
+            h = hist_cache[tk]
+            if h is None or h.empty:
+                continue
+            try:
+                after = h["Close"][h.index.tz_localize(None) >= (d0 + datetime.timedelta(days=round(r["h"] * 7 / 5)))].dropna() \
+                    if getattr(h.index, "tz", None) is not None else \
+                    h["Close"][h.index >= (d0 + datetime.timedelta(days=round(r["h"] * 7 / 5)))].dropna()
+                if after.empty:
+                    continue
+                r["outcome"] = 1 if float(after.iloc[0]) > r["price"] else 0
+                changed += 1
+            except Exception:
+                continue
+        return changed
+
+    return aggiorna_registro_completo(FORECAST_LOG_NAME, _risolvi)
 
 
 def calibration_report():
@@ -2088,7 +2092,7 @@ def _commit_to_github(name: str, content_str: str, force: bool = False) -> bool:
                 # che la guardia locale non vede: lettura fallita → lista vuota → append di 1
                 # elemento → 1 riga scritta sopra centinaia. Se questa GET non riuscisse, `sha`
                 # resterebbe None e l'aggiornamento fallirebbe da sé: nessun danno possibile.
-                if _riduce_storico(name, content_str, existing, force):
+                if _scrittura_pericolosa(name, content_str, existing, force):
                     return False
             except Exception:
                 pass
@@ -2112,6 +2116,14 @@ _REGISTRI_APPEND_ONLY = frozenset({
     "exit_history.json", "scenario_log.json", "presignal_log.json",
 })
 
+# File a DIZIONARIO (chiave = titolo) che contengono lo stato vivo del sistema: i titoli seguiti
+# con tutta la loro storia e le occasioni in osservazione. Qui le rimozioni SONO legittime — una o
+# due alla volta — ma un crollo improvviso (svuotamento, o meno della metà da un giro all'altro)
+# non è un dato reale: è la stessa lettura fallita che il 16/08/2026 ha azzerato i registri, e qui
+# costerebbe l'intero monitoraggio. Sono i due file più importanti e finora erano senza protezione.
+_REGISTRI_DIZIONARIO = frozenset({"tracking.json", "opp_watch.json"})
+_CROLLO_MIN_VOCI = 8      # sotto questa dimensione si blocca solo lo svuotamento totale
+
 # TETTI del file VIVO, calibrati sulla dimensione REALE di una riga (misurata sul branch) perché
 # ogni file vivo deve restare sotto ~600 KB: oltre 1 MB l'API GitHub non restituisce più il
 # contenuto e la protezione anti-cancellazione si spegnerebbe in silenzio. Tutto ciò che esce dal
@@ -2122,6 +2134,10 @@ _EXIT_HISTORY_MAX_LIVE = 2000  # ~278 byte/riga → ~555 KB
 _FORECAST_MAX = 5000           # ~113 byte/riga → ~565 KB
 _CONV_LOG_MAX = 2000           # ~310 byte/riga → ~620 KB
 _TRACK_RECORD_MAX = 2500       # ~212 byte/riga → ~530 KB
+# Di quanto il file vivo può superare il tetto per tenere in vita le righe non ancora mature.
+# Oltre questo margine si archivia comunque: un file vivo troppo grande spegne la protezione
+# anti-cancellazione, e allora il rischio non è più "un esito non calcolato" ma "il registro intero".
+_MARGINE_TETTO = 1.3       # caso peggiore ~860 KB: resta un margine vero sotto il muro di 1 MB
 
 
 def _riduce_storico(name: str, nuovo_str: str, vecchio_str: str, force: bool = False) -> bool:
@@ -2141,26 +2157,56 @@ def _riduce_storico(name: str, nuovo_str: str, vecchio_str: str, force: bool = F
     return len(nuovo) < len(vecchio)
 
 
+def _crollo_dizionario(name: str, nuovo_str: str, vecchio_str: str, force: bool = False) -> bool:
+    """True se la scrittura farebbe CROLLARE uno dei file a dizionario (titoli seguiti, osservazioni):
+    svuotarlo, oppure ridurlo a meno della metà in un colpo. Le rimozioni normali passano: togliere
+    uno o due titoli su decine non attiva nulla. Sotto _CROLLO_MIN_VOCI si blocca solo lo
+    svuotamento, così un monitoraggio di pochi titoli resta gestibile."""
+    if force or name not in _REGISTRI_DIZIONARIO:
+        return False
+    try:
+        nuovo, vecchio = json.loads(nuovo_str), json.loads(vecchio_str)
+    except Exception:
+        return False
+    if not isinstance(nuovo, dict) or not isinstance(vecchio, dict) or not vecchio:
+        return False
+    if not nuovo:
+        return True                      # da "pieno" a "vuoto" non è mai un dato reale
+    return len(vecchio) >= _CROLLO_MIN_VOCI and len(nuovo) * 2 < len(vecchio)
+
+
+def _scrittura_pericolosa(name: str, nuovo_str: str, vecchio_str: str, force: bool = False) -> bool:
+    """Vero se questa scrittura distruggerebbe dati: uno storico che si accorcia (registri e
+    archivi) o un dizionario che crolla (titoli seguiti, osservazioni)."""
+    return (_riduce_storico(name, nuovo_str, vecchio_str, force)
+            or _crollo_dizionario(name, nuovo_str, vecchio_str, force))
+
+
 def write_data_json(name: str, obj, force: bool = False) -> None:
     """Scrive un file dati: sempre su file locale; se in modalità cloud con token,
     anche sul branch remoto (così la modifica persiste e si vede dal telefono).
 
     PROTEZIONE ANTI-CANCELLAZIONE (due livelli): per i registri storici
-    (_REGISTRI_APPEND_ONLY) una scrittura che ne RIDURREBBE il contenuto viene rifiutata —
-    qui in base a quel che si riesce a leggere in locale/remoto, e in modo definitivo dentro
-    _commit_to_github, che il contenuto attuale del branch lo conosce con certezza.
+    (_REGISTRI_APPEND_ONLY) una scrittura che ne RIDURREBBE il contenuto viene rifiutata, e per i
+    file a dizionario (_REGISTRI_DIZIONARIO: titoli seguiti e osservazioni) una che li SVUOTEREBBE
+    o li dimezzerebbe di colpo — qui in base a quel che si riesce a leggere in locale/remoto, e in
+    modo definitivo dentro _commit_to_github, che il contenuto del branch lo conosce con certezza.
+    NB: il secondo livello legge via API dei contenuti, che sopra ~1 MB restituisce contenuto vuoto
+    e quindi non protegge (è il caso di tracking.json); il primo livello legge da
+    raw.githubusercontent, che non ha quel limite, quindi resta valido a qualsiasi dimensione.
     È così che il 16/08/2026 sono stati azzerati scenario_log (26 KB) ed exit_history (4,7 KB):
     una lettura remota fallita restituiva [] e il salvataggio lo scriveva sopra i dati buoni.
     Per ridurre davvero un registro serve force=True (scelta esplicita, non un effetto collaterale)."""
     content = json.dumps(obj, ensure_ascii=False, indent=0)
-    if not force and (name in _REGISTRI_APPEND_ONLY or name.startswith("archivio/")):
+    if not force and (name in _REGISTRI_APPEND_ONLY or name in _REGISTRI_DIZIONARIO
+                      or name.startswith("archivio/")):
         try:
             esistente = read_data_json(name, None)
         except Exception:
             esistente = None
-        if isinstance(esistente, (list, dict)) and _riduce_storico(
+        if isinstance(esistente, (list, dict)) and _scrittura_pericolosa(
                 name, content, json.dumps(esistente, ensure_ascii=False, indent=0)):
-            return          # non riduco lo storico
+            return          # non distruggo dati
     try:
         percorso = os.path.join(APPDIR, name)
         # i file d'archivio stanno in una sottocartella (archivio/…): va creata, altrimenti la
@@ -2231,17 +2277,26 @@ def _riga_giovane(riga, giorni: int) -> bool:
 def _archivia_e_pota(name: str, rows: list, live_max: int, giorni_protetti: int = 0) -> list:
     """Tiene il registro vivo entro `live_max` righe SPOSTANDO le più vecchie negli archivi
     annuali (niente viene perso). Le righe più recenti di `giorni_protetti` restano vive anche se
-    oltre il tetto (i loro esiti devono ancora maturare). Se l'archiviazione non riesce, NON pota
-    nulla: meglio un file vivo più grande che dati buttati. Ritorna le righe da tenere vive."""
+    oltre il tetto, perché i loro esiti devono ancora maturare — ma solo fino al TETTO INVALICABILE
+    (live_max × _MARGINE_TETTO): oltre quello si archiviano comunque. Altrimenti la protezione
+    delle righe recenti gonfierebbe il file senza limite (es. conv_log: 120 righe/giorno × 60 giorni
+    = 2,1 MB) e sopra 1 MB si spegne la protezione anti-cancellazione. Una riga archiviata prima di
+    maturare non è persa e nemmeno abbandonata: i risolutori la completano comunque, perché lavorano
+    su archivi + vivo (aggiorna_registro_completo). Se l'archiviazione non riesce NON pota nulla:
+    meglio un file vivo più grande che dati buttati. Ritorna le righe da tenere vive."""
     if not isinstance(rows, list) or len(rows) <= live_max:
         return rows
     taglio = len(rows) - live_max
-    candidati, resto = rows[:taglio], rows[taglio:]
-    if giorni_protetti:
-        protette = [r for r in candidati if _riga_giovane(r, giorni_protetti)]
-        candidati = [r for r in candidati if not _riga_giovane(r, giorni_protetti)]
-    else:
-        protette = []
+    testa, resto = rows[:taglio], rows[taglio:]
+    # Si ragiona per INDICI, non per copie, così l'ordine cronologico resta intatto in entrambe le
+    # liste anche quando una parte delle protette torna fra le archiviabili.
+    prot = [i for i, r in enumerate(testa) if _riga_giovane(r, giorni_protetti)] if giorni_protetti else []
+    troppe = len(prot) + len(resto) - int(live_max * _MARGINE_TETTO)
+    if troppe > 0:
+        prot = prot[troppe:]        # le più VECCHIE fra le protette si archiviano comunque
+    prot = set(prot)
+    candidati = [r for i, r in enumerate(testa) if i not in prot]
+    protette = [r for i, r in enumerate(testa) if i in prot]
     if not candidati:
         return rows
     per_anno = {}
@@ -2261,6 +2316,46 @@ def _archivia_e_pota(name: str, rows: list, live_max: int, giorni_protetti: int 
         except Exception:
             return rows
     return protette + resto
+
+
+def salva_registro(name: str, rows: list, live_max: int, giorni_protetti: int = 0) -> None:
+    """Salva un registro storico spostando l'eccedenza negli archivi annuali.
+    USARE QUESTA, non write_data_json: dopo un'archiviazione il file vivo è più CORTO di quello
+    esistente, e la protezione anti-cancellazione RIFIUTEREBBE la scrittura. Le righe resterebbero
+    sia in archivio sia nel vivo, contate DUE VOLTE dalle statistiche e ri-archiviate a ogni giro del
+    job (600 → 1.200 → 1.800 …). Il `force` si passa SOLO quando si è davvero archiviato: in tutti
+    gli altri casi la protezione deve restare accesa."""
+    tenute = _archivia_e_pota(name, rows, live_max, giorni_protetti)
+    archiviato = isinstance(rows, list) and isinstance(tenute, list) and len(tenute) < len(rows)
+    write_data_json(name, tenute, force=archiviato)
+
+
+def aggiorna_registro_completo(name: str, aggiorna) -> int:
+    """Applica `aggiorna(righe)` — che modifica le righe SUL POSTO e ritorna quante ne ha cambiate —
+    a TUTTI i pezzi del registro: prima gli archivi annuali, poi il file vivo.
+    Serve ai RISOLUTORI: una riga finita in archivio prima che il suo esito fosse maturo (la
+    previsione a 1 anno, la resa a 21 giorni di Borsa) deve poter essere completata comunque,
+    altrimenti resterebbe senza esito per sempre e la calibrazione si fermerebbe. Riscrivere un
+    archivio con lo STESSO numero di righe è consentito dalla protezione anti-cancellazione, che
+    guarda soltanto la lunghezza. Ritorna quante righe sono state completate in tutto."""
+    tot = 0
+    anni = [str(a) for a in range(_ANNO_INIZIO_ARCHIVIO, int(_today_iso()[:4]) + 1)] + ["senza-data"]
+    for anno in anni:
+        arc = _nome_archivio(name, anno)
+        righe = read_data_json(arc, None)
+        if not isinstance(righe, list) or not righe:
+            continue
+        n = aggiorna(righe) or 0
+        if n:
+            write_data_json(arc, righe)
+            tot += n
+    vivo = read_data_json(name, [])
+    if isinstance(vivo, list) and vivo:
+        n = aggiorna(vivo) or 0
+        if n:
+            write_data_json(name, vivo)      # stessa lunghezza: la protezione non blocca
+            tot += n
+    return tot
 
 
 def load_archivio(name: str) -> list:
@@ -3009,54 +3104,58 @@ def _log_convenience(kind, items, convmap) -> None:
         # NB: il vecchio tetto di 6000 righe superava 1,8 MB — oltre il limite in cui l'API GitHub
         # smette di restituire il contenuto (e quindi la protezione anti-cancellazione). Ora il
         # file vivo è più piccolo ma NIENTE si perde: l'eccedenza va in archivio.
-        write_data_json(CONV_LOG_NAME,
-                        _archivia_e_pota(CONV_LOG_NAME, rec, _CONV_LOG_MAX, giorni_protetti=60))
+        # 35 giorni: la resa forward più lunga è a 21 giorni di Borsa (~29 di calendario).
+        salva_registro(CONV_LOG_NAME, rec, _CONV_LOG_MAX, giorni_protetti=35)
 
 
 def resolve_convenience_log() -> int:
-    """Riempie la resa forward (5/21 giorni di Borsa) delle righe mature, dal prezzo storico. Per il job."""
-    rec = read_data_json(CONV_LOG_NAME, [])
-    if not isinstance(rec, list) or not rec:
-        return 0
-    changed, cache = 0, {}
-    for x in rec:
-        if not x.get("price") or x.get("ret_21d") is not None:
-            continue
-        tk = x.get("ticker")
-        for h_days, fld in ((5, "ret_5d"), (21, "ret_21d")):
-            if x.get(fld) is not None or _trading_days_between(x.get("date"), _today_iso(), x.get("ticker")) < h_days:
+    """Riempie la resa forward (5/21 giorni di Borsa) delle righe mature, dal prezzo storico. Per il job.
+    Lavora su archivi + file vivo: questo registro cresce di ~120 righe al giorno, quindi una riga
+    può finire in archivio prima dei 21 giorni di Borsa e senza questo resterebbe senza esito —
+    cioè inutile all'apprendimento dei pesi della convenienza."""
+    cache = {}
+
+    def _risolvi(rec):
+        changed = 0
+        for x in rec:
+            if not x.get("price") or x.get("ret_21d") is not None:
                 continue
-            if tk not in cache:
+            tk = x.get("ticker")
+            for h_days, fld in ((5, "ret_5d"), (21, "ret_21d")):
+                if x.get(fld) is not None or _trading_days_between(x.get("date"), _today_iso(), x.get("ticker")) < h_days:
+                    continue
+                if tk not in cache:
+                    try:
+                        cache[tk] = get_history(tk, "1y")
+                    except Exception:
+                        cache[tk] = None
+                h = cache[tk]
+                if h is None or h.empty:
+                    continue
+                closes = h["Close"].dropna()
+                if getattr(closes.index, "tz", None) is not None:
+                    closes = closes.copy()
+                    closes.index = closes.index.tz_localize(None)
                 try:
-                    cache[tk] = get_history(tk, "1y")
+                    start = datetime.date.fromisoformat(str(x["date"])[:10])
+                    target = pd.to_datetime(start + datetime.timedelta(days=round(h_days * 7 / 5)))
+                    after = closes[closes.index >= target]
+                    if not after.empty:
+                        x[fld] = round((float(after.iloc[0]) / x["price"] - 1) * 100, 2)
+                        changed += 1
                 except Exception:
-                    cache[tk] = None
-            h = cache[tk]
-            if h is None or h.empty:
-                continue
-            closes = h["Close"].dropna()
-            if getattr(closes.index, "tz", None) is not None:
-                closes = closes.copy()
-                closes.index = closes.index.tz_localize(None)
-            try:
-                start = datetime.date.fromisoformat(str(x["date"])[:10])
-                target = pd.to_datetime(start + datetime.timedelta(days=round(h_days * 7 / 5)))
-                after = closes[closes.index >= target]
-                if not after.empty:
-                    x[fld] = round((float(after.iloc[0]) / x["price"] - 1) * 100, 2)
-                    changed += 1
-            except Exception:
-                continue
-    if changed:
-        write_data_json(CONV_LOG_NAME, rec)
-    return changed
+                    continue
+        return changed
+
+    return aggiorna_registro_completo(CONV_LOG_NAME, _risolvi)
 
 
 def fit_conv_weights(kind: str):
     """Stima i pesi della convenienza dai rendimenti realizzati (resa forward 21g) con regressione
     RIDGE sui fattori standardizzati, FUSA con i pesi a mano (prior) in base alla numerosità.
-    Ritorna None finché i campioni risolti non bastano (niente overfitting su pochi dati)."""
-    rec = read_data_json(CONV_LOG_NAME, [])
+    Ritorna None finché i campioni risolti non bastano (niente overfitting su pochi dati).
+    Impara su TUTTO lo storico (archivi + vivo): più casi risolti, pesi più stabili."""
+    rec = load_registro_completo(CONV_LOG_NAME)
     if not isinstance(rec, list):
         return None
     rows = [x for x in rec if x.get("kind") == kind and x.get("ret_21d") is not None and x.get("factors")]
@@ -3421,8 +3520,13 @@ def load_tracking() -> dict:
     return data if isinstance(data, dict) else {}
 
 
-def save_tracking(data: dict) -> None:
-    write_data_json(TRACKING_NAME, data)
+def save_tracking(data: dict, force: bool = False) -> None:
+    """Salva i titoli seguiti. `force=True` va usato SOLO da chi ha appena deciso una rimozione
+    (l'utente che smette di seguire, il job che toglie un'occasione confermata): sono gli unici casi
+    in cui il file può legittimamente accorciarsi molto o svuotarsi. In tutti gli altri (scatti,
+    note, ancoraggi) resta attiva la protezione che rifiuta un crollo del file — vedi
+    _crollo_dizionario: senza `force` togliere l'ULTIMA occasione verrebbe rifiutato."""
+    write_data_json(TRACKING_NAME, data, force=force)
 
 
 def opportunity_snapshot(ticker: str, kind: str) -> dict:
@@ -3508,15 +3612,144 @@ def _trim_records(records, max_days, max_keep):
 
 
 def _append_snapshot(entry: dict, snapshot: dict) -> None:
-    """Aggiunge uno snapshot del monitoraggio (con data+ora); più punti al giorno, con tetto."""
+    """Aggiunge uno snapshot del monitoraggio (con data+ora); più punti al giorno, con tetto.
+    Al PRIMISSIMO scatto congela anche i valori d'ingresso (entry_price/target/stop/conv): sono
+    fuori dalla lista potata, quindi restano veri per sempre — vedi _ingresso()."""
     snaps = entry.setdefault("snapshots", [])
+    primo = not snaps
     snap = {k: _jsonable(v) for k, v in snapshot.items()}
     snap["date"] = _now_iso()
+    if primo and snap.get("price") and not entry.get("entry_price"):
+        entry.update({"entry_price": snap.get("price"), "entry_target": snap.get("target"),
+                      "entry_stop": snap.get("stop"), "entry_conv": snap.get("convenienza"),
+                      "entry_date": snap["date"], "entry_src": "scatto"})
     snaps.append(snap)
     snaps.sort(key=lambda s: s.get("date", ""))
     entry["snapshots"] = _trim_records(snaps, _SNAP_MAX_DAYS, _SNAP_MAX_KEEP)
     if snapshot.get("name") and not entry.get("name"):
         entry["name"] = snapshot["name"]
+
+
+def _ingresso(entry: dict) -> dict:
+    """Valori del MOMENTO D'INGRESSO di un'occasione seguita: prezzo, bersaglio, stop, convenienza.
+    Legge gli ancoraggi congelati (entry_price/entry_target/…); se mancano ripiega sul primo scatto
+    ancora in memoria, ma dichiara `sicuro=False` quando quello scatto NON è del giorno d'ingresso.
+    Serve perché la potatura fa scorrere in avanti il «primo scatto»: misurare il rendimento da lì
+    dà numeri falsi (misurato sul branch: 13 titoli su 83, con perdite inesistenti fino a −9%).
+    Chi DECIDE (avvisi, rimozioni, notifiche) quando `sicuro` è falso si astiene invece di sbagliare."""
+    snaps = [s for s in (entry.get("snapshots") or []) if s.get("price")]
+    s0 = snaps[0] if snaps else {}
+    if entry.get("entry_price"):
+        return {"price": entry.get("entry_price"), "target": entry.get("entry_target"),
+                "stop": entry.get("entry_stop"), "conv": entry.get("entry_conv"),
+                "date": entry.get("entry_date") or entry.get("added"),
+                "sicuro": True, "src": entry.get("entry_src") or "scatto"}
+    added = str(entry.get("added") or "")[:10]
+    coerente = bool(s0) and bool(added) and str(s0.get("date"))[:10] <= added
+    return {"price": s0.get("price"), "target": s0.get("target"), "stop": s0.get("stop"),
+            "conv": s0.get("convenienza"), "date": s0.get("date"),
+            "sicuro": coerente, "src": "scatto" if coerente else "potato"}
+
+
+def _chiusura_del_giorno(ticker: str, giorno: str):
+    """Chiusura del primo giorno di BORSA a partire da `giorno`. Serve il «primo da» e non «quel
+    giorno esatto» perché la data d'ingresso può cadere di sabato o in un festivo (sul branch è il
+    caso di KGC e AXTI). None se lo storico non è disponibile (titolo delistato)."""
+    try:
+        closes = get_history(ticker, period="2y")["Close"].dropna()
+        try:
+            closes.index = closes.index.tz_localize(None)
+        except (TypeError, AttributeError):
+            pass
+        s = closes[closes.index >= pd.Timestamp(str(giorno)[:10])]
+        return float(s.iloc[0]) if not s.empty else None
+    except Exception:
+        return None
+
+
+_ANCORA_VERIFICA_GIORNI = 1     # ri-verifica dell'ancoraggio: al più una volta al giorno per titolo
+_ANCORA_MAX_RETE = 25           # chiamate di rete al massimo per giro del job (83 titoli → ~1 ora)
+_ANCORA_SOGLIA_SPLIT = 0.25     # oltre questo scostamento è un frazionamento, non un movimento
+
+
+def ancora_ingressi(max_rete: int = _ANCORA_MAX_RETE) -> dict:
+    """Congela i valori d'INGRESSO delle occasioni seguite e li tiene allineati alla scala dei
+    prezzi. Va chiamata dal job PRIMA delle decisioni di monitoraggio. Fa tre cose:
+
+      1. ANCORAGGIO MANCANTE (occasioni già seguite prima di questa modifica). Se il primo scatto è
+         coerente col giorno d'ingresso lo copia da lì; altrimenti riscarica la chiusura del primo
+         giorno di Borsa da `added` (entry_src="storico"). Il bersaglio si prende dallo scatto più
+         vecchio superstite; lo stop si ricostruisce conservandone la DISTANZA dal prezzo, perché lo
+         stop è «prezzo − 2×ATR»: la distanza regge, il livello assoluto no.
+      2. RI-VERIFICA, una volta al giorno per titolo. Se l'ancoraggio si scosta di oltre il 25%
+         dalla chiusura di quel giorno, allora è cambiata la SCALA dei prezzi (frazionamento o
+         raggruppamento): non è una perdita. Si ri-ancora sulla scala nuova, altrimenti un prezzo
+         congelato prima di un frazionamento farebbe scattare stop e crollo per sempre.
+      3. Se lo storico non c'è (delistato), entry_src="ignoto" e l'ancoraggio resta vuoto: le regole
+         che misurano il rendimento dall'ingresso si astengono (mai "non lo so" letto come perdita).
+
+    Il numero di chiamate di rete per giro è limitato, così il job resta breve.
+    Ritorna {ancorati, riancorati, ignoti, saltati}."""
+    tracked = load_tracking()
+    out = {"ancorati": 0, "riancorati": 0, "ignoti": 0, "saltati": 0}
+    if not tracked:
+        return out
+    oggi = _today_iso()
+    rete, changed = 0, False
+    for tk, e in tracked.items():
+        snaps = [s for s in (e.get("snapshots") or []) if s.get("price")]
+        added = str(e.get("added") or (snaps[0].get("date") if snaps else ""))[:10]
+        if not added:
+            out["saltati"] += 1
+            continue
+        ha_ancora = bool(e.get("entry_price"))
+        coerente = bool(snaps) and str(snaps[0].get("date"))[:10] <= added
+        if not ha_ancora and coerente:
+            s0 = snaps[0]
+            e.update({"entry_price": s0.get("price"), "entry_target": s0.get("target"),
+                      "entry_stop": s0.get("stop"), "entry_conv": s0.get("convenienza"),
+                      "entry_date": s0.get("date"), "entry_src": "scatto", "entry_check": oggi})
+            out["ancorati"] += 1
+            changed = True
+            continue
+        scaduta = (not e.get("entry_check")
+                   or _days_between(e.get("entry_check"), oggi) >= _ANCORA_VERIFICA_GIORNI)
+        if (ha_ancora and not scaduta) or rete >= max_rete:
+            out["saltati"] += 1
+            continue
+        rete += 1
+        chiusura = _chiusura_del_giorno(tk, added)
+        e["entry_check"] = oggi
+        changed = True
+        if chiusura is None:
+            if not ha_ancora:
+                e["entry_src"] = "ignoto"
+                out["ignoti"] += 1
+            else:
+                out["saltati"] += 1
+            continue
+        if not ha_ancora:
+            dist = None
+            if snaps and snaps[0].get("price") and snaps[0].get("stop") is not None:
+                dist = float(snaps[0]["price"]) - float(snaps[0]["stop"])
+            e.update({"entry_price": round(chiusura, 4),
+                      "entry_target": (snaps[0].get("target") if snaps else None),
+                      "entry_stop": (round(chiusura - dist, 4) if dist is not None else None),
+                      "entry_conv": (snaps[0].get("convenienza") if snaps else None),
+                      "entry_date": added, "entry_src": "storico"})
+            out["ancorati"] += 1
+            continue
+        base = float(e["entry_price"])
+        if base > 0 and abs(chiusura / base - 1) > _ANCORA_SOGLIA_SPLIT:
+            fatt = chiusura / base
+            for campo in ("entry_price", "entry_target", "entry_stop"):
+                if e.get(campo):
+                    e[campo] = round(float(e[campo]) * fatt, 4)
+            e["entry_src"] = "riancorato"
+            out["riancorati"] += 1
+    if changed:
+        save_tracking(tracked)
+    return out
 
 
 def track_opportunity(ticker: str, kind: str, snapshot: dict = None, note: str = "") -> dict:
@@ -3565,7 +3798,7 @@ def untrack_opportunity(ticker: str) -> dict:
     if tk in data:
         _append_exit_record(tk, data[tk], "rimozione manuale")   # lapide anche per le uscite manuali
     data.pop(tk, None)
-    save_tracking(data)
+    save_tracking(data, force=True)     # scelta esplicita dell'utente: può anche svuotare l'elenco
     return data
 
 
@@ -3596,17 +3829,20 @@ def auto_snapshot_tracked() -> dict:
     return data
 
 
-def tracking_trend(snapshots: list) -> dict:
+def tracking_trend(snapshots: list, conv0=None, prezzo0=None) -> dict:
     """Verdetto di tendenza dai punti di convenienza accumulati: rafforzamento/stabile/indebolimento.
-    Ritorna None se ci sono meno di 2 scatti utili."""
+    Se `conv0`/`prezzo0` sono forniti (i valori d'INGRESSO congelati) il confronto parte da lì
+    invece che dal primo scatto ancora in memoria, che dopo la potatura non è più l'ingresso.
+    Ritorna None se non c'è abbastanza materiale per un confronto."""
     snaps = [s for s in snapshots if s.get("convenienza") is not None]
-    if len(snaps) < 2:
+    if not snaps or (conv0 is None and len(snaps) < 2):
         return None
     first, last = snaps[0], snaps[-1]
-    dconv = last["convenienza"] - first["convenienza"]
+    dconv = last["convenienza"] - (conv0 if conv0 is not None else first["convenienza"])
+    base_p = prezzo0 if prezzo0 is not None else first.get("price")
     dprice = None
-    if first.get("price") and last.get("price"):
-        dprice = (last["price"] / first["price"] - 1) * 100
+    if base_p and last.get("price"):
+        dprice = (last["price"] / base_p - 1) * 100
     if dconv >= 6:
         label, emoji, color = "Segnale in rafforzamento", "📈", "#1a7f37"
     elif dconv <= -6:
@@ -3851,19 +4087,23 @@ def _append_exit_record(tk: str, entry: dict, reason: str) -> None:
     (la rimozione va registrata comunque). Usata dal simulatore per includere anche le perdenti."""
     try:
         snaps = [s for s in entry.get("snapshots", []) if s.get("price")]
-        first = snaps[0] if snaps else {}
         last = snaps[-1] if snaps else {}
+        # I prezzi d'ingresso vengono dagli ANCORAGGI, non dal primo scatto superstite: questa riga
+        # è definitiva (il registro non si corregge più) e prima congelava per sempre un prezzo
+        # d'ingresso sbagliato, falsando il conto «quanto avrei guadagnato». `first_src` dichiara la
+        # provenienza, così una statistica può escludere gli ingressi ricostruiti.
+        ing = _ingresso(entry)
         hist = load_exit_history()
         hist.append({
             "ticker": str(tk).upper(), "kind": entry.get("kind", "short"),
             "added": entry.get("added"), "removed": _today_iso(), "reason": reason,
             "auto": bool(entry.get("auto")),
-            "first_price": first.get("price"), "last_price": last.get("price"),
-            "first_target": first.get("target"), "first_stop": first.get("stop"),
+            "first_price": ing.get("price"), "last_price": last.get("price"),
+            "first_target": ing.get("target"), "first_stop": ing.get("stop"),
+            "first_src": ing.get("src"), "first_sicuro": bool(ing.get("sicuro")),
             "my_target_price": entry.get("my_target_price"),
         })
-        write_data_json(EXIT_HISTORY_NAME,
-                        _archivia_e_pota(EXIT_HISTORY_NAME, hist, _EXIT_HISTORY_MAX))
+        salva_registro(EXIT_HISTORY_NAME, hist, _EXIT_HISTORY_MAX)
     except Exception:
         pass   # la lapide non deve mai bloccare la rimozione
 
@@ -3997,12 +4237,15 @@ def auto_promote_opportunities() -> list:
             tr[tk]["auto"] = True
             tr[tk]["notified"] = False
             save_tracking(tr)
-        # Ancoraggi per gli SCENARI acquisto/vendita (bersaglio/stop dal 1° scatto appena creato)
+        # Ancoraggi per gli SCENARI acquisto/vendita. Bersaglio e stop vengono dai valori
+        # d'INGRESSO appena congelati da track_opportunity (prima si leggeva "lo scatto numero 0",
+        # corretto solo perché l'entry era appena nata: ora è esplicito e non dipende dall'ordine).
+        _ing = _ingresso(tr.get(tk, {}))
         snap0 = (tr.get(tk, {}).get("snapshots") or [{}])[0]
         _log_promotion_scenario(tk, kind, promo_price=obs[-1].get("price"),
                                 obs_price=obs[0].get("price"),
                                 obs_date=str(obs[0].get("date", ""))[:10],
-                                target=snap0.get("target"), stop=snap0.get("stop"),
+                                target=_ing.get("target"), stop=_ing.get("stop"),
                                 # qualità del segnale al momento dell'acquisto: serve ai filtri
                                 reliab=snap0.get("reliab"), prob_gain=snap0.get("prob_gain"),
                                 prob_loss=snap0.get("prob_loss"), conv=snap0.get("convenienza"))
@@ -4022,13 +4265,16 @@ def auto_promote_opportunities() -> list:
 
 def _collapsed_or_stale(entry: dict, ticker=None):
     """Rileva un titolo CROLLATO/delistato o con DATI FERMI, dagli scatti di monitoraggio.
-    - "collapse": perdita > 90% dal primo scatto (fallimento/delisting) → va rimosso.
+    - "collapse": perdita > 90% dal prezzo d'INGRESSO (fallimento/delisting) → va rimosso.
     - "stale": l'ultimo scatto con prezzo è vecchio di ≥3 giorni di Borsa (il titolo non riceve
       più dati: possibile delisting) → si segnala soltanto. None se tutto regolare."""
     snaps = [s for s in entry.get("snapshots", []) if s.get("price")]
     if not snaps:
         return None
-    base, last = snaps[0].get("price"), snaps[-1].get("price")
+    # base = prezzo d'INGRESSO congelato (non il primo scatto superstite, che la potatura sposta in
+    # avanti). Il job lo tiene allineato ai frazionamenti: senza quello un titolo che si frazionava
+    # 12:1 risultava «crollato del 92%» e veniva rimosso subito, senza periodo di conferma.
+    base, last = _ingresso(entry).get("price"), snaps[-1].get("price")
     if base and last is not None and (last / base - 1) <= -0.90:
         return "collapse"
     if snaps[-1].get("date") and _trading_days_between(snaps[-1]["date"], _now_iso(), ticker) >= 3:
@@ -4052,12 +4298,18 @@ def monitoring_warn(entry, ticker=None):
     kind = entry.get("kind", "short")
     added = entry.get("added") or snaps[0].get("date")
     days = _trading_days_between(added, _today_iso(), ticker)
-    base, last_price = snaps[0].get("price"), snaps[-1].get("price")
-    ret = (last_price / base - 1) * 100 if base else 0.0
-    stop = snaps[0].get("stop")
-    if stop is not None and last_price is not None and last_price <= stop:
+    ing = _ingresso(entry)
+    base, last_price = ing.get("price"), snaps[-1].get("price")
+    # Le due regole che seguono misurano il rendimento DALL'INGRESSO: se il prezzo d'ingresso non è
+    # quello vero (occasione non ancora ancorata e primo scatto già potato) ci si ASTIENE. Un avviso
+    # falso non resta un avviso: dopo il periodo di conferma diventa una rimozione autonoma di una
+    # posizione sana. Il job sistema l'ancoraggio da sé (ancora_ingressi) al primo giro utile.
+    if not (base and last_price and ing.get("sicuro")):
+        return None
+    stop = ing.get("stop")
+    if stop is not None and last_price <= stop:
         return "sceso sotto lo stop (−2×ATR): valuta l'uscita"
-    if days >= _REMOVE_WINDOW.get(kind, 5) and ret <= 0:
+    if days >= _REMOVE_WINDOW.get(kind, 5) and (last_price / base - 1) <= 0:
         return f"in perdita da {days} giorni di Borsa: valuta l'uscita"
     return None
 
@@ -4104,9 +4356,14 @@ def manage_monitoring() -> tuple:
         kind = e.get("kind", "short")
         added = e.get("added") or snaps[0].get("date")
         days = _trading_days_between(added, _today_iso(), tk)
-        base = snaps[0]["price"]
+        ing = _ingresso(e)
+        base = ing.get("price")
         last_price = snaps[-1]["price"]
-        ret = (last_price / base - 1) * 100 if base else 0.0   # rendimento dal giorno di promozione
+        # rendimento dal giorno di promozione. None se il prezzo d'ingresso non è affidabile: la
+        # notifica di guadagno non deve partire su un numero inventato (e nemmeno mancare per un
+        # numero sbagliato: senza ancoraggio si notificava il rialzo dal primo scatto superstite).
+        ret = ((last_price / base - 1) * 100
+               if (base and last_price and ing.get("sicuro")) else None)
         # Crollo estremo / delisting (>90%): rimozione IMMEDIATA + cooldown.
         if _collapsed_or_stale(e, tk) == "collapse":
             _append_exit_record(tk, e, "crollo/delisting (perdita >90%)")
@@ -4137,13 +4394,17 @@ def manage_monitoring() -> tuple:
             e.pop("warn", None)
             e.pop("warn_since", None)
             changed = True
-        if days >= _NOTIFY_WINDOW.get(kind, 3) and ret >= _NOTIFY_MIN_RET and not e.get("notified"):
+        if (ret is not None and days >= _NOTIFY_WINDOW.get(kind, 3)
+                and ret >= _NOTIFY_MIN_RET and not e.get("notified")):
             e["notified"] = True
             changed = True
             to_notify.append({"ticker": tk, "kind": kind, "days": days,
                               "ret": round(ret, 1), "name": e.get("name", tk)})
     if changed:
-        save_tracking(tracked)
+        # force solo se si è davvero deciso di togliere qualcosa in questo giro: è l'unico caso in
+        # cui l'elenco si accorcia legittimamente (e non può derivare da una lettura fallita, che
+        # avrebbe dato un elenco vuoto e sarebbe uscita subito qui sopra).
+        save_tracking(tracked, force=bool(removed))
     return to_notify, removed
 
 
@@ -4249,9 +4510,7 @@ def load_track_record() -> list:
 def save_track_record(records: list) -> None:
     # prima non aveva tetto: crescendo avrebbe superato 1 MB, spegnendo la protezione
     # anti-cancellazione. Ora il vivo è limitato e l'eccedenza va in archivio (niente si perde).
-    write_data_json(TRACK_RECORD_NAME,
-                    _archivia_e_pota(TRACK_RECORD_NAME, records, _TRACK_RECORD_MAX,
-                                     giorni_protetti=60))
+    salva_registro(TRACK_RECORD_NAME, records, _TRACK_RECORD_MAX, giorni_protetti=60)
 
 
 def update_track_record() -> list:
@@ -4411,8 +4670,7 @@ def _log_promotion_scenario(tk, kind, promo_price, obs_price, obs_date, target, 
                      "target": target, "stop": stop,
                      "reliab": reliab, "prob_gain": prob_gain, "prob_loss": prob_loss, "conv": conv,
                      "res": {}})
-        write_data_json(SCENARIO_LOG_NAME,
-                        _archivia_e_pota(SCENARIO_LOG_NAME, rows, _SCENARIO_MAX, giorni_protetti=400))
+        salva_registro(SCENARIO_LOG_NAME, rows, _SCENARIO_MAX, giorni_protetti=400)
     except Exception:
         pass   # il log degli scenari non deve mai bloccare una promozione
 
@@ -4520,8 +4778,7 @@ def resolve_scenarios() -> int:
                 res[key] = round((float(sp) / float(bp) - 1) * 100, 2)
                 changed += 1
     if changed:
-        write_data_json(SCENARIO_LOG_NAME,
-                        _archivia_e_pota(SCENARIO_LOG_NAME, rows, _SCENARIO_MAX, giorni_protetti=400))
+        salva_registro(SCENARIO_LOG_NAME, rows, _SCENARIO_MAX, giorni_protetti=400)
     return changed
 
 
@@ -4631,8 +4888,7 @@ def record_presignals() -> list:
                      "ret_7d": None, "ret_30d": None})
         added.append(s["ticker"])
     if added:
-        write_data_json(PRESIGNAL_NAME,
-                        _archivia_e_pota(PRESIGNAL_NAME, rows, _PRESIGNAL_MAX, giorni_protetti=60))
+        salva_registro(PRESIGNAL_NAME, rows, _PRESIGNAL_MAX, giorni_protetti=60)
     return added
 
 
@@ -4681,8 +4937,7 @@ def resolve_presignals() -> int:
                     r[fld] = round((float(s.iloc[0]) / float(base) - 1) * 100, 2)
                     changed += 1
     if changed:
-        write_data_json(PRESIGNAL_NAME,
-                        _archivia_e_pota(PRESIGNAL_NAME, rows, _PRESIGNAL_MAX, giorni_protetti=60))
+        salva_registro(PRESIGNAL_NAME, rows, _PRESIGNAL_MAX, giorni_protetti=60)
     return changed
 
 

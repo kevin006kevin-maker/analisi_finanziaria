@@ -182,6 +182,20 @@ def main():
     except Exception as e:
         log(f"Errore durante la promozione automatica: {e!r}")
 
+    # PRIMA delle decisioni: congela/verifica i PREZZI D'INGRESSO delle occasioni seguite. Deve stare
+    # qui perché avvisi, rimozioni e notifiche della FASE 2 misurano il rendimento dall'ingresso: se
+    # quel prezzo viene dedotto dagli scatti (che si conservano poche settimane) il sistema "vede"
+    # perdite che non esistono e finisce per rimuovere posizioni sane.
+    try:
+        anc = fu.ancora_ingressi()
+        if anc.get("ancorati") or anc.get("riancorati") or anc.get("ignoti"):
+            log(f"Prezzi d'ingresso: {anc['ancorati']} congelati, {anc['riancorati']} riallineati "
+                f"(frazionamenti), {anc['ignoti']} non ricavabili, {anc['saltati']} già a posto.")
+        else:
+            log(f"Prezzi d'ingresso: già tutti a posto ({anc.get('saltati', 0)} verificati).")
+    except Exception as e:
+        log(f"Errore ancoraggio prezzi d'ingresso: {e!r}")
+
     # FASE 2 — monitoraggio: rimozione autonoma PRUDENTE (solo se il deterioramento persiste alcuni
     # giorni di Borsa, non al primo calo) + crollo/delisting (>90%) subito. Prima notifica per le confermate.
     try:

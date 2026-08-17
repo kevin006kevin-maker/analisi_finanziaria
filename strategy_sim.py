@@ -79,10 +79,15 @@ def _positions():
         snaps = [s for s in e.get("snapshots", []) if s.get("price")]
         if not snaps:
             continue
+        # prezzo e bersaglio del giorno d'INGRESSO (congelati): il primo scatto ancora in memoria
+        # non è l'ingresso, perché degli scatti si conservano solo le ultime settimane
+        ing = fu._ingresso(e)
+        if not ing.get("price"):
+            continue
         out.append({"ticker": tk, "kind": e.get("kind", "short"), "open": True,
                     "added": e.get("added") or str(snaps[0].get("date"))[:10],
-                    "p_in": float(snaps[0]["price"]),
-                    "target": snaps[0].get("target"),
+                    "p_in": float(ing["price"]),
+                    "target": ing.get("target"),
                     "p_last": float(snaps[-1]["price"]),
                     "entry": e, "removed": None, "reason": None})
     # storico completo (archivio + vivo): includo TUTTE le rimozioni, anche quelle vecchie

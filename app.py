@@ -1498,7 +1498,9 @@ if section.startswith("Monitoraggio"):
     def render_tracked(tk, entry):
         snaps = entry.get("snapshots", [])
         last = snaps[-1] if snaps else {}
-        first = snaps[0] if snaps else {}
+        # Valori del giorno d'INGRESSO (congelati): il "primo scatto ancora in memoria" non è
+        # l'ingresso, perché degli scatti si conservano solo le ultime settimane.
+        ing = fu._ingresso(entry)
         nm = entry.get("name") or last.get("name") or tk
         kind = entry.get("kind", "short")
         kind_badge = "⚡ Breve" if kind == "short" else "🏛️ Lungo"
@@ -1507,7 +1509,7 @@ if section.startswith("Monitoraggio"):
             giorni = fu._trading_days_between(entry.get("added", ""), fu._today_iso(), tk)
         except Exception:
             giorni = len(snaps) - 1
-        trend = fu.tracking_trend(snaps)
+        trend = fu.tracking_trend(snaps, ing.get("conv"), ing.get("price"))
 
         with st.container(border=True):
             tc1, tc2 = st.columns([4, 1])
@@ -1539,7 +1541,7 @@ if section.startswith("Monitoraggio"):
                     f"border-left:5px solid #cf222e;margin-bottom:8px'>⚠️ <b>Attenzione:</b> "
                     f"{entry['warn']}.</div>", unsafe_allow_html=True)
 
-            # Metriche attuali con variazione dal primo scatto
+            # Metriche attuali con variazione dal GIORNO D'INGRESSO
             def _delta(curr, prev):
                 if curr is None or prev is None:
                     return None
@@ -1547,12 +1549,16 @@ if section.startswith("Monitoraggio"):
             m1, m2, m3, m4 = st.columns(4)
             price = last.get("price")
             dprice = None
-            if price and first.get("price"):
-                dprice = (price / first["price"] - 1) * 100
+            if price and ing.get("price"):
+                dprice = (price / ing["price"] - 1) * 100
             m1.metric("Prezzo", f"{price:,.2f}" if price else "n/d",
-                      f"{dprice:+.1f}%" if dprice is not None else None)
+                      f"{dprice:+.1f}%" if dprice is not None else None,
+                      help="Variazione dal giorno in cui l'occasione è entrata nel Monitoraggio."
+                           + ("" if ing.get("sicuro") else
+                              " ⚠️ Il prezzo d'ingresso di questa occasione non è ancora stato "
+                              "verificato: la variazione parte dal controllo più vecchio in memoria."))
             conv = last.get("convenienza")
-            dc = _delta(conv, first.get("convenienza"))
+            dc = _delta(conv, ing.get("conv"))
             m2.metric("🏅 Convenienza", f"{conv:.0f}/100" if conv is not None else "n/d",
                       f"{dc:+.0f}" if dc is not None else None)
             pg = last.get("prob_gain")
@@ -1759,15 +1765,16 @@ if section.startswith("Monitoraggio"):
         return "—"
 
     def _riga_tabella(tk, entry):
-        """Una riga della tabella riassuntiva del Monitoraggio. Usa gli stessi scatti della scheda
-        (snaps[-1] / snaps[0]) così tabella e scheda non mostrano mai numeri diversi."""
+        """Una riga della tabella riassuntiva del Monitoraggio. Usa gli stessi valori della scheda
+        (ultimo controllo + valori d'ingresso congelati) così tabella e scheda non mostrano mai
+        numeri diversi."""
         snaps = entry.get("snapshots", []) or []
         last = snaps[-1] if snaps else {}
-        first = snaps[0] if snaps else {}
-        price, base = last.get("price"), first.get("price")
+        ing = fu._ingresso(entry)
+        price, base = last.get("price"), ing.get("price")
         conv = next((s.get("convenienza") for s in reversed(snaps)
                      if s.get("convenienza") is not None), None)
-        trend = fu.tracking_trend(snaps)
+        trend = fu.tracking_trend(snaps, ing.get("conv"), ing.get("price"))
         if trend:
             verso = ("📈 più conveniente" if trend["dconv"] >= 6 else
                      "📉 meno conveniente" if trend["dconv"] <= -6 else "➡️ stabile")
@@ -1890,10 +1897,10 @@ if section.startswith("Monitoraggio"):
                     help="Probabilità stimata di una perdita rilevante (oltre il 15%) sullo stesso periodo."),
                 "Prezzo": st.column_config.NumberColumn(
                     "Prezzo", format="%+.1f%%", width="small",
-                    help="Variazione del PREZZO dal più vecchio scatto ancora in memoria a oggi. Attenzione: "
-                         "il sistema conserva circa 3 settimane di scatti, quindi per le occasioni seguite "
-                         "da più tempo NON è la variazione dal giorno d'ingresso. Non è un tuo guadagno: "
-                         "non hai comprato."),
+                    help="Variazione del PREZZO dal giorno in cui l'occasione è entrata nel "
+                         "Monitoraggio a oggi. Il prezzo d'ingresso viene conservato a parte, quindi "
+                         "resta corretto anche per le occasioni seguite da mesi. Non è un tuo "
+                         "guadagno: non hai comprato."),
                 "Convenienza: come va": st.column_config.TextColumn(
                     "Convenienza: come va", width="medium",
                     help="Come sta cambiando il PUNTEGGIO di convenienza da quando la segui (tra parentesi "
