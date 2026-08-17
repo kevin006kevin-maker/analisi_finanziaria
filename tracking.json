@@ -17762,8 +17762,6 @@
 ],
 "auto": true,
 "notified": true,
-"warn_since": "2026-08-11",
-"warn": "in perdita da 20 giorni di Borsa: valuta l'uscita",
 "entry_check": "2026-08-17",
 "entry_price": 16.22,
 "entry_target": 16.1764,
@@ -29448,7 +29446,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-08-17",
 "max_price": 47.06,
-"max_date": "2026-08-17 17:51"
+"max_date": "2026-08-17 17:51",
+"warn_since": "2026-08-17",
+"warn": "in perdita da 14 giorni di Borsa: valuta l'uscita"
 },
 "NEM": {
 "kind": "long",
@@ -54603,7 +54603,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-08-17",
 "max_price": 46.62,
-"max_date": "2026-08-17 17:51"
+"max_date": "2026-08-17 17:51",
+"warn_since": "2026-08-17",
+"warn": "in perdita da 10 giorni di Borsa: valuta l'uscita"
 },
 "EEM": {
 "kind": "short",
@@ -79472,8 +79474,6 @@
 "entry_date": "2026-08-07 15:55",
 "entry_src": "scatto",
 "entry_check": "2026-08-17",
-"warn_since": "2026-08-17",
-"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita",
 "max_price": 49.04,
 "max_date": "2026-08-17 17:52"
 },
@@ -81273,7 +81273,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-08-17",
 "max_price": 15.505,
-"max_date": "2026-08-17 17:52"
+"max_date": "2026-08-17 17:52",
+"warn_since": "2026-08-17",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "SUJA": {
 "kind": "short",
@@ -82348,7 +82350,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-08-17",
 "max_price": 6.14,
-"max_date": "2026-08-17 17:52"
+"max_date": "2026-08-17 17:52",
+"warn_since": "2026-08-17",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "USNA": {
 "kind": "short",
