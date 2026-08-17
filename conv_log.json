@@ -1,69 +1,6 @@
 [
 {
 "date": "2026-08-04",
-"ticker": "EVGO",
-"kind": "short",
-"price": 1.71,
-"conv": 38,
-"factors": {
-"discount": 65.8683,
-"histcheap": 1.24,
-"riskadj": -1.93,
-"ddpen": -45.7,
-"momentum": -4.908,
-"prob": 29,
-"oversold": -50.2602,
-"rebound": 9.269,
-"trend": -1.0,
-"relstrength": 1.281
-},
-"ret_5d": -7.31,
-"ret_21d": null
-},
-{
-"date": "2026-08-04",
-"ticker": "SABR",
-"kind": "short",
-"price": 2.085,
-"conv": 28,
-"factors": {
-"discount": 30.5,
-"histcheap": -1.35,
-"riskadj": -0.53,
-"ddpen": -45.25,
-"momentum": -10.9043,
-"prob": 26,
-"oversold": -63.8445,
-"rebound": -12.4796,
-"trend": 1.0,
-"relstrength": 7.2773
-},
-"ret_5d": -0.96,
-"ret_21d": null
-},
-{
-"date": "2026-08-04",
-"ticker": "WOLF",
-"kind": "short",
-"price": 26.34,
-"conv": 56,
-"factors": {
-"discount": 64.1633,
-"histcheap": 0.15,
-"riskadj": 0.26,
-"ddpen": -41.63,
-"momentum": -20.3839,
-"prob": 7,
-"oversold": -40.8821,
-"rebound": 62.1185,
-"trend": -1.0,
-"relstrength": 16.7569
-},
-"ret_5d": 12.22,
-"ret_21d": null
-},
-{
-"date": "2026-08-04",
 "ticker": "SLDP",
 "kind": "short",
 "price": 2.2499,
@@ -53765,6 +53702,69 @@
 "quality": null,
 "valcheap": null,
 "trappen": 0
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-17",
+"ticker": "RDDT",
+"kind": "short",
+"price": 165.37,
+"conv": 47,
+"factors": {
+"discount": 38.9125,
+"histcheap": 0.59,
+"riskadj": -0.82,
+"ddpen": -33.48,
+"momentum": -4.1898,
+"prob": 32,
+"oversold": -48.7668,
+"rebound": 5.6142,
+"trend": -1.0,
+"relstrength": 4.2352
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-17",
+"ticker": "MARA",
+"kind": "short",
+"price": 9.755,
+"conv": 55,
+"factors": {
+"discount": 57.2898,
+"histcheap": 0.81,
+"riskadj": -1.05,
+"ddpen": -46.29,
+"momentum": -2.0397,
+"prob": 33,
+"oversold": -39.7849,
+"rebound": 25.9364,
+"trend": -1.0,
+"relstrength": 2.0851
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-17",
+"ticker": "PUMP",
+"kind": "short",
+"price": 12.72,
+"conv": 50,
+"factors": {
+"discount": 30.1099,
+"histcheap": -0.42,
+"riskadj": 2.46,
+"ddpen": -15.0,
+"momentum": -15.847,
+"prob": 13,
+"oversold": -56.4688,
+"rebound": 3.0362,
+"trend": 1.0,
+"relstrength": 15.8924
 },
 "ret_5d": null,
 "ret_21d": null
