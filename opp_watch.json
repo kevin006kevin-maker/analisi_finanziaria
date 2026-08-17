@@ -196,13 +196,23 @@
 "prob_gain": 82,
 "prob_loss": 8,
 "reliab": "🟢 Alta"
+},
+{
+"date": "2026-08-17 05:28",
+"conv": 80,
+"price": 7.4,
+"mkt": 4.3991,
+"occ": 69,
+"prob_gain": 82,
+"prob_loss": 8,
+"reliab": "🟢 Alta"
 }
 ]
 },
 "long:KGC": {
 "ticker": "KGC",
 "kind": "long",
-"name": "Kinross Gold Corporation",
+"name": "Kinross Gold Corp",
 "obs": [
 {
 "date": "2026-08-16 21:44",
@@ -240,6 +250,16 @@
 "price": 27.31,
 "mkt": 3.2103,
 "occ": 92,
+"prob_gain": 62,
+"prob_loss": 26,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-08-17 05:28",
+"conv": 79,
+"price": 27.31,
+"mkt": 4.3991,
+"occ": 91,
 "prob_gain": 62,
 "prob_loss": 26,
 "reliab": "🟡 Media"
@@ -300,13 +320,23 @@
 "prob_gain": 69,
 "prob_loss": 18,
 "reliab": "🟢 Alta"
+},
+{
+"date": "2026-08-17 05:28",
+"conv": 70,
+"price": 17.88,
+"mkt": 4.3991,
+"occ": 63,
+"prob_gain": 69,
+"prob_loss": 18,
+"reliab": "🟢 Alta"
 }
 ]
 },
 "long:DDS": {
 "ticker": "DDS",
 "kind": "long",
-"name": "DILLARD’S, INC.",
+"name": "Dillard's Inc",
 "obs": [
 {
 "date": "2026-08-16 21:44",
@@ -357,13 +387,23 @@
 "prob_gain": 67,
 "prob_loss": 17,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-08-17 05:28",
+"conv": 61,
+"price": 560.88,
+"mkt": 4.3991,
+"occ": 62,
+"prob_gain": 68,
+"prob_loss": 18,
+"reliab": "🟡 Media"
 }
 ]
 },
 "long:INTR": {
 "ticker": "INTR",
 "kind": "long",
-"name": "Inter & Co Inc",
+"name": "Inter & Co. Inc.",
 "obs": [
 {
 "date": "2026-08-16 22:17",
@@ -404,6 +444,16 @@
 "prob_gain": 73,
 "prob_loss": 17,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-08-17 05:28",
+"conv": 86,
+"price": 5.19,
+"mkt": 4.3991,
+"occ": 96,
+"prob_gain": 73,
+"prob_loss": 17,
+"reliab": "🟡 Media"
 }
 ]
 },
@@ -441,13 +491,23 @@
 "prob_gain": 65,
 "prob_loss": 22,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-08-17 05:28",
+"conv": 56,
+"price": 28.12,
+"mkt": 4.3991,
+"occ": 57,
+"prob_gain": 65,
+"prob_loss": 22,
+"reliab": "🟡 Media"
 }
 ]
 },
 "long:DUOL": {
 "ticker": "DUOL",
 "kind": "long",
-"name": "Duolingo, Inc.",
+"name": "Duolingo Inc",
 "obs": [
 {
 "date": "2026-08-16 22:17",
@@ -488,6 +548,33 @@
 "prob_gain": 66,
 "prob_loss": 27,
 "reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-17 05:28",
+"conv": 53,
+"price": 132.83,
+"mkt": 4.3991,
+"occ": 98,
+"prob_gain": 67,
+"prob_loss": 26,
+"reliab": "🔴 Bassa"
+}
+]
+},
+"long:PBR-A": {
+"ticker": "PBR-A",
+"kind": "long",
+"name": "Petroleo Brasileiro SA Petrobras",
+"obs": [
+{
+"date": "2026-08-17 05:28",
+"conv": 70,
+"price": 16.07,
+"mkt": 4.3991,
+"occ": 63,
+"prob_gain": 67,
+"prob_loss": 17,
+"reliab": "🟢 Alta"
 }
 ]
 }
