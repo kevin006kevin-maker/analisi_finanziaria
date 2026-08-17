@@ -1,86 +1,6 @@
 [
 {
 "date": "2026-08-05",
-"ticker": "LYG",
-"kind": "long",
-"price": 6.22,
-"conv": 40,
-"factors": {
-"discount": 0.639,
-"histcheap": -1.94,
-"riskadj": 1.93,
-"ddpen": -9.14,
-"momentum": -3.4942,
-"prob": 64,
-"quality": 58.0,
-"valcheap": -1.194,
-"trappen": 3
-},
-"ret_5d": -0.4,
-"ret_21d": null
-},
-{
-"date": "2026-08-05",
-"ticker": "ITUB",
-"kind": "long",
-"price": 8.19,
-"conv": 57,
-"factors": {
-"discount": 14.4201,
-"histcheap": -0.51,
-"riskadj": 1.19,
-"ddpen": -10.0,
-"momentum": 1.4441,
-"prob": 54,
-"quality": 68.2,
-"valcheap": -0.8734,
-"trappen": 2
-},
-"ret_5d": -8.79,
-"ret_21d": null
-},
-{
-"date": "2026-08-05",
-"ticker": "BSBR",
-"kind": "long",
-"price": 5.68,
-"conv": 25,
-"factors": {
-"discount": 21.1111,
-"histcheap": 0.19,
-"riskadj": 0.61,
-"ddpen": -15.01,
-"momentum": -3.6496,
-"prob": 17,
-"quality": 31.2,
-"valcheap": 0.9012,
-"trappen": 0
-},
-"ret_5d": 2.38,
-"ret_21d": null
-},
-{
-"date": "2026-08-05",
-"ticker": "UMC",
-"kind": "long",
-"price": 20.63,
-"conv": 26,
-"factors": {
-"discount": 26.3477,
-"histcheap": -1.51,
-"riskadj": 3.02,
-"ddpen": -13.22,
-"momentum": -18.8364,
-"prob": -2,
-"quality": 53.7,
-"valcheap": -1.3658,
-"trappen": 0
-},
-"ret_5d": -5.94,
-"ret_21d": null
-},
-{
-"date": "2026-08-05",
 "ticker": "VG",
 "kind": "long",
 "price": 12.84,
@@ -53726,6 +53646,90 @@
 "quality": 48.0,
 "valcheap": -0.6363,
 "trappen": 0
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-18",
+"ticker": "NOK",
+"kind": "short",
+"price": 10.78,
+"conv": 53,
+"factors": {
+"discount": 36.0237,
+"histcheap": -0.71,
+"riskadj": 2.38,
+"ddpen": -17.29,
+"momentum": -18.0723,
+"prob": 35,
+"oversold": -54.2774,
+"rebound": 7.8943,
+"trend": 1.0,
+"relstrength": 18.1761
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-18",
+"ticker": "SMCI",
+"kind": "short",
+"price": 38.28,
+"conv": 31,
+"factors": {
+"discount": 34.7648,
+"histcheap": -0.38,
+"riskadj": -0.27,
+"ddpen": -42.02,
+"momentum": -21.6783,
+"prob": 26,
+"oversold": -65.6474,
+"rebound": -19.9592,
+"trend": 1.0,
+"relstrength": 21.7821
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-18",
+"ticker": "ADCT",
+"kind": "short",
+"price": 1.1,
+"conv": 48,
+"factors": {
+"discount": 77.459,
+"histcheap": 1.93,
+"riskadj": -0.88,
+"ddpen": -37.58,
+"momentum": 2.6549,
+"prob": 54,
+"oversold": -43.4318,
+"rebound": 4.1164,
+"trend": -1.0,
+"relstrength": -2.551
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-18",
+"ticker": "PUMP",
+"kind": "short",
+"price": 12.79,
+"conv": 50,
+"factors": {
+"discount": 29.7253,
+"histcheap": -0.44,
+"riskadj": 2.47,
+"ddpen": -15.0,
+"momentum": -16.4845,
+"prob": 21,
+"oversold": -57.0487,
+"rebound": 2.4832,
+"trend": 1.0,
+"relstrength": 16.5883
 },
 "ret_5d": null,
 "ret_21d": null
