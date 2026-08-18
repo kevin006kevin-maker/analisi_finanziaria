@@ -1,36 +1,35 @@
 {
 "short": {
-"oversold": 0.088,
-"rebound": 0.745,
-"momentum": 0.296,
+"oversold": 0.065,
+"rebound": 0.751,
+"momentum": 0.414,
 "discount": 0.0,
 "riskadj": 0.0,
-"ddpen": 0.929,
-"histcheap": 0.0,
-"trend": 0.035,
+"ddpen": 0.927,
+"histcheap": 0.034,
+"trend": 0.037,
 "prob": 0.0,
-"relstrength": 0.133
+"relstrength": 0.25
 },
 "_audit": {
 "short": {
 "versione": 2,
 "data": "2026-08-18",
 "adottati": true,
-"righe": 2314,
+"righe": 2420,
 "giorni": 22,
 "scartate_frazionamenti": 111,
 "confine": "2026-07-14",
 "righe_train": 1562,
-"righe_verifica": 752,
-"ordina_meglio_appresi": 0.0917,
-"ordina_meglio_a_mano": 0.0169,
-"asticella": 0.0269,
+"righe_verifica": 858,
+"ordina_meglio_appresi": 0.1609,
+"ordina_meglio_a_mano": 0.0903,
+"asticella": 0.1003,
 "esito": "adottati: ordinano meglio dei pesi a mano",
 "quota_appresa": 0.6,
 "fattori_spenti": [
 "discount",
 "riskadj",
-"histcheap",
 "prob"
 ]
 },
@@ -38,32 +37,31 @@
 "versione": 2,
 "data": "2026-08-18",
 "adottati": true,
-"righe": 1114,
+"righe": 1158,
 "giorni": 22,
 "scartate_frazionamenti": 3,
 "confine": "2026-07-14",
 "righe_train": 768,
-"righe_verifica": 346,
-"ordina_meglio_appresi": 0.1978,
-"ordina_meglio_a_mano": 0.1502,
-"asticella": 0.1602,
+"righe_verifica": 390,
+"ordina_meglio_appresi": 0.2146,
+"ordina_meglio_a_mano": 0.202,
+"asticella": 0.212,
 "esito": "adottati: ordinano meglio dei pesi a mano",
 "quota_appresa": 0.6,
 "fattori_spenti": [
-"riskadj",
 "prob"
 ]
 }
 },
 "long": {
-"quality": 0.7,
-"valcheap": 0.201,
-"discount": 1.155,
-"histcheap": 0.336,
-"riskadj": 0.0,
-"ddpen": 1.121,
-"momentum": 0.042,
+"quality": 0.732,
+"valcheap": 0.191,
+"discount": 1.149,
+"histcheap": 0.343,
+"riskadj": 0.004,
+"ddpen": 1.095,
+"momentum": 0.048,
 "prob": 0.0,
-"trappen": 0.401
+"trappen": 0.4
 }
 }
