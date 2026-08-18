@@ -1,66 +1,6 @@
 [
 {
 "date": "2026-08-05",
-"ticker": "EFA",
-"kind": "long",
-"price": 107.32,
-"conv": 50,
-"factors": {
-"discount": -0.0,
-"histcheap": -1.85,
-"riskadj": 1.55,
-"ddpen": -3.07,
-"momentum": -3.3016,
-"prob": 85,
-"quality": null,
-"valcheap": null,
-"trappen": null
-},
-"ret_5d": 1.26,
-"ret_21d": null
-},
-{
-"date": "2026-08-05",
-"ticker": "EEM",
-"kind": "long",
-"price": 66.0,
-"conv": 51,
-"factors": {
-"discount": 7.3164,
-"histcheap": -1.28,
-"riskadj": 1.41,
-"ddpen": -4.74,
-"momentum": -5.8371,
-"prob": 87,
-"quality": null,
-"valcheap": null,
-"trappen": null
-},
-"ret_5d": 0.75,
-"ret_21d": null
-},
-{
-"date": "2026-08-05",
-"ticker": "XLK",
-"kind": "long",
-"price": 186.9,
-"conv": 43,
-"factors": {
-"discount": 5.7061,
-"histcheap": -1.9,
-"riskadj": 1.93,
-"ddpen": -5.99,
-"momentum": -9.2407,
-"prob": 81,
-"quality": null,
-"valcheap": -0.6264,
-"trappen": null
-},
-"ret_5d": 1.05,
-"ret_21d": null
-},
-{
-"date": "2026-08-05",
 "ticker": "XLF",
 "kind": "long",
 "price": 57.88,
@@ -53756,6 +53696,66 @@
 "rebound": -8.3974,
 "trend": 1.0,
 "relstrength": 3.5843
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-18",
+"ticker": "KLAR",
+"kind": "long",
+"price": 15.82,
+"conv": 47,
+"factors": {
+"discount": 65.2155,
+"histcheap": 0.84,
+"riskadj": -1.69,
+"ddpen": -51.8,
+"momentum": 19.368,
+"prob": 4,
+"quality": 54.1,
+"valcheap": -2.5218,
+"trappen": 0
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-18",
+"ticker": "FN",
+"kind": "long",
+"price": 515.0,
+"conv": 60,
+"factors": {
+"discount": 31.0086,
+"histcheap": -0.12,
+"riskadj": 0.81,
+"ddpen": -15.76,
+"momentum": 2.29,
+"prob": 47,
+"quality": 60.6,
+"valcheap": -2.8455,
+"trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-18",
+"ticker": "AUR",
+"kind": "long",
+"price": 6.405,
+"conv": 23,
+"factors": {
+"discount": 23.75,
+"histcheap": -1.02,
+"riskadj": -0.09,
+"ddpen": -26.07,
+"momentum": 8.2378,
+"prob": 30,
+"quality": 16.7,
+"valcheap": -3.0,
+"trappen": -2
 },
 "ret_5d": null,
 "ret_21d": null
