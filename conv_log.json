@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-08-05",
-"ticker": "T",
-"kind": "short",
-"price": 22.86,
-"conv": 42,
-"factors": {
-"discount": 22.8224,
-"histcheap": 1.27,
-"riskadj": -1.34,
-"ddpen": -15.04,
-"momentum": 4.5113,
-"prob": 45,
-"oversold": -49.7475,
-"rebound": -0.5766,
-"trend": -1.0,
-"relstrength": -10.3023
-},
-"ret_5d": 6.93,
-"ret_21d": null
-},
-{
-"date": "2026-08-05",
 "ticker": "SG",
 "kind": "short",
 "price": 6.0689,
@@ -53766,6 +53745,26 @@
 "rebound": -10.9781,
 "trend": 1.0,
 "relstrength": 7.5028
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-18",
+"ticker": "FSM",
+"kind": "long",
+"price": 10.45,
+"conv": 67,
+"factors": {
+"discount": 23.4993,
+"histcheap": -0.75,
+"riskadj": 0.92,
+"ddpen": -21.58,
+"momentum": 3.5088,
+"prob": 32,
+"quality": 91.0,
+"valcheap": 0.1169,
+"trappen": 3
 },
 "ret_5d": null,
 "ret_21d": null
