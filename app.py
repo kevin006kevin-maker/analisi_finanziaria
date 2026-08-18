@@ -539,14 +539,25 @@ if section.startswith("Occasioni"):
     if True:
         if refresh_choice != "Disattivato":
             st_autorefresh(interval=(900000 if "15" in refresh_choice else 1800000), key="opp_auto")
-            st.caption(f"🔄 Aggiornamento automatico **attivo** ({refresh_choice.lower()}) · "
-                       f"ultimo aggiornamento: {_now_rome().strftime('%H:%M')}")
+            st.caption(f"🔄 Ricarico questa pagina automaticamente ({refresh_choice.lower()}) · "
+                       f"pagina ricaricata alle {_now_rome().strftime('%H:%M')}")
 
         cloud = fu.cloud_mode()
         if cloud:
-            st.caption("🤖 **Sistema autonomo attivo sul server**: le occasioni vengono aggiornate ogni ~15 minuti "
-                       "anche a PC spento, e le migliori (in salita da 3 giorni) finiscono da sole nel «Monitoraggio». "
-                       "Qui vedi sempre l'ultimo aggiornamento del server.")
+            # FRESCHEZZA VERA dei dati del server, non l'orologio del computer. Prima qui c'era scritto
+            # «ultimo aggiornamento: <ora locale>», cioè sempre «adesso»: con i dati del server fermi
+            # l'app affermava il contrario del vero, ed era impossibile accorgersene da dentro l'app.
+            _fr = fu.freschezza_dati()
+            (st.warning if _fr["allarme"] else st.caption)(
+                ("⚠️ " if _fr["allarme"] else "🤖 ") + _fr["testo"]
+                + (". Il sistema autonomo scrive solo quando qualcosa cambia, quindi a mercati chiusi "
+                   "qualche ora di silenzio è normale; molte ore a mercati aperti no."
+                   if not _fr["allarme"] else
+                   ". Se i mercati sono aperti, qualcosa non sta funzionando: controlla la scheda "
+                   "«Actions» del repository."))
+            st.caption("🤖 **Sistema autonomo attivo sul server**: le occasioni vengono ricontrollate "
+                       "ogni **30 minuti** anche a PC spento, e quelle che superano i controlli "
+                       "finiscono da sole nel «Monitoraggio».")
             auto_promote_on = True
         else:
             auto_promote_on = st.checkbox(
@@ -1307,27 +1318,16 @@ if section.startswith("In anticipo"):
     _fq = filtri_qualita("pre", "I dati non ancora registrati non escludono nulla: qui sotto "
                                 "trovi il conteggio delle righe con dati incompleti.")
 
-    # DUE VISTE. La seconda è il gemello, sul lato opposto, di «Da incassare» del Monitoraggio: qui
-    # non hai ancora comprato, quindi «al massimo e potrebbe scendere» non significa «incassa» ma
-    # «troppo tardi per entrare». Sono le candidate che hanno già fatto il grosso della corsa: il
-    # rimbalzo è avvenuto, e chi entra adesso compra la parte finale del movimento.
+    # Le candidate che hanno GIÀ FATTO il movimento vengono TOLTE dall'elenco, non spostate in una
+    # sezione a parte: sono le stesse occasioni che si vedono già in «In osservazione», e mostrarle
+    # in due posti contemporaneamente non aggiunge niente. Il fatto che siano già corse non è una
+    # categoria da sfogliare, è un MOTIVO PER NON PROPORLE — e come tale si dichiara in una riga.
     _corse = {s["kind"] + ":" + s["ticker"]: _c for s in pre_all
               for _c in [fu.gia_corsa(_watch_pre.get(f"{s['kind']}:{s['ticker']}") or {}, s)] if _c}
-    _n_corse = sum(1 for s in pre_all if s.get("kind") == _fpre
-                   and f"{s['kind']}:{s['ticker']}" in _corse)
-    _pview = st.segmented_control(
-        "Quali candidate vedere", ["fresche", "corse"], default="fresche",
-        format_func=lambda k: ("🔭 Ancora da valutare"
-                               if k == "fresche" else f"🏃 Già corse troppo ({_n_corse})"),
-        required=True, key="pre_view",
-        help="«Già corse troppo» sono le candidate che sono già risalite molto da quando il sistema le "
-             "osserva (oltre l'8%), o che dal loro massimo hanno già ritracciato: il movimento c'è "
-             "stato, entrare adesso significa comprarne la coda. È l'equivalente, prima "
-             "dell'acquisto, di «Da incassare» nel Monitoraggio.") or "fresche"
 
     _base = [s for s in (solide if _solo_solide else pre_all) if s.get("kind") == _fpre]
-    _base = [s for s in _base
-             if (f"{s['kind']}:{s['ticker']}" in _corse) == (_pview == "corse")]
+    _escluse_corse = [s for s in _base if f"{s['kind']}:{s['ticker']}" in _corse]
+    _base = [s for s in _base if f"{s['kind']}:{s['ticker']}" not in _corse]
     _items_pre = [s for s in _base
                   if passa_qualita(s.get("reliab"), s.get("prob_gain"), s.get("prob_loss"),
                                    s.get("last_conv"), _fq)]
@@ -1336,19 +1336,19 @@ if section.startswith("In anticipo"):
                                          s.get("last_conv"), _fq))
     _items_pre.sort(key=lambda s: -(s.get("last_conv") or 0))
 
-    _titolo = ("🏃 Già corse troppo" if _pview == "corse"
-               else ("🔭 Le più solide" if _solo_solide else "🔭 Tutte le osservate"))
-    st.markdown(f"## {_titolo} — {len(_items_pre)} su "
-                f"{len([s for s in pre_all if s.get('kind') == _fpre])}")
-    if _pview == "corse":
-        st.caption("Queste hanno **già fatto il movimento**: sono risalite oltre l'8% da quando sono "
-                   "osservate, oppure hanno già ritracciato dal loro massimo. Non sono un'occasione da "
-                   "prendere adesso — sono la prova che il sistema le aveva viste **prima**. Guardarle "
-                   "serve a due cose: capire quanto in fretta si muovono, e non entrare per ultimo.")
-    else:
-        st.caption("Ordinate dalla **più conveniente** alla meno. Clicca una riga per la scheda completa."
-                   + (f"  ⚠️ {_incompl} righe non hanno ancora tutti i dati dei filtri (si popolano coi "
-                      "prossimi controlli) e restano visibili." if _incompl else ""))
+    st.markdown(f"## 🔭 {'Le più solide' if _solo_solide else 'Tutte le osservate'} — "
+                f"{len(_items_pre)} su {len([s for s in pre_all if s.get('kind') == _fpre])}")
+    st.caption("Ordinate dalla **più conveniente** alla meno. Clicca una riga per la scheda completa."
+               + (f"  ⚠️ {_incompl} righe non hanno ancora tutti i dati dei filtri (si popolano coi "
+                  "prossimi controlli) e restano visibili." if _incompl else ""))
+    if _escluse_corse:
+        _nomi = ", ".join(f"**{s['ticker']}**" for s in _escluse_corse[:8])
+        st.caption(f"🏃 **{len(_escluse_corse)} non sono in elenco** perché hanno già fatto il "
+                   f"movimento (risalite oltre l'8% da quando sono osservate, o già ritracciate dal "
+                   f"loro massimo): {_nomi}"
+                   + (f" e altre {len(_escluse_corse) - 8}" if len(_escluse_corse) > 8 else "")
+                   + ". Entrare adesso vorrebbe dire comprarne la coda. Le trovi comunque in "
+                     "«👀 In osservazione», dove il sistema continua a seguirle.")
 
     if not _items_pre:
         st.info("Nessuna candidata con questi filtri. Prova a togliere la spunta «Solo le più solide» "
@@ -1378,10 +1378,15 @@ if section.startswith("In anticipo"):
                 "Mancano": s.get("remaining"),
             })
         _tk_pre = [s["ticker"] for s in _items_pre]
+        # Il contatore nella chiave serve a CHIUDERE la scheda: azzerare la nostra memoria non
+        # bastava, perché la tabella continuava a riportare la stessa riga selezionata e la scheda si
+        # riapriva subito. Cambiando la chiave la tabella nasce di nuovo, senza selezione — e la
+        # stessa riga può essere ricliccata per riaprirla.
+        _npre = st.session_state.get(f"pre_nonce_{_fpre}", 0)
         _evp = st.dataframe(
             pd.DataFrame(_rows_pre), use_container_width=True, hide_index=True,
             on_select="rerun", selection_mode="single-row",
-            key=f"pretab_{_fpre}_{'|'.join(_tk_pre)}",
+            key=f"pretab_{_fpre}_{_npre}_{'|'.join(_tk_pre)}",
             column_config={
                 "Titolo": st.column_config.TextColumn("Titolo", width="medium",
                     help="Clicca la riga per aprire la scheda completa."),
@@ -1415,9 +1420,14 @@ if section.startswith("In anticipo"):
         _scelto = next((s for s in _items_pre if s["ticker"] == _tks), None)
         if _scelto:
             st.markdown("---")
-            if st.button("✖️ Chiudi la scheda", key=f"pre_close_{_fpre}"):
-                st.session_state.pop(_selkey_pre, None)
-                st.rerun()
+            # `on_click` invece di controllare il valore del bottone: la funzione gira PRIMA che la
+            # pagina venga ridisegnata, quindi la scheda si chiude al primo clic. Controllando il
+            # valore del bottone servirebbe un giro in più, perché la decisione se disegnare la
+            # scheda è già stata presa più in alto.
+            def _chiudi_pre(_k=_selkey_pre, _n=_npre, _f=_fpre):
+                st.session_state.pop(_k, None)
+                st.session_state[f"pre_nonce_{_f}"] = _n + 1   # tabella nuova = niente selezione
+            st.button("✖️ Chiudi la scheda", key=f"pre_close_{_fpre}", on_click=_chiudi_pre)
             _pre_card(_scelto)
         else:
             st.session_state.pop(_selkey_pre, None)
@@ -1942,10 +1952,12 @@ if section.startswith("Monitoraggio"):
         # La chiave contiene i titoli NELL'ORDINE mostrato: se l'ordine cambia la selezione decade,
         # così la riga selezionata non punta mai al titolo sbagliato. La scheda aperta resta comunque
         # visibile perché ricordiamo il TICKER scelto (sotto), non il numero di riga.
+        # Il contatore serve a chiudere la scheda: vedi la nota nella sezione «In anticipo».
+        _nmon = st.session_state.get(f"mon_nonce_{_vkey}", 0)
         _ev = st.dataframe(
             _df_mon, use_container_width=True, hide_index=True,
             on_select="rerun", selection_mode="single-row",
-            key=f"montab_{_vkey}_{'|'.join(_tickers)}",
+            key=f"montab_{_vkey}_{_nmon}_{'|'.join(_tickers)}",
             column_config={
                 "Titolo": st.column_config.TextColumn(
                     "Titolo", width="medium",
@@ -1996,9 +2008,11 @@ if section.startswith("Monitoraggio"):
         _tk_sel = st.session_state.get(_selkey)
         if _tk_sel and _tk_sel in tracked and _tk_sel in _tickers:
             st.markdown("---")
-            if st.button("✖️ Chiudi la scheda", key=f"closecard_{_vkey}"):
-                st.session_state.pop(_selkey, None)
-                st.rerun()
+            # `on_click`: vedi la nota nella sezione «In anticipo» — chiude al primo clic.
+            def _chiudi_mon(_k=_selkey, _n=_nmon, _v=_vkey):
+                st.session_state.pop(_k, None)
+                st.session_state[f"mon_nonce_{_v}"] = _n + 1   # tabella nuova = niente selezione
+            st.button("✖️ Chiudi la scheda", key=f"closecard_{_vkey}", on_click=_chiudi_mon)
             render_tracked(_tk_sel, tracked[_tk_sel])
         else:
             st.session_state.pop(_selkey, None)

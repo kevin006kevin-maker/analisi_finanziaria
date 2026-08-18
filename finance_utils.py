@@ -242,6 +242,54 @@ def data_status_line(info: dict, hist=None) -> str:
     return "📡 " + " · ".join(parts)
 
 
+def freschezza_dati() -> dict:
+    """Da quanto tempo il sistema autonomo NON registra un dato nuovo.
+
+    Serve perché la barra in alto mostrava l'orologio del COMPUTER e lo chiamava «ultimo
+    aggiornamento»: con i dati del server fermi, l'app diceva «aggiornato adesso» — il contrario del
+    vero. Non è un difetto teorico: il 18/08/2026 ci sono cascato io, convinto da una vista locale
+    non aggiornata che il job fosse morto da 17 ore mentre stava lavorando regolarmente.
+
+    Si guarda l'ultimo scatto dei titoli seguiti e l'ultima osservazione: sono le due cose che il job
+    scrive a ogni giro in cui qualcosa cambia. Ritorna {quando, ore, testo, allarme}; `allarme` è
+    vero solo oltre `_FRESCHEZZA_ALLARME_ORE`, e a mercati chiusi qualche ora di silenzio è normale."""
+    candidati = []
+    try:
+        for e in (load_tracking() or {}).values():
+            snaps = [s for s in (e.get("snapshots") or []) if s.get("date")]
+            if snaps:
+                candidati.append(str(snaps[-1]["date"]))
+    except Exception:
+        pass
+    try:
+        for e in (load_opp_watch() or {}).values():
+            obs = [o for o in (e.get("obs") or []) if o.get("date")]
+            if obs:
+                candidati.append(str(obs[-1]["date"]))
+    except Exception:
+        pass
+    if not candidati:
+        return {"quando": None, "ore": None, "allarme": True,
+                "testo": "nessun dato dal server: il sistema autonomo non ha ancora scritto niente"}
+    ultimo = max(candidati)
+    d, ora = _parse_dt(ultimo), _parse_dt(_now_iso())
+    ore = ((ora - d).total_seconds() / 3600.0) if (d and ora) else None
+    if ore is None:
+        return {"quando": ultimo, "ore": None, "allarme": False, "testo": f"ultimo dato: {ultimo}"}
+    if ore < 1:
+        quanto = f"{int(ore * 60)} minuti fa"
+    elif ore < 48:
+        quanto = f"{ore:.0f} ore fa"
+    else:
+        quanto = f"{ore / 24:.0f} giorni fa"
+    return {"quando": ultimo, "ore": round(ore, 1),
+            "allarme": ore > _FRESCHEZZA_ALLARME_ORE,
+            "testo": f"ultimo dato registrato dal server: **{str(ultimo)[:16]}** ({quanto})"}
+
+
+_FRESCHEZZA_ALLARME_ORE = 4     # oltre questo si segnala; a mercati chiusi è comunque normale
+
+
 def _first(data):
     return data[0] if isinstance(data, list) and data else {}
 
