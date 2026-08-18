@@ -690,8 +690,8 @@
 "obs_date": "2026-07-25",
 "pre_price": 8.57,
 "pre_date": "2026-07-27",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 10.6850004196167,
+"conf_date": "2026-08-18",
 "target": 8.7939,
 "stop": 8.1766,
 "reliab": "🟡 Media",
@@ -1147,15 +1147,18 @@
 "obs_date": "2026-06-29",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 181.1425018310547,
+"conf_date": "2026-08-18",
 "target": 181.9704,
 "stop": 165.4126,
 "reliab": "🟢 Alta",
 "prob_gain": 46,
 "prob_loss": 0,
 "conv": 68,
-"res": {}
+"res": {
+"osservazione|7g": 5.93,
+"promozione|7g": 2.04
+}
 },
 {
 "ticker": "RPT",
@@ -1185,15 +1188,18 @@
 "obs_date": "2026-07-17",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 50.7400016784668,
+"conf_date": "2026-08-18",
 "target": 55.152,
 "stop": 47.4146,
 "reliab": "🟡 Media",
 "prob_gain": 48,
 "prob_loss": 18,
 "conv": 66,
-"res": {}
+"res": {
+"osservazione|7g": 15.37,
+"promozione|7g": 9.9
+}
 },
 {
 "ticker": "AAON",
@@ -1204,15 +1210,18 @@
 "obs_date": "2026-07-20",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 85.41500091552734,
+"conf_date": "2026-08-18",
 "target": 116.0966,
 "stop": 76.0932,
 "reliab": "🔴 Bassa",
 "prob_gain": 45,
 "prob_loss": 19,
 "conv": 71,
-"res": {}
+"res": {
+"osservazione|7g": -16.74,
+"promozione|7g": -20.68
+}
 },
 {
 "ticker": "AGI",
@@ -1231,7 +1240,11 @@
 "prob_gain": 56,
 "prob_loss": 32,
 "conv": 75,
-"res": {}
+"res": {
+"anticipo|7g": 20.37,
+"osservazione|7g": 17.96,
+"promozione|7g": 0.93
+}
 },
 {
 "ticker": "TDUP",
