@@ -1,46 +1,6 @@
 [
 {
 "date": "2026-08-06",
-"ticker": "ENI.MI",
-"kind": "long",
-"price": 23.25,
-"conv": 63,
-"factors": {
-"discount": 6.5702,
-"histcheap": -1.27,
-"riskadj": 1.98,
-"ddpen": -6.25,
-"momentum": -5.6098,
-"prob": 70,
-"quality": 62.0,
-"valcheap": 0.555,
-"trappen": 2
-},
-"ret_5d": 3.05,
-"ret_21d": null
-},
-{
-"date": "2026-08-06",
-"ticker": "ISP.MI",
-"kind": "long",
-"price": 6.788,
-"conv": 51,
-"factors": {
-"discount": -0.0,
-"histcheap": -3.29,
-"riskadj": 1.61,
-"ddpen": -6.29,
-"momentum": -4.7531,
-"prob": 57,
-"quality": 64.9,
-"valcheap": 0.4347,
-"trappen": 2
-},
-"ret_5d": 1.77,
-"ret_21d": null
-},
-{
-"date": "2026-08-06",
 "ticker": "UCG.MI",
 "kind": "long",
 "price": 85.46,
@@ -53735,6 +53695,48 @@
 "quality": 97.3,
 "valcheap": 0.312,
 "trappen": 2
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-19",
+"ticker": "FN",
+"kind": "short",
+"price": 482.59,
+"conv": 56,
+"factors": {
+"discount": 35.3504,
+"histcheap": 0.2,
+"riskadj": 0.88,
+"ddpen": -15.75,
+"momentum": 8.2319,
+"prob": 31,
+"oversold": -44.2846,
+"rebound": 9.1874,
+"trend": -1.0,
+"relstrength": -7.7604
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-19",
+"ticker": "NOK",
+"kind": "short",
+"price": 10.39,
+"conv": 52,
+"factors": {
+"discount": 38.3383,
+"histcheap": -0.58,
+"riskadj": 2.31,
+"ddpen": -17.46,
+"momentum": -10.0636,
+"prob": 31,
+"oversold": -50.0532,
+"rebound": 11.1761,
+"trend": 1.0,
+"relstrength": 10.5351
 },
 "ret_5d": null,
 "ret_21d": null
