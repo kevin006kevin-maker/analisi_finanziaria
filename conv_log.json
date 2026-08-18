@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-08-05",
-"ticker": "DVA",
-"kind": "short",
-"price": 184.06,
-"conv": 77,
-"factors": {
-"discount": 23.6139,
-"histcheap": -0.81,
-"riskadj": 0.67,
-"ddpen": -10.2,
-"momentum": 23.6139,
-"prob": 47,
-"oversold": -22.0978,
-"rebound": 18.384,
-"trend": 1.0,
-"relstrength": -29.454
-},
-"ret_5d": -2.75,
-"ret_21d": null
-},
-{
-"date": "2026-08-05",
 "ticker": "EXTR",
 "kind": "short",
 "price": 26.475,
@@ -53770,6 +53749,26 @@
 "rebound": -24.3519,
 "trend": 1.0,
 "relstrength": 33.4993
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-18",
+"ticker": "MXL",
+"kind": "long",
+"price": 73.3572,
+"conv": 45,
+"factors": {
+"discount": 42.7031,
+"histcheap": -1.1,
+"riskadj": 2.17,
+"ddpen": -17.7,
+"momentum": -7.1847,
+"prob": 10,
+"quality": 26.9,
+"valcheap": -3.0,
+"trappen": 2
 },
 "ret_5d": null,
 "ret_21d": null
