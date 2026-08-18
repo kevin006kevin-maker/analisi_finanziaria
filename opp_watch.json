@@ -201,6 +201,16 @@
 "conv": null,
 "price": 4.62,
 "stale": true
+},
+{
+"date": "2026-08-18 10:31",
+"conv": 61,
+"price": 4.432,
+"mkt": 4.3991,
+"occ": 59,
+"prob_gain": 51,
+"prob_loss": 13,
+"reliab": "🟡 Media"
 }
 ]
 },
@@ -387,6 +397,16 @@
 "occ": 85,
 "prob_gain": 41,
 "prob_loss": 34,
+"reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-18 10:31",
+"conv": 59,
+"price": 6.65,
+"mkt": 4.3991,
+"occ": 84,
+"prob_gain": 41,
+"prob_loss": 31,
 "reliab": "🔴 Bassa"
 }
 ]
@@ -3886,6 +3906,16 @@
 "prob_gain": 51,
 "prob_loss": 29,
 "reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-18 10:31",
+"conv": 60,
+"price": 10.93,
+"mkt": 4.3991,
+"occ": 46,
+"prob_gain": 51,
+"prob_loss": 29,
+"reliab": "🔴 Bassa"
 }
 ]
 },
@@ -4687,6 +4717,23 @@
 "prob_gain": 55,
 "prob_loss": 22,
 "reliab": "🔴 Bassa"
+}
+]
+},
+"short:ENEL.MI": {
+"ticker": "ENEL.MI",
+"kind": "short",
+"name": "ENEL.MI",
+"obs": [
+{
+"date": "2026-08-18 10:31",
+"conv": 67,
+"price": 9.416,
+"mkt": 4.3991,
+"occ": 35,
+"prob_gain": 53,
+"prob_loss": 0,
+"reliab": "🟢 Alta"
 }
 ]
 }
