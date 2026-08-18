@@ -106,8 +106,13 @@ def notify_profit(items):
     """Notifica quando un'occasione seguita ha già dato quello che doveva dare: bersaglio raggiunto,
     soglia personale raggiunta, oppure guadagno che si sta sgonfiando dal massimo. È l'unico avviso
     sul lato GUADAGNO: prima il sistema sapeva segnalare solo le perdite."""
-    righe = ["💰 <b>Da valutare per l'incasso</b>", ""]
-    for it in items:
+    # Telegram taglia i messaggi oltre ~4000 caratteri: al primo giro le segnalazioni sono molte
+    # (l'arretrato di tutte le occasioni che hanno già raggiunto il bersaglio), quindi si elencano
+    # le più rilevanti — quelle col guadagno più alto — e si dice quante restano.
+    MAX_IN_MESSAGGIO = 12
+    ordinati = sorted(items, key=lambda x: -(x.get("gain") or 0))
+    righe = [f"💰 <b>Da valutare per l'incasso</b> ({len(items)})", ""]
+    for it in ordinati[:MAX_IN_MESSAGGIO]:
         tk = html.escape(str(it.get("ticker")))
         nm = html.escape(str(it.get("name") or tk))
         righe.append(f"🔔 <b>{tk}</b> — {nm}")
@@ -115,6 +120,11 @@ def notify_profit(items):
         if it.get("max") is not None and it.get("giu_dal_max") is not None:
             righe.append(f"• guadagno ora <b>{it.get('gain'):+.1f}%</b> · massimo toccato "
                          f"{it.get('max'):,.2f} ({it.get('giu_dal_max'):+.1f}% da lì)")
+        righe.append("")
+    if len(ordinati) > MAX_IN_MESSAGGIO:
+        altri = ordinati[MAX_IN_MESSAGGIO:]
+        righe.append(f"…e altre <b>{len(altri)}</b>: "
+                     + ", ".join(html.escape(str(x.get('ticker'))) for x in altri))
         righe.append("")
     righe.append("Apri l'app → Monitoraggio → «Da incassare». "
                  "(Strumento informativo, non è un consiglio di vendita.)")
