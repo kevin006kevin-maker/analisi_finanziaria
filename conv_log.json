@@ -1,26 +1,6 @@
 [
 {
 "date": "2026-08-05",
-"ticker": "TDC",
-"kind": "long",
-"price": 27.37,
-"conv": 68,
-"factors": {
-"discount": 27.7455,
-"histcheap": 0.08,
-"riskadj": 0.64,
-"ddpen": -15.73,
-"momentum": 10.6432,
-"prob": 50,
-"quality": 74.6,
-"valcheap": -0.2375,
-"trappen": 2
-},
-"ret_5d": -3.54,
-"ret_21d": null
-},
-{
-"date": "2026-08-05",
 "ticker": "T",
 "kind": "short",
 "price": 22.86,
@@ -53765,6 +53745,27 @@
 "quality": 64.6,
 "valcheap": -0.5792,
 "trappen": 2
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-18",
+"ticker": "KOS",
+"kind": "short",
+"price": 2.74,
+"conv": 41,
+"factors": {
+"discount": 16.208,
+"histcheap": -1.08,
+"riskadj": 0.94,
+"ddpen": -24.28,
+"momentum": -7.0313,
+"prob": 14,
+"oversold": -60.4365,
+"rebound": -10.9781,
+"trend": 1.0,
+"relstrength": 7.5028
 },
 "ret_5d": null,
 "ret_21d": null
