@@ -7458,7 +7458,7 @@
 "long:FN": {
 "ticker": "FN",
 "kind": "long",
-"name": "FABRINET",
+"name": "Fabrinet",
 "obs": [
 {
 "date": "2026-08-18 15:40",
@@ -7519,6 +7519,23 @@
 "prob_gain": 75,
 "prob_loss": 16,
 "reliab": "🔴 Bassa"
+}
+]
+},
+"long:FSM": {
+"ticker": "FSM",
+"kind": "long",
+"name": "Fortuna Mining Corp",
+"obs": [
+{
+"date": "2026-08-18 22:20",
+"conv": 67,
+"price": 10.45,
+"mkt": 2.4311,
+"occ": 84,
+"prob_gain": 60,
+"prob_loss": 28,
+"reliab": "🟡 Media"
 }
 ]
 }
