@@ -1,90 +1,6 @@
 [
 {
 "date": "2026-08-05",
-"ticker": "RRX",
-"kind": "short",
-"price": 186.27,
-"conv": 66,
-"factors": {
-"discount": 21.7977,
-"histcheap": -0.3,
-"riskadj": 0.57,
-"ddpen": -9.2,
-"momentum": 0.709,
-"prob": 45,
-"oversold": -38.8835,
-"rebound": 14.1166,
-"trend": 1.0,
-"relstrength": -6.5491
-},
-"ret_5d": -7.28,
-"ret_21d": null
-},
-{
-"date": "2026-08-05",
-"ticker": "NYT",
-"kind": "short",
-"price": 64.155,
-"conv": 71,
-"factors": {
-"discount": 25.2795,
-"histcheap": 0.63,
-"riskadj": 0.5,
-"ddpen": -8.16,
-"momentum": 17.4218,
-"prob": 50,
-"oversold": -31.653,
-"rebound": 14.8838,
-"trend": -1.0,
-"relstrength": -23.2619
-},
-"ret_5d": 0.18,
-"ret_21d": null
-},
-{
-"date": "2026-08-05",
-"ticker": "GLXY",
-"kind": "short",
-"price": 19.155,
-"conv": 61,
-"factors": {
-"discount": 55.308,
-"histcheap": 1.46,
-"riskadj": -0.66,
-"ddpen": -36.14,
-"momentum": -4.9014,
-"prob": 24,
-"oversold": -37.0327,
-"rebound": 40.083,
-"trend": -1.0,
-"relstrength": -0.9387
-},
-"ret_5d": 11.72,
-"ret_21d": null
-},
-{
-"date": "2026-08-05",
-"ticker": "RBA",
-"kind": "short",
-"price": 96.88,
-"conv": 69,
-"factors": {
-"discount": 18.6839,
-"histcheap": 1.48,
-"riskadj": -0.52,
-"ddpen": -11.77,
-"momentum": 15.9028,
-"prob": 54,
-"oversold": -30.0816,
-"rebound": 13.1761,
-"trend": -1.0,
-"relstrength": -21.7429
-},
-"ret_5d": -9.84,
-"ret_21d": null
-},
-{
-"date": "2026-08-05",
 "ticker": "EA",
 "kind": "short",
 "price": 209.7,
@@ -53769,6 +53685,86 @@
 "rebound": -88.9669,
 "trend": 1.0,
 "relstrength": 2174.4881
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-18",
+"ticker": "CVE",
+"kind": "long",
+"price": 32.245,
+"conv": 30,
+"factors": {
+"discount": -0.0,
+"histcheap": -1.97,
+"riskadj": 3.41,
+"ddpen": -7.81,
+"momentum": -8.0596,
+"prob": -6,
+"quality": 52.2,
+"valcheap": -1.9911,
+"trappen": 1
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-18",
+"ticker": "HST",
+"kind": "long",
+"price": 23.085,
+"conv": 61,
+"factors": {
+"discount": 9.6124,
+"histcheap": -1.19,
+"riskadj": 2.0,
+"ddpen": -4.4,
+"momentum": -3.5666,
+"prob": 56,
+"quality": 63.0,
+"valcheap": -0.1731,
+"trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-18",
+"ticker": "AEHR",
+"kind": "long",
+"price": 123.6114,
+"conv": 24,
+"factors": {
+"discount": 15.1079,
+"histcheap": -2.15,
+"riskadj": 2.58,
+"ddpen": -21.02,
+"momentum": -5.4885,
+"prob": -2,
+"quality": 14.7,
+"valcheap": -3.0,
+"trappen": -2
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-18",
+"ticker": "AXTI",
+"kind": "long",
+"price": 81.765,
+"conv": 33,
+"factors": {
+"discount": 41.9406,
+"histcheap": -1.12,
+"riskadj": 4.1,
+"ddpen": -26.08,
+"momentum": -10.8227,
+"prob": 7,
+"quality": 12.7,
+"valcheap": -3.0,
+"trappen": -1
 },
 "ret_5d": null,
 "ret_21d": null
