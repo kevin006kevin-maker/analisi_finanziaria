@@ -5333,6 +5333,66 @@ SCENARIO_VARIANTI = {
 }
 
 
+def _dato_mancante(r, min_pg=0, max_pl=100, min_conv=0) -> bool:
+    """True se un filtro ATTIVO non è applicabile a questa riga perché quel numero non è stato
+    registrato (righe vecchie, precedenti all'aggiunta del campo)."""
+    return bool((min_pg > 0 and r.get("prob_gain") is None)
+                or (max_pl < 100 and r.get("prob_loss") is None)
+                or (min_conv > 0 and r.get("conv") is None))
+
+
+def _seleziona_scenari(kind, min_rel=0, min_pg=0, max_pl=100, min_conv=0, variante="reale"):
+    """Righe degli scenari di un tipo: (tutte, quelle che passano i filtri di qualità).
+    Estratta da scenario_report per essere riusata dal calendario per periodi, senza duplicare la
+    logica dei filtri (che è il punto dove è più facile che due viste si contraddicano).
+    STORICO COMPLETO (archivio + vivo): il quadro non si accorcia mai col passare del tempo.
+
+    ATTENZIONE, qui un dato MANCANTE ESCLUDE — al contrario delle sezioni vive, dove un dato non
+    ancora registrato lascia passare la riga. Non è una svista: le due viste rispondono a domande
+    diverse. Nel monitoraggio il filtro serve a non nascondere un'occasione appena arrivata che
+    forse va bene; qui serve a rispondere a «e se avessi comprato SOLO le migliori?», e una riga di
+    cui non si conosce la probabilità di salita non è nota per essere fra le migliori: contarla
+    gonfierebbe il campione con casi che il filtro non ha mai giudicato. Con una soglia stretta
+    (per esempio salita ≥ 60%) era la differenza fra 5 casi veri e 11 casi di cui 6 ignoti.
+    Quante righe restano fuori per questo motivo lo dicono `scenario_report` e `scenari_calendario`
+    nel campo `n_senza_dato`, così l'esclusione non è silenziosa."""
+    tutte = [r for r in load_registro_completo(SCENARIO_LOG_NAME, load_scenario_log())
+             if not r.get("bad_data") and r.get("kind") == kind
+             and (variante == "senza_soglia" or r.get("promossa", True))]
+    sel = [r for r in tutte
+           if _rel_rank(r.get("reliab")) >= min_rel
+           and (min_pg <= 0 or (r.get("prob_gain") is not None and r["prob_gain"] >= min_pg))
+           and (max_pl >= 100 or (r.get("prob_loss") is not None and r["prob_loss"] <= max_pl))
+           and (min_conv <= 0 or (r.get("conv") is not None and r["conv"] >= min_conv))]
+    sel.sort(key=lambda r: str(r.get("date")))
+    return tutte, sel
+
+
+def _celle_da_righe(righe, kind):
+    """Aggrega un insieme di righe nelle caselle acquisto|vendita: (celle, casi).
+    Il numero principale è la MEDIANA, la media resta accanto: su campioni piccoli un solo caso
+    estremo sposta la media di decine di punti e racconta una storia mai avvenuta."""
+    celle, casi = {}, {}
+    for bk in SCENARIO_BUYS_UI:
+        for sk in SCENARIO_SELLS_PER_TIPO.get(kind, SCENARIO_SELLS_PER_TIPO["short"]):
+            key = f"{bk}|{sk}"
+            punti = [{"ticker": r.get("ticker"), "date": str(r.get("date"))[:10],
+                      "reliab": r.get("reliab"), "prob_gain": r.get("prob_gain"),
+                      "prob_loss": r.get("prob_loss"), "conv": r.get("conv"),
+                      "ret": r["res"][key]}
+                     for r in righe if (r.get("res") or {}).get(key) is not None]
+            if not punti:
+                continue
+            vals = sorted(p["ret"] for p in punti)
+            n = len(vals)
+            med = vals[n // 2] if n % 2 else (vals[n // 2 - 1] + vals[n // 2]) / 2
+            celle[key] = {"n": n, "avg": round(sum(vals) / n, 2),
+                          "hit": round(100 * sum(1 for v in vals if v > 0) / n),
+                          "med": round(med, 2), "best": round(vals[-1], 2), "worst": round(vals[0], 2)}
+            casi[key] = punti
+    return celle, casi
+
+
 def scenario_report(kind: str = "short", min_rel: int = 0, min_pg: int = 0,
                     max_pl: int = 100, min_conv: int = 0, variante: str = "reale") -> dict:
     """La «pagella» degli scenari per un tipo di occasione, con i filtri di qualità applicati al
@@ -5350,36 +5410,11 @@ def scenario_report(kind: str = "short", min_rel: int = 0, min_pg: int = 0,
                        soglia» resta popolata solo dalle promosse: il confronto onesto è sulle colonne
                        a 7 / 30 / 365 giorni.
     Le righe registrate prima di questa modifica non hanno il campo `promossa` e contano come promosse."""
-    # STORICO COMPLETO (archivio + vivo): il quadro non si accorcia mai col passare del tempo
-    tutte = [r for r in load_registro_completo(SCENARIO_LOG_NAME, load_scenario_log())
-             if not r.get("bad_data") and r.get("kind") == kind
-             and (variante == "senza_soglia" or r.get("promossa", True))]
-    sel = [r for r in tutte
-           if _rel_rank(r.get("reliab")) >= min_rel
-           and (r.get("prob_gain") is None or r["prob_gain"] >= min_pg)
-           and (r.get("prob_loss") is None or r["prob_loss"] <= max_pl)
-           and (r.get("conv") is None or r["conv"] >= min_conv)]
-    sel.sort(key=lambda r: str(r.get("date")))
-    celle, casi = {}, {}
-    for bk in SCENARIO_BUYS_UI:
-        for sk in SCENARIO_SELLS_PER_TIPO.get(kind, SCENARIO_SELLS_PER_TIPO["short"]):
-            key = f"{bk}|{sk}"
-            punti = [{"ticker": r.get("ticker"), "date": str(r.get("date"))[:10],
-                      "reliab": r.get("reliab"), "prob_gain": r.get("prob_gain"),
-                      "prob_loss": r.get("prob_loss"), "conv": r.get("conv"),
-                      "ret": r["res"][key]}
-                     for r in sel if r.get("res", {}).get(key) is not None]
-            if not punti:
-                continue
-            vals = sorted(p["ret"] for p in punti)
-            n = len(vals)
-            med = vals[n // 2] if n % 2 else (vals[n // 2 - 1] + vals[n // 2]) / 2
-            celle[key] = {"n": n, "avg": round(sum(vals) / n, 2),
-                          "hit": round(100 * sum(1 for v in vals if v > 0) / n),
-                          "med": round(med, 2), "best": round(vals[-1], 2), "worst": round(vals[0], 2)}
-            casi[key] = punti
+    tutte, sel = _seleziona_scenari(kind, min_rel, min_pg, max_pl, min_conv, variante)
+    celle, casi = _celle_da_righe(sel, kind)
     return {"n_tot": len(tutte), "n_casi": len(sel), "celle": celle, "casi": casi,
             "variante": variante,
+            "n_senza_dato": sum(1 for r in tutte if _dato_mancante(r, min_pg, max_pl, min_conv)),
             "n_scartate": sum(1 for r in tutte if r.get("promossa") is False),
             "n_totale_log": len([r for r in load_scenario_log() if not r.get("bad_data")])}
 
@@ -5477,6 +5512,311 @@ def resa_regole_sistema(importo: float = 30.0, fee: float = 1.0) -> dict:
 
 
 _LATI_OPERAZIONE = 2      # un'operazione completa paga la commissione DUE volte: comprare e vendere
+
+
+_MESI_IT = ("gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio",
+            "agosto", "settembre", "ottobre", "novembre", "dicembre")
+
+
+def _periodo_di(giorno: str, granularita: str = "settimana"):
+    """(chiave ordinabile, etichetta leggibile, primo giorno, ultimo giorno) del periodo che contiene
+    `giorno`. La settimana è quella ISO, da lunedì a domenica."""
+    d = datetime.date.fromisoformat(str(giorno)[:10])
+    if granularita == "mese":
+        primo = d.replace(day=1)
+        ultimo = (primo + datetime.timedelta(days=31)).replace(day=1) - datetime.timedelta(days=1)
+        return f"{d.year:04d}-{d.month:02d}", f"{_MESI_IT[d.month - 1]} {d.year}", primo, ultimo
+    anno, sett, _gg = d.isocalendar()
+    primo = d - datetime.timedelta(days=d.weekday())
+    ultimo = primo + datetime.timedelta(days=6)
+    etichetta = (f"sett. {sett} · {primo.day} {_MESI_IT[primo.month - 1][:3]}"
+                 f" – {ultimo.day} {_MESI_IT[ultimo.month - 1][:3]}")
+    return f"{anno:04d}-W{sett:02d}", etichetta, primo, ultimo
+
+
+def scenari_calendario(kind: str = "short", granularita: str = "settimana", min_rel: int = 0,
+                       min_pg: int = 0, max_pl: int = 100, min_conv: int = 0,
+                       variante: str = "reale", importo: float = 30.0, fee: float = 1.0) -> dict:
+    """CALENDARIO DEGLI SCENARI: gli stessi risultati, ma divisi per periodo di tempo.
+
+    A che serve: la matrice mette tutto insieme e risponde a «quale momento d'acquisto rende di
+    più». Non risponde a «sta migliorando o peggiorando?», che è una domanda diversa e altrettanto
+    importante: un sistema può avere una media buona costruita in una sola settimana fortunata.
+    Qui ogni riga è un periodo, così l'andamento nel tempo si vede.
+
+    I periodi sono quelli della PROMOZIONE (quando l'occasione è entrata), non della vendita: è la
+    data che il registro conserva con certezza, e raggruppare per «coorti d'ingresso» è anche il
+    modo corretto di confrontare periodi diversi. La resa di una coorte matura nei giorni dopo.
+
+    Ritorna {granularita, periodi: [...]}, ogni periodo con chiave, etichetta, estremi, quante
+    occasioni, e le caselle acquisto|vendita calcolate SOLO su quel periodo (con il netto in euro)."""
+    _tutte, sel = _seleziona_scenari(kind, min_rel, min_pg, max_pl, min_conv, variante)
+    n_senza_dato = sum(1 for r in _tutte if _dato_mancante(r, min_pg, max_pl, min_conv))
+    gruppi = {}
+    for r in sel:
+        g = str(r.get("date") or "")[:10]
+        if not g:
+            continue
+        try:
+            chiave, etichetta, primo, ultimo = _periodo_di(g, granularita)
+        except Exception:
+            continue
+        gruppi.setdefault(chiave, {"chiave": chiave, "etichetta": etichetta,
+                                   "dal": primo.isoformat(), "al": ultimo.isoformat(),
+                                   "righe": []})["righe"].append(r)
+    periodi = []
+    for chiave in sorted(gruppi, reverse=True):          # dal più recente
+        g = gruppi[chiave]
+        celle, casi = _celle_da_righe(g["righe"], kind)
+        for k, c in celle.items():
+            # I netti si calcolano CASO PER CASO e poi si fa la media: «il netto della resa tipica»
+            # e «la media dei netti» sono numeri diversi, perché la commissione è fissa e la tassa
+            # colpisce solo i guadagni. Quello utile è il secondo — è ciò che ti resta in tasca a
+            # operazione — ed è lo stesso che mostra la matrice, così le due viste non si
+            # contraddicono sugli stessi dati.
+            netti = [n for n in (net_eur(p["ret"], importo, fee) for p in casi[k]) if n is not None]
+            c["netto_medio"] = round(sum(netti) / len(netti), 2) if netti else None
+            c["netto_totale"] = round(sum(netti), 2)
+            c["in_utile"] = sum(1 for n in netti if n > 0)
+        periodi.append({"chiave": chiave, "etichetta": g["etichetta"], "dal": g["dal"],
+                        "al": g["al"], "n_occasioni": len(g["righe"]),
+                        "titoli": sorted({str(r.get("ticker")) for r in g["righe"]}),
+                        "celle": celle, "casi": casi})
+    return {"granularita": granularita, "kind": kind, "variante": variante,
+            "importo": importo, "fee": fee, "pareggio_pct": round(pareggio_pct(importo, fee), 2),
+            "n_senza_dato": n_senza_dato,
+            "periodi": periodi, "n_periodi": len(periodi)}
+
+
+def scenari_perche_vuoto(kind: str = "short", min_rel: int = 0, min_pg: int = 0,
+                         max_pl: int = 100, min_conv: int = 0, variante: str = "reale") -> dict:
+    """Quando la matrice degli scenari e' vuota, dice PERCHE': i filtri o il tempo.
+
+    Serve perche' il messaggio di prima dava sempre la colpa al tempo («nessun risultato maturo»)
+    anche quando la causa erano i filtri, e non c'era modo di capirlo dall'interno dell'app. Con
+    «Solo le migliori» accade davvero: chiedere una probabilita' di salita >= 60% quando quel numero
+    ha mediana 52 e massimo 85 lascia fuori quasi tutto, e combinato con «affidabilita' Alta» non
+    resta niente.
+
+    Prova a togliere una condizione alla volta: se togliendone UNA la tabella si ripopola, quella e'
+    la condizione che blocca. Ritorna {causa, testo, vincoli, n_senza_filtri, distribuzione}."""
+    pieno = scenario_report(kind, 0, 0, 100, 0, variante)
+    if not pieno["celle"]:
+        return {"causa": "tempo", "vincoli": [], "n_senza_filtri": pieno["n_casi"],
+                "distribuzione": {},
+                "testo": (f"Non dipende dai filtri: per questo tipo non c'è ancora **nessun** "
+                          f"risultato maturo, nemmeno senza filtri "
+                          f"({pieno['n_casi']} occasioni registrate, in attesa che passino i giorni).")}
+    # i filtri c'entrano: quale condizione blocca?
+    prove = (("affidabilità minima", (0, min_pg, max_pl, min_conv)),
+             ("probabilità di salita minima", (min_rel, 0, max_pl, min_conv)),
+             ("rischio di perdita massimo", (min_rel, min_pg, 100, min_conv)),
+             ("convenienza minima", (min_rel, min_pg, max_pl, 0)))
+    vincoli = []
+    for nome, (a, b, c, d) in prove:
+        if scenario_report(kind, a, b, c, d, variante)["celle"]:
+            vincoli.append(nome)
+    # com'e' distribuito, nella realta', cio' che i filtri chiedono
+    righe = [r for r in load_registro_completo(SCENARIO_LOG_NAME, load_scenario_log())
+             if not r.get("bad_data") and r.get("kind") == kind
+             and (variante == "senza_soglia" or r.get("promossa", True))]
+    dist = {}
+    for campo in ("prob_gain", "prob_loss", "conv"):
+        v = sorted(r[campo] for r in righe if r.get(campo) is not None)
+        if v:
+            dist[campo] = {"n": len(v), "min": v[0], "max": v[-1],
+                           "med": v[len(v) // 2] if len(v) % 2 else (v[len(v) // 2 - 1] + v[len(v) // 2]) / 2}
+    alte = sum(1 for r in righe if _rel_rank(r.get("reliab")) >= 2)
+    dist["affidabilita_alta"] = {"n": alte, "su": len(righe)}
+    if vincoli:
+        quali = ", ".join(f"**{v}**" for v in vincoli)
+        testo = (f"Sono i **filtri**, non il tempo: senza filtri ci sarebbero "
+                 f"**{pieno['n_casi']}** casi. Basta allentare {quali} per rivedere i dati.")
+    else:
+        testo = (f"Sono i filtri **combinati**: ognuno da solo lascerebbe passare qualcosa, ma tutti "
+                 f"insieme no. Senza filtri ci sarebbero **{pieno['n_casi']}** casi.")
+    return {"causa": "filtri", "vincoli": vincoli, "n_senza_filtri": pieno["n_casi"],
+            "distribuzione": dist, "testo": testo}
+
+
+# ---------------------------------------------------------------------------
+# QUALI INDICATORI FUNZIONANO DAVVERO — la domanda «è più corretta l'affidabilità
+# o la convenienza?» misurata sui dati, non risolta per opinione.
+# ---------------------------------------------------------------------------
+# ATTENZIONE, differenza concettuale che l'app non diceva da nessuna parte:
+#   * AFFIDABILITÀ non giudica l'occasione, giudica il DATO. Deriva solo da due cose
+#     (vedi _reliab_label): la volatilità annua del titolo e quante giornate di storico
+#     esistono. Alta = vol <= 35% e >= 180 giornate. Non guarda il prezzo, l'azienda, i
+#     conti, né quanto potrebbe salire. Serve a sapere quanto fidarsi degli altri numeri,
+#     e per costruzione premia i titoli TRANQUILLI: usarla come filtro d'acquisto scarta
+#     i titoli che si muovono, non quelli che perdono.
+#   * CONVENIENZA, PROBABILITÀ DI SALITA e RISCHIO DI PERDITA sono invece stime
+#     sull'ESITO. Fra l'altro la convenienza CONTIENE GIÀ l'affidabilità in forma
+#     continua (_reliab_factor smorza il punteggio verso 50 quando la stima è incerta):
+#     filtrare per entrambe conta due volte la stessa cosa.
+# Non essendo la stessa unità di misura, non si possono ordinare per «correttezza». Si può
+# solo misurare quale, di fatto, ha separato i risultati: è quello che fa questa funzione.
+_INDICATORI = (
+    ("reliab", "Affidabilità", "ordinale",
+     "Non giudica l'occasione ma il dato: volatilità del titolo e lunghezza dello storico."),
+    ("conv", "Convenienza", "numerico",
+     "Il punteggio 0-100 del sistema. Contiene già l'affidabilità in forma continua."),
+    ("prob_gain", "Probabilità di salita", "numerico",
+     "Probabilità stimata che il prezzo sia più alto alla scadenza."),
+    ("prob_loss", "Rischio di perdita", "numerico",
+     "Probabilità stimata di una perdita oltre il 15%."),
+)
+_IND_PERMUTAZIONI = 2000     # bastano per un p-value a due cifre; deterministico (seme fisso)
+
+
+def _p_permutazione(xs, ys, alto, basso, n_perm: int = _IND_PERMUTAZIONI, seed: int = 20260819):
+    """Quanto spesso IL CASO produce una differenza fra fasce grande come quella osservata.
+
+    Serve perché su poche decine di casi due fasce hanno quasi sempre mediane diverse: senza
+    questo numero qualunque differenza sembra una scoperta. Si rimescolano le rese fra le fasce
+    (le fasce restano identiche) e si conta. Seme fisso: lo stesso dato dà sempre lo stesso
+    p-value, altrimenti la stessa schermata cambierebbe verdetto a ogni ricarica."""
+    xs, ys = np.asarray(xs, float), np.asarray(ys, float)
+    m_hi, m_lo = xs >= alto, xs <= basso
+    if m_hi.sum() < 3 or m_lo.sum() < 3:
+        return None, None
+    oss = float(np.median(ys[m_hi]) - np.median(ys[m_lo]))
+    rng = np.random.default_rng(seed)
+    conta = 0
+    for _ in range(int(n_perm)):
+        p = rng.permutation(ys)
+        if abs(float(np.median(p[m_hi]) - np.median(p[m_lo]))) >= abs(oss) - 1e-12:
+            conta += 1
+    return round(oss, 2), round(conta / float(n_perm), 3)
+
+
+def indicatori_report(kind: str = "short", combo: str = None, variante: str = "reale") -> dict:
+    """I quattro indicatori di qualità messi alla prova sullo stesso campione: quale ha davvero
+    separato le occasioni andate bene da quelle andate male?
+
+    NB: si misura su TUTTE le occasioni del tipo, **senza** applicare i filtri di qualità. Se si
+    filtrasse prima, si toglierebbe proprio la parte di scala su cui la differenza va cercata (con
+    «affidabilità almeno Media» non si può più misurare se la Bassa rende meno).
+
+    Per ogni indicatore: numero di casi con il dato, correlazione di rango DENTRO LA GIORNATA
+    (confronto fra titoli dello stesso giorno: mescolando i giorni si misurerebbe il mercato, non
+    l'indicatore), le fasce con resa tipica e quante volte in positivo, la differenza fra fascia
+    alta e bassa e il p-value di permutazione.
+
+    Ritorna {combo, n, giornate, indicatori: [...], verdetto, abbastanza}."""
+    tutte, _sel = _seleziona_scenari(kind, 0, 0, 100, 0, variante)
+    # Solo le caselle che la matrice mostra davvero. In particolare NON «a inizio osservazione»:
+    # quel prezzo viene registrato soltanto per i titoli poi promossi, quindi in quella colonna non
+    # può esistere un caso partito male — misurare un indicatore lì darebbe numeri gonfiati.
+    visibili = {f"{bk}|{sk}" for bk in SCENARIO_BUYS_UI
+                for sk in SCENARIO_SELLS_PER_TIPO.get(kind, SCENARIO_SELLS_PER_TIPO["short"])}
+    per_combo = {}
+    for r in tutte:
+        for k, v in (r.get("res") or {}).items():
+            if v is not None and k in visibili:
+                per_combo.setdefault(k, []).append(r)
+    if not per_combo:
+        return {"combo": None, "n": 0, "giornate": 0, "indicatori": [], "abbastanza": False,
+                "combo_disponibili": [], "kind": kind, "variante": variante,
+                "verdetto": "Nessun risultato ancora maturo: non c'è niente da misurare."}
+    if combo not in per_combo:
+        # per difetto la casella con più casi; a pari casi vince quella che il sistema esegue
+        # davvero (comprare alla promozione), non un momento d'acquisto ipotetico.
+        combo = max(per_combo, key=lambda k: (len(per_combo[k]), k.startswith("promozione")))
+    righe = per_combo[combo]
+    giorni = sorted({str(r.get("date"))[:10] for r in righe})
+    out = []
+    for campo, nome, tipo, spiega in _INDICATORI:
+        if campo == "reliab":
+            dati = [(_rel_rank(r.get("reliab")), r["res"][combo], str(r.get("date"))[:10])
+                    for r in righe if r.get("reliab")]
+        else:
+            dati = [(float(r[campo]), r["res"][combo], str(r.get("date"))[:10])
+                    for r in righe if r.get(campo) is not None]
+        voce = {"campo": campo, "nome": nome, "spiega": spiega, "n": len(dati),
+                "ic": None, "giornate_ic": 0, "fasce": [], "delta": None, "p": None,
+                "verdetto": "", "utile": None}
+        if len(dati) < 10:
+            voce["verdetto"] = f"Solo {len(dati)} casi con questo dato: non misurabile."
+            out.append(voce)
+            continue
+        xs = np.array([d[0] for d in dati], float)
+        ys = np.array([d[1] for d in dati], float)
+        # --- correlazione di rango dentro la giornata (media sulle giornate utili) ---
+        per_g = {}
+        for x, y, g in dati:
+            per_g.setdefault(g, []).append((x, y))
+        ics = []
+        for g, gg in per_g.items():
+            if len(gg) < 4:
+                continue
+            ax = np.array([q[0] for q in gg], float)
+            ay = np.array([q[1] for q in gg], float)
+            if len(set(ax.tolist())) < 2:
+                continue
+            rx = np.argsort(np.argsort(ax)).astype(float)
+            ry = np.argsort(np.argsort(ay)).astype(float)
+            c = float(np.corrcoef(rx, ry)[0, 1])
+            if np.isfinite(c):
+                ics.append(c)
+        if ics:
+            voce["ic"] = round(float(np.mean(ics)), 3)
+            voce["giornate_ic"] = len(ics)
+        # --- fasce: i 3 livelli per l'affidabilità, i terzili per gli altri ---
+        if tipo == "ordinale":
+            gruppi = [(et, ys[xs == lv]) for lv, et in ((0, "🔴 Bassa"), (1, "🟡 Media"), (2, "🟢 Alta"))]
+            basso, alto = 0.0, 2.0
+        else:
+            q1, q2 = (float(x) for x in np.quantile(xs, [1 / 3.0, 2 / 3.0]))
+            gruppi = [(f"basso (≤{q1:.0f})", ys[xs <= q1]),
+                      (f"medio ({q1:.0f}–{q2:.0f})", ys[(xs > q1) & (xs <= q2)]),
+                      (f"alto (>{q2:.0f})", ys[xs > q2])]
+            basso, alto = q1, q2 + 1e-9
+        for et, yy in gruppi:
+            if not len(yy):
+                voce["fasce"].append({"fascia": et, "n": 0, "med": None, "hit": None})
+                continue
+            vv = sorted(float(v) for v in yy)
+            n = len(vv)
+            med = vv[n // 2] if n % 2 else (vv[n // 2 - 1] + vv[n // 2]) / 2
+            voce["fasce"].append({"fascia": et, "n": n, "med": round(med, 2),
+                                  "hit": round(100 * sum(1 for v in vv if v > 0) / n)})
+        delta, p = _p_permutazione(xs, ys, alto, basso)
+        voce["delta"], voce["p"] = delta, p
+        # «alto è meglio» per tutti tranne il rischio di perdita, dove alto è peggio
+        atteso = -1 if campo == "prob_loss" else +1
+        if p is None:
+            voce["verdetto"] = "Fasce troppo piccole per un confronto."
+        elif p >= 0.05:
+            voce["utile"] = False
+            voce["verdetto"] = (f"Nessuna differenza affidabile: fra fascia alta e bassa ci sono "
+                                f"{delta:+.2f} punti, ma il caso fa altrettanto {p * 100:.0f} "
+                                f"volte su 100.")
+        elif (delta or 0) * atteso > 0:
+            voce["utile"] = True
+            voce["verdetto"] = (f"Funziona nel verso giusto: {abs(delta):.2f} punti di differenza "
+                                f"fra le fasce (il caso lo farebbe {p * 100:.1f} volte su 100).")
+        else:
+            voce["utile"] = False
+            voce["verdetto"] = (f"⚠️ Funziona AL CONTRARIO: la fascia che dovrebbe rendere di più "
+                                f"rende {delta:+.2f} punti (il caso lo farebbe {p * 100:.1f} volte "
+                                f"su 100). Da rivedere, non da usare come filtro.")
+        out.append(voce)
+    buoni = [v["nome"] for v in out if v["utile"] is True]
+    rovesci = [v["nome"] for v in out if v["utile"] is False and (v["p"] or 1) < 0.05]
+    abbastanza = len(righe) >= 30 and len(giorni) >= 20
+    if buoni:
+        verdetto = ("Separano i risultati in modo non casuale: **" + "**, **".join(buoni) + "**."
+                    + (" Al contrario invece: **" + "**, **".join(rovesci) + "**." if rovesci else ""))
+    else:
+        verdetto = (f"**Nessuno dei quattro separa i risultati** su questo campione "
+                    f"({len(righe)} casi in {len(giorni)} giornate). Non vuol dire che siano "
+                    f"inutili: vuol dire che con questi numeri non si può ancora dirlo, e che "
+                    f"scegliere in base a uno di essi è, per ora, un atto di fiducia.")
+    return {"combo": combo, "n": len(righe), "giornate": len(giorni), "kind": kind,
+            "variante": variante,
+            "combo_disponibili": sorted(per_combo, key=lambda k: -len(per_combo[k])),
+            "indicatori": out, "verdetto": verdetto, "abbastanza": abbastanza}
 
 
 def net_eur(ret_pct, importo: float = 30.0, fee: float = 1.0, tax=None, lati: int = _LATI_OPERAZIONE):
