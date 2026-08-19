@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-08-07",
-"ticker": "VWO",
-"kind": "short",
-"price": 59.96,
-"conv": 55,
-"factors": {
-"discount": 2.0901,
-"histcheap": -1.46,
-"riskadj": 1.23,
-"ddpen": -3.47,
-"momentum": -3.0418,
-"prob": 47,
-"oversold": -57.3103,
-"rebound": -1.2308,
-"trend": 1.0,
-"relstrength": -0.6198
-},
-"ret_5d": 0.47,
-"ret_21d": null
-},
-{
-"date": "2026-08-07",
 "ticker": "EFA",
 "kind": "short",
 "price": 107.36,
@@ -53758,6 +53737,26 @@
 "rebound": -1.6875,
 "trend": 1.0,
 "relstrength": -1.3741
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-19",
+"ticker": "FSLY",
+"kind": "long",
+"price": 23.66,
+"conv": 38,
+"factors": {
+"discount": 29.3731,
+"histcheap": -1.07,
+"riskadj": 1.43,
+"ddpen": -25.15,
+"momentum": 17.0698,
+"prob": 33,
+"quality": 44.0,
+"valcheap": -2.1142,
+"trappen": 2
 },
 "ret_5d": null,
 "ret_21d": null
