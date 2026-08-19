@@ -308,6 +308,16 @@ def main():
     except Exception as e:
         log(f"Errore scenari acquisto/vendita: {e!r}")
 
+    # Passaggi: la fotografia dei valori veri a ogni cambio di sezione (osservazione → in anticipo →
+    # monitoraggio → dopo la verifica). Le righe nuove nascono già complete; questa passata riempie
+    # le vecchie con quello che è ricostruibile dai registri, e aggiunge la conferma man mano che i
+    # periodi di verifica si chiudono.
+    try:
+        npass = fu.completa_passaggi()
+        log(f"Passaggi delle occasioni: {npass} righe completate.")
+    except Exception as e:
+        log(f"Errore passaggi delle occasioni: {e!r}")
+
     # Pre-segnale: registra le "più solide" di oggi e ne verifica l'esito quando maturo,
     # così anche l'affidabilità del pre-segnale viene misurata nel tempo.
     try:

@@ -4240,11 +4240,28 @@ def record_observations(df, kind: str) -> None:
         price = _jsonable(r.get("Prezzo"))
         obs = e.get("obs", [])
         if _should_sample(obs, conv, price, _OBS_GAP_MIN, "conv"):
-            obs.append({"date": now, "conv": conv, "price": price, "mkt": mkt,
-                        "occ": _jsonable(r.get("Occasione")), "prob_gain": _jsonable(r.get("Prob. salita")),
-                        # servono ai filtri di qualità delle sezioni Osservazione/Anticipo
-                        "prob_loss": _jsonable(r.get("Rischio perdita")), "reliab": r.get("Affidabilità")})
+            punto = {"date": now, "conv": conv, "price": price, "mkt": mkt,
+                     "occ": _jsonable(r.get("Occasione")), "prob_gain": _jsonable(r.get("Prob. salita")),
+                     # servono ai filtri di qualità delle sezioni Osservazione/Anticipo
+                     "prob_loss": _jsonable(r.get("Rischio perdita")), "reliab": r.get("Affidabilità")}
+            obs.append(punto)
             obs.sort(key=lambda o: o.get("date", ""))
+            # FOTOGRAFIA DEL PRIMO ISTANTE, in un campo a parte che la potatura non tocca.
+            # Perché non basta obs[0]: la lista viene potata a _OBS_MAX_DAYS giorni, quindi per
+            # un'occasione che resta in osservazione più a lungo obs[0] SCIVOLA IN AVANTI e il
+            # prezzo di «inizio osservazione» diventa quello di qualche giorno dopo, senza che
+            # niente lo dica. Con `primo` il momento dell'ingresso resta a verbale per sempre.
+            # Se la storia è stata interrotta e riparte (campo `ripartita`), anche questa si azzera:
+            # il nuovo ingresso è un ingresso nuovo.
+            if not e.get("primo") or (e.get("ripartita") and
+                                      str(e["primo"].get("date", ""))[:10] < str(e["ripartita"])[:10]):
+                # ATTENZIONE: si prende obs[0], il punto più VECCHIO ancora noto, non `punto` (quello
+                # di adesso). Per un'occasione appena entrata sono lo stesso punto; per una già in
+                # osservazione da giorni — cioè tutte quelle in corso il giorno in cui questa
+                # fotografia è stata introdotta — timbrare l'istante attuale come «ingresso in
+                # osservazione» sarebbe un dato falso, con la data e i valori sbagliati di parecchi
+                # giorni. Così invece si conserva il più antico che esista ancora.
+                e["primo"] = dict(obs[0])
             e["obs"] = _trim_records(obs, _OBS_MAX_DAYS, _OBS_MAX_KEEP)
     save_opp_watch(watch)
 
@@ -5096,8 +5113,17 @@ _CONF_DAYS = {"short": 5, "long": 10}   # giorni di Borsa del "periodo di confer
 # 0% lordo e −1€ di commissione. In tabella si leggeva «media +0,00%, in positivo 0%», cioè come una
 # strategia che perde sempre: non lo è, è una casella che non esiste.
 _SCENARI_ESCLUSI = {("short", "conferma", "7g")}
-# Cosa si mostra nella matrice: 3 acquisti × 3 vendite, con orizzonti diversi per tipo.
-SCENARIO_BUYS_UI = ("anticipo", "promozione", "conferma")
+# Cosa si mostra nella matrice: 4 acquisti × 3 vendite, con orizzonti diversi per tipo.
+# «osservazione» è stato AGGIUNTO alla matrice (ago 2026): era già calcolato e salvato da sempre in
+# _SCENARIO_BUYS, ha tanti esiti quanti la promozione (45 contro 45 sul breve) e non era visibile in
+# nessuna scheda — si intravedeva solo nel confronto della scheda voti. Ha lo stesso limite di
+# «anticipo» (il prezzo è registrato solo per le occasioni POI promosse, quindi la riga è più bella
+# del vero), e l'avvertenza accanto lo dice.
+# L'ORDINE è quello CRONOLOGICO VERO, non quello dei nomi: prima il sistema mette un titolo in
+# osservazione, poi ne riconosce il pre-segnale («In anticipo»), poi lo promuove. Sui dati reali
+# «In anticipo» arriva DOPO l'inizio dell'osservazione in 39 righe su 41, quindi metterlo per primo
+# faceva leggere la matrice come una scala temporale che non esiste.
+SCENARIO_BUYS_UI = ("osservazione", "anticipo", "promozione", "conferma")
 SCENARIO_SELLS_PER_TIPO = {"short": ("bersaglio", "7g", "30g"),
                            "long": ("bersaglio", "30g", "365g")}
 SCENARIO_ETICHETTE = {
@@ -5119,20 +5145,146 @@ def _rel_rank(reliab) -> int:
     return 2 if "Alta" in s else (1 if "Media" in s else 0)
 
 
-def _pre_entry_for(tk, kind, entro_data):
-    """Prima comparsa di un titolo tra i pre-segnali SOLIDI (sezione «In anticipo») prima della
-    promozione: ritorna (prezzo, data) oppure (None, None) se non c'è mai passato."""
+def _pre_row_for(tk, kind, entro_data):
+    """La RIGA della prima comparsa di un titolo tra i pre-segnali solidi (sezione «In anticipo»)
+    prima della promozione, oppure None. Serve anche ai «passaggi»: da questa riga si prendono
+    prezzo, convenienza e probabilità del momento in cui l'occasione è entrata lì."""
     try:
-        cand = [r for r in load_presignal_log()
+        cand = [r for r in load_registro_completo(PRESIGNAL_NAME, load_presignal_log())
                 if str(r.get("ticker", "")).upper() == str(tk).upper()
                 and r.get("kind") == kind and r.get("price")
                 and str(r.get("date", ""))[:10] <= str(entro_data)[:10]]
         if not cand:
-            return None, None
-        primo = min(cand, key=lambda r: str(r.get("date")))
-        return float(primo["price"]), str(primo.get("date"))[:10]
+            return None
+        return min(cand, key=lambda r: str(r.get("date")))
+    except Exception:
+        return None
+
+
+def _pre_entry_for(tk, kind, entro_data):
+    """Prima comparsa di un titolo tra i pre-segnali SOLIDI (sezione «In anticipo») prima della
+    promozione: ritorna (prezzo, data) oppure (None, None) se non c'è mai passato."""
+    r = _pre_row_for(tk, kind, entro_data)
+    if not r:
+        return None, None
+    try:
+        return float(r["price"]), str(r.get("date"))[:10]
     except Exception:
         return None, None
+
+
+# ---------------------------------------------------------------------------
+# I «PASSAGGI» — la fotografia dei valori VERI a ogni cambio di sezione.
+#
+# Il problema che risolvono: la riga di scenario nasceva solo alla promozione e portava UN SOLO
+# gruppo di numeri di qualità, quelli di quel giorno. Ma la matrice confronta QUATTRO momenti
+# d'acquisto: filtrando la riga «compro quando entra in osservazione» con la probabilità di salita
+# del giorno della promozione si usa un'informazione che quel giorno non esisteva ancora — e il
+# risultato sembra migliore di quello che una regola eseguibile avrebbe dato.
+# Con `passaggi` ogni momento porta i suoi numeri, e i filtri di ogni sotto-sezione usano i suoi.
+# Cosa si riesce a mettere a verbale, e da dove:
+#   osservazione → campo `primo` del registro delle osservazioni (fotografia dell'ingresso)
+#   anticipo     → prima riga del registro dei pre-segnali
+#   monitoraggio → i valori che il monitoraggio ha in mano quando promuove (già disponibili)
+#   conferma     → dagli scatti del monitoraggio alla data di fine verifica (la riempie
+#                  resolve_scenarios quando ricava conf_price, anche a posteriori)
+# ---------------------------------------------------------------------------
+MOMENTI = ("osservazione", "anticipo", "promozione", "conferma")
+
+
+def _passaggio(data=None, prezzo=None, conv=None, prob_gain=None, prob_loss=None,
+               reliab=None, mkt=None) -> dict:
+    """Una voce di passaggio, sempre con gli stessi campi (anche vuoti): così chi legge non deve
+    indovinare se un campo manca perché non c'era o perché non è stato scritto."""
+    return {"data": (str(data)[:16] if data else None),
+            "prezzo": (float(prezzo) if prezzo not in (None, "") else None),
+            "conv": conv, "prob_gain": prob_gain, "prob_loss": prob_loss,
+            "reliab": reliab, "mkt": mkt}
+
+
+def _primo_osservazione(tk, kind) -> dict:
+    """La fotografia dell'ingresso in osservazione, dal registro delle osservazioni. Preferisce il
+    campo `primo` (immune alla potatura) e ripiega sul primo punto ancora presente in lista."""
+    try:
+        e = (load_opp_watch() or {}).get(f"{kind}:{str(tk).upper()}") or {}
+        p = e.get("primo") or (e.get("obs") or [{}])[0]
+        if not p:
+            return _passaggio()
+        return _passaggio(p.get("date"), p.get("price"), p.get("conv"), p.get("prob_gain"),
+                          p.get("prob_loss"), p.get("reliab"), p.get("mkt"))
+    except Exception:
+        return _passaggio()
+
+
+def _snap_alla_data(tk, kind, data) -> dict:
+    """I valori del monitoraggio alla data indicata: il primo scatto da quel giorno in poi, o in
+    mancanza l'ultimo precedente. Serve al passaggio «dopo i giorni di verifica», che non ha un
+    momento in cui qualcuno lo scrive: il periodo di verifica finisce da solo, e i numeri di quel
+    giorno stanno negli scatti che il monitoraggio prende comunque. È anche il modo di RECUPERARE
+    quel passaggio sulle occasioni già registrate."""
+    if not data:
+        return _passaggio()
+    try:
+        e = (load_tracking() or {}).get(str(tk).upper()) or {}
+        if e.get("kind") and kind and e.get("kind") != kind:
+            return _passaggio()
+        snaps = sorted([s for s in (e.get("snapshots") or []) if s.get("date")],
+                       key=lambda s: str(s.get("date")))
+        if not snaps:
+            return _passaggio()
+        d = str(data)[:10]
+        dopo = [s for s in snaps if str(s.get("date"))[:10] >= d]
+        s = dopo[0] if dopo else snaps[-1]
+        return _passaggio(s.get("date"), s.get("price"), s.get("convenienza"), s.get("prob_gain"),
+                          s.get("prob_loss"), s.get("reliab"))
+    except Exception:
+        return _passaggio()
+
+
+def completa_passaggi() -> int:
+    """Riempie i «passaggi» delle righe di scenario che non li hanno, con quello che è davvero
+    ricostruibile dai registri. Ritorna quante righe ha completato.
+
+    ONESTÀ SU COSA SI RECUPERA E COSA NO:
+      · promozione → sempre: i suoi numeri sono già nella riga;
+      · conferma   → dagli scatti del monitoraggio, quindi per le occasioni ancora seguite;
+      · anticipo   → dal registro dei pre-segnali: prezzo e convenienza sì, le probabilità solo per
+                     le candidate registrate da quando quel registro le salva;
+      · osservazione → solo per le occasioni ancora presenti nel registro delle osservazioni; per
+                     le altre resta il solo prezzo già noto nella riga, senza i numeri di qualità.
+    Quello che non si recupera resta vuoto, e le schede mostrano quante righe ne sono prive invece
+    di far finta che il dato ci sia."""
+    rows = load_scenario_log()
+    if not rows:
+        return 0
+    fatte = 0
+    for r in rows:
+        if isinstance(r.get("passaggi"), dict) and r["passaggi"].get("promozione"):
+            # già presenti: manca solo eventualmente la conferma, che matura dopo
+            if (not (r["passaggi"].get("conferma") or {}).get("prezzo")) and r.get("conf_date"):
+                r["passaggi"]["conferma"] = _snap_alla_data(r.get("ticker"), r.get("kind"),
+                                                            r.get("conf_date"))
+                fatte += 1
+            continue
+        tk, kind = r.get("ticker"), r.get("kind")
+        oss = _primo_osservazione(tk, kind)
+        if not oss.get("prezzo") and r.get("obs_price"):
+            oss = _passaggio(r.get("obs_date"), r.get("obs_price"))    # solo il prezzo, è quel che c'è
+        pre = _pre_row_for(tk, kind, r.get("date"))
+        r["passaggi"] = {
+            "osservazione": oss,
+            "anticipo": (_passaggio(pre.get("date"), pre.get("price"), pre.get("conv"),
+                                    pre.get("prob_gain"), pre.get("prob_loss"), pre.get("reliab"))
+                         if pre else _passaggio(r.get("pre_date"), r.get("pre_price"))),
+            "promozione": _passaggio(r.get("date"), r.get("promo_price"), r.get("conv"),
+                                     r.get("prob_gain"), r.get("prob_loss"), r.get("reliab")),
+            "conferma": (_snap_alla_data(tk, kind, r.get("conf_date")) if r.get("conf_date")
+                         else _passaggio()),
+        }
+        fatte += 1
+    if fatte:
+        salva_registro(SCENARIO_LOG_NAME, rows, _SCENARIO_MAX, giorni_protetti=400)
+    return fatte
 
 
 def _log_promotion_scenario(tk, kind, promo_price, obs_price, obs_date, target, stop,
@@ -5142,7 +5294,23 @@ def _log_promotion_scenario(tk, kind, promo_price, obs_price, obs_date, target, 
     bersaglio/stop e la QUALITÀ del segnale al momento dell'acquisto (affidabilità, probabilità,
     convenienza), che serve ai filtri «comprerei solo se…»."""
     try:
-        pre_price, pre_date = _pre_entry_for(tk, kind, _today_iso())
+        pre_row = _pre_row_for(tk, kind, _today_iso())
+        pre_price = float(pre_row["price"]) if pre_row and pre_row.get("price") else None
+        pre_date = str(pre_row.get("date"))[:10] if pre_row else None
+        # I PASSAGGI: i valori veri di ogni momento, non solo quelli della promozione.
+        passaggi = {
+            "osservazione": _primo_osservazione(tk, kind),
+            "anticipo": (_passaggio(pre_row.get("date"), pre_row.get("price"), pre_row.get("conv"),
+                                    pre_row.get("prob_gain"), pre_row.get("prob_loss"),
+                                    pre_row.get("reliab")) if pre_row else _passaggio()),
+            "promozione": _passaggio(_now_iso(), promo_price, conv, prob_gain, prob_loss, reliab),
+            "conferma": _passaggio(),      # la riempie resolve_scenarios a fine periodo di verifica
+        }
+        # il prezzo di inizio osservazione a verbale nel passaggio è più affidabile di quello
+        # ricavato dalla lista potata: se c'è, vince lui.
+        if passaggi["osservazione"].get("prezzo"):
+            obs_price = passaggi["osservazione"]["prezzo"]
+            obs_date = str(passaggi["osservazione"]["data"])[:10]
         rows = load_scenario_log()
         rows.append({"ticker": str(tk).upper(), "kind": kind, "date": _today_iso(),
                      "promo_price": promo_price, "obs_price": obs_price, "obs_date": obs_date,
@@ -5150,6 +5318,7 @@ def _log_promotion_scenario(tk, kind, promo_price, obs_price, obs_date, target, 
                      "conf_price": None, "conf_date": None,
                      "target": target, "stop": stop,
                      "reliab": reliab, "prob_gain": prob_gain, "prob_loss": prob_loss, "conv": conv,
+                     "passaggi": passaggi,
                      "res": {}})
         salva_registro(SCENARIO_LOG_NAME, rows, _SCENARIO_MAX, giorni_protetti=400)
     except Exception:
@@ -5276,6 +5445,12 @@ def resolve_scenarios() -> int:
             if s is not None and not s.empty:
                 r["conf_price"] = float(s.iloc[0])
                 r["conf_date"] = d_conf.isoformat()
+                # …e la fotografia della QUALITÀ a quella data, dagli scatti del monitoraggio:
+                # è l'unico momento d'acquisto che nessuno «vive» (il periodo di verifica finisce
+                # da solo), quindi senza questo la riga «dopo i giorni di verifica» resterebbe per
+                # sempre senza i suoi numeri e i filtri userebbero quelli della promozione.
+                if isinstance(r.get("passaggi"), dict):
+                    r["passaggi"]["conferma"] = _snap_alla_data(tk, kind, r["conf_date"])
                 changed += 1
             elif age > 60:
                 r["conf_na"] = True         # non ricavabile: smetti di riprovare
@@ -5333,15 +5508,39 @@ SCENARIO_VARIANTI = {
 }
 
 
-def _dato_mancante(r, min_pg=0, max_pl=100, min_conv=0) -> bool:
+def valori_momento(r, momento=None):
+    """I numeri di qualità VERI del momento d'acquisto scelto: (affidabilità, salita, perdita,
+    convenienza). Senza `momento` ritorna quelli della promozione, come si è sempre fatto.
+
+    È il cuore della correzione di ago 2026: la matrice confronta quattro momenti d'acquisto, ma i
+    filtri usavano SEMPRE i numeri del giorno della promozione. Filtrare la riga «compro quando
+    entra in osservazione» con la probabilità di salita misurata alla promozione — cioè giorni dopo
+    — significa selezionare con informazioni che quel giorno non esistevano, e ottenere un risultato
+    che nessuna regola eseguibile avrebbe potuto dare.
+    Se il momento richiesto non ha quel numero a verbale si ritorna None: la riga risulterà «senza
+    dato» e, con quel filtro attivo, resterà fuori — invece di essere giudicata con i numeri
+    sbagliati."""
+    if momento:
+        p = (r.get("passaggi") or {}).get(momento)
+        if isinstance(p, dict):
+            return p.get("reliab"), p.get("prob_gain"), p.get("prob_loss"), p.get("conv")
+        if momento == "promozione":       # righe vecchie: in cima alla riga ci sono i suoi numeri
+            return r.get("reliab"), r.get("prob_gain"), r.get("prob_loss"), r.get("conv")
+        return None, None, None, None
+    return r.get("reliab"), r.get("prob_gain"), r.get("prob_loss"), r.get("conv")
+
+
+def _dato_mancante(r, min_pg=0, max_pl=100, min_conv=0, momento=None) -> bool:
     """True se un filtro ATTIVO non è applicabile a questa riga perché quel numero non è stato
-    registrato (righe vecchie, precedenti all'aggiunta del campo)."""
-    return bool((min_pg > 0 and r.get("prob_gain") is None)
-                or (max_pl < 100 and r.get("prob_loss") is None)
-                or (min_conv > 0 and r.get("conv") is None))
+    registrato (righe vecchie, o momento d'acquisto di cui non si conosce la qualità)."""
+    _, pg, pl, cv = valori_momento(r, momento)
+    return bool((min_pg > 0 and pg is None)
+                or (max_pl < 100 and pl is None)
+                or (min_conv > 0 and cv is None))
 
 
-def _seleziona_scenari(kind, min_rel=0, min_pg=0, max_pl=100, min_conv=0, variante="reale"):
+def _seleziona_scenari(kind, min_rel=0, min_pg=0, max_pl=100, min_conv=0, variante="reale",
+                       momento=None):
     """Righe degli scenari di un tipo: (tutte, quelle che passano i filtri di qualità).
     Estratta da scenario_report per essere riusata dal calendario per periodi, senza duplicare la
     logica dei filtri (che è il punto dove è più facile che due viste si contraddicano).
@@ -5359,11 +5558,14 @@ def _seleziona_scenari(kind, min_rel=0, min_pg=0, max_pl=100, min_conv=0, varian
     tutte = [r for r in load_registro_completo(SCENARIO_LOG_NAME, load_scenario_log())
              if not r.get("bad_data") and r.get("kind") == kind
              and (variante == "senza_soglia" or r.get("promossa", True))]
-    sel = [r for r in tutte
-           if _rel_rank(r.get("reliab")) >= min_rel
-           and (min_pg <= 0 or (r.get("prob_gain") is not None and r["prob_gain"] >= min_pg))
-           and (max_pl >= 100 or (r.get("prob_loss") is not None and r["prob_loss"] <= max_pl))
-           and (min_conv <= 0 or (r.get("conv") is not None and r["conv"] >= min_conv))]
+    def _passa(r):
+        rel, pg, pl, cv = valori_momento(r, momento)
+        return (_rel_rank(rel) >= min_rel
+                and (min_pg <= 0 or (pg is not None and pg >= min_pg))
+                and (max_pl >= 100 or (pl is not None and pl <= max_pl))
+                and (min_conv <= 0 or (cv is not None and cv >= min_conv)))
+
+    sel = [r for r in tutte if _passa(r)]
     sel.sort(key=lambda r: str(r.get("date")))
     return tutte, sel
 
@@ -5372,15 +5574,28 @@ def _celle_da_righe(righe, kind):
     """Aggrega un insieme di righe nelle caselle acquisto|vendita: (celle, casi).
     Il numero principale è la MEDIANA, la media resta accanto: su campioni piccoli un solo caso
     estremo sposta la media di decine di punti e racconta una storia mai avvenuta."""
+    # Il prezzo per azione DEL MOMENTO D'ACQUISTO di quella riga: serve a dire quando l'operazione
+    # simulata è impossibile (un titolo da 1.256 $ non si compra con 30 €), cosa che l'app calcolava
+    # in euro senza accorgersene su 34 righe su 70.
+    _CAMPO_PREZZO = {"anticipo": "pre_price", "osservazione": "obs_price",
+                     "promozione": "promo_price", "conferma": "conf_price"}
     celle, casi = {}, {}
     for bk in SCENARIO_BUYS_UI:
         for sk in SCENARIO_SELLS_PER_TIPO.get(kind, SCENARIO_SELLS_PER_TIPO["short"]):
             key = f"{bk}|{sk}"
-            punti = [{"ticker": r.get("ticker"), "date": str(r.get("date"))[:10],
-                      "reliab": r.get("reliab"), "prob_gain": r.get("prob_gain"),
-                      "prob_loss": r.get("prob_loss"), "conv": r.get("conv"),
-                      "ret": r["res"][key]}
-                     for r in righe if (r.get("res") or {}).get(key) is not None]
+            # I numeri di qualità mostrati sono quelli DEL MOMENTO D'ACQUISTO di questa riga della
+            # matrice, non quelli della promozione: sotto «compro a inizio osservazione» si leggono
+            # la convenienza e le probabilità di quando l'occasione è entrata in osservazione.
+            punti = []
+            for r in righe:
+                if (r.get("res") or {}).get(key) is None:
+                    continue
+                _rel, _pg, _pl, _cv = valori_momento(r, bk)
+                punti.append({"ticker": r.get("ticker"), "date": str(r.get("date"))[:10],
+                              "reliab": _rel, "prob_gain": _pg, "prob_loss": _pl, "conv": _cv,
+                              "prezzo": r.get(_CAMPO_PREZZO.get(bk, "promo_price")),
+                              "data_acquisto": ((r.get("passaggi") or {}).get(bk) or {}).get("data"),
+                              "ret": r["res"][key]})
             if not punti:
                 continue
             vals = sorted(p["ret"] for p in punti)
@@ -5394,7 +5609,8 @@ def _celle_da_righe(righe, kind):
 
 
 def scenario_report(kind: str = "short", min_rel: int = 0, min_pg: int = 0,
-                    max_pl: int = 100, min_conv: int = 0, variante: str = "reale") -> dict:
+                    max_pl: int = 100, min_conv: int = 0, variante: str = "reale",
+                    momento: str = None) -> dict:
     """La «pagella» degli scenari per un tipo di occasione, con i filtri di qualità applicati al
     momento dell'ACQUISTO (affidabilità minima, probabilità di salita minima, rischio massimo,
     convenienza minima). Ritorna:
@@ -5410,13 +5626,66 @@ def scenario_report(kind: str = "short", min_rel: int = 0, min_pg: int = 0,
                        soglia» resta popolata solo dalle promosse: il confronto onesto è sulle colonne
                        a 7 / 30 / 365 giorni.
     Le righe registrate prima di questa modifica non hanno il campo `promossa` e contano come promosse."""
-    tutte, sel = _seleziona_scenari(kind, min_rel, min_pg, max_pl, min_conv, variante)
+    tutte, sel = _seleziona_scenari(kind, min_rel, min_pg, max_pl, min_conv, variante, momento)
     celle, casi = _celle_da_righe(sel, kind)
     return {"n_tot": len(tutte), "n_casi": len(sel), "celle": celle, "casi": casi,
             "variante": variante,
-            "n_senza_dato": sum(1 for r in tutte if _dato_mancante(r, min_pg, max_pl, min_conv)),
+            "n_senza_dato": sum(1 for r in tutte
+                               if _dato_mancante(r, min_pg, max_pl, min_conv, momento)),
             "n_scartate": sum(1 for r in tutte if r.get("promossa") is False),
             "n_totale_log": len([r for r in load_scenario_log() if not r.get("bad_data")])}
+
+
+def scenari_attesa(kind: str = "short", min_rel: int = 0, min_pg: int = 0, max_pl: int = 100,
+                   min_conv: int = 0, variante: str = "reale", momento: str = None) -> dict:
+    """Per ogni casella della matrice: quante occasioni la stanno MATURANDO e quando compare la
+    prima. Serve a non lasciare più scritto solo «nessun caso ancora maturo», che non distingue
+    «manca un giorno» da «manca un anno» — e il dato per dirlo c'era già: data di ingresso più i
+    giorni della colonna.
+
+    Ritorna {"acquisto|vendita": {"attesa": n, "prima": "AAAA-MM-GG" | None, "mai": n}}.
+    Le combinazioni escluse per costruzione non compaiono.
+
+    ATTENZIONE alla differenza fra le due cose, che è il punto della funzione:
+      · `attesa` = occasioni che matureranno, con la data della prima;
+      · `mai`    = occasioni che NON matureranno mai per quella casella, perché non hanno il prezzo
+                   di quel momento d'acquisto a verbale (per esempio il prezzo dell'ingresso in
+                   «In anticipo» esiste solo su 41 righe su 70, e il prezzo «dopo i giorni di
+                   verifica» solo su quelle abbastanza vecchie).
+    Senza questa distinzione la casella scriveva «la prima il 4 agosto» — una data già passata, per
+    occasioni che non arriveranno mai."""
+    _, sel = _seleziona_scenari(kind, min_rel, min_pg, max_pl, min_conv, variante, momento)
+    _CAMPO_PREZZO = {"anticipo": "pre_price", "osservazione": "obs_price",
+                     "promozione": "promo_price", "conferma": "conf_price"}
+    oggi = datetime.date.fromisoformat(_today_iso())
+    out = {}
+    for bk in SCENARIO_BUYS_UI:
+        campo = _CAMPO_PREZZO.get(bk, "promo_price")
+        for sk in SCENARIO_SELLS_PER_TIPO.get(kind, SCENARIO_SELLS_PER_TIPO["short"]):
+            if (kind, bk, sk) in _SCENARI_ESCLUSI:
+                continue
+            key = f"{bk}|{sk}"
+            gg = _SELL_DAYS.get(sk, 30)
+            date_attesa, mai = [], 0
+            for r in sel:
+                if (r.get("res") or {}).get(key) is not None:
+                    continue
+                if not r.get(campo):
+                    mai += 1                     # manca il prezzo d'acquisto: non si calcolerà mai
+                    continue
+                try:
+                    d = datetime.date.fromisoformat(str(r.get("date"))[:10])
+                except Exception:
+                    continue
+                scad = d + datetime.timedelta(days=gg)
+                if scad >= oggi:
+                    date_attesa.append(scad)
+                else:
+                    mai += 1                     # già scaduta e ancora vuota: non arriverà da sola
+            out[key] = {"attesa": len(date_attesa),
+                        "prima": min(date_attesa).isoformat() if date_attesa else None,
+                        "mai": mai}
+    return out
 
 
 def universo_benchmark(kind: str = "short", orizzonte: str = "21g", dal=None, al=None) -> dict:
@@ -5536,7 +5805,8 @@ def _periodo_di(giorno: str, granularita: str = "settimana"):
 
 def scenari_calendario(kind: str = "short", granularita: str = "settimana", min_rel: int = 0,
                        min_pg: int = 0, max_pl: int = 100, min_conv: int = 0,
-                       variante: str = "reale", importo: float = 30.0, fee: float = 1.0) -> dict:
+                       variante: str = "reale", importo: float = 30.0, fee: float = 1.0,
+                       momento: str = None) -> dict:
     """CALENDARIO DEGLI SCENARI: gli stessi risultati, ma divisi per periodo di tempo.
 
     A che serve: la matrice mette tutto insieme e risponde a «quale momento d'acquisto rende di
@@ -5550,8 +5820,11 @@ def scenari_calendario(kind: str = "short", granularita: str = "settimana", min_
 
     Ritorna {granularita, periodi: [...]}, ogni periodo con chiave, etichetta, estremi, quante
     occasioni, e le caselle acquisto|vendita calcolate SOLO su quel periodo (con il netto in euro)."""
-    _tutte, sel = _seleziona_scenari(kind, min_rel, min_pg, max_pl, min_conv, variante)
-    n_senza_dato = sum(1 for r in _tutte if _dato_mancante(r, min_pg, max_pl, min_conv))
+    # `momento`: i filtri usano i numeri del momento d'acquisto che si sta guardando, come nelle
+    # sotto-sezioni della matrice. Senza, valgono quelli della promozione (comportamento di prima).
+    _tutte, sel = _seleziona_scenari(kind, min_rel, min_pg, max_pl, min_conv, variante, momento)
+    n_senza_dato = sum(1 for r in _tutte
+                       if _dato_mancante(r, min_pg, max_pl, min_conv, momento))
     gruppi = {}
     for r in sel:
         g = str(r.get("date") or "")[:10]
