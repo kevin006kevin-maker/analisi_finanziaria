@@ -47306,7 +47306,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-08-19",
 "max_price": 70.04,
-"max_date": "2026-08-17 22:55"
+"max_date": "2026-08-17 22:55",
+"warn_since": "2026-08-19",
+"warn": "in perdita da 13 giorni di Borsa: valuta l'uscita"
 },
 "AAUC": {
 "kind": "short",
@@ -51173,7 +51175,7 @@
 }
 ],
 "auto": true,
-"notified": false,
+"notified": true,
 "entry_price": 10.73,
 "entry_target": 10.6588,
 "entry_stop": 10.2919,
@@ -82384,9 +82386,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-08-19",
 "max_price": 50.04,
-"max_date": "2026-08-17 22:56",
-"warn_since": "2026-08-19",
-"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-08-17 22:56"
 },
 "CC": {
 "kind": "short",
