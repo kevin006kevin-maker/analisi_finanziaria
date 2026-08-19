@@ -4157,5 +4157,62 @@
 "prob_loss": 19,
 "conv": 63,
 "res": {}
+},
+{
+"ticker": "CLBT",
+"kind": "short",
+"date": "2026-08-20",
+"promo_price": 11.24,
+"obs_price": 10.445,
+"obs_date": "2026-08-17",
+"pre_price": 10.8,
+"pre_date": "2026-08-14",
+"conf_price": null,
+"conf_date": null,
+"target": 14.2411,
+"stop": 9.2776,
+"reliab": "🔴 Bassa",
+"prob_gain": 57,
+"prob_loss": 10,
+"conv": 75,
+"passaggi": {
+"osservazione": {
+"data": "2026-08-17 16:23",
+"prezzo": 10.445,
+"conv": 71,
+"prob_gain": 56,
+"prob_loss": 8,
+"reliab": "🔴 Bassa",
+"mkt": 4.4206
+},
+"anticipo": {
+"data": "2026-08-14",
+"prezzo": 10.8,
+"conv": 78,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-08-20 00:51",
+"prezzo": 11.24,
+"conv": 75,
+"prob_gain": 57,
+"prob_loss": 10,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
