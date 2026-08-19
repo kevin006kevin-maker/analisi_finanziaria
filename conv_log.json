@@ -1,48 +1,6 @@
 [
 {
 "date": "2026-08-07",
-"ticker": "YXT",
-"kind": "short",
-"price": 7.95,
-"conv": 33,
-"factors": {
-"discount": 66.0691,
-"histcheap": -0.44,
-"riskadj": 0.01,
-"ddpen": -43.72,
-"momentum": -161.0837,
-"prob": -11,
-"oversold": -54.2867,
-"rebound": -46.6101,
-"trend": 1.0,
-"relstrength": 157.4222
-},
-"ret_5d": -53.96,
-"ret_21d": null
-},
-{
-"date": "2026-08-07",
-"ticker": "TDUP",
-"kind": "short",
-"price": 3.11,
-"conv": 74,
-"factors": {
-"discount": 74.255,
-"histcheap": 1.48,
-"riskadj": -1.13,
-"ddpen": -49.37,
-"momentum": 47.0187,
-"prob": 48,
-"oversold": -20.7523,
-"rebound": 87.4695,
-"trend": -1.0,
-"relstrength": -50.6803
-},
-"ret_5d": 0.8,
-"ret_21d": null
-},
-{
-"date": "2026-08-07",
 "ticker": "APPX",
 "kind": "short",
 "price": 15.2,
@@ -53765,6 +53723,46 @@
 "rebound": -29.549,
 "trend": 1.0,
 "relstrength": 33.8417
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-19",
+"ticker": "NBIS",
+"kind": "long",
+"price": 218.9,
+"conv": 27,
+"factors": {
+"discount": 23.6458,
+"histcheap": -1.37,
+"riskadj": 1.88,
+"ddpen": -22.33,
+"momentum": 15.5478,
+"prob": 10,
+"quality": 30.2,
+"valcheap": -3.0,
+"trappen": -1
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-19",
+"ticker": "AXTI",
+"kind": "long",
+"price": 73.77,
+"conv": 28,
+"factors": {
+"discount": 47.6177,
+"histcheap": -0.89,
+"riskadj": 3.97,
+"ddpen": -26.25,
+"momentum": 5.9896,
+"prob": 5,
+"quality": 12.7,
+"valcheap": -3.0,
+"trappen": -1
 },
 "ret_5d": null,
 "ret_21d": null
