@@ -7,22 +7,6 @@
 "snapshots": [
 {
 "name": "STRC",
-"price": 88.62,
-"rsi": 51.9332,
-"dd_high": -11.442,
-"occasione": 17,
-"convenienza": 69,
-"prob_gain": 54,
-"prob_loss": 2,
-"exp_ret": 0.3,
-"gain": 2.5612,
-"reliab": "🟢 Alta",
-"target": 90.8897,
-"stop": 83.1462,
-"date": "2026-07-28 20:49"
-},
-{
-"name": "STRC",
 "price": 88.22,
 "rsi": 50.9454,
 "dd_high": -11.8417,
@@ -1332,6 +1316,22 @@
 "target": 89.4412,
 "stop": 91.783,
 "date": "2026-08-19 19:53"
+},
+{
+"name": "STRC",
+"price": 95.27,
+"rsi": 62.5595,
+"dd_high": -4.7966,
+"occasione": 16,
+"convenienza": 54,
+"prob_gain": 51,
+"prob_loss": 3,
+"exp_ret": 0.1,
+"gain": -6.122,
+"reliab": "🟢 Alta",
+"target": 89.4376,
+"stop": 91.603,
+"date": "2026-08-19 21:06"
 }
 ],
 "auto": true,
@@ -1362,22 +1362,6 @@
 "note": "🤖 Promossa il 2026-07-06: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +38.0% e la convenienza (71) regge.",
 "name": "SOC",
 "snapshots": [
-{
-"name": "SOC",
-"price": 4.16,
-"rsi": 32.3661,
-"dd_high": -86.4363,
-"occasione": 39,
-"convenienza": 64,
-"prob_gain": 49,
-"prob_loss": 33,
-"exp_ret": -0.3,
-"gain": 113.75,
-"reliab": "🔴 Bassa",
-"target": 8.892,
-"stop": 2.9437,
-"date": "2026-07-28 20:49"
-},
 {
 "name": "SOC",
 "price": 4.14,
@@ -2689,6 +2673,22 @@
 "target": 5.8458,
 "stop": 3.7054,
 "date": "2026-08-19 19:53"
+},
+{
+"name": "SOC",
+"price": 4.9701,
+"rsi": 50.8944,
+"dd_high": -82.7544,
+"occasione": 50,
+"convenienza": 59,
+"prob_gain": 51,
+"prob_loss": 34,
+"exp_ret": 0.7,
+"gain": 17.8389,
+"reliab": "🔴 Bassa",
+"target": 5.8507,
+"stop": 3.8953,
+"date": "2026-08-19 21:06"
 }
 ],
 "auto": true,
@@ -2700,8 +2700,8 @@
 "entry_conv": 64,
 "entry_date": "2026-07-06",
 "entry_src": "storico",
-"max_price": 4.705,
-"max_date": "2026-08-19 19:53",
+"max_price": 4.9701,
+"max_date": "2026-08-19 21:06",
 "incasso": {
 "gain": 19.1,
 "max": 5.29,
@@ -2719,22 +2719,6 @@
 "note": "🤖 Promossa il 2026-07-07: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.5% e la convenienza (73) regge.",
 "name": "XLE",
 "snapshots": [
-{
-"name": "XLE",
-"price": 57.715,
-"rsi": 55.1322,
-"dd_high": -7.6806,
-"occasione": 0,
-"convenienza": 55,
-"prob_gain": 59,
-"prob_loss": 0,
-"exp_ret": 1.5,
-"gain": -1.7282,
-"reliab": "🟢 Alta",
-"target": 56.7569,
-"stop": 55.4546,
-"date": "2026-07-28 20:49"
-},
 {
 "name": "XLE",
 "price": 57.55,
@@ -4030,6 +4014,22 @@
 "target": 57.2722,
 "stop": 61.2965,
 "date": "2026-08-19 19:53"
+},
+{
+"name": "XLE",
+"price": 63.635,
+"rsi": 72.6179,
+"dd_high": -0.055,
+"occasione": 0,
+"convenienza": 42,
+"prob_gain": 47,
+"prob_loss": 0,
+"exp_ret": -0.5,
+"gain": -10.0138,
+"reliab": "🟢 Alta",
+"target": 57.2717,
+"stop": 61.2615,
+"date": "2026-08-19 21:06"
 }
 ],
 "auto": true,
@@ -4061,22 +4061,6 @@
 "note": "🤖 Promossa il 2026-07-09: dopo 7 giorni di Borsa di osservazione il prezzo è risalito di +5.8% e la convenienza (63) regge.",
 "name": "PBR",
 "snapshots": [
-{
-"name": "Petroleo Brasileiro SA Petrobras",
-"price": 18.135,
-"rsi": 53.4825,
-"dd_high": -17.635,
-"occasione": 61,
-"convenienza": 67,
-"prob_gain": 66,
-"prob_loss": 18,
-"exp_ret": 14.2,
-"gain": 14.2,
-"reliab": "🟢 Alta",
-"target": 17.9511,
-"stop": 17.1986,
-"date": "2026-07-28 20:49"
-},
 {
 "name": "Petróleo Brasileiro S.A. - Petrobr",
 "price": 18.07,
@@ -6236,6 +6220,22 @@
 "target": 17.72,
 "stop": 17.6625,
 "date": "2026-08-19 19:53"
+},
+{
+"name": "Petróleo Brasileiro S.A. - Petrobr",
+"price": 18.585,
+"rsi": 55.4993,
+"dd_high": -15.5924,
+"occasione": null,
+"convenienza": 63,
+"prob_gain": 74,
+"prob_loss": 13,
+"exp_ret": 26.6,
+"gain": 26.6,
+"reliab": "🟢 Alta",
+"target": 17.7187,
+"stop": 17.5954,
+"date": "2026-08-19 21:06"
 }
 ],
 "auto": true,
@@ -6266,22 +6266,6 @@
 "note": "🤖 Promossa il 2026-07-11: dopo 8 giorni di Borsa di osservazione il prezzo è risalito di +2.3% e la convenienza (78) regge.",
 "name": "KGC",
 "snapshots": [
-{
-"name": "Kinross Gold Corporation",
-"price": 23.5,
-"rsi": 44.2981,
-"dd_high": -38.2585,
-"occasione": 100,
-"convenienza": 80,
-"prob_gain": 60,
-"prob_loss": 28,
-"exp_ret": 13.9,
-"gain": 13.9,
-"reliab": "🟡 Media",
-"target": 25.6715,
-"stop": 21.5142,
-"date": "2026-07-28 20:49"
-},
 {
 "name": "Kinross Gold Corp",
 "price": 23.51,
@@ -8473,6 +8457,22 @@
 "target": 24.9134,
 "stop": 27.1354,
 "date": "2026-08-19 19:53"
+},
+{
+"name": "Kinross Gold Corp",
+"price": 29.725,
+"rsi": 70.5222,
+"dd_high": -22.0777,
+"occasione": 85,
+"convenienza": 66,
+"prob_gain": 55,
+"prob_loss": 32,
+"exp_ret": 5.9,
+"gain": 5.9,
+"reliab": "🟡 Media",
+"target": 24.9183,
+"stop": 27.3804,
+"date": "2026-08-19 21:06"
 }
 ],
 "auto": true,
@@ -10613,22 +10613,6 @@
 "name": "T",
 "snapshots": [
 {
-"name": "AT&T Inc",
-"price": 24.735,
-"rsi": 71.9759,
-"dd_high": -16.4922,
-"occasione": 59,
-"convenienza": 64,
-"prob_gain": 63,
-"prob_loss": 16,
-"exp_ret": 10.3,
-"gain": 10.3,
-"reliab": "🟢 Alta",
-"target": 22.9045,
-"stop": 23.2417,
-"date": "2026-07-28 20:49"
-},
-{
 "name": "AT&T Inc.",
 "price": 24.66,
 "rsi": 71.6176,
@@ -12099,6 +12083,22 @@
 "target": 22.8163,
 "stop": 23.9699,
 "date": "2026-08-19 19:53"
+},
+{
+"name": "AT&T Inc.",
+"price": 25.19,
+"rsi": 66.6471,
+"dd_high": -14.9727,
+"occasione": 58,
+"convenienza": 62,
+"prob_gain": 69,
+"prob_loss": 14,
+"exp_ret": 14.8,
+"gain": 14.8,
+"reliab": "🟢 Alta",
+"target": 22.8159,
+"stop": 23.9499,
+"date": "2026-08-19 21:06"
 }
 ],
 "auto": true,
@@ -14848,22 +14848,6 @@
 "name": "PBR-A",
 "snapshots": [
 {
-"name": "PETROBRAS - PETROLEO BRASILEIRO SA",
-"price": 16.1,
-"rsi": 52.0099,
-"dd_high": -19.0955,
-"occasione": 79,
-"convenienza": 76,
-"prob_gain": 81,
-"prob_loss": 8,
-"exp_ret": 34.4,
-"gain": 34.4,
-"reliab": "🟢 Alta",
-"target": 16.0624,
-"stop": 15.3597,
-"date": "2026-07-28 20:49"
-},
-{
 "name": "Petroleo Brasileiro SA Petrobras",
 "price": 16.07,
 "rsi": 51.5717,
@@ -17422,6 +17406,22 @@
 "target": 15.8381,
 "stop": 15.9009,
 "date": "2026-08-19 19:53"
+},
+{
+"name": "Petróleo Brasileiro S.A. - Petrobr",
+"price": 16.698,
+"rsi": 57.0913,
+"dd_high": -16.0804,
+"occasione": null,
+"convenienza": 64,
+"prob_gain": 77,
+"prob_loss": 12,
+"exp_ret": 28.7,
+"gain": 28.7,
+"reliab": "🟢 Alta",
+"target": 15.8374,
+"stop": 15.8659,
+"date": "2026-08-19 21:06"
 }
 ],
 "auto": true,
@@ -17442,22 +17442,6 @@
 "note": "🤖 Promossa il 2026-07-20: dopo 8 giorni di Borsa di osservazione il prezzo è risalito di +2.5% e la convenienza (57) regge.",
 "name": "CCL",
 "snapshots": [
-{
-"name": "Carnival Corp",
-"price": 28.045,
-"rsi": 56.419,
-"dd_high": -17.5346,
-"occasione": 57,
-"convenienza": 62,
-"prob_gain": 62,
-"prob_loss": 22,
-"exp_ret": 14.7,
-"gain": 14.7,
-"reliab": "🟡 Media",
-"target": 27.4134,
-"stop": 25.7947,
-"date": "2026-07-28 20:49"
-},
 {
 "name": "Carnival Corporation & plc",
 "price": 28.23,
@@ -18913,6 +18897,22 @@
 "target": 27.8943,
 "stop": 25.0801,
 "date": "2026-08-19 19:53"
+},
+{
+"name": "Carnival Corporation & plc",
+"price": 26.845,
+"rsi": 42.9635,
+"dd_high": -20.9994,
+"occasione": 61,
+"convenienza": 65,
+"prob_gain": 73,
+"prob_loss": 16,
+"exp_ret": 27.8,
+"gain": 27.8,
+"reliab": "🟡 Media",
+"target": 27.8934,
+"stop": 25.0309,
+"date": "2026-08-19 21:06"
 }
 ],
 "auto": true,
@@ -18933,22 +18933,6 @@
 "note": "🤖 Promossa il 2026-07-22: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +3.2% e la convenienza (69) regge.",
 "name": "SNPS",
 "snapshots": [
-{
-"name": "SNPS",
-"price": 383.75,
-"rsi": 33.8575,
-"dd_high": -40.5361,
-"occasione": 29,
-"convenienza": 72,
-"prob_gain": 54,
-"prob_loss": 12,
-"exp_ret": 1.3,
-"gain": 18.1208,
-"reliab": "🔴 Bassa",
-"target": 453.2884,
-"stop": 349.7914,
-"date": "2026-07-28 20:49"
-},
 {
 "name": "SNPS",
 "price": 383.82,
@@ -20244,6 +20228,22 @@
 "target": 422.745,
 "stop": 377.5174,
 "date": "2026-08-19 19:53"
+},
+{
+"name": "SNPS",
+"price": 404.12,
+"rsi": 46.6734,
+"dd_high": -34.0524,
+"occasione": 5,
+"convenienza": 65,
+"prob_gain": 54,
+"prob_loss": 13,
+"exp_ret": 1.2,
+"gain": 4.6091,
+"reliab": "🔴 Bassa",
+"target": 422.7464,
+"stop": 377.5874,
+"date": "2026-08-19 21:06"
 }
 ],
 "auto": true,
@@ -20264,22 +20264,6 @@
 "note": "🤖 Promossa il 2026-07-22: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +3.6% e la convenienza (62) regge.",
 "name": "NFLX",
 "snapshots": [
-{
-"name": "NFLX",
-"price": 73.155,
-"rsi": 48.6777,
-"dd_high": -42.0898,
-"occasione": 33,
-"convenienza": 70,
-"prob_gain": 40,
-"prob_loss": 5,
-"exp_ret": -2.1,
-"gain": 6.727,
-"reliab": "🟢 Alta",
-"target": 78.0761,
-"stop": 67.9009,
-"date": "2026-07-28 20:49"
-},
 {
 "name": "NFLX",
 "price": 72.39,
@@ -21543,6 +21527,22 @@
 "target": 74.6012,
 "stop": 75.5752,
 "date": "2026-08-19 19:53"
+},
+{
+"name": "NFLX",
+"price": 80.555,
+"rsi": 64.4958,
+"dd_high": -36.2319,
+"occasione": 29,
+"convenienza": 59,
+"prob_gain": 42,
+"prob_loss": 4,
+"exp_ret": -1.9,
+"gain": -7.3916,
+"reliab": "🟡 Media",
+"target": 74.6007,
+"stop": 75.5505,
+"date": "2026-08-19 21:06"
 }
 ],
 "auto": true,
@@ -21573,22 +21573,6 @@
 "note": "🤖 Promossa il 2026-07-23: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +10.0% e la convenienza (59) regge.",
 "name": "IMSR",
 "snapshots": [
-{
-"name": "IMSR",
-"price": 4.97,
-"rsi": 37.3765,
-"dd_high": -81.6605,
-"occasione": 30,
-"convenienza": 63,
-"prob_gain": 49,
-"prob_loss": 32,
-"exp_ret": -0.5,
-"gain": 37.5111,
-"reliab": "🔴 Bassa",
-"target": 6.8343,
-"stop": 3.9584,
-"date": "2026-07-28 20:49"
-},
 {
 "name": "IMSR",
 "price": 5.01,
@@ -22852,6 +22836,22 @@
 "target": 6.0566,
 "stop": 4.8394,
 "date": "2026-08-19 19:53"
+},
+{
+"name": "IMSR",
+"price": 5.635,
+"rsi": 49.617,
+"dd_high": -79.2066,
+"occasione": 42,
+"convenienza": 60,
+"prob_gain": 49,
+"prob_loss": 32,
+"exp_ret": -1.2,
+"gain": 7.457,
+"reliab": "🔴 Bassa",
+"target": 6.0552,
+"stop": 4.7694,
+"date": "2026-08-19 21:06"
 }
 ],
 "auto": true,
@@ -22872,22 +22872,6 @@
 "note": "🤖 Promossa il 2026-07-25: dopo 9 giorni di Borsa di osservazione il prezzo è risalito di +8.5% e la convenienza (67) regge.",
 "name": "AXTI",
 "snapshots": [
-{
-"name": "AXTI",
-"price": 42.1,
-"rsi": 35.2373,
-"dd_high": -70.1058,
-"occasione": 14,
-"convenienza": 67,
-"prob_gain": 55,
-"prob_loss": 30,
-"exp_ret": 5.0,
-"gain": 93.5178,
-"reliab": "🔴 Bassa",
-"target": 81.471,
-"stop": 24.8879,
-"date": "2026-07-28 20:49"
-},
 {
 "name": "AXTI",
 "price": 42.76,
@@ -24167,6 +24151,22 @@
 "target": 68.5426,
 "stop": 52.8116,
 "date": "2026-08-19 19:53"
+},
+{
+"name": "AXTI",
+"price": 74.645,
+"rsi": 52.0896,
+"dd_high": -46.9964,
+"occasione": 15,
+"convenienza": 59,
+"prob_gain": 51,
+"prob_loss": 34,
+"exp_ret": 0.5,
+"gain": -8.1845,
+"reliab": "🔴 Bassa",
+"target": 68.5357,
+"stop": 52.4666,
+"date": "2026-08-19 21:06"
 }
 ],
 "auto": true,
@@ -24197,22 +24197,6 @@
 "note": "🤖 Promossa il 2026-07-27: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +9.9% e la convenienza (75) regge.",
 "name": "ELTX",
 "snapshots": [
-{
-"name": "ELTX",
-"price": 2.9355,
-"rsi": 35.3061,
-"dd_high": -80.2323,
-"occasione": 34,
-"convenienza": 72,
-"prob_gain": 64,
-"prob_loss": 14,
-"exp_ret": 5.5,
-"gain": 132.6626,
-"reliab": "🔴 Bassa",
-"target": 6.8298,
-"stop": 1.7621,
-"date": "2026-07-28 20:49"
-},
 {
 "name": "ELTX",
 "price": 2.95,
@@ -25604,6 +25588,22 @@
 "target": 4.4379,
 "stop": 2.4677,
 "date": "2026-08-19 19:53"
+},
+{
+"name": "ELTX",
+"price": 3.07,
+"rsi": 40.8753,
+"dd_high": -79.3266,
+"occasione": 27,
+"convenienza": 70,
+"prob_gain": 68,
+"prob_loss": 15,
+"exp_ret": 8.2,
+"gain": 44.544,
+"reliab": "🔴 Bassa",
+"target": 4.4375,
+"stop": 2.4477,
+"date": "2026-08-19 21:06"
 }
 ],
 "auto": true,
@@ -25624,22 +25624,6 @@
 "note": "🤖 Promossa il 2026-07-28: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +3.2% e la convenienza (62) regge.",
 "name": "QS",
 "snapshots": [
-{
-"name": "QS",
-"price": 5.125,
-"rsi": 31.702,
-"dd_high": -72.2337,
-"occasione": 20,
-"convenienza": 68,
-"prob_gain": 54,
-"prob_loss": 18,
-"exp_ret": 2.1,
-"gain": 41.2961,
-"reliab": "🔴 Bassa",
-"target": 7.2345,
-"stop": 4.1939,
-"date": "2026-07-28 20:49"
-},
 {
 "name": "QS",
 "price": 5.17,
@@ -26951,6 +26935,22 @@
 "target": 6.3938,
 "stop": 5.0686,
 "date": "2026-08-19 19:53"
+},
+{
+"name": "QS",
+"price": 5.7499,
+"rsi": 44.6009,
+"dd_high": -68.8183,
+"occasione": 20,
+"convenienza": 64,
+"prob_gain": 51,
+"prob_loss": 23,
+"exp_ret": 0.8,
+"gain": 11.1897,
+"reliab": "🔴 Bassa",
+"target": 6.3933,
+"stop": 5.0435,
+"date": "2026-08-19 21:06"
 }
 ],
 "auto": true,
@@ -29034,22 +29034,6 @@
 "note": "🤖 Promossa il 2026-07-28: dopo 8 giorni di Borsa di osservazione il prezzo è risalito di +2.9% e la convenienza (77) regge.",
 "name": "NEM",
 "snapshots": [
-{
-"name": "Newmont Corporation",
-"price": 91.475,
-"rsi": 42.1616,
-"dd_high": -30.6707,
-"occasione": 94,
-"convenienza": 79,
-"prob_gain": 71,
-"prob_loss": 18,
-"exp_ret": 23.8,
-"gain": 23.8,
-"reliab": "🟡 Media",
-"target": 99.6624,
-"stop": 84.5895,
-"date": "2026-07-28 20:49"
-},
 {
 "name": "Newmont Corporation",
 "price": 91.52,
@@ -32041,6 +32025,22 @@
 "target": 100.1565,
 "stop": 114.8546,
 "date": "2026-08-19 19:53"
+},
+{
+"name": "Newmont Corporation",
+"price": 124.375,
+"rsi": 71.5245,
+"dd_high": -5.6991,
+"occasione": 66,
+"convenienza": 57,
+"prob_gain": 54,
+"prob_loss": 32,
+"exp_ret": 5.1,
+"gain": 5.1,
+"reliab": "🟡 Media",
+"target": 100.1668,
+"stop": 115.3697,
+"date": "2026-08-19 21:06"
 }
 ],
 "auto": true,
@@ -32072,22 +32072,6 @@
 "note": "🤖 Promossa il 2026-07-28: dopo 8 giorni di Borsa di osservazione il prezzo è risalito di +3.0% e la convenienza (58) regge.",
 "name": "CDE",
 "snapshots": [
-{
-"name": "Coeur Mining, Inc",
-"price": 14.865,
-"rsi": 42.5202,
-"dd_high": -45.2486,
-"occasione": 97,
-"convenienza": 72,
-"prob_gain": 62,
-"prob_loss": 30,
-"exp_ret": 20.2,
-"gain": 20.2,
-"reliab": "🔴 Bassa",
-"target": 16.7115,
-"stop": 13.0063,
-"date": "2026-07-28 20:49"
-},
 {
 "name": "Coeur Mining, Inc.",
 "price": 14.91,
@@ -33687,6 +33671,22 @@
 "target": 16.5345,
 "stop": 18.5026,
 "date": "2026-08-19 19:53"
+},
+{
+"name": "Coeur Mining, Inc.",
+"price": 20.792,
+"rsi": 67.5667,
+"dd_high": -23.5175,
+"occasione": null,
+"convenienza": 55,
+"prob_gain": 57,
+"prob_loss": 36,
+"exp_ret": 10.5,
+"gain": 10.5,
+"reliab": "🔴 Bassa",
+"target": 16.5351,
+"stop": 18.5326,
+"date": "2026-08-19 21:06"
 }
 ],
 "auto": true,
@@ -33717,22 +33717,6 @@
 "note": "🤖 Promossa il 2026-07-28: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +3.2% e la convenienza (66) regge.",
 "name": "ACI",
 "snapshots": [
-{
-"name": "ACI",
-"price": 11.62,
-"rsi": 29.4111,
-"dd_high": -41.4366,
-"occasione": 66,
-"convenienza": 82,
-"prob_gain": 56,
-"prob_loss": 4,
-"exp_ret": 1.2,
-"gain": 26.7526,
-"reliab": "🟡 Media",
-"target": 14.7422,
-"stop": 10.3186,
-"date": "2026-07-28 20:49"
-},
 {
 "name": "ACI",
 "price": 11.58,
@@ -35076,6 +35060,22 @@
 "target": 13.4308,
 "stop": 11.5179,
 "date": "2026-08-19 19:53"
+},
+{
+"name": "ACI",
+"price": 12.385,
+"rsi": 46.1884,
+"dd_high": -37.2594,
+"occasione": 39,
+"convenienza": 75,
+"prob_gain": 52,
+"prob_loss": 10,
+"exp_ret": 0.5,
+"gain": 8.4271,
+"reliab": "🟡 Media",
+"target": 13.4287,
+"stop": 11.4129,
+"date": "2026-08-19 21:06"
 }
 ],
 "auto": true,
@@ -35096,22 +35096,6 @@
 "note": "🤖 Promossa il 2026-07-28: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +3.7% e la convenienza (70) regge.",
 "name": "GOOGL",
 "snapshots": [
-{
-"name": "GOOGL",
-"price": 335.71,
-"rsi": 42.9503,
-"dd_high": -16.5864,
-"occasione": 45,
-"convenienza": 67,
-"prob_gain": 51,
-"prob_loss": 4,
-"exp_ret": 0.1,
-"gain": 7.7531,
-"reliab": "🟢 Alta",
-"target": 361.878,
-"stop": 312.3711,
-"date": "2026-07-28 20:49"
-},
 {
 "name": "GOOGL",
 "price": 333.71,
@@ -36375,6 +36359,22 @@
 "target": 352.4598,
 "stop": 324.3316,
 "date": "2026-08-19 19:53"
+},
+{
+"name": "GOOGL",
+"price": 344.295,
+"rsi": 46.2261,
+"dd_high": -14.4864,
+"occasione": 43,
+"convenienza": 64,
+"prob_gain": 45,
+"prob_loss": 5,
+"exp_ret": -0.9,
+"gain": 2.3726,
+"reliab": "🟢 Alta",
+"target": 352.4637,
+"stop": 324.5266,
+"date": "2026-08-19 21:06"
 }
 ],
 "auto": true,
@@ -39249,6 +39249,22 @@
 "target": 30.4237,
 "stop": 32.3958,
 "date": "2026-08-19 19:53"
+},
+{
+"name": "Super Micro Computer, Inc.",
+"price": 36.735,
+"rsi": 60.7091,
+"dd_high": -37.483,
+"occasione": null,
+"convenienza": 54,
+"prob_gain": 41,
+"prob_loss": 52,
+"exp_ret": -19.9,
+"gain": -19.9,
+"reliab": "🔴 Bassa",
+"target": 30.4089,
+"stop": 31.6557,
+"date": "2026-08-19 21:06"
 }
 ],
 "auto": true,
@@ -40334,6 +40350,22 @@
 "target": 67.1814,
 "stop": 41.3864,
 "date": "2026-08-19 19:53"
+},
+{
+"name": "AMKR",
+"price": 51.02,
+"rsi": 40.2657,
+"dd_high": -45.4623,
+"occasione": 22,
+"convenienza": 67,
+"prob_gain": 52,
+"prob_loss": 21,
+"exp_ret": 0.7,
+"gain": 31.6735,
+"reliab": "🔴 Bassa",
+"target": 67.1798,
+"stop": 41.2907,
+"date": "2026-08-19 21:06"
 }
 ],
 "auto": true,
@@ -43406,6 +43438,22 @@
 "target": 51.5118,
 "stop": 54.0835,
 "date": "2026-08-19 19:54"
+},
+{
+"name": "MTDR",
+"price": 57.93,
+"rsi": 67.4028,
+"dd_high": -11.4897,
+"occasione": 32,
+"convenienza": 45,
+"prob_gain": 43,
+"prob_loss": 9,
+"exp_ret": -1.9,
+"gain": -11.083,
+"reliab": "🟡 Media",
+"target": 51.5096,
+"stop": 53.9735,
+"date": "2026-08-19 21:06"
 }
 ],
 "auto": true,
@@ -49697,6 +49745,22 @@
 "target": 22.5644,
 "stop": 20.4544,
 "date": "2026-08-19 19:54"
+},
+{
+"name": "AAUC",
+"price": 22.91,
+"rsi": 56.4227,
+"dd_high": -28.4286,
+"occasione": 26,
+"convenienza": 64,
+"prob_gain": 44,
+"prob_loss": 13,
+"exp_ret": -1.7,
+"gain": -1.5007,
+"reliab": "🟡 Media",
+"target": 22.5662,
+"stop": 20.5444,
+"date": "2026-08-19 21:06"
 }
 ],
 "auto": true,
@@ -68480,6 +68544,22 @@
 "target": 67.192,
 "stop": 40.5753,
 "date": "2026-08-19 19:54"
+},
+{
+"name": "CCB",
+"price": 47.63,
+"rsi": 33.8988,
+"dd_high": -59.9647,
+"occasione": 40,
+"convenienza": 72,
+"prob_gain": 60,
+"prob_loss": 12,
+"exp_ret": 3.3,
+"gain": 41.0666,
+"reliab": "🔴 Bassa",
+"target": 67.19,
+"stop": 40.471,
+"date": "2026-08-19 21:06"
 }
 ],
 "auto": true,
@@ -77844,6 +77924,22 @@
 "target": 45.627,
 "stop": 41.4119,
 "date": "2026-08-19 19:54"
+},
+{
+"name": "ORCL-PD",
+"price": 45.1899,
+"rsi": 50.5563,
+"dd_high": -35.4707,
+"occasione": 30,
+"convenienza": 61,
+"prob_gain": 51,
+"prob_loss": 17,
+"exp_ret": 0.5,
+"gain": 0.9692,
+"reliab": "🟡 Media",
+"target": 45.6279,
+"stop": 41.4568,
+"date": "2026-08-19 21:06"
 }
 ],
 "auto": true,
@@ -79596,6 +79692,22 @@
 "target": 10.5384,
 "stop": 9.3885,
 "date": "2026-08-19 19:54"
+},
+{
+"name": "TU",
+"price": 10.015,
+"rsi": 48.7612,
+"dd_high": -39.6687,
+"occasione": 35,
+"convenienza": 73,
+"prob_gain": 51,
+"prob_loss": 0,
+"exp_ret": 0.2,
+"gain": 5.2331,
+"reliab": "🟢 Alta",
+"target": 10.5391,
+"stop": 9.4213,
+"date": "2026-08-19 21:07"
 }
 ],
 "auto": true,
@@ -91265,6 +91377,22 @@
 "target": 108.483,
 "stop": 69.9324,
 "date": "2026-08-19 19:54"
+},
+{
+"name": "AAON",
+"price": 81.135,
+"rsi": 31.2492,
+"dd_high": -45.2715,
+"occasione": 39,
+"convenienza": 75,
+"prob_gain": 50,
+"prob_loss": 13,
+"exp_ret": 0.0,
+"gain": 33.6948,
+"reliab": "🟡 Media",
+"target": 108.4733,
+"stop": 69.4474,
+"date": "2026-08-19 21:07"
 }
 ],
 "auto": true,
@@ -97595,6 +97723,22 @@
 "target": 12.2739,
 "stop": 12.076,
 "date": "2026-08-19 19:54"
+},
+{
+"name": "RBKB",
+"price": 12.7,
+"rsi": 58.2266,
+"dd_high": -0.626,
+"occasione": 0,
+"convenienza": 47,
+"prob_gain": 42,
+"prob_loss": 6,
+"exp_ret": -1.7,
+"gain": -3.3505,
+"reliab": "🟡 Media",
+"target": 12.2745,
+"stop": 12.106,
+"date": "2026-08-19 21:07"
 }
 ],
 "auto": true,
