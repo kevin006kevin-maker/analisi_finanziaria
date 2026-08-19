@@ -57159,9 +57159,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-08-19",
 "max_price": 47.9,
-"max_date": "2026-08-18 06:09",
-"warn_since": "2026-08-19",
-"warn": "in perdita da 12 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-08-18 06:09"
 },
 "EEM": {
 "kind": "short",
@@ -83276,7 +83274,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-08-19",
 "max_price": 50.04,
-"max_date": "2026-08-17 22:56"
+"max_date": "2026-08-17 22:56",
+"warn_since": "2026-08-19",
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "CC": {
 "kind": "short",
@@ -84150,7 +84150,7 @@
 }
 ],
 "auto": true,
-"notified": false,
+"notified": true,
 "entry_price": 15.75,
 "entry_target": 19.3232,
 "entry_stop": 13.5293,
