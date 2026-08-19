@@ -4787,6 +4787,16 @@
 "prob_gain": 66,
 "prob_loss": 22,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-08-19 09:35",
+"conv": 49,
+"price": 4.4605,
+"mkt": 2.0971,
+"occ": 61,
+"prob_gain": 70,
+"prob_loss": 20,
+"reliab": "🟡 Media"
 }
 ]
 },
@@ -9390,7 +9400,7 @@
 "long:FN": {
 "ticker": "FN",
 "kind": "long",
-"name": "Fabrinet",
+"name": "FABRINET",
 "obs": [
 {
 "date": "2026-08-18 15:40",
@@ -9487,7 +9497,7 @@
 "long:FSM": {
 "ticker": "FSM",
 "kind": "long",
-"name": "Fortuna Mining Corp",
+"name": "Fortuna Mining Corp.",
 "obs": [
 {
 "date": "2026-08-18 22:20",
@@ -9557,6 +9567,23 @@
 "occ": 84,
 "prob_gain": 60,
 "prob_loss": 28,
+"reliab": "🟡 Media"
+}
+]
+},
+"long:NEM": {
+"ticker": "NEM",
+"kind": "long",
+"name": "Newmont Corporation",
+"obs": [
+{
+"date": "2026-08-19 09:35",
+"conv": 64,
+"price": 115.98,
+"mkt": 2.0971,
+"occ": 73,
+"prob_gain": 60,
+"prob_loss": 27,
 "reliab": "🟡 Media"
 }
 ]
