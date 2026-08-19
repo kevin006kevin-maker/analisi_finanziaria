@@ -1,69 +1,6 @@
 [
 {
 "date": "2026-08-07",
-"ticker": "WOLF",
-"kind": "short",
-"price": 27.59,
-"conv": 58,
-"factors": {
-"discount": 62.4626,
-"histcheap": 0.06,
-"riskadj": 0.33,
-"ddpen": -41.89,
-"momentum": -15.9731,
-"prob": 5,
-"oversold": -44.3104,
-"rebound": 48.2573,
-"trend": -1.0,
-"relstrength": 12.3116
-},
-"ret_5d": 12.43,
-"ret_21d": null
-},
-{
-"date": "2026-08-07",
-"ticker": "SABR",
-"kind": "short",
-"price": 2.24,
-"conv": 33,
-"factors": {
-"discount": -0.0,
-"histcheap": -2.12,
-"riskadj": 0.25,
-"ddpen": -25.82,
-"momentum": -19.7861,
-"prob": 14,
-"oversold": -69.5118,
-"rebound": -17.4241,
-"trend": 1.0,
-"relstrength": 16.1246
-},
-"ret_5d": -2.23,
-"ret_21d": null
-},
-{
-"date": "2026-08-07",
-"ticker": "ABCL",
-"kind": "short",
-"price": 6.53,
-"conv": 43,
-"factors": {
-"discount": 19.5813,
-"histcheap": -1.75,
-"riskadj": 0.86,
-"ddpen": -30.73,
-"momentum": -14.7627,
-"prob": 25,
-"oversold": -57.1457,
-"rebound": -5.6799,
-"trend": 1.0,
-"relstrength": 11.1012
-},
-"ret_5d": 65.77,
-"ret_21d": null
-},
-{
-"date": "2026-08-07",
 "ticker": "CAPR",
 "kind": "short",
 "price": 4.18,
@@ -53761,6 +53698,69 @@
 "rebound": 15.3698,
 "trend": -1.0,
 "relstrength": 8.4636
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-19",
+"ticker": "ACMR",
+"kind": "short",
+"price": 78.48,
+"conv": 54,
+"factors": {
+"discount": 38.1512,
+"histcheap": -1.03,
+"riskadj": 1.76,
+"ddpen": -21.01,
+"momentum": 3.4211,
+"prob": 30,
+"oversold": -44.8929,
+"rebound": 15.3523,
+"trend": 1.0,
+"relstrength": -2.9955
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-19",
+"ticker": "AAL",
+"kind": "short",
+"price": 13.895,
+"conv": 58,
+"factors": {
+"discount": 23.4435,
+"histcheap": -0.16,
+"riskadj": 0.07,
+"ddpen": -16.71,
+"momentum": 6.9323,
+"prob": 44,
+"oversold": -36.8081,
+"rebound": 13.4631,
+"trend": -1.0,
+"relstrength": -6.5067
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-19",
+"ticker": "NCMI",
+"kind": "short",
+"price": 2.645,
+"conv": 58,
+"factors": {
+"discount": 45.91,
+"histcheap": 2.35,
+"riskadj": -0.65,
+"ddpen": -24.36,
+"momentum": -19.1441,
+"prob": 50,
+"oversold": -34.1019,
+"rebound": 38.7032,
+"trend": -1.0,
+"relstrength": 19.5698
 },
 "ret_5d": null,
 "ret_21d": null
