@@ -1,68 +1,51 @@
 {
 "short": {
-"oversold": 0.052,
-"rebound": 0.766,
-"momentum": 0.359,
+"oversold": 0.061,
+"rebound": 0.742,
+"momentum": 0.371,
 "discount": 0.0,
 "riskadj": 0.0,
-"ddpen": 0.943,
-"histcheap": 0.028,
-"trend": 0.032,
-"prob": 0.0,
-"relstrength": 0.191
+"ddpen": 0.929,
+"histcheap": 0.02,
+"trend": 0.024,
+"prob": 0.008,
+"relstrength": 0.195
 },
 "_audit": {
 "short": {
 "versione": 2,
 "data": "2026-08-19",
 "adottati": true,
-"righe": 2439,
+"righe": 2574,
 "giorni": 23,
 "scartate_frazionamenti": 116,
 "confine": "2026-07-15",
 "righe_train": 1695,
-"righe_verifica": 744,
-"ordina_meglio_appresi": 0.088,
-"ordina_meglio_a_mano": 0.0039,
-"asticella": 0.0139,
+"righe_verifica": 879,
+"ordina_meglio_appresi": 0.1513,
+"ordina_meglio_a_mano": 0.0586,
+"asticella": 0.0686,
 "esito": "adottati: ordinano meglio dei pesi a mano",
 "quota_appresa": 0.6,
 "fattori_spenti": [
 "discount",
-"riskadj",
-"prob"
+"riskadj"
 ]
 },
 "long": {
 "versione": 2,
 "data": "2026-08-19",
-"adottati": true,
-"righe": 1168,
+"adottati": false,
+"righe": 1213,
 "giorni": 23,
 "scartate_frazionamenti": 4,
 "confine": "2026-07-15",
 "righe_train": 822,
-"righe_verifica": 346,
-"ordina_meglio_appresi": 0.2152,
-"ordina_meglio_a_mano": 0.1747,
-"asticella": 0.1847,
-"esito": "adottati: ordinano meglio dei pesi a mano",
-"quota_appresa": 0.6,
-"fattori_spenti": [
-"riskadj",
-"prob"
-]
+"righe_verifica": 391,
+"ordina_meglio_appresi": 0.2148,
+"ordina_meglio_a_mano": 0.2321,
+"asticella": 0.2421,
+"esito": "sulle giornate di verifica i pesi imparati non ordinano i titoli meglio di quelli impostati a mano (o non li ordinano affatto): tengo quelli a mano"
 }
-},
-"long": {
-"quality": 0.728,
-"valcheap": 0.179,
-"discount": 1.145,
-"histcheap": 0.33,
-"riskadj": 0.0,
-"ddpen": 1.096,
-"momentum": 0.046,
-"prob": 0.0,
-"trappen": 0.403
 }
 }
