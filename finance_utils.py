@@ -5639,6 +5639,104 @@ def scenari_perche_vuoto(kind: str = "short", min_rel: int = 0, min_pg: int = 0,
             "distribuzione": dist, "testo": testo}
 
 
+def _promozioni_per_titolo() -> dict:
+    """{(kind, TICKER): [date di TUTTE le promozioni]} dal registro delle promozioni.
+    Serve a sapere se una candidata vista in «In anticipo» è poi stata promossa o no. Si tengono
+    tutte le date, non solo la prima: un titolo può essere promosso, tolto e ripromosso più tardi,
+    e guardando solo la prima volta la seconda candidatura risulterebbe «mai promossa»."""
+    out = {}
+    for r in load_registro_completo(TRACK_RECORD_NAME, load_track_record()):
+        chiave = (r.get("kind"), str(r.get("ticker") or "").upper())
+        giorno = str(r.get("date") or "")[:10]
+        if not chiave[1] or not giorno:
+            continue
+        out.setdefault(chiave, []).append(giorno)
+    return {k: sorted(v) for k, v in out.items()}
+
+
+def _gruppo_anticipo(righe, campo, importo, fee) -> dict:
+    """Statistiche di un insieme di candidate su un orizzonte: caso tipico, media, quante in
+    positivo e il risultato in EURO calcolato caso per caso (non sul rendimento medio)."""
+    vals = [float(r[campo]) for r in righe if r.get(campo) is not None]
+    if not vals:
+        return {"n": 0}
+    v = sorted(vals)
+    n = len(v)
+    med = v[n // 2] if n % 2 else (v[n // 2 - 1] + v[n // 2]) / 2
+    netti = [n_ for n_ in (net_eur(x, importo, fee) for x in vals) if n_ is not None]
+    return {"n": n, "med": round(med, 2), "avg": round(sum(vals) / n, 2),
+            "hit": round(100 * sum(1 for x in vals if x > 0) / n),
+            "best": round(v[-1], 2), "worst": round(v[0], 2),
+            "netto_medio": round(sum(netti) / len(netti), 2) if netti else None,
+            "netto_totale": round(sum(netti), 2),
+            "in_utile": sum(1 for x in netti if x > 0)}
+
+
+def scenari_anticipo(kind: str = "short", min_pg: int = 0, max_pl: int = 100, min_conv: int = 0,
+                     importo: float = 30.0, fee: float = 1.0) -> dict:
+    """«E se comprassi appena un'occasione entra in «In anticipo»?» — la versione ESEGUIBILE.
+
+    A che serve, e perché non basta la riga «All'ingresso in In anticipo» della matrice: quella riga
+    contiene **solo le candidate che poi sono state promosse**, perché gli scenari nascono alla
+    promozione. È una selezione fatta col senno del poi: il giorno in cui una candidata entra in
+    «In anticipo» non sai quali saranno promosse, quindi quel risultato non era ottenibile.
+
+    Qui si parte dall'altro capo: si prendono **tutte** le candidate registrate quando sono entrate
+    in «In anticipo» — il prezzo di quel giorno è già a verbale nel registro dei pre-segnali — e si
+    guarda come sono andate dopo 1 settimana e dopo 1 mese, **comprese quelle mai promosse**. È la
+    strategia che avresti potuto eseguire davvero: compro tutto quello che compare lì.
+
+    Le due parti si mostrano anche separate («poi promosse» / «mai promosse»), perché la differenza
+    fra le due È la distorsione che la matrice non può evitare.
+
+    La vendita «alla soglia» non c'è: bersaglio e stop li calcola la promozione, quindi per le
+    candidate mai promosse non esistono. Restano i due orizzonti a giorni fissi, che sono anche
+    quelli che si confrontano meglio.
+
+    I filtri di qualità valgono solo per le righe che hanno quei numeri: sono registrati dal
+    momento in cui questa funzione è nata (vedi `record_presignals`), quindi all'inizio `filtrabili`
+    è 0 e con un filtro attivo non passa nessuno — detto esplicitamente invece di far sembrare che
+    non ci siano dati."""
+    righe = [r for r in load_registro_completo(PRESIGNAL_NAME, load_presignal_log())
+             if r.get("kind") == kind and not r.get("bad_data") and r.get("price")]
+    prom = _promozioni_per_titolo()
+    # copertura per campo: la probabilità di salita e il rischio si registrano solo dalle candidate
+    # nuove, quindi all'inizio quei due contatori sono a zero e i filtri corrispondenti non possono
+    # lasciar passare niente. La convenienza invece c'è da sempre.
+    copertura = {c: sum(1 for r in righe if r.get(c) is not None)
+                 for c in ("prob_gain", "prob_loss", "conv")}
+    attivi = bool(min_pg > 0 or max_pl < 100 or min_conv > 0)
+    sel, scartate_senza_dato = [], 0
+    for r in righe:
+        if attivi and _dato_mancante(r, min_pg, max_pl, min_conv):
+            scartate_senza_dato += 1
+            continue
+        if attivi and not ((min_pg <= 0 or (r.get("prob_gain") is not None and r["prob_gain"] >= min_pg))
+                           and (max_pl >= 100 or (r.get("prob_loss") is not None and r["prob_loss"] <= max_pl))
+                           and (min_conv <= 0 or (r.get("conv") is not None and r["conv"] >= min_conv))):
+            continue
+        giorno = str(r.get("date"))[:10]
+        dopo = [d for d in prom.get((r.get("kind"), str(r.get("ticker") or "").upper()), [])
+                if d >= giorno]
+        sel.append(dict(r, date=giorno, promossa=bool(dopo),
+                        data_promozione=(dopo[0] if dopo else None)))
+    sel.sort(key=lambda r: str(r.get("date")))
+    gruppi = {"tutte": sel,
+              "poi_promosse": [r for r in sel if r["promossa"]],
+              "mai_promosse": [r for r in sel if not r["promossa"]]}
+    orizzonti = {"7g": "ret_7d", "30g": "ret_30d"}
+    celle = {nome: {g: _gruppo_anticipo(righe_g, campo, importo, fee)
+                    for g, righe_g in gruppi.items()}
+             for nome, campo in orizzonti.items()}
+    return {"kind": kind, "n": len(sel), "n_registrate": len(righe),
+            "n_senza_dato": scartate_senza_dato, "copertura": copertura,
+            "filtri_attivi": attivi,
+            "celle": celle, "casi": gruppi,
+            "importo": importo, "fee": fee,
+            "pareggio_pct": round(pareggio_pct(importo, fee), 2),
+            "dal": (sel[0]["date"] if sel else None), "al": (sel[-1]["date"] if sel else None)}
+
+
 # ---------------------------------------------------------------------------
 # QUALI INDICATORI FUNZIONANO DAVVERO — la domanda «è più corretta l'affidabilità
 # o la convenienza?» misurata sui dati, non risolta per opinione.
@@ -5898,6 +5996,14 @@ def record_presignals() -> list:
             continue
         rows.append({"ticker": s["ticker"], "kind": s.get("kind", "short"), "date": today,
                      "price": s["last_price"], "conv": s.get("last_conv"),
+                     # QUALITÀ DEL SEGNALE NEL MOMENTO DELL'INGRESSO in «In anticipo». Prima non si
+                     # registrava, e mancava per una ragione precisa: gli scenari nascevano solo
+                     # alla promozione, quindi i filtri usavano i numeri di QUEL giorno — cioè
+                     # informazioni che al momento dell'acquisto anticipato non erano disponibili.
+                     # Registrandoli qui, lo scenario «compro appena entra in In anticipo» diventa
+                     # filtrabile con quello che si sapeva davvero quel giorno.
+                     "reliab": s.get("reliab"), "prob_gain": s.get("prob_gain"),
+                     "prob_loss": s.get("prob_loss"),
                      "ret_7d": None, "ret_30d": None})
         added.append(s["ticker"])
     if added:
