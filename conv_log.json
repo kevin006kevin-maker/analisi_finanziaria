@@ -1,26 +1,6 @@
 [
 {
 "date": "2026-08-06",
-"ticker": "STMMI.MI",
-"kind": "long",
-"price": 46.92,
-"conv": 41,
-"factors": {
-"discount": 32.3432,
-"histcheap": -0.84,
-"riskadj": 1.76,
-"ddpen": -12.4,
-"momentum": -5.45,
-"prob": 36,
-"quality": 57.3,
-"valcheap": -1.8142,
-"trappen": 1
-},
-"ret_5d": 1.18,
-"ret_21d": null
-},
-{
-"date": "2026-08-06",
 "ticker": "TIT.MI",
 "kind": "long",
 "price": 7.55,
@@ -53738,6 +53718,27 @@
 "quality": 35.0,
 "valcheap": -3.0,
 "trappen": 2
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-19",
+"ticker": "AGRO",
+"kind": "short",
+"price": 9.81,
+"conv": 50,
+"factors": {
+"discount": 35.6721,
+"histcheap": 0.01,
+"riskadj": 0.48,
+"ddpen": -17.57,
+"momentum": -4.2508,
+"prob": 29,
+"oversold": -50.9545,
+"rebound": 2.4179,
+"trend": -1.0,
+"relstrength": 4.7223
 },
 "ret_5d": null,
 "ret_21d": null
