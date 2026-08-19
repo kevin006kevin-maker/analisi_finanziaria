@@ -1732,7 +1732,7 @@
 "long:KGC": {
 "ticker": "KGC",
 "kind": "long",
-"name": "Kinross Gold Corporation",
+"name": "Kinross Gold Corp",
 "obs": [
 {
 "date": "2026-08-16 21:44",
@@ -2172,6 +2172,16 @@
 "occ": 85,
 "prob_gain": 53,
 "prob_loss": 35,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-08-19 21:06",
+"conv": 78,
+"price": 29.665,
+"mkt": 2.8893,
+"occ": 85,
+"prob_gain": 55,
+"prob_loss": 32,
 "reliab": "🟡 Media"
 }
 ],
@@ -2676,7 +2686,7 @@
 "long:DDS": {
 "ticker": "DDS",
 "kind": "long",
-"name": "DILLARD’S, INC.",
+"name": "Dillard's Inc",
 "obs": [
 {
 "date": "2026-08-16 21:44",
@@ -3127,6 +3137,16 @@
 "prob_gain": 57,
 "prob_loss": 25,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-08-19 21:06",
+"conv": 58,
+"price": 609.15,
+"mkt": 2.8893,
+"occ": 56,
+"prob_gain": 51,
+"prob_loss": 32,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -3143,7 +3163,7 @@
 "long:INTR": {
 "ticker": "INTR",
 "kind": "long",
-"name": "Inter & Co. Inc.",
+"name": "Inter & Co Inc",
 "obs": [
 {
 "date": "2026-08-16 22:17",
@@ -3604,6 +3624,16 @@
 "prob_gain": 59,
 "prob_loss": 26,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-08-19 21:06",
+"conv": 71,
+"price": 5.325,
+"mkt": 2.8893,
+"occ": 83,
+"prob_gain": 60,
+"prob_loss": 26,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -3620,7 +3650,7 @@
 "long:CCL": {
 "ticker": "CCL",
 "kind": "long",
-"name": "Carnival Corp",
+"name": "Carnival Corporation & plc",
 "obs": [
 {
 "date": "2026-08-16 22:17",
@@ -4061,6 +4091,16 @@
 "prob_gain": 68,
 "prob_loss": 20,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-08-19 21:06",
+"conv": 69,
+"price": 26.8523,
+"mkt": 2.8893,
+"occ": 61,
+"prob_gain": 73,
+"prob_loss": 16,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -4077,7 +4117,7 @@
 "long:DUOL": {
 "ticker": "DUOL",
 "kind": "long",
-"name": "Duolingo, Inc.",
+"name": "Duolingo Inc",
 "obs": [
 {
 "date": "2026-08-16 22:17",
@@ -4556,6 +4596,16 @@
 "mkt": 2.9049,
 "occ": 100,
 "prob_gain": 58,
+"prob_loss": 32,
+"reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-19 21:06",
+"conv": 65,
+"price": 147.67,
+"mkt": 2.8893,
+"occ": 98,
+"prob_gain": 59,
 "prob_loss": 32,
 "reliab": "🔴 Bassa"
 }
@@ -5721,6 +5771,16 @@
 "prob_gain": 64,
 "prob_loss": 26,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-08-19 21:06",
+"conv": 54,
+"price": 4.6395,
+"mkt": 2.8893,
+"occ": 61,
+"prob_gain": 64,
+"prob_loss": 26,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -6535,6 +6595,16 @@
 "prob_gain": 66,
 "prob_loss": 25,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-08-19 21:06",
+"conv": 67,
+"price": 43.96,
+"mkt": 2.8893,
+"occ": 77,
+"prob_gain": 66,
+"prob_loss": 25,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -7299,6 +7369,16 @@
 "prob_gain": 68,
 "prob_loss": 14,
 "reliab": "🟢 Alta"
+},
+{
+"date": "2026-08-19 21:06",
+"conv": 67,
+"price": 5.545,
+"mkt": 2.8893,
+"occ": 55,
+"prob_gain": 55,
+"prob_loss": 27,
+"reliab": "🟢 Alta"
 }
 ],
 "primo": {
@@ -7315,7 +7395,7 @@
 "long:T": {
 "ticker": "T",
 "kind": "long",
-"name": "AT&T Inc",
+"name": "AT&T Inc.",
 "obs": [
 {
 "date": "2026-08-17 13:50",
@@ -7653,6 +7733,16 @@
 "price": 25.2051,
 "mkt": 2.9049,
 "occ": 57,
+"prob_gain": 69,
+"prob_loss": 14,
+"reliab": "🟢 Alta"
+},
+{
+"date": "2026-08-19 21:06",
+"conv": 62,
+"price": 25.1851,
+"mkt": 2.8893,
+"occ": 58,
 "prob_gain": 69,
 "prob_loss": 14,
 "reliab": "🟢 Alta"
@@ -9213,8 +9303,28 @@
 "conv": null,
 "price": 6.9275,
 "stale": true
+},
+{
+"date": "2026-08-19 21:06",
+"conv": 64,
+"price": 6.915,
+"mkt": 2.8893,
+"occ": 73,
+"prob_gain": 72,
+"prob_loss": 23,
+"reliab": "🔴 Bassa"
 }
-]
+],
+"primo": {
+"date": "2026-08-17 15:38",
+"conv": 66,
+"price": 7.725,
+"mkt": 4.4982,
+"occ": 73,
+"prob_gain": 70,
+"prob_loss": 25,
+"reliab": "🔴 Bassa"
+}
 },
 "long:MNSO": {
 "ticker": "MNSO",
@@ -9390,8 +9500,28 @@
 "conv": null,
 "price": 11.0252,
 "stale": true
+},
+{
+"date": "2026-08-19 21:06",
+"conv": 54,
+"price": 11.055,
+"mkt": 2.8893,
+"occ": 69,
+"prob_gain": 38,
+"prob_loss": 42,
+"reliab": "🟡 Media"
 }
-]
+],
+"primo": {
+"date": "2026-08-17 15:38",
+"conv": 63,
+"price": 10.96,
+"mkt": 4.4982,
+"occ": 69,
+"prob_gain": 44,
+"prob_loss": 33,
+"reliab": "🟡 Media"
+}
 },
 "short:CLBT": {
 "ticker": "CLBT",
@@ -10572,7 +10702,7 @@
 "long:HBM": {
 "ticker": "HBM",
 "kind": "long",
-"name": "Hudbay Minerals Inc.",
+"name": "Hudbay Minerals Inc",
 "obs": [
 {
 "date": "2026-08-17 18:55",
@@ -10872,6 +11002,16 @@
 "occ": 68,
 "prob_gain": 59,
 "prob_loss": 31,
+"reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-19 21:06",
+"conv": 68,
+"price": 27.455,
+"mkt": 2.8893,
+"occ": 60,
+"prob_gain": 61,
+"prob_loss": 28,
 "reliab": "🔴 Bassa"
 }
 ],
@@ -11830,7 +11970,7 @@
 "long:FN": {
 "ticker": "FN",
 "kind": "long",
-"name": "FABRINET",
+"name": "Fabrinet",
 "obs": [
 {
 "date": "2026-08-18 15:40",
@@ -11961,6 +12101,16 @@
 "prob_gain": 66,
 "prob_loss": 23,
 "reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-19 21:06",
+"conv": 71,
+"price": 452.3475,
+"mkt": 2.8893,
+"occ": 82,
+"prob_gain": 68,
+"prob_loss": 22,
+"reliab": "🔴 Bassa"
 }
 ],
 "primo": {
@@ -11977,7 +12127,7 @@
 "long:FSM": {
 "ticker": "FSM",
 "kind": "long",
-"name": "Fortuna Mining Corp.",
+"name": "Fortuna Mining Corp",
 "obs": [
 {
 "date": "2026-08-18 22:20",
@@ -12117,6 +12267,16 @@
 "occ": 80,
 "prob_gain": 53,
 "prob_loss": 37,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-08-19 21:06",
+"conv": 73,
+"price": 11.545,
+"mkt": 2.8893,
+"occ": 76,
+"prob_gain": 50,
+"prob_loss": 40,
 "reliab": "🟡 Media"
 }
 ],
