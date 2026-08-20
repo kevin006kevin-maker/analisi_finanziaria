@@ -2637,7 +2637,8 @@
 "entry_date": "2026-07-06",
 "entry_src": "storico",
 "max_price": 4.985,
-"max_date": "2026-08-20 15:36"
+"max_date": "2026-08-20 15:36",
+"incasso_notified": true
 },
 "XLE": {
 "kind": "short",
@@ -68194,7 +68195,8 @@
 "entry_src": "scatto",
 "entry_check": "2026-08-20",
 "max_price": 26.185,
-"max_date": "2026-08-19 16:30"
+"max_date": "2026-08-19 16:30",
+"incasso_notified": true
 },
 "CCB": {
 "kind": "short",
@@ -72650,7 +72652,7 @@
 ],
 "auto": true,
 "notified": true,
-"exit_notified": false,
+"exit_notified": true,
 "entry_price": 8.93,
 "entry_target": 8.7939,
 "entry_stop": 8.1766,
@@ -73670,7 +73672,8 @@
 "entry_src": "scatto",
 "entry_check": "2026-08-20",
 "max_price": 34.96,
-"max_date": "2026-08-17 22:55"
+"max_date": "2026-08-17 22:55",
+"incasso_notified": true
 },
 "TSLL": {
 "kind": "short",
@@ -91617,18 +91620,18 @@
 {
 "name": "RPT",
 "price": 13.22,
-"rsi": 55.8958,
+"rsi": 56.3896,
 "dd_high": -26.0626,
 "occasione": 25,
 "convenienza": 65,
-"prob_gain": 58,
+"prob_gain": 54,
 "prob_loss": 6,
-"exp_ret": 1.5,
-"gain": 1.0197,
+"exp_ret": 0.7,
+"gain": 0.2874,
 "reliab": "🟡 Media",
-"target": 13.3548,
-"stop": 12.2154,
-"date": "2026-08-20 16:34"
+"target": 13.258,
+"stop": 12.1408,
+"date": "2026-08-20 16:36"
 }
 ],
 "auto": true,
