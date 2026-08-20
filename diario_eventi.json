@@ -160,5 +160,32 @@
 },
 "stop": 20.052,
 "atr": 1.609
+},
+{
+"episodio": "short:DKS:2026-08-20",
+"ticker": "DKS",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-08-21 00:23",
+"data": "2026-08-21 00:22",
+"prezzo": 179.34,
+"conv": 74,
+"prob_gain": 50,
+"prob_loss": 0,
+"reliab": "🟡 Media",
+"mkt": 2.6585,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 214.7964,
+"media20": 201.351,
+"quattro_atr": 210.0363,
+"meta_caduta": 209.255,
+"bollinger": 216.7462,
+"consigliata": 210.0363
+},
+"stop": 163.9919,
+"atr": 7.6741
 }
 ]
