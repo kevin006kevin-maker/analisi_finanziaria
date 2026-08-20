@@ -2679,22 +2679,6 @@
 "snapshots": [
 {
 "name": "XLE",
-"price": 58.625,
-"rsi": 59.2848,
-"dd_high": -6.266,
-"occasione": 27,
-"convenienza": 52,
-"prob_gain": 54,
-"prob_loss": 0,
-"exp_ret": 0.7,
-"gain": -3.2449,
-"reliab": "🟢 Alta",
-"target": 56.7372,
-"stop": 56.2568,
-"date": "2026-07-29 21:37"
-},
-{
-"name": "XLE",
 "price": 58.65,
 "rsi": 59.3286,
 "dd_high": -6.25,
@@ -3956,6 +3940,22 @@
 "target": 57.4011,
 "stop": 61.5312,
 "date": "2026-08-20 20:34"
+},
+{
+"name": "XLE",
+"price": 63.785,
+"rsi": 72.8096,
+"dd_high": 0.0,
+"occasione": 27,
+"convenienza": 41,
+"prob_gain": 51,
+"prob_loss": 0,
+"exp_ret": 0.2,
+"gain": -10.0404,
+"reliab": "🟢 Alta",
+"target": 57.3987,
+"stop": 61.4112,
+"date": "2026-08-20 21:57"
 }
 ],
 "auto": true,
@@ -24098,38 +24098,6 @@
 "snapshots": [
 {
 "name": "ELTX",
-"price": 2.9,
-"rsi": 35.0998,
-"dd_high": -80.4714,
-"occasione": 34,
-"convenienza": 72,
-"prob_gain": 67,
-"prob_loss": 16,
-"exp_ret": 7.4,
-"gain": 140.9345,
-"reliab": "🔴 Bassa",
-"target": 6.9871,
-"stop": 1.6634,
-"date": "2026-07-29 19:59"
-},
-{
-"name": "ELTX",
-"price": 2.91,
-"rsi": 35.0982,
-"dd_high": -80.404,
-"occasione": 34,
-"convenienza": 72,
-"prob_gain": 65,
-"prob_loss": 13,
-"exp_ret": 7.3,
-"gain": 129.4055,
-"reliab": "🔴 Bassa",
-"target": 6.6757,
-"stop": 1.7847,
-"date": "2026-07-29 21:37"
-},
-{
-"name": "ELTX",
 "price": 2.89,
 "rsi": 34.9431,
 "dd_high": -80.5387,
@@ -25631,6 +25599,22 @@
 "target": 4.229,
 "stop": 2.4724,
 "date": "2026-08-20 19:58"
+},
+{
+"name": "ELTX",
+"price": 3.07,
+"rsi": 40.2719,
+"dd_high": -79.3266,
+"occasione": 28,
+"convenienza": 70,
+"prob_gain": 63,
+"prob_loss": 14,
+"exp_ret": 6.3,
+"gain": 51.3323,
+"reliab": "🔴 Bassa",
+"target": 4.6459,
+"stop": 2.4376,
+"date": "2026-08-20 21:57"
 }
 ],
 "auto": true,
@@ -77783,6 +77767,22 @@
 "target": 12.9661,
 "stop": 9.9209,
 "date": "2026-08-20 20:35"
+},
+{
+"name": "PUMP",
+"price": 11.335,
+"rsi": 42.5466,
+"dd_high": -37.7198,
+"occasione": 14,
+"convenienza": 66,
+"prob_gain": 43,
+"prob_loss": 23,
+"exp_ret": -2.9,
+"gain": 14.3829,
+"reliab": "🔴 Bassa",
+"target": 12.9653,
+"stop": 9.8752,
+"date": "2026-08-20 21:57"
 }
 ],
 "auto": true,
@@ -94452,6 +94452,22 @@
 "target": 13.3514,
 "stop": 12.0454,
 "date": "2026-08-20 20:35"
+},
+{
+"name": "RPT",
+"price": 13.16,
+"rsi": 55.1196,
+"dd_high": -26.3982,
+"occasione": 25,
+"convenienza": 66,
+"prob_gain": 53,
+"prob_loss": 6,
+"exp_ret": 0.5,
+"gain": 1.4711,
+"reliab": "🟡 Media",
+"target": 13.3536,
+"stop": 12.1512,
+"date": "2026-08-20 21:57"
 }
 ],
 "auto": true,
@@ -97905,6 +97921,22 @@
 "target": 31.487,
 "stop": 33.7111,
 "date": "2026-08-20 19:59"
+},
+{
+"name": "Alamos Gold Inc.",
+"price": 36.73,
+"rsi": 69.9037,
+"dd_high": -33.6165,
+"occasione": 95,
+"convenienza": 69,
+"prob_gain": 52,
+"prob_loss": 38,
+"exp_ret": 2.4,
+"gain": 2.4,
+"reliab": "🟡 Media",
+"target": 31.4896,
+"stop": 33.8226,
+"date": "2026-08-20 21:57"
 }
 ],
 "auto": true,
@@ -97916,8 +97948,8 @@
 "entry_date": "2026-08-11 01:31",
 "entry_src": "scatto",
 "entry_check": "2026-08-20",
-"max_price": 36.6,
-"max_date": "2026-08-20 19:59"
+"max_price": 36.73,
+"max_date": "2026-08-20 21:57"
 },
 "TDUP": {
 "kind": "short",
@@ -98676,6 +98708,22 @@
 "target": 5.491,
 "stop": 1.9792,
 "date": "2026-08-20 19:59"
+},
+{
+"name": "TDUP",
+"price": 2.765,
+"rsi": 23.7525,
+"dd_high": -77.1109,
+"occasione": 57,
+"convenienza": 71,
+"prob_gain": 55,
+"prob_loss": 18,
+"exp_ret": 2.9,
+"gain": 96.0217,
+"reliab": "🔴 Bassa",
+"target": 5.42,
+"stop": 2.0033,
+"date": "2026-08-20 21:57"
 }
 ],
 "auto": true,
