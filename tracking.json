@@ -18756,7 +18756,9 @@
 "entry_date": "2026-07-20",
 "entry_src": "storico",
 "max_price": 28.12,
-"max_date": "2026-08-18 06:09"
+"max_date": "2026-08-18 06:09",
+"warn_since": "2026-08-20",
+"warn": "in perdita da 23 giorni di Borsa: valuta l'uscita"
 },
 "SNPS": {
 "kind": "short",
@@ -74073,7 +74075,9 @@
 "entry_check": "2026-08-20",
 "max_price": 34.96,
 "max_date": "2026-08-17 22:55",
-"incasso_notified": true
+"incasso_notified": true,
+"warn_since": "2026-08-20",
+"warn": "in perdita da 12 giorni di Borsa: valuta l'uscita"
 },
 "TSLL": {
 "kind": "short",
@@ -80274,7 +80278,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-08-20",
 "max_price": 47.41,
-"max_date": "2026-08-18 06:09"
+"max_date": "2026-08-18 06:09",
+"warn_since": "2026-08-20",
+"warn": "in perdita da 11 giorni di Borsa: valuta l'uscita"
 },
 "WU": {
 "kind": "short",
