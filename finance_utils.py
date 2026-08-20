@@ -5264,7 +5264,7 @@ SCENARIO_SELLS_PER_TIPO = {"short": ("bersaglio", "7g", "30g"),
 SCENARIO_ETICHETTE = {
     "anticipo": "🔭 All'ingresso in «In anticipo»", "osservazione": "👀 A inizio osservazione",
     "promozione": "📌 All'ingresso in Monitoraggio", "conferma": "⏳ Dopo il periodo di conferma",
-    "bersaglio": "🎯 Alla soglia", "7g": "📅 Dopo 1 settimana",
+    "bersaglio": "🎯 Alla soglia", "soglia": "🎯 Alla soglia", "7g": "📅 Dopo 1 settimana",
     "30g": "📅 Dopo 1 mese", "365g": "📅 Dopo 1 anno",
 }
 
@@ -7650,6 +7650,134 @@ def screener_row(ticker: str) -> dict:
 
 
 # ---------------------------------------------------------------------------
+# LE SOGLIE CANDIDATE — piu formule per lo stesso bersaglio, registrate insieme.
+#
+# Perche piu di una. Il bersaglio di oggi e la media a 50 giorni, e misurata sui dati veri regge
+# male: distanza mediana +21% dal prezzo, il 52% delle occasioni oltre il +20%, sei su settantuno
+# con il bersaglio SOTTO il prezzo (cioe nessun bersaglio), e un massimo di +531%. Viene toccato nel
+# 23% dei casi, e il tasso crolla con la distanza: entro il 5% viene raggiunto sempre, oltre il 50%
+# MAI (0 su 15). Il difetto non e la formula in se: e che la distanza non e una scelta, e un effetto
+# di quanto il titolo e caduto.
+# Nessuna formula alternativa e misurabilmente migliore con i dati di oggi (la media a 20 giorni
+# viene toccata il 48% delle volte ma punta a guadagnare meno di quanto si rischia). Quindi invece
+# di scegliere a tavolino, si REGISTRANO TUTTE alla data dell'acquisto e si misura quale funziona:
+# essendo un confronto sulle stesse righe e nella stessa finestra, servono molti meno casi.
+#
+# Le formule, con il nome che compare nell'app:
+#   media50        la media a 50 giorni: ritorno alla media, e il bersaglio storico dell'app
+#   media20        la media a 20 giorni: piu vicina, quindi piu raggiungibile
+#   quattro_atr    prezzo + 4 volte l'ATR: rende il rischio/rendimento fisso a 2 (lo stop e 2 ATR)
+#   meta_caduta    prezzo + meta della distanza dal massimo degli ultimi 60 giorni
+#   bollinger      la banda di Bollinger superiore
+#   consigliata    la piu bassa fra media50 e quattro_atr: tiene la logica storica ma taglia gli
+#                  assurdi tipo +531%. E quella che l'app usa per la colonna «alla soglia».
+# Un valore <= al prezzo non e un bersaglio e viene messo a None: meglio una cella vuota che una
+# perdita registrata come «obiettivo raggiunto».
+# ---------------------------------------------------------------------------
+SOGLIA_USATA = "consigliata"     # quale formula alimenta la colonna «alla soglia»
+SOGLIE_NOMI = {
+    "media50": "Media a 50 giorni (la storica dell'app)",
+    "media20": "Media a 20 giorni (più vicina, più raggiungibile)",
+    "quattro_atr": "Prezzo + 4 volte l'ATR (rischio/rendimento fisso a 2)",
+    "meta_caduta": "Metà della caduta dal massimo di 60 giorni",
+    "bollinger": "Banda di Bollinger superiore",
+    "consigliata": "Consigliata: la più bassa fra media 50 e 4 ATR",
+}
+
+
+def _soglie_da_storico(h, price):
+    """Le soglie candidate a partire da uno storico prezzi gia caricato e dal prezzo di riferimento.
+    Ritorna un dizionario {nome: valore}, con None dove la formula non e calcolabile o darebbe un
+    bersaglio non superiore al prezzo (un obiettivo gia raggiunto non e un obiettivo)."""
+    out = {k: None for k in SOGLIE_NOMI}
+    try:
+        if h is None or len(h) == 0 or not price:
+            return out
+        p = float(price)
+        last = h.iloc[-1]
+        def _v(col):
+            try:
+                x = float(last.get(col, float("nan")))
+                return x if x == x else None      # scarta i NaN
+            except Exception:
+                return None
+        m50, m20, bb = _v("SMA50"), _v("SMA20"), _v("BB_up")
+        try:
+            a = atr(h, 14)
+            atr_val = float(a.iloc[-1])
+            if atr_val != atr_val or atr_val <= 0:
+                atr_val = None
+        except Exception:
+            atr_val = None
+        try:
+            massimo = float(h["Close"].tail(60).max())
+        except Exception:
+            massimo = None
+        cand = {
+            "media50": m50,
+            "media20": m20,
+            "quattro_atr": (p + 4 * atr_val) if atr_val else None,
+            "meta_caduta": (p + (massimo - p) / 2) if (massimo and massimo > p) else None,
+            "bollinger": bb,
+        }
+        validi = [cand["media50"], cand["quattro_atr"]]
+        validi = [x for x in validi if x and x > p]
+        cand["consigliata"] = min(validi) if validi else None
+        for k, v in cand.items():
+            out[k] = round(float(v), 4) if (v is not None and float(v) > p) else None
+        return out
+    except Exception:
+        return out
+
+
+def soglie_ora(ticker, price=None, kind="short"):
+    """Le soglie candidate ADESSO per un titolo, piu lo stop e l'ATR. Si calcolano al momento in cui
+    l'evento viene messo a verbale, cosi i livelli sono quelli veri di quel giorno: e la stessa
+    ragione per cui il diario registra gli eventi quando avvengono invece di ricostruirli dopo.
+    Una chiamata di rete per evento, e gli eventi sono pochi al giorno (lo storico e anche in cache)."""
+    fuori = {"soglie": {k: None for k in SOGLIE_NOMI}, "stop": None, "atr": None}
+    try:
+        h = get_history(ticker, period="1y")
+        if h is None or h.empty:
+            return fuori
+        h = add_indicators(h)
+        p = float(price) if price else float(h["Close"].dropna().iloc[-1])
+        s = _soglie_da_storico(h, p)
+        try:
+            a = atr(h, 14)
+            atr_val = float(a.iloc[-1])
+            atr_val = atr_val if atr_val == atr_val and atr_val > 0 else None
+        except Exception:
+            atr_val = None
+        stop = round(p - _ATR_STOP_K * atr_val, 4) if atr_val else None
+        if stop is not None and (stop <= 0 or stop >= p):
+            stop = None               # stop negativo o sopra il prezzo pagato: non e uno stop
+        return {"soglie": s, "stop": stop,
+                "atr": (round(atr_val, 4) if atr_val else None)}
+    except Exception:
+        return fuori
+
+
+def distanze_soglie(prezzo, soglie, atr_val=None) -> dict:
+    """Quanto dista ogni soglia dal prezzo, in percentuale e in multipli di ATR. Serve alla scheda
+    che mostra il diario: la distanza e il numero che predice se il bersaglio verra toccato, molto
+    piu della formula con cui e stato calcolato (entro il 5% viene raggiunto sempre, oltre il 50%
+    mai)."""
+    out = {}
+    try:
+        p = float(prezzo)
+    except (TypeError, ValueError):
+        return out
+    for k, v in (soglie or {}).items():
+        if v is None or not p:
+            continue
+        pct = (float(v) / p - 1) * 100
+        out[k] = {"pct": round(pct, 2),
+                  "atr": (round((float(v) - p) / float(atr_val), 2) if atr_val else None)}
+    return out
+
+
+# ---------------------------------------------------------------------------
 # IL DIARIO DEGLI EVENTI — il registro PERMANENTE della vita di ogni occasione.
 #
 # Perché esiste. Fino a oggi i dati che servono agli scenari non venivano scritti nel momento in cui
@@ -7675,7 +7803,12 @@ def screener_row(ticker: str) -> dict:
 # affidabilità e contesto di mercato di QUEL momento: valori veri, non ricostruiti.
 # ---------------------------------------------------------------------------
 DIARIO_NAME = "diario_eventi.json"
-_DIARIO_MAX = 3000        # ~300 byte/riga -> ~900 KB; l'eccedenza va in archivio, niente si perde
+# RITARATO con l'arrivo delle soglie: una riga di momento d'acquisto porta ora sei bersagli
+# candidati piu il loro esito, quindi pesa circa 850 byte invece di 300. Col tetto vecchio il file
+# vivo avrebbe superato i 2,5 MB e oltre 1 MB la protezione anti-cancellazione si spegne per sempre.
+# Niente si perde: l'eccedenza va negli archivi annuali, che non vengono mai potati, e le statistiche
+# leggono archivio + file vivo.
+_DIARIO_MAX = 700         # ~850 byte/riga -> ~580 KB (col margine 1,3: ~760 KB)
 
 # L ORDINE E QUELLO DEL PERCORSO REALE, misurato sui dati, non quello dei nomi:
 #   1 entra in osservazione
@@ -7771,6 +7904,13 @@ def registra_evento(kind, tk, evento, valori=None, episodio=None, note=None, dov
     for k, x in (valori or {}).items():
         if x is not None:
             v[k] = x
+    # LE SOGLIE CANDIDATE, ma solo per gli eventi che sono un momento d ACQUISTO: sono gli unici in
+    # cui serve un bersaglio, e calcolarle costa una lettura dello storico (che la scansione ha di
+    # norma gia in cache). Si calcolano ADESSO, cioe alla data dell evento: e il punto di tutto il
+    # diario — un bersaglio ricostruito mesi dopo sarebbe il bersaglio di un altro giorno.
+    liv = {}
+    if evento in eventi_acquisto():
+        liv = soglie_ora(TK, v.get("prezzo"), kind)
     righe.append({
         "episodio": eid, "ticker": TK, "kind": kind, "evento": evento,
         "scritto_il": _now_iso(),                 # quando il sistema l'ha messo a verbale
@@ -7789,6 +7929,11 @@ def registra_evento(kind, tk, evento, valori=None, episodio=None, note=None, dov
         # solo che tre chiamanti che devono ricordarsene.
         "dovuto_il": (dovuto_il.isoformat() if hasattr(dovuto_il, "isoformat")
                       else (str(dovuto_il)[:10] if dovuto_il else None)),
+        # i livelli del momento: piu formule per lo stesso bersaglio, cosi si potra misurare quale
+        # funziona invece di scegliere a tavolino (vedi SOGLIE_NOMI)
+        "soglie": liv.get("soglie") or None,
+        "stop": liv.get("stop"),
+        "atr": liv.get("atr"),
     })
     salva_registro(DIARIO_NAME, righe, _DIARIO_MAX, giorni_protetti=400)
     return True
@@ -7903,7 +8048,15 @@ SCENARI_ACQUISTO = (
      "in piu: altri 5 giorni di Borsa (10 per il lungo)"),
 )
 _DIARIO_SELLS = {"7g": 7, "30g": 30, "365g": 365}
-DIARIO_SELLS_PER_TIPO = {"short": ("7g", "30g"), "long": ("30g", "365g")}
+# LA FINESTRA DELLA SOGLIA: entro quanti giorni di calendario il bersaglio deve essere toccato,
+# altrimenti si vende alla chiusura di fine finestra. E l ultimo orizzonte fisso di quel tipo: un
+# mese per il breve, un anno per il lungo. Prima era 30 giorni per tutti, e per un occasione di
+# lungo periodo — che dichiara orizzonti a un mese e a un anno — quella colonna misurava un
+# orizzonte che non c entrava.
+# NB: NIENTE soglia a 7 giorni. Misurato: solo il 13% dei bersagli e raggiungibile in cinque sedute,
+# quindi quella colonna avrebbe misurato quasi sempre la chiusura di ripiego, non un obiettivo.
+_DIARIO_SOGLIA_GG = {"short": 30, "long": 365}
+DIARIO_SELLS_PER_TIPO = {"short": ("soglia", "7g", "30g"), "long": ("soglia", "30g", "365g")}
 
 
 def risolvi_diario() -> int:
@@ -7932,7 +8085,12 @@ def risolvi_diario() -> int:
         eta = (oggi - d0).days
         res = r.setdefault("res", {})
         attese = [sk for sk, gg in _DIARIO_SELLS.items() if eta >= gg and sk not in res]
-        if not attese:
+        # la soglia ha una finestra sua e piu formule: si valuta anche quando le colonne a giorni
+        # fissi sono gia tutte calcolate
+        gg_s = _DIARIO_SOGLIA_GG.get(r.get("kind"), 30)
+        manca_soglia = (eta >= gg_s and (r.get("soglie") or {})
+                        and len(r.get("res_soglia") or {}) < len([1 for v in (r.get("soglie") or {}).values() if v]))
+        if not attese and not manca_soglia:
             continue
         if eta > 400:
             r["bad_data"] = "troppo vecchia e ancora senza prezzi"
@@ -7959,6 +8117,42 @@ def risolvi_diario() -> int:
                 continue
             res[sk] = round((float(s.iloc[0]) / float(r["prezzo"]) - 1) * 100, 2)
             fatte += 1
+
+        # --- LA VENDITA «ALLA SOGLIA», una per ogni formula candidata -----------------------------
+        # Si vende al bersaglio se una CHIUSURA lo tocca entro la finestra, altrimenti alla chiusura
+        # di fine finestra. Tre cose che il vecchio impianto sbagliava e qui sono giuste:
+        #  1) la finestra parte dalla data di QUESTO acquisto, non dalla promozione: chi compra prima
+        #     ha davvero piu tempo, e prima si misurava un periodo che non aveva vissuto;
+        #  2) un bersaglio <= al prezzo non produce nessuna cella, invece di registrare una perdita
+        #     etichettata come «obiettivo raggiunto»;
+        #  3) si calcolano TUTTE le formule sulle stesse righe e nella stessa finestra, cosi il
+        #     confronto e appaiato e serviranno molti meno casi per capire quale funziona.
+        gg_soglia = _DIARIO_SOGLIA_GG.get(r.get("kind"), 30)
+        soglie = r.get("soglie") or {}
+        if eta >= gg_soglia and soglie:
+            res_s = r.setdefault("res_soglia", {})
+            fine = closes[closes.index >= pd.Timestamp(d0 + datetime.timedelta(days=gg_soglia))]
+            if not fine.empty:
+                finestra = dopo[dopo.index <= pd.Timestamp(d0 + datetime.timedelta(days=gg_soglia))]
+                for nome, liv in soglie.items():
+                    if nome in res_s or liv is None:
+                        continue
+                    try:
+                        liv = float(liv)
+                    except (TypeError, ValueError):
+                        continue
+                    if liv <= float(r["prezzo"]):
+                        continue          # non e un bersaglio: nessuna cella, e detto nella scheda
+                    tocchi = finestra[finestra >= liv]
+                    prezzo_vendita = liv if not tocchi.empty else float(fine.iloc[0])
+                    res_s[nome] = {"ret": round((prezzo_vendita / float(r["prezzo"]) - 1) * 100, 2),
+                                   "toccato": bool(not tocchi.empty),
+                                   "giorni": (int((tocchi.index[0].date() - d0).days)
+                                              if not tocchi.empty else None)}
+                    fatte += 1
+                # la colonna «alla soglia» degli scenari usa la formula consigliata
+                if SOGLIA_USATA in res_s and "soglia" not in res:
+                    res["soglia"] = res_s[SOGLIA_USATA]["ret"]
     if fatte:
         salva_registro(DIARIO_NAME, righe, _DIARIO_MAX, giorni_protetti=400)
     return fatte

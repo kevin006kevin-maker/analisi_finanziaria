@@ -2381,7 +2381,11 @@ if section.startswith("Scenari"):
     _et = fu.SCENARIO_ETICHETTE
     _COL_BUY = {"osservazione": "#8b5cd6", "anticipo": "#3987e5",
                 "promozione": "#d95926", "conferma": "#199e70"}
-    _COL_SELL = {"bersaglio": "#c2185b", "7g": "#0277bd", "30g": "#ef6c00", "365g": "#5e35b1"}
+    _COL_SELL = {"bersaglio": "#c2185b", "soglia": "#c2185b", "7g": "#0277bd",
+                 "30g": "#ef6c00", "365g": "#5e35b1"}
+    _COL_SCEN = {"s1_osservazione": "#8b5cd6", "s2_anticipo": "#3987e5",
+                 "s3_fine_osservazione": "#0f9b8e", "s4_monitoraggio": "#d95926",
+                 "s5_fine_verifica": "#199e70"}
 
     # =======================================================================
     # UNA SOTTO-SEZIONE PER MOMENTO D'ACQUISTO
@@ -2552,6 +2556,73 @@ if section.startswith("Scenari"):
                     "migliori»: giudicare con quello che si sapeva quel giorno.")
         st.caption("👆 Apri una sotto-sezione qui sopra per il dettaglio di un singolo scenario: le "
                    "regole di vendita a confronto, il grafico del guadagno e le singole operazioni.")
+
+        # --- TUTTI GLI SCENARI NELLO STESSO GRAFICO ---------------------------------------------
+        # Una linea per scenario, per confrontarli a parità di regola di vendita. Serve perché la
+        # tabella dice quanto rende ognuno ma non fa vedere COME ci arriva: una linea che sale piano
+        # e sempre è un'altra cosa da una che sale per due colpi di fortuna.
+        st.markdown("### Tutti gli scenari nello stesso grafico")
+        _gc1, _gc2 = st.columns([1.2, 1])
+        with _gc1:
+            _vend_g = st.segmented_control(
+                "Vendendo", list(_sd["vendite"]), default=_sd["vendite"][0],
+                format_func=lambda k: _et.get(k, k), required=True, key="graf_vendita",
+                help="Cambia la regola di vendita per tutte e cinque le linee insieme.") \
+                or _sd["vendite"][0]
+        with _gc2:
+            # DUE SCALE, perché sono due domande diverse e con una sola si sbaglia. Col totale, uno
+            # scenario che compra 500 occasioni domina tutti gli altri anche se rende meno per
+            # operazione — ed è la risposta giusta a «quanto mi resta in tasca». Con la media si
+            # confronta la qualità dei momenti a parità di numero di operazioni.
+            _scala = st.segmented_control(
+                "Cosa mostra la linea", ["totale", "media"], default="totale",
+                format_func=lambda k: ("Totale in tasca" if k == "totale"
+                                       else "Media per operazione"),
+                required=True, key="graf_scala") or "totale"
+
+        _fig_t = go.Figure()
+        for _sc in _sd["scenari"]:
+            _pts = sorted(_sc["casi"].get(_vend_g) or [], key=lambda p: p["data"])
+            if not _pts:
+                continue
+            _cum, _xs, _ys, _tx = 0.0, [], [], []
+            for _i, _p in enumerate(_pts, 1):
+                _nn = fu.net_eur(_p["ret"], sim_amt, sim_fee)
+                if _nn is None:
+                    continue
+                _cum += _nn
+                _xs.append(_p["data"])
+                _ys.append(round(_cum / _i if _scala == "media" else _cum, 2))
+                _tx.append(f"{_p['ticker']}: {_p['ret']:+.2f}% → {_nn:+.2f} €")
+            _fig_t.add_trace(go.Scatter(x=_xs, y=_ys, mode="lines+markers",
+                                        name=f"{_sc['nome']} ({len(_pts)})", text=_tx,
+                                        hovertemplate="%{text}<br>%{y:+.2f} €<extra></extra>",
+                                        line=dict(color=_COL_SCEN.get(_sc["chiave"]), width=2.4)))
+        if _fig_t.data:
+            _fig_t.add_hline(y=0, line=dict(color="gray", width=1, dash="dash"))
+            _fig_t.update_layout(height=380, margin=dict(t=10, b=10, l=10, r=10),
+                                 legend=dict(orientation="h"), hovermode="x unified",
+                                 yaxis_title=("Media per operazione (€)" if _scala == "media"
+                                              else "Totale in tasca (€)"))
+            show_chart(_fig_t, use_container_width=True)
+            if _scala == "totale":
+                st.caption("Fra parentesi, nella legenda, quante occasioni compone ogni linea. Con "
+                           "questa scala **il numero domina**, ed è giusto: uno scenario che compra "
+                           "dieci volte più occasioni arriva molto più in basso o più in alto anche "
+                           "a parità di rendimento per operazione. È la risposta a «quanto mi resta "
+                           "in tasca alla fine». Passa a «media per operazione» per confrontare "
+                           "invece la qualità dei cinque momenti.")
+            else:
+                st.caption("Con questa scala il numero di occasioni non conta più: si vede quale "
+                           "momento d'acquisto rende meglio per **ogni singola operazione**. "
+                           "Attenzione però: un momento che rende meglio per operazione può "
+                           "lasciarti meno in tasca in totale, se compra dieci volte meno "
+                           "occasioni. Sono due domande diverse, ed è per questo che ci sono due "
+                           "scale.")
+        else:
+            st.info("⏳ Il grafico d'insieme compare quando almeno uno scenario ha risultati maturi "
+                    "con questa regola di vendita. La vendita «alla soglia» matura a 30 giorni "
+                    "dall'acquisto (un anno per il lungo periodo), quindi è l'ultima ad apparire.")
 
     elif _stab.startswith("s") and _stab[1:2].isdigit():
         _rendi_scenario(_stab)
@@ -3268,22 +3339,47 @@ if section.startswith("Diario"):
         _d2.metric("Occasioni seguite", f"{_rie['episodi']}")
         _d3.metric("In funzione dal", _rie["dal"] or "—")
 
-    _ET_EV = {
-        "ingresso_osservazione": ("👀 Entra in osservazione", "il sistema comincia a guardarlo"),
-        "fine_osservazione": ("⏳ Finisce l'osservazione", "acquisto dello scenario «compro in osservazione»"),
-        "salita_2pct": ("📈 È salito del 2%", "acquisto dello scenario «compro in anticipo»"),
-        "ingresso_anticipo": ("🔭 Entra in «In anticipo»", "il pre-segnale diventa solido"),
-        "promozione": ("📌 Entra in Monitoraggio", "acquisto dello scenario «compro in monitoraggio»"),
-        "fine_verifica": ("✅ Finisce la verifica", "acquisto dello scenario «compro dopo la verifica»"),
-        "uscita": ("🚪 Esce dal Monitoraggio", "il sistema la toglie"),
+    # I NOMI, e soprattutto A CHE SERVE ogni evento, si RICAVANO dall'elenco degli scenari: non si
+    # riscrivono a mano. Quando gli scenari sono passati da quattro a cinque questa tabella era
+    # rimasta indietro e diceva tre cose false — che l'ingresso in osservazione non fosse un momento
+    # d'acquisto, che la salita del 2% lo fosse, e che i momenti fossero quattro. Un elenco scritto
+    # due volte prima o poi divergerà: ora c'è una sola fonte.
+    _NOMI_EV = {
+        "ingresso_osservazione": "👀 Entra in osservazione",
+        "ingresso_anticipo": "🔭 Entra in «In anticipo»",
+        "fine_osservazione": "⏳ Finisce l'osservazione",
+        "salita_2pct": "📈 È salito del 2%",
+        "promozione": "📌 Entra in Monitoraggio",
+        "fine_verifica": "✅ Finisce la verifica",
+        "uscita": "🚪 Esce dal Monitoraggio",
     }
+    _SERVE_EV = {
+        "ingresso_osservazione": "apre l'episodio: da qui il sistema lo segue",
+        "ingresso_anticipo": "il pre-segnale diventa solido (convenienza almeno 65)",
+        "fine_osservazione": "finiscono i giorni di osservazione (3 breve / 7 lungo)",
+        "salita_2pct": "il prezzo è risalito del 2%: è la condizione che apre la promozione",
+        "promozione": "entra nel Monitoraggio",
+        "fine_verifica": "finiscono i giorni di verifica (5 breve / 10 lungo)",
+        "uscita": "chiude l'episodio: il sistema la toglie",
+    }
+    # quale evento è il momento d'acquisto di quale scenario, col suo NUMERO: è il numero che si
+    # legge sulle schede (1️⃣…5️⃣), quindi lega la tabella alle sotto-sezioni senza ripetere i nomi
+    # (che, annidati fra virgolette, diventavano illeggibili). Niente grassetto: dentro una tabella
+    # non viene reso e si vedrebbero gli asterischi.
+    _ACQ_DI = {_ev: _i for _i, (_k, _ev, _n, _a) in enumerate(fu.SCENARI_ACQUISTO, 1)}
+    _ET_EV = {_e: (_NOMI_EV.get(_e, _e),
+                   (f"🛒 acquisto dello scenario {_ACQ_DI[_e]}" if _e in _ACQ_DI
+                    else _SERVE_EV.get(_e, "")))
+              for _e in fu.EVENTI}
     st.markdown("### Che cosa viene messo a verbale")
     st.dataframe(pd.DataFrame([{
         "Evento": _ET_EV[e][0], "A che serve": _ET_EV[e][1],
         "Quante volte": _rie["per_evento"].get(e, 0),
     } for e in fu.EVENTI]), use_container_width=True, hide_index=True)
-    st.caption("Quattro di questi eventi sono un **momento d'acquisto** di uno scenario: è per "
-               "questo che il prezzo e i numeri di qualità di quel giorno devono essere esatti.")
+    st.caption(f"**{len(_ACQ_DI)} di questi eventi sono un momento d'acquisto** di uno scenario: è "
+               f"per questo che il prezzo e i numeri di qualità di quel giorno devono essere esatti. "
+               f"Gli altri {len(fu.EVENTI) - len(_ACQ_DI)} servono a delimitare l'episodio e a "
+               f"spiegare il percorso, ma su di essi non si compra.")
     st.caption("L'ordine è quello del percorso tipico, ma **i tre eventi centrali possono "
                "scambiarsi**: un'occasione entra in «In anticipo» quando la convenienza sale a 65, "
                "che di solito avviene *durante* l'osservazione e non dopo (sui dati: 41 righe su "
@@ -3336,6 +3432,74 @@ if section.startswith("Diario"):
             st.caption("La colonna **Scritto il** è la garanzia: se coincide con «Quando», quei "
                        "numeri sono stati registrati mentre il momento avveniva. È la differenza "
                        "fra un dato misurato e un dato ricostruito.")
+
+            # --- LE SOGLIE CANDIDATE DI QUESTA OCCASIONE ----------------------------------------
+            # Perché sono più di una: il bersaglio storico dell'app (la media a 50 giorni) misurato
+            # sui dati veri viene toccato solo nel 23% dei casi, e il tasso crolla con la distanza
+            # (entro il 5% viene raggiunto sempre, oltre il 50% mai). Nessuna formula alternativa è
+            # però risultata migliore. Quindi si registrano tutte alla data dell'acquisto e si
+            # misurerà quale funziona, invece di deciderlo a tavolino.
+            st.markdown("##### 🎯 Le soglie di vendita a verbale, formula per formula")
+            _righe_sog = []
+            for _e in fu.EVENTI:
+                _r = _ev.get(_e) or {}
+                _sog = _r.get("soglie") or {}
+                if not _sog:
+                    continue
+                _dist = fu.distanze_soglie(_r.get("prezzo"), _sog, _r.get("atr"))
+                _esiti = _r.get("res_soglia") or {}
+                for _nome, _lab in fu.SOGLIE_NOMI.items():
+                    _liv = _sog.get(_nome)
+                    _d = _dist.get(_nome) or {}
+                    _es = _esiti.get(_nome) or {}
+                    _righe_sog.append({
+                        "Momento": _NOMI_EV.get(_e, _e),
+                        "Formula": _lab + (" ⭐" if _nome == fu.SOGLIA_USATA else ""),
+                        "Prezzo pagato": _r.get("prezzo"),
+                        "Soglia": _liv,
+                        "Distanza": (_d.get("pct") if _liv is not None else None),
+                        "In ATR": (_d.get("atr") if _liv is not None else None),
+                        "Toccata?": ("—" if not _es else ("✅ sì" if _es.get("toccato") else "❌ no")),
+                        "Dopo giorni": (_es.get("giorni") if _es else None),
+                        "Risultato": (_es.get("ret") if _es else None),
+                    })
+            if not _righe_sog:
+                st.caption("Nessuna soglia a verbale per questa occasione: le soglie si registrano "
+                           "solo sui momenti in cui si compra, e da quando questa funzione è in "
+                           "funzione.")
+            else:
+                st.dataframe(pd.DataFrame(_righe_sog), use_container_width=True, hide_index=True,
+                             column_config={
+                                 "Prezzo pagato": st.column_config.NumberColumn(format="%.2f"),
+                                 "Soglia": st.column_config.NumberColumn(format="%.2f",
+                                     help="Il prezzo a cui quella formula dice di vendere. Vuoto "
+                                          "quando la formula darebbe un valore sotto il prezzo "
+                                          "pagato: un obiettivo già raggiunto non è un obiettivo, e "
+                                          "in quel caso non viene creata nessuna cella."),
+                                 "Distanza": st.column_config.NumberColumn(format="%+.1f%%",
+                                     help="Quanto deve salire il prezzo per toccare la soglia. È il "
+                                          "numero che predice se verrà toccata, molto più della "
+                                          "formula: entro il 5% viene raggiunta quasi sempre, oltre "
+                                          "il 50% praticamente mai."),
+                                 "In ATR": st.column_config.NumberColumn(format="%.1f",
+                                     help="La stessa distanza misurata in «giornate tipiche» del "
+                                          "titolo. Serve a confrontare titoli tranquilli e titoli "
+                                          "che si muovono molto: 4 ATR sono lontani per tutti."),
+                                 "Dopo giorni": st.column_config.NumberColumn(format="%d",
+                                     help="Quanti giorni sono passati fra l'acquisto e il momento in "
+                                          "cui la soglia è stata toccata."),
+                                 "Risultato": st.column_config.NumberColumn(format="%+.2f%%",
+                                     help="Il rendimento di quella vendita: la soglia se è stata "
+                                          "toccata, altrimenti la chiusura di fine finestra (30 "
+                                          "giorni, un anno per il lungo periodo)."),
+                             })
+                st.caption("La formula con la ⭐ è quella che alimenta la colonna «alla soglia» negli "
+                           "scenari: la più bassa fra la media a 50 giorni e prezzo più 4 ATR. Tiene "
+                           "la logica storica dell'app e taglia i bersagli assurdi — nel registro "
+                           "vecchio ce n'era uno a +531%, che non poteva essere raggiunto da nessuno. "
+                           "Le altre vengono calcolate e conservate per poterle confrontare fra "
+                           "qualche mese sulle stesse occasioni: è un confronto appaiato, quindi "
+                           "servono molti meno casi che misurandole separatamente.")
     st.stop()
 
 # ===========================================================================
