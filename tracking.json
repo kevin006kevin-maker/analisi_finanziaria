@@ -2647,22 +2647,6 @@
 "snapshots": [
 {
 "name": "XLE",
-"price": 58.93,
-"rsi": 61.7453,
-"dd_high": -5.8824,
-"occasione": 27,
-"convenienza": 51,
-"prob_gain": 56,
-"prob_loss": 0,
-"exp_ret": 0.9,
-"gain": -3.5676,
-"reliab": "🟢 Alta",
-"target": 56.7794,
-"stop": 56.6653,
-"date": "2026-07-29 17:00"
-},
-{
-"name": "XLE",
 "price": 58.69,
 "rsi": 59.4378,
 "dd_high": -6.21,
@@ -3924,6 +3908,22 @@
 "target": 57.4106,
 "stop": 62.0347,
 "date": "2026-08-20 15:36"
+},
+{
+"name": "XLE",
+"price": 64.465,
+"rsi": 74.5643,
+"dd_high": 0.0,
+"occasione": 27,
+"convenienza": 41,
+"prob_gain": 48,
+"prob_loss": 2,
+"exp_ret": -0.3,
+"gain": -10.914,
+"reliab": "🟢 Alta",
+"target": 57.4115,
+"stop": 62.0512,
+"date": "2026-08-20 18:02"
 }
 ],
 "auto": true,
@@ -3946,8 +3946,8 @@
 "tipo": "bersaglio"
 },
 "incasso_notified": true,
-"max_price": 64.45,
-"max_date": "2026-08-20 15:36"
+"max_price": 64.465,
+"max_date": "2026-08-20 18:02"
 },
 "PBR": {
 "kind": "long",
@@ -26752,22 +26752,6 @@
 "snapshots": [
 {
 "name": "MONC.MI",
-"price": 48.51,
-"rsi": 41.1039,
-"dd_high": -17.1448,
-"occasione": 36,
-"convenienza": 72,
-"prob_gain": 52,
-"prob_loss": 1,
-"exp_ret": 0.3,
-"gain": 7.2984,
-"reliab": "🟢 Alta",
-"target": 52.0612,
-"stop": 45.1909,
-"date": "2026-07-29 17:01"
-},
-{
-"name": "MONC.MI",
 "price": 48.46,
 "rsi": 40.7972,
 "dd_high": -17.2473,
@@ -28861,6 +28845,22 @@
 "target": 50.6108,
 "stop": 44.139,
 "date": "2026-08-20 15:37"
+},
+{
+"name": "MONC.MI",
+"price": 46.94,
+"rsi": 35.9119,
+"dd_high": -19.8429,
+"occasione": 20,
+"convenienza": 78,
+"prob_gain": 47,
+"prob_loss": 1,
+"exp_ret": -0.8,
+"gain": 7.824,
+"reliab": "🟢 Alta",
+"target": 50.6126,
+"stop": 44.2161,
+"date": "2026-08-20 18:02"
 }
 ],
 "auto": true,
@@ -92244,6 +92244,22 @@
 "target": 13.258,
 "stop": 12.1408,
 "date": "2026-08-20 16:36"
+},
+{
+"name": "RPT",
+"price": 13.03,
+"rsi": 53.953,
+"dd_high": -27.1253,
+"occasione": 0,
+"convenienza": 67,
+"prob_gain": 56,
+"prob_loss": 6,
+"exp_ret": 0.9,
+"gain": 1.7206,
+"reliab": "🟡 Media",
+"target": 13.2542,
+"stop": 11.9508,
+"date": "2026-08-20 18:03"
 }
 ],
 "auto": true,
