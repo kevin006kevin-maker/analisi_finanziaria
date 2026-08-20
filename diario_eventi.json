@@ -32,5 +32,32 @@
 "fonte": "promozione",
 "note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
 "dovuto_il": null
+},
+{
+"episodio": "short:DKS:2026-08-20",
+"ticker": "DKS",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-20 17:29",
+"data": "2026-08-20 17:29",
+"prezzo": 176.47,
+"conv": 69,
+"prob_gain": 53,
+"prob_loss": 0,
+"reliab": "🟡 Media",
+"mkt": 3.2484,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 214.739,
+"media20": 201.2075,
+"quattro_atr": 207.0977,
+"meta_caduta": 207.82,
+"bollinger": 217.4942,
+"consigliata": 207.0977
+},
+"stop": 161.1562,
+"atr": 7.6569
 }
 ]
