@@ -3425,6 +3425,16 @@
 "prob_gain": 45,
 "prob_loss": 36,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-08-20 05:25",
+"conv": 55,
+"price": 615.87,
+"mkt": 3.3561,
+"occ": 58,
+"prob_gain": 49,
+"prob_loss": 33,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -5543,6 +5553,16 @@
 {
 "date": "2026-08-20 04:19",
 "conv": 79,
+"price": 16.66,
+"mkt": 3.3561,
+"occ": 76,
+"prob_gain": 79,
+"prob_loss": 9,
+"reliab": "🟢 Alta"
+},
+{
+"date": "2026-08-20 05:25",
+"conv": 80,
 "price": 16.66,
 "mkt": 3.3561,
 "occ": 76,
@@ -13810,6 +13830,33 @@
 "occ": 71,
 "prob_gain": 50,
 "prob_loss": 22,
+"reliab": "🔴 Bassa"
+}
+},
+"long:IAG": {
+"ticker": "IAG",
+"kind": "long",
+"name": "IAMGOLD Corp",
+"obs": [
+{
+"date": "2026-08-20 05:25",
+"conv": 60,
+"price": 19.72,
+"mkt": 3.3561,
+"occ": 78,
+"prob_gain": 56,
+"prob_loss": 35,
+"reliab": "🔴 Bassa"
+}
+],
+"primo": {
+"date": "2026-08-20 05:25",
+"conv": 60,
+"price": 19.72,
+"mkt": 3.3561,
+"occ": 78,
+"prob_gain": 56,
+"prob_loss": 35,
 "reliab": "🔴 Bassa"
 }
 }
