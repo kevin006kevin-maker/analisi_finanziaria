@@ -1,166 +1,6 @@
 [
 {
 "date": "2026-08-11",
-"ticker": "LYG",
-"kind": "long",
-"price": 6.12,
-"conv": 59,
-"factors": {
-"discount": 2.5478,
-"histcheap": -1.69,
-"riskadj": 1.68,
-"ddpen": -9.15,
-"momentum": 2.2364,
-"prob": 65,
-"quality": 58.0,
-"valcheap": 0.3726,
-"trappen": 3
-},
-"ret_5d": 0.41,
-"ret_21d": null
-},
-{
-"date": "2026-08-11",
-"ticker": "VG",
-"kind": "long",
-"price": 14.26,
-"conv": 33,
-"factors": {
-"discount": 18.6537,
-"histcheap": -1.11,
-"riskadj": 0.24,
-"ddpen": -33.14,
-"momentum": -9.0214,
-"prob": 13,
-"quality": 60.7,
-"valcheap": -0.4508,
-"trappen": 2
-},
-"ret_5d": 0.05,
-"ret_21d": null
-},
-{
-"date": "2026-08-11",
-"ticker": "UMC",
-"kind": "long",
-"price": 18.79,
-"conv": 38,
-"factors": {
-"discount": 32.9168,
-"histcheap": -1.16,
-"riskadj": 2.76,
-"ddpen": -13.83,
-"momentum": -0.535,
-"prob": 9,
-"quality": 54.0,
-"valcheap": -0.9315,
-"trappen": 0
-},
-"ret_5d": -0.96,
-"ret_21d": null
-},
-{
-"date": "2026-08-11",
-"ticker": "MU",
-"kind": "long",
-"price": 861.0,
-"conv": 53,
-"factors": {
-"discount": 29.0517,
-"histcheap": -1.33,
-"riskadj": 3.91,
-"ddpen": -11.21,
-"momentum": -3.7975,
-"prob": 23,
-"quality": 73.4,
-"valcheap": -2.0958,
-"trappen": 3
-},
-"ret_5d": 13.36,
-"ret_21d": null
-},
-{
-"date": "2026-08-11",
-"ticker": "T",
-"kind": "long",
-"price": 24.05,
-"conv": 58,
-"factors": {
-"discount": 18.8049,
-"histcheap": 0.73,
-"riskadj": -1.12,
-"ddpen": -15.21,
-"momentum": -1.95,
-"prob": 56,
-"quality": 63.4,
-"valcheap": 0.7395,
-"trappen": 2
-},
-"ret_5d": 3.85,
-"ret_21d": null
-},
-{
-"date": "2026-08-11",
-"ticker": "SAN",
-"kind": "long",
-"price": 14.69,
-"conv": 64,
-"factors": {
-"discount": 0.068,
-"histcheap": -2.24,
-"riskadj": 2.04,
-"ddpen": -6.77,
-"momentum": -1.6609,
-"prob": 65,
-"quality": 68.8,
-"valcheap": 0.5581,
-"trappen": 3
-},
-"ret_5d": -0.88,
-"ret_21d": null
-},
-{
-"date": "2026-08-11",
-"ticker": "WDC",
-"kind": "long",
-"price": 438.34,
-"conv": 64,
-"factors": {
-"discount": 41.2594,
-"histcheap": -0.83,
-"riskadj": 3.4,
-"ddpen": -12.05,
-"momentum": 16.8582,
-"prob": 55,
-"quality": 67.4,
-"valcheap": -1.965,
-"trappen": 3
-},
-"ret_5d": 15.81,
-"ret_21d": null
-},
-{
-"date": "2026-08-11",
-"ticker": "MS",
-"kind": "long",
-"price": 215.33,
-"conv": 56,
-"factors": {
-"discount": 5.7843,
-"histcheap": -1.59,
-"riskadj": 1.9,
-"ddpen": -6.23,
-"momentum": -1.941,
-"prob": 73,
-"quality": 60.3,
-"valcheap": -0.1112,
-"trappen": 3
-},
-"ret_5d": 0.47,
-"ret_21d": null
-},
-{
-"date": "2026-08-11",
 "ticker": "BTDR",
 "kind": "long",
 "price": 8.695,
@@ -40312,6 +40152,174 @@
 "quality": 24.4,
 "valcheap": -3.0,
 "trappen": -2
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-20",
+"ticker": "SHAZ",
+"kind": "short",
+"price": 60.775,
+"conv": 54,
+"factors": {
+"discount": 34.439,
+"histcheap": -0.46,
+"riskadj": 1.54,
+"ddpen": -22.94,
+"momentum": 15.6137,
+"prob": 27,
+"oversold": -47.5829,
+"rebound": 12.6613,
+"trend": null,
+"relstrength": -14.1261
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-20",
+"ticker": "BEAM",
+"kind": "short",
+"price": 27.205,
+"conv": 51,
+"factors": {
+"discount": 28.2569,
+"histcheap": -0.03,
+"riskadj": 1.25,
+"ddpen": -18.8,
+"momentum": -2.6217,
+"prob": 32,
+"oversold": -46.6531,
+"rebound": 10.3985,
+"trend": -1.0,
+"relstrength": 4.1093
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-20",
+"ticker": "XE",
+"kind": "short",
+"price": 18.595,
+"conv": 41,
+"factors": {
+"discount": 48.3185,
+"histcheap": 0.63,
+"riskadj": -2.81,
+"ddpen": -41.31,
+"momentum": 18.1918,
+"prob": 20,
+"oversold": -49.1489,
+"rebound": -1.9322,
+"trend": null,
+"relstrength": -16.7042
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-20",
+"ticker": "CLF",
+"kind": "short",
+"price": 10.4842,
+"conv": 49,
+"factors": {
+"discount": 35.2027,
+"histcheap": 0.6,
+"riskadj": -0.01,
+"ddpen": -28.58,
+"momentum": 13.7103,
+"prob": 36,
+"oversold": -39.9171,
+"rebound": 6.2483,
+"trend": -1.0,
+"relstrength": -12.2227
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-20",
+"ticker": "QDEL",
+"kind": "short",
+"price": 14.7,
+"conv": 41,
+"factors": {
+"discount": 58.4511,
+"histcheap": 1.0,
+"riskadj": -0.79,
+"ddpen": -42.01,
+"momentum": 2.5845,
+"prob": 25,
+"oversold": -46.7056,
+"rebound": 6.9537,
+"trend": -1.0,
+"relstrength": -1.0969
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-20",
+"ticker": "DQ",
+"kind": "short",
+"price": 14.87,
+"conv": 33,
+"factors": {
+"discount": 58.3357,
+"histcheap": 1.28,
+"riskadj": -1.13,
+"ddpen": -38.05,
+"momentum": 0.3351,
+"prob": 30,
+"oversold": -61.4164,
+"rebound": -9.5494,
+"trend": -1.0,
+"relstrength": 1.1525
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-20",
+"ticker": "SJT",
+"kind": "short",
+"price": 2.87,
+"conv": 37,
+"factors": {
+"discount": 55.6414,
+"histcheap": 1.7,
+"riskadj": -2.55,
+"ddpen": -30.57,
+"momentum": -3.6101,
+"prob": 39,
+"oversold": -56.9021,
+"rebound": -0.1672,
+"trend": -1.0,
+"relstrength": 5.0977
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-20",
+"ticker": "AGL",
+"kind": "short",
+"price": 99.1,
+"conv": 38,
+"factors": {
+"discount": 23.6753,
+"histcheap": -1.55,
+"riskadj": 1.46,
+"ddpen": -38.7,
+"momentum": -11.4736,
+"prob": 2,
+"oversold": -50.5133,
+"rebound": 6.4061,
+"trend": 1.0,
+"relstrength": 12.9612
 },
 "ret_5d": null,
 "ret_21d": null
