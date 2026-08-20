@@ -187,5 +187,32 @@
 },
 "stop": 163.9919,
 "atr": 7.6741
+},
+{
+"episodio": "short:CDNL:2026-08-18",
+"ticker": "CDNL",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-08-21 00:24",
+"data": "2026-08-20 22:57",
+"prezzo": 42.25,
+"conv": 67,
+"prob_gain": 55,
+"prob_loss": 26,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-08-21",
+"soglie": {
+"media50": 65.9733,
+"media20": 53.7485,
+"quattro_atr": 64.4691,
+"meta_caduta": 68.28,
+"bollinger": 78.01,
+"consigliata": 64.4691
+},
+"stop": 31.1405,
+"atr": 5.5548
 }
 ]
