@@ -1,46 +1,6 @@
 [
 {
 "date": "2026-08-11",
-"ticker": "EFA",
-"kind": "long",
-"price": 108.01,
-"conv": 49,
-"factors": {
-"discount": 0.4975,
-"histcheap": -1.93,
-"riskadj": 1.45,
-"ddpen": -3.07,
-"momentum": -1.877,
-"prob": 89,
-"quality": null,
-"valcheap": null,
-"trappen": null
-},
-"ret_5d": 0.0,
-"ret_21d": null
-},
-{
-"date": "2026-08-11",
-"ticker": "EEM",
-"kind": "long",
-"price": 65.17,
-"conv": 55,
-"factors": {
-"discount": 8.482,
-"histcheap": -1.1,
-"riskadj": 1.3,
-"ddpen": -4.85,
-"momentum": -1.3215,
-"prob": 88,
-"quality": null,
-"valcheap": null,
-"trappen": null
-},
-"ret_5d": 1.65,
-"ret_21d": null
-},
-{
-"date": "2026-08-11",
 "ticker": "XLK",
 "kind": "long",
 "price": 186.32,
@@ -40340,6 +40300,48 @@
 "rebound": -14.4791,
 "trend": -1.0,
 "relstrength": 1.6709
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-20",
+"ticker": "CNDT",
+"kind": "short",
+"price": 1.56,
+"conv": 36,
+"factors": {
+"discount": 47.2973,
+"histcheap": 0.6,
+"riskadj": -1.07,
+"ddpen": -40.86,
+"momentum": 3.7037,
+"prob": 31,
+"oversold": -50.078,
+"rebound": -3.4103,
+"trend": -1.0,
+"relstrength": -1.9998
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-20",
+"ticker": "ZIP",
+"kind": "short",
+"price": 5.265,
+"conv": 28,
+"factors": {
+"discount": 4.0984,
+"histcheap": -1.54,
+"riskadj": 0.25,
+"ddpen": -37.78,
+"momentum": -11.5466,
+"prob": 20,
+"oversold": -69.0234,
+"rebound": -23.1624,
+"trend": 1.0,
+"relstrength": 13.2506
 },
 "ret_5d": null,
 "ret_21d": null
