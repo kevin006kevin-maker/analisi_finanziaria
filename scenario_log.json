@@ -4451,7 +4451,45 @@
 "prob_gain": null,
 "prob_loss": null,
 "conv": 67,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-08-18 10:31",
+"prezzo": 9.416,
+"conv": 67,
+"prob_gain": 53,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": 4.3991
+},
+"anticipo": {
+"data": "2026-08-19",
+"prezzo": 9.467,
+"conv": 67,
+"prob_gain": 53,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-08-21",
+"prezzo": 9.475,
+"conv": 67,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "BIDU",
@@ -4472,6 +4510,44 @@
 "prob_gain": 47,
 "prob_loss": 14,
 "conv": 64,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-08-18 15:39",
+"prezzo": 97.36,
+"conv": 61,
+"prob_gain": 47,
+"prob_loss": 14,
+"reliab": "🟡 Media",
+"mkt": 3.5574
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-08-21",
+"prezzo": 91.97,
+"conv": 64,
+"prob_gain": 47,
+"prob_loss": 14,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 }
 ]
