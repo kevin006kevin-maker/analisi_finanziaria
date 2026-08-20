@@ -7968,11 +7968,33 @@ def aggiorna_eventi() -> int:
     incomparabilmente meglio di una ricostruzione tentata settimane dopo.
     Ritorna quanti eventi ha scritto."""
     scritti = 0
-    for eid, ep in diario_episodi().items():
+    episodi = diario_episodi()
+    # L ULTIMO ingresso in osservazione per ogni titolo: serve a riconoscere gli episodi SUPERATI.
+    # Se la storia di un titolo si interrompe (il sorvegliante salta piu di due giorni oltre la
+    # finestra) l osservazione RIPARTE da zero e si apre un episodio nuovo, ma quello vecchio resta
+    # aperto nel diario. Senza questa guardia i suoi eventi a tempo scatterebbero comunque, contando
+    # dalla data d ingresso vecchia e dal prezzo vecchio: si creerebbe un momento d acquisto che non
+    # e mai esistito, perche quell osservazione non e mai arrivata alla fine.
+    ultimo_ingresso = {}
+    for _e in episodi.values():
+        _i = (_e["eventi"].get("ingresso_osservazione") or {}).get("data")
+        if not _i:
+            continue
+        _k = f"{_e.get('kind')}:{_e.get('ticker')}"
+        if str(_i) > str(ultimo_ingresso.get(_k, "")):
+            ultimo_ingresso[_k] = str(_i)
+    for eid, ep in episodi.items():
         kind, tk = ep.get("kind") or "short", ep.get("ticker")
         ev = ep["eventi"]
         ing = ev.get("ingresso_osservazione")
-        if ing:
+        # episodio superato: c e un ingresso in osservazione piu recente per lo stesso titolo e
+        # questo non e mai arrivato alla promozione. Gli eventi PRIMA della promozione non scattano
+        # piu; quelli dopo (la fine della verifica) restano possibili, perche appartengono a un
+        # episodio che il monitoraggio ha davvero vissuto.
+        superato = bool(ing and not ev.get("promozione")
+                        and str(ing.get("data") or "") <
+                        str(ultimo_ingresso.get(f"{kind}:{tk}", "")))
+        if ing and not superato:
             g_oss = _OBS_WINDOW.get(kind, 3)
             if "fine_osservazione" not in ev and \
                     _trading_days_between(str(ing.get("data"))[:10], _today_iso(), tk) >= g_oss:
