@@ -1,86 +1,6 @@
 [
 {
 "date": "2026-08-11",
-"ticker": "QQQ",
-"kind": "long",
-"price": 720.87,
-"conv": 50,
-"factors": {
-"discount": 3.3894,
-"histcheap": -1.65,
-"riskadj": 1.51,
-"ddpen": -3.87,
-"momentum": -2.9711,
-"prob": 86,
-"quality": null,
-"valcheap": null,
-"trappen": null
-},
-"ret_5d": 0.01,
-"ret_21d": null
-},
-{
-"date": "2026-08-11",
-"ticker": "VOO",
-"kind": "long",
-"price": 710.65,
-"conv": 50,
-"factors": {
-"discount": 0.0084,
-"histcheap": -2.21,
-"riskadj": 1.82,
-"ddpen": -2.14,
-"momentum": -2.0462,
-"prob": 94,
-"quality": null,
-"valcheap": null,
-"trappen": null
-},
-"ret_5d": -0.55,
-"ret_21d": null
-},
-{
-"date": "2026-08-11",
-"ticker": "VTI",
-"kind": "long",
-"price": 381.63,
-"conv": 50,
-"factors": {
-"discount": 0.0393,
-"histcheap": -2.22,
-"riskadj": 1.87,
-"ddpen": -2.12,
-"momentum": -2.0838,
-"prob": 93,
-"quality": null,
-"valcheap": null,
-"trappen": null
-},
-"ret_5d": -0.4,
-"ret_21d": null
-},
-{
-"date": "2026-08-11",
-"ticker": "IWM",
-"kind": "long",
-"price": 299.98,
-"conv": 56,
-"factors": {
-"discount": 0.5734,
-"histcheap": -1.81,
-"riskadj": 2.52,
-"ddpen": -3.16,
-"momentum": -1.2693,
-"prob": 96,
-"quality": null,
-"valcheap": null,
-"trappen": null
-},
-"ret_5d": 0.8,
-"ret_21d": null
-},
-{
-"date": "2026-08-11",
 "ticker": "DIA",
 "kind": "long",
 "price": 538.99,
@@ -40333,6 +40253,90 @@
 "quality": 26.4,
 "valcheap": -0.5591,
 "trappen": -1
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-20",
+"ticker": "SEI",
+"kind": "short",
+"price": 53.31,
+"conv": 61,
+"factors": {
+"discount": 35.6781,
+"histcheap": 0.15,
+"riskadj": 1.27,
+"ddpen": -13.98,
+"momentum": 11.0017,
+"prob": 28,
+"oversold": -41.3087,
+"rebound": 23.0186,
+"trend": -1.0,
+"relstrength": -9.5061
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-20",
+"ticker": "AVAV",
+"kind": "short",
+"price": 157.83,
+"conv": 41,
+"factors": {
+"discount": 61.4889,
+"histcheap": 1.16,
+"riskadj": -0.8,
+"ddpen": -42.94,
+"momentum": 16.6816,
+"prob": 24,
+"oversold": -43.0508,
+"rebound": 2.5807,
+"trend": -1.0,
+"relstrength": -15.186
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-20",
+"ticker": "BYND",
+"kind": "short",
+"price": 15.0354,
+"conv": 22,
+"factors": {
+"discount": -0.0,
+"histcheap": -7.35,
+"riskadj": 1.44,
+"ddpen": -69.55,
+"momentum": -3496.9856,
+"prob": -39,
+"oversold": -88.5315,
+"rebound": -87.2806,
+"trend": 1.0,
+"relstrength": 3498.4812
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-20",
+"ticker": "AGRO",
+"kind": "short",
+"price": 11.1046,
+"conv": 36,
+"factors": {
+"discount": 27.183,
+"histcheap": -0.56,
+"riskadj": 0.87,
+"ddpen": -17.93,
+"momentum": -22.7028,
+"prob": 25,
+"oversold": -64.4236,
+"rebound": -10.3642,
+"trend": 1.0,
+"relstrength": 24.1983
 },
 "ret_5d": null,
 "ret_21d": null
