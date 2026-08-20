@@ -5202,14 +5202,24 @@ def _passaggio(data=None, prezzo=None, conv=None, prob_gain=None, prob_loss=None
             "reliab": reliab, "mkt": mkt}
 
 
-def _primo_osservazione(tk, kind) -> dict:
+def _primo_osservazione(tk, kind, entro_data=None) -> dict:
     """La fotografia dell'ingresso in osservazione, dal registro delle osservazioni. Preferisce il
-    campo `primo` (immune alla potatura) e ripiega sul primo punto ancora presente in lista."""
+    campo `primo` (immune alla potatura) e ripiega sul primo punto ancora presente in lista.
+
+    `entro_data` è OBBLIGATORIA nella pratica: il registro delle osservazioni contiene l'episodio
+    IN CORSO, non quello di mesi fa. Uno stesso titolo può tornare in osservazione dopo essere già
+    stato promosso, e in quel caso la fotografia che si trova lì appartiene al nuovo episodio.
+    Senza questo controllo si scriveva come «inizio osservazione» una data SUCCESSIVA alla
+    promozione — un dato falso, non mancante: su 70 righe erano 7, con date fino a 34 giorni dopo
+    e prezzi lontani fino al 24% da quello di promozione. Se la fotografia è più recente del
+    limite, si ritorna vuoto e chi chiama ripiega sul prezzo già noto nella riga."""
     try:
         e = (load_opp_watch() or {}).get(f"{kind}:{str(tk).upper()}") or {}
         p = e.get("primo") or (e.get("obs") or [{}])[0]
         if not p:
             return _passaggio()
+        if entro_data and str(p.get("date") or "")[:10] > str(entro_data)[:10]:
+            return _passaggio()          # è un episodio successivo: non c'entra con questa riga
         return _passaggio(p.get("date"), p.get("price"), p.get("conv"), p.get("prob_gain"),
                           p.get("prob_loss"), p.get("reliab"), p.get("mkt"))
     except Exception:
@@ -5265,9 +5275,16 @@ def completa_passaggi() -> int:
                 r["passaggi"]["conferma"] = _snap_alla_data(r.get("ticker"), r.get("kind"),
                                                             r.get("conf_date"))
                 fatte += 1
+            # RIPARAZIONE di un dato FALSO già scritto: un'osservazione datata DOPO la promozione
+            # appartiene a un episodio successivo dello stesso titolo. Si rimette il prezzo già
+            # noto nella riga, che è quello su cui i rendimenti sono stati calcolati.
+            _o = r["passaggi"].get("osservazione") or {}
+            if str(_o.get("data") or "")[:10] > str(r.get("date"))[:10]:
+                r["passaggi"]["osservazione"] = _passaggio(r.get("obs_date"), r.get("obs_price"))
+                fatte += 1
             continue
         tk, kind = r.get("ticker"), r.get("kind")
-        oss = _primo_osservazione(tk, kind)
+        oss = _primo_osservazione(tk, kind, entro_data=r.get("date"))
         if not oss.get("prezzo") and r.get("obs_price"):
             oss = _passaggio(r.get("obs_date"), r.get("obs_price"))    # solo il prezzo, è quel che c'è
         pre = _pre_row_for(tk, kind, r.get("date"))
@@ -5299,7 +5316,9 @@ def _log_promotion_scenario(tk, kind, promo_price, obs_price, obs_date, target, 
         pre_date = str(pre_row.get("date"))[:10] if pre_row else None
         # I PASSAGGI: i valori veri di ogni momento, non solo quelli della promozione.
         passaggi = {
-            "osservazione": _primo_osservazione(tk, kind),
+            # entro oggi: alla promozione l'episodio in corso è quello giusto, ma il limite protegge
+            # dai casi in cui la data del registro fosse avanti (fuso o orologio sfasato).
+            "osservazione": _primo_osservazione(tk, kind, entro_data=_today_iso()),
             "anticipo": (_passaggio(pre_row.get("date"), pre_row.get("price"), pre_row.get("conv"),
                                     pre_row.get("prob_gain"), pre_row.get("prob_loss"),
                                     pre_row.get("reliab")) if pre_row else _passaggio()),
