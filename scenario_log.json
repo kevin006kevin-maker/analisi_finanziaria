@@ -4370,5 +4370,62 @@
 "mkt": null
 }
 }
+},
+{
+"ticker": "EYPT",
+"kind": "short",
+"date": "2026-08-20",
+"promo_price": 5.63,
+"obs_price": 4.605,
+"obs_date": "2026-08-17",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": 12.6578,
+"stop": 2.6963,
+"reliab": "🔴 Bassa",
+"prob_gain": 64,
+"prob_loss": 12,
+"conv": 74,
+"passaggi": {
+"osservazione": {
+"data": "2026-08-17 21:25",
+"prezzo": 4.605,
+"conv": 68,
+"prob_gain": 65,
+"prob_loss": 8,
+"reliab": "🔴 Bassa",
+"mkt": 4.1862
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-08-20 15:43",
+"prezzo": 5.63,
+"conv": 74,
+"prob_gain": 64,
+"prob_loss": 12,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
