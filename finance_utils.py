@@ -2165,7 +2165,7 @@ def _commit_to_github(name: str, content_str: str, force: bool = False) -> bool:
 # (test di coerenza: vedi il controllo che confronta questo insieme con le costanti).
 _REGISTRI_APPEND_ONLY = frozenset({
     "track_record.json", "forecast_log.json", "conv_log.json",
-    "exit_history.json", "scenario_log.json", "presignal_log.json",
+    "exit_history.json", "scenario_log.json", "presignal_log.json", "diario_eventi.json",
 })
 
 # File di STATO VIVO: contengono la situazione corrente (titoli seguiti con la loro storia,
@@ -3865,8 +3865,9 @@ def opportunity_snapshot(ticker: str, kind: str) -> dict:
 # Campionamento: si misura più volte al giorno (non più 1/giorno), ma solo se il valore cambia
 # ed è passato un minimo di tempo → niente punti ridondanti (es. mercati chiusi) e dati contenuti.
 _OBS_GAP_MIN = 60       # opp_watch: al più ogni 60 min
-_OBS_MAX_DAYS = 12
-_OBS_MAX_KEEP = 220
+_OBS_MAX_DAYS = 12          # giorni con TUTTI i campionamenti (la finestra "densa")
+_OBS_MAX_DIRADATI = 400     # oltre i quali si tiene UN punto al giorno: la storia non si cancella
+_OBS_MAX_KEEP = 420         # tetto assoluto di punti per voce (~55 KB per 41 voci: sotto il muro)
 # Ingresso selettivo in osservazione: una NUOVA occasione entra solo se abbastanza conveniente
 # (riduce il rumore della watchlist); quelle GIÀ osservate continuano comunque ad aggiornarsi.
 _OBS_ENTRY_CONV = 60    # convenienza minima per ENTRARE in osservazione
@@ -3900,13 +3901,31 @@ def _should_sample(records, conv, price, gap_min, conv_field) -> bool:
     return not (last.get(conv_field) == conv and last.get("price") == price)
 
 
-def _trim_records(records, max_days, max_keep):
-    """Tiene gli ultimi `max_days` giorni e al più `max_keep` punti."""
+def _trim_records(records, max_days, max_keep, giorni_diradati=None):
+    """Tiene i punti recenti TUTTI, e quelli piu vecchi DIRADATI a uno al giorno invece di buttarli.
+
+    Prima si cancellava tutto oltre `max_days` giorni (dodici), e con dodici giorni di storia una
+    domanda come «com era questo titolo tre settimane fa» non aveva piu risposta. Cancellare non era
+    nemmeno necessario: il problema e la DIMENSIONE del file (oltre 1 MB la protezione
+    anti-cancellazione si spegne), e la dimensione dipende da quanti punti si tengono, non da quanti
+    giorni coprono. Campionando ogni ora, un giorno costa ~8 punti: tenendone UNO al giorno oltre la
+    finestra densa si conserva quattro mesi di storia nello stesso spazio che prima bastava per dodici
+    giorni. Del giorno si tiene l ultimo punto, che e quello con la chiusura piu vicina al vero.
+    `max_keep` resta l ultima difesa sulla dimensione."""
     now = _parse_dt(_now_iso())
-    if now:
-        cutoff = now - datetime.timedelta(days=max_days)
-        records = [r for r in records if (_parse_dt(r.get("date")) or now) >= cutoff]
-    return records[-max_keep:]
+    if not now:
+        return records[-max_keep:]
+    limite_totale = now - datetime.timedelta(days=giorni_diradati or max_days)
+    limite_denso = now - datetime.timedelta(days=max_days)
+    densi, per_giorno = [], {}
+    for r in records:
+        d = _parse_dt(r.get("date")) or now
+        if d >= limite_denso:
+            densi.append(r)
+        elif d >= limite_totale:
+            per_giorno[str(r.get("date"))[:10]] = r      # uno per giorno: vince l ultimo
+    tenuti = sorted(list(per_giorno.values()) + densi, key=lambda r: str(r.get("date") or ""))
+    return tenuti[-max_keep:]
 
 
 def _append_snapshot(entry: dict, snapshot: dict) -> None:
@@ -4329,7 +4348,19 @@ def record_observations(df, kind: str) -> None:
                 # osservazione» sarebbe un dato falso, con la data e i valori sbagliati di parecchi
                 # giorni. Così invece si conserva il più antico che esista ancora.
                 e["primo"] = dict(obs[0])
-            e["obs"] = _trim_records(obs, _OBS_MAX_DAYS, _OBS_MAX_KEEP)
+                # …e l EVENTO nel diario permanente, con i valori di quell istante. La voce di
+                # opp_watch e un registro di lavoro (si dirada, e stata anche troncata una volta);
+                # il diario e append-only e non si cancella mai.
+                registra_evento(kind, tk, "ingresso_osservazione",
+                                valori={"data": e["primo"].get("date"),
+                                        "prezzo": e["primo"].get("price"),
+                                        "conv": e["primo"].get("conv"),
+                                        "prob_gain": e["primo"].get("prob_gain"),
+                                        "prob_loss": e["primo"].get("prob_loss"),
+                                        "reliab": e["primo"].get("reliab"),
+                                        "mkt": e["primo"].get("mkt"), "fonte": "osservazione"},
+                                episodio=f"{kind}:{str(tk).upper()}:{str(e['primo'].get('date'))[:10]}")
+            e["obs"] = _trim_records(obs, _OBS_MAX_DAYS, _OBS_MAX_KEEP, _OBS_MAX_DIRADATI)
     save_opp_watch(watch)
 
 
@@ -4487,6 +4518,9 @@ def _append_exit_record(tk: str, entry: dict, reason: str) -> None:
             "snapshots": snaps,
         })
         salva_registro(EXIT_HISTORY_NAME, hist, _EXIT_HISTORY_MAX)
+        registra_evento(entry.get("kind", "short"), tk, "uscita",
+                        valori={"data": _now_iso(), "prezzo": last.get("price")},
+                        note=reason)
     except Exception:
         pass   # la lapide non deve mai bloccare la rimozione
 
@@ -4653,6 +4687,13 @@ def auto_promote_opportunities() -> list:
                                 reliab=snap0.get("reliab"), prob_gain=snap0.get("prob_gain"),
                                 prob_loss=snap0.get("prob_loss"), conv=snap0.get("convenienza"))
         promoted.append(tk)
+        registra_evento(kind, tk, "promozione",
+                        valori={"data": _now_iso(), "prezzo": obs[-1].get("price"),
+                                "conv": snap0.get("convenienza"),
+                                "prob_gain": snap0.get("prob_gain"),
+                                "prob_loss": snap0.get("prob_loss"),
+                                "reliab": snap0.get("reliab"), "fonte": "promozione"},
+                        note=f"entrata in monitoraggio dopo {days} giorni di Borsa di osservazione")
         new_records.append({"ticker": tk, "kind": kind, "date": _today_iso(),
                             "price": obs[-1].get("price"), "conv": obs[-1].get("conv"),
                             # prezzo/data di INIZIO osservazione: servono a misurare quanto rimbalzo
@@ -5712,10 +5753,84 @@ def resolve_scenarios() -> int:
     return changed
 
 
+# LE TRE SCELTE SONO ALTERNATIVE, non interruttori da combinare, e la terza toglie ENTRAMBE le
+# attese. La quarta combinazione possibile — togliere i giorni di osservazione ma pretendere ancora
+# il rimbalzo del 2% — non esiste perché non vuole dire niente: il 2% si misura DAL primo giorno di
+# osservazione, quindi al primo giorno non può essere ancora avvenuto. Chiedere un rimbalzo e non
+# dare tempo perché avvenga darebbe sempre zero candidate.
 SCENARIO_VARIANTI = {
-    "reale": "Come fa adesso (aspetta il +2%)",
-    "senza_soglia": "Come se il +2% non esistesse",
+    "reale": "Come fa adesso: aspetta i giorni di osservazione e il +2%",
+    "senza_soglia": "Senza il +2% (ma aspetta i giorni di osservazione)",
+    "senza_osservazione": "Senza nessuna attesa: né giorni di osservazione né +2%",
 }
+
+# Le due vendite disponibili per lo scenario «senza finestra di osservazione»: il registro delle
+# convenienze misura la resa a 5 e 21 giorni di BORSA, che sono l'equivalente pratico dei 7 e 30
+# giorni di CALENDARIO delle altre colonne (5 giorni di mercato ≈ una settimana, 21 ≈ un mese).
+# Non sono la stessa misura al giorno: la differenza va dichiarata, non nascosta.
+_SENZA_OSS_SELLS = {"7g": "ret_5d", "30g": "ret_21d"}
+
+
+def scenari_senza_osservazione(kind: str = "short", min_conv: int = 0,
+                               importo: float = 30.0, fee: float = 1.0) -> dict:
+    """LO SCENARIO «e se non aspettassi l'osservazione?»: compro ogni titolo il primo giorno in cui
+    entrerebbe in osservazione, senza aspettare i 3 giorni di Borsa (7 per il lungo) della finestra
+    e senza pretendere il rimbalzo del 2%.
+
+    Perché è una domanda diversa dalle altre due varianti: il «+2%» è una condizione sul PREZZO
+    verificata alla fine della finestra, la finestra è invece TEMPO — e togliere il tempo è la cosa
+    che cambia più radicalmente la strategia, perché si compra molti giorni prima.
+
+    La fonte non è il registro degli scenari (che contiene solo i promossi) ma il registro delle
+    convenienze, che mette a verbale OGNI titolo guardato ogni giorno, promosso o scartato: è
+    l'unico campione raccolto senza pregiudizio, ed è anche l'unico modo di misurare questo scenario
+    a ritroso invece di aspettare mesi. Si prende la PRIMA giornata in cui un titolo supera la
+    soglia d'ingresso in osservazione, e la resa che il registro ha già calcolato.
+
+    ATTENZIONE ai limiti, che le schede devono dichiarare:
+      · le rese sono a 5 e 21 giorni di BORSA, non a 7 e 30 di calendario come nella matrice;
+      · di qualità c'è solo la convenienza (probabilità e affidabilità non sono in questo registro),
+        quindi gli altri filtri non sono applicabili;
+      · esiste solo il momento d'acquisto «all'ingresso in osservazione»: gli altri tre non hanno
+        senso qui, perché nascono da passaggi che queste candidate non hanno mai fatto."""
+    rec = load_registro_completo(CONV_LOG_NAME)
+    if not isinstance(rec, list):
+        return {"celle": {}, "casi": {}, "n_tot": 0, "n_casi": 0}
+    sopra = [r for r in rec
+             if r.get("kind") == kind and not r.get("bad_data")
+             and (r.get("conv") or 0) >= _OBS_ENTRY_CONV and r.get("price")]
+    primi = {}
+    for r in sorted(sopra, key=lambda r: str(r.get("date") or "")):
+        primi.setdefault(str(r.get("ticker") or "").upper(), r)      # la PRIMA volta, non l'ultima
+    sel = [r for r in primi.values() if (r.get("conv") or 0) >= (min_conv or 0)]
+    celle, casi, scartati = {}, {}, {}
+    for sk, campo in _SENZA_OSS_SELLS.items():
+        tutti = [{"ticker": r.get("ticker"), "date": _giorno_di(r), "conv": r.get("conv"),
+                  "prezzo": r.get("price"), "reliab": None, "prob_gain": None, "prob_loss": None,
+                  "data_acquisto": _giorno_di(r), "ret": float(r[campo])}
+                 for r in sel if r.get(campo) is not None]
+        # RAGGRUPPAMENTI DI AZIONI, non guadagni: in questo registro compaiono rese come +5.874% in
+        # cinque giorni di Borsa e +30.817% in ventuno, che non sono movimenti di mercato ma cambi
+        # del numero di azioni (un raggruppamento alza il prezzo, un frazionamento lo abbassa).
+        # Bastano quattro righe così per portare la MEDIA da +1% a +30% e rendere il numero inutile.
+        # Si escludono le code impossibili, con soglie dichiarate, e si CONTA quante sono: il
+        # conteggio va mostrato, perché un'esclusione silenziosa fa sembrare completo un campione
+        # che non lo è.
+        punti = [p for p in tutti if -95.0 <= p["ret"] <= 300.0]
+        scartati[f"osservazione|{sk}"] = len(tutti) - len(punti)
+        if not punti:
+            continue
+        vals = sorted(p["ret"] for p in punti)
+        n = len(vals)
+        med = vals[n // 2] if n % 2 else (vals[n // 2 - 1] + vals[n // 2]) / 2
+        key = f"osservazione|{sk}"
+        celle[key] = {"n": n, "avg": round(sum(vals) / n, 2),
+                      "hit": round(100 * sum(1 for v in vals if v > 0) / n),
+                      "med": round(med, 2), "best": round(vals[-1], 2), "worst": round(vals[0], 2)}
+        casi[key] = sorted(punti, key=lambda p: str(p["date"]))
+    return {"celle": celle, "casi": casi, "n_tot": len(primi), "n_casi": len(sel),
+            "titoli": len(primi), "soglia_ingresso": _OBS_ENTRY_CONV,
+            "scartati_estremi": scartati, "limiti_estremi": (-95.0, 300.0)}
 
 
 def valori_momento(r, momento=None):
@@ -6523,6 +6638,11 @@ def record_presignals() -> list:
                      "reliab": rel_p, "prob_gain": pg_p, "prob_loss": pl_p,
                      "ret_7d": None, "ret_30d": None})
         added.append(s["ticker"])
+        registra_evento(s.get("kind", "short"), s["ticker"], "ingresso_anticipo",
+                        valori={"data": data_p, "prezzo": prezzo_p, "conv": conv_p,
+                                "prob_gain": pg_p, "prob_loss": pl_p, "reliab": rel_p,
+                                "fonte": "osservazione"},
+                        note="pre-segnale diventato solido")
     if added or completate:
         salva_registro(PRESIGNAL_NAME, rows, _PRESIGNAL_MAX, giorni_protetti=60)
     return added
@@ -7527,3 +7647,212 @@ def screener_row(ticker: str) -> dict:
         "Volatilità": vol,
         "Punteggio": final_score,
     }
+
+
+# ---------------------------------------------------------------------------
+# IL DIARIO DEGLI EVENTI — il registro PERMANENTE della vita di ogni occasione.
+#
+# Perché esiste. Fino a oggi i dati che servono agli scenari non venivano scritti nel momento in cui
+# esistevano: si tenevano nei registri di lavoro (le osservazioni, il monitoraggio) e si provava a
+# ricostruirli DOPO. Ma quei registri sono buffer — le osservazioni si potano, il monitoraggio si
+# svuota all'uscita — e ricostruire a posteriori ha prodotto dati sbagliati (sette righe con l'inizio
+# dell'osservazione datato DOPO la promozione) o mancanti per sempre (nove «ingressi in anticipo»,
+# otto momenti di fine verifica). Qui ogni evento viene SCRITTO quando avviene, con i valori di
+# quell'istante, in un registro che:
+#   · è append-only: una riga scritta non si modifica e non si cancella;
+#   · non si pota per età: l'eccedenza va negli archivi annuali, che non vengono più toccati;
+#   · non viene svuotato quando l'occasione è promossa o esce dal monitoraggio.
+#
+# I SETTE EVENTI, che sono esattamente i momenti che gli scenari devono poter misurare:
+#   ingresso_osservazione  il titolo entra in osservazione
+#   fine_osservazione      finiscono i giorni di osservazione (3 breve / 7 lungo)   -> acquisto sc. 1
+#   salita_2pct            il prezzo è salito del 2% dall'inizio dell'osservazione  -> acquisto sc. 2
+#   ingresso_anticipo      il pre-segnale diventa solido: entra in «In anticipo»
+#   promozione             entra nel Monitoraggio                                   -> acquisto sc. 3
+#   fine_verifica          finiscono i giorni di verifica (5 breve / 10 lungo)      -> acquisto sc. 4
+#   uscita                 il sistema la toglie dal Monitoraggio
+# Ogni riga porta data E ORA, prezzo, convenienza, probabilità di salita, rischio di perdita,
+# affidabilità e contesto di mercato di QUEL momento: valori veri, non ricostruiti.
+# ---------------------------------------------------------------------------
+DIARIO_NAME = "diario_eventi.json"
+_DIARIO_MAX = 3000        # ~300 byte/riga -> ~900 KB; l'eccedenza va in archivio, niente si perde
+
+EVENTI = ("ingresso_osservazione", "fine_osservazione", "salita_2pct", "ingresso_anticipo",
+          "promozione", "fine_verifica", "uscita")
+# Quale evento è il MOMENTO D'ACQUISTO di ciascuno dei quattro scenari.
+EVENTO_ACQUISTO = {"osservazione": "fine_osservazione", "anticipo": "salita_2pct",
+                   "promozione": "promozione", "conferma": "fine_verifica"}
+# E quale evento è il suo INGRESSO nella sezione (la prima delle due date in tabella). Per lo
+# scenario del monitoraggio le due coincidono: l'ingresso È l'acquisto, e la tabella mostra una
+# data sola.
+EVENTO_INGRESSO = {"osservazione": "ingresso_osservazione", "anticipo": "ingresso_anticipo",
+                   "promozione": "promozione", "conferma": "promozione"}
+
+
+def load_diario() -> list:
+    d = read_data_json(DIARIO_NAME, [])
+    return d if isinstance(d, list) else []
+
+
+def _valori_ora(kind, tk) -> dict:
+    """I valori più freschi che il sistema conosce ADESSO per un titolo: dal monitoraggio se lo
+    segue, altrimenti dalle osservazioni. Serve a scrivere un evento con i numeri di quell'istante
+    invece di lasciarli vuoti e provare a ricostruirli mesi dopo, che è ciò che non ha funzionato."""
+    TK = str(tk).upper()
+    try:
+        e = (load_tracking() or {}).get(TK) or {}
+        snaps = [s for s in (e.get("snapshots") or []) if s.get("date") and s.get("price")]
+        if snaps:
+            s = max(snaps, key=lambda x: str(x.get("date")))
+            return {"data": s.get("date"), "prezzo": s.get("price"), "conv": s.get("convenienza"),
+                    "prob_gain": s.get("prob_gain"), "prob_loss": s.get("prob_loss"),
+                    "reliab": s.get("reliab"), "mkt": None, "fonte": "monitoraggio"}
+    except Exception:
+        pass
+    try:
+        e = (load_opp_watch() or {}).get(f"{kind}:{TK}") or {}
+        pts = [o for o in (e.get("obs") or []) if o.get("price")]
+        if pts:
+            o = max(pts, key=lambda x: str(x.get("date")))
+            return {"data": o.get("date"), "prezzo": o.get("price"), "conv": o.get("conv"),
+                    "prob_gain": o.get("prob_gain"), "prob_loss": o.get("prob_loss"),
+                    "reliab": o.get("reliab"), "mkt": o.get("mkt"), "fonte": "osservazione"}
+    except Exception:
+        pass
+    return {"data": None, "prezzo": None, "conv": None, "prob_gain": None, "prob_loss": None,
+            "reliab": None, "mkt": None, "fonte": None}
+
+
+def episodio_corrente(kind, tk, crea_se_manca=False):
+    """L'identificativo dell'EPISODIO in corso di un titolo: «tipo:TITOLO:data-ingresso».
+    Un titolo può passare più volte nella vita del sistema, e mescolare due passaggi diversi è
+    l'errore che ha prodotto le osservazioni datate dopo la promozione. L'episodio si apre con
+    l'ingresso in osservazione e si chiude con l'uscita dal monitoraggio."""
+    TK = str(tk).upper()
+    righe = [r for r in load_registro_completo(DIARIO_NAME, load_diario())
+             if r.get("ticker") == TK and r.get("kind") == kind]
+    ingressi = [r for r in righe if r.get("evento") == "ingresso_osservazione"]
+    if ingressi:
+        ultimo = max(ingressi, key=lambda r: str(r.get("data") or ""))
+        eid = ultimo.get("episodio")
+        chiuso = any(r.get("episodio") == eid and r.get("evento") == "uscita" for r in righe)
+        if not chiuso:
+            return eid
+    return f"{kind}:{TK}:{_today_iso()}" if crea_se_manca else None
+
+
+def registra_evento(kind, tk, evento, valori=None, episodio=None, note=None, dovuto_il=None) -> bool:
+    """Scrive un evento nel diario. Ritorna True se l'ha scritto, False se c'era già.
+    UN SOLO evento per tipo dentro un episodio: se «fine_osservazione» è già a verbale non viene
+    riscritto, altrimenti a ogni giro del lavoro automatico verrebbe sovrascritto con i valori di
+    oggi — che è precisamente il difetto per cui questo registro esiste."""
+    if evento not in EVENTI:
+        return False
+    TK = str(tk).upper()
+    eid = episodio or episodio_corrente(kind, TK, crea_se_manca=True)
+    righe = load_diario()
+    if any(r.get("episodio") == eid and r.get("evento") == evento
+           for r in load_registro_completo(DIARIO_NAME, righe)):
+        return False
+    v = dict(_valori_ora(kind, TK))
+    for k, x in (valori or {}).items():
+        if x is not None:
+            v[k] = x
+    righe.append({
+        "episodio": eid, "ticker": TK, "kind": kind, "evento": evento,
+        "scritto_il": _now_iso(),                 # quando il sistema l'ha messo a verbale
+        "data": v.get("data") or _now_iso(),      # il momento a cui i valori si riferiscono
+        "prezzo": v.get("prezzo"), "conv": v.get("conv"),
+        "prob_gain": v.get("prob_gain"), "prob_loss": v.get("prob_loss"),
+        "reliab": v.get("reliab"), "mkt": v.get("mkt"),
+        "fonte": v.get("fonte"), "note": note,
+        # QUANDO L EVENTO ERA DOVUTO, distinto da quando e stato scritto. Il lavoro automatico gira
+        # ogni mezz ora, ma puo saltare dei giri (il 6 agosto non ha girato): in quel caso l evento
+        # viene messo a verbale in ritardo e i valori sono di qualche giorno dopo. Il ritardo deve
+        # essere VISIBILE, non nascosto: chi legge lo scenario deve poter scartare le righe in cui
+        # e troppo grande, invece di fidarsi di un numero preso nel giorno sbagliato.
+        # convertita qui e non nei chiamanti: il calcolo dei giorni di Borsa restituisce una data
+        # vera, e un oggetto data non si può scrivere in JSON. Meglio una conversione in un punto
+        # solo che tre chiamanti che devono ricordarsene.
+        "dovuto_il": (dovuto_il.isoformat() if hasattr(dovuto_il, "isoformat")
+                      else (str(dovuto_il)[:10] if dovuto_il else None)),
+    })
+    salva_registro(DIARIO_NAME, righe, _DIARIO_MAX, giorni_protetti=400)
+    return True
+
+
+def diario_episodi(kind=None) -> dict:
+    """Il diario riorganizzato per episodio: {id: {ticker, kind, eventi: {nome: riga}}}.
+    È la forma che serve agli scenari: dato un episodio, il momento d'acquisto di ciascuno scenario
+    è un evento preciso, coi suoi valori di quel giorno."""
+    out = {}
+    for r in sorted(load_registro_completo(DIARIO_NAME, load_diario()),
+                    key=lambda r: str(r.get("scritto_il") or "")):
+        if kind and r.get("kind") != kind:
+            continue
+        eid = r.get("episodio")
+        if not eid:
+            continue
+        ep = out.setdefault(eid, {"ticker": r.get("ticker"), "kind": r.get("kind"), "eventi": {}})
+        ep["eventi"].setdefault(r.get("evento"), r)      # il primo scritto vince, mai sovrascritto
+    return out
+
+
+def aggiorna_eventi() -> int:
+    """IL RISOLUTORE DEL DIARIO: rileva gli eventi che scattano col passare del tempo e li mette a
+    verbale nel momento in cui avvengono, coi valori di quell'istante.
+
+    Sono i tre eventi che nessuno «vive» e che finora non registrava nessuno:
+      · fine_osservazione — passati i giorni di osservazione (3 breve / 7 lungo, di Borsa);
+      · salita_2pct       — il prezzo è salito del 2% dall'inizio dell'osservazione;
+      · fine_verifica     — passati i giorni di verifica dopo la promozione (5 breve / 10 lungo).
+    Girando ogni mezz'ora, il ritardo massimo fra l'evento e la sua registrazione è mezz'ora:
+    incomparabilmente meglio di una ricostruzione tentata settimane dopo.
+    Ritorna quanti eventi ha scritto."""
+    scritti = 0
+    for eid, ep in diario_episodi().items():
+        kind, tk = ep.get("kind") or "short", ep.get("ticker")
+        ev = ep["eventi"]
+        ing = ev.get("ingresso_osservazione")
+        if ing:
+            g_oss = _OBS_WINDOW.get(kind, 3)
+            if "fine_osservazione" not in ev and \
+                    _trading_days_between(str(ing.get("data"))[:10], _today_iso(), tk) >= g_oss:
+                scritti += bool(registra_evento(
+                    kind, tk, "fine_osservazione", episodio=eid,
+                    dovuto_il=_data_dopo_giorni_borsa(str(ing.get("data"))[:10], g_oss, tk),
+                    note=f"passati {g_oss} giorni di Borsa dall'ingresso in osservazione"))
+            if "salita_2pct" not in ev and ing.get("prezzo"):
+                ora = _valori_ora(kind, tk)
+                try:
+                    salito = (ora.get("prezzo") is not None
+                              and float(ora["prezzo"]) >= float(ing["prezzo"]) * (1 + _PROMO_MIN_RET / 100.0))
+                except Exception:
+                    salito = False
+                if salito:
+                    scritti += bool(registra_evento(
+                        kind, tk, "salita_2pct", valori=ora, episodio=eid,
+                        note=f"prezzo salito di almeno il {_PROMO_MIN_RET:.0f}% da {ing['prezzo']}"))
+        promo = ev.get("promozione")
+        if promo and "fine_verifica" not in ev:
+            g_ver = _CONF_DAYS.get(kind, 5)
+            if _trading_days_between(str(promo.get("data"))[:10], _today_iso(), tk) >= g_ver:
+                scritti += bool(registra_evento(
+                    kind, tk, "fine_verifica", episodio=eid,
+                    dovuto_il=_data_dopo_giorni_borsa(str(promo.get("data"))[:10], g_ver, tk),
+                    note=f"passati {g_ver} giorni di Borsa dalla promozione"))
+    return scritti
+
+
+def diario_riepilogo() -> dict:
+    """Quante volte ogni evento è a verbale e da quando. Serve alla sezione che mostra il diario:
+    un registro nuovo deve poter dire da sé quanto è pieno e da quando è in funzione."""
+    righe = load_registro_completo(DIARIO_NAME, load_diario())
+    per_evento = {e: 0 for e in EVENTI}
+    for r in righe:
+        if r.get("evento") in per_evento:
+            per_evento[r["evento"]] += 1
+    date = sorted(str(r.get("scritto_il") or "")[:10] for r in righe if r.get("scritto_il"))
+    return {"righe": len(righe), "episodi": len({r.get("episodio") for r in righe}),
+            "per_evento": per_evento, "dal": (date[0] if date else None),
+            "al": (date[-1] if date else None)}

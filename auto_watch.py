@@ -326,6 +326,17 @@ def main():
     except Exception as e:
         log(f"Errore scenari acquisto/vendita: {e!r}")
 
+    # DIARIO DEGLI EVENTI: mette a verbale gli eventi che scattano col tempo e che nessuno «vive»
+    # (fine dell'osservazione, salita del 2%, fine della verifica), coi valori di QUEL momento.
+    # Gira dopo la promozione e dopo gli scatti, così i valori sono quelli aggiornati del giro.
+    try:
+        nev = fu.aggiorna_eventi()
+        r = fu.diario_riepilogo()
+        log(f"Diario degli eventi: {nev} nuovi · in tutto {r['righe']} righe su {r['episodi']} "
+            f"episodi" + (f" (dal {r['dal']})" if r.get("dal") else ""))
+    except Exception as e:
+        log(f"Errore diario degli eventi: {e!r}")
+
     # Passaggi: la fotografia dei valori veri a ogni cambio di sezione (osservazione → in anticipo →
     # monitoraggio → dopo la verifica). Le righe nuove nascono già complete; questa passata riempie
     # le vecchie con quello che è ricostruibile dai registri, e aggiunge la conferma man mano che i

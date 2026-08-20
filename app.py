@@ -239,9 +239,10 @@ def filtri_qualita(prefix: str, nota: str = ""):
 
     attivi = bool(st.session_state.get(kg, 0)
                   or st.session_state.get(kl, 100) != 100 or st.session_state.get(kc, 0))
-    with st.expander("🎚️ Filtri di qualità" + (" — ⚠️ ATTIVI" if attivi else ""), expanded=False):
-        st.caption("Mostra solo le occasioni che rispettano questi requisiti al momento attuale. "
-                   + (nota or ""))
+    # SEMPRE VISIBILI, non dentro un pannello da aprire: sono la scelta che cambia tutti i numeri
+    # della pagina, e nascosta dietro un clic si dimenticava di averla attiva.
+    with st.container(border=True):
+        st.markdown("**🎚️ Filtri di qualità**" + ("  ⚠️ ATTIVI" if attivi else ""))
         b1, b2, _sp = st.columns([1, 1, 2])
         b1.button("⭐ Solo le migliori", key=f"{prefix}_best", on_click=_best, use_container_width=True,
                   help="Probabilità di salita ≥60%, rischio di perdita ≤25%, convenienza ≥65. "
@@ -268,10 +269,6 @@ def filtri_qualita(prefix: str, nota: str = ""):
         mc = q3.slider("Convenienza minima", 0, 90, key=kc, step=5,
                        help="Il punteggio 0-100 del sistema. Nelle occasioni promosse il valore "
                             "tipico è 61-64: chiedere più di 75 lascia passare pochissimo.")
-        st.caption("L'affidabilità non è più un filtro: misurava la solidità del dato (volatilità e "
-                   "lunghezza dello storico), non la bontà dell'occasione, e messa alla prova sugli "
-                   "esiti veri non separava i risultati. Resta come colonna nelle tabelle — vedi "
-                   "«Scenari → 🎯 Quali indicatori funzionano».")
     # il primo posto era l'affidabilità minima: resta a 0 (filtro rimosso), il motore la supporta ancora
     return (0, mg, ml, mc)
 
@@ -323,6 +320,29 @@ def data_it(iso, con_anno=None) -> str:
         return "—"
     anno = con_anno if con_anno is not None else (d.year != _now_rome().year)
     return f"{d.day} {_MESI_IT[d.month - 1]}" + (f" {d.year}" if anno else "")
+
+
+PERIODI_GRAFICO = {"tutto": "📚 Tutto lo storico", "mese": "🗓️ Mese corrente",
+                   "settimana": "📆 Settimana corrente"}
+
+
+def filtra_periodo(punti, scelta: str, campo: str = "date"):
+    """Tiene solo i punti entrati nel periodo scelto. Serve ai grafici: su tutto lo storico si vede
+    la tendenza di fondo, su un mese o una settimana si vede il momento — e sono due domande diverse.
+    Il valore per difetto è «tutto», perché all'apertura un grafico deve avere dei punti dentro."""
+    if scelta == "tutto" or not punti:
+        return punti
+    oggi = _now_rome().date()
+    dal = (oggi - datetime.timedelta(days=oggi.weekday()) if scelta == "settimana"
+           else oggi.replace(day=1))
+    fuori = []
+    for p in punti:
+        try:
+            if datetime.date.fromisoformat(str(p.get(campo))[:10]) >= dal:
+                fuori.append(p)
+        except Exception:
+            continue
+    return fuori
 
 
 def solidita_campione(n: int, giornate: int):
@@ -464,12 +484,12 @@ if "_goto_section" in st.session_state:
 section = st.sidebar.radio(
     "Sezione", ["Analisi di un titolo", "Occasioni di mercato",
                 "In osservazione", "In anticipo", "Monitoraggio", "Portafoglio",
-                "Scenari", "Attualità"], key="section_radio",
+                "Scenari", "Diario dei dati", "Attualità"], key="section_radio",
     help="«Analisi di un titolo» studia una singola azienda/ETF. «Occasioni» scansiona il mercato per cali interessanti. "
          "«In osservazione» mostra le occasioni che il sistema sta seguendo verso un'eventuale promozione. "
          "«In anticipo» mostra le più solide tra quelle in osservazione, per entrare PRIMA della conferma (più rischio). "
          "«Monitoraggio» segue nel tempo le occasioni che hai scelto. «Portafoglio» registra i tuoi acquisti veri e mostra il guadagno/perdita. "
-         "«Scenari» misura quanto avresti guadagnato e quale momento di acquisto/vendita rende di più. "
+         "«Scenari» misura quanto avresti guadagnato e quale momento di acquisto/vendita rende di più. «Diario dei dati» mostra cosa il sistema mette a verbale, evento per evento, su ogni occasione. "
          "«Attualità» raccoglie le classifiche di mercato (rialzi/ribassi/più scambiati) e le notizie recenti divise per azienda/ETF.",
 )
 st.sidebar.markdown("---")
@@ -2295,6 +2315,25 @@ if section.startswith("Scenari"):
             pass
 
     # =======================================================================
+    # sezione per ciascun momento d'acquisto (le regole di vendita a confronto a parità d'acquisto),
+    # poi il calendario e gli strumenti di misura. Le due scelte in cima alla pagina (tipo di
+    # occasione e filtri) valgono per tutte, e sono UNA sola impostazione: così passando da una
+    # sezione all'altra si confrontano sempre gli stessi insiemi di occasioni.
+    _TABS = {"riepilogo": "📋 Riepilogo",
+             "m_osservazione": "👀 Compro in osservazione",
+             "m_anticipo": "🔭 Compro in anticipo",
+             "m_promozione": "📌 Compro in monitoraggio",
+             "m_conferma": "⏳ Compro dopo la verifica",
+             "calendario": "📅 Calendario",
+             "confronti": "⚖️ Effetto dei filtri",
+             "indicatori": "🎯 Quali indicatori funzionano",
+             "voti": "📊 Scheda voti", "lettera": "🎬 Seguendo il sistema"}
+    if "_goto_tab" in st.session_state:
+        st.session_state["scen_tab"] = st.session_state.pop("_goto_tab")
+    _stab = st.segmented_control("Che cosa vuoi guardare", list(_TABS.keys()), default="riepilogo",
+                                 format_func=lambda k: _TABS[k], required=True,
+                                 key="scen_tab") or "riepilogo"
+
     # SCELTE COMUNI A TUTTE LE SCHEDE — prima il tipo di occasione, subito sotto i filtri.
     # Stanno qui fuori di proposito: cambiare scheda non deve far ripartire da capo la selezione,
     # e due schede che mostrano gli stessi dati con filtri diversi sarebbero un modo perfetto per
@@ -2328,7 +2367,7 @@ if section.startswith("Scenari"):
 
     # --- 💶 I miei importi: il guadagno in euro di ogni scenario si aggiorna DA SOLO ---
     with st.container(border=True):
-        mi1, mi2, mi3 = st.columns([1, 1, 2.2])
+        mi1, mi2 = st.columns(2)
         sim_amt = mi1.number_input("💶 Investo per occasione (€)", min_value=1.0, value=30.0, step=10.0,
                                    key="sim_amt",
                                    help="Quanto metteresti su OGNI occasione: il guadagno in euro di "
@@ -2338,31 +2377,11 @@ if section.startswith("Scenari"):
                                    help="Quanto costa UN ordine. Comprare e vendere sono due ordini, "
                                         "e il conto li considera entrambi.")
         _pareggio = fu.pareggio_pct(sim_amt, sim_fee)
-        mi3.markdown(f"<div style='padding-top:28px'>⚖️ Con questi numeri il <b>pareggio</b> è a "
-                     f"<b>+{_pareggio:.1f}%</b> a operazione (€{sim_fee * 2:,.2f} di commissioni fra "
-                     f"acquisto e vendita) — sotto questa soglia, in euro ci rimetti anche con un "
-                     f"rendimento positivo.</div>", unsafe_allow_html=True)
 
     # =======================================================================
     # LE SCHEDE, una di fianco all'altra
     # =======================================================================
     # LE SCHEDE, nell'ordine in cui si guardano: prima il riepilogo di tutti gli scenari, poi una
-    # sezione per ciascun momento d'acquisto (le regole di vendita a confronto a parità d'acquisto),
-    # poi il calendario e gli strumenti di misura. Le due scelte in cima alla pagina (tipo di
-    # occasione e filtri) valgono per tutte, e sono UNA sola impostazione: così passando da una
-    # sezione all'altra si confrontano sempre gli stessi insiemi di occasioni.
-    _TABS = {"riepilogo": "📋 Riepilogo",
-             "m_osservazione": "👀 Compro in osservazione",
-             "m_anticipo": "🔭 Compro in anticipo",
-             "m_promozione": "📌 Compro in monitoraggio",
-             "m_conferma": "⏳ Compro dopo la verifica",
-             "calendario": "📅 Calendario",
-             "confronti": "⚖️ Effetto dei filtri",
-             "indicatori": "🎯 Quali indicatori funzionano",
-             "voti": "📊 Scheda voti", "lettera": "🎬 Seguendo il sistema"}
-    _stab = st.segmented_control("Che cosa vuoi guardare", list(_TABS.keys()), default="riepilogo",
-                                 format_func=lambda k: _TABS[k], required=True,
-                                 key="scen_tab") or "riepilogo"
     st.markdown("---")
 
     _sells = fu.SCENARIO_SELLS_PER_TIPO[_skind]
@@ -2404,12 +2423,44 @@ if section.startswith("Scenari"):
         st.caption(_spieg + "  Qui sotto le **tre regole di vendita** a confronto, con lo stesso "
                             "momento d'acquisto per tutte.")
 
-        # i filtri di QUESTO momento: è la differenza che rende onesto il confronto
-        _rep_m = fu.scenario_report(_skind, _minrel, _minpg, _maxpl, _mincv, _svar, momento=_bk)
-        _att_m = fu.scenari_attesa(_skind, _minrel, _minpg, _maxpl, _mincv, _svar, momento=_bk)
+        # LO SCENARIO «SENZA LA FINESTRA DI OSSERVAZIONE» ha una fonte diversa: non il registro
+        # degli scenari (che contiene solo i promossi) ma quello delle convenienze, che mette a
+        # verbale ogni titolo guardato ogni giorno. È l'unico modo di misurarlo, e vale solo per
+        # l'ingresso in osservazione: gli altri tre momenti nascono da passaggi che queste candidate
+        # non hanno mai fatto.
+        _alt = (_bk == "osservazione" and _svar == "senza_osservazione")
+        if _alt:
+            _r_alt = fu.scenari_senza_osservazione(_skind, _mincv, sim_amt, sim_fee)
+            _rep_m = {"celle": _r_alt["celle"], "casi": _r_alt["casi"],
+                      "n_casi": _r_alt["n_casi"], "n_tot": _r_alt["n_tot"], "n_senza_dato": 0}
+            _att_m = {}
+        else:
+            # i filtri di QUESTO momento: è la differenza che rende onesto il confronto
+            _rep_m = fu.scenario_report(_skind, _minrel, _minpg, _maxpl, _mincv, _svar, momento=_bk)
+            _att_m = fu.scenari_attesa(_skind, _minrel, _minpg, _maxpl, _mincv, _svar, momento=_bk)
         _filtri_on = bool(_minpg or _maxpl < 100 or _mincv)
+        if _svar == "senza_osservazione" and not _alt:
+            st.info("ℹ️ La scelta «come se non si aspettasse l'osservazione» riguarda **solo** "
+                    "l'ingresso in osservazione: gli altri momenti d'acquisto esistono perché "
+                    "l'occasione ha superato quella finestra. Qui i numeri restano quelli normali.")
 
-        if _bk in ("osservazione", "anticipo"):
+        if _alt:
+            _lim = _r_alt.get("limiti_estremi") or (-95.0, 300.0)
+            _sc = sum((_r_alt.get("scartati_estremi") or {}).values())
+            st.success(f"✅ **Questa sì che è eseguibile, ed è il campione più grande che c'è.** "
+                       f"Sono **{_r_alt['n_tot']}** titoli diversi, presi il primo giorno in cui "
+                       f"avrebbero superato la soglia d'ingresso in osservazione "
+                       f"(convenienza {_r_alt['soglia_ingresso']}), **senza** aspettare i giorni di "
+                       f"osservazione e **senza** pretendere il rimbalzo del 2%. Comprende anche "
+                       f"tutti i titoli che poi non sono mai stati promossi, quindi qui non c'è "
+                       f"nessuna selezione fatta col senno del poi.")
+            st.caption(f"Da sapere, perché cambia la lettura: le rese sono a **5 e 21 giorni di "
+                       f"Borsa** (l'equivalente pratico di una settimana e un mese, non gli stessi "
+                       f"giorni esatti delle altre schede) · di qualità c'è solo la **convenienza**, "
+                       f"quindi i filtri su salita e perdita non sono applicabili · sono state "
+                       f"escluse **{_sc}** righe con rese oltre il {_lim[1]:.0f}% o sotto il "
+                       f"{_lim[0]:.0f}%, che non sono guadagni ma raggruppamenti di azioni.")
+        elif _bk in ("osservazione", "anticipo"):
             st.warning("⚠️ **Non è una strategia che avresti potuto eseguire.** Il prezzo di questo "
                        "momento viene messo a verbale **solo** per le occasioni che il sistema ha "
                        "poi promosso: quel giorno non sapevi quali lo sarebbero state, e qui dentro "
@@ -2470,8 +2521,21 @@ if section.startswith("Scenari"):
         _serie = [(s, p) for s, p in _serie if p]
         if _serie:
             st.markdown("##### 📈 Il guadagno accumulato, regola per regola")
+            # SCELTA DEL PERIODO: cambia SOLO il grafico, non i riquadri qui sopra. Su tutto lo
+            # storico si legge la tendenza, su un mese o una settimana si legge il momento.
+            _perg = st.segmented_control(
+                "Periodo del grafico", list(PERIODI_GRAFICO.keys()), default="tutto",
+                format_func=lambda k: PERIODI_GRAFICO[k], required=True,
+                key="graf_periodo",
+                help="Vale solo per il grafico qui sotto: i numeri nei riquadri restano calcolati "
+                     "su tutte le occasioni che passano i filtri.") or "tutto"
             _fig_m = go.Figure()
+            _vuoti = 0
             for _sk, _pts in _serie:
+                _pts = filtra_periodo(_pts, _perg)
+                if not _pts:
+                    _vuoti += 1
+                    continue
                 _cum, _xs, _ys, _tx = 0.0, [], [], []
                 for p in sorted(_pts, key=lambda x: x["date"]):
                     _n = fu.net_eur(p["ret"], sim_amt, sim_fee)
@@ -2491,6 +2555,9 @@ if section.startswith("Scenari"):
                                  legend=dict(orientation="h"), hovermode="x unified",
                                  yaxis_title="Quanto ti resta in tasca (€)")
             show_chart(_fig_m, use_container_width=True)
+            if _perg != "tutto" and not _fig_m.data:
+                st.info(f"⏳ Nessuna operazione in questo periodo ({PERIODI_GRAFICO[_perg].lower()}): "
+                        f"scegli «tutto lo storico» per vedere il quadro completo.")
             st.caption(f"Ogni linea somma, operazione dopo operazione, quello che ti sarebbe rimasto "
                        f"in tasca con €{sim_amt:,.0f} per occasione, comprando sempre in questo "
                        f"momento e cambiando solo **quando vendi**. Commissioni e tassa del 26% sono "
@@ -2509,23 +2576,26 @@ if section.startswith("Scenari"):
                        f"migliore {_cel_sel['best']:+.1f}% · peggiore {_cel_sel['worst']:+.1f}%.")
             _n_qual = sum(1 for p in _casi_sel if p.get("conv") is not None
                           or p.get("prob_gain") is not None)
+            # UNA SOLA DATA: quella del momento che stai guardando, che è anche il giorno in cui
+            # compri. La seconda colonna («Promossa il») è stata tolta: fuori dal monitoraggio le
+            # due date non coincidono mai — l'osservazione comincia in media 5 giorni prima della
+            # promozione, il pre-segnale 2 — e vederle affiancate faceva pensare a un errore che non
+            # c'è. Chi vuole il confronto fra i momenti ha la scheda Riepilogo.
             st.dataframe(pd.DataFrame([{
                 "Titolo": p["ticker"],
                 "Comprata il": (str(p.get("data_acquisto"))[:10] if p.get("data_acquisto")
-                                else "—"),
-                "Promossa il": p["date"],
+                                else str(p.get("date"))[:10]),
                 "Prezzo": p.get("prezzo"),
                 "Conv.": p.get("conv"), "Salita": p.get("prob_gain"), "Perdita": p.get("prob_loss"),
                 "Rendimento": p["ret"],
                 f"Su €{sim_amt:,.0f}": fu.net_eur(p["ret"], sim_amt, sim_fee),
-            } for p in sorted(_casi_sel, key=lambda p: -p["ret"])]).set_index("Titolo"),
+            } for p in sorted(_casi_sel, key=lambda p: -p["ret"])])
+                .astype({c: "float64" for c in ("Conv.", "Salita", "Perdita")}, errors="ignore")
+                .set_index("Titolo"),
                 use_container_width=True, column_config={
                     "Comprata il": st.column_config.TextColumn("Comprata il",
                         help="Il giorno di QUESTO momento d'acquisto: è la data a cui si "
                              "riferiscono convenienza, salita e perdita di questa riga."),
-                    "Promossa il": st.column_config.TextColumn("Promossa il",
-                        help="Quando l'occasione è entrata in Monitoraggio. Serve a capire quanti "
-                             "giorni sono passati fra l'acquisto e la promozione."),
                     "Prezzo": st.column_config.NumberColumn("Prezzo per azione", format="%.2f"),
                     "Conv.": st.column_config.NumberColumn(format="%d"),
                     "Salita": st.column_config.NumberColumn("📈 Salita", format="%d%%"),
@@ -2647,7 +2717,11 @@ if section.startswith("Scenari"):
                                          help=f"Caso tipico {_cell['med']:+.2f}% · media "
                                               f"{_cell['avg']:+.2f}% · {_cell['hit']}% in positivo "
                                               f"· {_cell['n']} casi · clicca per il dettaglio"):
-                                st.session_state["scen_cella"] = _ck
+                                # il menu è un widget: la sua chiave si può cambiare solo PRIMA
+                                # che venga creato, quindi si passa da _goto_tab (stesso schema
+                                # già usato dal menu delle sezioni con _goto_section).
+                                st.session_state["_goto_tab"] = f"m_{_bk}"
+                                st.rerun()
                             if _eu_c:
                                 # L'EURO subito sotto la percentuale, e non solo nel dettaglio: è il
                                 # numero che decide, e con importi piccoli ha spesso il segno OPPOSTO
@@ -2702,141 +2776,14 @@ if section.startswith("Scenari"):
                 st.caption("⚖️ Il termine di confronto (come sono andati i titoli semplicemente guardati) "
                            "si popolerà appena il registro della convenienza avrà esiti maturi.")
 
-            # --- dettaglio della casella scelta ---
-            _sel = st.session_state.get("scen_cella")
-            if _sel not in _rep["celle"]:
-                # Per difetto si apre la strategia ESEGUIBILE (compro quando entra in monitoraggio),
-                # non la prima casella dell'elenco: da quando «a inizio osservazione» è la prima riga,
-                # la scheda si apriva sulla riga col senno del poi — cioè sul numero più bello e meno
-                # vero della tabella.
-                _sel = next((f"promozione|{_sk2}" for _sk2 in _sells
-                             if f"promozione|{_sk2}" in _rep["celle"]),
-                            list(_rep["celle"].keys())[0])
-            _c = _rep["celle"][_sel]
-            _casi = _rep["casi"][_sel]
-            _bk, _sk = _sel.split("|")
-            st.markdown(f"### {_et[_bk]} → {_et[_sk]}")
-            if _bk == "osservazione":
-                st.warning("⚠️ **Questa riga non è una strategia che avresti potuto eseguire.** Il "
-                           "prezzo di inizio osservazione viene messo a verbale **solo** per le "
-                           "occasioni che il sistema ha poi promosso: il giorno in cui un titolo "
-                           "entra in osservazione non sai quali lo saranno, e qui dentro non può "
-                           "esistere un caso partito male e mai promosso. Il risultato è quindi più "
-                           "bello del vero, e in più la promozione richiede che il prezzo sia già "
-                           "risalito del 2%, cioè una parte di questo guadagno è la regola "
-                           "d'ammissione e non un momento d'acquisto migliore. Serve per **capire "
-                           "quanto vale aspettare la conferma**, non come strategia. La versione "
-                           "eseguibile è nella scheda «🔭 Comprando in anticipo».")
-            elif _bk == "anticipo":
-                st.warning("⚠️ **Questa riga non è una strategia che avresti potuto eseguire**, per "
-                           "due motivi. **Primo:** il prezzo d'ingresso «In anticipo» viene "
-                           "registrato **solo** per le occasioni che poi sono state promosse, e il "
-                           "giorno in cui entravano in osservazione non potevi sapere quali lo "
-                           "sarebbero state — qui dentro non può esistere un caso partito male e "
-                           "mai promosso, quindi il risultato è più bello del vero. **Secondo:** il "
-                           "prezzo è quello del giorno in cui è entrata in osservazione, ma "
-                           "affidabilità, salita e perdita sono quelle del **giorno della "
-                           "promozione**, cioè di qualche giorno dopo: se filtri questa riga per "
-                           "«probabilità di salita ≥60%» stai usando un numero che al momento "
-                           "dell'acquisto non avevi. **La versione eseguibile di questa riga è "
-                           "nella scheda «🔭 Comprando in anticipo»**, che parte dalle candidate "
-                           "registrate quando compaiono e le conta tutte, promosse o no.")
-            _eu = euro_cella(_casi, sim_amt, sim_fee) or {"medio": 0.0, "totale": 0.0,
-                                                          "in_utile": 0, "n": _c["n"]}
-            # Quante giornate d'ingresso diverse: se i casi fossero tutti dello stesso giorno
-            # misurerebbero quel giorno di mercato, non il sistema. Il giudizio sulla solidità sta
-            # nella casella qui sopra (vedi solidita_campione), qui basta il numero.
-            _gg_sel = len({p["date"] for p in _casi})
-            # NIENTE RIQUADRI RIASSUNTIVI QUI: caso tipico, euro per operazione, quante in utile e
-            # quanto fidarsi sono già nella casella cliccata, poche righe più in su. Ripeterli in
-            # grande faceva leggere due volte la stessa cosa e allungava la pagina di uno schermo.
-            # Resta una riga sola con quello che nella casella NON c'è: il totale se le compri
-            # tutte, il capitale impiegato, e gli estremi.
-            st.caption(f"Comprandole tutte e {_c['n']} (**€{_c['n'] * sim_amt:,.0f}** impiegati) "
-                       f"ti resterebbero **{_eu['totale']:+.2f} €** in tasca. "
-                       f"Media {_c['avg']:+.2f}% · migliore {_c['best']:+.1f}% · "
-                       f"peggiore {_c['worst']:+.1f}% · casi distribuiti su **{_gg_sel}** giornate "
-                       f"d'ingresso diverse.")
-            with st.expander(f"📄 I casi dietro questo numero ({_c['n']})", expanded=False):
-                # QUANDO sono state misurate salita e perdita: è la domanda che la tabella non
-                # rispondeva. Sono i valori del giorno della PROMOZIONE (il primo scatto del
-                # monitoraggio), non quelli del giorno in cui l'occasione è entrata «In anticipo»:
-                # a quel momento quei due numeri non vengono nemmeno registrati.
-                st.caption("📈 Salita e 📉 Perdita sono le stime del **giorno della promozione** "
-                           "(la data nella colonna accanto), non di quando l'occasione era in "
-                           "osservazione: sono i numeri che il sistema aveva in mano nel momento "
-                           "in cui l'ha promossa, e sono quelli su cui agiscono i filtri.")
-                st.dataframe(pd.DataFrame([{
-                    "Titolo": p["ticker"], "Promossa il": p["date"],
-                    "Prezzo": p.get("prezzo"),
-                    "Affidabilità": p.get("reliab") or "—",
-                    "Salita": p.get("prob_gain"), "Perdita": p.get("prob_loss"),
-                    "Rendimento": p["ret"], f"Su €{sim_amt:,.0f}": fu.net_eur(p["ret"], sim_amt, sim_fee),
-                } for p in sorted(_casi, key=lambda p: p["ret"], reverse=True)]).set_index("Titolo"),
-                    use_container_width=True, column_config={
-                        "Promossa il": st.column_config.TextColumn("Promossa il",
-                            help="Giorno in cui l'occasione è entrata nel Monitoraggio. È anche il "
-                                 "giorno a cui si riferiscono affidabilità, salita e perdita."),
-                        "Prezzo": st.column_config.NumberColumn("Prezzo per azione", format="%.2f",
-                            help="Prezzo di UNA azione al momento dell'acquisto simulato. Se è più "
-                                 "alto dell'importo che hai messo, quell'operazione non l'avresti "
-                                 "potuta fare: il conto in euro la include comunque."),
-                        "Salita": st.column_config.NumberColumn("📈 Salita", format="%d%%",
-                            help="Probabilità di salita stimata IL GIORNO DELLA PROMOZIONE."),
-                        "Perdita": st.column_config.NumberColumn("📉 Perdita", format="%d%%",
-                            help="Rischio di una perdita oltre il 15%, stimato IL GIORNO DELLA "
-                                 "PROMOZIONE."),
-                        "Rendimento": st.column_config.NumberColumn("Rendimento", format="%+.2f%%"),
-                        f"Su €{sim_amt:,.0f}": st.column_config.NumberColumn(
-                            f"Su €{sim_amt:,.0f} (netti)", format="%+.2f €")})
-                _oltre = sum(1 for p in _casi
-                             if p.get("prezzo") and float(p["prezzo"]) > sim_amt)
-                if _oltre:
-                    st.warning(f"⚠️ **{_oltre} di queste {_c['n']} occasioni costano più di "
-                               f"€{sim_amt:,.0f} per azione**, quindi con questo importo non ne "
-                               f"compreresti nemmeno una: il conto in euro le include comunque, "
-                               f"perché ragiona in percentuale. Alza l'importo qui sopra per una "
-                               f"simulazione che potresti davvero eseguire.")
-
-            # --- grafico: i momenti d'acquisto a confronto nel tempo ---
-            st.markdown(f"### 📈 I momenti d'acquisto a confronto — vendendo {_et[_sk].lower()}")
-            figsc = go.Figure()
-            for _b2 in fu.SCENARIO_BUYS_UI:
-                _pts = _rep["casi"].get(f"{_b2}|{_sk}") or []
-                if not _pts:
-                    continue
-                # In EURO NETTI, non in somma di percentuali: sommare percentuali dà un numero che
-                # non esiste in nessun conto (ogni punto è calcolato su un capitale diverso), e
-                # soprattutto NASCONDE le commissioni — che su importi piccoli sono la voce che
-                # decide. Una linea in euro sotto lo zero dice «questa strategia ti è costata».
-                _cum, _xs, _ys, _tx = 0.0, [], [], []
-                for p in _pts:
-                    _n = fu.net_eur(p["ret"], sim_amt, sim_fee)
-                    if _n is None:
-                        continue
-                    _cum += _n
-                    _xs.append(p["date"])
-                    _ys.append(round(_cum, 2))
-                    _tx.append(f"{p['ticker']}: {p['ret']:+.2f}% → {_n:+.2f} €")
-                figsc.add_trace(go.Scatter(x=_xs, y=_ys, mode="lines+markers", name=_et[_b2],
-                                           text=_tx,
-                                           hovertemplate="%{text}<br>in tasca: %{y:+.2f} €"
-                                                         "<extra></extra>",
-                                           line=dict(color=_COL_BUY[_b2], width=2.5)))
-            if figsc.data:
-                figsc.add_hline(y=0, line=dict(color="gray", width=1, dash="dash"))
-                figsc.update_layout(height=380, margin=dict(t=10, b=10, l=10, r=10),
-                                    legend=dict(orientation="h"), hovermode="x unified",
-                                    yaxis_title="Quanto ti resta in tasca (€)")
-                show_chart(figsc, use_container_width=True)
-                st.caption(f"👀 Ogni linea somma, operazione dopo operazione, quello che ti sarebbe "
-                           f"**rimasto in tasca** mettendo €{sim_amt:,.0f} su ognuna: **la linea più "
-                           f"in alto è quella che avrebbe reso di più**, e sopra lo zero sei in "
-                           f"guadagno. Commissioni e tassa del 26% sono già dentro, quindi una linea "
-                           f"che scende è una strategia che ti sta costando soldi anche se le "
-                           f"percentuali sembrano positive.")
-            else:
-                st.caption("Per il grafico servono almeno due casi maturi con questi filtri.")
+            # NIENTE APPROFONDIMENTO QUI. Il Riepilogo serve a CONFRONTARE tutti gli scenari; il
+            # dettaglio di un singolo momento d'acquisto — i casi uno per uno, il grafico, gli
+            # avvertimenti — sta nella sua sotto-sezione, dove è già completo. Averlo in due posti
+            # significava leggere due volte la stessa cosa e, peggio, parlare del monitoraggio
+            # stando in una scheda che non è quella del monitoraggio.
+            st.info("👆 **Clicca una casella** per aprire la sotto-sezione di quel momento "
+                    "d'acquisto, dove trovi le regole di vendita a confronto, il grafico del "
+                    "guadagno e le singole operazioni.")
 
     # =======================================================================
     # LE SOTTO-SEZIONI PER MOMENTO D'ACQUISTO (osservazione, monitoraggio, dopo la verifica).
@@ -3528,6 +3475,100 @@ if section.startswith("Scenari"):
         elif not _ch.get("n"):
             st.info("⏳ Il sistema non ha ancora chiuso nessuna posizione con i prezzi necessari: "
                     "questa scheda si popola alla prima uscita.")
+    st.stop()
+
+# ===========================================================================
+# SEZIONE: DIARIO DEI DATI — il registro permanente di tutto ciò che gli scenari misurano
+# ===========================================================================
+if section.startswith("Diario"):
+    page_header("Diario dei dati",
+                "Tutto quello che il sistema mette a verbale sulla vita di un'occasione, "
+                "evento per evento, con i valori del momento in cui è avvenuto.")
+    if not fu.cloud_mode():
+        try:
+            fu.aggiorna_eventi()
+        except Exception:
+            pass
+    _rie = fu.diario_riepilogo()
+    st.caption("A che serve questa sezione: gli scenari misurano quanto avresti guadagnato "
+               "comprando in un certo momento. Perché la misura valga qualcosa, i valori di quel "
+               "momento devono essere **scritti quando il momento avviene** — non ricostruiti dopo. "
+               "Qui vedi cosa è stato scritto, quando, e con quali numeri. Le righe non si "
+               "modificano e non si cancellano mai.")
+
+    if not _rie["righe"]:
+        st.info("⏳ **Il diario è vuoto: è appena entrato in funzione.** Si riempie da solo al "
+                "primo giro del sorvegliante automatico, e da lì in avanti ogni occasione lascia "
+                "una traccia a ogni passaggio. I dati dei giorni scorsi non ci sono, per scelta: "
+                "erano ricostruiti a posteriori e non affidabili.")
+    else:
+        _d1, _d2, _d3 = st.columns(3)
+        _d1.metric("Eventi a verbale", f"{_rie['righe']}")
+        _d2.metric("Occasioni seguite", f"{_rie['episodi']}")
+        _d3.metric("In funzione dal", _rie["dal"] or "—")
+
+    _ET_EV = {
+        "ingresso_osservazione": ("👀 Entra in osservazione", "il sistema comincia a guardarlo"),
+        "fine_osservazione": ("⏳ Finisce l'osservazione", "acquisto dello scenario «compro in osservazione»"),
+        "salita_2pct": ("📈 È salito del 2%", "acquisto dello scenario «compro in anticipo»"),
+        "ingresso_anticipo": ("🔭 Entra in «In anticipo»", "il pre-segnale diventa solido"),
+        "promozione": ("📌 Entra in Monitoraggio", "acquisto dello scenario «compro in monitoraggio»"),
+        "fine_verifica": ("✅ Finisce la verifica", "acquisto dello scenario «compro dopo la verifica»"),
+        "uscita": ("🚪 Esce dal Monitoraggio", "il sistema la toglie"),
+    }
+    st.markdown("### Che cosa viene messo a verbale")
+    st.dataframe(pd.DataFrame([{
+        "Evento": _ET_EV[e][0], "A che serve": _ET_EV[e][1],
+        "Quante volte": _rie["per_evento"].get(e, 0),
+    } for e in fu.EVENTI]), use_container_width=True, hide_index=True)
+    st.caption("Quattro di questi eventi sono un **momento d'acquisto** di uno scenario: è per "
+               "questo che il prezzo e i numeri di qualità di quel giorno devono essere esatti.")
+
+    _epi = fu.diario_episodi()
+    if _epi:
+        st.markdown("### Le occasioni, una per una")
+        _righe_ep = []
+        for _eid, _ep in sorted(_epi.items(), key=lambda kv: -len(kv[1]["eventi"])):
+            _ev = _ep["eventi"]
+            _righe_ep.append({
+                "Titolo": _ep["ticker"],
+                "Tipo": "⚡ Breve" if _ep["kind"] == "short" else "🏛️ Lungo",
+                "Eventi": f"{len(_ev)} su {len(fu.EVENTI)}",
+                **{_ET_EV[e][0]: (str((_ev.get(e) or {}).get("data") or "")[:10] or "—")
+                   for e in fu.EVENTI},
+            })
+        st.dataframe(pd.DataFrame(_righe_ep), use_container_width=True, hide_index=True)
+        st.caption("Una riga per occasione, e in ogni colonna il giorno in cui quell'evento è "
+                   "avvenuto. Le caselle con «—» sono eventi non ancora accaduti: per esempio la "
+                   "fine della verifica arriva 5 giorni di Borsa dopo la promozione (10 per il "
+                   "lungo periodo).")
+
+        _scelto = st.selectbox("Guarda i numeri di un'occasione", sorted(_epi.keys()),
+                               format_func=lambda k: f"{_epi[k]['ticker']} — dal {k.split(':')[-1]}")
+        if _scelto:
+            _ev = _epi[_scelto]["eventi"]
+            st.dataframe(pd.DataFrame([{
+                "Evento": _ET_EV[e][0],
+                "Quando": (str((_ev.get(e) or {}).get("data") or "")[:16] or "—"),
+                "Prezzo": (_ev.get(e) or {}).get("prezzo"),
+                "Convenienza": (_ev.get(e) or {}).get("conv"),
+                "Salita": (_ev.get(e) or {}).get("prob_gain"),
+                "Perdita": (_ev.get(e) or {}).get("prob_loss"),
+                "Scritto il": (str((_ev.get(e) or {}).get("scritto_il") or "")[:16] or "—"),
+            } for e in fu.EVENTI if e in _ev]), use_container_width=True, hide_index=True,
+                column_config={
+                    "Prezzo": st.column_config.NumberColumn(format="%.2f"),
+                    "Convenienza": st.column_config.NumberColumn(format="%d"),
+                    "Salita": st.column_config.NumberColumn("📈 Salita", format="%d%%"),
+                    "Perdita": st.column_config.NumberColumn("📉 Perdita", format="%d%%"),
+                    "Scritto il": st.column_config.TextColumn("Scritto il",
+                        help="Quando il sistema ha messo a verbale la riga. Se è molto vicino alla "
+                             "colonna «Quando», i valori sono quelli veri di quel momento e non "
+                             "una ricostruzione."),
+                })
+            st.caption("La colonna **Scritto il** è la garanzia: se coincide con «Quando», quei "
+                       "numeri sono stati registrati mentre il momento avveniva. È la differenza "
+                       "fra un dato misurato e un dato ricostruito.")
     st.stop()
 
 # ===========================================================================
