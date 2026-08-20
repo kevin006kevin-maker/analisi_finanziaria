@@ -1,86 +1,6 @@
 [
 {
 "date": "2026-08-11",
-"ticker": "G.MI",
-"kind": "long",
-"price": 44.81,
-"conv": 43,
-"factors": {
-"discount": 0.0446,
-"histcheap": -2.45,
-"riskadj": 2.18,
-"ddpen": -3.6,
-"momentum": -1.8641,
-"prob": 81,
-"quality": 51.5,
-"valcheap": 0.062,
-"trappen": 2
-},
-"ret_5d": -3.39,
-"ret_21d": null
-},
-{
-"date": "2026-08-11",
-"ticker": "STMMI.MI",
-"kind": "long",
-"price": 48.235,
-"conv": 31,
-"factors": {
-"discount": 30.447,
-"histcheap": -0.9,
-"riskadj": 1.84,
-"ddpen": -12.91,
-"momentum": -5.5933,
-"prob": 22,
-"quality": 57.2,
-"valcheap": -1.8478,
-"trappen": 1
-},
-"ret_5d": -1.54,
-"ret_21d": null
-},
-{
-"date": "2026-08-11",
-"ticker": "TIT.MI",
-"kind": "long",
-"price": 7.595,
-"conv": 16,
-"factors": {
-"discount": 6.6839,
-"histcheap": -1.37,
-"riskadj": 2.33,
-"ddpen": -4.93,
-"momentum": -3.2912,
-"prob": 41,
-"quality": 27.7,
-"valcheap": -0.9745,
-"trappen": 1
-},
-"ret_5d": 0.68,
-"ret_21d": null
-},
-{
-"date": "2026-08-11",
-"ticker": "LDO.MI",
-"kind": "long",
-"price": 58.04,
-"conv": 24,
-"factors": {
-"discount": 9.6794,
-"histcheap": -1.17,
-"riskadj": 0.76,
-"ddpen": -12.94,
-"momentum": -5.2975,
-"prob": 34,
-"quality": 50.8,
-"valcheap": -1.363,
-"trappen": 2
-},
-"ret_5d": 2.46,
-"ret_21d": null
-},
-{
-"date": "2026-08-11",
 "ticker": "SPY",
 "kind": "long",
 "price": 773.03,
@@ -40329,6 +40249,90 @@
 "rebound": 44.4252,
 "trend": -1.0,
 "relstrength": -29.1546
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-20",
+"ticker": "AAP",
+"kind": "short",
+"price": 42.0001,
+"conv": 69,
+"factors": {
+"discount": 34.5487,
+"histcheap": 2.03,
+"riskadj": -0.67,
+"ddpen": -18.49,
+"momentum": 26.7781,
+"prob": 44,
+"oversold": -27.1774,
+"rebound": 35.4487,
+"trend": -1.0,
+"relstrength": -25.2062
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-20",
+"ticker": "EQPT",
+"kind": "short",
+"price": 18.09,
+"conv": 46,
+"factors": {
+"discount": 47.7621,
+"histcheap": 1.01,
+"riskadj": -2.04,
+"ddpen": -36.14,
+"momentum": 15.5068,
+"prob": 33,
+"oversold": -42.9485,
+"rebound": 8.5517,
+"trend": null,
+"relstrength": -13.9349
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-20",
+"ticker": "GCL",
+"kind": "short",
+"price": 0.7354,
+"conv": 23,
+"factors": {
+"discount": 79.741,
+"histcheap": 0.48,
+"riskadj": -2.29,
+"ddpen": -72.39,
+"momentum": -52.2567,
+"prob": 21,
+"oversold": -76.3416,
+"rebound": -36.3982,
+"trend": -1.0,
+"relstrength": 53.8286
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-20",
+"ticker": "PRLD",
+"kind": "short",
+"price": 6.4956,
+"conv": 29,
+"factors": {
+"discount": -0.0,
+"histcheap": -2.53,
+"riskadj": 1.34,
+"ddpen": -31.71,
+"momentum": -21.1866,
+"prob": 10,
+"oversold": -73.6484,
+"rebound": -28.3683,
+"trend": 1.0,
+"relstrength": 22.7584
 },
 "ret_5d": null,
 "ret_21d": null
