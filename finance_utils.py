@@ -7677,16 +7677,29 @@ def screener_row(ticker: str) -> dict:
 DIARIO_NAME = "diario_eventi.json"
 _DIARIO_MAX = 3000        # ~300 byte/riga -> ~900 KB; l'eccedenza va in archivio, niente si perde
 
-EVENTI = ("ingresso_osservazione", "fine_osservazione", "salita_2pct", "ingresso_anticipo",
+# L ORDINE E QUELLO DEL PERCORSO REALE, misurato sui dati, non quello dei nomi:
+#   1 entra in osservazione
+#   2 entra in «In anticipo» — arriva DURANTE l osservazione, non dopo: basta un giorno di
+#     osservazione e una convenienza di 65 (per entrare in osservazione bastano 60), e la finestra
+#     di osservazione NON e richiesta. Sui dati veri arriva prima della fine dell osservazione in
+#     41 righe su 42.
+#   3 finisce l osservazione (3 giorni di Borsa per il breve, 7 per il lungo)
+#   4 e salito del 2% — e la condizione che fa scattare la promozione, quindi sta subito prima
+#   5 entra in Monitoraggio
+#   6 finisce la verifica (5 giorni di Borsa per il breve, 10 per il lungo)
+#   7 esce dal Monitoraggio
+# I tre eventi centrali (2, 3, 4) possono scambiarsi fra loro: dipende da quando la convenienza
+# sale a 65 e da quando il prezzo fa il 2%. L unico ordine garantito e che la promozione viene
+# dopo la fine dell osservazione E dopo la salita del 2%, perche le richiede entrambe.
+EVENTI = ("ingresso_osservazione", "ingresso_anticipo", "fine_osservazione", "salita_2pct",
           "promozione", "fine_verifica", "uscita")
-# Quale evento è il MOMENTO D'ACQUISTO di ciascuno dei quattro scenari.
-EVENTO_ACQUISTO = {"osservazione": "fine_osservazione", "anticipo": "salita_2pct",
-                   "promozione": "promozione", "conferma": "fine_verifica"}
-# E quale evento è il suo INGRESSO nella sezione (la prima delle due date in tabella). Per lo
-# scenario del monitoraggio le due coincidono: l'ingresso È l'acquisto, e la tabella mostra una
-# data sola.
-EVENTO_INGRESSO = {"osservazione": "ingresso_osservazione", "anticipo": "ingresso_anticipo",
-                   "promozione": "promozione", "conferma": "promozione"}
+# Quali eventi sono un MOMENTO D'ACQUISTO si ricava da SCENARI_ACQUISTO (definito più in basso,
+# insieme ai cinque scenari), così la lista sta scritta in un posto solo. Prima c'era qui una mappa
+# a quattro voci: quando gli scenari sono diventati cinque è rimasta indietro, e il risolutore
+# saltava in silenzio i due momenti che non conosceva. Una lista duplicata è una lista che divergerà.
+def eventi_acquisto() -> set:
+    """Gli eventi del diario che sono un momento d'acquisto di uno scenario."""
+    return {ev for _k, ev, _n, _a in SCENARI_ACQUISTO}
 
 
 def load_diario() -> list:
@@ -7856,3 +7869,190 @@ def diario_riepilogo() -> dict:
     return {"righe": len(righe), "episodi": len({r.get("episodio") for r in righe}),
             "per_evento": per_evento, "dal": (date[0] if date else None),
             "al": (date[-1] if date else None)}
+
+
+# ---------------------------------------------------------------------------
+# I CINQUE SCENARI D'ACQUISTO, costruiti sul DIARIO degli eventi.
+#
+# Ogni scenario differisce dal precedente per UNA condizione sola: e questo che rende leggibile il
+# confronto. Prima la matrice mescolava momenti e selezioni, e non si capiva se un numero migliore
+# venisse dal comprare prima o dal comprare meglio.
+#   1 appena entra in osservazione        nessun filtro: si compra tutto quello che il sistema guarda
+#   2 appena entra in «In anticipo»        +  convenienza almeno 65 (e' una SELEZIONE, non un momento)
+#   3 alla fine dei giorni di osservazione +  la finestra conclusa, MA senza pretendere il 2%
+#   4 appena entra in monitoraggio         +  il rimbalzo del 2% (la condizione che blocca davvero)
+#   5 dopo la verifica nel monitoraggio    +  altri 5 giorni di Borsa (10 per il lungo)
+#
+# IL FILTRO «SOLO LE MIGLIORI» usa i valori del momento d'acquisto DI QUELLO SCENARIO, presi dal
+# diario: la convenienza e le probabilita scritte quando quell'evento e avvenuto. E l'unico modo
+# onesto di rispondere a «e se avessi comprato solo le migliori»: giudicare con l'informazione che
+# c'era quel giorno. Usare i numeri di oggi, o quelli di un altro passaggio, darebbe un risultato
+# che nessuna regola eseguibile avrebbe potuto ottenere.
+# ---------------------------------------------------------------------------
+# (chiave, evento del diario, nome per l'utente, cosa aggiunge rispetto al precedente)
+SCENARI_ACQUISTO = (
+    ("s1_osservazione", "ingresso_osservazione", "Appena entra in osservazione",
+     "nessuna condizione: si compra tutto quello che entra in osservazione"),
+    ("s2_anticipo", "ingresso_anticipo", "Appena entra in «In anticipo»",
+     "in piu: convenienza almeno 65 (e una selezione, non un momento diverso)"),
+    ("s3_fine_osservazione", "fine_osservazione", "Alla fine dei giorni di osservazione",
+     "in piu: la finestra di osservazione conclusa, ma SENZA pretendere il 2%"),
+    ("s4_monitoraggio", "promozione", "Appena entra in monitoraggio",
+     "in piu: il rimbalzo del 2%, che e la condizione che blocca di piu"),
+    ("s5_fine_verifica", "fine_verifica", "Dopo la verifica nel monitoraggio",
+     "in piu: altri 5 giorni di Borsa (10 per il lungo)"),
+)
+_DIARIO_SELLS = {"7g": 7, "30g": 30, "365g": 365}
+DIARIO_SELLS_PER_TIPO = {"short": ("7g", "30g"), "long": ("30g", "365g")}
+
+
+def risolvi_diario() -> int:
+    """Calcola, per ogni momento d'acquisto a verbale nel diario, quanto avrebbe reso vendendo dopo
+    7, 30 o 365 giorni di calendario. Scrive il risultato UNA VOLTA e non lo ricalcola mai piu.
+
+    Il campo `res` e l'unica parte della riga che si riempie dopo: i valori REGISTRATI (data, prezzo,
+    convenienza, probabilita) non si toccano, perche sono la fotografia di quel momento. Il
+    rendimento invece e una conseguenza che matura col tempo, e va calcolato quando e maturo.
+    Guardia anti-frazionamento: se la prima chiusura dopo l'acquisto dista oltre il 25% dal prezzo
+    a verbale, la riga viene marcata inutilizzabile — un raggruppamento di azioni non e un guadagno.
+    Ritorna quante caselle ha calcolato."""
+    righe = load_diario()
+    if not righe:
+        return 0
+    acquisti = eventi_acquisto()
+    oggi = datetime.date.fromisoformat(_today_iso())
+    fatte = 0
+    for r in righe:
+        if r.get("evento") not in acquisti or not r.get("prezzo") or r.get("bad_data"):
+            continue
+        try:
+            d0 = datetime.date.fromisoformat(str(r.get("data"))[:10])
+        except Exception:
+            continue
+        eta = (oggi - d0).days
+        res = r.setdefault("res", {})
+        attese = [sk for sk, gg in _DIARIO_SELLS.items() if eta >= gg and sk not in res]
+        if not attese:
+            continue
+        if eta > 400:
+            r["bad_data"] = "troppo vecchia e ancora senza prezzi"
+            fatte += 1
+            continue
+        try:
+            closes = get_history(r.get("ticker"), period=("6mo" if eta < 150 else "2y"))["Close"].dropna()
+            try:
+                closes.index = closes.index.tz_localize(None)
+            except (TypeError, AttributeError):
+                pass
+        except Exception:
+            continue
+        dopo = closes[closes.index > pd.Timestamp(d0)]
+        if dopo.empty:
+            continue
+        if abs(float(dopo.iloc[0]) / float(r["prezzo"]) - 1) > 0.25:
+            r["bad_data"] = "salto di prezzo oltre il 25%: probabile raggruppamento di azioni"
+            fatte += 1
+            continue
+        for sk in attese:
+            s = closes[closes.index >= pd.Timestamp(d0 + datetime.timedelta(days=_DIARIO_SELLS[sk]))]
+            if s.empty:
+                continue
+            res[sk] = round((float(s.iloc[0]) / float(r["prezzo"]) - 1) * 100, 2)
+            fatte += 1
+    if fatte:
+        salva_registro(DIARIO_NAME, righe, _DIARIO_MAX, giorni_protetti=400)
+    return fatte
+
+
+def _passa_migliori(r, min_pg=0, max_pl=100, min_conv=0):
+    """Il filtro «solo le migliori» applicato ai valori DI QUESTA RIGA, cioe del momento d'acquisto
+    di questo scenario. Ritorna (passa, dato_mancante): un filtro attivo su un numero che quel
+    giorno non era stato registrato NON lascia passare la riga, e il chiamante conta quante ne
+    restano fuori per questo motivo — un'esclusione silenziosa farebbe sembrare completo un campione
+    che non lo e."""
+    if (min_pg > 0 and r.get("prob_gain") is None) or \
+            (max_pl < 100 and r.get("prob_loss") is None) or \
+            (min_conv > 0 and r.get("conv") is None):
+        return False, True
+    if min_pg > 0 and (r.get("prob_gain") or 0) < min_pg:
+        return False, False
+    if max_pl < 100 and (r.get("prob_loss") if r.get("prob_loss") is not None else 999) > max_pl:
+        return False, False
+    if min_conv > 0 and (r.get("conv") or 0) < min_conv:
+        return False, False
+    return True, False
+
+
+def scenari_diario(kind: str = "short", min_pg: int = 0, max_pl: int = 100, min_conv: int = 0,
+                   importo: float = 30.0, fee: float = 1.0) -> dict:
+    """I cinque scenari con i loro esiti, filtrati sui valori del momento d'acquisto di ciascuno.
+
+    Ritorna {scenari: [{chiave, nome, aggiunge, evento, n_totali, n_passano, n_senza_dato,
+                        celle: {vendita: {n, med, avg, hit, best, worst, netto_medio, netto_tot,
+                                          in_utile}},
+                        casi: {vendita: [...]}}], vendite: (...)}
+    `n_passano` e il numero di occasioni che COMPRERESTI: va mostrato accanto al rendimento, perche
+    un rendimento piu alto su un decimo delle occasioni puo valere meno in totale."""
+    vendite = DIARIO_SELLS_PER_TIPO.get(kind, DIARIO_SELLS_PER_TIPO["short"])
+    righe = [r for r in load_registro_completo(DIARIO_NAME, load_diario())
+             if r.get("kind") == kind and not r.get("bad_data")]
+    per_evento = {}
+    for r in righe:
+        per_evento.setdefault(r.get("evento"), []).append(r)
+    out = []
+    for chiave, evento, nome, aggiunge in SCENARI_ACQUISTO:
+        tutte = [r for r in per_evento.get(evento, []) if r.get("prezzo")]
+        sel, senza = [], 0
+        for r in tutte:
+            ok, mancante = _passa_migliori(r, min_pg, max_pl, min_conv)
+            if ok:
+                sel.append(r)
+            elif mancante:
+                senza += 1
+        celle, casi = {}, {}
+        for sk in vendite:
+            punti = [{"ticker": r.get("ticker"), "data": str(r.get("data"))[:10],
+                      "prezzo": r.get("prezzo"), "conv": r.get("conv"),
+                      "prob_gain": r.get("prob_gain"), "prob_loss": r.get("prob_loss"),
+                      "ret": (r.get("res") or {})[sk]}
+                     for r in sel if (r.get("res") or {}).get(sk) is not None]
+            if not punti:
+                continue
+            vals = sorted(p["ret"] for p in punti)
+            n = len(vals)
+            med = vals[n // 2] if n % 2 else (vals[n // 2 - 1] + vals[n // 2]) / 2
+            nets = [net_eur(p["ret"], importo, fee) for p in punti]
+            nets = [x for x in nets if x is not None]
+            celle[sk] = {"n": n, "med": round(med, 2), "avg": round(sum(vals) / n, 2),
+                         "hit": round(100 * sum(1 for v in vals if v > 0) / n),
+                         "best": round(vals[-1], 2), "worst": round(vals[0], 2),
+                         "netto_medio": (round(sum(nets) / len(nets), 2) if nets else None),
+                         "netto_tot": (round(sum(nets), 2) if nets else None),
+                         "in_utile": sum(1 for x in nets if x > 0),
+                         "giornate": len({p["data"] for p in punti})}
+            casi[sk] = sorted(punti, key=lambda p: p["data"])
+        out.append({"chiave": chiave, "nome": nome, "aggiunge": aggiunge, "evento": evento,
+                    "n_totali": len(tutte), "n_passano": len(sel), "n_senza_dato": senza,
+                    "celle": celle, "casi": casi})
+    return {"scenari": out, "vendite": vendite,
+            "filtri_attivi": bool(min_pg or max_pl < 100 or min_conv)}
+
+
+def imbuto_occasioni(kind: str = None) -> dict:
+    """L'IMBUTO: quante occasioni raggiungono ciascuna tappa. E il contesto che rende leggibili i
+    cinque scenari — e risponde da solo alla domanda «quale condizione blocca di piu».
+    Si legge dal diario, quindi conta solo gli episodi registrati da quando il diario e in funzione."""
+    righe = [r for r in load_registro_completo(DIARIO_NAME, load_diario())
+             if not kind or r.get("kind") == kind]
+    per_evento = {}
+    for r in righe:
+        per_evento.setdefault(r.get("evento"), set()).add(r.get("episodio"))
+    tappe = []
+    prec = None
+    for chiave, evento, nome, _agg in SCENARI_ACQUISTO:
+        n = len(per_evento.get(evento, set()))
+        tappe.append({"nome": nome, "evento": evento, "quante": n,
+                      "passa_pct": (round(100 * n / prec) if prec else None)})
+        if prec is None:
+            prec = n or None
+    return {"tappe": tappe, "episodi": len({r.get("episodio") for r in righe})}

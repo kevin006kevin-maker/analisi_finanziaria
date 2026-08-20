@@ -331,9 +331,13 @@ def main():
     # Gira dopo la promozione e dopo gli scatti, così i valori sono quelli aggiornati del giro.
     try:
         nev = fu.aggiorna_eventi()
+        # …e i rendimenti dei momenti d'acquisto già maturi (7 / 30 / 365 giorni dall'acquisto):
+        # è quello che riempie i cinque scenari.
+        nres = fu.risolvi_diario()
         r = fu.diario_riepilogo()
-        log(f"Diario degli eventi: {nev} nuovi · in tutto {r['righe']} righe su {r['episodi']} "
-            f"episodi" + (f" (dal {r['dal']})" if r.get("dal") else ""))
+        log(f"Diario degli eventi: {nev} nuovi · {nres} rendimenti calcolati · in tutto "
+            f"{r['righe']} righe su {r['episodi']} episodi"
+            + (f" (dal {r['dal']})" if r.get("dal") else ""))
     except Exception as e:
         log(f"Errore diario degli eventi: {e!r}")
 
