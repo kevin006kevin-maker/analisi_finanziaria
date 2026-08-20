@@ -2647,22 +2647,6 @@
 "snapshots": [
 {
 "name": "XLE",
-"price": 58.65,
-"rsi": 59.3286,
-"dd_high": -6.25,
-"occasione": 27,
-"convenienza": 52,
-"prob_gain": 58,
-"prob_loss": 0,
-"exp_ret": 1.5,
-"gain": -3.261,
-"reliab": "🟢 Alta",
-"target": 56.7374,
-"stop": 56.2668,
-"date": "2026-07-29 22:39"
-},
-{
-"name": "XLE",
 "price": 58.32,
 "rsi": 56.5118,
 "dd_high": -6.9373,
@@ -3924,6 +3908,22 @@
 "target": 57.3987,
 "stop": 61.4112,
 "date": "2026-08-20 21:57"
+},
+{
+"name": "XLE",
+"price": 63.75,
+"rsi": 72.6474,
+"dd_high": 0.0,
+"occasione": 27,
+"convenienza": 41,
+"prob_gain": 50,
+"prob_loss": 1,
+"exp_ret": -0.1,
+"gain": -9.9645,
+"reliab": "🟢 Alta",
+"target": 57.3976,
+"stop": 61.3562,
+"date": "2026-08-20 23:25"
 }
 ],
 "auto": true,
@@ -23890,22 +23890,6 @@
 "snapshots": [
 {
 "name": "ELTX",
-"price": 2.89,
-"rsi": 34.9431,
-"dd_high": -80.5387,
-"occasione": 34,
-"convenienza": 72,
-"prob_gain": 66,
-"prob_loss": 16,
-"exp_ret": 6.6,
-"gain": 130.9792,
-"reliab": "🔴 Bassa",
-"target": 6.6753,
-"stop": 1.7647,
-"date": "2026-07-29 22:39"
-},
-{
-"name": "ELTX",
 "price": 2.91,
 "rsi": 35.3278,
 "dd_high": -80.3704,
@@ -25407,6 +25391,22 @@
 "target": 4.6459,
 "stop": 2.4376,
 "date": "2026-08-20 21:57"
+},
+{
+"name": "ELTX",
+"price": 3.075,
+"rsi": 41.046,
+"dd_high": -79.2929,
+"occasione": 27,
+"convenienza": 70,
+"prob_gain": 64,
+"prob_loss": 14,
+"exp_ret": 6.8,
+"gain": 37.535,
+"reliab": "🔴 Bassa",
+"target": 4.2292,
+"stop": 2.4781,
+"date": "2026-08-20 23:25"
 }
 ],
 "auto": true,
@@ -87268,6 +87268,22 @@
 "target": 56.1292,
 "stop": 38.0626,
 "date": "2026-08-20 20:35"
+},
+{
+"name": "STMMI.MI",
+"price": 43.01,
+"rsi": 34.0637,
+"dd_high": -37.9813,
+"occasione": 44,
+"convenienza": 73,
+"prob_gain": 52,
+"prob_loss": 14,
+"exp_ret": 0.7,
+"gain": 30.2032,
+"reliab": "🟡 Media",
+"target": 56.0004,
+"stop": 38.1477,
+"date": "2026-08-20 23:26"
 }
 ],
 "auto": true,
