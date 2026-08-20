@@ -2084,6 +2084,10 @@ def _read_local_json(name: str):
 # (read-your-writes), perché il branch remoto di GitHub si aggiorna con ritardo dopo il commit.
 # Senza questo, un'eliminazione/aggiunta dal telefono "ricompariva" leggendo il remoto stantio.
 _LOCAL_WRITES = set()
+# Registri il cui salvataggio REMOTO è fallito in questa sessione: il lavoro automatico li
+# stampa in fondo al giro, così un token scaduto o una rete assente si vedono invece di far
+# sparire i dati in silenzio.
+_SALVATAGGI_FALLITI = set()
 
 
 def read_data_json(name: str, default):
@@ -2178,11 +2182,20 @@ _CROLLO_MIN_VOCI = 8      # sotto questa dimensione si blocca solo lo svuotament
 # ogni file vivo deve restare sotto ~600 KB: oltre 1 MB l'API GitHub non restituisce più il
 # contenuto e la protezione anti-cancellazione si spegnerebbe in silenzio. Tutto ciò che esce dal
 # tetto NON viene buttato: va negli archivi annuali (vedi _archivia_e_pota / load_registro_completo).
-_SCENARIO_MAX_LIVE = 2000      # ~330 byte/riga → ~660 KB
+# RITARATO (ago 2026): una riga di scenario pesava ~330 byte, ma da quando porta i «passaggi» —
+# la fotografia dei quattro momenti — ne pesa 945 (554 sono i soli passaggi), misurati sul branch.
+# Col tetto vecchio il file vivo avrebbe raggiunto 1,89 MB, e col margine 2,46 MB: superato 1 MB
+# l'API GitHub non restituisce più il contenuto e la protezione anti-cancellazione si spegne PER
+# SEMPRE, perché l'archiviazione tiene il vivo a quel numero di righe. Sarebbe successo intorno alle
+# 1.100 righe, cioè in circa un anno al ritmo attuale di ~85 righe al mese. Niente si perde: quello
+# che esce dal tetto va negli archivi annuali e i risolutori lo completano comunque.
+_SCENARIO_MAX_LIVE = 600       # ~945 byte/riga → ~570 KB (col margine 1,3: ~740 KB)
 _PRESIGNAL_MAX_LIVE = 4000     # ~122 byte/riga → ~490 KB
 _EXIT_HISTORY_MAX_LIVE = 2000  # ~278 byte/riga → ~555 KB
 _FORECAST_MAX = 5000           # ~113 byte/riga → ~565 KB
-_CONV_LOG_MAX = 2000           # ~310 byte/riga → ~620 KB
+# Misurato adesso: 314 byte/riga su 2.600 righe = 817 KB, cioè il file vivo è GIÀ oltre il tetto e
+# oltre il margine, quindi l'archiviazione parte a ogni giro e siamo a un passo dal muro di 1 MB.
+_CONV_LOG_MAX = 1500           # ~314 byte/riga → ~470 KB (col margine 1,3: ~610 KB)
 _TRACK_RECORD_MAX = 2500       # ~212 byte/riga → ~530 KB
 # Di quanto il file vivo può superare il tetto per tenere in vita le righe non ancora mature.
 # Oltre questo margine si archivia comunque: un file vivo troppo grande spegne la protezione
@@ -2204,7 +2217,26 @@ def _riduce_storico(name: str, nuovo_str: str, vecchio_str: str, force: bool = F
         return False
     if not isinstance(nuovo, (list, dict)) or not isinstance(vecchio, (list, dict)):
         return False
-    return len(nuovo) < len(vecchio)
+    if len(nuovo) < len(vecchio):
+        return True
+    # NON BASTA CONTARE LE RIGHE. La protezione guardava solo QUANTE righe c'erano, quindi una
+    # scrittura che tiene tutte le righe ma le SVUOTA dentro passava liscia: due processi che
+    # lavorano sullo stesso registro (l'app e il lavoro automatico ogni mezz'ora) leggono, modificano
+    # e riscrivono l'intero file, e l'ultimo che salva cancella il lavoro dell'altro senza che nulla
+    # protesti. Con i «passaggi» — la fotografia dei quattro momenti, che è la parte più costosa da
+    # ricostruire e per lo storico irrecuperabile — questo significherebbe perderla in silenzio.
+    # Qui si rifiuta una scrittura che riduce di oltre un quarto il numero di righe che HANNO i
+    # passaggi: le perdite fisiologiche (una riga archiviata, un campo che matura) restano possibili.
+    try:
+        if isinstance(nuovo, list) and isinstance(vecchio, list):
+            def _con_passaggi(rs):
+                return sum(1 for r in rs if isinstance(r, dict) and (r.get("passaggi") or {}).get("promozione"))
+            v, n = _con_passaggi(vecchio), _con_passaggi(nuovo)
+            if v >= 8 and n < v * 0.75:
+                return True
+    except Exception:
+        pass
+    return False
 
 
 def _crollo_stato(name: str, nuovo_str: str, vecchio_str: str, force: bool = False) -> bool:
@@ -2235,7 +2267,7 @@ def _scrittura_pericolosa(name: str, nuovo_str: str, vecchio_str: str, force: bo
             or _crollo_stato(name, nuovo_str, vecchio_str, force))
 
 
-def write_data_json(name: str, obj, force: bool = False) -> None:
+def write_data_json(name: str, obj, force: bool = False) -> bool:
     """Scrive un file dati: sempre su file locale; se in modalità cloud con token,
     anche sul branch remoto (così la modifica persiste e si vede dal telefono).
 
@@ -2259,26 +2291,54 @@ def write_data_json(name: str, obj, force: bool = False) -> None:
             esistente = None
         if isinstance(esistente, (list, dict)) and _scrittura_pericolosa(
                 name, content, json.dumps(esistente, ensure_ascii=False, indent=0)):
-            return          # non distruggo dati
+            return False    # non distruggo dati
+    ok_locale = False
+    percorso = os.path.join(APPDIR, name)     # fuori dal try: serve anche al ripulisci-temporaneo
     try:
-        percorso = os.path.join(APPDIR, name)
         # i file d'archivio stanno in una sottocartella (archivio/…): va creata, altrimenti la
         # scrittura fallirebbe in silenzio e l'archiviazione non partirebbe mai.
         cartella = os.path.dirname(percorso)
         if cartella:
             os.makedirs(cartella, exist_ok=True)
-        with open(percorso, "w", encoding="utf-8") as f:
+        # SCRITTURA IN DUE TEMPI: prima su un file temporaneo, poi lo si rinomina sopra
+        # l'originale. Aprire direttamente in scrittura azzera il file SUBITO: se il processo muore
+        # nel mezzo (o il disco è pieno, o la cartella è in sincronizzazione) resta un file troncato
+        # e il contenuto di prima non esiste più. Con la rinomina o c'è il file vecchio o c'è quello
+        # nuovo, mai niente in mezzo.
+        tmp = percorso + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as f:
             f.write(content)
+            f.flush()
+            os.fsync(f.fileno())
+        os.replace(tmp, percorso)
         _LOCAL_WRITES.add(name)        # read-your-writes: d'ora in poi leggi il locale per questo file
+        ok_locale = True
     except Exception:
-        pass
+        try:
+            if os.path.exists(percorso + ".tmp"):
+                os.remove(percorso + ".tmp")
+        except Exception:
+            pass
+    # ESITO DEL SALVATAGGIO REMOTO: prima veniva chiamato e buttato via. Se il token è scaduto, se
+    # la rete non va o se GitHub rifiuta, il salvataggio falliva in SILENZIO — e sui server del
+    # lavoro automatico il file locale muore col giro, quindi la riga appena nata svaniva senza che
+    # nessuno lo sapesse. Ora l'esito si ritenta una volta, si annota e viene restituito a chi
+    # chiama, che può decidere di non fare il passo successivo (vedi _archivia_e_pota).
+    ok_remoto = True
     if _data_repo() and _github_token():
-        _commit_to_github(name, content, force)
+        ok_remoto = _commit_to_github(name, content, force)
+        if not ok_remoto:
+            ok_remoto = _commit_to_github(name, content, force)      # un secondo tentativo
+        if not ok_remoto:
+            _SALVATAGGI_FALLITI.add(name)
+        else:
+            _SALVATAGGI_FALLITI.discard(name)
     # invalida la cache di lettura remota così la modifica si vede subito
     try:
         _fetch_remote_json.clear()
     except Exception:
         pass
+    return bool(ok_locale or ok_remoto)
 
 
 # ---------------------------------------------------------------------------
@@ -2362,7 +2422,14 @@ def _archivia_e_pota(name: str, rows: list, live_max: int, giorni_protetti: int 
             if not isinstance(esistenti, list):
                 esistenti = []
             nuovo = esistenti + righe
-            write_data_json(arc, nuovo)
+            # LA POTATURA DIPENDE DALL'ESITO VERO. Prima si scriveva l'archivio e si
+            # "verificava" rileggendolo: ma la rilettura prende il file LOCALE appena scritto,
+            # quindi la verifica passava sempre — anche quando il salvataggio remoto era stato
+            # rifiutato — e il registro vivo veniva potato comunque. Su un archivio oltre il
+            # limite di lettura di GitHub questo può sovrascrivere migliaia di righe col solo
+            # lotto nuovo e poi accorciare il vivo: perdita doppia, in silenzio.
+            if not write_data_json(arc, nuovo):
+                return rows          # scrittura d'archivio non riuscita: NON poto il vivo
             verifica = read_data_json(arc, None)
             if not isinstance(verifica, list) or len(verifica) < len(nuovo):
                 return rows          # archivio non confermato: non poto il vivo
@@ -4410,6 +4477,14 @@ def _append_exit_record(tk: str, entry: dict, reason: str) -> None:
             "first_target": ing.get("target"), "first_stop": ing.get("stop"),
             "first_src": ing.get("src"), "first_sicuro": bool(ing.get("sicuro")),
             "my_target_price": entry.get("my_target_price"),
+            # GLI SCATTI, non solo i prezzi. Quando un'occasione esce, la sua voce di monitoraggio
+            # viene cancellata e con essa TUTTI gli scatti — che sono l'unica fonte dei numeri di
+            # qualità del momento «dopo i giorni di verifica». Un titolo che esce prima dei 5 o 10
+            # giorni di Borsa della verifica perdeva quel momento per sempre: sono già 8 occasioni
+            # (AEO, MPLT, STRL, WSO, BIOA, SSTK, AZN, USNA), irrecuperabili perché la lapide salvava
+            # soltanto i prezzi. Qui la lista viene messa a verbale nella lapide, che è un registro
+            # storico e non si cancella: da adesso quel momento si può ricostruire anche dopo l'uscita.
+            "snapshots": snaps,
         })
         salva_registro(EXIT_HISTORY_NAME, hist, _EXIT_HISTORY_MAX)
     except Exception:
@@ -4559,7 +4634,17 @@ def auto_promote_opportunities() -> list:
         # d'INGRESSO appena congelati da track_opportunity (prima si leggeva "lo scatto numero 0",
         # corretto solo perché l'entry era appena nata: ora è esplicito e non dipende dall'ordine).
         _ing = _ingresso(tr.get(tk, {}))
+        # Lo scatto iniziale del monitoraggio nasce da una chiamata di rete: se non riesce, resta un
+        # dizionario vuoto e la promozione perde i suoi quattro numeri di qualità — mentre l'ultimo
+        # punto dell'osservazione, che li ha, è già qui a portata di mano. Si ripiega sull'INTERO
+        # punto e non campo per campo: mescolare due istanti diversi è lo stesso errore che ha
+        # prodotto le fotografie sfasate del registro dei pre-segnali.
         snap0 = (tr.get(tk, {}).get("snapshots") or [{}])[0]
+        if snap0.get("convenienza") is None and snap0.get("prob_gain") is None:
+            _p = next((o for o in reversed(obs) if o.get("conv") is not None), None)
+            if _p:
+                snap0 = {"reliab": _p.get("reliab"), "prob_gain": _p.get("prob_gain"),
+                         "prob_loss": _p.get("prob_loss"), "convenienza": _p.get("conv")}
         _log_promotion_scenario(tk, kind, promo_price=obs[-1].get("price"),
                                 obs_price=obs[0].get("price"),
                                 obs_date=str(obs[0].get("date", ""))[:10],
@@ -4955,11 +5040,20 @@ def observation_status() -> list:
         def _ultimo(campo):
             return next((o.get(campo) for o in reversed(e.get("obs", []))
                          if o.get(campo) is not None), None)
+        # L'ULTIMO PUNTO COMPLETO, non i singoli campi risaliti uno per uno. Serve a chi deve
+        # scrivere una fotografia coerente (il registro dei pre-segnali): prendendo il prezzo
+        # dall'ultimo punto e la convenienza dall'ultimo punto che ce l'ha, si mette a verbale un
+        # istante che non è mai esistito — ENEL.MI il 19/08 aveva prezzo del 19 e convenienza del 18.
+        # I punti campionati fuori orario non hanno i numeri di qualità, ed è da lì che nasce lo
+        # sfasamento.
+        _completo = next((o for o in reversed(e.get("obs", []))
+                          if o.get("conv") is not None and o.get("price") is not None), None)
         out.append({"ticker": e.get("ticker", key.split(":")[-1]), "kind": kind,
                     "name": e.get("name", ""), "days": days, "ret": round(ret, 1),
                     "last_conv": last_conv, "window": window,
                     "remaining": max(0, window - days),
                     "last_price": obs[-1].get("price"),   # per la sezione "In anticipo" (pre-segnale)
+                    "punto_completo": _completo,          # fotografia coerente, tutti i campi dello stesso istante
                     "reliab": _ultimo("reliab"), "prob_gain": _ultimo("prob_gain"),
                     "prob_loss": _ultimo("prob_loss"), "occ": _ultimo("occ"),
                     "run": run, "trend_ok": trend_ok, "dconv": dconv, "n_days": len(vals)})
@@ -5145,15 +5239,27 @@ def _rel_rank(reliab) -> int:
     return 2 if "Alta" in s else (1 if "Media" in s else 0)
 
 
-def _pre_row_for(tk, kind, entro_data):
+def _pre_row_for(tk, kind, entro_data, dal_data=None):
     """La RIGA della prima comparsa di un titolo tra i pre-segnali solidi (sezione «In anticipo»)
-    prima della promozione, oppure None. Serve anche ai «passaggi»: da questa riga si prendono
-    prezzo, convenienza e probabilità del momento in cui l'occasione è entrata lì."""
+    DENTRO L'EPISODIO in corso, oppure None. Serve anche ai «passaggi»: da questa riga si prendono
+    prezzo, convenienza e probabilità del momento in cui l'occasione è entrata lì.
+
+    `dal_data` delimita l'episodio (di norma l'inizio dell'osservazione di quella riga) e non è un
+    dettaglio: senza limite inferiore si prendeva il pre-segnale PIÙ VECCHIO di tutta la storia,
+    archivio compreso. Finché nessun titolo era rientrato in «In anticipo» il difetto non si vedeva,
+    perché non c'erano doppioni; ma la regola anti-doppione dei pre-segnali dura 30 giorni, quindi
+    dal 27/08/2026 (trenta giorni dalle prime righe, del 27/07) lo stesso titolo può avere una
+    seconda riga, e la scelta «il più vecchio» avrebbe cominciato a datare l'ingresso in «In
+    anticipo» a un episodio chiuso settimane prima, con il prezzo di allora.
+    Se nell'episodio non c'è nessun pre-segnale si ritorna None — cioè «questa occasione non è mai
+    passata da In anticipo», che è la verità — invece di ripiegare su una riga di un altro episodio."""
     try:
         cand = [r for r in load_registro_completo(PRESIGNAL_NAME, load_presignal_log())
                 if str(r.get("ticker", "")).upper() == str(tk).upper()
                 and r.get("kind") == kind and r.get("price")
                 and str(r.get("date", ""))[:10] <= str(entro_data)[:10]]
+        if dal_data:
+            cand = [r for r in cand if str(r.get("date", ""))[:10] >= str(dal_data)[:10]]
         if not cand:
             return None
         return min(cand, key=lambda r: str(r.get("date")))
@@ -5190,6 +5296,11 @@ def _pre_entry_for(tk, kind, entro_data):
 #                  resolve_scenarios quando ricava conf_price, anche a posteriori)
 # ---------------------------------------------------------------------------
 MOMENTI = ("osservazione", "anticipo", "promozione", "conferma")
+# Quanti giorni di distanza si accettano fra la data di fine verifica e lo scatto del monitoraggio da
+# cui si prendono i numeri di qualità. Serve perché il lavoro automatico può saltare un giro (il 6
+# agosto non ha girato, e 30 voci su 77 hanno un giorno di Borsa mancante): un paio di giorni di
+# scarto è fisiologico, tre settimane è un altro momento.
+_CONF_SNAP_MAX_GG = 4
 
 
 def _passaggio(data=None, prezzo=None, conv=None, prob_gain=None, prob_loss=None,
@@ -5226,6 +5337,27 @@ def _primo_osservazione(tk, kind, entro_data=None) -> dict:
         return _passaggio()
 
 
+def _punto_osservazione_alla_data(tk, kind, data):
+    """Il punto di osservazione di quel titolo ALLA DATA indicata (l'ultimo di quel giorno, o il più
+    recente precedente), oppure None. Serve a completare una riga già scritta con i valori del
+    giorno a cui si riferisce, invece che con quelli di oggi: riempire il passato coi numeri del
+    presente è lo stesso errore che ha prodotto sette osservazioni datate dopo la promozione.
+    Se il punto è già stato potato dalla lista (la finestra è di pochi giorni) si ritorna None e il
+    campo resta vuoto, che è la risposta corretta."""
+    if not data:
+        return None
+    try:
+        e = (load_opp_watch() or {}).get(f"{kind}:{str(tk).upper()}") or {}
+        d = str(data)[:10]
+        prima = [o for o in (e.get("obs") or []) if str(o.get("date", ""))[:10] <= d
+                 and o.get("conv") is not None]
+        if not prima:
+            return None
+        return max(prima, key=lambda o: str(o.get("date")))
+    except Exception:
+        return None
+
+
 def _snap_alla_data(tk, kind, data) -> dict:
     """I valori del monitoraggio alla data indicata: il primo scatto da quel giorno in poi, o in
     mancanza l'ultimo precedente. Serve al passaggio «dopo i giorni di verifica», che non ha un
@@ -5237,18 +5369,53 @@ def _snap_alla_data(tk, kind, data) -> dict:
     try:
         e = (load_tracking() or {}).get(str(tk).upper()) or {}
         if e.get("kind") and kind and e.get("kind") != kind:
-            return _passaggio()
+            e = {}
         snaps = sorted([s for s in (e.get("snapshots") or []) if s.get("date")],
                        key=lambda s: str(s.get("date")))
         if not snaps:
+            # RIPIEGO SULLA LAPIDE: se il titolo è già uscito dal monitoraggio la sua voce non
+            # esiste più, ma da adesso gli scatti sono a verbale nella lapide dell'uscita, che è un
+            # registro storico. Senza questo ripiego il momento della verifica restava vuoto per
+            # sempre a ogni uscita anticipata, che è il caso più frequente di tutti.
+            lap = [h for h in load_registro_completo(EXIT_HISTORY_NAME, load_exit_history())
+                   if str(h.get("ticker", "")).upper() == str(tk).upper()
+                   and (not kind or not h.get("kind") or h.get("kind") == kind)
+                   and h.get("snapshots")]
+            if lap:
+                ultima = max(lap, key=lambda h: str(h.get("removed") or ""))
+                snaps = sorted([s for s in (ultima.get("snapshots") or []) if s.get("date")],
+                               key=lambda s: str(s.get("date")))
+        if not snaps:
             return _passaggio()
         d = str(data)[:10]
-        dopo = [s for s in snaps if str(s.get("date"))[:10] >= d]
-        s = dopo[0] if dopo else snaps[-1]
+        # LIMITE DI DISTANZA: prima si prendeva il primo scatto dalla data in poi e, se non c'era,
+        # l'ULTIMO disponibile — cioè un giorno qualunque, anche settimane dopo, e per un titolo
+        # ripromosso anche di un altro episodio. Un dato di un altro giorno è peggio di un dato
+        # mancante, perché il vuoto si vede e il numero sbagliato no. Ora si accetta solo uno scatto
+        # abbastanza vicino (in avanti si preferisce il primo, indietro si tollera lo stesso numero
+        # di giorni); se non c'è, si ritorna vuoto e la scheda lo dichiara.
+        vicini = [s for s in snaps
+                  if abs(_days_between(str(s.get("date"))[:10], d) or 999) <= _CONF_SNAP_MAX_GG]
+        if not vicini:
+            return _passaggio()
+        dopo = [s for s in vicini if str(s.get("date"))[:10] >= d]
+        s = dopo[0] if dopo else vicini[-1]
         return _passaggio(s.get("date"), s.get("price"), s.get("convenienza"), s.get("prob_gain"),
                           s.get("prob_loss"), s.get("reliab"))
     except Exception:
         return _passaggio()
+
+
+def _passaggio_conferma(r) -> dict:
+    """Il passaggio «dopo i giorni di verifica» di una riga: i numeri di QUALITÀ dallo scatto del
+    monitoraggio più vicino alla data di fine verifica, ma data e prezzo SEMPRE quelli su cui il
+    rendimento è stato calcolato. Regola scritta una volta sola perché la riempivano tre punti
+    diversi, ed è il tipo di regola che, ripetuta a mano, diventa tre regole leggermente diverse."""
+    if not r.get("conf_date"):
+        return _passaggio()
+    p = _snap_alla_data(r.get("ticker"), r.get("kind"), r.get("conf_date"))
+    p["data"], p["prezzo"] = r.get("conf_date"), r.get("conf_price")
+    return p
 
 
 def completa_passaggi() -> int:
@@ -5271,9 +5438,19 @@ def completa_passaggi() -> int:
     for r in rows:
         if isinstance(r.get("passaggi"), dict) and r["passaggi"].get("promozione"):
             # già presenti: manca solo eventualmente la conferma, che matura dopo
-            if (not (r["passaggi"].get("conferma") or {}).get("prezzo")) and r.get("conf_date"):
-                r["passaggi"]["conferma"] = _snap_alla_data(r.get("ticker"), r.get("kind"),
-                                                            r.get("conf_date"))
+            # La conferma si riempie quando matura, E si RIALLINEA se il prezzo a verbale non è
+            # quello su cui il rendimento è calcolato: le prime versioni prendevano il prezzo dallo
+            # scatto del monitoraggio (un campionamento a orario qualunque), quindi la riga diceva
+            # «comprata a X» mentre il conto era fatto su Y. Erano 54 righe su 54.
+            _c = r["passaggi"].get("conferma") or {}
+            # `conf_price` nella condizione: senza di esso il passaggio resterebbe senza prezzo e la
+            # riga verrebbe contata come «completata» a ogni giro pur non completando niente — con
+            # il registro riscritto a vuoto ogni mezz'ora. Il contatore deve dire la verità.
+            if r.get("conf_date") and r.get("conf_price") and (
+                    not _c.get("prezzo")
+                    or _c.get("prezzo") != r.get("conf_price")
+                    or str(_c.get("data") or "")[:10] != str(r.get("conf_date"))[:10]):
+                r["passaggi"]["conferma"] = _passaggio_conferma(r)
                 fatte += 1
             # RIPARAZIONE di un dato FALSO già scritto: un'osservazione datata DOPO la promozione
             # appartiene a un episodio successivo dello stesso titolo. Si rimette il prezzo già
@@ -5282,12 +5459,21 @@ def completa_passaggi() -> int:
             if str(_o.get("data") or "")[:10] > str(r.get("date"))[:10]:
                 r["passaggi"]["osservazione"] = _passaggio(r.get("obs_date"), r.get("obs_price"))
                 fatte += 1
+            # Stessa riparazione sull'ALTRO lato: un pre-segnale datato PRIMA dell'inizio
+            # dell'osservazione non può appartenere a questo episodio (per essere «solido» un titolo
+            # deve prima essere osservato), quindi è di un episodio precedente e va svuotato.
+            _a = r["passaggi"].get("anticipo") or {}
+            _oss_d = str((r["passaggi"].get("osservazione") or {}).get("data") or r.get("obs_date") or "")[:10]
+            if _a.get("prezzo") and _oss_d and str(_a.get("data") or "")[:10] < _oss_d:
+                r["passaggi"]["anticipo"] = _passaggio()
+                fatte += 1
             continue
         tk, kind = r.get("ticker"), r.get("kind")
         oss = _primo_osservazione(tk, kind, entro_data=r.get("date"))
         if not oss.get("prezzo") and r.get("obs_price"):
             oss = _passaggio(r.get("obs_date"), r.get("obs_price"))    # solo il prezzo, è quel che c'è
-        pre = _pre_row_for(tk, kind, r.get("date"))
+        pre = _pre_row_for(tk, kind, r.get("date"),
+                           dal_data=str(oss.get("data") or r.get("obs_date") or "")[:10] or None)
         r["passaggi"] = {
             "osservazione": oss,
             "anticipo": (_passaggio(pre.get("date"), pre.get("price"), pre.get("conv"),
@@ -5295,8 +5481,7 @@ def completa_passaggi() -> int:
                          if pre else _passaggio(r.get("pre_date"), r.get("pre_price"))),
             "promozione": _passaggio(r.get("date"), r.get("promo_price"), r.get("conv"),
                                      r.get("prob_gain"), r.get("prob_loss"), r.get("reliab")),
-            "conferma": (_snap_alla_data(tk, kind, r.get("conf_date")) if r.get("conf_date")
-                         else _passaggio()),
+            "conferma": _passaggio_conferma(r),
         }
         fatte += 1
     if fatte:
@@ -5311,14 +5496,18 @@ def _log_promotion_scenario(tk, kind, promo_price, obs_price, obs_date, target, 
     bersaglio/stop e la QUALITÀ del segnale al momento dell'acquisto (affidabilità, probabilità,
     convenienza), che serve ai filtri «comprerei solo se…»."""
     try:
-        pre_row = _pre_row_for(tk, kind, _today_iso())
+        # L'osservazione si calcola PRIMA perché la sua data delimita l'episodio: il pre-segnale da
+        # cercare è quello di QUESTO episodio, non il più vecchio mai registrato per il titolo.
+        p_oss = _primo_osservazione(tk, kind, entro_data=_today_iso())
+        dal = str(p_oss.get("data") or obs_date or "")[:10] or None
+        pre_row = _pre_row_for(tk, kind, _today_iso(), dal_data=dal)
         pre_price = float(pre_row["price"]) if pre_row and pre_row.get("price") else None
         pre_date = str(pre_row.get("date"))[:10] if pre_row else None
         # I PASSAGGI: i valori veri di ogni momento, non solo quelli della promozione.
         passaggi = {
             # entro oggi: alla promozione l'episodio in corso è quello giusto, ma il limite protegge
             # dai casi in cui la data del registro fosse avanti (fuso o orologio sfasato).
-            "osservazione": _primo_osservazione(tk, kind, entro_data=_today_iso()),
+            "osservazione": p_oss,
             "anticipo": (_passaggio(pre_row.get("date"), pre_row.get("price"), pre_row.get("conv"),
                                     pre_row.get("prob_gain"), pre_row.get("prob_loss"),
                                     pre_row.get("reliab")) if pre_row else _passaggio()),
@@ -5469,7 +5658,9 @@ def resolve_scenarios() -> int:
                 # da solo), quindi senza questo la riga «dopo i giorni di verifica» resterebbe per
                 # sempre senza i suoi numeri e i filtri userebbero quelli della promozione.
                 if isinstance(r.get("passaggi"), dict):
-                    r["passaggi"]["conferma"] = _snap_alla_data(tk, kind, r["conf_date"])
+                    # numeri di qualità dallo scatto vicino, data e prezzo quelli del rendimento:
+                    # la regola sta tutta in _passaggio_conferma, usata anche dal recupero.
+                    r["passaggi"]["conferma"] = _passaggio_conferma(r)
                 changed += 1
             elif age > 60:
                 r["conf_na"] = True         # non ricavabile: smetti di riprovare
@@ -6279,26 +6470,60 @@ def record_presignals() -> list:
         return []
     rows = load_presignal_log()
     today = _today_iso()
-    recenti = {f"{r.get('kind')}:{r.get('ticker')}" for r in rows
-               if 0 <= _days_between(r.get("date"), today) <= 30}
-    added = []
+    # DIZIONARIO, non insieme: serve la RIGA, non solo la chiave, perché una riga già registrata
+    # negli ultimi 30 giorni va COMPLETATA se le mancano i numeri di qualità, non solo saltata.
+    # Prima c'era un salto secco: le 125 righe esistenti non avevano le probabilità e non le
+    # avrebbero mai avute, e con esse restavano senza campione tutte le occasioni che nascono da
+    # quelle righe (19 candidate erano in quello stato).
+    recenti = {}
+    for r in rows:
+        d = _days_between(r.get("date"), today)
+        if d is not None and 0 <= d <= 30:
+            recenti[f"{r.get('kind')}:{r.get('ticker')}"] = r
+    added, completate = [], 0
     for s in solid:
         key = f"{s.get('kind')}:{s.get('ticker')}"
-        if key in recenti or not s.get("last_price"):
+        # FOTOGRAFIA COERENTE: tutti i campi dallo STESSO punto di osservazione. Prendere il prezzo
+        # dall'ultimo punto e la qualità dall'ultimo punto che ce l'ha mette a verbale un istante
+        # mai esistito.
+        p = s.get("punto_completo") or {}
+        data_p = str(p.get("date") or today)[:16]
+        prezzo_p = p.get("price") if p.get("price") is not None else s.get("last_price")
+        conv_p = p.get("conv") if p.get("conv") is not None else s.get("last_conv")
+        pg_p = p.get("prob_gain") if p.get("prob_gain") is not None else s.get("prob_gain")
+        pl_p = p.get("prob_loss") if p.get("prob_loss") is not None else s.get("prob_loss")
+        rel_p = p.get("reliab") or s.get("reliab")
+        vecchia = recenti.get(key)
+        if vecchia is not None:
+            # già a verbale: completa SOLO i campi mancanti, e con i valori del punto ALLA SUA DATA,
+            # non di oggi — riempirla con i numeri di adesso sarebbe rifare l'errore di datare un
+            # momento con la fotografia di un altro giorno.
+            p_sua = _punto_osservazione_alla_data(s.get("ticker"), s.get("kind"), vecchia.get("date"))
+            toccata = False
+            for campo, valore in (("reliab", (p_sua or {}).get("reliab")),
+                                  ("prob_gain", (p_sua or {}).get("prob_gain")),
+                                  ("prob_loss", (p_sua or {}).get("prob_loss"))):
+                if vecchia.get(campo) is None and valore is not None:
+                    vecchia[campo] = valore
+                    toccata = True
+            if toccata:
+                completate += 1
+            continue
+        if not prezzo_p:
             continue
         rows.append({"ticker": s["ticker"], "kind": s.get("kind", "short"), "date": today,
-                     "price": s["last_price"], "conv": s.get("last_conv"),
+                     "data_valori": data_p,      # l'istante da cui vengono TUTTI i numeri qui sotto
+                     "price": prezzo_p, "conv": conv_p,
                      # QUALITÀ DEL SEGNALE NEL MOMENTO DELL'INGRESSO in «In anticipo». Prima non si
                      # registrava, e mancava per una ragione precisa: gli scenari nascevano solo
                      # alla promozione, quindi i filtri usavano i numeri di QUEL giorno — cioè
                      # informazioni che al momento dell'acquisto anticipato non erano disponibili.
                      # Registrandoli qui, lo scenario «compro appena entra in In anticipo» diventa
                      # filtrabile con quello che si sapeva davvero quel giorno.
-                     "reliab": s.get("reliab"), "prob_gain": s.get("prob_gain"),
-                     "prob_loss": s.get("prob_loss"),
+                     "reliab": rel_p, "prob_gain": pg_p, "prob_loss": pl_p,
                      "ret_7d": None, "ret_30d": None})
         added.append(s["ticker"])
-    if added:
+    if added or completate:
         salva_registro(PRESIGNAL_NAME, rows, _PRESIGNAL_MAX, giorni_protetti=60)
     return added
 

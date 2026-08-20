@@ -202,6 +202,24 @@ def main():
         except Exception as e:
             log(f"{kind}: errore durante la scansione: {e!r}")
 
+    # FASE 0 — PRE-SEGNALE, prima della promozione. L'ORDINE È IL PUNTO.
+    # Prima questa registrazione stava dopo la promozione, e produceva una perdita definitiva: una
+    # candidata che diventa "solida" nello stesso giro in cui viene promossa non veniva registrata
+    # né allora né mai, perché subito dopo la promozione il titolo è nel monitoraggio e
+    # solid_presignals scarta i ticker già seguiti. Non è un caso di scuola: per entrare fra i
+    # pre-segnali serve convenienza ≥65, per promuovere basta ≥55, quindi il primo superamento di 65
+    # può cadere proprio il giorno della promozione. Sono 9 occasioni già perse così (RPT, AAON, PSN,
+    # VISN, TMUS, DIS, PUMP, AA, SOXL): il loro momento «All'ingresso in In anticipo» non esiste in
+    # nessun registro e non è ricostruibile. Registrando PRIMA, la riga viene scritta mentre il
+    # ticker non è ancora seguito, e _pre_row_for la trova già alla nascita della riga di scenario
+    # (il filtro è "data ≤ oggi", quindi lo stesso giorno vale).
+    try:
+        nuovi_pre = fu.record_presignals()
+        log(f"Pre-segnale: {len(nuovi_pre)} nuovi registrati"
+            + (f" ({', '.join(nuovi_pre)})" if nuovi_pre else ""))
+    except Exception as e:
+        log(f"Errore registrazione pre-segnale: {e!r}")
+
     # FASE 1 — promozione: occasioni con osservazione positiva (breve 3g / lungo 7g) → notifica inserimento
     try:
         promoted = fu.auto_promote_opportunities()
@@ -318,14 +336,25 @@ def main():
     except Exception as e:
         log(f"Errore passaggi delle occasioni: {e!r}")
 
-    # Pre-segnale: registra le "più solide" di oggi e ne verifica l'esito quando maturo,
-    # così anche l'affidabilità del pre-segnale viene misurata nel tempo.
+    # SALVATAGGI FALLITI: se il salvataggio sul branch non è riuscito, sui server del lavoro
+    # automatico il file locale muore col giro e il dato svanisce. Prima falliva in silenzio; ora
+    # lascia un segno qui, dove si legge.
     try:
-        nuovi_pre = fu.record_presignals()
+        falliti = sorted(getattr(fu, "_SALVATAGGI_FALLITI", set()))
+        if falliti:
+            log("⚠️ SALVATAGGIO NON RIUSCITO per: " + ", ".join(falliti)
+                + " — i dati di questo giro potrebbero non essere stati conservati. "
+                  "Controllare il token del repository dei dati.")
+    except Exception:
+        pass
+
+    # Pre-segnale, seconda metà: verifica gli esiti maturi (la registrazione è nella FASE 0, prima
+    # della promozione: vedi il commento lì, l'ordine non è indifferente).
+    try:
         npre = fu.resolve_presignals()
-        log(f"Pre-segnale: {len(nuovi_pre)} nuovi registrati · {npre} esiti verificati.")
+        log(f"Pre-segnale: {npre} esiti verificati.")
     except Exception as e:
-        log(f"Errore registro pre-segnale: {e!r}")
+        log(f"Errore esiti pre-segnale: {e!r}")
 
     # Loop di feedback: risolve la resa forward del log convenienza e ri-stima i pesi (se ci sono dati)
     try:
