@@ -241,5 +241,32 @@
 },
 "stop": 132.1996,
 "atr": 7.7802
+},
+{
+"episodio": "short:TNGX:2026-08-20",
+"ticker": "TNGX",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-08-21 08:56",
+"data": "2026-08-21 08:55",
+"prezzo": 23.51,
+"conv": 65,
+"prob_gain": 49,
+"prob_loss": 25,
+"reliab": "🔴 Bassa",
+"mkt": 3.1432,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 28.511,
+"media20": 26.6155,
+"quattro_atr": 29.9927,
+"meta_caduta": 28.205,
+"bollinger": 29.4935,
+"consigliata": 28.511
+},
+"stop": 20.2687,
+"atr": 1.6207
 }
 ]
