@@ -3033,5 +3033,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:AAL:2026-08-21",
+"ticker": "AAL",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 19:25",
+"data": "2026-08-21 19:25",
+"prezzo": 13.702,
+"conv": 67,
+"prob_gain": 51,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": 3.5702,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 15.7592,
+"media20": 15.0836,
+"quattro_atr": 15.9669,
+"meta_caduta": 15.926,
+"bollinger": 16.8461,
+"consigliata": 15.7592
+},
+"stop": 12.5696,
+"atr": 0.5662
 }
 ]
