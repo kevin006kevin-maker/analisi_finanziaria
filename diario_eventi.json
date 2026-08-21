@@ -322,5 +322,32 @@
 },
 "stop": 4.6886,
 "atr": 0.2507
+},
+{
+"episodio": "long:ITUB:2026-08-16",
+"ticker": "ITUB",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:09",
+"data": "2026-08-16 21:44",
+"prezzo": 7.4,
+"conv": 81,
+"prob_gain": 82,
+"prob_loss": 8,
+"reliab": "🟢 Alta",
+"mkt": 4.3991,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": 8.0528,
+"media20": 7.8855,
+"quattro_atr": 8.2115,
+"meta_caduta": 8.01,
+"bollinger": 8.8349,
+"consigliata": 8.0528
+},
+"stop": 6.9943,
+"atr": 0.2029
 }
 ]
