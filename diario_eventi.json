@@ -376,5 +376,32 @@
 },
 "stop": 24.9179,
 "atr": 1.196
+},
+{
+"episodio": "long:MNSO:2026-08-17",
+"ticker": "MNSO",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:09",
+"data": "2026-08-17 15:38",
+"prezzo": 10.96,
+"conv": 63,
+"prob_gain": 44,
+"prob_loss": 33,
+"reliab": "🟡 Media",
+"mkt": 4.4982,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": 12.1306,
+"media20": 12.1335,
+"quattro_atr": 12.3623,
+"meta_caduta": 12.245,
+"bollinger": 13.5911,
+"consigliata": 12.1306
+},
+"stop": 10.2588,
+"atr": 0.3506
 }
 ]
