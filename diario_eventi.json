@@ -754,5 +754,32 @@
 },
 "stop": 31.8983,
 "atr": 5.4383
+},
+{
+"episodio": "short:CLBT:2026-08-17",
+"ticker": "CLBT",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:09",
+"data": "2026-08-17 16:23",
+"prezzo": 10.445,
+"conv": 71,
+"prob_gain": 56,
+"prob_loss": 8,
+"reliab": "🔴 Bassa",
+"mkt": 4.4206,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": 14.2529,
+"media20": 13.9583,
+"quattro_atr": 14.1517,
+"meta_caduta": 13.5275,
+"bollinger": 18.0773,
+"consigliata": 14.1517
+},
+"stop": 8.5917,
+"atr": 0.9267
 }
 ]
