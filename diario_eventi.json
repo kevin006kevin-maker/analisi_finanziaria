@@ -79,5 +79,32 @@
 },
 "stop": 26.1853,
 "atr": 0.9674
+},
+{
+"episodio": "long:CDE:2026-08-17",
+"ticker": "CDE",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:09",
+"data": "2026-08-17 13:25",
+"prezzo": 18.81,
+"conv": 61,
+"prob_gain": 56,
+"prob_loss": 34,
+"reliab": "🔴 Bassa",
+"mkt": 4.3991,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": null,
+"media20": null,
+"quattro_atr": 23.2629,
+"meta_caduta": 19.96,
+"bollinger": 21.3392,
+"consigliata": 23.2629
+},
+"stop": 16.5836,
+"atr": 1.1132
 }
 ]
