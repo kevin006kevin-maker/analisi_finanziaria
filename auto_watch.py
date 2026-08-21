@@ -431,6 +431,14 @@ def main():
             log("⚠️ SALVATAGGIO NON RIUSCITO per: " + ", ".join(falliti)
                 + " — i dati di questo giro potrebbero non essere stati conservati. "
                   "Controllare il token del repository dei dati.")
+            # …e soprattutto lascialo scritto dove l'utente lo vede: questo registro sta sui server
+            # e nessuno lo legge. Da qui l'app mostra l'avviso in cima a ogni pagina.
+            log("   L'avviso è stato scritto anche in " + fu.AVVISI_NAME
+                + ", quindi comparirà in cima all'app.")
+        aperti = fu.avvisi_salvataggio()
+        if aperti:
+            log(f"Avvisi di salvataggio ancora aperti: {len(aperti)} "
+                + ", ".join(str(a.get("file")) for a in aperti[:5]))
     except Exception:
         pass
 

@@ -495,6 +495,26 @@ section = st.sidebar.radio(
 )
 st.sidebar.markdown("---")
 
+# --- AVVISO DI SALVATAGGIO NON RIUSCITO ------------------------------------------------------
+# Sta QUI, prima di ogni sezione, perché è l'unico guasto che altrimenti non si vedrebbe da
+# nessuna parte: il lavoro automatico gira sui server, e se un salvataggio non arriva al deposito
+# la cosa finiva in una riga di registro che nessuno legge. Un dato che sparisce in silenzio è
+# peggio di un dato che sparisce con un avviso, quindi l'avviso si mette dove non si può mancarlo.
+try:
+    _avv = fu.avvisi_salvataggio()
+except Exception:
+    _avv = []
+if _avv:
+    st.error("### ⚠️ Attenzione: un salvataggio non è arrivato al deposito dei dati")
+    for _a in _avv[:6]:
+        st.markdown("- " + fu.spiega_avviso(_a))
+    st.caption("Cosa vuol dire: le righe scritte in quel momento potrebbero non essere state "
+               "conservate. Il sistema riprova da solo a ogni giro, e quando ci riesce l'avviso "
+               "sparisce da qui. Se invece resta per più di qualche ora c'è qualcosa da "
+               "sistemare — di solito il permesso di scrittura sul deposito, oppure un file "
+               "diventato troppo grosso.")
+    st.markdown("---")
+
 # Impostazioni FISSE (prima erano interruttori nella barra laterale, tolti perché inutili):
 # - sempre modalità completa: tutti gli indicatori e i blocchi avanzati, senza scelte da fare;
 # - traduzione in italiano SEMPRE attiva (notizie e descrizioni);

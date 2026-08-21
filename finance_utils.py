@@ -2089,6 +2089,97 @@ _LOCAL_WRITES = set()
 # sparire i dati in silenzio.
 _SALVATAGGI_FALLITI = set()
 
+# --- AVVISI DI SALVATAGGIO -------------------------------------------------
+# _SALVATAGGI_FALLITI vive nella memoria del processo, quindi un fallimento avvenuto nel lavoro
+# automatico non arriva MAI all'app: finiva in una riga di registro sui server di GitHub, che nessuno
+# legge. Era l'unico caso in cui un dato poteva svanire senza che se ne sapesse niente.
+# Qui il fallimento viene SCRITTO in un file suo, minuscolo, e l'app lo mostra da sola.
+# Perché un file a parte funziona anche quando il salvataggio grosso è appena fallito: la causa
+# tipica è la dimensione (oltre 1 MB l'API si comporta male) o un rifiuto su quel percorso, e un
+# file da poche centinaia di byte ha ottime probabilità di passare comunque. Se non passa nemmeno
+# lui, non si perde nulla di più di prima.
+AVVISI_NAME = "avvisi_salvataggio.json"
+_AVVISI_MAX = 60
+_AVVISI_DENTRO = [False]      # anti-ricorsione: l'avviso non deve generare un avviso su se stesso
+
+
+def _segna_avviso(nome: str, byte_tentati: int = 0) -> None:
+    """Mette a verbale che il salvataggio di `nome` non è arrivato al deposito."""
+    if nome == AVVISI_NAME or _AVVISI_DENTRO[0]:
+        return
+    _AVVISI_DENTRO[0] = True
+    try:
+        avvisi = read_data_json(AVVISI_NAME, None)
+        avvisi = avvisi if isinstance(avvisi, list) else []
+        quando = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+        for a in avvisi:
+            if isinstance(a, dict) and a.get("file") == nome and not a.get("risolto"):
+                a["ultimo"] = quando
+                a["volte"] = int(a.get("volte") or 1) + 1
+                a["byte"] = byte_tentati or a.get("byte")
+                break
+        else:
+            avvisi.append({"file": nome, "primo": quando, "ultimo": quando, "volte": 1,
+                           "byte": byte_tentati, "risolto": None,
+                           "sospetto_dimensione": bool(byte_tentati and byte_tentati > 900_000)})
+        write_data_json(AVVISI_NAME, avvisi[-_AVVISI_MAX:], force=True)
+    except Exception:
+        pass
+    finally:
+        _AVVISI_DENTRO[0] = False
+
+
+def _togli_avviso(nome: str) -> None:
+    """Segna come risolto un avviso: il salvataggio di quel file è tornato a funzionare. Non lo
+    cancella — sapere che ieri qualcosa non è passato resta un'informazione utile."""
+    if nome == AVVISI_NAME or _AVVISI_DENTRO[0]:
+        return
+    _AVVISI_DENTRO[0] = True
+    try:
+        avvisi = read_data_json(AVVISI_NAME, None)
+        if not isinstance(avvisi, list):
+            return
+        cambiato = False
+        for a in avvisi:
+            if isinstance(a, dict) and a.get("file") == nome and not a.get("risolto"):
+                a["risolto"] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+                cambiato = True
+        if cambiato:
+            write_data_json(AVVISI_NAME, avvisi, force=True)
+    except Exception:
+        pass
+    finally:
+        _AVVISI_DENTRO[0] = False
+
+
+def avvisi_salvataggio(solo_aperti: bool = True) -> list:
+    """Gli avvisi di salvataggio, i più recenti per primi. È quello che l'app mostra in cima."""
+    avvisi = read_data_json(AVVISI_NAME, None)
+    if not isinstance(avvisi, list):
+        return []
+    fuori = [a for a in avvisi if isinstance(a, dict) and (not solo_aperti or not a.get("risolto"))]
+    return sorted(fuori, key=lambda a: str(a.get("ultimo") or ""), reverse=True)
+
+
+def spiega_avviso(a: dict) -> str:
+    """L'avviso in italiano, con il sospetto sulla causa quando c'è: serve a poter fare qualcosa,
+    non solo a sapere che qualcosa non va."""
+    if not isinstance(a, dict):
+        return ""
+    quante = int(a.get("volte") or 1)
+    quando = (f"{quante} volte, l'ultima il {a.get('ultimo')}" if quante > 1
+              else f"il {a.get('ultimo')}")
+    testo = (f"Il salvataggio di **{a.get('file')}** non è arrivato al deposito dei dati "
+             f"({quando}).")
+    kb = int((a.get("byte") or 0) / 1024)
+    if a.get("sospetto_dimensione"):
+        testo += (f" Il file pesa circa {kb} KB: vicino o oltre il limite di 1 MB, dove il deposito "
+                  "non si comporta più bene. Va alleggerito spostando la parte vecchia in archivio.")
+    elif kb:
+        testo += (f" Il file pesa circa {kb} KB, quindi non è un problema di dimensione: le cause "
+                  "probabili sono il permesso di scrittura scaduto o la rete.")
+    return testo
+
 
 def read_data_json(name: str, default):
     """Legge un file dati. Normalmente preferisce il branch remoto (cache 2 min)
@@ -2463,8 +2554,10 @@ def write_data_json(name: str, obj, force: bool = False) -> bool:
             ok_remoto = _commit_to_github(name, content, force)      # un secondo tentativo
         if not ok_remoto:
             _SALVATAGGI_FALLITI.add(name)
+            _segna_avviso(name, len(content.encode("utf-8")))
         else:
             _SALVATAGGI_FALLITI.discard(name)
+            _togli_avviso(name)
     # invalida la cache di lettura remota così la modifica si vede subito
     try:
         _fetch_remote_json.clear()
