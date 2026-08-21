@@ -1,1 +1,29 @@
-[]
+[
+{
+"episodio": "long:BBD:2026-08-16",
+"ticker": "BBD",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:08",
+"data": "2026-08-16 21:44",
+"prezzo": 3.14,
+"conv": 85,
+"prob_gain": 79,
+"prob_loss": 10,
+"reliab": "🟢 Alta",
+"mkt": 4.3991,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": 3.4418,
+"media20": 3.358,
+"quattro_atr": 3.5009,
+"meta_caduta": 3.435,
+"bollinger": 3.8191,
+"consigliata": 3.4418
+},
+"stop": 2.9595,
+"atr": 0.0902
+}
+]
