@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-08-12",
-"ticker": "SPY",
-"kind": "short",
-"price": 770.56,
-"conv": 39,
-"factors": {
-"discount": 0.3492,
-"histcheap": -2.12,
-"riskadj": 1.67,
-"ddpen": -2.15,
-"momentum": 0.0998,
-"prob": 47,
-"oversold": -63.3415,
-"rebound": -2.9486,
-"trend": 1.0,
-"relstrength": 0.0077
-},
-"ret_5d": -0.15,
-"ret_21d": null
-},
-{
-"date": "2026-08-12",
 "ticker": "QQQ",
 "kind": "short",
 "price": 718.45,
@@ -40315,6 +40294,26 @@
 "rebound": -28.4154,
 "trend": 1.0,
 "relstrength": 23.2924
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-21",
+"ticker": "NU",
+"kind": "long",
+"price": 14.21,
+"conv": 37,
+"factors": {
+"discount": 24.2537,
+"histcheap": 0.56,
+"riskadj": 0.03,
+"ddpen": -18.98,
+"momentum": -2.01,
+"prob": 48,
+"quality": 58.6,
+"valcheap": -2.5386,
+"trappen": 3
 },
 "ret_5d": null,
 "ret_21d": null
