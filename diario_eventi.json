@@ -349,5 +349,32 @@
 },
 "stop": 6.9943,
 "atr": 0.2029
+},
+{
+"episodio": "long:KGC:2026-08-16",
+"ticker": "KGC",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:09",
+"data": "2026-08-16 21:44",
+"prezzo": 27.31,
+"conv": 79,
+"prob_gain": 62,
+"prob_loss": 26,
+"reliab": "🟡 Media",
+"mkt": 4.3991,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": null,
+"media20": null,
+"quattro_atr": 32.0942,
+"meta_caduta": 29.37,
+"bollinger": 30.78,
+"consigliata": 32.0942
+},
+"stop": 24.9179,
+"atr": 1.196
 }
 ]
