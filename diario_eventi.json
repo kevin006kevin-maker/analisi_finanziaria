@@ -781,5 +781,32 @@
 },
 "stop": 8.5917,
 "atr": 0.9267
+},
+{
+"episodio": "short:CLM:2026-08-17",
+"ticker": "CLM",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:09",
+"data": "2026-08-17 16:53",
+"prezzo": 6.945,
+"conv": 66,
+"prob_gain": 52,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": 4.3943,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": 7.409,
+"media20": 7.31,
+"quattro_atr": 7.4454,
+"meta_caduta": 7.3025,
+"bollinger": 7.7938,
+"consigliata": 7.409
+},
+"stop": 6.6948,
+"atr": 0.1251
 }
 ]
