@@ -1159,5 +1159,32 @@
 },
 "stop": 98.3921,
 "atr": 3.0689
+},
+{
+"episodio": "short:YSS:2026-08-17",
+"ticker": "YSS",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:10",
+"data": "2026-08-17 15:37",
+"prezzo": 11.4145,
+"conv": 70,
+"prob_gain": 48,
+"prob_loss": 28,
+"reliab": "🔴 Bassa",
+"mkt": 4.4982,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": 19.5536,
+"media20": 12.9405,
+"quattro_atr": 17.9276,
+"meta_caduta": 23.2623,
+"bollinger": 18.6923,
+"consigliata": 17.9276
+},
+"stop": 8.1579,
+"atr": 1.6283
 }
 ]
