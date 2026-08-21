@@ -511,5 +511,32 @@
 },
 "stop": 33.4678,
 "atr": 2.5611
+},
+{
+"episodio": "long:STLAM.MI:2026-08-17",
+"ticker": "STLAM.MI",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:09",
+"data": "2026-08-17 13:25",
+"prezzo": 4.6255,
+"conv": 66,
+"prob_gain": 67,
+"prob_loss": 22,
+"reliab": "🟡 Media",
+"mkt": 4.3991,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": 5.0479,
+"media20": 4.8178,
+"quattro_atr": 5.3954,
+"meta_caduta": 5.7452,
+"bollinger": 5.2911,
+"consigliata": 5.0479
+},
+"stop": 4.2405,
+"atr": 0.1925
 }
 ]
