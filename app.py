@@ -2848,8 +2848,12 @@ if section.startswith("Scenari"):
                                           "caso fortunato sposta la media di decine di punti)."),
                                  "Migliori: risultato": st.column_config.NumberColumn(
                                      format="%+.2f%%"),
-                                 "Tutte: in utile": st.column_config.NumberColumn(format="%.0f%%"),
-                                 "Migliori: in utile": st.column_config.NumberColumn(format="%.0f%%"),
+                                 # e' un CONTEGGIO di operazioni, non una percentuale: col vecchio
+                                 # formato «8» diventava «8%», cioe' un numero che non esiste
+                                 "Tutte: in utile": st.column_config.NumberColumn(
+                                     format="%d", help="Quante operazioni chiudono in utile DOPO i "
+                                                       "costi (due commissioni e la tassa)."),
+                                 "Migliori: in utile": st.column_config.NumberColumn(format="%d"),
                                  "Differenza": st.column_config.NumberColumn(
                                      format="%+.2f%%",
                                      help="Quanto il filtro delle migliori aggiunge o toglie. "
@@ -3090,7 +3094,7 @@ if section.startswith("Scenari"):
     # SCHEDA 5 — 📊 SCHEDA VOTI (track record delle promozioni automatiche)
     # =======================================================================
     elif _stab == "voti":
-        rstats = fu.track_record_stats()
+        rstats = fu.track_record_stats(_skind)
         st.markdown(f"## 📊 Scheda voti del sistema — {rstats['total']} promozioni automatiche finora")
         if not rstats["total"]:
             st.info("⏳ **Questa scheda è in attesa, non è rotta.** Il 21 agosto 2026 lo storico "
@@ -3163,7 +3167,7 @@ if section.startswith("Scenari"):
     # SCHEDA 6 — 🎬 SEGUENDO IL SISTEMA ALLA LETTERA (l'unica strategia eseguibile)
     # =======================================================================
     elif _stab == "lettera":
-        _rr = fu.resa_regole_sistema(sim_amt, sim_fee)
+        _rr = fu.resa_regole_sistema(sim_amt, sim_fee, _skind)
         st.markdown("## 🎬 E se avessi seguito il sistema alla lettera?")
         st.caption("Compro alla promozione, vendo quando il sistema toglie l'occasione. "
                    "È l'unica strategia che avresti potuto **davvero** eseguire, e nessun'altra "
@@ -3675,11 +3679,11 @@ if section.startswith("Archivio"):
                             st.warning("Segnali di allarme trovati nei titoli: "
                                        + ", ".join(_n["bandiere_rosse"]))
                         for _v in (_n.get("notizie") or []):
-                            _fo = _v.get('fonte') or "fonte ignota"
-                            st.markdown(f"**{_v.get('titolo')}** — *{_fo}*, "
+                            _fo = fu.testo_sicuro(_v.get('fonte') or "fonte ignota")
+                            st.markdown(f"**{fu.testo_sicuro(_v.get('titolo'))}** — *{_fo}*, "
                                         f"{data_it(_v.get('data'))}")
                             if _v.get("riassunto"):
-                                st.caption(_v["riassunto"]
+                                st.caption(fu.testo_sicuro(_v["riassunto"])
                                            + (" […]" if _v.get("riassunto_tagliato") else ""))
             if _pag.get("esiti_maturati"):
                 st.markdown("##### Gli esiti maturati quel giorno")
@@ -3757,17 +3761,18 @@ if section.startswith("Archivio"):
                     "pb": "Prezzo sul patrimonio", "ps": "Prezzo sui ricavi",
                     "fscore": "Solidità dei conti", "sector": "Settore", "industry": "Industria",
                 }
-                _rt = [{"Caratteristica": _etich.get(k, k), "Valore": v}
-                       for k, v in _t.items() if k in _etich]
+                _rt = [{"Caratteristica": fu.nome_caratteristica(k), "Valore": v}
+                       for k, v in _t.items() if k in fu.NOMI_CARATTERISTICHE]
                 _rt += [{"Caratteristica": k, "Valore": v} for k, v in _t.items()
-                        if k not in _etich]
+                        if k not in fu.NOMI_CARATTERISTICHE]
                 st.dataframe(pd.DataFrame(_rt), use_container_width=True, hide_index=True)
 
                 if _p.get("fattori"):
                     st.markdown("##### Da cosa era composto il giudizio")
                     st.caption("Non solo il totale: i pezzi. Serve a imparare **quale** parte del "
                                "giudizio funziona, invece di sapere solo che «giudizio 72 va bene».")
-                    st.dataframe(pd.DataFrame([{"Pezzo del giudizio": k, "Valore": v}
+                    st.dataframe(pd.DataFrame([{"Pezzo del giudizio": fu.nome_caratteristica(k),
+                                                "Valore": v}
                                                for k, v in _p["fattori"].items()]),
                                  use_container_width=True, hide_index=True)
                 if _p.get("soglie"):
@@ -3789,11 +3794,11 @@ if section.startswith("Archivio"):
                     if _nz.get("bandiere_rosse"):
                         st.warning("Segnali di allarme: " + ", ".join(_nz["bandiere_rosse"]))
                     for _v in (_nz.get("notizie") or []):
-                        _fo = _v.get('fonte') or "fonte ignota"
-                        st.markdown(f"**{_v.get('titolo')}** — *{_fo}*, "
+                        _fo = fu.testo_sicuro(_v.get('fonte') or "fonte ignota")
+                        st.markdown(f"**{fu.testo_sicuro(_v.get('titolo'))}** — *{_fo}*, "
                                     f"{data_it(_v.get('data'))}")
                         if _v.get("riassunto"):
-                            st.caption(_v["riassunto"]
+                            st.caption(fu.testo_sicuro(_v["riassunto"])
                                        + (" […]" if _v.get("riassunto_tagliato") else ""))
 
                 _mo = _tutto.get("mondo") or {}
@@ -3859,7 +3864,8 @@ if section.startswith("Archivio"):
         else:
             st.warning(_s["avvertenza"])
             st.dataframe(pd.DataFrame([
-                {"Caratteristica": k, "Chi ha guadagnato": v["chi_guadagna"],
+                {"Caratteristica": fu.nome_caratteristica(k),
+                 "Chi ha guadagnato": v["chi_guadagna"],
                  "Chi ha perso": v["chi_perde"], "Differenza": v["differenza"],
                  "Casi in guadagno": v["casi_guadagno"], "Casi in perdita": v["casi_perdita"],
                  "Ci si può credere?": v["solidita"]}

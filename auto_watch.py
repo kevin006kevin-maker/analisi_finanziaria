@@ -398,6 +398,29 @@ def main():
     except Exception as e:
         log(f"Errore archivio dell'apprendimento: {e!r}")
 
+    # RIPARAZIONE DELLE SOGLIE CONTAMINATE: le righe che avevano costruito i bersagli con barre
+    # successive all'acquisto (57 su 82 al 21/08) vengono ricalcolate alla data giusta. Le vecchie
+    # restano scritte accanto, cosi la correzione e verificabile e niente si perde.
+    try:
+        rs = fu.ripara_soglie_contaminate()
+        if rs["corrette"]:
+            log(f"Soglie ricalcolate alla data dell'acquisto: {rs['corrette']} righe"
+                + (f" · {rs['in_attesa']} al prossimo giro" if rs.get("in_attesa") else ""))
+        if rs.get("motivo"):
+            log(f"⚠️ Soglie: {rs['motivo']}")
+    except Exception as e:
+        log(f"Errore riparazione delle soglie: {e!r}")
+
+    # RIALLINEAMENTO DEI PREZZI: dove l'archivio aveva il prezzo del giorno del profilo invece di
+    # quello dell'acquisto, vince il diario. Due verita per lo stesso acquisto non possono coesistere.
+    try:
+        rp = fu.ripara_prezzi_profili()
+        if rp["riallineati"]:
+            log(f"Prezzi d'acquisto riallineati al diario: {rp['riallineati']} profili su "
+                f"{len(rp['file'])} giornate")
+    except Exception as e:
+        log(f"Errore riallineamento dei prezzi: {e!r}")
+
     # Riparazione del contesto settoriale: riattacca i numeri del settore alle righe che ne sono
     # rimaste prive perché il nome del settore non era ancora riconosciuto quando furono scritte.
     # Non inventa nulla: ricollega due dati già a verbale nello stesso giorno.
@@ -471,6 +494,11 @@ def main():
             # e nessuno lo legge. Da qui l'app mostra l'avviso in cima a ogni pagina.
             log("   L'avviso è stato scritto anche in " + fu.AVVISI_NAME
                 + ", quindi comparirà in cima all'app.")
+        # GLI ERRORI INGHIOTTITI dagli except muti: un difetto che svuotava il giudizio su 42 righe
+        # su 42 e' rimasto invisibile per giorni perche nessuno li stampava.
+        _ing = getattr(fu, "_ERRORI_INGHIOTTITI", [])
+        if _ing:
+            log("Errori non fatali di questo giro (%d): %s" % (len(_ing), " | ".join(_ing[-5:])))
         aperti = fu.avvisi_salvataggio()
         if aperti:
             log(f"Avvisi di salvataggio ancora aperti: {len(aperti)} "

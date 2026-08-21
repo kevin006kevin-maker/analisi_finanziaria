@@ -2786,7 +2786,9 @@ def send_telegram_verbose(text: str):
             return True, "inviato correttamente"
         return False, f"HTTP {r.status_code}: {j.get('description', (r.text or '')[:140])}"
     except Exception as e:
-        return False, f"eccezione di rete: {e!r}"
+        # MAI il testo grezzo: l'indirizzo chiamato contiene il token, e requests lo mette dentro
+        # il messaggio dell'eccezione. Il docstring qui sopra promette che non accade: ora e' vero.
+        return False, f"eccezione di rete: {type(e).__name__}"
 
 
 def send_telegram(text: str) -> bool:
@@ -5534,12 +5536,17 @@ def update_track_record() -> list:
     return records
 
 
-def track_record_stats() -> dict:
+def track_record_stats(kind: str = None) -> dict:
     """Statistiche aggregate sulle promozioni: rendimento medio e MEDIANO, % di volte in positivo,
     migliore/peggiore. Su TUTTO lo storico (archivio + file vivo).
     La mediana c'è perché la media è fragile: un singolo caso fuori scala (o un titolo che
     decuplica) la sposta di decine di punti, mentre la mediana dice com'è andata «di solito»."""
     records = load_registro_completo(TRACK_RECORD_NAME, load_track_record())
+    # IL TIPO CONTA: la pagina dichiara che il selettore Breve/Lungo vale per tutte le schede, e
+    # questa lo ignorava, mescolando 63 titoli di breve con 15 di lungo — orizzonti e regole
+    # diversi. I record vecchi senza il campo si considerano di breve, come altrove nel progetto.
+    if kind:
+        records = [r for r in records if (r.get("kind") or "short") == kind]
 
     def agg(field):
         vals = sorted(r[field] for r in records if r.get(field) is not None)
@@ -6406,7 +6413,7 @@ def universo_benchmark(kind: str = "short", orizzonte: str = "21g", dal=None, al
             "dal": min(giorni), "al": max(giorni)}
 
 
-def resa_regole_sistema(importo: float = 30.0, fee: float = 1.0) -> dict:
+def resa_regole_sistema(importo: float = 30.0, fee: float = 1.0, kind: str = None) -> dict:
     """LA MISURA CHE MANCAVA: quanto avrebbe reso seguire il sistema ALLA LETTERA.
 
     Nessuno dei registri lo diceva. La scheda voti misura «quanto si è mosso il prezzo dopo la
@@ -6425,6 +6432,8 @@ def resa_regole_sistema(importo: float = 30.0, fee: float = 1.0) -> dict:
         if not p_in or not p_out:
             continue
         ret = (float(p_out) / float(p_in) - 1) * 100
+        if kind and (r.get("kind") or "short") != kind:
+            continue        # il selettore Breve/Lungo vale anche qui
         chiuse.append({"ticker": r.get("ticker"), "kind": r.get("kind", "short"), "ret": ret,
                        "motivo": r.get("reason"), "dal": r.get("added"), "al": r.get("removed"),
                        "ingresso_certo": r.get("first_sicuro", None)})
@@ -6432,6 +6441,8 @@ def resa_regole_sistema(importo: float = 30.0, fee: float = 1.0) -> dict:
         snaps = [s for s in (e.get("snapshots") or []) if s.get("price")]
         ing = _ingresso(e)
         if not (snaps and ing.get("price") and ing.get("sicuro")):
+            continue
+        if kind and (e.get("kind") or "short") != kind:
             continue
         aperte.append({"ticker": tk, "kind": e.get("kind", "short"),
                        "ret": (float(snaps[-1]["price"]) / float(ing["price"]) - 1) * 100,
@@ -8351,7 +8362,12 @@ def registra_evento(kind, tk, evento, valori=None, episodio=None, note=None, dov
         try:
             _d_ev = str(v.get("data") or "")[:16].replace("T", " ")
             try:
-                _rit = max(0.0, (datetime.datetime.now()
+                # LO STESSO OROLOGIO con cui e' scritta la data dell'evento (_now_iso), non
+                # datetime.now(): sui server il processo gira in UTC e la data dell'evento e' in ora
+                # italiana, quindi il conto perdeva 2 ore e tutto cio' che stava sotto le 2 ore
+                # veniva schiacciato a zero — cioe' un profilo in ritardo si presentava come preso
+                # nell'istante, il contrario di quello che il campo deve dire.
+                _rit = max(0.0, (datetime.datetime.strptime(_now_iso()[:16], "%Y-%m-%d %H:%M")
                                  - datetime.datetime.strptime(_d_ev, "%Y-%m-%d %H:%M")
                                  ).total_seconds() / 3600)
             except Exception:
@@ -8938,6 +8954,23 @@ _NOTIZIE_CHIESTE = set()  # (ticker, giorno) già chiesti in questo processo
 _NOTIZIE_SPESE = [0]      # contatore del budget di questo giro
 
 
+_ERRORI_INGHIOTTITI = []      # gli except muti che hanno avuto qualcosa da dire
+
+
+def _log_silenzioso(msg: str) -> None:
+    """Annota un errore che altrimenti sparirebbe in un `except: pass`.
+
+    Non e' un vezzo: un except muto ha nascosto per giorni un difetto che svuotava il giudizio su
+    TUTTE le righe dei momenti d'acquisto (42 su 42). Un errore che non lascia traccia non e' un
+    errore gestito, e' un errore invisibile. Qui resta in memoria per il giro e il lavoro automatico
+    lo stampa alla fine."""
+    try:
+        _ERRORI_INGHIOTTITI.append("%s  %s" % (_arc_ora(), str(msg)[:300]))
+        del _ERRORI_INGHIOTTITI[:-50]
+    except Exception:
+        pass
+
+
 def _arc_oggi() -> str:
     return datetime.date.today().isoformat()
 
@@ -9247,6 +9280,66 @@ def _gia_ha_notizie(giorno: str, ticker: str) -> bool:
     in_coda = {str(n.get("ticker")).upper() for n in _BUFFER_NOTIZIE
                if isinstance(n, dict) and n.get("giorno") == giorno}
     return ticker in (_NOTIZIE_IN_ARCHIVIO[giorno] | in_coda)
+
+
+# I NOMI DELLE CARATTERISTICHE IN ITALIANO. Stanno qui e non nell'interfaccia perche' li usano piu
+# schede: la tabella dell'apprendimento, il profilo di una singola occasione e i pezzi del giudizio.
+# Servono a rispondere alla domanda per cui l'archivio esiste — «che aspetto hanno le occasioni che
+# guadagnano» — e una tabella che risponde con «avg_dollar_vol» e «histcheap» non risponde.
+NOMI_CARATTERISTICHE = {
+    # com'era il titolo
+    "price": "Prezzo", "rsi": "Forza del prezzo (RSI)", "dd_high": "Quanto è scesa dai massimi",
+    "perf_5d": "Ultimi 5 giorni", "perf_1m": "Ultimo mese", "perf_1y": "Ultimo anno",
+    "hist_z": "Rispetto alla sua media storica", "sortino": "Qualità della salita",
+    "ulcer": "Quanto ha fatto soffrire", "maxdd": "La caduta peggiore",
+    "sharpe": "Rendimento contro rischio", "atr": "Movimento tipico in valuta",
+    "atr_pct": "Movimento tipico giornaliero", "rr": "Rischio contro rendimento",
+    "rvol": "Scambi rispetto al solito", "avg_dollar_vol": "Quanto viene scambiata al giorno",
+    "rebound_pot": "Rimbalzo possibile", "above_sma200": "Sopra la media a 200 giorni",
+    "below_bb": "Sotto la banda bassa", "green_day": "Giornata in verde",
+    "rsi_rising": "Forza in risalita", "back_in_bb": "Rientrata nelle bande",
+    "reversal_confirmed": "Inversione confermata", "vertical_crash": "Crollo verticale",
+    "target_price": "Bersaglio", "stop_price": "Prezzo di uscita",
+    "bench_5d": "L'indice negli ultimi 5 giorni", "bench_1m": "L'indice nell'ultimo mese",
+    "pe": "Prezzo sugli utili", "pb": "Prezzo sul patrimonio", "ps": "Prezzo sui ricavi",
+    "fscore": "Solidità dei conti", "fscore_health": "Salute dei conti",
+    "roic": "Redditività del capitale", "ev_ebit": "Valore sull'utile operativo",
+    "fcf_yield": "Cassa generata sul prezzo", "gross_m": "Margine lordo",
+    "interest_cov": "Copertura degli interessi", "div_cov": "Copertura del dividendo",
+    "rev_cagr3": "Crescita dei ricavi (3 anni)", "eps_cagr3": "Crescita degli utili (3 anni)",
+    "sector": "Settore", "industry": "Industria", "etf": "È un ETF",
+    # i punteggi
+    "prob_gain": "Probabilità di salita", "prob_loss": "Rischio di perdita",
+    "exp_ret": "Rendimento atteso", "reliab": "Affidabilità del dato",
+    "reliab_factor": "Quanto è affidabile il dato",
+    # i pezzi del giudizio
+    "discount": "Quanto è a sconto", "histcheap": "Sotto la sua media storica",
+    "riskadj": "Qualità della salita", "ddpen": "Quanto ha fatto soffrire",
+    "momentum": "Spinta recente", "prob": "Probabilità netta",
+    "oversold": "Quanto è ipervenduta", "rebound": "Rimbalzo possibile",
+    "trend": "Sopra la media a 200 giorni", "relstrength": "Forza contro l'indice",
+    "quality": "Qualità dei conti", "valcheap": "Multipli bassi per il suo settore",
+    "trappen": "Segnali di trappola",
+}
+
+
+def nome_caratteristica(k) -> str:
+    """Il nome in italiano di una caratteristica, o la chiave se non e' ancora tradotta."""
+    return NOMI_CARATTERISTICHE.get(str(k), str(k))
+
+
+def testo_sicuro(t) -> str:
+    """Rende innocuo un testo che arriva da internet, prima di mostrarlo nell'app.
+
+    I titoli delle notizie sono scritti da altri e finiscono in st.markdown, che interpreta i
+    metacaratteri: due simboli di dollaro attorno a un pezzo di frase diventano una formula e i
+    prezzi SPARISCONO dalla pagina. Misurato sui dati veri: 34 campi su 338 (il 10%) contengono due
+    o piu dollari, e altri contengono asterischi e parentesi quadre. Non e' un problema di sicurezza
+    grave — e' che la notizia mostrata non e' piu quella salvata, e chi legge non lo sa."""
+    x = str(t or "")
+    for c in ("\\", "$", "*", "_", "[", "]", "`", "~"):
+        x = x.replace(c, "\\" + c)
+    return x
 
 
 def registra_notizie(ticker: str, giorno: str = None, forza: bool = False) -> int:
@@ -9720,6 +9813,30 @@ def _contesto_del_giorno(kind: str, righe: list, giorno: str = None) -> dict:
     _memo = (giorno, kind)
     if _memo in _CONTESTO_FATTO:
         return _CONTESTO_FATTO[_memo]
+    # UN GIORNO PASSATO NON SI FOTOGRAFA OGGI. Da quando i momenti d'acquisto in ritardo ricevono la
+    # data vera dell'evento (1-5 giorni prima, 64 casi su 82), questa funzione veniva chiamata con un
+    # giorno passato — e contesto_mondo/contesto_settori leggono i mercati ADESSO, senza data. Il
+    # risultato era la paura, gli indici e i settori di oggi scritti nel file di un giorno chiuso:
+    # esattamente il difetto delle soglie costruite col futuro, sullo stesso percorso.
+    # Per un giorno passato si LEGGE quello che era stato archiviato allora; se non c'e, il contesto
+    # resta vuoto. Un contesto che manca si vede; un contesto sbagliato no.
+    if giorno != _arc_oggi():
+        try:
+            _m = ([x for x in _arc_leggi_giorni(ARC_MONDO, dal=giorno, al=giorno)
+                   if isinstance(x, dict)] or [{}])[0]
+            _s = [x for x in _arc_leggi_giorni(ARC_SETTORI, dal=giorno, al=giorno)
+                  if isinstance(x, dict)]
+        except Exception:
+            _m, _s = {}, []
+        try:
+            _o = origine_candidati(kind)
+        except Exception:
+            _o = {}
+        ctx = {"giorno": giorno, "mondo": _m, "ampiezza": (_m.get("ampiezza_mercato") or {}),
+               "origine": _o, "settori": {x.get("settore"): x for x in _s},
+               "ricostruito_da_archivio": True, "contesto_mancante": not bool(_m)}
+        _CONTESTO_FATTO[_memo] = ctx
+        return ctx
     try:
         mondo = contesto_mondo(giorno)
     except Exception:
@@ -9794,10 +9911,18 @@ def _accoda_scarto(r: dict, kind: str, motivo: str, dettaglio=None, conv=None,
     motivo non si scopre mai che è il filtro a sbagliare invece del titolo."""
     try:
         ctx = ctx or {}
+        # I PEZZI DEL GIUDIZIO ANCHE PER LE BOCCIATE. Senza, la tabella dell'apprendimento
+        # confronterebbe quelle caratteristiche fra popolazioni diverse: presenti sulle comprate,
+        # assenti sulle bocciate. Sono contro-esempi solo se hanno gli stessi campi.
+        try:
+            _fat = _factor_values(r, kind)
+        except Exception as _e:
+            _fat = None
+            _log_silenzioso("fattori non calcolati per %s: %r" % (r.get("ticker"), _e))
         prof = profilo_da_riga(
             r, kind, momento=None, motivo=motivo, dettaglio=dettaglio, conv=conv,
             occasione=(int(round(punteggio)) if isinstance(punteggio, (int, float)) else None),
-            fattori=None, mondo=_mondo_per_riga(r, ctx),
+            fattori=_fat, mondo=_mondo_per_riga(r, ctx),
             origine=(ctx.get("origine") or {}).get(r.get("ticker")),
             giorno=ctx.get("giorno"))
         accoda_profilo(prof)
@@ -9863,9 +9988,14 @@ def registra_profilo_occasione(kind: str, ticker: str, momento: str, episodio: s
         except Exception:
             fattori = None
         try:
-            conv = _convenience_single(TK, kind)
-        except Exception:
+            # LA RIGA, non il ticker: _convenience_single vuole il record di opportunity_row e al
+            # primo r.get() su una stringa solleva. L'except muto qui accanto ha nascosto il difetto
+            # su TUTTE le righe dei momenti d'acquisto — 42 su 42 nei dati veri avevano il giudizio
+            # vuoto, e nella scheda dell'archivio la colonna «Giudizio» era bianca su ogni riga.
+            conv = _convenience_single(r, kind)
+        except Exception as _e:
             conv = None
+            _log_silenzioso("convenienza non calcolata per %s: %r" % (TK, _e))
         try:
             punteggio = _short_score(r) if kind == "short" else _long_score(r)
         except Exception:
@@ -9897,8 +10027,11 @@ def registra_profilo_occasione(kind: str, ticker: str, momento: str, episodio: s
         # QUANTO TARDI e' stato preso questo profilo. Un profilo recuperato mezz'ora dopo l'evento
         # non e' la stessa cosa di uno preso nell'istante: i numeri sono di un altro momento. Va
         # scritto, non nascosto, cosi chi legge puo scartarlo se il ritardo e troppo grande.
-        if ritardo_ore:
-            prof["profilo_in_ritardo_ore"] = round(float(ritardo_ore), 1)
+        # sempre, anche se vale 0: «preso nell'istante» e' un'informazione, non un'assenza
+        try:
+            prof["profilo_in_ritardo_ore"] = round(float(ritardo_ore or 0), 1)
+        except (TypeError, ValueError):
+            prof["profilo_in_ritardo_ore"] = None
         accoda_profilo(prof)
         registra_notizie(TK, giorno, forza=True)   # un momento d'acquisto ha sempre diritto alle notizie
         return True
@@ -10382,7 +10515,7 @@ def riconcilia_profili(giorni: int = 2) -> dict:
         ore = 0.0
         try:
             q = str(r.get("data") or "")[:16].replace("T", " ")
-            ore = max(0.0, (datetime.datetime.now()
+            ore = max(0.0, (datetime.datetime.strptime(_now_iso()[:16], "%Y-%m-%d %H:%M")
                             - datetime.datetime.strptime(q, "%Y-%m-%d %H:%M")).total_seconds() / 3600)
         except Exception:
             ore = 0.0
@@ -10395,3 +10528,103 @@ def riconcilia_profili(giorni: int = 2) -> dict:
             non_riusciti.append(f"{tk}:{r.get('evento')}")
     return {"recuperati": len(recuperati), "quali": recuperati[:20],
             "non_riusciti": len(non_riusciti)}
+
+
+def ripara_soglie_contaminate(max_righe: int = 120) -> dict:
+    """Ricalcola le soglie delle righe del diario che le avevano costruite con dati del FUTURO.
+
+    Il difetto: soglie_ora leggeva lo storico fino a oggi mentre il prezzo era quello dell'evento, e
+    il lavoro automatico mette a verbale gli eventi anche giorni dopo (salta dei giri: misurato, 64
+    momenti su 82 sono stati scritti con 1-5 giorni di ritardo). Risultato: 57 righe su 82 avevano
+    bersagli costruiti su barre successive all'acquisto — e «meta_caduta», che e' il punto a meta fra
+    il prezzo e il massimo delle ultime 60 sedute, risultava raggiunto per costruzione ogni volta che
+    quel massimo cadeva dopo l'acquisto.
+
+    Perche ricalcolare e non solo scartare: il dato d'ingresso — lo storico dei prezzi fino alla data
+    dell'acquisto — e' oggettivo e disponibile, quindi il valore corretto si CALCOLA, non si indovina.
+    Non e' un riempimento a posteriori: e' la correzione di un conto sbagliato.
+    Le soglie vecchie restano scritte in `soglie_contaminate`, cosi nulla si perde e la correzione
+    resta verificabile. Ripetibile senza danno: chi e' gia stato corretto porta il marchio."""
+    righe = load_diario()
+    if not righe:
+        return {"corrette": 0, "in_attesa": 0}
+    acquisti = eventi_acquisto()
+    corrette, restano = 0, 0
+    for r in righe:
+        if r.get("evento") not in acquisti or r.get("soglie_ricalcolate_il"):
+            continue
+        d_ev, d_scr = str(r.get("data") or "")[:10], str(r.get("scritto_il") or "")[:10]
+        if not d_ev or not d_scr or d_scr <= d_ev:
+            continue          # scritta nello stesso giorno: le soglie erano già quelle giuste
+        if not (r.get("soglie") or {}):
+            continue
+        if corrette >= max_righe:
+            restano += 1
+            continue
+        nuove = soglie_ora(r.get("ticker"), r.get("prezzo"), r.get("kind"), fino_a=d_ev)
+        if not isinstance(nuove, dict):
+            continue
+        r["soglie_contaminate"] = r.get("soglie")      # non si butta: resta verificabile
+        r["soglie"] = nuove.get("soglie")
+        r["stop"] = nuove.get("stop")
+        r["atr"] = nuove.get("atr")
+        r["soglie_ricalcolate_il"] = _now_iso()
+        r["soglie_ritardo_giorni"] = (datetime.date.fromisoformat(d_scr)
+                                      - datetime.date.fromisoformat(d_ev)).days
+        # l'esito calcolato sul bersaglio sbagliato non vale piu: si rifara al prossimo giro
+        if isinstance(r.get("res"), dict):
+            r["res"].pop("soglia", None)
+        r.pop("res_soglia", None)
+        corrette += 1
+    if corrette and not salva_registro(DIARIO_NAME, righe, _DIARIO_MAX, giorni_protetti=400):
+        return {"corrette": 0, "in_attesa": corrette + restano,
+                "motivo": "il diario non si e salvato: nessuna correzione applicata"}
+    return {"corrette": corrette, "in_attesa": restano}
+
+
+def ripara_prezzi_profili(giorni: int = 7) -> dict:
+    """Riallinea il prezzo dei profili in archivio a quello del diario, dov'erano diversi.
+
+    Il diario e' la fonte del prezzo d'acquisto: e' l'unico prezzo a cui l'occasione e' stata
+    «comprata», e su quello si misurano tutti i rendimenti. L'archivio, per gli eventi in ritardo,
+    aveva registrato il prezzo del giorno in cui il profilo veniva costruito — misurato: 4 profili su
+    22 con scarti fino al +2,93%. Due verita per lo stesso acquisto significa che scenari e archivio
+    misurano rendimenti diversi, quindi una delle due e' sbagliata: e' quella dell'archivio.
+    Il prezzo di allora non si butta: finisce in `prezzo_al_momento_del_profilo`, dov'e' un dato vero."""
+    oggi = datetime.date.today()
+    dal = (oggi - datetime.timedelta(days=max(0, giorni))).isoformat()
+    # il prezzo giusto, per (ticker, momento, giorno) dal diario
+    veri = {}
+    for r in load_registro_completo(DIARIO_NAME, load_diario()):
+        if r.get("evento") in eventi_acquisto() and r.get("prezzo"):
+            veri[(str(r.get("ticker")).upper(), r.get("evento"),
+                  str(r.get("data") or "")[:10])] = r["prezzo"]
+    riallineati, file_toccati = 0, []
+    for nome in sorted(indice_archivio()):
+        if not nome.startswith(ARC_PROFILI + "/"):
+            continue
+        g = os.path.basename(nome)[:10]
+        if len(g) != 10 or g < dal:
+            continue
+        prof = read_data_json(nome, None)
+        if not isinstance(prof, list) or not prof:
+            continue          # non si legge: non si tocca
+        cambi = 0
+        for p in prof:
+            if not isinstance(p, dict) or p.get("scartata") or not p.get("momento"):
+                continue
+            giusto = veri.get((str(p.get("ticker")).upper(), p.get("momento"),
+                               str(p.get("giorno") or "")[:10]))
+            if giusto is None or p.get("prezzo") is None:
+                continue
+            if abs(float(p["prezzo"]) - float(giusto)) <= 0.005:
+                continue
+            if p.get("prezzo_al_momento_del_profilo") is None:
+                p["prezzo_al_momento_del_profilo"] = p["prezzo"]
+            p["prezzo"] = giusto
+            p["prezzo_riallineato_il"] = _arc_ora()
+            cambi += 1
+        if cambi and write_data_json(nome, prof) and nome not in _SALVATAGGI_FALLITI:
+            riallineati += cambi
+            file_toccati.append(nome)
+    return {"riallineati": riallineati, "file": file_toccati}
