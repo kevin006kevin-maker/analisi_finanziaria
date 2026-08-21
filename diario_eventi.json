@@ -1132,5 +1132,32 @@
 },
 "stop": 25.5465,
 "atr": 6.2718
+},
+{
+"episodio": "short:WMT:2026-08-20",
+"ticker": "WMT",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:10",
+"data": "2026-08-20 15:42",
+"prezzo": 104.53,
+"conv": 64,
+"prob_gain": 59,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": 3.8732,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": 113.9348,
+"media20": 112.497,
+"quattro_atr": 116.8057,
+"meta_caduta": 112.785,
+"bollinger": 117.9512,
+"consigliata": 113.9348
+},
+"stop": 98.3921,
+"atr": 3.0689
 }
 ]
