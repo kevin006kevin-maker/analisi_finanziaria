@@ -484,5 +484,32 @@
 },
 "stop": 15.2198,
 "atr": 0.4251
+},
+{
+"episodio": "long:SMCI:2026-08-17",
+"ticker": "SMCI",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:09",
+"data": "2026-08-17 16:23",
+"prezzo": 38.59,
+"conv": 60,
+"prob_gain": 54,
+"prob_loss": 38,
+"reliab": "🔴 Bassa",
+"mkt": 4.4206,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": null,
+"media20": null,
+"quattro_atr": 48.8343,
+"meta_caduta": 44.38,
+"bollinger": 41.2376,
+"consigliata": 48.8343
+},
+"stop": 33.4678,
+"atr": 2.5611
 }
 ]
