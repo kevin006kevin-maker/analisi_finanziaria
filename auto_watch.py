@@ -391,6 +391,21 @@ def main():
     except Exception as e:
         log(f"Errore statistiche dell'archivio: {e!r}")
 
+    # CONTEGGI DEI REGISTRI: quante righe dovrebbe avere ciascuno. È il numero che permette di
+    # distinguere «il file non esiste» da «non riesco a leggerlo» — due cose che arrivano identiche
+    # e che il 16/08/2026 sono costate due registri. Si salva una volta per giro, alla fine, quando
+    # tutte le scritture del giro sono passate.
+    try:
+        if fu.salva_conteggi():
+            _c = fu._conteggi_registri()
+            log(f"Conteggi dei registri aggiornati: {len([k for k in _c if '/' not in k])} "
+                f"registri sorvegliati.")
+        else:
+            log("⚠️ Conteggi dei registri NON salvati: la protezione contro le letture fallite "
+                "resta ai valori del giro precedente.")
+    except Exception as e:
+        log(f"Errore conteggi dei registri: {e!r}")
+
     # SALVATAGGI FALLITI: se il salvataggio sul branch non è riuscito, sui server del lavoro
     # automatico il file locale muore col giro e il dato svanisce. Prima falliva in silenzio; ora
     # lascia un segno qui, dove si legge.

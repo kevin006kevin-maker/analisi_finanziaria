@@ -2203,6 +2203,81 @@ _TRACK_RECORD_MAX = 2500       # ~212 byte/riga → ~530 KB
 _MARGINE_TETTO = 1.3       # caso peggiore ~860 KB: resta un margine vero sotto il muro di 1 MB
 
 
+# QUANTE RIGHE DOVREBBE AVERE OGNI REGISTRO. È il dato in più che permette di distinguere «questo
+# file non esiste ancora» da «non riesco a leggerlo» — due situazioni che arrivano identiche (lista
+# vuota) e che nessun confronto fra vecchio e nuovo potrà mai separare. Senza questo numero, una
+# lettura fallita seguita da una scrittura cancella lo storico, ed è esattamente com'è andata il
+# 16/08/2026. Sta sotto archivio/, quindi è protetto dalle stesse guardie che protegge.
+CONTEGGI_NAME = "archivio/conteggi_registri.json"
+_CONTEGGI_MEM = {}        # aggiornato a ogni scrittura riuscita; si salva una volta per giro
+
+
+def _quante(obj) -> int:
+    return len(obj) if isinstance(obj, (list, dict)) else 0
+
+
+def _conteggi_registri() -> dict:
+    d = read_data_json(CONTEGGI_NAME, None)
+    d = d if isinstance(d, dict) else {}
+    if _CONTEGGI_MEM:
+        d = dict(d)
+        d.update(_CONTEGGI_MEM)
+    return d
+
+
+def _sotto_il_conteggio_atteso(name: str, obj) -> bool:
+    """True se stiamo per scrivere MENO righe di quelle che quel registro dovrebbe avere.
+    Vale solo per i registri che possono soltanto crescere: i file di stato vivo si accorciano per
+    davvero (una voce rimossa è un dato reale) e li protegge _crollo_stato."""
+    if name not in _REGISTRI_APPEND_ONLY and not name.startswith("archivio/"):
+        return False
+    atteso = (_conteggi_registri().get(name) or {}).get("righe")
+    try:
+        return bool(atteso) and _quante(obj) < int(atteso)
+    except (TypeError, ValueError):
+        return False
+
+
+def _segna_conteggio(name: str, obj) -> None:
+    """Ricorda quante righe ha adesso quel registro. In memoria: si scrive una volta per giro,
+    perché salvarlo a ogni scrittura raddoppierebbe le chiamate all'API per nulla. Se il giro muore
+    prima di salvarlo il numero resta quello vecchio, cioè più BASSO del vero — che è il verso
+    innocuo dell'errore: protegge un po' meno, non blocca niente di legittimo."""
+    if name in _REGISTRI_APPEND_ONLY or name.startswith("archivio/"):
+        _CONTEGGI_MEM[name] = {"righe": _quante(obj), "aggiornato": _now_iso()}
+
+
+def salva_conteggi() -> bool:
+    """Mette su disco i conteggi raccolti in questo giro. Da chiamare una volta, alla fine."""
+    if not _CONTEGGI_MEM:
+        return True
+    fuori = read_data_json(CONTEGGI_NAME, None)
+    fuori = dict(fuori) if isinstance(fuori, dict) else {}
+    for k, v in _CONTEGGI_MEM.items():
+        vecchio = (fuori.get(k) or {}).get("righe") or 0
+        nuovo = v.get("righe") or 0
+        # Il conteggio segue SEMPRE la realtà, comprese le riduzioni. E le riduzioni sono legittime:
+        # l'archiviazione sposta le righe vecchie, e mettere da parte un registro lo azzera. Quelle
+        # passano tutte da force=True, cioè da una scelta dichiarata — e se il conteggio non
+        # scendesse con loro, da quel momento bloccherebbe ogni scrittura successiva credendo di
+        # difendere righe che nessuno vuole più. Quando scende si annota da quanto veniva, così un
+        # calo inatteso resta visibile invece di passare liscio.
+        fuori[k] = dict(v) if nuovo >= vecchio else dict(v, era=vecchio)
+    return write_data_json(CONTEGGI_NAME, fuori, force=True)
+
+
+def azzera_conteggio(name: str) -> bool:
+    """Rimette a zero il numero atteso di un registro. Serve quando lo si svuota di proposito —
+    per esempio mettendo da parte i dati vecchi — altrimenti la guardia bloccherebbe per sempre
+    ogni scrittura successiva, credendo di stare difendendo righe che nessuno vuole più."""
+    fuori = read_data_json(CONTEGGI_NAME, None)
+    if not isinstance(fuori, dict):
+        return False
+    _CONTEGGI_MEM.pop(name, None)
+    fuori[name] = {"righe": 0, "aggiornato": _now_iso(), "azzerato": True}
+    return write_data_json(CONTEGGI_NAME, fuori, force=True)
+
+
 def _riduce_storico(name: str, nuovo_str: str, vecchio_str: str, force: bool = False) -> bool:
     """True se scrivere `nuovo_str` su un REGISTRO STORICO ne ridurrebbe il numero di elementi.
     Uno storico che si accorcia non è un dato reale: è il sintomo di una lettura fallita a monte
@@ -2292,6 +2367,15 @@ def write_data_json(name: str, obj, force: bool = False) -> bool:
         if isinstance(esistente, (list, dict)) and _scrittura_pericolosa(
                 name, content, json.dumps(esistente, ensure_ascii=False, indent=0)):
             return False    # non distruggo dati
+        if esistente is None and _sotto_il_conteggio_atteso(name, obj):
+            # ECCO IL BUCO CHE HA FATTO PERDERE I DATI IL 16/08/2026, e questa è la sua chiusura.
+            # Quando la rilettura NON riesce, il confronto qui sopra viene saltato del tutto: e
+            # allora un chiamante che ha ricevuto [] da una lettura fallita, ci ha aggiunto una
+            # riga e riscrive, cancella tutto lo storico senza che nulla protesti. Il punto è che
+            # «il file non esiste» e «non riesco a leggerlo» arrivano IDENTICI, quindi nessun
+            # confronto potrà mai separarli: serve un dato in più, tenuto altrove — quante righe
+            # quel registro dovrebbe avere. Se ne stiamo scrivendo meno, non si scrive.
+            return False
     ok_locale = False
     percorso = os.path.join(APPDIR, name)     # fuori dal try: serve anche al ripulisci-temporaneo
     try:
@@ -2338,7 +2422,18 @@ def write_data_json(name: str, obj, force: bool = False) -> bool:
         _fetch_remote_json.clear()
     except Exception:
         pass
-    return bool(ok_locale or ok_remoto)
+    esito = bool(ok_locale or ok_remoto)
+    # Quante righe ha adesso: è il numero che permetterà, la prossima volta, di accorgersi che una
+    # lettura è fallita invece di scrivere una riga sola sopra tutto il resto. Si segna solo se il
+    # salvataggio è andato — e nel lavoro automatico solo se è arrivato DAVVERO sul deposito,
+    # perché lì il file locale muore col giro e un conteggio più alto del vero bloccherebbe le
+    # scritture successive.
+    if esito and ok_remoto:
+        try:
+            _segna_conteggio(name, obj)
+        except Exception:
+            pass
+    return esito
 
 
 # ---------------------------------------------------------------------------
@@ -7989,7 +8084,8 @@ def episodio_corrente(kind, tk, crea_se_manca=False):
     return f"{kind}:{TK}:{_today_iso()}" if crea_se_manca else None
 
 
-def registra_evento(kind, tk, evento, valori=None, episodio=None, note=None, dovuto_il=None) -> bool:
+def registra_evento(kind, tk, evento, valori=None, episodio=None, note=None, dovuto_il=None,
+                    profilo=True) -> bool:
     """Scrive un evento nel diario. Ritorna True se l'ha scritto, False se c'era già.
     UN SOLO evento per tipo dentro un episodio: se «fine_osservazione» è già a verbale non viene
     riscritto, altrimenti a ogni giro del lavoro automatico verrebbe sovrascritto con i valori di
@@ -8043,12 +8139,67 @@ def registra_evento(kind, tk, evento, valori=None, episodio=None, note=None, dov
     # e finora buttava, più com'era il mondo e il suo settore quel giorno, più le notizie. Sta qui e
     # non nei chiamanti perché registra_evento è il passaggio obbligato di ogni cambio di stato:
     # sette chiamanti, un solo punto da ricordare.
-    if evento in eventi_acquisto():
+    # `profilo=False` serve a un caso solo, ed è un caso di onestà: gli eventi RICOSTRUITI da un
+    # registro più vecchio. Di quelli si conosce la data vera d'ingresso ma NON le caratteristiche
+    # di quel giorno, perché nessuno le aveva salvate. Attaccarci il profilo di oggi vorrebbe dire
+    # accoppiare le caratteristiche di una data con l'acquisto di un'altra — cioè esattamente il
+    # difetto per cui questo archivio esiste. Meglio un profilo che manca, e si vede che manca.
+    if profilo and evento in eventi_acquisto():
         try:
             registra_profilo_occasione(kind, TK, evento, episodio=eid)
         except Exception:
             pass        # un profilo mancato non deve mai impedire di scrivere l'evento nel diario
     return True
+
+
+def riallinea_diario_osservazioni() -> dict:
+    """Riporta nel diario le occasioni GIÀ in osservazione che non hanno il loro ingresso a verbale.
+
+    A cosa serve. L'ingresso in osservazione viene messo a verbale una volta sola: nell'istante in
+    cui la voce riceve la sua fotografia iniziale. Un'occasione che quella fotografia la ha già —
+    43 delle 45 in corso — non riscriverebbe mai più quell'evento. Quindi se il diario viene
+    azzerato, quelle occasioni diventano ORFANE per sempre: nessun episodio, nessun momento
+    d'acquisto, niente in archivio. E sono proprio quelle che nei prossimi giorni dovrebbero
+    riempirlo, perché sono le più avanti di tutte.
+
+    Come lo fa in modo onesto. La data e i valori vengono dalla fotografia iniziale, che è la verità
+    congelata di quel giorno — NON da oggi, e non azzerando la fotografia per farla ricalcolare
+    (i punti più vecchi si diradano col tempo, quindi ricalcolarla darebbe una data più recente di
+    quella vera). E l'evento nasce SENZA profilo: di quel giorno le caratteristiche non esistono, e
+    inventarle con quelle di oggi sarebbe peggio che lasciarle mancare.
+
+    È ripetibile senza danno: un evento già a verbale non viene riscritto."""
+    watch = load_opp_watch() or {}
+    esistenti = {(r.get("kind"), r.get("ticker"))
+                 for r in load_registro_completo(DIARIO_NAME, load_diario())
+                 if r.get("evento") == "ingresso_osservazione"}
+    scritti, gia_presenti, senza_dati = 0, 0, 0
+    for chiave, e in sorted(watch.items()):
+        e = e or {}
+        kind = e.get("kind") or (str(chiave).split(":")[0] if ":" in str(chiave) else "short")
+        tk = str(e.get("ticker") or str(chiave).split(":")[-1]).upper()
+        if (kind, tk) in esistenti:
+            gia_presenti += 1
+            continue
+        punto = e.get("primo") or ((e.get("obs") or [{}]) or [{}])[0] or {}
+        data = str(punto.get("date") or "")
+        if not data or punto.get("price") in (None, 0):
+            senza_dati += 1
+            continue
+        if registra_evento(
+                kind, tk, "ingresso_osservazione",
+                episodio=f"{kind}:{tk}:{data[:10]}",     # l'episodio prende la data VERA, non oggi
+                valori={"data": data, "prezzo": punto.get("price"), "conv": punto.get("conv"),
+                        "prob_gain": punto.get("prob_gain"), "prob_loss": punto.get("prob_loss"),
+                        "reliab": punto.get("reliab"), "mkt": punto.get("mkt"),
+                        "fonte": "riallineato dal registro delle osservazioni"},
+                note="ingresso ricostruito dalla fotografia iniziale: la data e i valori sono "
+                     "quelli veri di quel giorno, ma le altre caratteristiche di allora non "
+                     "esistono, quindi questo momento non ha un profilo in archivio",
+                profilo=False):
+            scritti += 1
+    return {"scritti": scritti, "gia_presenti": gia_presenti, "senza_dati": senza_dati,
+            "in_osservazione": len(watch)}
 
 
 def diario_episodi(kind=None) -> dict:
