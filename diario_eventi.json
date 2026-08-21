@@ -1898,5 +1898,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:MNSO:2026-08-17",
+"ticker": "MNSO",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-08-21 10:38",
+"data": "2026-08-20 22:56",
+"prezzo": 11.13,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-08-20",
+"soglie": {
+"media50": 12.1306,
+"media20": 12.1335,
+"quattro_atr": 12.5323,
+"meta_caduta": 12.33,
+"bollinger": 13.5911,
+"consigliata": 12.1306
+},
+"stop": 10.4288,
+"atr": 0.3506
 }
 ]
