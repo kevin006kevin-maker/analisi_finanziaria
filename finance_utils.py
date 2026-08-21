@@ -9667,20 +9667,88 @@ def _mediana(xs):
     return round(float(np.median(xs)), 3) if xs else None
 
 
+def _identita_occasione(p: dict) -> str:
+    """Che cosa conta come UNA occasione. Serve perché la stessa occasione comprata compare in più
+    scenari (fino a cinque) e in più orizzonti: contare le righe la conta più volte, e sul numero di
+    righe si decide se una differenza è credibile. Misurato sui dati veri: 42 righe comprate erano
+    26 occasioni distinte, cioè il conteggio gonfiava del 62%."""
+    if not isinstance(p, dict):
+        return ""
+    if p.get("episodio"):
+        return str(p["episodio"])
+    # le bocciature non hanno un episodio: la loro identità è il titolo (una bocciatura dello stesso
+    # titolo in giorni diversi non è un caso indipendente, è lo stesso titolo guardato due volte)
+    return "%s:%s" % (p.get("kind") or "", str(p.get("ticker") or "").upper())
+
+
+# GRANDEZZE CHE DICONO LA STESSA COSA DUE VOLTE. I «pezzi del giudizio» sono ricavati dalle
+# caratteristiche del titolo — spesso solo col segno cambiato — quindi in una classifica si
+# spartirebbero i primi posti raddoppiando lo stesso segnale. Restano visibili, ma marcate: chi legge
+# deve poter vedere che «Quanto è a sconto» e «Quanto è scesa dai massimi» sono la stessa cosa.
+_DOPPIONI = {
+    "discount": "dd_high", "histcheap": "hist_z", "riskadj": "sortino", "ddpen": "ulcer",
+    "momentum": "perf_5d", "oversold": "rsi", "rebound": "rebound_pot",
+    "trend": "above_sma200", "prob": "prob_gain",
+}
+
+
+def _separazione(gv, gp) -> float:
+    """Quanto due gruppi sono separati, in un'unità confrontabile fra caratteristiche diverse.
+
+    Serve per ordinare la classifica. La differenza grezza NON si può usare: «quanto viene scambiata
+    al giorno» si misura in milioni e «qualità della salita» in unità, quindi in cima finirebbe
+    sempre il volume — non perché separi meglio, ma perché ha i numeri più grandi.
+    Qui la differenza fra le mediane è divisa per quanto i valori sono sparsi in generale: il
+    risultato è «di quante larghezze tipiche i due gruppi sono distanti», che si può confrontare."""
+    try:
+        tutti = [float(x) for x in list(gv) + list(gp)]
+        if len(tutti) < 4:
+            return 0.0
+        med = float(np.median(tutti))
+        sparsa = float(np.median([abs(x - med) for x in tutti])) * 1.4826
+        if sparsa <= 1e-9:
+            sparsa = float(np.std(tutti))
+        if sparsa <= 1e-9:
+            return 0.0
+        return abs(float(np.median(gv)) - float(np.median(gp))) / sparsa
+    except Exception:
+        return 0.0
+
+
 def sintesi_apprendimento(kind: str = None, orizzonte: str = "30g", momento: str = None,
                           solo_scartate: bool = None) -> dict:
-    """Per ogni caratteristica: quanto valeva nelle occasioni che hanno guadagnato e quanto in
-    quelle che hanno perso. Niente modello: una differenza fra due mediane, con il numero di casi
-    accanto — perché è quello che dice se puoi crederci.
+    """Per ogni caratteristica: quanto valeva nelle occasioni che hanno guadagnato e quanto in quelle
+    che hanno perso. Niente modello: una differenza fra due mediane, con accanto tre difese contro il
+    modo più comune di sbagliare con i dati — credere a una differenza che non significa niente.
 
-    Il campo `solidita` non è decorazione: con meno di 30 casi per lato qualunque differenza è
-    compatibile col caso, e presentarla come scoperta è il modo più comune di sbagliare con i dati."""
+    LE TRE DIFESE, e perché ognuna serve:
+
+    1. SI CONTANO LE OCCASIONI, NON LE RIGHE. La stessa occasione compare in più scenari e in più
+       orizzonti: contare le righe la conta più volte e gonfia la fiducia. Il giudizio di solidità
+       guarda le occasioni distinte; le righe restano visibili accanto, perché dicono quanto si è
+       misurato — non quanto si sa.
+
+    2. IN QUANTE GIORNATE LA DIFFERENZA SI RIPETE. Le occasioni dello stesso giorno salgono e
+       scendono insieme, quindi sessanta casi di un giorno valgono molto meno di sessanta casi di
+       venti giorni. Invece di correggere con una formula — che andrebbe creduta — si conta in quante
+       giornate la differenza va nello stesso verso. È un conteggio, non una statistica: se una
+       caratteristica funziona solo grazie a due giornate fortunate, qui si vede.
+
+    3. SCOPERTA SU UNA META, CONFERMA SULL'ALTRA. Si confrontano sei formule per cinque scenari e tre
+       orizzonti: qualcosa sembrerà buono per caso, è matematica. L'unica difesa vera è scegliere su
+       una parte dei dati e verificare sull'altra. La metà più vecchia serve a scoprire, la più
+       recente a confermare.
+       ATTENZIONE a come si legge: se una caratteristica non si conferma può essere rumore, OPPURE
+       può valere solo in certi mercati — una regola buona quando la borsa è calma può non tenere
+       quando è tesa, e non è un difetto, è un'informazione. Per distinguere le due cose si guarda
+       com'era il mondo nelle due metà: l'archivio lo registra ogni giorno esattamente per questo.
+       Per questo la conferma è una COLONNA e non un filtro: nulla viene nascosto."""
     profili = {p.get("id"): p for p in _arc_leggi_giorni(ARC_PROFILI) if isinstance(p, dict)}
     esiti = [e for e in _arc_leggi_giorni(ARC_ESITI)
              if isinstance(e, dict) and e.get("orizzonte") == orizzonte
              and not e.get("dati_sospetti") and not e.get("finestra_incompleta")
              and e.get("resa") is not None]
-    vinte, perse = [], []
+    coppie = []
     for e in esiti:
         p = profili.get(e.get("profilo"))
         if not p:
@@ -9693,36 +9761,110 @@ def sintesi_apprendimento(kind: str = None, orizzonte: str = "30g", momento: str
             continue
         if solo_scartate is False and p.get("scartata"):
             continue
-        (vinte if e["resa"] > 0 else perse).append((p, e))
-    caratteristiche = {}
+        coppie.append((p, e))
+    vinte = [(p, e) for p, e in coppie if e["resa"] > 0]
+    perse = [(p, e) for p, e in coppie if e["resa"] <= 0]
+
+    # la divisione in due metà per data d'acquisto: la più vecchia scopre, la più recente conferma
+    giorni_ord = sorted({str(p.get("giorno") or "") for p, _ in coppie if p.get("giorno")})
+    taglio = giorni_ord[len(giorni_ord) // 2] if len(giorni_ord) >= 4 else None
+
+    def _val(p, gruppo, campo):
+        x = (p.get(gruppo) or {}).get(campo)
+        return x if isinstance(x, (int, float)) and not isinstance(x, bool) else None
+
+    def _diff(sotto, gruppo, campo):
+        """(differenza fra le mediane, quanti a favore, quanti contro) su un sottoinsieme."""
+        gv = [v for v in (_val(p, gruppo, campo) for p, e in sotto if e["resa"] > 0) if v is not None]
+        gp = [v for v in (_val(p, gruppo, campo) for p, e in sotto if e["resa"] <= 0) if v is not None]
+        if not gv or not gp:
+            return None, len(gv), len(gp), gv, gp
+        return (round(_mediana(gv) - _mediana(gp), 3)), len(gv), len(gp), gv, gp
+
     campi = [("titolo", k) for k in _PROF_TITOLO] + \
             [("punteggi", k) for k in _PROF_PUNTEGGI] + \
             [("fattori", k) for k in ("discount", "histcheap", "riskadj", "ddpen", "momentum",
                                       "prob", "oversold", "rebound", "trend", "relstrength",
                                       "quality", "valcheap", "trappen")]
+    caratteristiche = {}
     for gruppo, campo in campi:
-        gv = [(p.get(gruppo) or {}).get(campo) for p, _ in vinte]
-        gp = [(p.get(gruppo) or {}).get(campo) for p, _ in perse]
-        gv = [x for x in gv if isinstance(x, (int, float)) and not isinstance(x, bool)]
-        gp = [x for x in gp if isinstance(x, (int, float)) and not isinstance(x, bool)]
-        if not gv or not gp:
+        d_tot, nv, np_, gv, gp = _diff(coppie, gruppo, campo)
+        if d_tot is None:
             continue
-        mv, mp = _mediana(gv), _mediana(gp)
+        # 1. quante OCCASIONI distinte, non quante righe
+        occ_v = {_identita_occasione(p) for p, e in coppie
+                 if e["resa"] > 0 and _val(p, gruppo, campo) is not None}
+        occ_p = {_identita_occasione(p) for p, e in coppie
+                 if e["resa"] <= 0 and _val(p, gruppo, campo) is not None}
+        n_occ = min(len(occ_v), len(occ_p))
+
+        # 2. in quante giornate la differenza va nello stesso verso
+        per_giorno, concordi, giornate_utili = {}, 0, 0
+        for p, e in coppie:
+            if _val(p, gruppo, campo) is None:
+                continue
+            per_giorno.setdefault(str(p.get("giorno") or ""), []).append((p, e))
+        for g, sotto in per_giorno.items():
+            dg, _a, _b, _c, _d = _diff(sotto, gruppo, campo)
+            if dg is None or d_tot == 0:
+                continue
+            giornate_utili += 1
+            if (dg > 0) == (d_tot > 0):
+                concordi += 1
+
+        # 3. scoperta sulla metà vecchia, conferma sulla metà recente
+        d_vecchia = d_recente = None
+        conferma = "dati insufficienti"
+        if taglio:
+            vecchie = [(p, e) for p, e in coppie if str(p.get("giorno") or "") < taglio]
+            recenti = [(p, e) for p, e in coppie if str(p.get("giorno") or "") >= taglio]
+            d_vecchia = _diff(vecchie, gruppo, campo)[0]
+            d_recente = _diff(recenti, gruppo, campo)[0]
+            if d_vecchia is None or d_recente is None:
+                conferma = "dati insufficienti"
+            elif d_vecchia == 0 or d_recente == 0:
+                conferma = "non confermata"
+            elif (d_vecchia > 0) == (d_recente > 0):
+                conferma = "confermata"
+            else:
+                conferma = "si rovescia"
+
         caratteristiche[campo] = {
-            "gruppo": gruppo, "chi_guadagna": mv, "chi_perde": mp,
-            "differenza": (round(mv - mp, 3) if (mv is not None and mp is not None) else None),
-            "casi_guadagno": len(gv), "casi_perdita": len(gp),
-            "solidita": ("da confermare" if min(len(gv), len(gp)) < 30 else
-                         "indicativa" if min(len(gv), len(gp)) < 100 else "solida"),
+            "gruppo": gruppo, "chi_guadagna": _mediana(gv), "chi_perde": _mediana(gp),
+            "differenza": d_tot,
+            "separazione": round(_separazione(gv, gp), 2),
+            "righe_guadagno": nv, "righe_perdita": np_,
+            "occasioni_guadagno": len(occ_v), "occasioni_perdita": len(occ_p),
+            "giornate": giornate_utili, "giornate_concordi": concordi,
+            "giornate_concordi_pct": (round(100 * concordi / giornate_utili)
+                                      if giornate_utili else None),
+            "differenza_meta_vecchia": d_vecchia, "differenza_meta_recente": d_recente,
+            "conferma": conferma,
+            "doppione_di": _DOPPIONI.get(campo),
+            # la solidità guarda le OCCASIONI, non le righe
+            "solidita": ("da confermare" if n_occ < 30 else
+                         "indicativa" if n_occ < 100 else "solida"),
         }
+    # la classifica va sulla SEPARAZIONE (unità confrontabile), e i doppioni non competono per i
+    # primi posti: resterebbero accanto al loro gemello raddoppiando lo stesso segnale
     ordinate = sorted(caratteristiche.items(),
-                      key=lambda kv: abs(kv[1].get("differenza") or 0), reverse=True)
+                      key=lambda kv: (kv[1].get("doppione_di") is not None,
+                                      -(kv[1].get("separazione") or 0)))
+    occ_tot_v = {_identita_occasione(p) for p, _ in vinte}
+    occ_tot_p = {_identita_occasione(p) for p, _ in perse}
     return {"orizzonte": orizzonte, "kind": kind, "momento": momento,
-            "quante_guadagnano": len(vinte), "quante_perdono": len(perse),
+            "quante_guadagnano": len(occ_tot_v), "quante_perdono": len(occ_tot_p),
+            "righe_guadagno": len(vinte), "righe_perdita": len(perse),
+            "giornate_totali": len(giorni_ord),
+            "meta_taglio": taglio,
             "caratteristiche": dict(ordinate),
             "aggiornato": _arc_ora(),
-            "avvertenza": ("Con meno di 30 casi per lato le differenze non sono distinguibili dal "
-                           "caso: la colonna «solidità» dice a quali si può cominciare a credere.")}
+            "avvertenza": ("I conteggi sono di OCCASIONI distinte, non di righe: la stessa occasione "
+                           "compare in più scenari e contarla più volte gonfia la fiducia. Sotto le "
+                           "30 occasioni per lato nessuna differenza è distinguibile dal caso. "
+                           "Guarda anche «in quante giornate» — sessanta casi di un giorno valgono "
+                           "meno di sessanta casi di venti giorni — e la colonna «conferma», che "
+                           "dice se la differenza tiene anche sulla metà più recente dei dati.")}
 
 
 def sintesi_pronta(kind: str = None, orizzonte: str = "30g") -> dict:

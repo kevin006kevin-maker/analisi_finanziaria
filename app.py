@@ -3850,9 +3850,19 @@ if section.startswith("Archivio"):
         # Si legge la sintesi GIA CALCOLATA dal lavoro automatico: ricalcolarla qui vorrebbe dire
         # riscaricare tutto l'archivio a ogni clic, e fra un anno sono centinaia di file.
         _s = fu.sintesi_pronta(kind=_kind, orizzonte=_oriz)
-        _q1, _q2 = st.columns(2)
-        _q1.metric("Occasioni che hanno guadagnato", _s["quante_guadagnano"])
+        _q1, _q2, _q3 = st.columns(3)
+        _q1.metric("Occasioni che hanno guadagnato", _s["quante_guadagnano"],
+                   help="OCCASIONI distinte, non righe: la stessa occasione compare in più scenari "
+                        "e contarla più volte gonficerebbe la fiducia.")
         _q2.metric("Occasioni che hanno perso", _s["quante_perdono"])
+        _q3.metric("Giornate coperte", _s.get("giornate_totali") or 0,
+                   help="Da quante giornate diverse vengono questi casi. Sessanta casi di un giorno "
+                        "valgono molto meno di sessanta casi di venti giorni, perché le occasioni "
+                        "dello stesso giorno salgono e scendono insieme.")
+        if _s.get("righe_guadagno") is not None:
+            st.caption(f"Le righe misurate sono {_s.get('righe_guadagno', 0)} in guadagno e "
+                       f"{_s.get('righe_perdita', 0)} in perdita: sono più delle occasioni perché "
+                       "ogni occasione compare in più scenari. Il giudizio guarda le occasioni.")
         if _s.get("da_file") and _s.get("calcolata_il"):
             st.caption(f"Conti aggiornati al **{_s['calcolata_il']}**. Si rifanno due volte al "
                        "giorno: le mediane non cambiano perché sono arrivati due esiti, e "
@@ -3863,17 +3873,65 @@ if section.startswith("Archivio"):
                     "qualche settimana per i 7 giorni e un paio di mesi per i 30.")
         else:
             st.warning(_s["avvertenza"])
+            _CONF = {"confermata": "✅ sì", "non confermata": "➖ no",
+                     "si rovescia": "❌ si rovescia", "dati insufficienti": "⏳ pochi dati"}
             st.dataframe(pd.DataFrame([
-                {"Caratteristica": fu.nome_caratteristica(k),
+                {"Caratteristica": (fu.nome_caratteristica(k)
+                                    + (" ↺" if v.get("doppione_di") else "")),
                  "Chi ha guadagnato": v["chi_guadagna"],
                  "Chi ha perso": v["chi_perde"], "Differenza": v["differenza"],
-                 "Casi in guadagno": v["casi_guadagno"], "Casi in perdita": v["casi_perdita"],
+                 "Quanto separa": v.get("separazione"),
+                 "Occasioni +": v.get("occasioni_guadagno"),
+                 "Occasioni −": v.get("occasioni_perdita"),
+                 "Giornate d'accordo": (f"{v.get('giornate_concordi')} su {v.get('giornate')}"
+                                        if v.get("giornate") else "—"),
+                 "Si conferma?": _CONF.get(v.get("conferma"), v.get("conferma")),
                  "Ci si può credere?": v["solidita"]}
                 for k, v in _s["caratteristiche"].items()]),
-                use_container_width=True, hide_index=True)
-            st.caption("Ordinate per differenza: in cima quelle che separano di più i due gruppi. "
-                       "La colonna «ci si può credere» va letta prima delle altre — sotto i 30 "
-                       "casi per lato una differenza è compatibile col caso.")
+                use_container_width=True, hide_index=True, column_config={
+                    "Differenza": st.column_config.NumberColumn(
+                        format="%+.3f",
+                        help="La differenza grezza fra le due mediane. Non è confrontabile fra "
+                             "caratteristiche diverse: gli scambi giornalieri si misurano in "
+                             "milioni, la qualità della salita in unità."),
+                    "Quanto separa": st.column_config.NumberColumn(
+                        format="%.2f",
+                        help="Quanto i due gruppi sono distanti, misurato in «larghezze tipiche» "
+                             "dei valori: QUESTO si può confrontare fra caratteristiche diverse, e "
+                             "la classifica è ordinata su questo. Sotto 0,2 la separazione è "
+                             "trascurabile anche se la differenza grezza sembra grande."),
+                    "Occasioni +": st.column_config.NumberColumn(
+                        format="%d", help="Occasioni distinte in guadagno, non righe."),
+                    "Occasioni −": st.column_config.NumberColumn(format="%d"),
+                    "Giornate d'accordo": st.column_config.TextColumn(
+                        help="In quante giornate la differenza va nello stesso verso del totale. "
+                             "Se è 3 su 12, quella differenza è costruita da poche giornate "
+                             "fortunate e non da un comportamento costante."),
+                    "Si conferma?": st.column_config.TextColumn(
+                        help="La metà più vecchia dei dati serve a SCOPRIRE, la più recente a "
+                             "CONFERMARE. «Si rovescia» significa che nella metà recente la "
+                             "differenza va nel verso opposto: quasi sempre era rumore."),
+                })
+            st.caption("**Come si legge, in ordine.** Prima «ci si può credere» e «occasioni»: "
+                       "sotto le 30 occasioni per lato nessuna differenza significa niente. Poi "
+                       "«quanto separa», che è l'unica colonna confrontabile fra caratteristiche "
+                       "diverse — la differenza grezza no, perché ognuna ha la sua unità di misura. "
+                       "Poi «giornate d'accordo»: una differenza costruita da due giornate non è un "
+                       "comportamento. Infine «si conferma»: si confrontano sei formule per cinque "
+                       "scenari e tre orizzonti, quindi qualcosa sembrerà buono per caso — è "
+                       "matematica, non sfortuna. La difesa è scoprire su una metà dei dati e "
+                       "verificare sull'altra.")
+            st.caption("Il segno ↺ marca le caratteristiche che dicono la **stessa cosa** di "
+                       "un'altra vista da un altro lato (per esempio «quanto è a sconto» e «quanto "
+                       "è scesa dai massimi»): restano in tabella ma non competono per i primi "
+                       "posti, altrimenti lo stesso segnale occuperebbe due righe.")
+            if _s.get("meta_taglio"):
+                st.caption(f"La divisione fra le due metà cade al **{data_it(_s['meta_taglio'])}**. "
+                           "Se una caratteristica non si conferma può essere rumore, **oppure** può "
+                           "valere solo in certi mercati: una regola buona a borsa calma può non "
+                           "tenere a borsa tesa, e non è un difetto — è un'informazione. Per "
+                           "distinguerle guarda com'era il mondo nelle due metà, in "
+                           "«📅 Calendario»: l'archivio lo registra ogni giorno per questo.")
     st.stop()
 
 # ===========================================================================
