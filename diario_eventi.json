@@ -1851,5 +1851,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:MARA:2026-08-18",
+"ticker": "MARA",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-08-21 10:38",
+"data": "2026-08-20 22:56",
+"prezzo": 11.15,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-08-21",
+"soglie": {
+"media50": 12.0914,
+"media20": null,
+"quattro_atr": 14.9829,
+"meta_caduta": 13.0,
+"bollinger": 12.6502,
+"consigliata": 12.0914
+},
+"stop": 9.2335,
+"atr": 0.9582
 }
 ]
