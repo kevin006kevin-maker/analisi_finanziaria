@@ -16,6 +16,16 @@
 "note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
 "dovuto_il": null,
 "soglie": {
+"media50": 3.46,
+"media20": 3.457,
+"quattro_atr": 3.5042,
+"meta_caduta": 3.435,
+"bollinger": 3.8664,
+"consigliata": 3.46
+},
+"stop": 2.9579,
+"atr": 0.0911,
+"soglie_contaminate": {
 "media50": 3.4418,
 "media20": 3.358,
 "quattro_atr": 3.5009,
@@ -23,8 +33,8 @@
 "bollinger": 3.8191,
 "consigliata": 3.4418
 },
-"stop": 2.9595,
-"atr": 0.0902
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 5
 },
 {
 "episodio": "long:BSBR:2026-08-17",
@@ -45,13 +55,23 @@
 "soglie": {
 "media50": null,
 "media20": null,
+"quattro_atr": 6.3839,
+"meta_caduta": 5.79,
+"bollinger": 6.0581,
+"consigliata": 6.3839
+},
+"stop": 5.4631,
+"atr": 0.1535,
+"soglie_contaminate": {
+"media50": null,
+"media20": null,
 "quattro_atr": 6.3677,
 "meta_caduta": 5.79,
 "bollinger": 6.0572,
 "consigliata": 6.3677
 },
-"stop": 5.4712,
-"atr": 0.1494
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 4
 },
 {
 "episodio": "long:CCL:2026-08-16",
@@ -72,13 +92,23 @@
 "soglie": {
 "media50": null,
 "media20": null,
+"quattro_atr": 31.936,
+"meta_caduta": 29.51,
+"bollinger": 30.0972,
+"consigliata": 31.936
+},
+"stop": 26.212,
+"atr": 0.954,
+"soglie_contaminate": {
+"media50": null,
+"media20": null,
 "quattro_atr": 31.9895,
 "meta_caduta": 29.51,
 "bollinger": 29.9623,
 "consigliata": 31.9895
 },
-"stop": 26.1853,
-"atr": 0.9674
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 5
 },
 {
 "episodio": "long:CDE:2026-08-17",
@@ -99,13 +129,23 @@
 "soglie": {
 "media50": null,
 "media20": null,
+"quattro_atr": 22.7521,
+"meta_caduta": 19.065,
+"bollinger": 19.9842,
+"consigliata": 22.7521
+},
+"stop": 16.839,
+"atr": 0.9855,
+"soglie_contaminate": {
+"media50": null,
+"media20": null,
 "quattro_atr": 23.2629,
 "meta_caduta": 19.96,
 "bollinger": 21.3392,
 "consigliata": 23.2629
 },
-"stop": 16.5836,
-"atr": 1.1132
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 4
 },
 {
 "episodio": "long:CHTR:2026-08-20",
@@ -126,13 +166,23 @@
 "soglie": {
 "media50": null,
 "media20": null,
+"quattro_atr": 182.368,
+"meta_caduta": 155.08,
+"bollinger": 162.0067,
+"consigliata": 182.368
+},
+"stop": 137.521,
+"atr": 7.4745,
+"soglie_contaminate": {
+"media50": null,
+"media20": null,
 "quattro_atr": 183.5909,
 "meta_caduta": 155.08,
 "bollinger": 165.0433,
 "consigliata": 183.5909
 },
-"stop": 136.9096,
-"atr": 7.7802
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "long:DDS:2026-08-16",
@@ -151,6 +201,16 @@
 "note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
 "dovuto_il": null,
 "soglie": {
+"media50": 574.0284,
+"media20": 598.8245,
+"quattro_atr": 674.6726,
+"meta_caduta": 603.46,
+"bollinger": 650.3481,
+"consigliata": 574.0284
+},
+"stop": 503.9837,
+"atr": 28.4482,
+"soglie_contaminate": {
 "media50": 573.4458,
 "media20": 602.8165,
 "quattro_atr": 671.3806,
@@ -158,8 +218,8 @@
 "bollinger": 649.446,
 "consigliata": 573.4458
 },
-"stop": 505.6297,
-"atr": 27.6251
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 5
 },
 {
 "episodio": "long:DUOL:2026-08-16",
@@ -179,14 +239,24 @@
 "dovuto_il": null,
 "soglie": {
 "media50": null,
+"media20": null,
+"quattro_atr": 166.914,
+"meta_caduta": 138.465,
+"bollinger": 146.2884,
+"consigliata": 166.914
+},
+"stop": 115.788,
+"atr": 8.521,
+"soglie_contaminate": {
+"media50": null,
 "media20": 135.6885,
 "quattro_atr": 167.3344,
 "meta_caduta": 139.93,
 "bollinger": 148.6905,
 "consigliata": 167.3344
 },
-"stop": 115.5778,
-"atr": 8.6261
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 5
 },
 {
 "episodio": "long:FN:2026-08-18",
@@ -205,6 +275,16 @@
 "note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
 "dovuto_il": null,
 "soglie": {
+"media50": 523.5442,
+"media20": null,
+"quattro_atr": 696.6185,
+"meta_caduta": 620.0,
+"bollinger": 614.3793,
+"consigliata": 523.5442
+},
+"stop": 424.1907,
+"atr": 45.4046,
+"soglie_contaminate": {
 "media50": 520.7216,
 "media20": null,
 "quattro_atr": 689.3258,
@@ -212,8 +292,8 @@
 "bollinger": 613.8969,
 "consigliata": 520.7216
 },
-"stop": 427.8371,
-"atr": 43.5814
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 3
 },
 {
 "episodio": "long:FSM:2026-08-18",
@@ -234,13 +314,23 @@
 "soglie": {
 "media50": null,
 "media20": null,
+"quattro_atr": 12.3613,
+"meta_caduta": 11.04,
+"bollinger": 11.8479,
+"consigliata": 12.3613
+},
+"stop": 9.4943,
+"atr": 0.4778,
+"soglie_contaminate": {
+"media50": null,
+"media20": null,
 "quattro_atr": 12.3848,
 "meta_caduta": 11.175,
 "bollinger": 12.1561,
 "consigliata": 12.3848
 },
-"stop": 9.4826,
-"atr": 0.4837
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 3
 },
 {
 "episodio": "long:HBM:2026-08-17",
@@ -261,13 +351,23 @@
 "soglie": {
 "media50": null,
 "media20": null,
+"quattro_atr": 32.3822,
+"meta_caduta": 29.5975,
+"bollinger": 29.513,
+"consigliata": 32.3822
+},
+"stop": 24.7964,
+"atr": 1.2643,
+"soglie_contaminate": {
+"media50": null,
+"media20": null,
 "quattro_atr": 32.5607,
 "meta_caduta": 29.5975,
 "bollinger": 30.1008,
 "consigliata": 32.5607
 },
-"stop": 24.7072,
-"atr": 1.3089
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 4
 },
 {
 "episodio": "long:IAG:2026-08-20",
@@ -288,13 +388,23 @@
 "soglie": {
 "media50": null,
 "media20": null,
+"quattro_atr": 23.4391,
+"meta_caduta": 20.48,
+"bollinger": 21.6272,
+"consigliata": 23.4391
+},
+"stop": 17.8604,
+"atr": 0.9298,
+"soglie_contaminate": {
+"media50": null,
+"media20": null,
 "quattro_atr": 23.4606,
 "meta_caduta": 20.11,
 "bollinger": 20.9619,
 "consigliata": 23.4606
 },
-"stop": 17.8497,
-"atr": 0.9352
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "long:INTR:2026-08-16",
@@ -313,6 +423,16 @@
 "note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
 "dovuto_il": null,
 "soglie": {
+"media50": 5.5204,
+"media20": 5.4575,
+"quattro_atr": 6.1952,
+"meta_caduta": 5.8,
+"bollinger": 5.8774,
+"consigliata": 5.5204
+},
+"stop": 4.6874,
+"atr": 0.2513,
+"soglie_contaminate": {
 "media50": 5.4944,
 "media20": 5.4015,
 "quattro_atr": 6.1928,
@@ -320,8 +440,8 @@
 "bollinger": 5.843,
 "consigliata": 5.4944
 },
-"stop": 4.6886,
-"atr": 0.2507
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 5
 },
 {
 "episodio": "long:ITUB:2026-08-16",
@@ -340,6 +460,16 @@
 "note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
 "dovuto_il": null,
 "soglie": {
+"media50": 8.0666,
+"media20": 8.0565,
+"quattro_atr": 8.2001,
+"meta_caduta": 8.01,
+"bollinger": 8.8993,
+"consigliata": 8.0666
+},
+"stop": 6.9999,
+"atr": 0.2,
+"soglie_contaminate": {
 "media50": 8.0528,
 "media20": 7.8855,
 "quattro_atr": 8.2115,
@@ -347,8 +477,8 @@
 "bollinger": 8.8349,
 "consigliata": 8.0528
 },
-"stop": 6.9943,
-"atr": 0.2029
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 5
 },
 {
 "episodio": "long:KGC:2026-08-16",
@@ -369,13 +499,23 @@
 "soglie": {
 "media50": null,
 "media20": null,
+"quattro_atr": 31.4019,
+"meta_caduta": 28.745,
+"bollinger": 28.7776,
+"consigliata": 31.4019
+},
+"stop": 25.2641,
+"atr": 1.023,
+"soglie_contaminate": {
+"media50": null,
+"media20": null,
 "quattro_atr": 32.0942,
 "meta_caduta": 29.37,
 "bollinger": 30.78,
 "consigliata": 32.0942
 },
-"stop": 24.9179,
-"atr": 1.196
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 5
 },
 {
 "episodio": "long:MNSO:2026-08-17",
@@ -394,6 +534,16 @@
 "note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
 "dovuto_il": null,
 "soglie": {
+"media50": 12.2116,
+"media20": 12.266,
+"quattro_atr": 12.3854,
+"meta_caduta": 12.245,
+"bollinger": 13.5566,
+"consigliata": 12.2116
+},
+"stop": 10.2473,
+"atr": 0.3564,
+"soglie_contaminate": {
 "media50": 12.1306,
 "media20": 12.1335,
 "quattro_atr": 12.3623,
@@ -401,8 +551,8 @@
 "bollinger": 13.5911,
 "consigliata": 12.1306
 },
-"stop": 10.2588,
-"atr": 0.3506
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 4
 },
 {
 "episodio": "long:NEM:2026-08-19",
@@ -429,7 +579,17 @@
 "consigliata": 134.2291
 },
 "stop": 106.8554,
-"atr": 4.5623
+"atr": 4.5623,
+"soglie_contaminate": {
+"media50": null,
+"media20": null,
+"quattro_atr": 134.2291,
+"meta_caduta": 121.81,
+"bollinger": 132.2438,
+"consigliata": 134.2291
+},
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 2
 },
 {
 "episodio": "long:PBR:2026-08-16",
@@ -449,14 +609,24 @@
 "dovuto_il": null,
 "soglie": {
 "media50": null,
+"media20": 18.452,
+"quattro_atr": 19.8127,
+"meta_caduta": 18.955,
+"bollinger": 19.4212,
+"consigliata": 19.8127
+},
+"stop": 16.9136,
+"atr": 0.4832,
+"soglie_contaminate": {
+"media50": null,
 "media20": 18.417,
 "quattro_atr": 19.9434,
 "meta_caduta": 18.64,
 "bollinger": 19.3718,
 "consigliata": 19.9434
 },
-"stop": 16.8483,
-"atr": 0.5158
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 5
 },
 {
 "episodio": "long:PBR-A:2026-08-17",
@@ -476,14 +646,24 @@
 "dovuto_il": null,
 "soglie": {
 "media50": null,
+"media20": 16.4205,
+"quattro_atr": 17.6726,
+"meta_caduta": 16.895,
+"bollinger": 17.1099,
+"consigliata": 17.6726
+},
+"stop": 15.2687,
+"atr": 0.4007,
+"soglie_contaminate": {
+"media50": null,
 "media20": 16.423,
 "quattro_atr": 17.7704,
 "meta_caduta": 16.61,
 "bollinger": 17.1286,
 "consigliata": 17.7704
 },
-"stop": 15.2198,
-"atr": 0.4251
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 4
 },
 {
 "episodio": "long:SMCI:2026-08-17",
@@ -504,13 +684,23 @@
 "soglie": {
 "media50": null,
 "media20": null,
+"quattro_atr": 48.8177,
+"meta_caduta": 44.38,
+"bollinger": 40.2545,
+"consigliata": 48.8177
+},
+"stop": 33.4761,
+"atr": 2.5569,
+"soglie_contaminate": {
+"media50": null,
+"media20": null,
 "quattro_atr": 48.8343,
 "meta_caduta": 44.38,
 "bollinger": 41.2376,
 "consigliata": 48.8343
 },
-"stop": 33.4678,
-"atr": 2.5611
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 4
 },
 {
 "episodio": "long:STLAM.MI:2026-08-17",
@@ -529,6 +719,16 @@
 "note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
 "dovuto_il": null,
 "soglie": {
+"media50": 5.0957,
+"media20": 4.8647,
+"quattro_atr": 5.3717,
+"meta_caduta": 5.8227,
+"bollinger": 5.3278,
+"consigliata": 5.0957
+},
+"stop": 4.2524,
+"atr": 0.1866,
+"soglie_contaminate": {
 "media50": 5.0479,
 "media20": 4.8178,
 "quattro_atr": 5.3954,
@@ -536,8 +736,8 @@
 "bollinger": 5.2911,
 "consigliata": 5.0479
 },
-"stop": 4.2405,
-"atr": 0.1925
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 4
 },
 {
 "episodio": "long:STMMI.MI:2026-08-17",
@@ -556,6 +756,16 @@
 "note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
 "dovuto_il": null,
 "soglie": {
+"media50": 56.4012,
+"media20": null,
+"quattro_atr": 58.7166,
+"meta_caduta": 58.9675,
+"bollinger": 53.1394,
+"consigliata": 56.4012
+},
+"stop": 43.5192,
+"atr": 2.5329,
+"soglie_contaminate": {
 "media50": 55.6308,
 "media20": null,
 "quattro_atr": 58.003,
@@ -563,8 +773,8 @@
 "bollinger": 49.5224,
 "consigliata": 55.6308
 },
-"stop": 43.876,
-"atr": 2.3545
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 4
 },
 {
 "episodio": "long:STUB:2026-08-17",
@@ -583,6 +793,16 @@
 "note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
 "dovuto_il": null,
 "soglie": {
+"media50": 10.154,
+"media20": 8.44,
+"quattro_atr": 10.1998,
+"meta_caduta": 10.7075,
+"bollinger": 9.6301,
+"consigliata": 10.154
+},
+"stop": 6.4876,
+"atr": 0.6187,
+"soglie_contaminate": {
 "media50": 10.0214,
 "media20": 8.2685,
 "quattro_atr": 10.0374,
@@ -590,8 +810,8 @@
 "bollinger": 9.7845,
 "consigliata": 10.0214
 },
-"stop": 6.5688,
-"atr": 0.5781
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 4
 },
 {
 "episodio": "long:T:2026-08-17",
@@ -612,13 +832,23 @@
 "soglie": {
 "media50": null,
 "media20": null,
+"quattro_atr": 27.3551,
+"meta_caduta": 25.075,
+"bollinger": 25.2514,
+"consigliata": 27.3551
+},
+"stop": 23.6574,
+"atr": 0.6163,
+"soglie_contaminate": {
+"media50": null,
+"media20": null,
 "quattro_atr": 27.2484,
 "meta_caduta": 25.02,
 "bollinger": 25.4725,
 "consigliata": 27.2484
 },
-"stop": 23.7108,
-"atr": 0.5896
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 4
 },
 {
 "episodio": "long:UMC:2026-08-17",
@@ -637,6 +867,16 @@
 "note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
 "dovuto_il": null,
 "soglie": {
+"media50": 21.9012,
+"media20": 19.1635,
+"quattro_atr": 23.9831,
+"meta_caduta": 23.58,
+"bollinger": 21.1384,
+"consigliata": 21.9012
+},
+"stop": 16.7334,
+"atr": 1.2083,
+"soglie_contaminate": {
 "media50": 21.826,
 "media20": null,
 "quattro_atr": 23.6855,
@@ -644,8 +884,8 @@
 "bollinger": 20.4317,
 "consigliata": 21.826
 },
-"stop": 16.8822,
-"atr": 1.1339
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 4
 },
 {
 "episodio": "short:BBAR:2026-08-17",
@@ -664,6 +904,16 @@
 "note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
 "dovuto_il": null,
 "soglie": {
+"media50": 18.9936,
+"media20": 17.731,
+"quattro_atr": 19.147,
+"meta_caduta": 18.6,
+"bollinger": 21.083,
+"consigliata": 18.9936
+},
+"stop": 13.3765,
+"atr": 0.9617,
+"soglie_contaminate": {
 "media50": 18.8572,
 "media20": 17.1725,
 "quattro_atr": 19.0395,
@@ -671,8 +921,8 @@
 "bollinger": 20.7237,
 "consigliata": 18.8572
 },
-"stop": 13.4303,
-"atr": 0.9349
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 4
 },
 {
 "episodio": "short:BIDU:2026-08-18",
@@ -691,6 +941,16 @@
 "note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
 "dovuto_il": null,
 "soglie": {
+"media50": 109.9472,
+"media20": 105.954,
+"quattro_atr": 113.2675,
+"meta_caduta": 117.04,
+"bollinger": 117.2169,
+"consigliata": 109.9472
+},
+"stop": 89.4063,
+"atr": 3.9769,
+"soglie_contaminate": {
 "media50": 109.3644,
 "media20": 105.183,
 "quattro_atr": 112.9484,
@@ -698,8 +958,8 @@
 "bollinger": 118.0316,
 "consigliata": 109.3644
 },
-"stop": 89.5658,
-"atr": 3.8971
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 3
 },
 {
 "episodio": "short:CAPR:2026-08-16",
@@ -718,6 +978,16 @@
 "note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
 "dovuto_il": null,
 "soglie": {
+"media50": 17.8294,
+"media20": 7.863,
+"quattro_atr": 12.4947,
+"meta_caduta": 18.525,
+"bollinger": 20.1033,
+"consigliata": 12.4947
+},
+"stop": 3.7277,
+"atr": 1.4612,
+"soglie_contaminate": {
 "media50": 16.6898,
 "media20": null,
 "quattro_atr": 12.2765,
@@ -725,8 +995,8 @@
 "bollinger": 13.1213,
 "consigliata": 12.2765
 },
-"stop": 3.8367,
-"atr": 1.4066
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 5
 },
 {
 "episodio": "short:CDNL:2026-08-18",
@@ -745,6 +1015,16 @@
 "note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
 "dovuto_il": null,
 "soglie": {
+"media50": 66.8131,
+"media20": 54.7305,
+"quattro_atr": 65.3555,
+"meta_caduta": 68.5425,
+"bollinger": 78.6194,
+"consigliata": 65.3555
+},
+"stop": 31.4847,
+"atr": 5.6451,
+"soglie_contaminate": {
 "media50": 66.4219,
 "media20": 53.2795,
 "quattro_atr": 64.5283,
@@ -752,8 +1032,8 @@
 "bollinger": 76.4531,
 "consigliata": 64.5283
 },
-"stop": 31.8983,
-"atr": 5.4383
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 3
 },
 {
 "episodio": "short:CLBT:2026-08-17",
@@ -772,6 +1052,16 @@
 "note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
 "dovuto_il": null,
 "soglie": {
+"media50": 14.3301,
+"media20": 14.2428,
+"quattro_atr": 14.422,
+"meta_caduta": 13.5275,
+"bollinger": 17.9314,
+"consigliata": 14.3301
+},
+"stop": 8.4565,
+"atr": 0.9942,
+"soglie_contaminate": {
 "media50": 14.2529,
 "media20": 13.9583,
 "quattro_atr": 14.1517,
@@ -779,8 +1069,8 @@
 "bollinger": 18.0773,
 "consigliata": 14.1517
 },
-"stop": 8.5917,
-"atr": 0.9267
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 4
 },
 {
 "episodio": "short:CLM:2026-08-17",
@@ -799,6 +1089,16 @@
 "note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
 "dovuto_il": null,
 "soglie": {
+"media50": 7.4376,
+"media20": 7.3545,
+"quattro_atr": 7.4487,
+"meta_caduta": 7.3025,
+"bollinger": 7.7361,
+"consigliata": 7.4376
+},
+"stop": 6.6932,
+"atr": 0.1259,
+"soglie_contaminate": {
 "media50": 7.409,
 "media20": 7.31,
 "quattro_atr": 7.4454,
@@ -806,8 +1106,8 @@
 "bollinger": 7.7938,
 "consigliata": 7.409
 },
-"stop": 6.6948,
-"atr": 0.1251
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 4
 },
 {
 "episodio": "short:DKS:2026-08-20",
@@ -826,6 +1126,16 @@
 "note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
 "dovuto_il": null,
 "soglie": {
+"media50": 213.3986,
+"media20": 199.5475,
+"quattro_atr": 204.7458,
+"meta_caduta": 207.82,
+"bollinger": 217.8154,
+"consigliata": 204.7458
+},
+"stop": 162.3321,
+"atr": 7.0689,
+"soglie_contaminate": {
 "media50": 214.1296,
 "media20": 200.9285,
 "quattro_atr": 206.2424,
@@ -833,8 +1143,8 @@
 "bollinger": 216.4394,
 "consigliata": 206.2424
 },
-"stop": 161.5838,
-"atr": 7.4431
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "short:ENEL.MI:2026-08-18",
@@ -853,6 +1163,16 @@
 "note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
 "dovuto_il": null,
 "soglie": {
+"media50": 9.9281,
+"media20": 9.8018,
+"quattro_atr": 10.044,
+"meta_caduta": 9.848,
+"bollinger": 10.1755,
+"consigliata": 9.9281
+},
+"stop": 9.102,
+"atr": 0.157,
+"soglie_contaminate": {
 "media50": 9.9258,
 "media20": 9.7881,
 "quattro_atr": 10.0223,
@@ -860,8 +1180,8 @@
 "bollinger": 10.179,
 "consigliata": 9.9258
 },
-"stop": 9.1128,
-"atr": 0.1516
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 3
 },
 {
 "episodio": "short:ENVX:2026-08-19",
@@ -888,7 +1208,17 @@
 "consigliata": 4.9765
 },
 "stop": 2.5593,
-"atr": 0.4029
+"atr": 0.4029,
+"soglie_contaminate": {
+"media50": 5.0699,
+"media20": 4.1195,
+"quattro_atr": 4.9765,
+"meta_caduta": 5.9925,
+"bollinger": 5.0968,
+"consigliata": 4.9765
+},
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 2
 },
 {
 "episodio": "short:EYPT:2026-08-17",
@@ -907,6 +1237,16 @@
 "note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
 "dovuto_il": null,
 "soglie": {
+"media50": 12.8836,
+"media20": 12.0,
+"quattro_atr": 10.907,
+"meta_caduta": 9.7225,
+"bollinger": 16.9011,
+"consigliata": 10.907
+},
+"stop": 1.454,
+"atr": 1.5755,
+"soglie_contaminate": {
 "media50": 12.6532,
 "media20": 11.3285,
 "quattro_atr": 10.5581,
@@ -914,8 +1254,8 @@
 "bollinger": 17.4925,
 "consigliata": 10.5581
 },
-"stop": 1.6285,
-"atr": 1.4883
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 4
 },
 {
 "episodio": "short:MARA:2026-08-18",
@@ -934,6 +1274,16 @@
 "note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
 "dovuto_il": null,
 "soglie": {
+"media50": 12.1346,
+"media20": 10.6165,
+"quattro_atr": 12.8539,
+"meta_caduta": 12.025,
+"bollinger": 12.9437,
+"consigliata": 12.1346
+},
+"stop": 7.373,
+"atr": 0.9135,
+"soglie_contaminate": {
 "media50": 12.0914,
 "media20": 10.5355,
 "quattro_atr": 13.0329,
@@ -941,8 +1291,8 @@
 "bollinger": 12.6502,
 "consigliata": 12.0914
 },
-"stop": 7.2835,
-"atr": 0.9582
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 3
 },
 {
 "episodio": "short:MNSO:2026-08-17",
@@ -961,6 +1311,16 @@
 "note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
 "dovuto_il": null,
 "soglie": {
+"media50": 12.2116,
+"media20": 12.266,
+"quattro_atr": 12.3854,
+"meta_caduta": 12.245,
+"bollinger": 13.5566,
+"consigliata": 12.2116
+},
+"stop": 10.2473,
+"atr": 0.3564,
+"soglie_contaminate": {
 "media50": 12.1306,
 "media20": 12.1335,
 "quattro_atr": 12.3623,
@@ -968,8 +1328,8 @@
 "bollinger": 13.5911,
 "consigliata": 12.1306
 },
-"stop": 10.2588,
-"atr": 0.3506
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 4
 },
 {
 "episodio": "short:SEDG:2026-08-19",
@@ -996,7 +1356,17 @@
 "consigliata": 45.0155
 },
 "stop": 24.6168,
-"atr": 3.3998
+"atr": 3.3998,
+"soglie_contaminate": {
+"media50": 46.9534,
+"media20": 36.311,
+"quattro_atr": 45.0155,
+"meta_caduta": 54.9632,
+"bollinger": 47.7831,
+"consigliata": 45.0155
+},
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 2
 },
 {
 "episodio": "short:STLAM.MI:2026-08-16",
@@ -1015,6 +1385,16 @@
 "note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
 "dovuto_il": null,
 "soglie": {
+"media50": 5.1288,
+"media20": 4.8995,
+"quattro_atr": 5.3912,
+"meta_caduta": 5.82,
+"bollinger": 5.3114,
+"consigliata": 5.1288
+},
+"stop": 4.2344,
+"atr": 0.1928,
+"soglie_contaminate": {
 "media50": 5.0479,
 "media20": 4.8178,
 "quattro_atr": 5.3899,
@@ -1022,8 +1402,8 @@
 "bollinger": 5.2911,
 "consigliata": 5.0479
 },
-"stop": 4.235,
-"atr": 0.1925
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 5
 },
 {
 "episodio": "short:STMMI.MI:2026-08-17",
@@ -1042,6 +1422,16 @@
 "note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
 "dovuto_il": null,
 "soglie": {
+"media50": 56.4012,
+"media20": null,
+"quattro_atr": 58.5116,
+"meta_caduta": 58.865,
+"bollinger": 53.1394,
+"consigliata": 56.4012
+},
+"stop": 43.3142,
+"atr": 2.5329,
+"soglie_contaminate": {
 "media50": 55.6308,
 "media20": null,
 "quattro_atr": 57.798,
@@ -1049,8 +1439,8 @@
 "bollinger": 49.5224,
 "consigliata": 55.6308
 },
-"stop": 43.671,
-"atr": 2.3545
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 4
 },
 {
 "episodio": "short:STUB:2026-08-17",
@@ -1069,6 +1459,16 @@
 "note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
 "dovuto_il": null,
 "soglie": {
+"media50": 10.154,
+"media20": 8.44,
+"quattro_atr": 10.1998,
+"meta_caduta": 10.7075,
+"bollinger": 9.6301,
+"consigliata": 10.154
+},
+"stop": 6.4876,
+"atr": 0.6187,
+"soglie_contaminate": {
 "media50": 10.0214,
 "media20": 8.2685,
 "quattro_atr": 10.0374,
@@ -1076,8 +1476,8 @@
 "bollinger": 9.7845,
 "consigliata": 10.0214
 },
-"stop": 6.5688,
-"atr": 0.5781
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 4
 },
 {
 "episodio": "short:TNGX:2026-08-20",
@@ -1096,6 +1496,16 @@
 "note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
 "dovuto_il": null,
 "soglie": {
+"media50": 28.4131,
+"media20": 26.4733,
+"quattro_atr": 29.4914,
+"meta_caduta": 28.085,
+"bollinger": 29.6171,
+"consigliata": 28.4131
+},
+"stop": 20.1593,
+"atr": 1.5553,
+"soglie_contaminate": {
 "media50": 28.511,
 "media20": 26.6155,
 "quattro_atr": 29.7527,
@@ -1103,8 +1513,8 @@
 "bollinger": 29.4935,
 "consigliata": 28.511
 },
-"stop": 20.0287,
-"atr": 1.6207
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "short:VCX:2026-08-17",
@@ -1123,6 +1533,16 @@
 "note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
 "dovuto_il": null,
 "soglie": {
+"media50": 67.9386,
+"media20": 38.6355,
+"quattro_atr": 64.8395,
+"meta_caduta": 150.935,
+"bollinger": 56.2812,
+"consigliata": 64.8395
+},
+"stop": 24.7153,
+"atr": 6.6874,
+"soglie_contaminate": {
 "media50": 63.5102,
 "media20": null,
 "quattro_atr": 63.177,
@@ -1130,8 +1550,8 @@
 "bollinger": 47.5521,
 "consigliata": 63.177
 },
-"stop": 25.5465,
-"atr": 6.2718
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 4
 },
 {
 "episodio": "short:WMT:2026-08-20",
@@ -1150,6 +1570,16 @@
 "note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
 "dovuto_il": null,
 "soglie": {
+"media50": 113.5934,
+"media20": 112.1995,
+"quattro_atr": 116.2532,
+"meta_caduta": 112.785,
+"bollinger": 118.8638,
+"consigliata": 113.5934
+},
+"stop": 98.6684,
+"atr": 2.9308,
+"soglie_contaminate": {
 "media50": 113.9348,
 "media20": 112.497,
 "quattro_atr": 116.8057,
@@ -1157,8 +1587,8 @@
 "bollinger": 117.9512,
 "consigliata": 113.9348
 },
-"stop": 98.3921,
-"atr": 3.0689
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "short:YSS:2026-08-17",
@@ -1177,6 +1607,16 @@
 "note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
 "dovuto_il": null,
 "soglie": {
+"media50": 20.2994,
+"media20": 13.7385,
+"quattro_atr": 18.3684,
+"meta_caduta": 23.2623,
+"bollinger": 19.6775,
+"consigliata": 18.3684
+},
+"stop": 7.9375,
+"atr": 1.7385,
+"soglie_contaminate": {
 "media50": 19.5536,
 "media20": 12.9405,
 "quattro_atr": 17.9276,
@@ -1184,8 +1624,8 @@
 "bollinger": 18.6923,
 "consigliata": 17.9276
 },
-"stop": 8.1579,
-"atr": 1.6283
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 4
 },
 {
 "episodio": "short:ZTO:2026-08-19",
@@ -1212,7 +1652,17 @@
 "consigliata": 23.2074
 },
 "stop": 20.2453,
-"atr": 0.5898
+"atr": 0.5898,
+"soglie_contaminate": {
+"media50": 23.2074,
+"media20": 23.424,
+"quattro_atr": 23.7843,
+"meta_caduta": 23.0225,
+"bollinger": 25.0731,
+"consigliata": 23.2074
+},
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 2
 },
 {
 "episodio": "short:DKS:2026-08-20",
@@ -1312,6 +1762,16 @@
 "note": "pre-segnale diventato solido",
 "dovuto_il": null,
 "soglie": {
+"media50": 9.9281,
+"media20": 9.8018,
+"quattro_atr": 10.044,
+"meta_caduta": 9.848,
+"bollinger": 10.1755,
+"consigliata": 9.9281
+},
+"stop": 9.102,
+"atr": 0.157,
+"soglie_contaminate": {
 "media50": 9.926,
 "media20": 9.7887,
 "quattro_atr": 10.0235,
@@ -1319,8 +1779,8 @@
 "bollinger": 10.178,
 "consigliata": 9.926
 },
-"stop": 9.1123,
-"atr": 0.1519
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 3
 },
 {
 "episodio": "short:TNGX:2026-08-20",
@@ -1593,6 +2053,16 @@
 "note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
 "dovuto_il": "2026-08-20",
 "soglie": {
+"media50": 18.7888,
+"media20": 16.9415,
+"quattro_atr": 17.6438,
+"meta_caduta": 17.99,
+"bollinger": 20.6289,
+"consigliata": 17.6438
+},
+"stop": 12.2981,
+"atr": 0.891,
+"soglie_contaminate": {
 "media50": 18.8572,
 "media20": 17.1725,
 "quattro_atr": 17.8195,
@@ -1600,8 +2070,8 @@
 "bollinger": 20.7237,
 "consigliata": 17.8195
 },
-"stop": 12.2103,
-"atr": 0.9349
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "short:BIDU:2026-08-18",
@@ -1694,6 +2164,16 @@
 "note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
 "dovuto_il": "2026-08-21",
 "soglie": {
+"media50": 66.0639,
+"media20": 52.2715,
+"quattro_atr": 62.7038,
+"meta_caduta": 68.28,
+"bollinger": 75.3635,
+"consigliata": 62.7038
+},
+"stop": 32.0231,
+"atr": 5.1135,
+"soglie_contaminate": {
 "media50": 66.4219,
 "media20": 53.2795,
 "quattro_atr": 64.0033,
@@ -1701,8 +2181,8 @@
 "bollinger": 76.4531,
 "consigliata": 64.0033
 },
-"stop": 31.3733,
-"atr": 5.4383
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "short:CLBT:2026-08-17",
@@ -1721,6 +2201,16 @@
 "note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
 "dovuto_il": "2026-08-20",
 "soglie": {
+"media50": 14.2178,
+"media20": 13.8093,
+"quattro_atr": 14.8029,
+"meta_caduta": 13.96,
+"bollinger": 18.1011,
+"consigliata": 14.2178
+},
+"stop": 9.5635,
+"atr": 0.8732,
+"soglie_contaminate": {
 "media50": 14.2529,
 "media20": 13.9583,
 "quattro_atr": 15.0167,
@@ -1728,8 +2218,8 @@
 "bollinger": 18.0773,
 "consigliata": 14.2529
 },
-"stop": 9.4567,
-"atr": 0.9267
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "short:CLBT:2026-08-17",
@@ -1768,6 +2258,16 @@
 "note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
 "dovuto_il": "2026-08-20",
 "soglie": {
+"media50": 7.3973,
+"media20": 7.2873,
+"quattro_atr": 7.279,
+"meta_caduta": 7.23,
+"bollinger": 7.8176,
+"consigliata": 7.279
+},
+"stop": 6.5605,
+"atr": 0.1197,
+"soglie_contaminate": {
 "media50": 7.409,
 "media20": 7.31,
 "quattro_atr": 7.3004,
@@ -1775,8 +2275,8 @@
 "bollinger": 7.7938,
 "consigliata": 7.3004
 },
-"stop": 6.5498,
-"atr": 0.1251
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "short:ENEL.MI:2026-08-18",
@@ -1822,6 +2322,16 @@
 "note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
 "dovuto_il": "2026-08-20",
 "soglie": {
+"media50": 12.5156,
+"media20": 10.9915,
+"quattro_atr": 11.0364,
+"meta_caduta": 10.12,
+"bollinger": 17.6725,
+"consigliata": 11.0364
+},
+"stop": 2.5818,
+"atr": 1.4091,
+"soglie_contaminate": {
 "media50": 12.6532,
 "media20": 11.3285,
 "quattro_atr": 11.3531,
@@ -1829,8 +2339,8 @@
 "bollinger": 17.4925,
 "consigliata": 11.3531
 },
-"stop": 2.4235,
-"atr": 1.4883
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "short:EYPT:2026-08-17",
@@ -1869,6 +2379,16 @@
 "note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
 "dovuto_il": "2026-08-21",
 "soglie": {
+"media50": 12.0807,
+"media20": null,
+"quattro_atr": 14.9935,
+"meta_caduta": 13.0,
+"bollinger": 12.643,
+"consigliata": 12.0807
+},
+"stop": 9.2282,
+"atr": 0.9609,
+"soglie_contaminate": {
 "media50": 12.0914,
 "media20": null,
 "quattro_atr": 14.9829,
@@ -1876,8 +2396,8 @@
 "bollinger": 12.6502,
 "consigliata": 12.0914
 },
-"stop": 9.2335,
-"atr": 0.9582
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "short:MARA:2026-08-18",
@@ -1916,6 +2436,16 @@
 "note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
 "dovuto_il": "2026-08-20",
 "soglie": {
+"media50": 12.0882,
+"media20": 12.0754,
+"quattro_atr": 12.4822,
+"meta_caduta": 12.33,
+"bollinger": 13.6106,
+"consigliata": 12.0882
+},
+"stop": 10.4539,
+"atr": 0.338,
+"soglie_contaminate": {
 "media50": 12.1306,
 "media20": 12.1335,
 "quattro_atr": 12.5323,
@@ -1923,8 +2453,8 @@
 "bollinger": 13.5911,
 "consigliata": 12.1306
 },
-"stop": 10.4288,
-"atr": 0.3506
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "short:STLAM.MI:2026-08-16",
@@ -1943,6 +2473,16 @@
 "note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
 "dovuto_il": "2026-08-19",
 "soglie": {
+"media50": 5.0199,
+"media20": 4.7914,
+"quattro_atr": 5.2247,
+"meta_caduta": 5.545,
+"bollinger": 5.2767,
+"consigliata": 5.0199
+},
+"stop": 4.0071,
+"atr": 0.2029,
+"soglie_contaminate": {
 "media50": 5.0481,
 "media20": 4.8185,
 "quattro_atr": 5.1829,
@@ -1950,8 +2490,8 @@
 "bollinger": 5.2902,
 "consigliata": 5.0481
 },
-"stop": 4.028,
-"atr": 0.1925
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "short:STMMI.MI:2026-08-17",
@@ -1997,6 +2537,16 @@
 "note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
 "dovuto_il": "2026-08-20",
 "soglie": {
+"media50": 9.9553,
+"media20": 8.1987,
+"quattro_atr": 9.0086,
+"meta_caduta": 10.26,
+"bollinger": 9.8414,
+"consigliata": 9.0086
+},
+"stop": 5.7407,
+"atr": 0.5447,
+"soglie_contaminate": {
 "media50": 10.0214,
 "media20": 8.2685,
 "quattro_atr": 9.1424,
@@ -2004,8 +2554,8 @@
 "bollinger": 9.7845,
 "consigliata": 9.1424
 },
-"stop": 5.6738,
-"atr": 0.5781
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "short:VCX:2026-08-17",
@@ -2024,6 +2574,16 @@
 "note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
 "dovuto_il": "2026-08-20",
 "soglie": {
+"media50": 61.5049,
+"media20": null,
+"quattro_atr": 63.0294,
+"meta_caduta": 132.205,
+"bollinger": 42.3585,
+"consigliata": 61.5049
+},
+"stop": 27.6153,
+"atr": 5.9023,
+"soglie_contaminate": {
 "media50": 63.5102,
 "media20": null,
 "quattro_atr": 64.507,
@@ -2031,8 +2591,8 @@
 "bollinger": 47.5521,
 "consigliata": 63.5102
 },
-"stop": 26.8765,
-"atr": 6.2718
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "short:VCX:2026-08-17",
@@ -2071,6 +2631,16 @@
 "note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
 "dovuto_il": "2026-08-20",
 "soglie": {
+"media50": 19.1924,
+"media20": 12.5655,
+"quattro_atr": 15.4107,
+"meta_caduta": 21.46,
+"bollinger": 18.1623,
+"consigliata": 15.4107
+},
+"stop": 6.0946,
+"atr": 1.5527,
+"soglie_contaminate": {
 "media50": 19.5536,
 "media20": 12.9405,
 "quattro_atr": 15.7131,
@@ -2078,8 +2648,8 @@
 "bollinger": 18.6923,
 "consigliata": 15.7131
 },
-"stop": 5.9434,
-"atr": 1.6283
+"soglie_ricalcolate_il": "2026-08-21 15:45",
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "long:BSBR:2026-08-17",
