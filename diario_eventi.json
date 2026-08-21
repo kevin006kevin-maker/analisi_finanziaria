@@ -835,5 +835,32 @@
 },
 "stop": 161.5838,
 "atr": 7.4431
+},
+{
+"episodio": "short:ENEL.MI:2026-08-18",
+"ticker": "ENEL.MI",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:10",
+"data": "2026-08-18 10:31",
+"prezzo": 9.416,
+"conv": 67,
+"prob_gain": 53,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": 4.3991,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": 9.9258,
+"media20": 9.7881,
+"quattro_atr": 10.0223,
+"meta_caduta": 9.848,
+"bollinger": 10.179,
+"consigliata": 9.9258
+},
+"stop": 9.1128,
+"atr": 0.1516
 }
 ]
