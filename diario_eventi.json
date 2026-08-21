@@ -1804,5 +1804,32 @@
 },
 "stop": 9.2433,
 "atr": 0.1519
+},
+{
+"episodio": "short:EYPT:2026-08-17",
+"ticker": "EYPT",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-08-21 10:38",
+"data": "2026-08-20 22:57",
+"prezzo": 5.4,
+"conv": 74,
+"prob_gain": 63,
+"prob_loss": 13,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-08-20",
+"soglie": {
+"media50": 12.6532,
+"media20": 11.3285,
+"quattro_atr": 11.3531,
+"meta_caduta": 10.12,
+"bollinger": 17.4925,
+"consigliata": 11.3531
+},
+"stop": 2.4235,
+"atr": 1.4883
 }
 ]
