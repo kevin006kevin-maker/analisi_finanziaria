@@ -646,5 +646,32 @@
 },
 "stop": 16.8822,
 "atr": 1.1339
+},
+{
+"episodio": "short:BBAR:2026-08-17",
+"ticker": "BBAR",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:09",
+"data": "2026-08-17 15:37",
+"prezzo": 15.3,
+"conv": 73,
+"prob_gain": 53,
+"prob_loss": 19,
+"reliab": "🔴 Bassa",
+"mkt": 4.4982,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": 18.8572,
+"media20": 17.1725,
+"quattro_atr": 19.0395,
+"meta_caduta": 18.6,
+"bollinger": 20.7237,
+"consigliata": 18.8572
+},
+"stop": 13.4303,
+"atr": 0.9349
 }
 ]
