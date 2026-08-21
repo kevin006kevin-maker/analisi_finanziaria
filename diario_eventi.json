@@ -1105,5 +1105,32 @@
 },
 "stop": 20.0287,
 "atr": 1.6207
+},
+{
+"episodio": "short:VCX:2026-08-17",
+"ticker": "VCX",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:10",
+"data": "2026-08-17 17:50",
+"prezzo": 38.09,
+"conv": 64,
+"prob_gain": 32,
+"prob_loss": 62,
+"reliab": "🔴 Bassa",
+"mkt": 4.4111,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": 63.5102,
+"media20": null,
+"quattro_atr": 63.177,
+"meta_caduta": 133.545,
+"bollinger": 47.5521,
+"consigliata": 63.177
+},
+"stop": 25.5465,
+"atr": 6.2718
 }
 ]
