@@ -2134,5 +2134,32 @@
 },
 "stop": 8.7105,
 "atr": 0.1943
+},
+{
+"episodio": "short:OI:2026-08-21",
+"ticker": "OI",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 15:42",
+"data": "2026-08-21 15:42",
+"prezzo": 6.91,
+"conv": 70,
+"prob_gain": 49,
+"prob_loss": 14,
+"reliab": "🟡 Media",
+"mkt": 3.4728,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 8.478,
+"media20": 7.2235,
+"quattro_atr": 8.5326,
+"meta_caduta": 8.475,
+"bollinger": 8.7291,
+"consigliata": 8.478
+},
+"stop": 6.0987,
+"atr": 0.4056
 }
 ]
