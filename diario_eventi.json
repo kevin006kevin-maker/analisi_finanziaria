@@ -160,5 +160,32 @@
 },
 "stop": 505.6297,
 "atr": 27.6251
+},
+{
+"episodio": "long:DUOL:2026-08-16",
+"ticker": "DUOL",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:09",
+"data": "2026-08-16 22:17",
+"prezzo": 132.83,
+"conv": 60,
+"prob_gain": 60,
+"prob_loss": 31,
+"reliab": "🔴 Bassa",
+"mkt": 3.2103,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": null,
+"media20": 135.6885,
+"quattro_atr": 167.3344,
+"meta_caduta": 139.93,
+"bollinger": 148.6905,
+"consigliata": 167.3344
+},
+"stop": 115.5778,
+"atr": 8.6261
 }
 ]
