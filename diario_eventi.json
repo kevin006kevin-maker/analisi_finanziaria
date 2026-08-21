@@ -2080,5 +2080,32 @@
 },
 "stop": 5.9434,
 "atr": 1.6283
+},
+{
+"episodio": "long:BSBR:2026-08-17",
+"ticker": "BSBR",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-08-21 11:33",
+"data": "2026-08-21 11:33",
+"prezzo": 5.57,
+"conv": 78,
+"prob_gain": 72,
+"prob_loss": 16,
+"reliab": "🟢 Alta",
+"mkt": 3.1432,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": null,
+"media20": 5.605,
+"quattro_atr": 6.1677,
+"meta_caduta": 5.69,
+"bollinger": 6.0572,
+"consigliata": 6.1677
+},
+"stop": 5.2712,
+"atr": 0.1494
 }
 ]
