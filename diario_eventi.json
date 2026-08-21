@@ -1024,5 +1024,32 @@
 },
 "stop": 4.235,
 "atr": 0.1925
+},
+{
+"episodio": "short:STMMI.MI:2026-08-17",
+"ticker": "STMMI.MI",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:10",
+"data": "2026-08-17 10:07",
+"prezzo": 48.38,
+"conv": 80,
+"prob_gain": 54,
+"prob_loss": 13,
+"reliab": "🟡 Media",
+"mkt": 3.2103,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": 55.6308,
+"media20": null,
+"quattro_atr": 57.798,
+"meta_caduta": 58.865,
+"bollinger": 49.5224,
+"consigliata": 55.6308
+},
+"stop": 43.671,
+"atr": 2.3545
 }
 ]
