@@ -1602,5 +1602,32 @@
 },
 "stop": 12.2103,
 "atr": 0.9349
+},
+{
+"episodio": "short:BIDU:2026-08-18",
+"ticker": "BIDU",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-08-21 10:37",
+"data": "2026-08-21 10:35",
+"prezzo": 91.97,
+"conv": 65,
+"prob_gain": 50,
+"prob_loss": 13,
+"reliab": "🟡 Media",
+"mkt": 3.1432,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-08-21",
+"soglie": {
+"media50": 109.3644,
+"media20": 105.183,
+"quattro_atr": 107.5584,
+"meta_caduta": 114.345,
+"bollinger": 118.0316,
+"consigliata": 107.5584
+},
+"stop": 84.1758,
+"atr": 3.8971
 }
 ]
