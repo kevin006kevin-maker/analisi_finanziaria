@@ -430,5 +430,32 @@
 },
 "stop": 106.8554,
 "atr": 4.5623
+},
+{
+"episodio": "long:PBR:2026-08-16",
+"ticker": "PBR",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:09",
+"data": "2026-08-16 21:44",
+"prezzo": 17.88,
+"conv": 72,
+"prob_gain": 69,
+"prob_loss": 18,
+"reliab": "🟢 Alta",
+"mkt": 4.3991,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": null,
+"media20": 18.417,
+"quattro_atr": 19.9434,
+"meta_caduta": 18.64,
+"bollinger": 19.3718,
+"consigliata": 19.9434
+},
+"stop": 16.8483,
+"atr": 0.5158
 }
 ]
