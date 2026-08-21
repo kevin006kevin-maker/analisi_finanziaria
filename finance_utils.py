@@ -3634,44 +3634,92 @@ def position_size(capital, risk_pct, price, stop):
             "risk_per_share": risk_per_share, "stop_pct": (stop / price - 1) * 100}
 
 
+# Da quale porta è entrata un'occasione, in italiano. Serve all'archivio dell'apprendimento: «da
+# dove arriva» è gratis da registrare e potrebbe rivelarsi fra le cose più predittive che abbiamo,
+# perché un titolo pescato fra i maggiori ribassi e uno pescato fra i più scambiati sono due
+# situazioni diverse anche a parità di tutti gli altri numeri.
+_ORIGINI = {
+    "day_losers": "maggiori ribassi", "most_actives": "più scambiati",
+    "small_cap_gainers": "società piccole in salita",
+    "undervalued_large_caps": "grandi sottovalutate",
+    "undervalued_growth_stocks": "crescita sottovalutata",
+    "penny": "titoli a basso prezzo molto scambiati",
+    "riserva": "lista di riserva (classifiche non disponibili)",
+    "europa": "Europa e Borsa Italiana", "etf": "ETF",
+}
+
+
 @st.cache_data(ttl=900, show_spinner=False)
-def opportunity_candidates(kind: str, include_eu: bool = True, include_etf: bool = True) -> list:
-    """Universo di partenza dalle classifiche di mercato (USA); riserva se non disponibili.
-    Con include_eu aggiunge titoli di Borsa Italiana / Europa; con include_etf aggiunge ETF
-    liquidi (USA + UCITS) — entrambe le categorie non sono coperte dalle classifiche gratuite."""
+def _candidati_e_origine(kind: str, include_eu: bool = True, include_etf: bool = True) -> dict:
+    """L'universo di partenza E da quale porta è entrato ogni nome. Una funzione sola per non
+    tenere due elenchi che col tempo divergono: chi vuole solo i nomi usa opportunity_candidates.
+    Ritorna {"ordine": [ticker…], "origine": {ticker: etichetta}, "troncati": n}."""
     screens = (["day_losers", "most_actives", "small_cap_gainers"] if kind == "short"
                else ["undervalued_large_caps", "undervalued_growth_stocks", "day_losers"])
-    names = []
+    names, origine = [], {}
+
+    def aggiungi(tk, da):
+        if not tk:
+            return
+        names.append(tk)
+        origine.setdefault(tk, _ORIGINI.get(da, da))    # la PRIMA porta che l'ha pescato
+
     for s in screens:
         df = get_screen(s, 12)
         if not df.empty:
-            names += [x for x in df["Ticker"].tolist() if x]
+            for x in df["Ticker"].tolist():
+                aggiungi(x, s)
     # Per il breve periodo: includi anche titoli economici molto scambiati (anche < 1$),
     # che le classifiche "biggest losers" delle borse principali non mostrano.
     if kind == "short" and _fmp_key():
         pen = _fmp_get("company-screener?isActivelyTrading=true&priceLowerThan=5"
                        "&volumeMoreThan=300000&limit=25")
         if isinstance(pen, list):
-            names += [q.get("symbol") for q in pen if q.get("symbol")]
+            for q in pen:
+                aggiungi(q.get("symbol"), "penny")
     # Se le classifiche non hanno dato nulla (es. FMP esaurito), usa l'universo di riserva,
     # così le occasioni continuano ad aggiornarsi con i dati di Finnhub/SEC/yfinance.
     if not names:
-        names = list(_FALLBACK_UNIVERSE)
+        for x in _FALLBACK_UNIVERSE:
+            aggiungi(x, "riserva")
     # Breve = 1 chiamata/titolo (si può osare di più); Lungo = ~4 chiamate/titolo (limita la quota FMP)
     cap = 40 if kind == "short" else 20
-    out = list(dict.fromkeys(names))[:cap]
+    unici = list(dict.fromkeys(names))
+    out = unici[:cap]
+    # I nomi oltre il tetto non vengono MAI guardati: non sono scarti, sono un punto cieco a monte.
+    # Si tengono i loro NOMI, non solo il conteggio: così fra qualche mese si potrà controllare come
+    # sono andati e sapere se il tetto ci costa occasioni — che è l'unico modo di rispondere a
+    # quella domanda, perché a posteriori di loro non esiste nessun altro dato.
+    tagliati = unici[cap:]
     if include_eu:                          # aggiunge i titoli italiani/europei (lista curata)
         eu_cap = 16 if kind == "short" else 10
-        out += _FALLBACK_UNIVERSE_EU[:eu_cap]
+        for x in _FALLBACK_UNIVERSE_EU[:eu_cap]:
+            out.append(x)
+            origine.setdefault(x, _ORIGINI["europa"])
     if include_etf:                         # aggiunge ETF liquidi (USA + UCITS europei)
         etf_cap = 18 if kind == "short" else 14
-        out += _ETF_UNIVERSE[:etf_cap]
-    return list(dict.fromkeys(out))
+        for x in _ETF_UNIVERSE[:etf_cap]:
+            out.append(x)
+            origine.setdefault(x, _ORIGINI["etf"])
+    return {"ordine": list(dict.fromkeys(out)), "origine": origine, "tagliati": tagliati}
+
+
+def opportunity_candidates(kind: str, include_eu: bool = True, include_etf: bool = True) -> list:
+    """Universo di partenza dalle classifiche di mercato (USA); riserva se non disponibili.
+    Con include_eu aggiunge titoli di Borsa Italiana / Europa; con include_etf aggiunge ETF
+    liquidi (USA + UCITS) — entrambe le categorie non sono coperte dalle classifiche gratuite."""
+    return _candidati_e_origine(kind, include_eu, include_etf)["ordine"]
+
+
+def origine_candidati(kind: str, include_eu: bool = True, include_etf: bool = True) -> dict:
+    """Da quale porta è entrato ogni candidato. Gratis: rilegge la stessa cache dei candidati."""
+    return _candidati_e_origine(kind, include_eu, include_etf)["origine"]
 
 
 def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
     # PASSO 1 — scarica i dati di tutti i candidati (universo per gli z-score)
     rmap = {}
+    _senza_storia = []
     for t in dict.fromkeys([x for x in tickers if x]):
         try:
             r = opportunity_row(t, with_fundamentals=(kind == "long"))
@@ -3679,6 +3727,12 @@ def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
             r = None
         if r:
             rmap[r["ticker"]] = r
+        else:
+            # L'UNICO scarto che avviene prima di calcolare qualsiasi caratteristica: meno di 60
+            # sedute di storico, o prezzo non disponibile. Non ha un profilo, ma il suo NOME va a
+            # verbale: un punto cieco contato è un punto cieco, un punto cieco silenzioso è una
+            # bugia sui dati.
+            _senza_storia.append(t)
     # Forza relativa (solo breve): rendimento dell'indice condiviso attaccato a ogni riga (1 chiamata)
     if kind == "short":
         _b = _benchmark_perf()
@@ -3693,6 +3747,31 @@ def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
             pass
     # Regime di volatilità (solo breve): moltiplicatore globale che declassa i rimbalzi nei crash
     regime = volatility_regime()["factor"] if kind == "short" else 1.0
+    # ARCHIVIO DELL'APPRENDIMENTO: il contesto si prepara UNA volta per scansione (24 chiamate al
+    # giorno in tutto, condivise), e ogni scarto qui sotto viene messo in coda col MOTIVO preso
+    # nell'istante esatto — a posteriori metà degli scarti non è ricostruibile, quindi è ora o mai.
+    # Solo nel lavoro automatico: nell'app rallenterebbe ogni caricamento di pagina senza aggiungere
+    # niente, perché il lavoro automatico guarda lo stesso universo ogni mezz'ora.
+    _arc_on = os.environ.get("DATA_LOCAL_FIRST") == "1"
+    _arc_ctx = _prepara_contesto_scansione(kind, list(rmap.values())) if _arc_on else None
+
+    def _scarta(r, motivo, dettaglio=None, conv=None, punteggio=None):
+        if _arc_on:
+            _accoda_scarto(r, kind, motivo, dettaglio, conv, punteggio, _arc_ctx)
+
+    if _arc_on:
+        # I due punti ciechi, messi a verbale col nome: quelli senza storia sufficiente e quelli
+        # che il tetto dell'universo ha tagliato prima ancora di aprirli. Di loro non c'è un
+        # profilo, ma fra qualche mese si potrà andare a vedere come sono andati e sapere se quel
+        # tetto ci costa qualcosa — invece di supporlo.
+        try:
+            accoda_senza_profilo(kind, _senza_storia, "storico_insufficiente",
+                                 (_arc_ctx or {}).get("giorno"))
+            accoda_senza_profilo(kind, _candidati_e_origine(kind).get("tagliati") or [],
+                                 "mai_guardata", (_arc_ctx or {}).get("giorno"))
+        except Exception:
+            pass
+
     # PASSO 3 — filtra le vere occasioni e costruisci la tabella
     rows = []
     for tk, r in rmap.items():
@@ -3701,17 +3780,22 @@ def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
         if kind == "short":
             # Filtro liquidità/penny: sotto ~3$ o pochi scambi l'RSI è inaffidabile → escludi
             if r["price"] < _MIN_PRICE:
+                _scarta(r, "prezzo_basso", r["price"], conv)
                 continue
             liq = r.get("avg_dollar_vol")
             if liq is not None and liq < _MIN_DOLLAR_VOL:
+                _scarta(r, "poco_scambiato", liq, conv)
                 continue
             sc = _short_score(r, regime=regime)
             if sc is None or not np.isfinite(sc) or sc < 35:   # setup da ipervenduto / zona bassa
+                _scarta(r, "punteggio_basso", (None if sc is None else round(float(sc), 1)), conv)
                 continue
             if dd is None or dd > -8:           # dev'essere un calo reale, non un titolo ai massimi
+                _scarta(r, "sconto_insufficiente", dd, conv, sc)
                 continue
             # Filtro Rischio/Rendimento: via i setup asimmetrici perdenti (R:R < 1,5)
             if r.get("rr") is not None and r["rr"] < _RR_MIN:
+                _scarta(r, "rischio_rendimento", r["rr"], conv, sc)
                 continue
             # In regime di alta volatilità scarta chi crolla MOLTO più del mercato (coltello che cade
             # beta-driven): pretende forza relativa non troppo negativa vs l'indice.
@@ -3719,6 +3803,7 @@ def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
                 _mom = r.get("perf_5d") if r.get("perf_5d") is not None else r.get("perf_1m")
                 _bm = r.get("bench_5d") if r.get("perf_5d") is not None else r.get("bench_1m")
                 if _mom is not None and _bm is not None and (_mom - _bm) < -3.0:
+                    _scarta(r, "cade_piu_del_mercato", round(_mom - _bm, 2), conv, sc)
                     continue
             gain = r["rebound_pot"] if r["rebound_pot"] is not None else r["exp_ret"]
             rows.append({"Ticker": r["ticker"], "Nome": r["name"], "Convenienza": conv,
@@ -3732,17 +3817,22 @@ def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
         else:
             # Liquidità/prezzo anche sul lungo (prima assenti): via penny/illiquidi inaffidabili
             if r["price"] < _MIN_PRICE_LONG:
+                _scarta(r, "prezzo_basso", r["price"], conv)
                 continue
             liq = r.get("avg_dollar_vol")
             if liq is not None and liq < _MIN_DOLLAR_VOL_LONG:
+                _scarta(r, "poco_scambiato", liq, conv)
                 continue
             # Trappola di valore CONCLAMATA: esclusa del tutto (non solo declassata del 25%)
             if (r.get("trap") or {}).get("strong"):
+                _scarta(r, "trappola_di_valore", (r.get("trap") or {}).get("signals"), conv)
                 continue
             sc = _long_score(r)
             if sc is None or not np.isfinite(sc) or sc < 50:
+                _scarta(r, "punteggio_basso", (None if sc is None else round(float(sc), 1)), conv)
                 continue
             if dd is None or dd > -12:          # richiede uno sconto significativo dai massimi
+                _scarta(r, "sconto_insufficiente", dd, conv, sc)
                 continue
             rows.append({"Ticker": r["ticker"], "Nome": r["name"], "Convenienza": conv,
                          "Settore": r.get("sector"),
@@ -3759,8 +3849,18 @@ def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
         # Cap per settore (solo lungo): evita liste tutte-banche o tutte-stesso-settore
         if kind == "long" and "Settore" in df.columns:
             df["_sec"] = df["Settore"].fillna("—")
+            _prima = set(df["Ticker"].tolist())
             df = df.groupby("_sec", group_keys=False, sort=False).head(_SECTOR_CAP_LONG)
             df = df.drop(columns="_sec")
+            # Questo è l'unico taglio che butta righe GIÀ complete, e finora non lasciava traccia
+            # da nessuna parte: nei registri risultavano identiche a una passata. Sono occasioni
+            # rifiutate non per un difetto loro ma per far posto ad altre, quindi come contro-esempio
+            # valgono meno di zero se non si sa che sono state rifiutate per questo motivo.
+            for _tk in _prima - set(df["Ticker"].tolist()):
+                _rr = rmap.get(_tk)
+                if _rr:
+                    _scarta(_rr, "troppi_dello_stesso_settore", _rr.get("sector"),
+                            convmap.get(_tk))
         df = df.set_index("Ticker")
     return df
 
@@ -4319,6 +4419,8 @@ def record_observations(df, kind: str) -> None:
         # Ingresso selettivo: una NUOVA occasione (o una ripartita) entra in osservazione solo se
         # abbastanza conveniente (meno rumore); quelle già in corso continuano ad aggiornarsi.
         if not (watch.get(key) or {}).get("obs") and (conv is None or conv < _OBS_ENTRY_CONV):
+            if os.environ.get("DATA_LOCAL_FIRST") == "1":
+                scarto_cancello_osservazione(kind, tk, conv)   # per l'archivio dell'apprendimento
             continue
         e = watch.setdefault(key, {"ticker": tk, "kind": kind, "name": tk, "obs": []})
         e["ticker"], e["kind"] = tk, kind
@@ -7936,6 +8038,16 @@ def registra_evento(kind, tk, evento, valori=None, episodio=None, note=None, dov
         "atr": liv.get("atr"),
     })
     salva_registro(DIARIO_NAME, righe, _DIARIO_MAX, giorni_protetti=400)
+    # ARCHIVIO DELL'APPRENDIMENTO: se questo evento è un momento in cui si compra, qui si registra
+    # il PROFILO COMPLETO dell'occasione — le ~50 caratteristiche che il sistema calcola a ogni giro
+    # e finora buttava, più com'era il mondo e il suo settore quel giorno, più le notizie. Sta qui e
+    # non nei chiamanti perché registra_evento è il passaggio obbligato di ogni cambio di stato:
+    # sette chiamanti, un solo punto da ricordare.
+    if evento in eventi_acquisto():
+        try:
+            registra_profilo_occasione(kind, TK, evento, episodio=eid)
+        except Exception:
+            pass        # un profilo mancato non deve mai impedire di scrivere l'evento nel diario
     return True
 
 
@@ -8272,3 +8384,1115 @@ def imbuto_occasioni(kind: str = None) -> dict:
         if prec is None:
             prec = n or None
     return {"tappe": tappe, "episodi": len({r.get("episodio") for r in righe})}
+
+
+# ---------------------------------------------------------------------------
+# ARCHIVIO DELL'APPRENDIMENTO
+# Il posto dove il sistema si costruisce l'esperienza. Per ogni occasione che gli passa davanti —
+# comprese quelle che scarta — registra COM'ERA nell'istante esatto in cui l'ha vista: le sue
+# caratteristiche, il giudizio che le ha dato, com'era il mondo quel giorno, com'era il suo settore,
+# che notizie girassero. Poi, quando l'esito matura, registra COM'È ANDATA. Dal confronto ripetuto
+# migliaia di volte si ricava il profilo di quelle che guadagnano e di quelle che perdono.
+#
+# PERCHÉ UN FILE AL GIORNO, E MAI RISCRITTO.
+# Il modo in cui questo progetto ha perso dati (il 16/08/2026, due registri azzerati) è sempre lo
+# stesso: si rilegge tutto il file, si aggiunge una riga, si riscrive tutto — e se la rilettura
+# fallisce, read_data_json restituisce [] in silenzio e la riscrittura cancella lo storico. Qui
+# quella sequenza è impossibile per COSTRUZIONE, non per attenzione: si scrive solo il file di OGGI,
+# e a mezzanotte quel file è chiuso per sempre. Nel caso peggiore in assoluto si perdono le righe di
+# oggi; mai un giorno passato, mai un mese passato. In più i nomi stanno sotto "archivio/", che è
+# l'unico prefisso per cui entrambe le guardie anti-cancellazione si attivano da sole.
+#
+# E PERCHÉ GLI ESITI STANNO IN UN ARCHIVIO SEPARATO.
+# Un esito matura 7, 30 o 365 giorni dopo l'acquisto: scriverlo dentro la riga vorrebbe dire
+# riaprire in scrittura un file vecchio, cioè buttare via l'unica garanzia vera. Quindi gli esiti
+# sono righe nuove, archiviate nel giorno in cui MATURANO, che puntano al profilo con il suo
+# identificativo. Così l'intero archivio non riscrive mai niente: solo aggiunge.
+#
+# COSA VUOL DIRE «IMPARARE» QUI.
+# Per i primi mesi: statistica misurata, non modello. Per ogni caratteristica, quanto vale nelle
+# occasioni che hanno guadagnato e quanto in quelle che hanno perso, con quanti casi e quanto è
+# solido. Un modello addestrato su 200 casi trova regolarità nel rumore e le presenta con la stessa
+# faccia sicura di quelle vere: sarebbe il modo più elegante di sbagliare. Prima si accumula.
+# ---------------------------------------------------------------------------
+
+ARC_PROFILI = "archivio/profili"      # una riga per occasione×momento, e una per ogni scarto
+ARC_ESITI = "archivio/esiti"          # com'è andata: righe nuove il giorno in cui maturano
+ARC_MONDO = "archivio/mondo"          # una riga al giorno: com'era il mondo
+ARC_SETTORI = "archivio/settori"      # una riga per giorno×settore
+ARC_NOTIZIE = "archivio/notizie"      # una riga per titolo×giorno, col riassunto
+INDICE_NAME = "archivio/indice_archivio.json"   # cosa esiste e con quante righe
+SINTESI_NAME = "profili_sintesi.json"           # le statistiche misurate: le legge l'app
+
+# Tetto di sicurezza per file. Un giorno pieno fa ~200 righe da ~1,2 KB = ~240 KB, quindi il tetto
+# non si tocca mai: è la cintura per il giorno anomalo. Oltre il tetto il giorno si spezza in pezzi
+# (2026-08-21.json, 2026-08-21_b.json…) invece di crescere verso il muro di 1 MB, dove l'API GitHub
+# smette di restituire il contenuto e le protezioni si spengono in silenzio.
+_ARC_TETTO_BYTE = 600_000
+_ARC_TETTO_RIGHE = 450
+
+# Le notizie sono l'unica cosa che costa chiamate di rete vere. Il limite di Finnhub non è scritto
+# da nessuna parte nel codice (solo prosa nei commenti), quindi non lo si indovina: si mette un
+# tetto proprio, prudente, e si spende il budget sulle occasioni che contano invece di bruciarlo sui
+# candidati qualunque. Senza tetto sarebbero ~3.000 chiamate al giorno in raffiche da 48 giri.
+_NOTIZIE_PER_GIRO = 20        # tetto duro per singolo giro: oltre, si aspetta il giro dopo
+_NOTIZIE_MAX_RIASSUNTO = 700  # caratteri per riassunto: oltre è prosa, non informazione
+_NOTIZIE_PER_TITOLO = 5       # quante notizie per titolo al giorno
+
+# Gli indicatori del mondo, verificati disponibili gratis dalla stessa fonte dei prezzi (21/08/2026:
+# 24 su 24). Costano 24 chiamate AL GIORNO IN TUTTO, condivise da ogni occasione di quella giornata:
+# è il motivo per cui la fotografia del mondo si può fare per bene invece che al risparmio.
+_MONDO_SIMBOLI = (
+    ("paura", "^VIX", "indice della paura"),
+    ("sp500", "^GSPC", "S&P 500"),
+    ("nasdaq", "^IXIC", "Nasdaq"),
+    ("piccole", "^RUT", "Russell 2000, le società piccole"),
+    ("europa", "^STOXX50E", "Europa"),
+    ("tasso_10a", "^TNX", "tasso decennale USA"),
+    ("tasso_3m", "^IRX", "tasso a 3 mesi"),
+    ("dollaro", "DX-Y.NYB", "dollaro"),
+    ("petrolio", "CL=F", "petrolio"),
+    ("oro", "GC=F", "oro"),
+    ("rame", "HG=F", "rame"),
+    ("obbl_rischiose", "HYG", "obbligazioni rischiose"),
+    ("obbl_lunghe", "TLT", "obbligazioni lunghe"),
+)
+
+# Gli 11 ETF settoriali. Servono a rendere «il settore era in crisi» un NUMERO invece di un
+# racconto: senza questi, per le occasioni di breve periodo il settore non esiste affatto, perché i
+# fondamentali vengono calcolati solo per il lungo.
+_SETTORI_ETF = {
+    "Technology": "XLK", "Financial Services": "XLF", "Healthcare": "XLV",
+    "Consumer Cyclical": "XLY", "Consumer Defensive": "XLP", "Industrials": "XLI",
+    "Energy": "XLE", "Utilities": "XLU", "Real Estate": "XLRE",
+    "Basic Materials": "XLB", "Communication Services": "XLC",
+}
+
+# Le caratteristiche del titolo che finiscono nel profilo. NON ci sono spark/spark_dates (60 prezzi
+# più 60 date): triplicherebbero il peso della riga e il grafico si ricostruisce dallo storico
+# quando serve. Tutto il resto di opportunity_row c'è, perché è esattamente ciò che oggi viene
+# calcolato a ogni giro e poi buttato.
+_PROF_TITOLO = (
+    "price", "rsi", "dd_high", "perf_5d", "perf_1m", "perf_1y", "below_bb", "above_sma200",
+    "rebound_pot", "sharpe", "sortino", "ulcer", "maxdd", "hist_z", "atr", "atr_pct", "rr",
+    "rvol", "avg_dollar_vol", "green_day", "rsi_rising", "back_in_bb", "reversal_confirmed",
+    "vertical_crash", "target_price", "stop_price", "bench_5d", "bench_1m",
+    "etf", "sector", "industry", "pe", "pb", "ps", "fscore", "fscore_health", "roic", "ev_ebit",
+    "fcf_yield", "gross_m", "interest_cov", "div_cov", "rev_cagr3", "eps_cagr3",
+)
+_PROF_PUNTEGGI = ("prob_gain", "prob_loss", "exp_ret", "reliab", "reliab_factor")
+
+# I motivi di scarto, con il nome che appare nell'archivio e la spiegazione in italiano. Vanno
+# catturati NELL'ISTANTE dello scarto: a posteriori 1.377 scarti su 2.826 non sono ricostruibili dai
+# soli dati che oggi si salvano, quindi senza questo non si scopre mai se è il filtro a sbagliare.
+MOTIVI_SCARTO = {
+    "prezzo_basso": "prezzo sotto il minimo: sui titoli da pochi centesimi gli indicatori non tengono",
+    "poco_scambiato": "troppo pochi scambi al giorno: non ci si entra e non ci si esce",
+    "punteggio_basso": "il punteggio dell'occasione è sotto il minimo",
+    "sconto_insufficiente": "non è scesa abbastanza dai suoi massimi: non è un'occasione, è un titolo caro",
+    "rischio_rendimento": "quello che si rischia è troppo rispetto a quello che si può guadagnare",
+    "cade_piu_del_mercato": "in un mercato teso sta scendendo molto più dell'indice: coltello che cade",
+    "trappola_di_valore": "sembra a sconto ma i conti stanno peggiorando: trappola",
+    "troppi_dello_stesso_settore": "già scelte altre dello stesso settore, questa è in eccesso",
+    "convenienza_sotto_cancello": "non ha raggiunto la convenienza minima per entrare in osservazione",
+    # Questi due non hanno un profilo da registrare, e sono qui proprio per questo: erano i due
+    # buchi dell'archivio, e una riga che dice «di questa non sappiamo niente, ed ecco perché» vale
+    # infinitamente più di un nome che sparisce senza lasciare traccia. Così i punti ciechi si
+    # contano invece di essere scoperti fra un anno.
+    "storico_insufficiente": "meno di 60 giorni di storia, oppure prezzo non disponibile: le "
+                             "caratteristiche non si possono nemmeno calcolare",
+    "mai_guardata": "oltre il tetto dell'universo: il sistema non l'ha nemmeno aperta, quindi di "
+                    "lei non esiste alcun dato",
+}
+# I motivi per cui non esiste un profilo: la riga porta solo il nome e il perché.
+MOTIVI_SENZA_PROFILO = ("storico_insufficiente", "mai_guardata")
+
+_BUFFER_PROFILI = []      # righe in attesa: si scrive UNA volta per giro, non una per titolo
+_BUFFER_NOTIZIE = []      # idem per le notizie
+_NOTIZIE_CHIESTE = set()  # (ticker, giorno) già chiesti in questo processo
+_NOTIZIE_SPESE = [0]      # contatore del budget di questo giro
+
+
+def _arc_oggi() -> str:
+    return datetime.date.today().isoformat()
+
+
+def _arc_ora() -> str:
+    return datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+
+
+def _arc_nome(prefisso: str, giorno: str, pezzo: int = 0) -> str:
+    """Il nome del file di un giorno. Il pezzo oltre il primo prende un suffisso (_b, _c…): serve
+    solo al giorno anomalo, perché un giorno normale ci sta largo in un pezzo solo."""
+    coda = "" if pezzo <= 0 else "_" + chr(ord("b") + pezzo - 1)
+    return f"{prefisso}/{giorno}{coda}.json"
+
+
+def indice_archivio() -> dict:
+    """Cosa contiene l'archivio: per ogni file, quante righe ha. È la fonte che permette di
+    distinguere «questo file non esiste ancora» da «la lettura è fallita» — due situazioni che
+    read_data_json restituisce in modo IDENTICO (lista vuota) e che nessuna guardia basata sul
+    confronto delle lunghezze potrà mai separare. Senza questa distinzione, un archivio nuovo nasce
+    esposto esattamente all'incidente che ha azzerato due registri il 16/08/2026."""
+    d = read_data_json(INDICE_NAME, None)
+    return d if isinstance(d, dict) else {}
+
+
+def _indice_scrivi(indice: dict) -> bool:
+    """L'indice è sotto archivio/, quindi la guardia anti-riduzione lo protegge da sola: se una
+    lettura fallita lo facesse rimpicciolire, la scrittura viene rifiutata."""
+    return write_data_json(INDICE_NAME, indice)
+
+
+def _indice_o_niente():
+    """L'indice, oppure None se non si riesce a stabilire lo stato dell'archivio.
+
+    Qui sta il nodo di tutta la faccenda. «Il file non esiste ancora» e «la lettura è fallita»
+    arrivano identici — lista o dizionario vuoti — e nessun confronto potrà distinguerli. La prova
+    che li separa è provare a CREARE l'indice vuoto: se l'archivio è davvero nuovo la creazione
+    passa; se invece l'indice esiste e la lettura era fallita, scriverne uno vuoto lo
+    RIMPICCIOLIREBBE, e la guardia anti-riduzione rifiuta la scrittura da sola. In quel caso si
+    torna None e non si scrive niente. Costa un giro di archivio; l'alternativa costa l'archivio."""
+    d = read_data_json(INDICE_NAME, None)
+    if isinstance(d, dict) and d:
+        return d
+    if not write_data_json(INDICE_NAME, {"_creato": _arc_ora()}):
+        return None     # la guardia ha rifiutato: l'indice esiste e la lettura era fallita
+    d = read_data_json(INDICE_NAME, None)
+    return d if isinstance(d, dict) else None
+
+
+def _arc_aggiungi(prefisso: str, righe_nuove: list, chiave=None, giorno: str = None) -> dict:
+    """Aggiunge righe al file di OGGI di un archivio, senza poter cancellare niente.
+
+    Restituisce {"scritte": n, "salvate": bool, "motivo": str|None}. In caso di dubbio NON scrive:
+    un giro senza archivio costa una manciata di righe, un giro che scrive sopra lo storico costa
+    l'archivio. Le tre regole:
+      1. se l'indice non si legge, non si scrive niente (l'indice è minuscolo: un suo fallimento è
+         un problema di rete vero, non un caso limite);
+      2. se il file del giorno non si legge MA l'indice dice che ha righe, si annulla: è
+         esattamente la sequenza che cancella gli storici;
+      3. si scrive solo il giorno corrente; i giorni chiusi non si riaprono mai.
+    """
+    if not righe_nuove:
+        return {"scritte": 0, "salvate": True, "motivo": None}
+    giorno = giorno or _arc_oggi()
+    indice = _indice_o_niente()
+    if indice is None:
+        return {"scritte": 0, "salvate": False,
+                "motivo": "non riesco a leggere l'indice dell'archivio: non scrivo niente, "
+                          "perché senza indice non posso sapere cosa c'è già"}
+    def apri(pezzo):
+        """Legge un pezzo del giorno. Ritorna (righe, errore): righe=None se non si deve toccare."""
+        nome = _arc_nome(prefisso, giorno, pezzo)
+        atteso = (indice.get(nome) or {}).get("righe")
+        letto = read_data_json(nome, None)
+        if letto is None:
+            if atteso:
+                return nome, None, (f"lettura di {nome} fallita ma l'indice dice {atteso} righe: "
+                                    "non scrivo per non cancellare lo storico")
+            return nome, [], None
+        if not isinstance(letto, list):
+            return nome, None, f"{nome} non contiene una lista"
+        if atteso and len(letto) < atteso:
+            return nome, None, (f"{nome} ha {len(letto)} righe ma l'indice ne conta {atteso}: "
+                                "lettura incompleta, non scrivo")
+        return nome, letto, None
+
+    # 1. si trova il primo pezzo del giorno che ha ancora posto, e si raccolgono le chiavi già viste
+    # in TUTTI i pezzi (altrimenti un doppione entrerebbe in un pezzo diverso dallo stesso giorno)
+    pezzo, viste = 0, set()
+    nome, esistenti, err = apri(0)
+    if err:
+        return {"scritte": 0, "salvate": False, "motivo": err}
+    while True:
+        if chiave:
+            viste |= {chiave(r) for r in esistenti}
+        if len(esistenti) < _ARC_TETTO_RIGHE or pezzo >= 24:
+            break
+        pezzo += 1
+        nome, prossimo, err = apri(pezzo)
+        if err:
+            return {"scritte": 0, "salvate": False, "motivo": err}
+        esistenti = prossimo
+
+    da_aggiungere = []
+    for r in righe_nuove:
+        k = chiave(r) if chiave else None
+        if k is not None and k in viste:
+            continue
+        if k is not None:
+            viste.add(k)
+        da_aggiungere.append(r)
+    if not da_aggiungere:
+        return {"scritte": 0, "salvate": True, "motivo": None}
+
+    # 2. si riempie pezzo per pezzo, e nessun pezzo può superare i tetti. Il controllo va fatto
+    # sull'ESITO della scrittura, non sul punto di partenza: un blocco di righe scavalcherebbe in
+    # un colpo un tetto controllato solo all'inizio, ed è precisamente il muro di 1 MB — che non dà
+    # errore, spegne le protezioni anti-cancellazione e non lo dice a nessuno.
+    scritte, rimaste = 0, list(da_aggiungere)
+    while rimaste:
+        posto = max(0, _ARC_TETTO_RIGHE - len(esistenti))
+        if posto == 0 and pezzo < 24:
+            pezzo += 1
+            nome, esistenti, err = apri(pezzo)
+            if err:
+                return {"scritte": scritte, "salvate": False, "motivo": err}
+            continue
+        lotto = rimaste[:posto] if posto else rimaste
+        # taglia il lotto finché il file che ne risulta sta sotto il tetto dei byte
+        while lotto:
+            corpo = json.dumps(esistenti + lotto, ensure_ascii=False, indent=0)
+            if len(corpo.encode("utf-8")) <= _ARC_TETTO_BYTE or len(lotto) == 1:
+                break
+            lotto = lotto[:max(1, len(lotto) // 2)]
+        tutte = esistenti + lotto
+        if not write_data_json(nome, tutte):
+            return {"scritte": scritte, "salvate": False,
+                    "motivo": f"scrittura di {nome} non riuscita"}
+        if nome in _SALVATAGGI_FALLITI:
+            # La risposta positiva non basta: write_data_json dice «riuscito» anche col solo
+            # successo locale, e nel lavoro automatico il file locale muore col giro.
+            return {"scritte": scritte, "salvate": False,
+                    "motivo": f"{nome} salvato solo in locale: il commit remoto non è passato"}
+        indice[nome] = {"righe": len(tutte), "aggiornato": _arc_ora()}
+        _indice_scrivi(indice)
+        scritte += len(lotto)
+        rimaste = rimaste[len(lotto):]
+        if rimaste:
+            if pezzo >= 24:
+                return {"scritte": scritte, "salvate": False,
+                        "motivo": f"il giorno {giorno} ha esaurito i pezzi disponibili"}
+            pezzo += 1
+            nome, esistenti, err = apri(pezzo)
+            if err:
+                return {"scritte": scritte, "salvate": False, "motivo": err}
+    return {"scritte": scritte, "salvate": True, "motivo": None}
+
+
+def _arc_leggi_giorni(prefisso: str, dal: str = None, al: str = None) -> list:
+    """Rilegge un archivio enumerando l'indice — non elencando cartelle, che sul ramo remoto non si
+    possono elencare. Perciò l'indice va tenuto aggiornato: è la mappa dell'archivio."""
+    fuori = []
+    for nome in sorted(indice_archivio()):
+        if not nome.startswith(prefisso + "/"):
+            continue
+        g = os.path.basename(nome)[:10]
+        if (dal and g < dal) or (al and g > al):
+            continue
+        righe = read_data_json(nome, None)
+        if isinstance(righe, list):
+            fuori += righe
+    return fuori
+
+
+# --- COM'ERA IL MONDO -------------------------------------------------------
+
+@st.cache_data(ttl=3600, show_spinner=False)
+def _serie_mondo(simbolo: str) -> dict:
+    """Valore e variazioni di un indicatore del mondo. Una chiamata, poi calcolo locale."""
+    try:
+        c = get_history(simbolo, period="6mo")["Close"].dropna()
+    except Exception:
+        return {}
+    if c.empty:
+        return {}
+    ultimo = float(c.iloc[-1])
+
+    def var(n):
+        return round(float(c.iloc[-1] / c.iloc[-n] - 1) * 100, 2) if len(c) > n else None
+
+    return {"valore": round(ultimo, 4), "var_5g": var(6), "var_1m": var(21), "var_3m": var(63)}
+
+
+def contesto_mondo(giorno: str = None) -> dict:
+    """Com'era il mondo oggi: paura, indici, tassi, dollaro, materie prime, credito. Una riga al
+    giorno, condivisa da tutte le occasioni di quella giornata — è il motivo per cui non finisce
+    dentro ogni riga di profilo: scriverla 200 volte al giorno significherebbe sfondare i limiti e,
+    peggio, non poter mai aggiungere un indicatore nuovo senza riscrivere la storia."""
+    giorno = giorno or _arc_oggi()
+    dati = {"giorno": giorno, "ora": _arc_ora()}
+    for chiave, simbolo, _etichetta in _MONDO_SIMBOLI:
+        dati[chiave] = _serie_mondo(simbolo)
+    try:
+        reg = volatility_regime()
+        dati["regime"] = {"etichetta": reg.get("label"), "fattore": reg.get("factor"),
+                          "vix": reg.get("vix")}
+    except Exception:
+        dati["regime"] = {}
+    # curva dei tassi: differenza fra 10 anni e 3 mesi. Negativa = mercato che teme la recessione,
+    # ed è uno dei pochi segnali con una storia lunga alle spalle.
+    try:
+        d10 = (dati.get("tasso_10a") or {}).get("valore")
+        d3m = (dati.get("tasso_3m") or {}).get("valore")
+        dati["curva_tassi"] = round(d10 - d3m, 3) if (d10 is not None and d3m is not None) else None
+    except Exception:
+        dati["curva_tassi"] = None
+    return dati
+
+
+def contesto_settori(giorno: str = None) -> list:
+    """Come stanno gli 11 settori: quanto si muovono e quanto vanno meglio o peggio dell'indice.
+    È così che «il settore era in crisi» diventa un numero verificabile."""
+    giorno = giorno or _arc_oggi()
+    sp = _serie_mondo("^GSPC")
+    fuori = []
+    for nome, etf in sorted(_SETTORI_ETF.items()):
+        s = _serie_mondo(etf)
+        if not s:
+            continue
+        riga = {"giorno": giorno, "settore": nome, "etf": etf, "ora": _arc_ora()}
+        riga.update(s)
+        for periodo in ("var_5g", "var_1m", "var_3m"):
+            mio, suo = s.get(periodo), sp.get(periodo)
+            riga["forza_" + periodo] = (round(mio - suo, 2)
+                                        if (mio is not None and suo is not None) else None)
+        fuori.append(riga)
+    return fuori
+
+
+def ampiezza_mercato(righe) -> dict:
+    """Quanti dei titoli guardati stanno salendo e quanti scendendo. Non esiste da nessuna parte nel
+    sistema, ma si ricava a COSTO ZERO da quello che la scansione ha già in mano: è la differenza
+    fra «è scesa lei» e «è scesa tutta la borsa», che è la domanda da cui dipende metà del giudizio
+    su un'occasione."""
+    vals = [r for r in (righe or []) if isinstance(r, dict)]
+    if not vals:
+        return {}
+    def conta(campo):
+        xs = [r.get(campo) for r in vals if r.get(campo) is not None]
+        if not xs:
+            return {}
+        su = sum(1 for x in xs if x > 0)
+        return {"quanti": len(xs), "in_salita": su, "in_salita_pct": round(100 * su / len(xs), 1),
+                "mediana": round(float(np.median(xs)), 2)}
+    rsi = [r.get("rsi") for r in vals if r.get("rsi") is not None]
+    return {"a_5_giorni": conta("perf_5d"), "a_1_mese": conta("perf_1m"),
+            "rsi_mediano": round(float(np.median(rsi)), 1) if rsi else None,
+            "titoli_guardati": len(vals)}
+
+
+# --- LE NOTIZIE -------------------------------------------------------------
+
+def registra_notizie(ticker: str, giorno: str = None, forza: bool = False) -> int:
+    """Salva le notizie di un titolo COL RIASSUNTO, così che fra un anno si possa capire perché quel
+    giorno il prezzo era quello. Va fatto il giorno stesso: una ricerca fatta dopo restituisce cose
+    diverse e, soprattutto, restituisce anche quello che è successo DOPO — cioè bara.
+
+    Il budget è la ragione per cui esiste il tetto: senza, sarebbero ~3.000 chiamate al giorno in
+    raffiche. Il limite vero di Finnhub non è scritto nel codice, quindi non lo si indovina: si
+    tiene un tetto proprio e prudente, e chi lo supera aspetta il giro dopo invece di ricevere
+    silenzio (che è quello che accade oggi: superata la quota, le notizie diventano [] e nessuno lo
+    viene a sapere)."""
+    giorno = giorno or _arc_oggi()
+    TK = str(ticker).upper()
+    if (TK, giorno) in _NOTIZIE_CHIESTE:
+        return 0
+    if not forza and _NOTIZIE_SPESE[0] >= _NOTIZIE_PER_GIRO:
+        return 0
+    _NOTIZIE_CHIESTE.add((TK, giorno))
+    _NOTIZIE_SPESE[0] += 1
+    try:
+        news = get_news(TK, _NOTIZIE_PER_TITOLO) or []
+    except Exception:
+        news = []
+    if not news:
+        return 0
+    voci = []
+    for n in news[:_NOTIZIE_PER_TITOLO]:
+        testo = (n.get("summary") or "").strip()
+        voci.append({"titolo": (n.get("title") or "").strip(),
+                     "riassunto": testo[:_NOTIZIE_MAX_RIASSUNTO],
+                     "riassunto_tagliato": len(testo) > _NOTIZIE_MAX_RIASSUNTO,
+                     "fonte": n.get("publisher"), "data": n.get("date"), "url": n.get("url")})
+    try:
+        etichetta, punteggio = news_sentiment(news)
+    except Exception:
+        etichetta, punteggio = None, None
+    try:
+        bandiere = news_red_flags(news)
+    except Exception:
+        bandiere = []
+    riga = {"giorno": giorno, "ticker": TK, "ora": _arc_ora(), "quante": len(voci),
+            "tono": etichetta, "tono_punteggio": punteggio, "bandiere_rosse": bandiere,
+            "notizie": voci}
+    # In coda, non su disco: venti titoli in un giro sarebbero venti letture-e-riscritture dello
+    # stesso file, cioè quaranta chiamate all'API per niente. Si scrive una volta alla fine.
+    _BUFFER_NOTIZIE.append(riga)
+    return len(voci)
+
+
+def notizie_del_giorno(ticker: str, giorno: str = None) -> dict:
+    giorno = giorno or _arc_oggi()
+    TK = str(ticker).upper()
+    for nome in sorted(indice_archivio()):
+        if not nome.startswith(ARC_NOTIZIE + "/") or os.path.basename(nome)[:10] != giorno:
+            continue
+        for r in (read_data_json(nome, None) or []):
+            if r.get("ticker") == TK:
+                return r
+    return {}
+
+
+# --- IL PROFILO DI UN'OCCASIONE --------------------------------------------
+
+def _profilo_id(giorno, kind, ticker, momento) -> str:
+    return f"{giorno}:{kind}:{str(ticker).upper()}:{momento or 'scartata'}"
+
+
+def profilo_da_riga(r: dict, kind: str, momento: str = None, episodio: str = None,
+                    motivo: str = None, dettaglio=None, conv=None, occasione=None,
+                    fattori: dict = None, mondo: dict = None, origine: str = None,
+                    giorno: str = None) -> dict:
+    """Costruisce la riga di profilo da un record di opportunity_row. Tutte le caratteristiche che
+    oggi il sistema calcola a ogni giro e poi butta finiscono qui, raggruppate in modo che aprendo
+    il file si capisca cosa si sta guardando."""
+    giorno = giorno or _arc_oggi()
+    tk = str(r.get("ticker") or "").upper()
+    titolo = {k: r.get(k) for k in _PROF_TITOLO if r.get(k) is not None}
+    trappola = r.get("trap") or {}
+    prof = {
+        "id": _profilo_id(giorno, kind, tk, momento),
+        "giorno": giorno, "ora": _arc_ora(), "ticker": tk, "nome": r.get("name"),
+        "kind": kind, "momento": momento, "episodio": episodio,
+        "scartata": bool(motivo), "motivo": motivo, "motivo_dettaglio": dettaglio,
+        "origine": origine,
+        # IL COLLEGAMENTO ALLE NOTIZIE. Le notizie stanno in un archivio loro (pesano dieci volte
+        # una riga di profilo e sono condivise da tutti i momenti dello stesso titolo nello stesso
+        # giorno), ma il legame è scritto qui e non è un numero progressivo che si può disallineare:
+        # è titolo + giorno, cioè due dati che la riga possiede già. apri_occasione() lo segue.
+        "notizie_di": f"{giorno}:{tk}",
+        "prezzo": r.get("price"),
+        "titolo": titolo,
+        "punteggi": {k: r.get(k) for k in _PROF_PUNTEGGI if r.get(k) is not None},
+        "convenienza": conv, "occasione": occasione,
+        "fattori": {k: (round(v, 4) if isinstance(v, float) else v)
+                    for k, v in (fattori or {}).items() if v is not None},
+        "trappola": {"etichetta": trappola.get("label"), "conclamata": trappola.get("strong"),
+                     "segnali": trappola.get("signals")} if trappola else None,
+        "settore": r.get("sector"),
+        "mondo": mondo or {},
+    }
+    return prof
+
+
+def mondo_minimo(mondo: dict = None, ampiezza: dict = None, settore_riga: dict = None) -> dict:
+    """La copia essenziale del contesto dentro la riga di profilo: quattro numeri, perché una riga
+    deve restare leggibile da sola senza dover aprire altri tre file. Il contesto COMPLETO sta nei
+    suoi archivi, che è dove va guardato quando si vuole capire davvero."""
+    m = mondo or {}
+    out = {"paura": ((m.get("paura") or {}).get("valore")),
+           "regime": ((m.get("regime") or {}).get("etichetta")),
+           "sp500_1m": ((m.get("sp500") or {}).get("var_1m")),
+           "curva_tassi": m.get("curva_tassi")}
+    if ampiezza:
+        out["titoli_in_salita_pct"] = (ampiezza.get("a_5_giorni") or {}).get("in_salita_pct")
+    if settore_riga:
+        out["settore_1m"] = settore_riga.get("var_1m")
+        out["settore_forza_1m"] = settore_riga.get("forza_var_1m")
+    return out
+
+
+def accoda_profilo(prof: dict) -> None:
+    """Mette una riga in coda. Si scrive UNA volta per giro (vedi scarica_profili): con ~135 scarti
+    al giorno, salvare a ogni riga vorrebbe dire 135 letture-e-riscritture dello stesso file."""
+    if prof:
+        _BUFFER_PROFILI.append(prof)
+
+
+def _scarica_coda(coda: list, prefisso: str, chiave) -> dict:
+    """Svuota una coda sui file del giorno a cui ogni riga appartiene. Se il salvataggio non riesce
+    le righe RESTANO in coda: un giro andato male non deve costare le sue righe."""
+    if not coda:
+        return {"scritte": 0, "in_coda": 0, "motivo": None}
+    per_giorno = {}
+    for p in coda:
+        per_giorno.setdefault(p.get("giorno") or _arc_oggi(), []).append(p)
+    scritte, problemi, rimaste = 0, [], []
+    for giorno, righe in sorted(per_giorno.items()):
+        esito = _arc_aggiungi(prefisso, righe, chiave=chiave, giorno=giorno)
+        scritte += esito.get("scritte", 0)
+        if not esito.get("salvate"):
+            problemi.append(esito.get("motivo"))
+            rimaste += righe
+    del coda[:]
+    coda.extend(rimaste)
+    return {"scritte": scritte, "in_coda": len(rimaste),
+            "motivo": ("; ".join(x for x in problemi if x) or None)}
+
+
+def scarica_profili() -> dict:
+    """Scrive in archivio tutto quello che è in coda — profili e notizie. Da chiamare una volta per
+    giro, alla fine."""
+    p = _scarica_coda(_BUFFER_PROFILI, ARC_PROFILI, lambda r: r.get("id"))
+    n = _scarica_coda(_BUFFER_NOTIZIE, ARC_NOTIZIE,
+                      lambda r: (r.get("giorno"), r.get("ticker")))
+    motivi = [x for x in (p.get("motivo"), n.get("motivo")) if x]
+    return {"scritte": p["scritte"], "notizie_scritte": n["scritte"],
+            "in_coda": p["in_coda"] + n["in_coda"],
+            "motivo": ("; ".join(motivi) or None)}
+
+
+# --- COM'È ANDATA ----------------------------------------------------------
+
+# Gli orizzonti su cui si misura l'esito. ATTENZIONE: nei registri vecchi convivono due unità di
+# misura diverse — 5 e 21 giorni di BORSA nel registro della convenienza, 7 e 30 di CALENDARIO
+# negli scenari. Mescolarle senza dirlo produce confronti falsi, quindi qui l'unità è scritta nel
+# nome e nel campo `unita`.
+ORIZZONTI_ESITO = (("7g", 7, "calendario"), ("30g", 30, "calendario"), ("365g", 365, "calendario"))
+
+
+def _resa_e_percorso(ticker: str, dal: str, prezzo, giorni: int, storico=None) -> dict:
+    """Com'è andata, e COME ci è arrivata. Il percorso conta quanto il traguardo: due occasioni che
+    finiscono entrambe a +2% sono animali diversi se una è prima passata da +15% e l'altra da -12%.
+    Senza il massimo e il minimo toccati, le regole di vendita non sono giudicabili — si misurerebbe
+    il traguardo ignorando la corsa."""
+    try:
+        h = storico if storico is not None else get_history(ticker, "2y")
+        if h is None or h.empty or prezzo in (None, 0):
+            return {}
+        c = h["Close"].dropna()
+        idx = [str(x)[:10] for x in c.index]
+        parti = [i for i, g in enumerate(idx) if g >= str(dal)[:10]]
+        if not parti:
+            return {}
+        i0 = parti[0]
+        # GUARDIA ANTI-FRAZIONAMENTO: dopo un raggruppamento di azioni lo storico è riscalato ma il
+        # prezzo registrato no, e la resa risulta assurda (misurato +50.421% su un titolo). Le righe
+        # fuori scala si MARCANO, non si cancellano: un dato sbagliato riconosciuto vale più di un
+        # dato scomparso.
+        p0 = float(c.iloc[i0])
+        if abs(p0 / float(prezzo) - 1) > _SPLIT_TOLL:
+            return {"dati_sospetti": True, "prezzo_storico": round(p0, 4)}
+        fine = None
+        limite = (datetime.date.fromisoformat(str(dal)[:10])
+                  + datetime.timedelta(days=giorni)).isoformat()
+        for i in range(i0, len(c)):
+            if idx[i] <= limite:
+                fine = i
+            else:
+                break
+        if fine is None or fine <= i0:
+            return {}
+        tratto = c.iloc[i0:fine + 1].astype(float)
+        pf = float(tratto.iloc[-1])
+        pmax, pmin = float(tratto.max()), float(tratto.min())
+        imax = int(tratto.values.argmax())
+        imin = int(tratto.values.argmin())
+        return {
+            "resa": round((pf / float(prezzo) - 1) * 100, 2),
+            "max_toccato": round((pmax / float(prezzo) - 1) * 100, 2),
+            "min_toccato": round((pmin / float(prezzo) - 1) * 100, 2),
+            "giorni_al_massimo": imax, "giorni_al_minimo": imin,
+            "giorni_misurati": fine - i0, "prezzo_fine": round(pf, 4),
+            "maturato_il": idx[fine],
+        }
+    except Exception:
+        return {}
+
+
+def risolvi_esiti(max_titoli: int = 60, recupero_giorni: int = 10) -> dict:
+    """Calcola gli esiti maturati e li archivia come righe NUOVE nel giorno in cui maturano.
+    Non riapre nessun file passato: è quello che rende impossibile perdere lo storico riscrivendolo.
+    L'esito porta con sé la resa a scadenza, il massimo e il minimo toccati e in quanti giorni.
+
+    LEGGE POCHISSIMO, di proposito. Gli esiti che maturano oggi appartengono a tre giornate precise
+    — oggi meno 7, meno 30, meno 365 — quindi non c'è alcun bisogno di aprire tutto l'archivio: si
+    aprono quelle. `recupero_giorni` allarga la finestra all'indietro perché il lavoro automatico
+    salta dei giri (il 6 agosto non ha girato affatto): senza quel margine, un giorno saltato
+    lascerebbe quelle occasioni senza esito per sempre."""
+    oggi = _arc_oggi()
+    oggi_d = datetime.date.fromisoformat(oggi)
+    # le giornate di ACQUISTO che maturano adesso, per ciascun orizzonte
+    interessanti = set()
+    for _nome, gg, _u in ORIZZONTI_ESITO:
+        for indietro in range(0, max(1, recupero_giorni) + 1):
+            g = oggi_d - datetime.timedelta(days=gg + indietro)
+            interessanti.add(g.isoformat())
+    dal = min(interessanti)
+    profili = [p for p in _arc_leggi_giorni(ARC_PROFILI, dal=dal, al=oggi)
+               if isinstance(p, dict) and p.get("giorno") in interessanti]
+    if not profili:
+        return {"nuovi": 0, "in_attesa": 0, "titoli": 0}
+    # gli esiti già scritti stanno nei giorni in cui sono maturati, cioè da poco: basta la finestra
+    fatti = {(r.get("profilo"), r.get("orizzonte"))
+             for r in _arc_leggi_giorni(
+                 ARC_ESITI,
+                 dal=(oggi_d - datetime.timedelta(days=max(1, recupero_giorni) + 3)).isoformat(),
+                 al=oggi) if isinstance(r, dict)}
+    da_fare = []
+    for p in profili:
+        giorno, prezzo = p.get("giorno"), p.get("prezzo")
+        if not giorno or prezzo in (None, 0):
+            continue
+        for nome, gg, unita in ORIZZONTI_ESITO:
+            if (p.get("id"), nome) in fatti:
+                continue
+            scade = (datetime.date.fromisoformat(giorno)
+                     + datetime.timedelta(days=gg)).isoformat()
+            if scade > oggi:
+                continue
+            da_fare.append((p, nome, gg, unita))
+    per_titolo = {}
+    for p, nome, gg, unita in da_fare:
+        per_titolo.setdefault(p.get("ticker"), []).append((p, nome, gg, unita))
+    nuove = []
+    for i, (tk, lista) in enumerate(sorted(per_titolo.items())):
+        if i >= max_titoli:
+            break
+        try:
+            h = get_history(tk, "2y")
+        except Exception:
+            h = None
+        for p, nome, gg, unita in lista:
+            res = _resa_e_percorso(tk, p.get("giorno"), p.get("prezzo"), gg, storico=h)
+            if not res:
+                continue
+            riga = {"giorno": oggi, "ora": _arc_ora(), "profilo": p.get("id"), "ticker": tk,
+                    "kind": p.get("kind"), "momento": p.get("momento"),
+                    "scartata": p.get("scartata"), "comprato_il": p.get("giorno"),
+                    "prezzo_acquisto": p.get("prezzo"), "orizzonte": nome,
+                    "giorni": gg, "unita": unita}
+            riga.update(res)
+            nuove.append(riga)
+    esito = _arc_aggiungi(ARC_ESITI, nuove,
+                          chiave=lambda r: (r.get("profilo"), r.get("orizzonte")))
+    return {"nuovi": esito.get("scritte", 0), "in_attesa": len(da_fare) - len(nuove),
+            "titoli": len(per_titolo), "motivo": esito.get("motivo")}
+
+
+# --- COSA SE NE IMPARA ----------------------------------------------------
+
+def _mediana(xs):
+    xs = [float(x) for x in xs if x is not None]
+    return round(float(np.median(xs)), 3) if xs else None
+
+
+def sintesi_apprendimento(kind: str = None, orizzonte: str = "30g", momento: str = None,
+                          solo_scartate: bool = None) -> dict:
+    """Per ogni caratteristica: quanto valeva nelle occasioni che hanno guadagnato e quanto in
+    quelle che hanno perso. Niente modello: una differenza fra due mediane, con il numero di casi
+    accanto — perché è quello che dice se puoi crederci.
+
+    Il campo `solidita` non è decorazione: con meno di 30 casi per lato qualunque differenza è
+    compatibile col caso, e presentarla come scoperta è il modo più comune di sbagliare con i dati."""
+    profili = {p.get("id"): p for p in _arc_leggi_giorni(ARC_PROFILI) if isinstance(p, dict)}
+    esiti = [e for e in _arc_leggi_giorni(ARC_ESITI)
+             if isinstance(e, dict) and e.get("orizzonte") == orizzonte
+             and not e.get("dati_sospetti") and e.get("resa") is not None]
+    vinte, perse = [], []
+    for e in esiti:
+        p = profili.get(e.get("profilo"))
+        if not p:
+            continue
+        if kind and p.get("kind") != kind:
+            continue
+        if momento and p.get("momento") != momento:
+            continue
+        if solo_scartate is True and not p.get("scartata"):
+            continue
+        if solo_scartate is False and p.get("scartata"):
+            continue
+        (vinte if e["resa"] > 0 else perse).append((p, e))
+    caratteristiche = {}
+    campi = [("titolo", k) for k in _PROF_TITOLO] + \
+            [("punteggi", k) for k in _PROF_PUNTEGGI] + \
+            [("fattori", k) for k in ("discount", "histcheap", "riskadj", "ddpen", "momentum",
+                                      "prob", "oversold", "rebound", "trend", "relstrength",
+                                      "quality", "valcheap", "trappen")]
+    for gruppo, campo in campi:
+        gv = [(p.get(gruppo) or {}).get(campo) for p, _ in vinte]
+        gp = [(p.get(gruppo) or {}).get(campo) for p, _ in perse]
+        gv = [x for x in gv if isinstance(x, (int, float)) and not isinstance(x, bool)]
+        gp = [x for x in gp if isinstance(x, (int, float)) and not isinstance(x, bool)]
+        if not gv or not gp:
+            continue
+        mv, mp = _mediana(gv), _mediana(gp)
+        caratteristiche[campo] = {
+            "gruppo": gruppo, "chi_guadagna": mv, "chi_perde": mp,
+            "differenza": (round(mv - mp, 3) if (mv is not None and mp is not None) else None),
+            "casi_guadagno": len(gv), "casi_perdita": len(gp),
+            "solidita": ("da confermare" if min(len(gv), len(gp)) < 30 else
+                         "indicativa" if min(len(gv), len(gp)) < 100 else "solida"),
+        }
+    ordinate = sorted(caratteristiche.items(),
+                      key=lambda kv: abs(kv[1].get("differenza") or 0), reverse=True)
+    return {"orizzonte": orizzonte, "kind": kind, "momento": momento,
+            "quante_guadagnano": len(vinte), "quante_perdono": len(perse),
+            "caratteristiche": dict(ordinate),
+            "aggiornato": _arc_ora(),
+            "avvertenza": ("Con meno di 30 casi per lato le differenze non sono distinguibili dal "
+                           "caso: la colonna «solidità» dice a quali si può cominciare a credere.")}
+
+
+def salva_sintesi(forza: bool = False, ogni_ore: int = 12) -> bool:
+    """Ricalcola e salva le statistiche misurate. È il file piccolo che legge l'app: l'archivio
+    grezzo sono centinaia di file, aprirli tutti a ogni caricamento di pagina non è sostenibile.
+
+    Girando ogni mezz'ora questo conto rileggerebbe l'intero archivio 48 volte al giorno per
+    ottenere quasi sempre lo stesso risultato: le mediane non cambiano perché sono arrivati due
+    esiti. Si rifà due volte al giorno, e basta."""
+    if not forza:
+        try:
+            vecchia = read_data_json(SINTESI_NAME, None) or {}
+            q = str(vecchia.get("aggiornato") or "")
+            if q:
+                eta = datetime.datetime.now() - datetime.datetime.strptime(q, "%Y-%m-%d %H:%M")
+                if eta.total_seconds() < ogni_ore * 3600:
+                    return True     # ancora fresca: non c'è niente da rifare
+        except Exception:
+            pass
+    fuori = {"aggiornato": _arc_ora(), "viste": {}}
+    for kind in ("short", "long"):
+        for oriz in ("7g", "30g", "365g"):
+            s = sintesi_apprendimento(kind=kind, orizzonte=oriz)
+            if s.get("quante_guadagnano") or s.get("quante_perdono"):
+                fuori["viste"][f"{kind}:{oriz}"] = s
+    return write_data_json(SINTESI_NAME, fuori)
+
+
+def stato_archivio() -> dict:
+    """A che punto è l'archivio: quanti file, quante righe, da quando. Serve perché «non si è perso
+    niente» sia una cosa che si può VERIFICARE, non una che si deve sperare."""
+    indice = indice_archivio()
+    per_area = {}
+    for nome, info in indice.items():
+        if "/" not in nome or not isinstance(info, dict):
+            continue                      # voci di servizio dell'indice (es. _creato)
+        area = nome.rsplit("/", 1)[0]
+        d = per_area.setdefault(area, {"file": 0, "righe": 0, "primo": None, "ultimo": None})
+        d["file"] += 1
+        d["righe"] += int((info or {}).get("righe") or 0)
+        g = os.path.basename(nome)[:10]
+        if len(g) == 10:
+            d["primo"] = g if not d["primo"] else min(d["primo"], g)
+            d["ultimo"] = g if not d["ultimo"] else max(d["ultimo"], g)
+    return {"aree": per_area, "in_coda": len(_BUFFER_PROFILI),
+            "notizie_in_coda": len(_BUFFER_NOTIZIE),
+            "notizie_spese_in_questo_giro": _NOTIZIE_SPESE[0],
+            "salvataggi_falliti": sorted(_SALVATAGGI_FALLITI)}
+
+
+# --- IL CALENDARIO: COME SI SCRIVE E COME SI RILEGGE UNA GIORNATA ----------
+# Ogni giornata è una cartella di file col nome del giorno. Scrivere i dati di oggi non può toccare
+# nessun altro giorno, perché nessun altro giorno viene aperto. È la stessa cosa che si farebbe con
+# un'agenda di carta: si scrive sulla pagina di oggi e le pagine di ieri restano dove sono.
+
+_CONTESTO_FATTO = {}      # (giorno, kind) → contesto già preparato in questo processo
+
+
+def _contesto_del_giorno(kind: str, righe: list, giorno: str = None) -> dict:
+    """Prepara (e archivia, una volta al giorno) il contesto condiviso da tutte le occasioni di
+    oggi: com'era il mondo, come stavano gli 11 settori, quanti titoli salivano. Costa 24 chiamate
+    AL GIORNO in tutto, non per occasione: è la ragione per cui il contesto sta in archivi suoi e
+    non copiato dentro ogni riga.
+
+    La memoria per (giorno, tipo) non è un'ottimizzazione: senza, ogni singolo scarto rileggerebbe e
+    riscriverebbe gli stessi due file del contesto, cioè centinaia di chiamate all'API per riscrivere
+    le stesse righe."""
+    giorno = giorno or _arc_oggi()
+    _memo = (giorno, kind)
+    if _memo in _CONTESTO_FATTO:
+        return _CONTESTO_FATTO[_memo]
+    try:
+        mondo = contesto_mondo(giorno)
+    except Exception:
+        mondo = {}
+    try:
+        settori = contesto_settori(giorno)
+    except Exception:
+        settori = []
+    try:
+        ampiezza = ampiezza_mercato(righe)
+    except Exception:
+        ampiezza = {}
+    if mondo:
+        m = dict(mondo)
+        m["ampiezza_mercato"] = ampiezza
+        _arc_aggiungi(ARC_MONDO, [m], chiave=lambda r: r.get("giorno"), giorno=giorno)
+    if settori:
+        _arc_aggiungi(ARC_SETTORI, settori,
+                      chiave=lambda r: (r.get("giorno"), r.get("settore")), giorno=giorno)
+    try:
+        origine = origine_candidati(kind)
+    except Exception:
+        origine = {}
+    ctx = {"giorno": giorno, "mondo": mondo, "ampiezza": ampiezza, "origine": origine,
+           "settori": {s.get("settore"): s for s in settori}}
+    _CONTESTO_FATTO[_memo] = ctx
+    return ctx
+
+
+def scarto_cancello_osservazione(kind: str, ticker: str, conv=None) -> bool:
+    """Un'occasione che ha superato tutti i filtri tecnici ma NON la convenienza minima per entrare
+    in osservazione. È una bocciatura diversa dalle altre — non ha un difetto, ha solo un giudizio
+    troppo basso — ed è la più vicina al confine, quindi come contro-esempio è fra le più utili."""
+    try:
+        TK = str(ticker).upper()
+        r = opportunity_row(TK, with_fundamentals=(kind == "long"))
+        if not r:
+            return False
+        ctx = _contesto_del_giorno(kind, [r])
+        prof = profilo_da_riga(
+            r, kind, momento=None, motivo="convenienza_sotto_cancello",
+            dettaglio=conv, conv=conv, mondo=_mondo_per_riga(r, ctx),
+            origine=(ctx.get("origine") or {}).get(TK), giorno=ctx.get("giorno"))
+        accoda_profilo(prof)
+        return True
+    except Exception:
+        return False
+
+
+def _prepara_contesto_scansione(kind: str, righe: list) -> dict:
+    """Nome usato dalla scansione. Se qualcosa nel contesto non si riesce a prendere, il profilo si
+    registra comunque: una riga senza il contesto vale molto più di una riga che non esiste."""
+    try:
+        return _contesto_del_giorno(kind, righe)
+    except Exception:
+        return {"giorno": _arc_oggi(), "mondo": {}, "ampiezza": {}, "origine": {}, "settori": {}}
+
+
+def _mondo_per_riga(r: dict, ctx: dict) -> dict:
+    ctx = ctx or {}
+    sett = (ctx.get("settori") or {}).get(r.get("sector")) if r.get("sector") else None
+    return mondo_minimo(ctx.get("mondo"), ctx.get("ampiezza"), sett)
+
+
+def _accoda_scarto(r: dict, kind: str, motivo: str, dettaglio=None, conv=None,
+                   punteggio=None, ctx: dict = None) -> None:
+    """Mette in coda un'occasione BOCCIATA, col motivo preso nell'istante del rifiuto.
+    Sono le righe più preziose dell'archivio: senza contro-esempi non si impara niente, e senza il
+    motivo non si scopre mai che è il filtro a sbagliare invece del titolo."""
+    try:
+        ctx = ctx or {}
+        prof = profilo_da_riga(
+            r, kind, momento=None, motivo=motivo, dettaglio=dettaglio, conv=conv,
+            occasione=(int(round(punteggio)) if isinstance(punteggio, (int, float)) else None),
+            fattori=None, mondo=_mondo_per_riga(r, ctx),
+            origine=(ctx.get("origine") or {}).get(r.get("ticker")),
+            giorno=ctx.get("giorno"))
+        accoda_profilo(prof)
+        # Le notizie costano chiamate, quindi si spendono dove servono: sugli scarti che avevano
+        # convenienza da promozione. Sono il contro-esempio più informativo che esista — «il sistema
+        # le riteneva buone e le ha bocciate un filtro tecnico» — e sono ~800 su 3.760 misurate.
+        if conv is not None and conv >= _OBS_ENTRY_CONV:
+            registra_notizie(r.get("ticker"), ctx.get("giorno"))
+    except Exception:
+        pass
+
+
+def accoda_senza_profilo(kind: str, tickers, motivo: str, giorno: str = None) -> int:
+    """Mette in coda i titoli di cui NON si può avere un profilo, col motivo. Sono i due punti
+    ciechi del sistema: quelli con troppa poca storia (esclusi prima di calcolare qualsiasi cosa) e
+    quelli oltre il tetto dell'universo (mai nemmeno aperti).
+
+    Registrarli è quello che trasforma «non sappiamo cosa ci siamo perso» in «sappiamo esattamente
+    quali nomi ci siamo perso, e sono questi»: fra qualche mese si potrà andare a vedere come sono
+    andati quei titoli e sapere se il tetto ci costa qualcosa, invece di supporlo."""
+    if motivo not in MOTIVI_SENZA_PROFILO:
+        return 0
+    giorno = giorno or _arc_oggi()
+    n = 0
+    for tk in dict.fromkeys([str(x).upper() for x in (tickers or []) if x]):
+        accoda_profilo({
+            "id": _profilo_id(giorno, kind, tk, motivo), "giorno": giorno, "ora": _arc_ora(),
+            "ticker": tk, "nome": None, "kind": kind, "momento": None, "episodio": None,
+            "scartata": True, "motivo": motivo, "motivo_dettaglio": None, "origine": None,
+            "notizie_di": None, "prezzo": None, "titolo": {}, "punteggi": {},
+            "convenienza": None, "occasione": None, "fattori": {}, "trappola": None,
+            "settore": None, "mondo": {},
+        })
+        n += 1
+    return n
+
+
+def registra_profilo_occasione(kind: str, ticker: str, momento: str, episodio: str = None,
+                               giorno: str = None) -> bool:
+    """Registra il profilo COMPLETO di un'occasione in un momento d'acquisto. Chiamata dal diario,
+    così ogni momento passa da qui e nessuno può sfuggire per dimenticanza in un chiamante.
+
+    Costa poco: opportunity_row ha una cache di 15 minuti e nel giro automatico è già calda dalla
+    scansione appena fatta, quindi tipicamente zero o una chiamata di rete. Tutto il resto — le ~50
+    caratteristiche, i fattori, i punteggi — è calcolo locale gratuito."""
+    try:
+        TK = str(ticker).upper()
+        giorno = giorno or _arc_oggi()
+        r = opportunity_row(TK, with_fundamentals=True)
+        if not r:
+            return False
+        if kind == "short":
+            try:
+                b = _benchmark_perf()
+                r = dict(r)
+                r["bench_5d"], r["bench_1m"] = b.get("perf_5d"), b.get("perf_1m")
+            except Exception:
+                pass
+        ctx = _contesto_del_giorno(kind, [r], giorno)
+        try:
+            fattori = _factor_values(r, kind)
+        except Exception:
+            fattori = None
+        try:
+            conv = _convenience_single(TK, kind)
+        except Exception:
+            conv = None
+        try:
+            punteggio = _short_score(r) if kind == "short" else _long_score(r)
+        except Exception:
+            punteggio = None
+        prof = profilo_da_riga(
+            r, kind, momento=momento, episodio=episodio, conv=conv,
+            occasione=(int(round(punteggio)) if isinstance(punteggio, (int, float))
+                       and np.isfinite(punteggio) else None),
+            fattori=fattori, mondo=_mondo_per_riga(r, ctx),
+            origine=(ctx.get("origine") or {}).get(TK), giorno=giorno)
+        try:
+            s = soglie_ora(TK, r.get("price"), kind)
+            prof["soglie"] = s.get("soglie")
+            prof["stop_soglia"] = s.get("stop")
+        except Exception:
+            pass
+        # a quale dei cinque scenari corrisponde questo momento: ricavato da SCENARI_ACQUISTO, mai
+        # scritto a mano, così se gli scenari cambiano l'archivio resta coerente da solo
+        prof["scenario"] = next((c for c, ev, _n, _a in SCENARI_ACQUISTO if ev == momento), None)
+        accoda_profilo(prof)
+        registra_notizie(TK, giorno, forza=True)   # un momento d'acquisto ha sempre diritto alle notizie
+        return True
+    except Exception:
+        return False
+
+
+def giornata(giorno: str) -> dict:
+    """Tutto quello che il sistema ha visto e pensato in una singola giornata: le occasioni e gli
+    scarti col loro profilo, com'era il mondo, come stavano i settori, che notizie girassero, e gli
+    esiti maturati quel giorno. È la pagina del calendario."""
+    def leggi(prefisso):
+        fuori = []
+        for nome in sorted(indice_archivio()):
+            if nome.startswith(prefisso + "/") and os.path.basename(nome)[:10] == giorno:
+                fuori += (read_data_json(nome, None) or [])
+        return fuori
+
+    profili = leggi(ARC_PROFILI)
+    return {"giorno": giorno, "profili": profili,
+            "occasioni": [p for p in profili if not p.get("scartata")],
+            "scartate": [p for p in profili if p.get("scartata")],
+            "mondo": (leggi(ARC_MONDO) or [{}])[0],
+            "settori": leggi(ARC_SETTORI), "notizie": leggi(ARC_NOTIZIE),
+            "esiti_maturati": leggi(ARC_ESITI)}
+
+
+def giorni_archivio(prefisso: str = None) -> list:
+    """I giorni presenti nell'archivio, dal più recente. È l'elenco delle pagine del calendario."""
+    pre = prefisso or ARC_PROFILI
+    giorni = set()
+    for nome in indice_archivio():
+        if nome.startswith(pre + "/"):
+            g = os.path.basename(nome)[:10]
+            if len(g) == 10 and g[4] == "-":
+                giorni.add(g)
+    return sorted(giorni, reverse=True)
+
+
+def apri_occasione(profilo_id: str) -> dict:
+    """Ricompone UNA occasione da tutti gli archivi: il suo profilo, le notizie di quel giorno per
+    QUEL titolo, com'era il mondo, come stava il suo settore, e com'è andata.
+
+    È qui che si vede perché tenere le notizie in un archivio separato non le scollega: il legame è
+    (titolo, giorno), che è dentro l'identificativo del profilo stesso. Nulla è appeso a un numero
+    progressivo che si può disallineare."""
+    if not profilo_id or ":" not in profilo_id:
+        return {}
+    giorno = str(profilo_id).split(":")[0]
+    g = giornata(giorno)
+    prof = next((p for p in g["profili"] if p.get("id") == profilo_id), None)
+    if prof is None:
+        return {}
+    tk = prof.get("ticker")
+    return {
+        "profilo": prof,
+        "notizie": next((n for n in g["notizie"] if n.get("ticker") == tk), {}),
+        "mondo": g["mondo"],
+        "settore": next((s for s in g["settori"] if s.get("settore") == prof.get("settore")), {}),
+        "esiti": [e for e in _arc_leggi_giorni(ARC_ESITI) if e.get("profilo") == profilo_id],
+    }
+
+
+def ripara_indice() -> dict:
+    """Riallinea l'indice ai file che esistono davvero. Serve nel caso in cui l'indice dica «questo
+    file ha 80 righe» e il file ne abbia 50: quella discordanza blocca le scritture per non
+    rischiare di cancellare, ed è giusto che le blocchi, ma deve esistere un modo di sbloccarla
+    guardando i fatti invece di forzare. Non cancella niente: riscrive solo i conteggi."""
+    indice = read_data_json(INDICE_NAME, None)
+    if not isinstance(indice, dict):
+        return {"riparate": 0, "motivo": "l'indice non si legge: non tocco niente"}
+    cambi = []
+    for nome in sorted(indice):
+        if "/" not in nome or not isinstance(indice.get(nome), dict):
+            continue
+        righe = read_data_json(nome, None)
+        if not isinstance(righe, list):
+            continue        # non si legge: si lascia stare, non si azzera
+        atteso = indice[nome].get("righe")
+        if atteso != len(righe):
+            cambi.append({"file": nome, "prima": atteso, "adesso": len(righe)})
+            indice[nome] = {"righe": len(righe), "aggiornato": _arc_ora(),
+                            "riparato": True}
+    if cambi:
+        _indice_scrivi(indice)
+    return {"riparate": len(cambi), "dettagli": cambi}
+
+
+def copertura_archivio(kind: str = None, giorni: int = 60) -> dict:
+    """QUANTE occasioni finiscono davvero in archivio e quante no, e perché. Esiste perché
+    «registriamo tutto» è una frase che va verificata, non ripetuta: qui si vedono i buchi
+    dichiarati invece di scoprirli fra un anno.
+
+    Il totale viene dall'elenco dell'archivio, che lo sa senza aprire niente; i dettagli si
+    calcolano sugli ultimi `giorni` giorni. Serve perché aprire questa pagina non debba scaricare
+    l'intero archivio: fra un anno sarebbero centinaia di file a ogni caricamento."""
+    _dal = (datetime.date.today() - datetime.timedelta(days=max(1, giorni))).isoformat()
+    # totale esatto e gratuito: i conteggi per file sono già nell'elenco
+    totale_righe = sum(int((info or {}).get("righe") or 0)
+                       for nome, info in indice_archivio().items()
+                       if nome.startswith(ARC_PROFILI + "/") and isinstance(info, dict))
+    profili = [p for p in _arc_leggi_giorni(ARC_PROFILI, dal=_dal)
+               if isinstance(p, dict) and (not kind or p.get("kind") == kind)]
+    per_motivo = {}
+    for p in profili:
+        if p.get("scartata"):
+            per_motivo[p.get("motivo")] = per_motivo.get(p.get("motivo"), 0) + 1
+    momenti = {}
+    for p in profili:
+        if not p.get("scartata"):
+            momenti[p.get("momento")] = momenti.get(p.get("momento"), 0) + 1
+    con_notizie = {(n.get("giorno"), n.get("ticker")) for n in _arc_leggi_giorni(ARC_NOTIZIE)}
+    quante_con_notizie = sum(1 for p in profili
+                             if (p.get("giorno"), p.get("ticker")) in con_notizie)
+    return {
+        "righe_totali": totale_righe,
+        "righe_guardate": len(profili), "dettagli_dal": _dal,
+        "occasioni_comprate": sum(1 for p in profili if not p.get("scartata")),
+        "bocciate": sum(1 for p in profili if p.get("scartata")),
+        "per_momento": momenti, "per_motivo_di_scarto": per_motivo,
+        "con_notizie": quante_con_notizie,
+        "giorni_coperti": len(giorni_archivio()),
+        "senza_profilo": sum(1 for p in profili
+                             if p.get("motivo") in MOTIVI_SENZA_PROFILO),
+        "non_registrate": [
+            "I nomi oltre il tetto dell'universo (40 per il breve, 20 per il lungo) non vengono "
+            "mai aperti, quindi di loro non esistono caratteristiche. Il loro NOME però è a "
+            "verbale, con il motivo «mai guardata»: fra qualche mese si potrà controllare come "
+            "sono andati e sapere se quel tetto ci costa occasioni.",
+            "Lo stesso per i titoli con meno di 60 sedute di storico o col prezzo non "
+            "disponibile: nome e motivo sì, caratteristiche no — vengono esclusi prima che si "
+            "possa calcolarne una.",
+            "Le notizie hanno un tetto di %d chiamate per giro: le hanno tutti i momenti "
+            "d'acquisto e le bocciature con convenienza da promozione, non ogni candidato. "
+            "Il limite vero della fonte non è scritto nel codice, quindi il tetto è nostro e "
+            "prudente." % _NOTIZIE_PER_GIRO,
+            "L'archivio si scrive solo durante il lavoro automatico, non quando si sfoglia "
+            "l'app: il lavoro gira ogni mezz'ora sullo stesso mercato, quindi non sfugge nulla.",
+        ],
+    }

@@ -484,12 +484,13 @@ if "_goto_section" in st.session_state:
 section = st.sidebar.radio(
     "Sezione", ["Analisi di un titolo", "Occasioni di mercato",
                 "In osservazione", "In anticipo", "Monitoraggio", "Portafoglio",
-                "Scenari", "Diario dei dati", "Attualità"], key="section_radio",
+                "Scenari", "Diario dei dati", "Archivio", "Attualità"], key="section_radio",
     help="«Analisi di un titolo» studia una singola azienda/ETF. «Occasioni» scansiona il mercato per cali interessanti. "
          "«In osservazione» mostra le occasioni che il sistema sta seguendo verso un'eventuale promozione. "
          "«In anticipo» mostra le più solide tra quelle in osservazione, per entrare PRIMA della conferma (più rischio). "
          "«Monitoraggio» segue nel tempo le occasioni che hai scelto. «Portafoglio» registra i tuoi acquisti veri e mostra il guadagno/perdita. "
          "«Scenari» misura quanto avresti guadagnato e quale momento di acquisto/vendita rende di più. «Diario dei dati» mostra cosa il sistema mette a verbale, evento per evento, su ogni occasione. "
+         "«Archivio» è l'esperienza del sistema: giorno per giorno, tutte le occasioni viste — comprate e bocciate — con le loro caratteristiche, le notizie, com'era il mondo e com'è andata. "
          "«Attualità» raccoglie le classifiche di mercato (rialzi/ribassi/più scambiati) e le notizie recenti divise per azienda/ETF.",
 )
 st.sidebar.markdown("---")
@@ -3500,6 +3501,423 @@ if section.startswith("Diario"):
                            "Le altre vengono calcolate e conservate per poterle confrontare fra "
                            "qualche mese sulle stesse occasioni: è un confronto appaiato, quindi "
                            "servono molti meno casi che misurandole separatamente.")
+    st.stop()
+
+# ===========================================================================
+# SEZIONE: ARCHIVIO — l'esperienza del sistema, giorno per giorno
+# ===========================================================================
+if section.startswith("Archivio"):
+    page_header("Archivio",
+                "Tutto quello che il sistema ha visto e pensato, giorno per giorno. "
+                "È da qui che con il tempo si capisce che aspetto hanno le occasioni "
+                "che fanno guadagnare e quelle che fanno perdere.")
+    st.caption("Come è fatto: **una pagina per ogni giornata**, e le pagine dei giorni passati non "
+               "si riaprono mai in scrittura. Scrivere i dati di oggi non può toccare nessun altro "
+               "giorno, come su un'agenda di carta. Nel caso peggiore in assoluto si perdono le "
+               "righe di oggi — mai un giorno di un mese scorso.")
+
+    def _fmt_val(x, dec=2):
+        """Un numero in italiano, o un trattino se non c'e."""
+        try:
+            return ("%.*f" % (dec, float(x))).replace(".", ",")
+        except (TypeError, ValueError):
+            return "—"
+
+    def _fmt_pct(x, dec=2):
+        try:
+            return ("%+.*f%%" % (dec, float(x))).replace(".", ",")
+        except (TypeError, ValueError):
+            return "—"
+
+    _arc_tab = st.segmented_control(
+        "Cosa guardare",
+        ["copertura", "calendario", "occasione", "imparato"],
+        default="copertura", required=True, key="arc_tab",
+        format_func=lambda k: {"copertura": "📦 Cosa c'è dentro",
+                               "calendario": "📅 Calendario",
+                               "occasione": "🔎 Una singola occasione",
+                               "imparato": "🧠 Cosa se ne impara"}.get(k, k)) or "copertura"
+
+    # ---------------------------------------------------------------- copertura
+    if _arc_tab == "copertura":
+        _cop = fu.copertura_archivio()
+        _st = fu.stato_archivio()
+        if not _cop["righe_totali"]:
+            st.info("⏳ L'archivio è vuoto: si riempie da solo, a partire dal primo giro del "
+                    "lavoro automatico dopo la messa in funzione. Ogni giro registra le occasioni "
+                    "che il sistema compra e quelle che boccia, col motivo del rifiuto.")
+        _c = st.columns(4)
+        _c[0].metric("Righe in archivio", _cop["righe_totali"])
+        _c[1].metric("Occasioni comprate", _cop["occasioni_comprate"],
+                     help="Contate sugli ultimi due mesi. Il totale in archivio, sopra, copre "
+                          "tutta la storia.")
+        _c[2].metric("Occasioni bocciate", _cop["bocciate"],
+                     help="Sono le più preziose: senza contro-esempi non si impara niente. "
+                          "Quelle bocciate pur avendo un buon giudizio sono il caso più "
+                          "informativo che esista.")
+        _c[3].metric("Giorni coperti", _cop["giorni_coperti"])
+        st.caption(f"I riquadri centrali e le tabelle qui sotto sono calcolati sugli ultimi due "
+                   f"mesi (dal {data_it(_cop['dettagli_dal'])}): aprire questa pagina non deve "
+                   f"scaricare tutto l'archivio ogni volta. Il numero di righe in archivio invece "
+                   f"è quello vero e completo — lo sa l'elenco dei file, senza aprirne nessuno.")
+        if _cop.get("senza_profilo"):
+            st.caption(f"Di quelle bocciate, **{_cop['senza_profilo']}** sono a verbale col solo "
+                       "nome e il motivo, senza caratteristiche: sono i due punti ciechi del "
+                       "sistema — i titoli con troppa poca storia e quelli oltre il tetto "
+                       "dell'universo, che non vengono nemmeno aperti. Registrarne il nome serve "
+                       "a poter controllare, fra qualche mese, se quel tetto ci costa occasioni.")
+
+        if _cop["per_motivo_di_scarto"]:
+            st.markdown("##### Perché sono state bocciate")
+            _righe_m = [{"Motivo": fu.MOTIVI_SCARTO.get(k, k or "—"), "Quante": v}
+                        for k, v in sorted(_cop["per_motivo_di_scarto"].items(),
+                                           key=lambda kv: -kv[1])]
+            st.dataframe(pd.DataFrame(_righe_m), use_container_width=True, hide_index=True)
+            st.caption("Il motivo viene preso **nell'istante del rifiuto**. Non è un dettaglio: a "
+                       "posteriori metà delle bocciature non è ricostruibile, e senza il motivo non "
+                       "si scopre mai che è il filtro a sbagliare invece del titolo.")
+
+        if _cop["per_momento"]:
+            st.markdown("##### In quale momento sono state comprate")
+            _nomi_mom = {ev: nome for _c2, ev, nome, _a in fu.SCENARI_ACQUISTO}
+            st.dataframe(pd.DataFrame([{"Momento": _nomi_mom.get(k, k or "—"), "Quante": v}
+                                       for k, v in sorted(_cop["per_momento"].items(),
+                                                          key=lambda kv: -kv[1])]),
+                         use_container_width=True, hide_index=True)
+
+        st.markdown("##### I file dell'archivio")
+        _aree = [{"Archivio": {"archivio/profili": "Profili delle occasioni",
+                               "archivio/esiti": "Com'è andata",
+                               "archivio/mondo": "Com'era il mondo",
+                               "archivio/settori": "Come stavano i settori",
+                               "archivio/notizie": "Notizie col riassunto"}.get(a, a),
+                  "File": d["file"], "Righe": d["righe"], "Dal": d["primo"], "Al": d["ultimo"]}
+                 for a, d in sorted(_st["aree"].items())]
+        if _aree:
+            st.dataframe(pd.DataFrame(_aree), use_container_width=True, hide_index=True)
+        if _st.get("salvataggi_falliti"):
+            st.error("⚠️ Salvataggi non riusciti su: " + ", ".join(_st["salvataggi_falliti"])
+                     + ". I dati di quel giro potrebbero non essere stati conservati sul "
+                       "server: va controllato il collegamento al deposito dei dati.")
+        if _st.get("in_coda"):
+            st.warning(f"{_st['in_coda']} righe sono in attesa di essere salvate. Non sono perse: "
+                       "restano in coda e il prossimo giro riprova.")
+
+        st.markdown("##### Cosa NON finisce in archivio")
+        st.caption("Dichiarato qui invece di scoprirlo fra un anno. «Registriamo tutto» è una frase "
+                   "che va verificata, non ripetuta.")
+        for _x in _cop["non_registrate"]:
+            st.markdown(f"- {_x}")
+        if st.button("Ricontrolla i conteggi dei file",
+                     help="Riallinea l'elenco dell'archivio ai file che esistono davvero. Serve "
+                          "solo se un salvataggio è rimasto a metà: non cancella niente, "
+                          "ricontrolla i numeri."):
+            _rip = fu.ripara_indice()
+            st.success(f"Controllati. Conteggi corretti: {_rip['riparate']}.")
+            if _rip.get("dettagli"):
+                st.dataframe(pd.DataFrame(_rip["dettagli"]), use_container_width=True,
+                             hide_index=True)
+
+    # ---------------------------------------------------------------- calendario
+    elif _arc_tab == "calendario":
+        _giorni = fu.giorni_archivio()
+        if not _giorni:
+            st.info("⏳ Nessuna giornata in archivio per ora. La prima pagina del calendario "
+                    "compare dopo il primo giro del lavoro automatico.")
+        else:
+            _g = st.selectbox("Giornata", _giorni, index=0, key="arc_giorno",
+                              format_func=lambda g: data_it(g),
+                              help="Ogni giornata è un file suo. Aprire una giornata non tocca "
+                                   "le altre.")
+            _pag = fu.giornata(_g)
+            _m = _pag.get("mondo") or {}
+            st.markdown(f"### {data_it(_g)}")
+
+            if _m:
+                st.markdown("##### Com'era il mondo quel giorno")
+                _reg = (_m.get("regime") or {})
+                _cm = st.columns(5)
+                _cm[0].metric("Paura", _fmt_val((_m.get("paura") or {}).get("valore")),
+                              help="L'indice della paura: sotto 18 mercato calmo, sopra 35 crash.")
+                _cm[1].metric("Clima", _reg.get("etichetta") or "—")
+                _cm[2].metric("S&P 500 a 1 mese",
+                              _fmt_pct((_m.get("sp500") or {}).get("var_1m")))
+                _cm[3].metric("Curva dei tassi", _fmt_val(_m.get("curva_tassi")),
+                              help="Tasso a 10 anni meno quello a 3 mesi. Negativa = il mercato "
+                                   "teme una recessione.")
+                _amp = (_m.get("ampiezza_mercato") or {}).get("a_5_giorni") or {}
+                _cm[4].metric("Titoli in salita", _fmt_pct(_amp.get("in_salita_pct")),
+                              help="Quanti dei titoli guardati stavano salendo. È la differenza "
+                                   "fra «è scesa lei» e «è scesa tutta la borsa».")
+                _altri = [("nasdaq", "Nasdaq"), ("piccole", "Società piccole"),
+                          ("europa", "Europa"), ("dollaro", "Dollaro"), ("petrolio", "Petrolio"),
+                          ("oro", "Oro"), ("rame", "Rame"),
+                          ("obbl_rischiose", "Obbligazioni rischiose"),
+                          ("obbl_lunghe", "Obbligazioni lunghe"),
+                          ("tasso_10a", "Tasso a 10 anni"), ("tasso_3m", "Tasso a 3 mesi")]
+                _rm = [{"Indicatore": _lab, "Valore": (_m.get(_k) or {}).get("valore"),
+                        "5 giorni": (_m.get(_k) or {}).get("var_5g"),
+                        "1 mese": (_m.get(_k) or {}).get("var_1m"),
+                        "3 mesi": (_m.get(_k) or {}).get("var_3m")}
+                       for _k, _lab in _altri if _m.get(_k)]
+                if _rm:
+                    with st.expander("Tutti gli indicatori del mondo di quel giorno"):
+                        st.dataframe(pd.DataFrame(_rm), use_container_width=True, hide_index=True,
+                                     column_config={
+                                         "Valore": st.column_config.NumberColumn(format="%.2f"),
+                                         "5 giorni": st.column_config.NumberColumn(format="%+.2f%%"),
+                                         "1 mese": st.column_config.NumberColumn(format="%+.2f%%"),
+                                         "3 mesi": st.column_config.NumberColumn(format="%+.2f%%")})
+
+            if _pag.get("settori"):
+                st.markdown("##### Come stavano i settori")
+                st.dataframe(pd.DataFrame([
+                    {"Settore": s.get("settore"), "1 mese": s.get("var_1m"),
+                     "3 mesi": s.get("var_3m"),
+                     "Meglio o peggio dell'indice (1 mese)": s.get("forza_var_1m")}
+                    for s in sorted(_pag["settori"],
+                                    key=lambda s: -(s.get("forza_var_1m") or -99))]),
+                    use_container_width=True, hide_index=True, column_config={
+                        "1 mese": st.column_config.NumberColumn(format="%+.2f%%"),
+                        "3 mesi": st.column_config.NumberColumn(format="%+.2f%%"),
+                        "Meglio o peggio dell'indice (1 mese)":
+                            st.column_config.NumberColumn(
+                                format="%+.2f%%",
+                                help="Quanto il settore ha fatto meglio o peggio del mercato. "
+                                     "È così che «il settore era in crisi» diventa un numero.")})
+
+            _co1, _co2 = st.columns(2)
+            _co1.metric("Occasioni comprate", len(_pag["occasioni"]))
+            _co2.metric("Occasioni bocciate", len(_pag["scartate"]))
+
+            def _tab_profili(righe, scarti):
+                _out = []
+                for p in righe:
+                    _t = p.get("titolo") or {}
+                    _r = {"Titolo": p.get("ticker"), "Tipo": ("Breve" if p.get("kind") == "short"
+                                                              else "Lungo"),
+                          "Prezzo": p.get("prezzo"), "Giudizio": p.get("convenienza"),
+                          "Forza RSI": _t.get("rsi"), "Sceso dai massimi": _t.get("dd_high"),
+                          "Settore": p.get("settore"), "Trovata fra": p.get("origine")}
+                    if scarti:
+                        _r["Perché bocciata"] = fu.MOTIVI_SCARTO.get(p.get("motivo"),
+                                                                     p.get("motivo") or "—")
+                    else:
+                        _nomi = {ev: nome for _c3, ev, nome, _a in fu.SCENARI_ACQUISTO}
+                        _r["Momento"] = _nomi.get(p.get("momento"), p.get("momento") or "—")
+                    _out.append(_r)
+                return pd.DataFrame(_out)
+
+            _cfg = {"Prezzo": st.column_config.NumberColumn(format="%.2f"),
+                    "Forza RSI": st.column_config.NumberColumn(format="%.0f"),
+                    "Sceso dai massimi": st.column_config.NumberColumn(format="%+.1f%%")}
+            if _pag["occasioni"]:
+                st.markdown("##### Le occasioni comprate quel giorno")
+                st.dataframe(_tab_profili(_pag["occasioni"], False), use_container_width=True,
+                             hide_index=True, column_config=_cfg)
+            if _pag["scartate"]:
+                st.markdown("##### Le occasioni bocciate quel giorno")
+                st.dataframe(_tab_profili(_pag["scartate"], True), use_container_width=True,
+                             hide_index=True, column_config=_cfg)
+                st.caption("Queste righe sono il contro-esempio. Senza di loro si imparerebbe solo "
+                           "fra le prescelte, e non si scoprirebbe mai se è il filtro d'ingresso a "
+                           "sbagliare.")
+            if _pag.get("notizie"):
+                st.markdown("##### Le notizie di quel giorno")
+                for _n in _pag["notizie"]:
+                    with st.expander(f"{_n.get('ticker')} — {_n.get('tono') or 'tono non valutato'}"
+                                     f" · {_n.get('quante')} notizie"):
+                        if _n.get("bandiere_rosse"):
+                            st.warning("Segnali di allarme trovati nei titoli: "
+                                       + ", ".join(_n["bandiere_rosse"]))
+                        for _v in (_n.get("notizie") or []):
+                            _fo = _v.get('fonte') or "fonte ignota"
+                            st.markdown(f"**{_v.get('titolo')}** — *{_fo}*, "
+                                        f"{data_it(_v.get('data'))}")
+                            if _v.get("riassunto"):
+                                st.caption(_v["riassunto"]
+                                           + (" […]" if _v.get("riassunto_tagliato") else ""))
+            if _pag.get("esiti_maturati"):
+                st.markdown("##### Gli esiti maturati quel giorno")
+                st.dataframe(pd.DataFrame([
+                    {"Titolo": e.get("ticker"), "Comprata il": e.get("comprato_il"),
+                     "Dopo": e.get("orizzonte"), "Risultato": e.get("resa"),
+                     "Massimo toccato": e.get("max_toccato"),
+                     "Minimo toccato": e.get("min_toccato"),
+                     "Giorni al massimo": e.get("giorni_al_massimo")}
+                    for e in _pag["esiti_maturati"]]), use_container_width=True, hide_index=True,
+                    column_config={
+                        "Risultato": st.column_config.NumberColumn(format="%+.2f%%"),
+                        "Massimo toccato": st.column_config.NumberColumn(
+                            format="%+.2f%%",
+                            help="Il punto più alto raggiunto prima della scadenza. Due occasioni "
+                                 "che finiscono uguali sono cose diverse se una è passata da +15%."),
+                        "Minimo toccato": st.column_config.NumberColumn(format="%+.2f%%")})
+
+    # ---------------------------------------------------------------- una occasione
+    elif _arc_tab == "occasione":
+        _giorni = fu.giorni_archivio()
+        if not _giorni:
+            st.info("⏳ Nessuna occasione in archivio per ora.")
+        else:
+            _gg = st.selectbox("Giornata", _giorni, index=0, key="arc_occ_giorno",
+                               format_func=lambda g: data_it(g))
+            _pag = fu.giornata(_gg)
+            _scelte = [p.get("id") for p in _pag["profili"]]
+            if not _scelte:
+                st.info("Quella giornata non contiene occasioni.")
+            else:
+                def _etichetta(pid):
+                    _p = next((x for x in _pag["profili"] if x.get("id") == pid), {})
+                    _q = ("bocciata: " + str(fu.MOTIVI_SCARTO.get(_p.get("motivo"),
+                                                                  _p.get("motivo") or ""))
+                          if _p.get("scartata") else "comprata")
+                    return f"{_p.get('ticker')} — {_q}"
+
+                _pid = st.selectbox("Occasione", _scelte, index=0, key="arc_occ",
+                                    format_func=_etichetta)
+                _tutto = fu.apri_occasione(_pid)
+                _p = _tutto.get("profilo") or {}
+                st.markdown(f"### {_p.get('ticker')} — {_p.get('nome') or ''}")
+                st.caption(f"Identificativo in archivio: `{_pid}`")
+                _k1 = st.columns(4)
+                _k1[0].metric("Prezzo", _fmt_val(_p.get("prezzo")))
+                _k1[1].metric("Giudizio", _p.get("convenienza") if _p.get("convenienza")
+                              is not None else "—")
+                _k1[2].metric("Tipo", "Breve" if _p.get("kind") == "short" else "Lungo")
+                _k1[3].metric("Trovata fra", _p.get("origine") or "—",
+                              help="Da quale lista di mercato è stata pescata.")
+                if _p.get("scartata"):
+                    st.warning("**Bocciata**: " + str(fu.MOTIVI_SCARTO.get(
+                        _p.get("motivo"), _p.get("motivo") or "—"))
+                        + (f" (valore: {_p.get('motivo_dettaglio')})"
+                           if _p.get("motivo_dettaglio") is not None else ""))
+                else:
+                    _nomi = {ev: nome for _c4, ev, nome, _a in fu.SCENARI_ACQUISTO}
+                    st.success("**Comprata** nel momento: "
+                               + str(_nomi.get(_p.get("momento"), _p.get("momento") or "—")))
+
+                st.markdown("##### Com'era il titolo in quell'istante")
+                _t = _p.get("titolo") or {}
+                _etich = {
+                    "rsi": "Forza (RSI)", "dd_high": "Sceso dai massimi",
+                    "perf_5d": "Ultimi 5 giorni", "perf_1m": "Ultimo mese",
+                    "perf_1y": "Ultimo anno", "hist_z": "Rispetto alla sua media storica",
+                    "sortino": "Qualità della salita", "ulcer": "Quanto ha fatto soffrire",
+                    "maxdd": "Caduta peggiore", "atr_pct": "Movimento tipico giornaliero",
+                    "rr": "Rischio contro rendimento", "rvol": "Scambi rispetto al solito",
+                    "avg_dollar_vol": "Scambi al giorno", "rebound_pot": "Rimbalzo possibile",
+                    "above_sma200": "Sopra la media a 200 giorni", "below_bb": "Sotto la banda bassa",
+                    "target_price": "Bersaglio", "stop_price": "Prezzo di uscita",
+                    "bench_5d": "L'indice negli ultimi 5 giorni", "pe": "Prezzo sugli utili",
+                    "pb": "Prezzo sul patrimonio", "ps": "Prezzo sui ricavi",
+                    "fscore": "Solidità dei conti", "sector": "Settore", "industry": "Industria",
+                }
+                _rt = [{"Caratteristica": _etich.get(k, k), "Valore": v}
+                       for k, v in _t.items() if k in _etich]
+                _rt += [{"Caratteristica": k, "Valore": v} for k, v in _t.items()
+                        if k not in _etich]
+                st.dataframe(pd.DataFrame(_rt), use_container_width=True, hide_index=True)
+
+                if _p.get("fattori"):
+                    st.markdown("##### Da cosa era composto il giudizio")
+                    st.caption("Non solo il totale: i pezzi. Serve a imparare **quale** parte del "
+                               "giudizio funziona, invece di sapere solo che «giudizio 72 va bene».")
+                    st.dataframe(pd.DataFrame([{"Pezzo del giudizio": k, "Valore": v}
+                                               for k, v in _p["fattori"].items()]),
+                                 use_container_width=True, hide_index=True)
+                if _p.get("soglie"):
+                    st.markdown("##### Le soglie di vendita a verbale")
+                    st.dataframe(pd.DataFrame([{"Formula": fu.SOGLIE_NOMI.get(k, k), "Prezzo": v}
+                                               for k, v in _p["soglie"].items()]),
+                                 use_container_width=True, hide_index=True,
+                                 column_config={"Prezzo": st.column_config.NumberColumn(
+                                     format="%.2f")})
+
+                _nz = _tutto.get("notizie") or {}
+                st.markdown("##### Perché il prezzo era quello: le notizie di quel giorno")
+                if not _nz:
+                    st.caption("Nessuna notizia a verbale per questo titolo in quella giornata. Le "
+                               "notizie hanno un tetto di chiamate per giro: le ricevono i momenti "
+                               "d'acquisto e le bocciature con un buon giudizio.")
+                else:
+                    st.markdown(f"Tono complessivo: **{_nz.get('tono') or 'non valutato'}**")
+                    if _nz.get("bandiere_rosse"):
+                        st.warning("Segnali di allarme: " + ", ".join(_nz["bandiere_rosse"]))
+                    for _v in (_nz.get("notizie") or []):
+                        _fo = _v.get('fonte') or "fonte ignota"
+                        st.markdown(f"**{_v.get('titolo')}** — *{_fo}*, "
+                                    f"{data_it(_v.get('data'))}")
+                        if _v.get("riassunto"):
+                            st.caption(_v["riassunto"]
+                                       + (" […]" if _v.get("riassunto_tagliato") else ""))
+
+                _mo = _tutto.get("mondo") or {}
+                _se = _tutto.get("settore") or {}
+                if _mo or _se:
+                    st.markdown("##### E com'era il resto: il mondo e il suo settore")
+                    _cw = st.columns(4)
+                    _cw[0].metric("Paura", _fmt_val((_mo.get("paura") or {}).get("valore")))
+                    _cw[1].metric("Clima", (_mo.get("regime") or {}).get("etichetta") or "—")
+                    _cw[2].metric("Settore a 1 mese", _fmt_pct(_se.get("var_1m")))
+                    _cw[3].metric("Settore contro l'indice", _fmt_pct(_se.get("forza_var_1m")),
+                                  help="Negativo = il settore andava peggio del mercato. "
+                                       "È la crisi di settore, misurata.")
+
+                _es = _tutto.get("esiti") or []
+                st.markdown("##### Com'è andata")
+                if not _es:
+                    st.info("⏳ Nessun esito ancora maturo. Il primo arriva 7 giorni dopo "
+                            "l'acquisto, poi a 30 giorni e a un anno.")
+                else:
+                    st.dataframe(pd.DataFrame([
+                        {"Dopo": e.get("orizzonte"), "Risultato": e.get("resa"),
+                         "Massimo toccato": e.get("max_toccato"),
+                         "Giorni al massimo": e.get("giorni_al_massimo"),
+                         "Minimo toccato": e.get("min_toccato"),
+                         "Giorni al minimo": e.get("giorni_al_minimo"),
+                         "Dati sospetti": ("sì" if e.get("dati_sospetti") else "no")}
+                        for e in _es]), use_container_width=True, hide_index=True,
+                        column_config={
+                            "Risultato": st.column_config.NumberColumn(format="%+.2f%%"),
+                            "Massimo toccato": st.column_config.NumberColumn(format="%+.2f%%"),
+                            "Minimo toccato": st.column_config.NumberColumn(format="%+.2f%%")})
+
+    # ---------------------------------------------------------------- imparato
+    else:
+        st.caption("Qui non c'è nessun modello: c'è una differenza fra due mediane, col numero di "
+                   "casi accanto. È voluto. Un modello addestrato su duecento casi trova "
+                   "regolarità nel rumore e le presenta con la stessa faccia sicura di quelle "
+                   "vere: sarebbe il modo più elegante di sbagliare. Prima si accumula.")
+        _ck1, _ck2 = st.columns(2)
+        _kind = _ck1.segmented_control("Tipo", ["short", "long"], default="short", required=True,
+                                       key="arc_imp_kind",
+                                       format_func=lambda k: ("Breve periodo" if k == "short"
+                                                              else "Lungo periodo")) or "short"
+        _oriz = _ck2.segmented_control("Misurato dopo", ["7g", "30g", "365g"], default="30g",
+                                       required=True, key="arc_imp_oriz",
+                                       format_func=lambda k: {"7g": "7 giorni", "30g": "30 giorni",
+                                                              "365g": "un anno"}[k]) or "30g"
+        _s = fu.sintesi_apprendimento(kind=_kind, orizzonte=_oriz)
+        _q1, _q2 = st.columns(2)
+        _q1.metric("Occasioni che hanno guadagnato", _s["quante_guadagnano"])
+        _q2.metric("Occasioni che hanno perso", _s["quante_perdono"])
+        if not _s["caratteristiche"]:
+            st.info("⏳ Non ci sono ancora esiti maturi con questa combinazione. La prima misura "
+                    "utile arriva quando ci sono decine di casi per lato: al ritmo attuale, "
+                    "qualche settimana per i 7 giorni e un paio di mesi per i 30.")
+        else:
+            st.warning(_s["avvertenza"])
+            st.dataframe(pd.DataFrame([
+                {"Caratteristica": k, "Chi ha guadagnato": v["chi_guadagna"],
+                 "Chi ha perso": v["chi_perde"], "Differenza": v["differenza"],
+                 "Casi in guadagno": v["casi_guadagno"], "Casi in perdita": v["casi_perdita"],
+                 "Ci si può credere?": v["solidita"]}
+                for k, v in _s["caratteristiche"].items()]),
+                use_container_width=True, hide_index=True)
+            st.caption("Ordinate per differenza: in cima quelle che separano di più i due gruppi. "
+                       "La colonna «ci si può credere» va letta prima delle altre — sotto i 30 "
+                       "casi per lato una differenza è compatibile col caso.")
     st.stop()
 
 # ===========================================================================

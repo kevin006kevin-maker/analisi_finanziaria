@@ -351,6 +351,46 @@ def main():
     except Exception as e:
         log(f"Errore passaggi delle occasioni: {e!r}")
 
+    # ARCHIVIO DELL'APPRENDIMENTO: qui si scrive su disco tutto quello che il giro ha messo in coda
+    # — il profilo completo di ogni occasione comprata, il profilo di ogni occasione BOCCIATA col
+    # motivo del rifiuto, e le notizie. Sta dopo il diario di proposito: i momenti d'acquisto
+    # scattano lì, e i loro profili devono essere già in coda quando si scarica.
+    # Un file per giorno, e i giorni passati non si riaprono mai: è quello che rende impossibile
+    # perdere lo storico riscrivendolo, che è il modo in cui questo progetto lo ha già perso una
+    # volta (16/08/2026, due registri azzerati da una lettura fallita).
+    try:
+        arc = fu.scarica_profili()
+        cop = fu.copertura_archivio()
+        _gg = cop["giorni_coperti"]
+        log(f"Archivio dell'apprendimento: {arc['scritte']} profili "
+            f"+ {arc['notizie_scritte']} titoli con notizie · in tutto {cop['righe_totali']} righe "
+            f"su {_gg} " + ("giornata" if _gg == 1 else "giornate")
+            + f" (negli ultimi due mesi: {cop['occasioni_comprate']} comprate, "
+              f"{cop['bocciate']} bocciate)")
+        if arc.get("in_coda"):
+            log(f"⚠️ Archivio: {arc['in_coda']} righe NON salvate e rimaste in coda — "
+                f"{arc.get('motivo')}")
+    except Exception as e:
+        log(f"Errore archivio dell'apprendimento: {e!r}")
+
+    # Esiti dell'archivio: com'è andata, per le occasioni la cui scadenza è arrivata. Righe NUOVE
+    # nel giorno in cui maturano, così nessun file passato viene riaperto in scrittura.
+    try:
+        es = fu.risolvi_esiti()
+        log(f"Esiti dell'archivio: {es['nuovi']} nuovi su {es['titoli']} titoli"
+            + (f" · {es['in_attesa']} non calcolabili per ora" if es.get("in_attesa") else ""))
+        if es.get("motivo"):
+            log(f"⚠️ Esiti dell'archivio: {es['motivo']}")
+    except Exception as e:
+        log(f"Errore esiti dell'archivio: {e!r}")
+
+    # Statistiche misurate: due volte al giorno, non a ogni giro (le mediane non cambiano perché
+    # sono arrivati due esiti, e ricalcolarle vorrebbe dire rileggere tutto l'archivio 48 volte).
+    try:
+        fu.salva_sintesi()
+    except Exception as e:
+        log(f"Errore statistiche dell'archivio: {e!r}")
+
     # SALVATAGGI FALLITI: se il salvataggio sul branch non è riuscito, sui server del lavoro
     # automatico il file locale muore col giro e il dato svanisce. Prima falliva in silenzio; ora
     # lascia un segno qui, dove si legge.
