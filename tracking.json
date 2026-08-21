@@ -3897,9 +3897,7 @@
 "entry_date": "2026-07-23",
 "entry_src": "storico",
 "max_price": 5.89,
-"max_date": "2026-08-18 06:09",
-"warn_since": "2026-08-20",
-"warn": "in perdita da 21 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-08-18 06:09"
 },
 "AXTI": {
 "kind": "short",
@@ -11305,9 +11303,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-08-21",
 "max_price": 48.3,
-"max_date": "2026-08-21 15:35",
-"warn_since": "2026-08-20",
-"warn": "in perdita da 14 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-08-21 15:35"
 },
 "EEM": {
 "kind": "short",
@@ -17824,9 +17820,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-08-21",
 "max_price": 16.235,
-"max_date": "2026-08-19 17:58",
-"warn_since": "2026-08-20",
-"warn": "in perdita da 9 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-08-19 17:58"
 },
 "SUJA": {
 "kind": "short",
@@ -19331,9 +19325,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-08-21",
 "max_price": 53.115,
-"max_date": "2026-08-21 15:36",
-"warn_since": "2026-08-18",
-"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-08-21 15:36"
 },
 "AAON": {
 "kind": "short",
@@ -23256,7 +23248,9 @@
 "urgenza": "incassa",
 "tipo": "sgonfia"
 },
-"incasso_notified": true
+"incasso_notified": true,
+"warn_since": "2026-08-21",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "TDC": {
 "kind": "long",
