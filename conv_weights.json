@@ -1,30 +1,30 @@
 {
 "short": {
-"oversold": 0.087,
-"rebound": 0.697,
-"momentum": 0.325,
+"oversold": 0.101,
+"rebound": 0.693,
+"momentum": 0.381,
 "discount": 0.0,
 "riskadj": 0.0,
-"ddpen": 0.926,
-"histcheap": 0.006,
+"ddpen": 0.929,
+"histcheap": 0.04,
 "trend": 0.0,
-"prob": 0.041,
-"relstrength": 0.142
+"prob": 0.043,
+"relstrength": 0.204
 },
 "_audit": {
 "short": {
 "versione": 2,
 "data": "2026-08-21",
 "adottati": true,
-"righe": 2713,
+"righe": 2709,
 "giorni": 24,
-"scartate_frazionamenti": 126,
+"scartate_frazionamenti": 135,
 "confine": "2026-07-15",
 "righe_train": 1695,
-"righe_verifica": 1018,
-"ordina_meglio_appresi": 0.1082,
-"ordina_meglio_a_mano": 0.015,
-"asticella": 0.025,
+"righe_verifica": 1014,
+"ordina_meglio_appresi": 0.1071,
+"ordina_meglio_a_mano": 0.0083,
+"asticella": 0.0183,
 "esito": "adottati: ordinano meglio dei pesi a mano",
 "quota_appresa": 0.6,
 "fattori_spenti": [
