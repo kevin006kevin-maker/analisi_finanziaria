@@ -18,7 +18,45 @@
 "prob_gain": 50,
 "prob_loss": 22,
 "conv": 64,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-08-17 15:37",
+"prezzo": 15.3,
+"conv": 73,
+"prob_gain": 53,
+"prob_loss": 19,
+"reliab": "🔴 Bassa",
+"mkt": 4.4982
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-08-21",
+"prezzo": 14.08,
+"conv": 64,
+"prob_gain": 50,
+"prob_loss": 22,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "YSS",
@@ -39,7 +77,45 @@
 "prob_gain": null,
 "prob_loss": null,
 "conv": 57,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-08-17 15:37",
+"prezzo": 11.4145,
+"conv": 70,
+"prob_gain": 48,
+"prob_loss": 28,
+"reliab": "🔴 Bassa",
+"mkt": 4.4982
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-08-21",
+"prezzo": 9.2,
+"conv": 57,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "CLM",
@@ -60,7 +136,45 @@
 "prob_gain": 56,
 "prob_loss": 0,
 "conv": 65,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-08-17 16:53",
+"prezzo": 6.945,
+"conv": 66,
+"prob_gain": 52,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": 4.3943
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-08-21",
+"prezzo": 6.8,
+"conv": 65,
+"prob_gain": 56,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "ENEL.MI",
@@ -81,7 +195,45 @@
 "prob_gain": null,
 "prob_loss": null,
 "conv": 67,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-08-18 10:31",
+"prezzo": 9.416,
+"conv": 67,
+"prob_gain": 53,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": 4.3991
+},
+"anticipo": {
+"data": "2026-08-21",
+"prezzo": 9.416,
+"conv": 67,
+"prob_gain": 53,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-08-21",
+"prezzo": 9.547,
+"conv": 67,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "BIDU",
@@ -102,6 +254,44 @@
 "prob_gain": 50,
 "prob_loss": 13,
 "conv": 65,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-08-18 15:39",
+"prezzo": 97.36,
+"conv": 61,
+"prob_gain": 47,
+"prob_loss": 14,
+"reliab": "🟡 Media",
+"mkt": 3.5574
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-08-21",
+"prezzo": 91.97,
+"conv": 65,
+"prob_gain": 50,
+"prob_loss": 13,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 }
 ]
