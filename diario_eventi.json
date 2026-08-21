@@ -1925,5 +1925,32 @@
 },
 "stop": 10.4288,
 "atr": 0.3506
+},
+{
+"episodio": "short:STLAM.MI:2026-08-16",
+"ticker": "STLAM.MI",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-08-21 10:38",
+"data": "2026-08-20 15:42",
+"prezzo": 4.413,
+"conv": 50,
+"prob_gain": 53,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": 3.8732,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-08-19",
+"soglie": {
+"media50": 5.0481,
+"media20": 4.8185,
+"quattro_atr": 5.1829,
+"meta_caduta": 5.639,
+"bollinger": 5.2902,
+"consigliata": 5.0481
+},
+"stop": 4.028,
+"atr": 0.1925
 }
 ]
