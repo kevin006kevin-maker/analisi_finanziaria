@@ -214,5 +214,32 @@
 },
 "stop": 31.1405,
 "atr": 5.5548
+},
+{
+"episodio": "long:CHTR:2026-08-21",
+"ticker": "CHTR",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-08-21 03:03",
+"data": "2026-08-21 03:03",
+"prezzo": 147.76,
+"conv": 68,
+"prob_gain": 66,
+"prob_loss": 26,
+"reliab": "🟡 Media",
+"mkt": 3.1432,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": null,
+"media20": null,
+"quattro_atr": 178.8809,
+"meta_caduta": 152.725,
+"bollinger": 165.0433,
+"consigliata": 178.8809
+},
+"stop": 132.1996,
+"atr": 7.7802
 }
 ]
