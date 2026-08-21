@@ -1186,5 +1186,32 @@
 },
 "stop": 8.1579,
 "atr": 1.6283
+},
+{
+"episodio": "short:ZTO:2026-08-19",
+"ticker": "ZTO",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:10",
+"data": "2026-08-19 18:58",
+"prezzo": 21.425,
+"conv": 64,
+"prob_gain": 56,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": 3.4572,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": 23.2074,
+"media20": 23.424,
+"quattro_atr": 23.7843,
+"meta_caduta": 23.0225,
+"bollinger": 25.0731,
+"consigliata": 23.2074
+},
+"stop": 20.2453,
+"atr": 0.5898
 }
 ]
