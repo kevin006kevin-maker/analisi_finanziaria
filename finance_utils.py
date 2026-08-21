@@ -2311,7 +2311,47 @@ def _riduce_storico(name: str, nuovo_str: str, vecchio_str: str, force: bool = F
                 return True
     except Exception:
         pass
+    # …E LO STESSO PER OGNI ALTRO CAMPO, senza doverli elencare a mano. Il controllo qui sopra è
+    # scritto per un campo solo, quindi copriva i «passaggi» e lasciava scoperto tutto il resto —
+    # comprese le SOGLIE del diario, che sono la parte più costosa da ricostruire e per lo storico
+    # irrecuperabile: un bersaglio ricalcolato mesi dopo è il bersaglio di un altro giorno. Un
+    # elenco scritto a mano poi divergerebbe appena si aggiunge un campo, quindi qui si guardano
+    # TUTTI i campi: se uno era pieno in almeno 8 righe e la scrittura lo svuoterebbe in oltre un
+    # quarto di quelle, non è un dato che matura — è un dato che sparisce.
+    if _svuota_un_campo(nuovo, vecchio):
+        return True
     return False
+
+
+def _svuota_un_campo(nuovo, vecchio) -> str:
+    """Il nome del primo campo che la scrittura svuoterebbe, o "" se nessuno. Conta quante righe
+    hanno un valore VERO per ogni campo (zero, None, liste e dizionari vuoti non contano) e
+    confronta prima e dopo. Le perdite fisiologiche restano possibili: una riga archiviata, un campo
+    che cambia, un episodio che si chiude. Quello che si blocca è lo svuotamento in massa.
+    Funziona sia sulle liste di righe sia sui dizionari di voci (i titoli seguiti, le osservazioni):
+    in quel caso le «righe» sono i valori del dizionario."""
+    if isinstance(nuovo, dict) and isinstance(vecchio, dict):
+        nuovo, vecchio = list(nuovo.values()), list(vecchio.values())
+    if not isinstance(nuovo, list) or not isinstance(vecchio, list):
+        return ""
+    try:
+        def pieni(rs):
+            conta = {}
+            for r in rs:
+                if not isinstance(r, dict):
+                    continue
+                for k, x in r.items():
+                    if x or x == 0:
+                        conta[k] = conta.get(k, 0) + 1
+            return conta
+
+        pv, pn = pieni(vecchio), pieni(nuovo)
+        for campo, quanti in pv.items():
+            if quanti >= 8 and pn.get(campo, 0) < quanti * 0.75:
+                return campo
+    except Exception:
+        return ""
+    return ""
 
 
 def _crollo_stato(name: str, nuovo_str: str, vecchio_str: str, force: bool = False) -> bool:
@@ -2332,7 +2372,15 @@ def _crollo_stato(name: str, nuovo_str: str, vecchio_str: str, force: bool = Fal
         return False                     # cambio di forma: non è un confronto sensato
     if not nuovo:
         return True                      # da "pieno" a "vuoto" non è mai un dato reale
-    return len(vecchio) >= _CROLLO_MIN_VOCI and len(nuovo) * 2 < len(vecchio)
+    if len(vecchio) >= _CROLLO_MIN_VOCI and len(nuovo) * 2 < len(vecchio):
+        return True
+    # NON BASTA CONTARE LE VOCI, come non bastava per gli storici. Qui dentro c'è la roba che non si
+    # ricostruisce: i prezzi d'ingresso dei titoli seguiti, gli scatti, le fotografie iniziali delle
+    # osservazioni. Una scrittura che tiene tutte le 78 voci e le svuota DENTRO passerebbe liscia,
+    # e il file di stato vivo più grosso (i titoli seguiti) è proprio quello che ha già superato
+    # 1 MB, cioè quello dove la protezione remota è spenta. Chi svuota di proposito — l'archiviazione
+    # degli scatti — passa da force=True, che qui sopra esce subito.
+    return bool(_svuota_un_campo(nuovo, vecchio))
 
 
 def _scrittura_pericolosa(name: str, nuovo_str: str, vecchio_str: str, force: bool = False) -> bool:
@@ -4013,13 +4061,15 @@ def load_tracking() -> dict:
     return data if isinstance(data, dict) else {}
 
 
-def save_tracking(data: dict, force: bool = False) -> None:
+def save_tracking(data: dict, force: bool = False) -> bool:
     """Salva i titoli seguiti. `force=True` va usato SOLO da chi ha appena deciso una rimozione
     (l'utente che smette di seguire, il job che toglie un'occasione confermata): sono gli unici casi
     in cui il file può legittimamente accorciarsi molto o svuotarsi. In tutti gli altri (scatti,
     note, ancoraggi) resta attiva la protezione che rifiuta un crollo del file — vedi
-    _crollo_dizionario: senza `force` togliere l'ULTIMA occasione verrebbe rifiutato."""
-    write_data_json(TRACKING_NAME, data, force=force)
+    _crollo_dizionario: senza `force` togliere l'ULTIMA occasione verrebbe rifiutato.
+    Ritorna True se il salvataggio e riuscito: senza questo esito chi salva non puo sapere se il
+    dato e stato conservato, ed e' proprio il modo in cui questo progetto ha perso dei registri."""
+    return write_data_json(TRACKING_NAME, data, force=force)
 
 
 def opportunity_snapshot(ticker: str, kind: str) -> dict:
@@ -5608,8 +5658,14 @@ def _snap_alla_data(tk, kind, data) -> dict:
         e = (load_tracking() or {}).get(str(tk).upper()) or {}
         if e.get("kind") and kind and e.get("kind") != kind:
             e = {}
-        snaps = sorted([s for s in (e.get("snapshots") or []) if s.get("date")],
-                       key=lambda s: str(s.get("date")))
+        # STORIA COMPLETA, non solo il file vivo. Questa funzione cerca i valori a una data che può
+        # essere di settimane prima, e il file vivo ne tiene pochi giorni: cercarli lì darebbe None
+        # proprio nei casi che contano. L'archivio degli scatti invece non butta più niente, quindi
+        # da adesso questa ricerca funziona MEGLIO di prima, non peggio.
+        snaps = storia_scatti(tk) if e else []
+        if not snaps:
+            snaps = sorted([s for s in (e.get("snapshots") or []) if s.get("date")],
+                           key=lambda s: str(s.get("date")))
         if not snaps:
             # RIPIEGO SULLA LAPIDE: se il titolo è già uscito dal monitoraggio la sua voce non
             # esiste più, ma da adesso gli scatti sono a verbale nella lapide dell'uscita, che è un
@@ -9647,3 +9703,158 @@ def copertura_archivio(kind: str = None, giorni: int = 60) -> dict:
             "l'app: il lavoro gira ogni mezz'ora sullo stesso mercato, quindi non sfugge nulla.",
         ],
     }
+
+
+# --- GLI SCATTI DEL MONITORAGGIO --------------------------------------------
+# IL PROBLEMA, misurato: tracking.json era a 1,89 MB con 6.651 scatti su 23 giorni. Oltre 1 MB
+# l'API dei contenuti di GitHub non restituisce più il contenuto del file, e allora la protezione
+# anti-cancellazione si spegne IN SILENZIO — non c'è errore, non c'è messaggio: semplicemente da
+# quel momento chiunque può riscriverci sopra qualunque cosa. Quel file conteneva i prezzi
+# d'ingresso di 78 titoli seguiti, cioè roba irrecuperabile.
+#
+# LA CURA: gli scatti vecchi vanno in file giornalieri d'archivio e il file vivo torna piccolo. Non
+# si perde niente — al contrario, da adesso gli scatti si tengono PER SEMPRE, mentre prima venivano
+# buttati dopo 22 giorni. Il file vivo tiene gli ultimi giorni, e chi vuole la storia completa la
+# chiede a storia_scatti(), che rimette insieme archivio e vivo.
+ARC_SCATTI = "archivio/scatti"
+_SCATTI_VIVI_GG = 3          # giorni di scatti che restano nel file vivo
+_SCATTI_TETTO_BYTE = 600_000  # oltre questo il file vivo si accorcia da solo, fin dove serve
+_SCATTI_GIORNI_PER_GIRO = 10  # quanti giorni archiviare al massimo per giro, per non martellare l'API
+# QUANTI SCATTI RESTANO SEMPRE, per ogni titolo, anche se più vecchi della finestra. Non è una
+# rifinitura: un titolo che smette di ricevere dati — cioè un possibile delisting, il caso in cui
+# l'allarme serve davvero — non avrebbe scatti recenti per definizione, e resterebbe con la lista
+# vuota. Chi controlla se un titolo è fermo si ferma alla prima riga: «se non ci sono scatti, non
+# dico niente». Quindi l'allarme si spegnerebbe esattamente sui titoli che deve sorvegliare.
+_SCATTI_MINIMO = 3
+
+
+def _peso(obj) -> int:
+    try:
+        return len(json.dumps(obj, ensure_ascii=False, indent=0).encode("utf-8"))
+    except Exception:
+        return 0
+
+
+def archivia_scatti(giorni_vivi: int = None, tetto_byte: int = None,
+                    max_giorni: int = None) -> dict:
+    """Sposta gli scatti vecchi del monitoraggio in file giornalieri e rimpicciolisce il file vivo.
+
+    L'ordine è quello che conta: si scrive l'archivio, si VERIFICA che sia arrivato, e solo dopo si
+    toglie qualcosa dal file vivo. Se l'archivio non riesce, il file vivo non viene toccato: resta
+    grosso, che è un problema, ma nessuno scatto sparisce — e un problema che resta è sempre meglio
+    di un dato che non c'è più.
+
+    Ritorna quanti scatti ha spostato, quanti giorni ha coperto e quanto pesa ora il file vivo."""
+    giorni_vivi = _SCATTI_VIVI_GG if giorni_vivi is None else giorni_vivi
+    tetto_byte = _SCATTI_TETTO_BYTE if tetto_byte is None else tetto_byte
+    max_giorni = _SCATTI_GIORNI_PER_GIRO if max_giorni is None else max_giorni
+
+    tracked = load_tracking()
+    if not isinstance(tracked, dict) or not tracked:
+        return {"spostati": 0, "giorni": 0, "peso_prima": 0, "peso_dopo": 0,
+                "motivo": "non riesco a leggere il monitoraggio: non tocco niente"}
+    peso_prima = _peso(tracked)
+    spostati_tot, giorni_fatti, problemi = 0, [], []
+
+    while True:
+        taglio = (datetime.date.today() - datetime.timedelta(days=max(1, giorni_vivi))).isoformat()
+        # 1. raccogli gli scatti da spostare, raggruppati per il GIORNO IN CUI SONO AVVENUTI: così
+        #    l'archivio diventa un calendario di com'erano i titoli seguiti, giorno per giorno.
+        per_giorno = {}
+        scelti = {}      # {ticker: set(date esatte scelte)} — la corrispondenza deve essere ESATTA
+        for tk, e in tracked.items():
+            if not isinstance(e, dict):
+                continue
+            TK = str(tk).upper()
+            _tutti = sorted((e.get("snapshots") or []), key=lambda s: str(s.get("date") or ""))
+            _intoccabili = {id(s) for s in _tutti[-_SCATTI_MINIMO:]}   # gli ultimi restano sempre
+            for s in _tutti:
+                g = str(s.get("date") or "")[:10]
+                if not g or g >= taglio or id(s) in _intoccabili:
+                    continue
+                riga = {"giorno": g, "ticker": TK, "kind": e.get("kind"), "nome": e.get("name")}
+                riga.update({k: v for k, v in s.items() if k != "name"})
+                per_giorno.setdefault(g, []).append(riga)
+                scelti.setdefault(TK, set()).add(str(s.get("date")))
+        if not per_giorno:
+            break
+        # 2. scrivi (e verifica) un giorno alla volta, dal più vecchio
+        salvati = set()
+        for g in sorted(per_giorno)[:max(1, max_giorni)]:
+            esito = _arc_aggiungi(ARC_SCATTI, per_giorno[g],
+                                  chiave=lambda r: (r.get("ticker"), r.get("date")), giorno=g)
+            if esito.get("salvate"):
+                salvati.add(g)
+                giorni_fatti.append(g)
+            else:
+                problemi.append(f"{g}: {esito.get('motivo')}")
+        if not salvati:
+            break
+        # 3. SOLO ADESSO togli dal file vivo quelli che sono davvero in archivio
+        spostati = 0
+        for tk, e in tracked.items():
+            if not isinstance(e, dict):
+                continue
+            _scelte = scelti.get(str(tk).upper()) or set()
+            tenuti = []
+            for s in (e.get("snapshots") or []):
+                d = str(s.get("date") or "")
+                # Si toglie SOLO quello che è stato scelto E il cui giorno è arrivato in archivio.
+                # Non basta «è vecchio e quel giorno è salvato»: gli ultimi scatti di ogni titolo
+                # non vengono mai archiviati, e un altro titolo può averne uno lo stesso giorno —
+                # quindi quella scorciatoia li cancellerebbe senza che siano da nessuna parte.
+                if d in _scelte and d[:10] in salvati:
+                    spostati += 1
+                else:
+                    tenuti.append(s)
+            e["snapshots"] = tenuti
+        spostati_tot += spostati
+        # 4. ancora troppo grosso? si stringe la finestra e si ripassa. Il tetto non è un vezzo: è
+        #    quello che tiene ACCESA la protezione anti-cancellazione di questo file.
+        if _peso(tracked) <= tetto_byte or giorni_vivi <= 1:
+            break
+        giorni_vivi -= 1
+
+    if not spostati_tot:
+        return {"spostati": 0, "giorni": 0, "peso_prima": peso_prima, "peso_dopo": peso_prima,
+                "motivo": ("; ".join(problemi) or None)}
+    if not save_tracking(tracked, force=True):   # riduzione dichiarata, non un effetto collaterale
+        return {"spostati": 0, "giorni": len(set(giorni_fatti)), "peso_prima": peso_prima,
+                "peso_dopo": peso_prima,
+                "motivo": "gli scatti sono in archivio ma il file vivo non si è salvato: "
+                          "nessuno scatto è perso, si riprova al prossimo giro"}
+    return {"spostati": spostati_tot, "giorni": len(set(giorni_fatti)),
+            "peso_prima": peso_prima, "peso_dopo": _peso(tracked),
+            "giorni_vivi": giorni_vivi, "motivo": ("; ".join(problemi) or None)}
+
+
+def storia_scatti(ticker: str, dal: str = None, al: str = None) -> list:
+    """La storia COMPLETA degli scatti di un titolo: archivio più file vivo, in ordine di data.
+    Da usare dove serve la storia lunga — i grafici del monitoraggio e la ricerca di un valore a una
+    data precisa. Il file vivo da solo tiene pochi giorni, ma l'archivio non butta più niente:
+    quindi da adesso questa storia si allunga invece di accorciarsi come faceva prima."""
+    TK = str(ticker).upper()
+    fuori = {}
+    for r in _arc_leggi_giorni(ARC_SCATTI, dal=dal, al=al):
+        if isinstance(r, dict) and r.get("ticker") == TK and r.get("date"):
+            fuori[str(r["date"])] = {k: v for k, v in r.items()
+                                     if k not in ("giorno", "ticker", "kind", "nome")}
+    e = (load_tracking() or {}).get(TK) or {}
+    for s in (e.get("snapshots") or []):
+        if s.get("date"):
+            d = str(s["date"])
+            if (dal and d[:10] < dal) or (al and d[:10] > al):
+                continue
+            fuori[d] = s          # il vivo vince: è la copia più aggiornata
+    return [fuori[k] for k in sorted(fuori)]
+
+
+def scatti_del_giorno(giorno: str) -> list:
+    """Com'erano tutti i titoli seguiti in un giorno preciso. È la pagina del calendario del
+    monitoraggio, e serve a rispondere a «com'era la situazione quel giorno» senza doverla
+    ricostruire titolo per titolo."""
+    fuori = []
+    for nome in sorted(indice_archivio()):
+        if nome.startswith(ARC_SCATTI + "/") and os.path.basename(nome)[:10] == giorno:
+            fuori += (read_data_json(nome, None) or [])
+    return fuori

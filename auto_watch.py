@@ -391,6 +391,22 @@ def main():
     except Exception as e:
         log(f"Errore statistiche dell'archivio: {e!r}")
 
+    # SCATTI DEL MONITORAGGIO: i vecchi vanno in file giornalieri e il file vivo torna piccolo.
+    # Non è un riordino: a 1,89 MB il file dei titoli seguiti aveva le protezioni SPENTE, perché
+    # sopra 1 MB l'API di GitHub non restituisce più il contenuto e la guardia anti-cancellazione
+    # non ha più niente da confrontare. Dentro c'erano i prezzi d'ingresso di 78 titoli. Da adesso
+    # gli scatti si tengono per sempre in archivio, mentre prima venivano buttati dopo 22 giorni.
+    try:
+        sc = fu.archivia_scatti()
+        if sc["spostati"]:
+            log(f"Scatti del monitoraggio: {sc['spostati']} spostati in archivio su "
+                f"{sc['giorni']} giornate · file vivo da {sc['peso_prima'] // 1024} KB a "
+                f"{sc['peso_dopo'] // 1024} KB")
+        if sc.get("motivo"):
+            log(f"⚠️ Scatti del monitoraggio: {sc['motivo']}")
+    except Exception as e:
+        log(f"Errore archivio degli scatti: {e!r}")
+
     # CONTEGGI DEI REGISTRI: quante righe dovrebbe avere ciascuno. È il numero che permette di
     # distinguere «il file non esiste» da «non riesco a leggerlo» — due cose che arrivano identiche
     # e che il 16/08/2026 sono costate due registri. Si salva una volta per giro, alla fine, quando
