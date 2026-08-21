@@ -214,5 +214,32 @@
 },
 "stop": 427.8371,
 "atr": 43.5814
+},
+{
+"episodio": "long:FSM:2026-08-18",
+"ticker": "FSM",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:09",
+"data": "2026-08-18 22:20",
+"prezzo": 10.45,
+"conv": 67,
+"prob_gain": 60,
+"prob_loss": 28,
+"reliab": "🟡 Media",
+"mkt": 2.4311,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": null,
+"media20": null,
+"quattro_atr": 12.3848,
+"meta_caduta": 11.175,
+"bollinger": 12.1561,
+"consigliata": 12.3848
+},
+"stop": 9.4826,
+"atr": 0.4837
 }
 ]
