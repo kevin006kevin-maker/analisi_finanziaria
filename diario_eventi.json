@@ -592,5 +592,32 @@
 },
 "stop": 6.5688,
 "atr": 0.5781
+},
+{
+"episodio": "long:T:2026-08-17",
+"ticker": "T",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:09",
+"data": "2026-08-17 13:50",
+"prezzo": 24.89,
+"conv": 60,
+"prob_gain": 68,
+"prob_loss": 15,
+"reliab": "🟢 Alta",
+"mkt": 4.3991,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": null,
+"media20": null,
+"quattro_atr": 27.2484,
+"meta_caduta": 25.02,
+"bollinger": 25.4725,
+"consigliata": 27.2484
+},
+"stop": 23.7108,
+"atr": 0.5896
 }
 ]
