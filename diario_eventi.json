@@ -241,5 +241,32 @@
 },
 "stop": 9.4826,
 "atr": 0.4837
+},
+{
+"episodio": "long:HBM:2026-08-17",
+"ticker": "HBM",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:09",
+"data": "2026-08-17 18:55",
+"prezzo": 27.325,
+"conv": 60,
+"prob_gain": 61,
+"prob_loss": 30,
+"reliab": "🔴 Bassa",
+"mkt": 4.3764,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": null,
+"media20": null,
+"quattro_atr": 32.5607,
+"meta_caduta": 29.5975,
+"bollinger": 30.1008,
+"consigliata": 32.5607
+},
+"stop": 24.7072,
+"atr": 1.3089
 }
 ]
