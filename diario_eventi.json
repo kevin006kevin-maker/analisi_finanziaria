@@ -403,5 +403,32 @@
 },
 "stop": 10.2588,
 "atr": 0.3506
+},
+{
+"episodio": "long:NEM:2026-08-19",
+"ticker": "NEM",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:09",
+"data": "2026-08-19 09:35",
+"prezzo": 115.98,
+"conv": 64,
+"prob_gain": 60,
+"prob_loss": 27,
+"reliab": "🟡 Media",
+"mkt": 2.0971,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": null,
+"media20": null,
+"quattro_atr": 134.2291,
+"meta_caduta": 121.81,
+"bollinger": 132.2438,
+"consigliata": 134.2291
+},
+"stop": 106.8554,
+"atr": 4.5623
 }
 ]
