@@ -565,5 +565,32 @@
 },
 "stop": 43.876,
 "atr": 2.3545
+},
+{
+"episodio": "long:STUB:2026-08-17",
+"ticker": "STUB",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:09",
+"data": "2026-08-17 15:38",
+"prezzo": 7.725,
+"conv": 66,
+"prob_gain": 70,
+"prob_loss": 25,
+"reliab": "🔴 Bassa",
+"mkt": 4.4982,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": 10.0214,
+"media20": 8.2685,
+"quattro_atr": 10.0374,
+"meta_caduta": 10.7075,
+"bollinger": 9.7845,
+"consigliata": 10.0214
+},
+"stop": 6.5688,
+"atr": 0.5781
 }
 ]
