@@ -295,5 +295,32 @@
 },
 "stop": 17.8497,
 "atr": 0.9352
+},
+{
+"episodio": "long:INTR:2026-08-16",
+"ticker": "INTR",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:09",
+"data": "2026-08-16 22:17",
+"prezzo": 5.19,
+"conv": 67,
+"prob_gain": 73,
+"prob_loss": 17,
+"reliab": "🟡 Media",
+"mkt": 3.2103,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": 5.4944,
+"media20": 5.4015,
+"quattro_atr": 6.1928,
+"meta_caduta": 5.8,
+"bollinger": 5.843,
+"consigliata": 5.4944
+},
+"stop": 4.6886,
+"atr": 0.2507
 }
 ]
