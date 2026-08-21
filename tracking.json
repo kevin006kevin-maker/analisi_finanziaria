@@ -15897,7 +15897,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-08-21",
 "max_price": 34.96,
-"max_date": "2026-08-17 22:55"
+"max_date": "2026-08-17 22:55",
+"warn_since": "2026-08-21",
+"warn": "in perdita da 13 giorni di Borsa: valuta l'uscita"
 },
 "TSLL": {
 "kind": "short",
@@ -25576,7 +25578,9 @@
 "urgenza": "incassa",
 "tipo": "sgonfia"
 },
-"incasso_notified": true
+"incasso_notified": true,
+"warn_since": "2026-08-21",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "TDC": {
 "kind": "long",
