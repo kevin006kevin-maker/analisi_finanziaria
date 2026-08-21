@@ -700,5 +700,32 @@
 },
 "stop": 89.5658,
 "atr": 3.8971
+},
+{
+"episodio": "short:CAPR:2026-08-16",
+"ticker": "CAPR",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:09",
+"data": "2026-08-16 21:44",
+"prezzo": 6.65,
+"conv": 74,
+"prob_gain": 44,
+"prob_loss": 33,
+"reliab": "🔴 Bassa",
+"mkt": 4.3991,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": 16.6898,
+"media20": null,
+"quattro_atr": 12.2765,
+"meta_caduta": 18.525,
+"bollinger": 13.1213,
+"consigliata": 12.2765
+},
+"stop": 3.8367,
+"atr": 1.4066
 }
 ]
