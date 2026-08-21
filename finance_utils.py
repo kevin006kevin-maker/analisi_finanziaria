@@ -9951,3 +9951,80 @@ def scatti_del_giorno(giorno: str) -> list:
         if nome.startswith(ARC_SCATTI + "/") and os.path.basename(nome)[:10] == giorno:
             fuori += (read_data_json(nome, None) or [])
     return fuori
+
+
+def scenari_calendario_diario(kind: str = "short", granularita: str = "settimana",
+                              min_pg: int = 0, max_pl: int = 100, min_conv: int = 0,
+                              importo: float = 30.0, fee: float = 1.0) -> dict:
+    """IL CALENDARIO, ma preso dal DIARIO invece che dal vecchio registro degli scenari.
+
+    Perché rifatto: il calendario vecchio leggeva un registro che non usiamo più per imparare, e
+    ragionava sui quattro momenti d'acquisto di prima. Gli scenari ora sono cinque e stanno nel
+    diario, quindi due viste sugli stessi dati davano strutture diverse — cioè il modo più sicuro
+    per trovarsi con due numeri che non tornano e non sapere a quale credere.
+
+    A che serve: la scheda di riepilogo mette tutto insieme e risponde a «quale momento d'acquisto
+    rende di più». Non risponde a «sta migliorando o peggiorando?», che è un'altra domanda: una
+    media buona può essere costruita in una settimana fortunata. Qui ogni riga è un periodo.
+
+    I periodi sono quelli dell'ACQUISTO, non della vendita: è la data che il diario conserva con
+    certezza, e raggruppare per periodo d'ingresso è anche l'unico modo corretto di confrontare
+    periodi diversi. La resa di un gruppo matura nei giorni successivi.
+
+    Le caselle hanno la stessa forma di prima — "scenario|vendita" — così l'interfaccia del
+    calendario resta quella e non ci sono due modi di leggere la stessa cosa."""
+    sd = scenari_diario(kind, min_pg, max_pl, min_conv, importo, fee)
+    nomi = {sc["chiave"]: sc["nome"] for sc in sd["scenari"]}
+    gruppi = {}
+    for sc in sd["scenari"]:
+        for vend in sd.get("vendite") or ():
+            for p in ((sc.get("casi") or {}).get(vend) or []):
+                g = str(p.get("data") or p.get("date") or "")[:10]
+                if not g or p.get("ret") is None:
+                    continue
+                try:
+                    chiave, etichetta, primo, ultimo = _periodo_di(g, granularita)
+                except Exception:
+                    continue
+                gr = gruppi.setdefault(chiave, {
+                    "chiave": chiave, "etichetta": etichetta, "dal": primo.isoformat(),
+                    "al": ultimo.isoformat(), "casi": {}, "episodi": set()})
+                gr["casi"].setdefault(f"{sc['chiave']}|{vend}", []).append(p)
+                gr["episodi"].add(p.get("episodio") or p.get("ticker"))
+
+    periodi = []
+    for chiave in sorted(gruppi, reverse=True):          # dal più recente
+        gr = gruppi[chiave]
+        celle = {}
+        for k, punti in gr["casi"].items():
+            rese = sorted(float(p["ret"]) for p in punti if p.get("ret") is not None)
+            if not rese:
+                continue
+            n = len(rese)
+            med = rese[n // 2] if n % 2 else (rese[n // 2 - 1] + rese[n // 2]) / 2
+            # I netti si calcolano CASO PER CASO e poi si fa la media: «il netto della resa tipica»
+            # e «la media dei netti» sono numeri diversi, perché la commissione è fissa e la tassa
+            # colpisce solo i guadagni. Quello utile è il secondo, ed è lo stesso che mostra la
+            # scheda di riepilogo — così le due viste non si contraddicono sugli stessi dati.
+            netti = [x for x in (net_eur(p["ret"], importo, fee) for p in punti) if x is not None]
+            celle[k] = {
+                "n": n, "med": round(med, 2), "avg": round(sum(rese) / n, 2),
+                "hit": round(100 * sum(1 for x in rese if x > 0) / n),
+                "best": round(max(rese), 2), "worst": round(min(rese), 2),
+                "netto_medio": (round(sum(netti) / len(netti), 2) if netti else None),
+                "netto_totale": round(sum(netti), 2),
+                "in_utile": sum(1 for x in netti if x > 0),
+            }
+        periodi.append({
+            "chiave": chiave, "etichetta": gr["etichetta"], "dal": gr["dal"], "al": gr["al"],
+            "n_occasioni": len(gr["episodi"]),
+            "titoli": sorted({str(p.get("ticker")) for punti in gr["casi"].values() for p in punti}),
+            "celle": celle,
+            "casi": {k: sorted(v, key=lambda p: str(p.get("data") or ""))
+                     for k, v in gr["casi"].items()},
+        })
+    return {"granularita": granularita, "kind": kind, "importo": importo, "fee": fee,
+            "pareggio_pct": round(pareggio_pct(importo, fee), 2),
+            "n_senza_dato": sum(sc.get("n_senza_dato") or 0 for sc in sd["scenari"]),
+            "nomi_scenari": nomi, "vendite": sd.get("vendite") or (),
+            "periodi": periodi, "n_periodi": len(periodi)}
