@@ -52,5 +52,32 @@
 },
 "stop": 5.4712,
 "atr": 0.1494
+},
+{
+"episodio": "long:CCL:2026-08-16",
+"ticker": "CCL",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:09",
+"data": "2026-08-16 22:17",
+"prezzo": 28.12,
+"conv": 60,
+"prob_gain": 65,
+"prob_loss": 22,
+"reliab": "🟡 Media",
+"mkt": 3.2103,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": null,
+"media20": null,
+"quattro_atr": 31.9895,
+"meta_caduta": 29.51,
+"bollinger": 29.9623,
+"consigliata": 31.9895
+},
+"stop": 26.1853,
+"atr": 0.9674
 }
 ]
