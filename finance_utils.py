@@ -2342,8 +2342,13 @@ def salva_conteggi() -> bool:
     """Mette su disco i conteggi raccolti in questo giro. Da chiamare una volta, alla fine."""
     if not _CONTEGGI_MEM:
         return True
-    fuori = read_data_json(CONTEGGI_NAME, None)
-    fuori = dict(fuori) if isinstance(fuori, dict) else {}
+    letto = read_data_json(CONTEGGI_NAME, None)
+    # SE LA LETTURA FALLISCE non si scrive con force. Questa tabella protegge TUTTI i registri:
+    # sostituirla con i pochi conteggi di questo giro spegnerebbe la protezione su tutti gli altri
+    # in un colpo, e force=True passerebbe sopra a ogni guardia. Senza force, se il file esiste la
+    # guardia anti-riduzione lo rifiuta da sola; se non esiste ancora, la scrittura passa.
+    letta_bene = isinstance(letto, dict) and bool(letto)
+    fuori = dict(letto) if isinstance(letto, dict) else {}
     for k, v in _CONTEGGI_MEM.items():
         vecchio = (fuori.get(k) or {}).get("righe") or 0
         nuovo = v.get("righe") or 0
@@ -2354,7 +2359,7 @@ def salva_conteggi() -> bool:
         # difendere righe che nessuno vuole più. Quando scende si annota da quanto veniva, così un
         # calo inatteso resta visibile invece di passare liscio.
         fuori[k] = dict(v) if nuovo >= vecchio else dict(v, era=vecchio)
-    return write_data_json(CONTEGGI_NAME, fuori, force=True)
+    return write_data_json(CONTEGGI_NAME, fuori, force=letta_bene)
 
 
 def azzera_conteggio(name: str) -> bool:
@@ -2682,7 +2687,7 @@ def _archivia_e_pota(name: str, rows: list, live_max: int, giorni_protetti: int 
     return protette + resto
 
 
-def salva_registro(name: str, rows: list, live_max: int, giorni_protetti: int = 0) -> None:
+def salva_registro(name: str, rows: list, live_max: int, giorni_protetti: int = 0) -> bool:
     """Salva un registro storico spostando l'eccedenza negli archivi annuali.
     USARE QUESTA, non write_data_json: dopo un'archiviazione il file vivo è più CORTO di quello
     esistente, e la protezione anti-cancellazione RIFIUTEREBBE la scrittura. Le righe resterebbero
@@ -2691,7 +2696,9 @@ def salva_registro(name: str, rows: list, live_max: int, giorni_protetti: int = 
     gli altri casi la protezione deve restare accesa."""
     tenute = _archivia_e_pota(name, rows, live_max, giorni_protetti)
     archiviato = isinstance(rows, list) and isinstance(tenute, list) and len(tenute) < len(rows)
-    write_data_json(name, tenute, force=archiviato)
+    # L'ESITO SI RESTITUISCE: chi scrive una riga nuova deve poter sapere se e' arrivata, altrimenti
+    # crede di averla messa a verbale e non riprova mai piu.
+    return bool(write_data_json(name, tenute, force=archiviato))
 
 
 def aggiorna_registro_completo(name: str, aggiorna) -> int:
@@ -8084,16 +8091,39 @@ def _soglie_da_storico(h, price):
         return out
 
 
-def soglie_ora(ticker, price=None, kind="short"):
-    """Le soglie candidate ADESSO per un titolo, piu lo stop e l'ATR. Si calcolano al momento in cui
-    l'evento viene messo a verbale, cosi i livelli sono quelli veri di quel giorno: e la stessa
-    ragione per cui il diario registra gli eventi quando avvengono invece di ricostruirli dopo.
+def soglie_ora(ticker, price=None, kind="short", fino_a=None):
+    """Le soglie candidate per un titolo ALLA DATA `fino_a`, piu lo stop e l'ATR.
+
+    `fino_a` NON e un dettaglio: senza, lo storico arrivava sempre a oggi mentre il prezzo era quello
+    dell'evento, che il lavoro automatico mette a verbale anche giorni dopo (salta dei giri). Misurato
+    sul diario vero: 57 momenti d'acquisto su 67 avevano le soglie costruite su barre SUCCESSIVE
+    all'acquisto, fino a 5 giorni dopo. E il difetto non era solo inelegante, era un bias in positivo
+    proprio sulla misura per cui le soglie esistono: «meta_caduta» e il punto a meta fra il prezzo e
+    il massimo delle ultime 60 sedute, quindi se quel massimo cade DOPO l'acquisto, il bersaglio
+    risulta raggiunto per costruzione — e la finestra in cui si verifica se e stato toccato contiene
+    proprio le barre usate per costruirlo. Il confronto fra le sei formule ne sarebbe uscito falsato
+    verso l'ottimismo, cioe inutile.
     Una chiamata di rete per evento, e gli eventi sono pochi al giorno (lo storico e anche in cache)."""
     fuori = {"soglie": {k: None for k in SOGLIE_NOMI}, "stop": None, "atr": None}
     try:
         h = get_history(ticker, period="1y")
         if h is None or h.empty:
             return fuori
+        if fino_a:
+            # si taglia PRIMA di calcolare gli indicatori: medie, bande e ATR devono essere quelli
+            # di allora, non quelli di oggi ricalcolati su una serie piu lunga
+            try:
+                h = h.copy()
+                if getattr(h.index, "tz", None) is not None:
+                    h.index = h.index.tz_localize(None)
+            except (TypeError, AttributeError):
+                pass
+            try:
+                h = h[h.index <= pd.Timestamp(str(fino_a)[:10]) + pd.Timedelta(days=1)]
+            except Exception:
+                pass
+            if h is None or h.empty:
+                return fuori      # meglio nessun bersaglio che il bersaglio di un altro giorno
         h = add_indicators(h)
         p = float(price) if price else float(h["Close"].dropna().iloc[-1])
         s = _soglie_da_storico(h, p)
@@ -8265,7 +8295,8 @@ def registra_evento(kind, tk, evento, valori=None, episodio=None, note=None, dov
     # diario — un bersaglio ricostruito mesi dopo sarebbe il bersaglio di un altro giorno.
     liv = {}
     if evento in eventi_acquisto():
-        liv = soglie_ora(TK, v.get("prezzo"), kind)
+        # alla DATA dell'evento, non a oggi: vedi il perche dentro soglie_ora
+        liv = soglie_ora(TK, v.get("prezzo"), kind, fino_a=str(v.get("data") or "")[:10] or None)
     righe.append({
         "episodio": eid, "ticker": TK, "kind": kind, "evento": evento,
         "scritto_il": _now_iso(),                 # quando il sistema l'ha messo a verbale
@@ -8290,7 +8321,13 @@ def registra_evento(kind, tk, evento, valori=None, episodio=None, note=None, dov
         "stop": liv.get("stop"),
         "atr": liv.get("atr"),
     })
-    salva_registro(DIARIO_NAME, righe, _DIARIO_MAX, giorni_protetti=400)
+    # L'ESITO DEL SALVATAGGIO CONTA. Prima si ritornava True comunque: chi chiama credeva che
+    # l'evento fosse a verbale e al giro dopo non riprovava, quindi l'ingresso in osservazione di
+    # quell'occasione era perso. Ritornando False il chiamante riprova al giro successivo.
+    if not salva_registro(DIARIO_NAME, righe, _DIARIO_MAX, giorni_protetti=400):
+        return False
+    if DIARIO_NAME in _SALVATAGGI_FALLITI:
+        return False        # arrivato solo in locale: nel lavoro automatico muore col giro
     # ARCHIVIO DELL'APPRENDIMENTO: se questo evento è un momento in cui si compra, qui si registra
     # il PROFILO COMPLETO dell'occasione — le ~50 caratteristiche che il sistema calcola a ogni giro
     # e finora buttava, più com'era il mondo e il suo settore quel giorno, più le notizie. Sta qui e
@@ -8301,9 +8338,27 @@ def registra_evento(kind, tk, evento, valori=None, episodio=None, note=None, dov
     # di quel giorno, perché nessuno le aveva salvate. Attaccarci il profilo di oggi vorrebbe dire
     # accoppiare le caratteristiche di una data con l'acquisto di un'altra — cioè esattamente il
     # difetto per cui questo archivio esiste. Meglio un profilo che manca, e si vede che manca.
+    # LO STESSO PRINCIPIO VALE ANCHE PER GLI EVENTI IN RITARDO, e qui c'era il buco. Un evento
+    # "dovuto" giorni prima viene messo a verbale oggi (il lavoro automatico salta dei giri), e il
+    # profilo ricalcolava TUTTO col mercato di oggi: prezzo compreso. Misurato sui dati veri del
+    # 21/08/2026: su 22 momenti d'acquisto, 4 avevano nell'archivio un prezzo diverso da quello del
+    # diario — ENEL.MI 9,4160 del 18 agosto contro 9,5570 del 21, cioe +1,50%; STLAM.MI +2,93%.
+    # Conseguenza: gli scenari e l'archivio avrebbero misurato rendimenti DIVERSI per lo stesso
+    # acquisto. Il prezzo d'acquisto e uno solo, ed e quello del diario: il profilo lo riceve, e
+    # riceve anche di quante ore e in ritardo, cosi le caratteristiche non si spacciano per quelle
+    # dell'istante.
     if profilo and evento in eventi_acquisto():
         try:
-            registra_profilo_occasione(kind, TK, evento, episodio=eid)
+            _d_ev = str(v.get("data") or "")[:16].replace("T", " ")
+            try:
+                _rit = max(0.0, (datetime.datetime.now()
+                                 - datetime.datetime.strptime(_d_ev, "%Y-%m-%d %H:%M")
+                                 ).total_seconds() / 3600)
+            except Exception:
+                _rit = 0.0
+            registra_profilo_occasione(kind, TK, evento, episodio=eid,
+                                       giorno=(_d_ev[:10] or None), ritardo_ore=_rit,
+                                       prezzo_acquisto=v.get("prezzo"))
         except Exception:
             pass        # un profilo mancato non deve mai impedire di scrivere l'evento nel diario
     return True
@@ -9174,6 +9229,26 @@ def ampiezza_mercato(righe) -> dict:
 
 # --- LE NOTIZIE -------------------------------------------------------------
 
+_NOTIZIE_IN_ARCHIVIO = {}     # giorno -> insieme dei titoli che hanno gia le notizie
+
+
+def _gia_ha_notizie(giorno: str, ticker: str) -> bool:
+    """Se quel titolo ha già le notizie di quel giorno in archivio. Legge l'archivio UNA volta per
+    giro e poi tiene il risultato in memoria: senza questo sarebbe una lettura per titolo."""
+    if giorno not in _NOTIZIE_IN_ARCHIVIO:
+        try:
+            _NOTIZIE_IN_ARCHIVIO[giorno] = {
+                str(n.get("ticker")).upper()
+                for n in _arc_leggi_giorni(ARC_NOTIZIE, dal=giorno, al=giorno)
+                if isinstance(n, dict) and n.get("ticker")}
+        except Exception:
+            _NOTIZIE_IN_ARCHIVIO[giorno] = set()
+    # anche quelle appena messe in coda in questo giro contano come già fatte
+    in_coda = {str(n.get("ticker")).upper() for n in _BUFFER_NOTIZIE
+               if isinstance(n, dict) and n.get("giorno") == giorno}
+    return ticker in (_NOTIZIE_IN_ARCHIVIO[giorno] | in_coda)
+
+
 def registra_notizie(ticker: str, giorno: str = None, forza: bool = False) -> int:
     """Salva le notizie di un titolo COL RIASSUNTO, così che fra un anno si possa capire perché quel
     giorno il prezzo era quello. Va fatto il giorno stesso: una ricerca fatta dopo restituisce cose
@@ -9187,6 +9262,15 @@ def registra_notizie(ticker: str, giorno: str = None, forza: bool = False) -> in
     giorno = giorno or _arc_oggi()
     TK = str(ticker).upper()
     if (TK, giorno) in _NOTIZIE_CHIESTE:
+        return 0
+    # IL RICORDO DEVE DURARE PIU DEL PROCESSO. _NOTIZIE_CHIESTE vive solo dentro un giro: al giro
+    # dopo il sistema ripartiva dai primi titoli della lista e ribruciava il budget su quelli che
+    # avevano GIA le notizie, quindi la coda non le riceveva mai. Misurato sui dati veri del
+    # 21/08/2026: 34 titoli con notizie su 100 visti, tutte richieste fra le 8 e le 9 del mattino —
+    # una quarantina di giri successivi non ne hanno aggiunta nessuna. Chiedere all'archivio chi ce
+    # le ha già costa una lettura per giro e fa arrivare il budget a chi non e ancora servito.
+    if _gia_ha_notizie(giorno, TK):
+        _NOTIZIE_CHIESTE.add((TK, giorno))
         return 0
     if not forza and _NOTIZIE_SPESE[0] >= _NOTIZIE_PER_GIRO:
         return 0
@@ -9252,7 +9336,12 @@ def profilo_da_riga(r: dict, kind: str, momento: str = None, episodio: str = Non
     titolo = {k: r.get(k) for k in _PROF_TITOLO if r.get(k) is not None}
     trappola = r.get("trap") or {}
     prof = {
-        "id": _profilo_id(giorno, kind, tk, momento),
+        # NELL'IDENTIFICATIVO CI VA IL MOTIVO, non un generico «scartata». I doppioni si scartano
+        # per identificativo: senza il motivo, di un titolo bocciato due volte nello stesso giorno
+        # per ragioni DIVERSE sopravviveva solo la prima, e la distribuzione dei motivi — cioe' il
+        # dato per cui le bocciature si registrano — risultava storta. Misurato: 36 titoli su 124
+        # bocciature del 21/08 compaiono piu di una volta nello stesso giorno.
+        "id": _profilo_id(giorno, kind, tk, momento or motivo),
         "giorno": giorno, "ora": _arc_ora(), "ticker": tk, "nome": r.get("name"),
         "kind": kind, "momento": momento, "episodio": episodio,
         "scartata": bool(motivo), "motivo": motivo, "motivo_dettaglio": dettaglio,
@@ -9378,6 +9467,15 @@ def _resa_e_percorso(ticker: str, dal: str, prezzo, giorni: int, storico=None) -
                 break
         if fine is None or fine <= i0:
             return {}
+        # IL TITOLO QUOTA ANCORA FINO ALLA SCADENZA? Se ha smesso di quotare a metà finestra — un
+        # delisting, un titolo sospeso — l'ultima chiusura disponibile è di settimane prima, e
+        # attribuirla all'orizzonte intero significa dire «dopo 30 giorni ha reso questo» quando in
+        # realtà il prezzo è fermo al giorno 6. Un esito falso è peggio di un esito mancante: qui la
+        # riga si scrive comunque (il dato parziale è utile) ma DICHIARA fino a dove arriva.
+        _ultimo = idx[fine]
+        _giorni_reali = (datetime.date.fromisoformat(_ultimo)
+                        - datetime.date.fromisoformat(str(dal)[:10])).days
+        _incompleto = _ultimo < limite and _giorni_reali < giorni * 0.8
         tratto = c.iloc[i0:fine + 1].astype(float)
         pf = float(tratto.iloc[-1])
         pmax, pmin = float(tratto.max()), float(tratto.min())
@@ -9390,6 +9488,10 @@ def _resa_e_percorso(ticker: str, dal: str, prezzo, giorni: int, storico=None) -
             "giorni_al_massimo": imax, "giorni_al_minimo": imin,
             "giorni_misurati": fine - i0, "prezzo_fine": round(pf, 4),
             "maturato_il": idx[fine],
+            # quanto della finestra è stato davvero coperto, e se il titolo ha smesso di quotare
+            "giorni_di_calendario_coperti": _giorni_reali,
+            "finestra_incompleta": _incompleto,
+            "ultima_quotazione": _ultimo,
         }
     except Exception:
         return {}
@@ -9483,7 +9585,8 @@ def sintesi_apprendimento(kind: str = None, orizzonte: str = "30g", momento: str
     profili = {p.get("id"): p for p in _arc_leggi_giorni(ARC_PROFILI) if isinstance(p, dict)}
     esiti = [e for e in _arc_leggi_giorni(ARC_ESITI)
              if isinstance(e, dict) and e.get("orizzonte") == orizzonte
-             and not e.get("dati_sospetti") and e.get("resa") is not None]
+             and not e.get("dati_sospetti") and not e.get("finestra_incompleta")
+             and e.get("resa") is not None]
     vinte, perse = [], []
     for e in esiti:
         p = profili.get(e.get("profilo"))
@@ -9527,6 +9630,25 @@ def sintesi_apprendimento(kind: str = None, orizzonte: str = "30g", momento: str
             "aggiornato": _arc_ora(),
             "avvertenza": ("Con meno di 30 casi per lato le differenze non sono distinguibili dal "
                            "caso: la colonna «solidità» dice a quali si può cominciare a credere.")}
+
+
+def sintesi_pronta(kind: str = None, orizzonte: str = "30g") -> dict:
+    """Le statistiche GIA CALCOLATE, dal file che il lavoro automatico tiene aggiornato.
+
+    Serve all'app: sintesi_apprendimento rilegge l'intero archivio, e a un anno di distanza sarebbero
+    centinaia di file scaricati a ogni clic su una scheda. Il lavoro automatico le ricalcola due
+    volte al giorno; qui si legge il risultato. Se il file non c'e ancora — o non contiene la vista
+    chiesta — si ricalcola una volta sola, cosi la scheda funziona comunque."""
+    try:
+        d = read_data_json(SINTESI_NAME, None) or {}
+        v = ((d.get("viste") or {}).get(f"{kind}:{orizzonte}"))
+        if v:
+            return dict(v, calcolata_il=d.get("aggiornato"), da_file=True)
+    except Exception:
+        pass
+    s = sintesi_apprendimento(kind=kind, orizzonte=orizzonte)
+    s["da_file"] = False
+    return s
 
 
 def salva_sintesi(forza: bool = False, ogni_ore: int = 12) -> bool:
@@ -9714,7 +9836,8 @@ def accoda_senza_profilo(kind: str, tickers, motivo: str, giorno: str = None) ->
 
 
 def registra_profilo_occasione(kind: str, ticker: str, momento: str, episodio: str = None,
-                               giorno: str = None, ritardo_ore: float = 0) -> bool:
+                               giorno: str = None, ritardo_ore: float = 0,
+                               prezzo_acquisto: float = None) -> bool:
     """Registra il profilo COMPLETO di un'occasione in un momento d'acquisto. Chiamata dal diario,
     così ogni momento passa da qui e nessuno può sfuggire per dimenticanza in un chiamante.
 
@@ -9753,8 +9876,17 @@ def registra_profilo_occasione(kind: str, ticker: str, momento: str, episodio: s
                        and np.isfinite(punteggio) else None),
             fattori=fattori, mondo=_mondo_per_riga(r, ctx),
             origine=(ctx.get("origine") or {}).get(TK), giorno=giorno)
+        # IL PREZZO D'ACQUISTO E QUELLO DEL DIARIO, non quello di adesso: e' l'unico prezzo a cui
+        # l'occasione e' stata "comprata", e su quello si misurano tutti i rendimenti. Il prezzo di
+        # adesso resta a verbale a parte, dentro le caratteristiche, dove e' un dato vero e utile.
+        if prezzo_acquisto is not None:
+            prof["prezzo"] = prezzo_acquisto
+            prof["prezzo_al_momento_del_profilo"] = r.get("price")
         try:
-            s = soglie_ora(TK, r.get("price"), kind)
+            # anche le soglie si calcolano sul PREZZO D'ACQUISTO: un bersaglio misurato da un prezzo
+            # diverso da quello pagato non e' il bersaglio di quell'acquisto
+            s = soglie_ora(TK, (prezzo_acquisto if prezzo_acquisto is not None
+                                else r.get("price")), kind, fino_a=str(giorno)[:10])
             prof["soglie"] = s.get("soglie")
             prof["stop_soglia"] = s.get("stop")
         except Exception:
@@ -9893,14 +10025,24 @@ def copertura_archivio(kind: str = None, giorni: int = 60) -> dict:
         "giorni_coperti": len(giorni_archivio()),
         "senza_profilo": sum(1 for p in profili
                              if p.get("motivo") in MOTIVI_SENZA_PROFILO),
+        # DUE POPOLAZIONI, CONTATE SEPARATAMENTE. Prima il numeratore girava su tutte le righe e il
+        # denominatore solo sulle comprate: il riquadro diceva "22 su 22, 100%" mentre la copertura
+        # vera fra le comprate era 8 su 22. Un controllo di copertura che mente in positivo e' peggio
+        # di nessun controllo, perche' spegne proprio l'allarme che deve suonare.
         "con_contesto_settore": sum(1 for p in profili
-                                    if (p.get("mondo") or {}).get("settore_1m") is not None),
+                                    if not p.get("scartata")
+                                    and (p.get("mondo") or {}).get("settore_1m") is not None),
+        "bocciate_con_settore": sum(1 for p in profili
+                                    if p.get("scartata")
+                                    and (p.get("mondo") or {}).get("settore_1m") is not None),
         "settore_non_riconosciuto": sorted({
             str(p.get("settore")) for p in profili
             if p.get("settore") and not (p.get("settore_gruppo")
                                          or settore_canonico(p.get("settore")))}),
         "senza_settore": sum(1 for p in profili
                              if not p.get("scartata") and not p.get("settore")),
+        "bocciate_senza_settore": sum(1 for p in profili
+                                      if p.get("scartata") and not p.get("settore")),
         "non_registrate": [
             "I nomi oltre il tetto dell'universo (40 per il breve, 20 per il lungo) non vengono "
             "mai aperti, quindi di loro non esistono caratteristiche. Il loro NOME però è a "

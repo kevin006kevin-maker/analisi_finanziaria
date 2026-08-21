@@ -3482,8 +3482,18 @@ if section.startswith("Archivio"):
             _msg = (f"Occasioni con il contesto del settore a verbale: **{_q_set} su {_q_com}** "
                     f"({_pc_set:.0f}%).")
             if _cop.get("senza_settore"):
-                _msg += (f" {_cop['senza_settore']} non hanno il settore perche la fonte non lo ha "
+                _msg += (f" {_cop['senza_settore']} non hanno il settore perché la fonte non lo ha "
                          "dato: per quelle resta il contesto del mercato, non quello del settore.")
+            # LE BOCCIATE, contate a parte. Sono la maggioranza delle righe e sul breve periodo il
+            # settore non viene nemmeno chiesto (costa una chiamata in più per titolo), quindi la
+            # loro copertura è molto più bassa: mescolarla con quella delle comprate nascondeva
+            # entrambe. Sono i contro-esempi, cioè metà del valore dell'archivio.
+            _b_tot = _cop.get("bocciate") or 0
+            _b_set = _cop.get("bocciate_con_settore") or 0
+            if _b_tot:
+                _msg += (f" Fra le **bocciate**, invece, ce l'hanno {_b_set} su {_b_tot} "
+                         f"({100 * _b_set / _b_tot:.0f}%): sul breve periodo il settore non viene "
+                         f"chiesto, perché costerebbe una chiamata in più per ogni titolo guardato.")
             if _cop.get("settore_non_riconosciuto"):
                 st.warning("⚠️ " + _msg + " Nomi di settore che il sistema **non riesce a "
                            "collegare** al loro settore di riferimento: "
@@ -3832,10 +3842,16 @@ if section.startswith("Archivio"):
                                        required=True, key="arc_imp_oriz",
                                        format_func=lambda k: {"7g": "7 giorni", "30g": "30 giorni",
                                                               "365g": "un anno"}[k]) or "30g"
-        _s = fu.sintesi_apprendimento(kind=_kind, orizzonte=_oriz)
+        # Si legge la sintesi GIA CALCOLATA dal lavoro automatico: ricalcolarla qui vorrebbe dire
+        # riscaricare tutto l'archivio a ogni clic, e fra un anno sono centinaia di file.
+        _s = fu.sintesi_pronta(kind=_kind, orizzonte=_oriz)
         _q1, _q2 = st.columns(2)
         _q1.metric("Occasioni che hanno guadagnato", _s["quante_guadagnano"])
         _q2.metric("Occasioni che hanno perso", _s["quante_perdono"])
+        if _s.get("da_file") and _s.get("calcolata_il"):
+            st.caption(f"Conti aggiornati al **{_s['calcolata_il']}**. Si rifanno due volte al "
+                       "giorno: le mediane non cambiano perché sono arrivati due esiti, e "
+                       "ricalcolarle a ogni apertura vorrebbe dire riscaricare tutto l'archivio.")
         if not _s["caratteristiche"]:
             st.info("⏳ Non ci sono ancora esiti maturi con questa combinazione. La prima misura "
                     "utile arriva quando ci sono decine di casi per lato: al ritmo attuale, "
