@@ -32,6 +32,10 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
+    # TETTO DI TEMPO. Senza, vale il predefinito di 6 ore: una chiamata di rete che si
+    # impianta tiene il processo appeso per ore, e con lui le righe ancora in memoria che
+    # non sono state scritte. 25 minuti stanno dentro l'intervallo fra due giri (30).
+    timeout-minutes: 25
     steps:
       - name: Scarica il codice
         uses: actions/checkout@v4

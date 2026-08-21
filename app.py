@@ -3471,6 +3471,29 @@ if section.startswith("Archivio"):
                    f"mesi (dal {data_it(_cop['dettagli_dal'])}): aprire questa pagina non deve "
                    f"scaricare tutto l'archivio ogni volta. Il numero di righe in archivio invece "
                    f"è quello vero e completo — lo sa l'elenco dei file, senza aprirne nessuno.")
+        # LA COPERTURA DEL SETTORE, in chiaro. Il 21/08/2026 solo 8 occasioni su 22 avevano il
+        # contesto settoriale: il sistema prende il settore da due fonti con nomi diversi e il
+        # collegamento all'ETF di riferimento falliva in silenzio. Ora c'e una tabella di sinonimi,
+        # e questo riquadro esiste perche se il buco si ripresenta si veda subito.
+        _q_com = _cop.get("occasioni_comprate") or 0
+        _q_set = _cop.get("con_contesto_settore") or 0
+        if _q_com:
+            _pc_set = 100 * _q_set / _q_com
+            _msg = (f"Occasioni con il contesto del settore a verbale: **{_q_set} su {_q_com}** "
+                    f"({_pc_set:.0f}%).")
+            if _cop.get("senza_settore"):
+                _msg += (f" {_cop['senza_settore']} non hanno il settore perche la fonte non lo ha "
+                         "dato: per quelle resta il contesto del mercato, non quello del settore.")
+            if _cop.get("settore_non_riconosciuto"):
+                st.warning("⚠️ " + _msg + " Nomi di settore che il sistema **non riesce a "
+                           "collegare** al loro settore di riferimento: "
+                           + ", ".join(f"«{x}»" for x in _cop["settore_non_riconosciuto"][:8])
+                           + ". Per queste occasioni il confronto col settore non viene registrato.")
+            elif _pc_set < 80:
+                st.warning("⚠️ " + _msg)
+            else:
+                st.caption(_msg)
+
         if _cop.get("senza_profilo"):
             st.caption(f"Di quelle bocciate, **{_cop['senza_profilo']}** sono a verbale col solo "
                        "nome e il motivo, senza caratteristiche: sono i due punti ciechi del "

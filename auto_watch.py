@@ -326,6 +326,16 @@ def main():
     except Exception as e:
         log(f"Errore scenari acquisto/vendita: {e!r}")
 
+    # SCARICO INTERMEDIO della coda: quello che e gia stato raccolto va su disco adesso, senza
+    # aspettare la fine del giro. Se il giro muore piu avanti, questo e gia salvo.
+    try:
+        _int = fu.scarica_profili()
+        if _int["scritte"] or _int["notizie_scritte"]:
+            log(f"Archivio (scarico intermedio): {_int['scritte']} profili "
+                f"+ {_int['notizie_scritte']} titoli con notizie")
+    except Exception as e:
+        log(f"Errore scarico intermedio dell'archivio: {e!r}")
+
     # DIARIO DEGLI EVENTI: mette a verbale gli eventi che scattano col tempo e che nessuno «vive»
     # (fine dell'osservazione, salita del 2%, fine della verifica), coi valori di QUEL momento.
     # Gira dopo la promozione e dopo gli scatti, così i valori sono quelli aggiornati del giro.
@@ -358,6 +368,21 @@ def main():
     # Un file per giorno, e i giorni passati non si riaprono mai: è quello che rende impossibile
     # perdere lo storico riscrivendolo, che è il modo in cui questo progetto lo ha già perso una
     # volta (16/08/2026, due registri azzerati da una lettura fallita).
+    # RICONCILIAZIONE: i momenti d'acquisto che sono nel diario ma non hanno un profilo. Succede se
+    # un giro precedente e morto fra la scrittura dell'evento e lo scarico della coda: l'evento
+    # resta, il profilo no, e al giro dopo registra_evento non riprova perche l'evento c'e gia.
+    # Senza questa passata quel momento d'acquisto resterebbe senza caratteristiche per sempre.
+    try:
+        ric = fu.riconcilia_profili()
+        if ric["recuperati"]:
+            log(f"Profili recuperati da giri interrotti: {ric['recuperati']} "
+                + ", ".join(ric["quali"][:8]))
+        if ric["non_riusciti"]:
+            log(f"⚠️ {ric['non_riusciti']} momenti d'acquisto senza profilo e non piu "
+                "ricostruibili: messi a verbale come buco dichiarato.")
+    except Exception as e:
+        log(f"Errore riconciliazione dei profili: {e!r}")
+
     try:
         arc = fu.scarica_profili()
         cop = fu.copertura_archivio()
@@ -372,6 +397,17 @@ def main():
                 f"{arc.get('motivo')}")
     except Exception as e:
         log(f"Errore archivio dell'apprendimento: {e!r}")
+
+    # Riparazione del contesto settoriale: riattacca i numeri del settore alle righe che ne sono
+    # rimaste prive perché il nome del settore non era ancora riconosciuto quando furono scritte.
+    # Non inventa nulla: ricollega due dati già a verbale nello stesso giorno.
+    try:
+        rip = fu.ripara_settori()
+        if rip["riparate"]:
+            log(f"Contesto dei settori: {rip['riparate']} campi riattaccati su "
+                f"{len(rip['file'])} giornate")
+    except Exception as e:
+        log(f"Errore riparazione dei settori: {e!r}")
 
     # Esiti dell'archivio: com'è andata, per le occasioni la cui scadenza è arrivata. Righe NUOVE
     # nel giorno in cui maturano, così nessun file passato viene riaperto in scrittura.

@@ -2601,7 +2601,7 @@ def _nome_archivio(name: str, anno) -> str:
 def _anno_di(riga) -> str:
     """Anno di una riga di registro, dal primo campo-data disponibile."""
     if isinstance(riga, dict):
-        for k in ("date", "removed", "added", "obs_date", "pre_date"):
+        for k in ("date", "data", "removed", "added", "obs_date", "pre_date"):
             v = riga.get(k)
             if v and len(str(v)) >= 4 and str(v)[:4].isdigit():
                 return str(v)[:4]
@@ -2666,6 +2666,14 @@ def _archivia_e_pota(name: str, rows: list, live_max: int, giorni_protetti: int 
             # lotto nuovo e poi accorciare il vivo: perdita doppia, in silenzio.
             if not write_data_json(arc, nuovo):
                 return rows          # scrittura d'archivio non riuscita: NON poto il vivo
+            # LA RISPOSTA POSITIVA NON BASTA, e la rilettura non aiuta: write_data_json dice
+            # "riuscito" anche col solo successo locale, e la verifica qui sotto rilegge proprio
+            # quel file locale (il nome e ormai fra le scritture di questa sessione), quindi
+            # passerebbe sempre. Nel lavoro automatico il file locale muore col giro: potare il
+            # vivo fidandosi di quella verifica butterebbe righe che sul deposito non esistono.
+            # L'unico segnale che dice la verita e' _SALVATAGGI_FALLITI.
+            if arc in _SALVATAGGI_FALLITI:
+                return rows          # arrivato solo in locale: NON poto il vivo
             verifica = read_data_json(arc, None)
             if not isinstance(verifica, list) or len(verifica) < len(nuovo):
                 return rows          # archivio non confermato: non poto il vivo
@@ -8503,93 +8511,97 @@ def risolvi_diario() -> int:
     Guardia anti-frazionamento: se la prima chiusura dopo l'acquisto dista oltre il 25% dal prezzo
     a verbale, la riga viene marcata inutilizzabile — un raggruppamento di azioni non e un guadagno.
     Ritorna quante caselle ha calcolato."""
-    righe = load_diario()
-    if not righe:
-        return 0
+    # SU TUTTI I PEZZI, non solo sul file vivo. Un momento d'acquisto aspetta il suo esito fino a
+    # 365 giorni: al ritmo attuale la sua riga finisce in archivio molto prima, e lavorando solo sul
+    # vivo quell'esito non sarebbe mai stato calcolato — cioe lo scenario a un anno sarebbe rimasto
+    # vuoto per sempre. aggiorna_registro_completo e lo stesso schema usato dagli altri risolutori.
     acquisti = eventi_acquisto()
     oggi = datetime.date.fromisoformat(_today_iso())
-    fatte = 0
-    for r in righe:
-        if r.get("evento") not in acquisti or not r.get("prezzo") or r.get("bad_data"):
-            continue
-        try:
-            d0 = datetime.date.fromisoformat(str(r.get("data"))[:10])
-        except Exception:
-            continue
-        eta = (oggi - d0).days
-        res = r.setdefault("res", {})
-        attese = [sk for sk, gg in _DIARIO_SELLS.items() if eta >= gg and sk not in res]
-        # la soglia ha una finestra sua e piu formule: si valuta anche quando le colonne a giorni
-        # fissi sono gia tutte calcolate
-        gg_s = _DIARIO_SOGLIA_GG.get(r.get("kind"), 30)
-        manca_soglia = (eta >= gg_s and (r.get("soglie") or {})
-                        and len(r.get("res_soglia") or {}) < len([1 for v in (r.get("soglie") or {}).values() if v]))
-        if not attese and not manca_soglia:
-            continue
-        if eta > 400:
-            r["bad_data"] = "troppo vecchia e ancora senza prezzi"
-            fatte += 1
-            continue
-        try:
-            closes = get_history(r.get("ticker"), period=("6mo" if eta < 150 else "2y"))["Close"].dropna()
-            try:
-                closes.index = closes.index.tz_localize(None)
-            except (TypeError, AttributeError):
-                pass
-        except Exception:
-            continue
-        dopo = closes[closes.index > pd.Timestamp(d0)]
-        if dopo.empty:
-            continue
-        if abs(float(dopo.iloc[0]) / float(r["prezzo"]) - 1) > 0.25:
-            r["bad_data"] = "salto di prezzo oltre il 25%: probabile raggruppamento di azioni"
-            fatte += 1
-            continue
-        for sk in attese:
-            s = closes[closes.index >= pd.Timestamp(d0 + datetime.timedelta(days=_DIARIO_SELLS[sk]))]
-            if s.empty:
-                continue
-            res[sk] = round((float(s.iloc[0]) / float(r["prezzo"]) - 1) * 100, 2)
-            fatte += 1
 
-        # --- LA VENDITA «ALLA SOGLIA», una per ogni formula candidata -----------------------------
-        # Si vende al bersaglio se una CHIUSURA lo tocca entro la finestra, altrimenti alla chiusura
-        # di fine finestra. Tre cose che il vecchio impianto sbagliava e qui sono giuste:
-        #  1) la finestra parte dalla data di QUESTO acquisto, non dalla promozione: chi compra prima
-        #     ha davvero piu tempo, e prima si misurava un periodo che non aveva vissuto;
-        #  2) un bersaglio <= al prezzo non produce nessuna cella, invece di registrare una perdita
-        #     etichettata come «obiettivo raggiunto»;
-        #  3) si calcolano TUTTE le formule sulle stesse righe e nella stessa finestra, cosi il
-        #     confronto e appaiato e serviranno molti meno casi per capire quale funziona.
-        gg_soglia = _DIARIO_SOGLIA_GG.get(r.get("kind"), 30)
-        soglie = r.get("soglie") or {}
-        if eta >= gg_soglia and soglie:
-            res_s = r.setdefault("res_soglia", {})
-            fine = closes[closes.index >= pd.Timestamp(d0 + datetime.timedelta(days=gg_soglia))]
-            if not fine.empty:
-                finestra = dopo[dopo.index <= pd.Timestamp(d0 + datetime.timedelta(days=gg_soglia))]
-                for nome, liv in soglie.items():
-                    if nome in res_s or liv is None:
-                        continue
-                    try:
-                        liv = float(liv)
-                    except (TypeError, ValueError):
-                        continue
-                    if liv <= float(r["prezzo"]):
-                        continue          # non e un bersaglio: nessuna cella, e detto nella scheda
-                    tocchi = finestra[finestra >= liv]
-                    prezzo_vendita = liv if not tocchi.empty else float(fine.iloc[0])
-                    res_s[nome] = {"ret": round((prezzo_vendita / float(r["prezzo"]) - 1) * 100, 2),
-                                   "toccato": bool(not tocchi.empty),
-                                   "giorni": (int((tocchi.index[0].date() - d0).days)
-                                              if not tocchi.empty else None)}
-                    fatte += 1
-                # la colonna «alla soglia» degli scenari usa la formula consigliata
-                if SOGLIA_USATA in res_s and "soglia" not in res:
-                    res["soglia"] = res_s[SOGLIA_USATA]["ret"]
-    if fatte:
-        salva_registro(DIARIO_NAME, righe, _DIARIO_MAX, giorni_protetti=400)
-    return fatte
+    def _risolvi(righe):
+      fatte = 0
+      for r in righe:
+          if r.get("evento") not in acquisti or not r.get("prezzo") or r.get("bad_data"):
+              continue
+          try:
+              d0 = datetime.date.fromisoformat(str(r.get("data"))[:10])
+          except Exception:
+              continue
+          eta = (oggi - d0).days
+          res = r.setdefault("res", {})
+          attese = [sk for sk, gg in _DIARIO_SELLS.items() if eta >= gg and sk not in res]
+          # la soglia ha una finestra sua e piu formule: si valuta anche quando le colonne a giorni
+          # fissi sono gia tutte calcolate
+          gg_s = _DIARIO_SOGLIA_GG.get(r.get("kind"), 30)
+          manca_soglia = (eta >= gg_s and (r.get("soglie") or {})
+                          and len(r.get("res_soglia") or {}) < len([1 for v in (r.get("soglie") or {}).values() if v]))
+          if not attese and not manca_soglia:
+              continue
+          if eta > 400:
+              r["bad_data"] = "troppo vecchia e ancora senza prezzi"
+              fatte += 1
+              continue
+          try:
+              closes = get_history(r.get("ticker"), period=("6mo" if eta < 150 else "2y"))["Close"].dropna()
+              try:
+                  closes.index = closes.index.tz_localize(None)
+              except (TypeError, AttributeError):
+                  pass
+          except Exception:
+              continue
+          dopo = closes[closes.index > pd.Timestamp(d0)]
+          if dopo.empty:
+              continue
+          if abs(float(dopo.iloc[0]) / float(r["prezzo"]) - 1) > 0.25:
+              r["bad_data"] = "salto di prezzo oltre il 25%: probabile raggruppamento di azioni"
+              fatte += 1
+              continue
+          for sk in attese:
+              s = closes[closes.index >= pd.Timestamp(d0 + datetime.timedelta(days=_DIARIO_SELLS[sk]))]
+              if s.empty:
+                  continue
+              res[sk] = round((float(s.iloc[0]) / float(r["prezzo"]) - 1) * 100, 2)
+              fatte += 1
+
+          # --- LA VENDITA «ALLA SOGLIA», una per ogni formula candidata -----------------------------
+          # Si vende al bersaglio se una CHIUSURA lo tocca entro la finestra, altrimenti alla chiusura
+          # di fine finestra. Tre cose che il vecchio impianto sbagliava e qui sono giuste:
+          #  1) la finestra parte dalla data di QUESTO acquisto, non dalla promozione: chi compra prima
+          #     ha davvero piu tempo, e prima si misurava un periodo che non aveva vissuto;
+          #  2) un bersaglio <= al prezzo non produce nessuna cella, invece di registrare una perdita
+          #     etichettata come «obiettivo raggiunto»;
+          #  3) si calcolano TUTTE le formule sulle stesse righe e nella stessa finestra, cosi il
+          #     confronto e appaiato e serviranno molti meno casi per capire quale funziona.
+          gg_soglia = _DIARIO_SOGLIA_GG.get(r.get("kind"), 30)
+          soglie = r.get("soglie") or {}
+          if eta >= gg_soglia and soglie:
+              res_s = r.setdefault("res_soglia", {})
+              fine = closes[closes.index >= pd.Timestamp(d0 + datetime.timedelta(days=gg_soglia))]
+              if not fine.empty:
+                  finestra = dopo[dopo.index <= pd.Timestamp(d0 + datetime.timedelta(days=gg_soglia))]
+                  for nome, liv in soglie.items():
+                      if nome in res_s or liv is None:
+                          continue
+                      try:
+                          liv = float(liv)
+                      except (TypeError, ValueError):
+                          continue
+                      if liv <= float(r["prezzo"]):
+                          continue          # non e un bersaglio: nessuna cella, e detto nella scheda
+                      tocchi = finestra[finestra >= liv]
+                      prezzo_vendita = liv if not tocchi.empty else float(fine.iloc[0])
+                      res_s[nome] = {"ret": round((prezzo_vendita / float(r["prezzo"]) - 1) * 100, 2),
+                                     "toccato": bool(not tocchi.empty),
+                                     "giorni": (int((tocchi.index[0].date() - d0).days)
+                                                if not tocchi.empty else None)}
+                      fatte += 1
+                  # la colonna «alla soglia» degli scenari usa la formula consigliata
+                  if SOGLIA_USATA in res_s and "soglia" not in res:
+                      res["soglia"] = res_s[SOGLIA_USATA]["ret"]
+      return fatte
+
+    # La potatura non serve qui: registra_evento chiama gia salva_registro a ogni evento nuovo.
+    return aggiorna_registro_completo(DIARIO_NAME, _risolvi)
 
 
 def _passa_migliori(r, min_pg=0, max_pl=100, min_conv=0):
@@ -8768,6 +8780,60 @@ _SETTORI_ETF = {
     "Basic Materials": "XLB", "Communication Services": "XLC",
 }
 
+# NOMI ALTERNATIVI DEI SETTORI. Il sistema prende il settore da DUE fonti diverse che usano nomi
+# diversi per le stesse cose: una dice «Financial Services» e «Healthcare», l'altra «Banking» e
+# «Biotechnology». Senza questa tabella il collegamento all'ETF settoriale falliva in silenzio, e il
+# contesto del settore restava vuoto — misurato sui dati veri del 21/08/2026: 10 nomi su 19 non
+# venivano riconosciuti, e solo 8 occasioni su 22 avevano il settore a verbale. Cioè «com'era il
+# settore» — una delle cose che l'archivio deve registrare — mancava su due terzi delle righe.
+_SETTORI_ALIAS = {
+    "banking": "Financial Services", "banks": "Financial Services",
+    "insurance": "Financial Services", "financial": "Financial Services",
+    "financials": "Financial Services", "capital markets": "Financial Services",
+    "biotechnology": "Healthcare", "pharmaceuticals": "Healthcare",
+    "health care": "Healthcare", "healthcare": "Healthcare",
+    "medical devices": "Healthcare", "life sciences": "Healthcare",
+    "metals & mining": "Basic Materials", "chemicals": "Basic Materials",
+    "steel": "Basic Materials", "paper & forest": "Basic Materials",
+    "logistics & transportation": "Industrials", "transportation": "Industrials",
+    "aerospace & defense": "Industrials", "construction": "Industrials",
+    "machinery": "Industrials", "airlines": "Industrials",
+    "industrial conglomerates": "Industrials", "business services": "Industrials",
+    "media": "Communication Services", "telecommunication": "Communication Services",
+    "telecommunications": "Communication Services", "entertainment": "Communication Services",
+    "retail": "Consumer Cyclical", "retailing": "Consumer Cyclical",
+    "automobiles": "Consumer Cyclical", "hotels, restaurants & leisure": "Consumer Cyclical",
+    "textiles apparel & luxury goods": "Consumer Cyclical", "apparel": "Consumer Cyclical",
+    "food, beverage & tobacco": "Consumer Defensive", "beverages": "Consumer Defensive",
+    "food products": "Consumer Defensive", "household products": "Consumer Defensive",
+    "tobacco": "Consumer Defensive", "consumer staples": "Consumer Defensive",
+    "semiconductors": "Technology", "software": "Technology", "hardware": "Technology",
+    "information technology": "Technology", "technology services": "Technology",
+    "energy": "Energy", "oil & gas": "Energy", "utilities": "Utilities",
+    "real estate": "Real Estate", "reits": "Real Estate",
+}
+# Nomi che significano «non lo sappiamo»: non sono settori sconosciuti, sono assenze dichiarate.
+_SETTORI_VUOTI = {"", "n/a", "na", "none", "unknown", "-", "—", "other", "altro"}
+
+
+def settore_canonico(nome) -> str:
+    """Il nome standard del settore, quello che ha un ETF di riferimento. Ritorna "" se non si sa.
+    Serve a non perdere il contesto settoriale solo perché la fonte usa un sinonimo."""
+    s = str(nome or "").strip()
+    if not s or s.lower() in _SETTORI_VUOTI:
+        return ""
+    if s in _SETTORI_ETF:
+        return s
+    diretto = _SETTORI_ALIAS.get(s.lower())
+    if diretto:
+        return diretto
+    # ultimo tentativo: una parola chiave contenuta nel nome (es. «Regional Banks» → banche)
+    b = s.lower()
+    for chiave, canonico in _SETTORI_ALIAS.items():
+        if chiave in b or b in chiave:
+            return canonico
+    return ""
+
 # Le caratteristiche del titolo che finiscono nel profilo. NON ci sono spark/spark_dates (60 prezzi
 # più 60 date): triplicherebbero il peso della riga e il grafico si ricostruisce dallo storico
 # quando serve. Tutto il resto di opportunity_row c'è, perché è esattamente ciò che oggi viene
@@ -8803,9 +8869,13 @@ MOTIVI_SCARTO = {
                              "caratteristiche non si possono nemmeno calcolare",
     "mai_guardata": "oltre il tetto dell'universo: il sistema non l'ha nemmeno aperta, quindi di "
                     "lei non esiste alcun dato",
+    "profilo_non_ricostruibile": "il momento d'acquisto e a verbale nel diario ma le sue "
+                                 "caratteristiche non sono state registrate e non si riesce piu a "
+                                 "ricostruirle: un giro interrotto, e il dato non torna",
 }
 # I motivi per cui non esiste un profilo: la riga porta solo il nome e il perché.
-MOTIVI_SENZA_PROFILO = ("storico_insufficiente", "mai_guardata")
+MOTIVI_SENZA_PROFILO = ("storico_insufficiente", "mai_guardata",
+                        "profilo_non_ricostruibile")
 
 _BUFFER_PROFILI = []      # righe in attesa: si scrive UNA volta per giro, non una per titolo
 _BUFFER_NOTIZIE = []      # idem per le notizie
@@ -8856,10 +8926,16 @@ def _indice_o_niente():
     d = read_data_json(INDICE_NAME, None)
     if isinstance(d, dict) and d:
         return d
-    if not write_data_json(INDICE_NAME, {"_creato": _arc_ora()}):
-        return None     # la guardia ha rifiutato: l'indice esiste e la lettura era fallita
+    # NON BASTA che write_data_json dica "riuscito": dice riuscito anche col solo successo LOCALE,
+    # e nel lavoro automatico il file locale muore col giro. Se la guardia remota ha rifiutato ma il
+    # locale e passato, la rilettura (che a quel punto legge il locale) trova l'indice appena
+    # scritto con una chiave sola: un indice "vuoto ma valido" che spegnerebbe tutte e tre le
+    # regole di _arc_aggiungi proprio nel momento in cui servono.
+    if (not write_data_json(INDICE_NAME, {"_creato": _arc_ora()})
+            or INDICE_NAME in _SALVATAGGI_FALLITI):
+        return None     # rifiutata, o arrivata solo in locale: non so cosa contiene l'archivio
     d = read_data_json(INDICE_NAME, None)
-    return d if isinstance(d, dict) else None
+    return d if isinstance(d, dict) and d else None
 
 
 def _arc_aggiungi(prefisso: str, righe_nuove: list, chiave=None, giorno: str = None) -> dict:
@@ -8899,22 +8975,38 @@ def _arc_aggiungi(prefisso: str, righe_nuove: list, chiave=None, giorno: str = N
                                 "lettura incompleta, non scrivo")
         return nome, letto, None
 
-    # 1. si trova il primo pezzo del giorno che ha ancora posto, e si raccolgono le chiavi già viste
-    # in TUTTI i pezzi (altrimenti un doppione entrerebbe in un pezzo diverso dallo stesso giorno)
-    pezzo, viste = 0, set()
-    nome, esistenti, err = apri(0)
-    if err:
-        return {"scritte": 0, "salvate": False, "motivo": err}
-    while True:
-        if chiave:
-            viste |= {chiave(r) for r in esistenti}
-        if len(esistenti) < _ARC_TETTO_RIGHE or pezzo >= 24:
-            break
-        pezzo += 1
-        nome, prossimo, err = apri(pezzo)
+    # 1. SI LEGGONO TUTTI I PEZZI DEL GIORNO, non solo fino al primo con posto.
+    #
+    # Qui c'era un difetto grave. «Dove scrivo» e «fin dove leggo» erano la stessa cosa: il ciclo si
+    # fermava al primo pezzo con posto, quindi le chiavi dei pezzi successivi non venivano mai
+    # lette. Un pezzo si chiude ANCHE per il tetto dei byte, e in quel caso resta sotto il tetto
+    # delle righe: da quel momento il controllo anti-doppione non vedeva più il pezzo _b, e a ogni
+    # giro (uno ogni mezz'ora) le stesse righe venivano riscritte come se fossero nuove. Le
+    # statistiche avrebbero contato la stessa occasione molte volte.
+    # E per i PROFILI il caso non è raro, è la regola: una riga pesa ~1.400 byte, quindi il tetto
+    # dei byte (600 KB) scatta intorno alle 429 righe, sempre PRIMA di quello delle righe (450).
+    # Quindi: prima si raccolgono le chiavi di ogni pezzo esistente, poi si cerca dove scrivere.
+    pezzi_noti = sorted({p for p in range(25)
+                         if _arc_nome(prefisso, giorno, p) in indice} | {0})
+    viste, primo_con_posto, nome, esistenti = set(), None, None, []
+    for p in pezzi_noti:
+        n_p, righe_p, err = apri(p)
         if err:
             return {"scritte": 0, "salvate": False, "motivo": err}
-        esistenti = prossimo
+        if chiave:
+            viste |= {chiave(r) for r in righe_p}
+        if primo_con_posto is None and len(righe_p) < _ARC_TETTO_RIGHE:
+            primo_con_posto, nome, esistenti = p, n_p, righe_p
+    if primo_con_posto is None:
+        # tutti i pezzi noti sono pieni: si apre il primo successivo
+        pezzo = min(pezzi_noti[-1] + 1, 24)
+        nome, esistenti, err = apri(pezzo)
+        if err:
+            return {"scritte": 0, "salvate": False, "motivo": err}
+        if chiave:
+            viste |= {chiave(r) for r in esistenti}
+    else:
+        pezzo = primo_con_posto
 
     da_aggiungere = []
     for r in righe_nuove:
@@ -8957,7 +9049,14 @@ def _arc_aggiungi(prefisso: str, righe_nuove: list, chiave=None, giorno: str = N
             return {"scritte": scritte, "salvate": False,
                     "motivo": f"{nome} salvato solo in locale: il commit remoto non è passato"}
         indice[nome] = {"righe": len(tutte), "aggiornato": _arc_ora()}
-        _indice_scrivi(indice)
+        # L'esito dell'indice va guardato come quello del file: se le righe arrivano al deposito ma
+        # l'indice no, quel file diventa INVISIBILE a chi legge (tutti i lettori enumerano
+        # dall'indice) e resta senza la guardia che lo protegge dalla riscrittura. Meglio fermarsi e
+        # riprovare al giro dopo, con le righe che restano in coda.
+        if not _indice_scrivi(indice) or INDICE_NAME in _SALVATAGGI_FALLITI:
+            return {"scritte": scritte, "salvate": False,
+                    "motivo": f"{nome} e stato salvato ma l'elenco dell'archivio non e arrivato al "
+                              "deposito: mi fermo, altrimenti quel file resterebbe invisibile"}
         scritte += len(lotto)
         rimaste = rimaste[len(lotto):]
         if rimaste:
@@ -9171,7 +9270,11 @@ def profilo_da_riga(r: dict, kind: str, momento: str = None, episodio: str = Non
                     for k, v in (fattori or {}).items() if v is not None},
         "trappola": {"etichetta": trappola.get("label"), "conclamata": trappola.get("strong"),
                      "segnali": trappola.get("signals")} if trappola else None,
+        # DUE campi, non uno: «settore» e il nome esatto che la fonte ha dato (non si falsa un dato
+        # alla fonte), «settore_gruppo» e il nome standard con cui si ritrova l'ETF di riferimento
+        # negli archivi. Tenere solo il primo faceva fallire il collegamento in silenzio.
         "settore": r.get("sector"),
+        "settore_gruppo": settore_canonico(r.get("sector")) or None,
         "mondo": mondo or {},
     }
     return prof
@@ -9555,7 +9658,10 @@ def _prepara_contesto_scansione(kind: str, righe: list) -> dict:
 
 def _mondo_per_riga(r: dict, ctx: dict) -> dict:
     ctx = ctx or {}
-    sett = (ctx.get("settori") or {}).get(r.get("sector")) if r.get("sector") else None
+    # il nome del settore passa dalla tabella dei sinonimi, altrimenti il collegamento all'ETF
+    # settoriale fallisce in silenzio ogni volta che la fonte usa un nome diverso dal solito
+    gruppo = settore_canonico(r.get("sector"))
+    sett = (ctx.get("settori") or {}).get(gruppo) if gruppo else None
     return mondo_minimo(ctx.get("mondo"), ctx.get("ampiezza"), sett)
 
 
@@ -9608,7 +9714,7 @@ def accoda_senza_profilo(kind: str, tickers, motivo: str, giorno: str = None) ->
 
 
 def registra_profilo_occasione(kind: str, ticker: str, momento: str, episodio: str = None,
-                               giorno: str = None) -> bool:
+                               giorno: str = None, ritardo_ore: float = 0) -> bool:
     """Registra il profilo COMPLETO di un'occasione in un momento d'acquisto. Chiamata dal diario,
     così ogni momento passa da qui e nessuno può sfuggire per dimenticanza in un chiamante.
 
@@ -9656,6 +9762,11 @@ def registra_profilo_occasione(kind: str, ticker: str, momento: str, episodio: s
         # a quale dei cinque scenari corrisponde questo momento: ricavato da SCENARI_ACQUISTO, mai
         # scritto a mano, così se gli scenari cambiano l'archivio resta coerente da solo
         prof["scenario"] = next((c for c, ev, _n, _a in SCENARI_ACQUISTO if ev == momento), None)
+        # QUANTO TARDI e' stato preso questo profilo. Un profilo recuperato mezz'ora dopo l'evento
+        # non e' la stessa cosa di uno preso nell'istante: i numeri sono di un altro momento. Va
+        # scritto, non nascosto, cosi chi legge puo scartarlo se il ritardo e troppo grande.
+        if ritardo_ore:
+            prof["profilo_in_ritardo_ore"] = round(float(ritardo_ore), 1)
         accoda_profilo(prof)
         registra_notizie(TK, giorno, forza=True)   # un momento d'acquisto ha sempre diritto alle notizie
         return True
@@ -9714,7 +9825,9 @@ def apri_occasione(profilo_id: str) -> dict:
         "profilo": prof,
         "notizie": next((n for n in g["notizie"] if n.get("ticker") == tk), {}),
         "mondo": g["mondo"],
-        "settore": next((s for s in g["settori"] if s.get("settore") == prof.get("settore")), {}),
+        "settore": next((s for s in g["settori"]
+                         if s.get("settore") == (prof.get("settore_gruppo")
+                                                 or settore_canonico(prof.get("settore")))), {}),
         "esiti": [e for e in _arc_leggi_giorni(ARC_ESITI) if e.get("profilo") == profilo_id],
     }
 
@@ -9780,6 +9893,14 @@ def copertura_archivio(kind: str = None, giorni: int = 60) -> dict:
         "giorni_coperti": len(giorni_archivio()),
         "senza_profilo": sum(1 for p in profili
                              if p.get("motivo") in MOTIVI_SENZA_PROFILO),
+        "con_contesto_settore": sum(1 for p in profili
+                                    if (p.get("mondo") or {}).get("settore_1m") is not None),
+        "settore_non_riconosciuto": sorted({
+            str(p.get("settore")) for p in profili
+            if p.get("settore") and not (p.get("settore_gruppo")
+                                         or settore_canonico(p.get("settore")))}),
+        "senza_settore": sum(1 for p in profili
+                             if not p.get("scartata") and not p.get("settore")),
         "non_registrate": [
             "I nomi oltre il tetto dell'universo (40 per il breve, 20 per il lungo) non vengono "
             "mai aperti, quindi di loro non esistono caratteristiche. Il loro NOME però è a "
@@ -10028,3 +10149,107 @@ def scenari_calendario_diario(kind: str = "short", granularita: str = "settimana
             "n_senza_dato": sum(sc.get("n_senza_dato") or 0 for sc in sd["scenari"]),
             "nomi_scenari": nomi, "vendite": sd.get("vendite") or (),
             "periodi": periodi, "n_periodi": len(periodi)}
+
+
+def ripara_settori(giorni: int = 3) -> dict:
+    """Riattacca il contesto del settore alle righe di profilo che ne sono rimaste prive.
+
+    Serve perché il collegamento fra il nome del settore e il suo ETF di riferimento si è allargato
+    dopo che le righe erano già scritte: il 21/08/2026 il sistema riconosceva 22 nomi su 40, ora 38,
+    e senza questa passata quelle righe resterebbero senza il confronto col settore per sempre.
+    Vale anche per il futuro: ogni volta che si aggiunge un sinonimo, le righe recenti si riparano.
+
+    NON inventa niente: il nome del settore era già a verbale nella riga, e i numeri del settore
+    erano già a verbale nell'archivio dei settori DI QUEL GIORNO. Qui si ricollegano due dati veri.
+    Gira dentro il lavoro automatico, che è l'unico che scrive: nessuna corsa fra due processi.
+    Non tocca i giorni più vecchi di `giorni`, dove i settori potrebbero non essere stati fotografati."""
+    oggi = datetime.date.today()
+    dal = (oggi - datetime.timedelta(days=max(0, giorni))).isoformat()
+    riparate, toccati = 0, []
+    for nome in sorted(indice_archivio()):
+        if not nome.startswith(ARC_PROFILI + "/"):
+            continue
+        g = os.path.basename(nome)[:10]
+        if len(g) != 10 or g < dal:
+            continue
+        righe = read_data_json(nome, None)
+        if not isinstance(righe, list) or not righe:
+            continue        # non si legge o è vuoto: non si tocca, mai
+        # i numeri dei settori di QUEL giorno, non di oggi
+        sett = {s.get("settore"): s for s in _arc_leggi_giorni(ARC_SETTORI, dal=g, al=g)
+                if isinstance(s, dict)}
+        if not sett:
+            continue
+        cambi = 0
+        for r in righe:
+            if not isinstance(r, dict) or not r.get("settore"):
+                continue
+            gruppo = r.get("settore_gruppo") or settore_canonico(r.get("settore"))
+            if not gruppo:
+                continue
+            if not r.get("settore_gruppo"):
+                r["settore_gruppo"] = gruppo
+                cambi += 1
+            m = r.get("mondo")
+            if isinstance(m, dict) and m.get("settore_1m") is None and sett.get(gruppo):
+                s = sett[gruppo]
+                m["settore_1m"] = s.get("var_1m")
+                m["settore_forza_1m"] = s.get("forza_var_1m")
+                cambi += 1
+        if not cambi:
+            continue
+        # stesso numero di righe e solo campi AGGIUNTI: le due guardie lo accettano senza force
+        if write_data_json(nome, righe) and nome not in _SALVATAGGI_FALLITI:
+            riparate += cambi
+            toccati.append(nome)
+    return {"riparate": riparate, "file": toccati}
+
+
+def riconcilia_profili(giorni: int = 2) -> dict:
+    """Recupera i momenti d'acquisto che sono nel diario ma non hanno un profilo in archivio.
+
+    PERCHE SERVE. registra_evento scrive subito l'evento nel diario, poi mette il profilo in coda;
+    la coda si scrive alla fine del giro. Se il giro muore in mezzo — il servizio che lo esegue puo
+    ucciderlo — l'evento resta a verbale e il profilo no. E al giro dopo registra_evento vede che
+    l'evento c'e gia e non riprova: quel momento d'acquisto resterebbe senza caratteristiche PER
+    SEMPRE, cioe inutile all'apprendimento, senza che nessuno lo sappia.
+
+    Questa passata confronta i due elenchi e ricrea quello che manca. E ripetibile senza danno:
+    l'archivio scarta i doppioni per identificativo, quindi puo girare a ogni giro.
+    Sul profilo recuperato scrive di quante ore e in ritardo: un dato preso dopo non va confuso con
+    uno preso nell'istante giusto."""
+    oggi = datetime.date.today()
+    dal = (oggi - datetime.timedelta(days=max(0, giorni))).isoformat()
+    acquisti = eventi_acquisto()
+    # gli identificativi dei profili gia in archivio nella finestra, piu quelli ancora in coda
+    presenti = {p.get("id") for p in _arc_leggi_giorni(ARC_PROFILI, dal=dal) if isinstance(p, dict)}
+    presenti |= {p.get("id") for p in _BUFFER_PROFILI if isinstance(p, dict)}
+    recuperati, non_riusciti = [], []
+    for r in load_registro_completo(DIARIO_NAME, load_diario()):
+        if r.get("evento") not in acquisti:
+            continue
+        g = str(r.get("data") or r.get("scritto_il") or "")[:10]
+        if len(g) != 10 or g < dal:
+            continue
+        tk, kind = str(r.get("ticker") or "").upper(), r.get("kind")
+        if not tk or not kind:
+            continue
+        if _profilo_id(g, kind, tk, r.get("evento")) in presenti:
+            continue
+        # quante ore sono passate fra il momento dell'evento e adesso
+        ore = 0.0
+        try:
+            q = str(r.get("data") or "")[:16].replace("T", " ")
+            ore = max(0.0, (datetime.datetime.now()
+                            - datetime.datetime.strptime(q, "%Y-%m-%d %H:%M")).total_seconds() / 3600)
+        except Exception:
+            ore = 0.0
+        if registra_profilo_occasione(kind, tk, r.get("evento"), episodio=r.get("episodio"),
+                                      giorno=g, ritardo_ore=ore):
+            recuperati.append(f"{tk}:{r.get('evento')}")
+        else:
+            # non si e riusciti nemmeno adesso: si mette a verbale il BUCO, invece di tacerlo
+            accoda_senza_profilo(kind, [tk], "profilo_non_ricostruibile", g)
+            non_riusciti.append(f"{tk}:{r.get('evento')}")
+    return {"recuperati": len(recuperati), "quali": recuperati[:20],
+            "non_riusciti": len(non_riusciti)}
