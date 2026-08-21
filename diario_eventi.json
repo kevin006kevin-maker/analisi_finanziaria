@@ -2188,5 +2188,32 @@
 },
 "stop": 177.0293,
 "atr": 9.2529
+},
+{
+"episodio": "short:ENVX:2026-08-19",
+"ticker": "ENVX",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-08-21 15:43",
+"data": "2026-08-21 15:42",
+"prezzo": 3.375,
+"conv": 70,
+"prob_gain": 51,
+"prob_loss": 23,
+"reliab": "🔴 Bassa",
+"mkt": 3.4728,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 5.0118,
+"media20": 4.0907,
+"quattro_atr": 4.9056,
+"meta_caduta": 5.9975,
+"bollinger": 5.1215,
+"consigliata": 4.9056
+},
+"stop": 2.6097,
+"atr": 0.3827
 }
 ]
