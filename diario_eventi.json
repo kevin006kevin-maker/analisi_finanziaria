@@ -3114,5 +3114,32 @@
 },
 "stop": 16.1478,
 "atr": 1.0961
+},
+{
+"episodio": "long:IAG:2026-08-20",
+"ticker": "IAG",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-08-22 14:30",
+"data": "2026-08-22 14:30",
+"prezzo": 21.14,
+"conv": 65,
+"prob_gain": 56,
+"prob_loss": 34,
+"reliab": "🔴 Bassa",
+"mkt": 3.5401,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": null,
+"media20": null,
+"quattro_atr": 24.8591,
+"meta_caduta": null,
+"bollinger": 21.6031,
+"consigliata": 24.8591
+},
+"stop": 19.2804,
+"atr": 0.9298
 }
 ]
