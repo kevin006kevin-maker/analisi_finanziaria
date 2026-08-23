@@ -3141,5 +3141,32 @@
 },
 "stop": 19.2804,
 "atr": 0.9298
+},
+{
+"episodio": "short:RXT:2026-08-21",
+"ticker": "RXT",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-08-24 00:18",
+"data": "2026-08-24 00:17",
+"prezzo": 3.32,
+"conv": 73,
+"prob_gain": 45,
+"prob_loss": 42,
+"reliab": "🔴 Bassa",
+"mkt": 3.5401,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 5.0522,
+"media20": 4.1935,
+"quattro_atr": 5.2648,
+"meta_caduta": 5.425,
+"bollinger": 5.3332,
+"consigliata": 5.0522
+},
+"stop": 2.3476,
+"atr": 0.4862
 }
 ]
