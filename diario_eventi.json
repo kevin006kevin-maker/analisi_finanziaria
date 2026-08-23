@@ -3282,5 +3282,32 @@
 },
 "stop": 2.6068,
 "atr": 0.3866
+},
+{
+"episodio": "short:SEDG:2026-08-19",
+"ticker": "SEDG",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-08-24 00:19",
+"data": "2026-08-24 00:17",
+"prezzo": 30.83,
+"conv": 70,
+"prob_gain": 49,
+"prob_loss": 26,
+"reliab": "🔴 Bassa",
+"mkt": 3.5401,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-08-24",
+"soglie": {
+"media50": 46.4792,
+"media20": 35.7225,
+"quattro_atr": 43.9992,
+"meta_caduta": 54.67,
+"bollinger": 47.0428,
+"consigliata": 43.9992
+},
+"stop": 24.2454,
+"atr": 3.2923
 }
 ]
