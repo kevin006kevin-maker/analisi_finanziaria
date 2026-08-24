@@ -470,5 +470,62 @@
 "mkt": null
 }
 }
+},
+{
+"ticker": "DUOL",
+"kind": "long",
+"date": "2026-08-25",
+"promo_price": 146.84,
+"obs_price": 132.83,
+"obs_date": "2026-08-16",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": null,
+"stop": 130.4432,
+"reliab": "🔴 Bassa",
+"prob_gain": 63,
+"prob_loss": 27,
+"conv": 67,
+"passaggi": {
+"osservazione": {
+"data": "2026-08-16 22:17",
+"prezzo": 132.83,
+"conv": 60,
+"prob_gain": 60,
+"prob_loss": 31,
+"reliab": "🔴 Bassa",
+"mkt": 3.2103
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-08-25 00:24",
+"prezzo": 146.84,
+"conv": 67,
+"prob_gain": 63,
+"prob_loss": 27,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
