@@ -2052,7 +2052,9 @@
 "entry_date": "2026-07-20",
 "entry_src": "storico",
 "max_price": 28.12,
-"max_date": "2026-08-18 06:09"
+"max_date": "2026-08-18 06:09",
+"warn_since": "2026-08-24",
+"warn": "in perdita da 25 giorni di Borsa: valuta l'uscita"
 },
 "SNPS": {
 "kind": "short",
@@ -7506,9 +7508,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-08-24",
 "max_price": 217.03,
-"max_date": "2026-08-17 22:55",
-"warn_since": "2026-08-24",
-"warn": "in perdita da 15 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-08-17 22:55"
 },
 "PSN": {
 "kind": "short",
