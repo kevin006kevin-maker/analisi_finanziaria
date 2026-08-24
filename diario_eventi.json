@@ -3630,5 +3630,32 @@
 },
 "stop": 10.2565,
 "atr": 0.4667
+},
+{
+"episodio": "long:XPEV:2026-08-24",
+"ticker": "XPEV",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-24 20:43",
+"data": "2026-08-24 20:43",
+"prezzo": 11.155,
+"conv": 60,
+"prob_gain": 72,
+"prob_loss": 16,
+"reliab": "🟡 Media",
+"mkt": 3.3381,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 12.7617,
+"media20": 12.1057,
+"quattro_atr": 13.0391,
+"meta_caduta": 14.5225,
+"bollinger": 13.1067,
+"consigliata": 12.7617
+},
+"stop": 10.213,
+"atr": 0.471
 }
 ]
