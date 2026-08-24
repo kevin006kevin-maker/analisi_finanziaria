@@ -4222,5 +4222,32 @@
 },
 "stop": 21.3456,
 "atr": 1.5822
+},
+{
+"episodio": "short:WMT:2026-08-20",
+"ticker": "WMT",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-08-25 00:26",
+"data": "2026-08-24 22:59",
+"prezzo": 106.49,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-08-25",
+"soglie": {
+"media50": 113.3168,
+"media20": 111.946,
+"quattro_atr": 118.4669,
+"meta_caduta": 113.765,
+"bollinger": 119.0389,
+"consigliata": 113.3168
+},
+"stop": 100.5015,
+"atr": 2.9942
 }
 ]
