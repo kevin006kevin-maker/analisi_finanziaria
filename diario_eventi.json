@@ -3771,5 +3771,32 @@
 },
 "stop": 3.1194,
 "atr": 0.4653
+},
+{
+"episodio": "short:FRVO:2026-08-24",
+"ticker": "FRVO",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-08-25 00:23",
+"data": "2026-08-25 00:21",
+"prezzo": 15.47,
+"conv": 71,
+"prob_gain": 53,
+"prob_loss": 15,
+"reliab": "🔴 Bassa",
+"mkt": 3.2332,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 25.562,
+"media20": 20.525,
+"quattro_atr": 24.4524,
+"meta_caduta": 27.72,
+"bollinger": 26.3321,
+"consigliata": 24.4524
+},
+"stop": 10.9788,
+"atr": 2.2456
 }
 ]
