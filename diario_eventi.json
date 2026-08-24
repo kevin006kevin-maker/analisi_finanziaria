@@ -3979,5 +3979,32 @@
 },
 "stop": 2.9586,
 "atr": 0.0957
+},
+{
+"episodio": "long:CCL:2026-08-16",
+"ticker": "CCL",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-08-25 00:26",
+"data": "2026-08-24 23:00",
+"prezzo": 25.71,
+"conv": 67,
+"prob_gain": 72,
+"prob_loss": 18,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-08-25",
+"soglie": {
+"media50": 27.7896,
+"media20": 27.7795,
+"quattro_atr": 29.4291,
+"meta_caduta": 28.305,
+"bollinger": 30.1524,
+"consigliata": 27.7896
+},
+"stop": 23.8504,
+"atr": 0.9298
 }
 ]
