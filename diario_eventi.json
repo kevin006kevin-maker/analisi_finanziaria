@@ -3455,5 +3455,32 @@
 },
 "stop": 2.2127,
 "atr": 0.4087
+},
+{
+"episodio": "long:SNDK:2026-08-24",
+"ticker": "SNDK",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-24 16:01",
+"data": "2026-08-24 16:01",
+"prezzo": 1431.595,
+"conv": 65,
+"prob_gain": 60,
+"prob_loss": 34,
+"reliab": "🔴 Bassa",
+"mkt": 3.2175,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 1645.1765,
+"media20": null,
+"quattro_atr": 2056.6531,
+"meta_caduta": 1883.2975,
+"bollinger": 1795.7105,
+"consigliata": 1645.1765
+},
+"stop": 1119.066,
+"atr": 156.2645
 }
 ]
