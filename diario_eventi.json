@@ -4195,5 +4195,32 @@
 },
 "stop": 164.3869,
 "atr": 7.4715
+},
+{
+"episodio": "short:TNGX:2026-08-20",
+"ticker": "TNGX",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-08-25 00:26",
+"data": "2026-08-24 22:59",
+"prezzo": 24.51,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-08-25",
+"soglie": {
+"media50": 28.3088,
+"media20": 26.3675,
+"quattro_atr": 30.8389,
+"meta_caduta": 28.705,
+"bollinger": 29.6126,
+"consigliata": 28.3088
+},
+"stop": 21.3456,
+"atr": 1.5822
 }
 ]
