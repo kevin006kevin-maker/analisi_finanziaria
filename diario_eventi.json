@@ -3952,5 +3952,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "long:BBD:2026-08-16",
+"ticker": "BBD",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-08-25 00:26",
+"data": "2026-08-25 00:23",
+"prezzo": 3.15,
+"conv": 74,
+"prob_gain": 67,
+"prob_loss": 17,
+"reliab": "🟢 Alta",
+"mkt": 3.2332,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-08-25",
+"soglie": {
+"media50": 3.4336,
+"media20": 3.3225,
+"quattro_atr": 3.5328,
+"meta_caduta": 3.44,
+"bollinger": 3.7884,
+"consigliata": 3.4336
+},
+"stop": 2.9586,
+"atr": 0.0957
 }
 ]
