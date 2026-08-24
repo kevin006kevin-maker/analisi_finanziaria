@@ -4005,7 +4005,17 @@
 "consigliata": 27.7896
 },
 "stop": 23.8504,
-"atr": 0.9298
+"atr": 0.9298,
+"soglie_contaminate": {
+"media50": 27.7896,
+"media20": 27.7795,
+"quattro_atr": 29.4291,
+"meta_caduta": 28.305,
+"bollinger": 30.1524,
+"consigliata": 27.7896
+},
+"soglie_ricalcolate_il": "2026-08-25 00:26",
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "long:DDS:2026-08-16",
@@ -4032,7 +4042,17 @@
 "consigliata": 753.2135
 },
 "stop": 587.3383,
-"atr": 27.6459
+"atr": 27.6459,
+"soglie_contaminate": {
+"media50": null,
+"media20": null,
+"quattro_atr": 753.2135,
+"meta_caduta": 644.335,
+"bollinger": 653.5983,
+"consigliata": 753.2135
+},
+"soglie_ricalcolate_il": "2026-08-25 00:26",
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "long:DUOL:2026-08-16",
@@ -4086,7 +4106,17 @@
 "consigliata": 6.6392
 },
 "stop": 5.0204,
-"atr": 0.2698
+"atr": 0.2698,
+"soglie_contaminate": {
+"media50": null,
+"media20": null,
+"quattro_atr": 6.6392,
+"meta_caduta": 5.865,
+"bollinger": 5.8449,
+"consigliata": 6.6392
+},
+"soglie_ricalcolate_il": "2026-08-25 00:26",
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "long:ITUB:2026-08-16",
@@ -4140,7 +4170,17 @@
 "consigliata": 37.7918
 },
 "stop": 30.5741,
-"atr": 1.203
+"atr": 1.203,
+"soglie_contaminate": {
+"media50": null,
+"media20": null,
+"quattro_atr": 37.7918,
+"meta_caduta": null,
+"bollinger": 33.0245,
+"consigliata": 37.7918
+},
+"soglie_ricalcolate_il": "2026-08-25 00:26",
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "long:PBR:2026-08-16",
@@ -4167,7 +4207,17 @@
 "consigliata": 20.6636
 },
 "stop": 17.5682,
-"atr": 0.5159
+"atr": 0.5159,
+"soglie_contaminate": {
+"media50": null,
+"media20": null,
+"quattro_atr": 20.6636,
+"meta_caduta": 19.0,
+"bollinger": 19.4452,
+"consigliata": 20.6636
+},
+"soglie_ricalcolate_il": "2026-08-25 00:26",
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "short:DKS:2026-08-20",
@@ -4194,7 +4244,17 @@
 "consigliata": 209.2162
 },
 "stop": 164.3869,
-"atr": 7.4715
+"atr": 7.4715,
+"soglie_contaminate": {
+"media50": 212.6024,
+"media20": 198.4745,
+"quattro_atr": 209.2162,
+"meta_caduta": 209.25,
+"bollinger": 217.6914,
+"consigliata": 209.2162
+},
+"soglie_ricalcolate_il": "2026-08-25 00:26",
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "short:TNGX:2026-08-20",
@@ -4221,7 +4281,17 @@
 "consigliata": 28.3088
 },
 "stop": 21.3456,
-"atr": 1.5822
+"atr": 1.5822,
+"soglie_contaminate": {
+"media50": 28.3088,
+"media20": 26.3675,
+"quattro_atr": 30.8389,
+"meta_caduta": 28.705,
+"bollinger": 29.6126,
+"consigliata": 28.3088
+},
+"soglie_ricalcolate_il": "2026-08-25 00:26",
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "short:WMT:2026-08-20",
@@ -4248,6 +4318,16 @@
 "consigliata": 113.3168
 },
 "stop": 100.5015,
-"atr": 2.9942
+"atr": 2.9942,
+"soglie_contaminate": {
+"media50": 113.3168,
+"media20": 111.946,
+"quattro_atr": 118.4669,
+"meta_caduta": 113.765,
+"bollinger": 119.0389,
+"consigliata": 113.3168
+},
+"soglie_ricalcolate_il": "2026-08-25 00:26",
+"soglie_ritardo_giorni": 1
 }
 ]
