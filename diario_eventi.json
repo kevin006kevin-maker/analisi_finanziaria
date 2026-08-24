@@ -4168,5 +4168,32 @@
 },
 "stop": 17.5682,
 "atr": 0.5159
+},
+{
+"episodio": "short:DKS:2026-08-20",
+"ticker": "DKS",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-08-25 00:26",
+"data": "2026-08-24 22:59",
+"prezzo": 179.33,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-08-25",
+"soglie": {
+"media50": 212.6024,
+"media20": 198.4745,
+"quattro_atr": 209.2162,
+"meta_caduta": 209.25,
+"bollinger": 217.6914,
+"consigliata": 209.2162
+},
+"stop": 164.3869,
+"atr": 7.4715
 }
 ]
