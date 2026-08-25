@@ -4731,5 +4731,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:DY:2026-08-25",
+"ticker": "DY",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-25 20:38",
+"data": "2026-08-25 20:38",
+"prezzo": 356.72,
+"conv": 80,
+"prob_gain": 53,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": 3.2665,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 428.1042,
+"media20": 403.0085,
+"quattro_atr": 437.4795,
+"meta_caduta": 431.76,
+"bollinger": 437.4973,
+"consigliata": 428.1042
+},
+"stop": 316.3403,
+"atr": 20.1899
 }
 ]
