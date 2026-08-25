@@ -4919,5 +4919,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "long:BSBR:2026-08-17",
+"ticker": "BSBR",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-08-26 00:24",
+"data": "2026-08-26 00:23",
+"prezzo": 5.8,
+"conv": 71,
+"prob_gain": 71,
+"prob_loss": 14,
+"reliab": "🟢 Alta",
+"mkt": 3.3451,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-08-26",
+"soglie": {
+"media50": null,
+"media20": null,
+"quattro_atr": 6.3907,
+"meta_caduta": 5.805,
+"bollinger": 6.086,
+"consigliata": 6.3907
+},
+"stop": 5.5047,
+"atr": 0.1477
 }
 ]
