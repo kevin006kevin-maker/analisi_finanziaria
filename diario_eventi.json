@@ -5027,5 +5027,32 @@
 },
 "stop": 10.62,
 "atr": 0.32
+},
+{
+"episodio": "long:PBR-A:2026-08-17",
+"ticker": "PBR-A",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-08-26 00:24",
+"data": "2026-08-25 23:02",
+"prezzo": 16.06,
+"conv": 77,
+"prob_gain": 81,
+"prob_loss": 10,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-08-26",
+"soglie": {
+"media50": null,
+"media20": 16.489,
+"quattro_atr": 17.9008,
+"meta_caduta": 16.64,
+"bollinger": 17.2643,
+"consigliata": 17.9008
+},
+"stop": 15.1396,
+"atr": 0.4602
 }
 ]
