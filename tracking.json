@@ -11364,5 +11364,37 @@
 "auto": true,
 "notified": false,
 "entry_check": "2026-08-25"
+},
+"TNGX": {
+"kind": "short",
+"added": "2026-08-25",
+"note": "🤖 Promossa il 2026-08-25: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +8.6% e la convenienza (72) regge.",
+"name": "TNGX",
+"snapshots": [
+{
+"name": "TNGX",
+"price": 25.22,
+"rsi": 44.5503,
+"dd_high": -23.2067,
+"occasione": 50,
+"convenienza": 57,
+"prob_gain": 47,
+"prob_loss": 27,
+"exp_ret": -1.7,
+"gain": 11.5983,
+"reliab": "🔴 Bassa",
+"target": 28.1953,
+"stop": 22.1695,
+"date": "2026-08-25 15:46"
+}
+],
+"entry_price": 25.22,
+"entry_target": 28.1953,
+"entry_stop": 22.1695,
+"entry_conv": 57,
+"entry_date": "2026-08-25 15:46",
+"entry_src": "scatto",
+"max_price": 25.22,
+"max_date": "2026-08-25 15:46"
 }
 }
