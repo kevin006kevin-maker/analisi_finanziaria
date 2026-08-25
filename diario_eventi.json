@@ -5270,5 +5270,32 @@
 },
 "stop": 6.6685,
 "atr": 0.4207
+},
+{
+"episodio": "short:TE:2026-08-21",
+"ticker": "TE",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-08-26 00:25",
+"data": "2026-08-26 00:21",
+"prezzo": 4.65,
+"conv": 67,
+"prob_gain": 45,
+"prob_loss": 38,
+"reliab": "🔴 Bassa",
+"mkt": 3.3451,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-08-26",
+"soglie": {
+"media50": 6.4102,
+"media20": 4.8405,
+"quattro_atr": 6.9499,
+"meta_caduta": 8.345,
+"bollinger": 5.9492,
+"consigliata": 6.4102
+},
+"stop": 3.5,
+"atr": 0.575
 }
 ]
