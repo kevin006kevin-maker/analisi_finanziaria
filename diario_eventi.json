@@ -4825,5 +4825,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "long:ASO:2026-08-25",
+"ticker": "ASO",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-08-26 00:23",
+"data": "2026-08-26 00:23",
+"prezzo": 43.475,
+"conv": 73,
+"prob_gain": 75,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": 3.3451,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 47.9256,
+"media20": 47.6385,
+"quattro_atr": 50.9861,
+"meta_caduta": 48.0325,
+"bollinger": 50.8108,
+"consigliata": 47.9256
+},
+"stop": 39.7195,
+"atr": 1.8778
 }
 ]
