@@ -780,5 +780,62 @@
 "prob_loss": 14,
 "conv": 71,
 "res": {}
+},
+{
+"ticker": "GOF",
+"kind": "short",
+"date": "2026-08-26",
+"promo_price": 9.63,
+"obs_price": 9.099,
+"obs_date": "2026-08-21",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": 10.5724,
+"stop": 9.1622,
+"reliab": "🟢 Alta",
+"prob_gain": 60,
+"prob_loss": 1,
+"conv": 80,
+"passaggi": {
+"osservazione": {
+"data": "2026-08-21 15:42",
+"prezzo": 9.099,
+"conv": 89,
+"prob_gain": 59,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": 3.4728
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-08-26 00:23",
+"prezzo": 9.63,
+"conv": 80,
+"prob_gain": 60,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
