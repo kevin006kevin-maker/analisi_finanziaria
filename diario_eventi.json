@@ -4946,5 +4946,32 @@
 },
 "stop": 5.5047,
 "atr": 0.1477
+},
+{
+"episodio": "long:CDE:2026-08-17",
+"ticker": "CDE",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-08-26 00:24",
+"data": "2026-08-25 23:02",
+"prezzo": 21.59,
+"conv": 57,
+"prob_gain": 55,
+"prob_loss": 36,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-08-26",
+"soglie": {
+"media50": null,
+"media20": null,
+"quattro_atr": 26.0064,
+"meta_caduta": 21.59,
+"bollinger": 22.6262,
+"consigliata": 26.0064
+},
+"stop": 19.3818,
+"atr": 1.1041
 }
 ]
