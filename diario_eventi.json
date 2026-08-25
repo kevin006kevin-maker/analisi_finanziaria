@@ -5431,5 +5431,32 @@
 },
 "stop": 2.4856,
 "atr": 0.4572
+},
+{
+"episodio": "short:INTC:2026-08-25",
+"ticker": "INTC",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-08-26 01:23",
+"data": "2026-08-26 01:22",
+"prezzo": 87.48,
+"conv": 75,
+"prob_gain": 49,
+"prob_loss": 25,
+"reliab": "🔴 Bassa",
+"mkt": 3.3451,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 106.8456,
+"media20": 95.5375,
+"quattro_atr": 112.0445,
+"meta_caduta": 114.21,
+"bollinger": 108.3873,
+"consigliata": 106.8456
+},
+"stop": 75.1977,
+"atr": 6.1411
 }
 ]
