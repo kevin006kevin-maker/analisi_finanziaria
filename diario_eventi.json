@@ -4550,5 +4550,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:WSO:2026-08-25",
+"ticker": "WSO",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-25 16:41",
+"data": "2026-08-25 16:41",
+"prezzo": 299.29,
+"conv": 82,
+"prob_gain": 50,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": 3.1849,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 359.392,
+"media20": 316.9345,
+"quattro_atr": 343.571,
+"meta_caduta": 358.01,
+"bollinger": 334.7749,
+"consigliata": 343.571
+},
+"stop": 277.1495,
+"atr": 11.0702
 }
 ]
