@@ -5108,5 +5108,32 @@
 },
 "stop": 4.0035,
 "atr": 0.2105
+},
+{
+"episodio": "long:STMMI.MI:2026-08-17",
+"ticker": "STMMI.MI",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-08-26 00:24",
+"data": "2026-08-26 00:23",
+"prezzo": 42.25,
+"conv": 67,
+"prob_gain": 72,
+"prob_loss": 19,
+"reliab": "🟡 Media",
+"mkt": 3.3451,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-08-26",
+"soglie": {
+"media50": 54.5999,
+"media20": 45.8353,
+"quattro_atr": 51.2261,
+"meta_caduta": 55.8,
+"bollinger": 49.8697,
+"consigliata": 51.2261
+},
+"stop": 37.7619,
+"atr": 2.244
 }
 ]
