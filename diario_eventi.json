@@ -5189,5 +5189,32 @@
 },
 "stop": 24.6395,
 "atr": 0.5653
+},
+{
+"episodio": "long:UMC:2026-08-17",
+"ticker": "UMC",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-08-26 00:25",
+"data": "2026-08-26 00:23",
+"prezzo": 19.6,
+"conv": 32,
+"prob_gain": 47,
+"prob_loss": 42,
+"reliab": "🔴 Bassa",
+"mkt": 3.3451,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-08-26",
+"soglie": {
+"media50": 21.7416,
+"media20": null,
+"quattro_atr": 23.9608,
+"meta_caduta": 23.805,
+"bollinger": 20.353,
+"consigliata": 21.7416
+},
+"stop": 17.4196,
+"atr": 1.0902
 }
 ]
