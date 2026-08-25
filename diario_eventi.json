@@ -5135,5 +5135,32 @@
 },
 "stop": 37.7619,
 "atr": 2.244
+},
+{
+"episodio": "long:STUB:2026-08-17",
+"ticker": "STUB",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-08-26 00:24",
+"data": "2026-08-25 23:02",
+"prezzo": 6.81,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-08-26",
+"soglie": {
+"media50": 9.7798,
+"media20": 8.0165,
+"quattro_atr": 8.839,
+"meta_caduta": 10.25,
+"bollinger": 9.8948,
+"consigliata": 8.839
+},
+"stop": 5.7955,
+"atr": 0.5073
 }
 ]
