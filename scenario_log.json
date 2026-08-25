@@ -626,5 +626,62 @@
 "prob_loss": 1,
 "conv": 90,
 "res": {}
+},
+{
+"ticker": "TNGX",
+"kind": "short",
+"date": "2026-08-25",
+"promo_price": 25.265,
+"obs_price": 23.27,
+"obs_date": "2026-08-20",
+"pre_price": 23.51,
+"pre_date": "2026-08-21",
+"conf_price": null,
+"conf_date": null,
+"target": 28.1953,
+"stop": 22.1695,
+"reliab": "🔴 Bassa",
+"prob_gain": 47,
+"prob_loss": 27,
+"conv": 57,
+"passaggi": {
+"osservazione": {
+"data": "2026-08-20 21:56",
+"prezzo": 23.27,
+"conv": 62,
+"prob_gain": 52,
+"prob_loss": 24,
+"reliab": "🔴 Bassa",
+"mkt": 2.665
+},
+"anticipo": {
+"data": "2026-08-21",
+"prezzo": 23.51,
+"conv": 65,
+"prob_gain": 49,
+"prob_loss": 25,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-08-25 15:46",
+"prezzo": 25.265,
+"conv": 57,
+"prob_gain": 47,
+"prob_loss": 27,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
