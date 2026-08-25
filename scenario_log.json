@@ -993,5 +993,62 @@
 "mkt": null
 }
 }
+},
+{
+"ticker": "UMC",
+"kind": "long",
+"date": "2026-08-26",
+"promo_price": 19.6,
+"obs_price": 19.15,
+"obs_date": "2026-08-17",
+"pre_price": 18.34,
+"pre_date": "2026-08-22",
+"conf_price": null,
+"conf_date": null,
+"target": 21.7416,
+"stop": 17.4196,
+"reliab": "🔴 Bassa",
+"prob_gain": 61,
+"prob_loss": 29,
+"conv": 66,
+"passaggi": {
+"osservazione": {
+"data": "2026-08-17 13:50",
+"prezzo": 19.15,
+"conv": 63,
+"prob_gain": 51,
+"prob_loss": 40,
+"reliab": "🔴 Bassa",
+"mkt": 4.3991
+},
+"anticipo": {
+"data": "2026-08-22",
+"prezzo": 18.34,
+"conv": 66,
+"prob_gain": 66,
+"prob_loss": 25,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-08-26 01:24",
+"prezzo": 19.6,
+"conv": 66,
+"prob_gain": 61,
+"prob_loss": 29,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
