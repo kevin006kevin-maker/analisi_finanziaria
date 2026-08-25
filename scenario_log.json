@@ -604,7 +604,45 @@
 "prob_gain": null,
 "prob_loss": null,
 "conv": 82,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-08-20 15:42",
+"prezzo": 104.53,
+"conv": 64,
+"prob_gain": 59,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": 3.8732
+},
+"anticipo": {
+"data": "2026-08-21",
+"prezzo": 103.84,
+"conv": 70,
+"prob_gain": 57,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-08-25",
+"prezzo": 105.28,
+"conv": 82,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "DKS",
@@ -625,7 +663,45 @@
 "prob_gain": 62,
 "prob_loss": 1,
 "conv": 90,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-08-20 17:29",
+"prezzo": 176.47,
+"conv": 69,
+"prob_gain": 53,
+"prob_loss": 0,
+"reliab": "🟡 Media",
+"mkt": 3.2484
+},
+"anticipo": {
+"data": "2026-08-21",
+"prezzo": 179.34,
+"conv": 75,
+"prob_gain": 52,
+"prob_loss": 0,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-08-25",
+"prezzo": 138.98,
+"conv": 90,
+"prob_gain": 62,
+"prob_loss": 1,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "TNGX",
