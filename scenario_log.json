@@ -1107,5 +1107,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "OI",
+"kind": "short",
+"date": "2026-08-26",
+"promo_price": 7.615,
+"obs_price": 6.91,
+"obs_date": "2026-08-21",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": 8.3867,
+"stop": 6.8029,
+"reliab": "🟡 Media",
+"prob_gain": 49,
+"prob_loss": 15,
+"conv": 66,
+"passaggi": {
+"osservazione": {
+"data": "2026-08-21 15:42",
+"prezzo": 6.91,
+"conv": 70,
+"prob_gain": 49,
+"prob_loss": 14,
+"reliab": "🟡 Media",
+"mkt": 3.4728
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-08-26 15:54",
+"prezzo": 7.615,
+"conv": 66,
+"prob_gain": 49,
+"prob_loss": 15,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
