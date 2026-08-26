@@ -1050,5 +1050,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "SEDG",
+"kind": "short",
+"date": "2026-08-26",
+"promo_price": 32.3,
+"obs_price": 31.4164,
+"obs_date": "2026-08-19",
+"pre_price": 31.565,
+"pre_date": "2026-08-21",
+"conf_price": null,
+"conf_date": null,
+"target": 44.736,
+"stop": 26.2835,
+"reliab": "🔴 Bassa",
+"prob_gain": 49,
+"prob_loss": 23,
+"conv": 65,
+"passaggi": {
+"osservazione": {
+"data": "2026-08-19 17:04",
+"prezzo": 31.4164,
+"conv": 61,
+"prob_gain": 50,
+"prob_loss": 28,
+"reliab": "🔴 Bassa",
+"mkt": 3.7905
+},
+"anticipo": {
+"data": "2026-08-21",
+"prezzo": 31.565,
+"conv": 69,
+"prob_gain": 47,
+"prob_loss": 27,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-08-26 15:54",
+"prezzo": 32.3,
+"conv": 65,
+"prob_gain": 49,
+"prob_loss": 23,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
