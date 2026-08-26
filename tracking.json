@@ -17555,5 +17555,37 @@
 "auto": true,
 "notified": false,
 "entry_check": "2026-08-26"
+},
+"SEDG": {
+"kind": "short",
+"added": "2026-08-26",
+"note": "🤖 Promossa il 2026-08-26: dopo 5 giorni di Borsa di osservazione il prezzo è risalito di +2.8% e la convenienza (68) regge.",
+"name": "SEDG",
+"snapshots": [
+{
+"name": "SEDG",
+"price": 32.34,
+"rsi": 40.7193,
+"dd_high": -58.8587,
+"occasione": 59,
+"convenienza": 65,
+"prob_gain": 49,
+"prob_loss": 23,
+"exp_ret": -0.6,
+"gain": 38.5016,
+"reliab": "🔴 Bassa",
+"target": 44.736,
+"stop": 26.2835,
+"date": "2026-08-26 15:54"
+}
+],
+"entry_price": 32.34,
+"entry_target": 44.736,
+"entry_stop": 26.2835,
+"entry_conv": 65,
+"entry_date": "2026-08-26 15:54",
+"entry_src": "scatto",
+"max_price": 32.34,
+"max_date": "2026-08-26 15:54"
 }
 }
