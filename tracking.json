@@ -2587,7 +2587,9 @@
 "entry_date": "2026-07-20",
 "entry_src": "storico",
 "max_price": 17.245,
-"max_date": "2026-08-21 21:09"
+"max_date": "2026-08-21 21:09",
+"warn_since": "2026-08-26",
+"warn": "in perdita da 27 giorni di Borsa: valuta l'uscita"
 },
 "CCL": {
 "kind": "long",
@@ -6935,9 +6937,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-08-26",
 "max_price": 61.805,
-"max_date": "2026-08-17 18:55",
-"warn_since": "2026-08-26",
-"warn": "in perdita da 18 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-08-17 18:55"
 },
 "MU": {
 "kind": "long",
