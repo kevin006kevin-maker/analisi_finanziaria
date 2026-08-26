@@ -1164,5 +1164,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "AAL",
+"kind": "short",
+"date": "2026-08-26",
+"promo_price": 14.005,
+"obs_price": 13.702,
+"obs_date": "2026-08-21",
+"pre_price": 13.82,
+"pre_date": "2026-08-24",
+"conf_price": null,
+"conf_date": null,
+"target": 15.6915,
+"stop": 12.9426,
+"reliab": "🟡 Media",
+"prob_gain": 51,
+"prob_loss": 12,
+"conv": 63,
+"passaggi": {
+"osservazione": {
+"data": "2026-08-21 19:25",
+"prezzo": 13.702,
+"conv": 67,
+"prob_gain": 51,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": 3.5702
+},
+"anticipo": {
+"data": "2026-08-24",
+"prezzo": 13.82,
+"conv": 66,
+"prob_gain": 52,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-08-26 15:54",
+"prezzo": 14.005,
+"conv": 63,
+"prob_gain": 51,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
