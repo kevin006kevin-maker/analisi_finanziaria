@@ -5485,5 +5485,32 @@
 },
 "stop": 17.4196,
 "atr": 1.0902
+},
+{
+"episodio": "long:DKS:2026-08-25",
+"ticker": "DKS",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-08-26 03:02",
+"data": "2026-08-26 03:02",
+"prezzo": 124.31,
+"conv": 65,
+"prob_gain": 97,
+"prob_loss": 1,
+"reliab": "🟡 Media",
+"mkt": 3.3451,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 210.6688,
+"media20": 194.1215,
+"quattro_atr": 167.87,
+"meta_caduta": 181.74,
+"bollinger": 231.7044,
+"consigliata": 167.87
+},
+"stop": 102.53,
+"atr": 10.89
 }
 ]
