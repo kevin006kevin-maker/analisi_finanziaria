@@ -1241,7 +1241,45 @@
 "prob_gain": 68,
 "prob_loss": 19,
 "conv": 58,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-08-17 13:25",
+"prezzo": 4.6255,
+"conv": 66,
+"prob_gain": 67,
+"prob_loss": 22,
+"reliab": "🟡 Media",
+"mkt": 4.3991
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-08-26",
+"prezzo": 4.461,
+"conv": 58,
+"prob_gain": 68,
+"prob_loss": 19,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "STUB",
@@ -1262,6 +1300,44 @@
 "prob_gain": 68,
 "prob_loss": 27,
 "conv": 60,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-08-17 15:38",
+"prezzo": 7.725,
+"conv": 66,
+"prob_gain": 70,
+"prob_loss": 25,
+"reliab": "🔴 Bassa",
+"mkt": 4.4982
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-08-26",
+"prezzo": 6.58,
+"conv": 60,
+"prob_gain": 68,
+"prob_loss": 27,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 }
 ]
