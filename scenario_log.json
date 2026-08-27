@@ -1554,5 +1554,62 @@
 "prob_loss": null,
 "conv": 64,
 "res": {}
+},
+{
+"ticker": "FRVO",
+"kind": "short",
+"date": "2026-08-27",
+"promo_price": 15.96,
+"obs_price": 15.615,
+"obs_date": "2026-08-24",
+"pre_price": 15.47,
+"pre_date": "2026-08-25",
+"conf_price": null,
+"conf_date": null,
+"target": 24.4306,
+"stop": 11.8945,
+"reliab": "🔴 Bassa",
+"prob_gain": 44,
+"prob_loss": 24,
+"conv": 64,
+"passaggi": {
+"osservazione": {
+"data": "2026-08-24 18:32",
+"prezzo": 15.615,
+"conv": 71,
+"prob_gain": 53,
+"prob_loss": 18,
+"reliab": "🔴 Bassa",
+"mkt": 3.384
+},
+"anticipo": {
+"data": "2026-08-25",
+"prezzo": 15.47,
+"conv": 71,
+"prob_gain": 53,
+"prob_loss": 15,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-08-27 22:40",
+"prezzo": 15.96,
+"conv": 64,
+"prob_gain": 44,
+"prob_loss": 24,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
