@@ -2787,7 +2787,7 @@
 "max_price": 17.245,
 "max_date": "2026-08-21 21:09",
 "warn_since": "2026-08-26",
-"warn": "in perdita da 27 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 28 giorni di Borsa: valuta l'uscita"
 },
 "CCL": {
 "kind": "long",
@@ -3112,7 +3112,7 @@
 "max_price": 28.12,
 "max_date": "2026-08-18 06:09",
 "warn_since": "2026-08-26",
-"warn": "in perdita da 27 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 28 giorni di Borsa: valuta l'uscita"
 },
 "SNPS": {
 "kind": "short",
@@ -3947,9 +3947,7 @@
 "entry_date": "2026-07-23",
 "entry_src": "storico",
 "max_price": 5.89,
-"max_date": "2026-08-18 06:09",
-"warn_since": "2026-08-26",
-"warn": "in perdita da 24 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-08-18 06:09"
 },
 "AXTI": {
 "kind": "short",
@@ -4463,7 +4461,7 @@
 "max_price": 3.15,
 "max_date": "2026-08-19 15:42",
 "warn_since": "2026-08-26",
-"warn": "in perdita da 22 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 23 giorni di Borsa: valuta l'uscita"
 },
 "QS": {
 "kind": "short",
@@ -5095,7 +5093,7 @@
 "max_price": 48.94,
 "max_date": "2026-08-18 00:22",
 "warn_since": "2026-08-26",
-"warn": "in perdita da 21 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 22 giorni di Borsa: valuta l'uscita"
 },
 "NEM": {
 "kind": "long",
@@ -14235,9 +14233,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-08-26",
 "max_price": 34.96,
-"max_date": "2026-08-17 22:55",
-"warn_since": "2026-08-21",
-"warn": "in perdita da 16 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-08-17 22:55"
 },
 "TSLL": {
 "kind": "short",
@@ -15650,7 +15646,7 @@
 "max_price": 7.46,
 "max_date": "2026-08-24 16:02",
 "warn_since": "2026-08-24",
-"warn": "in perdita da 15 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 16 giorni di Borsa: valuta l'uscita"
 },
 "TU": {
 "kind": "short",
@@ -16459,9 +16455,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-08-26",
 "max_price": 16.235,
-"max_date": "2026-08-19 17:58",
-"warn_since": "2026-08-26",
-"warn": "in perdita da 12 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-08-19 17:58"
 },
 "SUJA": {
 "kind": "short",
@@ -17515,7 +17509,7 @@
 "max_price": 53.115,
 "max_date": "2026-08-21 15:36",
 "warn_since": "2026-08-24",
-"warn": "in perdita da 11 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 12 giorni di Borsa: valuta l'uscita"
 },
 "AGI": {
 "kind": "long",
@@ -18785,7 +18779,7 @@
 "max_price": 35.21,
 "max_date": "2026-08-18 06:10",
 "warn_since": "2026-08-26",
-"warn": "in perdita da 10 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 11 giorni di Borsa: valuta l'uscita"
 },
 "POST": {
 "kind": "short",
@@ -19321,7 +19315,7 @@
 "max_price": 12.99,
 "max_date": "2026-08-25 15:47",
 "warn_since": "2026-08-26",
-"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 9 giorni di Borsa: valuta l'uscita"
 },
 "CAPR": {
 "kind": "short",
@@ -20894,7 +20888,7 @@
 "max_price": 11.62,
 "max_date": "2026-08-26 22:31",
 "auto": true,
-"notified": false,
+"notified": true,
 "entry_check": "2026-08-26"
 },
 "EYPT": {
@@ -21154,7 +21148,9 @@
 "max_date": "2026-08-20 15:43",
 "auto": true,
 "notified": false,
-"entry_check": "2026-08-26"
+"entry_check": "2026-08-26",
+"warn_since": "2026-08-27",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "DUOL": {
 "kind": "long",
