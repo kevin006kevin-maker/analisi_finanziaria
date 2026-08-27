@@ -1475,7 +1475,45 @@
 "prob_gain": 67,
 "prob_loss": 25,
 "conv": 57,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-08-18 15:40",
+"prezzo": 515.0,
+"conv": 60,
+"prob_gain": 68,
+"prob_loss": 21,
+"reliab": "🔴 Bassa",
+"mkt": 3.5574
+},
+"anticipo": {
+"data": "2026-08-25",
+"prezzo": 421.14,
+"conv": 66,
+"prob_gain": 72,
+"prob_loss": 19,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-08-27",
+"prezzo": 432.71,
+"conv": 57,
+"prob_gain": 67,
+"prob_loss": 25,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "ENVX",
@@ -1553,7 +1591,45 @@
 "prob_gain": null,
 "prob_loss": null,
 "conv": 64,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-08-24 16:00",
+"prezzo": 3.03,
+"conv": 67,
+"prob_gain": 52,
+"prob_loss": 22,
+"reliab": "🔴 Bassa",
+"mkt": 3.2175
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-08-27",
+"prezzo": 3.04,
+"conv": 64,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "FRVO",
@@ -1631,6 +1707,44 @@
 "prob_gain": null,
 "prob_loss": null,
 "conv": 70,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-08-24 19:59",
+"prezzo": 11.19,
+"conv": 65,
+"prob_gain": 56,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": 3.2093
+},
+"anticipo": {
+"data": "2026-08-25",
+"prezzo": 11.15,
+"conv": 65,
+"prob_gain": 50,
+"prob_loss": 13,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-08-27",
+"prezzo": 11.33,
+"conv": 70,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 }
 ]
