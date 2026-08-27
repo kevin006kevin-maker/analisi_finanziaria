@@ -21657,5 +21657,37 @@
 "max_date": "2026-08-27 02:04",
 "auto": true,
 "notified": false
+},
+"ENVX": {
+"kind": "short",
+"added": "2026-08-27",
+"note": "🤖 Promossa il 2026-08-27: dopo 6 giorni di Borsa di osservazione il prezzo è risalito di +6.7% e la convenienza (60) regge.",
+"name": "ENVX",
+"snapshots": [
+{
+"name": "ENVX",
+"price": 3.59,
+"rsi": 41.2847,
+"dd_high": -72.7824,
+"occasione": 58,
+"convenienza": 64,
+"prob_gain": 47,
+"prob_loss": 26,
+"exp_ret": -1.8,
+"gain": 32.1254,
+"reliab": "🔴 Bassa",
+"target": 4.7433,
+"stop": 2.9303,
+"date": "2026-08-27 22:40"
+}
+],
+"entry_price": 3.59,
+"entry_target": 4.7433,
+"entry_stop": 2.9303,
+"entry_conv": 64,
+"entry_date": "2026-08-27 22:40",
+"entry_src": "scatto",
+"max_price": 3.59,
+"max_date": "2026-08-27 22:40"
 }
 }
