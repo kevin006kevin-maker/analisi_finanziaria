@@ -5882,5 +5882,32 @@
 },
 "stop": 11.4494,
 "atr": 0.4803
+},
+{
+"episodio": "short:CVRX:2026-08-24",
+"ticker": "CVRX",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-08-27 02:06",
+"data": "2026-08-26 22:30",
+"prezzo": 3.27,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-08-27",
+"soglie": {
+"media50": 4.5748,
+"media20": 3.6482,
+"quattro_atr": 4.8285,
+"meta_caduta": 4.605,
+"bollinger": 6.2109,
+"consigliata": 4.5748
+},
+"stop": 2.4907,
+"atr": 0.3896
 }
 ]
