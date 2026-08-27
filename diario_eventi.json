@@ -6030,5 +6030,32 @@
 "stop": 3.2852,
 "atr": 0.4724,
 "res": {}
+},
+{
+"episodio": "long:DY:2026-08-26",
+"ticker": "DY",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-08-27 22:40",
+"data": "2026-08-27 22:40",
+"prezzo": 308.01,
+"conv": 68,
+"prob_gain": 85,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": 3.9324,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 421.5238,
+"media20": 394.255,
+"quattro_atr": 395.0396,
+"meta_caduta": 407.405,
+"bollinger": 460.6471,
+"consigliata": 395.0396
+},
+"stop": 264.4952,
+"atr": 21.7574
 }
 ]
