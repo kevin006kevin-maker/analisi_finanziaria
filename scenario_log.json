@@ -1476,5 +1476,62 @@
 "prob_loss": 25,
 "conv": 57,
 "res": {}
+},
+{
+"ticker": "ENVX",
+"kind": "short",
+"date": "2026-08-27",
+"promo_price": 3.59,
+"obs_price": 3.365,
+"obs_date": "2026-08-19",
+"pre_price": 3.375,
+"pre_date": "2026-08-21",
+"conf_price": null,
+"conf_date": null,
+"target": 4.7433,
+"stop": 2.9303,
+"reliab": "🔴 Bassa",
+"prob_gain": 47,
+"prob_loss": 26,
+"conv": 64,
+"passaggi": {
+"osservazione": {
+"data": "2026-08-19 21:04",
+"prezzo": 3.365,
+"conv": 62,
+"prob_gain": 50,
+"prob_loss": 22,
+"reliab": "🔴 Bassa",
+"mkt": 2.8893
+},
+"anticipo": {
+"data": "2026-08-21",
+"prezzo": 3.375,
+"conv": 70,
+"prob_gain": 51,
+"prob_loss": 23,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-08-27 22:40",
+"prezzo": 3.59,
+"conv": 64,
+"prob_gain": 47,
+"prob_loss": 26,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
