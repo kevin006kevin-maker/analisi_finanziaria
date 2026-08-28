@@ -6211,5 +6211,32 @@
 },
 "stop": 266.2354,
 "atr": 11.8823
+},
+{
+"episodio": "short:MNSO:2026-08-28",
+"ticker": "MNSO",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-28 07:04",
+"data": "2026-08-28 07:04",
+"prezzo": 10.81,
+"conv": 72,
+"prob_gain": 51,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": 3.9443,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 11.9486,
+"media20": 11.751,
+"quattro_atr": 12.1764,
+"meta_caduta": 12.06,
+"bollinger": 13.2418,
+"consigliata": 11.9486
+},
+"stop": 10.1268,
+"atr": 0.3416
 }
 ]
