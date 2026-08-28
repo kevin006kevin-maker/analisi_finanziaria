@@ -6332,5 +6332,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "long:NEM:2026-08-19",
+"ticker": "NEM",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-08-28 07:06",
+"data": "2026-08-28 07:06",
+"prezzo": 132.29,
+"conv": 54,
+"prob_gain": 60,
+"prob_loss": 27,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-08-28",
+"soglie": {
+"media50": null,
+"media20": null,
+"quattro_atr": 150.0947,
+"meta_caduta": 133.715,
+"bollinger": 142.8113,
+"consigliata": 150.0947
+},
+"stop": 123.3877,
+"atr": 4.4512
 }
 ]
