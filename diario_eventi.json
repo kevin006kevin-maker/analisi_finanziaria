@@ -6359,5 +6359,32 @@
 },
 "stop": 123.3877,
 "atr": 4.4512
+},
+{
+"episodio": "short:WSO:2026-08-25",
+"ticker": "WSO",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-08-28 07:06",
+"data": "2026-08-27 22:39",
+"prezzo": 313.05,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-08-28",
+"soglie": {
+"media50": 356.5218,
+"media20": 316.919,
+"quattro_atr": 357.8193,
+"meta_caduta": 364.89,
+"bollinger": 334.0163,
+"consigliata": 356.5218
+},
+"stop": 290.6654,
+"atr": 11.1923
 }
 ]
