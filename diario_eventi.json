@@ -6514,5 +6514,32 @@
 },
 "stop": 4.968,
 "atr": 0.421
+},
+{
+"episodio": "short:ENI.MI:2026-08-28",
+"ticker": "ENI.MI",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-28 19:34",
+"data": "2026-08-28 19:34",
+"prezzo": 22.79,
+"conv": 62,
+"prob_gain": 52,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": 2.9639,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": null,
+"media20": 23.5657,
+"quattro_atr": 24.8571,
+"meta_caduta": 23.67,
+"bollinger": 24.5056,
+"consigliata": 24.8571
+},
+"stop": 21.7564,
+"atr": 0.5168
 }
 ]
