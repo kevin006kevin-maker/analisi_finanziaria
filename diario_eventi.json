@@ -6487,5 +6487,32 @@
 },
 "stop": 50.0186,
 "atr": 1.9678
+},
+{
+"episodio": "short:SSTK:2026-08-28",
+"ticker": "SSTK",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-28 19:34",
+"data": "2026-08-28 19:34",
+"prezzo": 5.81,
+"conv": 64,
+"prob_gain": 56,
+"prob_loss": 17,
+"reliab": "🔴 Bassa",
+"mkt": 2.9639,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 7.8328,
+"media20": null,
+"quattro_atr": 7.494,
+"meta_caduta": 10.76,
+"bollinger": 6.228,
+"consigliata": 7.494
+},
+"stop": 4.968,
+"atr": 0.421
 }
 ]
