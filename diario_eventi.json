@@ -6541,5 +6541,32 @@
 },
 "stop": 21.7564,
 "atr": 0.5168
+},
+{
+"episodio": "short:CABO:2026-08-28",
+"ticker": "CABO",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-28 19:34",
+"data": "2026-08-28 19:34",
+"prezzo": 24.845,
+"conv": 61,
+"prob_gain": 57,
+"prob_loss": 26,
+"reliab": "🔴 Bassa",
+"mkt": 2.9639,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 38.3493,
+"media20": 32.2057,
+"quattro_atr": 38.2888,
+"meta_caduta": 39.2025,
+"bollinger": 47.8131,
+"consigliata": 38.2888
+},
+"stop": 18.1231,
+"atr": 3.361
 }
 ]
