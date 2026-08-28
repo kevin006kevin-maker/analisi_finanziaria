@@ -3070,7 +3070,9 @@
 "entry_date": "2026-07-23",
 "entry_src": "storico",
 "max_price": 5.89,
-"max_date": "2026-08-18 06:09"
+"max_date": "2026-08-18 06:09",
+"warn_since": "2026-08-28",
+"warn": "in perdita da 26 giorni di Borsa: valuta l'uscita"
 },
 "AXTI": {
 "kind": "short",
@@ -5862,7 +5864,9 @@
 "urgenza": "incassa",
 "tipo": "sgonfia"
 },
-"incasso_notified": true
+"incasso_notified": true,
+"warn_since": "2026-08-28",
+"warn": "in perdita da 20 giorni di Borsa: valuta l'uscita"
 },
 "MU": {
 "kind": "long",
@@ -9772,7 +9776,9 @@
 "urgenza": "incassa",
 "tipo": "sgonfia"
 },
-"incasso_notified": true
+"incasso_notified": true,
+"warn_since": "2026-08-28",
+"warn": "in perdita da 19 giorni di Borsa: valuta l'uscita"
 },
 "ALNY": {
 "kind": "short",
@@ -10895,7 +10901,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-08-28",
 "max_price": 34.96,
-"max_date": "2026-08-17 22:55"
+"max_date": "2026-08-17 22:55",
+"warn_since": "2026-08-28",
+"warn": "in perdita da 18 giorni di Borsa: valuta l'uscita"
 },
 "TSLL": {
 "kind": "short",
@@ -12014,7 +12022,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-08-28",
 "max_price": 10.085,
-"max_date": "2026-08-21 17:07"
+"max_date": "2026-08-21 17:07",
+"warn_since": "2026-08-28",
+"warn": "in perdita da 17 giorni di Borsa: valuta l'uscita"
 },
 "NOK": {
 "kind": "short",
@@ -12436,7 +12446,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-08-27",
 "max_price": 16.235,
-"max_date": "2026-08-19 17:58"
+"max_date": "2026-08-19 17:58",
+"warn_since": "2026-08-28",
+"warn": "in perdita da 14 giorni di Borsa: valuta l'uscita"
 },
 "SUJA": {
 "kind": "short",
@@ -12858,9 +12870,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-08-27",
 "max_price": 185.965,
-"max_date": "2026-08-19 16:31",
-"warn_since": "2026-08-27",
-"warn": "in perdita da 13 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-08-19 16:31"
 },
 "RPT": {
 "kind": "short",
@@ -13875,9 +13885,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-08-27",
 "max_price": 35.21,
-"max_date": "2026-08-18 06:10",
-"warn_since": "2026-08-26",
-"warn": "in perdita da 12 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-08-18 06:10"
 },
 "POST": {
 "kind": "short",
@@ -15168,7 +15176,9 @@
 "urgenza": "incassa",
 "tipo": "sgonfia"
 },
-"incasso_notified": true
+"incasso_notified": true,
+"warn_since": "2026-08-28",
+"warn": "in perdita da 10 giorni di Borsa: valuta l'uscita"
 },
 "CLBT": {
 "kind": "short",
