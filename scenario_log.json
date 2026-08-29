@@ -1879,5 +1879,62 @@
 "mkt": null
 }
 }
+},
+{
+"ticker": "INTC",
+"kind": "short",
+"date": "2026-08-29",
+"promo_price": 92.09,
+"obs_price": 88.5,
+"obs_date": "2026-08-25",
+"pre_price": 87.48,
+"pre_date": "2026-08-26",
+"conf_price": null,
+"conf_date": null,
+"target": 105.554,
+"stop": 80.4753,
+"reliab": "🔴 Bassa",
+"prob_gain": 48,
+"prob_loss": 25,
+"conv": 62,
+"passaggi": {
+"osservazione": {
+"data": "2026-08-25 16:41",
+"prezzo": 88.5,
+"conv": 74,
+"prob_gain": 50,
+"prob_loss": 23,
+"reliab": "🔴 Bassa",
+"mkt": 3.1849
+},
+"anticipo": {
+"data": "2026-08-26",
+"prezzo": 87.48,
+"conv": 75,
+"prob_gain": 49,
+"prob_loss": 25,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-08-29 10:04",
+"prezzo": 92.09,
+"conv": 62,
+"prob_gain": 48,
+"prob_loss": 25,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
