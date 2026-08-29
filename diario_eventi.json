@@ -6688,5 +6688,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:VISN:2026-08-29",
+"ticker": "VISN",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-29 03:25",
+"data": "2026-08-29 03:25",
+"prezzo": 6.06,
+"conv": 79,
+"prob_gain": 79,
+"prob_loss": 9,
+"reliab": "🔴 Bassa",
+"mkt": 2.9646,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 11.8084,
+"media20": 11.1445,
+"quattro_atr": 9.3461,
+"meta_caduta": 9.47,
+"bollinger": 13.7618,
+"consigliata": 9.3461
+},
+"stop": 4.4169,
+"atr": 0.8215
 }
 ]
