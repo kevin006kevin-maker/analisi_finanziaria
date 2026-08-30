@@ -1956,7 +1956,45 @@
 "prob_gain": 54,
 "prob_loss": 15,
 "conv": 79,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-08-17 10:07",
+"prezzo": 48.38,
+"conv": 80,
+"prob_gain": 54,
+"prob_loss": 13,
+"reliab": "🟡 Media",
+"mkt": 3.2103
+},
+"anticipo": {
+"data": "2026-08-31",
+"prezzo": 43.575,
+"conv": 79,
+"prob_gain": 54,
+"prob_loss": 15,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-08-31",
+"prezzo": 43.575,
+"conv": 79,
+"prob_gain": 54,
+"prob_loss": 15,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "IAG",
@@ -2034,6 +2072,44 @@
 "prob_gain": null,
 "prob_loss": null,
 "conv": 57,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-08-20 08:42",
+"prezzo": 152.47,
+"conv": 61,
+"prob_gain": 65,
+"prob_loss": 26,
+"reliab": "🟡 Media",
+"mkt": 2.7873
+},
+"anticipo": {
+"data": "2026-08-21",
+"prezzo": 147.925,
+"conv": 65,
+"prob_gain": 67,
+"prob_loss": 24,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-08-31",
+"prezzo": 153.62,
+"conv": 57,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 }
 ]
