@@ -7051,5 +7051,32 @@
 },
 "stop": 18.7409,
 "atr": 0.9245
+},
+{
+"episodio": "long:CHTR:2026-08-20",
+"ticker": "CHTR",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-08-31 00:25",
+"data": "2026-08-31 00:22",
+"prezzo": 153.62,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-08-31",
+"soglie": {
+"media50": null,
+"media20": null,
+"quattro_atr": 182.9774,
+"meta_caduta": 155.655,
+"bollinger": 159.5948,
+"consigliata": 182.9774
+},
+"stop": 138.9413,
+"atr": 7.3393
 }
 ]
