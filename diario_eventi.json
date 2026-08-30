@@ -6970,5 +6970,32 @@
 },
 "stop": 39.4204,
 "atr": 2.0773
+},
+{
+"episodio": "long:HMY:2026-08-28",
+"ticker": "HMY",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-08-31 00:22",
+"data": "2026-08-31 00:22",
+"prezzo": 20.23,
+"conv": 69,
+"prob_gain": 64,
+"prob_loss": 26,
+"reliab": "🔴 Bassa",
+"mkt": 2.9646,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": null,
+"media20": null,
+"quattro_atr": 24.1511,
+"meta_caduta": 21.885,
+"bollinger": 24.0352,
+"consigliata": 24.1511
+},
+"stop": 18.2694,
+"atr": 0.9803
 }
 ]
