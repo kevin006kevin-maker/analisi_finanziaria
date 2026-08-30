@@ -6997,5 +6997,32 @@
 },
 "stop": 18.2694,
 "atr": 0.9803
+},
+{
+"episodio": "long:AEO:2026-08-28",
+"ticker": "AEO",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-08-31 00:23",
+"data": "2026-08-30 21:39",
+"prezzo": 16.87,
+"conv": 65,
+"prob_gain": 45,
+"prob_loss": 45,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 17.152,
+"media20": 17.007,
+"quattro_atr": 19.6765,
+"meta_caduta": 17.83,
+"bollinger": 18.5202,
+"consigliata": 17.152
+},
+"stop": 15.4667,
+"atr": 0.7016
 }
 ]
