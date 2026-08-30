@@ -8632,5 +8632,37 @@
 "auto": true,
 "notified": false,
 "entry_check": "2026-08-30"
+},
+"IAG": {
+"kind": "long",
+"added": "2026-08-31",
+"note": "🤖 Promossa il 2026-08-31: dopo 7 giorni di Borsa di osservazione il prezzo è risalito di +4.4% e la convenienza (72) regge.",
+"name": "IAG",
+"snapshots": [
+{
+"name": "IAMGOLD Corporation",
+"price": 20.59,
+"rsi": 63.0834,
+"dd_high": -16.1986,
+"occasione": null,
+"convenienza": 56,
+"prob_gain": 64,
+"prob_loss": 26,
+"exp_ret": 25.4,
+"gain": 25.4,
+"reliab": "🔴 Bassa",
+"target": 16.6852,
+"stop": 18.7409,
+"date": "2026-08-31 00:23"
+}
+],
+"entry_price": 20.59,
+"entry_target": 16.6852,
+"entry_stop": 18.7409,
+"entry_conv": 56,
+"entry_date": "2026-08-31 00:23",
+"entry_src": "scatto",
+"max_price": 20.59,
+"max_date": "2026-08-31 00:23"
 }
 }
