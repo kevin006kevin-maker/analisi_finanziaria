@@ -7263,5 +7263,32 @@
 },
 "stop": 3.2128,
 "atr": 0.2011
+},
+{
+"episodio": "short:XLU:2026-08-31",
+"ticker": "XLU",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-31 16:48",
+"data": "2026-08-31 16:48",
+"prezzo": 42.07,
+"conv": 73,
+"prob_gain": 54,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": 0.9484,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 44.6336,
+"media20": 43.5245,
+"quattro_atr": 44.7428,
+"meta_caduta": 44.18,
+"bollinger": 44.6571,
+"consigliata": 44.6336
+},
+"stop": 40.7336,
+"atr": 0.6682
 }
 ]
