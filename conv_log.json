@@ -1,46 +1,6 @@
 [
 {
 "date": "2026-08-21",
-"ticker": "IWM",
-"kind": "long",
-"price": 297.67,
-"conv": 50,
-"factors": {
-"discount": 2.4321,
-"histcheap": -1.57,
-"riskadj": 2.21,
-"ddpen": -3.15,
-"momentum": 1.9209,
-"prob": 96,
-"quality": null,
-"valcheap": null,
-"trappen": null
-},
-"ret_5d": -0.43,
-"ret_21d": null
-},
-{
-"date": "2026-08-21",
-"ticker": "DIA",
-"kind": "long",
-"price": 527.51,
-"conv": 51,
-"factors": {
-"discount": 2.8187,
-"histcheap": -1.66,
-"riskadj": 1.69,
-"ddpen": -2.64,
-"momentum": 1.9334,
-"prob": 96,
-"quality": null,
-"valcheap": null,
-"trappen": null
-},
-"ret_5d": 1.41,
-"ret_21d": null
-},
-{
-"date": "2026-08-21",
 "ticker": "VEA",
 "kind": "long",
 "price": 72.84,
@@ -40261,6 +40221,46 @@
 "rebound": -14.6831,
 "trend": -1.0,
 "relstrength": 32.2206
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-31",
+"ticker": "EIX",
+"kind": "long",
+"price": 53.955,
+"conv": 83,
+"factors": {
+"discount": 32.8751,
+"histcheap": 1.54,
+"riskadj": -0.16,
+"ddpen": -5.52,
+"momentum": 27.0583,
+"prob": 99,
+"quality": 59.0,
+"valcheap": 0.353,
+"trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-08-31",
+"ticker": "PCG",
+"kind": "long",
+"price": 13.265,
+"conv": 78,
+"factors": {
+"discount": 30.5861,
+"histcheap": 3.12,
+"riskadj": -0.49,
+"ddpen": -8.55,
+"momentum": 26.7532,
+"prob": 98,
+"quality": 44.5,
+"valcheap": 0.2892,
+"trappen": 3
 },
 "ret_5d": null,
 "ret_21d": null
