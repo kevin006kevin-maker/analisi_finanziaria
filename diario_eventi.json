@@ -7344,5 +7344,32 @@
 },
 "stop": 11.5353,
 "atr": 0.8648
+},
+{
+"episodio": "short:BURL:2026-08-28",
+"ticker": "BURL",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-08-31 16:49",
+"data": "2026-08-29 10:03",
+"prezzo": 290.0,
+"conv": 89,
+"prob_gain": 57,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 339.4326,
+"media20": 341.3165,
+"quattro_atr": 339.7856,
+"meta_caduta": 331.095,
+"bollinger": 396.8657,
+"consigliata": 339.4326
+},
+"stop": 265.1072,
+"atr": 12.4464
 }
 ]
