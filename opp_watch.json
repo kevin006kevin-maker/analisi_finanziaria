@@ -11908,106 +11908,6 @@
 "stale": true
 },
 {
-"date": "2026-08-19 00:18",
-"conv": 60,
-"price": 49.04,
-"mkt": 2.4311,
-"occ": 49,
-"prob_gain": 48,
-"prob_loss": 17,
-"reliab": "🟡 Media"
-},
-{
-"date": "2026-08-19 01:46",
-"conv": 59,
-"price": 49.04,
-"mkt": 2.4311,
-"occ": 50,
-"prob_gain": 47,
-"prob_loss": 17,
-"reliab": "🟡 Media"
-},
-{
-"date": "2026-08-19 02:59",
-"conv": 60,
-"price": 49.04,
-"mkt": 2.4311,
-"occ": 49,
-"prob_gain": 48,
-"prob_loss": 17,
-"reliab": "🟡 Media"
-},
-{
-"date": "2026-08-19 04:21",
-"conv": 59,
-"price": 49.04,
-"mkt": 2.4311,
-"occ": 50,
-"prob_gain": 47,
-"prob_loss": 17,
-"reliab": "🟡 Media"
-},
-{
-"date": "2026-08-19 06:07",
-"conv": 66,
-"price": 49.04,
-"mkt": 2.2801,
-"occ": 50,
-"prob_gain": 51,
-"prob_loss": 16,
-"reliab": "🟡 Media"
-},
-{
-"date": "2026-08-19 08:36",
-"conv": 59,
-"price": 49.04,
-"mkt": 2.4311,
-"occ": 50,
-"prob_gain": 47,
-"prob_loss": 17,
-"reliab": "🟡 Media"
-},
-{
-"date": "2026-08-19 10:31",
-"conv": 68,
-"price": 45.045,
-"mkt": 2.0971,
-"occ": 36,
-"prob_gain": 54,
-"prob_loss": 13,
-"reliab": "🟡 Media"
-},
-{
-"date": "2026-08-19 12:00",
-"conv": 67,
-"price": 44.845,
-"mkt": 2.4311,
-"occ": 37,
-"prob_gain": 51,
-"prob_loss": 14,
-"reliab": "🟡 Media"
-},
-{
-"date": "2026-08-19 13:21",
-"conv": 66,
-"price": 45.18,
-"mkt": 2.4311,
-"occ": 35,
-"prob_gain": 54,
-"prob_loss": 15,
-"reliab": "🟡 Media"
-},
-{
-"date": "2026-08-19 14:37",
-"conv": 69,
-"price": 45.035,
-"mkt": 2.0971,
-"occ": 36,
-"prob_gain": 51,
-"prob_loss": 16,
-"reliab": "🟡 Media"
-},
-{
 "date": "2026-08-19 15:41",
 "conv": 67,
 "price": 45.55,
@@ -12871,6 +12771,16 @@
 "occ": 67,
 "prob_gain": 54,
 "prob_loss": 15,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-08-31 16:48",
+"conv": 75,
+"price": 43.415,
+"mkt": 0.9484,
+"occ": 67,
+"prob_gain": 49,
+"prob_loss": 17,
 "reliab": "🟡 Media"
 }
 ],
@@ -20255,6 +20165,16 @@
 "mkt": 2.9646,
 "occ": 46,
 "prob_gain": 52,
+"prob_loss": 3,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-08-31 16:48",
+"conv": 83,
+"price": 9.435,
+"mkt": 0.9484,
+"occ": 47,
+"prob_gain": 55,
 "prob_loss": 3,
 "reliab": "🟡 Media"
 }
@@ -40900,6 +40820,16 @@
 "prob_gain": 51,
 "prob_loss": 28,
 "reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-31 16:48",
+"conv": 57,
+"price": 26.255,
+"mkt": 0.9484,
+"occ": 61,
+"prob_gain": 51,
+"prob_loss": 28,
+"reliab": "🔴 Bassa"
 }
 ],
 "primo": {
@@ -41110,6 +41040,16 @@
 "prob_gain": 79,
 "prob_loss": 9,
 "reliab": "🔴 Bassa"
+},
+{
+"date": "2026-08-31 16:48",
+"conv": 78,
+"price": 6.365,
+"mkt": 0.9484,
+"occ": 100,
+"prob_gain": 79,
+"prob_loss": 8,
+"reliab": "🔴 Bassa"
 }
 ],
 "primo": {
@@ -41243,6 +41183,141 @@
 "prob_gain": 60,
 "prob_loss": 26,
 "reliab": "🟡 Media"
+}
+},
+"short:EIX": {
+"ticker": "EIX",
+"kind": "short",
+"name": "EIX",
+"obs": [
+{
+"date": "2026-08-31 16:48",
+"conv": 91,
+"price": 53.955,
+"mkt": 0.9484,
+"occ": 36,
+"prob_gain": 68,
+"prob_loss": 1,
+"reliab": "🟡 Media"
+}
+],
+"primo": {
+"date": "2026-08-31 16:48",
+"conv": 91,
+"price": 53.955,
+"mkt": 0.9484,
+"occ": 36,
+"prob_gain": 68,
+"prob_loss": 1,
+"reliab": "🟡 Media"
+}
+},
+"short:HWM": {
+"ticker": "HWM",
+"kind": "short",
+"name": "HWM",
+"obs": [
+{
+"date": "2026-08-31 16:48",
+"conv": 87,
+"price": 244.915,
+"mkt": 0.9484,
+"occ": 58,
+"prob_gain": 53,
+"prob_loss": 1,
+"reliab": "🟢 Alta"
+}
+],
+"primo": {
+"date": "2026-08-31 16:48",
+"conv": 87,
+"price": 244.915,
+"mkt": 0.9484,
+"occ": 58,
+"prob_gain": 53,
+"prob_loss": 1,
+"reliab": "🟢 Alta"
+}
+},
+"short:TKC": {
+"ticker": "TKC",
+"kind": "short",
+"name": "TKC",
+"obs": [
+{
+"date": "2026-08-31 16:48",
+"conv": 85,
+"price": 5.0001,
+"mkt": 0.9484,
+"occ": 57,
+"prob_gain": 55,
+"prob_loss": 1,
+"reliab": "🟢 Alta"
+}
+],
+"primo": {
+"date": "2026-08-31 16:48",
+"conv": 85,
+"price": 5.0001,
+"mkt": 0.9484,
+"occ": 57,
+"prob_gain": 55,
+"prob_loss": 1,
+"reliab": "🟢 Alta"
+}
+},
+"short:FINV": {
+"ticker": "FINV",
+"kind": "short",
+"name": "FINV",
+"obs": [
+{
+"date": "2026-08-31 16:48",
+"conv": 80,
+"price": 3.615,
+"mkt": 0.9484,
+"occ": 98,
+"prob_gain": 56,
+"prob_loss": 8,
+"reliab": "🟡 Media"
+}
+],
+"primo": {
+"date": "2026-08-31 16:48",
+"conv": 80,
+"price": 3.615,
+"mkt": 0.9484,
+"occ": 98,
+"prob_gain": 56,
+"prob_loss": 8,
+"reliab": "🟡 Media"
+}
+},
+"short:XLU": {
+"ticker": "XLU",
+"kind": "short",
+"name": "XLU",
+"obs": [
+{
+"date": "2026-08-31 16:48",
+"conv": 73,
+"price": 42.07,
+"mkt": 0.9484,
+"occ": 38,
+"prob_gain": 54,
+"prob_loss": 0,
+"reliab": "🟢 Alta"
+}
+],
+"primo": {
+"date": "2026-08-31 16:48",
+"conv": 73,
+"price": 42.07,
+"mkt": 0.9484,
+"occ": 38,
+"prob_gain": 54,
+"prob_loss": 0,
+"reliab": "🟢 Alta"
 }
 }
 }
