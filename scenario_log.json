@@ -320,15 +320,18 @@
 "obs_date": "2026-08-19",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 31.553600311279297,
+"conf_date": "2026-08-31",
 "target": null,
 "stop": null,
 "reliab": "🔴 Bassa",
 "prob_gain": 49,
 "prob_loss": 26,
 "conv": 70,
-"res": {},
+"res": {
+"osservazione|7g": 0.44,
+"promozione|7g": 2.35
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-08-19 17:04",
@@ -358,12 +361,12 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-08-31",
+"prezzo": 31.553600311279297,
+"conv": 66,
+"prob_gain": 50,
+"prob_loss": 23,
+"reliab": "🔴 Bassa",
 "mkt": null
 }
 }
@@ -379,15 +382,18 @@
 "obs_date": "2026-08-19",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 21.364999771118164,
+"conf_date": "2026-08-31",
 "target": null,
 "stop": null,
 "reliab": "🟢 Alta",
 "prob_gain": 56,
 "prob_loss": 1,
 "conv": 79,
-"res": {},
+"res": {
+"osservazione|7g": -0.28,
+"promozione|7g": -0.02
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-08-19 18:58",
@@ -417,8 +423,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-08-31",
+"prezzo": 21.364999771118164,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -438,15 +444,18 @@
 "obs_date": "2026-08-19",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 3.384999990463257,
+"conf_date": "2026-08-31",
 "target": null,
 "stop": null,
 "reliab": "🔴 Bassa",
 "prob_gain": 51,
 "prob_loss": 23,
 "conv": 70,
-"res": {},
+"res": {
+"osservazione|7g": 0.59,
+"promozione|7g": 0.15
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-08-19 21:04",
@@ -476,12 +485,12 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-08-31",
+"prezzo": 3.384999990463257,
+"conv": 65,
+"prob_gain": 49,
+"prob_loss": 25,
+"reliab": "🔴 Bassa",
 "mkt": null
 }
 }
