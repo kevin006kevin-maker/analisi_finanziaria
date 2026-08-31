@@ -7290,5 +7290,32 @@
 },
 "stop": 40.7336,
 "atr": 0.6682
+},
+{
+"episodio": "long:EIX:2026-08-31",
+"ticker": "EIX",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-31 16:49",
+"data": "2026-08-31 16:49",
+"prezzo": 53.955,
+"conv": 83,
+"prob_gain": 99,
+"prob_loss": 0,
+"reliab": "🟡 Media",
+"mkt": 0.9484,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 73.8917,
+"media20": 70.4908,
+"quattro_atr": 68.2214,
+"meta_caduta": 67.1675,
+"bollinger": 79.6322,
+"consigliata": 68.2214
+},
+"stop": 46.8218,
+"atr": 3.5666
 }
 ]
