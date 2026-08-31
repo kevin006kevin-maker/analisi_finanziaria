@@ -7418,7 +7418,17 @@
 },
 "stop": 265.1072,
 "atr": 12.4464,
-"res": {}
+"res": {},
+"soglie_contaminate": {
+"media50": 339.4326,
+"media20": 341.3165,
+"quattro_atr": 339.7856,
+"meta_caduta": 331.095,
+"bollinger": 396.8657,
+"consigliata": 339.4326
+},
+"soglie_ricalcolate_il": "2026-08-31 16:52",
+"soglie_ritardo_giorni": 2
 },
 {
 "episodio": "short:PYPL:2026-08-28",
@@ -7446,7 +7456,17 @@
 },
 "stop": 50.0186,
 "atr": 1.9678,
-"res": {}
+"res": {},
+"soglie_contaminate": {
+"media50": null,
+"media20": 59.98,
+"quattro_atr": 61.8252,
+"meta_caduta": 58.127,
+"bollinger": 64.1027,
+"consigliata": 61.8252
+},
+"soglie_ricalcolate_il": "2026-08-31 16:52",
+"soglie_ritardo_giorni": 3
 },
 {
 "episodio": "long:STLAM.MI:2026-08-17",
