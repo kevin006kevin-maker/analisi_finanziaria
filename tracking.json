@@ -4303,7 +4303,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-08-31",
 "max_price": 11.1111,
-"max_date": "2026-08-19 16:30"
+"max_date": "2026-08-19 16:30",
+"warn_since": "2026-08-31",
+"warn": "in perdita da 20 giorni di Borsa: valuta l'uscita"
 },
 "SMH": {
 "kind": "short",
@@ -6041,9 +6043,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-08-31",
 "max_price": 34.96,
-"max_date": "2026-08-17 22:55",
-"warn_since": "2026-08-28",
-"warn": "in perdita da 19 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-08-17 22:55"
 },
 "TSLL": {
 "kind": "short",
