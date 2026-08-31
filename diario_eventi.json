@@ -7236,5 +7236,32 @@
 },
 "stop": 4.7401,
 "atr": 0.13
+},
+{
+"episodio": "short:FINV:2026-08-31",
+"ticker": "FINV",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-31 16:48",
+"data": "2026-08-31 16:48",
+"prezzo": 3.615,
+"conv": 80,
+"prob_gain": 56,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": 0.9484,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 4.6285,
+"media20": 4.3983,
+"quattro_atr": 4.4194,
+"meta_caduta": 4.3225,
+"bollinger": 5.172,
+"consigliata": 4.4194
+},
+"stop": 3.2128,
+"atr": 0.2011
 }
 ]
