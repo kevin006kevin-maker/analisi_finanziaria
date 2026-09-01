@@ -7675,5 +7675,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:TNGX:2026-08-20",
+"ticker": "TNGX",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-09-01 02:25",
+"data": "2026-08-31 22:38",
+"prezzo": 22.84,
+"conv": 63,
+"prob_gain": 47,
+"prob_loss": 27,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-09-01",
+"soglie": {
+"media50": 27.6176,
+"media20": 25.7295,
+"quattro_atr": 29.2865,
+"meta_caduta": 27.87,
+"bollinger": 29.4249,
+"consigliata": 27.6176
+},
+"stop": 19.6167,
+"atr": 1.6116
 }
 ]
