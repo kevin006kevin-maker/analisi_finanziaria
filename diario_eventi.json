@@ -8480,5 +8480,32 @@
 },
 "stop": 8.7131,
 "atr": 0.4234
+},
+{
+"episodio": "short:PYPL:2026-08-28",
+"ticker": "PYPL",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-02 01:51",
+"data": "2026-09-02 01:46",
+"prezzo": 52.4,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-02",
+"soglie": {
+"media50": 54.2257,
+"media20": 59.4128,
+"quattro_atr": 59.8394,
+"meta_caduta": 57.35,
+"bollinger": 65.547,
+"consigliata": 54.2257
+},
+"stop": 48.6803,
+"atr": 1.8599
 }
 ]
