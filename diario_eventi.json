@@ -8588,5 +8588,32 @@
 },
 "stop": 17.054,
 "atr": 3.408
+},
+{
+"episodio": "short:VISN:2026-08-29",
+"ticker": "VISN",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-02 01:51",
+"data": "2026-09-02 01:49",
+"prezzo": 6.22,
+"conv": 75,
+"prob_gain": 77,
+"prob_loss": 11,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-02",
+"soglie": {
+"media50": 11.5482,
+"media20": 10.544,
+"quattro_atr": 9.2364,
+"meta_caduta": 9.55,
+"bollinger": 14.3916,
+"consigliata": 9.2364
+},
+"stop": 4.7118,
+"atr": 0.7541
 }
 ]
