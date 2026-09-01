@@ -2360,5 +2360,62 @@
 "prob_loss": 20,
 "conv": 60,
 "res": {}
+},
+{
+"ticker": "ENI.MI",
+"kind": "short",
+"date": "2026-09-02",
+"promo_price": 23.305,
+"obs_price": 22.79,
+"obs_date": "2026-08-28",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": null,
+"stop": 22.256,
+"reliab": "🟢 Alta",
+"prob_gain": 53,
+"prob_loss": 2,
+"conv": 56,
+"passaggi": {
+"osservazione": {
+"data": "2026-08-28 19:34",
+"prezzo": 22.79,
+"conv": 62,
+"prob_gain": 52,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": 2.9639
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-02 01:48",
+"prezzo": 23.305,
+"conv": 56,
+"prob_gain": 53,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
