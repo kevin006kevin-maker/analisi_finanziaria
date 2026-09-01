@@ -1,46 +1,6 @@
 [
 {
 "date": "2026-08-22",
-"ticker": "ENI.MI",
-"kind": "long",
-"price": 24.55,
-"conv": 48,
-"factors": {
-"discount": 1.3462,
-"histcheap": -1.51,
-"riskadj": 2.12,
-"ddpen": -6.33,
-"momentum": -3.5646,
-"prob": 62,
-"quality": 61.7,
-"valcheap": -0.0932,
-"trappen": 2
-},
-"ret_5d": -4.93,
-"ret_21d": null
-},
-{
-"date": "2026-08-22",
-"ticker": "ISP.MI",
-"kind": "long",
-"price": 6.815,
-"conv": 50,
-"factors": {
-"discount": 1.4746,
-"histcheap": -2.62,
-"riskadj": 1.06,
-"ddpen": -6.28,
-"momentum": 0.8871,
-"prob": 85,
-"quality": 67.3,
-"valcheap": 0.0,
-"trappen": 2
-},
-"ret_5d": -0.23,
-"ret_21d": null
-},
-{
-"date": "2026-08-22",
 "ticker": "UCG.MI",
 "kind": "long",
 "price": 82.82,
@@ -40253,6 +40213,46 @@
 "rebound": -3.7054,
 "trend": 1.0,
 "relstrength": -0.5674
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-01",
+"ticker": "ALMS",
+"kind": "long",
+"price": 9.47,
+"conv": 73,
+"factors": {
+"discount": 68.7459,
+"histcheap": 0.97,
+"riskadj": 0.54,
+"ddpen": -15.39,
+"momentum": 58.8797,
+"prob": 85,
+"quality": null,
+"valcheap": null,
+"trappen": 0
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-01",
+"ticker": "PMI",
+"kind": "long",
+"price": 3.86,
+"conv": 55,
+"factors": {
+"discount": 99.4152,
+"histcheap": 0.75,
+"riskadj": -2.23,
+"ddpen": -84.44,
+"momentum": 24.7563,
+"prob": -7,
+"quality": null,
+"valcheap": null,
+"trappen": 0
 },
 "ret_5d": null,
 "ret_21d": null
