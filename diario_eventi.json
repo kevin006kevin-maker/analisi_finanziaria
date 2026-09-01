@@ -7948,5 +7948,32 @@
 },
 "stop": 21.1714,
 "atr": 0.8698
+},
+{
+"episodio": "long:PURR:2026-09-01",
+"ticker": "PURR",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-01 20:43",
+"data": "2026-09-01 20:43",
+"prezzo": 11.185,
+"conv": 68,
+"prob_gain": 68,
+"prob_loss": 27,
+"reliab": "🔴 Bassa",
+"mkt": 0.2438,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": null,
+"media20": null,
+"quattro_atr": 15.3542,
+"meta_caduta": 12.0075,
+"bollinger": 13.7409,
+"consigliata": 15.3542
+},
+"stop": 9.1004,
+"atr": 1.0423
 }
 ]
