@@ -7975,5 +7975,32 @@
 },
 "stop": 9.1004,
 "atr": 1.0423
+},
+{
+"episodio": "short:BW:2026-08-31",
+"ticker": "BW",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-01 20:43",
+"data": "2026-09-01 20:42",
+"prezzo": 6.935,
+"conv": 72,
+"prob_gain": 50,
+"prob_loss": 31,
+"reliab": "🔴 Bassa",
+"mkt": 0.2438,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 10.2257,
+"media20": 8.6498,
+"quattro_atr": 10.1374,
+"meta_caduta": 12.3475,
+"bollinger": 10.6508,
+"consigliata": 10.1374
+},
+"stop": 5.3338,
+"atr": 0.8006
 }
 ]
