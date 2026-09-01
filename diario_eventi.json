@@ -8136,5 +8136,32 @@
 },
 "stop": 20.6201,
 "atr": 0.5099
+},
+{
+"episodio": "long:STMMI.MI:2026-08-17",
+"ticker": "STMMI.MI",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-01 23:34",
+"data": "2026-09-01 23:34",
+"prezzo": 42.29,
+"conv": 66,
+"prob_gain": 67,
+"prob_loss": 25,
+"reliab": "🟡 Media",
+"mkt": -1.3432,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 51.7497,
+"media20": 45.1458,
+"quattro_atr": 50.1166,
+"meta_caduta": 55.82,
+"bollinger": 49.9704,
+"consigliata": 50.1166
+},
+"stop": 38.3767,
+"atr": 1.9567
 }
 ]
