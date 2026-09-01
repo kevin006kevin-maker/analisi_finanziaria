@@ -1141,7 +1141,7 @@
 "max_price": 121.55,
 "max_date": "2026-08-18 07:03",
 "warn_since": "2026-09-01",
-"warn": "in perdita da 34 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 35 giorni di Borsa: valuta l'uscita"
 },
 "T": {
 "kind": "long",
@@ -2243,7 +2243,7 @@
 "max_price": 5.89,
 "max_date": "2026-08-18 06:09",
 "warn_since": "2026-08-28",
-"warn": "in perdita da 28 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 29 giorni di Borsa: valuta l'uscita"
 },
 "AXTI": {
 "kind": "short",
@@ -3875,7 +3875,7 @@
 "max_price": 61.805,
 "max_date": "2026-08-17 18:55",
 "warn_since": "2026-08-28",
-"warn": "in perdita da 22 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 23 giorni di Borsa: valuta l'uscita"
 },
 "MU": {
 "kind": "long",
@@ -5146,7 +5146,7 @@
 "max_price": 11.1111,
 "max_date": "2026-08-19 16:30",
 "warn_since": "2026-08-31",
-"warn": "in perdita da 21 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 22 giorni di Borsa: valuta l'uscita"
 },
 "SMH": {
 "kind": "short",
@@ -5858,7 +5858,7 @@
 "max_price": 49.28,
 "max_date": "2026-08-27 22:41",
 "warn_since": "2026-09-01",
-"warn": "in perdita da 21 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 22 giorni di Borsa: valuta l'uscita"
 },
 "EEM": {
 "kind": "short",
@@ -6311,7 +6311,7 @@
 "max_price": 155.83,
 "max_date": "2026-08-17 17:51",
 "warn_since": "2026-09-01",
-"warn": "in perdita da 21 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 22 giorni di Borsa: valuta l'uscita"
 },
 "XLK": {
 "kind": "short",
@@ -6633,7 +6633,7 @@
 "max_price": 14.72,
 "max_date": "2026-08-17 17:51",
 "warn_since": "2026-08-28",
-"warn": "in perdita da 21 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 22 giorni di Borsa: valuta l'uscita"
 },
 "ALNY": {
 "kind": "short",
@@ -7605,7 +7605,7 @@
 "max_price": 34.96,
 "max_date": "2026-08-17 22:55",
 "warn_since": "2026-09-01",
-"warn": "in perdita da 20 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 21 giorni di Borsa: valuta l'uscita"
 },
 "TSLL": {
 "kind": "short",
@@ -8243,7 +8243,7 @@
 "max_price": 47.41,
 "max_date": "2026-08-18 06:09",
 "warn_since": "2026-09-01",
-"warn": "in perdita da 19 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 20 giorni di Borsa: valuta l'uscita"
 },
 "TU": {
 "kind": "short",
@@ -8392,7 +8392,7 @@
 "max_price": 10.085,
 "max_date": "2026-08-21 17:07",
 "warn_since": "2026-09-01",
-"warn": "in perdita da 19 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 20 giorni di Borsa: valuta l'uscita"
 },
 "NOK": {
 "kind": "short",
@@ -8730,7 +8730,7 @@
 "max_price": 16.235,
 "max_date": "2026-08-19 17:58",
 "warn_since": "2026-08-28",
-"warn": "in perdita da 16 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 17 giorni di Borsa: valuta l'uscita"
 },
 "SUJA": {
 "kind": "short",
@@ -10447,7 +10447,7 @@
 "max_price": 45.14,
 "max_date": "2026-08-19 11:05",
 "warn_since": "2026-08-28",
-"warn": "in perdita da 12 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 13 giorni di Borsa: valuta l'uscita"
 },
 "CLBT": {
 "kind": "short",
@@ -10595,155 +10595,6 @@
 "auto": true,
 "notified": true,
 "entry_check": "2026-09-01"
-},
-"EYPT": {
-"kind": "short",
-"added": "2026-08-20",
-"note": "🤖 Promossa il 2026-08-20: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +22.3% e la convenienza (66) regge.",
-"name": "EYPT",
-"snapshots": [
-{
-"name": "EYPT",
-"price": 4.48,
-"rsi": 28.0933,
-"dd_high": -76.2334,
-"occasione": 29,
-"convenienza": 74,
-"prob_gain": 60,
-"prob_loss": 17,
-"exp_ret": 5.5,
-"gain": 161.6027,
-"reliab": "🔴 Bassa",
-"target": 11.7198,
-"stop": 2.2951,
-"date": "2026-08-29 03:26"
-},
-{
-"name": "EYPT",
-"price": 4.63,
-"rsi": 28.4858,
-"dd_high": -75.4377,
-"occasione": 50,
-"convenienza": 74,
-"prob_gain": 64,
-"prob_loss": 14,
-"exp_ret": 7.2,
-"gain": 156.8726,
-"reliab": "🔴 Bassa",
-"target": 11.8932,
-"stop": 2.3247,
-"date": "2026-08-29 10:05"
-},
-{
-"name": "EYPT",
-"price": 4.48,
-"rsi": 28.0933,
-"dd_high": -76.2334,
-"occasione": 29,
-"convenienza": 74,
-"prob_gain": 60,
-"prob_loss": 17,
-"exp_ret": 5.5,
-"gain": 161.6027,
-"reliab": "🔴 Bassa",
-"target": 11.7198,
-"stop": 2.2951,
-"date": "2026-08-29 22:00"
-},
-{
-"name": "EYPT",
-"price": 4.495,
-"rsi": 28.1998,
-"dd_high": -76.1538,
-"occasione": 83,
-"convenienza": 74,
-"prob_gain": 61,
-"prob_loss": 15,
-"exp_ret": 6.0,
-"gain": 156.6874,
-"reliab": "🔴 Bassa",
-"target": 11.5381,
-"stop": 2.4411,
-"date": "2026-08-31 16:51"
-},
-{
-"name": "EYPT",
-"price": 4.5,
-"rsi": 28.145,
-"dd_high": -76.1273,
-"occasione": 29,
-"convenienza": 74,
-"prob_gain": 61,
-"prob_loss": 15,
-"exp_ret": 5.4,
-"gain": 160.4489,
-"reliab": "🔴 Bassa",
-"target": 11.7202,
-"stop": 2.3222,
-"date": "2026-08-31 22:38"
-},
-{
-"name": "EYPT",
-"price": 4.49,
-"rsi": 28.1171,
-"dd_high": -76.1804,
-"occasione": 51,
-"convenienza": 74,
-"prob_gain": 64,
-"prob_loss": 14,
-"exp_ret": 6.2,
-"gain": 156.98,
-"reliab": "🔴 Bassa",
-"target": 11.5384,
-"stop": 2.4392,
-"date": "2026-09-01 17:04"
-},
-{
-"name": "EYPT",
-"price": 4.535,
-"rsi": 28.3933,
-"dd_high": -75.9416,
-"occasione": 83,
-"convenienza": 74,
-"prob_gain": 60,
-"prob_loss": 17,
-"exp_ret": 4.9,
-"gain": 154.4498,
-"reliab": "🔴 Bassa",
-"target": 11.5393,
-"stop": 2.4756,
-"date": "2026-09-01 20:43"
-},
-{
-"name": "EYPT",
-"price": 4.58,
-"rsi": 28.7102,
-"dd_high": -75.7029,
-"occasione": 82,
-"convenienza": 73,
-"prob_gain": 56,
-"prob_loss": 18,
-"exp_ret": 3.2,
-"gain": 151.9694,
-"reliab": "🔴 Bassa",
-"target": 11.5402,
-"stop": 2.5206,
-"date": "2026-09-01 23:35"
-}
-],
-"entry_price": 5.67,
-"entry_target": 12.6578,
-"entry_stop": 2.6963,
-"entry_conv": 74,
-"entry_date": "2026-08-20 15:43",
-"entry_src": "scatto",
-"max_price": 5.67,
-"max_date": "2026-08-20 15:43",
-"auto": true,
-"notified": false,
-"entry_check": "2026-09-01",
-"warn_since": "2026-08-27",
-"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "DUOL": {
 "kind": "long",
@@ -11330,7 +11181,7 @@
 "notified": false,
 "entry_check": "2026-09-01",
 "warn_since": "2026-09-01",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
 },
 "GOF": {
 "kind": "short",
@@ -11477,7 +11328,9 @@
 "max_date": "2026-08-26 20:17",
 "auto": true,
 "notified": false,
-"entry_check": "2026-09-01"
+"entry_check": "2026-09-01",
+"warn_since": "2026-09-02",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "UMC": {
 "kind": "long",
@@ -12094,7 +11947,9 @@
 "max_date": "2026-08-26 15:54",
 "auto": true,
 "notified": false,
-"entry_check": "2026-09-01"
+"entry_check": "2026-09-01",
+"warn_since": "2026-09-02",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "AAL": {
 "kind": "short",
@@ -12257,7 +12112,9 @@
 "max_date": "2026-08-26 15:54",
 "auto": true,
 "notified": false,
-"entry_check": "2026-09-01"
+"entry_check": "2026-09-01",
+"warn_since": "2026-09-02",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "ADXN": {
 "kind": "short",
