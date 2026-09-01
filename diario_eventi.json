@@ -7588,5 +7588,32 @@
 },
 "stop": 301.949,
 "atr": 9.7855
+},
+{
+"episodio": "long:PYPL:2026-08-28",
+"ticker": "PYPL",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-01 02:23",
+"data": "2026-09-01 02:22",
+"prezzo": 52.665,
+"conv": 72,
+"prob_gain": 78,
+"prob_loss": 14,
+"reliab": "🟡 Media",
+"mkt": 1.1268,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 54.0245,
+"media20": 59.7198,
+"quattro_atr": 60.4767,
+"meta_caduta": 57.4825,
+"bollinger": 64.9197,
+"consigliata": 54.0245
+},
+"stop": 48.7591,
+"atr": 1.9529
 }
 ]
