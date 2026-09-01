@@ -915,7 +915,9 @@
 "entry_date": "2026-07-15",
 "entry_src": "storico",
 "max_price": 121.55,
-"max_date": "2026-08-18 07:03"
+"max_date": "2026-08-18 07:03",
+"warn_since": "2026-09-01",
+"warn": "in perdita da 34 giorni di Borsa: valuta l'uscita"
 },
 "T": {
 "kind": "long",
@@ -1410,123 +1412,6 @@
 "entry_src": "storico",
 "max_price": 18.03,
 "max_date": "2026-09-01 17:04"
-},
-"CCL": {
-"kind": "long",
-"added": "2026-07-20",
-"note": "🤖 Promossa il 2026-07-20: dopo 8 giorni di Borsa di osservazione il prezzo è risalito di +2.5% e la convenienza (57) regge.",
-"name": "CCL",
-"snapshots": [
-{
-"name": "Carnival Corporation & plc",
-"price": 24.76,
-"rsi": 34.0267,
-"dd_high": -27.155,
-"occasione": 68,
-"convenienza": 70,
-"prob_gain": 69,
-"prob_loss": 18,
-"exp_ret": 23.0,
-"gain": 23.0,
-"reliab": "🟡 Media",
-"target": 27.4162,
-"stop": 22.994,
-"date": "2026-08-29 03:26"
-},
-{
-"name": "Carnival Corp",
-"price": 24.95,
-"rsi": 34.9944,
-"dd_high": -26.5961,
-"occasione": 67,
-"convenienza": 69,
-"prob_gain": 74,
-"prob_loss": 14,
-"exp_ret": 31.0,
-"gain": 31.0,
-"reliab": "🟡 Media",
-"target": 27.5192,
-"stop": 23.1697,
-"date": "2026-08-29 10:04"
-},
-{
-"name": "Carnival Corporation & plc",
-"price": 24.76,
-"rsi": 34.0267,
-"dd_high": -27.155,
-"occasione": 68,
-"convenienza": 70,
-"prob_gain": 69,
-"prob_loss": 18,
-"exp_ret": 23.0,
-"gain": 23.0,
-"reliab": "🟡 Media",
-"target": 27.4162,
-"stop": 22.994,
-"date": "2026-08-29 21:59"
-},
-{
-"name": "Carnival Corp",
-"price": 24.135,
-"rsi": 30.9245,
-"dd_high": -29.038,
-"occasione": 70,
-"convenienza": 72,
-"prob_gain": 72,
-"prob_loss": 16,
-"exp_ret": 26.9,
-"gain": 26.9,
-"reliab": "🟡 Media",
-"target": 27.2812,
-"stop": 22.3794,
-"date": "2026-08-31 16:50"
-},
-{
-"name": "Carnival Corporation & plc",
-"price": 23.89,
-"rsi": 29.9435,
-"dd_high": -29.7146,
-"occasione": 70,
-"convenienza": 72,
-"prob_gain": 69,
-"prob_loss": 18,
-"exp_ret": 26.2,
-"gain": 26.2,
-"reliab": "🟡 Media",
-"target": 27.2766,
-"stop": 22.1258,
-"date": "2026-08-31 22:38"
-},
-{
-"name": "Carnival Corp",
-"price": 23.665,
-"rsi": 29.0168,
-"dd_high": -30.3472,
-"occasione": 71,
-"convenienza": 73,
-"prob_gain": 73,
-"prob_loss": 17,
-"exp_ret": 28.2,
-"gain": 28.2,
-"reliab": "🟡 Media",
-"target": 27.1463,
-"stop": 21.9699,
-"date": "2026-09-01 17:04"
-}
-],
-"auto": true,
-"notified": true,
-"entry_check": "2026-09-01",
-"entry_price": 26.04,
-"entry_target": 27.315,
-"entry_stop": 23.8564,
-"entry_conv": 67,
-"entry_date": "2026-07-20",
-"entry_src": "storico",
-"max_price": 28.12,
-"max_date": "2026-08-18 06:09",
-"warn_since": "2026-08-26",
-"warn": "in perdita da 31 giorni di Borsa: valuta l'uscita"
 },
 "SNPS": {
 "kind": "short",
@@ -5188,7 +5073,9 @@
 "urgenza": "incassa",
 "tipo": "sgonfia"
 },
-"incasso_notified": true
+"incasso_notified": true,
+"warn_since": "2026-09-01",
+"warn": "in perdita da 21 giorni di Borsa: valuta l'uscita"
 },
 "XLK": {
 "kind": "short",
@@ -6208,7 +6095,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-01",
 "max_price": 34.96,
-"max_date": "2026-08-17 22:55"
+"max_date": "2026-08-17 22:55",
+"warn_since": "2026-09-01",
+"warn": "in perdita da 20 giorni di Borsa: valuta l'uscita"
 },
 "TSLL": {
 "kind": "short",
@@ -6815,7 +6704,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-01",
 "max_price": 10.085,
-"max_date": "2026-08-21 17:07"
+"max_date": "2026-08-21 17:07",
+"warn_since": "2026-09-01",
+"warn": "in perdita da 19 giorni di Borsa: valuta l'uscita"
 },
 "NOK": {
 "kind": "short",
@@ -10220,7 +10111,7 @@
 "max_price": 18.93,
 "max_date": "2026-09-01 17:04",
 "auto": true,
-"notified": false,
+"notified": true,
 "entry_check": "2026-09-01"
 },
 "INTC": {
