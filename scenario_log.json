@@ -550,7 +550,10 @@
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"osservazione|7g": 17.2,
+"promozione|7g": 6.02
+}
 },
 {
 "ticker": "INTR",
@@ -607,7 +610,11 @@
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": 9.62,
+"osservazione|7g": 9.83,
+"promozione|7g": 2.52
+}
 },
 {
 "ticker": "WMT",
@@ -620,15 +627,18 @@
 "obs_date": "2026-08-20",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 106.6050033569336,
+"conf_date": "2026-09-01",
 "target": null,
 "stop": null,
 "reliab": null,
 "prob_gain": null,
 "prob_loss": null,
 "conv": 82,
-"res": {},
+"res": {
+"osservazione|7g": 1.99,
+"promozione|7g": 1.26
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-08-20 15:42",
@@ -658,8 +668,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-09-01",
+"prezzo": 106.6050033569336,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -679,15 +689,18 @@
 "obs_date": "2026-08-20",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 133.38499450683594,
+"conf_date": "2026-09-01",
 "target": null,
 "stop": null,
 "reliab": "🟡 Media",
 "prob_gain": 62,
 "prob_loss": 1,
 "conv": 90,
-"res": {},
+"res": {
+"osservazione|7g": -24.41,
+"promozione|7g": -4.03
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-08-20 17:29",
@@ -717,8 +730,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-09-01",
+"prezzo": 133.38499450683594,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -736,8 +749,8 @@
 "obs_date": "2026-08-20",
 "pre_price": 23.51,
 "pre_date": "2026-08-21",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 22.6200008392334,
+"conf_date": "2026-09-01",
 "target": 28.1953,
 "stop": 22.1695,
 "reliab": "🔴 Bassa",
@@ -773,16 +786,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-09-01",
+"prezzo": 22.6200008392334,
+"conv": 63,
+"prob_gain": 47,
+"prob_loss": 27,
+"reliab": "🔴 Bassa",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": -3.79,
+"osservazione|7g": -2.79,
+"promozione|7g": -10.47
+}
 },
 {
 "ticker": "BSBR",
