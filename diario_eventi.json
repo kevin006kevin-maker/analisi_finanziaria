@@ -7921,5 +7921,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:OSW:2026-09-01",
+"ticker": "OSW",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-01 20:42",
+"data": "2026-09-01 20:42",
+"prezzo": 22.911,
+"conv": 75,
+"prob_gain": 53,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": 0.2438,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 26.6082,
+"media20": 26.1695,
+"quattro_atr": 26.3902,
+"meta_caduta": 25.7955,
+"bollinger": 27.9612,
+"consigliata": 26.3902
+},
+"stop": 21.1714,
+"atr": 0.8698
 }
 ]
