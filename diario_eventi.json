@@ -8264,5 +8264,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:SEDG:2026-08-19",
+"ticker": "SEDG",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-09-02 01:51",
+"data": "2026-09-02 01:50",
+"prezzo": 32.49,
+"conv": 64,
+"prob_gain": 50,
+"prob_loss": 28,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-09-02",
+"soglie": {
+"media50": 42.7952,
+"media20": null,
+"quattro_atr": 43.4165,
+"meta_caduta": 48.22,
+"bollinger": 34.2996,
+"consigliata": 42.7952
+},
+"stop": 27.0268,
+"atr": 2.7316
 }
 ]
