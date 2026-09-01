@@ -1,111 +1,6 @@
 [
 {
 "date": "2026-08-22",
-"ticker": "ISP.MI",
-"kind": "short",
-"price": 6.815,
-"conv": 29,
-"factors": {
-"discount": 1.4746,
-"histcheap": -2.62,
-"riskadj": 1.06,
-"ddpen": -6.28,
-"momentum": 0.8871,
-"prob": 53,
-"oversold": -63.251,
-"rebound": -6.2465,
-"trend": 1.0,
-"relstrength": 0.5435
-},
-"ret_5d": -0.23,
-"ret_21d": null
-},
-{
-"date": "2026-08-22",
-"ticker": "UCG.MI",
-"kind": "short",
-"price": 82.82,
-"conv": 47,
-"factors": {
-"discount": 3.0892,
-"histcheap": -1.85,
-"riskadj": 0.8,
-"ddpen": -8.93,
-"momentum": 3.0324,
-"prob": 52,
-"oversold": -49.9129,
-"rebound": -1.7976,
-"trend": 1.0,
-"relstrength": -1.6018
-},
-"ret_5d": 2.0,
-"ret_21d": null
-},
-{
-"date": "2026-08-22",
-"ticker": "ENEL.MI",
-"kind": "short",
-"price": 9.499,
-"conv": 72,
-"factors": {
-"discount": 7.5973,
-"histcheap": -0.42,
-"riskadj": 0.83,
-"ddpen": -4.01,
-"momentum": 1.961,
-"prob": 53,
-"oversold": -35.1645,
-"rebound": 4.4834,
-"trend": 1.0,
-"relstrength": -0.5303
-},
-"ret_5d": -0.68,
-"ret_21d": null
-},
-{
-"date": "2026-08-22",
-"ticker": "STLAM.MI",
-"kind": "short",
-"price": 4.4675,
-"conv": 64,
-"factors": {
-"discount": 57.101,
-"histcheap": 1.71,
-"riskadj": -1.42,
-"ddpen": -32.96,
-"momentum": 3.4367,
-"prob": 40,
-"oversold": -36.4875,
-"rebound": 12.9634,
-"trend": -1.0,
-"relstrength": -2.006
-},
-"ret_5d": 6.91,
-"ret_21d": null
-},
-{
-"date": "2026-08-22",
-"ticker": "RACE.MI",
-"kind": "short",
-"price": 364.15,
-"conv": 20,
-"factors": {
-"discount": 14.699,
-"histcheap": -0.88,
-"riskadj": -0.43,
-"ddpen": -24.64,
-"momentum": -2.5053,
-"prob": 46,
-"oversold": -67.676,
-"rebound": -8.4754,
-"trend": 1.0,
-"relstrength": 3.936
-},
-"ret_5d": 0.11,
-"ret_21d": null
-},
-{
-"date": "2026-08-22",
 "ticker": "G.MI",
 "kind": "short",
 "price": 42.84,
@@ -40241,6 +40136,106 @@
 "rebound": -12.3218,
 "trend": 1.0,
 "relstrength": 12.2062
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-01",
+"ticker": "BKR",
+"kind": "long",
+"price": 63.55,
+"conv": 15,
+"factors": {
+"discount": 8.7843,
+"histcheap": -1.04,
+"riskadj": 1.44,
+"ddpen": -8.88,
+"momentum": -1.941,
+"prob": 30,
+"quality": 50.2,
+"valcheap": -1.6136,
+"trappen": 1
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-01",
+"ticker": "OXY",
+"kind": "long",
+"price": 60.18,
+"conv": 55,
+"factors": {
+"discount": 9.1485,
+"histcheap": -1.34,
+"riskadj": 0.84,
+"ddpen": -12.58,
+"momentum": 1.8271,
+"prob": 41,
+"quality": 69.2,
+"valcheap": 0.3147,
+"trappen": 2
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-01",
+"ticker": "NEM",
+"kind": "long",
+"price": 126.06,
+"conv": 65,
+"factors": {
+"discount": 6.719,
+"histcheap": -1.58,
+"riskadj": 1.27,
+"ddpen": -15.24,
+"momentum": 4.1952,
+"prob": 45,
+"quality": 92.6,
+"valcheap": -1.2998,
+"trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-01",
+"ticker": "BMY",
+"kind": "long",
+"price": 66.81,
+"conv": 38,
+"factors": {
+"discount": 1.6343,
+"histcheap": -1.8,
+"riskadj": 2.02,
+"ddpen": -5.53,
+"momentum": 0.2985,
+"prob": 67,
+"quality": 61.8,
+"valcheap": -1.2335,
+"trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-01",
+"ticker": "TAL",
+"kind": "long",
+"price": 11.74,
+"conv": 74,
+"factors": {
+"discount": 9.0627,
+"histcheap": -0.87,
+"riskadj": 0.34,
+"ddpen": -14.64,
+"momentum": -3.7102,
+"prob": 50,
+"quality": 92.3,
+"valcheap": 0.5275,
+"trappen": 3
 },
 "ret_5d": null,
 "ret_21d": null
