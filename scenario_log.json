@@ -2417,5 +2417,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "VISN",
+"kind": "short",
+"date": "2026-09-02",
+"promo_price": 6.22,
+"obs_price": 6.06,
+"obs_date": "2026-08-29",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": 11.5482,
+"stop": 4.7118,
+"reliab": "🔴 Bassa",
+"prob_gain": 77,
+"prob_loss": 11,
+"conv": 75,
+"passaggi": {
+"osservazione": {
+"data": "2026-08-29 03:25",
+"prezzo": 6.06,
+"conv": 79,
+"prob_gain": 79,
+"prob_loss": 9,
+"reliab": "🔴 Bassa",
+"mkt": 2.9646
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-02 01:49",
+"prezzo": 6.22,
+"conv": 75,
+"prob_gain": 77,
+"prob_loss": 11,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
