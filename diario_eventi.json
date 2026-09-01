@@ -8109,5 +8109,32 @@
 },
 "stop": 4.5008,
 "atr": 2.4846
+},
+{
+"episodio": "long:HST:2026-08-27",
+"ticker": "HST",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-01 23:34",
+"data": "2026-09-01 23:34",
+"prezzo": 21.64,
+"conv": 77,
+"prob_gain": 77,
+"prob_loss": 8,
+"reliab": "🟢 Alta",
+"mkt": -1.3432,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 23.7222,
+"media20": 22.995,
+"quattro_atr": 23.6798,
+"meta_caduta": 23.59,
+"bollinger": 24.6695,
+"consigliata": 23.6798
+},
+"stop": 20.6201,
+"atr": 0.5099
 }
 ]
