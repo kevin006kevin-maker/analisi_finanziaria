@@ -7702,5 +7702,32 @@
 },
 "stop": 19.6167,
 "atr": 1.6116
+},
+{
+"episodio": "long:OSIS:2026-08-21",
+"ticker": "OSIS",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-01 02:25",
+"data": "2026-09-01 02:22",
+"prezzo": 207.91,
+"conv": 33,
+"prob_gain": 70,
+"prob_loss": 18,
+"reliab": "🟡 Media",
+"mkt": 1.1268,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-01",
+"soglie": {
+"media50": 218.693,
+"media20": 221.9085,
+"quattro_atr": 240.8223,
+"meta_caduta": 222.505,
+"bollinger": 246.4924,
+"consigliata": 218.693
+},
+"stop": 191.4539,
+"atr": 8.2281
 }
 ]
