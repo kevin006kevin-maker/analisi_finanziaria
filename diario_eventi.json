@@ -9244,5 +9244,32 @@
 },
 "stop": 47.896,
 "atr": 1.577
+},
+{
+"episodio": "short:EIX:2026-08-31",
+"ticker": "EIX",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-03 00:24",
+"data": "2026-09-03 00:21",
+"prezzo": 55.19,
+"conv": 83,
+"prob_gain": 68,
+"prob_loss": 2,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-03",
+"soglie": {
+"media50": 73.2692,
+"media20": 69.241,
+"quattro_atr": 71.0334,
+"meta_caduta": 67.785,
+"bollinger": 81.6457,
+"consigliata": 71.0334
+},
+"stop": 47.2683,
+"atr": 3.9608
 }
 ]
