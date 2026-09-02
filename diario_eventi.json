@@ -8721,5 +8721,32 @@
 "soglie_ricalcolate_il": "2026-09-02 01:52",
 "soglie_ritardo_giorni": 1,
 "res": {}
+},
+{
+"episodio": "short:ENEL.MI:2026-09-02",
+"ticker": "ENEL.MI",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-02 14:29",
+"data": "2026-09-02 14:29",
+"prezzo": 9.067,
+"conv": 73,
+"prob_gain": 54,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": 0.4075,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 9.8408,
+"media20": 9.5635,
+"quattro_atr": 9.6716,
+"meta_caduta": 9.6735,
+"bollinger": 10.0488,
+"consigliata": 9.6716
+},
+"stop": 8.7647,
+"atr": 0.1511
 }
 ]
