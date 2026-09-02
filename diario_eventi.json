@@ -9163,5 +9163,32 @@
 },
 "stop": 2.6681,
 "atr": 0.426
+},
+{
+"episodio": "long:ASO:2026-08-25",
+"ticker": "ASO",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-03 00:24",
+"data": "2026-09-03 00:20",
+"prezzo": 43.6,
+"conv": 64,
+"prob_gain": 67,
+"prob_loss": 18,
+"reliab": "🟡 Media",
+"mkt": -0.7374,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-03",
+"soglie": {
+"media50": 47.0744,
+"media20": 46.0905,
+"quattro_atr": 50.3286,
+"meta_caduta": 47.965,
+"bollinger": 51.0253,
+"consigliata": 47.0744
+},
+"stop": 40.2357,
+"atr": 1.6822
 }
 ]
