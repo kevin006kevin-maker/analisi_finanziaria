@@ -7839,7 +7839,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-02",
 "max_price": 10.085,
-"max_date": "2026-08-21 17:07"
+"max_date": "2026-08-21 17:07",
+"warn_since": "2026-09-02",
+"warn": "in perdita da 20 giorni di Borsa: valuta l'uscita"
 },
 "NOK": {
 "kind": "short",
@@ -10956,7 +10958,7 @@
 "max_price": 34.25,
 "max_date": "2026-09-02 21:39",
 "auto": true,
-"notified": false,
+"notified": true,
 "entry_check": "2026-09-02"
 },
 "OI": {
