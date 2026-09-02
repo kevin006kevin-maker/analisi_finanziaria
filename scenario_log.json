@@ -820,7 +820,10 @@
 "prob_gain": 71,
 "prob_loss": 14,
 "conv": 71,
-"res": {},
+"res": {
+"osservazione|7g": 1.91,
+"promozione|7g": 1.38
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-08-17 13:50",
@@ -869,8 +872,8 @@
 "obs_date": "2026-08-21",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 9.414999961853027,
+"conf_date": "2026-09-02",
 "target": 10.5724,
 "stop": 9.1622,
 "reliab": "🟢 Alta",
@@ -906,16 +909,19 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-09-02",
+"prezzo": 9.414999961853027,
+"conv": 83,
+"prob_gain": 54,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"osservazione|7g": 3.47,
+"promozione|7g": -2.23
+}
 },
 {
 "ticker": "AAL",
@@ -928,15 +934,18 @@
 "obs_date": "2026-08-21",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 13.09000015258789,
+"conf_date": "2026-09-02",
 "target": null,
 "stop": null,
 "reliab": "🟡 Media",
 "prob_gain": 53,
 "prob_loss": 13,
 "conv": 69,
-"res": {},
+"res": {
+"osservazione|7g": -4.47,
+"promozione|7g": -6.16
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-08-21 19:25",
@@ -966,12 +975,12 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-09-02",
+"prezzo": 13.09000015258789,
+"conv": 70,
+"prob_gain": 50,
+"prob_loss": 13,
+"reliab": "🟡 Media",
 "mkt": null
 }
 }
@@ -987,15 +996,18 @@
 "obs_date": "2026-08-21",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 3.055000066757202,
+"conf_date": "2026-09-02",
 "target": null,
 "stop": null,
 "reliab": "🔴 Bassa",
 "prob_gain": 40,
 "prob_loss": 46,
 "conv": 70,
-"res": {},
+"res": {
+"osservazione|7g": -10.8,
+"promozione|7g": -10.15
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-08-21 20:30",
@@ -1025,8 +1037,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-09-02",
+"prezzo": 3.055000066757202,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -1090,7 +1102,11 @@
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": 8.78,
+"osservazione|7g": 4.18,
+"promozione|7g": 1.79
+}
 },
 {
 "ticker": "SEDG",
@@ -1101,8 +1117,8 @@
 "obs_date": "2026-08-19",
 "pre_price": 31.565,
 "pre_date": "2026-08-21",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 34.25,
+"conf_date": "2026-09-02",
 "target": 44.736,
 "stop": 26.2835,
 "reliab": "🔴 Bassa",
@@ -1138,16 +1154,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-09-02",
+"prezzo": 34.25,
+"conv": 65,
+"prob_gain": 49,
+"prob_loss": 26,
+"reliab": "🔴 Bassa",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": 8.51,
+"osservazione|7g": 9.02,
+"promozione|7g": 6.04
+}
 },
 {
 "ticker": "OI",
@@ -1158,8 +1178,8 @@
 "obs_date": "2026-08-21",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 7.159999847412109,
+"conf_date": "2026-09-02",
 "target": 8.3867,
 "stop": 6.8029,
 "reliab": "🟡 Media",
@@ -1195,16 +1215,19 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-09-02",
+"prezzo": 7.159999847412109,
+"conv": 69,
+"prob_gain": 51,
+"prob_loss": 16,
+"reliab": "🟡 Media",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"osservazione|7g": 3.62,
+"promozione|7g": -5.98
+}
 },
 {
 "ticker": "AAL",
@@ -1215,8 +1238,8 @@
 "obs_date": "2026-08-21",
 "pre_price": 13.82,
 "pre_date": "2026-08-24",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 13.09000015258789,
+"conf_date": "2026-09-02",
 "target": 15.6915,
 "stop": 12.9426,
 "reliab": "🟡 Media",
@@ -1252,16 +1275,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-09-02",
+"prezzo": 13.09000015258789,
+"conv": 70,
+"prob_gain": 50,
+"prob_loss": 13,
+"reliab": "🟡 Media",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": -5.28,
+"osservazione|7g": -4.47,
+"promozione|7g": -6.53
+}
 },
 {
 "ticker": "STLAM.MI",
@@ -1344,7 +1371,10 @@
 "prob_gain": 68,
 "prob_loss": 27,
 "conv": 60,
-"res": {},
+"res": {
+"osservazione|7g": -20.71,
+"promozione|7g": -6.91
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-08-17 15:38",
