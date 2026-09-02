@@ -1,48 +1,6 @@
 [
 {
 "date": "2026-08-23",
-"ticker": "ZTO",
-"kind": "short",
-"price": 21.37,
-"conv": 79,
-"factors": {
-"discount": 17.4266,
-"histcheap": 0.33,
-"riskadj": 0.52,
-"ddpen": -6.59,
-"momentum": 6.6812,
-"prob": 55,
-"oversold": -28.1258,
-"rebound": 8.4979,
-"trend": -1.0,
-"relstrength": -5.2505
-},
-"ret_5d": -0.05,
-"ret_21d": null
-},
-{
-"date": "2026-08-23",
-"ticker": "ENVX",
-"kind": "short",
-"price": 3.38,
-"conv": 69,
-"factors": {
-"discount": 74.3745,
-"histcheap": 1.72,
-"riskadj": -1.84,
-"ddpen": -46.95,
-"momentum": 23.0068,
-"prob": 28,
-"oversold": -35.7346,
-"rebound": 48.2811,
-"trend": -1.0,
-"relstrength": -21.5761
-},
-"ret_5d": 0.15,
-"ret_21d": null
-},
-{
-"date": "2026-08-23",
 "ticker": "WMT",
 "kind": "short",
 "price": 103.7,
@@ -40241,6 +40199,46 @@
 "rebound": -16.2546,
 "trend": 1.0,
 "relstrength": 9.5722
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-02",
+"ticker": "NU",
+"kind": "long",
+"price": 14.46,
+"conv": 32,
+"factors": {
+"discount": 22.9211,
+"histcheap": 0.41,
+"riskadj": -0.21,
+"ddpen": -19.33,
+"momentum": 4.4914,
+"prob": 51,
+"quality": 58.6,
+"valcheap": -3.0,
+"trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-02",
+"ticker": "LYG",
+"kind": "long",
+"price": 5.91,
+"conv": 49,
+"factors": {
+"discount": 5.8917,
+"histcheap": -1.11,
+"riskadj": 1.74,
+"ddpen": -9.14,
+"momentum": 2.7961,
+"prob": 67,
+"quality": 58.0,
+"valcheap": -0.4386,
+"trappen": 3
 },
 "ret_5d": null,
 "ret_21d": null
