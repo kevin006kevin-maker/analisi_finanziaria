@@ -8802,5 +8802,32 @@
 },
 "stop": 3.5619,
 "atr": 0.1534
+},
+{
+"episodio": "short:AON:2026-09-01",
+"ticker": "AON",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-02 18:50",
+"data": "2026-09-01 17:03",
+"prezzo": 320.905,
+"conv": 74,
+"prob_gain": 53,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 352.9536,
+"media20": 349.718,
+"quattro_atr": 360.6102,
+"meta_caduta": 351.0825,
+"bollinger": 372.0648,
+"consigliata": 352.9536
+},
+"stop": 301.0524,
+"atr": 9.9263
 }
 ]
