@@ -9109,5 +9109,32 @@
 },
 "stop": 2.7554,
 "atr": 0.2873
+},
+{
+"episodio": "short:FRVO:2026-08-24",
+"ticker": "FRVO",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-09-03 00:24",
+"data": "2026-09-03 00:22",
+"prezzo": 17.98,
+"conv": 58,
+"prob_gain": 35,
+"prob_loss": 34,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-09-03",
+"soglie": {
+"media50": 22.9702,
+"media20": 18.81,
+"quattro_atr": 26.547,
+"meta_caduta": 27.235,
+"bollinger": 25.3287,
+"consigliata": 22.9702
+},
+"stop": 13.6965,
+"atr": 2.1418
 }
 ]
