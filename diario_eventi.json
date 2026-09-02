@@ -8921,5 +8921,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "long:DKS:2026-08-25",
+"ticker": "DKS",
+"kind": "long",
+"evento": "promozione",
+"scritto_il": "2026-09-03 00:21",
+"data": "2026-09-03 00:21",
+"prezzo": 137.34,
+"conv": 80,
+"prob_gain": 69,
+"prob_loss": 18,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 7 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 199.1262,
+"media20": 174.0325,
+"quattro_atr": 173.3213,
+"meta_caduta": 188.255,
+"bollinger": 239.4229,
+"consigliata": 173.3213
+},
+"stop": 119.3493,
+"atr": 8.9953
 }
 ]
