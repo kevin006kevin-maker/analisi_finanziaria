@@ -2718,5 +2718,62 @@
 "prob_loss": 18,
 "conv": 64,
 "res": {}
+},
+{
+"ticker": "DKS",
+"kind": "long",
+"date": "2026-09-03",
+"promo_price": 137.34,
+"obs_price": 130.67,
+"obs_date": "2026-08-25",
+"pre_price": 124.31,
+"pre_date": "2026-08-26",
+"conf_price": null,
+"conf_date": null,
+"target": 199.1262,
+"stop": 119.3493,
+"reliab": "🟡 Media",
+"prob_gain": 69,
+"prob_loss": 18,
+"conv": 80,
+"passaggi": {
+"osservazione": {
+"data": "2026-08-25 16:42",
+"prezzo": 130.67,
+"conv": 61,
+"prob_gain": 94,
+"prob_loss": 2,
+"reliab": "🟡 Media",
+"mkt": 3.1849
+},
+"anticipo": {
+"data": "2026-08-26",
+"prezzo": 124.31,
+"conv": 65,
+"prob_gain": 97,
+"prob_loss": 1,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-03 00:21",
+"prezzo": 137.34,
+"conv": 80,
+"prob_gain": 69,
+"prob_loss": 18,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
