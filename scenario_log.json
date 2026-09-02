@@ -2717,7 +2717,45 @@
 "prob_gain": 67,
 "prob_loss": 18,
 "conv": 64,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-08-25 15:46",
+"prezzo": 43.76,
+"conv": 71,
+"prob_gain": 68,
+"prob_loss": 18,
+"reliab": "🟡 Media",
+"mkt": 3.4251
+},
+"anticipo": {
+"data": "2026-08-26",
+"prezzo": 43.475,
+"conv": 73,
+"prob_gain": 75,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-03",
+"prezzo": 43.6,
+"conv": 64,
+"prob_gain": 67,
+"prob_loss": 18,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "DKS",
@@ -2909,7 +2947,45 @@
 "prob_gain": 51,
 "prob_loss": 2,
 "conv": 76,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-08-31 16:48",
+"prezzo": 5.0001,
+"conv": 85,
+"prob_gain": 55,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": 0.9484
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-03",
+"prezzo": 5.08,
+"conv": 76,
+"prob_gain": 51,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "FINV",
@@ -2930,7 +3006,45 @@
 "prob_gain": 57,
 "prob_loss": 8,
 "conv": 79,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-08-31 16:48",
+"prezzo": 3.615,
+"conv": 80,
+"prob_gain": 56,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": 0.9484
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-03",
+"prezzo": 3.44,
+"conv": 79,
+"prob_gain": 57,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "BW",
@@ -2951,6 +3065,44 @@
 "prob_gain": 52,
 "prob_loss": 31,
 "conv": 72,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-08-31 22:37",
+"prezzo": 7.54,
+"conv": 72,
+"prob_gain": 50,
+"prob_loss": 30,
+"reliab": "🔴 Bassa",
+"mkt": 1.1119
+},
+"anticipo": {
+"data": "2026-09-01",
+"prezzo": 6.935,
+"conv": 72,
+"prob_gain": 50,
+"prob_loss": 31,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-03",
+"prezzo": 7.03,
+"conv": 72,
+"prob_gain": 52,
+"prob_loss": 31,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 }
 ]
