@@ -2775,5 +2775,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "EIX",
+"kind": "short",
+"date": "2026-09-03",
+"promo_price": 55.19,
+"obs_price": 53.955,
+"obs_date": "2026-08-31",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": 73.2692,
+"stop": 47.2683,
+"reliab": "🟡 Media",
+"prob_gain": 68,
+"prob_loss": 2,
+"conv": 83,
+"passaggi": {
+"osservazione": {
+"data": "2026-08-31 16:48",
+"prezzo": 53.955,
+"conv": 91,
+"prob_gain": 68,
+"prob_loss": 1,
+"reliab": "🟡 Media",
+"mkt": 0.9484
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-03 00:21",
+"prezzo": 55.19,
+"conv": 83,
+"prob_gain": 68,
+"prob_loss": 2,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
