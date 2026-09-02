@@ -2832,5 +2832,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "HWM",
+"kind": "short",
+"date": "2026-09-03",
+"promo_price": 252.96,
+"obs_price": 244.915,
+"obs_date": "2026-08-31",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": 275.938,
+"stop": 234.159,
+"reliab": "🟢 Alta",
+"prob_gain": 46,
+"prob_loss": 3,
+"conv": 69,
+"passaggi": {
+"osservazione": {
+"data": "2026-08-31 16:48",
+"prezzo": 244.915,
+"conv": 87,
+"prob_gain": 53,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": 0.9484
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-03 00:21",
+"prezzo": 252.96,
+"conv": 69,
+"prob_gain": 46,
+"prob_loss": 3,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
