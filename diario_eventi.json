@@ -9406,5 +9406,32 @@
 },
 "stop": 5.4728,
 "atr": 0.7786
+},
+{
+"episodio": "short:ALMS:2026-09-01",
+"ticker": "ALMS",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-03 02:30",
+"data": "2026-09-03 02:29",
+"prezzo": 9.47,
+"conv": 79,
+"prob_gain": 51,
+"prob_loss": 20,
+"reliab": "🔴 Bassa",
+"mkt": -0.7374,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 26.1564,
+"media20": 23.9785,
+"quattro_atr": 19.0569,
+"meta_caduta": 19.885,
+"bollinger": 31.6611,
+"consigliata": 19.0569
+},
+"stop": 4.6766,
+"atr": 2.3967
 }
 ]
