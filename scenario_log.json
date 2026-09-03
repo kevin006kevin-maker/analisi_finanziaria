@@ -3364,5 +3364,62 @@
 "prob_loss": 2,
 "conv": 78,
 "res": {}
+},
+{
+"ticker": "ALMS",
+"kind": "short",
+"date": "2026-09-04",
+"promo_price": 11.36,
+"obs_price": 9.47,
+"obs_date": "2026-09-01",
+"pre_price": 9.47,
+"pre_date": "2026-09-03",
+"conf_price": null,
+"conf_date": null,
+"target": 25.6034,
+"stop": 6.8244,
+"reliab": "🔴 Bassa",
+"prob_gain": 53,
+"prob_loss": 21,
+"conv": 74,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-01 23:34",
+"prezzo": 9.47,
+"conv": 78,
+"prob_gain": 56,
+"prob_loss": 18,
+"reliab": "🔴 Bassa",
+"mkt": -1.3432
+},
+"anticipo": {
+"data": "2026-09-03",
+"prezzo": 9.47,
+"conv": 79,
+"prob_gain": 51,
+"prob_loss": 20,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-04 00:46",
+"prezzo": 11.36,
+"conv": 74,
+"prob_gain": 53,
+"prob_loss": 21,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
