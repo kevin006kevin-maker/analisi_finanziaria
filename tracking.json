@@ -1685,7 +1685,7 @@
 "max_price": 121.55,
 "max_date": "2026-08-18 07:03",
 "warn_since": "2026-09-01",
-"warn": "in perdita da 36 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 37 giorni di Borsa: valuta l'uscita"
 },
 "T": {
 "kind": "long",
@@ -6964,7 +6964,7 @@
 "max_price": 11.1111,
 "max_date": "2026-08-19 16:30",
 "warn_since": "2026-08-31",
-"warn": "in perdita da 23 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 24 giorni di Borsa: valuta l'uscita"
 },
 "SMH": {
 "kind": "short",
@@ -8055,7 +8055,7 @@
 "max_price": 49.28,
 "max_date": "2026-08-27 22:41",
 "warn_since": "2026-09-01",
-"warn": "in perdita da 23 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 24 giorni di Borsa: valuta l'uscita"
 },
 "EEM": {
 "kind": "short",
@@ -12418,7 +12418,7 @@
 "max_price": 16.235,
 "max_date": "2026-08-19 17:58",
 "warn_since": "2026-09-03",
-"warn": "in perdita da 18 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 19 giorni di Borsa: valuta l'uscita"
 },
 "SUJA": {
 "kind": "short",
@@ -16004,7 +16004,7 @@
 "notified": false,
 "entry_check": "2026-09-03",
 "warn_since": "2026-09-01",
-"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "GOF": {
 "kind": "short",
@@ -16217,7 +16217,7 @@
 "notified": false,
 "entry_check": "2026-09-03",
 "warn_since": "2026-09-02",
-"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
 },
 "UMC": {
 "kind": "long",
@@ -17108,7 +17108,7 @@
 "notified": false,
 "entry_check": "2026-09-03",
 "warn_since": "2026-09-02",
-"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
 },
 "AAL": {
 "kind": "short",
@@ -17353,7 +17353,7 @@
 "notified": false,
 "entry_check": "2026-09-03",
 "warn_since": "2026-09-02",
-"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
 },
 "ADXN": {
 "kind": "short",
@@ -17582,7 +17582,7 @@
 "notified": false,
 "entry_check": "2026-09-03",
 "warn_since": "2026-09-03",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
 },
 "ENVX": {
 "kind": "short",
@@ -17795,7 +17795,7 @@
 "notified": false,
 "entry_check": "2026-09-03",
 "warn_since": "2026-09-03",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
 },
 "FRVO": {
 "kind": "short",
@@ -18339,7 +18339,9 @@
 "max_date": "2026-08-29 10:04",
 "auto": true,
 "notified": false,
-"entry_check": "2026-09-03"
+"entry_check": "2026-09-03",
+"warn_since": "2026-09-04",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "IAG": {
 "kind": "long",
