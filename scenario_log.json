@@ -3264,7 +3264,45 @@
 "prob_gain": null,
 "prob_loss": null,
 "conv": 74,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-09-01 02:21",
+"prezzo": 321.52,
+"conv": 72,
+"prob_gain": 53,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": 1.1268
+},
+"anticipo": {
+"data": "2026-09-02",
+"prezzo": 320.905,
+"conv": 74,
+"prob_gain": 53,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-04",
+"prezzo": 327.0,
+"conv": 74,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "PCG",
@@ -3342,7 +3380,45 @@
 "prob_gain": 52,
 "prob_loss": 10,
 "conv": 71,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-09-01 17:03",
+"prezzo": 4.065,
+"conv": 70,
+"prob_gain": 50,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": 0.6577
+},
+"anticipo": {
+"data": "2026-09-02",
+"prezzo": 3.8686,
+"conv": 78,
+"prob_gain": 53,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-04",
+"prezzo": 3.86,
+"conv": 71,
+"prob_gain": 52,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "OSW",
@@ -3363,7 +3439,45 @@
 "prob_gain": 54,
 "prob_loss": 2,
 "conv": 78,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-09-01 20:42",
+"prezzo": 22.911,
+"conv": 75,
+"prob_gain": 53,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": 0.2438
+},
+"anticipo": {
+"data": "2026-09-02",
+"prezzo": 22.585,
+"conv": 82,
+"prob_gain": 51,
+"prob_loss": 3,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-04",
+"prezzo": 22.27,
+"conv": 78,
+"prob_gain": 54,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "ALMS",
