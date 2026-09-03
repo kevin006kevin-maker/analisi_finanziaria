@@ -9875,5 +9875,32 @@
 },
 "stop": 258.5729,
 "atr": 18.4935
+},
+{
+"episodio": "short:AON:2026-09-01",
+"ticker": "AON",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-04 00:49",
+"data": "2026-09-04 00:43",
+"prezzo": 327.0,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-04",
+"soglie": {
+"media50": 353.001,
+"media20": 348.073,
+"quattro_atr": 367.067,
+"meta_caduta": 354.13,
+"bollinger": 371.8243,
+"consigliata": 353.001
+},
+"stop": 306.9665,
+"atr": 10.0168
 }
 ]
