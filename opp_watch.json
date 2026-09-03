@@ -23127,6 +23127,16 @@
 "prob_gain": 52,
 "prob_loss": 0,
 "reliab": "🟢 Alta"
+},
+{
+"date": "2026-09-03 15:45",
+"conv": 76,
+"price": 8.979,
+"mkt": -0.1053,
+"occ": 49,
+"prob_gain": 54,
+"prob_loss": 0,
+"reliab": "🟢 Alta"
 }
 ],
 "ripartita": "2026-09-02",
@@ -40774,6 +40784,16 @@
 "prob_gain": 51,
 "prob_loss": 2,
 "reliab": "🟢 Alta"
+},
+{
+"date": "2026-09-03 15:45",
+"conv": 73,
+"price": 5.055,
+"mkt": -0.1053,
+"occ": 36,
+"prob_gain": 48,
+"prob_loss": 3,
+"reliab": "🟢 Alta"
 }
 ],
 "primo": {
@@ -41551,6 +41571,16 @@
 "prob_gain": 52,
 "prob_loss": 31,
 "reliab": "🔴 Bassa"
+},
+{
+"date": "2026-09-03 15:45",
+"conv": 68,
+"price": 7.04,
+"mkt": -0.1053,
+"occ": 71,
+"prob_gain": 49,
+"prob_loss": 32,
+"reliab": "🔴 Bassa"
 }
 ],
 "primo": {
@@ -41761,6 +41791,16 @@
 "conv": null,
 "price": 13.33,
 "stale": true
+},
+{
+"date": "2026-09-03 15:45",
+"conv": 87,
+"price": 13.535,
+"mkt": -0.1053,
+"occ": 68,
+"prob_gain": 58,
+"prob_loss": 3,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -41887,6 +41927,16 @@
 "occ": 64,
 "prob_gain": 54,
 "prob_loss": 7,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-09-03 15:45",
+"conv": 77,
+"price": 3.725,
+"mkt": -0.1053,
+"occ": 66,
+"prob_gain": 51,
+"prob_loss": 9,
 "reliab": "🟡 Media"
 }
 ],
@@ -42264,6 +42314,16 @@
 "prob_gain": 53,
 "prob_loss": 19,
 "reliab": "🔴 Bassa"
+},
+{
+"date": "2026-09-03 15:45",
+"conv": 75,
+"price": 10.855,
+"mkt": -0.1053,
+"occ": 100,
+"prob_gain": 51,
+"prob_loss": 22,
+"reliab": "🔴 Bassa"
 }
 ],
 "primo": {
@@ -42274,6 +42334,60 @@
 "occ": 47,
 "prob_gain": 56,
 "prob_loss": 18,
+"reliab": "🔴 Bassa"
+}
+},
+"short:TSN": {
+"ticker": "TSN",
+"kind": "short",
+"name": "TSN",
+"obs": [
+{
+"date": "2026-09-03 15:45",
+"conv": 78,
+"price": 51.42,
+"mkt": -0.1053,
+"occ": 51,
+"prob_gain": 56,
+"prob_loss": 2,
+"reliab": "🟢 Alta"
+}
+],
+"primo": {
+"date": "2026-09-03 15:45",
+"conv": 78,
+"price": 51.42,
+"mkt": -0.1053,
+"occ": 51,
+"prob_gain": 56,
+"prob_loss": 2,
+"reliab": "🟢 Alta"
+}
+},
+"short:MXL": {
+"ticker": "MXL",
+"kind": "short",
+"name": "MXL",
+"obs": [
+{
+"date": "2026-09-03 15:45",
+"conv": 70,
+"price": 57.04,
+"mkt": -0.1053,
+"occ": 42,
+"prob_gain": 40,
+"prob_loss": 29,
+"reliab": "🔴 Bassa"
+}
+],
+"primo": {
+"date": "2026-09-03 15:45",
+"conv": 70,
+"price": 57.04,
+"mkt": -0.1053,
+"occ": 42,
+"prob_gain": 40,
+"prob_loss": 29,
 "reliab": "🔴 Bassa"
 }
 }
