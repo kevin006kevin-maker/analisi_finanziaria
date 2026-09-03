@@ -9433,5 +9433,32 @@
 },
 "stop": 4.6766,
 "atr": 2.3967
+},
+{
+"episodio": "short:TSN:2026-09-03",
+"ticker": "TSN",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-03 15:45",
+"data": "2026-09-03 15:45",
+"prezzo": 51.42,
+"conv": 78,
+"prob_gain": 56,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": -0.1053,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 57.7718,
+"media20": 56.847,
+"quattro_atr": 57.7534,
+"meta_caduta": 56.3,
+"bollinger": 60.4042,
+"consigliata": 57.7534
+},
+"stop": 48.2533,
+"atr": 1.5833
 }
 ]
