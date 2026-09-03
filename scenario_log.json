@@ -3128,5 +3128,62 @@
 "mkt": null
 }
 }
+},
+{
+"ticker": "STLAM.MI",
+"kind": "long",
+"date": "2026-09-03",
+"promo_price": 4.702,
+"obs_price": 4.6255,
+"obs_date": "2026-08-17",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": 4.8426,
+"stop": 4.3214,
+"reliab": "🟡 Media",
+"prob_gain": 59,
+"prob_loss": 28,
+"conv": 67,
+"passaggi": {
+"osservazione": {
+"data": "2026-08-17 13:25",
+"prezzo": 4.6255,
+"conv": 66,
+"prob_gain": 67,
+"prob_loss": 22,
+"reliab": "🟡 Media",
+"mkt": 4.3991
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-03 22:06",
+"prezzo": 4.702,
+"conv": 67,
+"prob_gain": 59,
+"prob_loss": 28,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
