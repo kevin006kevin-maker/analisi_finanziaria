@@ -9460,5 +9460,32 @@
 },
 "stop": 48.2533,
 "atr": 1.5833
+},
+{
+"episodio": "short:MXL:2026-09-03",
+"ticker": "MXL",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-03 15:45",
+"data": "2026-09-03 15:45",
+"prezzo": 57.04,
+"conv": 70,
+"prob_gain": 40,
+"prob_loss": 29,
+"reliab": "🔴 Bassa",
+"mkt": -0.1053,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 77.7368,
+"media20": 68.2185,
+"quattro_atr": 82.192,
+"meta_caduta": 92.535,
+"bollinger": 84.1043,
+"consigliata": 77.7368
+},
+"stop": 44.464,
+"atr": 6.288
 }
 ]
