@@ -3265,5 +3265,62 @@
 "prob_loss": null,
 "conv": 74,
 "res": {}
+},
+{
+"ticker": "PCG",
+"kind": "short",
+"date": "2026-09-04",
+"promo_price": 13.96,
+"obs_price": 13.37,
+"obs_date": "2026-09-01",
+"pre_price": 14.06,
+"pre_date": "2026-09-02",
+"conf_price": null,
+"conf_date": null,
+"target": 17.1466,
+"stop": 12.0507,
+"reliab": "🟡 Media",
+"prob_gain": 57,
+"prob_loss": 3,
+"conv": 82,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-01 17:03",
+"prezzo": 13.37,
+"conv": 91,
+"prob_gain": 59,
+"prob_loss": 1,
+"reliab": "🟡 Media",
+"mkt": 0.6577
+},
+"anticipo": {
+"data": "2026-09-02",
+"prezzo": 14.06,
+"conv": 84,
+"prob_gain": 58,
+"prob_loss": 1,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-04 00:45",
+"prezzo": 13.96,
+"conv": 82,
+"prob_gain": 57,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
