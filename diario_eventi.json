@@ -9740,5 +9740,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:PL:2026-09-03",
+"ticker": "PL",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-04 00:45",
+"data": "2026-09-04 00:43",
+"prezzo": 18.35,
+"conv": 72,
+"prob_gain": 51,
+"prob_loss": 28,
+"reliab": "🔴 Bassa",
+"mkt": 0.4896,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 23.7308,
+"media20": 22.118,
+"quattro_atr": 23.7115,
+"meta_caduta": 26.26,
+"bollinger": 26.0107,
+"consigliata": 23.7115
+},
+"stop": 15.6693,
+"atr": 1.3404
 }
 ]
