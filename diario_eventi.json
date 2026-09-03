@@ -9983,5 +9983,32 @@
 },
 "stop": 20.4123,
 "atr": 0.9289
+},
+{
+"episodio": "short:ALMS:2026-09-01",
+"ticker": "ALMS",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-04 00:49",
+"data": "2026-09-04 00:45",
+"prezzo": 11.36,
+"conv": 74,
+"prob_gain": 53,
+"prob_loss": 21,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-04",
+"soglie": {
+"media50": 25.6034,
+"media20": 22.318,
+"quattro_atr": 20.4311,
+"meta_caduta": 20.83,
+"bollinger": 33.0364,
+"consigliata": 20.4311
+},
+"stop": 6.8244,
+"atr": 2.2678
 }
 ]
