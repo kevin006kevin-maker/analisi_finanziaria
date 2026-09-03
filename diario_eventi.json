@@ -9929,5 +9929,32 @@
 },
 "stop": 12.0507,
 "atr": 0.9547
+},
+{
+"episodio": "short:NIO:2026-09-01",
+"ticker": "NIO",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-04 00:49",
+"data": "2026-09-04 00:43",
+"prezzo": 3.86,
+"conv": 71,
+"prob_gain": 52,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": 0.4896,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-04",
+"soglie": {
+"media50": 4.6618,
+"media20": 4.4265,
+"quattro_atr": 4.4862,
+"meta_caduta": 4.545,
+"bollinger": 4.9425,
+"consigliata": 4.4862
+},
+"stop": 3.5469,
+"atr": 0.1565
 }
 ]
