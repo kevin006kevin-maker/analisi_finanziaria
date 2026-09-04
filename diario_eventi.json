@@ -10511,5 +10511,32 @@
 },
 "stop": 11.2051,
 "atr": 2.0475
+},
+{
+"episodio": "long:GAP:2026-08-29",
+"ticker": "GAP",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-05 00:07",
+"data": "2026-09-05 00:06",
+"prezzo": 22.43,
+"conv": 70,
+"prob_gain": 67,
+"prob_loss": 20,
+"reliab": "🟡 Media",
+"mkt": -0.5032,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": null,
+"media20": null,
+"quattro_atr": 26.0957,
+"meta_caduta": 22.955,
+"bollinger": 23.1761,
+"consigliata": 26.0957
+},
+"stop": 20.5971,
+"atr": 0.9164
 }
 ]
