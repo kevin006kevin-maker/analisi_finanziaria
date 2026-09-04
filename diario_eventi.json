@@ -10430,5 +10430,32 @@
 },
 "stop": null,
 "atr": 8.8425
+},
+{
+"episodio": "short:LULG:2026-09-04",
+"ticker": "LULG",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-04 21:47",
+"data": "2026-09-04 21:47",
+"prezzo": 4.265,
+"conv": 67,
+"prob_gain": 54,
+"prob_loss": 23,
+"reliab": "🔴 Bassa",
+"mkt": -0.5759,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 6.376,
+"media20": 6.3196,
+"quattro_atr": 6.7161,
+"meta_caduta": 5.88,
+"bollinger": 7.5289,
+"consigliata": 6.376
+},
+"stop": 3.0394,
+"atr": 0.6128
 }
 ]
