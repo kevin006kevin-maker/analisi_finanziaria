@@ -1,48 +1,6 @@
 [
 {
 "date": "2026-08-25",
-"ticker": "VWO",
-"kind": "short",
-"price": 59.97,
-"conv": 45,
-"factors": {
-"discount": 2.0738,
-"histcheap": -1.36,
-"riskadj": 0.91,
-"ddpen": -3.52,
-"momentum": 0.6955,
-"prob": 50,
-"oversold": -52.8787,
-"rebound": -0.9692,
-"trend": 1.0,
-"relstrength": 0.495
-},
-"ret_5d": 1.73,
-"ret_21d": null
-},
-{
-"date": "2026-08-25",
-"ticker": "EFA",
-"kind": "short",
-"price": 108.03,
-"conv": 38,
-"factors": {
-"discount": 0.6072,
-"histcheap": -1.76,
-"riskadj": 1.24,
-"ddpen": -3.06,
-"momentum": 0.3873,
-"prob": 52,
-"oversold": -58.6524,
-"rebound": -2.6693,
-"trend": 1.0,
-"relstrength": 0.8032
-},
-"ret_5d": -1.01,
-"ret_21d": null
-},
-{
-"date": "2026-08-25",
 "ticker": "EEM",
 "kind": "short",
 "price": 66.11,
@@ -40262,6 +40220,46 @@
 "rebound": 24.8231,
 "trend": -1.0,
 "relstrength": -14.8444
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-04",
+"ticker": "GWRE",
+"kind": "long",
+"price": 161.19,
+"conv": 31,
+"factors": {
+"discount": 38.4489,
+"histcheap": 0.3,
+"riskadj": -0.72,
+"ddpen": -37.22,
+"momentum": 21.6954,
+"prob": 30,
+"quality": 45.9,
+"valcheap": -3.0,
+"trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-04",
+"ticker": "FICO",
+"kind": "long",
+"price": 932.0,
+"conv": 58,
+"factors": {
+"discount": 50.4137,
+"histcheap": 1.66,
+"riskadj": -1.0,
+"ddpen": -29.99,
+"momentum": 19.2073,
+"prob": 63,
+"quality": 64.7,
+"valcheap": -2.9123,
+"trappen": 3
 },
 "ret_5d": null,
 "ret_21d": null
