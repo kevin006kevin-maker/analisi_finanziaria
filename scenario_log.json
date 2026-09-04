@@ -1856,15 +1856,18 @@
 "obs_date": "2026-08-25",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 302.6199951171875,
+"conf_date": "2026-09-04",
 "target": null,
 "stop": null,
 "reliab": "🟡 Media",
 "prob_gain": 56,
 "prob_loss": 6,
 "conv": 87,
-"res": {},
+"res": {
+"osservazione|7g": -15.17,
+"promozione|7g": -1.75
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-08-25 20:38",
@@ -1894,8 +1897,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-09-04",
+"prezzo": 302.6199951171875,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -1915,15 +1918,18 @@
 "obs_date": "2026-08-25",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 94.65499877929688,
+"conf_date": "2026-09-04",
 "target": null,
 "stop": null,
 "reliab": null,
 "prob_gain": null,
 "prob_loss": null,
 "conv": 74,
-"res": {},
+"res": {
+"osservazione|7g": 6.95,
+"promozione|7g": 6.07
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-08-25 16:41",
@@ -1953,12 +1959,12 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-09-04",
+"prezzo": 94.65499877929688,
+"conv": 61,
+"prob_gain": 46,
+"prob_loss": 26,
+"reliab": "🔴 Bassa",
 "mkt": null
 }
 }
@@ -1972,8 +1978,8 @@
 "obs_date": "2026-08-25",
 "pre_price": 87.48,
 "pre_date": "2026-08-26",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 94.65499877929688,
+"conf_date": "2026-09-04",
 "target": 105.554,
 "stop": 80.4753,
 "reliab": "🔴 Bassa",
@@ -2009,12 +2015,12 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-09-04",
+"prezzo": 94.65499877929688,
+"conv": 61,
+"prob_gain": 46,
+"prob_loss": 26,
+"reliab": "🔴 Bassa",
 "mkt": null
 }
 },
