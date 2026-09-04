@@ -3556,5 +3556,62 @@
 "prob_loss": 16,
 "conv": 61,
 "res": {}
+},
+{
+"ticker": "AON",
+"kind": "short",
+"date": "2026-09-04",
+"promo_price": 330.88,
+"obs_price": 321.52,
+"obs_date": "2026-09-01",
+"pre_price": 320.905,
+"pre_date": "2026-09-02",
+"conf_price": null,
+"conf_date": null,
+"target": 352.9706,
+"stop": 310.9628,
+"reliab": "🟢 Alta",
+"prob_gain": 52,
+"prob_loss": 0,
+"conv": 65,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-01 02:21",
+"prezzo": 321.52,
+"conv": 72,
+"prob_gain": 53,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": 1.1268
+},
+"anticipo": {
+"data": "2026-09-02",
+"prezzo": 320.905,
+"conv": 74,
+"prob_gain": 53,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-04 02:42",
+"prezzo": 330.88,
+"conv": 65,
+"prob_gain": 52,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
