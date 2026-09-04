@@ -10457,5 +10457,32 @@
 },
 "stop": 3.0394,
 "atr": 0.6128
+},
+{
+"episodio": "short:YSS:2026-09-05",
+"ticker": "YSS",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-05 00:04",
+"data": "2026-09-05 00:04",
+"prezzo": 8.96,
+"conv": 69,
+"prob_gain": 46,
+"prob_loss": 34,
+"reliab": "🔴 Bassa",
+"mkt": -0.5032,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 15.157,
+"media20": 9.738,
+"quattro_atr": 13.0192,
+"meta_caduta": 21.34,
+"bollinger": 11.543,
+"consigliata": 13.0192
+},
+"stop": 6.9304,
+"atr": 1.0148
 }
 ]
