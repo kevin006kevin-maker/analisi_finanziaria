@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-08-25",
-"ticker": "DQ",
-"kind": "short",
-"price": 14.43,
-"conv": 32,
-"factors": {
-"discount": 59.5685,
-"histcheap": 1.29,
-"riskadj": -1.27,
-"ddpen": -38.96,
-"momentum": -1.3343,
-"prob": 28,
-"oversold": -55.4831,
-"rebound": -8.4574,
-"trend": -1.0,
-"relstrength": 2.5247
-},
-"ret_5d": -9.77,
-"ret_21d": null
-},
-{
-"date": "2026-08-25",
 "ticker": "SUPV",
 "kind": "short",
 "price": 8.55,
@@ -40263,6 +40242,27 @@
 "quality": 74.9,
 "valcheap": 0.4442,
 "trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-04",
+"ticker": "DLTH",
+"kind": "short",
+"price": 4.46,
+"conv": 25,
+"factors": {
+"discount": 6.499,
+"histcheap": -1.68,
+"riskadj": 0.31,
+"ddpen": -28.52,
+"momentum": -20.5405,
+"prob": 19,
+"oversold": -68.9526,
+"rebound": -8.0673,
+"trend": 1.0,
+"relstrength": 20.3243
 },
 "ret_5d": null,
 "ret_21d": null
