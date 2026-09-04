@@ -19551,5 +19551,37 @@
 "max_date": "2026-09-04 00:45",
 "auto": true,
 "notified": false
+},
+"AON": {
+"kind": "short",
+"added": "2026-09-04",
+"note": "🤖 Promossa il 2026-09-04: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.9% e la convenienza (74) regge.",
+"name": "AON",
+"snapshots": [
+{
+"name": "AON",
+"price": 330.88,
+"rsi": 38.7131,
+"dd_high": -13.2141,
+"occasione": 53,
+"convenienza": 65,
+"prob_gain": 52,
+"prob_loss": 0,
+"exp_ret": 0.3,
+"gain": 6.6763,
+"reliab": "🟢 Alta",
+"target": 352.9706,
+"stop": 310.9628,
+"date": "2026-09-04 02:42"
+}
+],
+"entry_price": 330.88,
+"entry_target": 352.9706,
+"entry_stop": 310.9628,
+"entry_conv": 65,
+"entry_date": "2026-09-04 02:42",
+"entry_src": "scatto",
+"max_price": 330.88,
+"max_date": "2026-09-04 02:42"
 }
 }
