@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-08-25",
-"ticker": "SUPV",
-"kind": "short",
-"price": 8.55,
-"conv": 46,
-"factors": {
-"discount": 33.5148,
-"histcheap": 0.4,
-"riskadj": 0.03,
-"ddpen": -25.26,
-"momentum": -7.1429,
-"prob": 22,
-"oversold": -47.9187,
-"rebound": 10.2222,
-"trend": -1.0,
-"relstrength": 8.3333
-},
-"ret_5d": 4.8,
-"ret_21d": null
-},
-{
-"date": "2026-08-25",
 "ticker": "ANGX",
 "kind": "short",
 "price": 4.54,
@@ -40263,6 +40242,26 @@
 "rebound": -8.0673,
 "trend": 1.0,
 "relstrength": 20.3243
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-04",
+"ticker": "CNQ",
+"kind": "long",
+"price": 51.14,
+"conv": 53,
+"factors": {
+"discount": 1.2932,
+"histcheap": -1.59,
+"riskadj": 2.03,
+"ddpen": -7.8,
+"momentum": -2.7527,
+"prob": 44,
+"quality": 74.2,
+"valcheap": -0.8504,
+"trappen": 3
 },
 "ret_5d": null,
 "ret_21d": null
