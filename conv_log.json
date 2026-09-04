@@ -1,46 +1,6 @@
 [
 {
 "date": "2026-08-25",
-"ticker": "ET",
-"kind": "long",
-"price": 21.08,
-"conv": 22,
-"factors": {
-"discount": 1.5873,
-"histcheap": -1.94,
-"riskadj": 1.56,
-"ddpen": -4.16,
-"momentum": -0.6686,
-"prob": 39,
-"quality": 30.5,
-"valcheap": 0.2562,
-"trappen": 0
-},
-"ret_5d": 2.32,
-"ret_21d": null
-},
-{
-"date": "2026-08-25",
-"ticker": "T",
-"kind": "long",
-"price": 25.69,
-"conv": 52,
-"factors": {
-"discount": 13.2681,
-"histcheap": -0.05,
-"riskadj": -0.86,
-"ddpen": -15.54,
-"momentum": -4.0924,
-"prob": 52,
-"quality": 63.3,
-"valcheap": 0.7568,
-"trappen": 2
-},
-"ret_5d": 1.28,
-"ret_21d": null
-},
-{
-"date": "2026-08-25",
 "ticker": "SAN",
 "kind": "long",
 "price": 14.72,
@@ -40269,6 +40229,46 @@
 "rebound": -12.3058,
 "trend": -1.0,
 "relstrength": 6.2234
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-04",
+"ticker": "BANL",
+"kind": "long",
+"price": 9.01,
+"conv": 56,
+"factors": {
+"discount": 44.0373,
+"histcheap": -2.25,
+"riskadj": 2.58,
+"ddpen": -41.4,
+"momentum": 44.0373,
+"prob": 14,
+"quality": null,
+"valcheap": null,
+"trappen": 0
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-04",
+"ticker": "BTAI",
+"kind": "long",
+"price": 0.0707,
+"conv": 65,
+"factors": {
+"discount": 98.3286,
+"histcheap": 2.25,
+"riskadj": -1.92,
+"ddpen": -64.45,
+"momentum": 60.9392,
+"prob": 64,
+"quality": null,
+"valcheap": null,
+"trappen": 0
 },
 "ret_5d": null,
 "ret_21d": null
