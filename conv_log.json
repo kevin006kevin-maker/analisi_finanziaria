@@ -1,28 +1,6 @@
 [
 {
 "date": "2026-08-25",
-"ticker": "DKS",
-"kind": "short",
-"price": 179.33,
-"conv": 77,
-"factors": {
-"discount": 25.0199,
-"histcheap": 2.8,
-"riskadj": -1.27,
-"ddpen": -10.39,
-"momentum": 8.617,
-"prob": 53,
-"oversold": -30.851,
-"rebound": 18.5537,
-"trend": -1.0,
-"relstrength": -7.4266
-},
-"ret_5d": null,
-"ret_21d": null,
-"bad_data": true
-},
-{
-"date": "2026-08-25",
 "ticker": "TNGX",
 "kind": "short",
 "price": 24.51,
@@ -40260,6 +40238,26 @@
 "rebound": 4.2737,
 "trend": 1.0,
 "relstrength": -0.5513
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-04",
+"ticker": "LULU",
+"kind": "long",
+"price": 100.525,
+"conv": 73,
+"factors": {
+"discount": 53.4348,
+"histcheap": 1.85,
+"riskadj": -1.61,
+"ddpen": -30.2,
+"momentum": 16.7908,
+"prob": 85,
+"quality": 73.1,
+"valcheap": -0.1606,
+"trappen": 0
 },
 "ret_5d": null,
 "ret_21d": null
