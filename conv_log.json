@@ -1,48 +1,6 @@
 [
 {
 "date": "2026-08-25",
-"ticker": "CMPS",
-"kind": "short",
-"price": 14.2,
-"conv": 35,
-"factors": {
-"discount": 5.7731,
-"histcheap": -2.01,
-"riskadj": 2.68,
-"ddpen": -15.68,
-"momentum": -3.4985,
-"prob": 23,
-"oversold": -60.0602,
-"rebound": -9.4606,
-"trend": 1.0,
-"relstrength": 4.689
-},
-"ret_5d": -6.06,
-"ret_21d": null
-},
-{
-"date": "2026-08-25",
-"ticker": "SABR",
-"kind": "short",
-"price": 2.26,
-"conv": 27,
-"factors": {
-"discount": -0.0,
-"histcheap": -2.03,
-"riskadj": 0.49,
-"ddpen": -25.64,
-"momentum": -4.8724,
-"prob": 17,
-"oversold": -63.0582,
-"rebound": -14.0929,
-"trend": 1.0,
-"relstrength": 6.0628
-},
-"ret_5d": -7.96,
-"ret_21d": null
-},
-{
-"date": "2026-08-25",
 "ticker": "DQ",
 "kind": "short",
 "price": 14.43,
@@ -40265,6 +40223,46 @@
 "rebound": -7.898,
 "trend": 1.0,
 "relstrength": 22.2837
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-04",
+"ticker": "KGC",
+"kind": "long",
+"price": 31.59,
+"conv": 67,
+"factors": {
+"discount": 17.0213,
+"histcheap": -0.8,
+"riskadj": 0.87,
+"ddpen": -19.86,
+"momentum": 2.8299,
+"prob": 36,
+"quality": 93.1,
+"valcheap": -1.3488,
+"trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-04",
+"ticker": "FIS",
+"kind": "long",
+"price": 42.28,
+"conv": 68,
+"factors": {
+"discount": 38.6891,
+"histcheap": 1.0,
+"riskadj": -2.06,
+"ddpen": -27.78,
+"momentum": -4.2663,
+"prob": 59,
+"quality": 74.9,
+"valcheap": 0.4442,
+"trappen": 3
 },
 "ret_5d": null,
 "ret_21d": null
