@@ -1,111 +1,6 @@
 [
 {
 "date": "2026-08-25",
-"ticker": "BRBR",
-"kind": "short",
-"price": 10.85,
-"conv": 46,
-"factors": {
-"discount": 74.5783,
-"histcheap": 1.1,
-"riskadj": -1.71,
-"ddpen": -54.44,
-"momentum": -6.5815,
-"prob": 30,
-"oversold": -43.7795,
-"rebound": 8.6415,
-"trend": -1.0,
-"relstrength": 7.772
-},
-"ret_5d": -0.37,
-"ret_21d": null
-},
-{
-"date": "2026-08-25",
-"ticker": "CANG",
-"kind": "short",
-"price": 2.3,
-"conv": 26,
-"factors": {
-"discount": 91.6364,
-"histcheap": 1.07,
-"riskadj": -2.53,
-"ddpen": -68.1,
-"momentum": -28.4916,
-"prob": 14,
-"oversold": -59.6889,
-"rebound": -12.8261,
-"trend": -1.0,
-"relstrength": 29.6821
-},
-"ret_5d": -17.39,
-"ret_21d": null
-},
-{
-"date": "2026-08-25",
-"ticker": "CAPR",
-"kind": "short",
-"price": 6.8,
-"conv": 70,
-"factors": {
-"discount": 80.7583,
-"histcheap": 1.2,
-"riskadj": 0.0,
-"ddpen": -30.75,
-"momentum": 8.7248,
-"prob": 16,
-"oversold": -38.3676,
-"rebound": 134.4735,
-"trend": -1.0,
-"relstrength": -7.5344
-},
-"ret_5d": 52.79,
-"ret_21d": null
-},
-{
-"date": "2026-08-25",
-"ticker": "ZIP",
-"kind": "short",
-"price": 4.54,
-"conv": 37,
-"factors": {
-"discount": 17.3042,
-"histcheap": -0.84,
-"riskadj": -0.26,
-"ddpen": -37.83,
-"momentum": 6.5844,
-"prob": 29,
-"oversold": -50.8873,
-"rebound": -9.5242,
-"trend": 1.0,
-"relstrength": -5.3939
-},
-"ret_5d": -5.62,
-"ret_21d": null
-},
-{
-"date": "2026-08-25",
-"ticker": "JELD",
-"kind": "short",
-"price": 2.49,
-"conv": 20,
-"factors": {
-"discount": 63.1657,
-"histcheap": 0.07,
-"riskadj": -1.42,
-"ddpen": -65.42,
-"momentum": -33.1551,
-"prob": 11,
-"oversold": -81.7298,
-"rebound": -37.5984,
-"trend": 1.0,
-"relstrength": 34.3455
-},
-"ret_5d": -11.65,
-"ret_21d": null
-},
-{
-"date": "2026-08-25",
 "ticker": "SID",
 "kind": "short",
 "price": 1.03,
@@ -40270,6 +40165,106 @@
 "rebound": 11.3333,
 "trend": -1.0,
 "relstrength": -12.9894
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-04",
+"ticker": "ET",
+"kind": "long",
+"price": 21.54,
+"conv": 17,
+"factors": {
+"discount": -0.0,
+"histcheap": -2.08,
+"riskadj": 1.71,
+"ddpen": -4.0,
+"momentum": -0.5133,
+"prob": 48,
+"quality": 40.8,
+"valcheap": -0.6356,
+"trappen": 2
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-04",
+"ticker": "AEG",
+"kind": "long",
+"price": 9.25,
+"conv": 16,
+"factors": {
+"discount": 2.9381,
+"histcheap": -1.85,
+"riskadj": 0.87,
+"ddpen": -5.43,
+"momentum": -0.4343,
+"prob": 30,
+"quality": 42.9,
+"valcheap": 0.5349,
+"trappen": -1
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-04",
+"ticker": "TAL",
+"kind": "long",
+"price": 12.13,
+"conv": 73,
+"factors": {
+"discount": 6.0418,
+"histcheap": -1.32,
+"riskadj": 0.57,
+"ddpen": -14.63,
+"momentum": -3.7639,
+"prob": 36,
+"quality": 92.2,
+"valcheap": 0.3443,
+"trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-04",
+"ticker": "ONON",
+"kind": "long",
+"price": 27.8,
+"conv": 74,
+"factors": {
+"discount": 45.0918,
+"histcheap": 2.34,
+"riskadj": -1.34,
+"ddpen": -21.96,
+"momentum": 4.8922,
+"prob": 55,
+"quality": 75.8,
+"valcheap": -1.8668,
+"trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-04",
+"ticker": "PBR-A",
+"kind": "long",
+"price": 18.81,
+"conv": 43,
+"factors": {
+"discount": 5.4774,
+"histcheap": -1.46,
+"riskadj": 2.31,
+"ddpen": -11.52,
+"momentum": -17.4157,
+"prob": 18,
+"quality": 65.2,
+"valcheap": 0.4083,
+"trappen": 2
 },
 "ret_5d": null,
 "ret_21d": null
