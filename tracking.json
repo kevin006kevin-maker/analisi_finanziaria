@@ -1843,7 +1843,9 @@
 "entry_date": "2026-07-15",
 "entry_src": "storico",
 "max_price": 121.55,
-"max_date": "2026-08-18 07:03"
+"max_date": "2026-08-18 07:03",
+"warn_since": "2026-09-04",
+"warn": "in perdita da 37 giorni di Borsa: valuta l'uscita"
 },
 "T": {
 "kind": "long",
@@ -13107,9 +13109,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-04",
 "max_price": 10.085,
-"max_date": "2026-08-21 17:07",
-"warn_since": "2026-09-04",
-"warn": "in perdita da 22 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-08-21 17:07"
 },
 "NOK": {
 "kind": "short",
@@ -16421,7 +16421,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-04",
 "max_price": 29.34,
-"max_date": "2026-09-03 15:46"
+"max_date": "2026-09-03 15:46",
+"warn_since": "2026-09-04",
+"warn": "in perdita da 15 giorni di Borsa: valuta l'uscita"
 },
 "CLBT": {
 "kind": "short",
@@ -20273,7 +20275,7 @@
 "max_price": 94.895,
 "max_date": "2026-09-04 19:26",
 "auto": true,
-"notified": false,
+"notified": true,
 "entry_check": "2026-09-04"
 },
 "IAG": {
