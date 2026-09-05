@@ -19014,9 +19014,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-04",
 "max_price": 29.34,
-"max_date": "2026-09-03 15:46",
-"warn_since": "2026-09-04",
-"warn": "in perdita da 15 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-09-03 15:46"
 },
 "CLBT": {
 "kind": "short",
@@ -23461,7 +23459,9 @@
 "max_date": "2026-09-05 00:08",
 "auto": true,
 "notified": true,
-"entry_check": "2026-09-04"
+"entry_check": "2026-09-04",
+"warn_since": "2026-09-05",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "IAG": {
 "kind": "long",
