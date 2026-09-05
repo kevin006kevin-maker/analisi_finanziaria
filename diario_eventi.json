@@ -10538,5 +10538,32 @@
 },
 "stop": 20.5971,
 "atr": 0.9164
+},
+{
+"episodio": "short:PSNY:2026-09-03",
+"ticker": "PSNY",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-05 02:16",
+"data": "2026-09-05 02:15",
+"prezzo": 8.69,
+"conv": 77,
+"prob_gain": 58,
+"prob_loss": 20,
+"reliab": "🔴 Bassa",
+"mkt": -0.5032,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 14.9862,
+"media20": 13.037,
+"quattro_atr": 12.6603,
+"meta_caduta": 14.72,
+"bollinger": 15.5868,
+"consigliata": 12.6603
+},
+"stop": 6.7049,
+"atr": 0.9926
 }
 ]
