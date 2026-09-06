@@ -18820,78 +18820,8 @@
 "reliab": "🔴 Bassa"
 },
 {
-"date": "2026-08-24 11:43",
-"conv": 45,
-"price": 37.24,
-"mkt": 3.5401,
-"occ": 79,
-"prob_gain": 58,
-"prob_loss": 36,
-"reliab": "🔴 Bassa"
-},
-{
-"date": "2026-08-24 16:01",
-"conv": 54,
-"price": 34.63,
-"mkt": 3.2175,
-"occ": 83,
-"prob_gain": 63,
-"prob_loss": 32,
-"reliab": "🔴 Bassa"
-},
-{
-"date": "2026-08-24 17:37",
-"conv": 52,
-"price": 35.11,
-"mkt": 3.2895,
-"occ": 83,
-"prob_gain": 60,
-"prob_loss": 34,
-"reliab": "🔴 Bassa"
-},
-{
-"date": "2026-08-24 19:28",
-"conv": 53,
-"price": 35.52,
-"mkt": 3.2488,
-"occ": 83,
-"prob_gain": 62,
-"prob_loss": 31,
-"reliab": "🔴 Bassa"
-},
-{
-"date": "2026-08-24 20:43",
-"conv": 53,
-"price": 35.38,
-"mkt": 3.3381,
-"occ": 83,
-"prob_gain": 65,
-"prob_loss": 30,
-"reliab": "🔴 Bassa"
-},
-{
-"date": "2026-08-24 21:54",
-"conv": 54,
-"price": 35.02,
-"mkt": 3.2255,
-"occ": 83,
-"prob_gain": 65,
-"prob_loss": 27,
-"reliab": "🔴 Bassa"
-},
-{
 "date": "2026-08-24 23:00",
 "conv": 53,
-"price": 35.17,
-"mkt": 3.2332,
-"occ": 83,
-"prob_gain": 62,
-"prob_loss": 29,
-"reliab": "🔴 Bassa"
-},
-{
-"date": "2026-08-25 00:54",
-"conv": 54,
 "price": 35.17,
 "mkt": 3.2332,
 "occ": 83,
@@ -19438,6 +19368,16 @@
 {
 "date": "2026-09-05 14:19",
 "conv": 46,
+"price": 39.59,
+"mkt": -0.5032,
+"occ": 82,
+"prob_gain": 50,
+"prob_loss": 42,
+"reliab": "🔴 Bassa"
+},
+{
+"date": "2026-09-06 03:13",
+"conv": 45,
 "price": 39.59,
 "mkt": -0.5032,
 "occ": 82,
@@ -41985,6 +41925,16 @@
 "prob_gain": 89,
 "prob_loss": 2,
 "reliab": "🟢 Alta"
+},
+{
+"date": "2026-09-06 03:13",
+"conv": 76,
+"price": 10.65,
+"mkt": -0.5032,
+"occ": 58,
+"prob_gain": 89,
+"prob_loss": 2,
+"reliab": "🟢 Alta"
 }
 ],
 "primo": {
@@ -43813,6 +43763,16 @@
 "prob_gain": 84,
 "prob_loss": 8,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-09-06 03:13",
+"conv": 72,
+"price": 100.61,
+"mkt": -0.5032,
+"occ": 63,
+"prob_gain": 84,
+"prob_loss": 8,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -44028,6 +43988,33 @@
 "prob_gain": 54,
 "prob_loss": 23,
 "reliab": "🔴 Bassa"
+}
+},
+"long:FICO": {
+"ticker": "FICO",
+"kind": "long",
+"name": "Fair Isaac Corp",
+"obs": [
+{
+"date": "2026-09-06 03:13",
+"conv": 62,
+"price": 932.26,
+"mkt": -0.5032,
+"occ": 87,
+"prob_gain": 80,
+"prob_loss": 12,
+"reliab": "🟡 Media"
+}
+],
+"primo": {
+"date": "2026-09-06 03:13",
+"conv": 62,
+"price": 932.26,
+"mkt": -0.5032,
+"occ": 87,
+"prob_gain": 80,
+"prob_loss": 12,
+"reliab": "🟡 Media"
 }
 }
 }
