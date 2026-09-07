@@ -10689,5 +10689,32 @@
 },
 "soglie_ricalcolate_il": "2026-09-07 01:29",
 "soglie_ritardo_giorni": 1
+},
+{
+"episodio": "short:PST.MI:2026-09-07",
+"ticker": "PST.MI",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-07 14:54",
+"data": "2026-09-07 14:54",
+"prezzo": 25.81,
+"conv": 74,
+"prob_gain": 54,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": -0.5032,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 27.474,
+"media20": 27.1495,
+"quattro_atr": 27.9876,
+"meta_caduta": 27.52,
+"bollinger": 28.1501,
+"consigliata": 27.474
+},
+"stop": 24.7212,
+"atr": 0.5444
 }
 ]
