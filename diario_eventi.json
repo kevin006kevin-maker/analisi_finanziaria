@@ -10731,5 +10731,32 @@
 "stop": 24.7212,
 "atr": 0.5444,
 "res": {}
+},
+{
+"episodio": "short:PST.MI:2026-09-07",
+"ticker": "PST.MI",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-08 01:57",
+"data": "2026-09-07 14:54",
+"prezzo": 25.81,
+"conv": 74,
+"prob_gain": 54,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 27.529,
+"media20": 27.2025,
+"quattro_atr": 27.7305,
+"meta_caduta": 27.52,
+"bollinger": 27.995,
+"consigliata": 27.529
+},
+"stop": 24.8498,
+"atr": 0.4801
 }
 ]
