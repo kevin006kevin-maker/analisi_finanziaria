@@ -2037,15 +2037,18 @@
 "obs_date": "2026-08-17",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 46.17499923706055,
+"conf_date": "2026-09-07",
 "target": null,
 "stop": null,
 "reliab": "🟡 Media",
 "prob_gain": 54,
 "prob_loss": 15,
 "conv": 79,
-"res": {},
+"res": {
+"osservazione|7g": -5.84,
+"promozione|7g": 5.97
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-08-17 10:07",
@@ -2075,8 +2078,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-09-07",
+"prezzo": 46.17499923706055,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -2220,7 +2223,10 @@
 "prob_gain": 71,
 "prob_loss": 20,
 "conv": 61,
-"res": {},
+"res": {
+"osservazione|7g": -5.84,
+"promozione|7g": 7.31
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-08-17 13:25",
