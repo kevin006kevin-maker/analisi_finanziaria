@@ -10886,5 +10886,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "long:HST:2026-08-27",
+"ticker": "HST",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-08 01:58",
+"data": "2026-09-08 01:56",
+"prezzo": 22.05,
+"conv": 46,
+"prob_gain": 74,
+"prob_loss": 10,
+"reliab": "🟢 Alta",
+"mkt": -0.5032,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-08",
+"soglie": {
+"media50": 23.5006,
+"media20": 22.5775,
+"quattro_atr": 23.9211,
+"meta_caduta": 23.795,
+"bollinger": 23.5286,
+"consigliata": 23.5006
+},
+"stop": 21.1144,
+"atr": 0.4678
 }
 ]
