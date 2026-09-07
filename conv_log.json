@@ -1,46 +1,6 @@
 [
 {
 "date": "2026-08-27",
-"ticker": "HST",
-"kind": "long",
-"price": 22.43,
-"conv": 68,
-"factors": {
-"discount": 12.177,
-"histcheap": -0.89,
-"riskadj": 1.31,
-"ddpen": -4.68,
-"momentum": 3.1101,
-"prob": 70,
-"quality": 63.0,
-"valcheap": -0.0045,
-"trappen": 3
-},
-"ret_5d": -1.23,
-"ret_21d": null
-},
-{
-"date": "2026-08-27",
-"ticker": "UMC",
-"kind": "long",
-"price": 19.03,
-"conv": 36,
-"factors": {
-"discount": 32.06,
-"histcheap": -1.09,
-"riskadj": 2.79,
-"ddpen": -15.54,
-"momentum": -5.0221,
-"prob": 14,
-"quality": 53.0,
-"valcheap": -1.2063,
-"trappen": 0
-},
-"ret_5d": 2.84,
-"ret_21d": null
-},
-{
-"date": "2026-08-27",
 "ticker": "SAN",
 "kind": "long",
 "price": 14.7,
@@ -40236,6 +40196,48 @@
 "quality": 34.5,
 "valcheap": -0.7464,
 "trappen": 1
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-07",
+"ticker": "GOGO",
+"kind": "short",
+"price": 2.84,
+"conv": 50,
+"factors": {
+"discount": 73.6059,
+"histcheap": 1.15,
+"riskadj": -2.54,
+"ddpen": -54.68,
+"momentum": -4.4118,
+"prob": 27,
+"oversold": -46.1445,
+"rebound": 17.0916,
+"trend": -1.0,
+"relstrength": 4.3231
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-07",
+"ticker": "NX",
+"kind": "short",
+"price": 22.93,
+"conv": 20,
+"factors": {
+"discount": -0.0,
+"histcheap": -2.11,
+"riskadj": 0.51,
+"ddpen": -18.83,
+"momentum": -18.0742,
+"prob": 36,
+"oversold": -67.1135,
+"rebound": -16.71,
+"trend": 1.0,
+"relstrength": 17.9855
 },
 "ret_5d": null,
 "ret_21d": null
