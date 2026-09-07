@@ -10785,5 +10785,59 @@
 },
 "stop": null,
 "atr": 8.8428
+},
+{
+"episodio": "short:LULG:2026-09-04",
+"ticker": "LULG",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-08 01:57",
+"data": "2026-09-08 01:56",
+"prezzo": 4.27,
+"conv": 72,
+"prob_gain": 57,
+"prob_loss": 18,
+"reliab": "🔴 Bassa",
+"mkt": -0.5032,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 6.3761,
+"media20": 6.3199,
+"quattro_atr": 6.7268,
+"meta_caduta": 5.8825,
+"bollinger": 7.5274,
+"consigliata": 6.3761
+},
+"stop": 3.0416,
+"atr": 0.6142
+},
+{
+"episodio": "short:YSS:2026-09-05",
+"ticker": "YSS",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-08 01:57",
+"data": "2026-09-08 01:56",
+"prezzo": 8.96,
+"conv": 71,
+"prob_gain": 46,
+"prob_loss": 34,
+"reliab": "🔴 Bassa",
+"mkt": -0.5032,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 15.157,
+"media20": 9.738,
+"quattro_atr": 13.0192,
+"meta_caduta": 21.34,
+"bollinger": 11.543,
+"consigliata": 13.0192
+},
+"stop": 6.9304,
+"atr": 1.0148
 }
 ]
