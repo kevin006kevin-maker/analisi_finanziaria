@@ -11843,5 +11843,32 @@
 },
 "stop": 2.5456,
 "atr": 0.3422
+},
+{
+"episodio": "short:RARE:2026-09-03",
+"ticker": "RARE",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-09 00:55",
+"data": "2026-09-08 22:02",
+"prezzo": 14.88,
+"conv": 77,
+"prob_gain": 65,
+"prob_loss": 14,
+"reliab": "🔴 Bassa",
+"mkt": -1.0187,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-09",
+"soglie": {
+"media50": 27.3929,
+"media20": 24.4385,
+"quattro_atr": 22.6768,
+"meta_caduta": 25.375,
+"bollinger": 32.6234,
+"consigliata": 22.6768
+},
+"stop": 10.9816,
+"atr": 1.9492
 }
 ]
