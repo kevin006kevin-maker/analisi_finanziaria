@@ -11005,5 +11005,32 @@
 },
 "stop": 38.0212,
 "atr": 2.4994
+},
+{
+"episodio": "short:MOMO:2026-09-04",
+"ticker": "MOMO",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-08 19:05",
+"data": "2026-09-05 02:15",
+"prezzo": 5.1,
+"conv": 85,
+"prob_gain": 56,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 5.8319,
+"media20": 5.6675,
+"quattro_atr": 5.7472,
+"meta_caduta": 5.655,
+"bollinger": 6.0491,
+"consigliata": 5.7472
+},
+"stop": 4.7764,
+"atr": 0.1618
 }
 ]
