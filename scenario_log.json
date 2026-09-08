@@ -3698,5 +3698,62 @@
 "prob_loss": 17,
 "conv": 66,
 "res": {}
+},
+{
+"ticker": "AEO",
+"kind": "long",
+"date": "2026-09-09",
+"promo_price": 17.22,
+"obs_price": 16.69,
+"obs_date": "2026-08-28",
+"pre_price": 16.87,
+"pre_date": "2026-08-31",
+"conf_price": null,
+"conf_date": null,
+"target": null,
+"stop": 15.8685,
+"reliab": "🟡 Media",
+"prob_gain": 53,
+"prob_loss": 36,
+"conv": 65,
+"passaggi": {
+"osservazione": {
+"data": "2026-08-28 07:05",
+"prezzo": 16.69,
+"conv": 62,
+"prob_gain": 46,
+"prob_loss": 42,
+"reliab": "🔴 Bassa",
+"mkt": 3.9443
+},
+"anticipo": {
+"data": "2026-08-31",
+"prezzo": 16.87,
+"conv": 65,
+"prob_gain": 45,
+"prob_loss": 45,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-09 00:53",
+"prezzo": 17.22,
+"conv": 65,
+"prob_gain": 53,
+"prob_loss": 36,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
