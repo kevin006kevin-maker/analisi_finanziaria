@@ -11196,5 +11196,32 @@
 },
 "stop": 9.3601,
 "atr": 0.8399
+},
+{
+"episodio": "long:FICO:2026-09-06",
+"ticker": "FICO",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-08 22:03",
+"data": "2026-09-08 22:03",
+"prezzo": 932.4,
+"conv": 69,
+"prob_gain": 77,
+"prob_loss": 14,
+"reliab": "🟡 Media",
+"mkt": -1.0187,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 1162.5742,
+"media20": 1099.363,
+"quattro_atr": 1170.9573,
+"meta_caduta": 1152.74,
+"bollinger": 1238.842,
+"consigliata": 1162.5742
+},
+"stop": 813.1213,
+"atr": 59.6393
 }
 ]
