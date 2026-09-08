@@ -11364,5 +11364,32 @@
 },
 "stop": 17.0617,
 "atr": 1.4591
+},
+{
+"episodio": "short:NVS:2026-09-08",
+"ticker": "NVS",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-09 00:53",
+"data": "2026-09-09 00:52",
+"prezzo": 137.7,
+"conv": 74,
+"prob_gain": 64,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -1.0266,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 155.2698,
+"media20": 155.6005,
+"quattro_atr": 156.9225,
+"meta_caduta": 150.395,
+"bollinger": 166.9956,
+"consigliata": 155.2698
+},
+"stop": 128.0888,
+"atr": 4.8056
 }
 ]
