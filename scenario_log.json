@@ -3875,5 +3875,62 @@
 "prob_loss": 26,
 "conv": 73,
 "res": {}
+},
+{
+"ticker": "PSNY",
+"kind": "short",
+"date": "2026-09-09",
+"promo_price": 8.93,
+"obs_price": 8.69,
+"obs_date": "2026-09-03",
+"pre_price": 8.69,
+"pre_date": "2026-09-05",
+"conf_price": null,
+"conf_date": null,
+"target": 14.621,
+"stop": 6.9092,
+"reliab": "🔴 Bassa",
+"prob_gain": 52,
+"prob_loss": 22,
+"conv": 71,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-03 22:04",
+"prezzo": 8.69,
+"conv": 76,
+"prob_gain": 54,
+"prob_loss": 19,
+"reliab": "🔴 Bassa",
+"mkt": 0.4969
+},
+"anticipo": {
+"data": "2026-09-05",
+"prezzo": 8.69,
+"conv": 77,
+"prob_gain": 58,
+"prob_loss": 20,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-09 00:53",
+"prezzo": 8.93,
+"conv": 71,
+"prob_gain": 52,
+"prob_loss": 22,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
