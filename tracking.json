@@ -10717,5 +10717,37 @@
 "auto": true,
 "notified": false,
 "entry_check": "2026-09-08"
+},
+"AEO": {
+"kind": "long",
+"added": "2026-09-09",
+"note": "🤖 Promossa il 2026-09-09: dopo 7 giorni di Borsa di osservazione il prezzo è risalito di +3.2% e la convenienza (68) regge.",
+"name": "AEO",
+"snapshots": [
+{
+"name": "AMERICAN EAGLE OUTFITTERS INC",
+"price": 17.22,
+"rsi": 52.9333,
+"dd_high": -38.9145,
+"occasione": 78,
+"convenienza": 65,
+"prob_gain": 53,
+"prob_loss": 36,
+"exp_ret": 3.4,
+"gain": 3.4,
+"reliab": "🟡 Media",
+"target": 17.0266,
+"stop": 15.8685,
+"date": "2026-09-09 00:53"
+}
+],
+"entry_price": 17.22,
+"entry_target": 17.0266,
+"entry_stop": 15.8685,
+"entry_conv": 65,
+"entry_date": "2026-09-09 00:53",
+"entry_src": "scatto",
+"max_price": 17.22,
+"max_date": "2026-09-09 00:53"
 }
 }
