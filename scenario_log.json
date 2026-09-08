@@ -3776,5 +3776,62 @@
 "prob_loss": 28,
 "conv": 58,
 "res": {}
+},
+{
+"ticker": "GAP",
+"kind": "long",
+"date": "2026-09-09",
+"promo_price": 22.38,
+"obs_price": 20.79,
+"obs_date": "2026-08-29",
+"pre_price": 22.43,
+"pre_date": "2026-09-05",
+"conf_price": null,
+"conf_date": null,
+"target": null,
+"stop": 20.6117,
+"reliab": "🟡 Media",
+"prob_gain": 74,
+"prob_loss": 15,
+"conv": 68,
+"passaggi": {
+"osservazione": {
+"data": "2026-08-29 10:04",
+"prezzo": 20.79,
+"conv": 60,
+"prob_gain": 60,
+"prob_loss": 26,
+"reliab": "🟡 Media",
+"mkt": 3.9443
+},
+"anticipo": {
+"data": "2026-09-05",
+"prezzo": 22.43,
+"conv": 70,
+"prob_gain": 67,
+"prob_loss": 20,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-09 00:53",
+"prezzo": 22.38,
+"conv": 68,
+"prob_gain": 74,
+"prob_loss": 15,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
