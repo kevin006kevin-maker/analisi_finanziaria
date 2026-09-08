@@ -3468,9 +3468,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-08",
 "max_price": 11.1111,
-"max_date": "2026-08-19 16:30",
-"warn_since": "2026-08-31",
-"warn": "in perdita da 25 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-08-19 16:30"
 },
 "SMH": {
 "kind": "short",
@@ -5589,7 +5587,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-08",
 "max_price": 10.085,
-"max_date": "2026-08-21 17:07"
+"max_date": "2026-08-21 17:07",
+"warn_since": "2026-09-08",
+"warn": "in perdita da 23 giorni di Borsa: valuta l'uscita"
 },
 "NOK": {
 "kind": "short",
@@ -7089,7 +7089,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-08",
 "max_price": 29.34,
-"max_date": "2026-09-03 15:46"
+"max_date": "2026-09-03 15:46",
+"warn_since": "2026-09-08",
+"warn": "in perdita da 16 giorni di Borsa: valuta l'uscita"
 },
 "CLBT": {
 "kind": "short",
@@ -9041,7 +9043,7 @@
 "max_price": 6.54,
 "max_date": "2026-09-08 19:07",
 "auto": true,
-"notified": false,
+"notified": true,
 "entry_check": "2026-09-08"
 },
 "DKS": {
