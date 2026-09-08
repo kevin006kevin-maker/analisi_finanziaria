@@ -11573,5 +11573,32 @@
 },
 "stop": 130.2291,
 "atr": 8.0804
+},
+{
+"episodio": "long:INTR:2026-08-16",
+"ticker": "INTR",
+"kind": "long",
+"evento": "fine_verifica",
+"scritto_il": "2026-09-09 00:54",
+"data": "2026-09-09 00:54",
+"prezzo": 5.62,
+"conv": 71,
+"prob_gain": 66,
+"prob_loss": 20,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 10 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-09-09",
+"soglie": {
+"media50": null,
+"media20": null,
+"quattro_atr": 6.6796,
+"meta_caduta": 5.75,
+"bollinger": 5.8855,
+"consigliata": 6.6796
+},
+"stop": 5.0902,
+"atr": 0.2649
 }
 ]
