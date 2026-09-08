@@ -11789,5 +11789,32 @@
 },
 "stop": 54.9599,
 "atr": 5.77
+},
+{
+"episodio": "short:PL:2026-09-03",
+"ticker": "PL",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-09 00:54",
+"data": "2026-09-09 00:52",
+"prezzo": 17.81,
+"conv": 73,
+"prob_gain": 51,
+"prob_loss": 26,
+"reliab": "🔴 Bassa",
+"mkt": -1.0266,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-09",
+"soglie": {
+"media50": 23.3778,
+"media20": 21.563,
+"quattro_atr": 23.3634,
+"meta_caduta": 25.47,
+"bollinger": 26.0613,
+"consigliata": 23.3634
+},
+"stop": 15.0333,
+"atr": 1.3883
 }
 ]
