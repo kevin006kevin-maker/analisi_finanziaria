@@ -11418,5 +11418,32 @@
 },
 "stop": 35.1427,
 "atr": 2.6187
+},
+{
+"episodio": "long:CCL:2026-09-09",
+"ticker": "CCL",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-09 00:53",
+"data": "2026-09-09 00:52",
+"prezzo": 23.2,
+"conv": 66,
+"prob_gain": 71,
+"prob_loss": 17,
+"reliab": "🟡 Media",
+"mkt": -1.0266,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 26.7128,
+"media20": 25.6465,
+"quattro_atr": 26.397,
+"meta_caduta": 27.05,
+"bollinger": 29.1923,
+"consigliata": 26.397
+},
+"stop": 21.6015,
+"atr": 0.7993
 }
 ]
