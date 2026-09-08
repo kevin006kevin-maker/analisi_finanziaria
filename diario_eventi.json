@@ -11870,5 +11870,32 @@
 },
 "stop": 10.9816,
 "atr": 1.9492
+},
+{
+"episodio": "short:PSNY:2026-09-03",
+"ticker": "PSNY",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-09 00:55",
+"data": "2026-09-09 00:53",
+"prezzo": 8.93,
+"conv": 71,
+"prob_gain": 52,
+"prob_loss": 22,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-09",
+"soglie": {
+"media50": 14.621,
+"media20": 12.5405,
+"quattro_atr": 12.9715,
+"meta_caduta": 14.84,
+"bollinger": 15.9556,
+"consigliata": 12.9715
+},
+"stop": 6.9092,
+"atr": 1.0104
 }
 ]
