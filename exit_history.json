@@ -4888,5 +4888,70 @@
 "date": "2026-09-08 22:04"
 }
 ]
+},
+{
+"ticker": "GOF",
+"kind": "short",
+"added": "2026-08-26",
+"removed": "2026-09-09",
+"reason": "in perdita da 9 giorni di Borsa: valuta l'uscita",
+"auto": true,
+"first_price": 9.63,
+"last_price": 9.26,
+"first_target": 10.5724,
+"first_stop": 9.1622,
+"first_src": "scatto",
+"first_sicuro": true,
+"my_target_price": null,
+"snapshots": [
+{
+"name": "GOF",
+"price": 9.38,
+"rsi": 28.8091,
+"dd_high": -38.0858,
+"occasione": 41,
+"convenienza": 81,
+"prob_gain": 53,
+"prob_loss": 0,
+"exp_ret": 0.5,
+"gain": 10.6183,
+"reliab": "🟢 Alta",
+"target": 10.376,
+"stop": 8.9342,
+"date": "2026-09-05 00:08"
+},
+{
+"name": "GOF",
+"price": 9.295,
+"rsi": 27.04,
+"dd_high": -38.6469,
+"occasione": 44,
+"convenienza": 82,
+"prob_gain": 57,
+"prob_loss": 0,
+"exp_ret": 1.0,
+"gain": 11.3297,
+"reliab": "🟢 Alta",
+"target": 10.3481,
+"stop": 8.861,
+"date": "2026-09-08 19:06"
+},
+{
+"name": "GOF",
+"price": 9.26,
+"rsi": 26.3731,
+"dd_high": -38.8375,
+"occasione": 46,
+"convenienza": 83,
+"prob_gain": 52,
+"prob_loss": 1,
+"exp_ret": 0.4,
+"gain": 11.743,
+"reliab": "🟢 Alta",
+"target": 10.3474,
+"stop": 8.826,
+"date": "2026-09-08 22:04"
+}
+]
 }
 ]
