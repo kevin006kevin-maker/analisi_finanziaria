@@ -4565,5 +4565,102 @@
 "date": "2026-09-05 06:47"
 }
 ]
+},
+{
+"ticker": "OI",
+"kind": "short",
+"added": "2026-08-26",
+"removed": "2026-09-08",
+"reason": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
+"auto": true,
+"first_price": 7.615,
+"last_price": 6.755,
+"first_target": 8.3867,
+"first_stop": 6.8029,
+"first_src": "scatto",
+"first_sicuro": true,
+"my_target_price": null,
+"snapshots": [
+{
+"name": "OI",
+"price": 7.14,
+"rsi": 45.8512,
+"dd_high": -57.0655,
+"occasione": 48,
+"convenienza": 69,
+"prob_gain": 52,
+"prob_loss": 13,
+"exp_ret": 0.8,
+"gain": 13.3866,
+"reliab": "🟡 Media",
+"target": 8.0958,
+"stop": 6.4176,
+"date": "2026-09-05 00:08"
+},
+{
+"name": "OI",
+"price": 7.03,
+"rsi": 43.6217,
+"dd_high": -57.727,
+"occasione": 21,
+"convenienza": 70,
+"prob_gain": 52,
+"prob_loss": 13,
+"exp_ret": 0.9,
+"gain": 15.8037,
+"reliab": "🟡 Media",
+"target": 8.141,
+"stop": 6.2888,
+"date": "2026-09-05 02:16"
+},
+{
+"name": "OI",
+"price": 7.14,
+"rsi": 45.8512,
+"dd_high": -57.0655,
+"occasione": 48,
+"convenienza": 69,
+"prob_gain": 52,
+"prob_loss": 13,
+"exp_ret": 0.8,
+"gain": 13.3866,
+"reliab": "🟡 Media",
+"target": 8.0958,
+"stop": 6.4146,
+"date": "2026-09-05 06:48"
+},
+{
+"name": "OI",
+"price": 6.835,
+"rsi": 41.0087,
+"dd_high": -58.8996,
+"occasione": 26,
+"convenienza": 71,
+"prob_gain": 54,
+"prob_loss": 13,
+"exp_ret": 1.3,
+"gain": 17.605,
+"reliab": "🟡 Media",
+"target": 8.0383,
+"stop": 6.1136,
+"date": "2026-09-08 19:06"
+},
+{
+"name": "OI",
+"price": 6.755,
+"rsi": 39.9033,
+"dd_high": -59.3806,
+"occasione": 28,
+"convenienza": 71,
+"prob_gain": 54,
+"prob_loss": 17,
+"exp_ret": 1.8,
+"gain": 18.9741,
+"reliab": "🟡 Media",
+"target": 8.0367,
+"stop": 6.0228,
+"date": "2026-09-08 22:04"
+}
+]
 }
 ]
