@@ -4791,5 +4791,102 @@
 "date": "2026-09-08 22:04"
 }
 ]
+},
+{
+"ticker": "HWM",
+"kind": "short",
+"added": "2026-09-03",
+"removed": "2026-09-08",
+"reason": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
+"auto": true,
+"first_price": 252.96,
+"last_price": 231.53,
+"first_target": 275.938,
+"first_stop": 234.159,
+"first_src": "scatto",
+"first_sicuro": true,
+"my_target_price": null,
+"snapshots": [
+{
+"name": "HWM",
+"price": 259.27,
+"rsi": 41.9893,
+"dd_high": -11.4061,
+"occasione": 17,
+"convenienza": 64,
+"prob_gain": 44,
+"prob_loss": 2,
+"exp_ret": -1.3,
+"gain": 6.2017,
+"reliab": "🟢 Alta",
+"target": 275.3492,
+"stop": 241.2804,
+"date": "2026-09-05 00:08"
+},
+{
+"name": "HWM",
+"price": 260.49,
+"rsi": 42.7285,
+"dd_high": -10.9892,
+"occasione": 48,
+"convenienza": 64,
+"prob_gain": 48,
+"prob_loss": 2,
+"exp_ret": -0.6,
+"gain": 5.8108,
+"reliab": "🟢 Alta",
+"target": 275.6266,
+"stop": 241.9066,
+"date": "2026-09-05 02:17"
+},
+{
+"name": "HWM",
+"price": 259.27,
+"rsi": 41.9893,
+"dd_high": -11.4061,
+"occasione": 17,
+"convenienza": 64,
+"prob_gain": 44,
+"prob_loss": 2,
+"exp_ret": -1.3,
+"gain": 6.2017,
+"reliab": "🟢 Alta",
+"target": 275.3492,
+"stop": 241.2725,
+"date": "2026-09-05 06:48"
+},
+{
+"name": "HWM",
+"price": 239.76,
+"rsi": 32.2121,
+"dd_high": -18.1975,
+"occasione": 26,
+"convenienza": 73,
+"prob_gain": 52,
+"prob_loss": 2,
+"exp_ret": 0.6,
+"gain": 14.7725,
+"reliab": "🟢 Alta",
+"target": 274.7597,
+"stop": 219.7545,
+"date": "2026-09-08 19:07"
+},
+{
+"name": "HWM",
+"price": 231.53,
+"rsi": 29.4943,
+"dd_high": -20.885,
+"occasione": 44,
+"convenienza": 76,
+"prob_gain": 53,
+"prob_loss": 2,
+"exp_ret": 0.7,
+"gain": 18.6034,
+"reliab": "🟢 Alta",
+"target": 274.6024,
+"stop": 210.5895,
+"date": "2026-09-08 22:04"
+}
+]
 }
 ]
