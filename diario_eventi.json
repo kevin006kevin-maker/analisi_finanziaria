@@ -12584,5 +12584,32 @@
 },
 "stop": 44.0893,
 "atr": 2.9704
+},
+{
+"episodio": "short:SYK:2026-09-09",
+"ticker": "SYK",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-10 01:28",
+"data": "2026-09-10 01:25",
+"prezzo": 275.39,
+"conv": 80,
+"prob_gain": 56,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": -1.1884,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 326.6806,
+"media20": 322.245,
+"quattro_atr": 318.9382,
+"meta_caduta": 313.82,
+"bollinger": 360.7752,
+"consigliata": 318.9382
+},
+"stop": 253.6159,
+"atr": 10.8871
 }
 ]
