@@ -504,8 +504,8 @@
 "obs_date": "2026-08-16",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 140.5800018310547,
+"conf_date": "2026-09-09",
 "target": null,
 "stop": 130.4432,
 "reliab": "🔴 Bassa",
@@ -541,12 +541,12 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-09-09",
+"prezzo": 140.5800018310547,
+"conv": 65,
+"prob_gain": 58,
+"prob_loss": 32,
+"reliab": "🔴 Bassa",
 "mkt": null
 }
 },
@@ -564,8 +564,8 @@
 "obs_date": "2026-08-16",
 "pre_price": 5.2,
 "pre_date": "2026-08-21",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 5.5,
+"conf_date": "2026-09-09",
 "target": null,
 "stop": 5.0204,
 "reliab": "🟡 Media",
@@ -601,12 +601,12 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-09-09",
+"prezzo": 5.5,
+"conv": 75,
+"prob_gain": 66,
+"prob_loss": 20,
+"reliab": "🟡 Media",
 "mkt": null
 }
 },
@@ -2288,8 +2288,8 @@
 "obs_date": "2026-08-21",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 4.795000076293945,
+"conf_date": "2026-09-09",
 "target": null,
 "stop": null,
 "reliab": null,
@@ -2329,8 +2329,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-09-09",
+"prezzo": 4.795000076293945,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -2358,7 +2358,10 @@
 "prob_gain": 56,
 "prob_loss": 2,
 "conv": 74,
-"res": {},
+"res": {
+"osservazione|7g": -14.99,
+"promozione|7g": -3.87
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-08-28 07:04",
@@ -2417,7 +2420,10 @@
 "prob_gain": 32,
 "prob_loss": 55,
 "conv": 68,
-"res": {},
+"res": {
+"osservazione|7g": -4.62,
+"promozione|7g": -4.74
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-08-24 20:43",
@@ -2476,7 +2482,10 @@
 "prob_gain": 56,
 "prob_loss": 5,
 "conv": 85,
-"res": {},
+"res": {
+"osservazione|7g": -15.99,
+"promozione|7g": -7.06
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-08-28 07:04",
@@ -2535,7 +2544,10 @@
 "prob_gain": null,
 "prob_loss": null,
 "conv": 65,
-"res": {},
+"res": {
+"osservazione|7g": -2.42,
+"promozione|7g": 0.48
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-08-28 19:34",
@@ -2594,7 +2606,10 @@
 "prob_gain": 55,
 "prob_loss": 20,
 "conv": 60,
-"res": {},
+"res": {
+"osservazione|7g": -13.68,
+"promozione|7g": -12.78
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-08-28 19:34",
@@ -2749,7 +2764,10 @@
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"osservazione|7g": 6.11,
+"promozione|7g": 3.38
+}
 },
 {
 "ticker": "ASO",
