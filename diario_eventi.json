@@ -12914,5 +12914,32 @@
 },
 "stop": 5.2298,
 "atr": 0.5876
+},
+{
+"episodio": "long:EIX:2026-08-31",
+"ticker": "EIX",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-10 01:30",
+"data": "2026-09-09 23:07",
+"prezzo": 57.44,
+"conv": 78,
+"prob_gain": 60,
+"prob_loss": 7,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-10",
+"soglie": {
+"media50": 71.864,
+"media20": 67.0545,
+"quattro_atr": 71.5308,
+"meta_caduta": 68.91,
+"bollinger": 82.8755,
+"consigliata": 71.5308
+},
+"stop": 50.3946,
+"atr": 3.5227
 }
 ]
