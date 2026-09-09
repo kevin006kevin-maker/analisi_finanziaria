@@ -4084,5 +4084,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "MXL",
+"kind": "short",
+"date": "2026-09-09",
+"promo_price": 62.74,
+"obs_price": 57.04,
+"obs_date": "2026-09-03",
+"pre_price": 58.5595,
+"pre_date": "2026-09-04",
+"conf_price": null,
+"conf_date": null,
+"target": 76.6852,
+"stop": 51.0565,
+"reliab": "🔴 Bassa",
+"prob_gain": 41,
+"prob_loss": 34,
+"conv": 61,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-03 15:45",
+"prezzo": 57.04,
+"conv": 70,
+"prob_gain": 40,
+"prob_loss": 29,
+"reliab": "🔴 Bassa",
+"mkt": -0.1053
+},
+"anticipo": {
+"data": "2026-09-04",
+"prezzo": 58.5595,
+"conv": 68,
+"prob_gain": 38,
+"prob_loss": 35,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-09 03:02",
+"prezzo": 62.74,
+"conv": 61,
+"prob_gain": 41,
+"prob_loss": 34,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
