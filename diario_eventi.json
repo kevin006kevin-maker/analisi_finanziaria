@@ -12665,5 +12665,32 @@
 },
 "stop": 5.5164,
 "atr": 0.6193
+},
+{
+"episodio": "short:TTAN:2026-09-09",
+"ticker": "TTAN",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-10 01:28",
+"data": "2026-09-10 01:25",
+"prezzo": 57.12,
+"conv": 74,
+"prob_gain": 57,
+"prob_loss": 13,
+"reliab": "🔴 Bassa",
+"mkt": -1.1884,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 83.896,
+"media20": 91.1843,
+"quattro_atr": 82.573,
+"meta_caduta": 78.88,
+"bollinger": 109.3355,
+"consigliata": 82.573
+},
+"stop": 44.3935,
+"atr": 6.3632
 }
 ]
