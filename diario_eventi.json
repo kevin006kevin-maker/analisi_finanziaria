@@ -12995,5 +12995,32 @@
 },
 "stop": 4.8494,
 "atr": 0.1653
+},
+{
+"episodio": "short:FGL:2026-09-04",
+"ticker": "FGL",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-10 01:30",
+"data": "2026-09-10 01:25",
+"prezzo": 6.79,
+"conv": 69,
+"prob_gain": 57,
+"prob_loss": 33,
+"reliab": "🔴 Bassa",
+"mkt": -1.1884,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-10",
+"soglie": {
+"media50": 76.5608,
+"media20": 26.322,
+"quattro_atr": 38.7473,
+"meta_caduta": 96.395,
+"bollinger": 61.0035,
+"consigliata": 38.7473
+},
+"stop": null,
+"atr": 7.9893
 }
 ]
