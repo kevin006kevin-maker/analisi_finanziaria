@@ -189,8 +189,7 @@
 "entry_date": "2026-07-06",
 "entry_src": "storico",
 "max_price": 5.265,
-"max_date": "2026-08-21 17:06",
-"incasso_notified": true
+"max_date": "2026-08-21 17:06"
 },
 "XLE": {
 "kind": "short",
@@ -3812,8 +3811,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-09",
 "max_price": 217.03,
-"max_date": "2026-08-17 22:55",
-"incasso_notified": true
+"max_date": "2026-08-17 22:55"
 },
 "PSN": {
 "kind": "short",
@@ -5065,8 +5063,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-09",
 "max_price": 10.6727,
-"max_date": "2026-09-03 19:32",
-"incasso_notified": true
+"max_date": "2026-09-03 19:32"
 },
 "RBLX": {
 "kind": "short",
@@ -5348,7 +5345,16 @@
 "entry_check": "2026-09-09",
 "max_price": 49.89,
 "max_date": "2026-09-08 22:03",
-"incasso_notified": true
+"incasso_notified": true,
+"incasso": {
+"gain": 11.0,
+"max": 49.89,
+"max_date": "2026-09-08 22:03",
+"giu_dal_max": -0.5,
+"motivo": "bersaglio 49.38 raggiunto (sei a +11.0%): valuta di incassare",
+"urgenza": "incassa",
+"tipo": "bersaglio"
+}
 },
 "TU": {
 "kind": "short",
@@ -5548,8 +5554,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-09",
 "max_price": 10.98,
-"max_date": "2026-08-17 17:52",
-"incasso_notified": true
+"max_date": "2026-08-17 17:52"
 },
 "CC": {
 "kind": "short",
@@ -7878,8 +7883,7 @@
 "max_date": "2026-09-01 20:43",
 "auto": true,
 "notified": true,
-"entry_check": "2026-09-09",
-"incasso_notified": true
+"entry_check": "2026-09-09"
 },
 "INTC": {
 "kind": "short",
@@ -7978,8 +7982,7 @@
 "max_date": "2026-09-08 19:07",
 "auto": true,
 "notified": true,
-"entry_check": "2026-09-09",
-"incasso_notified": true
+"entry_check": "2026-09-09"
 },
 "IAG": {
 "kind": "long",
