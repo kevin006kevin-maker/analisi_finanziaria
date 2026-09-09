@@ -2549,7 +2549,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-09",
 "max_price": 351.05,
-"max_date": "2026-08-24 17:37"
+"max_date": "2026-08-24 17:37",
+"warn_since": "2026-09-09",
+"warn": "in perdita da 30 giorni di Borsa: valuta l'uscita"
 },
 "XLY": {
 "kind": "short",
@@ -6557,7 +6559,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-09",
 "max_price": 189.07,
-"max_date": "2026-09-03 19:32"
+"max_date": "2026-09-03 19:32",
+"warn_since": "2026-09-09",
+"warn": "in perdita da 20 giorni di Borsa: valuta l'uscita"
 },
 "RPT": {
 "kind": "short",
@@ -8254,7 +8258,9 @@
 "max_date": "2026-09-03 15:46",
 "auto": true,
 "notified": true,
-"entry_check": "2026-09-09"
+"entry_check": "2026-09-09",
+"warn_since": "2026-09-09",
+"warn": "in perdita da 10 giorni di Borsa: valuta l'uscita"
 },
 "UMC": {
 "kind": "long",
@@ -10309,105 +10315,6 @@
 "entry_src": "scatto",
 "max_price": 11.36,
 "max_date": "2026-09-04 00:45",
-"auto": true,
-"notified": false,
-"entry_check": "2026-09-09"
-},
-"AON": {
-"kind": "short",
-"added": "2026-09-04",
-"note": "🤖 Promossa il 2026-09-04: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.9% e la convenienza (74) regge.",
-"name": "AON",
-"snapshots": [
-{
-"name": "AON",
-"price": 319.51,
-"rsi": 33.53,
-"dd_high": -16.1963,
-"occasione": 23,
-"convenienza": 72,
-"prob_gain": 52,
-"prob_loss": 0,
-"exp_ret": 0.3,
-"gain": 10.4692,
-"reliab": "🟢 Alta",
-"target": 352.9602,
-"stop": 300.0987,
-"date": "2026-09-08 19:07"
-},
-{
-"name": "AON",
-"price": 315.79,
-"rsi": 32.0193,
-"dd_high": -17.172,
-"occasione": 26,
-"convenienza": 74,
-"prob_gain": 50,
-"prob_loss": 0,
-"exp_ret": 0.1,
-"gain": 11.747,
-"reliab": "🟢 Alta",
-"target": 352.8858,
-"stop": 296.3787,
-"date": "2026-09-08 22:04"
-},
-{
-"name": "AON",
-"price": 323.09,
-"rsi": 35.1249,
-"dd_high": -15.2573,
-"occasione": 19,
-"convenienza": 70,
-"prob_gain": 52,
-"prob_loss": 0,
-"exp_ret": 0.4,
-"gain": 9.302,
-"reliab": "🟢 Alta",
-"target": 353.1438,
-"stop": 303.4378,
-"date": "2026-09-09 03:04"
-},
-{
-"name": "AON",
-"price": 315.79,
-"rsi": 32.0193,
-"dd_high": -17.172,
-"occasione": 26,
-"convenienza": 74,
-"prob_gain": 50,
-"prob_loss": 0,
-"exp_ret": 0.1,
-"gain": 11.747,
-"reliab": "🟢 Alta",
-"target": 352.8858,
-"stop": 296.3787,
-"date": "2026-09-09 07:54"
-},
-{
-"name": "AON",
-"price": 307.975,
-"rsi": 29.0575,
-"dd_high": -19.2218,
-"occasione": 44,
-"convenienza": 78,
-"prob_gain": 56,
-"prob_loss": 0,
-"exp_ret": 0.9,
-"gain": 14.4554,
-"reliab": "🟢 Alta",
-"target": 352.4939,
-"stop": 288.7859,
-"date": "2026-09-09 17:03"
-}
-],
-"entry_price": 330.88,
-"entry_target": 352.9706,
-"entry_stop": 310.9628,
-"entry_conv": 65,
-"entry_date": "2026-09-04 02:42",
-"entry_src": "scatto",
-"max_price": 330.88,
-"max_date": "2026-09-04 02:42",
 "auto": true,
 "notified": false,
 "entry_check": "2026-09-09"
