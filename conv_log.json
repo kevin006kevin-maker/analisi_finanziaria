@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-08-29",
-"ticker": "RBRK",
-"kind": "short",
-"price": 107.02,
-"conv": 18,
-"factors": {
-"discount": -0.0,
-"histcheap": -2.59,
-"riskadj": 0.35,
-"ddpen": -31.55,
-"momentum": -9.7416,
-"prob": 26,
-"oversold": -67.6282,
-"rebound": -21.3212,
-"trend": 1.0,
-"relstrength": 8.566
-},
-"ret_5d": -14.26,
-"ret_21d": null
-},
-{
-"date": "2026-08-29",
 "ticker": "KLRA",
 "kind": "short",
 "price": 18.53,
@@ -40277,6 +40256,26 @@
 "rebound": 12.5505,
 "trend": -1.0,
 "relstrength": 7.6227
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-09",
+"ticker": "TTAN",
+"kind": "long",
+"price": 56.71,
+"conv": 35,
+"factors": {
+"discount": 52.5915,
+"histcheap": 1.53,
+"riskadj": -1.35,
+"ddpen": -33.92,
+"momentum": 40.5867,
+"prob": 78,
+"quality": 43.5,
+"valcheap": -2.3452,
+"trappen": 0
 },
 "ret_5d": null,
 "ret_21d": null
