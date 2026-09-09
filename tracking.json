@@ -8078,7 +8078,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-09",
 "max_price": 189.07,
-"max_date": "2026-09-03 19:32"
+"max_date": "2026-09-03 19:32",
+"warn_since": "2026-09-09",
+"warn": "in perdita da 20 giorni di Borsa: valuta l'uscita"
 },
 "RPT": {
 "kind": "short",
@@ -10079,7 +10081,9 @@
 "max_date": "2026-09-03 15:46",
 "auto": true,
 "notified": true,
-"entry_check": "2026-09-09"
+"entry_check": "2026-09-09",
+"warn_since": "2026-09-09",
+"warn": "in perdita da 10 giorni di Borsa: valuta l'uscita"
 },
 "UMC": {
 "kind": "long",
