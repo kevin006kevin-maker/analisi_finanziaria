@@ -12941,5 +12941,32 @@
 },
 "stop": 50.3946,
 "atr": 3.5227
+},
+{
+"episodio": "long:PCG:2026-08-31",
+"ticker": "PCG",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-10 01:30",
+"data": "2026-09-09 23:07",
+"prezzo": 14.19,
+"conv": 80,
+"prob_gain": 55,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-10",
+"soglie": {
+"media50": 16.9788,
+"media20": 16.419,
+"quattro_atr": 17.7691,
+"meta_caduta": 16.275,
+"bollinger": 20.1964,
+"consigliata": 16.9788
+},
+"stop": 12.4005,
+"atr": 0.8948
 }
 ]
