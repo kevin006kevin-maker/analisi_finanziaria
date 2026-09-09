@@ -4278,5 +4278,62 @@
 "mkt": null
 }
 }
+},
+{
+"ticker": "RXT",
+"kind": "short",
+"date": "2026-09-09",
+"promo_price": 3.26,
+"obs_price": 3.185,
+"obs_date": "2026-09-03",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": 4.2683,
+"stop": 2.608,
+"reliab": "🔴 Bassa",
+"prob_gain": 44,
+"prob_loss": 44,
+"conv": 60,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-03 19:29",
+"prezzo": 3.185,
+"conv": 63,
+"prob_gain": 42,
+"prob_loss": 46,
+"reliab": "🔴 Bassa",
+"mkt": 0.4154
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-09 20:30",
+"prezzo": 3.26,
+"conv": 60,
+"prob_gain": 44,
+"prob_loss": 44,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
