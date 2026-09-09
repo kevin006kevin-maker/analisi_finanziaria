@@ -12224,5 +12224,32 @@
 },
 "stop": 555.9103,
 "atr": 34.4774
+},
+{
+"episodio": "short:TBBK:2026-09-09",
+"ticker": "TBBK",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-09 17:00",
+"data": "2026-09-09 17:00",
+"prezzo": 49.16,
+"conv": 81,
+"prob_gain": 64,
+"prob_loss": 7,
+"reliab": "🟡 Media",
+"mkt": -0.983,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 66.8464,
+"media20": 66.156,
+"quattro_atr": 61.0414,
+"meta_caduta": 60.605,
+"bollinger": 74.7079,
+"consigliata": 61.0414
+},
+"stop": 43.2193,
+"atr": 2.9704
 }
 ]
