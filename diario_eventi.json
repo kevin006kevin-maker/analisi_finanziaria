@@ -11954,5 +11954,32 @@
 },
 "stop": 6.2373,
 "atr": 0.4313
+},
+{
+"episodio": "short:FLNC:2026-09-08",
+"ticker": "FLNC",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-09 03:02",
+"data": "2026-09-09 03:01",
+"prezzo": 10.35,
+"conv": 70,
+"prob_gain": 46,
+"prob_loss": 35,
+"reliab": "🔴 Bassa",
+"mkt": -1.0266,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 13.8249,
+"media20": 11.6165,
+"quattro_atr": 13.6544,
+"meta_caduta": 17.77,
+"bollinger": 13.6922,
+"consigliata": 13.6544
+},
+"stop": 8.6978,
+"atr": 0.8261
 }
 ]
