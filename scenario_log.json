@@ -4141,5 +4141,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "RARE",
+"kind": "short",
+"date": "2026-09-09",
+"promo_price": 15.3,
+"obs_price": 14.85,
+"obs_date": "2026-09-03",
+"pre_price": 15.3,
+"pre_date": "2026-09-05",
+"conf_price": null,
+"conf_date": null,
+"target": 27.7107,
+"stop": 11.2051,
+"reliab": "🔴 Bassa",
+"prob_gain": 66,
+"prob_loss": 12,
+"conv": 75,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-03 22:04",
+"prezzo": 14.85,
+"conv": 77,
+"prob_gain": 65,
+"prob_loss": 14,
+"reliab": "🔴 Bassa",
+"mkt": 0.4969
+},
+"anticipo": {
+"data": "2026-09-05",
+"prezzo": 15.3,
+"conv": 77,
+"prob_gain": 65,
+"prob_loss": 14,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-09 03:02",
+"prezzo": 15.3,
+"conv": 75,
+"prob_gain": 66,
+"prob_loss": 12,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
