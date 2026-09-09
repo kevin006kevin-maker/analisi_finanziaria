@@ -12530,5 +12530,32 @@
 },
 "stop": 5.5164,
 "atr": 0.6193
+},
+{
+"episodio": "short:CASY:2026-09-09",
+"ticker": "CASY",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-10 01:28",
+"data": "2026-09-10 01:25",
+"prezzo": 629.03,
+"conv": 87,
+"prob_gain": 61,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": -1.1884,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 822.7956,
+"media20": 795.969,
+"quattro_atr": 766.9394,
+"meta_caduta": 752.14,
+"bollinger": 915.0379,
+"consigliata": 766.9394
+},
+"stop": 560.0753,
+"atr": 34.4774
 }
 ]
