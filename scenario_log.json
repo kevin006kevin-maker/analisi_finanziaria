@@ -4413,5 +4413,62 @@
 "prob_loss": 33,
 "conv": 69,
 "res": {}
+},
+{
+"ticker": "PST.MI",
+"kind": "short",
+"date": "2026-09-10",
+"promo_price": 26.39,
+"obs_price": 25.81,
+"obs_date": "2026-09-07",
+"pre_price": 25.81,
+"pre_date": "2026-09-08",
+"conf_price": null,
+"conf_date": null,
+"target": 27.4856,
+"stop": 25.3698,
+"reliab": "🟢 Alta",
+"prob_gain": 53,
+"prob_loss": 1,
+"conv": 63,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-07 14:54",
+"prezzo": 25.81,
+"conv": 74,
+"prob_gain": 54,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": -0.5032
+},
+"anticipo": {
+"data": "2026-09-08",
+"prezzo": 25.81,
+"conv": 74,
+"prob_gain": 54,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-10 01:28",
+"prezzo": 26.39,
+"conv": 63,
+"prob_gain": 53,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
