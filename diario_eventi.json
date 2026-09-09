@@ -11981,5 +11981,32 @@
 },
 "stop": 8.6978,
 "atr": 0.8261
+},
+{
+"episodio": "long:LULU:2026-09-04",
+"ticker": "LULU",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-09 03:02",
+"data": "2026-09-09 03:02",
+"prezzo": 100.61,
+"conv": 78,
+"prob_gain": 80,
+"prob_loss": 11,
+"reliab": "🟡 Media",
+"mkt": -1.0266,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 118.4018,
+"media20": 118.9165,
+"quattro_atr": 124.1843,
+"meta_caduta": 114.595,
+"bollinger": 129.5966,
+"consigliata": 118.4018
+},
+"stop": 88.8229,
+"atr": 5.8936
 }
 ]
