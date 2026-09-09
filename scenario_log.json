@@ -1301,8 +1301,8 @@
 "obs_date": "2026-08-17",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 4.606500148773193,
+"conf_date": "2026-09-09",
 "target": null,
 "stop": null,
 "reliab": "🟡 Media",
@@ -1342,12 +1342,12 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-09-09",
+"prezzo": 4.606500148773193,
+"conv": 65,
+"prob_gain": 53,
+"prob_loss": 33,
+"reliab": "🟡 Media",
 "mkt": null
 }
 }
@@ -2643,8 +2643,8 @@
 "obs_date": "2026-08-28",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 23.850000381469727,
+"conf_date": "2026-09-09",
 "target": null,
 "stop": 22.256,
 "reliab": "🟢 Alta",
@@ -2680,16 +2680,19 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-09-09",
+"prezzo": 23.850000381469727,
+"conv": 55,
+"prob_gain": 49,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"osservazione|7g": 4.65,
+"promozione|7g": 2.34
+}
 },
 {
 "ticker": "VISN",
