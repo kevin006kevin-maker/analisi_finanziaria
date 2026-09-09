@@ -12197,5 +12197,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:CASY:2026-09-09",
+"ticker": "CASY",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-09 17:00",
+"data": "2026-09-09 17:00",
+"prezzo": 624.865,
+"conv": 87,
+"prob_gain": 61,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": -0.983,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 822.7123,
+"media20": 795.7608,
+"quattro_atr": 762.7744,
+"meta_caduta": 750.0575,
+"bollinger": 916.0672,
+"consigliata": 762.7744
+},
+"stop": 555.9103,
+"atr": 34.4774
 }
 ]
