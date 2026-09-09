@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-08-30",
-"ticker": "MRVL",
-"kind": "short",
-"price": 216.62,
-"conv": 61,
-"factors": {
-"discount": 31.5425,
-"histcheap": -1.17,
-"riskadj": 2.5,
-"ddpen": -16.7,
-"momentum": 8.6146,
-"prob": 31,
-"oversold": -47.1588,
-"rebound": 5.5101,
-"trend": 1.0,
-"relstrength": -9.1018
-},
-"ret_5d": 6.06,
-"ret_21d": null
-},
-{
-"date": "2026-08-30",
 "ticker": "MARA",
 "kind": "short",
 "price": 10.67,
@@ -40283,6 +40262,26 @@
 "rebound": -9.5973,
 "trend": 1.0,
 "relstrength": 1.0369
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-09",
+"ticker": "CRMT",
+"kind": "long",
+"price": 1.475,
+"conv": 62,
+"factors": {
+"discount": 95.8286,
+"histcheap": 1.5,
+"riskadj": -2.01,
+"ddpen": -60.88,
+"momentum": 34.1518,
+"prob": 15,
+"quality": null,
+"valcheap": null,
+"trappen": 0
 },
 "ret_5d": null,
 "ret_21d": null
