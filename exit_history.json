@@ -4953,5 +4953,102 @@
 "date": "2026-09-08 22:04"
 }
 ]
+},
+{
+"ticker": "AON",
+"kind": "short",
+"added": "2026-09-04",
+"removed": "2026-09-09",
+"reason": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
+"auto": true,
+"first_price": 330.88,
+"last_price": 307.975,
+"first_target": 352.9706,
+"first_stop": 310.9628,
+"first_src": "scatto",
+"first_sicuro": true,
+"my_target_price": null,
+"snapshots": [
+{
+"name": "AON",
+"price": 319.51,
+"rsi": 33.53,
+"dd_high": -16.1963,
+"occasione": 23,
+"convenienza": 72,
+"prob_gain": 52,
+"prob_loss": 0,
+"exp_ret": 0.3,
+"gain": 10.4692,
+"reliab": "🟢 Alta",
+"target": 352.9602,
+"stop": 300.0987,
+"date": "2026-09-08 19:07"
+},
+{
+"name": "AON",
+"price": 315.79,
+"rsi": 32.0193,
+"dd_high": -17.172,
+"occasione": 26,
+"convenienza": 74,
+"prob_gain": 50,
+"prob_loss": 0,
+"exp_ret": 0.1,
+"gain": 11.747,
+"reliab": "🟢 Alta",
+"target": 352.8858,
+"stop": 296.3787,
+"date": "2026-09-08 22:04"
+},
+{
+"name": "AON",
+"price": 323.09,
+"rsi": 35.1249,
+"dd_high": -15.2573,
+"occasione": 19,
+"convenienza": 70,
+"prob_gain": 52,
+"prob_loss": 0,
+"exp_ret": 0.4,
+"gain": 9.302,
+"reliab": "🟢 Alta",
+"target": 353.1438,
+"stop": 303.4378,
+"date": "2026-09-09 03:04"
+},
+{
+"name": "AON",
+"price": 315.79,
+"rsi": 32.0193,
+"dd_high": -17.172,
+"occasione": 26,
+"convenienza": 74,
+"prob_gain": 50,
+"prob_loss": 0,
+"exp_ret": 0.1,
+"gain": 11.747,
+"reliab": "🟢 Alta",
+"target": 352.8858,
+"stop": 296.3787,
+"date": "2026-09-09 07:54"
+},
+{
+"name": "AON",
+"price": 307.975,
+"rsi": 29.0575,
+"dd_high": -19.2218,
+"occasione": 44,
+"convenienza": 78,
+"prob_gain": 56,
+"prob_loss": 0,
+"exp_ret": 0.9,
+"gain": 14.4554,
+"reliab": "🟢 Alta",
+"target": 352.4939,
+"stop": 288.7859,
+"date": "2026-09-09 17:03"
+}
+]
 }
 ]
