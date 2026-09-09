@@ -4412,7 +4412,45 @@
 "prob_gain": 57,
 "prob_loss": 33,
 "conv": 69,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-09-04 21:47",
+"prezzo": 9.26,
+"conv": 69,
+"prob_gain": 58,
+"prob_loss": 33,
+"reliab": "🔴 Bassa",
+"mkt": -0.5759
+},
+"anticipo": {
+"data": "2026-09-08",
+"prezzo": 9.3,
+"conv": 73,
+"prob_gain": 58,
+"prob_loss": 31,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-10",
+"prezzo": 6.79,
+"conv": 69,
+"prob_gain": 57,
+"prob_loss": 33,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "PST.MI",
