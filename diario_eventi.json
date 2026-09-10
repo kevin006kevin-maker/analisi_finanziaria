@@ -13769,5 +13769,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:COO:2026-09-10",
+"ticker": "COO",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-11 01:22",
+"data": "2026-09-11 01:20",
+"prezzo": 54.17,
+"conv": 91,
+"prob_gain": 65,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": -2.0236,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 72.0696,
+"media20": 71.553,
+"quattro_atr": 64.7015,
+"meta_caduta": 65.495,
+"bollinger": 82.4735,
+"consigliata": 64.7015
+},
+"stop": 48.9042,
+"atr": 2.6329
 }
 ]
