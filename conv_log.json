@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-08-31",
-"ticker": "G.MI",
-"kind": "short",
-"price": 43.91,
-"conv": 41,
-"factors": {
-"discount": 2.0522,
-"histcheap": -1.87,
-"riskadj": 2.0,
-"ddpen": -3.12,
-"momentum": -2.4977,
-"prob": 48,
-"oversold": -55.4895,
-"rebound": -1.7877,
-"trend": 1.0,
-"relstrength": 2.0105
-},
-"ret_5d": 2.21,
-"ret_21d": null
-},
-{
-"date": "2026-08-31",
 "ticker": "STMMI.MI",
 "kind": "short",
 "price": 43.575,
@@ -40286,6 +40265,26 @@
 "rebound": -13.085,
 "trend": -1.0,
 "relstrength": 2.2114
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-10",
+"ticker": "CDT",
+"kind": "long",
+"price": 0.3448,
+"conv": 58,
+"factors": {
+"discount": 99.9808,
+"histcheap": 0.75,
+"riskadj": -5.37,
+"ddpen": -85.72,
+"momentum": 62.1099,
+"prob": 32,
+"quality": null,
+"valcheap": null,
+"trappen": 0
 },
 "ret_5d": null,
 "ret_21d": null
