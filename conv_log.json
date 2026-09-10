@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-08-30",
-"ticker": "NVD",
-"kind": "short",
-"price": 4.05,
-"conv": 59,
-"factors": {
-"discount": 63.3152,
-"histcheap": 1.52,
-"riskadj": -1.8,
-"ddpen": -41.61,
-"momentum": 6.0325,
-"prob": 35,
-"oversold": -44.2388,
-"rebound": 16.3802,
-"trend": -1.0,
-"relstrength": -6.5197
-},
-"ret_5d": -7.78,
-"ret_21d": null
-},
-{
-"date": "2026-08-30",
 "ticker": "BITO",
 "kind": "short",
 "price": 10.45,
@@ -40284,6 +40263,26 @@
 "rebound": -2.3499,
 "trend": null,
 "relstrength": 3.9701
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-10",
+"ticker": "AIG",
+"kind": "long",
+"price": 74.8,
+"conv": 48,
+"factors": {
+"discount": 13.6159,
+"histcheap": 0.92,
+"riskadj": -0.4,
+"ddpen": -10.23,
+"momentum": 1.747,
+"prob": 42,
+"quality": 49.6,
+"valcheap": 0.1366,
+"trappen": 2
 },
 "ret_5d": null,
 "ret_21d": null
