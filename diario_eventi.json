@@ -13958,5 +13958,32 @@
 },
 "stop": 9.8048,
 "atr": 0.1926
+},
+{
+"episodio": "long:PURR:2026-09-01",
+"ticker": "PURR",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-11 01:25",
+"data": "2026-09-11 01:21",
+"prezzo": 11.01,
+"conv": 56,
+"prob_gain": 70,
+"prob_loss": 25,
+"reliab": "🔴 Bassa",
+"mkt": -2.0236,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-11",
+"soglie": {
+"media50": null,
+"media20": null,
+"quattro_atr": 15.2932,
+"meta_caduta": 11.92,
+"bollinger": 14.6242,
+"consigliata": 15.2932
+},
+"stop": 8.8684,
+"atr": 1.0708
 }
 ]
