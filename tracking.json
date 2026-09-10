@@ -3108,7 +3108,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-10",
 "max_price": 6.19,
-"max_date": "2026-08-18 06:09"
+"max_date": "2026-08-18 06:09",
+"warn_since": "2026-09-10",
+"warn": "in perdita da 31 giorni di Borsa: valuta l'uscita"
 },
 "NEM": {
 "kind": "long",
@@ -14228,7 +14230,9 @@
 "max_date": "2026-09-01 20:43",
 "auto": true,
 "notified": true,
-"entry_check": "2026-09-10"
+"entry_check": "2026-09-10",
+"warn_since": "2026-09-10",
+"warn": "in perdita da 9 giorni di Borsa: valuta l'uscita"
 },
 "INTC": {
 "kind": "short",
