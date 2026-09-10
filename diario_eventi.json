@@ -13264,5 +13264,32 @@
 },
 "stop": 17.061,
 "atr": 1.4595
+},
+{
+"episodio": "short:ADTN:2026-09-09",
+"ticker": "ADTN",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-10 03:18",
+"data": "2026-09-10 03:17",
+"prezzo": 7.58,
+"conv": 69,
+"prob_gain": 54,
+"prob_loss": 19,
+"reliab": "🔴 Bassa",
+"mkt": -1.1884,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 9.6448,
+"media20": 7.8255,
+"quattro_atr": 9.3364,
+"meta_caduta": 11.58,
+"bollinger": 8.5731,
+"consigliata": 9.3364
+},
+"stop": 6.7018,
+"atr": 0.4391
 }
 ]
