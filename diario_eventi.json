@@ -13668,5 +13668,32 @@
 },
 "stop": 49.9742,
 "atr": 2.6329
+},
+{
+"episodio": "short:NAVN:2026-09-10",
+"ticker": "NAVN",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-10 20:55",
+"data": "2026-09-10 20:55",
+"prezzo": 20.095,
+"conv": 72,
+"prob_gain": 56,
+"prob_loss": 18,
+"reliab": "🔴 Bassa",
+"mkt": -2.0112,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 27.0684,
+"media20": 28.1115,
+"quattro_atr": 26.987,
+"meta_caduta": 25.3375,
+"bollinger": 32.5406,
+"consigliata": 26.987
+},
+"stop": 16.649,
+"atr": 1.723
 }
 ]
