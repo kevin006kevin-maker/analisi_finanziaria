@@ -13495,5 +13495,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:MONC.MI:2026-09-10",
+"ticker": "MONC.MI",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-10 13:38",
+"data": "2026-09-10 13:38",
+"prezzo": 43.99,
+"conv": 68,
+"prob_gain": 48,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -1.1884,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 48.8882,
+"media20": 46.9365,
+"quattro_atr": 48.8779,
+"meta_caduta": 48.885,
+"bollinger": 49.3393,
+"consigliata": 48.8779
+},
+"stop": 41.5461,
+"atr": 1.222
 }
 ]
