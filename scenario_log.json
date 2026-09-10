@@ -812,8 +812,8 @@
 "obs_date": "2026-08-17",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 5.894999980926514,
+"conf_date": "2026-09-10",
 "target": null,
 "stop": null,
 "reliab": "🟢 Alta",
@@ -853,8 +853,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-09-10",
+"prezzo": 5.894999980926514,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -1056,8 +1056,8 @@
 "obs_date": "2026-08-17",
 "pre_price": 18.34,
 "pre_date": "2026-08-22",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 22.18000030517578,
+"conf_date": "2026-09-10",
 "target": 21.7416,
 "stop": 17.4196,
 "reliab": "🔴 Bassa",
@@ -1093,12 +1093,12 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-09-10",
+"prezzo": 22.18000030517578,
+"conv": 58,
+"prob_gain": 56,
+"prob_loss": 36,
+"reliab": "🔴 Bassa",
 "mkt": null
 }
 },
@@ -1363,8 +1363,8 @@
 "obs_date": "2026-08-17",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 5.934999942779541,
+"conf_date": "2026-09-10",
 "target": null,
 "stop": null,
 "reliab": "🔴 Bassa",
@@ -1404,8 +1404,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-09-10",
+"prezzo": 5.934999942779541,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -2350,8 +2350,8 @@
 "obs_date": "2026-08-28",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 9.0649995803833,
+"conf_date": "2026-09-10",
 "target": null,
 "stop": null,
 "reliab": "🟡 Media",
@@ -2391,8 +2391,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-09-10",
+"prezzo": 9.0649995803833,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -2474,8 +2474,8 @@
 "obs_date": "2026-08-28",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 237.47000122070312,
+"conf_date": "2026-09-10",
 "target": null,
 "stop": null,
 "reliab": "🟡 Media",
@@ -2515,8 +2515,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-09-10",
+"prezzo": 237.47000122070312,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -2536,8 +2536,8 @@
 "obs_date": "2026-08-28",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 53.154998779296875,
+"conf_date": "2026-09-10",
 "target": null,
 "stop": null,
 "reliab": null,
@@ -2577,8 +2577,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-09-10",
+"prezzo": 53.154998779296875,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -2598,8 +2598,8 @@
 "obs_date": "2026-08-28",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 5.03000020980835,
+"conf_date": "2026-09-10",
 "target": null,
 "stop": null,
 "reliab": "🔴 Bassa",
@@ -2639,8 +2639,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-09-10",
+"prezzo": 5.03000020980835,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -2718,8 +2718,8 @@
 "obs_date": "2026-08-29",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 6.394999980926514,
+"conf_date": "2026-09-10",
 "target": 11.5482,
 "stop": 4.7118,
 "reliab": "🔴 Bassa",
@@ -2755,12 +2755,12 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-09-10",
+"prezzo": 6.394999980926514,
+"conv": 74,
+"prob_gain": 73,
+"prob_loss": 17,
+"reliab": "🔴 Bassa",
 "mkt": null
 }
 },
@@ -2788,7 +2788,10 @@
 "prob_gain": 67,
 "prob_loss": 18,
 "conv": 64,
-"res": {},
+"res": {
+"osservazione|7g": 21.24,
+"promozione|7g": 21.69
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-08-25 15:46",
@@ -2883,7 +2886,11 @@
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": 7.38,
+"osservazione|7g": 2.15,
+"promozione|7g": -2.81
+}
 },
 {
 "ticker": "EIX",
@@ -2940,7 +2947,10 @@
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"osservazione|7g": 5.48,
+"promozione|7g": 3.12
+}
 },
 {
 "ticker": "HWM",
@@ -2997,7 +3007,10 @@
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"osservazione|7g": -5.78,
+"promozione|7g": -8.77
+}
 },
 {
 "ticker": "TKC",
@@ -3018,7 +3031,10 @@
 "prob_gain": 51,
 "prob_loss": 2,
 "conv": 76,
-"res": {},
+"res": {
+"osservazione|7g": 4.5,
+"promozione|7g": 2.85
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-08-31 16:48",
@@ -3077,7 +3093,10 @@
 "prob_gain": 57,
 "prob_loss": 8,
 "conv": 79,
-"res": {},
+"res": {
+"osservazione|7g": -5.53,
+"promozione|7g": -0.73
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-08-31 16:48",
@@ -3136,7 +3155,10 @@
 "prob_gain": 52,
 "prob_loss": 31,
 "conv": 72,
-"res": {},
+"res": {
+"osservazione|7g": -2.65,
+"promozione|7g": 4.41
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-08-31 22:37",
