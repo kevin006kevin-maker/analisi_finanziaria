@@ -4529,5 +4529,62 @@
 "prob_loss": null,
 "conv": 85,
 "res": {}
+},
+{
+"ticker": "LULG",
+"kind": "short",
+"date": "2026-09-10",
+"promo_price": 4.47,
+"obs_price": 4.265,
+"obs_date": "2026-09-04",
+"pre_price": 4.27,
+"pre_date": "2026-09-08",
+"conf_price": null,
+"conf_date": null,
+"target": 6.3365,
+"stop": 3.2879,
+"reliab": "🔴 Bassa",
+"prob_gain": 59,
+"prob_loss": 20,
+"conv": 66,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-04 21:47",
+"prezzo": 4.265,
+"conv": 67,
+"prob_gain": 54,
+"prob_loss": 23,
+"reliab": "🔴 Bassa",
+"mkt": -0.5759
+},
+"anticipo": {
+"data": "2026-09-08",
+"prezzo": 4.27,
+"conv": 72,
+"prob_gain": 57,
+"prob_loss": 18,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-10 03:18",
+"prezzo": 4.47,
+"conv": 66,
+"prob_gain": 59,
+"prob_loss": 20,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
