@@ -13291,5 +13291,32 @@
 },
 "stop": 6.7018,
 "atr": 0.4391
+},
+{
+"episodio": "short:GRAB:2026-09-09",
+"ticker": "GRAB",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-10 03:18",
+"data": "2026-09-09 23:06",
+"prezzo": 3.04,
+"conv": 67,
+"prob_gain": 48,
+"prob_loss": 6,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 3.6122,
+"media20": 3.5395,
+"quattro_atr": 3.5485,
+"meta_caduta": 3.49,
+"bollinger": 3.7595,
+"consigliata": 3.5485
+},
+"stop": 2.7858,
+"atr": 0.1271
 }
 ]
