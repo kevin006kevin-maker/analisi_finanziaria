@@ -4528,7 +4528,45 @@
 "prob_gain": null,
 "prob_loss": null,
 "conv": 85,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-09-04 15:58",
+"prezzo": 5.37,
+"conv": 65,
+"prob_gain": 55,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -0.2229
+},
+"anticipo": {
+"data": "2026-09-08",
+"prezzo": 5.1,
+"conv": 85,
+"prob_gain": 56,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-10",
+"prezzo": 5.26,
+"conv": 85,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "LULG",
