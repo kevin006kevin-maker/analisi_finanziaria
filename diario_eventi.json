@@ -13210,5 +13210,32 @@
 },
 "stop": 35.9491,
 "atr": 3.8354
+},
+{
+"episodio": "short:DYN:2026-09-09",
+"ticker": "DYN",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-10 03:17",
+"data": "2026-09-10 03:17",
+"prezzo": 20.31,
+"conv": 77,
+"prob_gain": 55,
+"prob_loss": 12,
+"reliab": "🔴 Bassa",
+"mkt": -1.1884,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 24.7474,
+"media20": 25.5305,
+"quattro_atr": 26.1183,
+"meta_caduta": 23.545,
+"bollinger": 28.2944,
+"consigliata": 24.7474
+},
+"stop": 17.4059,
+"atr": 1.4521
 }
 ]
