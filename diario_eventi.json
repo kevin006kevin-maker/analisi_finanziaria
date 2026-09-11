@@ -14464,5 +14464,32 @@
 },
 "stop": 249.469,
 "atr": 10.7955
+},
+{
+"episodio": "long:LDO.MI:2026-08-25",
+"ticker": "LDO.MI",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-11 23:34",
+"data": "2026-09-11 23:34",
+"prezzo": 50.0,
+"conv": 70,
+"prob_gain": 70,
+"prob_loss": 17,
+"reliab": "🟡 Media",
+"mkt": -1.8399,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 53.91,
+"media20": 53.8322,
+"quattro_atr": 55.9753,
+"meta_caduta": 54.95,
+"bollinger": 61.0699,
+"consigliata": 53.91
+},
+"stop": 47.0124,
+"atr": 1.4938
 }
 ]
