@@ -14234,5 +14234,32 @@
 },
 "stop": 17.6559,
 "atr": 0.9171
+},
+{
+"episodio": "short:BAND:2026-09-10",
+"ticker": "BAND",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-11 03:19",
+"data": "2026-09-10 03:17",
+"prezzo": 43.62,
+"conv": 72,
+"prob_gain": 43,
+"prob_loss": 30,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 55.3567,
+"media20": 49.2263,
+"quattro_atr": 59.6059,
+"meta_caduta": 61.03,
+"bollinger": 55.5922,
+"consigliata": 55.3567
+},
+"stop": 35.627,
+"atr": 3.9965
 }
 ]
