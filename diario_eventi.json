@@ -14207,5 +14207,32 @@
 },
 "stop": 2.7737,
 "atr": 0.2082
+},
+{
+"episodio": "short:RVLV:2026-09-10",
+"ticker": "RVLV",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-11 03:19",
+"data": "2026-09-11 03:19",
+"prezzo": 19.49,
+"conv": 74,
+"prob_gain": 58,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": -2.0236,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 23.8316,
+"media20": 22.7335,
+"quattro_atr": 23.1582,
+"meta_caduta": 23.16,
+"bollinger": 25.3662,
+"consigliata": 23.1582
+},
+"stop": 17.6559,
+"atr": 0.9171
 }
 ]
