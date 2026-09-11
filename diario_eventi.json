@@ -14437,5 +14437,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:KAI:2026-09-11",
+"ticker": "KAI",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-11 20:57",
+"data": "2026-09-11 20:57",
+"prezzo": 271.06,
+"conv": 72,
+"prob_gain": 54,
+"prob_loss": 5,
+"reliab": "🟡 Media",
+"mkt": -1.7043,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 309.875,
+"media20": 303.798,
+"quattro_atr": 314.242,
+"meta_caduta": 304.695,
+"bollinger": 332.3637,
+"consigliata": 309.875
+},
+"stop": 249.469,
+"atr": 10.7955
 }
 ]
