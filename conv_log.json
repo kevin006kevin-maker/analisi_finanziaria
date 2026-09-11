@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-09-01",
-"ticker": "ABEV",
-"kind": "short",
-"price": 2.87,
-"conv": 56,
-"factors": {
-"discount": 16.3265,
-"histcheap": -0.27,
-"riskadj": 1.29,
-"ddpen": -7.94,
-"momentum": 1.7123,
-"prob": 45,
-"oversold": -42.0832,
-"rebound": 4.9547,
-"trend": -1.0,
-"relstrength": -2.1472
-},
-"ret_5d": 5.92,
-"ret_21d": null
-},
-{
-"date": "2026-09-01",
 "ticker": "NIO",
 "kind": "short",
 "price": 4.23,
@@ -40295,6 +40274,26 @@
 "rebound": 1.4274,
 "trend": 1.0,
 "relstrength": -5.0745
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-11",
+"ticker": "SMR",
+"kind": "long",
+"price": 8.905,
+"conv": 26,
+"factors": {
+"discount": 83.3333,
+"histcheap": 0.81,
+"riskadj": -2.5,
+"ddpen": -69.45,
+"momentum": 8.6667,
+"prob": -5,
+"quality": 31.1,
+"valcheap": -1.6385,
+"trappen": -2
 },
 "ret_5d": null,
 "ret_21d": null
