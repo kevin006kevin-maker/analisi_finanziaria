@@ -14311,5 +14311,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "long:RELY:2026-09-11",
+"ticker": "RELY",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-11 08:22",
+"data": "2026-09-11 08:22",
+"prezzo": 21.93,
+"conv": 73,
+"prob_gain": 78,
+"prob_loss": 14,
+"reliab": "🟡 Media",
+"mkt": -2.0236,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 24.5421,
+"media20": 25.7192,
+"quattro_atr": 26.845,
+"meta_caduta": 24.425,
+"bollinger": 28.0883,
+"consigliata": 24.5421
+},
+"stop": 19.4725,
+"atr": 1.2288
 }
 ]
