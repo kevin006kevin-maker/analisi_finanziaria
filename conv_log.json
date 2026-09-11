@@ -1,154 +1,6 @@
 [
 {
 "date": "2026-09-01",
-"ticker": "NIO",
-"kind": "short",
-"price": 4.23,
-"conv": 59,
-"factors": {
-"discount": 46.3878,
-"histcheap": 1.51,
-"riskadj": -1.51,
-"ddpen": -30.84,
-"momentum": 2.9817,
-"prob": 38,
-"oversold": -34.5821,
-"rebound": 11.7494,
-"trend": -1.0,
-"relstrength": -3.4165
-},
-"ret_5d": -10.4,
-"ret_21d": null
-},
-{
-"date": "2026-09-01",
-"ticker": "BAC",
-"kind": "short",
-"price": 61.94,
-"conv": 48,
-"factors": {
-"discount": 4.4283,
-"histcheap": -1.86,
-"riskadj": 1.15,
-"ddpen": -7.07,
-"momentum": 0.6257,
-"prob": 55,
-"oversold": -48.4949,
-"rebound": -1.134,
-"trend": 1.0,
-"relstrength": -1.0606
-},
-"ret_5d": 0.73,
-"ret_21d": null
-},
-{
-"date": "2026-09-01",
-"ticker": "HTZ",
-"kind": "short",
-"price": 2.27,
-"conv": 34,
-"factors": {
-"discount": 70.9347,
-"histcheap": 1.69,
-"riskadj": -1.16,
-"ddpen": -40.0,
-"momentum": -3.653,
-"prob": 20,
-"oversold": -52.1631,
-"rebound": -3.5595,
-"trend": -1.0,
-"relstrength": 3.2181
-},
-"ret_5d": -3.74,
-"ret_21d": null
-},
-{
-"date": "2026-09-01",
-"ticker": "SOC",
-"kind": "short",
-"price": 4.83,
-"conv": 39,
-"factors": {
-"discount": 80.3579,
-"histcheap": 1.12,
-"riskadj": -1.18,
-"ddpen": -59.59,
-"momentum": 0.8214,
-"prob": 25,
-"oversold": -50.0172,
-"rebound": 0.8033,
-"trend": -1.0,
-"relstrength": -1.2562
-},
-"ret_5d": 0.41,
-"ret_21d": null
-},
-{
-"date": "2026-09-01",
-"ticker": "SLQT",
-"kind": "short",
-"price": 0.56,
-"conv": 65,
-"factors": {
-"discount": 74.0741,
-"histcheap": 1.29,
-"riskadj": -1.75,
-"ddpen": -50.0,
-"momentum": 27.8351,
-"prob": 31,
-"oversold": -35.9101,
-"rebound": 31.975,
-"trend": -1.0,
-"relstrength": -28.2699
-},
-"ret_5d": -4.39,
-"ret_21d": null
-},
-{
-"date": "2026-09-01",
-"ticker": "GPRO",
-"kind": "short",
-"price": 0.8762,
-"conv": 21,
-"factors": {
-"discount": 69.5764,
-"histcheap": 0.71,
-"riskadj": -0.9,
-"ddpen": -58.68,
-"momentum": -46.0333,
-"prob": 2,
-"oversold": -68.9127,
-"rebound": -20.8076,
-"trend": -1.0,
-"relstrength": 45.5985
-},
-"ret_5d": null,
-"ret_21d": null,
-"bad_data": true
-},
-{
-"date": "2026-09-01",
-"ticker": "CANG",
-"kind": "short",
-"price": 2.39,
-"conv": 25,
-"factors": {
-"discount": 91.3091,
-"histcheap": 1.02,
-"riskadj": -2.39,
-"ddpen": -69.3,
-"momentum": -3.9131,
-"prob": 8,
-"oversold": -57.9488,
-"rebound": -17.9749,
-"trend": -1.0,
-"relstrength": 3.4782
-},
-"ret_5d": -10.88,
-"ret_21d": null
-},
-{
-"date": "2026-09-01",
 "ticker": "BW",
 "kind": "short",
 "price": 7.54,
@@ -40294,6 +40146,153 @@
 "quality": 31.1,
 "valcheap": -1.6385,
 "trappen": -2
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-11",
+"ticker": "GOSS",
+"kind": "short",
+"price": 10.7,
+"conv": 62,
+"factors": {
+"discount": 96.471,
+"histcheap": 0.97,
+"riskadj": -1.4,
+"ddpen": -71.51,
+"momentum": 23.8326,
+"prob": 43,
+"oversold": -36.5738,
+"rebound": 25.5379,
+"trend": -1.0,
+"relstrength": -22.7788
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-11",
+"ticker": "XE",
+"kind": "short",
+"price": 14.9101,
+"conv": 58,
+"factors": {
+"discount": 58.56,
+"histcheap": 1.19,
+"riskadj": -3.46,
+"ddpen": -42.88,
+"momentum": 16.6102,
+"prob": 27,
+"oversold": -37.5554,
+"rebound": 18.4539,
+"trend": null,
+"relstrength": -15.5564
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-11",
+"ticker": "KAI",
+"kind": "short",
+"price": 271.06,
+"conv": 72,
+"factors": {
+"discount": 21.9545,
+"histcheap": 1.71,
+"riskadj": -0.9,
+"ddpen": -10.67,
+"momentum": 8.9058,
+"prob": 49,
+"oversold": -25.2952,
+"rebound": 14.3197,
+"trend": -1.0,
+"relstrength": -7.852
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-11",
+"ticker": "SG",
+"kind": "short",
+"price": 7.135,
+"conv": 33,
+"factors": {
+"discount": 30.1175,
+"histcheap": -0.18,
+"riskadj": -0.48,
+"ddpen": -27.92,
+"momentum": -6.8114,
+"prob": 29,
+"oversold": -57.9542,
+"rebound": -6.5606,
+"trend": 1.0,
+"relstrength": 7.8651
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-11",
+"ticker": "SOC",
+"kind": "short",
+"price": 5.171,
+"conv": 27,
+"factors": {
+"discount": 78.8853,
+"histcheap": 1.01,
+"riskadj": -1.12,
+"ddpen": -61.02,
+"momentum": -9.5551,
+"prob": 22,
+"oversold": -57.161,
+"rebound": -12.3415,
+"trend": -1.0,
+"relstrength": 10.6088
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-11",
+"ticker": "CPRI",
+"kind": "short",
+"price": 13.66,
+"conv": 48,
+"factors": {
+"discount": 50.6146,
+"histcheap": 1.86,
+"riskadj": -1.54,
+"ddpen": -28.48,
+"momentum": -3.1722,
+"prob": 38,
+"oversold": -45.696,
+"rebound": 12.2899,
+"trend": -1.0,
+"relstrength": 4.2259
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-11",
+"ticker": "XRX",
+"kind": "short",
+"price": 3.45,
+"conv": 25,
+"factors": {
+"discount": 16.4649,
+"histcheap": -1.15,
+"riskadj": -0.22,
+"ddpen": -39.33,
+"momentum": -4.5455,
+"prob": 13,
+"oversold": -64.0112,
+"rebound": -14.0174,
+"trend": 1.0,
+"relstrength": 5.5992
 },
 "ret_5d": null,
 "ret_21d": null
