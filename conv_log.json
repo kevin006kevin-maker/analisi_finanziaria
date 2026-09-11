@@ -1,48 +1,6 @@
 [
 {
 "date": "2026-09-01",
-"ticker": "BAMI.MI",
-"kind": "short",
-"price": 15.98,
-"conv": 56,
-"factors": {
-"discount": 6.9849,
-"histcheap": -1.81,
-"riskadj": 1.69,
-"ddpen": -6.22,
-"momentum": 4.2254,
-"prob": 48,
-"oversold": -43.1668,
-"rebound": -0.291,
-"trend": 1.0,
-"relstrength": -4.6602
-},
-"ret_5d": 1.13,
-"ret_21d": null
-},
-{
-"date": "2026-09-01",
-"ticker": "BMED.MI",
-"kind": "short",
-"price": 24.16,
-"conv": 32,
-"factors": {
-"discount": 1.0647,
-"histcheap": -2.19,
-"riskadj": 1.64,
-"ddpen": -6.37,
-"momentum": -1.0879,
-"prob": 51,
-"oversold": -60.6313,
-"rebound": -4.5563,
-"trend": 1.0,
-"relstrength": 0.653
-},
-"ret_5d": -4.8,
-"ret_21d": null
-},
-{
-"date": "2026-09-01",
 "ticker": "MB.MI",
 "kind": "short",
 "price": 27.71,
@@ -40293,6 +40251,46 @@
 "rebound": -10.5863,
 "trend": 1.0,
 "relstrength": -4.6227
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-11",
+"ticker": "OPTT",
+"kind": "long",
+"price": 0.1065,
+"conv": 63,
+"factors": {
+"discount": 84.7857,
+"histcheap": 2.22,
+"riskadj": -1.8,
+"ddpen": -49.29,
+"momentum": 43.9474,
+"prob": 35,
+"quality": null,
+"valcheap": null,
+"trappen": 0
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-11",
+"ticker": "UCAR",
+"kind": "long",
+"price": 4.97,
+"conv": 41,
+"factors": {
+"discount": 77.3059,
+"histcheap": 0.53,
+"riskadj": -0.71,
+"ddpen": -68.57,
+"momentum": -722.8477,
+"prob": -61,
+"quality": null,
+"valcheap": null,
+"trappen": 0
 },
 "ret_5d": null,
 "ret_21d": null
