@@ -14491,5 +14491,32 @@
 },
 "stop": 47.0124,
 "atr": 1.4938
+},
+{
+"episodio": "long:QLYS:2026-09-13",
+"ticker": "QLYS",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-13 00:29",
+"data": "2026-09-13 00:29",
+"prezzo": 150.28,
+"conv": 63,
+"prob_gain": 71,
+"prob_loss": 20,
+"reliab": "🟡 Media",
+"mkt": -1.8209,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 165.8818,
+"media20": 177.362,
+"quattro_atr": 185.5628,
+"meta_caduta": 173.08,
+"bollinger": 196.961,
+"consigliata": 165.8818
+},
+"stop": 132.6386,
+"atr": 8.8207
 }
 ]
