@@ -1,48 +1,6 @@
 [
 {
 "date": "2026-09-01",
-"ticker": "FLYE",
-"kind": "short",
-"price": 2.2,
-"conv": 25,
-"factors": {
-"discount": 89.7196,
-"histcheap": 0.66,
-"riskadj": -1.45,
-"ddpen": -77.75,
-"momentum": -33.3333,
-"prob": 17,
-"oversold": -64.0506,
-"rebound": -15.3773,
-"trend": -1.0,
-"relstrength": 33.9153
-},
-"ret_5d": -13.18,
-"ret_21d": null
-},
-{
-"date": "2026-09-01",
-"ticker": "BIOX",
-"kind": "short",
-"price": 0.4599,
-"conv": 25,
-"factors": {
-"discount": 84.0865,
-"histcheap": 0.77,
-"riskadj": -2.38,
-"ddpen": -70.79,
-"momentum": -11.6262,
-"prob": 28,
-"oversold": -64.0895,
-"rebound": -19.8091,
-"trend": -1.0,
-"relstrength": 12.2082
-},
-"ret_5d": -8.24,
-"ret_21d": null
-},
-{
-"date": "2026-09-01",
 "ticker": "VIR",
 "kind": "short",
 "price": 11.63,
@@ -40300,6 +40258,46 @@
 "quality": 55.3,
 "valcheap": 0.7707,
 "trappen": 2
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-12",
+"ticker": "KGC",
+"kind": "long",
+"price": 29.13,
+"conv": 76,
+"factors": {
+"discount": 23.4831,
+"histcheap": -0.16,
+"riskadj": 0.48,
+"ddpen": -20.14,
+"momentum": 7.7873,
+"prob": 46,
+"quality": 93.4,
+"valcheap": -0.8468,
+"trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-12",
+"ticker": "OKLO",
+"kind": "long",
+"price": 36.22,
+"conv": 38,
+"factors": {
+"discount": 79.2006,
+"histcheap": 1.29,
+"riskadj": -1.54,
+"ddpen": -58.39,
+"momentum": 9.0863,
+"prob": -41,
+"quality": 48.4,
+"valcheap": -1.3093,
+"trappen": 0
 },
 "ret_5d": null,
 "ret_21d": null
