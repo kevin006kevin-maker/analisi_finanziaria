@@ -1,26 +1,6 @@
 [
 {
 "date": "2026-09-02",
-"ticker": "EGIEY",
-"kind": "long",
-"price": 5.72,
-"conv": 55,
-"factors": {
-"discount": 29.6433,
-"histcheap": 0.69,
-"riskadj": 0.21,
-"ddpen": -15.42,
-"momentum": 4.6667,
-"prob": 31,
-"quality": 58.0,
-"valcheap": -0.5445,
-"trappen": 3
-},
-"ret_5d": 5.94,
-"ret_21d": null
-},
-{
-"date": "2026-09-02",
 "ticker": "TCRX",
 "kind": "short",
 "price": 0.3641,
@@ -40309,6 +40289,27 @@
 "quality": 52.8,
 "valcheap": -1.7144,
 "trappen": 1
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-13",
+"ticker": "XE",
+"kind": "short",
+"price": 14.93,
+"conv": 57,
+"factors": {
+"discount": 58.5047,
+"histcheap": 1.19,
+"riskadj": -3.45,
+"ddpen": -42.88,
+"momentum": 16.4989,
+"prob": 25,
+"oversold": -37.6115,
+"rebound": 18.2987,
+"trend": null,
+"relstrength": -15.3278
 },
 "ret_5d": null,
 "ret_21d": null
