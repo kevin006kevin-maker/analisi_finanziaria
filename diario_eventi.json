@@ -14619,5 +14619,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:AON:2026-09-01",
+"ticker": "AON",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-09-14 00:38",
+"data": "2026-09-05 06:46",
+"prezzo": 323.09,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-09-14",
+"soglie": {
+"media50": 353.1438,
+"media20": 346.3125,
+"quattro_atr": 362.3944,
+"meta_caduta": 352.175,
+"bollinger": 372.0119,
+"consigliata": 353.1438
+},
+"stop": 303.4378,
+"atr": 9.8261
 }
 ]
