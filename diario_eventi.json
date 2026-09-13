@@ -14518,5 +14518,32 @@
 },
 "stop": 132.6386,
 "atr": 8.8207
+},
+{
+"episodio": "short:KAI:2026-09-11",
+"ticker": "KAI",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-14 00:35",
+"data": "2026-09-14 00:32",
+"prezzo": 266.3,
+"conv": 77,
+"prob_gain": 55,
+"prob_loss": 5,
+"reliab": "🟡 Media",
+"mkt": -1.8209,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 309.7798,
+"media20": 303.56,
+"quattro_atr": 311.1763,
+"meta_caduta": 302.315,
+"bollinger": 333.3282,
+"consigliata": 309.7798
+},
+"stop": 243.8619,
+"atr": 11.2191
 }
 ]
