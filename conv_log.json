@@ -1,48 +1,6 @@
 [
 {
 "date": "2026-09-03",
-"ticker": "EIX",
-"kind": "short",
-"price": 55.19,
-"conv": 88,
-"factors": {
-"discount": 31.3386,
-"histcheap": 1.38,
-"riskadj": -0.08,
-"ddpen": -6.09,
-"momentum": 25.9294,
-"prob": 66,
-"oversold": -29.2437,
-"rebound": 32.7581,
-"trend": -1.0,
-"relstrength": -25.8109
-},
-"ret_5d": 2.83,
-"ret_21d": null
-},
-{
-"date": "2026-09-03",
-"ticker": "PLTR",
-"kind": "short",
-"price": 169.46,
-"conv": 31,
-"factors": {
-"discount": 18.2064,
-"histcheap": -0.56,
-"riskadj": 0.16,
-"ddpen": -25.73,
-"momentum": 4.5296,
-"prob": 32,
-"oversold": -52.2017,
-"rebound": -13.1552,
-"trend": 1.0,
-"relstrength": -4.411
-},
-"ret_5d": -2.12,
-"ret_21d": null
-},
-{
-"date": "2026-09-03",
 "ticker": "IOT",
 "kind": "short",
 "price": 36.79,
@@ -40302,6 +40260,46 @@
 "rebound": -10.5863,
 "trend": 1.0,
 "relstrength": -4.6418
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-13",
+"ticker": "OPTT",
+"kind": "long",
+"price": 0.196,
+"conv": 61,
+"factors": {
+"discount": 71.9278,
+"histcheap": 2.25,
+"riskadj": -1.72,
+"ddpen": -42.86,
+"momentum": 11.3122,
+"prob": 8,
+"quality": null,
+"valcheap": null,
+"trappen": 0
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-13",
+"ticker": "UCAR",
+"kind": "long",
+"price": 4.97,
+"conv": 40,
+"factors": {
+"discount": 77.3059,
+"histcheap": 0.53,
+"riskadj": -0.71,
+"ddpen": -68.57,
+"momentum": -722.8477,
+"prob": -61,
+"quality": null,
+"valcheap": null,
+"trappen": 0
 },
 "ret_5d": null,
 "ret_21d": null
