@@ -14997,5 +14997,32 @@
 },
 "stop": 19.9395,
 "atr": 1.4302
+},
+{
+"episodio": "short:BBOT:2026-09-09",
+"ticker": "BBOT",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-14 00:38",
+"data": "2026-09-12 01:51",
+"prezzo": 4.95,
+"conv": 78,
+"prob_gain": 62,
+"prob_loss": 7,
+"reliab": "🔴 Bassa",
+"mkt": -1.8209,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-14",
+"soglie": {
+"media50": 8.638,
+"media20": 8.5487,
+"quattro_atr": 7.6367,
+"meta_caduta": 7.275,
+"bollinger": 11.0744,
+"consigliata": 7.6367
+},
+"stop": 3.6066,
+"atr": 0.6717
 }
 ]
