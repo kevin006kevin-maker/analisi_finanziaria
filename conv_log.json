@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-09-02",
-"ticker": "FAMI",
-"kind": "short",
-"price": 0.1563,
-"conv": 62,
-"factors": {
-"discount": 92.3005,
-"histcheap": 1.93,
-"riskadj": -1.01,
-"ddpen": -48.7,
-"momentum": -56.3,
-"prob": 48,
-"oversold": -47.2291,
-"rebound": 44.8023,
-"trend": -1.0,
-"relstrength": 56.3654
-},
-"ret_5d": -16.83,
-"ret_21d": null
-},
-{
-"date": "2026-09-02",
 "ticker": "RITR",
 "kind": "short",
 "price": 0.1015,
@@ -40301,6 +40280,27 @@
 "quality": 51.1,
 "valcheap": -0.8837,
 "trappen": 1
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-13",
+"ticker": "AAPL",
+"kind": "short",
+"price": 332.27,
+"conv": 29,
+"factors": {
+"discount": 2.2965,
+"histcheap": -2.1,
+"riskadj": 1.71,
+"ddpen": -6.4,
+"momentum": -1.237,
+"prob": 48,
+"oversold": -62.789,
+"rebound": -4.3025,
+"trend": 1.0,
+"relstrength": 2.4081
 },
 "ret_5d": null,
 "ret_21d": null
