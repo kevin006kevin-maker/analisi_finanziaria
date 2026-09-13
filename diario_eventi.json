@@ -14754,5 +14754,32 @@
 },
 "stop": 15.4383,
 "atr": 1.3858
+},
+{
+"episodio": "short:ENOV:2026-09-09",
+"ticker": "ENOV",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-14 00:38",
+"data": "2026-09-14 00:32",
+"prezzo": 19.28,
+"conv": 69,
+"prob_gain": 53,
+"prob_loss": 12,
+"reliab": "🔴 Bassa",
+"mkt": -1.8209,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-14",
+"soglie": {
+"media50": 25.3142,
+"media20": 23.0465,
+"quattro_atr": 24.8779,
+"meta_caduta": 25.35,
+"bollinger": 29.2625,
+"consigliata": 24.8779
+},
+"stop": 16.481,
+"atr": 1.3995
 }
 ]
