@@ -14970,5 +14970,32 @@
 },
 "stop": 2.7888,
 "atr": 0.1306
+},
+{
+"episodio": "short:NAMS:2026-09-09",
+"ticker": "NAMS",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-14 00:38",
+"data": "2026-09-14 00:32",
+"prezzo": 22.8,
+"conv": 74,
+"prob_gain": 48,
+"prob_loss": 17,
+"reliab": "🟡 Media",
+"mkt": -1.8209,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-14",
+"soglie": {
+"media50": 28.7846,
+"media20": 25.9885,
+"quattro_atr": 28.521,
+"meta_caduta": 29.895,
+"bollinger": 29.5862,
+"consigliata": 28.521
+},
+"stop": 19.9395,
+"atr": 1.4302
 }
 ]
