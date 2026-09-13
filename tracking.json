@@ -15562,5 +15562,37 @@
 "auto": true,
 "notified": false,
 "entry_check": "2026-09-13"
+},
+"ADTN": {
+"kind": "short",
+"added": "2026-09-14",
+"note": "🤖 Promossa il 2026-09-14: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +6.2% e la convenienza (60) regge.",
+"name": "ADTN",
+"snapshots": [
+{
+"name": "ADTN",
+"price": 7.54,
+"rsi": 41.4772,
+"dd_high": -61.134,
+"occasione": 58,
+"convenienza": 67,
+"prob_gain": 53,
+"prob_loss": 18,
+"exp_ret": 1.6,
+"gain": 22.7772,
+"reliab": "🔴 Bassa",
+"target": 9.2574,
+"stop": 6.6759,
+"date": "2026-09-14 00:35"
+}
+],
+"entry_price": 7.54,
+"entry_target": 9.2574,
+"entry_stop": 6.6759,
+"entry_conv": 67,
+"entry_date": "2026-09-14 00:35",
+"entry_src": "scatto",
+"max_price": 7.54,
+"max_date": "2026-09-14 00:35"
 }
 }
