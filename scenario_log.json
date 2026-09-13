@@ -4975,5 +4975,62 @@
 "prob_loss": 12,
 "conv": 69,
 "res": {}
+},
+{
+"ticker": "ADTN",
+"kind": "short",
+"date": "2026-09-14",
+"promo_price": 7.54,
+"obs_price": 7.1,
+"obs_date": "2026-09-09",
+"pre_price": 7.58,
+"pre_date": "2026-09-10",
+"conf_price": null,
+"conf_date": null,
+"target": 9.2574,
+"stop": 6.6759,
+"reliab": "🔴 Bassa",
+"prob_gain": 53,
+"prob_loss": 18,
+"conv": 67,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-09 03:01",
+"prezzo": 7.1,
+"conv": 75,
+"prob_gain": 55,
+"prob_loss": 20,
+"reliab": "🔴 Bassa",
+"mkt": -1.0266
+},
+"anticipo": {
+"data": "2026-09-10",
+"prezzo": 7.58,
+"conv": 69,
+"prob_gain": 54,
+"prob_loss": 19,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-14 00:35",
+"prezzo": 7.54,
+"conv": 67,
+"prob_gain": 53,
+"prob_loss": 18,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
