@@ -14700,5 +14700,32 @@
 },
 "stop": 5.5073,
 "atr": 1.8363
+},
+{
+"episodio": "short:SYK:2026-09-09",
+"ticker": "SYK",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-14 00:38",
+"data": "2026-09-14 00:32",
+"prezzo": 275.56,
+"conv": 78,
+"prob_gain": 54,
+"prob_loss": 3,
+"reliab": "🟢 Alta",
+"mkt": -1.8209,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-14",
+"soglie": {
+"media50": 325.0274,
+"media20": 315.1085,
+"quattro_atr": 318.2989,
+"meta_caduta": 313.905,
+"bollinger": 360.9061,
+"consigliata": 318.2989
+},
+"stop": 254.1906,
+"atr": 10.6847
 }
 ]
