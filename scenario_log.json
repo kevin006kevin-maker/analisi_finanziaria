@@ -5053,5 +5053,62 @@
 "prob_loss": 5,
 "conv": 89,
 "res": {}
+},
+{
+"ticker": "TBBK",
+"kind": "short",
+"date": "2026-09-14",
+"promo_price": 50.63,
+"obs_price": 49.16,
+"obs_date": "2026-09-09",
+"pre_price": 50.03,
+"pre_date": "2026-09-10",
+"conf_price": null,
+"conf_date": null,
+"target": 66.3388,
+"stop": 45.0816,
+"reliab": "🟡 Media",
+"prob_gain": 61,
+"prob_loss": 8,
+"conv": 80,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-09 17:00",
+"prezzo": 49.16,
+"conv": 81,
+"prob_gain": 64,
+"prob_loss": 7,
+"reliab": "🟡 Media",
+"mkt": -0.983
+},
+"anticipo": {
+"data": "2026-09-10",
+"prezzo": 50.03,
+"conv": 82,
+"prob_gain": 59,
+"prob_loss": 6,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-14 00:35",
+"prezzo": 50.63,
+"conv": 80,
+"prob_gain": 61,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
