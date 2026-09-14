@@ -12444,5 +12444,37 @@
 "max_date": "2026-09-15 00:47",
 "auto": true,
 "notified": false
+},
+"ITUB": {
+"kind": "long",
+"added": "2026-09-15",
+"note": "🤖 Promossa il 2026-09-15: dopo 13 giorni di Borsa di osservazione il prezzo è risalito di +7.6% e la convenienza (56) regge.",
+"name": "ITUB",
+"snapshots": [
+{
+"name": "Itau Unibanco Holding SA",
+"price": 8.23,
+"rsi": 58.4402,
+"dd_high": -14.0021,
+"occasione": 59,
+"convenienza": 65,
+"prob_gain": 68,
+"prob_loss": 14,
+"exp_ret": 17.9,
+"gain": 17.9,
+"reliab": "🟢 Alta",
+"target": 8.022,
+"stop": 7.7552,
+"date": "2026-09-15 00:47"
+}
+],
+"entry_price": 8.23,
+"entry_target": 8.022,
+"entry_stop": 7.7552,
+"entry_conv": 65,
+"entry_date": "2026-09-15 00:47",
+"entry_src": "scatto",
+"max_price": 8.23,
+"max_date": "2026-09-15 00:47"
 }
 }
