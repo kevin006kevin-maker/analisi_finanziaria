@@ -14,7 +14,15 @@ name: Aggiornamento autonomo occasioni
 # Resta un margine di sicurezza: se GitHub salta un giro, ne resta comunque uno nell'ora.
 on:
   schedule:
-    - cron: "*/30 * * * *"   # ogni 30 minuti
+    # OGNI 30 MINUTI, MA NON AI MINUTI TONDI. Lo zero e il trenta sono i due minuti piu' affollati
+    # del pianeta, perche' e' li che programmano tutti: GitHub scrive nella sua documentazione che
+    # l'orario "puo' essere ritardato nei periodi di carico elevato, e i picchi sono all'inizio di
+    # ogni ora", e raccomanda per iscritto di spostarsi su un altro minuto.
+    # Misurato su 300 giri (21/08-14/09/2026): dei 48 giri richiesti al giorno ne partivano 6-12, e
+    # le partenze erano sparse su tutti i 60 minuti dell'ora invece che allo 0 e al 30 — cioe'
+    # GitHub non parte quando glielo si chiede. Questo e' l'unico rimedio che GitHub stesso indica.
+    # La frequenza resta quella di prima: due richieste all'ora.
+    - cron: "8,38 * * * *"   # ogni 30 minuti, lontano dai minuti tondi
   workflow_dispatch:           # avvio manuale dalla scheda "Actions"
     inputs:
       test_notifica:
