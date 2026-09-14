@@ -5886,5 +5886,62 @@
 "prob_loss": 4,
 "conv": 93,
 "res": {}
+},
+{
+"ticker": "NAVN",
+"kind": "short",
+"date": "2026-09-15",
+"promo_price": 21.37,
+"obs_price": 20.095,
+"obs_date": "2026-09-10",
+"pre_price": 20.26,
+"pre_date": "2026-09-11",
+"conf_price": null,
+"conf_date": null,
+"target": 26.9211,
+"stop": 18.1085,
+"reliab": "🔴 Bassa",
+"prob_gain": 57,
+"prob_loss": 20,
+"conv": 61,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-10 20:55",
+"prezzo": 20.095,
+"conv": 72,
+"prob_gain": 56,
+"prob_loss": 18,
+"reliab": "🔴 Bassa",
+"mkt": -2.0112
+},
+"anticipo": {
+"data": "2026-09-11",
+"prezzo": 20.26,
+"conv": 72,
+"prob_gain": 55,
+"prob_loss": 18,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-15 00:47",
+"prezzo": 21.37,
+"conv": 61,
+"prob_gain": 57,
+"prob_loss": 20,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
