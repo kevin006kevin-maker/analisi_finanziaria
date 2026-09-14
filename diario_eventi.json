@@ -15101,5 +15101,32 @@
 "soglie_ricalcolate_il": "2026-09-14 00:39",
 "soglie_ritardo_giorni": 2,
 "res": {}
+},
+{
+"episodio": "short:RWT:2026-09-14",
+"ticker": "RWT",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-14 21:35",
+"data": "2026-09-14 21:35",
+"prezzo": 3.79,
+"conv": 80,
+"prob_gain": 55,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": -1.9985,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 4.6864,
+"media20": 4.4705,
+"quattro_atr": 4.6101,
+"meta_caduta": 4.5,
+"bollinger": 5.2378,
+"consigliata": 4.6101
+},
+"stop": 3.38,
+"atr": 0.205
 }
 ]
