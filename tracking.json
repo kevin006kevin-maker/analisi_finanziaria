@@ -2145,9 +2145,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-15",
 "max_price": 6.19,
-"max_date": "2026-08-18 06:09",
-"warn_since": "2026-09-14",
-"warn": "in perdita da 33 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-08-18 06:09"
 },
 "NEM": {
 "kind": "long",
@@ -4468,7 +4466,7 @@
 "max_date": "2026-08-17 18:55",
 "incasso_notified": true,
 "warn_since": "2026-09-14",
-"warn": "in perdita da 29 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 30 giorni di Borsa: valuta l'uscita"
 },
 "SMH": {
 "kind": "short",
@@ -5043,155 +5041,6 @@
 },
 "incasso_notified": true
 },
-"PSN": {
-"kind": "short",
-"added": "2026-08-03",
-"note": "🤖 Promossa il 2026-08-03: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +26.4% e la convenienza (59) regge.",
-"name": "PSN",
-"snapshots": [
-{
-"name": "PSN",
-"price": 46.29,
-"rsi": 43.5457,
-"dd_high": -48.1577,
-"occasione": 17,
-"convenienza": 68,
-"prob_gain": 54,
-"prob_loss": 17,
-"exp_ret": 1.6,
-"gain": 9.8276,
-"reliab": "🔴 Bassa",
-"target": 50.8392,
-"stop": 42.2756,
-"date": "2026-09-11 03:20"
-},
-{
-"name": "PSN",
-"price": 45.88,
-"rsi": 42.4157,
-"dd_high": -48.6169,
-"occasione": 19,
-"convenienza": 68,
-"prob_gain": 53,
-"prob_loss": 18,
-"exp_ret": 1.3,
-"gain": 10.5253,
-"reliab": "🔴 Bassa",
-"target": 50.709,
-"stop": 42.0038,
-"date": "2026-09-11 08:22"
-},
-{
-"name": "PSN",
-"price": 45.285,
-"rsi": 40.7624,
-"dd_high": -49.2832,
-"occasione": 23,
-"convenienza": 69,
-"prob_gain": 56,
-"prob_loss": 17,
-"exp_ret": 2.3,
-"gain": 11.6297,
-"reliab": "🔴 Bassa",
-"target": 50.5515,
-"stop": 41.4471,
-"date": "2026-09-11 17:47"
-},
-{
-"name": "PSN",
-"price": 45.085,
-"rsi": 40.2353,
-"dd_high": -49.5072,
-"occasione": 24,
-"convenienza": 69,
-"prob_gain": 54,
-"prob_loss": 16,
-"exp_ret": 1.8,
-"gain": 12.116,
-"reliab": "🔴 Bassa",
-"target": 50.5475,
-"stop": 41.2471,
-"date": "2026-09-11 20:57"
-},
-{
-"name": "PSN",
-"price": 45.75,
-"rsi": 42.0431,
-"dd_high": -48.7625,
-"occasione": 20,
-"convenienza": 69,
-"prob_gain": 58,
-"prob_loss": 14,
-"exp_ret": 2.9,
-"gain": 10.5154,
-"reliab": "🔴 Bassa",
-"target": 50.5608,
-"stop": 41.9121,
-"date": "2026-09-11 23:34"
-},
-{
-"name": "PSN",
-"price": 46.845,
-"rsi": 46.32,
-"dd_high": -47.5361,
-"occasione": 43,
-"convenienza": 67,
-"prob_gain": 53,
-"prob_loss": 17,
-"exp_ret": 1.2,
-"gain": 7.5289,
-"reliab": "🔴 Bassa",
-"target": 50.3719,
-"stop": 43.1062,
-"date": "2026-09-14 15:54"
-},
-{
-"name": "PSN",
-"price": 46.945,
-"rsi": 46.6794,
-"dd_high": -47.4241,
-"occasione": 43,
-"convenienza": 67,
-"prob_gain": 54,
-"prob_loss": 17,
-"exp_ret": 1.5,
-"gain": 7.3041,
-"reliab": "🔴 Bassa",
-"target": 50.3739,
-"stop": 43.1241,
-"date": "2026-09-14 21:37"
-},
-{
-"name": "PSN",
-"price": 46.94,
-"rsi": 46.6615,
-"dd_high": -47.4297,
-"occasione": 43,
-"convenienza": 66,
-"prob_gain": 51,
-"prob_loss": 17,
-"exp_ret": 0.6,
-"gain": 7.3153,
-"reliab": "🔴 Bassa",
-"target": 50.3738,
-"stop": 43.1191,
-"date": "2026-09-15 00:48"
-}
-],
-"auto": true,
-"notified": true,
-"entry_price": 47.0,
-"entry_target": 54.8684,
-"entry_stop": 39.2443,
-"entry_conv": 70,
-"entry_date": "2026-08-03 16:03",
-"entry_src": "scatto",
-"entry_check": "2026-09-14",
-"max_price": 49.28,
-"max_date": "2026-08-27 22:41",
-"warn_since": "2026-09-09",
-"warn": "in perdita da 29 giorni di Borsa: valuta l'uscita"
-},
 "EEM": {
 "kind": "short",
 "added": "2026-08-03",
@@ -5636,7 +5485,7 @@
 "max_date": "2026-08-17 17:51",
 "incasso_notified": true,
 "warn_since": "2026-09-14",
-"warn": "in perdita da 29 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 30 giorni di Borsa: valuta l'uscita"
 },
 "XLK": {
 "kind": "short",
@@ -6670,7 +6519,7 @@
 "max_price": 34.96,
 "max_date": "2026-08-17 22:55",
 "warn_since": "2026-09-10",
-"warn": "in perdita da 28 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 29 giorni di Borsa: valuta l'uscita"
 },
 "TSLL": {
 "kind": "short",
@@ -7274,155 +7123,6 @@
 "entry_check": "2026-09-14",
 "max_price": 50.34,
 "max_date": "2026-09-09 20:30"
-},
-"TU": {
-"kind": "short",
-"added": "2026-08-05",
-"note": "🤖 Promossa il 2026-08-05: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.8% e la convenienza (64) regge.",
-"name": "TU",
-"snapshots": [
-{
-"name": "TU",
-"price": 9.46,
-"rsi": 37.3198,
-"dd_high": -41.1325,
-"occasione": 26,
-"convenienza": 79,
-"prob_gain": 55,
-"prob_loss": 1,
-"exp_ret": 0.7,
-"gain": 5.9979,
-"reliab": "🟢 Alta",
-"target": 10.0274,
-"stop": 9.0033,
-"date": "2026-09-11 03:20"
-},
-{
-"name": "TU",
-"price": 9.09,
-"rsi": 29.6816,
-"dd_high": -43.435,
-"occasione": 53,
-"convenienza": 83,
-"prob_gain": 56,
-"prob_loss": 1,
-"exp_ret": 0.9,
-"gain": 9.9868,
-"reliab": "🟢 Alta",
-"target": 9.9978,
-"stop": 8.6088,
-"date": "2026-09-11 08:22"
-},
-{
-"name": "TU",
-"price": 9.115,
-"rsi": 30.7135,
-"dd_high": -43.2794,
-"occasione": 83,
-"convenienza": 82,
-"prob_gain": 54,
-"prob_loss": 1,
-"exp_ret": 0.3,
-"gain": 9.3769,
-"reliab": "🟢 Alta",
-"target": 9.9697,
-"stop": 8.6517,
-"date": "2026-09-11 17:47"
-},
-{
-"name": "TU",
-"price": 9.065,
-"rsi": 29.2461,
-"dd_high": -43.5905,
-"occasione": 54,
-"convenienza": 83,
-"prob_gain": 57,
-"prob_loss": 1,
-"exp_ret": 1.2,
-"gain": 9.9691,
-"reliab": "🟢 Alta",
-"target": 9.9687,
-"stop": 8.6003,
-"date": "2026-09-11 20:57"
-},
-{
-"name": "TU",
-"price": 9.1,
-"rsi": 30.0981,
-"dd_high": -43.3727,
-"occasione": 84,
-"convenienza": 82,
-"prob_gain": 54,
-"prob_loss": 0,
-"exp_ret": 0.5,
-"gain": 9.5538,
-"reliab": "🟢 Alta",
-"target": 9.9694,
-"stop": 8.6353,
-"date": "2026-09-11 23:34"
-},
-{
-"name": "TU",
-"price": 9.08,
-"rsi": 29.719,
-"dd_high": -43.4972,
-"occasione": 53,
-"convenienza": 82,
-"prob_gain": 57,
-"prob_loss": 0,
-"exp_ret": 1.0,
-"gain": 9.5507,
-"reliab": "🟢 Alta",
-"target": 9.9472,
-"stop": 8.6383,
-"date": "2026-09-14 15:30"
-},
-{
-"name": "TU",
-"price": 9.145,
-"rsi": 32.0481,
-"dd_high": -43.0927,
-"occasione": 69,
-"convenienza": 82,
-"prob_gain": 55,
-"prob_loss": 1,
-"exp_ret": 0.9,
-"gain": 8.7862,
-"reliab": "🟢 Alta",
-"target": 9.9485,
-"stop": 8.674,
-"date": "2026-09-14 21:37"
-},
-{
-"name": "TU",
-"price": 9.16,
-"rsi": 32.6742,
-"dd_high": -42.9994,
-"occasione": 72,
-"convenienza": 81,
-"prob_gain": 56,
-"prob_loss": 1,
-"exp_ret": 0.9,
-"gain": 8.6114,
-"reliab": "🟢 Alta",
-"target": 9.9488,
-"stop": 8.689,
-"date": "2026-09-15 00:48"
-}
-],
-"auto": true,
-"notified": true,
-"entry_price": 9.655,
-"entry_target": 11.078,
-"entry_stop": 8.9416,
-"entry_conv": 81,
-"entry_date": "2026-08-05 20:56",
-"entry_src": "scatto",
-"entry_check": "2026-09-14",
-"max_price": 10.085,
-"max_date": "2026-08-21 17:07",
-"warn_since": "2026-09-09",
-"warn": "in perdita da 27 giorni di Borsa: valuta l'uscita"
 },
 "NOK": {
 "kind": "short",
@@ -8064,7 +7764,7 @@
 "max_price": 13.35,
 "max_date": "2026-08-18 07:04",
 "warn_since": "2026-09-14",
-"warn": "in perdita da 23 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 24 giorni di Borsa: valuta l'uscita"
 },
 "AGI": {
 "kind": "long",
@@ -8787,7 +8487,7 @@
 "max_price": 86.21,
 "max_date": "2026-09-02 18:51",
 "warn_since": "2026-09-14",
-"warn": "in perdita da 22 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 23 giorni di Borsa: valuta l'uscita"
 },
 "CAPR": {
 "kind": "short",
@@ -10369,7 +10069,7 @@
 "notified": true,
 "entry_check": "2026-09-14",
 "warn_since": "2026-09-10",
-"warn": "in perdita da 11 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 12 giorni di Borsa: valuta l'uscita"
 },
 "INTC": {
 "kind": "short",
@@ -10833,7 +10533,9 @@
 "max_date": "2026-09-03 22:06",
 "auto": true,
 "notified": false,
-"entry_check": "2026-09-14"
+"entry_check": "2026-09-14",
+"warn_since": "2026-09-15",
+"warn": "in perdita da 10 giorni di Borsa: valuta l'uscita"
 },
 "ENI.MI": {
 "kind": "short",
@@ -11894,7 +11596,7 @@
 "notified": false,
 "entry_check": "2026-09-14",
 "warn_since": "2026-09-14",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
 },
 "ALMS": {
 "kind": "short",
@@ -12043,7 +11745,7 @@
 "notified": false,
 "entry_check": "2026-09-14",
 "warn_since": "2026-09-14",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
 },
 "GAP": {
 "kind": "long",
