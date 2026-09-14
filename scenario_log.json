@@ -5557,5 +5557,62 @@
 "mkt": null
 }
 }
+},
+{
+"ticker": "SYK",
+"kind": "short",
+"date": "2026-09-14",
+"promo_price": 282.47,
+"obs_price": 276.43,
+"obs_date": "2026-09-09",
+"pre_price": 275.39,
+"pre_date": "2026-09-10",
+"conf_price": null,
+"conf_date": null,
+"target": 324.146,
+"stop": 260.9691,
+"reliab": "🟢 Alta",
+"prob_gain": 56,
+"prob_loss": 3,
+"conv": 78,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-09 00:52",
+"prezzo": 276.43,
+"conv": 82,
+"prob_gain": 59,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": -1.0266
+},
+"anticipo": {
+"data": "2026-09-10",
+"prezzo": 275.39,
+"conv": 80,
+"prob_gain": 56,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-14 21:37",
+"prezzo": 282.47,
+"conv": 78,
+"prob_gain": 56,
+"prob_loss": 3,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
