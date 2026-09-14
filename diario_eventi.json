@@ -15709,5 +15709,32 @@
 },
 "stop": 13.7731,
 "atr": 0.8285
+},
+{
+"episodio": "short:RVLV:2026-09-10",
+"ticker": "RVLV",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-15 00:50",
+"data": "2026-09-15 00:45",
+"prezzo": 20.49,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-15",
+"soglie": {
+"media50": 23.6982,
+"media20": 22.257,
+"quattro_atr": 24.2578,
+"meta_caduta": 23.66,
+"bollinger": 25.0487,
+"consigliata": 23.6982
+},
+"stop": 18.6061,
+"atr": 0.942
 }
 ]
