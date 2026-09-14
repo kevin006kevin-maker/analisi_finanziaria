@@ -15628,5 +15628,32 @@
 },
 "stop": 42.1642,
 "atr": 1.2629
+},
+{
+"episodio": "short:COO:2026-09-10",
+"ticker": "COO",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-15 00:50",
+"data": "2026-09-15 00:45",
+"prezzo": 54.22,
+"conv": 93,
+"prob_gain": 64,
+"prob_loss": 4,
+"reliab": "🟢 Alta",
+"mkt": -2.1293,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-15",
+"soglie": {
+"media50": 71.3092,
+"media20": 69.321,
+"quattro_atr": 64.3653,
+"meta_caduta": 65.52,
+"bollinger": 84.0591,
+"consigliata": 64.3653
+},
+"stop": 49.1474,
+"atr": 2.5363
 }
 ]
