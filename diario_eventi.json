@@ -1104,7 +1104,8 @@
 "res": {
 "7g": -0.15
 },
-"taglio_corretto": true
+"taglio_corretto": true,
+"res_soglia": {}
 },
 {
 "episodio": "short:CDNL:2026-08-18",
@@ -1555,7 +1556,8 @@
 "res": {
 "7g": -2.71
 },
-"taglio_corretto": true
+"taglio_corretto": true,
+"res_soglia": {}
 },
 {
 "episodio": "short:STMMI.MI:2026-08-17",
@@ -11096,7 +11098,8 @@
 },
 "stop": null,
 "atr": 8.8428,
-"res": {}
+"res": {},
+"bad_data": "salto di prezzo oltre il 25%: probabile raggruppamento di azioni"
 },
 {
 "episodio": "short:LULG:2026-09-04",
@@ -15398,7 +15401,8 @@
 "consigliata": 4.6515
 },
 "stop": 3.4192,
-"atr": 0.2054
+"atr": 0.2054,
+"res": {}
 },
 {
 "episodio": "short:WSO:2026-08-25",
@@ -15425,7 +15429,10 @@
 "consigliata": 356.5218
 },
 "stop": 292.0054,
-"atr": 11.1923
+"atr": 11.1923,
+"res": {
+"7g": 0.31
+}
 },
 {
 "episodio": "long:BBD:2026-08-16",
@@ -15452,7 +15459,8 @@
 "consigliata": 3.9837
 },
 "stop": 3.3181,
-"atr": 0.1109
+"atr": 0.1109,
+"res": {}
 },
 {
 "episodio": "long:ITUB:2026-08-16",
@@ -15479,7 +15487,8 @@
 "consigliata": 9.1795
 },
 "stop": 7.7552,
-"atr": 0.2374
+"atr": 0.2374,
+"res": {}
 },
 {
 "episodio": "short:NAVN:2026-09-10",
@@ -15506,7 +15515,8 @@
 "consigliata": 26.9211
 },
 "stop": 18.1085,
-"atr": 1.6307
+"atr": 1.6307,
+"res": {}
 },
 {
 "episodio": "short:PSN:2026-09-15",
@@ -15573,7 +15583,8 @@
 "consigliata": 23.2684
 },
 "stop": 18.0508,
-"atr": 0.8696
+"atr": 0.8696,
+"res": {}
 },
 {
 "episodio": "short:BAND:2026-09-10",
@@ -15600,7 +15611,8 @@
 "consigliata": 54.7321
 },
 "stop": 39.8437,
-"atr": 4.5631
+"atr": 4.5631,
+"res": {}
 },
 {
 "episodio": "short:MONC.MI:2026-09-10",
@@ -15627,7 +15639,8 @@
 "consigliata": 48.7478
 },
 "stop": 42.1642,
-"atr": 1.2629
+"atr": 1.2629,
+"res": {}
 },
 {
 "episodio": "short:COO:2026-09-10",
@@ -15654,7 +15667,8 @@
 "consigliata": 64.3653
 },
 "stop": 49.1474,
-"atr": 2.5363
+"atr": 2.5363,
+"res": {}
 },
 {
 "episodio": "short:NAVN:2026-09-10",
@@ -15681,7 +15695,8 @@
 "consigliata": 26.9211
 },
 "stop": 18.1085,
-"atr": 1.6307
+"atr": 1.6307,
+"res": {}
 },
 {
 "episodio": "short:AEO:2026-09-10",
@@ -15708,7 +15723,8 @@
 "consigliata": 16.9036
 },
 "stop": 13.7731,
-"atr": 0.8285
+"atr": 0.8285,
+"res": {}
 },
 {
 "episodio": "short:RVLV:2026-09-10",
@@ -15735,6 +15751,7 @@
 "consigliata": 23.6982
 },
 "stop": 18.6061,
-"atr": 0.942
+"atr": 0.942,
+"res": {}
 }
 ]
