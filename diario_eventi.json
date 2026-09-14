@@ -15574,5 +15574,32 @@
 },
 "stop": 18.0508,
 "atr": 0.8696
+},
+{
+"episodio": "short:BAND:2026-09-10",
+"ticker": "BAND",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-15 00:50",
+"data": "2026-09-15 00:45",
+"prezzo": 48.97,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-15",
+"soglie": {
+"media50": 54.7321,
+"media20": 49.0992,
+"quattro_atr": 67.2225,
+"meta_caduta": 63.705,
+"bollinger": 55.6366,
+"consigliata": 54.7321
+},
+"stop": 39.8437,
+"atr": 4.5631
 }
 ]
