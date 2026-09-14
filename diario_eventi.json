@@ -15128,5 +15128,32 @@
 },
 "stop": 3.38,
 "atr": 0.205
+},
+{
+"episodio": "short:TYRA:2026-09-11",
+"ticker": "TYRA",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-14 21:36",
+"data": "2026-09-11 03:19",
+"prezzo": 22.01,
+"conv": 72,
+"prob_gain": 59,
+"prob_loss": 14,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 28.4257,
+"media20": 25.4725,
+"quattro_atr": 30.5977,
+"meta_caduta": 27.535,
+"bollinger": 28.5909,
+"consigliata": 28.4257
+},
+"stop": 17.7161,
+"atr": 2.1469
 }
 ]
