@@ -5730,5 +5730,62 @@
 "mkt": null
 }
 }
+},
+{
+"ticker": "BBD",
+"kind": "long",
+"date": "2026-09-15",
+"promo_price": 3.54,
+"obs_price": 3.14,
+"obs_date": "2026-08-16",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": null,
+"stop": 3.3181,
+"reliab": "🟢 Alta",
+"prob_gain": 61,
+"prob_loss": 21,
+"conv": 66,
+"passaggi": {
+"osservazione": {
+"data": "2026-08-16 21:44",
+"prezzo": 3.14,
+"conv": 85,
+"prob_gain": 79,
+"prob_loss": 10,
+"reliab": "🟢 Alta",
+"mkt": 4.3991
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-15 00:47",
+"prezzo": 3.54,
+"conv": 66,
+"prob_gain": 61,
+"prob_loss": 21,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
