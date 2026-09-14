@@ -15372,5 +15372,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:RWT:2026-09-14",
+"ticker": "RWT",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-15 00:47",
+"data": "2026-09-15 00:45",
+"prezzo": 3.83,
+"conv": 85,
+"prob_gain": 52,
+"prob_loss": 2,
+"reliab": "🟡 Media",
+"mkt": -2.1293,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 4.6872,
+"media20": 4.4725,
+"quattro_atr": 4.6515,
+"meta_caduta": 4.52,
+"bollinger": 5.2326,
+"consigliata": 4.6515
+},
+"stop": 3.4192,
+"atr": 0.2054
 }
 ]
