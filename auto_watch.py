@@ -443,6 +443,17 @@ def main():
     except Exception as e:
         log(f"Errore esiti dell'archivio: {e!r}")
 
+    # RIPASSO DEGLI ESITI: rifa' quelli scartati per una finestra creduta incompleta (erano meta'
+    # del totale: 1.797 su 3.642) e annulla le rese impossibili da raggruppamento azionario.
+    try:
+        re_ = fu.ripara_esiti()
+        if re_["rifatti"]:
+            log(f"Esiti rifatti: {re_['rifatti']} su {re_['file']} giornate"
+                + (f" · {re_['marcati_sospetti']} marcati come dati sospetti"
+                   if re_.get("marcati_sospetti") else ""))
+    except Exception as e:
+        log(f"Errore ripasso degli esiti: {e!r}")
+
     # Statistiche misurate: due volte al giorno, non a ogni giro (le mediane non cambiano perché
     # sono arrivati due esiti, e ricalcolarle vorrebbe dire rileggere tutto l'archivio 48 volte).
     try:
@@ -465,6 +476,21 @@ def main():
             log(f"⚠️ Scatti del monitoraggio: {sc['motivo']}")
     except Exception as e:
         log(f"Errore archivio degli scatti: {e!r}")
+
+    # PUNTI DI OSSERVAZIONE: i vecchi in file giornalieri, il file vivo torna piccolo. Stessa cura
+    # degli scatti, e per lo stesso motivo: a 763 KB con +17 KB al giorno quel file arrivava al muro
+    # di 1 MB in due settimane, e li dentro c'e' la fotografia congelata del primo giorno di ogni
+    # occasione — il dato da cui nascono tutti gli scenari.
+    try:
+        ao = fu.archivia_osservazioni()
+        if ao["spostati"]:
+            log(f"Punti di osservazione: {ao['spostati']} spostati in archivio su "
+                f"{ao['giorni']} giornate · file vivo da {ao['peso_prima'] // 1024} KB a "
+                f"{ao['peso_dopo'] // 1024} KB")
+        if ao.get("motivo"):
+            log(f"⚠️ Punti di osservazione: {ao['motivo']}")
+    except Exception as e:
+        log(f"Errore archivio delle osservazioni: {e!r}")
 
     # CONTEGGI DEI REGISTRI: quante righe dovrebbe avere ciascuno. È il numero che permette di
     # distinguere «il file non esiste» da «non riesco a leggerlo» — due cose che arrivano identiche

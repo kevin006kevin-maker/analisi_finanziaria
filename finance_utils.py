@@ -2598,9 +2598,66 @@ ARCHIVIO_DIR = "archivio"
 _ANNO_INIZIO_ARCHIVIO = 2026        # primo anno del progetto: prima non esistono dati
 
 
-def _nome_archivio(name: str, anno) -> str:
+# TETTO DEGLI ARCHIVI ANNUALI. Era l'unico posto del sistema senza un limite: i file giornalieri si
+# spezzano da soli, gli annuali crescevano all'infinito. Misurato il 14/09/2026:
+# archivio/conv_log_2026.json era a 813.007 byte con +54.749 al giorno, cioe' a tre giorni dal muro
+# di 1 MB — dove l'API di GitHub smette di restituire il contenuto e la protezione
+# anti-cancellazione si spegne in silenzio. La prova che succede davvero e' li accanto: la copia
+# messa da parte il 21/08 pesa 2.596.021 byte.
+# Stesso rimedio dei giornalieri: superato il tetto si apre un pezzo nuovo (_b, _c…).
+_ARCHIVIO_TETTO_BYTE = 600_000
+_ARCHIVIO_MAX_PEZZI = 25
+
+
+def _nome_archivio(name: str, anno, pezzo: int = 0) -> str:
+    """Il nome di un archivio annuale. Il pezzo oltre il primo prende un suffisso (_b, _c…), come
+    per i file giornalieri: il primo pezzo mantiene il nome di sempre, quindi gli archivi gia'
+    esistenti restano dove sono e continuano a essere letti."""
     base = name[:-5] if name.endswith(".json") else name
-    return f"{ARCHIVIO_DIR}/{base}_{anno}.json"
+    coda = "" if pezzo <= 0 else "_" + chr(ord("b") + pezzo - 1)
+    return f"{ARCHIVIO_DIR}/{base}_{anno}{coda}.json"
+
+
+def _pezzi_archivio(name: str, anno) -> list:
+    """I pezzi esistenti di un archivio annuale, in ordine: [(nome, righe), …].
+    Si ferma al primo che manca: i pezzi si creano sempre in sequenza."""
+    fuori = []
+    for pezzo in range(_ARCHIVIO_MAX_PEZZI):
+        n = _nome_archivio(name, anno, pezzo)
+        d = read_data_json(n, None)
+        if isinstance(d, list):
+            fuori.append((n, d))
+        elif pezzo > 0:
+            break
+        elif not fuori:
+            break
+    return fuori
+
+
+def _aggiungi_ad_archivio(name: str, anno, righe: list):
+    """Aggiunge righe all'archivio di un anno, aprendo un pezzo nuovo quando quello in corso e'
+    pieno. Ritorna (riuscito, nome_del_pezzo). Non riscrive mai i pezzi gia' chiusi."""
+    pezzi = _pezzi_archivio(name, anno)
+    pezzo = max(0, len(pezzi) - 1)
+    nome = _nome_archivio(name, anno, pezzo)
+    esistenti = pezzi[-1][1] if pezzi else []
+    corpo = json.dumps(esistenti + righe, ensure_ascii=False, indent=0)
+    if len(corpo.encode("utf-8")) > _ARCHIVIO_TETTO_BYTE and esistenti:
+        # il pezzo in corso e' pieno: se ne apre uno nuovo invece di allungare quello vecchio
+        pezzo += 1
+        if pezzo >= _ARCHIVIO_MAX_PEZZI:
+            return False, nome
+        nome = _nome_archivio(name, anno, pezzo)
+        esistenti = []
+    tutte = esistenti + righe
+    if not write_data_json(nome, tutte):
+        return False, nome
+    if nome in _SALVATAGGI_FALLITI:
+        return False, nome
+    verifica = read_data_json(nome, None)
+    if not isinstance(verifica, list) or len(verifica) < len(tutte):
+        return False, nome
+    return True, nome
 
 
 def _anno_di(riga) -> str:
@@ -2657,31 +2714,10 @@ def _archivia_e_pota(name: str, rows: list, live_max: int, giorni_protetti: int 
     for r in candidati:
         per_anno.setdefault(_anno_di(r), []).append(r)
     for anno, righe in per_anno.items():
-        arc = _nome_archivio(name, anno)
         try:
-            esistenti = read_data_json(arc, [])
-            if not isinstance(esistenti, list):
-                esistenti = []
-            nuovo = esistenti + righe
-            # LA POTATURA DIPENDE DALL'ESITO VERO. Prima si scriveva l'archivio e si
-            # "verificava" rileggendolo: ma la rilettura prende il file LOCALE appena scritto,
-            # quindi la verifica passava sempre — anche quando il salvataggio remoto era stato
-            # rifiutato — e il registro vivo veniva potato comunque. Su un archivio oltre il
-            # limite di lettura di GitHub questo può sovrascrivere migliaia di righe col solo
-            # lotto nuovo e poi accorciare il vivo: perdita doppia, in silenzio.
-            if not write_data_json(arc, nuovo):
-                return rows          # scrittura d'archivio non riuscita: NON poto il vivo
-            # LA RISPOSTA POSITIVA NON BASTA, e la rilettura non aiuta: write_data_json dice
-            # "riuscito" anche col solo successo locale, e la verifica qui sotto rilegge proprio
-            # quel file locale (il nome e ormai fra le scritture di questa sessione), quindi
-            # passerebbe sempre. Nel lavoro automatico il file locale muore col giro: potare il
-            # vivo fidandosi di quella verifica butterebbe righe che sul deposito non esistono.
-            # L'unico segnale che dice la verita e' _SALVATAGGI_FALLITI.
-            if arc in _SALVATAGGI_FALLITI:
-                return rows          # arrivato solo in locale: NON poto il vivo
-            verifica = read_data_json(arc, None)
-            if not isinstance(verifica, list) or len(verifica) < len(nuovo):
-                return rows          # archivio non confermato: non poto il vivo
+            ok, _arc = _aggiungi_ad_archivio(name, anno, righe)
+            if not ok:
+                return rows          # non confermato o non arrivato: NON poto il vivo
         except Exception:
             return rows
     return protette + resto
@@ -2712,14 +2748,13 @@ def aggiorna_registro_completo(name: str, aggiorna) -> int:
     tot = 0
     anni = [str(a) for a in range(_ANNO_INIZIO_ARCHIVIO, int(_today_iso()[:4]) + 1)] + ["senza-data"]
     for anno in anni:
-        arc = _nome_archivio(name, anno)
-        righe = read_data_json(arc, None)
-        if not isinstance(righe, list) or not righe:
-            continue
-        n = aggiorna(righe) or 0
-        if n:
-            write_data_json(arc, righe)
-            tot += n
+        for arc, righe in _pezzi_archivio(name, anno):    # tutti i pezzi
+            if not righe:
+                continue
+            n = aggiorna(righe) or 0
+            if n:
+                write_data_json(arc, righe)
+                tot += n
     vivo = read_data_json(name, [])
     if isinstance(vivo, list) and vivo:
         n = aggiorna(vivo) or 0
@@ -2734,9 +2769,9 @@ def load_archivio(name: str) -> list:
     out = []
     anni = [str(a) for a in range(_ANNO_INIZIO_ARCHIVIO, int(_today_iso()[:4]) + 1)] + ["senza-data"]
     for anno in anni:
-        d = read_data_json(_nome_archivio(name, anno), None)
-        if isinstance(d, list) and d:
-            out.extend(d)
+        for _n, d in _pezzi_archivio(name, anno):     # tutti i pezzi, non solo il primo
+            if d:
+                out.extend(d)
     return out
 
 
@@ -4582,8 +4617,11 @@ def load_opp_watch() -> dict:
     return data if isinstance(data, dict) else {}
 
 
-def save_opp_watch(data: dict) -> None:
-    write_data_json(OPP_WATCH_NAME, data)
+def save_opp_watch(data: dict, force: bool = False) -> bool:
+    """Salva le osservazioni. `force=True` solo per una riduzione DICHIARATA (l'archiviazione dei
+    punti vecchi): in tutti gli altri casi resta attiva la protezione anti-crollo.
+    Ritorna l'esito: chi salva deve poter sapere se il dato e' stato conservato."""
+    return bool(write_data_json(OPP_WATCH_NAME, data, force=force))
 
 
 # Config della sezione Occasioni (ticker extra + watchlist + preferenze EU/ETF) salvata dall'app
@@ -8130,7 +8168,12 @@ def soglie_ora(ticker, price=None, kind="short", fino_a=None):
             except (TypeError, AttributeError):
                 pass
             try:
-                h = h[h.index <= pd.Timestamp(str(fino_a)[:10]) + pd.Timedelta(days=1)]
+                # STRETTAMENTE PRIMA del giorno dopo, non "minore o uguale": la barra giornaliera
+                # e' indicizzata a mezzanotte esatta, quindi con <= entrava la seduta SUCCESSIVA
+                # all'acquisto — proprio quella da escludere. Misurato: su 114 righe ricalcolate,
+                # 105 avevano ancora dentro un giorno di Borsa successivo, e 61 ricalcoli su 114
+                # restituivano valori identici a quelli che dovevano correggere.
+                h = h[h.index < pd.Timestamp(str(fino_a)[:10]) + pd.Timedelta(days=1)]
             except Exception:
                 pass
             if h is None or h.empty:
@@ -9568,14 +9611,39 @@ def _resa_e_percorso(ticker: str, dal: str, prezzo, giorni: int, storico=None) -
         _ultimo = idx[fine]
         _giorni_reali = (datetime.date.fromisoformat(_ultimo)
                         - datetime.date.fromisoformat(str(dal)[:10])).days
-        _incompleto = _ultimo < limite and _giorni_reali < giorni * 0.8
+        # LA FINESTRA SI MISURA IN SEDUTE, NON IN GIORNI DI CALENDARIO. La regola vecchia
+        # confrontava i giorni solari coperti con l'80% dell'orizzonte: ma in sette giorni solari
+        # la Borsa ne apre cinque, quindi una settimana NORMALE risultava «incompleta» ogni volta
+        # che la scadenza cadeva di sabato o domenica. Misurato il 14/09/2026: 1.797 esiti su 3.642
+        # (il 49%) scartati per sempre, e chi comprava di domenica ne perdeva il 100%.
+        # Quello che conta e' se dopo l'ultima chiusura disponibile la Borsa ha davvero aperto
+        # ancora entro la scadenza: se non ha aperto, la finestra E' completa.
+        _sedute_perse = sum(1 for g in idx[fine + 1:]
+                            if g <= limite) if fine + 1 < len(idx) else 0
+        _incompleto = _ultimo < limite and _sedute_perse > 0
+        if not _incompleto and _ultimo < limite:
+            # nessuna seduta persa: la finestra e' completa anche se l'ultimo prezzo e' di qualche
+            # giorno prima (fine settimana, festivita). Si annota, ma non si scarta.
+            pass
         tratto = c.iloc[i0:fine + 1].astype(float)
         pf = float(tratto.iloc[-1])
         pmax, pmin = float(tratto.max()), float(tratto.min())
         imax = int(tratto.values.argmax())
         imin = int(tratto.values.argmin())
+        _resa = round((pf / float(prezzo) - 1) * 100, 2)
+        # UNA RESA IMPOSSIBILE NON E' UN GUADAGNO, E' UN RAGGRUPPAMENTO DI AZIONI. La guardia
+        # esistente confronta il prezzo d'acquisto con la PRIMA barra, e non vede i raggruppamenti
+        # avvenuti DOPO. Misurato il 14/09/2026: tre esiti a +3.298%, +2.212% e +1.813% in sette
+        # giorni, tutti su titoli comprati sotto i 17 centesimi che poi ne valevano 2,50-3,81.
+        # Da soli facevano passare la resa media di 3.594 esiti da -1,64% a +0,47%: cambiavano il
+        # segno. La riga resta a verbale — non si cancella un dato — ma la resa viene annullata e
+        # marcata, cosi non entra nell'apprendimento.
+        if abs(_resa) > _RESA_IMPOSSIBILE and giorni <= 40:
+            return {"dati_sospetti": True, "motivo_sospetto": "resa impossibile nel periodo",
+                    "resa_grezza": _resa, "prezzo_fine": round(pf, 4),
+                    "prezzo_acquisto_registrato": float(prezzo), "maturato_il": idx[fine]}
         return {
-            "resa": round((pf / float(prezzo) - 1) * 100, 2),
+            "resa": _resa,
             "max_toccato": round((pmax / float(prezzo) - 1) * 100, 2),
             "min_toccato": round((pmin / float(prezzo) - 1) * 100, 2),
             "giorni_al_massimo": imax, "giorni_al_minimo": imin,
@@ -9690,6 +9758,23 @@ _DOPPIONI = {
     "momentum": "perf_5d", "oversold": "rsi", "rebound": "rebound_pot",
     "trend": "above_sma200", "prob": "prob_gain",
 }
+
+
+def _separazione_prudente(sep: float, n_min: int) -> float:
+    """La separazione tolto il margine d'errore dovuto ai pochi casi.
+
+    Serve perche' la separazione nuda non guarda QUANTI casi ci sono: con quattro casi fortunati si
+    ottiene un numero altissimo. Misurato sui dati veri del 14/09/2026: «Copertura del dividendo»
+    era prima in classifica con separazione 1,52 su 16 righe di 1.231 e una sola giornata.
+    Qui si sottrae l'incertezza tipica di un campione di quella dimensione: cio' che resta e' il
+    valore di cui ci si puo' fidare anche nel caso sfortunato. Con pochi casi resta zero, ed e'
+    esattamente la risposta giusta — non «non lo so», ma «non ho niente su cui basarmi»."""
+    try:
+        n = max(1, int(n_min))
+        margine = 1.96 * 1.25 * (2.0 / n) ** 0.5
+        return max(0.0, round(float(sep) - margine, 3))
+    except Exception:
+        return 0.0
 
 
 def _separazione(gv, gp) -> float:
@@ -9833,6 +9918,8 @@ def sintesi_apprendimento(kind: str = None, orizzonte: str = "30g", momento: str
             "gruppo": gruppo, "chi_guadagna": _mediana(gv), "chi_perde": _mediana(gp),
             "differenza": d_tot,
             "separazione": round(_separazione(gv, gp), 2),
+            "separazione_prudente": _separazione_prudente(_separazione(gv, gp),
+                                                          min(len(occ_v), len(occ_p))),
             "righe_guadagno": nv, "righe_perdita": np_,
             "occasioni_guadagno": len(occ_v), "occasioni_perdita": len(occ_p),
             "giornate": giornate_utili, "giornate_concordi": concordi,
@@ -9847,8 +9934,17 @@ def sintesi_apprendimento(kind: str = None, orizzonte: str = "30g", momento: str
         }
     # la classifica va sulla SEPARAZIONE (unità confrontabile), e i doppioni non competono per i
     # primi posti: resterebbero accanto al loro gemello raddoppiando lo stesso segnale
+    # LA CLASSIFICA guarda tre cose, in quest'ordine: (1) i doppioni non competono per i primi
+    # posti; (2) chi ha meno di 30 occasioni per lato non sta in cima, per quanto alta sia la sua
+    # separazione — con pochi casi un numero alto e' fortuna, non conoscenza; (3) fra i restanti
+    # vince la separazione PRUDENTE, cioe' tolto il margine d'errore dei pochi casi.
+    # Senza (2) e (3), nei dati veri del 14/09 era prima una caratteristica presente su 16 righe
+    # di 1.231, misurata in una sola giornata.
     ordinate = sorted(caratteristiche.items(),
                       key=lambda kv: (kv[1].get("doppione_di") is not None,
+                                      min(kv[1].get("occasioni_guadagno") or 0,
+                                          kv[1].get("occasioni_perdita") or 0) < 30,
+                                      -(kv[1].get("separazione_prudente") or 0),
                                       -(kv[1].get("separazione") or 0)))
     occ_tot_v = {_identita_occasione(p) for p, _ in vinte}
     occ_tot_p = {_identita_occasione(p) for p, _ in perse}
@@ -10693,7 +10789,11 @@ def ripara_soglie_contaminate(max_righe: int = 120) -> dict:
     acquisti = eventi_acquisto()
     corrette, restano = 0, 0
     for r in righe:
-        if r.get("evento") not in acquisti or r.get("soglie_ricalcolate_il"):
+        if r.get("evento") not in acquisti:
+            continue
+        # SI RIPASSA anche chi era gia' stato "corretto", se lo era stato con il taglio sbagliato
+        # di un giorno: quelle righe portano il marchio ma hanno ancora dentro il futuro.
+        if r.get("soglie_ricalcolate_il") and r.get("taglio_corretto"):
             continue
         d_ev, d_scr = str(r.get("data") or "")[:10], str(r.get("scritto_il") or "")[:10]
         if not d_ev or not d_scr or d_scr <= d_ev:
@@ -10706,11 +10806,13 @@ def ripara_soglie_contaminate(max_righe: int = 120) -> dict:
         nuove = soglie_ora(r.get("ticker"), r.get("prezzo"), r.get("kind"), fino_a=d_ev)
         if not isinstance(nuove, dict):
             continue
-        r["soglie_contaminate"] = r.get("soglie")      # non si butta: resta verificabile
+        if "soglie_contaminate" not in r:
+            r["soglie_contaminate"] = r.get("soglie")  # le ORIGINALI, non quelle del primo tentativo
         r["soglie"] = nuove.get("soglie")
         r["stop"] = nuove.get("stop")
         r["atr"] = nuove.get("atr")
         r["soglie_ricalcolate_il"] = _now_iso()
+        r["taglio_corretto"] = True      # ricalcolata col taglio giusto (barra successiva esclusa)
         r["soglie_ritardo_giorni"] = (datetime.date.fromisoformat(d_scr)
                                       - datetime.date.fromisoformat(d_ev)).days
         # l'esito calcolato sul bersaglio sbagliato non vale piu: si rifara al prossimo giro
@@ -10770,3 +10872,204 @@ def ripara_prezzi_profili(giorni: int = 7) -> dict:
             riallineati += cambi
             file_toccati.append(nome)
     return {"riallineati": riallineati, "file": file_toccati}
+
+
+# --- I PUNTI DI OSSERVAZIONE ------------------------------------------------
+# STESSO PROBLEMA DEGLI SCATTI, STESSA CURA. opp_watch.json e' un file di STATO VIVO che cresceva
+# senza freno vero: misurato il 14/09/2026, 763.662 byte con +16.795 al giorno, cioe' il muro di
+# 1 MB verso il 28 settembre. Il 96% del peso sono i punti di osservazione (5.485 punti su 130
+# voci), e la causa e' il numero di voci: erano 51 il 21/08, sono 130 oggi, +3,3 al giorno e
+# nessuna che esce. Il tetto per voce era dimensionato su «41 voci, ~55 KB»: con 130 voci e 420
+# punti a testa quel file puo' arrivare a 7,3 MB.
+# Sopra 1 MB la protezione anti-crollo si spegne in silenzio, e li dentro c'e' la fotografia
+# congelata del primo giorno di ogni occasione — il dato da cui nascono gli scenari.
+# Come per gli scatti: i punti vecchi vanno in file giornalieri e non si buttano piu'.
+ARC_OSSERVAZIONI = "archivio/osservazioni"
+_OBS_VIVI_GG = 5              # giorni di punti che restano nel file vivo
+_OBS_TETTO_BYTE = 500_000     # oltre questo il file vivo si accorcia da solo
+_OBS_MINIMO = 3               # punti che restano SEMPRE per voce (vedi _SCATTI_MINIMO)
+_OBS_GIORNI_PER_GIRO = 10
+
+
+def archivia_osservazioni(giorni_vivi: int = None, tetto_byte: int = None,
+                          max_giorni: int = None) -> dict:
+    """Sposta i punti di osservazione vecchi in file giornalieri e rimpicciolisce il file vivo.
+
+    L'ordine e' quello che conta, identico a quello degli scatti: si scrive l'archivio, si VERIFICA
+    che sia arrivato, e solo dopo si toglie qualcosa dal vivo. Se l'archivio non riesce, il file
+    vivo non viene toccato: resta grosso — un problema — ma nessun punto sparisce.
+    Il campo `primo` non si tocca MAI: e' la fotografia congelata del giorno d'ingresso, e sta
+    fuori dalla lista dei punti proprio perche' non deve poter essere potato."""
+    giorni_vivi = _OBS_VIVI_GG if giorni_vivi is None else giorni_vivi
+    tetto_byte = _OBS_TETTO_BYTE if tetto_byte is None else tetto_byte
+    max_giorni = _OBS_GIORNI_PER_GIRO if max_giorni is None else max_giorni
+
+    watch = load_opp_watch()
+    if not isinstance(watch, dict) or not watch:
+        return {"spostati": 0, "giorni": 0, "peso_prima": 0, "peso_dopo": 0,
+                "motivo": "non riesco a leggere le osservazioni: non tocco niente"}
+    peso_prima = _peso(watch)
+    spostati_tot, giorni_fatti, problemi = 0, [], []
+
+    while True:
+        taglio = (datetime.date.today() - datetime.timedelta(days=max(1, giorni_vivi))).isoformat()
+        per_giorno, scelti = {}, {}
+        for chiave, e in watch.items():
+            if not isinstance(e, dict):
+                continue
+            tutti = sorted((e.get("obs") or []), key=lambda o: str(o.get("date") or ""))
+            intoccabili = {id(o) for o in tutti[-_OBS_MINIMO:]}
+            for o in tutti:
+                g = str(o.get("date") or "")[:10]
+                if not g or g >= taglio or id(o) in intoccabili:
+                    continue
+                riga = {"giorno": g, "chiave": chiave, "ticker": e.get("ticker"),
+                        "kind": e.get("kind"), "nome": e.get("name")}
+                riga.update(o)
+                per_giorno.setdefault(g, []).append(riga)
+                scelti.setdefault(chiave, set()).add(str(o.get("date")))
+        if not per_giorno:
+            break
+        salvati = set()
+        for g in sorted(per_giorno)[:max(1, max_giorni)]:
+            esito = _arc_aggiungi(ARC_OSSERVAZIONI, per_giorno[g],
+                                  chiave=lambda r: (r.get("chiave"), r.get("date")), giorno=g)
+            if esito.get("salvate"):
+                salvati.add(g)
+                giorni_fatti.append(g)
+            else:
+                problemi.append(f"{g}: {esito.get('motivo')}")
+        if not salvati:
+            break
+        spostati = 0
+        for chiave, e in watch.items():
+            if not isinstance(e, dict):
+                continue
+            scelte = scelti.get(chiave) or set()
+            tenuti = []
+            for o in (e.get("obs") or []):
+                d = str(o.get("date") or "")
+                # si toglie SOLO cio' che e' stato scelto E il cui giorno e' arrivato in archivio
+                if d in scelte and d[:10] in salvati:
+                    spostati += 1
+                else:
+                    tenuti.append(o)
+            e["obs"] = tenuti
+        spostati_tot += spostati
+        if _peso(watch) <= tetto_byte or giorni_vivi <= 1:
+            break
+        giorni_vivi -= 1
+
+    if not spostati_tot:
+        return {"spostati": 0, "giorni": 0, "peso_prima": peso_prima, "peso_dopo": peso_prima,
+                "motivo": ("; ".join(problemi) or None)}
+    if not save_opp_watch(watch, force=True):   # riduzione dichiarata, non un effetto collaterale
+        return {"spostati": 0, "giorni": len(set(giorni_fatti)), "peso_prima": peso_prima,
+                "peso_dopo": peso_prima,
+                "motivo": "i punti sono in archivio ma il file vivo non si e salvato: nulla e perso"}
+    return {"spostati": spostati_tot, "giorni": len(set(giorni_fatti)),
+            "peso_prima": peso_prima, "peso_dopo": _peso(watch),
+            "giorni_vivi": giorni_vivi, "motivo": ("; ".join(problemi) or None)}
+
+
+def storia_osservazioni(kind: str, ticker: str, dal: str = None, al: str = None) -> list:
+    """La storia COMPLETA dei punti di osservazione di un'occasione: archivio piu' file vivo.
+    Da usare dove serve la storia lunga; il file vivo ne tiene pochi giorni, ma l'archivio non
+    butta piu' niente — quindi da adesso questa storia si allunga invece di accorciarsi."""
+    chiave = f"{kind}:{str(ticker).upper()}"
+    fuori = {}
+    for r in _arc_leggi_giorni(ARC_OSSERVAZIONI, dal=dal, al=al):
+        if isinstance(r, dict) and r.get("chiave") == chiave and r.get("date"):
+            fuori[str(r["date"])] = {k: v for k, v in r.items()
+                                     if k not in ("giorno", "chiave", "ticker", "kind", "nome")}
+    e = (load_opp_watch() or {}).get(chiave) or {}
+    for o in (e.get("obs") or []):
+        if o.get("date"):
+            d = str(o["date"])
+            if (dal and d[:10] < dal) or (al and d[:10] > al):
+                continue
+            fuori[d] = o
+    return [fuori[k] for k in sorted(fuori)]
+
+
+def ripara_esiti(giorni: int = 45, max_titoli: int = 120) -> dict:
+    """Rifà gli esiti che erano stati scartati o creduti per sbaglio.
+
+    Due categorie, entrambe misurate sui dati veri del 14/09/2026:
+
+    1. FINESTRA CREDUTA INCOMPLETA — 1.797 esiti su 3.642 (il 49%). La regola vecchia misurava la
+       finestra in giorni di calendario: ma in sette giorni solari la Borsa ne apre cinque, quindi
+       una settimana NORMALE risultava incompleta ogni volta che la scadenza cadeva nel fine
+       settimana. Chi comprava di domenica perdeva il 100% dei propri esiti. Quelle righe non erano
+       sbagliate: erano giuste e buttate. Rifacendole, la base dell'apprendimento raddoppia.
+
+    2. RESE IMPOSSIBILI — tre esiti a +3.298%, +2.212% e +1.813% in sette giorni, raggruppamenti di
+       azioni letti come guadagno. Cambiavano il SEGNO della media di 3.594 righe.
+
+    Non cancella niente: i valori di prima restano accanto, marcati. Ripetibile senza danno."""
+    oggi = datetime.date.today()
+    dal = (oggi - datetime.timedelta(days=max(1, giorni))).isoformat()
+    # le righe di profilo servono per riavere prezzo e data d'acquisto
+    profili = {p.get("id"): p for p in _arc_leggi_giorni(ARC_PROFILI, dal=(
+        (oggi - datetime.timedelta(days=max(1, giorni) + 400)).isoformat()))
+        if isinstance(p, dict)}
+    rifatti, sospesi, file_toccati, storico = 0, 0, [], {}
+
+    def _storia(tk):
+        if tk not in storico:
+            try:
+                storico[tk] = get_history(tk, "2y")
+            except Exception:
+                storico[tk] = None
+        return storico[tk]
+
+    for nome in sorted(indice_archivio()):
+        if not nome.startswith(ARC_ESITI + "/"):
+            continue
+        g = os.path.basename(nome)[:10]
+        if len(g) != 10 or g < dal:
+            continue
+        righe = read_data_json(nome, None)
+        if not isinstance(righe, list) or not righe:
+            continue          # non si legge: non si tocca, mai
+        cambi = 0
+        for e in righe:
+            if not isinstance(e, dict) or e.get("rifatto_il"):
+                continue
+            da_rifare = bool(e.get("finestra_incompleta"))
+            impossibile = (e.get("resa") is not None
+                           and abs(float(e["resa"])) > _RESA_IMPOSSIBILE
+                           and int(e.get("giorni") or 0) <= 40)
+            if not da_rifare and not impossibile:
+                continue
+            if len(storico) >= max_titoli and e.get("ticker") not in storico:
+                continue      # basta cosi per questo giro: si riprende al prossimo
+            p = profili.get(e.get("profilo")) or {}
+            prezzo = e.get("prezzo_acquisto") or p.get("prezzo")
+            comprato = e.get("comprato_il") or p.get("giorno")
+            if not prezzo or not comprato:
+                continue
+            nuovo = _resa_e_percorso(e.get("ticker"), comprato, prezzo,
+                                     int(e.get("giorni") or 7), storico=_storia(e.get("ticker")))
+            if not nuovo:
+                continue
+            e.setdefault("prima_del_ripasso", {
+                "resa": e.get("resa"), "finestra_incompleta": e.get("finestra_incompleta"),
+                "maturato_il": e.get("maturato_il")})
+            for k in ("resa", "max_toccato", "min_toccato", "giorni_al_massimo",
+                      "giorni_al_minimo", "giorni_misurati", "prezzo_fine", "maturato_il",
+                      "giorni_di_calendario_coperti", "finestra_incompleta", "ultima_quotazione",
+                      "dati_sospetti", "motivo_sospetto", "resa_grezza"):
+                if k in nuovo:
+                    e[k] = nuovo[k]
+                elif k in ("dati_sospetti", "motivo_sospetto", "resa_grezza"):
+                    e.pop(k, None)
+            if nuovo.get("dati_sospetti"):
+                e["resa"] = None
+                sospesi += 1
+            e["rifatto_il"] = _arc_ora()
+            cambi += 1
+        if cambi and write_data_json(nome, righe) and nome not in _SALVATAGGI_FALLITI:
+            rifatti += cambi
+            file_toccati.append(nome)
+    return {"rifatti": rifatti, "marcati_sospetti": sospesi, "file": len(file_toccati)}
