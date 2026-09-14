@@ -5614,5 +5614,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "TTAN",
+"kind": "short",
+"date": "2026-09-14",
+"promo_price": 59.045,
+"obs_price": 56.71,
+"obs_date": "2026-09-09",
+"pre_price": 57.12,
+"pre_date": "2026-09-10",
+"conf_price": null,
+"conf_date": null,
+"target": 82.8296,
+"stop": 47.6286,
+"reliab": "🔴 Bassa",
+"prob_gain": 58,
+"prob_loss": 15,
+"conv": 71,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-09 17:00",
+"prezzo": 56.71,
+"conv": 74,
+"prob_gain": 60,
+"prob_loss": 12,
+"reliab": "🔴 Bassa",
+"mkt": -0.983
+},
+"anticipo": {
+"data": "2026-09-10",
+"prezzo": 57.12,
+"conv": 74,
+"prob_gain": 57,
+"prob_loss": 13,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-14 21:37",
+"prezzo": 59.045,
+"conv": 71,
+"prob_gain": 58,
+"prob_loss": 15,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
