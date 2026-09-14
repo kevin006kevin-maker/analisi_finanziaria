@@ -15547,5 +15547,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "long:IAG:2026-08-20",
+"ticker": "IAG",
+"kind": "long",
+"evento": "fine_verifica",
+"scritto_il": "2026-09-15 00:50",
+"data": "2026-09-15 00:49",
+"prezzo": 19.79,
+"conv": 63,
+"prob_gain": 65,
+"prob_loss": 25,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 10 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-09-15",
+"soglie": {
+"media50": null,
+"media20": 20.4195,
+"quattro_atr": 23.2684,
+"meta_caduta": 20.98,
+"bollinger": 22.345,
+"consigliata": 23.2684
+},
+"stop": 18.0508,
+"atr": 0.8696
 }
 ]
