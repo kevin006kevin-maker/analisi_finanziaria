@@ -1,48 +1,6 @@
 [
 {
 "date": "2026-09-03",
-"ticker": "GEMI",
-"kind": "short",
-"price": 4.605,
-"conv": 29,
-"factors": {
-"discount": 85.8395,
-"histcheap": 0.72,
-"riskadj": -3.44,
-"ddpen": -74.01,
-"momentum": -1.4317,
-"prob": 29,
-"oversold": -56.19,
-"rebound": -7.7611,
-"trend": -1.0,
-"relstrength": 0.9142
-},
-"ret_5d": -4.67,
-"ret_21d": null
-},
-{
-"date": "2026-09-03",
-"ticker": "LAB",
-"kind": "short",
-"price": 0.7137,
-"conv": 43,
-"factors": {
-"discount": 57.5179,
-"histcheap": 1.55,
-"riskadj": -1.05,
-"ddpen": -35.43,
-"momentum": -9.8,
-"prob": 27,
-"oversold": -48.0478,
-"rebound": 10.3088,
-"trend": -1.0,
-"relstrength": 9.2825
-},
-"ret_5d": -3.36,
-"ret_21d": null
-},
-{
-"date": "2026-09-03",
 "ticker": "WOOF",
 "kind": "short",
 "price": 2.8,
@@ -40319,6 +40277,46 @@
 "rebound": 15.0559,
 "trend": -1.0,
 "relstrength": 5.2063
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-14",
+"ticker": "CTNT",
+"kind": "long",
+"price": 0.152,
+"conv": 62,
+"factors": {
+"discount": 99.9636,
+"histcheap": 1.16,
+"riskadj": -1.91,
+"ddpen": -67.66,
+"momentum": 87.84,
+"prob": 41,
+"quality": null,
+"valcheap": null,
+"trappen": 0
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-14",
+"ticker": "QCLS",
+"kind": "long",
+"price": 0.5698,
+"conv": 67,
+"factors": {
+"discount": 91.7659,
+"histcheap": 3.84,
+"riskadj": -1.27,
+"ddpen": -44.19,
+"momentum": 68.1676,
+"prob": 68,
+"quality": null,
+"valcheap": null,
+"trappen": 0
 },
 "ret_5d": null,
 "ret_21d": null
