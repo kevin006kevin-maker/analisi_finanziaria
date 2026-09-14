@@ -5787,5 +5787,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "ITUB",
+"kind": "long",
+"date": "2026-09-15",
+"promo_price": 8.23,
+"obs_price": 7.4,
+"obs_date": "2026-08-16",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": null,
+"stop": 7.7552,
+"reliab": "🟢 Alta",
+"prob_gain": 68,
+"prob_loss": 14,
+"conv": 65,
+"passaggi": {
+"osservazione": {
+"data": "2026-08-16 21:44",
+"prezzo": 7.4,
+"conv": 81,
+"prob_gain": 82,
+"prob_loss": 8,
+"reliab": "🟢 Alta",
+"mkt": 4.3991
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-15 00:47",
+"prezzo": 8.23,
+"conv": 65,
+"prob_gain": 68,
+"prob_loss": 14,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
