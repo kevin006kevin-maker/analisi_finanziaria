@@ -6078,5 +6078,62 @@
 "mkt": null
 }
 }
+},
+{
+"ticker": "ASO",
+"kind": "long",
+"date": "2026-09-15",
+"promo_price": 55.36,
+"obs_price": 43.76,
+"obs_date": "2026-08-25",
+"pre_price": 43.475,
+"pre_date": "2026-08-26",
+"conf_price": null,
+"conf_date": null,
+"target": null,
+"stop": 51.0318,
+"reliab": "🟡 Media",
+"prob_gain": 39,
+"prob_loss": 44,
+"conv": 50,
+"passaggi": {
+"osservazione": {
+"data": "2026-08-25 15:46",
+"prezzo": 43.76,
+"conv": 71,
+"prob_gain": 68,
+"prob_loss": 18,
+"reliab": "🟡 Media",
+"mkt": 3.4251
+},
+"anticipo": {
+"data": "2026-08-26",
+"prezzo": 43.475,
+"conv": 73,
+"prob_gain": 75,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-15 03:26",
+"prezzo": 55.36,
+"conv": 50,
+"prob_gain": 39,
+"prob_loss": 44,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
