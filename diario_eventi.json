@@ -1554,10 +1554,43 @@
 "soglie_ricalcolate_il": "2026-09-14 21:39",
 "soglie_ritardo_giorni": 5,
 "res": {
-"7g": -2.71
+"7g": -2.71,
+"30g": -1.71,
+"soglia": -1.71
 },
 "taglio_corretto": true,
-"res_soglia": {}
+"res_soglia": {
+"media50": {
+"ret": -1.71,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -1.71,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -1.71,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -1.71,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -1.71,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -1.71,
+"toccato": false,
+"giorni": null
+}
+}
 },
 {
 "episodio": "short:STMMI.MI:2026-08-17",
@@ -15790,7 +15823,8 @@
 "consigliata": 7.2863
 },
 "stop": 5.5968,
-"atr": 0.2816
+"atr": 0.2816,
+"res": {}
 },
 {
 "episodio": "short:INIO:2026-09-15",
@@ -15817,7 +15851,8 @@
 "consigliata": 26.1818
 },
 "stop": 17.0879,
-"atr": 1.631
+"atr": 1.631,
+"res": {}
 },
 {
 "episodio": "short:HWM:2026-09-15",
@@ -15855,7 +15890,8 @@
 },
 "soglie_ricalcolate_il": "2026-09-15 03:28",
 "taglio_corretto": true,
-"soglie_ritardo_giorni": 6
+"soglie_ritardo_giorni": 6,
+"res": {}
 },
 {
 "episodio": "long:ASO:2026-08-25",
@@ -15882,7 +15918,8 @@
 "consigliata": 64.0163
 },
 "stop": 51.0318,
-"atr": 2.1641
+"atr": 2.1641,
+"res": {}
 },
 {
 "episodio": "short:RVLV:2026-09-10",
@@ -15909,7 +15946,8 @@
 "consigliata": 23.7408
 },
 "stop": 19.275,
-"atr": 0.9275
+"atr": 0.9275,
+"res": {}
 },
 {
 "episodio": "long:ASO:2026-08-25",
