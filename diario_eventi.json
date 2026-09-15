@@ -16801,5 +16801,32 @@
 },
 "stop": 88.2033,
 "atr": 5.0834
+},
+{
+"episodio": "long:FICO:2026-09-06",
+"ticker": "FICO",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-16 01:46",
+"data": "2026-09-16 01:43",
+"prezzo": 985.96,
+"conv": 43,
+"prob_gain": 70,
+"prob_loss": 20,
+"reliab": "🟡 Media",
+"mkt": -2.0572,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-16",
+"soglie": {
+"media50": 1138.2006,
+"media20": 1078.077,
+"quattro_atr": 1203.7647,
+"meta_caduta": 1179.52,
+"bollinger": 1251.5202,
+"consigliata": 1138.2006
+},
+"stop": 877.0577,
+"atr": 54.4512
 }
 ]
