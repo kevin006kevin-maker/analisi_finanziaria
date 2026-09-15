@@ -15791,5 +15791,32 @@
 },
 "stop": 5.5968,
 "atr": 0.2816
+},
+{
+"episodio": "short:INIO:2026-09-15",
+"ticker": "INIO",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-15 03:24",
+"data": "2026-09-15 03:24",
+"prezzo": 20.35,
+"conv": 62,
+"prob_gain": 44,
+"prob_loss": 29,
+"reliab": "🔴 Bassa",
+"mkt": -2.1293,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 26.1818,
+"media20": 22.3545,
+"quattro_atr": 26.8741,
+"meta_caduta": 30.74,
+"bollinger": 27.4743,
+"consigliata": 26.1818
+},
+"stop": 17.0879,
+"atr": 1.631
 }
 ]
