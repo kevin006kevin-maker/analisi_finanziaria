@@ -16720,5 +16720,32 @@
 },
 "stop": 5.5424,
 "atr": 0.8888
+},
+{
+"episodio": "long:ONON:2026-09-04",
+"ticker": "ONON",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-16 01:46",
+"data": "2026-09-15 23:17",
+"prezzo": 26.76,
+"conv": 68,
+"prob_gain": 69,
+"prob_loss": 19,
+"reliab": "🟡 Media",
+"mkt": -2.06,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-16",
+"soglie": {
+"media50": 33.205,
+"media20": 28.528,
+"quattro_atr": 30.8356,
+"meta_caduta": 32.77,
+"bollinger": 31.1991,
+"consigliata": 30.8356
+},
+"stop": 24.7222,
+"atr": 1.0189
 }
 ]
