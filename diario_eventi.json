@@ -16747,5 +16747,32 @@
 },
 "stop": 24.7222,
 "atr": 1.0189
+},
+{
+"episodio": "long:FIS:2026-09-04",
+"ticker": "FIS",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-16 01:46",
+"data": "2026-09-15 23:17",
+"prezzo": 37.34,
+"conv": 80,
+"prob_gain": 83,
+"prob_loss": 7,
+"reliab": "🟢 Alta",
+"mkt": -2.06,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-16",
+"soglie": {
+"media50": 41.6998,
+"media20": 40.267,
+"quattro_atr": 42.9797,
+"meta_caduta": 42.075,
+"bollinger": 43.1927,
+"consigliata": 41.6998
+},
+"stop": 34.5202,
+"atr": 1.4099
 }
 ]
