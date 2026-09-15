@@ -6135,5 +6135,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "RVLV",
+"kind": "short",
+"date": "2026-09-15",
+"promo_price": 21.13,
+"obs_price": 20.51,
+"obs_date": "2026-09-10",
+"pre_price": 19.49,
+"pre_date": "2026-09-11",
+"conf_price": null,
+"conf_date": null,
+"target": 23.7408,
+"stop": 19.275,
+"reliab": "🟡 Media",
+"prob_gain": 55,
+"prob_loss": 13,
+"conv": 70,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-10 20:55",
+"prezzo": 20.51,
+"conv": 63,
+"prob_gain": 57,
+"prob_loss": 11,
+"reliab": "🟡 Media",
+"mkt": -2.0112
+},
+"anticipo": {
+"data": "2026-09-11",
+"prezzo": 19.49,
+"conv": 74,
+"prob_gain": 58,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-15 03:26",
+"prezzo": 21.13,
+"conv": 70,
+"prob_gain": 55,
+"prob_loss": 13,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
