@@ -6547,5 +6547,86 @@
 "date": "2026-09-15 19:43"
 }
 ]
+},
+{
+"ticker": "ASO",
+"kind": "long",
+"added": "2026-09-15",
+"removed": "2026-09-15",
+"reason": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
+"auto": true,
+"first_price": 55.36,
+"last_price": 50.44,
+"first_target": null,
+"first_stop": 51.0318,
+"first_src": "scatto",
+"first_sicuro": true,
+"my_target_price": null,
+"snapshots": [
+{
+"name": "Academy Sports and Outdoors, Inc.",
+"price": 55.36,
+"rsi": 73.9849,
+"dd_high": -9.5277,
+"occasione": 49,
+"convenienza": 50,
+"prob_gain": 39,
+"prob_loss": 44,
+"exp_ret": -10.8,
+"gain": -10.8,
+"reliab": "🟡 Media",
+"target": 47.1655,
+"stop": 51.0318,
+"date": "2026-09-15 03:26"
+},
+{
+"name": "Academy Sports and Outdoors, Inc.",
+"price": 54.25,
+"rsi": 69.438,
+"dd_high": -11.3417,
+"occasione": 50,
+"convenienza": 54,
+"prob_gain": 43,
+"prob_loss": 40,
+"exp_ret": -6.7,
+"gain": -6.7,
+"reliab": "🟡 Media",
+"target": 47.2937,
+"stop": 49.9167,
+"date": "2026-09-15 08:43"
+},
+{
+"name": "Academy Sports and Outdoors Inc",
+"price": 51.29,
+"rsi": 58.8722,
+"dd_high": -16.2608,
+"occasione": 58,
+"convenienza": 60,
+"prob_gain": 48,
+"prob_loss": 35,
+"exp_ret": -2.8,
+"gain": -2.8,
+"reliab": "🟡 Media",
+"target": 47.3809,
+"stop": 46.7748,
+"date": "2026-09-15 19:44"
+},
+{
+"name": "Academy Sports and Outdoors Inc",
+"price": 50.44,
+"rsi": 56.5838,
+"dd_high": -17.5682,
+"occasione": 60,
+"convenienza": 61,
+"prob_gain": 47,
+"prob_loss": 35,
+"exp_ret": -2.9,
+"gain": -2.9,
+"reliab": "🟡 Media",
+"target": 47.3649,
+"stop": 45.8677,
+"date": "2026-09-15 23:18"
+}
+]
 }
 ]
