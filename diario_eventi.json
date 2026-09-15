@@ -16383,5 +16383,32 @@
 },
 "stop": 20.655,
 "atr": 0.3775
+},
+{
+"episodio": "short:IONS:2026-09-15",
+"ticker": "IONS",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-16 01:43",
+"data": "2026-09-16 01:41",
+"prezzo": 47.25,
+"conv": 86,
+"prob_gain": 64,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": -2.0572,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 57.955,
+"media20": 58.522,
+"quattro_atr": 57.1094,
+"meta_caduta": 66.79,
+"bollinger": 66.703,
+"consigliata": 57.1094
+},
+"stop": 42.3203,
+"atr": 2.4648
 }
 ]
