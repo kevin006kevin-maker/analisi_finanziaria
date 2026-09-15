@@ -16464,5 +16464,32 @@
 },
 "stop": 8.6652,
 "atr": 0.8524
+},
+{
+"episodio": "short:XLU:2026-09-15",
+"ticker": "XLU",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-16 01:44",
+"data": "2026-09-16 01:41",
+"prezzo": 41.32,
+"conv": 68,
+"prob_gain": 48,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -2.0572,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 44.061,
+"media20": 42.927,
+"quattro_atr": 43.9249,
+"meta_caduta": 43.805,
+"bollinger": 44.3078,
+"consigliata": 43.9249
+},
+"stop": 40.0175,
+"atr": 0.6512
 }
 ]
