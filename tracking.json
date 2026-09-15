@@ -10322,5 +10322,37 @@
 "auto": true,
 "notified": false,
 "entry_check": "2026-09-15"
+},
+"KRMN": {
+"kind": "short",
+"added": "2026-09-15",
+"note": "🤖 Promossa il 2026-09-15: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +6.5% e la convenienza (64) regge.",
+"name": "KRMN",
+"snapshots": [
+{
+"name": "KRMN",
+"price": 37.825,
+"rsi": 32.6999,
+"dd_high": -67.4733,
+"occasione": 74,
+"convenienza": 68,
+"prob_gain": 49,
+"prob_loss": 28,
+"exp_ret": -0.8,
+"gain": 30.296,
+"reliab": "🔴 Bassa",
+"target": 48.861,
+"stop": 31.8214,
+"date": "2026-09-15 19:42"
+}
+],
+"entry_price": 37.825,
+"entry_target": 48.861,
+"entry_stop": 31.8214,
+"entry_conv": 68,
+"entry_date": "2026-09-15 19:42",
+"entry_src": "scatto",
+"max_price": 37.825,
+"max_date": "2026-09-15 19:42"
 }
 }
