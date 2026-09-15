@@ -16356,5 +16356,32 @@
 },
 "stop": 86.0987,
 "atr": 7.3706
+},
+{
+"episodio": "long:NLY:2026-09-16",
+"ticker": "NLY",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-16 01:43",
+"data": "2026-09-16 01:43",
+"prezzo": 21.41,
+"conv": 74,
+"prob_gain": 89,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": -2.0572,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 22.8302,
+"media20": 22.7635,
+"quattro_atr": 22.92,
+"meta_caduta": 22.575,
+"bollinger": 23.9252,
+"consigliata": 22.8302
+},
+"stop": 20.655,
+"atr": 0.3775
 }
 ]
