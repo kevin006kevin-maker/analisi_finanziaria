@@ -1579,7 +1579,7 @@
 "max_date": "2026-08-27 22:41",
 "exit_notified": false,
 "warn_since": "2026-09-15",
-"warn": "in perdita da 38 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 39 giorni di Borsa: valuta l'uscita"
 },
 "NFLX": {
 "kind": "short",
@@ -1984,7 +1984,7 @@
 "max_price": 6.19,
 "max_date": "2026-08-18 06:09",
 "warn_since": "2026-09-15",
-"warn": "in perdita da 34 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 35 giorni di Borsa: valuta l'uscita"
 },
 "NEM": {
 "kind": "long",
@@ -2934,7 +2934,7 @@
 "max_price": 118.715,
 "max_date": "2026-08-24 16:01",
 "warn_since": "2026-09-15",
-"warn": "in perdita da 34 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 35 giorni di Borsa: valuta l'uscita"
 },
 "SMCI": {
 "kind": "long",
@@ -4129,7 +4129,7 @@
 "max_price": 37.28,
 "max_date": "2026-08-17 18:55",
 "warn_since": "2026-09-15",
-"warn": "in perdita da 30 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 31 giorni di Borsa: valuta l'uscita"
 },
 "SMH": {
 "kind": "short",
@@ -5081,7 +5081,7 @@
 "max_price": 155.83,
 "max_date": "2026-08-17 17:51",
 "warn_since": "2026-09-15",
-"warn": "in perdita da 30 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 31 giorni di Borsa: valuta l'uscita"
 },
 "XLK": {
 "kind": "short",
@@ -5913,139 +5913,6 @@
 "entry_check": "2026-09-15",
 "max_price": 12.81,
 "max_date": "2026-08-27 22:41"
-},
-"WOLF": {
-"kind": "short",
-"added": "2026-08-04",
-"note": "🤖 Promossa il 2026-08-04: dopo 8 giorni di Borsa di osservazione il prezzo è risalito di +2.1% e la convenienza (57) regge.",
-"name": "WOLF",
-"snapshots": [
-{
-"name": "WOLF",
-"price": 23.672,
-"rsi": 40.8631,
-"dd_high": -66.9116,
-"occasione": 27,
-"convenienza": 62,
-"prob_gain": 49,
-"prob_loss": 33,
-"exp_ret": -0.5,
-"gain": 18.1423,
-"reliab": "🔴 Bassa",
-"target": 28.7322,
-"stop": 19.2242,
-"date": "2026-09-14 15:30"
-},
-{
-"name": "WOLF",
-"price": 24.17,
-"rsi": 40.5632,
-"dd_high": -67.1156,
-"occasione": 27,
-"convenienza": 61,
-"prob_gain": 43,
-"prob_loss": 40,
-"exp_ret": -6.1,
-"gain": 18.8631,
-"reliab": "🔴 Bassa",
-"target": 28.7292,
-"stop": 19.0385,
-"date": "2026-09-14 21:37"
-},
-{
-"name": "WOLF",
-"price": 23.96,
-"rsi": 40.1506,
-"dd_high": -67.4014,
-"occasione": 6,
-"convenienza": 62,
-"prob_gain": 47,
-"prob_loss": 36,
-"exp_ret": -3.1,
-"gain": 19.8873,
-"reliab": "🔴 Bassa",
-"target": 28.725,
-"stop": 18.8285,
-"date": "2026-09-15 00:48"
-},
-{
-"name": "WOLF",
-"price": 25.92,
-"rsi": 44.3618,
-"dd_high": -64.7347,
-"occasione": 52,
-"convenienza": 60,
-"prob_gain": 47,
-"prob_loss": 36,
-"exp_ret": -2.6,
-"gain": 12.0594,
-"reliab": "🔴 Bassa",
-"target": 29.0458,
-"stop": 20.7461,
-"date": "2026-09-15 03:27"
-},
-{
-"name": "WOLF",
-"price": 23.96,
-"rsi": 40.1506,
-"dd_high": -67.4014,
-"occasione": 6,
-"convenienza": 62,
-"prob_gain": 47,
-"prob_loss": 36,
-"exp_ret": -3.1,
-"gain": 19.8873,
-"reliab": "🔴 Bassa",
-"target": 28.725,
-"stop": 18.8285,
-"date": "2026-09-15 08:43"
-},
-{
-"name": "WOLF",
-"price": 23.855,
-"rsi": 39.9319,
-"dd_high": -67.5442,
-"occasione": 7,
-"convenienza": 62,
-"prob_gain": 50,
-"prob_loss": 36,
-"exp_ret": 0.3,
-"gain": 19.1058,
-"reliab": "🔴 Bassa",
-"target": 28.4127,
-"stop": 18.9272,
-"date": "2026-09-15 19:43"
-},
-{
-"name": "WOLF",
-"price": 24.02,
-"rsi": 40.3373,
-"dd_high": -67.3197,
-"occasione": 60,
-"convenienza": 63,
-"prob_gain": 49,
-"prob_loss": 32,
-"exp_ret": -0.7,
-"gain": 18.3014,
-"reliab": "🔴 Bassa",
-"target": 28.416,
-"stop": 19.0922,
-"date": "2026-09-15 23:17"
-}
-],
-"auto": true,
-"notified": true,
-"entry_price": 26.739,
-"entry_target": 42.7097,
-"entry_stop": 18.8818,
-"entry_conv": 60,
-"entry_date": "2026-08-04 19:25",
-"entry_src": "scatto",
-"entry_check": "2026-09-15",
-"max_price": 34.96,
-"max_date": "2026-08-17 22:55",
-"warn_since": "2026-09-10",
-"warn": "in perdita da 29 giorni di Borsa: valuta l'uscita"
 },
 "TSLL": {
 "kind": "short",
@@ -7178,7 +7045,7 @@
 "max_price": 13.35,
 "max_date": "2026-08-18 07:04",
 "warn_since": "2026-09-15",
-"warn": "in perdita da 24 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 25 giorni di Borsa: valuta l'uscita"
 },
 "AGI": {
 "kind": "long",
@@ -7859,7 +7726,7 @@
 "max_price": 86.21,
 "max_date": "2026-09-02 18:51",
 "warn_since": "2026-09-15",
-"warn": "in perdita da 23 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 24 giorni di Borsa: valuta l'uscita"
 },
 "CAPR": {
 "kind": "short",
@@ -8894,7 +8761,7 @@
 "notified": true,
 "entry_check": "2026-09-15",
 "warn_since": "2026-09-15",
-"warn": "in perdita da 14 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 15 giorni di Borsa: valuta l'uscita"
 },
 "UMC": {
 "kind": "long",
@@ -9253,139 +9120,6 @@
 "auto": true,
 "notified": true,
 "entry_check": "2026-09-15"
-},
-"FRVO": {
-"kind": "short",
-"added": "2026-08-27",
-"note": "🤖 Promossa il 2026-08-27: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.2% e la convenienza (67) regge.",
-"name": "FRVO",
-"snapshots": [
-{
-"name": "FRVO",
-"price": 15.125,
-"rsi": 39.5723,
-"dd_high": -64.4118,
-"occasione": 7,
-"convenienza": 63,
-"prob_gain": 50,
-"prob_loss": 23,
-"exp_ret": -0.1,
-"gain": 39.0843,
-"reliab": "🔴 Bassa",
-"target": 21.0365,
-"stop": 11.4908,
-"date": "2026-09-14 15:30"
-},
-{
-"name": "FRVO",
-"price": 14.955,
-"rsi": 39.168,
-"dd_high": -64.8118,
-"occasione": 8,
-"convenienza": 63,
-"prob_gain": 46,
-"prob_loss": 24,
-"exp_ret": -1.9,
-"gain": 40.6426,
-"reliab": "🔴 Bassa",
-"target": 21.0331,
-"stop": 11.2509,
-"date": "2026-09-14 21:37"
-},
-{
-"name": "FRVO",
-"price": 14.96,
-"rsi": 39.1798,
-"dd_high": -64.8,
-"occasione": 8,
-"convenienza": 63,
-"prob_gain": 49,
-"prob_loss": 23,
-"exp_ret": -0.5,
-"gain": 40.5963,
-"reliab": "🔴 Bassa",
-"target": 21.0332,
-"stop": 11.2516,
-"date": "2026-09-15 00:49"
-},
-{
-"name": "FRVO",
-"price": 15.59,
-"rsi": 40.7222,
-"dd_high": -63.3176,
-"occasione": 27,
-"convenienza": 62,
-"prob_gain": 47,
-"prob_loss": 25,
-"exp_ret": -1.6,
-"gain": 36.5606,
-"reliab": "🔴 Bassa",
-"target": 21.2898,
-"stop": 11.7532,
-"date": "2026-09-15 03:27"
-},
-{
-"name": "FRVO",
-"price": 14.96,
-"rsi": 39.1798,
-"dd_high": -64.8,
-"occasione": 8,
-"convenienza": 63,
-"prob_gain": 49,
-"prob_loss": 23,
-"exp_ret": -0.5,
-"gain": 40.5963,
-"reliab": "🔴 Bassa",
-"target": 21.0332,
-"stop": 11.2516,
-"date": "2026-09-15 08:43"
-},
-{
-"name": "FRVO",
-"price": 15.102,
-"rsi": 39.7339,
-"dd_high": -64.4659,
-"occasione": 61,
-"convenienza": 63,
-"prob_gain": 48,
-"prob_loss": 24,
-"exp_ret": -1.1,
-"gain": 37.582,
-"reliab": "🔴 Bassa",
-"target": 20.7776,
-"stop": 11.5842,
-"date": "2026-09-15 19:43"
-},
-{
-"name": "FRVO",
-"price": 15.16,
-"rsi": 39.9573,
-"dd_high": -64.3294,
-"occasione": 61,
-"convenienza": 63,
-"prob_gain": 46,
-"prob_loss": 24,
-"exp_ret": -2.0,
-"gain": 37.0633,
-"reliab": "🔴 Bassa",
-"target": 20.7788,
-"stop": 11.6422,
-"date": "2026-09-15 23:18"
-}
-],
-"entry_price": 15.96,
-"entry_target": 24.4306,
-"entry_stop": 11.8945,
-"entry_conv": 64,
-"entry_date": "2026-08-27 22:40",
-"entry_src": "scatto",
-"max_price": 19.89,
-"max_date": "2026-09-01 20:43",
-"auto": true,
-"notified": true,
-"entry_check": "2026-09-15",
-"warn_since": "2026-09-10",
-"warn": "in perdita da 12 giorni di Borsa: valuta l'uscita"
 },
 "INTC": {
 "kind": "short",
@@ -9851,7 +9585,7 @@
 "notified": false,
 "entry_check": "2026-09-15",
 "warn_since": "2026-09-15",
-"warn": "in perdita da 10 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 11 giorni di Borsa: valuta l'uscita"
 },
 "ENI.MI": {
 "kind": "short",
@@ -10522,7 +10256,7 @@
 "notified": true,
 "entry_check": "2026-09-15",
 "warn_since": "2026-09-15",
-"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "STLAM.MI": {
 "kind": "long",
@@ -10818,7 +10552,7 @@
 "notified": false,
 "entry_check": "2026-09-15",
 "warn_since": "2026-09-14",
-"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
 },
 "ALMS": {
 "kind": "short",
@@ -10951,7 +10685,7 @@
 "notified": false,
 "entry_check": "2026-09-15",
 "warn_since": "2026-09-14",
-"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
 },
 "PSNY": {
 "kind": "short",
@@ -11050,7 +10784,9 @@
 "max_date": "2026-09-09 03:04",
 "auto": true,
 "notified": false,
-"entry_check": "2026-09-15"
+"entry_check": "2026-09-15",
+"warn_since": "2026-09-16",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "MXL": {
 "kind": "short",
@@ -11322,7 +11058,9 @@
 "max_date": "2026-09-09 03:02",
 "auto": true,
 "notified": false,
-"entry_check": "2026-09-15"
+"entry_check": "2026-09-15",
+"warn_since": "2026-09-16",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "RXT": {
 "kind": "short",
