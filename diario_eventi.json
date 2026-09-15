@@ -16612,5 +16612,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:MXL:2026-09-03",
+"ticker": "MXL",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-09-16 01:46",
+"data": "2026-09-15 23:18",
+"prezzo": 67.12,
+"conv": 58,
+"prob_gain": 38,
+"prob_loss": 38,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-09-16",
+"soglie": {
+"media50": 72.276,
+"media20": null,
+"quattro_atr": 90.7806,
+"meta_caduta": 97.575,
+"bollinger": 74.1199,
+"consigliata": 72.276
+},
+"stop": 55.2897,
+"atr": 5.9152
 }
 ]
