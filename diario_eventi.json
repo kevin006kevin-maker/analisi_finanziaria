@@ -15818,5 +15818,32 @@
 },
 "stop": 17.0879,
 "atr": 1.631
+},
+{
+"episodio": "short:HWM:2026-09-15",
+"ticker": "HWM",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-15 03:26",
+"data": "2026-09-09 12:41",
+"prezzo": 231.53,
+"conv": 76,
+"prob_gain": 53,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": -1.0266,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 273.8834,
+"media20": 266.504,
+"quattro_atr": 274.0381,
+"meta_caduta": 262.09,
+"bollinger": 301.5721,
+"consigliata": 273.8834
+},
+"stop": 210.276,
+"atr": 10.627
 }
 ]
