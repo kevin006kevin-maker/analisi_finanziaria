@@ -16855,5 +16855,32 @@
 },
 "stop": 20.9211,
 "atr": 2.2544
+},
+{
+"episodio": "short:MYGN:2026-09-11",
+"ticker": "MYGN",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-16 01:46",
+"data": "2026-09-15 23:16",
+"prezzo": 3.88,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-16",
+"soglie": {
+"media50": 4.1372,
+"media20": null,
+"quattro_atr": 4.8142,
+"meta_caduta": 5.095,
+"bollinger": null,
+"consigliata": 4.1372
+},
+"stop": 3.4129,
+"atr": 0.2335
 }
 ]
