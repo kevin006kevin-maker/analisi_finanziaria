@@ -15764,5 +15764,32 @@
 "stop": 18.6061,
 "atr": 0.942,
 "res": {}
+},
+{
+"episodio": "short:TDOC:2026-09-15",
+"ticker": "TDOC",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-15 03:24",
+"data": "2026-09-15 03:24",
+"prezzo": 6.16,
+"conv": 67,
+"prob_gain": 57,
+"prob_loss": 17,
+"reliab": "🔴 Bassa",
+"mkt": -2.1293,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 7.5722,
+"media20": 6.368,
+"quattro_atr": 7.2863,
+"meta_caduta": 7.94,
+"bollinger": 6.7402,
+"consigliata": 7.2863
+},
+"stop": 5.5968,
+"atr": 0.2816
 }
 ]
