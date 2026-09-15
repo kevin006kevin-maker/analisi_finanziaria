@@ -5138,5 +5138,68 @@
 },
 "ret_5d": 46.11,
 "ret_21d": null
+},
+{
+"date": "2026-09-04",
+"ticker": "LULU",
+"kind": "long",
+"price": 100.525,
+"conv": 73,
+"factors": {
+"discount": 53.4348,
+"histcheap": 1.85,
+"riskadj": -1.61,
+"ddpen": -30.2,
+"momentum": 16.7908,
+"prob": 85,
+"quality": 73.1,
+"valcheap": -0.1606,
+"trappen": 0
+},
+"ret_5d": -1.55,
+"ret_21d": null
+},
+{
+"date": "2026-09-04",
+"ticker": "BANL",
+"kind": "short",
+"price": 9.01,
+"conv": 34,
+"factors": {
+"discount": 44.0373,
+"histcheap": -2.25,
+"riskadj": 2.58,
+"ddpen": -41.4,
+"momentum": 44.0373,
+"prob": -26,
+"oversold": -44.8502,
+"rebound": -31.7294,
+"trend": 1.0,
+"relstrength": -44.0528
+},
+"ret_5d": -30.08,
+"ret_21d": null
+},
+{
+"date": "2026-09-04",
+"ticker": "BTAI",
+"kind": "short",
+"price": 0.0707,
+"conv": 75,
+"factors": {
+"discount": 98.3286,
+"histcheap": 2.25,
+"riskadj": -1.92,
+"ddpen": -64.45,
+"momentum": 60.9392,
+"prob": 65,
+"oversold": -20.0945,
+"rebound": 1087.1486,
+"trend": -1.0,
+"relstrength": -60.9548
+},
+"ret_5d": null,
+"ret_21d": null,
+"bad_data": true
 }
 ]
