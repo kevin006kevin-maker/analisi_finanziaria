@@ -16042,5 +16042,32 @@
 },
 "stop": 42.481,
 "atr": 2.4295
+},
+{
+"episodio": "short:ALHC:2026-09-15",
+"ticker": "ALHC",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-15 19:40",
+"data": "2026-09-15 19:40",
+"prezzo": 10.075,
+"conv": 79,
+"prob_gain": 53,
+"prob_loss": 17,
+"reliab": "🔴 Bassa",
+"mkt": -2.099,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 15.8672,
+"media20": 13.137,
+"quattro_atr": 13.4747,
+"meta_caduta": 17.3175,
+"bollinger": 14.7412,
+"consigliata": 13.4747
+},
+"stop": 8.3752,
+"atr": 0.8499
 }
 ]
