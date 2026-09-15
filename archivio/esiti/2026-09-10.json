@@ -899,7 +899,7 @@
 "orizzonte": "7g",
 "giorni": 7,
 "unita": "calendario",
-"resa": -63.4,
+"resa": null,
 "max_toccato": 0.43,
 "min_toccato": -63.4,
 "giorni_al_massimo": 0,
@@ -909,7 +909,14 @@
 "maturato_il": "2026-09-08",
 "giorni_di_calendario_coperti": 5,
 "finestra_incompleta": true,
-"ultima_quotazione": "2026-09-08"
+"ultima_quotazione": "2026-09-08",
+"prima_del_ripasso": {
+"resa": -63.4,
+"finestra_incompleta": true,
+"maturato_il": "2026-09-08"
+},
+"dati_sospetti": true,
+"rifatto_il": "2026-09-15 12:41"
 },
 {
 "giorno": "2026-09-10",
