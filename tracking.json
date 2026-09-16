@@ -1763,9 +1763,7 @@
 "entry_src": "storico",
 "max_price": 464.89,
 "max_date": "2026-08-27 22:41",
-"exit_notified": false,
-"warn_since": "2026-09-15",
-"warn": "in perdita da 39 giorni di Borsa: valuta l'uscita"
+"exit_notified": false
 },
 "NFLX": {
 "kind": "short",
@@ -5611,7 +5609,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-16",
 "max_price": 155.83,
-"max_date": "2026-08-17 17:51"
+"max_date": "2026-08-17 17:51",
+"warn_since": "2026-09-16",
+"warn": "in perdita da 31 giorni di Borsa: valuta l'uscita"
 },
 "XLK": {
 "kind": "short",
@@ -6120,7 +6120,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-16",
 "max_price": 26.21,
-"max_date": "2026-08-21 17:07"
+"max_date": "2026-08-21 17:07",
+"warn_since": "2026-09-16",
+"warn": "in perdita da 30 giorni di Borsa: valuta l'uscita"
 },
 "CCB": {
 "kind": "short",
@@ -7752,7 +7754,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-16",
 "max_price": 189.07,
-"max_date": "2026-09-03 19:32"
+"max_date": "2026-09-03 19:32",
+"warn_since": "2026-09-16",
+"warn": "in perdita da 25 giorni di Borsa: valuta l'uscita"
 },
 "RPT": {
 "kind": "short",
@@ -9235,9 +9239,7 @@
 "max_date": "2026-08-27 22:41",
 "auto": true,
 "notified": true,
-"entry_check": "2026-09-16",
-"warn_since": "2026-09-16",
-"warn": "in perdita da 18 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-09-16"
 },
 "DUOL": {
 "kind": "long",
@@ -11267,7 +11269,9 @@
 "max_date": "2026-09-08 19:07",
 "auto": true,
 "notified": true,
-"entry_check": "2026-09-16"
+"entry_check": "2026-09-16",
+"warn_since": "2026-09-16",
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "STLAM.MI": {
 "kind": "long",
