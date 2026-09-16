@@ -17573,5 +17573,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:ON:2026-09-16",
+"ticker": "ON",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-16 20:52",
+"data": "2026-09-16 20:52",
+"prezzo": 67.01,
+"conv": 64,
+"prob_gain": 50,
+"prob_loss": 17,
+"reliab": "🔴 Bassa",
+"mkt": -1.4977,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 80.623,
+"media20": 72.8955,
+"quattro_atr": 82.1557,
+"meta_caduta": 92.875,
+"bollinger": 77.2305,
+"consigliata": 80.623
+},
+"stop": 59.4371,
+"atr": 3.7864
 }
 ]
