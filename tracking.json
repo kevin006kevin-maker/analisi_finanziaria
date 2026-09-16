@@ -11461,5 +11461,37 @@
 "auto": true,
 "notified": false,
 "entry_check": "2026-09-15"
+},
+"LDO.MI": {
+"kind": "short",
+"added": "2026-09-16",
+"note": "🤖 Promossa il 2026-09-16: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.0% e la convenienza (64) regge.",
+"name": "LDO.MI",
+"snapshots": [
+{
+"name": "LDO.MI",
+"price": 49.63,
+"rsi": 35.987,
+"dd_high": -22.7669,
+"occasione": 21,
+"convenienza": 72,
+"prob_gain": 52,
+"prob_loss": 6,
+"exp_ret": 0.7,
+"gain": 8.1165,
+"reliab": "🟡 Media",
+"target": 53.6582,
+"stop": 46.6349,
+"date": "2026-09-16 11:54"
+}
+],
+"entry_price": 49.63,
+"entry_target": 53.6582,
+"entry_stop": 46.6349,
+"entry_conv": 72,
+"entry_date": "2026-09-16 11:54",
+"entry_src": "scatto",
+"max_price": 49.63,
+"max_date": "2026-09-16 11:54"
 }
 }
