@@ -17755,5 +17755,32 @@
 },
 "stop": 2.876,
 "atr": 0.4838
+},
+{
+"episodio": "short:PST.MI:2026-09-07",
+"ticker": "PST.MI",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-09-17 00:12",
+"data": "2026-09-17 00:11",
+"prezzo": 25.94,
+"conv": 65,
+"prob_gain": 49,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-09-17",
+"soglie": {
+"media50": 27.1704,
+"media20": 26.8525,
+"quattro_atr": 28.0413,
+"meta_caduta": 27.555,
+"bollinger": 28.3268,
+"consigliata": 27.1704
+},
+"stop": 24.8893,
+"atr": 0.5253
 }
 ]
