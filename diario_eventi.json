@@ -17809,5 +17809,32 @@
 },
 "stop": 2.1704,
 "atr": 0.6398
+},
+{
+"episodio": "short:RWT:2026-09-14",
+"ticker": "RWT",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-17 00:12",
+"data": "2026-09-17 00:07",
+"prezzo": 3.89,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-17",
+"soglie": {
+"media50": 4.6578,
+"media20": 4.386,
+"quattro_atr": 4.6843,
+"meta_caduta": 4.55,
+"bollinger": 5.1908,
+"consigliata": 4.6578
+},
+"stop": 3.4929,
+"atr": 0.1986
 }
 ]
