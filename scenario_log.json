@@ -6422,5 +6422,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "TYRA",
+"kind": "short",
+"date": "2026-09-16",
+"promo_price": 25.41,
+"obs_price": 22.01,
+"obs_date": "2026-09-11",
+"pre_price": 22.01,
+"pre_date": "2026-09-14",
+"conf_price": null,
+"conf_date": null,
+"target": 28.0755,
+"stop": 21.0617,
+"reliab": "🔴 Bassa",
+"prob_gain": 48,
+"prob_loss": 17,
+"conv": 67,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-11 03:19",
+"prezzo": 22.01,
+"conv": 72,
+"prob_gain": 59,
+"prob_loss": 14,
+"reliab": "🔴 Bassa",
+"mkt": -2.0236
+},
+"anticipo": {
+"data": "2026-09-14",
+"prezzo": 22.01,
+"conv": 72,
+"prob_gain": 59,
+"prob_loss": 14,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-16 16:56",
+"prezzo": 25.41,
+"conv": 67,
+"prob_gain": 48,
+"prob_loss": 17,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
