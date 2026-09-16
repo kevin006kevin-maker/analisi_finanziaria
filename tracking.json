@@ -11694,5 +11694,37 @@
 "max_date": "2026-09-16 11:54",
 "auto": true,
 "notified": false
+},
+"YSS": {
+"kind": "short",
+"added": "2026-09-16",
+"note": "🤖 Promossa il 2026-09-16: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +3.8% e la convenienza (63) regge.",
+"name": "YSS",
+"snapshots": [
+{
+"name": "YSS",
+"price": 8.15,
+"rsi": 33.8161,
+"dd_high": -81.3119,
+"occasione": 72,
+"convenienza": 64,
+"prob_gain": 45,
+"prob_loss": 33,
+"exp_ret": -3.2,
+"gain": 58.3276,
+"reliab": "🔴 Bassa",
+"target": 12.8562,
+"stop": 6.4182,
+"date": "2026-09-16 16:56"
+}
+],
+"entry_price": 8.15,
+"entry_target": 12.8562,
+"entry_stop": 6.4182,
+"entry_conv": 64,
+"entry_date": "2026-09-16 16:56",
+"entry_src": "scatto",
+"max_price": 8.15,
+"max_date": "2026-09-16 16:56"
 }
 }
