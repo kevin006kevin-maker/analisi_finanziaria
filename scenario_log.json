@@ -6479,5 +6479,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "MYGN",
+"kind": "short",
+"date": "2026-09-16",
+"promo_price": 3.866,
+"obs_price": 3.19,
+"obs_date": "2026-09-11",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": 4.0973,
+"stop": 3.3986,
+"reliab": "🔴 Bassa",
+"prob_gain": 51,
+"prob_loss": 22,
+"conv": 60,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-11 03:19",
+"prezzo": 3.19,
+"conv": 63,
+"prob_gain": 57,
+"prob_loss": 18,
+"reliab": "🔴 Bassa",
+"mkt": -2.0236
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-16 16:56",
+"prezzo": 3.866,
+"conv": 60,
+"prob_gain": 51,
+"prob_loss": 22,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
