@@ -6365,5 +6365,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "YSS",
+"kind": "short",
+"date": "2026-09-16",
+"promo_price": 8.12,
+"obs_price": 8.96,
+"obs_date": "2026-09-05",
+"pre_price": 8.96,
+"pre_date": "2026-09-08",
+"conf_price": null,
+"conf_date": null,
+"target": 12.8562,
+"stop": 6.4182,
+"reliab": "🔴 Bassa",
+"prob_gain": 45,
+"prob_loss": 33,
+"conv": 64,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-05 00:04",
+"prezzo": 8.96,
+"conv": 69,
+"prob_gain": 46,
+"prob_loss": 34,
+"reliab": "🔴 Bassa",
+"mkt": -0.5032
+},
+"anticipo": {
+"data": "2026-09-08",
+"prezzo": 8.96,
+"conv": 71,
+"prob_gain": 46,
+"prob_loss": 34,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-16 16:56",
+"prezzo": 8.12,
+"conv": 64,
+"prob_gain": 45,
+"prob_loss": 33,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
