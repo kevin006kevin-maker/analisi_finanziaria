@@ -6308,5 +6308,62 @@
 "mkt": null
 }
 }
+},
+{
+"ticker": "LDO.MI",
+"kind": "short",
+"date": "2026-09-16",
+"promo_price": 49.63,
+"obs_price": 48.89,
+"obs_date": "2026-09-09",
+"pre_price": 48.645,
+"pre_date": "2026-09-10",
+"conf_price": null,
+"conf_date": null,
+"target": 53.6582,
+"stop": 46.6349,
+"reliab": "🟡 Media",
+"prob_gain": 52,
+"prob_loss": 6,
+"conv": 72,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-09 17:00",
+"prezzo": 48.89,
+"conv": 64,
+"prob_gain": 48,
+"prob_loss": 6,
+"reliab": "🟡 Media",
+"mkt": -0.983
+},
+"anticipo": {
+"data": "2026-09-10",
+"prezzo": 48.645,
+"conv": 68,
+"prob_gain": 52,
+"prob_loss": 6,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-16 11:54",
+"prezzo": 49.63,
+"conv": 72,
+"prob_gain": 52,
+"prob_loss": 6,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
