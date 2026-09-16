@@ -6482,7 +6482,17 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-16",
 "max_price": 50.34,
-"max_date": "2026-09-09 20:30"
+"max_date": "2026-09-09 20:30",
+"incasso": {
+"gain": 3.4,
+"max": 50.34,
+"max_date": "2026-09-09 20:30",
+"giu_dal_max": -8.1,
+"motivo": "scesa 8% dal massimo (50.34) restando in guadagno (+3.4%): il guadagno si sta sgonfiando",
+"urgenza": "incassa",
+"tipo": "sgonfia"
+},
+"incasso_notified": true
 },
 "NOK": {
 "kind": "short",
