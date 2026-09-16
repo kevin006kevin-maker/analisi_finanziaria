@@ -1116,7 +1116,8 @@
 "res": {
 "7g": -5.09
 },
-"taglio_corretto": true
+"taglio_corretto": true,
+"res_soglia": {}
 },
 {
 "episodio": "short:CAPR:2026-08-16",
@@ -1232,7 +1233,8 @@
 "res": {
 "7g": -2.22
 },
-"taglio_corretto": true
+"taglio_corretto": true,
+"res_soglia": {}
 },
 {
 "episodio": "short:CLBT:2026-08-17",
@@ -1464,7 +1466,8 @@
 "res": {
 "7g": 1.4
 },
-"taglio_corretto": true
+"taglio_corretto": true,
+"res_soglia": {}
 },
 {
 "episodio": "short:ENVX:2026-08-19",
@@ -1621,7 +1624,8 @@
 "res": {
 "7g": 20.82
 },
-"taglio_corretto": true
+"taglio_corretto": true,
+"res_soglia": {}
 },
 {
 "episodio": "short:MNSO:2026-08-17",
@@ -2361,7 +2365,8 @@
 "res": {
 "7g": 1.4
 },
-"taglio_corretto": true
+"taglio_corretto": true,
+"res_soglia": {}
 },
 {
 "episodio": "short:TNGX:2026-08-20",
@@ -13349,7 +13354,8 @@
 },
 "stop": 5.5164,
 "atr": 0.6193,
-"res": {}
+"res": {},
+"bad_data": "salto di prezzo oltre il 25%: probabile raggruppamento di azioni"
 },
 {
 "episodio": "short:TTAN:2026-09-09",
@@ -13927,7 +13933,8 @@
 },
 "stop": 35.9491,
 "atr": 3.8354,
-"res": {}
+"res": {},
+"bad_data": "salto di prezzo oltre il 25%: probabile raggruppamento di azioni"
 },
 {
 "episodio": "short:DYN:2026-09-09",
@@ -14930,7 +14937,8 @@
 "soglie_ricalcolate_il": "2026-09-14 21:39",
 "soglie_ritardo_giorni": 1,
 "res": {},
-"taglio_corretto": true
+"taglio_corretto": true,
+"bad_data": "salto di prezzo oltre il 25%: probabile raggruppamento di azioni"
 },
 {
 "episodio": "short:COO:2026-09-10",
@@ -17599,7 +17607,8 @@
 "consigliata": 80.623
 },
 "stop": 59.4371,
-"atr": 3.7864
+"atr": 3.7864,
+"res": {}
 },
 {
 "episodio": "short:XLI:2026-09-16",
@@ -17626,7 +17635,8 @@
 "consigliata": 178.7169
 },
 "stop": 164.0665,
-"atr": 2.4417
+"atr": 2.4417,
+"res": {}
 },
 {
 "episodio": "short:HBAN:2026-09-16",
@@ -17653,7 +17663,8 @@
 "consigliata": 17.3408
 },
 "stop": 15.2983,
-"atr": 0.3558
+"atr": 0.3558,
+"res": {}
 },
 {
 "episodio": "short:WING:2026-09-16",
@@ -17700,7 +17711,8 @@
 "consigliata": 22.801
 },
 "stop": 20.4968,
-"atr": 0.3966
+"atr": 0.3966,
+"res": {}
 },
 {
 "episodio": "long:STLAM.MI:2026-08-17",
@@ -17727,7 +17739,8 @@
 "consigliata": 4.7861
 },
 "stop": 4.1324,
-"atr": 0.1773
+"atr": 0.1773,
+"res": {}
 },
 {
 "episodio": "short:LULG:2026-09-04",
@@ -17754,7 +17767,8 @@
 "consigliata": 5.7786
 },
 "stop": 2.876,
-"atr": 0.4838
+"atr": 0.4838,
+"res": {}
 },
 {
 "episodio": "short:PST.MI:2026-09-07",
@@ -17781,7 +17795,8 @@
 "consigliata": 27.1704
 },
 "stop": 24.8893,
-"atr": 0.5253
+"atr": 0.5253,
+"res": {}
 },
 {
 "episodio": "short:EYPT:2026-09-10",
@@ -17808,7 +17823,8 @@
 "consigliata": 6.0091
 },
 "stop": 2.1704,
-"atr": 0.6398
+"atr": 0.6398,
+"res": {}
 },
 {
 "episodio": "short:RWT:2026-09-14",
@@ -17835,6 +17851,7 @@
 "consigliata": 4.6578
 },
 "stop": 3.4929,
-"atr": 0.1986
+"atr": 0.1986,
+"res": {}
 }
 ]
