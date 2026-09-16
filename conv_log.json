@@ -1,48 +1,6 @@
 [
 {
 "date": "2026-09-06",
-"ticker": "BMEA",
-"kind": "short",
-"price": 2.03,
-"conv": 20,
-"factors": {
-"discount": 23.97,
-"histcheap": -2.08,
-"riskadj": 0.04,
-"ddpen": -46.58,
-"momentum": -17.341,
-"prob": 14,
-"oversold": -81.0951,
-"rebound": -31.1084,
-"trend": 1.0,
-"relstrength": 17.2523
-},
-"ret_5d": -13.55,
-"ret_21d": null
-},
-{
-"date": "2026-09-06",
-"ticker": "EPRX",
-"kind": "short",
-"price": 8.4,
-"conv": 23,
-"factors": {
-"discount": 7.387,
-"histcheap": -1.66,
-"riskadj": 1.1,
-"ddpen": -18.72,
-"momentum": -25.8427,
-"prob": 33,
-"oversold": -69.3092,
-"rebound": -20.4964,
-"trend": 1.0,
-"relstrength": 25.754
-},
-"ret_5d": -3.69,
-"ret_21d": null
-},
-{
-"date": "2026-09-06",
 "ticker": "YQ",
 "kind": "short",
 "price": 2.92,
@@ -40309,6 +40267,46 @@
 "rebound": 6.1298,
 "trend": 1.0,
 "relstrength": 2.7286
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-16",
+"ticker": "BULL",
+"kind": "long",
+"price": 7.835,
+"conv": 22,
+"factors": {
+"discount": 49.6141,
+"histcheap": 0.1,
+"riskadj": -1.51,
+"ddpen": -50.29,
+"momentum": 16.8259,
+"prob": 15,
+"quality": 40.9,
+"valcheap": -2.1945,
+"trappen": 0
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-16",
+"ticker": "BLSH",
+"kind": "long",
+"price": 32.14,
+"conv": 44,
+"factors": {
+"discount": 53.7487,
+"histcheap": 0.53,
+"riskadj": -1.13,
+"ddpen": -47.98,
+"momentum": 6.4065,
+"prob": -36,
+"quality": 50.8,
+"valcheap": 0.939,
+"trappen": 2
 },
 "ret_5d": null,
 "ret_21d": null
