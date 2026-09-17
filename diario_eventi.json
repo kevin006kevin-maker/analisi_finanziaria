@@ -18005,5 +18005,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:SYNA:2026-09-17",
+"ticker": "SYNA",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-17 07:19",
+"data": "2026-09-17 07:19",
+"prezzo": 89.24,
+"conv": 64,
+"prob_gain": 48,
+"prob_loss": 13,
+"reliab": "🟡 Media",
+"mkt": -1.8195,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 106.0128,
+"media20": 96.144,
+"quattro_atr": 108.9894,
+"meta_caduta": 111.825,
+"bollinger": 101.5765,
+"consigliata": 106.0128
+},
+"stop": 79.3653,
+"atr": 4.9373
 }
 ]
