@@ -1,292 +1,6 @@
 [
 {
 "date": "2026-09-07",
-"ticker": "PL",
-"kind": "short",
-"price": 18.12,
-"conv": 73,
-"factors": {
-"discount": 64.7471,
-"histcheap": 0.6,
-"riskadj": 1.61,
-"ddpen": -28.51,
-"momentum": 9.3093,
-"prob": 14,
-"oversold": -28.6059,
-"rebound": 30.0386,
-"trend": -1.0,
-"relstrength": -9.398
-},
-"ret_5d": -10.57,
-"ret_21d": null
-},
-{
-"date": "2026-09-07",
-"ticker": "RARE",
-"kind": "short",
-"price": 15.3,
-"conv": 77,
-"factors": {
-"discount": 58.1281,
-"histcheap": 2.48,
-"riskadj": -0.69,
-"ddpen": -28.16,
-"momentum": 40.2577,
-"prob": 51,
-"oversold": -21.1419,
-"rebound": 81.1157,
-"trend": -1.0,
-"relstrength": -40.3464
-},
-"ret_5d": -9.8,
-"ret_21d": null
-},
-{
-"date": "2026-09-07",
-"ticker": "PSNY",
-"kind": "short",
-"price": 9.21,
-"conv": 75,
-"factors": {
-"discount": 70.1942,
-"histcheap": 2.17,
-"riskadj": -1.55,
-"ddpen": -40.15,
-"momentum": 27.5943,
-"prob": 26,
-"oversold": -23.8748,
-"rebound": 60.5972,
-"trend": -1.0,
-"relstrength": -27.683
-},
-"ret_5d": -19.65,
-"ret_21d": null
-},
-{
-"date": "2026-09-07",
-"ticker": "MOMO",
-"kind": "short",
-"price": 5.37,
-"conv": 65,
-"factors": {
-"discount": 36.9718,
-"histcheap": 1.75,
-"riskadj": -2.36,
-"ddpen": -25.66,
-"momentum": 6.1189,
-"prob": 56,
-"oversold": -38.1042,
-"rebound": 8.6015,
-"trend": -1.0,
-"relstrength": -6.2076
-},
-"ret_5d": -7.82,
-"ret_21d": null
-},
-{
-"date": "2026-09-07",
-"ticker": "FGL",
-"kind": "short",
-"price": 9.3,
-"conv": 72,
-"factors": {
-"discount": 99.9316,
-"histcheap": 0.68,
-"riskadj": -5.23,
-"ddpen": -88.0,
-"momentum": 39.2157,
-"prob": 27,
-"oversold": -15.6995,
-"rebound": 779.9312,
-"trend": -1.0,
-"relstrength": -39.3044
-},
-"ret_5d": -43.87,
-"ret_21d": null
-},
-{
-"date": "2026-09-07",
-"ticker": "LULG",
-"kind": "short",
-"price": 4.27,
-"conv": 70,
-"factors": {
-"discount": 83.5712,
-"histcheap": 1.39,
-"riskadj": -1.87,
-"ddpen": -54.36,
-"momentum": 34.1049,
-"prob": 39,
-"oversold": -31.0326,
-"rebound": 49.3237,
-"trend": -1.0,
-"relstrength": -34.1936
-},
-"ret_5d": -1.29,
-"ret_21d": null
-},
-{
-"date": "2026-09-07",
-"ticker": "SMCI",
-"kind": "long",
-"price": 39.59,
-"conv": 45,
-"factors": {
-"discount": 32.5324,
-"histcheap": -0.58,
-"riskadj": -0.07,
-"ddpen": -42.76,
-"momentum": -6.7691,
-"prob": 8,
-"quality": 71.9,
-"valcheap": 0.5309,
-"trappen": 2
-},
-"ret_5d": -6.18,
-"ret_21d": null
-},
-{
-"date": "2026-09-07",
-"ticker": "CDE",
-"kind": "long",
-"price": 21.24,
-"conv": 49,
-"factors": {
-"discount": 21.768,
-"histcheap": -0.9,
-"riskadj": 0.64,
-"ddpen": -27.84,
-"momentum": -0.5206,
-"prob": 28,
-"quality": 75.9,
-"valcheap": -1.5576,
-"trappen": 3
-},
-"ret_5d": -5.86,
-"ret_21d": null
-},
-{
-"date": "2026-09-07",
-"ticker": "BBD",
-"kind": "long",
-"price": 3.47,
-"conv": 55,
-"factors": {
-"discount": 17.5772,
-"histcheap": 0.29,
-"riskadj": 0.25,
-"ddpen": -12.28,
-"momentum": -6.7692,
-"prob": 45,
-"quality": 62.5,
-"valcheap": 0.684,
-"trappen": 3
-},
-"ret_5d": 1.87,
-"ret_21d": null
-},
-{
-"date": "2026-09-07",
-"ticker": "AGNC",
-"kind": "long",
-"price": 10.65,
-"conv": 76,
-"factors": {
-"discount": 12.4897,
-"histcheap": -0.05,
-"riskadj": -0.02,
-"ddpen": -9.68,
-"momentum": 2.2936,
-"prob": 87,
-"quality": 68.9,
-"valcheap": 0.5197,
-"trappen": 3
-},
-"ret_5d": -5.35,
-"ret_21d": null
-},
-{
-"date": "2026-09-07",
-"ticker": "CCL",
-"kind": "long",
-"price": 23.51,
-"conv": 69,
-"factors": {
-"discount": 30.8326,
-"histcheap": 1.92,
-"riskadj": -1.17,
-"ddpen": -17.68,
-"momentum": 5.0485,
-"prob": 48,
-"quality": 60.1,
-"valcheap": -0.0194,
-"trappen": 3
-},
-"ret_5d": -3.76,
-"ret_21d": null
-},
-{
-"date": "2026-09-07",
-"ticker": "ITUB",
-"kind": "long",
-"price": 8.15,
-"conv": 39,
-"factors": {
-"discount": 14.838,
-"histcheap": -0.39,
-"riskadj": 0.7,
-"ddpen": -11.68,
-"momentum": -8.6667,
-"prob": 49,
-"quality": 68.2,
-"valcheap": -0.8734,
-"trappen": 2
-},
-"ret_5d": 1.04,
-"ret_21d": null
-},
-{
-"date": "2026-09-07",
-"ticker": "LYG",
-"kind": "long",
-"price": 6.08,
-"conv": 37,
-"factors": {
-"discount": 3.1847,
-"histcheap": -1.4,
-"riskadj": 1.79,
-"ddpen": -9.15,
-"momentum": -2.7027,
-"prob": 63,
-"quality": 58.2,
-"valcheap": -1.1765,
-"trappen": 3
-},
-"ret_5d": -3.21,
-"ret_21d": null
-},
-{
-"date": "2026-09-07",
-"ticker": "UMC",
-"kind": "long",
-"price": 20.77,
-"conv": 38,
-"factors": {
-"discount": 25.8479,
-"histcheap": -1.31,
-"riskadj": 2.97,
-"ddpen": -16.24,
-"momentum": -4.952,
-"prob": 9,
-"quality": 64.5,
-"valcheap": -2.2773,
-"trappen": 3
-},
-"ret_5d": 6.26,
-"ret_21d": null
-},
-{
-"date": "2026-09-07",
 "ticker": "VG",
 "kind": "long",
 "price": 14.42,
@@ -40291,6 +40005,300 @@
 "quality": 47.8,
 "valcheap": -3.0,
 "trappen": 2
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-17",
+"ticker": "LGVN",
+"kind": "short",
+"price": 2.7799,
+"conv": 78,
+"factors": {
+"discount": 76.0353,
+"histcheap": 2.88,
+"riskadj": -0.83,
+"ddpen": -32.6,
+"momentum": 58.134,
+"prob": 45,
+"oversold": -21.1583,
+"rebound": 145.5915,
+"trend": -1.0,
+"relstrength": -58.7638
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-17",
+"ticker": "TGL",
+"kind": "short",
+"price": 2.195,
+"conv": 60,
+"factors": {
+"discount": 91.3719,
+"histcheap": 0.85,
+"riskadj": -1.84,
+"ddpen": -74.77,
+"momentum": 26.3423,
+"prob": 33,
+"oversold": -40.7854,
+"rebound": 35.3831,
+"trend": -1.0,
+"relstrength": -26.9721
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-17",
+"ticker": "NAMI",
+"kind": "short",
+"price": 2.069,
+"conv": 52,
+"factors": {
+"discount": 92.7404,
+"histcheap": 1.43,
+"riskadj": -2.89,
+"ddpen": -61.14,
+"momentum": -7.7604,
+"prob": 13,
+"oversold": -43.7461,
+"rebound": 35.3881,
+"trend": -1.0,
+"relstrength": 7.1307
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-17",
+"ticker": "TPST",
+"kind": "short",
+"price": 0.8628,
+"conv": 44,
+"factors": {
+"discount": 92.7067,
+"histcheap": 0.78,
+"riskadj": -2.09,
+"ddpen": -76.37,
+"momentum": -7.4471,
+"prob": 39,
+"oversold": -44.9357,
+"rebound": 14.5475,
+"trend": -1.0,
+"relstrength": 6.8173
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-17",
+"ticker": "JAGX",
+"kind": "short",
+"price": 2.5,
+"conv": 74,
+"factors": {
+"discount": 99.7956,
+"histcheap": 0.98,
+"riskadj": -3.94,
+"ddpen": -76.09,
+"momentum": 47.7534,
+"prob": 42,
+"oversold": -15.1778,
+"rebound": 480.5236,
+"trend": -1.0,
+"relstrength": -48.3832
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-17",
+"ticker": "GSUN",
+"kind": "short",
+"price": 0.2369,
+"conv": 54,
+"factors": {
+"discount": 92.2072,
+"histcheap": 1.01,
+"riskadj": -1.76,
+"ddpen": -71.48,
+"momentum": -3.0,
+"prob": 21,
+"oversold": -43.9745,
+"rebound": 37.7113,
+"trend": -1.0,
+"relstrength": 2.3702
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-17",
+"ticker": "SDST",
+"kind": "short",
+"price": 0.268,
+"conv": 64,
+"factors": {
+"discount": 96.22,
+"histcheap": 1.9,
+"riskadj": -2.43,
+"ddpen": -62.72,
+"momentum": -57.6471,
+"prob": 28,
+"oversold": -36.0406,
+"rebound": 199.0672,
+"trend": -1.0,
+"relstrength": 57.0173
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-17",
+"ticker": "DTSS",
+"kind": "short",
+"price": 1.1986,
+"conv": 21,
+"factors": {
+"discount": 47.887,
+"histcheap": -0.26,
+"riskadj": -0.92,
+"ddpen": -56.0,
+"momentum": -74.9781,
+"prob": 10,
+"oversold": -78.1394,
+"rebound": -36.9788,
+"trend": 1.0,
+"relstrength": 74.3483
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-17",
+"ticker": "SURG",
+"kind": "short",
+"price": 0.1517,
+"conv": 65,
+"factors": {
+"discount": 94.8923,
+"histcheap": 1.11,
+"riskadj": -2.97,
+"ddpen": -68.46,
+"momentum": 8.0606,
+"prob": 20,
+"oversold": -36.6128,
+"rebound": 53.8787,
+"trend": -1.0,
+"relstrength": -8.6904
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-17",
+"ticker": "DAIC",
+"kind": "short",
+"price": 5.3,
+"conv": 21,
+"factors": {
+"discount": 94.0449,
+"histcheap": 0.56,
+"riskadj": -2.0,
+"ddpen": -83.13,
+"momentum": -90.6475,
+"prob": -13,
+"oversold": -69.1271,
+"rebound": -65.5143,
+"trend": -1.0,
+"relstrength": 90.0177
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-17",
+"ticker": "AEMD",
+"kind": "short",
+"price": 6.38,
+"conv": 20,
+"factors": {
+"discount": 84.05,
+"histcheap": 0.72,
+"riskadj": -2.08,
+"ddpen": -70.89,
+"momentum": -308.9744,
+"prob": -8,
+"oversold": -81.8644,
+"rebound": -56.9122,
+"trend": -1.0,
+"relstrength": 308.3446
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-17",
+"ticker": "DCX",
+"kind": "short",
+"price": 0.4216,
+"conv": 64,
+"factors": {
+"discount": 99.8793,
+"histcheap": 0.44,
+"riskadj": -4.28,
+"ddpen": -94.07,
+"momentum": 23.0657,
+"prob": 10,
+"oversold": -30.7779,
+"rebound": 97.2277,
+"trend": -1.0,
+"relstrength": -23.6955
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-17",
+"ticker": "TURB",
+"kind": "short",
+"price": 1.455,
+"conv": 25,
+"factors": {
+"discount": 87.0896,
+"histcheap": 0.33,
+"riskadj": -1.83,
+"ddpen": -83.68,
+"momentum": -18.2927,
+"prob": 2,
+"oversold": -61.3088,
+"rebound": -9.8282,
+"trend": -1.0,
+"relstrength": 17.6629
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-17",
+"ticker": "GPRO",
+"kind": "short",
+"price": 1.365,
+"conv": 25,
+"factors": {
+"discount": 52.6042,
+"histcheap": -0.23,
+"riskadj": -0.83,
+"ddpen": -59.61,
+"momentum": 2.5,
+"prob": 0,
+"oversold": -60.7635,
+"rebound": -37.2806,
+"trend": 1.0,
+"relstrength": -3.1298
 },
 "ret_5d": null,
 "ret_21d": null
