@@ -2051,7 +2051,9 @@
 "entry_src": "storico",
 "max_price": 464.89,
 "max_date": "2026-08-27 22:41",
-"exit_notified": false
+"exit_notified": false,
+"warn_since": "2026-09-17",
+"warn": "in perdita da 40 giorni di Borsa: valuta l'uscita"
 },
 "NFLX": {
 "kind": "short",
@@ -7160,9 +7162,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-17",
 "max_price": 26.21,
-"max_date": "2026-08-21 17:07",
-"warn_since": "2026-09-16",
-"warn": "in perdita da 31 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-08-21 17:07"
 },
 "CCB": {
 "kind": "short",
@@ -9075,9 +9075,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-17",
 "max_price": 189.07,
-"max_date": "2026-09-03 19:32",
-"warn_since": "2026-09-16",
-"warn": "in perdita da 26 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-09-03 19:32"
 },
 "RPT": {
 "kind": "short",
