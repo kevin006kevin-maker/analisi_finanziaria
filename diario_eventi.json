@@ -18764,7 +18764,18 @@
 "consigliata": 105.3678
 },
 "stop": 79.3735,
-"atr": 4.9332
+"atr": 4.9332,
+"soglie_contaminate": {
+"media50": 105.3678,
+"media20": 95.651,
+"quattro_atr": 108.9729,
+"meta_caduta": 109.675,
+"bollinger": 101.0249,
+"consigliata": 105.3678
+},
+"soglie_ricalcolate_il": "2026-09-18 00:33",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "short:INIO:2026-09-15",
