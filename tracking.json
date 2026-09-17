@@ -20980,5 +20980,37 @@
 "max_date": "2026-09-18 00:29",
 "auto": true,
 "notified": false
+},
+"ENVA": {
+"kind": "short",
+"added": "2026-09-18",
+"note": "🤖 Promossa il 2026-09-18: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +3.6% e la convenienza (82) regge.",
+"name": "ENVA",
+"snapshots": [
+{
+"name": "ENVA",
+"price": 179.06,
+"rsi": 26.3349,
+"dd_high": -32.5447,
+"occasione": 85,
+"convenienza": 75,
+"prob_gain": 57,
+"prob_loss": 8,
+"exp_ret": 2.2,
+"gain": 32.4766,
+"reliab": "🟡 Media",
+"target": 237.2126,
+"stop": 158.1595,
+"date": "2026-09-18 00:29"
+}
+],
+"entry_price": 179.06,
+"entry_target": 237.2126,
+"entry_stop": 158.1595,
+"entry_conv": 75,
+"entry_date": "2026-09-18 00:29",
+"entry_src": "scatto",
+"max_price": 179.06,
+"max_date": "2026-09-18 00:29"
 }
 }
