@@ -18032,5 +18032,32 @@
 },
 "stop": 79.3653,
 "atr": 4.9373
+},
+{
+"episodio": "short:JBHT:2026-09-16",
+"ticker": "JBHT",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-17 07:20",
+"data": "2026-09-17 07:19",
+"prezzo": 236.73,
+"conv": 77,
+"prob_gain": 56,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": -1.8195,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 273.913,
+"media20": 266.0155,
+"quattro_atr": 276.2585,
+"meta_caduta": 267.57,
+"bollinger": 284.1779,
+"consigliata": 273.913
+},
+"stop": 216.9658,
+"atr": 9.8821
 }
 ]
