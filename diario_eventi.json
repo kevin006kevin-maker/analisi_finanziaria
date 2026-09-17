@@ -18214,5 +18214,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:MWA:2026-09-17",
+"ticker": "MWA",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-17 17:18",
+"data": "2026-09-17 17:18",
+"prezzo": 21.87,
+"conv": 83,
+"prob_gain": 52,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": -1.0791,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 24.875,
+"media20": 23.9895,
+"quattro_atr": 24.271,
+"meta_caduta": 24.48,
+"bollinger": 25.7921,
+"consigliata": 24.271
+},
+"stop": 20.6695,
+"atr": 0.6003
 }
 ]
