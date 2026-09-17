@@ -6725,7 +6725,45 @@
 "prob_gain": 48,
 "prob_loss": 0,
 "conv": 63,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-09-15 19:40",
+"prezzo": 41.475,
+"conv": 63,
+"prob_gain": 50,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -2.099
+},
+"anticipo": {
+"data": "2026-09-16",
+"prezzo": 41.32,
+"conv": 68,
+"prob_gain": 48,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-18",
+"prezzo": 41.69,
+"conv": 63,
+"prob_gain": 48,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "INIO",
@@ -6860,7 +6898,45 @@
 "prob_gain": 66,
 "prob_loss": 10,
 "conv": 81,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-09-15 19:40",
+"prezzo": 47.34,
+"conv": 80,
+"prob_gain": 68,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": -2.099
+},
+"anticipo": {
+"data": "2026-09-16",
+"prezzo": 47.25,
+"conv": 86,
+"prob_gain": 64,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-18",
+"prezzo": 46.75,
+"conv": 81,
+"prob_gain": 66,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "ALHC",
@@ -6881,7 +6957,45 @@
 "prob_gain": 54,
 "prob_loss": 14,
 "conv": 80,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-09-15 19:40",
+"prezzo": 10.075,
+"conv": 79,
+"prob_gain": 53,
+"prob_loss": 17,
+"reliab": "🔴 Bassa",
+"mkt": -2.099
+},
+"anticipo": {
+"data": "2026-09-16",
+"prezzo": 10.37,
+"conv": 78,
+"prob_gain": 51,
+"prob_loss": 17,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-18",
+"prezzo": 8.7,
+"conv": 80,
+"prob_gain": 54,
+"prob_loss": 14,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "AXON",
