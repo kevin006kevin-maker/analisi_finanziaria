@@ -6574,5 +6574,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "RWT",
+"kind": "short",
+"date": "2026-09-17",
+"promo_price": 3.91,
+"obs_price": 3.79,
+"obs_date": "2026-09-14",
+"pre_price": 3.83,
+"pre_date": "2026-09-15",
+"conf_price": null,
+"conf_date": null,
+"target": 4.6744,
+"stop": 3.5,
+"reliab": "🟡 Media",
+"prob_gain": 52,
+"prob_loss": 3,
+"conv": 79,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-14 21:35",
+"prezzo": 3.79,
+"conv": 80,
+"prob_gain": 55,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": -1.9985
+},
+"anticipo": {
+"data": "2026-09-15",
+"prezzo": 3.83,
+"conv": 85,
+"prob_gain": 52,
+"prob_loss": 2,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-17 02:30",
+"prezzo": 3.91,
+"conv": 79,
+"prob_gain": 52,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
