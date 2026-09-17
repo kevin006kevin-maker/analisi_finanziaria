@@ -6726,5 +6726,62 @@
 "prob_loss": 0,
 "conv": 63,
 "res": {}
+},
+{
+"ticker": "INIO",
+"kind": "short",
+"date": "2026-09-18",
+"promo_price": 20.96,
+"obs_price": 20.35,
+"obs_date": "2026-09-15",
+"pre_price": 17.79,
+"pre_date": "2026-09-16",
+"conf_price": null,
+"conf_date": null,
+"target": 24.8558,
+"stop": 17.5455,
+"reliab": "🔴 Bassa",
+"prob_gain": 37,
+"prob_loss": 34,
+"conv": 58,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-15 03:24",
+"prezzo": 20.35,
+"conv": 62,
+"prob_gain": 44,
+"prob_loss": 29,
+"reliab": "🔴 Bassa",
+"mkt": -2.1293
+},
+"anticipo": {
+"data": "2026-09-16",
+"prezzo": 17.79,
+"conv": 68,
+"prob_gain": 48,
+"prob_loss": 23,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-18 00:29",
+"prezzo": 20.96,
+"conv": 58,
+"prob_gain": 37,
+"prob_loss": 34,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
