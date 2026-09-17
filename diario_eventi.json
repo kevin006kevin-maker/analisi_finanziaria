@@ -18630,5 +18630,32 @@
 },
 "stop": 59.3858,
 "atr": 3.2821
+},
+{
+"episodio": "short:LCID:2026-09-18",
+"ticker": "LCID",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-18 00:26",
+"data": "2026-09-18 00:26",
+"prezzo": 4.28,
+"conv": 60,
+"prob_gain": 45,
+"prob_loss": 24,
+"reliab": "🔴 Bassa",
+"mkt": -0.911,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 5.8709,
+"media20": 4.6913,
+"quattro_atr": 5.8087,
+"meta_caduta": 6.2,
+"bollinger": 5.6397,
+"consigliata": 5.8087
+},
+"stop": 3.5156,
+"atr": 0.3822
 }
 ]
