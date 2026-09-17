@@ -3207,8 +3207,8 @@
 "obs_date": "2026-08-17",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 4.421500205993652,
+"conf_date": "2026-09-17",
 "target": 4.8426,
 "stop": 4.3214,
 "reliab": "🟡 Media",
@@ -3244,12 +3244,12 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-09-17",
+"prezzo": 4.421500205993652,
+"conv": 68,
+"prob_gain": 65,
+"prob_loss": 22,
+"reliab": "🟡 Media",
 "mkt": null
 }
 },
@@ -3269,8 +3269,8 @@
 "obs_date": "2026-08-25",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 50.47999954223633,
+"conf_date": "2026-09-17",
 "target": null,
 "stop": null,
 "reliab": "🟡 Media",
@@ -3310,8 +3310,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-09-17",
+"prezzo": 50.47999954223633,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -4551,8 +4551,8 @@
 "obs_date": "2026-09-07",
 "pre_price": 25.81,
 "pre_date": "2026-09-08",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 26.780000686645508,
+"conf_date": "2026-09-17",
 "target": 27.4856,
 "stop": 25.3698,
 "reliab": "🟢 Alta",
@@ -4588,16 +4588,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-09-17",
+"prezzo": 26.780000686645508,
+"conv": 63,
+"prob_gain": 53,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": 3.76,
+"osservazione|7g": 3.76,
+"promozione|7g": 1.48
+}
 },
 {
 "ticker": "MOMO",
