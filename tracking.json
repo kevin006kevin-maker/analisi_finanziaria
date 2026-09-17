@@ -2944,9 +2944,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-17",
 "max_price": 6.19,
-"max_date": "2026-08-18 06:09",
-"warn_since": "2026-09-15",
-"warn": "in perdita da 36 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-08-18 06:09"
 },
 "NEM": {
 "kind": "long",
@@ -7321,9 +7319,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-17",
 "max_price": 155.83,
-"max_date": "2026-08-17 17:51",
-"warn_since": "2026-09-16",
-"warn": "in perdita da 32 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-08-17 17:51"
 },
 "XLK": {
 "kind": "short",
@@ -12579,7 +12575,9 @@
 "max_date": "2026-09-03 15:46",
 "auto": true,
 "notified": true,
-"entry_check": "2026-09-17"
+"entry_check": "2026-09-17",
+"warn_since": "2026-09-17",
+"warn": "in perdita da 16 giorni di Borsa: valuta l'uscita"
 },
 "INTR": {
 "kind": "long",
@@ -14909,9 +14907,7 @@
 "max_date": "2026-09-08 19:07",
 "auto": true,
 "notified": true,
-"entry_check": "2026-09-17",
-"warn_since": "2026-09-16",
-"warn": "in perdita da 9 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-09-17"
 },
 "STLAM.MI": {
 "kind": "long",
