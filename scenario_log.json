@@ -6882,5 +6882,62 @@
 "prob_loss": 14,
 "conv": 80,
 "res": {}
+},
+{
+"ticker": "AXON",
+"kind": "short",
+"date": "2026-09-18",
+"promo_price": 453.5,
+"obs_price": 436.985,
+"obs_date": "2026-09-15",
+"pre_price": 442.08,
+"pre_date": "2026-09-16",
+"conf_price": null,
+"conf_date": null,
+"target": 551.1902,
+"stop": 393.4891,
+"reliab": "🔴 Bassa",
+"prob_gain": 52,
+"prob_loss": 22,
+"conv": 66,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-15 19:40",
+"prezzo": 436.985,
+"conv": 64,
+"prob_gain": 54,
+"prob_loss": 18,
+"reliab": "🔴 Bassa",
+"mkt": -2.099
+},
+"anticipo": {
+"data": "2026-09-16",
+"prezzo": 442.08,
+"conv": 66,
+"prob_gain": 53,
+"prob_loss": 23,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-18 00:29",
+"prezzo": 453.5,
+"conv": 66,
+"prob_gain": 52,
+"prob_loss": 22,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
