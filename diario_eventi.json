@@ -18711,5 +18711,32 @@
 },
 "stop": 179.2828,
 "atr": 14.2336
+},
+{
+"episodio": "short:NVST:2026-09-17",
+"ticker": "NVST",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-18 00:29",
+"data": "2026-09-18 00:26",
+"prezzo": 23.69,
+"conv": 74,
+"prob_gain": 52,
+"prob_loss": 5,
+"reliab": "🟡 Media",
+"mkt": -0.911,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 26.9844,
+"media20": 26.559,
+"quattro_atr": 27.2826,
+"meta_caduta": 26.2,
+"bollinger": 28.784,
+"consigliata": 26.9844
+},
+"stop": 21.8937,
+"atr": 0.8981
 }
 ]
