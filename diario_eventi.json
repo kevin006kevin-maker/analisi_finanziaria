@@ -18684,5 +18684,32 @@
 },
 "stop": 59.3858,
 "atr": 3.2821
+},
+{
+"episodio": "short:MTZ:2026-09-17",
+"ticker": "MTZ",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-18 00:29",
+"data": "2026-09-18 00:26",
+"prezzo": 207.75,
+"conv": 80,
+"prob_gain": 54,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": -0.911,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 283.5044,
+"media20": 240.3375,
+"quattro_atr": 264.6844,
+"meta_caduta": 318.42,
+"bollinger": 269.6376,
+"consigliata": 264.6844
+},
+"stop": 179.2828,
+"atr": 14.2336
 }
 ]
