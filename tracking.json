@@ -8444,8 +8444,7 @@
 "entry_check": "2026-09-17",
 "max_price": 51.29,
 "max_date": "2026-09-15 00:48",
-"exit_notified": false,
-"incasso_notified": true
+"exit_notified": false
 },
 "ACDC": {
 "kind": "short",
@@ -8910,7 +8909,16 @@
 "entry_check": "2026-09-17",
 "max_price": 50.34,
 "max_date": "2026-09-09 20:30",
-"incasso_notified": true
+"incasso_notified": true,
+"incasso": {
+"gain": 3.3,
+"max": 50.34,
+"max_date": "2026-09-09 20:30",
+"giu_dal_max": -8.3,
+"motivo": "scesa 8% dal massimo (50.34) restando in guadagno (+3.3%): il guadagno si sta sgonfiando",
+"urgenza": "incassa",
+"tipo": "sgonfia"
+}
 },
 "NOK": {
 "kind": "short",
@@ -12755,8 +12763,7 @@
 "max_date": "2026-09-09 23:07",
 "auto": true,
 "notified": true,
-"entry_check": "2026-09-17",
-"incasso_notified": true
+"entry_check": "2026-09-17"
 },
 "IAG": {
 "kind": "long",
