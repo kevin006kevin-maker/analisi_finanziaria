@@ -329,7 +329,8 @@
 "soglie_ricalcolate_il": "2026-09-14 21:39",
 "soglie_ritardo_giorni": 3,
 "res": {
-"7g": -15.99
+"7g": -15.99,
+"30g": -25.31
 },
 "taglio_corretto": true
 },
@@ -370,7 +371,8 @@
 "soglie_ricalcolate_il": "2026-09-14 21:39",
 "soglie_ritardo_giorni": 3,
 "res": {
-"7g": 15.12
+"7g": 15.12,
+"30g": 13.92
 },
 "taglio_corretto": true
 },
@@ -1114,10 +1116,43 @@
 "soglie_ricalcolate_il": "2026-09-14 21:39",
 "soglie_ritardo_giorni": 3,
 "res": {
-"7g": -5.09
+"7g": -5.09,
+"30g": -7.91,
+"soglia": -7.91
 },
 "taglio_corretto": true,
-"res_soglia": {}
+"res_soglia": {
+"media50": {
+"ret": -7.91,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -7.91,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -7.91,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -7.91,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -7.91,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -7.91,
+"toccato": false,
+"giorni": null
+}
+}
 },
 {
 "episodio": "short:CAPR:2026-08-16",
@@ -1231,10 +1266,43 @@
 "soglie_ricalcolate_il": "2026-09-14 21:39",
 "soglie_ritardo_giorni": 3,
 "res": {
-"7g": -2.22
+"7g": -2.22,
+"30g": -22.77,
+"soglia": -22.77
 },
 "taglio_corretto": true,
-"res_soglia": {}
+"res_soglia": {
+"media50": {
+"ret": -22.77,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -22.77,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -22.77,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -22.77,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -22.77,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -22.77,
+"toccato": false,
+"giorni": null
+}
+}
 },
 {
 "episodio": "short:CLBT:2026-08-17",
@@ -1655,10 +1723,43 @@
 "soglie_ricalcolate_il": "2026-09-14 21:39",
 "soglie_ritardo_giorni": 3,
 "res": {
-"7g": 20.82
+"7g": 20.82,
+"30g": 22.5,
+"soglia": 22.5
 },
 "taglio_corretto": true,
-"res_soglia": {}
+"res_soglia": {
+"media50": {
+"ret": 22.5,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": 16.9,
+"toccato": true,
+"giorni": 2
+},
+"quattro_atr": {
+"ret": 22.5,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": 22.5,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": 22.5,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": 22.5,
+"toccato": false,
+"giorni": null
+}
+}
 },
 {
 "episodio": "short:MNSO:2026-08-17",
@@ -13308,7 +13409,9 @@
 },
 "stop": 560.0753,
 "atr": 34.4774,
-"res": {}
+"res": {
+"7g": -5.27
+}
 },
 {
 "episodio": "short:TBBK:2026-09-09",
@@ -13336,7 +13439,9 @@
 },
 "stop": 44.0893,
 "atr": 2.9704,
-"res": {}
+"res": {
+"7g": 0.4
+}
 },
 {
 "episodio": "short:SYK:2026-09-09",
@@ -13364,7 +13469,9 @@
 },
 "stop": 253.6159,
 "atr": 10.8871,
-"res": {}
+"res": {
+"7g": 1.94
+}
 },
 {
 "episodio": "short:NAMS:2026-09-09",
@@ -13392,7 +13499,9 @@
 },
 "stop": 19.9427,
 "atr": 1.4236,
-"res": {}
+"res": {
+"7g": -2.54
+}
 },
 {
 "episodio": "short:BBOT:2026-09-09",
@@ -13449,7 +13558,9 @@
 },
 "stop": 44.3935,
 "atr": 6.3632,
-"res": {}
+"res": {
+"7g": 0.07
+}
 },
 {
 "episodio": "short:KRMN:2026-09-09",
@@ -13477,7 +13588,9 @@
 },
 "stop": 29.1343,
 "atr": 3.0428,
-"res": {}
+"res": {
+"7g": 1.79
+}
 },
 {
 "episodio": "short:LDO.MI:2026-09-09",
@@ -13546,7 +13659,9 @@
 },
 "stop": 3.8562,
 "atr": 0.7719,
-"res": {}
+"res": {
+"7g": -28.7
+}
 },
 {
 "episodio": "short:PST.MI:2026-09-07",
@@ -13664,7 +13779,9 @@
 },
 "stop": 20.6488,
 "atr": 1.0206,
-"res": {}
+"res": {
+"7g": 6.65
+}
 },
 {
 "episodio": "short:VISN:2026-08-29",
@@ -13856,7 +13973,9 @@
 },
 "stop": null,
 "atr": 7.9893,
-"res": {}
+"res": {
+"7g": -35.77
+}
 },
 {
 "episodio": "short:LULG:2026-09-04",
@@ -13925,7 +14044,9 @@
 },
 "stop": 6.106,
 "atr": 0.982,
-"res": {}
+"res": {
+"7g": 7.25
+}
 },
 {
 "episodio": "short:PST.MI:2026-09-07",
@@ -14032,7 +14153,9 @@
 },
 "stop": 17.4059,
 "atr": 1.4521,
-"res": {}
+"res": {
+"7g": -12.75
+}
 },
 {
 "episodio": "short:ENOV:2026-09-09",
@@ -14060,7 +14183,9 @@
 },
 "stop": 17.061,
 "atr": 1.4595,
-"res": {}
+"res": {
+"7g": -9.16
+}
 },
 {
 "episodio": "short:ADTN:2026-09-09",
@@ -14088,7 +14213,9 @@
 },
 "stop": 6.7018,
 "atr": 0.4391,
-"res": {}
+"res": {
+"7g": -5.41
+}
 },
 {
 "episodio": "short:GRAB:2026-09-09",
@@ -14157,7 +14284,9 @@
 },
 "stop": 3.2879,
 "atr": 0.5911,
-"res": {}
+"res": {
+"7g": -14.32
+}
 },
 {
 "episodio": "short:CASY:2026-09-09",
@@ -14395,7 +14524,9 @@
 },
 "stop": 49.9742,
 "atr": 2.6329,
-"res": {}
+"res": {
+"7g": -3.83
+}
 },
 {
 "episodio": "short:NAVN:2026-09-10",
@@ -14423,7 +14554,9 @@
 },
 "stop": 16.649,
 "atr": 1.723,
-"res": {}
+"res": {
+"7g": 10.4
+}
 },
 {
 "episodio": "short:AEO:2026-09-10",
@@ -14451,7 +14584,9 @@
 },
 "stop": 12.5585,
 "atr": 0.8257,
-"res": {}
+"res": {
+"7g": 5.45
+}
 },
 {
 "episodio": "short:RVLV:2026-09-10",
@@ -14479,7 +14614,9 @@
 },
 "stop": 18.6269,
 "atr": 0.9416,
-"res": {}
+"res": {
+"7g": 1.17
+}
 },
 {
 "episodio": "short:AEO:2026-09-10",
@@ -14665,7 +14802,9 @@
 },
 "stop": 49.8664,
 "atr": 3.4418,
-"res": {},
+"res": {
+"7g": -2.33
+},
 "soglie_contaminate": {
 "media50": 71.51,
 "media20": 66.422,
@@ -14801,7 +14940,9 @@
 },
 "stop": 128.6267,
 "atr": 4.4266,
-"res": {},
+"res": {
+"7g": 2.46
+},
 "soglie_contaminate": {
 "media50": 154.4828,
 "media20": 154.002,
@@ -18240,7 +18381,8 @@
 "consigliata": 24.271
 },
 "stop": 20.6695,
-"atr": 0.6003
+"atr": 0.6003,
+"res": {}
 },
 {
 "episodio": "short:MTZ:2026-09-17",
@@ -18267,7 +18409,8 @@
 "consigliata": 266.4129
 },
 "stop": 181.4485,
-"atr": 14.1607
+"atr": 14.1607,
+"res": {}
 },
 {
 "episodio": "short:RARE:2026-09-17",
@@ -18294,7 +18437,8 @@
 "consigliata": 19.3384
 },
 "stop": 10.7158,
-"atr": 1.4371
+"atr": 1.4371,
+"res": {}
 },
 {
 "episodio": "short:NVST:2026-09-17",
@@ -18321,7 +18465,8 @@
 "consigliata": 26.9917
 },
 "stop": 22.2587,
-"atr": 0.8981
+"atr": 0.8981,
+"res": {}
 },
 {
 "episodio": "short:XLI:2026-09-16",
@@ -18348,7 +18493,8 @@
 "consigliata": 179.205
 },
 "stop": 163.8865,
-"atr": 2.5618
+"atr": 2.5618,
+"res": {}
 },
 {
 "episodio": "short:ON:2026-09-16",
@@ -18375,7 +18521,8 @@
 "consigliata": 80.1038
 },
 "stop": 60.5557,
-"atr": 3.8421
+"atr": 3.8421,
+"res": {}
 },
 {
 "episodio": "short:ENVA:2026-09-15",
