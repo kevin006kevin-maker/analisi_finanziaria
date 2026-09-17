@@ -2412,8 +2412,8 @@
 "obs_date": "2026-08-24",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 10.625,
+"conf_date": "2026-09-17",
 "target": null,
 "stop": null,
 "reliab": "🟡 Media",
@@ -2453,8 +2453,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-09-17",
+"prezzo": 10.625,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -4435,8 +4435,8 @@
 "obs_date": "2026-08-17",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 3.8499999046325684,
+"conf_date": "2026-09-17",
 "target": 10.4068,
 "stop": 2.7962,
 "reliab": "🔴 Bassa",
@@ -4472,16 +4472,19 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-09-17",
+"prezzo": 3.8499999046325684,
+"conv": 74,
+"prob_gain": 61,
+"prob_loss": 18,
+"reliab": "🔴 Bassa",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"osservazione|7g": -16.4,
+"promozione|7g": -28.7
+}
 },
 {
 "ticker": "FGL",
@@ -4494,15 +4497,18 @@
 "obs_date": "2026-09-04",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 4.361299991607666,
+"conf_date": "2026-09-17",
 "target": null,
 "stop": null,
 "reliab": "🔴 Bassa",
 "prob_gain": 57,
 "prob_loss": 33,
 "conv": 69,
-"res": {},
+"res": {
+"osservazione|7g": -52.9,
+"promozione|7g": -35.77
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-09-04 21:47",
@@ -4532,8 +4538,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-09-17",
+"prezzo": 4.361299991607666,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -4614,15 +4620,18 @@
 "obs_date": "2026-09-04",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 4.894999980926514,
+"conf_date": "2026-09-17",
 "target": null,
 "stop": null,
 "reliab": null,
 "prob_gain": null,
 "prob_loss": null,
 "conv": 85,
-"res": {},
+"res": {
+"osservazione|7g": -8.85,
+"promozione|7g": -6.94
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-09-04 15:58",
@@ -4652,8 +4661,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-09-17",
+"prezzo": 4.894999980926514,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -4671,8 +4680,8 @@
 "obs_date": "2026-09-04",
 "pre_price": 4.27,
 "pre_date": "2026-09-08",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 3.8299999237060547,
+"conf_date": "2026-09-17",
 "target": 6.3365,
 "stop": 3.2879,
 "reliab": "🔴 Bassa",
@@ -4708,16 +4717,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-09-17",
+"prezzo": 3.8299999237060547,
+"conv": 66,
+"prob_gain": 55,
+"prob_loss": 24,
+"reliab": "🔴 Bassa",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": -10.3,
+"osservazione|7g": -10.2,
+"promozione|7g": -14.32
+}
 },
 {
 "ticker": "CDNL",
