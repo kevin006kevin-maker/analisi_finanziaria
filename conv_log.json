@@ -1,26 +1,6 @@
 [
 {
 "date": "2026-09-08",
-"ticker": "GAP",
-"kind": "long",
-"price": 22.43,
-"conv": 72,
-"factors": {
-"discount": 23.0003,
-"histcheap": 0.44,
-"riskadj": -0.24,
-"ddpen": -18.37,
-"momentum": 4.4719,
-"prob": 47,
-"quality": 74.3,
-"valcheap": 0.5937,
-"trappen": 2
-},
-"ret_5d": -8.6,
-"ret_21d": null
-},
-{
-"date": "2026-09-08",
 "ticker": "ONON",
 "kind": "long",
 "price": 27.99,
@@ -40295,6 +40275,27 @@
 "quality": 64.1,
 "valcheap": -0.5729,
 "trappen": 2
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-18",
+"ticker": "SRFM",
+"kind": "short",
+"price": 0.635,
+"conv": 38,
+"factors": {
+"discount": 88.3486,
+"histcheap": 1.04,
+"riskadj": -3.47,
+"ddpen": -68.52,
+"momentum": -9.8616,
+"prob": 12,
+"oversold": -48.3111,
+"rebound": 14.5102,
+"trend": -1.0,
+"relstrength": 9.2549
 },
 "ret_5d": null,
 "ret_21d": null
