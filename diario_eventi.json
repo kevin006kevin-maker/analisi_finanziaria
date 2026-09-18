@@ -19514,5 +19514,32 @@
 },
 "stop": 40.7257,
 "atr": 1.5371
+},
+{
+"episodio": "short:LFTO:2026-09-18",
+"ticker": "LFTO",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-18 20:23",
+"data": "2026-09-18 20:23",
+"prezzo": 16.305,
+"conv": 66,
+"prob_gain": 66,
+"prob_loss": 11,
+"reliab": "🔴 Bassa",
+"mkt": -0.0839,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 20.9827,
+"media20": 18.3772,
+"quattro_atr": 20.9179,
+"meta_caduta": 21.8475,
+"bollinger": 19.7243,
+"consigliata": 20.9179
+},
+"stop": 13.9985,
+"atr": 1.1532
 }
 ]
