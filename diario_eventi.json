@@ -19649,5 +19649,32 @@
 },
 "stop": 2.5647,
 "atr": 0.2177
+},
+{
+"episodio": "short:RSI:2026-09-19",
+"ticker": "RSI",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-19 01:35",
+"data": "2026-09-19 01:34",
+"prezzo": 23.3,
+"conv": 70,
+"prob_gain": 56,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": 0.1222,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 27.759,
+"media20": 26.0825,
+"quattro_atr": 27.9599,
+"meta_caduta": 28.91,
+"bollinger": 27.6338,
+"consigliata": 27.759
+},
+"stop": 20.9701,
+"atr": 1.165
 }
 ]
