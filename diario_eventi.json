@@ -19255,5 +19255,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:XENE:2026-09-18",
+"ticker": "XENE",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-18 16:59",
+"data": "2026-09-18 16:59",
+"prezzo": 40.25,
+"conv": 83,
+"prob_gain": 56,
+"prob_loss": 1,
+"reliab": "🔴 Bassa",
+"mkt": -0.1712,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 62.3106,
+"media20": 58.64,
+"quattro_atr": 52.1279,
+"meta_caduta": 55.605,
+"bollinger": 67.9496,
+"consigliata": 52.1279
+},
+"stop": 34.3111,
+"atr": 2.9695
 }
 ]
