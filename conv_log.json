@@ -1,46 +1,6 @@
 [
 {
 "date": "2026-09-08",
-"ticker": "T",
-"kind": "long",
-"price": 25.68,
-"conv": 55,
-"factors": {
-"discount": 13.3018,
-"histcheap": -0.09,
-"riskadj": -1.03,
-"ddpen": -15.69,
-"momentum": 1.2687,
-"prob": 61,
-"quality": 63.3,
-"valcheap": 0.5263,
-"trappen": 2
-},
-"ret_5d": 4.42,
-"ret_21d": null
-},
-{
-"date": "2026-09-08",
-"ticker": "PBR",
-"kind": "long",
-"price": 20.12,
-"conv": 43,
-"factors": {
-"discount": 8.67,
-"histcheap": -1.2,
-"riskadj": 2.2,
-"ddpen": -11.63,
-"momentum": -8.5807,
-"prob": 26,
-"quality": 65.2,
-"valcheap": 0.5774,
-"trappen": 2
-},
-"ret_5d": 8.18,
-"ret_21d": null
-},
-{
-"date": "2026-09-08",
 "ticker": "SAN",
 "kind": "long",
 "price": 14.93,
@@ -40293,6 +40253,48 @@
 "quality": 77.6,
 "valcheap": -0.9447,
 "trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-18",
+"ticker": "NRGV",
+"kind": "short",
+"price": 3.97,
+"conv": 31,
+"factors": {
+"discount": 38.829,
+"histcheap": 0.0,
+"riskadj": 0.51,
+"ddpen": -32.96,
+"momentum": 7.4592,
+"prob": 23,
+"oversold": -53.3461,
+"rebound": -11.6977,
+"trend": -1.0,
+"relstrength": -8.0659
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-18",
+"ticker": "GLOO",
+"kind": "short",
+"price": 4.07,
+"conv": 24,
+"factors": {
+"discount": 57.1579,
+"histcheap": 0.86,
+"riskadj": -1.39,
+"ddpen": -46.19,
+"momentum": -29.2064,
+"prob": 14,
+"oversold": -67.6635,
+"rebound": -18.5995,
+"trend": -1.0,
+"relstrength": 28.5996
 },
 "ret_5d": null,
 "ret_21d": null
