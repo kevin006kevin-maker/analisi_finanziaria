@@ -1,26 +1,6 @@
 [
 {
 "date": "2026-09-08",
-"ticker": "GWRE",
-"kind": "long",
-"price": 162.42,
-"conv": 32,
-"factors": {
-"discount": 37.9792,
-"histcheap": 0.27,
-"riskadj": -1.12,
-"ddpen": -37.29,
-"momentum": 21.0979,
-"prob": 56,
-"quality": 43.5,
-"valcheap": -3.0,
-"trappen": 3
-},
-"ret_5d": -7.68,
-"ret_21d": null
-},
-{
-"date": "2026-09-08",
 "ticker": "LULU",
 "kind": "long",
 "price": 100.61,
@@ -40296,6 +40276,27 @@
 "quality": 51.6,
 "valcheap": -1.3639,
 "trappen": 1
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-18",
+"ticker": "CAPR",
+"kind": "short",
+"price": 9.42,
+"conv": 41,
+"factors": {
+"discount": 73.3447,
+"histcheap": 1.0,
+"riskadj": 0.22,
+"ddpen": -36.26,
+"momentum": -13.494,
+"prob": 1,
+"oversold": -52.2723,
+"rebound": 8.5924,
+"trend": -1.0,
+"relstrength": 12.8873
 },
 "ret_5d": null,
 "ret_21d": null
