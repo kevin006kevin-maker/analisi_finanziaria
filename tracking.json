@@ -8785,7 +8785,9 @@
 "urgenza": "incassa",
 "tipo": "sgonfia"
 },
-"incasso_notified": true
+"incasso_notified": true,
+"warn_since": "2026-09-18",
+"warn": "in perdita da 33 giorni di Borsa: valuta l'uscita"
 },
 "XLK": {
 "kind": "short",
@@ -9630,7 +9632,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-18",
 "max_price": 26.21,
-"max_date": "2026-08-21 17:07"
+"max_date": "2026-08-21 17:07",
+"warn_since": "2026-09-18",
+"warn": "in perdita da 32 giorni di Borsa: valuta l'uscita"
 },
 "CCB": {
 "kind": "short",
@@ -17734,7 +17738,9 @@
 "max_date": "2026-09-08 19:07",
 "auto": true,
 "notified": true,
-"entry_check": "2026-09-17"
+"entry_check": "2026-09-17",
+"warn_since": "2026-09-18",
+"warn": "in perdita da 10 giorni di Borsa: valuta l'uscita"
 },
 "STLAM.MI": {
 "kind": "long",
