@@ -19568,5 +19568,32 @@
 },
 "stop": 4.8887,
 "atr": 4.4756
+},
+{
+"episodio": "short:NCT:2026-09-18",
+"ticker": "NCT",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-18 23:14",
+"data": "2026-09-18 23:14",
+"prezzo": 6.13,
+"conv": 70,
+"prob_gain": 68,
+"prob_loss": 21,
+"reliab": "🔴 Bassa",
+"mkt": 0.0639,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 73.3941,
+"media20": 57.1478,
+"quattro_atr": 50.2208,
+"meta_caduta": 68.315,
+"bollinger": 167.6952,
+"consigliata": 50.2208
+},
+"stop": null,
+"atr": 11.0227
 }
 ]
