@@ -19823,5 +19823,32 @@
 },
 "stop": 12.5767,
 "atr": 0.5366
+},
+{
+"episodio": "long:AGNC:2026-09-20",
+"ticker": "AGNC",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-20 00:32",
+"data": "2026-09-20 00:31",
+"prezzo": 9.87,
+"conv": 84,
+"prob_gain": 91,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": 0.1222,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 10.7336,
+"media20": 10.4965,
+"quattro_atr": 10.6713,
+"meta_caduta": 10.65,
+"bollinger": 11.2867,
+"consigliata": 10.6713
+},
+"stop": 9.4693,
+"atr": 0.2003
 }
 ]
