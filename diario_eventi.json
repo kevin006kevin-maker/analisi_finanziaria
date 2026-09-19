@@ -19796,5 +19796,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "long:NU:2026-09-19",
+"ticker": "NU",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-19 08:35",
+"data": "2026-09-19 08:35",
+"prezzo": 13.65,
+"conv": 62,
+"prob_gain": 80,
+"prob_loss": 9,
+"reliab": "🟡 Media",
+"mkt": 0.1222,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 14.3886,
+"media20": 14.708,
+"quattro_atr": 15.7966,
+"meta_caduta": 14.665,
+"bollinger": 15.8484,
+"consigliata": 14.3886
+},
+"stop": 12.5767,
+"atr": 0.5366
 }
 ]
