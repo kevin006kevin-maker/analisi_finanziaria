@@ -1,48 +1,6 @@
 [
 {
 "date": "2026-09-09",
-"ticker": "CASY",
-"kind": "short",
-"price": 624.865,
-"conv": 87,
-"factors": {
-"discount": 31.8041,
-"histcheap": 0.54,
-"riskadj": 0.42,
-"ddpen": -6.73,
-"momentum": 18.5217,
-"prob": 57,
-"oversold": -19.7249,
-"rebound": 31.6624,
-"trend": -1.0,
-"relstrength": -18.7938
-},
-"ret_5d": -4.01,
-"ret_21d": null
-},
-{
-"date": "2026-09-09",
-"ticker": "BKV",
-"kind": "short",
-"price": 24.12,
-"conv": 49,
-"factors": {
-"discount": 25.0,
-"histcheap": 0.89,
-"riskadj": 0.26,
-"ddpen": -13.12,
-"momentum": 3.9809,
-"prob": 35,
-"oversold": -43.3937,
-"rebound": 5.427,
-"trend": -1.0,
-"relstrength": -4.2529
-},
-"ret_5d": -3.03,
-"ret_21d": null
-},
-{
-"date": "2026-09-09",
 "ticker": "XE",
 "kind": "short",
 "price": 17.4051,
@@ -40327,6 +40285,48 @@
 "quality": 50.2,
 "valcheap": -2.6042,
 "trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-19",
+"ticker": "BKKT",
+"kind": "short",
+"price": 8.61,
+"conv": 29,
+"factors": {
+"discount": 80.8837,
+"histcheap": 0.55,
+"riskadj": -0.32,
+"ddpen": -72.42,
+"momentum": -5.2567,
+"prob": -10,
+"oversold": -56.9369,
+"rebound": -9.7979,
+"trend": -1.0,
+"relstrength": 5.3413
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-19",
+"ticker": "FLNC",
+"kind": "short",
+"price": 7.32,
+"conv": 74,
+"factors": {
+"discount": 77.2882,
+"histcheap": 2.03,
+"riskadj": -0.34,
+"ddpen": -41.99,
+"momentum": 26.284,
+"prob": 17,
+"oversold": -23.6809,
+"rebound": 68.0341,
+"trend": -1.0,
+"relstrength": -26.1994
 },
 "ret_5d": null,
 "ret_21d": null
