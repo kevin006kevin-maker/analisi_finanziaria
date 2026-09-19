@@ -320,11 +320,11 @@
 "entry_date": "2026-07-06",
 "entry_src": "storico",
 "incasso": {
-"gain": 11.2,
+"gain": 10.8,
 "max": 98.9895,
 "max_date": "2026-09-14 21:37",
-"giu_dal_max": -0.5,
-"motivo": "bersaglio 91.33 raggiunto (sei a +11.2%): valuta di incassare",
+"giu_dal_max": -0.9,
+"motivo": "bersaglio 91.33 raggiunto (sei a +10.8%): valuta di incassare",
 "urgenza": "incassa",
 "tipo": "bersaglio"
 },
@@ -657,11 +657,11 @@
 "max_date": "2026-09-14 15:53",
 "incasso_notified": true,
 "incasso": {
-"gain": 15.4,
+"gain": 10.1,
 "max": 5.325,
 "max_date": "2026-09-14 15:53",
-"giu_dal_max": -14.4,
-"motivo": "scesa 14% dal massimo (5.33) restando in guadagno (+15.4%): il guadagno si sta sgonfiando",
+"giu_dal_max": -18.3,
+"motivo": "scesa 18% dal massimo (5.33) restando in guadagno (+10.1%): il guadagno si sta sgonfiando",
 "urgenza": "incassa",
 "tipo": "sgonfia"
 }
@@ -6581,11 +6581,11 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-19",
 "incasso": {
-"gain": 16.3,
+"gain": 18.1,
 "max": 63.59,
 "max_date": "2026-09-15 19:43",
-"giu_dal_max": -10.7,
-"motivo": "bersaglio 52.30 raggiunto (sei a +16.3%): valuta di incassare",
+"giu_dal_max": -9.3,
+"motivo": "bersaglio 52.30 raggiunto (sei a +18.1%): valuta di incassare",
 "urgenza": "incassa",
 "tipo": "bersaglio"
 },
@@ -6917,13 +6917,13 @@
 "max_price": 1804.5,
 "max_date": "2026-08-17 18:55",
 "incasso": {
-"gain": 42.5,
+"gain": 28.4,
 "max": 1804.5,
 "max_date": "2026-08-17 18:55",
-"giu_dal_max": -0.7,
-"motivo": "bersaglio 1,710.05 raggiunto (sei a +42.5%): valuta di incassare",
+"giu_dal_max": -10.5,
+"motivo": "scesa 11% dal massimo (1,804.50) restando in guadagno (+28.4%): il guadagno si sta sgonfiando",
 "urgenza": "incassa",
-"tipo": "bersaglio"
+"tipo": "sgonfia"
 },
 "incasso_notified": true
 },
@@ -7236,11 +7236,11 @@
 "max_date": "2026-09-02 21:38",
 "incasso_notified": true,
 "incasso": {
-"gain": 19.3,
+"gain": 17.5,
 "max": 16.06,
 "max_date": "2026-09-02 21:38",
-"giu_dal_max": -18.6,
-"motivo": "scesa 19% dal massimo (16.06) restando in guadagno (+19.3%): il guadagno si sta sgonfiando",
+"giu_dal_max": -19.9,
+"motivo": "scesa 20% dal massimo (16.06) restando in guadagno (+17.5%): il guadagno si sta sgonfiando",
 "urgenza": "incassa",
 "tipo": "sgonfia"
 }
@@ -7566,7 +7566,17 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-19",
 "max_price": 24.365,
-"max_date": "2026-09-03 15:46"
+"max_date": "2026-09-03 15:46",
+"incasso": {
+"gain": 18.1,
+"max": 24.365,
+"max_date": "2026-09-03 15:46",
+"giu_dal_max": -11.6,
+"motivo": "scesa 12% dal massimo (24.36) restando in guadagno (+18.1%): il guadagno si sta sgonfiando",
+"urgenza": "incassa",
+"tipo": "sgonfia"
+},
+"incasso_notified": true
 },
 "VRTL": {
 "kind": "short",
@@ -11084,11 +11094,11 @@
 "max_date": "2026-08-18 06:09",
 "incasso_notified": true,
 "incasso": {
-"gain": 7.8,
+"gain": 7.9,
 "max": 52.47,
 "max_date": "2026-08-18 06:09",
-"giu_dal_max": -12.4,
-"motivo": "scesa 12% dal massimo (52.47) restando in guadagno (+7.8%): il guadagno si sta sgonfiando",
+"giu_dal_max": -12.3,
+"motivo": "scesa 12% dal massimo (52.47) restando in guadagno (+7.9%): il guadagno si sta sgonfiando",
 "urgenza": "incassa",
 "tipo": "sgonfia"
 }
@@ -11789,11 +11799,11 @@
 "max_date": "2026-09-03 19:32",
 "incasso_notified": true,
 "incasso": {
-"gain": 17.9,
+"gain": 18.9,
 "max": 10.6727,
 "max_date": "2026-09-03 19:32",
-"giu_dal_max": -9.8,
-"motivo": "scesa 10% dal massimo (10.67) restando in guadagno (+17.9%): il guadagno si sta sgonfiando",
+"giu_dal_max": -9.0,
+"motivo": "scesa 9% dal massimo (10.67) restando in guadagno (+18.9%): il guadagno si sta sgonfiando",
 "urgenza": "incassa",
 "tipo": "sgonfia"
 }
