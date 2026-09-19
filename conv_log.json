@@ -1,48 +1,6 @@
 [
 {
 "date": "2026-09-09",
-"ticker": "TBBK",
-"kind": "short",
-"price": 49.16,
-"conv": 81,
-"factors": {
-"discount": 38.8101,
-"histcheap": 1.95,
-"riskadj": -0.84,
-"ddpen": -22.4,
-"momentum": 23.6053,
-"prob": 57,
-"oversold": -18.5984,
-"rebound": 35.9772,
-"trend": -1.0,
-"relstrength": -23.8773
-},
-"ret_5d": 2.7,
-"ret_21d": null
-},
-{
-"date": "2026-09-09",
-"ticker": "BRZE",
-"kind": "short",
-"price": 24.83,
-"conv": 60,
-"factors": {
-"discount": 31.3899,
-"histcheap": 0.15,
-"riskadj": -0.53,
-"ddpen": -31.2,
-"momentum": 24.2526,
-"prob": 34,
-"oversold": -34.868,
-"rebound": 10.2803,
-"trend": 1.0,
-"relstrength": -24.5246
-},
-"ret_5d": 0.89,
-"ret_21d": null
-},
-{
-"date": "2026-09-09",
 "ticker": "CASY",
 "kind": "short",
 "price": 624.865,
@@ -40329,6 +40287,46 @@
 "rebound": -1.6364,
 "trend": -1.0,
 "relstrength": 11.6788
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-19",
+"ticker": "APA",
+"kind": "long",
+"price": 44.87,
+"conv": 39,
+"factors": {
+"discount": 5.3575,
+"histcheap": -1.75,
+"riskadj": 2.1,
+"ddpen": -11.65,
+"momentum": -0.313,
+"prob": 19,
+"quality": 69.6,
+"valcheap": 0.0324,
+"trappen": 0
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-19",
+"ticker": "RSI",
+"kind": "long",
+"price": 25.25,
+"conv": 31,
+"factors": {
+"discount": 26.854,
+"histcheap": -0.5,
+"riskadj": 0.28,
+"ddpen": -15.88,
+"momentum": 4.2109,
+"prob": 50,
+"quality": 50.2,
+"valcheap": -2.6042,
+"trappen": 3
 },
 "ret_5d": null,
 "ret_21d": null
