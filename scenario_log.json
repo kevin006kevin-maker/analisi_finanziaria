@@ -7065,5 +7065,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "STMMI.MI",
+"kind": "short",
+"date": "2026-09-20",
+"promo_price": 43.43,
+"obs_price": 48.38,
+"obs_date": "2026-08-17",
+"pre_price": 43.575,
+"pre_date": "2026-08-31",
+"conf_price": null,
+"conf_date": null,
+"target": 47.301,
+"stop": 39.9233,
+"reliab": "🟡 Media",
+"prob_gain": 52,
+"prob_loss": 15,
+"conv": 68,
+"passaggi": {
+"osservazione": {
+"data": "2026-08-17 10:07",
+"prezzo": 48.38,
+"conv": 80,
+"prob_gain": 54,
+"prob_loss": 13,
+"reliab": "🟡 Media",
+"mkt": 3.2103
+},
+"anticipo": {
+"data": "2026-08-31",
+"prezzo": 43.575,
+"conv": 79,
+"prob_gain": 54,
+"prob_loss": 15,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-20 07:24",
+"prezzo": 43.43,
+"conv": 68,
+"prob_gain": 52,
+"prob_loss": 15,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
