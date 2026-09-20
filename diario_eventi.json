@@ -20443,5 +20443,32 @@
 },
 "stop": 164.7867,
 "atr": 2.4816
+},
+{
+"episodio": "short:HBAN:2026-09-16",
+"ticker": "HBAN",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-21 01:17",
+"data": "2026-09-21 01:12",
+"prezzo": 15.88,
+"conv": 68,
+"prob_gain": 52,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": 0.1222,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-21",
+"soglie": {
+"media50": 17.2678,
+"media20": 16.7,
+"quattro_atr": 17.3914,
+"meta_caduta": 17.22,
+"bollinger": 17.4931,
+"consigliata": 17.2678
+},
+"stop": 15.1243,
+"atr": 0.3778
 }
 ]
