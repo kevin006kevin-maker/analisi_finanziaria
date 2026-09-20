@@ -20227,5 +20227,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:SYK:2026-09-09",
+"ticker": "SYK",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-09-21 01:17",
+"data": "2026-09-18 23:17",
+"prezzo": 275.12,
+"conv": 79,
+"prob_gain": 56,
+"prob_loss": 5,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-09-21",
+"soglie": {
+"media50": 320.3956,
+"media20": 301.7805,
+"quattro_atr": 314.3835,
+"meta_caduta": 313.685,
+"bollinger": 348.7764,
+"consigliata": 314.3835
+},
+"stop": 255.4882,
+"atr": 9.8159
 }
 ]
