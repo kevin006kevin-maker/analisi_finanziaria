@@ -19985,5 +19985,32 @@
 },
 "stop": 33.7039,
 "atr": 3.023
+},
+{
+"episodio": "short:ALKS:2026-09-18",
+"ticker": "ALKS",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-21 01:15",
+"data": "2026-09-21 01:12",
+"prezzo": 43.39,
+"conv": 77,
+"prob_gain": 47,
+"prob_loss": 7,
+"reliab": "🟡 Media",
+"mkt": 0.1222,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 49.094,
+"media20": 46.8885,
+"quattro_atr": 49.63,
+"meta_caduta": 49.305,
+"bollinger": 49.8872,
+"consigliata": 49.094
+},
+"stop": 40.27,
+"atr": 1.56
 }
 ]
