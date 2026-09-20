@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-09-10",
-"ticker": "WLTH",
-"kind": "short",
-"price": 10.81,
-"conv": 22,
-"factors": {
-"discount": 22.509,
-"histcheap": -0.59,
-"riskadj": -0.72,
-"ddpen": -31.19,
-"momentum": -19.9778,
-"prob": 35,
-"oversold": -71.3409,
-"rebound": -13.432,
-"trend": null,
-"relstrength": 20.9422
-},
-"ret_5d": -5.83,
-"ret_21d": null
-},
-{
-"date": "2026-09-10",
 "ticker": "CRMT",
 "kind": "short",
 "price": 1.665,
@@ -40312,6 +40291,27 @@
 "quality": 41.0,
 "valcheap": -0.1005,
 "trappen": 2
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-20",
+"ticker": "NFLX",
+"kind": "short",
+"price": 71.79,
+"conv": 49,
+"factors": {
+"discount": 42.1678,
+"histcheap": 1.33,
+"riskadj": -2.05,
+"ddpen": -28.88,
+"momentum": 7.2481,
+"prob": 45,
+"oversold": -36.2819,
+"rebound": 5.4704,
+"trend": -1.0,
+"relstrength": -7.1634
 },
 "ret_5d": null,
 "ret_21d": null
