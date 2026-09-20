@@ -20093,5 +20093,32 @@
 },
 "stop": null,
 "atr": 11.0227
+},
+{
+"episodio": "short:FIP:2026-09-18",
+"ticker": "FIP",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-21 01:15",
+"data": "2026-09-21 01:12",
+"prezzo": 3.0,
+"conv": 71,
+"prob_gain": 50,
+"prob_loss": 20,
+"reliab": "🔴 Bassa",
+"mkt": 0.1222,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 3.8333,
+"media20": 3.3605,
+"quattro_atr": 3.8707,
+"meta_caduta": 3.975,
+"bollinger": 3.9876,
+"consigliata": 3.8333
+},
+"stop": 2.5647,
+"atr": 0.2177
 }
 ]
