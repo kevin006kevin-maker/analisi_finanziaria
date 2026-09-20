@@ -7142,7 +7142,45 @@
 "prob_gain": 51,
 "prob_loss": 5,
 "conv": 79,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-09-16 16:54",
+"prezzo": 238.581,
+"conv": 66,
+"prob_gain": 53,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": -1.0814
+},
+"anticipo": {
+"data": "2026-09-17",
+"prezzo": 236.73,
+"conv": 77,
+"prob_gain": 56,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-21",
+"prezzo": 234.25,
+"conv": 79,
+"prob_gain": 51,
+"prob_loss": 5,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "XLI",
@@ -7163,7 +7201,45 @@
 "prob_gain": 50,
 "prob_loss": 0,
 "conv": 63,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-09-16 20:52",
+"prezzo": 168.95,
+"conv": 63,
+"prob_gain": 51,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -1.4977
+},
+"anticipo": {
+"data": "2026-09-17",
+"prezzo": 169.01,
+"conv": 67,
+"prob_gain": 51,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-21",
+"prezzo": 169.75,
+"conv": 63,
+"prob_gain": 50,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "HBAN",
@@ -7184,6 +7260,44 @@
 "prob_gain": 52,
 "prob_loss": 2,
 "conv": 68,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-09-16 20:52",
+"prezzo": 16.01,
+"conv": 62,
+"prob_gain": 51,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": -1.4977
+},
+"anticipo": {
+"data": "2026-09-17",
+"prezzo": 15.82,
+"conv": 69,
+"prob_gain": 51,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-21",
+"prezzo": 15.88,
+"conv": 68,
+"prob_gain": 52,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 }
 ]
