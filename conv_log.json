@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-09-10",
-"ticker": "AAL",
-"kind": "short",
-"price": 12.8301,
-"conv": 62,
-"factors": {
-"discount": 29.3107,
-"histcheap": 0.44,
-"riskadj": -0.11,
-"ddpen": -17.64,
-"momentum": 2.135,
-"prob": 42,
-"oversold": -33.5617,
-"rebound": 16.5743,
-"trend": -1.0,
-"relstrength": -1.1706
-},
-"ret_5d": 1.29,
-"ret_21d": null
-},
-{
-"date": "2026-09-10",
 "ticker": "KVUE",
 "kind": "short",
 "price": 17.84,
@@ -40315,6 +40294,26 @@
 "rebound": 17.2284,
 "trend": -1.0,
 "relstrength": 11.0705
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-20",
+"ticker": "PATH",
+"kind": "long",
+"price": 13.39,
+"conv": 50,
+"factors": {
+"discount": 30.5858,
+"histcheap": -0.06,
+"riskadj": 0.2,
+"ddpen": -32.76,
+"momentum": 2.6182,
+"prob": 32,
+"quality": 72.8,
+"valcheap": -0.9591,
+"trappen": 3
 },
 "ret_5d": null,
 "ret_21d": null
