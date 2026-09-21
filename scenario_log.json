@@ -7415,5 +7415,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "ENEL.MI",
+"kind": "short",
+"date": "2026-09-21",
+"promo_price": 8.92,
+"obs_price": 9.067,
+"obs_date": "2026-09-02",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": 9.531,
+"stop": 8.603,
+"reliab": "🟢 Alta",
+"prob_gain": 50,
+"prob_loss": 0,
+"conv": 72,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-02 14:29",
+"prezzo": 9.067,
+"conv": 73,
+"prob_gain": 54,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": 0.4075
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-21 16:35",
+"prezzo": 8.92,
+"conv": 72,
+"prob_gain": 50,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
