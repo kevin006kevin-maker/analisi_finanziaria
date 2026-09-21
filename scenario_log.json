@@ -7725,5 +7725,62 @@
 "prob_loss": 1,
 "conv": 74,
 "res": {}
+},
+{
+"ticker": "MTZ",
+"kind": "short",
+"date": "2026-09-22",
+"promo_price": 222.9,
+"obs_price": 209.77,
+"obs_date": "2026-09-17",
+"pre_price": 207.75,
+"pre_date": "2026-09-18",
+"conf_price": null,
+"conf_date": null,
+"target": 277.0978,
+"stop": 195.3757,
+"reliab": "🟡 Media",
+"prob_gain": 51,
+"prob_loss": 14,
+"conv": 74,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-17 17:18",
+"prezzo": 209.77,
+"conv": 82,
+"prob_gain": 51,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": -1.0791
+},
+"anticipo": {
+"data": "2026-09-18",
+"prezzo": 207.75,
+"conv": 80,
+"prob_gain": 54,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-22 01:19",
+"prezzo": 222.9,
+"conv": 74,
+"prob_gain": 51,
+"prob_loss": 14,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
