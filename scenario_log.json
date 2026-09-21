@@ -7472,5 +7472,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "WING",
+"kind": "short",
+"date": "2026-09-21",
+"promo_price": 104.645,
+"obs_price": 100.84,
+"obs_date": "2026-09-16",
+"pre_price": 100.84,
+"pre_date": "2026-09-17",
+"conf_price": null,
+"conf_date": null,
+"target": 121.12,
+"stop": 91.8633,
+"reliab": "🔴 Bassa",
+"prob_gain": 55,
+"prob_loss": 18,
+"conv": 69,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-16 01:41",
+"prezzo": 100.84,
+"conv": 66,
+"prob_gain": 51,
+"prob_loss": 20,
+"reliab": "🔴 Bassa",
+"mkt": -2.0572
+},
+"anticipo": {
+"data": "2026-09-17",
+"prezzo": 100.84,
+"conv": 65,
+"prob_gain": 53,
+"prob_loss": 19,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-21 16:35",
+"prezzo": 104.645,
+"conv": 69,
+"prob_gain": 55,
+"prob_loss": 18,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
