@@ -12052,5 +12052,37 @@
 "auto": true,
 "notified": false,
 "entry_check": "2026-09-20"
+},
+"FGL": {
+"kind": "short",
+"added": "2026-09-21",
+"note": "🤖 Promossa il 2026-09-21: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.9% e la convenienza (68) regge.",
+"name": "FGL",
+"snapshots": [
+{
+"name": "FGL",
+"price": 4.6,
+"rsi": 15.923,
+"dd_high": -99.9662,
+"occasione": 89,
+"convenienza": 66,
+"prob_gain": 56,
+"prob_loss": 33,
+"exp_ret": 11.3,
+"gain": 1143.0761,
+"reliab": "🔴 Bassa",
+"target": 57.1815,
+"stop": -5.9461,
+"date": "2026-09-21 09:12"
+}
+],
+"entry_price": 4.6,
+"entry_target": 57.1815,
+"entry_stop": -5.9461,
+"entry_conv": 66,
+"entry_date": "2026-09-21 09:12",
+"entry_src": "scatto",
+"max_price": 4.6,
+"max_date": "2026-09-21 09:12"
 }
 }
