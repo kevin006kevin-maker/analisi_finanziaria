@@ -1,48 +1,6 @@
 [
 {
 "date": "2026-09-12",
-"ticker": "NOK",
-"kind": "short",
-"price": 11.13,
-"conv": 30,
-"factors": {
-"discount": 33.9466,
-"histcheap": -0.73,
-"riskadj": 2.34,
-"ddpen": -20.2,
-"momentum": -13.9202,
-"prob": 31,
-"oversold": -60.9201,
-"rebound": -7.0189,
-"trend": 1.0,
-"relstrength": 15.0912
-},
-"ret_5d": -1.03,
-"ret_21d": null
-},
-{
-"date": "2026-09-12",
-"ticker": "SPCX",
-"kind": "short",
-"price": 151.21,
-"conv": 29,
-"factors": {
-"discount": 28.4687,
-"histcheap": -0.43,
-"riskadj": -0.46,
-"ddpen": -33.99,
-"momentum": -0.9817,
-"prob": 11,
-"oversold": -62.2412,
-"rebound": -10.6709,
-"trend": null,
-"relstrength": 2.1528
-},
-"ret_5d": 4.42,
-"ret_21d": null
-},
-{
-"date": "2026-09-12",
 "ticker": "ORCL",
 "kind": "short",
 "price": 150.28,
@@ -40300,6 +40258,46 @@
 "rebound": 13.3513,
 "trend": -1.0,
 "relstrength": -14.7271
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-21",
+"ticker": "ET",
+"kind": "long",
+"price": 20.88,
+"conv": 24,
+"factors": {
+"discount": 3.9116,
+"histcheap": -1.43,
+"riskadj": 1.45,
+"ddpen": -3.82,
+"momentum": 2.8385,
+"prob": 81,
+"quality": 36.7,
+"valcheap": -1.9087,
+"trappen": 0
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-21",
+"ticker": "MBRX",
+"kind": "long",
+"price": 0.5071,
+"conv": 54,
+"factors": {
+"discount": 96.1728,
+"histcheap": 1.02,
+"riskadj": -1.61,
+"ddpen": -72.64,
+"momentum": 34.5677,
+"prob": 5,
+"quality": null,
+"valcheap": null,
+"trappen": 0
 },
 "ret_5d": null,
 "ret_21d": null
