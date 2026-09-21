@@ -22140,5 +22140,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:KRMN:2026-09-09",
+"ticker": "KRMN",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-09-22 01:23",
+"data": "2026-09-22 01:21",
+"prezzo": 35.21,
+"conv": 69,
+"prob_gain": 49,
+"prob_loss": 26,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-09-22",
+"soglie": {
+"media50": 47.6936,
+"media20": 40.267,
+"quattro_atr": 46.3305,
+"meta_caduta": 48.685,
+"bollinger": 51.0883,
+"consigliata": 46.3305
+},
+"stop": 29.6497,
+"atr": 2.7801
 }
 ]
