@@ -14892,5 +14892,37 @@
 "max_date": "2026-09-22 01:19",
 "auto": true,
 "notified": false
+},
+"MTZ": {
+"kind": "short",
+"added": "2026-09-22",
+"note": "🤖 Promossa il 2026-09-22: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +6.3% e la convenienza (69) regge.",
+"name": "MTZ",
+"snapshots": [
+{
+"name": "MTZ",
+"price": 222.9,
+"rsi": 38.7959,
+"dd_high": -49.0526,
+"occasione": 58,
+"convenienza": 74,
+"prob_gain": 51,
+"prob_loss": 14,
+"exp_ret": 0.4,
+"gain": 24.3149,
+"reliab": "🟡 Media",
+"target": 277.0978,
+"stop": 195.3757,
+"date": "2026-09-22 01:19"
+}
+],
+"entry_price": 222.9,
+"entry_target": 277.0978,
+"entry_stop": 195.3757,
+"entry_conv": 74,
+"entry_date": "2026-09-22 01:19",
+"entry_src": "scatto",
+"max_price": 222.9,
+"max_date": "2026-09-22 01:19"
 }
 }
