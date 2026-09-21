@@ -21992,5 +21992,32 @@
 },
 "stop": 36.9644,
 "atr": 1.4178
+},
+{
+"episodio": "long:PATH:2026-09-20",
+"ticker": "PATH",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-22 01:19",
+"data": "2026-09-22 01:18",
+"prezzo": 13.59,
+"conv": 65,
+"prob_gain": 64,
+"prob_loss": 28,
+"reliab": "🔴 Bassa",
+"mkt": 1.177,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 14.3894,
+"media20": 15.657,
+"quattro_atr": 17.0716,
+"meta_caduta": 16.13,
+"bollinger": 19.7077,
+"consigliata": 14.3894
+},
+"stop": 11.8492,
+"atr": 0.8704
 }
 ]
