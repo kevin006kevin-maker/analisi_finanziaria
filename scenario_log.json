@@ -7647,5 +7647,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "SYNA",
+"kind": "short",
+"date": "2026-09-22",
+"promo_price": 95.36,
+"obs_price": 89.24,
+"obs_date": "2026-09-17",
+"pre_price": 89.24,
+"pre_date": "2026-09-18",
+"conf_price": null,
+"conf_date": null,
+"target": 104.012,
+"stop": 85.7427,
+"reliab": "🟡 Media",
+"prob_gain": 47,
+"prob_loss": 14,
+"conv": 65,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-17 07:19",
+"prezzo": 89.24,
+"conv": 64,
+"prob_gain": 48,
+"prob_loss": 13,
+"reliab": "🟡 Media",
+"mkt": -1.8195
+},
+"anticipo": {
+"data": "2026-09-18",
+"prezzo": 89.24,
+"conv": 65,
+"prob_gain": 48,
+"prob_loss": 13,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-22 01:19",
+"prezzo": 95.36,
+"conv": 65,
+"prob_gain": 47,
+"prob_loss": 14,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
