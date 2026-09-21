@@ -443,6 +443,16 @@ def main():
     except Exception as e:
         log(f"Errore esiti dell'archivio: {e!r}")
 
+    # ESITI DELLA STRATEGIA VERA: compro nel momento X, vendo quando il sistema toglie l'occasione.
+    # Era l'unica domanda senza risposta: 34 uscite avvenute e nessuna registrata.
+    try:
+        es_ = fu.esiti_di_sistema()
+        if es_["nuovi"]:
+            log(f"Esiti della strategia del sistema: {es_['nuovi']} nuovi "
+                f"(su {es_['uscite_viste']} uscite a verbale)")
+    except Exception as e:
+        log(f"Errore esiti di sistema: {e!r}")
+
     # RIPASSO DEGLI ESITI: rifa' quelli scartati per una finestra creduta incompleta (erano meta'
     # del totale: 1.797 su 3.642) e annulla le rese impossibili da raggruppamento azionario.
     try:
@@ -476,6 +486,12 @@ def main():
             log(f"⚠️ Scatti del monitoraggio: {sc['motivo']}")
     except Exception as e:
         log(f"Errore archivio degli scatti: {e!r}")
+
+    # La tabella dei settori imparati: si scrive solo se ha imparato qualcosa di nuovo.
+    try:
+        fu.salva_settori_titoli()
+    except Exception as e:
+        log(f"Errore tabella dei settori: {e!r}")
 
     # PUNTI DI OSSERVAZIONE: i vecchi in file giornalieri, il file vivo torna piccolo. Stessa cura
     # degli scatti, e per lo stesso motivo: a 763 KB con +17 KB al giorno quel file arrivava al muro

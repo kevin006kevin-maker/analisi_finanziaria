@@ -972,7 +972,9 @@ if section.startswith("Occasioni"):
                                     st.caption("Calcolo a rischio fisso: qty = capitale × rischio% / (prezzo − stop). "
                                                "Così ogni operazione mette a rischio la **stessa** cifra, qualunque sia la volatilità.")
                                 # First-passage: P(il prezzo tocca lo stop lungo il percorso, ~1 mese)
-                                if stp and price and price > stp:
+                                # stp > 0: uno stop negativo (titoli da centesimi, due ATR sopra
+                                # il prezzo) non e' uno stop e faceva morire tutta la pagina
+                                if stp and price and stp > 0 and price > stp:
                                     hp = fu.get_history(tk, period="1y")
                                     fp = fu.forecast_paths(hp, 21, stop_pct=(stp / price - 1))
                                     if fp and fp.get("p_touch_stop") is not None:
@@ -3843,10 +3845,16 @@ if section.startswith("Archivio"):
                                        key="arc_imp_kind",
                                        format_func=lambda k: ("Breve periodo" if k == "short"
                                                               else "Lungo periodo")) or "short"
-        _oriz = _ck2.segmented_control("Misurato dopo", ["7g", "30g", "365g"], default="30g",
-                                       required=True, key="arc_imp_oriz",
-                                       format_func=lambda k: {"7g": "7 giorni", "30g": "30 giorni",
-                                                              "365g": "un anno"}[k]) or "30g"
+        # «sistema» e' la vendita VERA — si vende quando il sistema toglie l'occasione — ed e'
+        # l'unica strategia che si potrebbe davvero eseguire: sta per prima.
+        # E il valore predefinito e' «7 giorni» e non «30»: a 30 giorni non c'e' ancora nulla, e
+        # una pagina che si apre su una vista vuota sembra rotta quando invece sta lavorando.
+        _oriz = _ck2.segmented_control("Vendendo", ["sistema", "7g", "30g", "365g"],
+                                       default="7g", required=True, key="arc_imp_oriz",
+                                       format_func=lambda k: {
+                                           "sistema": "🚪 Quando il sistema toglie l'occasione",
+                                           "7g": "dopo 7 giorni", "30g": "dopo 30 giorni",
+                                           "365g": "dopo un anno"}[k]) or "7g"
         # Si legge la sintesi GIA CALCOLATA dal lavoro automatico: ricalcolarla qui vorrebbe dire
         # riscaricare tutto l'archivio a ogni clic, e fra un anno sono centinaia di file.
         _s = fu.sintesi_pronta(kind=_kind, orizzonte=_oriz)
@@ -3877,7 +3885,8 @@ if section.startswith("Archivio"):
                      "si rovescia": "❌ si rovescia", "dati insufficienti": "⏳ pochi dati"}
             st.dataframe(pd.DataFrame([
                 {"Caratteristica": (fu.nome_caratteristica(k)
-                                    + (" ↺" if v.get("doppione_di") else "")),
+                                    + (" ↺" if v.get("doppione_di") else "")
+                                    + (" 🌍" if v.get("contesto_di_giornata") else "")),
                  "Chi ha guadagnato": v["chi_guadagna"],
                  "Chi ha perso": v["chi_perde"], "Differenza": v["differenza"],
                  "Quanto separa": v.get("separazione"),
@@ -3921,6 +3930,11 @@ if section.startswith("Archivio"):
                        "scenari e tre orizzonti, quindi qualcosa sembrerà buono per caso — è "
                        "matematica, non sfortuna. La difesa è scoprire su una metà dei dati e "
                        "verificare sull'altra.")
+            st.caption("Il segno 🌍 marca le grandezze che descrivono **il giorno, non il titolo**: "
+                       "l'andamento dell'indice è lo stesso per tutte le occasioni di una giornata, "
+                       "quindi dice «comprare quando il mercato saliva è andato meglio» — vero e "
+                       "utile, ma con poche settimane di dati è soprattutto il racconto di quali "
+                       "giorni sono stati fortunati. Sta in fondo di proposito.")
             st.caption("Il segno ↺ marca le caratteristiche che dicono la **stessa cosa** di "
                        "un'altra vista da un altro lato (per esempio «quanto è a sconto» e «quanto "
                        "è scesa dai massimi»): restano in tabella ma non competono per i primi "

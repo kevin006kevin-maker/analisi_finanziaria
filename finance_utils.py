@@ -1146,8 +1146,15 @@ def forecast_paths(hist, horizon_days, stop_pct=None, demean=None, drift_annual=
         "ret_p90": round((math.exp(float(np.percentile(final, 90))) - 1) * 100, 1),
         "sigma_ewma": sim.get("sigma_ewma"),
     }
-    if stop_pct is not None and stop_pct < 0:
+    # UNO STOP A ZERO O SOTTO ZERO NON E' UNO STOP. Succede sui titoli da pochi centesimi, dove due
+    # ATR superano il prezzo: lo stop «prezzo meno due ATR» viene negativo, e math.log(1 + stop_pct)
+    # con stop_pct <= -1 solleva un errore che faceva morire l'intera pagina delle occasioni
+    # (misurato il 21/09/2026). Un prezzo non puo' scendere sotto zero, quindi quella probabilita'
+    # non ha senso: si lascia vuota, e chi legge vede che manca invece di vedere una pagina rotta.
+    if stop_pct is not None and -1 < stop_pct < 0:
         out["p_touch_stop"] = round(float((cmin <= math.log(1 + stop_pct)).mean()) * 100)
+    elif stop_pct is not None and stop_pct <= -1:
+        out["p_touch_stop"] = None
     return out
 
 
@@ -4033,6 +4040,12 @@ def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
             _log_convenience(kind, list(rmap.values()), convmap)
         except Exception:
             pass
+        # IL METRO DELLA CONVENIENZA di oggi, e le regole con cui e' stata calcolata. Vanno presi
+        # QUI perche' qui i dati esistono gia': dopo, l'universo di oggi non e' piu' ricostruibile.
+        try:
+            registra_regole(scala_conv=scala_convenienza(convmap, kind))
+        except Exception as _e:
+            _log_silenzioso("regole del giorno non registrate: %r" % _e)
     # Regime di volatilità (solo breve): moltiplicatore globale che declassa i rimbalzi nei crash
     regime = volatility_regime()["factor"] if kind == "short" else 1.0
     # ARCHIVIO DELL'APPRENDIMENTO: il contesto si prepara UNA volta per scansione (24 chiamate al
@@ -9456,6 +9469,17 @@ def notizie_del_giorno(ticker: str, giorno: str = None) -> dict:
 
 # --- IL PROFILO DI UN'OCCASIONE --------------------------------------------
 
+def _settore_con_tabella(r: dict):
+    """Il settore di una riga: quello che la scansione ha dato, altrimenti quello imparato prima.
+    Se la scansione lo ha, lo si impara per le prossime volte."""
+    s = (r or {}).get("sector")
+    tk = (r or {}).get("ticker")
+    if s:
+        impara_settore(tk, s)
+        return s
+    return settore_noto(tk)
+
+
 def _profilo_id(giorno, kind, ticker, momento) -> str:
     return f"{giorno}:{kind}:{str(ticker).upper()}:{momento or 'scartata'}"
 
@@ -9477,6 +9501,10 @@ def profilo_da_riga(r: dict, kind: str, momento: str = None, episodio: str = Non
         # per ragioni DIVERSE sopravviveva solo la prima, e la distribuzione dei motivi — cioe' il
         # dato per cui le bocciature si registrano — risultava storta. Misurato: 36 titoli su 124
         # bocciature del 21/08 compaiono piu di una volta nello stesso giorno.
+        # LA VERSIONE DELLA FORMA. Senza, fra un anno «campo assente» e «campo che non esisteva
+        # ancora» sono indistinguibili — ed e' l'ambiguita' che ci e' gia' costata tempo.
+        # Le regole in vigore quel giorno stanno in archivio/regole/<giorno>.json.
+        "v": VERSIONE_ARCHIVIO,
         "id": _profilo_id(giorno, kind, tk, momento or motivo),
         "giorno": giorno, "ora": _arc_ora(), "ticker": tk, "nome": r.get("name"),
         "kind": kind, "momento": momento, "episodio": episodio,
@@ -9498,8 +9526,11 @@ def profilo_da_riga(r: dict, kind: str, momento: str = None, episodio: str = Non
         # DUE campi, non uno: «settore» e il nome esatto che la fonte ha dato (non si falsa un dato
         # alla fonte), «settore_gruppo» e il nome standard con cui si ritrova l'ETF di riferimento
         # negli archivi. Tenere solo il primo faceva fallire il collegamento in silenzio.
-        "settore": r.get("sector"),
-        "settore_gruppo": settore_canonico(r.get("sector")) or None,
+        # IL SETTORE, anche quando la scansione non lo ha chiesto: se lo abbiamo visto anche una
+        # sola volta in passato e' in tabella, e un settore non cambia. Senza questo, 4 bocciature
+        # su 5 restavano senza — cioe' proprio i contro-esempi su cui si impara.
+        "settore": _settore_con_tabella(r),
+        "settore_gruppo": settore_canonico(_settore_con_tabella(r)) or None,
         "mondo": mondo or {},
     }
     return prof
@@ -9757,7 +9788,19 @@ _DOPPIONI = {
     "discount": "dd_high", "histcheap": "hist_z", "riskadj": "sortino", "ddpen": "ulcer",
     "momentum": "perf_5d", "oversold": "rsi", "rebound": "rebound_pot",
     "trend": "above_sma200", "prob": "prob_gain",
+    # emersi coi dati veri del 21/09/2026: il bersaglio e' il prezzo per una costante e lo stop e'
+    # il prezzo meno due ATR, quindi «separano» esattamente quanto il prezzo. Occupavano tre dei
+    # primi quattro posti con lo stesso segnale.
+    "target_price": "price", "stop_price": "price",
 }
+
+# GRANDEZZE DI CONTESTO, NON DEL TITOLO. L'indice a 5 giorni e a un mese e' lo stesso numero per
+# TUTTI i titoli guardati in una giornata: non descrive l'occasione, descrive il giorno. Nella
+# classifica risultava primo con separazione 0,74 ma «giornate d'accordo» 1 su 27 — perche' dentro
+# una giornata non varia, quindi il confronto per giornata non esiste. Dice una cosa vera e utile
+# («comprare in un mercato che saliva e' andato meglio») ma con 27 giornate e' soprattutto il
+# racconto di quali giorni sono stati fortunati. Si mostra a parte, non in gara con le altre.
+_CONTESTO_DI_GIORNATA = {"bench_5d", "bench_1m"}
 
 
 def _separazione_prudente(sep: float, n_min: int) -> float:
@@ -9928,6 +9971,7 @@ def sintesi_apprendimento(kind: str = None, orizzonte: str = "30g", momento: str
             "differenza_meta_vecchia": d_vecchia, "differenza_meta_recente": d_recente,
             "conferma": conferma,
             "doppione_di": _DOPPIONI.get(campo),
+            "contesto_di_giornata": campo in _CONTESTO_DI_GIORNATA,
             # la solidità guarda le OCCASIONI, non le righe
             "solidita": ("da confermare" if n_occ < 30 else
                          "indicativa" if n_occ < 100 else "solida"),
@@ -9940,10 +9984,19 @@ def sintesi_apprendimento(kind: str = None, orizzonte: str = "30g", momento: str
     # vince la separazione PRUDENTE, cioe' tolto il margine d'errore dei pochi casi.
     # Senza (2) e (3), nei dati veri del 14/09 era prima una caratteristica presente su 16 righe
     # di 1.231, misurata in una sola giornata.
+    def _batte_la_moneta(v):
+        """Vero se la differenza va nello stesso verso in PIU' della meta' delle giornate.
+        Sotto, e' costruita da pochi giorni fortunati e non da un comportamento costante — e la
+        separazione prudente da sola non lo vede, perche' conta le occasioni e non i giorni."""
+        g = v.get("giornate") or 0
+        return g >= 5 and (v.get("giornate_concordi") or 0) > g / 2
+
     ordinate = sorted(caratteristiche.items(),
-                      key=lambda kv: (kv[1].get("doppione_di") is not None,
+                      key=lambda kv: (kv[1].get("doppione_di") is not None
+                                      or kv[1].get("contesto_di_giornata", False),
                                       min(kv[1].get("occasioni_guadagno") or 0,
                                           kv[1].get("occasioni_perdita") or 0) < 30,
+                                      not _batte_la_moneta(kv[1]),
                                       -(kv[1].get("separazione_prudente") or 0),
                                       -(kv[1].get("separazione") or 0)))
     occ_tot_v = {_identita_occasione(p) for p, _ in vinte}
@@ -10001,7 +10054,9 @@ def salva_sintesi(forza: bool = False, ogni_ore: int = 12) -> bool:
             pass
     fuori = {"aggiornato": _arc_ora(), "viste": {}}
     for kind in ("short", "long"):
-        for oriz in ("7g", "30g", "365g"):
+        # «sistema» e' la vendita VERA: si compra nel momento X e si vende quando il sistema toglie
+        # l'occasione. E' l'unica strategia eseguibile, quindi va misurata insieme alle altre.
+        for oriz in ("7g", "30g", "365g", "sistema"):
             s = sintesi_apprendimento(kind=kind, orizzonte=oriz)
             if s.get("quante_guadagnano") or s.get("quante_perdono"):
                 fuori["viste"][f"{kind}:{oriz}"] = s
@@ -11073,3 +11128,201 @@ def ripara_esiti(giorni: int = 45, max_titoli: int = 120) -> dict:
             rifatti += cambi
             file_toccati.append(nome)
     return {"rifatti": rifatti, "marcati_sospetti": sospesi, "file": len(file_toccati)}
+
+
+# --- LA TABELLA DEI SETTORI -------------------------------------------------
+# IL SETTORE DI UN TITOLO NON CAMBIA, ma sul breve periodo non lo chiediamo mai perche' costerebbe
+# una chiamata in piu' per ogni titolo guardato. Risultato misurato il 14/09/2026: solo 943
+# bocciature su 5.380 (il 17,5%) hanno il settore, e sono proprio le bocciature i contro-esempi su
+# cui si impara. Qui il settore si IMPARA quando arriva gratis — dalle occasioni comprate e dalle
+# scansioni di lungo periodo, che i fondamentali li chiedono comunque — e si riusa per tutte le
+# altre. Zero chiamate in piu'.
+SETTORI_TITOLI_NAME = "settori_titoli.json"
+_SETTORI_MEM = {}
+
+
+def _settori_noti() -> dict:
+    """La tabella ticker → settore, letta una volta per processo."""
+    if not _SETTORI_MEM:
+        d = read_data_json(SETTORI_TITOLI_NAME, None)
+        if isinstance(d, dict):
+            _SETTORI_MEM.update(d)
+        _SETTORI_MEM.setdefault("_letta", True)
+    return _SETTORI_MEM
+
+
+def impara_settore(ticker, settore) -> None:
+    """Mette in tabella il settore di un titolo, quando lo si conosce."""
+    tk = str(ticker or "").upper()
+    if not tk or not settore or not str(settore).strip():
+        return
+    noti = _settori_noti()
+    if noti.get(tk) != settore:
+        noti[tk] = settore
+        _SETTORI_MEM["_da_salvare"] = True
+
+
+def settore_noto(ticker):
+    """Il settore di un titolo se lo abbiamo gia' visto qualche volta, altrimenti None."""
+    return _settori_noti().get(str(ticker or "").upper())
+
+
+def salva_settori_titoli() -> bool:
+    """Scrive la tabella se e' cambiata. Da chiamare una volta per giro."""
+    if not _SETTORI_MEM.get("_da_salvare"):
+        return True
+    fuori = {k: v for k, v in _SETTORI_MEM.items() if not k.startswith("_")}
+    if not fuori:
+        return True
+    ok = write_data_json(SETTORI_TITOLI_NAME, fuori)
+    if ok:
+        _SETTORI_MEM.pop("_da_salvare", None)
+    return bool(ok)
+
+
+# --- LA TARGA DELLE REGOLE --------------------------------------------------
+# PERCHE' SERVE. Il 14/09/2026 l'archivio conteneva 5.743 righe e NESSUNA sapeva con quali regole
+# era stata prodotta. Se domani la soglia d'ingresso passa da 60 a 65, o cambia la formula del
+# bersaglio «consigliata», le righe vecchie e quelle nuove diventano incomparabili — e niente lo
+# dice. Si scoprirebbe fra mesi, guardando una differenza che non esiste.
+# La cura e' una riga al giorno con le regole in vigore. Vale solo da quando la si scrive: una
+# configurazione non registrata oggi non e' ricostruibile domani, esattamente come il prezzo
+# d'acquisto e le soglie che abbiamo gia' dovuto rincorrere.
+ARC_REGOLE = "archivio/regole"
+VERSIONE_ARCHIVIO = 3      # cambia quando cambia la FORMA delle righe, non il loro contenuto
+
+
+def regole_del_giorno(giorno: str = None) -> dict:
+    """Le regole in vigore adesso: le soglie che decidono chi entra, chi viene bocciato, come si
+    misura il bersaglio e per quanto si aspetta un esito."""
+    giorno = giorno or _arc_oggi()
+    try:
+        pesi = _load_conv_stats() or {}
+    except Exception:
+        pesi = {}
+    return {
+        "giorno": giorno, "ora": _arc_ora(), "versione_archivio": VERSIONE_ARCHIVIO,
+        "ingresso": {
+            "convenienza_minima_osservazione": _OBS_ENTRY_CONV,
+            "convenienza_minima_anticipo": _PRE_MIN_CONV,
+            "giorni_di_osservazione": dict(_OBS_WINDOW),
+        },
+        "filtri_breve": {
+            "prezzo_minimo": _MIN_PRICE, "scambi_minimi": _MIN_DOLLAR_VOL,
+            "rischio_rendimento_minimo": _RR_MIN, "sconto_minimo_dai_massimi": -8,
+            "punteggio_minimo": 35,
+        },
+        "filtri_lungo": {
+            "prezzo_minimo": _MIN_PRICE_LONG, "scambi_minimi": _MIN_DOLLAR_VOL_LONG,
+            "sconto_minimo_dai_massimi": -12, "punteggio_minimo": 50,
+            "massimo_per_settore": _SECTOR_CAP_LONG,
+        },
+        "universo": {"tetto_breve": 40, "tetto_lungo": 20,
+                     "europa_breve": 16, "europa_lungo": 10,
+                     "etf_breve": 18, "etf_lungo": 14},
+        "bersaglio": {"formula_usata": SOGLIA_USATA, "formule_registrate": list(SOGLIE_NOMI),
+                      "stop_in_atr": _ATR_STOP_K},
+        "esiti": {"orizzonti": [{"nome": n, "giorni": g, "unita": u} for n, g, u in ORIZZONTI_ESITO],
+                  "vendite_per_tipo": {k: list(v) for k, v in DIARIO_SELLS_PER_TIPO.items()},
+                  "resa_impossibile_oltre": _RESA_IMPOSSIBILE,
+                  "scostamento_frazionamento": _SPLIT_TOLL},
+        "scenari": [{"chiave": c, "evento": e, "nome": n} for c, e, n, _a in SCENARI_ACQUISTO],
+        "pesi_convenienza": {k: v for k, v in (pesi.get("weights") or {}).items()},
+    }
+
+
+def registra_regole(giorno: str = None, scala_conv: dict = None) -> bool:
+    """Mette a verbale le regole del giorno, una volta sola. `scala_conv` e' la distribuzione della
+    convenienza nell'universo di quel giorno: serve perche' la convenienza NON e' un voto assoluto,
+    e' un confronto con gli altri titoli guardati quel giorno. Senza il metro, «72» di oggi e «72»
+    di fra sei mesi possono voler dire cose diverse e nessuno se ne accorge."""
+    giorno = giorno or _arc_oggi()
+    r = regole_del_giorno(giorno)
+    if scala_conv:
+        r["scala_convenienza"] = scala_conv
+    return _arc_aggiungi(ARC_REGOLE, [r], chiave=lambda x: x.get("giorno"),
+                         giorno=giorno).get("salvate", False)
+
+
+def scala_convenienza(convmap: dict, kind: str) -> dict:
+    """Com'era distribuita la convenienza nell'universo guardato oggi: e' il METRO che rende
+    confrontabile un voto di oggi con uno di fra sei mesi. Cinque numeri, calcolati su dati che il
+    sistema ha gia' in mano: nessuna chiamata in piu'."""
+    vals = sorted(float(v) for v in (convmap or {}).values() if v is not None)
+    if not vals:
+        return {}
+    n = len(vals)
+    def q(p):
+        return round(float(vals[min(n - 1, int(n * p))]), 1)
+    return {"kind": kind, "quanti": n, "minimo": round(vals[0], 1), "primo_quarto": q(0.25),
+            "mediana": q(0.5), "terzo_quarto": q(0.75), "massimo": round(vals[-1], 1),
+            "quanti_sopra_il_cancello": sum(1 for v in vals if v >= _OBS_ENTRY_CONV)}
+
+
+def esiti_di_sistema(giorni: int = 400) -> dict:
+    """Registra l'esito della STRATEGIA CHE SEGUIRESTI DAVVERO: compro nel momento X, vendo quando
+    il sistema toglie l'occasione.
+
+    PERCHE' MANCAVA, ed e' il buco piu' grosso dell'archivio. Fino a oggi si misurava «vendere dopo
+    7, 30 o 365 giorni» e «vendere al bersaglio»: regole comode da calcolare e che nessuno applica.
+    Il sistema invece ha le SUE regole di uscita — lo stop, «in perdita da troppi giorni», il
+    bersaglio raggiunto — e quelle sono le uniche che si eseguirebbero. Misurato il 14/09/2026:
+    34 uscite gia' avvenute, 0 registrate. Quella domanda — «se avessi fatto esattamente quello che
+    dice il sistema, quanto avrei guadagnato?» — non aveva risposta.
+
+    Ogni uscita produce un esito per OGNI momento d'acquisto di quell'occasione, cosi si puo'
+    confrontare: comprando all'ingresso in osservazione e vendendo all'uscita, quanto rendeva?
+    E comprando piu' tardi? E' lo stesso confronto dei cinque scenari, ma con la vendita vera.
+    Ripetibile senza danno: l'archivio scarta i doppioni per (profilo, orizzonte)."""
+    oggi = datetime.date.today()
+    dal = (oggi - datetime.timedelta(days=max(1, giorni))).isoformat()
+    righe = load_registro_completo(DIARIO_NAME, load_diario())
+    acquisti = eventi_acquisto()
+    # i momenti d'acquisto, per episodio
+    per_ep = {}
+    for r in righe:
+        if r.get("evento") in acquisti and r.get("prezzo"):
+            per_ep.setdefault(r.get("episodio"), []).append(r)
+    gia = {(e.get("profilo"), e.get("orizzonte"))
+           for e in _arc_leggi_giorni(ARC_ESITI, dal=dal) if isinstance(e, dict)}
+    nuove = []
+    for u in righe:
+        if u.get("evento") != "uscita" or not u.get("prezzo"):
+            continue
+        g_usc = str(u.get("data") or u.get("scritto_il") or "")[:10]
+        if len(g_usc) != 10 or g_usc < dal:
+            continue
+        for a in per_ep.get(u.get("episodio")) or []:
+            g_acq = str(a.get("data") or "")[:10]
+            if len(g_acq) != 10 or g_acq > g_usc:
+                continue          # un acquisto dopo l'uscita non e' di questo episodio
+            pid = _profilo_id(g_acq, a.get("kind"), a.get("ticker"), a.get("evento"))
+            if (pid, "sistema") in gia:
+                continue
+            try:
+                p_in, p_out = float(a["prezzo"]), float(u["prezzo"])
+                if p_in <= 0:
+                    continue
+                resa = round((p_out / p_in - 1) * 100, 2)
+            except (TypeError, ValueError, KeyError):
+                continue
+            # stessa guardia degli altri esiti: una resa impossibile e' un frazionamento
+            sospetto = abs(resa) > _RESA_IMPOSSIBILE
+            giorni_tenuta = (datetime.date.fromisoformat(g_usc)
+                             - datetime.date.fromisoformat(g_acq)).days
+            nuove.append({
+                "giorno": g_usc, "ora": _arc_ora(), "profilo": pid, "ticker": a.get("ticker"),
+                "kind": a.get("kind"), "momento": a.get("evento"), "scartata": False,
+                "comprato_il": g_acq, "prezzo_acquisto": p_in,
+                "orizzonte": "sistema", "giorni": giorni_tenuta, "unita": "regole del sistema",
+                "resa": (None if sospetto else resa),
+                "dati_sospetti": (True if sospetto else None),
+                "resa_grezza": (resa if sospetto else None),
+                "prezzo_fine": p_out, "maturato_il": g_usc,
+                "uscita_il": g_usc, "motivo_uscita": u.get("note"),
+                "finestra_incompleta": False,
+            })
+    esito = _arc_aggiungi(ARC_ESITI, nuove,
+                          chiave=lambda r: (r.get("profilo"), r.get("orizzonte")))
+    return {"nuovi": esito.get("scritte", 0), "uscite_viste": sum(
+        1 for r in righe if r.get("evento") == "uscita"), "motivo": esito.get("motivo")}
