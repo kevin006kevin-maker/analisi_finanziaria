@@ -7724,7 +7724,45 @@
 "prob_gain": 52,
 "prob_loss": 1,
 "conv": 74,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-09-17 17:18",
+"prezzo": 21.87,
+"conv": 83,
+"prob_gain": 52,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": -1.0791
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-22",
+"prezzo": 21.91,
+"conv": 74,
+"prob_gain": 52,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "MTZ",
@@ -7802,6 +7840,44 @@
 "prob_gain": 53,
 "prob_loss": 4,
 "conv": 73,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-09-17 17:18",
+"prezzo": 24.055,
+"conv": 74,
+"prob_gain": 50,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": -1.0791
+},
+"anticipo": {
+"data": "2026-09-18",
+"prezzo": 23.69,
+"conv": 74,
+"prob_gain": 52,
+"prob_loss": 5,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-22",
+"prezzo": 23.43,
+"conv": 73,
+"prob_gain": 53,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 }
 ]
