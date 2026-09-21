@@ -7320,5 +7320,62 @@
 "prob_loss": null,
 "conv": 56,
 "res": {}
+},
+{
+"ticker": "FGL",
+"kind": "short",
+"date": "2026-09-21",
+"promo_price": 4.6,
+"obs_price": 9.26,
+"obs_date": "2026-09-04",
+"pre_price": 9.3,
+"pre_date": "2026-09-08",
+"conf_price": null,
+"conf_date": null,
+"target": 57.1815,
+"stop": null,
+"reliab": "🔴 Bassa",
+"prob_gain": 56,
+"prob_loss": 33,
+"conv": 66,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-04 21:47",
+"prezzo": 9.26,
+"conv": 69,
+"prob_gain": 58,
+"prob_loss": 33,
+"reliab": "🔴 Bassa",
+"mkt": -0.5759
+},
+"anticipo": {
+"data": "2026-09-08",
+"prezzo": 9.3,
+"conv": 73,
+"prob_gain": 58,
+"prob_loss": 31,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-21 09:12",
+"prezzo": 4.6,
+"conv": 66,
+"prob_gain": 56,
+"prob_loss": 33,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
