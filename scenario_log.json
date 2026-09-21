@@ -7529,5 +7529,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "ON",
+"kind": "short",
+"date": "2026-09-21",
+"promo_price": 70.235,
+"obs_price": 67.01,
+"obs_date": "2026-09-16",
+"pre_price": 68.24,
+"pre_date": "2026-09-17",
+"conf_price": null,
+"conf_date": null,
+"target": 79.0327,
+"stop": 62.8695,
+"reliab": "🔴 Bassa",
+"prob_gain": 49,
+"prob_loss": 16,
+"conv": 67,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-16 20:52",
+"prezzo": 67.01,
+"conv": 64,
+"prob_gain": 50,
+"prob_loss": 17,
+"reliab": "🔴 Bassa",
+"mkt": -1.4977
+},
+"anticipo": {
+"data": "2026-09-17",
+"prezzo": 68.24,
+"conv": 65,
+"prob_gain": 48,
+"prob_loss": 14,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-21 16:35",
+"prezzo": 70.235,
+"conv": 67,
+"prob_gain": 49,
+"prob_loss": 16,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
