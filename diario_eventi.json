@@ -20590,5 +20590,32 @@
 },
 "stop": 54.0883,
 "atr": 1.5859
+},
+{
+"episodio": "short:SMST:2026-09-18",
+"ticker": "SMST",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-21 16:35",
+"data": "2026-09-21 16:33",
+"prezzo": 11.665,
+"conv": 72,
+"prob_gain": 57,
+"prob_loss": 29,
+"reliab": "🔴 Bassa",
+"mkt": 0.6264,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 42.2709,
+"media20": 22.3875,
+"quattro_atr": 29.0745,
+"meta_caduta": 53.2725,
+"bollinger": 32.2735,
+"consigliata": 29.0745
+},
+"stop": 2.9602,
+"atr": 4.3524
 }
 ]
