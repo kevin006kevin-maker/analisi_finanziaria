@@ -2380,7 +2380,7 @@
 "max_price": 6.19,
 "max_date": "2026-08-18 06:09",
 "warn_since": "2026-09-18",
-"warn": "in perdita da 38 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 39 giorni di Borsa: valuta l'uscita"
 },
 "NEM": {
 "kind": "long",
@@ -6215,7 +6215,7 @@
 "max_price": 26.21,
 "max_date": "2026-08-21 17:07",
 "warn_since": "2026-09-18",
-"warn": "in perdita da 33 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 34 giorni di Borsa: valuta l'uscita"
 },
 "CCB": {
 "kind": "short",
@@ -10324,7 +10324,7 @@
 "notified": false,
 "entry_check": "2026-09-21",
 "warn_since": "2026-09-15",
-"warn": "in perdita da 14 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 15 giorni di Borsa: valuta l'uscita"
 },
 "ENI.MI": {
 "kind": "short",
@@ -10976,7 +10976,7 @@
 "entry_check": "2026-09-21",
 "exit_notified": true,
 "warn_since": "2026-09-18",
-"warn": "in perdita da 11 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 12 giorni di Borsa: valuta l'uscita"
 },
 "EIX": {
 "kind": "short",
@@ -11141,204 +11141,7 @@
 "notified": true,
 "entry_check": "2026-09-21",
 "warn_since": "2026-09-21",
-"warn": "in perdita da 11 giorni di Borsa: valuta l'uscita"
-},
-"PSNY": {
-"kind": "short",
-"added": "2026-09-09",
-"note": "🤖 Promossa il 2026-09-09: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.8% e la convenienza (74) regge.",
-"name": "PSNY",
-"snapshots": [
-{
-"name": "PSNY",
-"price": 7.94,
-"rsi": 27.3139,
-"dd_high": -73.5333,
-"occasione": 85,
-"convenienza": 70,
-"prob_gain": 51,
-"prob_loss": 26,
-"exp_ret": 1.3,
-"gain": 63.4559,
-"reliab": "🔴 Bassa",
-"target": 12.9784,
-"stop": 6.2409,
-"date": "2026-09-18 00:31"
-},
-{
-"name": "PSNY",
-"price": 7.3,
-"rsi": 19.3261,
-"dd_high": -75.6667,
-"occasione": 57,
-"convenienza": 71,
-"prob_gain": 51,
-"prob_loss": 26,
-"exp_ret": 0.8,
-"gain": 80.7945,
-"reliab": "🔴 Bassa",
-"target": 13.198,
-"stop": 5.5794,
-"date": "2026-09-18 02:48"
-},
-{
-"name": "PSNY",
-"price": 7.94,
-"rsi": 27.3139,
-"dd_high": -73.5333,
-"occasione": 85,
-"convenienza": 70,
-"prob_gain": 51,
-"prob_loss": 26,
-"exp_ret": 1.3,
-"gain": 63.4559,
-"reliab": "🔴 Bassa",
-"target": 12.9784,
-"stop": 6.2409,
-"date": "2026-09-18 07:54"
-},
-{
-"name": "PSNY",
-"price": 7.81,
-"rsi": 26.7348,
-"dd_high": -73.9667,
-"occasione": 54,
-"convenienza": 70,
-"prob_gain": 52,
-"prob_loss": 26,
-"exp_ret": 1.5,
-"gain": 63.5775,
-"reliab": "🔴 Bassa",
-"target": 12.7754,
-"stop": 6.1794,
-"date": "2026-09-18 17:02"
-},
-{
-"name": "PSNY",
-"price": 7.78,
-"rsi": 26.6047,
-"dd_high": -74.0667,
-"occasione": 54,
-"convenienza": 69,
-"prob_gain": 51,
-"prob_loss": 29,
-"exp_ret": 0.3,
-"gain": 64.2005,
-"reliab": "🔴 Bassa",
-"target": 12.7748,
-"stop": 6.1494,
-"date": "2026-09-18 20:26"
-},
-{
-"name": "PSNY",
-"price": 7.86,
-"rsi": 26.9546,
-"dd_high": -73.7738,
-"occasione": 53,
-"convenienza": 69,
-"prob_gain": 50,
-"prob_loss": 27,
-"exp_ret": 0.1,
-"gain": 62.5496,
-"reliab": "🔴 Bassa",
-"target": 12.7764,
-"stop": 6.2294,
-"date": "2026-09-18 23:17"
-},
-{
-"name": "PSNY",
-"price": 7.94,
-"rsi": 27.3139,
-"dd_high": -73.5068,
-"occasione": 85,
-"convenienza": 69,
-"prob_gain": 50,
-"prob_loss": 27,
-"exp_ret": 0.3,
-"gain": 63.4559,
-"reliab": "🔴 Bassa",
-"target": 12.9784,
-"stop": 6.2409,
-"date": "2026-09-19 03:36"
-},
-{
-"name": "PSNY",
-"price": 7.86,
-"rsi": 26.9546,
-"dd_high": -73.7738,
-"occasione": 53,
-"convenienza": 69,
-"prob_gain": 50,
-"prob_loss": 27,
-"exp_ret": 0.1,
-"gain": 62.5496,
-"reliab": "🔴 Bassa",
-"target": 12.7764,
-"stop": 6.228,
-"date": "2026-09-19 08:35"
-},
-{
-"name": "PSNY",
-"price": 7.82,
-"rsi": 26.7651,
-"dd_high": -73.9072,
-"occasione": 54,
-"convenienza": 70,
-"prob_gain": 52,
-"prob_loss": 28,
-"exp_ret": 1.3,
-"gain": 60.5985,
-"reliab": "🔴 Bassa",
-"target": 12.5588,
-"stop": 6.2546,
-"date": "2026-09-21 16:36"
-},
-{
-"name": "PSNY",
-"price": 7.75,
-"rsi": 26.4397,
-"dd_high": -74.1408,
-"occasione": 54,
-"convenienza": 69,
-"prob_gain": 48,
-"prob_loss": 29,
-"exp_ret": -1.1,
-"gain": 62.031,
-"reliab": "🔴 Bassa",
-"target": 12.5574,
-"stop": 6.1717,
-"date": "2026-09-21 21:48"
-},
-{
-"name": "PSNY",
-"price": 7.81,
-"rsi": 26.7181,
-"dd_high": -73.9406,
-"occasione": 54,
-"convenienza": 70,
-"prob_gain": 53,
-"prob_loss": 27,
-"exp_ret": 1.2,
-"gain": 60.8015,
-"reliab": "🔴 Bassa",
-"target": 12.5586,
-"stop": 6.2317,
-"date": "2026-09-22 01:20"
-}
-],
-"entry_price": 8.93,
-"entry_target": 14.621,
-"entry_stop": 6.9092,
-"entry_conv": 71,
-"entry_date": "2026-09-09 00:53",
-"entry_src": "scatto",
-"max_price": 9.21,
-"max_date": "2026-09-09 03:04",
-"auto": true,
-"notified": false,
-"entry_check": "2026-09-21",
-"warn_since": "2026-09-16",
-"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 12 giorni di Borsa: valuta l'uscita"
 },
 "MXL": {
 "kind": "short",
@@ -11512,203 +11315,6 @@
 "tipo": "bersaglio"
 },
 "incasso_notified": true
-},
-"RARE": {
-"kind": "short",
-"added": "2026-09-09",
-"note": "🤖 Promossa il 2026-09-09: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +3.0% e la convenienza (77) regge.",
-"name": "RARE",
-"snapshots": [
-{
-"name": "RARE",
-"price": 14.5,
-"rsi": 28.0588,
-"dd_high": -60.3175,
-"occasione": 93,
-"convenienza": 73,
-"prob_gain": 59,
-"prob_loss": 20,
-"exp_ret": 4.0,
-"gain": 70.0076,
-"reliab": "🔴 Bassa",
-"target": 24.6511,
-"stop": 11.493,
-"date": "2026-09-18 00:31"
-},
-{
-"name": "RARE",
-"price": 12.88,
-"rsi": 18.1807,
-"dd_high": -64.751,
-"occasione": 57,
-"convenienza": 75,
-"prob_gain": 63,
-"prob_loss": 17,
-"exp_ret": 6.7,
-"gain": 94.5225,
-"reliab": "🔴 Bassa",
-"target": 25.0545,
-"stop": 9.9016,
-"date": "2026-09-18 02:48"
-},
-{
-"name": "RARE",
-"price": 14.5,
-"rsi": 28.0588,
-"dd_high": -60.3175,
-"occasione": 93,
-"convenienza": 73,
-"prob_gain": 59,
-"prob_loss": 20,
-"exp_ret": 4.0,
-"gain": 70.0076,
-"reliab": "🔴 Bassa",
-"target": 24.6511,
-"stop": 11.4922,
-"date": "2026-09-18 07:54"
-},
-{
-"name": "RARE",
-"price": 14.649,
-"rsi": 28.2029,
-"dd_high": -60.249,
-"occasione": 83,
-"convenienza": 73,
-"prob_gain": 60,
-"prob_loss": 20,
-"exp_ret": 5.7,
-"gain": 66.9494,
-"reliab": "🔴 Bassa",
-"target": 24.2494,
-"stop": 11.6221,
-"date": "2026-09-18 17:02"
-},
-{
-"name": "RARE",
-"price": 14.75,
-"rsi": 29.1954,
-"dd_high": -59.7701,
-"occasione": 81,
-"convenienza": 72,
-"prob_gain": 56,
-"prob_loss": 22,
-"exp_ret": 3.6,
-"gain": 64.9857,
-"reliab": "🔴 Bassa",
-"target": 24.2529,
-"stop": 11.7685,
-"date": "2026-09-18 20:26"
-},
-{
-"name": "RARE",
-"price": 14.51,
-"rsi": 28.1165,
-"dd_high": -60.2901,
-"occasione": 93,
-"convenienza": 74,
-"prob_gain": 61,
-"prob_loss": 21,
-"exp_ret": 5.3,
-"gain": 67.1199,
-"reliab": "🔴 Bassa",
-"target": 24.2491,
-"stop": 11.5742,
-"date": "2026-09-18 23:17"
-},
-{
-"name": "RARE",
-"price": 14.5,
-"rsi": 28.0588,
-"dd_high": -60.3175,
-"occasione": 93,
-"convenienza": 74,
-"prob_gain": 61,
-"prob_loss": 18,
-"exp_ret": 4.4,
-"gain": 70.0076,
-"reliab": "🔴 Bassa",
-"target": 24.6511,
-"stop": 11.4922,
-"date": "2026-09-19 03:36"
-},
-{
-"name": "RARE",
-"price": 14.51,
-"rsi": 28.1165,
-"dd_high": -60.2901,
-"occasione": 93,
-"convenienza": 74,
-"prob_gain": 61,
-"prob_loss": 21,
-"exp_ret": 5.3,
-"gain": 67.1199,
-"reliab": "🔴 Bassa",
-"target": 24.2491,
-"stop": 11.5742,
-"date": "2026-09-19 08:35"
-},
-{
-"name": "RARE",
-"price": 14.675,
-"rsi": 28.9146,
-"dd_high": -59.9343,
-"occasione": 82,
-"convenienza": 73,
-"prob_gain": 62,
-"prob_loss": 18,
-"exp_ret": 6.2,
-"gain": 63.0157,
-"reliab": "🔴 Bassa",
-"target": 23.8655,
-"stop": 11.8398,
-"date": "2026-09-21 16:36"
-},
-{
-"name": "RARE",
-"price": 14.695,
-"rsi": 29.277,
-"dd_high": -59.7701,
-"occasione": 81,
-"convenienza": 73,
-"prob_gain": 60,
-"prob_loss": 19,
-"exp_ret": 4.7,
-"gain": 62.3585,
-"reliab": "🔴 Bassa",
-"target": 23.8667,
-"stop": 11.8689,
-"date": "2026-09-21 21:48"
-},
-{
-"name": "RARE",
-"price": 14.65,
-"rsi": 28.9753,
-"dd_high": -59.907,
-"occasione": 81,
-"convenienza": 73,
-"prob_gain": 59,
-"prob_loss": 20,
-"exp_ret": 5.8,
-"gain": 62.9058,
-"reliab": "🔴 Bassa",
-"target": 23.8657,
-"stop": 11.8189,
-"date": "2026-09-22 01:20"
-}
-],
-"entry_price": 15.3,
-"entry_target": 27.7107,
-"entry_stop": 11.2051,
-"entry_conv": 75,
-"entry_date": "2026-09-09 03:02",
-"entry_src": "scatto",
-"max_price": 15.3,
-"max_date": "2026-09-09 03:02",
-"auto": true,
-"notified": false,
-"entry_check": "2026-09-21",
-"warn_since": "2026-09-16",
-"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "RXT": {
 "kind": "short",
@@ -12068,7 +11674,7 @@
 "notified": false,
 "entry_check": "2026-09-21",
 "warn_since": "2026-09-17",
-"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "PST.MI": {
 "kind": "short",
@@ -12444,7 +12050,7 @@
 "notified": false,
 "entry_check": "2026-09-21",
 "warn_since": "2026-09-17",
-"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "ADTN": {
 "kind": "short",
@@ -12609,7 +12215,7 @@
 "notified": false,
 "entry_check": "2026-09-21",
 "warn_since": "2026-09-21",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
 },
 "TBBK": {
 "kind": "short",
@@ -12758,7 +12364,7 @@
 "notified": false,
 "entry_check": "2026-09-21",
 "warn_since": "2026-09-21",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
 },
 "SYK": {
 "kind": "short",
@@ -12923,7 +12529,7 @@
 "notified": false,
 "entry_check": "2026-09-21",
 "warn_since": "2026-09-21",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
 },
 "TTAN": {
 "kind": "short",
@@ -13120,7 +12726,7 @@
 "notified": false,
 "entry_check": "2026-09-21",
 "warn_since": "2026-09-21",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
 },
 "BBD": {
 "kind": "long",
@@ -14143,7 +13749,9 @@
 "max_date": "2026-09-15 19:42",
 "auto": true,
 "notified": false,
-"entry_check": "2026-09-21"
+"entry_check": "2026-09-21",
+"warn_since": "2026-09-22",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "LDO.MI": {
 "kind": "short",
@@ -15053,7 +14661,7 @@
 "max_price": 4.04,
 "max_date": "2026-09-21 21:48",
 "auto": true,
-"notified": false,
+"notified": true,
 "entry_check": "2026-09-21"
 },
 "KAI": {
