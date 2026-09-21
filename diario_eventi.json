@@ -22019,5 +22019,32 @@
 },
 "stop": 11.8492,
 "atr": 0.8704
+},
+{
+"episodio": "long:OXY:2026-09-21",
+"ticker": "OXY",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-22 01:19",
+"data": "2026-09-22 01:18",
+"prezzo": 57.25,
+"conv": 65,
+"prob_gain": 64,
+"prob_loss": 20,
+"reliab": "🟡 Media",
+"mkt": 1.177,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 58.1352,
+"media20": 60.1355,
+"quattro_atr": 63.6534,
+"meta_caduta": 60.385,
+"bollinger": 62.9892,
+"consigliata": 58.1352
+},
+"stop": 54.0483,
+"atr": 1.6009
 }
 ]
