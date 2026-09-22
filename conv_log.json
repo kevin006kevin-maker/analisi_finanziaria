@@ -1,48 +1,6 @@
 [
 {
 "date": "2026-09-13",
-"ticker": "LEU",
-"kind": "short",
-"price": 152.31,
-"conv": 53,
-"factors": {
-"discount": 65.0665,
-"histcheap": 1.22,
-"riskadj": -0.67,
-"ddpen": -48.33,
-"momentum": 10.6477,
-"prob": 26,
-"oversold": -38.2616,
-"rebound": 14.7095,
-"trend": -1.0,
-"relstrength": -9.4766
-},
-"ret_5d": -0.82,
-"ret_21d": null
-},
-{
-"date": "2026-09-13",
-"ticker": "QLYS",
-"kind": "short",
-"price": 150.28,
-"conv": 62,
-"factors": {
-"discount": 23.2796,
-"histcheap": -0.82,
-"riskadj": 0.24,
-"ddpen": -24.38,
-"momentum": 13.8056,
-"prob": 37,
-"oversold": -33.2579,
-"rebound": 10.3818,
-"trend": 1.0,
-"relstrength": -12.6345
-},
-"ret_5d": 19.3,
-"ret_21d": null
-},
-{
-"date": "2026-09-13",
 "ticker": "KAI",
 "kind": "short",
 "price": 266.3,
@@ -40291,6 +40249,46 @@
 "rebound": 5.9746,
 "trend": -1.0,
 "relstrength": -0.1751
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-22",
+"ticker": "ACGL",
+"kind": "long",
+"price": 95.78,
+"conv": 77,
+"factors": {
+"discount": 10.0488,
+"histcheap": -0.18,
+"riskadj": 0.36,
+"ddpen": -6.02,
+"momentum": 2.2154,
+"prob": 81,
+"quality": 76.8,
+"valcheap": 0.5152,
+"trappen": 2
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-22",
+"ticker": "NEM",
+"kind": "long",
+"price": 123.05,
+"conv": 65,
+"factors": {
+"discount": 8.9463,
+"histcheap": -1.22,
+"riskadj": 0.97,
+"ddpen": -15.31,
+"momentum": 0.0162,
+"prob": 48,
+"quality": 91.4,
+"valcheap": -1.1531,
+"trappen": 3
 },
 "ret_5d": null,
 "ret_21d": null
