@@ -23005,5 +23005,32 @@
 },
 "stop": 8.132,
 "atr": 0.889
+},
+{
+"episodio": "short:LDO.MI:2026-09-09",
+"ticker": "LDO.MI",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-09-23 01:52",
+"data": "2026-09-23 01:51",
+"prezzo": 50.61,
+"conv": 67,
+"prob_gain": 47,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-09-23",
+"soglie": {
+"media50": 53.5424,
+"media20": 51.1292,
+"quattro_atr": 56.1266,
+"meta_caduta": 55.255,
+"bollinger": 54.5435,
+"consigliata": 53.5424
+},
+"stop": 47.8517,
+"atr": 1.3792
 }
 ]
