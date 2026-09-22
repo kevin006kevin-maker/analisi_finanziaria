@@ -22924,5 +22924,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "long:AEO:2026-08-28",
+"ticker": "AEO",
+"kind": "long",
+"evento": "fine_verifica",
+"scritto_il": "2026-09-23 01:52",
+"data": "2026-09-23 01:49",
+"prezzo": 15.92,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 10 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-09-23",
+"soglie": {
+"media50": 16.7458,
+"media20": 16.1105,
+"quattro_atr": 18.7743,
+"meta_caduta": 17.12,
+"bollinger": 18.1157,
+"consigliata": 16.7458
+},
+"stop": 14.4928,
+"atr": 0.7136
 }
 ]
