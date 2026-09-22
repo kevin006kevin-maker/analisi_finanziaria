@@ -8976,5 +8976,102 @@
 "date": "2026-09-22 01:20"
 }
 ]
+},
+{
+"ticker": "EYPT",
+"kind": "short",
+"added": "2026-09-10",
+"removed": "2026-09-23",
+"reason": "in perdita da 9 giorni di Borsa: valuta l'uscita",
+"auto": true,
+"first_price": 4.34,
+"last_price": 4.07,
+"first_target": 10.4068,
+"first_stop": 2.7962,
+"first_src": "scatto",
+"first_sicuro": true,
+"my_target_price": null,
+"snapshots": [
+{
+"name": "EYPT",
+"price": 4.02,
+"rsi": 33.0904,
+"dd_high": -78.6737,
+"occasione": 74,
+"convenienza": 72,
+"prob_gain": 57,
+"prob_loss": 19,
+"exp_ret": 3.9,
+"gain": 118.1741,
+"reliab": "🔴 Bassa",
+"target": 8.7706,
+"stop": 2.8543,
+"date": "2026-09-21 16:36"
+},
+{
+"name": "EYPT",
+"price": 4.005,
+"rsi": 32.9038,
+"dd_high": -78.7533,
+"occasione": 74,
+"convenienza": 72,
+"prob_gain": 60,
+"prob_loss": 17,
+"exp_ret": 5.5,
+"gain": 118.9838,
+"reliab": "🔴 Bassa",
+"target": 8.7703,
+"stop": 2.8308,
+"date": "2026-09-21 21:48"
+},
+{
+"name": "EYPT",
+"price": 4.02,
+"rsi": 33.0904,
+"dd_high": -78.6737,
+"occasione": 74,
+"convenienza": 72,
+"prob_gain": 57,
+"prob_loss": 19,
+"exp_ret": 3.9,
+"gain": 118.1741,
+"reliab": "🔴 Bassa",
+"target": 8.7706,
+"stop": 2.8458,
+"date": "2026-09-22 01:20"
+},
+{
+"name": "EYPT",
+"price": 4.05,
+"rsi": 33.4889,
+"dd_high": -78.5146,
+"occasione": 73,
+"convenienza": 72,
+"prob_gain": 61,
+"prob_loss": 16,
+"exp_ret": 6.0,
+"gain": 111.5062,
+"reliab": "🔴 Bassa",
+"target": 8.566,
+"stop": 2.9304,
+"date": "2026-09-22 19:50"
+},
+{
+"name": "EYPT",
+"price": 4.07,
+"rsi": 33.7519,
+"dd_high": -78.4085,
+"occasione": 72,
+"convenienza": 72,
+"prob_gain": 61,
+"prob_loss": 15,
+"exp_ret": 6.1,
+"gain": 110.4766,
+"reliab": "🔴 Bassa",
+"target": 8.5664,
+"stop": 2.945,
+"date": "2026-09-22 23:18"
+}
+]
 }
 ]
