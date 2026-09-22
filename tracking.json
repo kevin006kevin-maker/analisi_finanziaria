@@ -7496,9 +7496,7 @@
 "max_date": "2026-09-03 22:06",
 "auto": true,
 "notified": false,
-"entry_check": "2026-09-22",
-"warn_since": "2026-09-15",
-"warn": "in perdita da 15 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-09-22"
 },
 "ENI.MI": {
 "kind": "short",
@@ -8105,7 +8103,9 @@
 "max_date": "2026-09-08 19:07",
 "auto": true,
 "notified": true,
-"entry_check": "2026-09-22"
+"entry_check": "2026-09-22",
+"warn_since": "2026-09-22",
+"warn": "in perdita da 12 giorni di Borsa: valuta l'uscita"
 },
 "MXL": {
 "kind": "short",
@@ -8960,7 +8960,9 @@
 "max_date": "2026-09-22 19:50",
 "auto": true,
 "notified": false,
-"entry_check": "2026-09-22"
+"entry_check": "2026-09-22",
+"warn_since": "2026-09-22",
+"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
 },
 "SYK": {
 "kind": "short",
