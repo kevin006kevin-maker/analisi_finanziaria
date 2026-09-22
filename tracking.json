@@ -3902,9 +3902,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-22",
 "max_price": 26.21,
-"max_date": "2026-08-21 17:07",
-"warn_since": "2026-09-18",
-"warn": "in perdita da 34 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-08-21 17:07"
 },
 "CCB": {
 "kind": "short",
@@ -6137,7 +6135,9 @@
 "max_date": "2026-09-03 15:46",
 "auto": true,
 "notified": true,
-"entry_check": "2026-09-22"
+"entry_check": "2026-09-22",
+"warn_since": "2026-09-22",
+"warn": "in perdita da 19 giorni di Borsa: valuta l'uscita"
 },
 "UMC": {
 "kind": "long",
@@ -6895,9 +6895,7 @@
 "max_date": "2026-09-15 19:43",
 "auto": true,
 "notified": true,
-"entry_check": "2026-09-22",
-"warn_since": "2026-09-22",
-"warn": "in perdita da 14 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-09-22"
 },
 "VISN": {
 "kind": "short",
@@ -7261,9 +7259,7 @@
 "max_date": "2026-09-08 19:07",
 "auto": true,
 "notified": true,
-"entry_check": "2026-09-22",
-"warn_since": "2026-09-21",
-"warn": "in perdita da 12 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-09-22"
 },
 "MXL": {
 "kind": "short",
@@ -8022,9 +8018,7 @@
 "max_date": "2026-09-22 19:50",
 "auto": true,
 "notified": false,
-"entry_check": "2026-09-22",
-"warn_since": "2026-09-21",
-"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-09-22"
 },
 "SYK": {
 "kind": "short",
@@ -8223,10 +8217,8 @@
 "max_price": 61.22,
 "max_date": "2026-09-22 19:50",
 "auto": true,
-"notified": false,
-"entry_check": "2026-09-22",
-"warn_since": "2026-09-21",
-"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
+"notified": true,
+"entry_check": "2026-09-22"
 },
 "BBD": {
 "kind": "long",
@@ -8667,7 +8659,9 @@
 "max_date": "2026-09-17 00:11",
 "auto": true,
 "notified": true,
-"entry_check": "2026-09-22"
+"entry_check": "2026-09-22",
+"warn_since": "2026-09-22",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "RVLV": {
 "kind": "short",
