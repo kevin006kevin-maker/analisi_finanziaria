@@ -22830,5 +22830,32 @@
 },
 "stop": 26.9512,
 "atr": 0.7344
+},
+{
+"episodio": "short:LPLA:2026-09-22",
+"ticker": "LPLA",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-23 01:50",
+"data": "2026-09-23 01:48",
+"prezzo": 307.5,
+"conv": 68,
+"prob_gain": 55,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": 1.4606,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 349.1958,
+"media20": 348.789,
+"quattro_atr": 354.5526,
+"meta_caduta": 342.09,
+"bollinger": 380.7661,
+"consigliata": 349.1958
+},
+"stop": 283.9737,
+"atr": 11.7631
 }
 ]
