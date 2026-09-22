@@ -1,48 +1,6 @@
 [
 {
 "date": "2026-09-13",
-"ticker": "XLU",
-"kind": "short",
-"price": 42.39,
-"conv": 53,
-"factors": {
-"discount": 11.1879,
-"histcheap": 1.58,
-"riskadj": -0.37,
-"ddpen": -5.76,
-"momentum": 1.4873,
-"prob": 46,
-"oversold": -38.1217,
-"rebound": 4.3156,
-"trend": -1.0,
-"relstrength": -0.3163
-},
-"ret_5d": -3.97,
-"ret_21d": null
-},
-{
-"date": "2026-09-13",
-"ticker": "SMH",
-"kind": "short",
-"price": 568.53,
-"conv": 45,
-"factors": {
-"discount": 15.0065,
-"histcheap": -1.1,
-"riskadj": 2.1,
-"ddpen": -7.95,
-"momentum": -2.8827,
-"prob": 43,
-"oversold": -51.3371,
-"rebound": 0.1009,
-"trend": 1.0,
-"relstrength": 4.0538
-},
-"ret_5d": 3.18,
-"ret_21d": null
-},
-{
-"date": "2026-09-13",
 "ticker": "NVS",
 "kind": "short",
 "price": 137.16,
@@ -40288,6 +40246,46 @@
 "rebound": 0.7907,
 "trend": -1.0,
 "relstrength": 7.5549
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-22",
+"ticker": "PLNT",
+"kind": "long",
+"price": 42.325,
+"conv": 68,
+"factors": {
+"discount": 62.1997,
+"histcheap": 1.52,
+"riskadj": -1.62,
+"ddpen": -37.14,
+"momentum": 16.6995,
+"prob": 64,
+"quality": 66.7,
+"valcheap": -1.2747,
+"trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-22",
+"ticker": "WGS",
+"kind": "long",
+"price": 88.025,
+"conv": 30,
+"factors": {
+"discount": 47.4525,
+"histcheap": 0.12,
+"riskadj": -0.41,
+"ddpen": -48.28,
+"momentum": 6.9896,
+"prob": 40,
+"quality": 41.2,
+"valcheap": -3.0,
+"trappen": 2
 },
 "ret_5d": null,
 "ret_21d": null
