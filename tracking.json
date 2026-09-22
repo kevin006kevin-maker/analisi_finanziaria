@@ -11846,5 +11846,37 @@
 "auto": true,
 "notified": false,
 "entry_check": "2026-09-22"
+},
+"AGNC": {
+"kind": "short",
+"added": "2026-09-23",
+"note": "🤖 Promossa il 2026-09-23: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.2% e la convenienza (57) regge.",
+"name": "AGNC",
+"snapshots": [
+{
+"name": "AGNC",
+"price": 10.09,
+"rsi": 37.0985,
+"dd_high": -17.0912,
+"occasione": 48,
+"convenienza": 73,
+"prob_gain": 50,
+"prob_loss": 0,
+"exp_ret": 0.0,
+"gain": 5.9703,
+"reliab": "🟢 Alta",
+"target": 10.6924,
+"stop": 9.7034,
+"date": "2026-09-23 01:50"
+}
+],
+"entry_price": 10.09,
+"entry_target": 10.6924,
+"entry_stop": 9.7034,
+"entry_conv": 73,
+"entry_date": "2026-09-23 01:50",
+"entry_src": "scatto",
+"max_price": 10.09,
+"max_date": "2026-09-23 01:50"
 }
 }
