@@ -23329,5 +23329,32 @@
 },
 "stop": null,
 "atr": 9.6654
+},
+{
+"episodio": "short:AGNC:2026-09-18",
+"ticker": "AGNC",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-23 01:52",
+"data": "2026-09-23 01:50",
+"prezzo": 10.09,
+"conv": 73,
+"prob_gain": 50,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-23",
+"soglie": {
+"media50": 10.6924,
+"media20": 10.406,
+"quattro_atr": 10.8632,
+"meta_caduta": 10.76,
+"bollinger": 11.1814,
+"consigliata": 10.6924
+},
+"stop": 9.7034,
+"atr": 0.1933
 }
 ]
