@@ -10540,5 +10540,37 @@
 "auto": true,
 "notified": false,
 "entry_check": "2026-09-22"
+},
+"IONS": {
+"kind": "short",
+"added": "2026-09-22",
+"note": "🤖 Promossa il 2026-09-22: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.0% e la convenienza (71) regge.",
+"name": "IONS",
+"snapshots": [
+{
+"name": "IONS",
+"price": 45.75,
+"rsi": 29.8688,
+"dd_high": -47.1098,
+"occasione": 74,
+"convenienza": 83,
+"prob_gain": 63,
+"prob_loss": 13,
+"exp_ret": 3.5,
+"gain": 21.2839,
+"reliab": "🟡 Media",
+"target": 55.4874,
+"stop": 41.0547,
+"date": "2026-09-22 23:17"
+}
+],
+"entry_price": 45.75,
+"entry_target": 55.4874,
+"entry_stop": 41.0547,
+"entry_conv": 83,
+"entry_date": "2026-09-22 23:17",
+"entry_src": "scatto",
+"max_price": 45.75,
+"max_date": "2026-09-22 23:17"
 }
 }
