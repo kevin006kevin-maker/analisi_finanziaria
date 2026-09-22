@@ -23086,5 +23086,32 @@
 },
 "stop": 3.511,
 "atr": 0.2545
+},
+{
+"episodio": "short:SAH:2026-09-18",
+"ticker": "SAH",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-23 01:52",
+"data": "2026-09-23 01:48",
+"prezzo": 65.34,
+"conv": 74,
+"prob_gain": 58,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": 1.4606,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-23",
+"soglie": {
+"media50": 83.9526,
+"media20": 74.908,
+"quattro_atr": 78.5796,
+"meta_caduta": 89.0,
+"bollinger": 85.5497,
+"consigliata": 78.5796
+},
+"stop": 58.7202,
+"atr": 3.3099
 }
 ]
