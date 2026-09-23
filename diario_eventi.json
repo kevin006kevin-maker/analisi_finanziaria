@@ -24893,5 +24893,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:KAI:2026-09-11",
+"ticker": "KAI",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-09-24 00:21",
+"data": "2026-09-24 00:19",
+"prezzo": 278.35,
+"conv": 70,
+"prob_gain": 48,
+"prob_loss": 6,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-09-24",
+"soglie": {
+"media50": 305.459,
+"media20": 286.147,
+"quattro_atr": 320.0016,
+"meta_caduta": 308.34,
+"bollinger": 317.9145,
+"consigliata": 305.459
+},
+"stop": 257.5242,
+"atr": 10.4129
 }
 ]
