@@ -24738,5 +24738,32 @@
 },
 "stop": 11.7061,
 "atr": 1.1194
+},
+{
+"episodio": "short:NVO:2026-09-22",
+"ticker": "NVO",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-24 00:18",
+"data": "2026-09-24 00:15",
+"prezzo": 38.17,
+"conv": 70,
+"prob_gain": 59,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": 0.3745,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 46.2926,
+"media20": 43.934,
+"quattro_atr": 43.6211,
+"meta_caduta": 44.89,
+"bollinger": 49.202,
+"consigliata": 43.6211
+},
+"stop": 35.4444,
+"atr": 1.3628
 }
 ]
