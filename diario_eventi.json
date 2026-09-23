@@ -24549,5 +24549,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:HVII:2026-09-24",
+"ticker": "HVII",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-24 00:15",
+"data": "2026-09-24 00:15",
+"prezzo": 4.46,
+"conv": 79,
+"prob_gain": 92,
+"prob_loss": 7,
+"reliab": "🔴 Bassa",
+"mkt": 0.3745,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 9.7294,
+"media20": 9.077,
+"quattro_atr": 10.7142,
+"meta_caduta": 7.86,
+"bollinger": 12.5177,
+"consigliata": 9.7294
+},
+"stop": 1.3329,
+"atr": 1.5636
 }
 ]
