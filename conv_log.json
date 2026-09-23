@@ -1,92 +1,6 @@
 [
 {
 "date": "2026-09-14",
-"ticker": "NCT",
-"kind": "short",
-"price": 0.5023,
-"conv": 67,
-"factors": {
-"discount": 98.7203,
-"histcheap": 0.83,
-"riskadj": -1.22,
-"ddpen": -80.79,
-"momentum": -25.575,
-"prob": 43,
-"oversold": -24.597,
-"rebound": 525.3366,
-"trend": -1.0,
-"relstrength": 26.7208
-},
-"ret_5d": null,
-"ret_21d": null,
-"bad_data": true
-},
-{
-"date": "2026-09-14",
-"ticker": "UZX",
-"kind": "short",
-"price": 0.0943,
-"conv": 72,
-"factors": {
-"discount": 96.3591,
-"histcheap": 1.48,
-"riskadj": -2.85,
-"ddpen": -61.07,
-"momentum": 20.7563,
-"prob": 27,
-"oversold": -24.0522,
-"rebound": 95.9979,
-"trend": -1.0,
-"relstrength": -19.6105
-},
-"ret_5d": null,
-"ret_21d": null,
-"bad_data": true
-},
-{
-"date": "2026-09-14",
-"ticker": "SOAR",
-"kind": "short",
-"price": 0.2322,
-"conv": 24,
-"factors": {
-"discount": 93.4961,
-"histcheap": 0.64,
-"riskadj": -1.73,
-"ddpen": -82.82,
-"momentum": 3.25,
-"prob": 9,
-"oversold": -59.0608,
-"rebound": -28.5599,
-"trend": -1.0,
-"relstrength": -2.1042
-},
-"ret_5d": -14.04,
-"ret_21d": null
-},
-{
-"date": "2026-09-14",
-"ticker": "FTFT",
-"kind": "short",
-"price": 7.7024,
-"conv": 20,
-"factors": {
-"discount": 94.8787,
-"histcheap": 0.82,
-"riskadj": -4.17,
-"ddpen": -76.62,
-"momentum": -372.5399,
-"prob": -10,
-"oversold": -78.0276,
-"rebound": -45.9824,
-"trend": -1.0,
-"relstrength": 373.6857
-},
-"ret_5d": -35.38,
-"ret_21d": null
-},
-{
-"date": "2026-09-14",
 "ticker": "SOXL",
 "kind": "short",
 "price": 102.795,
@@ -40323,6 +40237,86 @@
 "rebound": 6.0171,
 "trend": -1.0,
 "relstrength": -11.9165
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-23",
+"ticker": "EXK",
+"kind": "long",
+"price": 9.355,
+"conv": 41,
+"factors": {
+"discount": 33.7465,
+"histcheap": 0.13,
+"riskadj": 0.33,
+"ddpen": -27.26,
+"momentum": 2.9564,
+"prob": 40,
+"quality": 51.7,
+"valcheap": -1.6565,
+"trappen": 2
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-23",
+"ticker": "RLAY",
+"kind": "long",
+"price": 17.73,
+"conv": 37,
+"factors": {
+"discount": 14.5542,
+"histcheap": -1.12,
+"riskadj": 3.71,
+"ddpen": -10.07,
+"momentum": 6.5366,
+"prob": 29,
+"quality": 43.7,
+"valcheap": -2.4676,
+"trappen": 2
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-23",
+"ticker": "DAVE",
+"kind": "long",
+"price": 323.5,
+"conv": 62,
+"factors": {
+"discount": 26.8976,
+"histcheap": -0.87,
+"riskadj": 0.63,
+"ddpen": -18.2,
+"momentum": 13.6562,
+"prob": 48,
+"quality": 84.8,
+"valcheap": -2.6725,
+"trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-23",
+"ticker": "AUR",
+"kind": "long",
+"price": 5.9,
+"conv": 20,
+"factors": {
+"discount": 29.7619,
+"histcheap": -0.5,
+"riskadj": -0.16,
+"ddpen": -25.08,
+"momentum": 8.3851,
+"prob": 21,
+"quality": 16.7,
+"valcheap": -1.754,
+"trappen": -2
 },
 "ret_5d": null,
 "ret_21d": null
