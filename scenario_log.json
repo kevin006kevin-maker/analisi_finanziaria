@@ -8494,5 +8494,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "FIP",
+"kind": "short",
+"date": "2026-09-23",
+"promo_price": 3.07,
+"obs_price": 3.0,
+"obs_date": "2026-09-18",
+"pre_price": 3.0,
+"pre_date": "2026-09-21",
+"conf_price": null,
+"conf_date": null,
+"target": 3.8039,
+"stop": 2.6422,
+"reliab": "🔴 Bassa",
+"prob_gain": 51,
+"prob_loss": 20,
+"conv": 70,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-18 23:14",
+"prezzo": 3.0,
+"conv": 65,
+"prob_gain": 50,
+"prob_loss": 20,
+"reliab": "🔴 Bassa",
+"mkt": 0.0639
+},
+"anticipo": {
+"data": "2026-09-21",
+"prezzo": 3.0,
+"conv": 71,
+"prob_gain": 50,
+"prob_loss": 20,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-23 06:42",
+"prezzo": 3.07,
+"conv": 70,
+"prob_gain": 51,
+"prob_loss": 20,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
