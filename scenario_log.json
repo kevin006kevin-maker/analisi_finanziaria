@@ -8437,5 +8437,62 @@
 "mkt": null
 }
 }
+},
+{
+"ticker": "LFTO",
+"kind": "short",
+"date": "2026-09-23",
+"promo_price": 17.65,
+"obs_price": 16.305,
+"obs_date": "2026-09-18",
+"pre_price": 16.39,
+"pre_date": "2026-09-21",
+"conf_price": null,
+"conf_date": null,
+"target": 20.8408,
+"stop": 15.2602,
+"reliab": "🔴 Bassa",
+"prob_gain": 57,
+"prob_loss": 15,
+"conv": 64,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-18 20:23",
+"prezzo": 16.305,
+"conv": 66,
+"prob_gain": 66,
+"prob_loss": 11,
+"reliab": "🔴 Bassa",
+"mkt": -0.0839
+},
+"anticipo": {
+"data": "2026-09-21",
+"prezzo": 16.39,
+"conv": 68,
+"prob_gain": 63,
+"prob_loss": 11,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-23 06:42",
+"prezzo": 17.65,
+"conv": 64,
+"prob_gain": 57,
+"prob_loss": 15,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
