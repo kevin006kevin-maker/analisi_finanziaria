@@ -24408,5 +24408,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:KNF:2026-09-23",
+"ticker": "KNF",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-23 21:02",
+"data": "2026-09-23 21:02",
+"prezzo": 51.65,
+"conv": 75,
+"prob_gain": 52,
+"prob_loss": 11,
+"reliab": "🟡 Media",
+"mkt": 0.7643,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 67.4462,
+"media20": 59.598,
+"quattro_atr": 61.5945,
+"meta_caduta": 68.82,
+"bollinger": 68.4598,
+"consigliata": 61.5945
+},
+"stop": 46.6778,
+"atr": 2.4861
 }
 ]
