@@ -24711,5 +24711,32 @@
 },
 "stop": 17.9535,
 "atr": 1.1182
+},
+{
+"episodio": "short:ERAS:2026-09-23",
+"ticker": "ERAS",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-24 00:18",
+"data": "2026-09-24 00:15",
+"prezzo": 13.945,
+"conv": 71,
+"prob_gain": 52,
+"prob_loss": 21,
+"reliab": "🔴 Bassa",
+"mkt": 0.3745,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 17.6973,
+"media20": 16.4323,
+"quattro_atr": 18.4227,
+"meta_caduta": 17.6025,
+"bollinger": 19.2499,
+"consigliata": 17.6973
+},
+"stop": 11.7061,
+"atr": 1.1194
 }
 ]
