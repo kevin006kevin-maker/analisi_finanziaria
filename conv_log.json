@@ -1,46 +1,6 @@
 [
 {
 "date": "2026-09-14",
-"ticker": "CCL",
-"kind": "long",
-"price": 22.75,
-"conv": 67,
-"factors": {
-"discount": 33.0686,
-"histcheap": 2.14,
-"riskadj": -1.29,
-"ddpen": -17.69,
-"momentum": 3.109,
-"prob": 55,
-"quality": 60.2,
-"valcheap": 0.034,
-"trappen": 3
-},
-"ret_5d": -2.29,
-"ret_21d": null
-},
-{
-"date": "2026-09-14",
-"ticker": "LYG",
-"kind": "long",
-"price": 6.01,
-"conv": 52,
-"factors": {
-"discount": 4.2994,
-"histcheap": -1.24,
-"riskadj": 1.52,
-"ddpen": -9.19,
-"momentum": 1.4754,
-"prob": 70,
-"quality": 58.4,
-"valcheap": 0.1467,
-"trappen": 3
-},
-"ret_5d": -2.25,
-"ret_21d": null
-},
-{
-"date": "2026-09-14",
 "ticker": "BKR",
 "kind": "long",
 "price": 59.06,
@@ -40282,6 +40242,48 @@
 "quality": 28.2,
 "valcheap": -0.3643,
 "trappen": 1
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-23",
+"ticker": "ABSI",
+"kind": "short",
+"price": 9.82,
+"conv": 30,
+"factors": {
+"discount": 15.4905,
+"histcheap": -1.77,
+"riskadj": 2.19,
+"ddpen": -29.39,
+"momentum": -21.3844,
+"prob": 16,
+"oversold": -61.5896,
+"rebound": -11.0927,
+"trend": 1.0,
+"relstrength": 19.4852
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-23",
+"ticker": "STTK",
+"kind": "short",
+"price": 6.11,
+"conv": 58,
+"factors": {
+"discount": 24.1936,
+"histcheap": -0.58,
+"riskadj": 1.93,
+"ddpen": -17.75,
+"momentum": 1.4516,
+"prob": 19,
+"oversold": -38.1082,
+"rebound": 14.4583,
+"trend": 1.0,
+"relstrength": -3.3508
 },
 "ret_5d": null,
 "ret_21d": null
