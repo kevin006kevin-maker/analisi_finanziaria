@@ -24947,5 +24947,32 @@
 },
 "stop": 3.3138,
 "atr": 0.2031
+},
+{
+"episodio": "long:ENVA:2026-09-15",
+"ticker": "ENVA",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-24 00:21",
+"data": "2026-09-24 00:19",
+"prezzo": 168.37,
+"conv": 78,
+"prob_gain": 55,
+"prob_loss": 9,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-24",
+"soglie": {
+"media50": 233.3716,
+"media20": 212.5435,
+"quattro_atr": 206.0454,
+"meta_caduta": 216.91,
+"bollinger": 266.5778,
+"consigliata": 206.0454
+},
+"stop": 149.5323,
+"atr": 9.4189
 }
 ]
