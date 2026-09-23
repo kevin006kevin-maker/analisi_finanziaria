@@ -1,0 +1,120 @@
+[
+{
+"giorno": "2026-09-23",
+"ora": "2026-09-23 04:40",
+"versione_archivio": 3,
+"ingresso": {
+"convenienza_minima_osservazione": 60,
+"convenienza_minima_anticipo": 65,
+"giorni_di_osservazione": {
+"short": 3,
+"long": 7
+}
+},
+"filtri_breve": {
+"prezzo_minimo": 3.0,
+"scambi_minimi": 1000000,
+"rischio_rendimento_minimo": 1.5,
+"sconto_minimo_dai_massimi": -8,
+"punteggio_minimo": 35
+},
+"filtri_lungo": {
+"prezzo_minimo": 1.0,
+"scambi_minimi": 300000,
+"sconto_minimo_dai_massimi": -12,
+"punteggio_minimo": 50,
+"massimo_per_settore": 4
+},
+"universo": {
+"tetto_breve": 40,
+"tetto_lungo": 20,
+"europa_breve": 16,
+"europa_lungo": 10,
+"etf_breve": 18,
+"etf_lungo": 14
+},
+"bersaglio": {
+"formula_usata": "consigliata",
+"formule_registrate": [
+"media50",
+"media20",
+"quattro_atr",
+"meta_caduta",
+"bollinger",
+"consigliata"
+],
+"stop_in_atr": 2.0
+},
+"esiti": {
+"orizzonti": [
+{
+"nome": "7g",
+"giorni": 7,
+"unita": "calendario"
+},
+{
+"nome": "30g",
+"giorni": 30,
+"unita": "calendario"
+},
+{
+"nome": "365g",
+"giorni": 365,
+"unita": "calendario"
+}
+],
+"vendite_per_tipo": {
+"short": [
+"soglia",
+"7g",
+"30g"
+],
+"long": [
+"soglia",
+"30g",
+"365g"
+]
+},
+"resa_impossibile_oltre": 100.0,
+"scostamento_frazionamento": 0.25
+},
+"scenari": [
+{
+"chiave": "s1_osservazione",
+"evento": "ingresso_osservazione",
+"nome": "Appena entra in osservazione"
+},
+{
+"chiave": "s2_anticipo",
+"evento": "ingresso_anticipo",
+"nome": "Appena entra in «In anticipo»"
+},
+{
+"chiave": "s3_fine_osservazione",
+"evento": "fine_osservazione",
+"nome": "Alla fine dei giorni di osservazione"
+},
+{
+"chiave": "s4_monitoraggio",
+"evento": "promozione",
+"nome": "Appena entra in monitoraggio"
+},
+{
+"chiave": "s5_fine_verifica",
+"evento": "fine_verifica",
+"nome": "Dopo la verifica nel monitoraggio"
+}
+],
+"pesi_convenienza": {},
+"scala_convenienza": {
+"kind": "short",
+"quanti": 99,
+"minimo": 23.0,
+"primo_quarto": 41.0,
+"mediana": 54.0,
+"terzo_quarto": 62.0,
+"massimo": 82.0,
+"quanti_sopra_il_cancello": 32
+}
+}
+]
