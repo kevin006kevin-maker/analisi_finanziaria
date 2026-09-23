@@ -6477,8 +6477,8 @@
 "obs_date": "2026-09-09",
 "pre_price": 48.645,
 "pre_date": "2026-09-10",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 49.8849983215332,
+"conf_date": "2026-09-23",
 "target": 53.6582,
 "stop": 46.6349,
 "reliab": "🟡 Media",
@@ -6514,16 +6514,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-09-23",
+"prezzo": 49.8849983215332,
+"conv": 70,
+"prob_gain": 47,
+"prob_loss": 7,
+"reliab": "🟡 Media",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": 2.55,
+"osservazione|7g": 2.04,
+"promozione|7g": 0.51
+}
 },
 {
 "ticker": "YSS",
