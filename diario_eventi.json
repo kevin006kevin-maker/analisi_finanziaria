@@ -24630,5 +24630,32 @@
 },
 "stop": 97.9057,
 "atr": 3.2922
+},
+{
+"episodio": "short:IMVT:2026-09-23",
+"ticker": "IMVT",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-24 00:18",
+"data": "2026-09-24 00:15",
+"prezzo": 34.54,
+"conv": 74,
+"prob_gain": 50,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": 0.3745,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 40.0308,
+"media20": 39.089,
+"quattro_atr": 40.8437,
+"meta_caduta": 39.75,
+"bollinger": 44.1945,
+"consigliata": 40.0308
+},
+"stop": 31.3881,
+"atr": 1.5759
 }
 ]
