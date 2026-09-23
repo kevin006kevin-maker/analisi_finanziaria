@@ -23492,5 +23492,32 @@
 },
 "stop": 8.5256,
 "atr": 0.4572
+},
+{
+"episodio": "short:GT:2026-09-23",
+"ticker": "GT",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-23 06:40",
+"data": "2026-09-23 06:40",
+"prezzo": 5.02,
+"conv": 70,
+"prob_gain": 55,
+"prob_loss": 11,
+"reliab": "🟡 Media",
+"mkt": 1.177,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 6.3254,
+"media20": 5.7625,
+"quattro_atr": 6.0321,
+"meta_caduta": 6.235,
+"bollinger": 6.7168,
+"consigliata": 6.0321
+},
+"stop": 4.5139,
+"atr": 0.253
 }
 ]
