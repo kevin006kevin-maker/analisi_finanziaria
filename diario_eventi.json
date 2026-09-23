@@ -24846,5 +24846,32 @@
 },
 "stop": 19.8415,
 "atr": 0.7242
+},
+{
+"episodio": "long:SAH:2026-09-18",
+"ticker": "SAH",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-24 00:18",
+"data": "2026-09-24 00:17",
+"prezzo": 62.37,
+"conv": 66,
+"prob_gain": 83,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": 0.3745,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 83.8932,
+"media20": 74.7595,
+"quattro_atr": 75.8696,
+"meta_caduta": 87.515,
+"bollinger": 86.0278,
+"consigliata": 75.8696
+},
+"stop": 55.6202,
+"atr": 3.3749
 }
 ]
