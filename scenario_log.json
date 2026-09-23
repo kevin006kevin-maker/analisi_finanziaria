@@ -8555,5 +8555,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "FLNC",
+"kind": "short",
+"date": "2026-09-23",
+"promo_price": 7.59,
+"obs_price": 11.04,
+"obs_date": "2026-09-08",
+"pre_price": 10.35,
+"pre_date": "2026-09-09",
+"conf_price": null,
+"conf_date": null,
+"target": 11.9733,
+"stop": 6.0894,
+"reliab": "🔴 Bassa",
+"prob_gain": 46,
+"prob_loss": 32,
+"conv": 71,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-08 22:02",
+"prezzo": 11.04,
+"conv": 62,
+"prob_gain": 47,
+"prob_loss": 35,
+"reliab": "🔴 Bassa",
+"mkt": -1.0187
+},
+"anticipo": {
+"data": "2026-09-09",
+"prezzo": 10.35,
+"conv": 70,
+"prob_gain": 46,
+"prob_loss": 35,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-23 17:01",
+"prezzo": 7.59,
+"conv": 71,
+"prob_gain": 46,
+"prob_loss": 32,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
