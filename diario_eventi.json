@@ -26141,5 +26141,32 @@
 },
 "stop": 42.6609,
 "atr": 1.7446
+},
+{
+"episodio": "short:ZTO:2026-09-22",
+"ticker": "ZTO",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-25 01:29",
+"data": "2026-09-25 01:25",
+"prezzo": 19.47,
+"conv": 61,
+"prob_gain": 54,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": 0.3497,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-25",
+"soglie": {
+"media50": 22.3168,
+"media20": 20.698,
+"quattro_atr": 21.5355,
+"meta_caduta": 22.045,
+"bollinger": 21.8727,
+"consigliata": 21.5355
+},
+"stop": 18.4373,
+"atr": 0.5164
 }
 ]
