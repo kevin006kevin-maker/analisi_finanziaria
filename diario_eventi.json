@@ -25104,5 +25104,32 @@
 },
 "stop": 5.9712,
 "atr": 0.4244
+},
+{
+"episodio": "short:ESRT:2026-09-21",
+"ticker": "ESRT",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-24 02:54",
+"data": "2026-09-24 02:52",
+"prezzo": 4.14,
+"conv": 69,
+"prob_gain": 52,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": 0.6948,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 4.8524,
+"media20": 4.386,
+"quattro_atr": 4.7961,
+"meta_caduta": 4.97,
+"bollinger": 4.8503,
+"consigliata": 4.7961
+},
+"stop": 3.812,
+"atr": 0.164
 }
 ]
