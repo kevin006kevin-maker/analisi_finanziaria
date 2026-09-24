@@ -576,7 +576,10 @@
 },
 "res": {
 "osservazione|7g": 17.2,
-"promozione|7g": 6.02
+"promozione|7g": 6.02,
+"osservazione|30g": 8.73,
+"promozione|30g": -1.64,
+"conferma|30g": 2.74
 }
 },
 {
@@ -637,7 +640,11 @@
 "res": {
 "anticipo|7g": 9.62,
 "osservazione|7g": 9.83,
-"promozione|7g": 2.52
+"promozione|7g": 2.52,
+"anticipo|30g": -2.5,
+"osservazione|30g": -2.31,
+"promozione|30g": -8.81,
+"conferma|30g": -7.82
 }
 },
 {
@@ -661,7 +668,10 @@
 "conv": 82,
 "res": {
 "osservazione|7g": 1.99,
-"promozione|7g": 1.26
+"promozione|7g": 1.26,
+"osservazione|30g": 3.73,
+"promozione|30g": 2.99,
+"conferma|30g": 1.71
 },
 "passaggi": {
 "osservazione": {
@@ -723,7 +733,10 @@
 "conv": 90,
 "res": {
 "osservazione|7g": -24.41,
-"promozione|7g": -4.03
+"promozione|7g": -4.03,
+"osservazione|30g": -24.16,
+"promozione|30g": -3.7,
+"conferma|30g": 0.34
 },
 "passaggi": {
 "osservazione": {
@@ -822,7 +835,15 @@
 "res": {
 "anticipo|7g": -3.79,
 "osservazione|7g": -2.79,
-"promozione|7g": -10.47
+"promozione|7g": -10.47,
+"anticipo|30g": 2.3,
+"osservazione|30g": 3.35,
+"promozione|30g": -4.81,
+"conferma|30g": 6.32,
+"anticipo|bersaglio": 2.3,
+"osservazione|bersaglio": 3.35,
+"promozione|bersaglio": -4.81,
+"conferma|bersaglio": 6.32
 }
 },
 {
@@ -6732,8 +6753,8 @@
 "obs_date": "2026-09-14",
 "pre_price": 3.83,
 "pre_date": "2026-09-15",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 3.684999942779541,
+"conf_date": "2026-09-24",
 "target": 4.6744,
 "stop": 3.5,
 "reliab": "🟡 Media",
@@ -6769,16 +6790,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-09-24",
+"prezzo": 3.684999942779541,
+"conv": 79,
+"prob_gain": 51,
+"prob_loss": 3,
+"reliab": "🟡 Media",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": -3.79,
+"osservazione|7g": -2.77,
+"promozione|7g": -5.75
+}
 },
 {
 "ticker": "KAI",
@@ -6789,8 +6814,8 @@
 "obs_date": "2026-09-11",
 "pre_price": 266.3,
 "pre_date": "2026-09-14",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 272.30999755859375,
+"conf_date": "2026-09-24",
 "target": 307.3244,
 "stop": 248.1945,
 "reliab": "🟡 Media",
@@ -6826,16 +6851,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-09-24",
+"prezzo": 272.30999755859375,
+"conv": 69,
+"prob_gain": 49,
+"prob_loss": 6,
+"reliab": "🟡 Media",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": 2.26,
+"osservazione|7g": 0.46,
+"promozione|7g": -0.07
+}
 },
 {
 "ticker": "XLU",
