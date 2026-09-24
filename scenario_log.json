@@ -8861,7 +8861,45 @@
 "prob_gain": 59,
 "prob_loss": 0,
 "conv": 64,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-09-22 01:15",
+"prezzo": 28.75,
+"conv": 71,
+"prob_gain": 58,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": 1.177
+},
+"anticipo": {
+"data": "2026-09-23",
+"prezzo": 28.42,
+"conv": 71,
+"prob_gain": 60,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-25",
+"prezzo": 28.0,
+"conv": 64,
+"prob_gain": 59,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "NVO",
@@ -8882,7 +8920,45 @@
 "prob_gain": 52,
 "prob_loss": 12,
 "conv": 57,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-09-22 01:15",
+"prezzo": 39.8,
+"conv": 67,
+"prob_gain": 61,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": 1.177
+},
+"anticipo": {
+"data": "2026-09-24",
+"prezzo": 38.17,
+"conv": 70,
+"prob_gain": 59,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-25",
+"prezzo": 38.62,
+"conv": 57,
+"prob_gain": 52,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "PLNT",
@@ -8903,7 +8979,45 @@
 "prob_gain": 58,
 "prob_loss": 7,
 "conv": 69,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-09-22 19:46",
+"prezzo": 42.325,
+"conv": 73,
+"prob_gain": 56,
+"prob_loss": 7,
+"reliab": "🟡 Media",
+"mkt": 1.477
+},
+"anticipo": {
+"data": "2026-09-23",
+"prezzo": 42.6,
+"conv": 71,
+"prob_gain": 56,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-25",
+"prezzo": 40.72,
+"conv": 69,
+"prob_gain": 58,
+"prob_loss": 7,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "LPLA",
@@ -8924,7 +9038,45 @@
 "prob_gain": 57,
 "prob_loss": 5,
 "conv": 61,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-09-22 19:46",
+"prezzo": 310.1,
+"conv": 66,
+"prob_gain": 55,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": 1.477
+},
+"anticipo": {
+"data": "2026-09-23",
+"prezzo": 307.5,
+"conv": 68,
+"prob_gain": 55,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-25",
+"prezzo": 302.76,
+"conv": 61,
+"prob_gain": 57,
+"prob_loss": 5,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "CAR",
@@ -8945,6 +9097,44 @@
 "prob_gain": 47,
 "prob_loss": 23,
 "conv": 64,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-09-22 19:46",
+"prezzo": 109.7,
+"conv": 66,
+"prob_gain": 46,
+"prob_loss": 23,
+"reliab": "🔴 Bassa",
+"mkt": 1.477
+},
+"anticipo": {
+"data": "2026-09-24",
+"prezzo": 105.67,
+"conv": 68,
+"prob_gain": 46,
+"prob_loss": 24,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-25",
+"prezzo": 103.54,
+"conv": 64,
+"prob_gain": 47,
+"prob_loss": 23,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 }
 ]
