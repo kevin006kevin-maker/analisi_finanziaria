@@ -25389,5 +25389,32 @@
 },
 "stop": 31.4955,
 "atr": 1.1648
+},
+{
+"episodio": "short:PTRN:2026-09-24",
+"ticker": "PTRN",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-24 19:05",
+"data": "2026-09-24 19:05",
+"prezzo": 18.04,
+"conv": 68,
+"prob_gain": 54,
+"prob_loss": 20,
+"reliab": "🔴 Bassa",
+"mkt": 0.4711,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 22.003,
+"media20": 20.0505,
+"quattro_atr": 22.2199,
+"meta_caduta": 23.72,
+"bollinger": 21.6835,
+"consigliata": 22.003
+},
+"stop": 15.9501,
+"atr": 1.045
 }
 ]
