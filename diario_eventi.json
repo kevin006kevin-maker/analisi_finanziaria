@@ -26060,5 +26060,32 @@
 },
 "stop": 153.7007,
 "atr": 9.0997
+},
+{
+"episodio": "short:AXON:2026-09-15",
+"ticker": "AXON",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-09-25 01:29",
+"data": "2026-09-24 22:29",
+"prezzo": 445.0,
+"conv": 66,
+"prob_gain": 50,
+"prob_loss": 22,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-09-25",
+"soglie": {
+"media50": 542.257,
+"media20": 503.415,
+"quattro_atr": 548.9374,
+"meta_caduta": 545.36,
+"bollinger": 614.3455,
+"consigliata": 542.257
+},
+"stop": 393.0313,
+"atr": 25.9844
 }
 ]
