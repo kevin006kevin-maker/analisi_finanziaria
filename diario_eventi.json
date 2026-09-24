@@ -26276,5 +26276,32 @@
 },
 "stop": 279.7409,
 "atr": 11.5095
+},
+{
+"episodio": "short:CAR:2026-09-22",
+"ticker": "CAR",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-25 01:30",
+"data": "2026-09-25 01:25",
+"prezzo": 103.54,
+"conv": 64,
+"prob_gain": 47,
+"prob_loss": 23,
+"reliab": "🔴 Bassa",
+"mkt": 0.3497,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-25",
+"soglie": {
+"media50": 140.1216,
+"media20": 127.672,
+"quattro_atr": 127.5856,
+"meta_caduta": 134.93,
+"bollinger": 153.7375,
+"consigliata": 127.5856
+},
+"stop": 91.5172,
+"atr": 6.0114
 }
 ]
