@@ -25939,5 +25939,32 @@
 },
 "stop": 36.4811,
 "atr": 2.1194
+},
+{
+"episodio": "long:DAVE:2026-09-23",
+"ticker": "DAVE",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-25 01:28",
+"data": "2026-09-25 01:27",
+"prezzo": 331.455,
+"conv": 69,
+"prob_gain": 68,
+"prob_loss": 23,
+"reliab": "🔴 Bassa",
+"mkt": 0.3497,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 371.1829,
+"media20": 361.2812,
+"quattro_atr": 419.572,
+"meta_caduta": 386.9925,
+"bollinger": 396.1413,
+"consigliata": 371.1829
+},
+"stop": 287.3965,
+"atr": 22.0293
 }
 ]
