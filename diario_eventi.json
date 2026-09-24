@@ -25912,5 +25912,32 @@
 },
 "stop": 3.292,
 "atr": 0.469
+},
+{
+"episodio": "long:PLNT:2026-09-22",
+"ticker": "PLNT",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-25 01:28",
+"data": "2026-09-25 01:27",
+"prezzo": 40.72,
+"conv": 71,
+"prob_gain": 80,
+"prob_loss": 11,
+"reliab": "🟡 Media",
+"mkt": 0.3497,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 51.7834,
+"media20": 49.7545,
+"quattro_atr": 49.1978,
+"meta_caduta": 48.655,
+"bollinger": 56.4177,
+"consigliata": 49.1978
+},
+"stop": 36.4811,
+"atr": 2.1194
 }
 ]
