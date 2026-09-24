@@ -1,90 +1,6 @@
 [
 {
 "date": "2026-09-16",
-"ticker": "NOK",
-"kind": "short",
-"price": 9.84,
-"conv": 59,
-"factors": {
-"discount": 41.6024,
-"histcheap": -0.29,
-"riskadj": 1.78,
-"ddpen": -20.54,
-"momentum": 7.6056,
-"prob": 38,
-"oversold": -45.1204,
-"rebound": 4.1362,
-"trend": 1.0,
-"relstrength": -6.4616
-},
-"ret_5d": 9.3,
-"ret_21d": null
-},
-{
-"date": "2026-09-16",
-"ticker": "AAL",
-"kind": "short",
-"price": 12.77,
-"conv": 62,
-"factors": {
-"discount": 29.6419,
-"histcheap": 0.48,
-"riskadj": -0.0,
-"ddpen": -17.84,
-"momentum": 1.0844,
-"prob": 38,
-"oversold": -34.8168,
-"rebound": 14.7862,
-"trend": -1.0,
-"relstrength": 0.0596
-},
-"ret_5d": 5.09,
-"ret_21d": null
-},
-{
-"date": "2026-09-16",
-"ticker": "INTC",
-"kind": "short",
-"price": 97.14,
-"conv": 50,
-"factors": {
-"discount": 31.0771,
-"histcheap": -0.89,
-"riskadj": 2.94,
-"ddpen": -17.08,
-"momentum": 7.0164,
-"prob": 18,
-"oversold": -50.2746,
-"rebound": 0.2553,
-"trend": 1.0,
-"relstrength": -5.8723
-},
-"ret_5d": 24.29,
-"ret_21d": null
-},
-{
-"date": "2026-09-16",
-"ticker": "GRAB",
-"kind": "short",
-"price": 2.91,
-"conv": 74,
-"factors": {
-"discount": 54.8837,
-"histcheap": 1.54,
-"riskadj": -3.57,
-"ddpen": -35.49,
-"momentum": 10.4615,
-"prob": 49,
-"oversold": -26.2692,
-"rebound": 21.299,
-"trend": -1.0,
-"relstrength": -9.3175
-},
-"ret_5d": 9.11,
-"ret_21d": null
-},
-{
-"date": "2026-09-16",
 "ticker": "PATH",
 "kind": "short",
 "price": 14.23,
@@ -40316,6 +40232,86 @@
 "rebound": -43.9387,
 "trend": 1.0,
 "relstrength": 56.8054
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-24",
+"ticker": "BENF",
+"kind": "long",
+"price": 1.45,
+"conv": 38,
+"factors": {
+"discount": 87.8356,
+"histcheap": 1.66,
+"riskadj": -0.45,
+"ddpen": -66.59,
+"momentum": -130.5246,
+"prob": -63,
+"quality": null,
+"valcheap": null,
+"trappen": 0
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-24",
+"ticker": "TRT",
+"kind": "long",
+"price": 7.26,
+"conv": 64,
+"factors": {
+"discount": 63.7905,
+"histcheap": 0.17,
+"riskadj": 1.01,
+"ddpen": -30.23,
+"momentum": 28.0476,
+"prob": 50,
+"quality": null,
+"valcheap": null,
+"trappen": 0
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-24",
+"ticker": "XXII",
+"kind": "long",
+"price": 1.51,
+"conv": 48,
+"factors": {
+"discount": 99.7458,
+"histcheap": 0.86,
+"riskadj": -5.65,
+"ddpen": -81.02,
+"momentum": 12.2093,
+"prob": 2,
+"quality": null,
+"valcheap": null,
+"trappen": 0
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-24",
+"ticker": "IPEXU",
+"kind": "long",
+"price": 6.8,
+"conv": 68,
+"factors": {
+"discount": 51.4286,
+"histcheap": 5.84,
+"riskadj": -0.26,
+"ddpen": -20.3,
+"momentum": 43.0962,
+"prob": 36,
+"quality": null,
+"valcheap": null,
+"trappen": 0
 },
 "ret_5d": null,
 "ret_21d": null
