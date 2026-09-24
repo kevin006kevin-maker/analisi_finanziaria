@@ -26168,5 +26168,32 @@
 },
 "stop": 18.4373,
 "atr": 0.5164
+},
+{
+"episodio": "short:BBT:2026-09-22",
+"ticker": "BBT",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-25 01:29",
+"data": "2026-09-25 01:25",
+"prezzo": 28.0,
+"conv": 64,
+"prob_gain": 59,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": 0.3497,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-25",
+"soglie": {
+"media50": 31.0626,
+"media20": 30.8095,
+"quattro_atr": 30.9024,
+"meta_caduta": 30.305,
+"bollinger": 33.1497,
+"consigliata": 30.9024
+},
+"stop": 26.5488,
+"atr": 0.7256
 }
 ]
