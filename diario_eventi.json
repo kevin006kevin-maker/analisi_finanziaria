@@ -25416,5 +25416,32 @@
 },
 "stop": 15.9501,
 "atr": 1.045
+},
+{
+"episodio": "short:FSLR:2026-09-24",
+"ticker": "FSLR",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-24 19:05",
+"data": "2026-09-24 19:05",
+"prezzo": 177.29,
+"conv": 67,
+"prob_gain": 50,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": 0.4711,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 212.0894,
+"media20": 201.7865,
+"quattro_atr": 219.0241,
+"meta_caduta": 213.67,
+"bollinger": 217.8745,
+"consigliata": 212.0894
+},
+"stop": 156.423,
+"atr": 10.4335
 }
 ]
