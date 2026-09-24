@@ -25885,5 +25885,32 @@
 },
 "stop": 20.0216,
 "atr": 1.0792
+},
+{
+"episodio": "short:ADXN:2026-09-25",
+"ticker": "ADXN",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-25 01:28",
+"data": "2026-08-27 02:02",
+"prezzo": 4.23,
+"conv": 75,
+"prob_gain": 52,
+"prob_loss": 9,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 5.676,
+"media20": 5.2885,
+"quattro_atr": 6.1061,
+"meta_caduta": 5.465,
+"bollinger": 6.7996,
+"consigliata": 5.676
+},
+"stop": 3.292,
+"atr": 0.469
 }
 ]
