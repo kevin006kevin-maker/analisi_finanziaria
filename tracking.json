@@ -3715,7 +3715,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-25",
 "max_price": 12.99,
-"max_date": "2026-09-15 19:42"
+"max_date": "2026-09-15 19:42",
+"warn_since": "2026-09-25",
+"warn": "in perdita da 42 giorni di Borsa: valuta l'uscita"
 },
 "GOOGL": {
 "kind": "short",
@@ -7875,7 +7877,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-25",
 "max_price": 26.21,
-"max_date": "2026-08-21 17:07"
+"max_date": "2026-08-21 17:07",
+"warn_since": "2026-09-25",
+"warn": "in perdita da 37 giorni di Borsa: valuta l'uscita"
 },
 "CCB": {
 "kind": "short",
@@ -13755,7 +13759,9 @@
 "max_date": "2026-09-15 23:18",
 "auto": true,
 "notified": true,
-"entry_check": "2026-09-25"
+"entry_check": "2026-09-25",
+"warn_since": "2026-09-25",
+"warn": "in perdita da 16 giorni di Borsa: valuta l'uscita"
 },
 "DKS": {
 "kind": "long",
@@ -15294,7 +15300,9 @@
 "max_date": "2026-09-22 19:50",
 "auto": true,
 "notified": false,
-"entry_check": "2026-09-25"
+"entry_check": "2026-09-25",
+"warn_since": "2026-09-25",
+"warn": "in perdita da 9 giorni di Borsa: valuta l'uscita"
 },
 "TTAN": {
 "kind": "short",
@@ -16577,9 +16585,7 @@
 "max_date": "2026-09-22 23:18",
 "auto": true,
 "notified": false,
-"entry_check": "2026-09-25",
-"warn_since": "2026-09-23",
-"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-09-25"
 },
 "KRMN": {
 "kind": "short",
