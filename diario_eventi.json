@@ -26980,5 +26980,32 @@
 },
 "stop": 18.4682,
 "atr": 1.1009
+},
+{
+"episodio": "short:TRIP:2026-09-24",
+"ticker": "TRIP",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-25 20:33",
+"data": "2026-09-25 20:32",
+"prezzo": 8.37,
+"conv": 71,
+"prob_gain": 53,
+"prob_loss": 17,
+"reliab": "🟡 Media",
+"mkt": 0.15,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 10.9,
+"media20": 9.004,
+"quattro_atr": 10.1178,
+"meta_caduta": 11.65,
+"bollinger": 9.8951,
+"consigliata": 10.1178
+},
+"stop": 7.4961,
+"atr": 0.437
 }
 ]
