@@ -867,7 +867,10 @@
 "conv": 71,
 "res": {
 "osservazione|7g": 1.91,
-"promozione|7g": 1.38
+"promozione|7g": 1.38,
+"osservazione|30g": -0.26,
+"promozione|30g": -0.78,
+"conferma|30g": -2.37
 },
 "passaggi": {
 "osservazione": {
@@ -965,7 +968,13 @@
 },
 "res": {
 "osservazione|7g": 3.47,
-"promozione|7g": -2.23
+"promozione|7g": -2.23,
+"osservazione|30g": -6.75,
+"promozione|30g": -11.89,
+"conferma|30g": -9.88,
+"osservazione|bersaglio": -6.75,
+"promozione|bersaglio": -11.89,
+"conferma|bersaglio": -9.88
 }
 },
 {
@@ -989,7 +998,10 @@
 "conv": 69,
 "res": {
 "osservazione|7g": -4.47,
-"promozione|7g": -6.16
+"promozione|7g": -6.16,
+"osservazione|30g": -0.74,
+"promozione|30g": -2.51,
+"conferma|30g": 3.9
 },
 "passaggi": {
 "osservazione": {
@@ -1051,7 +1063,10 @@
 "conv": 70,
 "res": {
 "osservazione|7g": -10.8,
-"promozione|7g": -10.15
+"promozione|7g": -10.15,
+"osservazione|30g": 20.85,
+"promozione|30g": 21.74,
+"conferma|30g": 35.48
 },
 "passaggi": {
 "osservazione": {
@@ -1150,7 +1165,14 @@
 "res": {
 "anticipo|7g": 8.78,
 "osservazione|7g": 4.18,
-"promozione|7g": 1.79
+"promozione|7g": 1.79,
+"anticipo|30g": 31.98,
+"osservazione|30g": 26.4,
+"promozione|30g": 23.49,
+"conferma|30g": 9.13,
+"anticipo|bersaglio": 18.55,
+"osservazione|bersaglio": 13.53,
+"promozione|bersaglio": 10.93
 }
 },
 {
@@ -1211,7 +1233,15 @@
 "res": {
 "anticipo|7g": 8.51,
 "osservazione|7g": 9.02,
-"promozione|7g": 6.04
+"promozione|7g": 6.04,
+"anticipo|30g": 3.33,
+"osservazione|30g": 3.82,
+"promozione|30g": 0.98,
+"conferma|30g": -4.77,
+"anticipo|bersaglio": 3.33,
+"osservazione|bersaglio": 3.82,
+"promozione|bersaglio": 0.98,
+"conferma|bersaglio": -4.77
 }
 },
 {
@@ -1271,7 +1301,13 @@
 },
 "res": {
 "osservazione|7g": 3.62,
-"promozione|7g": -5.98
+"promozione|7g": -5.98,
+"osservazione|30g": -15.63,
+"promozione|30g": -23.44,
+"conferma|30g": -18.58,
+"osservazione|bersaglio": -15.63,
+"promozione|bersaglio": -23.44,
+"conferma|bersaglio": -18.58
 }
 },
 {
@@ -1332,7 +1368,15 @@
 "res": {
 "anticipo|7g": -5.28,
 "osservazione|7g": -4.47,
-"promozione|7g": -6.53
+"promozione|7g": -6.53,
+"anticipo|30g": -1.59,
+"osservazione|30g": -0.74,
+"promozione|30g": -2.89,
+"conferma|30g": 3.9,
+"anticipo|bersaglio": -1.59,
+"osservazione|bersaglio": -0.74,
+"promozione|bersaglio": -2.89,
+"conferma|bersaglio": 3.9
 }
 },
 {
@@ -1421,7 +1465,10 @@
 "conv": 60,
 "res": {
 "osservazione|7g": -20.71,
-"promozione|7g": -6.91
+"promozione|7g": -6.91,
+"osservazione|30g": -29.97,
+"promozione|30g": -17.78,
+"conferma|30g": -8.85
 },
 "passaggi": {
 "osservazione": {
@@ -6880,15 +6927,18 @@
 "obs_date": "2026-09-15",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 39.34000015258789,
+"conf_date": "2026-09-25",
 "target": null,
 "stop": null,
 "reliab": "🟢 Alta",
 "prob_gain": 48,
 "prob_loss": 0,
 "conv": 63,
-"res": {},
+"res": {
+"osservazione|7g": -5.15,
+"promozione|7g": -5.64
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-09-15 19:40",
@@ -6918,8 +6968,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-09-25",
+"prezzo": 39.34000015258789,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -6937,8 +6987,8 @@
 "obs_date": "2026-09-15",
 "pre_price": 17.79,
 "pre_date": "2026-09-16",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 19.190000534057617,
+"conf_date": "2026-09-25",
 "target": 24.8558,
 "stop": 17.5455,
 "reliab": "🔴 Bassa",
@@ -6974,16 +7024,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-09-25",
+"prezzo": 19.190000534057617,
+"conv": 61,
+"prob_gain": 42,
+"prob_loss": 28,
+"reliab": "🔴 Bassa",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": 7.87,
+"osservazione|7g": -5.7,
+"promozione|7g": -8.44
+}
 },
 {
 "ticker": "ENVA",
@@ -6994,8 +7048,8 @@
 "obs_date": "2026-09-15",
 "pre_price": 173.61,
 "pre_date": "2026-09-16",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 172.9499969482422,
+"conf_date": "2026-09-25",
 "target": 237.2126,
 "stop": 158.1595,
 "reliab": "🟡 Media",
@@ -7031,16 +7085,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-09-25",
+"prezzo": 172.9499969482422,
+"conv": 76,
+"prob_gain": 57,
+"prob_loss": 9,
+"reliab": "🟡 Media",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": -0.38,
+"osservazione|7g": 0.03,
+"promozione|7g": -3.41
+}
 },
 {
 "ticker": "IONS",
@@ -7053,15 +7111,18 @@
 "obs_date": "2026-09-15",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 44.0,
+"conf_date": "2026-09-25",
 "target": null,
 "stop": null,
 "reliab": "🟡 Media",
 "prob_gain": 66,
 "prob_loss": 10,
 "conv": 81,
-"res": {},
+"res": {
+"osservazione|7g": -7.06,
+"promozione|7g": -5.88
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-09-15 19:40",
@@ -7091,12 +7152,12 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-09-25",
+"prezzo": 44.0,
+"conv": 84,
+"prob_gain": 64,
+"prob_loss": 13,
+"reliab": "🟡 Media",
 "mkt": null
 }
 }
@@ -7112,15 +7173,18 @@
 "obs_date": "2026-09-15",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 7.764999866485596,
+"conf_date": "2026-09-25",
 "target": null,
 "stop": null,
 "reliab": "🔴 Bassa",
 "prob_gain": 54,
 "prob_loss": 14,
 "conv": 80,
-"res": {},
+"res": {
+"osservazione|7g": -22.93,
+"promozione|7g": -10.75
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-09-15 19:40",
@@ -7150,8 +7214,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-09-25",
+"prezzo": 7.764999866485596,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -7169,8 +7233,8 @@
 "obs_date": "2026-09-15",
 "pre_price": 442.08,
 "pre_date": "2026-09-16",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 447.2900085449219,
+"conf_date": "2026-09-25",
 "target": 551.1902,
 "stop": 393.4891,
 "reliab": "🔴 Bassa",
@@ -7206,16 +7270,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-09-25",
+"prezzo": 447.2900085449219,
+"conv": 66,
+"prob_gain": 50,
+"prob_loss": 22,
+"reliab": "🔴 Bassa",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": 1.18,
+"osservazione|7g": 2.36,
+"promozione|7g": -1.37
+}
 },
 {
 "ticker": "STMMI.MI",
