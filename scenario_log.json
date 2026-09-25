@@ -9286,7 +9286,45 @@
 "prob_gain": 54,
 "prob_loss": 1,
 "conv": 73,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-09-22 01:15",
+"prezzo": 19.45,
+"conv": 77,
+"prob_gain": 54,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": 1.177
+},
+"anticipo": {
+"data": "2026-09-24",
+"prezzo": 19.45,
+"conv": 80,
+"prob_gain": 52,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-25",
+"prezzo": 19.475,
+"conv": 73,
+"prob_gain": 54,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "LPLA",
