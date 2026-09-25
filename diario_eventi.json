@@ -26451,5 +26451,32 @@
 "soglie_ricalcolate_il": "2026-09-25 09:44",
 "taglio_corretto": true,
 "soglie_ritardo_giorni": 1
+},
+{
+"episodio": "short:TRT:2026-09-24",
+"ticker": "TRT",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-25 15:43",
+"data": "2026-09-25 15:41",
+"prezzo": 6.49,
+"conv": 72,
+"prob_gain": 52,
+"prob_loss": 26,
+"reliab": "🔴 Bassa",
+"mkt": -0.0176,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 10.3838,
+"media20": 10.139,
+"quattro_atr": 10.6353,
+"meta_caduta": 9.085,
+"bollinger": 12.5851,
+"consigliata": 10.3838
+},
+"stop": 4.4173,
+"atr": 1.0363
 }
 ]
