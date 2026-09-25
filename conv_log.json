@@ -1,69 +1,6 @@
 [
 {
 "date": "2026-09-16",
-"ticker": "TRAX",
-"kind": "short",
-"price": 40.13,
-"conv": 40,
-"factors": {
-"discount": 16.2563,
-"histcheap": -0.99,
-"riskadj": 2.83,
-"ddpen": -21.53,
-"momentum": -1.4152,
-"prob": -5,
-"oversold": -48.6226,
-"rebound": 2.1585,
-"trend": null,
-"relstrength": 1.779
-},
-"ret_5d": -3.99,
-"ret_21d": null
-},
-{
-"date": "2026-09-16",
-"ticker": "OPENZ",
-"kind": "short",
-"price": 0.0723,
-"conv": 65,
-"factors": {
-"discount": 89.8739,
-"histcheap": 1.61,
-"riskadj": -2.39,
-"ddpen": -61.15,
-"momentum": 24.6875,
-"prob": 11,
-"oversold": -33.9648,
-"rebound": 107.1729,
-"trend": null,
-"relstrength": -24.3237
-},
-"ret_5d": 23.93,
-"ret_21d": null
-},
-{
-"date": "2026-09-16",
-"ticker": "FTK",
-"kind": "short",
-"price": 27.425,
-"conv": 37,
-"factors": {
-"discount": 29.3534,
-"histcheap": -1.63,
-"riskadj": 1.72,
-"ddpen": -15.84,
-"momentum": 1.632,
-"prob": 27,
-"oversold": -53.9492,
-"rebound": -1.251,
-"trend": 1.0,
-"relstrength": -1.2682
-},
-"ret_5d": 12.34,
-"ret_21d": null
-},
-{
-"date": "2026-09-16",
 "ticker": "SKIL",
 "kind": "short",
 "price": 5.925,
@@ -40312,6 +40249,69 @@
 "quality": 85.5,
 "valcheap": -0.6294,
 "trappen": 1
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-25",
+"ticker": "SNX",
+"kind": "short",
+"price": 259.47,
+"conv": 43,
+"factors": {
+"discount": 10.5708,
+"histcheap": -1.21,
+"riskadj": 1.89,
+"ddpen": -8.38,
+"momentum": 0.3954,
+"prob": 42,
+"oversold": -48.6193,
+"rebound": -1.4052,
+"trend": 1.0,
+"relstrength": -2.4124
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-25",
+"ticker": "UXIN",
+"kind": "short",
+"price": 1.3,
+"conv": 29,
+"factors": {
+"discount": 67.7419,
+"histcheap": 1.51,
+"riskadj": -1.92,
+"ddpen": -40.03,
+"momentum": -20.3704,
+"prob": 26,
+"oversold": -59.9042,
+"rebound": -3.6,
+"trend": -1.0,
+"relstrength": 18.3534
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-25",
+"ticker": "LU",
+"kind": "short",
+"price": 1.35,
+"conv": 25,
+"factors": {
+"discount": 69.3182,
+"histcheap": 1.11,
+"riskadj": -2.89,
+"ddpen": -53.21,
+"momentum": -12.5,
+"prob": 32,
+"oversold": -56.5969,
+"rebound": 1.4519,
+"trend": -1.0,
+"relstrength": 10.483
 },
 "ret_5d": null,
 "ret_21d": null
