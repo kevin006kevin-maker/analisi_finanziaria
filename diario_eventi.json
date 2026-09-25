@@ -26380,5 +26380,32 @@
 "stop": 91.5172,
 "atr": 6.0114,
 "res": {}
+},
+{
+"episodio": "long:PCG:2026-08-31",
+"ticker": "PCG",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-25 09:43",
+"data": "2026-09-24 22:28",
+"prezzo": 12.32,
+"conv": 74,
+"prob_gain": 72,
+"prob_loss": 16,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 16.1168,
+"media20": 13.877,
+"quattro_atr": 14.8495,
+"meta_caduta": 15.34,
+"bollinger": 16.5502,
+"consigliata": 14.8495
+},
+"stop": 11.0553,
+"atr": 0.6324
 }
 ]
