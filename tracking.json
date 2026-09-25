@@ -18949,5 +18949,37 @@
 "auto": true,
 "notified": false,
 "entry_check": "2026-09-25"
+},
+"LPLA": {
+"kind": "short",
+"added": "2026-09-25",
+"note": "🤖 Promossa il 2026-09-25: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.2% e la convenienza (63) regge.",
+"name": "LPLA",
+"snapshots": [
+{
+"name": "LPLA",
+"price": 316.83,
+"rsi": 37.2726,
+"dd_high": -19.4329,
+"occasione": 49,
+"convenienza": 67,
+"prob_gain": 54,
+"prob_loss": 4,
+"exp_ret": 1.2,
+"gain": 9.8419,
+"reliab": "🟡 Media",
+"target": 348.0122,
+"stop": 292.4321,
+"date": "2026-09-25 20:33"
+}
+],
+"entry_price": 316.83,
+"entry_target": 348.0122,
+"entry_stop": 292.4321,
+"entry_conv": 67,
+"entry_date": "2026-09-25 20:33",
+"entry_src": "scatto",
+"max_price": 316.83,
+"max_date": "2026-09-25 20:33"
 }
 }
