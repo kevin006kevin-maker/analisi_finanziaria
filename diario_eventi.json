@@ -27101,5 +27101,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:MGM:2026-09-24",
+"ticker": "MGM",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-26 07:29",
+"data": "2026-09-26 07:27",
+"prezzo": 32.58,
+"conv": 84,
+"prob_gain": 50,
+"prob_loss": 1,
+"reliab": "🟡 Media",
+"mkt": 0.1607,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 42.4496,
+"media20": 39.2765,
+"quattro_atr": 37.6095,
+"meta_caduta": 39.91,
+"bollinger": 44.234,
+"consigliata": 37.6095
+},
+"stop": 30.0653,
+"atr": 1.2574
 }
 ]
