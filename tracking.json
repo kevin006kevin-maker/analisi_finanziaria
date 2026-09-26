@@ -510,9 +510,7 @@
 "entry_date": "2026-07-06",
 "entry_src": "storico",
 "max_price": 5.325,
-"max_date": "2026-09-14 15:53",
-"warn_since": "2026-09-25",
-"warn": "in perdita da 58 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-09-14 15:53"
 },
 "XLE": {
 "kind": "short",
@@ -3949,9 +3947,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-09-26",
 "max_price": 12.99,
-"max_date": "2026-09-15 19:42",
-"warn_since": "2026-09-25",
-"warn": "in perdita da 42 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-09-15 19:42"
 },
 "GOOGL": {
 "kind": "short",
@@ -12236,9 +12232,7 @@
 "max_date": "2026-08-27 22:41",
 "auto": true,
 "notified": true,
-"entry_check": "2026-09-25",
-"warn_since": "2026-09-25",
-"warn": "in perdita da 25 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-09-25"
 },
 "DUOL": {
 "kind": "long",
@@ -12561,9 +12555,7 @@
 "max_date": "2026-09-03 15:46",
 "auto": true,
 "notified": true,
-"entry_check": "2026-09-25",
-"warn_since": "2026-09-25",
-"warn": "in perdita da 22 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-09-25"
 },
 "INTR": {
 "kind": "long",
@@ -13464,7 +13456,9 @@
 "max_date": "2026-09-08 19:06",
 "auto": true,
 "notified": true,
-"entry_check": "2026-09-25"
+"entry_check": "2026-09-25",
+"warn_since": "2026-09-26",
+"warn": "in perdita da 21 giorni di Borsa: valuta l'uscita"
 },
 "INTC": {
 "kind": "short",
@@ -14593,9 +14587,7 @@
 "max_date": "2026-09-15 23:18",
 "auto": true,
 "notified": true,
-"entry_check": "2026-09-25",
-"warn_since": "2026-09-25",
-"warn": "in perdita da 16 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-09-25"
 },
 "DKS": {
 "kind": "long",
@@ -16491,9 +16483,7 @@
 "max_date": "2026-09-24 00:19",
 "auto": true,
 "notified": true,
-"entry_check": "2026-09-25",
-"warn_since": "2026-09-25",
-"warn": "in perdita da 9 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-09-25"
 },
 "BBD": {
 "kind": "long",
@@ -17595,7 +17585,9 @@
 "max_date": "2026-09-22 23:18",
 "auto": true,
 "notified": false,
-"entry_check": "2026-09-25"
+"entry_check": "2026-09-25",
+"warn_since": "2026-09-26",
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "KRMN": {
 "kind": "short",
