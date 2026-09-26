@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-09-17",
-"ticker": "DTSS",
-"kind": "short",
-"price": 1.1986,
-"conv": 21,
-"factors": {
-"discount": 47.887,
-"histcheap": -0.26,
-"riskadj": -0.92,
-"ddpen": -56.0,
-"momentum": -74.9781,
-"prob": 10,
-"oversold": -78.1394,
-"rebound": -36.9788,
-"trend": 1.0,
-"relstrength": 74.3483
-},
-"ret_5d": -29.04,
-"ret_21d": null
-},
-{
-"date": "2026-09-17",
 "ticker": "SURG",
 "kind": "short",
 "price": 0.1517,
@@ -40301,6 +40280,26 @@
 "rebound": -3.6323,
 "trend": -1.0,
 "relstrength": -3.4182
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-26",
+"ticker": "ET",
+"kind": "long",
+"price": 20.19,
+"conv": 39,
+"factors": {
+"discount": 7.087,
+"histcheap": -0.94,
+"riskadj": 1.16,
+"ddpen": -3.68,
+"momentum": 4.4938,
+"prob": 71,
+"quality": 41.5,
+"valcheap": -0.0419,
+"trappen": 2
 },
 "ret_5d": null,
 "ret_21d": null
