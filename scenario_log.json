@@ -9496,5 +9496,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "COO",
+"kind": "short",
+"date": "2026-09-27",
+"promo_price": 55.38,
+"obs_price": 55.24,
+"obs_date": "2026-09-10",
+"pre_price": 54.17,
+"pre_date": "2026-09-11",
+"conf_price": null,
+"conf_date": null,
+"target": 68.3858,
+"stop": 51.1735,
+"reliab": "🟢 Alta",
+"prob_gain": 55,
+"prob_loss": 8,
+"conv": 83,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-10 20:55",
+"prezzo": 55.24,
+"conv": 91,
+"prob_gain": 64,
+"prob_loss": 3,
+"reliab": "🟢 Alta",
+"mkt": -2.0112
+},
+"anticipo": {
+"data": "2026-09-11",
+"prezzo": 54.17,
+"conv": 91,
+"prob_gain": 65,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-27 12:47",
+"prezzo": 55.38,
+"conv": 83,
+"prob_gain": 55,
+"prob_loss": 8,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
