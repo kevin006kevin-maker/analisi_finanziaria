@@ -27600,5 +27600,32 @@
 },
 "stop": 70.0762,
 "atr": 3.5619
+},
+{
+"episodio": "short:XRAY:2026-09-23",
+"ticker": "XRAY",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-28 00:36",
+"data": "2026-09-26 07:27",
+"prezzo": 9.4,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-28",
+"soglie": {
+"media50": 11.5854,
+"media20": 10.3595,
+"quattro_atr": 11.1411,
+"meta_caduta": 11.835,
+"bollinger": 11.8049,
+"consigliata": 11.1411
+},
+"stop": 8.5295,
+"atr": 0.4353
 }
 ]
