@@ -27290,5 +27290,32 @@
 },
 "stop": 5.682,
 "atr": 3.449
+},
+{
+"episodio": "short:ACAD:2026-09-25",
+"ticker": "ACAD",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-28 00:35",
+"data": "2026-09-28 00:33",
+"prezzo": 20.68,
+"conv": 87,
+"prob_gain": 58,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": 0.1607,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 27.4536,
+"media20": 27.0105,
+"quattro_atr": 25.0836,
+"meta_caduta": 25.625,
+"bollinger": 31.277,
+"consigliata": 25.0836
+},
+"stop": 18.4782,
+"atr": 1.1009
 }
 ]
