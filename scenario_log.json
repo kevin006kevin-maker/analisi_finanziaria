@@ -9553,5 +9553,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "SMST",
+"kind": "short",
+"date": "2026-09-27",
+"promo_price": 12.58,
+"obs_price": 13.84,
+"obs_date": "2026-09-18",
+"pre_price": 11.665,
+"pre_date": "2026-09-21",
+"conf_price": null,
+"conf_date": null,
+"target": 38.2662,
+"stop": 5.682,
+"reliab": "🔴 Bassa",
+"prob_gain": 53,
+"prob_loss": 32,
+"conv": 69,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-18 23:14",
+"prezzo": 13.84,
+"conv": 71,
+"prob_gain": 55,
+"prob_loss": 31,
+"reliab": "🔴 Bassa",
+"mkt": 0.0639
+},
+"anticipo": {
+"data": "2026-09-21",
+"prezzo": 11.665,
+"conv": 72,
+"prob_gain": 57,
+"prob_loss": 29,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-27 12:47",
+"prezzo": 12.58,
+"conv": 69,
+"prob_gain": 53,
+"prob_loss": 32,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
