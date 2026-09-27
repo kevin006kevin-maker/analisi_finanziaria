@@ -27762,5 +27762,32 @@
 },
 "stop": 19.2066,
 "atr": 1.0767
+},
+{
+"episodio": "short:PAYX:2026-09-23",
+"ticker": "PAYX",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-28 00:37",
+"data": "2026-09-28 00:33",
+"prezzo": 101.37,
+"conv": 75,
+"prob_gain": 55,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": 0.1607,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-28",
+"soglie": {
+"media50": 118.371,
+"media20": 116.832,
+"quattro_atr": 114.7352,
+"meta_caduta": 114.355,
+"bollinger": 131.9208,
+"consigliata": 114.7352
+},
+"stop": 94.6874,
+"atr": 3.3413
 }
 ]
