@@ -9382,5 +9382,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "ENOV",
+"kind": "short",
+"date": "2026-09-27",
+"promo_price": 18.46,
+"obs_price": 19.98,
+"obs_date": "2026-09-09",
+"pre_price": 19.98,
+"pre_date": "2026-09-10",
+"conf_price": null,
+"conf_date": null,
+"target": 23.8938,
+"stop": 16.1601,
+"reliab": "🔴 Bassa",
+"prob_gain": 50,
+"prob_loss": 16,
+"conv": 71,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-09 00:52",
+"prezzo": 19.98,
+"conv": 72,
+"prob_gain": 54,
+"prob_loss": 11,
+"reliab": "🔴 Bassa",
+"mkt": -1.0266
+},
+"anticipo": {
+"data": "2026-09-10",
+"prezzo": 19.98,
+"conv": 74,
+"prob_gain": 52,
+"prob_loss": 11,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-27 12:46",
+"prezzo": 18.46,
+"conv": 71,
+"prob_gain": 50,
+"prob_loss": 16,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
