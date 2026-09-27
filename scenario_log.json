@@ -9709,5 +9709,62 @@
 "prob_loss": 1,
 "conv": 75,
 "res": {}
+},
+{
+"ticker": "KNF",
+"kind": "short",
+"date": "2026-09-28",
+"promo_price": 54.58,
+"obs_price": 51.65,
+"obs_date": "2026-09-23",
+"pre_price": 51.43,
+"pre_date": "2026-09-24",
+"conf_price": null,
+"conf_date": null,
+"target": 65.7986,
+"stop": 49.5924,
+"reliab": "🟡 Media",
+"prob_gain": 48,
+"prob_loss": 14,
+"conv": 77,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-23 21:02",
+"prezzo": 51.65,
+"conv": 75,
+"prob_gain": 52,
+"prob_loss": 11,
+"reliab": "🟡 Media",
+"mkt": 0.7643
+},
+"anticipo": {
+"data": "2026-09-24",
+"prezzo": 51.43,
+"conv": 78,
+"prob_gain": 48,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-28 00:35",
+"prezzo": 54.58,
+"conv": 77,
+"prob_gain": 48,
+"prob_loss": 14,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
