@@ -27155,5 +27155,32 @@
 },
 "stop": 14.8423,
 "atr": 1.0889
+},
+{
+"episodio": "short:BYND:2026-09-17",
+"ticker": "BYND",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-27 12:46",
+"data": "2026-09-27 12:44",
+"prezzo": 8.35,
+"conv": 68,
+"prob_gain": 54,
+"prob_loss": 25,
+"reliab": "🔴 Bassa",
+"mkt": 0.1607,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 13.7656,
+"media20": 11.1235,
+"quattro_atr": 12.3812,
+"meta_caduta": 15.185,
+"bollinger": 13.7135,
+"consigliata": 12.3812
+},
+"stop": 6.3344,
+"atr": 1.0078
 }
 ]
