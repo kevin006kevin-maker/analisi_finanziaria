@@ -27546,5 +27546,32 @@
 },
 "stop": null,
 "atr": 3.9921
+},
+{
+"episodio": "short:WING:2026-09-16",
+"ticker": "WING",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-09-28 00:36",
+"data": "2026-09-26 07:30",
+"prezzo": 99.07,
+"conv": 69,
+"prob_gain": 53,
+"prob_loss": 19,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-09-28",
+"soglie": {
+"media50": 117.3351,
+"media20": 107.095,
+"quattro_atr": 123.3154,
+"meta_caduta": 138.53,
+"bollinger": 118.7557,
+"consigliata": 117.3351
+},
+"stop": 86.9473,
+"atr": 6.0613
 }
 ]
