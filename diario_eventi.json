@@ -27317,5 +27317,32 @@
 },
 "stop": 18.4782,
 "atr": 1.1009
+},
+{
+"episodio": "short:GIL:2026-09-24",
+"ticker": "GIL",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-28 00:35",
+"data": "2026-09-28 00:33",
+"prezzo": 40.98,
+"conv": 84,
+"prob_gain": 54,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": 0.1607,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 52.2658,
+"media20": 48.36,
+"quattro_atr": 48.5747,
+"meta_caduta": 49.745,
+"bollinger": 55.7868,
+"consigliata": 48.5747
+},
+"stop": 37.1827,
+"atr": 1.8987
 }
 ]
