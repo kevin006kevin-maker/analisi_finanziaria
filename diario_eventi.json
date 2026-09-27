@@ -27344,5 +27344,32 @@
 },
 "stop": 37.1827,
 "atr": 1.8987
+},
+{
+"episodio": "short:WYY:2026-09-25",
+"ticker": "WYY",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-28 00:35",
+"data": "2026-09-28 00:33",
+"prezzo": 5.47,
+"conv": 75,
+"prob_gain": 57,
+"prob_loss": 22,
+"reliab": "🔴 Bassa",
+"mkt": 0.1607,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 10.584,
+"media20": 10.8825,
+"quattro_atr": 10.1638,
+"meta_caduta": 10.695,
+"bollinger": 13.8811,
+"consigliata": 10.1638
+},
+"stop": 3.1231,
+"atr": 1.1735
 }
 ]
