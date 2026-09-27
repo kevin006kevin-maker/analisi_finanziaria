@@ -9439,5 +9439,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "CASY",
+"kind": "short",
+"date": "2026-09-27",
+"promo_price": 598.46,
+"obs_price": 624.865,
+"obs_date": "2026-09-09",
+"pre_price": 629.03,
+"pre_date": "2026-09-10",
+"conf_price": null,
+"conf_date": null,
+"target": 770.759,
+"stop": 548.3232,
+"reliab": "🟡 Media",
+"prob_gain": 56,
+"prob_loss": 10,
+"conv": 82,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-09 17:00",
+"prezzo": 624.865,
+"conv": 87,
+"prob_gain": 61,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": -0.983
+},
+"anticipo": {
+"data": "2026-09-10",
+"prezzo": 629.03,
+"conv": 87,
+"prob_gain": 61,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-27 12:47",
+"prezzo": 598.46,
+"conv": 82,
+"prob_gain": 56,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
