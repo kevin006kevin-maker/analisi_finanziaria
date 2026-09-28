@@ -7340,7 +7340,11 @@
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": 3.24,
+"osservazione|7g": -7.02,
+"promozione|7g": 3.58
+}
 },
 {
 "ticker": "JBHT",
@@ -7530,15 +7534,18 @@
 "obs_date": "2026-09-16",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 8.911999702453613,
+"conf_date": "2026-09-28",
 "target": null,
 "stop": null,
 "reliab": null,
 "prob_gain": null,
 "prob_loss": null,
 "conv": 56,
-"res": {},
+"res": {
+"osservazione|7g": 1.94,
+"promozione|7g": 0.48
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-09-02 14:29",
@@ -7568,12 +7575,12 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-09-28",
+"prezzo": 8.911999702453613,
+"conv": 71,
+"prob_gain": 50,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
 "mkt": null
 }
 }
@@ -7644,8 +7651,8 @@
 "obs_date": "2026-09-02",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 8.911999702453613,
+"conf_date": "2026-09-28",
 "target": 9.531,
 "stop": 8.603,
 "reliab": "🟢 Alta",
@@ -7681,16 +7688,19 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-09-28",
+"prezzo": 8.911999702453613,
+"conv": 71,
+"prob_gain": 50,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"osservazione|7g": -1.71,
+"promozione|7g": -0.09
+}
 },
 {
 "ticker": "WING",
