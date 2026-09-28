@@ -28118,5 +28118,32 @@
 },
 "stop": 272.2042,
 "atr": 3.4879
+},
+{
+"episodio": "long:GFI:2026-09-28",
+"ticker": "GFI",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-28 17:59",
+"data": "2026-09-28 17:59",
+"prezzo": 35.33,
+"conv": 74,
+"prob_gain": 77,
+"prob_loss": 16,
+"reliab": "🔴 Bassa",
+"mkt": -0.3755,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 40.81,
+"media20": 43.5865,
+"quattro_atr": 43.1306,
+"meta_caduta": 42.1,
+"bollinger": 49.8244,
+"consigliata": 40.81
+},
+"stop": 31.4297,
+"atr": 1.9501
 }
 ]
