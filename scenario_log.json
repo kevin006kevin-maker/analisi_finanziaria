@@ -1530,7 +1530,10 @@
 "conv": 71,
 "res": {
 "osservazione|7g": 12.07,
-"promozione|7g": 13.34
+"promozione|7g": 13.34,
+"osservazione|30g": -8.97,
+"promozione|30g": -7.93,
+"conferma|30g": -18.77
 },
 "passaggi": {
 "osservazione": {
@@ -1629,7 +1632,15 @@
 "res": {
 "anticipo|7g": -9.63,
 "osservazione|7g": -3.94,
-"promozione|7g": -13.48
+"promozione|7g": -13.48,
+"anticipo|30g": -28.89,
+"osservazione|30g": -24.41,
+"promozione|30g": -31.91,
+"conferma|30g": -21.31,
+"anticipo|bersaglio": -28.89,
+"osservazione|bersaglio": -24.41,
+"promozione|bersaglio": -31.91,
+"conferma|bersaglio": -21.31
 }
 },
 {
@@ -1653,7 +1664,10 @@
 "conv": 57,
 "res": {
 "osservazione|7g": -24.77,
-"promozione|7g": -10.46
+"promozione|7g": -10.46,
+"osservazione|30g": -21.49,
+"promozione|30g": -6.56,
+"conferma|30g": -3.26
 },
 "passaggi": {
 "osservazione": {
@@ -1752,7 +1766,15 @@
 "res": {
 "anticipo|7g": 0.92,
 "osservazione|7g": 1.22,
-"promozione|7g": -5.13
+"promozione|7g": -5.13,
+"anticipo|30g": -21.48,
+"osservazione|30g": -21.25,
+"promozione|30g": -26.18,
+"conferma|30g": -22.2,
+"anticipo|bersaglio": -21.48,
+"osservazione|bersaglio": -21.25,
+"promozione|bersaglio": -26.18,
+"conferma|bersaglio": -22.2
 }
 },
 {
@@ -1776,7 +1798,10 @@
 "conv": 64,
 "res": {
 "osservazione|7g": 1.68,
-"promozione|7g": 1.35
+"promozione|7g": 1.35,
+"osservazione|30g": -13.53,
+"promozione|30g": -13.82,
+"conferma|30g": -14.96
 },
 "passaggi": {
 "osservazione": {
@@ -1875,7 +1900,15 @@
 "res": {
 "anticipo|7g": 13.12,
 "osservazione|7g": 12.07,
-"promozione|7g": 9.65
+"promozione|7g": 9.65,
+"anticipo|30g": -8.11,
+"osservazione|30g": -8.97,
+"promozione|30g": -10.93,
+"conferma|30g": -18.77,
+"anticipo|bersaglio": -8.11,
+"osservazione|bersaglio": -8.97,
+"promozione|bersaglio": -10.93,
+"conferma|bersaglio": -18.77
 }
 },
 {
@@ -1899,7 +1932,10 @@
 "conv": 70,
 "res": {
 "osservazione|7g": -3.32,
-"promozione|7g": -4.51
+"promozione|7g": -4.51,
+"osservazione|30g": -10.63,
+"promozione|30g": -11.74,
+"conferma|30g": -7.57
 },
 "passaggi": {
 "osservazione": {
@@ -1961,7 +1997,10 @@
 "conv": 87,
 "res": {
 "osservazione|7g": -15.17,
-"promozione|7g": -1.75
+"promozione|7g": -1.75,
+"osservazione|30g": -24.51,
+"promozione|30g": -12.57,
+"conferma|30g": -11.02
 },
 "passaggi": {
 "osservazione": {
@@ -2023,7 +2062,10 @@
 "conv": 74,
 "res": {
 "osservazione|7g": 6.95,
-"promozione|7g": 6.07
+"promozione|7g": 6.07,
+"osservazione|30g": 30.35,
+"promozione|30g": 29.27,
+"conferma|30g": 21.87
 },
 "passaggi": {
 "osservazione": {
@@ -2122,7 +2164,15 @@
 "res": {
 "anticipo|7g": 20.51,
 "osservazione|7g": 19.12,
-"promozione|7g": 14.48
+"promozione|7g": 14.48,
+"anticipo|30g": 31.87,
+"osservazione|30g": 30.35,
+"promozione|30g": 25.27,
+"conferma|30g": 21.87,
+"anticipo|bersaglio": 20.66,
+"osservazione|bersaglio": 19.27,
+"promozione|bersaglio": 14.62,
+"conferma|bersaglio": 11.51
 }
 },
 {
@@ -7357,15 +7407,18 @@
 "obs_date": "2026-09-16",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 226.08999633789062,
+"conf_date": "2026-09-28",
 "target": null,
 "stop": null,
 "reliab": "🟡 Media",
 "prob_gain": 51,
 "prob_loss": 5,
 "conv": 79,
-"res": {},
+"res": {
+"osservazione|7g": -5.24,
+"promozione|7g": -3.48
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-09-16 16:54",
@@ -7395,8 +7448,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-09-28",
+"prezzo": 226.08999633789062,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -7416,15 +7469,18 @@
 "obs_date": "2026-09-16",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 168.38999938964844,
+"conf_date": "2026-09-28",
 "target": null,
 "stop": null,
 "reliab": "🟢 Alta",
 "prob_gain": 50,
 "prob_loss": 0,
 "conv": 63,
-"res": {},
+"res": {
+"osservazione|7g": -0.33,
+"promozione|7g": -0.8
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-09-16 20:52",
@@ -7454,8 +7510,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-09-28",
+"prezzo": 168.38999938964844,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -7475,15 +7531,18 @@
 "obs_date": "2026-09-16",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 15.369999885559082,
+"conf_date": "2026-09-28",
 "target": null,
 "stop": null,
 "reliab": "🟢 Alta",
 "prob_gain": 52,
 "prob_loss": 2,
 "conv": 68,
-"res": {},
+"res": {
+"osservazione|7g": -4.0,
+"promozione|7g": -3.21
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-09-16 20:52",
@@ -7513,8 +7572,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-09-28",
+"prezzo": 15.369999885559082,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -7594,8 +7653,8 @@
 "obs_date": "2026-09-04",
 "pre_price": 9.3,
 "pre_date": "2026-09-08",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 4.389999866485596,
+"conf_date": "2026-09-28",
 "target": 57.1815,
 "stop": null,
 "reliab": "🔴 Bassa",
@@ -7631,16 +7690,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-09-28",
+"prezzo": 4.389999866485596,
+"conv": 67,
+"prob_gain": 56,
+"prob_loss": 32,
+"reliab": "🔴 Bassa",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": -52.8,
+"osservazione|7g": -52.59,
+"promozione|7g": -4.57
+}
 },
 {
 "ticker": "ENEL.MI",
@@ -7711,8 +7774,8 @@
 "obs_date": "2026-09-16",
 "pre_price": 100.84,
 "pre_date": "2026-09-17",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 100.80000305175781,
+"conf_date": "2026-09-28",
 "target": 121.12,
 "stop": 91.8633,
 "reliab": "🔴 Bassa",
@@ -7748,16 +7811,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-09-28",
+"prezzo": 100.80000305175781,
+"conv": 69,
+"prob_gain": 53,
+"prob_loss": 19,
+"reliab": "🔴 Bassa",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": -0.04,
+"osservazione|7g": -0.04,
+"promozione|7g": -3.67
+}
 },
 {
 "ticker": "ON",
@@ -7768,8 +7835,8 @@
 "obs_date": "2026-09-16",
 "pre_price": 68.24,
 "pre_date": "2026-09-17",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 75.0199966430664,
+"conf_date": "2026-09-28",
 "target": 79.0327,
 "stop": 62.8695,
 "reliab": "🔴 Bassa",
@@ -7805,16 +7872,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-09-28",
+"prezzo": 75.0199966430664,
+"conv": 62,
+"prob_gain": 46,
+"prob_loss": 18,
+"reliab": "🔴 Bassa",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": 9.94,
+"osservazione|7g": 11.95,
+"promozione|7g": 6.81
+}
 },
 {
 "ticker": "SYNA",
