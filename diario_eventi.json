@@ -29031,5 +29031,32 @@
 },
 "stop": 4.821,
 "atr": 1.122
+},
+{
+"episodio": "short:ACET:2026-09-28",
+"ticker": "ACET",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-28 23:54",
+"data": "2026-09-28 23:54",
+"prezzo": 6.35,
+"conv": 61,
+"prob_gain": 57,
+"prob_loss": 14,
+"reliab": "🔴 Bassa",
+"mkt": -0.3535,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 8.7864,
+"media20": 9.0105,
+"quattro_atr": 9.4852,
+"meta_caduta": 8.04,
+"bollinger": 10.5144,
+"consigliata": 8.7864
+},
+"stop": 4.7824,
+"atr": 0.7838
 }
 ]
