@@ -10029,5 +10029,62 @@
 "prob_loss": null,
 "conv": 74,
 "res": {}
+},
+{
+"ticker": "RELY",
+"kind": "short",
+"date": "2026-09-28",
+"promo_price": 21.71,
+"obs_price": 19.75,
+"obs_date": "2026-09-23",
+"pre_price": 20.19,
+"pre_date": "2026-09-24",
+"conf_price": null,
+"conf_date": null,
+"target": 23.9853,
+"stop": 19.579,
+"reliab": "🟡 Media",
+"prob_gain": 50,
+"prob_loss": 16,
+"conv": 59,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-23 16:59",
+"prezzo": 19.75,
+"conv": 69,
+"prob_gain": 56,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": 1.0225
+},
+"anticipo": {
+"data": "2026-09-24",
+"prezzo": 20.19,
+"conv": 71,
+"prob_gain": 56,
+"prob_loss": 16,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-28 18:00",
+"prezzo": 21.71,
+"conv": 59,
+"prob_gain": 50,
+"prob_loss": 16,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
