@@ -28091,5 +28091,32 @@
 },
 "stop": 11.3537,
 "atr": 0.5532
+},
+{
+"episodio": "short:IWM:2026-09-28",
+"ticker": "IWM",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-28 17:57",
+"data": "2026-09-28 17:57",
+"prezzo": 279.18,
+"conv": 62,
+"prob_gain": 49,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -0.3755,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 293.7056,
+"media20": 287.7815,
+"quattro_atr": 293.1317,
+"meta_caduta": 292.135,
+"bollinger": 297.9338,
+"consigliata": 293.1317
+},
+"stop": 272.2042,
+"atr": 3.4879
 }
 ]
