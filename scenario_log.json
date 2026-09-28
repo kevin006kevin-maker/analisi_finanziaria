@@ -10328,5 +10328,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "MBC",
+"kind": "short",
+"date": "2026-09-28",
+"promo_price": 6.96,
+"obs_price": 6.82,
+"obs_date": "2026-09-23",
+"pre_price": 6.82,
+"pre_date": "2026-09-24",
+"conf_price": null,
+"conf_date": null,
+"target": 8.299,
+"stop": 6.1127,
+"reliab": "🟡 Media",
+"prob_gain": 51,
+"prob_loss": 19,
+"conv": 70,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-23 06:40",
+"prezzo": 6.82,
+"conv": 62,
+"prob_gain": 51,
+"prob_loss": 17,
+"reliab": "🟡 Media",
+"mkt": 1.177
+},
+"anticipo": {
+"data": "2026-09-24",
+"prezzo": 6.82,
+"conv": 74,
+"prob_gain": 53,
+"prob_loss": 14,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-28 23:55",
+"prezzo": 6.96,
+"conv": 70,
+"prob_gain": 51,
+"prob_loss": 19,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
