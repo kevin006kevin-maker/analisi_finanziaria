@@ -9852,5 +9852,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "NAMS",
+"kind": "short",
+"date": "2026-09-28",
+"promo_price": 23.12,
+"obs_price": 23.16,
+"obs_date": "2026-09-09",
+"pre_price": 22.79,
+"pre_date": "2026-09-10",
+"conf_price": null,
+"conf_date": null,
+"target": 26.2072,
+"stop": 20.5129,
+"reliab": "🟡 Media",
+"prob_gain": 44,
+"prob_loss": 19,
+"conv": 72,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-09 20:29",
+"prezzo": 23.16,
+"conv": 70,
+"prob_gain": 49,
+"prob_loss": 14,
+"reliab": "🟡 Media",
+"mkt": -1.0946
+},
+"anticipo": {
+"data": "2026-09-10",
+"prezzo": 22.79,
+"conv": 76,
+"prob_gain": 49,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-28 18:00",
+"prezzo": 23.12,
+"conv": 72,
+"prob_gain": 44,
+"prob_loss": 19,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
