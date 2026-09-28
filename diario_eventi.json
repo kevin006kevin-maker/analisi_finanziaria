@@ -28064,5 +28064,32 @@
 "taglio_corretto": true,
 "soglie_ritardo_giorni": 2,
 "res": {}
+},
+{
+"episodio": "short:NU:2026-09-28",
+"ticker": "NU",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-28 17:57",
+"data": "2026-09-28 17:57",
+"prezzo": 12.46,
+"conv": 63,
+"prob_gain": 57,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": -0.3755,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 14.364,
+"media20": 14.339,
+"quattro_atr": 14.6726,
+"meta_caduta": 14.07,
+"bollinger": 15.9524,
+"consigliata": 14.364
+},
+"stop": 11.3537,
+"atr": 0.5532
 }
 ]
