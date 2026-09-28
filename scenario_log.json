@@ -9909,5 +9909,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "MONC.MI",
+"kind": "short",
+"date": "2026-09-28",
+"promo_price": 44.7,
+"obs_price": 43.99,
+"obs_date": "2026-09-10",
+"pre_price": 43.6,
+"pre_date": "2026-09-11",
+"conf_price": null,
+"conf_date": null,
+"target": 47.1188,
+"stop": 42.3077,
+"reliab": "🟢 Alta",
+"prob_gain": 46,
+"prob_loss": 0,
+"conv": 74,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-10 13:38",
+"prezzo": 43.99,
+"conv": 68,
+"prob_gain": 48,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -1.1884
+},
+"anticipo": {
+"data": "2026-09-11",
+"prezzo": 43.6,
+"conv": 68,
+"prob_gain": 46,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-28 18:00",
+"prezzo": 44.7,
+"conv": 74,
+"prob_gain": 46,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
