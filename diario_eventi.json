@@ -29004,5 +29004,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:ITG:2026-09-28",
+"ticker": "ITG",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-28 23:54",
+"data": "2026-09-28 23:54",
+"prezzo": 7.065,
+"conv": 75,
+"prob_gain": 90,
+"prob_loss": 4,
+"reliab": "🔴 Bassa",
+"mkt": -0.3535,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 12.4749,
+"media20": 12.0413,
+"quattro_atr": 11.5531,
+"meta_caduta": 10.8775,
+"bollinger": 15.1987,
+"consigliata": 11.5531
+},
+"stop": 4.821,
+"atr": 1.122
 }
 ]
