@@ -10057,7 +10057,45 @@
 "prob_gain": 49,
 "prob_loss": 19,
 "conv": 55,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-09-18 00:26",
+"prezzo": 4.28,
+"conv": 60,
+"prob_gain": 45,
+"prob_loss": 24,
+"reliab": "🔴 Bassa",
+"mkt": -0.911
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-28",
+"prezzo": 3.93,
+"conv": 55,
+"prob_gain": 49,
+"prob_loss": 19,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "XRAY",
@@ -10078,7 +10116,45 @@
 "prob_gain": 55,
 "prob_loss": 11,
 "conv": 65,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-09-23 06:40",
+"prezzo": 9.44,
+"conv": 70,
+"prob_gain": 53,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": 1.177
+},
+"anticipo": {
+"data": "2026-09-24",
+"prezzo": 9.78,
+"conv": 65,
+"prob_gain": 52,
+"prob_loss": 11,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-28",
+"prezzo": 9.025,
+"conv": 65,
+"prob_gain": 55,
+"prob_loss": 11,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "MBC",
@@ -10099,7 +10175,45 @@
 "prob_gain": null,
 "prob_loss": null,
 "conv": 74,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-09-23 06:40",
+"prezzo": 6.82,
+"conv": 62,
+"prob_gain": 51,
+"prob_loss": 17,
+"reliab": "🟡 Media",
+"mkt": 1.177
+},
+"anticipo": {
+"data": "2026-09-24",
+"prezzo": 6.82,
+"conv": 74,
+"prob_gain": 53,
+"prob_loss": 14,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-28",
+"prezzo": 6.805,
+"conv": 74,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "RELY",
