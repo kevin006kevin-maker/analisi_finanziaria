@@ -1,47 +1,5 @@
 [
 {
-"episodio": "long:NEM:2026-08-19",
-"ticker": "NEM",
-"kind": "long",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-21 10:09",
-"data": "2026-08-19 09:35",
-"prezzo": 115.98,
-"conv": 64,
-"prob_gain": 60,
-"prob_loss": 27,
-"reliab": "🟡 Media",
-"mkt": 2.0971,
-"fonte": "riallineato dal registro delle osservazioni",
-"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
-"dovuto_il": null,
-"soglie": {
-"media50": null,
-"media20": null,
-"quattro_atr": 134.1006,
-"meta_caduta": 120.53,
-"bollinger": 129.2796,
-"consigliata": 134.1006
-},
-"stop": 106.9197,
-"atr": 4.5302,
-"soglie_contaminate": {
-"media50": null,
-"media20": null,
-"quattro_atr": 134.2291,
-"meta_caduta": 121.81,
-"bollinger": 132.2438,
-"consigliata": 134.2291
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 2,
-"res": {
-"7g": 14.27,
-"30g": 5.44
-},
-"taglio_corretto": true
-},
-{
 "episodio": "long:PBR:2026-08-16",
 "ticker": "PBR",
 "kind": "long",
@@ -29876,5 +29834,32 @@
 },
 "stop": 6.5018,
 "atr": 0.6591
+},
+{
+"episodio": "short:LFTO:2026-09-18",
+"ticker": "LFTO",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-09-30 01:49",
+"data": "2026-09-29 22:03",
+"prezzo": 15.83,
+"conv": 67,
+"prob_gain": 60,
+"prob_loss": 12,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-09-30",
+"soglie": {
+"media50": 19.959,
+"media20": 17.4825,
+"quattro_atr": 19.8403,
+"meta_caduta": 20.78,
+"bollinger": 19.852,
+"consigliata": 19.8403
+},
+"stop": 13.8248,
+"atr": 1.0026
 }
 ]
