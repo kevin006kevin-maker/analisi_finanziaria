@@ -1,47 +1,5 @@
 [
 {
-"episodio": "long:SMCI:2026-08-17",
-"ticker": "SMCI",
-"kind": "long",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-21 10:09",
-"data": "2026-08-17 16:23",
-"prezzo": 38.59,
-"conv": 60,
-"prob_gain": 54,
-"prob_loss": 38,
-"reliab": "🔴 Bassa",
-"mkt": 4.4206,
-"fonte": "riallineato dal registro delle osservazioni",
-"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
-"dovuto_il": null,
-"soglie": {
-"media50": null,
-"media20": null,
-"quattro_atr": 48.9706,
-"meta_caduta": 44.38,
-"bollinger": 39.7103,
-"consigliata": 48.9706
-},
-"stop": 33.3997,
-"atr": 2.5952,
-"soglie_contaminate": {
-"media50": null,
-"media20": null,
-"quattro_atr": 48.8343,
-"meta_caduta": 44.38,
-"bollinger": 41.2376,
-"consigliata": 48.8343
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 4,
-"res": {
-"7g": -11.38,
-"30g": -5.65
-},
-"taglio_corretto": true
-},
-{
 "episodio": "long:STLAM.MI:2026-08-17",
 "ticker": "STLAM.MI",
 "kind": "long",
@@ -29831,5 +29789,32 @@
 },
 "stop": 2.379,
 "atr": 0.2205
+},
+{
+"episodio": "long:OXY:2026-09-21",
+"ticker": "OXY",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-30 01:50",
+"data": "2026-09-30 01:45",
+"prezzo": 54.94,
+"conv": 56,
+"prob_gain": 70,
+"prob_loss": 15,
+"reliab": "🟡 Media",
+"mkt": -0.1991,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-30",
+"soglie": {
+"media50": 58.3906,
+"media20": 59.337,
+"quattro_atr": 61.103,
+"meta_caduta": 59.23,
+"bollinger": 63.9103,
+"consigliata": 58.3906
+},
+"stop": 51.8585,
+"atr": 1.5408
 }
 ]
