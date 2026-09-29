@@ -10465,5 +10465,62 @@
 "prob_loss": null,
 "conv": 77,
 "res": {}
+},
+{
+"ticker": "GIL",
+"kind": "short",
+"date": "2026-09-29",
+"promo_price": 42.62,
+"obs_price": 40.965,
+"obs_date": "2026-09-24",
+"pre_price": 40.98,
+"pre_date": "2026-09-28",
+"conf_price": null,
+"conf_date": null,
+"target": 52.0366,
+"stop": 38.5996,
+"reliab": "🟡 Media",
+"prob_gain": 53,
+"prob_loss": 5,
+"conv": 82,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-24 19:05",
+"prezzo": 40.965,
+"conv": 82,
+"prob_gain": 55,
+"prob_loss": 5,
+"reliab": "🟡 Media",
+"mkt": 0.4711
+},
+"anticipo": {
+"data": "2026-09-28",
+"prezzo": 40.98,
+"conv": 84,
+"prob_gain": 54,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-29 03:54",
+"prezzo": 42.62,
+"conv": 82,
+"prob_gain": 53,
+"prob_loss": 5,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
