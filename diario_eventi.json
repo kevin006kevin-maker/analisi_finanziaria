@@ -1,47 +1,5 @@
 [
 {
-"episodio": "long:DDS:2026-08-16",
-"ticker": "DDS",
-"kind": "long",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-21 10:09",
-"data": "2026-08-16 21:44",
-"prezzo": 560.88,
-"conv": 62,
-"prob_gain": 68,
-"prob_loss": 18,
-"reliab": "🟡 Media",
-"mkt": 4.3991,
-"fonte": "riallineato dal registro delle osservazioni",
-"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
-"dovuto_il": null,
-"soglie": {
-"media50": 574.7048,
-"media20": 597.64,
-"quattro_atr": 673.789,
-"meta_caduta": 603.46,
-"bollinger": 652.0264,
-"consigliata": 574.7048
-},
-"stop": 504.4255,
-"atr": 28.2273,
-"soglie_contaminate": {
-"media50": 573.4458,
-"media20": 602.8165,
-"quattro_atr": 671.3806,
-"meta_caduta": 603.46,
-"bollinger": 649.446,
-"consigliata": 573.4458
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 5,
-"res": {
-"7g": 15.12,
-"30g": 15.54
-},
-"taglio_corretto": true
-},
-{
 "episodio": "long:DUOL:2026-08-16",
 "ticker": "DUOL",
 "kind": "long",
@@ -30040,5 +29998,32 @@
 },
 "stop": null,
 "atr": 15.3559
+},
+{
+"episodio": "short:PIPR:2026-09-30",
+"ticker": "PIPR",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-30 01:41",
+"data": "2026-09-30 01:41",
+"prezzo": 64.72,
+"conv": 68,
+"prob_gain": 55,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": -0.1991,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 74.7824,
+"media20": 73.6805,
+"quattro_atr": 74.941,
+"meta_caduta": 71.57,
+"bollinger": 79.7462,
+"consigliata": 74.7824
+},
+"stop": 59.6095,
+"atr": 2.5552
 }
 ]
