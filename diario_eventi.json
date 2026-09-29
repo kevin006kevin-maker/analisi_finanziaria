@@ -1,47 +1,5 @@
 [
 {
-"episodio": "long:CHTR:2026-08-20",
-"ticker": "CHTR",
-"kind": "long",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-21 10:09",
-"data": "2026-08-20 08:42",
-"prezzo": 152.47,
-"conv": 61,
-"prob_gain": 65,
-"prob_loss": 26,
-"reliab": "🟡 Media",
-"mkt": 2.7873,
-"fonte": "riallineato dal registro delle osservazioni",
-"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
-"dovuto_il": null,
-"soglie": {
-"media50": null,
-"media20": null,
-"quattro_atr": 183.5909,
-"meta_caduta": 155.08,
-"bollinger": 165.0433,
-"consigliata": 183.5909
-},
-"stop": 136.9096,
-"atr": 7.7802,
-"soglie_contaminate": {
-"media50": null,
-"media20": null,
-"quattro_atr": 183.5909,
-"meta_caduta": 155.08,
-"bollinger": 165.0433,
-"consigliata": 183.5909
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": -2.72,
-"30g": -17.77
-},
-"taglio_corretto": true
-},
-{
 "episodio": "long:DDS:2026-08-16",
 "ticker": "DDS",
 "kind": "long",
@@ -30055,5 +30013,32 @@
 },
 "stop": 2.4518,
 "atr": 0.7241
+},
+{
+"episodio": "short:DCX:2026-09-29",
+"ticker": "DCX",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-29 21:59",
+"data": "2026-09-29 21:59",
+"prezzo": 3.66,
+"conv": 66,
+"prob_gain": 66,
+"prob_loss": 25,
+"reliab": "🔴 Bassa",
+"mkt": -0.1723,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 110.8014,
+"media20": 56.1875,
+"quattro_atr": 65.0835,
+"meta_caduta": 101.03,
+"bollinger": 137.3123,
+"consigliata": 65.0835
+},
+"stop": null,
+"atr": 15.3559
 }
 ]
