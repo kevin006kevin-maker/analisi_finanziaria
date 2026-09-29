@@ -29857,5 +29857,32 @@
 },
 "stop": null,
 "atr": 3.4798
+},
+{
+"episodio": "short:FICO:2026-09-29",
+"ticker": "FICO",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-29 17:05",
+"data": "2026-09-29 17:05",
+"prezzo": 620.979,
+"conv": 79,
+"prob_gain": 55,
+"prob_loss": 10,
+"reliab": "🔴 Bassa",
+"mkt": -0.1905,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 1063.2808,
+"media20": 945.586,
+"quattro_atr": 851.2608,
+"meta_caduta": 997.0295,
+"bollinger": 1163.908,
+"consigliata": 851.2608
+},
+"stop": 505.8381,
+"atr": 57.5705
 }
 ]
