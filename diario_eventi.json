@@ -29543,5 +29543,32 @@
 },
 "stop": 11.1051,
 "atr": 0.5624
+},
+{
+"episodio": "long:PATH:2026-09-20",
+"ticker": "PATH",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-29 03:56",
+"data": "2026-09-29 03:53",
+"prezzo": 12.19,
+"conv": 69,
+"prob_gain": 59,
+"prob_loss": 30,
+"reliab": "🔴 Bassa",
+"mkt": -0.364,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-29",
+"soglie": {
+"media50": 14.4618,
+"media20": 14.5105,
+"quattro_atr": 15.4503,
+"meta_caduta": 15.43,
+"bollinger": 18.6005,
+"consigliata": 14.4618
+},
+"stop": 10.5599,
+"atr": 0.8151
 }
 ]
