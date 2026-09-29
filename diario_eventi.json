@@ -1,47 +1,5 @@
 [
 {
-"episodio": "long:INTR:2026-08-16",
-"ticker": "INTR",
-"kind": "long",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-21 10:09",
-"data": "2026-08-16 22:17",
-"prezzo": 5.19,
-"conv": 67,
-"prob_gain": 73,
-"prob_loss": 17,
-"reliab": "🟡 Media",
-"mkt": 3.2103,
-"fonte": "riallineato dal registro delle osservazioni",
-"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
-"dovuto_il": null,
-"soglie": {
-"media50": 5.5298,
-"media20": 5.474,
-"quattro_atr": 6.2233,
-"meta_caduta": 5.8,
-"bollinger": 5.8921,
-"consigliata": 5.5298
-},
-"stop": 4.6734,
-"atr": 0.2583,
-"soglie_contaminate": {
-"media50": 5.4944,
-"media20": 5.4015,
-"quattro_atr": 6.1928,
-"meta_caduta": 5.8,
-"bollinger": 5.843,
-"consigliata": 5.4944
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 5,
-"res": {
-"7g": 5.68,
-"30g": 6.07
-},
-"taglio_corretto": true
-},
-{
 "episodio": "long:ITUB:2026-08-16",
 "ticker": "ITUB",
 "kind": "long",
@@ -29950,5 +29908,32 @@
 },
 "stop": 12.8429,
 "atr": 1.2385
+},
+{
+"episodio": "short:WYY:2026-09-25",
+"ticker": "WYY",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-09-30 01:47",
+"data": "2026-09-30 01:47",
+"prezzo": 7.35,
+"conv": 66,
+"prob_gain": 55,
+"prob_loss": 23,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 10.3842,
+"media20": 10.5365,
+"quattro_atr": 12.0852,
+"meta_caduta": 10.75,
+"bollinger": 14.5452,
+"consigliata": 10.3842
+},
+"stop": 4.9824,
+"atr": 1.1838
 }
 ]
