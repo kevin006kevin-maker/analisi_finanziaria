@@ -7587,7 +7587,9 @@
 "max_date": "2026-09-22 23:18",
 "auto": true,
 "notified": false,
-"entry_check": "2026-09-29"
+"entry_check": "2026-09-29",
+"warn_since": "2026-09-29",
+"warn": "in perdita da 10 giorni di Borsa: valuta l'uscita"
 },
 "LDO.MI": {
 "kind": "short",
@@ -9249,9 +9251,7 @@
 "max_date": "2026-09-28 18:02",
 "auto": true,
 "notified": false,
-"entry_check": "2026-09-29",
-"warn_since": "2026-09-29",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-09-29"
 },
 "LFTO": {
 "kind": "short",
