@@ -1,47 +1,5 @@
 [
 {
-"episodio": "long:STMMI.MI:2026-08-17",
-"ticker": "STMMI.MI",
-"kind": "long",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-21 10:09",
-"data": "2026-08-17 13:25",
-"prezzo": 48.585,
-"conv": 60,
-"prob_gain": 59,
-"prob_loss": 30,
-"reliab": "🟡 Media",
-"mkt": 4.3991,
-"fonte": "riallineato dal registro delle osservazioni",
-"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
-"dovuto_il": null,
-"soglie": {
-"media50": 56.724,
-"media20": null,
-"quattro_atr": 58.3098,
-"meta_caduta": 58.9675,
-"bollinger": 55.1772,
-"consigliata": 56.724
-},
-"stop": 43.7226,
-"atr": 2.4312,
-"soglie_contaminate": {
-"media50": 55.6308,
-"media20": null,
-"quattro_atr": 58.003,
-"meta_caduta": 58.9675,
-"bollinger": 49.5224,
-"consigliata": 55.6308
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 4,
-"res": {
-"7g": -11.96,
-"30g": -11.79
-},
-"taglio_corretto": true
-},
-{
 "episodio": "long:STUB:2026-08-17",
 "ticker": "STUB",
 "kind": "long",
@@ -29801,5 +29759,32 @@
 },
 "stop": 18.1376,
 "atr": 1.0412
+},
+{
+"episodio": "short:WYY:2026-09-25",
+"ticker": "WYY",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-30 01:50",
+"data": "2026-09-30 01:46",
+"prezzo": 7.35,
+"conv": 66,
+"prob_gain": 55,
+"prob_loss": 23,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-30",
+"soglie": {
+"media50": 10.3842,
+"media20": 10.5365,
+"quattro_atr": 12.0852,
+"meta_caduta": 10.75,
+"bollinger": 14.5452,
+"consigliata": 10.3842
+},
+"stop": 4.9824,
+"atr": 1.1838
 }
 ]
