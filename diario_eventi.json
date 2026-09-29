@@ -29391,7 +29391,18 @@
 "consigliata": 7.573
 },
 "stop": 6.4905,
-"atr": 0.1823
+"atr": 0.1823,
+"soglie_contaminate": {
+"media50": 7.573,
+"media20": 7.572,
+"quattro_atr": 7.584,
+"meta_caduta": 7.4605,
+"bollinger": 7.9335,
+"consigliata": 7.573
+},
+"soglie_ricalcolate_il": "2026-09-30 01:51",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "short:DCX:2026-09-29",
@@ -29539,7 +29550,18 @@
 "consigliata": 10.4564
 },
 "stop": 6.5018,
-"atr": 0.6591
+"atr": 0.6591,
+"soglie_contaminate": {
+"media50": 11.2561,
+"media20": 8.896,
+"quattro_atr": 10.4564,
+"meta_caduta": 12.28,
+"bollinger": 11.5742,
+"consigliata": 10.4564
+},
+"soglie_ricalcolate_il": "2026-09-30 01:51",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "short:LFTO:2026-09-18",
@@ -29566,7 +29588,18 @@
 "consigliata": 19.8403
 },
 "stop": 13.8248,
-"atr": 1.0026
+"atr": 1.0026,
+"soglie_contaminate": {
+"media50": 19.959,
+"media20": 17.4825,
+"quattro_atr": 19.8403,
+"meta_caduta": 20.78,
+"bollinger": 19.852,
+"consigliata": 19.8403
+},
+"soglie_ricalcolate_il": "2026-09-30 01:51",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "short:AGNC:2026-09-18",
