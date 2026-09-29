@@ -292,5 +292,47 @@
 "30g": 14.87
 },
 "taglio_corretto": true
+},
+{
+"episodio": "long:FN:2026-08-18",
+"ticker": "FN",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:09",
+"data": "2026-08-18 15:40",
+"prezzo": 515.0,
+"conv": 60,
+"prob_gain": 68,
+"prob_loss": 21,
+"reliab": "🔴 Bassa",
+"mkt": 3.5574,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": 526.9274,
+"media20": null,
+"quattro_atr": 695.7707,
+"meta_caduta": 620.0,
+"bollinger": 614.6439,
+"consigliata": 526.9274
+},
+"stop": 424.6146,
+"atr": 45.1927,
+"soglie_contaminate": {
+"media50": 520.7216,
+"media20": null,
+"quattro_atr": 689.3258,
+"meta_caduta": 620.0,
+"bollinger": 613.8969,
+"consigliata": 520.7216
+},
+"soglie_ricalcolate_il": "2026-09-14 21:39",
+"soglie_ritardo_giorni": 3,
+"res": {
+"7g": -15.99,
+"30g": -25.31
+},
+"taglio_corretto": true
 }
 ]
