@@ -29786,5 +29786,32 @@
 },
 "stop": 7.5585,
 "atr": 0.4258
+},
+{
+"episodio": "short:WHLR:2026-09-24",
+"ticker": "WHLR",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-29 03:56",
+"data": "2026-09-29 03:52",
+"prezzo": 4.09,
+"conv": 52,
+"prob_gain": 55,
+"prob_loss": 37,
+"reliab": "🔴 Bassa",
+"mkt": -0.364,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-29",
+"soglie": {
+"media50": 15.8341,
+"media20": null,
+"quattro_atr": 18.0091,
+"meta_caduta": 68.465,
+"bollinger": 6.7716,
+"consigliata": 15.8341
+},
+"stop": null,
+"atr": 3.4798
 }
 ]
