@@ -29732,5 +29732,32 @@
 },
 "stop": 153.0032,
 "atr": 9.9834
+},
+{
+"episodio": "short:TRT:2026-09-24",
+"ticker": "TRT",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-29 03:56",
+"data": "2026-09-29 03:52",
+"prezzo": 6.42,
+"conv": 71,
+"prob_gain": 50,
+"prob_loss": 28,
+"reliab": "🔴 Bassa",
+"mkt": -0.364,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-29",
+"soglie": {
+"media50": 10.3038,
+"media20": 9.9415,
+"quattro_atr": 10.5056,
+"meta_caduta": 9.05,
+"bollinger": 12.9682,
+"consigliata": 10.3038
+},
+"stop": 4.3772,
+"atr": 1.0214
 }
 ]
