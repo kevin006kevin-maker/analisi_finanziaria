@@ -1,47 +1,5 @@
 [
 {
-"episodio": "long:HBM:2026-08-17",
-"ticker": "HBM",
-"kind": "long",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-21 10:09",
-"data": "2026-08-17 18:55",
-"prezzo": 27.325,
-"conv": 60,
-"prob_gain": 61,
-"prob_loss": 30,
-"reliab": "🔴 Bassa",
-"mkt": 4.3764,
-"fonte": "riallineato dal registro delle osservazioni",
-"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
-"dovuto_il": null,
-"soglie": {
-"media50": null,
-"media20": null,
-"quattro_atr": 32.3466,
-"meta_caduta": 29.5975,
-"bollinger": 29.3649,
-"consigliata": 32.3466
-},
-"stop": 24.8142,
-"atr": 1.2554,
-"soglie_contaminate": {
-"media50": null,
-"media20": null,
-"quattro_atr": 32.5607,
-"meta_caduta": 29.5975,
-"bollinger": 30.1008,
-"consigliata": 32.5607
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 4,
-"res": {
-"7g": 8.36,
-"30g": -6.11
-},
-"taglio_corretto": true
-},
-{
 "episodio": "long:IAG:2026-08-20",
 "ticker": "IAG",
 "kind": "long",
@@ -29980,5 +29938,32 @@
 },
 "stop": 6.4905,
 "atr": 0.1823
+},
+{
+"episodio": "short:DCX:2026-09-29",
+"ticker": "DCX",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-30 01:46",
+"data": "2026-09-30 01:41",
+"prezzo": 3.61,
+"conv": 67,
+"prob_gain": 66,
+"prob_loss": 25,
+"reliab": "🔴 Bassa",
+"mkt": -0.1991,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 110.8004,
+"media20": 56.185,
+"quattro_atr": 65.0335,
+"meta_caduta": 101.005,
+"bollinger": 137.3166,
+"consigliata": 65.0335
+},
+"stop": null,
+"atr": 15.3559
 }
 ]
