@@ -29938,5 +29938,32 @@
 },
 "stop": 6.4711,
 "atr": 0.1895
+},
+{
+"episodio": "short:AIR:2026-09-29",
+"ticker": "AIR",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-29 17:05",
+"data": "2026-09-29 17:05",
+"prezzo": 106.31,
+"conv": 67,
+"prob_gain": 55,
+"prob_loss": 6,
+"reliab": "🟡 Media",
+"mkt": -0.1905,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 131.7088,
+"media20": 119.7745,
+"quattro_atr": 129.6892,
+"meta_caduta": 130.01,
+"bollinger": 131.7406,
+"consigliata": 129.6892
+},
+"stop": 94.6204,
+"atr": 5.8448
 }
 ]
