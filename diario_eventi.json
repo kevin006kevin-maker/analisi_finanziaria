@@ -29992,5 +29992,32 @@
 },
 "stop": 3.1577,
 "atr": 0.1236
+},
+{
+"episodio": "long:NESR:2026-09-29",
+"ticker": "NESR",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-29 17:07",
+"data": "2026-09-29 17:07",
+"prezzo": 26.12,
+"conv": 60,
+"prob_gain": 83,
+"prob_loss": 11,
+"reliab": "🟡 Media",
+"mkt": -0.1905,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 31.9097,
+"media20": 32.7735,
+"quattro_atr": 32.6141,
+"meta_caduta": 31.215,
+"bollinger": 36.822,
+"consigliata": 31.9097
+},
+"stop": 22.8729,
+"atr": 1.6235
 }
 ]
