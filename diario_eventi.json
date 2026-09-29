@@ -1,47 +1,5 @@
 [
 {
-"episodio": "long:CCL:2026-08-16",
-"ticker": "CCL",
-"kind": "long",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-21 10:09",
-"data": "2026-08-16 22:17",
-"prezzo": 28.12,
-"conv": 60,
-"prob_gain": 65,
-"prob_loss": 22,
-"reliab": "🟡 Media",
-"mkt": 3.2103,
-"fonte": "riallineato dal registro delle osservazioni",
-"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
-"dovuto_il": null,
-"soglie": {
-"media50": null,
-"media20": null,
-"quattro_atr": 32.0541,
-"meta_caduta": 29.51,
-"bollinger": 30.1421,
-"consigliata": 32.0541
-},
-"stop": 26.1529,
-"atr": 0.9835,
-"soglie_contaminate": {
-"media50": null,
-"media20": null,
-"quattro_atr": 31.9895,
-"meta_caduta": 29.51,
-"bollinger": 29.9623,
-"consigliata": 31.9895
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 5,
-"res": {
-"7g": -7.09,
-"30g": -21.32
-},
-"taglio_corretto": true
-},
-{
 "episodio": "long:CDE:2026-08-17",
 "ticker": "CDE",
 "kind": "long",
@@ -30085,5 +30043,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:QURE:2026-09-29",
+"ticker": "QURE",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-29 21:59",
+"data": "2026-09-29 21:59",
+"prezzo": 24.33,
+"conv": 73,
+"prob_gain": 64,
+"prob_loss": 20,
+"reliab": "🔴 Bassa",
+"mkt": -0.1723,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 44.1622,
+"media20": 42.753,
+"quattro_atr": 37.4506,
+"meta_caduta": 37.69,
+"bollinger": 52.8126,
+"consigliata": 37.4506
+},
+"stop": 17.7697,
+"atr": 3.2801
 }
 ]
