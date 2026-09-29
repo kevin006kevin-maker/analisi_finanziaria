@@ -1,47 +1,5 @@
 [
 {
-"episodio": "long:IAG:2026-08-20",
-"ticker": "IAG",
-"kind": "long",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-21 10:09",
-"data": "2026-08-20 05:25",
-"prezzo": 19.72,
-"conv": 60,
-"prob_gain": 56,
-"prob_loss": 35,
-"reliab": "🔴 Bassa",
-"mkt": 3.3561,
-"fonte": "riallineato dal registro delle osservazioni",
-"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
-"dovuto_il": null,
-"soglie": {
-"media50": null,
-"media20": null,
-"quattro_atr": 23.4606,
-"meta_caduta": 20.11,
-"bollinger": 20.9619,
-"consigliata": 23.4606
-},
-"stop": 17.8497,
-"atr": 0.9352,
-"soglie_contaminate": {
-"media50": null,
-"media20": null,
-"quattro_atr": 23.4606,
-"meta_caduta": 20.11,
-"bollinger": 20.9619,
-"consigliata": 23.4606
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": 9.23,
-"30g": 2.48
-},
-"taglio_corretto": true
-},
-{
 "episodio": "long:INTR:2026-08-16",
 "ticker": "INTR",
 "kind": "long",
@@ -29965,5 +29923,32 @@
 },
 "stop": null,
 "atr": 15.3559
+},
+{
+"episodio": "short:RARE:2026-09-30",
+"ticker": "RARE",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-09-30 01:46",
+"data": "2026-09-30 01:46",
+"prezzo": 15.32,
+"conv": 71,
+"prob_gain": 59,
+"prob_loss": 20,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 21.9558,
+"media20": 15.6548,
+"quattro_atr": 20.2742,
+"meta_caduta": 25.595,
+"bollinger": 22.9758,
+"consigliata": 20.2742
+},
+"stop": 12.8429,
+"atr": 1.2385
 }
 ]
