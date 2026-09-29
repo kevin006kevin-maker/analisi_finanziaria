@@ -1,47 +1,5 @@
 [
 {
-"episodio": "long:STLAM.MI:2026-08-17",
-"ticker": "STLAM.MI",
-"kind": "long",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-21 10:09",
-"data": "2026-08-17 13:25",
-"prezzo": 4.6255,
-"conv": 66,
-"prob_gain": 67,
-"prob_loss": 22,
-"reliab": "🟡 Media",
-"mkt": 4.3991,
-"fonte": "riallineato dal registro delle osservazioni",
-"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
-"dovuto_il": null,
-"soglie": {
-"media50": 5.1288,
-"media20": 4.8995,
-"quattro_atr": 5.3967,
-"meta_caduta": 5.8227,
-"bollinger": 5.3114,
-"consigliata": 5.1288
-},
-"stop": 4.2399,
-"atr": 0.1928,
-"soglie_contaminate": {
-"media50": 5.0479,
-"media20": 4.8178,
-"quattro_atr": 5.3954,
-"meta_caduta": 5.7452,
-"bollinger": 5.2911,
-"consigliata": 5.0479
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 4,
-"res": {
-"7g": -2.82,
-"30g": -5.86
-},
-"taglio_corretto": true
-},
-{
 "episodio": "long:STMMI.MI:2026-08-17",
 "ticker": "STMMI.MI",
 "kind": "long",
@@ -29816,5 +29774,32 @@
 },
 "stop": 51.8585,
 "atr": 1.5408
+},
+{
+"episodio": "short:ACAD:2026-09-25",
+"ticker": "ACAD",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-30 01:50",
+"data": "2026-09-30 01:41",
+"prezzo": 20.22,
+"conv": 81,
+"prob_gain": 59,
+"prob_loss": 7,
+"reliab": "🟡 Media",
+"mkt": -0.1991,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-30",
+"soglie": {
+"media50": 27.2548,
+"media20": 26.147,
+"quattro_atr": 24.3847,
+"meta_caduta": 25.395,
+"bollinger": 31.7972,
+"consigliata": 24.3847
+},
+"stop": 18.1376,
+"atr": 1.0412
 }
 ]
