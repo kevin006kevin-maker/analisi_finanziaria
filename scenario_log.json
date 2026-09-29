@@ -10972,5 +10972,62 @@
 "prob_loss": 7,
 "conv": 81,
 "res": {}
+},
+{
+"ticker": "WYY",
+"kind": "short",
+"date": "2026-09-30",
+"promo_price": 7.35,
+"obs_price": 5.47,
+"obs_date": "2026-09-25",
+"pre_price": 5.47,
+"pre_date": "2026-09-28",
+"conf_price": null,
+"conf_date": null,
+"target": 10.3842,
+"stop": 4.9824,
+"reliab": "🔴 Bassa",
+"prob_gain": 55,
+"prob_loss": 23,
+"conv": 66,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-25 23:49",
+"prezzo": 5.47,
+"conv": 73,
+"prob_gain": 57,
+"prob_loss": 22,
+"reliab": "🔴 Bassa",
+"mkt": 0.1436
+},
+"anticipo": {
+"data": "2026-09-28",
+"prezzo": 5.47,
+"conv": 75,
+"prob_gain": 57,
+"prob_loss": 22,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-30 01:46",
+"prezzo": 7.35,
+"conv": 66,
+"prob_gain": 55,
+"prob_loss": 23,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
