@@ -29354,5 +29354,32 @@
 },
 "stop": 3.1507,
 "atr": 0.0997
+},
+{
+"episodio": "long:ITUB:2026-08-16",
+"ticker": "ITUB",
+"kind": "long",
+"evento": "fine_verifica",
+"scritto_il": "2026-09-29 03:56",
+"data": "2026-09-29 03:55",
+"prezzo": 7.99,
+"conv": 67,
+"prob_gain": 78,
+"prob_loss": 10,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 10 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-09-29",
+"soglie": {
+"media50": 7.9966,
+"media20": 8.1635,
+"quattro_atr": 8.8665,
+"meta_caduta": 8.305,
+"bollinger": 8.5904,
+"consigliata": 7.9966
+},
+"stop": 7.5517,
+"atr": 0.2191
 }
 ]
