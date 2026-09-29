@@ -1,47 +1,5 @@
 [
 {
-"episodio": "long:PBR-A:2026-08-17",
-"ticker": "PBR-A",
-"kind": "long",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-21 10:09",
-"data": "2026-08-17 05:28",
-"prezzo": 16.07,
-"conv": 70,
-"prob_gain": 67,
-"prob_loss": 17,
-"reliab": "🟢 Alta",
-"mkt": 4.3991,
-"fonte": "riallineato dal registro delle osservazioni",
-"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
-"dovuto_il": null,
-"soglie": {
-"media50": null,
-"media20": 16.4245,
-"quattro_atr": 17.6913,
-"meta_caduta": 17.025,
-"bollinger": 17.1136,
-"consigliata": 17.6913
-},
-"stop": 15.2594,
-"atr": 0.4053,
-"soglie_contaminate": {
-"media50": null,
-"media20": 16.423,
-"quattro_atr": 17.7704,
-"meta_caduta": 16.61,
-"bollinger": 17.1286,
-"consigliata": 17.7704
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 4,
-"res": {
-"7g": 3.83,
-"30g": 18.23
-},
-"taglio_corretto": true
-},
-{
 "episodio": "long:SMCI:2026-08-17",
 "ticker": "SMCI",
 "kind": "long",
@@ -29846,5 +29804,32 @@
 },
 "stop": 9.0372,
 "atr": 0.2064
+},
+{
+"episodio": "short:FIP:2026-09-18",
+"ticker": "FIP",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-09-30 01:50",
+"data": "2026-09-30 01:48",
+"prezzo": 2.82,
+"conv": 70,
+"prob_gain": 46,
+"prob_loss": 20,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-09-30",
+"soglie": {
+"media50": 3.654,
+"media20": 3.1392,
+"quattro_atr": 3.7021,
+"meta_caduta": 3.74,
+"bollinger": 3.572,
+"consigliata": 3.654
+},
+"stop": 2.379,
+"atr": 0.2205
 }
 ]
