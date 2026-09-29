@@ -13256,5 +13256,37 @@
 "auto": true,
 "notified": false,
 "entry_check": "2026-09-28"
+},
+"GIL": {
+"kind": "short",
+"added": "2026-09-29",
+"note": "🤖 Promossa il 2026-09-29: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +4.0% e la convenienza (71) regge.",
+"name": "GIL",
+"snapshots": [
+{
+"name": "GIL",
+"price": 42.62,
+"rsi": 31.481,
+"dd_high": -41.2786,
+"occasione": 79,
+"convenienza": 82,
+"prob_gain": 53,
+"prob_loss": 5,
+"exp_ret": 0.9,
+"gain": 22.0943,
+"reliab": "🟡 Media",
+"target": 52.0366,
+"stop": 38.5996,
+"date": "2026-09-29 03:54"
+}
+],
+"entry_price": 42.62,
+"entry_target": 52.0366,
+"entry_stop": 38.5996,
+"entry_conv": 82,
+"entry_date": "2026-09-29 03:54",
+"entry_src": "scatto",
+"max_price": 42.62,
+"max_date": "2026-09-29 03:54"
 }
 }
