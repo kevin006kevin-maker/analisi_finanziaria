@@ -29911,5 +29911,32 @@
 },
 "stop": 22.8729,
 "atr": 1.6235
+},
+{
+"episodio": "short:TIT.MI:2026-09-29",
+"ticker": "TIT.MI",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-29 17:05",
+"data": "2026-09-29 17:05",
+"prezzo": 6.85,
+"conv": 74,
+"prob_gain": 54,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": -0.1905,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 7.558,
+"media20": 7.5369,
+"quattro_atr": 7.6078,
+"meta_caduta": 7.458,
+"bollinger": 8.0218,
+"consigliata": 7.558
+},
+"stop": 6.4711,
+"atr": 0.1895
 }
 ]
