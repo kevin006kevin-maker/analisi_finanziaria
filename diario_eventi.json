@@ -1,47 +1,5 @@
 [
 {
-"episodio": "long:FSM:2026-08-18",
-"ticker": "FSM",
-"kind": "long",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-21 10:09",
-"data": "2026-08-18 22:20",
-"prezzo": 10.45,
-"conv": 67,
-"prob_gain": 60,
-"prob_loss": 28,
-"reliab": "🟡 Media",
-"mkt": 2.4311,
-"fonte": "riallineato dal registro delle osservazioni",
-"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
-"dovuto_il": null,
-"soglie": {
-"media50": null,
-"media20": null,
-"quattro_atr": 12.1176,
-"meta_caduta": 10.645,
-"bollinger": 11.5353,
-"consigliata": 12.1176
-},
-"stop": 9.6162,
-"atr": 0.4169,
-"soglie_contaminate": {
-"media50": null,
-"media20": null,
-"quattro_atr": 12.3848,
-"meta_caduta": 11.175,
-"bollinger": 12.1561,
-"consigliata": 12.3848
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 3,
-"res": {
-"7g": 15.12,
-"30g": 13.92
-},
-"taglio_corretto": true
-},
-{
 "episodio": "long:HBM:2026-08-17",
 "ticker": "HBM",
 "kind": "long",
@@ -29995,5 +29953,32 @@
 },
 "stop": 501.0977,
 "atr": 58.3862
+},
+{
+"episodio": "short:TIT.MI:2026-09-29",
+"ticker": "TIT.MI",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-30 01:46",
+"data": "2026-09-29 21:59",
+"prezzo": 6.855,
+"conv": 72,
+"prob_gain": 53,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 7.573,
+"media20": 7.572,
+"quattro_atr": 7.584,
+"meta_caduta": 7.4605,
+"bollinger": 7.9335,
+"consigliata": 7.573
+},
+"stop": 6.4905,
+"atr": 0.1823
 }
 ]
