@@ -29159,5 +29159,32 @@
 },
 "stop": 4.7824,
 "atr": 0.7838
+},
+{
+"episodio": "short:NU:2026-09-28",
+"ticker": "NU",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-29 03:54",
+"data": "2026-09-29 03:52",
+"prezzo": 12.23,
+"conv": 68,
+"prob_gain": 55,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": -0.364,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 14.3594,
+"media20": 14.3275,
+"quattro_atr": 14.4798,
+"meta_caduta": 13.955,
+"bollinger": 15.9995,
+"consigliata": 14.3594
+},
+"stop": 11.1051,
+"atr": 0.5624
 }
 ]
