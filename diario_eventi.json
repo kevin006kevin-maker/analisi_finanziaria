@@ -29489,5 +29489,32 @@
 },
 "stop": 179.8535,
 "atr": 12.1182
+},
+{
+"episodio": "long:SAH:2026-09-18",
+"ticker": "SAH",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-29 03:56",
+"data": "2026-09-28 23:55",
+"prezzo": 62.45,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-29",
+"soglie": {
+"media50": 81.0936,
+"media20": 71.8195,
+"quattro_atr": 75.2779,
+"meta_caduta": 87.555,
+"bollinger": 85.2513,
+"consigliata": 75.2779
+},
+"stop": 56.036,
+"atr": 3.207
 }
 ]
