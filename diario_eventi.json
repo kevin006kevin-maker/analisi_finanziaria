@@ -1,47 +1,5 @@
 [
 {
-"episodio": "long:UMC:2026-08-17",
-"ticker": "UMC",
-"kind": "long",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-21 10:09",
-"data": "2026-08-17 13:50",
-"prezzo": 19.15,
-"conv": 63,
-"prob_gain": 51,
-"prob_loss": 40,
-"reliab": "🔴 Bassa",
-"mkt": 4.3991,
-"fonte": "riallineato dal registro delle osservazioni",
-"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
-"dovuto_il": null,
-"soglie": {
-"media50": 21.9256,
-"media20": 19.299,
-"quattro_atr": 23.9272,
-"meta_caduta": 23.58,
-"bollinger": 21.4413,
-"consigliata": 21.9256
-},
-"stop": 16.7614,
-"atr": 1.1943,
-"soglie_contaminate": {
-"media50": 21.826,
-"media20": null,
-"quattro_atr": 23.6855,
-"meta_caduta": 23.58,
-"bollinger": 20.4317,
-"consigliata": 21.826
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 4,
-"res": {
-"7g": -1.64,
-"30g": 18.49
-},
-"taglio_corretto": true
-},
-{
 "episodio": "short:BBAR:2026-08-17",
 "ticker": "BBAR",
 "kind": "short",
@@ -29775,5 +29733,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:CAR:2026-09-22",
+"ticker": "CAR",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-09-30 13:24",
+"data": "2026-09-30 13:24",
+"prezzo": 106.79,
+"conv": 66,
+"prob_gain": 48,
+"prob_loss": 24,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 135.9294,
+"media20": 120.604,
+"quattro_atr": 130.3466,
+"meta_caduta": 136.555,
+"bollinger": 145.9292,
+"consigliata": 130.3466
+},
+"stop": 95.0117,
+"atr": 5.8891
 }
 ]
