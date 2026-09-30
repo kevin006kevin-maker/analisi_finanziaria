@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:DKS:2026-08-20",
-"ticker": "DKS",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-21 10:10",
-"data": "2026-08-20 17:29",
-"prezzo": 176.47,
-"conv": 69,
-"prob_gain": 53,
-"prob_loss": 0,
-"reliab": "🟡 Media",
-"mkt": 3.2484,
-"fonte": "riallineato dal registro delle osservazioni",
-"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
-"dovuto_il": null,
-"soglie": {
-"media50": 214.1296,
-"media20": 200.9285,
-"quattro_atr": 206.2424,
-"meta_caduta": 207.82,
-"bollinger": 216.4394,
-"consigliata": 206.2424
-},
-"stop": 161.5838,
-"atr": 7.4431,
-"soglie_contaminate": {
-"media50": 214.1296,
-"media20": 200.9285,
-"quattro_atr": 206.2424,
-"meta_caduta": 207.82,
-"bollinger": 216.4394,
-"consigliata": 206.2424
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": -25.33,
-"30g": -31.22,
-"soglia": -31.22
-},
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": -31.22,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -31.22,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -31.22,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -31.22,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -31.22,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -31.22,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:ENEL.MI:2026-08-18",
 "ticker": "ENEL.MI",
 "kind": "short",
@@ -29568,5 +29493,25 @@
 },
 "stop": 2.571,
 "atr": 0.2145
+},
+{
+"episodio": "short:QURE:2026-09-29",
+"ticker": "QURE",
+"kind": "short",
+"evento": "salita_2pct",
+"scritto_il": "2026-09-30 19:16",
+"data": "2026-09-30 19:02",
+"prezzo": 25.13,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "prezzo salito di almeno il 2% da 24.33",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
