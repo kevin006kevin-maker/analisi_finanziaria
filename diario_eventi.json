@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:ENVX:2026-08-19",
-"ticker": "ENVX",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-21 10:10",
-"data": "2026-08-19 21:04",
-"prezzo": 3.365,
-"conv": 62,
-"prob_gain": 50,
-"prob_loss": 22,
-"reliab": "🔴 Bassa",
-"mkt": 2.8893,
-"fonte": "riallineato dal registro delle osservazioni",
-"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
-"dovuto_il": null,
-"soglie": {
-"media50": 5.1395,
-"media20": 4.173,
-"quattro_atr": 5.0189,
-"meta_caduta": 5.9925,
-"bollinger": 5.0682,
-"consigliata": 5.0189
-},
-"stop": 2.5381,
-"atr": 0.4135,
-"soglie_contaminate": {
-"media50": 5.0699,
-"media20": 4.1195,
-"quattro_atr": 4.9765,
-"meta_caduta": 5.9925,
-"bollinger": 5.0968,
-"consigliata": 4.9765
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 2,
-"res": {
-"7g": 2.67,
-"30g": -13.97,
-"soglia": -13.97
-},
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": -13.97,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -13.97,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -13.97,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -13.97,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -13.97,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -13.97,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:EYPT:2026-08-17",
 "ticker": "EYPT",
 "kind": "short",
@@ -29454,6 +29379,26 @@
 "mkt": null,
 "fonte": "osservazione",
 "note": "prezzo salito di almeno il 2% da 3.66",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:PIPR:2026-09-30",
+"ticker": "PIPR",
+"kind": "short",
+"evento": "salita_2pct",
+"scritto_il": "2026-09-30 19:16",
+"data": "2026-09-30 19:02",
+"prezzo": 66.18,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "prezzo salito di almeno il 2% da 64.72",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
