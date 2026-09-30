@@ -11105,5 +11105,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "CAR",
+"kind": "short",
+"date": "2026-09-30",
+"promo_price": 106.79,
+"obs_price": 109.7,
+"obs_date": "2026-09-22",
+"pre_price": 105.67,
+"pre_date": "2026-09-24",
+"conf_price": null,
+"conf_date": null,
+"target": 135.9294,
+"stop": 95.0117,
+"reliab": "🔴 Bassa",
+"prob_gain": 48,
+"prob_loss": 24,
+"conv": 66,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-22 19:46",
+"prezzo": 109.7,
+"conv": 66,
+"prob_gain": 46,
+"prob_loss": 23,
+"reliab": "🔴 Bassa",
+"mkt": 1.477
+},
+"anticipo": {
+"data": "2026-09-24",
+"prezzo": 105.67,
+"conv": 68,
+"prob_gain": 46,
+"prob_loss": 24,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-30 13:24",
+"prezzo": 106.79,
+"conv": 66,
+"prob_gain": 48,
+"prob_loss": 24,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
