@@ -1756,5 +1756,80 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:MARA:2026-08-18",
+"ticker": "MARA",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:10",
+"data": "2026-08-18 06:07",
+"prezzo": 9.2,
+"conv": 60,
+"prob_gain": 55,
+"prob_loss": 22,
+"reliab": "🔴 Bassa",
+"mkt": 3.2103,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": 12.2172,
+"media20": 10.7545,
+"quattro_atr": 12.7627,
+"meta_caduta": 12.025,
+"bollinger": 13.1662,
+"consigliata": 12.2172
+},
+"stop": 7.4187,
+"atr": 0.8907,
+"soglie_contaminate": {
+"media50": 12.0914,
+"media20": 10.5355,
+"quattro_atr": 13.0329,
+"meta_caduta": 12.025,
+"bollinger": 12.6502,
+"consigliata": 12.0914
+},
+"soglie_ricalcolate_il": "2026-09-14 21:39",
+"soglie_ritardo_giorni": 3,
+"res": {
+"7g": 20.82,
+"30g": 22.5,
+"soglia": 22.5
+},
+"taglio_corretto": true,
+"res_soglia": {
+"media50": {
+"ret": 22.5,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": 16.9,
+"toccato": true,
+"giorni": 2
+},
+"quattro_atr": {
+"ret": 22.5,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": 22.5,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": 22.5,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": 22.5,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
