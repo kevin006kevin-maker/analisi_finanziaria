@@ -11332,5 +11332,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "BBOT",
+"kind": "short",
+"date": "2026-09-30",
+"promo_price": 4.1,
+"obs_price": 6.755,
+"obs_date": "2026-09-09",
+"pre_price": 6.755,
+"pre_date": "2026-09-10",
+"conf_price": null,
+"conf_date": null,
+"target": 7.57,
+"stop": 3.2537,
+"reliab": "🔴 Bassa",
+"prob_gain": 61,
+"prob_loss": 15,
+"conv": 74,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-09 23:06",
+"prezzo": 6.755,
+"conv": 73,
+"prob_gain": 57,
+"prob_loss": 8,
+"reliab": "🔴 Bassa",
+"mkt": -1.171
+},
+"anticipo": {
+"data": "2026-09-10",
+"prezzo": 6.755,
+"conv": 75,
+"prob_gain": 57,
+"prob_loss": 8,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-30 23:27",
+"prezzo": 4.1,
+"conv": 74,
+"prob_gain": 61,
+"prob_loss": 15,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
