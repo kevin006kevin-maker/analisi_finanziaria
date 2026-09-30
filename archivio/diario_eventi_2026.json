@@ -1081,5 +1081,80 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:BIDU:2026-08-18",
+"ticker": "BIDU",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:09",
+"data": "2026-08-18 15:39",
+"prezzo": 97.36,
+"conv": 61,
+"prob_gain": 47,
+"prob_loss": 14,
+"reliab": "🟡 Media",
+"mkt": 3.5574,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": 110.4718,
+"media20": 106.6865,
+"quattro_atr": 113.5988,
+"meta_caduta": 117.04,
+"bollinger": 116.1242,
+"consigliata": 110.4718
+},
+"stop": 89.2406,
+"atr": 4.0597,
+"soglie_contaminate": {
+"media50": 109.3644,
+"media20": 105.183,
+"quattro_atr": 112.9484,
+"meta_caduta": 117.04,
+"bollinger": 118.0316,
+"consigliata": 109.3644
+},
+"soglie_ricalcolate_il": "2026-09-14 21:39",
+"soglie_ritardo_giorni": 3,
+"res": {
+"7g": -5.09,
+"30g": -7.91,
+"soglia": -7.91
+},
+"taglio_corretto": true,
+"res_soglia": {
+"media50": {
+"ret": -7.91,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -7.91,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -7.91,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -7.91,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -7.91,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -7.91,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
