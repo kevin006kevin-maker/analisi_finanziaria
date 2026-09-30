@@ -11493,5 +11493,37 @@
 "max_date": "2026-09-30 23:27",
 "auto": true,
 "notified": false
+},
+"RSI": {
+"kind": "short",
+"added": "2026-09-30",
+"note": "🤖 Promossa il 2026-09-30: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.3% e la convenienza (64) regge.",
+"name": "RSI",
+"snapshots": [
+{
+"name": "RSI",
+"price": 20.33,
+"rsi": 27.8355,
+"dd_high": -41.1066,
+"occasione": 76,
+"convenienza": 77,
+"prob_gain": 57,
+"prob_loss": 13,
+"exp_ret": 2.8,
+"gain": 26.1938,
+"reliab": "🟡 Media",
+"target": 25.6552,
+"stop": 17.9393,
+"date": "2026-09-30 23:27"
+}
+],
+"entry_price": 20.33,
+"entry_target": 25.6552,
+"entry_stop": 17.9393,
+"entry_conv": 77,
+"entry_date": "2026-09-30 23:27",
+"entry_src": "scatto",
+"max_price": 20.33,
+"max_date": "2026-09-30 23:27"
 }
 }
