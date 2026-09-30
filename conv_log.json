@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-09-22",
-"ticker": "ETS",
-"kind": "short",
-"price": 1.65,
-"conv": 31,
-"factors": {
-"discount": 36.5385,
-"histcheap": -3.06,
-"riskadj": 0.79,
-"ddpen": -34.99,
-"momentum": 12.6984,
-"prob": 17,
-"oversold": -54.7744,
-"rebound": -29.3794,
-"trend": 1.0,
-"relstrength": -15.052
-},
-"ret_5d": 1.82,
-"ret_21d": null
-},
-{
-"date": "2026-09-22",
 "ticker": "ARCLR",
 "kind": "short",
 "price": 0.1596,
@@ -40346,6 +40325,26 @@
 "rebound": 9.7508,
 "trend": 1.0,
 "relstrength": 8.7978
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-30",
+"ticker": "DKI",
+"kind": "long",
+"price": 1.57,
+"conv": 51,
+"factors": {
+"discount": 75.2756,
+"histcheap": 0.22,
+"riskadj": 0.45,
+"ddpen": -49.35,
+"momentum": 39.1473,
+"prob": 16,
+"quality": 46.0,
+"valcheap": 0.2363,
+"trappen": -1
 },
 "ret_5d": null,
 "ret_21d": null
