@@ -11219,5 +11219,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "TRT",
+"kind": "short",
+"date": "2026-09-30",
+"promo_price": 6.62,
+"obs_price": 7.26,
+"obs_date": "2026-09-24",
+"pre_price": 6.49,
+"pre_date": "2026-09-25",
+"conf_price": null,
+"conf_date": null,
+"target": 10.2462,
+"stop": 4.6574,
+"reliab": "🔴 Bassa",
+"prob_gain": 52,
+"prob_loss": 28,
+"conv": 69,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-24 22:28",
+"prezzo": 7.26,
+"conv": 69,
+"prob_gain": 52,
+"prob_loss": 27,
+"reliab": "🔴 Bassa",
+"mkt": 0.3665
+},
+"anticipo": {
+"data": "2026-09-25",
+"prezzo": 6.49,
+"conv": 72,
+"prob_gain": 52,
+"prob_loss": 26,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-30 13:24",
+"prezzo": 6.62,
+"conv": 69,
+"prob_gain": 52,
+"prob_loss": 28,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
