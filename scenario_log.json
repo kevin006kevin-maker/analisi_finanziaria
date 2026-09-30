@@ -11162,5 +11162,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "FSLR",
+"kind": "short",
+"date": "2026-09-30",
+"promo_price": 176.93,
+"obs_price": 177.29,
+"obs_date": "2026-09-24",
+"pre_price": 177.71,
+"pre_date": "2026-09-28",
+"conf_price": null,
+"conf_date": null,
+"target": 209.4936,
+"stop": 157.668,
+"reliab": "🟡 Media",
+"prob_gain": 49,
+"prob_loss": 14,
+"conv": 75,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-24 19:05",
+"prezzo": 177.29,
+"conv": 67,
+"prob_gain": 50,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": 0.4711
+},
+"anticipo": {
+"data": "2026-09-28",
+"prezzo": 177.71,
+"conv": 68,
+"prob_gain": 50,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-09-30 13:24",
+"prezzo": 176.93,
+"conv": 75,
+"prob_gain": 49,
+"prob_loss": 14,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
