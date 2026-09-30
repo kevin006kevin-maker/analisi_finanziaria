@@ -1,67 +1,6 @@
 [
 {
 "date": "2026-09-22",
-"ticker": "ACGL",
-"kind": "long",
-"price": 95.78,
-"conv": 77,
-"factors": {
-"discount": 10.0488,
-"histcheap": -0.18,
-"riskadj": 0.36,
-"ddpen": -6.02,
-"momentum": 2.2154,
-"prob": 81,
-"quality": 76.8,
-"valcheap": 0.5152,
-"trappen": 2
-},
-"ret_5d": -1.52,
-"ret_21d": null
-},
-{
-"date": "2026-09-22",
-"ticker": "NEM",
-"kind": "long",
-"price": 123.05,
-"conv": 65,
-"factors": {
-"discount": 8.9463,
-"histcheap": -1.22,
-"riskadj": 0.97,
-"ddpen": -15.31,
-"momentum": 0.0162,
-"prob": 48,
-"quality": 91.4,
-"valcheap": -1.1531,
-"trappen": 3
-},
-"ret_5d": -5.02,
-"ret_21d": null
-},
-{
-"date": "2026-09-22",
-"ticker": "MOMO",
-"kind": "short",
-"price": 4.99,
-"conv": 60,
-"factors": {
-"discount": 34.1689,
-"histcheap": 2.24,
-"riskadj": -2.22,
-"ddpen": -18.54,
-"momentum": -1.217,
-"prob": 49,
-"oversold": -34.5274,
-"rebound": 13.2365,
-"trend": -1.0,
-"relstrength": -0.6822
-},
-"ret_5d": -2.51,
-"ret_21d": null
-},
-{
-"date": "2026-09-22",
 "ticker": "FGL",
 "kind": "short",
 "price": 4.07,
@@ -40345,6 +40284,69 @@
 "quality": 88.9,
 "valcheap": -0.4829,
 "trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-30",
+"ticker": "TEAD",
+"kind": "short",
+"price": 0.515,
+"conv": 37,
+"factors": {
+"discount": 70.0581,
+"histcheap": 1.1,
+"riskadj": -1.17,
+"ddpen": -53.36,
+"momentum": -13.4361,
+"prob": 24,
+"oversold": -49.983,
+"rebound": 16.5398,
+"trend": -1.0,
+"relstrength": 14.6442
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-30",
+"ticker": "JELD",
+"kind": "short",
+"price": 1.99,
+"conv": 33,
+"factors": {
+"discount": 59.4705,
+"histcheap": 0.22,
+"riskadj": -1.35,
+"ddpen": -58.49,
+"momentum": -8.1522,
+"prob": 19,
+"oversold": -52.1675,
+"rebound": -6.0503,
+"trend": 1.0,
+"relstrength": 9.3602
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-30",
+"ticker": "SANG",
+"kind": "short",
+"price": 4.93,
+"conv": 17,
+"factors": {
+"discount": 8.7037,
+"histcheap": -0.96,
+"riskadj": -0.1,
+"ddpen": -21.43,
+"momentum": -40.0568,
+"prob": 26,
+"oversold": -80.324,
+"rebound": -20.8965,
+"trend": 1.0,
+"relstrength": 41.2649
 },
 "ret_5d": null,
 "ret_21d": null
