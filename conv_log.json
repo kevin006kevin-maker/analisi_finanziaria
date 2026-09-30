@@ -1,48 +1,6 @@
 [
 {
 "date": "2026-09-22",
-"ticker": "ONDS",
-"kind": "short",
-"price": 7.55,
-"conv": 43,
-"factors": {
-"discount": 46.1099,
-"histcheap": 0.89,
-"riskadj": 0.01,
-"ddpen": -32.68,
-"momentum": -4.2818,
-"prob": 18,
-"oversold": -46.4551,
-"rebound": 5.494,
-"trend": -1.0,
-"relstrength": 1.9068
-},
-"ret_5d": 0.86,
-"ret_21d": null
-},
-{
-"date": "2026-09-22",
-"ticker": "NU",
-"kind": "short",
-"price": 13.975,
-"conv": 44,
-"factors": {
-"discount": 25.5064,
-"histcheap": 0.69,
-"riskadj": -0.68,
-"ddpen": -20.04,
-"momentum": 1.5151,
-"prob": 48,
-"oversold": -43.8524,
-"rebound": 3.0462,
-"trend": -1.0,
-"relstrength": -3.8901
-},
-"ret_5d": -10.81,
-"ret_21d": null
-},
-{
-"date": "2026-09-22",
 "ticker": "VKTX",
 "kind": "short",
 "price": 38.69,
@@ -40347,6 +40305,46 @@
 "rebound": -15.4819,
 "trend": -1.0,
 "relstrength": 11.2307
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-30",
+"ticker": "LQDA",
+"kind": "long",
+"price": 53.22,
+"conv": 46,
+"factors": {
+"discount": 41.5358,
+"histcheap": -0.22,
+"riskadj": 1.52,
+"ddpen": -14.41,
+"momentum": 21.1439,
+"prob": 60,
+"quality": 64.5,
+"valcheap": -3.0,
+"trappen": 2
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-09-30",
+"ticker": "TRLV",
+"kind": "long",
+"price": 10.46,
+"conv": 27,
+"factors": {
+"discount": 19.5385,
+"histcheap": -1.17,
+"riskadj": 0.38,
+"ddpen": -29.73,
+"momentum": 16.5869,
+"prob": 10,
+"quality": 39.6,
+"valcheap": -0.1672,
+"trappen": -1
 },
 "ret_5d": null,
 "ret_21d": null
