@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:MNSO:2026-08-17",
-"ticker": "MNSO",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-21 10:10",
-"data": "2026-08-17 15:37",
-"prezzo": 10.96,
-"conv": 80,
-"prob_gain": 50,
-"prob_loss": 4,
-"reliab": "🟡 Media",
-"mkt": 4.4982,
-"fonte": "riallineato dal registro delle osservazioni",
-"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
-"dovuto_il": null,
-"soglie": {
-"media50": 12.257,
-"media20": 12.355,
-"quattro_atr": 12.4551,
-"meta_caduta": 12.35,
-"bollinger": 13.4089,
-"consigliata": 12.257
-},
-"stop": 10.2125,
-"atr": 0.3738,
-"soglie_contaminate": {
-"media50": 12.1306,
-"media20": 12.1335,
-"quattro_atr": 12.3623,
-"meta_caduta": 12.245,
-"bollinger": 13.5911,
-"consigliata": 12.1306
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 4,
-"res": {
-"7g": 1.51,
-"30g": -19.3,
-"soglia": -19.3
-},
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": -19.3,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -19.3,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -19.3,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -19.3,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -19.3,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -19.3,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:SEDG:2026-08-19",
 "ticker": "SEDG",
 "kind": "short",
@@ -29680,5 +29605,32 @@
 },
 "stop": 3.2537,
 "atr": 0.4232
+},
+{
+"episodio": "short:RSI:2026-09-19",
+"ticker": "RSI",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-09-30 23:28",
+"data": "2026-09-30 23:28",
+"prezzo": 20.33,
+"conv": 77,
+"prob_gain": 57,
+"prob_loss": 13,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 25.6552,
+"media20": 23.759,
+"quattro_atr": 25.1113,
+"meta_caduta": 27.425,
+"bollinger": 29.8419,
+"consigliata": 25.1113
+},
+"stop": 17.9393,
+"atr": 1.1953
 }
 ]
