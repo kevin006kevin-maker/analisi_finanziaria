@@ -1831,5 +1831,80 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:MNSO:2026-08-17",
+"ticker": "MNSO",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:10",
+"data": "2026-08-17 15:37",
+"prezzo": 10.96,
+"conv": 80,
+"prob_gain": 50,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": 4.4982,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": 12.257,
+"media20": 12.355,
+"quattro_atr": 12.4551,
+"meta_caduta": 12.35,
+"bollinger": 13.4089,
+"consigliata": 12.257
+},
+"stop": 10.2125,
+"atr": 0.3738,
+"soglie_contaminate": {
+"media50": 12.1306,
+"media20": 12.1335,
+"quattro_atr": 12.3623,
+"meta_caduta": 12.245,
+"bollinger": 13.5911,
+"consigliata": 12.1306
+},
+"soglie_ricalcolate_il": "2026-09-14 21:39",
+"soglie_ritardo_giorni": 4,
+"res": {
+"7g": 1.51,
+"30g": -19.3,
+"soglia": -19.3
+},
+"taglio_corretto": true,
+"res_soglia": {
+"media50": {
+"ret": -19.3,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -19.3,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -19.3,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -19.3,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -19.3,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -19.3,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
