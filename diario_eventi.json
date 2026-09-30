@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:ENEL.MI:2026-08-18",
-"ticker": "ENEL.MI",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-21 10:10",
-"data": "2026-08-18 10:31",
-"prezzo": 9.416,
-"conv": 67,
-"prob_gain": 53,
-"prob_loss": 0,
-"reliab": "🟢 Alta",
-"mkt": 4.3991,
-"fonte": "riallineato dal registro delle osservazioni",
-"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
-"dovuto_il": null,
-"soglie": {
-"media50": 9.9307,
-"media20": 9.8298,
-"quattro_atr": 10.0665,
-"meta_caduta": 9.848,
-"bollinger": 10.184,
-"consigliata": 9.9307
-},
-"stop": 9.0908,
-"atr": 0.1626,
-"soglie_contaminate": {
-"media50": 9.9258,
-"media20": 9.7881,
-"quattro_atr": 10.0223,
-"meta_caduta": 9.848,
-"bollinger": 10.179,
-"consigliata": 9.9258
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 3,
-"res": {
-"7g": 1.4,
-"30g": -4.94,
-"soglia": -4.94
-},
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": -4.94,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -4.94,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -4.94,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -4.94,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -4.94,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -4.94,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:ENVX:2026-08-19",
 "ticker": "ENVX",
 "kind": "short",
@@ -29509,6 +29434,26 @@
 "mkt": null,
 "fonte": "osservazione",
 "note": "prezzo salito di almeno il 2% da 24.33",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:DCX:2026-09-29",
+"ticker": "DCX",
+"kind": "short",
+"evento": "salita_2pct",
+"scritto_il": "2026-09-30 19:16",
+"data": "2026-09-30 19:02",
+"prezzo": 3.77,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "prezzo salito di almeno il 2% da 3.66",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
