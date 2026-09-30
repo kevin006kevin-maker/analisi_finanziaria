@@ -9820,5 +9820,37 @@
 "max_date": "2026-09-30 13:24",
 "auto": true,
 "notified": false
+},
+"TRT": {
+"kind": "short",
+"added": "2026-09-30",
+"note": "🤖 Promossa il 2026-09-30: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.0% e la convenienza (71) regge.",
+"name": "TRT",
+"snapshots": [
+{
+"name": "TRT",
+"price": 6.62,
+"rsi": 29.656,
+"dd_high": -66.9825,
+"occasione": 80,
+"convenienza": 69,
+"prob_gain": 52,
+"prob_loss": 28,
+"exp_ret": 2.0,
+"gain": 54.7764,
+"reliab": "🔴 Bassa",
+"target": 10.2462,
+"stop": 4.6574,
+"date": "2026-09-30 13:24"
+}
+],
+"entry_price": 6.62,
+"entry_target": 10.2462,
+"entry_stop": 4.6574,
+"entry_conv": 69,
+"entry_date": "2026-09-30 13:24",
+"entry_src": "scatto",
+"max_price": 6.62,
+"max_date": "2026-09-30 13:24"
 }
 }
