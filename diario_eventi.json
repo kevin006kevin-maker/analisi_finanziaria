@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:STUB:2026-08-17",
-"ticker": "STUB",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-08-21 10:38",
-"data": "2026-08-20 22:56",
-"prezzo": 6.83,
-"conv": 51,
-"prob_gain": 57,
-"prob_loss": 23,
-"reliab": "🔴 Bassa",
-"mkt": 2.6585,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-08-20",
-"soglie": {
-"media50": 10.0214,
-"media20": 8.2685,
-"quattro_atr": 9.1424,
-"meta_caduta": 10.26,
-"bollinger": 9.7845,
-"consigliata": 9.1424
-},
-"stop": 5.6738,
-"atr": 0.5781,
-"soglie_contaminate": {
-"media50": 10.0214,
-"media20": 8.2685,
-"quattro_atr": 9.1424,
-"meta_caduta": 10.26,
-"bollinger": 9.7845,
-"consigliata": 9.1424
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": -4.1,
-"30g": -13.98,
-"soglia": -13.98
-},
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": -13.98,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -13.98,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -13.98,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -13.98,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -13.98,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -13.98,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:VCX:2026-08-17",
 "ticker": "VCX",
 "kind": "short",
@@ -28548,5 +28473,25 @@
 },
 "stop": 11.8084,
 "atr": 0.5558
+},
+{
+"episodio": "short:NU:2026-09-28",
+"ticker": "NU",
+"kind": "short",
+"evento": "salita_2pct",
+"scritto_il": "2026-10-01 16:48",
+"data": "2026-10-01 16:47",
+"prezzo": 12.875,
+"conv": 73,
+"prob_gain": 50,
+"prob_loss": 5,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "prezzo salito di almeno il 2% da 12.46",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
