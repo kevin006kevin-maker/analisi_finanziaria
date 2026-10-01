@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:MNSO:2026-08-17",
-"ticker": "MNSO",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-08-21 10:38",
-"data": "2026-08-20 22:56",
-"prezzo": 11.13,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-08-20",
-"soglie": {
-"media50": 12.1306,
-"media20": 12.1335,
-"quattro_atr": 12.5323,
-"meta_caduta": 12.33,
-"bollinger": 13.5911,
-"consigliata": 12.1306
-},
-"stop": 10.4288,
-"atr": 0.3506,
-"soglie_contaminate": {
-"media50": 12.1306,
-"media20": 12.1335,
-"quattro_atr": 12.5323,
-"meta_caduta": 12.33,
-"bollinger": 13.5911,
-"consigliata": 12.1306
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": -2.88,
-"30g": -20.84,
-"soglia": -20.84
-},
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": -20.84,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -20.84,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -20.84,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -20.84,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -20.84,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -20.84,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:STLAM.MI:2026-08-16",
 "ticker": "STLAM.MI",
 "kind": "short",
@@ -28681,5 +28606,32 @@
 },
 "stop": 10.2543,
 "atr": 0.4429
+},
+{
+"episodio": "long:LYG:2026-10-01",
+"ticker": "LYG",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-01 16:47",
+"data": "2026-10-01 16:47",
+"prezzo": 5.39,
+"conv": 65,
+"prob_gain": 85,
+"prob_loss": 5,
+"reliab": "🟢 Alta",
+"mkt": -0.2598,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 5.9772,
+"media20": 5.8285,
+"quattro_atr": 5.8755,
+"meta_caduta": 5.835,
+"bollinger": 6.1762,
+"consigliata": 5.8755
+},
+"stop": 5.1473,
+"atr": 0.1214
 }
 ]
