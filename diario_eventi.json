@@ -1,25 +1,5 @@
 [
 {
-"episodio": "long:PBR:2026-08-16",
-"ticker": "PBR",
-"kind": "long",
-"evento": "salita_2pct",
-"scritto_il": "2026-08-21 10:37",
-"data": "2026-08-20 22:56",
-"prezzo": 19.01,
-"conv": 63,
-"prob_gain": 58,
-"prob_loss": 26,
-"reliab": "🟢 Alta",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "prezzo salito di almeno il 2% da 17.88",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "long:PBR-A:2026-08-17",
 "ticker": "PBR-A",
 "kind": "long",
@@ -28998,5 +28978,32 @@
 },
 "stop": 272.0124,
 "atr": 3.4988
+},
+{
+"episodio": "short:ITG:2026-09-28",
+"ticker": "ITG",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-01 02:56",
+"data": "2026-10-01 02:53",
+"prezzo": 8.16,
+"conv": 70,
+"prob_gain": 84,
+"prob_loss": 7,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-01",
+"soglie": {
+"media50": 12.4102,
+"media20": 11.841,
+"quattro_atr": 12.7875,
+"meta_caduta": 11.26,
+"bollinger": 15.4408,
+"consigliata": 12.4102
+},
+"stop": 5.8462,
+"atr": 1.1569
 }
 ]
