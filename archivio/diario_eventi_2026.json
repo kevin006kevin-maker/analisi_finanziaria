@@ -2056,5 +2056,75 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:STMMI.MI:2026-08-17",
+"ticker": "STMMI.MI",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:10",
+"data": "2026-08-17 10:07",
+"prezzo": 48.38,
+"conv": 80,
+"prob_gain": 54,
+"prob_loss": 13,
+"reliab": "🟡 Media",
+"mkt": 3.2103,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": 56.724,
+"media20": null,
+"quattro_atr": 58.1048,
+"meta_caduta": 58.865,
+"bollinger": 55.1772,
+"consigliata": 56.724
+},
+"stop": 43.5176,
+"atr": 2.4312,
+"soglie_contaminate": {
+"media50": 55.6308,
+"media20": null,
+"quattro_atr": 57.798,
+"meta_caduta": 58.865,
+"bollinger": 49.5224,
+"consigliata": 55.6308
+},
+"soglie_ricalcolate_il": "2026-09-14 21:39",
+"soglie_ritardo_giorni": 4,
+"res": {
+"7g": -11.59,
+"30g": -11.42,
+"soglia": -11.42
+},
+"taglio_corretto": true,
+"res_soglia": {
+"media50": {
+"ret": -11.42,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -11.42,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -11.42,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -11.42,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -11.42,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
