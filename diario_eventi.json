@@ -3,76 +3,6 @@
 "episodio": "short:MARA:2026-08-18",
 "ticker": "MARA",
 "kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-08-21 10:38",
-"data": "2026-08-20 22:56",
-"prezzo": 11.15,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-08-21",
-"soglie": {
-"media50": 12.0914,
-"media20": null,
-"quattro_atr": 14.9829,
-"meta_caduta": 13.0,
-"bollinger": 12.6502,
-"consigliata": 12.0914
-},
-"stop": 9.2335,
-"atr": 0.9582,
-"soglie_contaminate": {
-"media50": 12.0914,
-"media20": null,
-"quattro_atr": 14.9829,
-"meta_caduta": 13.0,
-"bollinger": 12.6502,
-"consigliata": 12.0914
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": 6.46,
-"30g": 20.0,
-"soglia": 8.44
-},
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": 8.44,
-"toccato": true,
-"giorni": 29
-},
-"quattro_atr": {
-"ret": 20.0,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 16.59,
-"toccato": true,
-"giorni": 29
-},
-"bollinger": {
-"ret": 13.45,
-"toccato": true,
-"giorni": 29
-},
-"consigliata": {
-"ret": 8.44,
-"toccato": true,
-"giorni": 29
-}
-}
-},
-{
-"episodio": "short:MARA:2026-08-18",
-"ticker": "MARA",
-"kind": "short",
 "evento": "salita_2pct",
 "scritto_il": "2026-08-21 10:38",
 "data": "2026-08-20 22:56",
@@ -28717,5 +28647,32 @@
 },
 "stop": 16.4307,
 "atr": 0.4022
+},
+{
+"episodio": "short:XLF:2026-10-01",
+"ticker": "XLF",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-01 16:46",
+"data": "2026-10-01 16:46",
+"prezzo": 52.9899,
+"conv": 63,
+"prob_gain": 50,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -0.2598,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 56.8484,
+"media20": 55.7945,
+"quattro_atr": 55.8366,
+"meta_caduta": 55.775,
+"bollinger": 58.9474,
+"consigliata": 55.8366
+},
+"stop": 51.5665,
+"atr": 0.7117
 }
 ]
