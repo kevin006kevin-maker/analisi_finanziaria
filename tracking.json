@@ -12954,5 +12954,37 @@
 "max_date": "2026-10-01 02:53",
 "auto": true,
 "notified": false
+},
+"ACET": {
+"kind": "short",
+"added": "2026-10-01",
+"note": "🤖 Promossa il 2026-10-01: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +7.6% e la convenienza (68) regge.",
+"name": "ACET",
+"snapshots": [
+{
+"name": "ACET",
+"price": 6.83,
+"rsi": 35.2058,
+"dd_high": -58.9543,
+"occasione": 91,
+"convenienza": 67,
+"prob_gain": 55,
+"prob_loss": 16,
+"exp_ret": 2.0,
+"gain": 28.3338,
+"reliab": "🔴 Bassa",
+"target": 8.7652,
+"stop": 5.2729,
+"date": "2026-10-01 02:53"
+}
+],
+"entry_price": 6.83,
+"entry_target": 8.7652,
+"entry_stop": 5.2729,
+"entry_conv": 67,
+"entry_date": "2026-10-01 02:53",
+"entry_src": "scatto",
+"max_price": 6.83,
+"max_date": "2026-10-01 02:53"
 }
 }
