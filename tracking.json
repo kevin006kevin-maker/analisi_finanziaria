@@ -1681,7 +1681,9 @@
 "entry_date": "2026-07-22",
 "entry_src": "storico",
 "max_price": 83.245,
-"max_date": "2026-09-03 15:46"
+"max_date": "2026-09-03 15:46",
+"warn_since": "2026-10-01",
+"warn": "in perdita da 50 giorni di Borsa: valuta l'uscita"
 },
 "AXTI": {
 "kind": "short",
@@ -7350,7 +7352,9 @@
 "max_date": "2026-08-27 22:41",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-01"
+"entry_check": "2026-10-01",
+"warn_since": "2026-10-01",
+"warn": "in perdita da 29 giorni di Borsa: valuta l'uscita"
 },
 "DUOL": {
 "kind": "long",
@@ -11056,7 +11060,9 @@
 "max_date": "2026-09-29 22:03",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-01"
+"entry_check": "2026-10-01",
+"warn_since": "2026-10-01",
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "ON": {
 "kind": "short",
@@ -12237,7 +12243,9 @@
 "max_date": "2026-09-25 23:51",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-01"
+"entry_check": "2026-10-01",
+"warn_since": "2026-10-01",
+"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
 },
 "LPLA": {
 "kind": "short",
