@@ -3,76 +3,6 @@
 "episodio": "short:VCX:2026-08-17",
 "ticker": "VCX",
 "kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-08-21 10:38",
-"data": "2026-08-20 21:28",
-"prezzo": 39.42,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-08-20",
-"soglie": {
-"media50": 63.5102,
-"media20": null,
-"quattro_atr": 64.507,
-"meta_caduta": 134.21,
-"bollinger": 47.5521,
-"consigliata": 63.5102
-},
-"stop": 26.8765,
-"atr": 6.2718,
-"soglie_contaminate": {
-"media50": 63.5102,
-"media20": null,
-"quattro_atr": 64.507,
-"meta_caduta": 134.21,
-"bollinger": 47.5521,
-"consigliata": 63.5102
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": 4.87,
-"30g": -21.11,
-"soglia": -21.11
-},
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": -21.11,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -21.11,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -21.11,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -21.11,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -21.11,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
-"episodio": "short:VCX:2026-08-17",
-"ticker": "VCX",
-"kind": "short",
 "evento": "salita_2pct",
 "scritto_il": "2026-08-21 10:38",
 "data": "2026-08-20 21:28",
@@ -28489,6 +28419,26 @@
 "mkt": null,
 "fonte": "monitoraggio",
 "note": "prezzo salito di almeno il 2% da 12.46",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:FICO:2026-09-29",
+"ticker": "FICO",
+"kind": "short",
+"evento": "salita_2pct",
+"scritto_il": "2026-10-01 16:49",
+"data": "2026-10-01 16:46",
+"prezzo": 650.74,
+"conv": 75,
+"prob_gain": 52,
+"prob_loss": 14,
+"reliab": "🔴 Bassa",
+"mkt": -0.2598,
+"fonte": "osservazione",
+"note": "prezzo salito di almeno il 2% da 620.979",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
