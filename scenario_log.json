@@ -11678,5 +11678,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "ALHC",
+"kind": "short",
+"date": "2026-10-01",
+"promo_price": 8.16,
+"obs_price": 10.075,
+"obs_date": "2026-09-15",
+"pre_price": 10.37,
+"pre_date": "2026-09-16",
+"conf_price": null,
+"conf_date": null,
+"target": 13.0559,
+"stop": 6.7145,
+"reliab": "🔴 Bassa",
+"prob_gain": 53,
+"prob_loss": 23,
+"conv": 73,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-15 19:40",
+"prezzo": 10.075,
+"conv": 79,
+"prob_gain": 53,
+"prob_loss": 17,
+"reliab": "🔴 Bassa",
+"mkt": -2.099
+},
+"anticipo": {
+"data": "2026-09-16",
+"prezzo": 10.37,
+"conv": 78,
+"prob_gain": 51,
+"prob_loss": 17,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-01 09:13",
+"prezzo": 8.16,
+"conv": 73,
+"prob_gain": 53,
+"prob_loss": 23,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
