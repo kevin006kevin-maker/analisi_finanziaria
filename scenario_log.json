@@ -11545,5 +11545,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "ACET",
+"kind": "short",
+"date": "2026-10-01",
+"promo_price": 6.83,
+"obs_price": 6.35,
+"obs_date": "2026-09-28",
+"pre_price": 6.35,
+"pre_date": "2026-09-29",
+"conf_price": null,
+"conf_date": null,
+"target": 8.7652,
+"stop": 5.2729,
+"reliab": "🔴 Bassa",
+"prob_gain": 55,
+"prob_loss": 16,
+"conv": 67,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-28 23:54",
+"prezzo": 6.35,
+"conv": 61,
+"prob_gain": 57,
+"prob_loss": 14,
+"reliab": "🔴 Bassa",
+"mkt": -0.3535
+},
+"anticipo": {
+"data": "2026-09-29",
+"prezzo": 6.35,
+"conv": 68,
+"prob_gain": 57,
+"prob_loss": 14,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-01 02:53",
+"prezzo": 6.83,
+"conv": 67,
+"prob_gain": 55,
+"prob_loss": 16,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
