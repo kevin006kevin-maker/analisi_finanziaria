@@ -11488,5 +11488,62 @@
 "prob_loss": 0,
 "conv": 67,
 "res": {}
+},
+{
+"ticker": "ITG",
+"kind": "short",
+"date": "2026-10-01",
+"promo_price": 8.16,
+"obs_price": 7.065,
+"obs_date": "2026-09-28",
+"pre_price": 7.07,
+"pre_date": "2026-09-29",
+"conf_price": null,
+"conf_date": null,
+"target": 12.4102,
+"stop": 5.8462,
+"reliab": "🔴 Bassa",
+"prob_gain": 84,
+"prob_loss": 7,
+"conv": 70,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-28 23:54",
+"prezzo": 7.065,
+"conv": 75,
+"prob_gain": 90,
+"prob_loss": 4,
+"reliab": "🔴 Bassa",
+"mkt": -0.3535
+},
+"anticipo": {
+"data": "2026-09-29",
+"prezzo": 7.07,
+"conv": 75,
+"prob_gain": 89,
+"prob_loss": 4,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-01 02:53",
+"prezzo": 8.16,
+"conv": 70,
+"prob_gain": 84,
+"prob_loss": 7,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
