@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:STLAM.MI:2026-08-16",
-"ticker": "STLAM.MI",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-08-21 10:38",
-"data": "2026-08-20 15:42",
-"prezzo": 4.413,
-"conv": 50,
-"prob_gain": 53,
-"prob_loss": 12,
-"reliab": "🟡 Media",
-"mkt": 3.8732,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-08-19",
-"soglie": {
-"media50": 5.0466,
-"media20": 4.8147,
-"quattro_atr": 5.2515,
-"meta_caduta": 5.639,
-"bollinger": 5.2968,
-"consigliata": 5.0466
-},
-"stop": 3.9938,
-"atr": 0.2096,
-"soglie_contaminate": {
-"media50": 5.0481,
-"media20": 4.8185,
-"quattro_atr": 5.1829,
-"meta_caduta": 5.639,
-"bollinger": 5.2902,
-"consigliata": 5.0481
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": 1.93,
-"30g": -3.8,
-"soglia": -3.8
-},
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": -3.8,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -3.8,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -3.8,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -3.8,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -3.8,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -3.8,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:STMMI.MI:2026-08-17",
 "ticker": "STMMI.MI",
 "kind": "short",
@@ -28633,5 +28558,32 @@
 },
 "stop": 5.1473,
 "atr": 0.1214
+},
+{
+"episodio": "short:MTG:2026-09-30",
+"ticker": "MTG",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-01 16:47",
+"data": "2026-10-01 16:46",
+"prezzo": 25.94,
+"conv": 79,
+"prob_gain": 61,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": -0.2598,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 30.1608,
+"media20": 29.443,
+"quattro_atr": 29.0433,
+"meta_caduta": 28.705,
+"bollinger": 32.5358,
+"consigliata": 29.0433
+},
+"stop": 24.3883,
+"atr": 0.7758
 }
 ]
