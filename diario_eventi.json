@@ -1,25 +1,5 @@
 [
 {
-"episodio": "long:KGC:2026-08-16",
-"ticker": "KGC",
-"kind": "long",
-"evento": "salita_2pct",
-"scritto_il": "2026-08-21 10:37",
-"data": "2026-08-21 08:56",
-"prezzo": 31.43,
-"conv": 63,
-"prob_gain": 55,
-"prob_loss": 33,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "prezzo salito di almeno il 2% da 27.31",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "long:NEM:2026-08-19",
 "ticker": "NEM",
 "kind": "long",
@@ -28984,5 +28964,32 @@
 },
 "stop": 36.6075,
 "atr": 2.0663
+},
+{
+"episodio": "short:NU:2026-09-28",
+"ticker": "NU",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-01 02:56",
+"data": "2026-10-01 02:49",
+"prezzo": 12.35,
+"conv": 73,
+"prob_gain": 54,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": 0.263,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-01",
+"soglie": {
+"media50": 14.3266,
+"media20": 14.2175,
+"quattro_atr": 14.5162,
+"meta_caduta": 14.015,
+"bollinger": 16.1036,
+"consigliata": 14.3266
+},
+"stop": 11.2669,
+"atr": 0.5416
 }
 ]
