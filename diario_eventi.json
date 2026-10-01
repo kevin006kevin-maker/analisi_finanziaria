@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:STLAM.MI:2026-08-16",
-"ticker": "STLAM.MI",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-21 10:10",
-"data": "2026-08-16 21:44",
-"prezzo": 4.62,
-"conv": 80,
-"prob_gain": 49,
-"prob_loss": 13,
-"reliab": "🟡 Media",
-"mkt": 4.3991,
-"fonte": "riallineato dal registro delle osservazioni",
-"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
-"dovuto_il": null,
-"soglie": {
-"media50": 5.1632,
-"media20": 4.9306,
-"quattro_atr": 5.373,
-"meta_caduta": 5.82,
-"bollinger": 5.2828,
-"consigliata": 5.1632
-},
-"stop": 4.2435,
-"atr": 0.1882,
-"soglie_contaminate": {
-"media50": 5.0479,
-"media20": 4.8178,
-"quattro_atr": 5.3899,
-"meta_caduta": 5.7425,
-"bollinger": 5.2911,
-"consigliata": 5.0479
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 5,
-"res": {
-"7g": -2.71,
-"30g": -1.71,
-"soglia": -1.71
-},
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": -1.71,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -1.71,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -1.71,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -1.71,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -1.71,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -1.71,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:STMMI.MI:2026-08-17",
 "ticker": "STMMI.MI",
 "kind": "short",
@@ -29584,5 +29509,32 @@
 },
 "stop": 60.6724,
 "atr": 1.2838
+},
+{
+"episodio": "short:COUR:2026-10-01",
+"ticker": "COUR",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-01 02:49",
+"data": "2026-10-01 02:49",
+"prezzo": 4.67,
+"conv": 66,
+"prob_gain": 55,
+"prob_loss": 9,
+"reliab": "🟡 Media",
+"mkt": 0.263,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 5.609,
+"media20": 5.3195,
+"quattro_atr": 5.6056,
+"meta_caduta": 5.595,
+"bollinger": 6.1655,
+"consigliata": 5.6056
+},
+"stop": 4.2022,
+"atr": 0.2339
 }
 ]
