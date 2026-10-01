@@ -2276,5 +2276,80 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:VCX:2026-08-17",
+"ticker": "VCX",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:10",
+"data": "2026-08-17 17:50",
+"prezzo": 38.09,
+"conv": 64,
+"prob_gain": 32,
+"prob_loss": 62,
+"reliab": "🔴 Bassa",
+"mkt": 4.4111,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": 69.8534,
+"media20": 39.549,
+"quattro_atr": 65.1463,
+"meta_caduta": 163.8,
+"bollinger": 59.505,
+"consigliata": 65.1463
+},
+"stop": 24.5618,
+"atr": 6.7641,
+"soglie_contaminate": {
+"media50": 63.5102,
+"media20": null,
+"quattro_atr": 63.177,
+"meta_caduta": 133.545,
+"bollinger": 47.5521,
+"consigliata": 63.177
+},
+"soglie_ricalcolate_il": "2026-09-14 21:39",
+"soglie_ritardo_giorni": 4,
+"res": {
+"7g": 9.01,
+"30g": -21.25,
+"soglia": -21.25
+},
+"taglio_corretto": true,
+"res_soglia": {
+"media50": {
+"ret": -21.25,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": 3.83,
+"toccato": true,
+"giorni": 1
+},
+"quattro_atr": {
+"ret": -21.25,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -21.25,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -21.25,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -21.25,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
