@@ -2201,5 +2201,80 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:TNGX:2026-08-20",
+"ticker": "TNGX",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-08-21 10:10",
+"data": "2026-08-20 21:56",
+"prezzo": 23.27,
+"conv": 62,
+"prob_gain": 52,
+"prob_loss": 24,
+"reliab": "🔴 Bassa",
+"mkt": 2.665,
+"fonte": "riallineato dal registro delle osservazioni",
+"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
+"dovuto_il": null,
+"soglie": {
+"media50": 28.511,
+"media20": 26.6155,
+"quattro_atr": 29.7527,
+"meta_caduta": 28.085,
+"bollinger": 29.4935,
+"consigliata": 28.511
+},
+"stop": 20.0287,
+"atr": 1.6207,
+"soglie_contaminate": {
+"media50": 28.511,
+"media20": 26.6155,
+"quattro_atr": 29.7527,
+"meta_caduta": 28.085,
+"bollinger": 29.4935,
+"consigliata": 28.511
+},
+"soglie_ricalcolate_il": "2026-09-14 21:39",
+"soglie_ritardo_giorni": 1,
+"res": {
+"7g": 8.64,
+"30g": -4.51,
+"soglia": -4.51
+},
+"taglio_corretto": true,
+"res_soglia": {
+"media50": {
+"ret": -4.51,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -4.51,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -4.51,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -4.51,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -4.51,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -4.51,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
