@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:CAPR:2026-08-16",
-"ticker": "CAPR",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-08-21 10:37",
-"data": "2026-08-21 06:35",
-"prezzo": 6.84,
-"conv": 66,
-"prob_gain": 44,
-"prob_loss": 30,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "prezzo salito di almeno il 2% da 6.65",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:CDNL:2026-08-18",
 "ticker": "CDNL",
 "kind": "short",
@@ -28917,5 +28897,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:F:2026-10-01",
+"ticker": "F",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-01 09:10",
+"data": "2026-10-01 09:10",
+"prezzo": 12.06,
+"conv": 65,
+"prob_gain": 51,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": 0.263,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 13.8714,
+"media20": 13.363,
+"quattro_atr": 13.6351,
+"meta_caduta": 13.67,
+"bollinger": 14.797,
+"consigliata": 13.6351
+},
+"stop": 11.2725,
+"atr": 0.3938
 }
 ]
