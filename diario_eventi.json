@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:ENEL.MI:2026-08-18",
-"ticker": "ENEL.MI",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-08-21 10:36",
-"data": "2026-08-18 10:31",
-"prezzo": 9.416,
-"conv": 67,
-"prob_gain": 53,
-"prob_loss": 0,
-"reliab": "🟢 Alta",
-"mkt": null,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 9.9307,
-"media20": 9.8298,
-"quattro_atr": 10.0665,
-"meta_caduta": 9.848,
-"bollinger": 10.184,
-"consigliata": 9.9307
-},
-"stop": 9.0908,
-"atr": 0.1626,
-"soglie_contaminate": {
-"media50": 9.926,
-"media20": 9.7887,
-"quattro_atr": 10.0235,
-"meta_caduta": 9.848,
-"bollinger": 10.178,
-"consigliata": 9.926
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 3,
-"res": {
-"7g": 1.4,
-"30g": -4.94,
-"soglia": -4.94
-},
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": -4.94,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -4.94,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -4.94,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -4.94,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -4.94,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -4.94,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:TNGX:2026-08-20",
 "ticker": "TNGX",
 "kind": "short",
@@ -29083,6 +29008,26 @@
 "mkt": null,
 "fonte": "monitoraggio",
 "note": "in perdita da 62 giorni di Borsa: valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:ACI:2026-10-01",
+"ticker": "ACI",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-10-01 02:55",
+"data": "2026-10-01 02:55",
+"prezzo": 11.64,
+"conv": 77,
+"prob_gain": 57,
+"prob_loss": 7,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "in perdita da 46 giorni di Borsa: valuta l'uscita",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
