@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:INTR:2026-08-16",
-"ticker": "INTR",
-"kind": "long",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-08-21 10:36",
-"data": "2026-08-21 10:36",
-"prezzo": 5.2,
-"conv": 76,
-"prob_gain": 64,
-"prob_loss": 23,
-"reliab": "🟡 Media",
-"mkt": 3.1432,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 5.4944,
-"media20": 5.4015,
-"quattro_atr": 6.2028,
-"meta_caduta": 5.805,
-"bollinger": 5.843,
-"consigliata": 5.4944
-},
-"stop": 4.6986,
-"atr": 0.2507,
-"res": {
-"7g": 1.92,
-"30g": 5.29
-}
-},
-{
 "episodio": "long:CDE:2026-08-17",
 "ticker": "CDE",
 "kind": "long",
@@ -28984,6 +28953,26 @@
 "mkt": null,
 "fonte": "monitoraggio",
 "note": "in perdita da 41 giorni di Borsa: valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:VISN:2026-08-29",
+"ticker": "VISN",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-10-01 02:55",
+"data": "2026-10-01 02:55",
+"prezzo": 5.94,
+"conv": 74,
+"prob_gain": 75,
+"prob_loss": 16,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "in perdita da 20 giorni di Borsa: valuta l'uscita",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
