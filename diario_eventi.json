@@ -1,25 +1,5 @@
 [
 {
-"episodio": "long:NEM:2026-08-19",
-"ticker": "NEM",
-"kind": "long",
-"evento": "salita_2pct",
-"scritto_il": "2026-08-21 10:37",
-"data": "2026-08-21 08:56",
-"prezzo": 127.64,
-"conv": 56,
-"prob_gain": 56,
-"prob_loss": 30,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "prezzo salito di almeno il 2% da 115.98",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "long:PBR:2026-08-16",
 "ticker": "PBR",
 "kind": "long",
@@ -28991,5 +28971,32 @@
 },
 "stop": 11.2669,
 "atr": 0.5416
+},
+{
+"episodio": "short:IWM:2026-09-28",
+"ticker": "IWM",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-01 02:56",
+"data": "2026-10-01 02:49",
+"prezzo": 279.01,
+"conv": 67,
+"prob_gain": 50,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": 0.263,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-01",
+"soglie": {
+"media50": 293.4564,
+"media20": 287.0775,
+"quattro_atr": 293.0051,
+"meta_caduta": 292.05,
+"bollinger": 297.389,
+"consigliata": 293.0051
+},
+"stop": 272.0124,
+"atr": 3.4988
 }
 ]
