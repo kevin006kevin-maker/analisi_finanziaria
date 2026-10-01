@@ -1,48 +1,6 @@
 [
 {
 "date": "2026-09-23",
-"ticker": "YSS",
-"kind": "short",
-"price": 9.76,
-"conv": 40,
-"factors": {
-"discount": 77.5374,
-"histcheap": 1.51,
-"riskadj": -2.53,
-"ddpen": -47.76,
-"momentum": -26.5888,
-"prob": 11,
-"oversold": -49.728,
-"rebound": 24.6967,
-"trend": null,
-"relstrength": 24.6896
-},
-"ret_5d": -9.22,
-"ret_21d": null
-},
-{
-"date": "2026-09-23",
-"ticker": "MARA",
-"kind": "short",
-"price": 13.28,
-"conv": 26,
-"factors": {
-"discount": 41.8564,
-"histcheap": -0.36,
-"riskadj": -0.62,
-"ddpen": -48.95,
-"momentum": -15.4783,
-"prob": 26,
-"oversold": -63.0183,
-"rebound": -15.6521,
-"trend": 1.0,
-"relstrength": 13.579
-},
-"ret_5d": -12.28,
-"ret_21d": null
-},
-{
-"date": "2026-09-23",
 "ticker": "MOMO",
 "kind": "short",
 "price": 4.99,
@@ -40348,6 +40306,46 @@
 "rebound": -21.0932,
 "trend": 1.0,
 "relstrength": 11.0294
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-01",
+"ticker": "CTVA",
+"kind": "long",
+"price": 12.3399,
+"conv": 58,
+"factors": {
+"discount": 86.3663,
+"histcheap": 7.2,
+"riskadj": -0.59,
+"ddpen": -8.21,
+"momentum": 84.4683,
+"prob": 100,
+"quality": 35.9,
+"valcheap": -1.2296,
+"trappen": 0
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-01",
+"ticker": "GRND",
+"kind": "long",
+"price": 13.755,
+"conv": 53,
+"factors": {
+"discount": 23.3278,
+"histcheap": -0.11,
+"riskadj": -0.34,
+"ddpen": -15.81,
+"momentum": 13.327,
+"prob": 72,
+"quality": 73.9,
+"valcheap": -2.3224,
+"trappen": 3
 },
 "ret_5d": null,
 "ret_21d": null
