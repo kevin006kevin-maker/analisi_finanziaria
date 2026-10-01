@@ -1,75 +1,5 @@
 [
 {
-"episodio": "short:STMMI.MI:2026-08-17",
-"ticker": "STMMI.MI",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-21 10:10",
-"data": "2026-08-17 10:07",
-"prezzo": 48.38,
-"conv": 80,
-"prob_gain": 54,
-"prob_loss": 13,
-"reliab": "🟡 Media",
-"mkt": 3.2103,
-"fonte": "riallineato dal registro delle osservazioni",
-"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
-"dovuto_il": null,
-"soglie": {
-"media50": 56.724,
-"media20": null,
-"quattro_atr": 58.1048,
-"meta_caduta": 58.865,
-"bollinger": 55.1772,
-"consigliata": 56.724
-},
-"stop": 43.5176,
-"atr": 2.4312,
-"soglie_contaminate": {
-"media50": 55.6308,
-"media20": null,
-"quattro_atr": 57.798,
-"meta_caduta": 58.865,
-"bollinger": 49.5224,
-"consigliata": 55.6308
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 4,
-"res": {
-"7g": -11.59,
-"30g": -11.42,
-"soglia": -11.42
-},
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": -11.42,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -11.42,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -11.42,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -11.42,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -11.42,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:STUB:2026-08-17",
 "ticker": "STUB",
 "kind": "short",
@@ -29536,5 +29466,32 @@
 },
 "stop": 4.2022,
 "atr": 0.2339
+},
+{
+"episodio": "short:NESR:2026-09-29",
+"ticker": "NESR",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-01 02:52",
+"data": "2026-10-01 02:49",
+"prezzo": 26.49,
+"conv": 81,
+"prob_gain": 58,
+"prob_loss": 9,
+"reliab": "🟡 Media",
+"mkt": 0.263,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 31.9171,
+"media20": 32.792,
+"quattro_atr": 33.027,
+"meta_caduta": 31.4,
+"bollinger": 36.7139,
+"consigliata": 31.9171
+},
+"stop": 23.2215,
+"atr": 1.6343
 }
 ]
