@@ -1,25 +1,5 @@
 [
 {
-"episodio": "long:IAG:2026-08-20",
-"ticker": "IAG",
-"kind": "long",
-"evento": "salita_2pct",
-"scritto_il": "2026-08-21 10:37",
-"data": "2026-08-21 09:40",
-"prezzo": 20.5,
-"conv": 62,
-"prob_gain": 55,
-"prob_loss": 36,
-"reliab": "🔴 Bassa",
-"mkt": 3.1432,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 19.72",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "long:KGC:2026-08-16",
 "ticker": "KGC",
 "kind": "long",
@@ -28977,5 +28957,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "long:PLNT:2026-09-22",
+"ticker": "PLNT",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-01 02:56",
+"data": "2026-10-01 02:51",
+"prezzo": 40.74,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-01",
+"soglie": {
+"media50": 50.8592,
+"media20": 47.5845,
+"quattro_atr": 49.0051,
+"meta_caduta": 48.665,
+"bollinger": 56.1976,
+"consigliata": 49.0051
+},
+"stop": 36.6075,
+"atr": 2.0663
 }
 ]
