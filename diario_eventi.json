@@ -8273,7 +8273,8 @@
 "atr": 9.7855,
 "res": {
 "7g": -0.63
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "long:PYPL:2026-08-28",
@@ -8498,7 +8499,8 @@
 "atr": 0.8295,
 "res": {
 "7g": 11.08
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:NIO:2026-09-01",
@@ -8528,7 +8530,8 @@
 "atr": 0.1498,
 "res": {
 "7g": -5.66
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "long:AGNC:2026-09-01",
@@ -8628,7 +8631,8 @@
 "atr": 0.8698,
 "res": {
 "7g": -0.81
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "long:PURR:2026-09-01",
@@ -8688,7 +8692,8 @@
 "atr": 0.8006,
 "res": {
 "7g": 13.84
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:EIX:2026-08-31",
@@ -8798,7 +8803,8 @@
 "atr": 2.4846,
 "res": {
 "7g": 10.77
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "long:HST:2026-08-27",
@@ -9039,7 +9045,8 @@
 "res": {
 "7g": -0.48
 },
-"taglio_corretto": true
+"taglio_corretto": true,
+"res_soglia": {}
 },
 {
 "episodio": "short:OI:2026-08-21",
@@ -9110,7 +9117,8 @@
 "res": {
 "7g": 0.77
 },
-"taglio_corretto": true
+"taglio_corretto": true,
+"res_soglia": {}
 },
 {
 "episodio": "long:SNDK:2026-08-24",
@@ -9372,7 +9380,8 @@
 "res": {
 "7g": -4.27
 },
-"taglio_corretto": true
+"taglio_corretto": true,
+"res_soglia": {}
 },
 {
 "episodio": "short:VISN:2026-08-29",
@@ -9443,7 +9452,8 @@
 "res": {
 "7g": 23.78
 },
-"taglio_corretto": true
+"taglio_corretto": true,
+"res_soglia": {}
 },
 {
 "episodio": "short:ENEL.MI:2026-09-02",
@@ -9574,7 +9584,8 @@
 },
 "soglie_ricalcolate_il": "2026-09-14 21:39",
 "soglie_ritardo_giorni": 1,
-"taglio_corretto": true
+"taglio_corretto": true,
+"res_soglia": {}
 },
 {
 "episodio": "short:AON:2026-09-01",
@@ -23276,7 +23287,8 @@
 },
 "stop": 1.3329,
 "atr": 1.5636,
-"res": {}
+"res": {},
+"bad_data": "salto di prezzo oltre il 25%: probabile raggruppamento di azioni"
 },
 {
 "episodio": "short:KNF:2026-09-23",
@@ -24218,7 +24230,8 @@
 },
 "stop": null,
 "atr": 3.7874,
-"res": {}
+"res": {},
+"bad_data": "salto di prezzo oltre il 25%: probabile raggruppamento di azioni"
 },
 {
 "episodio": "short:AGNC:2026-09-18",
@@ -28147,7 +28160,8 @@
 "consigliata": 55.7886
 },
 "stop": 17.4957,
-"atr": 6.3821
+"atr": 6.3821,
+"res": {}
 },
 {
 "episodio": "short:BBOT:2026-09-09",
@@ -28174,7 +28188,8 @@
 "consigliata": 5.7927
 },
 "stop": 3.2537,
-"atr": 0.4232
+"atr": 0.4232,
+"res": {}
 },
 {
 "episodio": "short:RSI:2026-09-19",
@@ -28201,7 +28216,8 @@
 "consigliata": 25.1113
 },
 "stop": 17.9393,
-"atr": 1.1953
+"atr": 1.1953,
+"res": {}
 },
 {
 "episodio": "short:ESNT:2026-10-01",
@@ -28228,7 +28244,8 @@
 "consigliata": 67.403
 },
 "stop": 60.6724,
-"atr": 1.2838
+"atr": 1.2838,
+"res": {}
 },
 {
 "episodio": "short:COUR:2026-10-01",
@@ -28255,7 +28272,8 @@
 "consigliata": 5.6056
 },
 "stop": 4.2022,
-"atr": 0.2339
+"atr": 0.2339,
+"res": {}
 },
 {
 "episodio": "short:NESR:2026-09-29",
@@ -28282,7 +28300,8 @@
 "consigliata": 31.9171
 },
 "stop": 23.2215,
-"atr": 1.6343
+"atr": 1.6343,
+"res": {}
 },
 {
 "episodio": "short:AIR:2026-09-29",
@@ -28309,7 +28328,8 @@
 "consigliata": 130.2149
 },
 "stop": 95.0176,
-"atr": 5.8662
+"atr": 5.8662,
+"res": {}
 },
 {
 "episodio": "short:LQDA:2026-09-30",
@@ -28336,7 +28356,8 @@
 "consigliata": 44.8077
 },
 "stop": 22.9861,
-"atr": 3.6369
+"atr": 3.6369,
+"res": {}
 },
 {
 "episodio": "short:PIPR:2026-09-30",
@@ -28363,7 +28384,8 @@
 "consigliata": 74.7824
 },
 "stop": 59.6088,
-"atr": 2.5556
+"atr": 2.5556,
+"res": {}
 },
 {
 "episodio": "short:DKNG:2026-09-30",
@@ -28390,7 +28412,8 @@
 "consigliata": 23.7964
 },
 "stop": 17.1711,
-"atr": 1.2095
+"atr": 1.2095,
+"res": {}
 },
 {
 "episodio": "short:IWM:2026-09-28",
@@ -28417,7 +28440,8 @@
 "consigliata": 293.0051
 },
 "stop": 272.0124,
-"atr": 3.4988
+"atr": 3.4988,
+"res": {}
 },
 {
 "episodio": "short:STLAM.MI:2026-09-18",
@@ -28444,7 +28468,8 @@
 "consigliata": 4.5849
 },
 "stop": 3.5673,
-"atr": 0.1696
+"atr": 0.1696,
+"res": {}
 },
 {
 "episodio": "short:ITG:2026-09-28",
@@ -28471,7 +28496,8 @@
 "consigliata": 12.4102
 },
 "stop": 5.8462,
-"atr": 1.1569
+"atr": 1.1569,
+"res": {}
 },
 {
 "episodio": "short:ACET:2026-09-28",
@@ -28498,7 +28524,8 @@
 "consigliata": 8.7652
 },
 "stop": 5.2729,
-"atr": 0.7785
+"atr": 0.7785,
+"res": {}
 },
 {
 "episodio": "short:SOC:2026-10-01",
@@ -28705,7 +28732,8 @@
 "consigliata": 49.0051
 },
 "stop": 36.6075,
-"atr": 2.0663
+"atr": 2.0663,
+"res": {}
 },
 {
 "episodio": "short:NU:2026-09-28",
@@ -28732,7 +28760,8 @@
 "consigliata": 14.3266
 },
 "stop": 11.2669,
-"atr": 0.5416
+"atr": 0.5416,
+"res": {}
 },
 {
 "episodio": "short:IWM:2026-09-28",
@@ -28759,7 +28788,8 @@
 "consigliata": 293.0051
 },
 "stop": 272.0124,
-"atr": 3.4988
+"atr": 3.4988,
+"res": {}
 },
 {
 "episodio": "short:ITG:2026-09-28",
@@ -28786,7 +28816,8 @@
 "consigliata": 12.4102
 },
 "stop": 5.8462,
-"atr": 1.1569
+"atr": 1.1569,
+"res": {}
 },
 {
 "episodio": "short:ACET:2026-09-28",
@@ -28813,7 +28844,8 @@
 "consigliata": 8.7652
 },
 "stop": 5.2729,
-"atr": 0.7785
+"atr": 0.7785,
+"res": {}
 },
 {
 "episodio": "short:NMIH:2026-09-30",
