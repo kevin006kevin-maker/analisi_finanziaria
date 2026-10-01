@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:ENEL.MI:2026-08-18",
-"ticker": "ENEL.MI",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-08-21 10:37",
-"data": "2026-08-21 09:39",
-"prezzo": 9.547,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-08-21",
-"soglie": {
-"media50": 9.926,
-"media20": 9.7887,
-"quattro_atr": 10.1545,
-"meta_caduta": 9.9135,
-"bollinger": 10.178,
-"consigliata": 9.926
-},
-"stop": 9.2433,
-"atr": 0.1519,
-"res": {
-"7g": -0.91,
-"30g": -6.57,
-"soglia": -6.57
-},
-"res_soglia": {
-"media50": {
-"ret": -6.57,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -6.57,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -6.57,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -6.57,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -6.57,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -6.57,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:EYPT:2026-08-17",
 "ticker": "EYPT",
 "kind": "short",
@@ -28795,5 +28731,32 @@
 },
 "stop": null,
 "atr": 6.7778
+},
+{
+"episodio": "short:ENLT:2026-10-01",
+"ticker": "ENLT",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-01 16:46",
+"data": "2026-10-01 16:46",
+"prezzo": 64.78,
+"conv": 69,
+"prob_gain": 54,
+"prob_loss": 9,
+"reliab": "🟡 Media",
+"mkt": -0.2598,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 78.7636,
+"media20": 72.7445,
+"quattro_atr": 75.732,
+"meta_caduta": 78.19,
+"bollinger": 80.0137,
+"consigliata": 75.732
+},
+"stop": 59.304,
+"atr": 2.738
 }
 ]
