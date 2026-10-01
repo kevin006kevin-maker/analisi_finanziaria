@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:ZTO:2026-08-19",
-"ticker": "ZTO",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-21 10:10",
-"data": "2026-08-19 18:58",
-"prezzo": 21.425,
-"conv": 64,
-"prob_gain": 56,
-"prob_loss": 0,
-"reliab": "🟢 Alta",
-"mkt": 3.4572,
-"fonte": "riallineato dal registro delle osservazioni",
-"note": "ingresso ricostruito dalla fotografia iniziale: la data e i valori sono quelli veri di quel giorno, ma le altre caratteristiche di allora non esistono, quindi questo momento non ha un profilo in archivio",
-"dovuto_il": null,
-"soglie": {
-"media50": 23.2186,
-"media20": 23.557,
-"quattro_atr": 23.7904,
-"meta_caduta": 23.0225,
-"bollinger": 24.9155,
-"consigliata": 23.2186
-},
-"stop": 20.2423,
-"atr": 0.5914,
-"soglie_contaminate": {
-"media50": 23.2074,
-"media20": 23.424,
-"quattro_atr": 23.7843,
-"meta_caduta": 23.0225,
-"bollinger": 25.0731,
-"consigliata": 23.2074
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 2,
-"res": {
-"7g": -0.44,
-"30g": -2.03,
-"soglia": -2.03
-},
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": -2.03,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -2.03,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -2.03,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -2.03,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -2.03,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -2.03,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:DKS:2026-08-20",
 "ticker": "DKS",
 "kind": "short",
@@ -29253,5 +29178,32 @@
 },
 "stop": 272.0124,
 "atr": 3.4988
+},
+{
+"episodio": "short:STLAM.MI:2026-09-18",
+"ticker": "STLAM.MI",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-01 02:53",
+"data": "2026-10-01 02:49",
+"prezzo": 3.9065,
+"conv": 65,
+"prob_gain": 46,
+"prob_loss": 13,
+"reliab": "🟡 Media",
+"mkt": 0.263,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 4.6175,
+"media20": 4.39,
+"quattro_atr": 4.5849,
+"meta_caduta": 4.5978,
+"bollinger": 4.9532,
+"consigliata": 4.5849
+},
+"stop": 3.5673,
+"atr": 0.1696
 }
 ]
