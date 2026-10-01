@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:STMMI.MI:2026-08-17",
-"ticker": "STMMI.MI",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-08-21 10:38",
-"data": "2026-08-21 10:37",
-"prezzo": 43.495,
-"conv": 71,
-"prob_gain": 49,
-"prob_loss": 16,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-08-20",
-"soglie": {
-"media50": 55.628,
-"media20": 46.2285,
-"quattro_atr": 52.913,
-"meta_caduta": 56.4225,
-"bollinger": 49.5388,
-"consigliata": 52.913
-},
-"stop": 38.786,
-"atr": 2.3545,
-"res": {
-"7g": -0.36,
-"30g": 2.67,
-"soglia": 2.67
-},
-"res_soglia": {
-"media50": {
-"ret": 2.67,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 6.28,
-"toccato": true,
-"giorni": 17
-},
-"quattro_atr": {
-"ret": 2.67,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 2.67,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 2.67,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 2.67,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:STUB:2026-08-17",
 "ticker": "STUB",
 "kind": "short",
@@ -28585,5 +28521,32 @@
 },
 "stop": 24.3883,
 "atr": 0.7758
+},
+{
+"episodio": "short:NU:2026-09-28",
+"ticker": "NU",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-01 16:47",
+"data": "2026-10-01 16:47",
+"prezzo": 12.92,
+"conv": 73,
+"prob_gain": 50,
+"prob_loss": 5,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 14.2602,
+"media20": 14.0035,
+"quattro_atr": 15.1433,
+"meta_caduta": 14.3,
+"bollinger": 15.9841,
+"consigliata": 14.2602
+},
+"stop": 11.8084,
+"atr": 0.5558
 }
 ]
