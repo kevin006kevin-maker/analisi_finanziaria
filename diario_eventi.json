@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:CDNL:2026-08-18",
-"ticker": "CDNL",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-08-21 10:37",
-"data": "2026-08-20 22:57",
-"prezzo": 42.25,
-"conv": 67,
-"prob_gain": 55,
-"prob_loss": 26,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-08-21",
-"soglie": {
-"media50": 66.4219,
-"media20": 53.2795,
-"quattro_atr": 64.0033,
-"meta_caduta": 68.28,
-"bollinger": 76.4531,
-"consigliata": 64.0033
-},
-"stop": 31.3733,
-"atr": 5.4383,
-"soglie_contaminate": {
-"media50": 66.4219,
-"media20": 53.2795,
-"quattro_atr": 64.0033,
-"meta_caduta": 68.28,
-"bollinger": 76.4531,
-"consigliata": 64.0033
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": -2.15,
-"30g": -25.18,
-"soglia": -25.18
-},
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": -25.18,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -25.18,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -25.18,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -25.18,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -25.18,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -25.18,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:CLBT:2026-08-17",
 "ticker": "CLBT",
 "kind": "short",
@@ -28924,5 +28849,32 @@
 },
 "stop": 11.2725,
 "atr": 0.3938
+},
+{
+"episodio": "short:HVII:2026-09-24",
+"ticker": "HVII",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-01 09:13",
+"data": "2026-09-26 02:36",
+"prezzo": 3.47,
+"conv": 77,
+"prob_gain": 90,
+"prob_loss": 7,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 9.4024,
+"media20": 8.6855,
+"quattro_atr": 9.6208,
+"meta_caduta": 7.365,
+"bollinger": 13.7407,
+"consigliata": 9.4024
+},
+"stop": 0.3946,
+"atr": 1.5377
 }
 ]
