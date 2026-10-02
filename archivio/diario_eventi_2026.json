@@ -6418,5 +6418,47 @@
 "7g": 3.32,
 "30g": 7.71
 }
+},
+{
+"episodio": "long:KGC:2026-08-16",
+"ticker": "KGC",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-08-25 00:26",
+"data": "2026-08-24 23:00",
+"prezzo": 32.98,
+"conv": 58,
+"prob_gain": 49,
+"prob_loss": 36,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-08-25",
+"soglie": {
+"media50": null,
+"media20": null,
+"quattro_atr": 37.7947,
+"meta_caduta": null,
+"bollinger": 33.0245,
+"consigliata": 37.7947
+},
+"stop": 30.5726,
+"atr": 1.2037,
+"soglie_contaminate": {
+"media50": null,
+"media20": null,
+"quattro_atr": 37.7918,
+"meta_caduta": null,
+"bollinger": 33.0245,
+"consigliata": 37.7918
+},
+"soglie_ricalcolate_il": "2026-09-14 21:39",
+"soglie_ritardo_giorni": 1,
+"res": {
+"7g": -7.47,
+"30g": -17.0
+},
+"taglio_corretto": true
 }
 ]
