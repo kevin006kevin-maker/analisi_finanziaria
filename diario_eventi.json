@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:XPEV:2026-08-24",
-"ticker": "XPEV",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-24 19:59",
-"data": "2026-08-24 19:59",
-"prezzo": 11.19,
-"conv": 65,
-"prob_gain": 56,
-"prob_loss": 12,
-"reliab": "🟡 Media",
-"mkt": 3.2093,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 12.7624,
-"media20": 12.1075,
-"quattro_atr": 13.0569,
-"meta_caduta": 14.54,
-"bollinger": 13.1015,
-"consigliata": 12.7624
-},
-"stop": 10.2565,
-"atr": 0.4667,
-"res": {
-"7g": 1.97,
-"30g": -7.69,
-"soglia": -7.69
-},
-"res_soglia": {
-"media50": {
-"ret": -7.69,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -7.69,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -7.69,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -7.69,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -7.69,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -7.69,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "long:XPEV:2026-08-24",
 "ticker": "XPEV",
 "kind": "long",
@@ -28292,5 +28228,32 @@
 },
 "stop": 2.2852,
 "atr": 0.7074
+},
+{
+"episodio": "short:DCX:2026-09-29",
+"ticker": "DCX",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-02 02:16",
+"data": "2026-10-02 02:11",
+"prezzo": 3.71,
+"conv": 69,
+"prob_gain": 61,
+"prob_loss": 29,
+"reliab": "🔴 Bassa",
+"mkt": -0.002,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-02",
+"soglie": {
+"media50": 108.6346,
+"media20": 50.5625,
+"quattro_atr": 60.9145,
+"meta_caduta": 101.055,
+"bollinger": 129.7564,
+"consigliata": 60.9145
+},
+"stop": null,
+"atr": 14.3011
 }
 ]
