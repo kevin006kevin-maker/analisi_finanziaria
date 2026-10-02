@@ -12268,5 +12268,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "DCX",
+"kind": "short",
+"date": "2026-10-02",
+"promo_price": 3.74,
+"obs_price": 3.66,
+"obs_date": "2026-09-29",
+"pre_price": 3.61,
+"pre_date": "2026-09-30",
+"conf_price": null,
+"conf_date": null,
+"target": 106.3478,
+"stop": null,
+"reliab": "🔴 Bassa",
+"prob_gain": 65,
+"prob_loss": 27,
+"conv": 67,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-29 21:59",
+"prezzo": 3.66,
+"conv": 66,
+"prob_gain": 66,
+"prob_loss": 25,
+"reliab": "🔴 Bassa",
+"mkt": -0.1723
+},
+"anticipo": {
+"data": "2026-09-30",
+"prezzo": 3.61,
+"conv": 67,
+"prob_gain": 66,
+"prob_loss": 25,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-02 08:10",
+"prezzo": 3.74,
+"conv": 67,
+"prob_gain": 65,
+"prob_loss": 27,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
