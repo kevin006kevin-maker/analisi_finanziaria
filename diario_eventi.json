@@ -6963,7 +6963,8 @@
 "atr": 3.9608,
 "res": {
 "7g": 3.12
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:HWM:2026-08-31",
@@ -6993,7 +6994,8 @@
 "atr": 9.4005,
 "res": {
 "7g": -8.77
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:IMSR:2026-09-03",
@@ -7103,7 +7105,8 @@
 "atr": 0.2873,
 "res": {
 "7g": -4.51
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:FRVO:2026-08-24",
@@ -7133,7 +7136,8 @@
 "atr": 2.1418,
 "res": {
 "7g": -10.18
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:ADXN:2026-08-24",
@@ -7163,7 +7167,8 @@
 "atr": 0.426,
 "res": {
 "7g": 2.56
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "long:ASO:2026-08-25",
@@ -7283,7 +7288,8 @@
 "atr": 3.9608,
 "res": {
 "7g": 3.12
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:HWM:2026-08-31",
@@ -7313,7 +7319,8 @@
 "atr": 9.4005,
 "res": {
 "7g": -8.77
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:TKC:2026-08-31",
@@ -7343,7 +7350,8 @@
 "atr": 0.1266,
 "res": {
 "7g": 2.85
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:FINV:2026-08-31",
@@ -7373,7 +7381,8 @@
 "atr": 0.2177,
 "res": {
 "7g": -0.73
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:XLU:2026-08-31",
@@ -7403,7 +7412,8 @@
 "atr": 0.6602,
 "res": {
 "7g": 0.14
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:BW:2026-08-31",
@@ -7433,7 +7443,8 @@
 "atr": 0.7786,
 "res": {
 "7g": 4.41
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:ALMS:2026-09-01",
@@ -7463,7 +7474,8 @@
 "atr": 2.3967,
 "res": {
 "7g": 2.75
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:TSN:2026-09-03",
@@ -7493,7 +7505,8 @@
 "atr": 1.5833,
 "res": {
 "7g": 1.91
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:MXL:2026-09-03",
@@ -7523,7 +7536,8 @@
 "atr": 6.288,
 "res": {
 "7g": 19.06
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:XLU:2026-08-31",
@@ -7593,7 +7607,8 @@
 "atr": 1.3264,
 "res": {
 "7g": -5.53
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:RXT:2026-09-03",
@@ -7623,7 +7638,8 @@
 "atr": 0.3589,
 "res": {
 "7g": -0.47
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:MXL:2026-09-03",
@@ -7673,7 +7689,8 @@
 "atr": 2.1103,
 "res": {
 "7g": -3.1
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:PSNY:2026-09-03",
@@ -7703,7 +7720,8 @@
 "atr": 0.9926,
 "res": {
 "7g": -12.66
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "long:STLAM.MI:2026-08-17",
@@ -7884,7 +7902,8 @@
 "res": {
 "7g": 10.97
 },
-"taglio_corretto": true
+"taglio_corretto": true,
+"res_soglia": {}
 },
 {
 "episodio": "long:DY:2026-08-26",
@@ -8135,7 +8154,8 @@
 "res": {
 "7g": 15.97
 },
-"taglio_corretto": true
+"taglio_corretto": true,
+"res_soglia": {}
 },
 {
 "episodio": "short:AON:2026-09-01",
@@ -26349,7 +26369,8 @@
 },
 "soglie_ricalcolate_il": "2026-10-01 09:17",
 "taglio_corretto": true,
-"soglie_ritardo_giorni": 5
+"soglie_ritardo_giorni": 5,
+"bad_data": "salto di prezzo oltre il 25%: probabile raggruppamento di azioni"
 },
 {
 "episodio": "short:ALHC:2026-09-15",
@@ -28384,7 +28405,8 @@
 "consigliata": 6.2981
 },
 "stop": 2.5917,
-"atr": 0.6991
+"atr": 0.6991,
+"res": {}
 },
 {
 "episodio": "short:LFTO:2026-09-18",
