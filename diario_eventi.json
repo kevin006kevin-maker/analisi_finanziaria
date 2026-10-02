@@ -1,47 +1,5 @@
 [
 {
-"episodio": "long:CCL:2026-08-16",
-"ticker": "CCL",
-"kind": "long",
-"evento": "fine_osservazione",
-"scritto_il": "2026-08-25 00:26",
-"data": "2026-08-24 23:00",
-"prezzo": 25.71,
-"conv": 67,
-"prob_gain": 72,
-"prob_loss": 18,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-08-25",
-"soglie": {
-"media50": 27.7896,
-"media20": 27.7795,
-"quattro_atr": 29.4277,
-"meta_caduta": 28.305,
-"bollinger": 30.1524,
-"consigliata": 27.7896
-},
-"stop": 23.8512,
-"atr": 0.9294,
-"soglie_contaminate": {
-"media50": 27.7896,
-"media20": 27.7795,
-"quattro_atr": 29.4291,
-"meta_caduta": 28.305,
-"bollinger": 30.1524,
-"consigliata": 27.7896
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": -6.16,
-"30g": -14.84
-},
-"taglio_corretto": true
-},
-{
 "episodio": "long:DDS:2026-08-16",
 "ticker": "DDS",
 "kind": "long",
@@ -28179,5 +28137,32 @@
 },
 "stop": 6.0282,
 "atr": 0.1259
+},
+{
+"episodio": "short:UCG.MI:2026-10-02",
+"ticker": "UCG.MI",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-02 14:32",
+"data": "2026-10-02 14:31",
+"prezzo": 77.15,
+"conv": 68,
+"prob_gain": 53,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": -0.002,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 83.4772,
+"media20": 83.0405,
+"quattro_atr": 84.9534,
+"meta_caduta": 81.65,
+"bollinger": 86.8079,
+"consigliata": 83.4772
+},
+"stop": 73.2483,
+"atr": 1.9509
 }
 ]
