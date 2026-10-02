@@ -6785,5 +6785,69 @@
 "7g": -3.44,
 "30g": -4.38
 }
+},
+{
+"episodio": "short:XPEV:2026-08-24",
+"ticker": "XPEV",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-08-25 12:28",
+"data": "2026-08-25 12:27",
+"prezzo": 11.15,
+"conv": 65,
+"prob_gain": 50,
+"prob_loss": 13,
+"reliab": "🟡 Media",
+"mkt": 3.2332,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 12.7616,
+"media20": 12.1055,
+"quattro_atr": 13.0341,
+"meta_caduta": 14.52,
+"bollinger": 13.1074,
+"consigliata": 12.7616
+},
+"stop": 10.208,
+"atr": 0.471,
+"res": {
+"7g": 1.57,
+"30g": -7.62,
+"soglia": -7.62
+},
+"res_soglia": {
+"media50": {
+"ret": -7.62,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -7.62,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -7.62,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -7.62,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -7.62,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -7.62,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
