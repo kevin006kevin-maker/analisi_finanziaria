@@ -1,25 +1,5 @@
 [
 {
-"episodio": "long:T:2026-08-17",
-"ticker": "T",
-"kind": "long",
-"evento": "salita_2pct",
-"scritto_il": "2026-08-21 17:07",
-"data": "2026-08-21 17:06",
-"prezzo": 25.505,
-"conv": 59,
-"prob_gain": 72,
-"prob_loss": 12,
-"reliab": "🟢 Alta",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "prezzo salito di almeno il 2% da 24.89",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:DKS:2026-08-20",
 "ticker": "DKS",
 "kind": "short",
@@ -28713,5 +28693,32 @@
 },
 "stop": 17.6862,
 "atr": 3.2369
+},
+{
+"episodio": "short:JLHL:2026-09-29",
+"ticker": "JLHL",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-02 02:14",
+"data": "2026-10-02 02:11",
+"prezzo": 3.7,
+"conv": 73,
+"prob_gain": 59,
+"prob_loss": 28,
+"reliab": "🔴 Bassa",
+"mkt": -0.002,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 6.4027,
+"media20": 5.6393,
+"quattro_atr": 6.5295,
+"meta_caduta": 8.245,
+"bollinger": 6.9798,
+"consigliata": 6.4027
+},
+"stop": 2.2852,
+"atr": 0.7074
 }
 ]
