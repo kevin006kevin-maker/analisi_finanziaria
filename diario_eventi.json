@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:GOF:2026-08-21",
-"ticker": "GOF",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-08-21 18:41",
-"data": "2026-08-21 18:38",
-"prezzo": 9.465,
-"conv": 83,
-"prob_gain": 58,
-"prob_loss": 0,
-"reliab": "🟢 Alta",
-"mkt": 3.6414,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 9.099",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "long:OSIS:2026-08-21",
 "ticker": "OSIS",
 "kind": "long",
@@ -28623,5 +28603,25 @@
 },
 "stop": 5.1686,
 "atr": 0.1107
+},
+{
+"episodio": "short:CCB:2026-10-02",
+"ticker": "CCB",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-10-02 02:15",
+"data": "2026-10-02 02:15",
+"prezzo": 39.94,
+"conv": 71,
+"prob_gain": 63,
+"prob_loss": 12,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "in perdita da 42 giorni di Borsa: valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
