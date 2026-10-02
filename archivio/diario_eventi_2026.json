@@ -4753,5 +4753,69 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:BIDU:2026-08-18",
+"ticker": "BIDU",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-08-21 18:40",
+"data": "2026-08-21 18:38",
+"prezzo": 94.15,
+"conv": 75,
+"prob_gain": 48,
+"prob_loss": 16,
+"reliab": "🟡 Media",
+"mkt": 3.6414,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 108.8978,
+"media20": 104.6235,
+"quattro_atr": 109.5535,
+"meta_caduta": 115.435,
+"bollinger": 118.3854,
+"consigliata": 108.8978
+},
+"stop": 86.4483,
+"atr": 3.8509,
+"res": {
+"7g": 2.88,
+"30g": -3.48,
+"soglia": -3.48
+},
+"res_soglia": {
+"media50": {
+"ret": -3.48,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -3.48,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -3.48,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -3.48,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -3.48,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -3.48,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
