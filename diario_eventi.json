@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:CVRX:2026-08-24",
-"ticker": "CVRX",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-24 16:00",
-"data": "2026-08-24 16:00",
-"prezzo": 3.03,
-"conv": 67,
-"prob_gain": 52,
-"prob_loss": 22,
-"reliab": "🔴 Bassa",
-"mkt": 3.2175,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 4.6398,
-"media20": 3.8052,
-"quattro_atr": 4.6646,
-"meta_caduta": 4.485,
-"bollinger": 6.4808,
-"consigliata": 4.6398
-},
-"stop": 2.2127,
-"atr": 0.4087,
-"res": {
-"7g": -5.94,
-"30g": -7.92,
-"soglia": -7.92
-},
-"res_soglia": {
-"media50": {
-"ret": -7.92,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -7.92,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -7.92,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -7.92,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -7.92,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -7.92,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "long:SNDK:2026-08-24",
 "ticker": "SNDK",
 "kind": "long",
@@ -28356,5 +28292,32 @@
 },
 "stop": 22.1347,
 "atr": 1.6677
+},
+{
+"episodio": "short:TIT.MI:2026-09-29",
+"ticker": "TIT.MI",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-02 02:16",
+"data": "2026-10-02 02:11",
+"prezzo": 6.678,
+"conv": 79,
+"prob_gain": 55,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": -0.002,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-02",
+"soglie": {
+"media50": 7.54,
+"media20": 7.4934,
+"quattro_atr": 7.4808,
+"meta_caduta": 7.3525,
+"bollinger": 8.1107,
+"consigliata": 7.4808
+},
+"stop": 6.2766,
+"atr": 0.2007
 }
 ]
