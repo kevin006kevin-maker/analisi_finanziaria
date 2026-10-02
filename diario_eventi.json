@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:DKS:2026-08-20",
-"ticker": "DKS",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-08-21 17:07",
-"data": "2026-08-21 17:06",
-"prezzo": 182.551,
-"conv": 78,
-"prob_gain": 54,
-"prob_loss": 0,
-"reliab": "🟡 Media",
-"mkt": 3.6155,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 176.47",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:OI:2026-08-21",
 "ticker": "OI",
 "kind": "short",
@@ -28720,5 +28700,32 @@
 },
 "stop": 2.2852,
 "atr": 0.7074
+},
+{
+"episodio": "short:F:2026-10-01",
+"ticker": "F",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-02 02:14",
+"data": "2026-10-02 02:11",
+"prezzo": 12.06,
+"conv": 72,
+"prob_gain": 50,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": -0.002,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 13.8714,
+"media20": 13.363,
+"quattro_atr": 13.6351,
+"meta_caduta": 13.67,
+"bollinger": 14.797,
+"consigliata": 13.6351
+},
+"stop": 11.2725,
+"atr": 0.3938
 }
 ]
