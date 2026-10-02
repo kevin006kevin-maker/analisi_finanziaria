@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:ADXN:2026-08-24",
-"ticker": "ADXN",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-08-25 00:23",
-"data": "2026-08-25 00:21",
-"prezzo": 4.05,
-"conv": 76,
-"prob_gain": 57,
-"prob_loss": 7,
-"reliab": "🔴 Bassa",
-"mkt": 3.2332,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 5.8096,
-"media20": 5.5577,
-"quattro_atr": 5.9111,
-"meta_caduta": 5.375,
-"bollinger": 6.5924,
-"consigliata": 5.8096
-},
-"stop": 3.1194,
-"atr": 0.4653,
-"res": {
-"7g": -5.93,
-"30g": -16.05,
-"soglia": -16.05
-},
-"res_soglia": {
-"media50": {
-"ret": -16.05,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -16.05,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -16.05,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -16.05,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -16.05,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -16.05,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:FRVO:2026-08-24",
 "ticker": "FRVO",
 "kind": "short",
@@ -28251,5 +28187,32 @@
 },
 "stop": 23.0455,
 "atr": 1.0772
+},
+{
+"episodio": "short:VRDN:2026-10-02",
+"ticker": "VRDN",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-02 08:09",
+"data": "2026-10-02 08:09",
+"prezzo": 18.99,
+"conv": 61,
+"prob_gain": 58,
+"prob_loss": 13,
+"reliab": "🔴 Bassa",
+"mkt": -0.002,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 21.9571,
+"media20": 21.6058,
+"quattro_atr": 22.7808,
+"meta_caduta": 21.895,
+"bollinger": 23.8184,
+"consigliata": 21.9571
+},
+"stop": 17.0946,
+"atr": 0.9477
 }
 ]
