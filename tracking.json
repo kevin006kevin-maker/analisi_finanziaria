@@ -6425,8 +6425,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-10-02",
 "max_price": 11.13,
-"max_date": "2026-09-11 23:34",
-"incasso_notified": true
+"max_date": "2026-09-11 23:34"
 },
 "SUJA": {
 "kind": "short",
@@ -10525,8 +10524,7 @@
 "max_date": "2026-09-30 19:14",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-02",
-"incasso_notified": true
+"entry_check": "2026-10-02"
 },
 "STMMI.MI": {
 "kind": "short",
@@ -10753,7 +10751,17 @@
 "max_date": "2026-10-02 14:33",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-02"
+"entry_check": "2026-10-02",
+"incasso": {
+"gain": 11.5,
+"max": 48.44,
+"max_date": "2026-10-02 14:33",
+"giu_dal_max": 0.0,
+"motivo": "bersaglio 47.30 raggiunto (sei a +11.5%): valuta di incassare",
+"urgenza": "incassa",
+"tipo": "bersaglio"
+},
+"incasso_notified": true
 },
 "WING": {
 "kind": "short",
