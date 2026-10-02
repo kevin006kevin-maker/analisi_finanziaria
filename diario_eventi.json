@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:BIDU:2026-08-18",
-"ticker": "BIDU",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-08-21 18:40",
-"data": "2026-08-21 18:38",
-"prezzo": 94.15,
-"conv": 75,
-"prob_gain": 48,
-"prob_loss": 16,
-"reliab": "🟡 Media",
-"mkt": 3.6414,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 108.8978,
-"media20": 104.6235,
-"quattro_atr": 109.5535,
-"meta_caduta": 115.435,
-"bollinger": 118.3854,
-"consigliata": 108.8978
-},
-"stop": 86.4483,
-"atr": 3.8509,
-"res": {
-"7g": 2.88,
-"30g": -3.48,
-"soglia": -3.48
-},
-"res_soglia": {
-"media50": {
-"ret": -3.48,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -3.48,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -3.48,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -3.48,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -3.48,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -3.48,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:SEDG:2026-08-19",
 "ticker": "SEDG",
 "kind": "short",
@@ -28697,5 +28633,32 @@
 },
 "stop": 4.167,
 "atr": 0.2515
+},
+{
+"episodio": "short:XLF:2026-10-01",
+"ticker": "XLF",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-02 02:14",
+"data": "2026-10-02 02:11",
+"prezzo": 53.4,
+"conv": 65,
+"prob_gain": 55,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -0.002,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 56.9096,
+"media20": 56.028,
+"quattro_atr": 56.2303,
+"meta_caduta": 55.98,
+"bollinger": 58.9925,
+"consigliata": 56.2303
+},
+"stop": 51.9848,
+"atr": 0.7076
 }
 ]
