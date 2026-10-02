@@ -12211,5 +12211,62 @@
 "mkt": null
 }
 }
+},
+{
+"ticker": "FICO",
+"kind": "short",
+"date": "2026-10-02",
+"promo_price": 661.75,
+"obs_price": 620.979,
+"obs_date": "2026-09-29",
+"pre_price": 617.87,
+"pre_date": "2026-09-30",
+"conf_price": null,
+"conf_date": null,
+"target": 1039.3268,
+"stop": 544.9283,
+"reliab": "🔴 Bassa",
+"prob_gain": 58,
+"prob_loss": 11,
+"conv": 75,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-29 17:05",
+"prezzo": 620.979,
+"conv": 79,
+"prob_gain": 55,
+"prob_loss": 10,
+"reliab": "🔴 Bassa",
+"mkt": -0.1905
+},
+"anticipo": {
+"data": "2026-09-30",
+"prezzo": 617.87,
+"conv": 79,
+"prob_gain": 56,
+"prob_loss": 9,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-02 08:10",
+"prezzo": 661.75,
+"conv": 75,
+"prob_gain": 58,
+"prob_loss": 11,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
