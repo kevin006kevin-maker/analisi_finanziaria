@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:ENVX:2026-08-19",
-"ticker": "ENVX",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-08-21 15:43",
-"data": "2026-08-21 15:42",
-"prezzo": 3.375,
-"conv": 70,
-"prob_gain": 51,
-"prob_loss": 23,
-"reliab": "🔴 Bassa",
-"mkt": 3.4728,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 5.0118,
-"media20": 4.0907,
-"quattro_atr": 4.9056,
-"meta_caduta": 5.9975,
-"bollinger": 5.1215,
-"consigliata": 4.9056
-},
-"stop": 2.6097,
-"atr": 0.3827,
-"res": {
-"7g": 1.76,
-"30g": -11.85,
-"soglia": -11.85
-},
-"res_soglia": {
-"media50": {
-"ret": -11.85,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -11.85,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -11.85,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -11.85,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -11.85,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -11.85,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "long:CHTR:2026-08-20",
 "ticker": "CHTR",
 "kind": "long",
@@ -28740,5 +28676,32 @@
 },
 "stop": 10.3192,
 "atr": 0.5954
+},
+{
+"episodio": "short:NMIH:2026-09-30",
+"ticker": "NMIH",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-02 02:13",
+"data": "2026-10-02 02:11",
+"prezzo": 37.32,
+"conv": 86,
+"prob_gain": 61,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": -0.002,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 43.8201,
+"media20": 42.8537,
+"quattro_atr": 42.0329,
+"meta_caduta": 41.515,
+"bollinger": 46.6013,
+"consigliata": 42.0329
+},
+"stop": 34.9635,
+"atr": 1.1782
 }
 ]
