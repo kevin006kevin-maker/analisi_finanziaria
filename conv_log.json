@@ -1,46 +1,6 @@
 [
 {
 "date": "2026-09-24",
-"ticker": "G.MI",
-"kind": "long",
-"price": 44.26,
-"conv": 49,
-"factors": {
-"discount": 4.1784,
-"histcheap": -1.58,
-"riskadj": 2.15,
-"ddpen": -3.09,
-"momentum": 3.0024,
-"prob": 89,
-"quality": 51.7,
-"valcheap": -0.5301,
-"trappen": 2
-},
-"ret_5d": -5.72,
-"ret_21d": null
-},
-{
-"date": "2026-09-24",
-"ticker": "STMMI.MI",
-"kind": "long",
-"price": 46.61,
-"conv": 47,
-"factors": {
-"discount": 32.7902,
-"histcheap": -0.64,
-"riskadj": 1.4,
-"ddpen": -18.11,
-"momentum": -11.5606,
-"prob": 29,
-"quality": 64.2,
-"valcheap": 0.7521,
-"trappen": 1
-},
-"ret_5d": 0.85,
-"ret_21d": null
-},
-{
-"date": "2026-09-24",
 "ticker": "TIT.MI",
 "kind": "long",
 "price": 7.516,
@@ -40320,6 +40280,48 @@
 "quality": 49.0,
 "valcheap": -1.5258,
 "trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-02",
+"ticker": "BIRD",
+"kind": "short",
+"price": 3.49,
+"conv": 21,
+"factors": {
+"discount": 79.4585,
+"histcheap": 0.38,
+"riskadj": -0.72,
+"ddpen": -65.55,
+"momentum": -46.6386,
+"prob": -6,
+"oversold": -78.4264,
+"rebound": -29.7622,
+"trend": -1.0,
+"relstrength": 47.1277
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-02",
+"ticker": "CCOI",
+"kind": "short",
+"price": 8.23,
+"conv": 51,
+"factors": {
+"discount": 81.7517,
+"histcheap": 1.3,
+"riskadj": -1.7,
+"ddpen": -59.06,
+"momentum": -7.7225,
+"prob": 31,
+"oversold": -42.181,
+"rebound": 22.9964,
+"trend": -1.0,
+"relstrength": 8.2116
 },
 "ret_5d": null,
 "ret_21d": null
