@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:IAG:2026-08-20",
-"ticker": "IAG",
-"kind": "long",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-08-22 14:30",
-"data": "2026-08-22 14:30",
-"prezzo": 21.14,
-"conv": 65,
-"prob_gain": 56,
-"prob_loss": 34,
-"reliab": "🔴 Bassa",
-"mkt": 3.5401,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": null,
-"media20": null,
-"quattro_atr": 24.8591,
-"meta_caduta": null,
-"bollinger": 21.6031,
-"consigliata": 24.8591
-},
-"stop": 19.2804,
-"atr": 0.9298,
-"res": {
-"7g": -4.56,
-"30g": -4.4
-}
-},
-{
 "episodio": "short:RXT:2026-08-21",
 "ticker": "RXT",
 "kind": "short",
@@ -28524,5 +28493,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:ENOV:2026-09-09",
+"ticker": "ENOV",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-02 02:16",
+"data": "2026-10-02 02:14",
+"prezzo": 18.27,
+"conv": 71,
+"prob_gain": 51,
+"prob_loss": 14,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-02",
+"soglie": {
+"media50": 23.3714,
+"media20": 18.5905,
+"quattro_atr": 22.4496,
+"meta_caduta": 24.845,
+"bollinger": 19.9094,
+"consigliata": 22.4496
+},
+"stop": 16.1802,
+"atr": 1.0449
 }
 ]
