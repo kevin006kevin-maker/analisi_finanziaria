@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:SNDK:2026-08-24",
-"ticker": "SNDK",
-"kind": "long",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-24 16:01",
-"data": "2026-08-24 16:01",
-"prezzo": 1431.595,
-"conv": 65,
-"prob_gain": 60,
-"prob_loss": 34,
-"reliab": "🔴 Bassa",
-"mkt": 3.2175,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 1645.1765,
-"media20": null,
-"quattro_atr": 2056.6531,
-"meta_caduta": 1883.2975,
-"bollinger": 1795.7105,
-"consigliata": 1645.1765
-},
-"stop": 1119.066,
-"atr": 156.2645,
-"res": {
-"7g": 6.51,
-"30g": 28.15
-}
-},
-{
 "episodio": "long:ITUB:2026-08-16",
 "ticker": "ITUB",
 "kind": "long",
@@ -28319,5 +28288,32 @@
 },
 "stop": 6.2766,
 "atr": 0.2007
+},
+{
+"episodio": "short:AIR:2026-09-29",
+"ticker": "AIR",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-02 02:16",
+"data": "2026-10-02 02:11",
+"prezzo": 101.47,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-02",
+"soglie": {
+"media50": 130.919,
+"media20": 118.646,
+"quattro_atr": 125.2674,
+"meta_caduta": 127.59,
+"bollinger": 132.8322,
+"consigliata": 125.2674
+},
+"stop": 89.5713,
+"atr": 5.9494
 }
 ]
