@@ -1,25 +1,5 @@
 [
 {
-"episodio": "long:SNDK:2026-08-24",
-"ticker": "SNDK",
-"kind": "long",
-"evento": "salita_2pct",
-"scritto_il": "2026-08-24 17:38",
-"data": "2026-08-24 17:37",
-"prezzo": 1474.2,
-"conv": 60,
-"prob_gain": 53,
-"prob_loss": 30,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "prezzo salito di almeno il 2% da 1431.595",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:FRVO:2026-08-24",
 "ticker": "FRVO",
 "kind": "short",
@@ -28322,5 +28302,32 @@
 },
 "stop": 3.1863,
 "atr": 0.1219
+},
+{
+"episodio": "short:QURE:2026-09-29",
+"ticker": "QURE",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-02 02:16",
+"data": "2026-10-02 02:11",
+"prezzo": 24.16,
+"conv": 73,
+"prob_gain": 59,
+"prob_loss": 20,
+"reliab": "🔴 Bassa",
+"mkt": -0.002,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-02",
+"soglie": {
+"media50": 43.8472,
+"media20": 41.577,
+"quattro_atr": 37.1076,
+"meta_caduta": 37.605,
+"bollinger": 54.2762,
+"consigliata": 37.1076
+},
+"stop": 17.6862,
+"atr": 3.2369
 }
 ]
