@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:SEDG:2026-08-19",
-"ticker": "SEDG",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-08-24 00:19",
-"data": "2026-08-24 00:17",
-"prezzo": 30.83,
-"conv": 70,
-"prob_gain": 49,
-"prob_loss": 26,
-"reliab": "🔴 Bassa",
-"mkt": 3.5401,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-08-24",
-"soglie": {
-"media50": 46.4792,
-"media20": 35.7225,
-"quattro_atr": 43.9992,
-"meta_caduta": 54.67,
-"bollinger": 47.0428,
-"consigliata": 43.9992
-},
-"stop": 24.2454,
-"atr": 3.2923,
-"res": {
-"7g": 2.35,
-"30g": 11.76,
-"soglia": 11.76
-},
-"res_soglia": {
-"media50": {
-"ret": 11.76,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 15.87,
-"toccato": true,
-"giorni": 15
-},
-"quattro_atr": {
-"ret": 11.76,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 11.76,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 11.76,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 11.76,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:ZTO:2026-08-19",
 "ticker": "ZTO",
 "kind": "short",
@@ -28430,5 +28366,32 @@
 },
 "stop": 282.9506,
 "atr": 19.2797
+},
+{
+"episodio": "short:FICO:2026-09-29",
+"ticker": "FICO",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-02 02:16",
+"data": "2026-10-02 02:11",
+"prezzo": 592.47,
+"conv": 81,
+"prob_gain": 62,
+"prob_loss": 8,
+"reliab": "🔴 Bassa",
+"mkt": -0.002,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-02",
+"soglie": {
+"media50": 1050.5212,
+"media20": 919.87,
+"quattro_atr": 818.4244,
+"meta_caduta": 982.775,
+"bollinger": 1177.3499,
+"consigliata": 818.4244
+},
+"stop": 479.4928,
+"atr": 56.4886
 }
 ]
