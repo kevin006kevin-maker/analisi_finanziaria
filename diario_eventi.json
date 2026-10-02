@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:XPEV:2026-08-24",
-"ticker": "XPEV",
-"kind": "long",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-24 20:43",
-"data": "2026-08-24 20:43",
-"prezzo": 11.155,
-"conv": 60,
-"prob_gain": 72,
-"prob_loss": 16,
-"reliab": "🟡 Media",
-"mkt": 3.3381,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 12.7617,
-"media20": 12.1057,
-"quattro_atr": 13.0391,
-"meta_caduta": 14.5225,
-"bollinger": 13.1067,
-"consigliata": 12.7617
-},
-"stop": 10.213,
-"atr": 0.471,
-"res": {
-"7g": 2.29,
-"30g": -7.4
-}
-},
-{
 "episodio": "short:BW:2026-08-24",
 "ticker": "BW",
 "kind": "short",
@@ -28255,5 +28224,25 @@
 },
 "stop": null,
 "atr": 14.3011
+},
+{
+"episodio": "short:CTVA:2026-10-01",
+"ticker": "CTVA",
+"kind": "short",
+"evento": "salita_2pct",
+"scritto_il": "2026-10-02 02:16",
+"data": "2026-10-02 02:11",
+"prezzo": 77.65,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "prezzo salito di almeno il 2% da 12.3399",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
