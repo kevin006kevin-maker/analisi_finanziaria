@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:OSIS:2026-08-21",
-"ticker": "OSIS",
-"kind": "long",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-08-25 01:47",
-"data": "2026-08-25 01:47",
-"prezzo": 204.05,
-"conv": 67,
-"prob_gain": 72,
-"prob_loss": 18,
-"reliab": "🟡 Media",
-"mkt": 3.2332,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 220.046,
-"media20": 224.958,
-"quattro_atr": 240.4175,
-"meta_caduta": 220.575,
-"bollinger": 244.3128,
-"consigliata": 220.046
-},
-"stop": 185.8663,
-"atr": 9.0919,
-"res": {
-"7g": 1.18,
-"30g": -0.12
-}
-},
-{
 "episodio": "long:FN:2026-08-18",
 "ticker": "FN",
 "kind": "long",
@@ -28088,6 +28057,26 @@
 "mkt": null,
 "fonte": "osservazione",
 "note": "prezzo salito di almeno il 2% da 18.99",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:BAMI.MI:2026-10-02",
+"ticker": "BAMI.MI",
+"kind": "short",
+"evento": "salita_2pct",
+"scritto_il": "2026-10-02 20:05",
+"data": "2026-10-02 20:02",
+"prezzo": 15.225,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "prezzo salito di almeno il 2% da 14.885",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
