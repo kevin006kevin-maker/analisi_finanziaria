@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:TNGX:2026-08-20",
-"ticker": "TNGX",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-08-21 15:45",
-"data": "2026-08-21 15:42",
-"prezzo": 23.7857,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 23.27",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "long:T:2026-08-17",
 "ticker": "T",
 "kind": "long",
@@ -28706,5 +28686,32 @@
 },
 "stop": 8.0625,
 "atr": 2.2538
+},
+{
+"episodio": "short:QURE:2026-09-29",
+"ticker": "QURE",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-02 02:14",
+"data": "2026-10-02 02:11",
+"prezzo": 24.16,
+"conv": 73,
+"prob_gain": 59,
+"prob_loss": 20,
+"reliab": "🔴 Bassa",
+"mkt": -0.002,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 43.8472,
+"media20": 41.577,
+"quattro_atr": 37.1076,
+"meta_caduta": 37.605,
+"bollinger": 54.2762,
+"consigliata": 37.1076
+},
+"stop": 17.6862,
+"atr": 3.2369
 }
 ]
