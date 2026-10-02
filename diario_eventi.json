@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:FN:2026-08-18",
-"ticker": "FN",
-"kind": "long",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-08-25 01:47",
-"data": "2026-08-25 01:47",
-"prezzo": 421.14,
-"conv": 66,
-"prob_gain": 72,
-"prob_loss": 19,
-"reliab": "🔴 Bassa",
-"mkt": 3.2332,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 514.628,
-"media20": 497.721,
-"quattro_atr": 584.6027,
-"meta_caduta": 573.07,
-"bollinger": 617.4441,
-"consigliata": 514.628
-},
-"stop": 339.4086,
-"atr": 40.8657,
-"res": {
-"7g": -3.44,
-"30g": -4.38
-}
-},
-{
 "episodio": "short:XPEV:2026-08-24",
 "ticker": "XPEV",
 "kind": "short",
@@ -28077,6 +28046,26 @@
 "mkt": null,
 "fonte": "osservazione",
 "note": "prezzo salito di almeno il 2% da 14.885",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:UCG.MI:2026-10-02",
+"ticker": "UCG.MI",
+"kind": "short",
+"evento": "salita_2pct",
+"scritto_il": "2026-10-02 20:05",
+"data": "2026-10-02 20:02",
+"prezzo": 78.85,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "prezzo salito di almeno il 2% da 77.15",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
