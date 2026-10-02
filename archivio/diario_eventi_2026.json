@@ -6345,5 +6345,47 @@
 "7g": 6.02,
 "30g": -1.64
 }
+},
+{
+"episodio": "long:INTR:2026-08-16",
+"ticker": "INTR",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-08-25 00:26",
+"data": "2026-08-24 23:33",
+"prezzo": 5.56,
+"conv": 71,
+"prob_gain": 63,
+"prob_loss": 23,
+"reliab": "🟡 Media",
+"mkt": 3.2332,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-08-25",
+"soglie": {
+"media50": null,
+"media20": null,
+"quattro_atr": 6.6392,
+"meta_caduta": 5.865,
+"bollinger": 5.8449,
+"consigliata": 6.6392
+},
+"stop": 5.0204,
+"atr": 0.2698,
+"soglie_contaminate": {
+"media50": null,
+"media20": null,
+"quattro_atr": 6.6392,
+"meta_caduta": 5.865,
+"bollinger": 5.8449,
+"consigliata": 6.6392
+},
+"soglie_ricalcolate_il": "2026-09-14 21:39",
+"soglie_ritardo_giorni": 1,
+"res": {
+"7g": -3.87,
+"30g": -1.98
+},
+"taglio_corretto": true
 }
 ]
