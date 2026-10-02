@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:ASO:2026-08-25",
-"ticker": "ASO",
-"kind": "long",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-25 15:46",
-"data": "2026-08-25 15:46",
-"prezzo": 43.76,
-"conv": 71,
-"prob_gain": 68,
-"prob_loss": 18,
-"reliab": "🟡 Media",
-"mkt": 3.4251,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 47.9313,
-"media20": 47.6528,
-"quattro_atr": 51.2435,
-"meta_caduta": 48.175,
-"bollinger": 50.7479,
-"consigliata": 47.9313
-},
-"stop": 40.0182,
-"atr": 1.8709,
-"res": {
-"7g": -2.11,
-"30g": 11.43
-}
-},
-{
 "episodio": "short:TNGX:2026-08-20",
 "ticker": "TNGX",
 "kind": "short",
@@ -28416,5 +28385,25 @@
 },
 "stop": 2.5917,
 "atr": 0.6991
+},
+{
+"episodio": "short:LFTO:2026-09-18",
+"ticker": "LFTO",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-10-03 00:14",
+"data": "2026-10-03 00:14",
+"prezzo": 15.15,
+"conv": 68,
+"prob_gain": 56,
+"prob_loss": 13,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
