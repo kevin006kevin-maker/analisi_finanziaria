@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:AAL:2026-08-21",
-"ticker": "AAL",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-08-24 00:18",
-"data": "2026-08-24 00:17",
-"prezzo": 13.82,
-"conv": 66,
-"prob_gain": 52,
-"prob_loss": 12,
-"reliab": "🟡 Media",
-"mkt": 3.5401,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 15.7616,
-"media20": 15.0895,
-"quattro_atr": 16.0849,
-"meta_caduta": 15.985,
-"bollinger": 16.8332,
-"consigliata": 15.7616
-},
-"stop": 12.6876,
-"atr": 0.5662,
-"res": {
-"7g": -3.36,
-"30g": -2.71,
-"soglia": -2.71
-},
-"res_soglia": {
-"media50": {
-"ret": -2.71,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -2.71,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -2.71,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -2.71,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -2.71,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -2.71,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:STMMI.MI:2026-08-17",
 "ticker": "STMMI.MI",
 "kind": "short",
@@ -28483,5 +28419,32 @@
 },
 "stop": 562.3581,
 "atr": 23.0509
+},
+{
+"episodio": "short:COO:2026-09-10",
+"ticker": "COO",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-02 02:16",
+"data": "2026-10-02 02:14",
+"prezzo": 56.53,
+"conv": 80,
+"prob_gain": 56,
+"prob_loss": 10,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-02",
+"soglie": {
+"media50": 67.4942,
+"media20": 58.3175,
+"quattro_atr": 64.345,
+"meta_caduta": 66.675,
+"bollinger": 70.4937,
+"consigliata": 64.345
+},
+"stop": 52.6225,
+"atr": 1.9538
 }
 ]
