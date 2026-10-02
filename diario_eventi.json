@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:STMMI.MI:2026-08-17",
-"ticker": "STMMI.MI",
-"kind": "short",
-"evento": "uscita",
-"scritto_il": "2026-08-24 00:19",
-"data": "2026-08-24 00:19",
-"prezzo": 43.095,
-"conv": 73,
-"prob_gain": 53,
-"prob_loss": 15,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "in perdita da 11 giorni di Borsa: valuta l'uscita",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:VSH:2026-08-24",
 "ticker": "VSH",
 "kind": "short",
@@ -28446,5 +28426,32 @@
 },
 "stop": 52.6225,
 "atr": 1.9538
+},
+{
+"episodio": "short:SMST:2026-09-18",
+"ticker": "SMST",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-02 02:16",
+"data": "2026-10-02 02:14",
+"prezzo": 13.44,
+"conv": 69,
+"prob_gain": 52,
+"prob_loss": 35,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-02",
+"soglie": {
+"media50": 35.5852,
+"media20": 17.3067,
+"quattro_atr": 25.6806,
+"meta_caduta": 40.145,
+"bollinger": 27.0732,
+"consigliata": 25.6806
+},
+"stop": 7.3197,
+"atr": 3.0602
 }
 ]
