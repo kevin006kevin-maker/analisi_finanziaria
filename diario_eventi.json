@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:ENVX:2026-08-19",
-"ticker": "ENVX",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-08-24 00:19",
-"data": "2026-08-24 00:17",
-"prezzo": 3.38,
-"conv": 70,
-"prob_gain": 51,
-"prob_loss": 23,
-"reliab": "🔴 Bassa",
-"mkt": 3.5401,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-08-24",
-"soglie": {
-"media50": 5.0119,
-"media20": 4.091,
-"quattro_atr": 4.9264,
-"meta_caduta": 6.0,
-"bollinger": 5.121,
-"consigliata": 4.9264
-},
-"stop": 2.6068,
-"atr": 0.3866,
-"res": {
-"7g": 0.15,
-"30g": -12.72,
-"soglia": -12.72
-},
-"res_soglia": {
-"media50": {
-"ret": -12.72,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -12.72,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -12.72,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -12.72,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -12.72,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -12.72,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:SEDG:2026-08-19",
 "ticker": "SEDG",
 "kind": "short",
@@ -28467,5 +28403,32 @@
 },
 "stop": 19.8244,
 "atr": 0.6478
+},
+{
+"episodio": "long:DAVE:2026-09-23",
+"ticker": "DAVE",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-02 02:16",
+"data": "2026-10-02 02:12",
+"prezzo": 321.51,
+"conv": 45,
+"prob_gain": 63,
+"prob_loss": 30,
+"reliab": "🔴 Bassa",
+"mkt": -0.002,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-02",
+"soglie": {
+"media50": 360.1585,
+"media20": 352.3852,
+"quattro_atr": 398.6288,
+"meta_caduta": 382.02,
+"bollinger": 395.9277,
+"consigliata": 360.1585
+},
+"stop": 282.9506,
+"atr": 19.2797
 }
 ]
