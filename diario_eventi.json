@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:OI:2026-08-21",
-"ticker": "OI",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-21 15:42",
-"data": "2026-08-21 15:42",
-"prezzo": 6.91,
-"conv": 70,
-"prob_gain": 49,
-"prob_loss": 14,
-"reliab": "🟡 Media",
-"mkt": 3.4728,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 8.478,
-"media20": 7.2235,
-"quattro_atr": 8.5326,
-"meta_caduta": 8.475,
-"bollinger": 8.7291,
-"consigliata": 8.478
-},
-"stop": 6.0987,
-"atr": 0.4056,
-"res": {
-"7g": 7.24,
-"30g": -11.51,
-"soglia": -11.51
-},
-"res_soglia": {
-"media50": {
-"ret": -11.51,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 4.54,
-"toccato": true,
-"giorni": 3
-},
-"quattro_atr": {
-"ret": -11.51,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -11.51,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -11.51,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -11.51,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "long:OSIS:2026-08-21",
 "ticker": "OSIS",
 "kind": "long",
@@ -28781,5 +28717,32 @@
 },
 "stop": 52.1148,
 "atr": 1.1576
+},
+{
+"episodio": "short:STLA:2026-10-02",
+"ticker": "STLA",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-02 02:11",
+"data": "2026-10-02 02:11",
+"prezzo": 4.36,
+"conv": 67,
+"prob_gain": 52,
+"prob_loss": 14,
+"reliab": "🟡 Media",
+"mkt": -0.002,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 5.2934,
+"media20": 4.979,
+"quattro_atr": 5.1196,
+"meta_caduta": 5.185,
+"bollinger": 5.7389,
+"consigliata": 5.1196
+},
+"stop": 3.9802,
+"atr": 0.1899
 }
 ]
