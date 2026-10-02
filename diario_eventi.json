@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:VSH:2026-08-24",
-"ticker": "VSH",
-"kind": "short",
-"evento": "uscita",
-"scritto_il": "2026-08-24 00:19",
-"data": "2026-08-24 00:19",
-"prezzo": 31.63,
-"conv": 68,
-"prob_gain": 52,
-"prob_loss": 20,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "in perdita da 10 giorni di Borsa: valuta l'uscita",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:AAON:2026-08-24",
 "ticker": "AAON",
 "kind": "short",
@@ -28453,5 +28433,32 @@
 },
 "stop": 7.3197,
 "atr": 3.0602
+},
+{
+"episodio": "short:LPLA:2026-09-22",
+"ticker": "LPLA",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-02 02:16",
+"data": "2026-10-02 02:14",
+"prezzo": 305.8,
+"conv": 72,
+"prob_gain": 52,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-02",
+"soglie": {
+"media50": 346.8716,
+"media20": 332.0045,
+"quattro_atr": 350.0881,
+"meta_caduta": 341.24,
+"bollinger": 373.0764,
+"consigliata": 346.8716
+},
+"stop": 283.6559,
+"atr": 11.072
 }
 ]
