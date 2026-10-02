@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:LGN:2026-08-25",
-"ticker": "LGN",
-"kind": "short",
-"evento": "uscita",
-"scritto_il": "2026-08-25 00:25",
-"data": "2026-08-25 00:25",
-"prezzo": 56.38,
-"conv": 69,
-"prob_gain": 52,
-"prob_loss": 15,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "in perdita da 17 giorni di Borsa: valuta l'uscita",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:TE:2026-08-21",
 "ticker": "TE",
 "kind": "short",
@@ -28169,5 +28149,25 @@
 },
 "stop": null,
 "atr": 13.3232
+},
+{
+"episodio": "short:CXM:2026-10-02",
+"ticker": "CXM",
+"kind": "short",
+"evento": "salita_2pct",
+"scritto_il": "2026-10-02 08:12",
+"data": "2026-10-02 08:09",
+"prezzo": 5.22,
+"conv": 59,
+"prob_gain": 54,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": -0.002,
+"fonte": "osservazione",
+"note": "prezzo salito di almeno il 2% da 4.95",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
