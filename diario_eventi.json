@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:UMC:2026-08-17",
-"ticker": "UMC",
-"kind": "long",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-08-22 04:18",
-"data": "2026-08-22 04:18",
-"prezzo": 18.34,
-"conv": 66,
-"prob_gain": 66,
-"prob_loss": 25,
-"reliab": "🔴 Bassa",
-"mkt": 3.5401,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 21.8148,
-"media20": 18.8045,
-"quattro_atr": 22.7244,
-"meta_caduta": 23.175,
-"bollinger": 20.3629,
-"consigliata": 21.8148
-},
-"stop": 16.1478,
-"atr": 1.0961,
-"res": {
-"7g": 9.0,
-"30g": 37.75
-}
-},
-{
 "episodio": "long:IAG:2026-08-20",
 "ticker": "IAG",
 "kind": "long",
@@ -28528,6 +28497,26 @@
 "prob_gain": 53,
 "prob_loss": 36,
 "reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "in perdita da 9 giorni di Borsa: valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:ENEL.MI:2026-09-02",
+"ticker": "ENEL.MI",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-10-02 02:15",
+"data": "2026-10-02 02:15",
+"prezzo": 8.747,
+"conv": 74,
+"prob_gain": 53,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
 "mkt": null,
 "fonte": "monitoraggio",
 "note": "in perdita da 9 giorni di Borsa: valuta l'uscita",
