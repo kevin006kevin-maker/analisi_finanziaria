@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:TE:2026-08-21",
-"ticker": "TE",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-21 17:59",
-"data": "2026-08-21 17:59",
-"prezzo": 4.5828,
-"conv": 70,
-"prob_gain": 48,
-"prob_loss": 34,
-"reliab": "🔴 Bassa",
-"mkt": 3.7609,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 6.5735,
-"media20": 4.8526,
-"quattro_atr": 7.0353,
-"meta_caduta": 8.3114,
-"bollinger": 5.967,
-"consigliata": 6.5735
-},
-"stop": 3.3566,
-"atr": 0.6131,
-"res": {
-"7g": 4.52,
-"30g": -4.21,
-"soglia": -4.21
-},
-"res_soglia": {
-"media50": {
-"ret": -4.21,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 5.89,
-"toccato": true,
-"giorni": 6
-},
-"quattro_atr": {
-"ret": -4.21,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -4.21,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -4.21,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -4.21,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:BIDU:2026-08-18",
 "ticker": "BIDU",
 "kind": "short",
@@ -28734,5 +28670,32 @@
 },
 "stop": 12.5906,
 "atr": 0.5822
+},
+{
+"episodio": "short:COUR:2026-10-01",
+"ticker": "COUR",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-02 02:14",
+"data": "2026-10-01 02:49",
+"prezzo": 4.67,
+"conv": 66,
+"prob_gain": 55,
+"prob_loss": 9,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 5.601,
+"media20": 5.2585,
+"quattro_atr": 5.676,
+"meta_caduta": 5.595,
+"bollinger": 6.0144,
+"consigliata": 5.601
+},
+"stop": 4.167,
+"atr": 0.2515
 }
 ]
