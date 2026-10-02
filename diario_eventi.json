@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:CHTR:2026-08-20",
-"ticker": "CHTR",
-"kind": "long",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-08-21 15:43",
-"data": "2026-08-21 15:43",
-"prezzo": 147.925,
-"conv": 65,
-"prob_gain": 67,
-"prob_loss": 24,
-"reliab": "🟡 Media",
-"mkt": 3.4728,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": null,
-"media20": 148.8358,
-"quattro_atr": 177.823,
-"meta_caduta": 152.8075,
-"bollinger": 162.0067,
-"consigliata": 177.823
-},
-"stop": 132.976,
-"atr": 7.4745,
-"res": {
-"7g": 3.29,
-"30g": -15.25
-}
-},
-{
 "episodio": "long:INTR:2026-08-16",
 "ticker": "INTR",
 "kind": "long",
@@ -28703,5 +28672,32 @@
 },
 "stop": 34.9635,
 "atr": 1.1782
+},
+{
+"episodio": "short:ESNT:2026-10-01",
+"ticker": "ESNT",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-02 02:13",
+"data": "2026-10-02 02:11",
+"prezzo": 57.91,
+"conv": 84,
+"prob_gain": 57,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -0.002,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 67.2516,
+"media20": 66.5515,
+"quattro_atr": 64.3441,
+"meta_caduta": 63.77,
+"bollinger": 72.2994,
+"consigliata": 64.3441
+},
+"stop": 54.6929,
+"atr": 1.6085
 }
 ]
