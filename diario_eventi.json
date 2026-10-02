@@ -1,47 +1,5 @@
 [
 {
-"episodio": "long:INTR:2026-08-16",
-"ticker": "INTR",
-"kind": "long",
-"evento": "fine_osservazione",
-"scritto_il": "2026-08-25 00:26",
-"data": "2026-08-24 23:33",
-"prezzo": 5.56,
-"conv": 71,
-"prob_gain": 63,
-"prob_loss": 23,
-"reliab": "🟡 Media",
-"mkt": 3.2332,
-"fonte": "osservazione",
-"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-08-25",
-"soglie": {
-"media50": null,
-"media20": null,
-"quattro_atr": 6.6392,
-"meta_caduta": 5.865,
-"bollinger": 5.8449,
-"consigliata": 6.6392
-},
-"stop": 5.0204,
-"atr": 0.2698,
-"soglie_contaminate": {
-"media50": null,
-"media20": null,
-"quattro_atr": 6.6392,
-"meta_caduta": 5.865,
-"bollinger": 5.8449,
-"consigliata": 6.6392
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": -3.87,
-"30g": -1.98
-},
-"taglio_corretto": true
-},
-{
 "episodio": "long:ITUB:2026-08-16",
 "ticker": "ITUB",
 "kind": "long",
@@ -28289,5 +28247,32 @@
 },
 "stop": 33.1284,
 "atr": 2.1708
+},
+{
+"episodio": "short:NKE:2026-10-02",
+"ticker": "NKE",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-02 20:01",
+"data": "2026-10-02 20:01",
+"prezzo": 33.5277,
+"conv": 66,
+"prob_gain": 56,
+"prob_loss": 5,
+"reliab": "🟡 Media",
+"mkt": -0.3499,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 38.9408,
+"media20": 36.2244,
+"quattro_atr": 38.1117,
+"meta_caduta": 39.0488,
+"bollinger": 38.3288,
+"consigliata": 38.1117
+},
+"stop": 31.2357,
+"atr": 1.146
 }
 ]
