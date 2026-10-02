@@ -1,47 +1,5 @@
 [
 {
-"episodio": "long:DDS:2026-08-16",
-"ticker": "DDS",
-"kind": "long",
-"evento": "fine_osservazione",
-"scritto_il": "2026-08-25 00:26",
-"data": "2026-08-24 23:00",
-"prezzo": 642.63,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-08-25",
-"soglie": {
-"media50": null,
-"media20": null,
-"quattro_atr": 753.2149,
-"meta_caduta": 644.335,
-"bollinger": 653.5983,
-"consigliata": 753.2149
-},
-"stop": 587.3376,
-"atr": 27.6462,
-"soglie_contaminate": {
-"media50": null,
-"media20": null,
-"quattro_atr": 753.2135,
-"meta_caduta": 644.335,
-"bollinger": 653.5983,
-"consigliata": 753.2135
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": -2.11,
-"30g": 1.65
-},
-"taglio_corretto": true
-},
-{
 "episodio": "long:DUOL:2026-08-16",
 "ticker": "DUOL",
 "kind": "long",
@@ -28164,5 +28122,32 @@
 },
 "stop": 73.2483,
 "atr": 1.9509
+},
+{
+"episodio": "long:CTVA:2026-10-02",
+"ticker": "CTVA",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-02 14:32",
+"data": "2026-10-02 14:32",
+"prezzo": 12.57,
+"conv": 61,
+"prob_gain": 100,
+"prob_loss": 0,
+"reliab": "🔴 Bassa",
+"mkt": -0.002,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 80.3964,
+"media20": 78.4095,
+"quattro_atr": 39.744,
+"meta_caduta": 51.54,
+"bollinger": 110.0834,
+"consigliata": 39.744
+},
+"stop": null,
+"atr": 6.7935
 }
 ]
