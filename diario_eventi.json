@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:SEDG:2026-08-19",
-"ticker": "SEDG",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-08-21 18:40",
-"data": "2026-08-21 18:38",
-"prezzo": 31.565,
-"conv": 69,
-"prob_gain": 47,
-"prob_loss": 27,
-"reliab": "🔴 Bassa",
-"mkt": 3.6414,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 46.4939,
-"media20": 35.7592,
-"quattro_atr": 44.4928,
-"meta_caduta": 55.0375,
-"bollinger": 47.0172,
-"consigliata": 44.4928
-},
-"stop": 25.1011,
-"atr": 3.2319,
-"res": {
-"7g": -1.28,
-"30g": 7.21,
-"soglia": 7.21
-},
-"res_soglia": {
-"media50": {
-"ret": 7.21,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 13.29,
-"toccato": true,
-"giorni": 18
-},
-"quattro_atr": {
-"ret": 7.21,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 7.21,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 7.21,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 7.21,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:GOF:2026-08-21",
 "ticker": "GOF",
 "kind": "short",
@@ -28660,5 +28596,32 @@
 },
 "stop": 51.9848,
 "atr": 0.7076
+},
+{
+"episodio": "long:LYG:2026-10-01",
+"ticker": "LYG",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-02 02:14",
+"data": "2026-10-01 16:47",
+"prezzo": 5.39,
+"conv": 65,
+"prob_gain": 85,
+"prob_loss": 5,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 5.992,
+"media20": 5.858,
+"quattro_atr": 5.8328,
+"meta_caduta": 5.835,
+"bollinger": 6.1436,
+"consigliata": 5.8328
+},
+"stop": 5.1686,
+"atr": 0.1107
 }
 ]
