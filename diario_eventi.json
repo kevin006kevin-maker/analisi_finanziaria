@@ -1,25 +1,5 @@
 [
 {
-"episodio": "long:INTR:2026-08-16",
-"ticker": "INTR",
-"kind": "long",
-"evento": "salita_2pct",
-"scritto_il": "2026-08-21 15:45",
-"data": "2026-08-21 15:43",
-"prezzo": 5.335,
-"conv": 63,
-"prob_gain": 58,
-"prob_loss": 25,
-"reliab": "🟡 Media",
-"mkt": 3.4728,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 5.19",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:TNGX:2026-08-20",
 "ticker": "TNGX",
 "kind": "short",
@@ -28699,5 +28679,32 @@
 },
 "stop": 54.6929,
 "atr": 1.6085
+},
+{
+"episodio": "short:CTVA:2026-10-01",
+"ticker": "CTVA",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-02 02:13",
+"data": "2026-10-01 22:20",
+"prezzo": 12.57,
+"conv": 80,
+"prob_gain": 96,
+"prob_loss": 0,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 81.9156,
+"media20": 82.2795,
+"quattro_atr": 21.5851,
+"meta_caduta": 51.54,
+"bollinger": 89.7436,
+"consigliata": 21.5851
+},
+"stop": 8.0625,
+"atr": 2.2538
 }
 ]
