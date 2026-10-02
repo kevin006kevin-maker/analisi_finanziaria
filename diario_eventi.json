@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:FRVO:2026-08-24",
-"ticker": "FRVO",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-24 18:32",
-"data": "2026-08-24 18:32",
-"prezzo": 15.615,
-"conv": 71,
-"prob_gain": 53,
-"prob_loss": 18,
-"reliab": "🔴 Bassa",
-"mkt": 3.384,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 25.5649,
-"media20": 20.5323,
-"quattro_atr": 24.5402,
-"meta_caduta": 27.7925,
-"bollinger": 26.3131,
-"consigliata": 24.5402
-},
-"stop": 11.1524,
-"atr": 2.2313,
-"res": {
-"7g": -2.63,
-"30g": 5.99,
-"soglia": 5.99
-},
-"res_soglia": {
-"media50": {
-"ret": 5.99,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 5.99,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 5.99,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 5.99,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 5.99,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 5.99,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:XPEV:2026-08-24",
 "ticker": "XPEV",
 "kind": "short",
@@ -28329,5 +28265,32 @@
 },
 "stop": 17.6862,
 "atr": 3.2369
+},
+{
+"episodio": "short:JLHL:2026-09-29",
+"ticker": "JLHL",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-02 02:16",
+"data": "2026-10-02 02:11",
+"prezzo": 3.7,
+"conv": 73,
+"prob_gain": 59,
+"prob_loss": 28,
+"reliab": "🔴 Bassa",
+"mkt": -0.002,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-02",
+"soglie": {
+"media50": 6.4027,
+"media20": 5.6393,
+"quattro_atr": 6.5295,
+"meta_caduta": 8.245,
+"bollinger": 6.9798,
+"consigliata": 6.4027
+},
+"stop": 2.2852,
+"atr": 0.7074
 }
 ]
