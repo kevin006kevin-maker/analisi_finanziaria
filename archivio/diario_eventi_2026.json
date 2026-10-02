@@ -6542,5 +6542,80 @@
 "res": {},
 "bad_data": "salto di prezzo oltre il 25%: probabile raggruppamento di azioni",
 "taglio_corretto": true
+},
+{
+"episodio": "short:TNGX:2026-08-20",
+"ticker": "TNGX",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-08-25 00:26",
+"data": "2026-08-24 22:59",
+"prezzo": 24.51,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-08-25",
+"soglie": {
+"media50": 28.3088,
+"media20": 26.3675,
+"quattro_atr": 30.8389,
+"meta_caduta": 28.705,
+"bollinger": 29.6126,
+"consigliata": 28.3088
+},
+"stop": 21.3456,
+"atr": 1.5822,
+"soglie_contaminate": {
+"media50": 28.3088,
+"media20": 26.3675,
+"quattro_atr": 30.8389,
+"meta_caduta": 28.705,
+"bollinger": 29.6126,
+"consigliata": 28.3088
+},
+"soglie_ricalcolate_il": "2026-09-14 21:39",
+"soglie_ritardo_giorni": 1,
+"res": {
+"7g": -7.43,
+"30g": 0.98,
+"soglia": 0.98
+},
+"taglio_corretto": true,
+"res_soglia": {
+"media50": {
+"ret": 0.98,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": 0.98,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": 0.98,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": 0.98,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": 0.98,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": 0.98,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
