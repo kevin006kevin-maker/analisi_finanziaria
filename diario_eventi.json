@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:TNGX:2026-08-20",
-"ticker": "TNGX",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-08-25 00:26",
-"data": "2026-08-24 22:59",
-"prezzo": 24.51,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-08-25",
-"soglie": {
-"media50": 28.3088,
-"media20": 26.3675,
-"quattro_atr": 30.8389,
-"meta_caduta": 28.705,
-"bollinger": 29.6126,
-"consigliata": 28.3088
-},
-"stop": 21.3456,
-"atr": 1.5822,
-"soglie_contaminate": {
-"media50": 28.3088,
-"media20": 26.3675,
-"quattro_atr": 30.8389,
-"meta_caduta": 28.705,
-"bollinger": 29.6126,
-"consigliata": 28.3088
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": -7.43,
-"30g": 0.98,
-"soglia": 0.98
-},
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": 0.98,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 0.98,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 0.98,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 0.98,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 0.98,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 0.98,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:WMT:2026-08-20",
 "ticker": "WMT",
 "kind": "short",
@@ -28209,6 +28134,26 @@
 "mkt": null,
 "fonte": "monitoraggio",
 "note": "prezzo salito di almeno il 2% da 48.38",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "long:RELY:2026-09-11",
+"ticker": "RELY",
+"kind": "long",
+"evento": "salita_2pct",
+"scritto_il": "2026-10-02 20:05",
+"data": "2026-10-02 20:03",
+"prezzo": 22.46,
+"conv": 55,
+"prob_gain": 53,
+"prob_loss": 18,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "prezzo salito di almeno il 2% da 21.93",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
