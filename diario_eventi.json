@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:DUOL:2026-08-16",
-"ticker": "DUOL",
-"kind": "long",
-"evento": "fine_osservazione",
-"scritto_il": "2026-08-25 00:26",
-"data": "2026-08-25 00:23",
-"prezzo": 146.84,
-"conv": 67,
-"prob_gain": 63,
-"prob_loss": 27,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-08-25",
-"soglie": {
-"media50": null,
-"media20": null,
-"quattro_atr": 179.6336,
-"meta_caduta": 146.935,
-"bollinger": 150.3609,
-"consigliata": 179.6336
-},
-"stop": 130.4432,
-"atr": 8.1984,
-"res": {
-"7g": 6.02,
-"30g": -1.64
-}
-},
-{
 "episodio": "long:INTR:2026-08-16",
 "ticker": "INTR",
 "kind": "long",
@@ -28293,5 +28262,32 @@
 "stop": null,
 "atr": 6.7935,
 "res": {}
+},
+{
+"episodio": "short:AXGN:2026-10-02",
+"ticker": "AXGN",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-02 20:01",
+"data": "2026-10-02 20:01",
+"prezzo": 37.47,
+"conv": 75,
+"prob_gain": 58,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": -0.3499,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 45.7642,
+"media20": 43.7785,
+"quattro_atr": 46.1531,
+"meta_caduta": 44.6,
+"bollinger": 48.8011,
+"consigliata": 45.7642
+},
+"stop": 33.1284,
+"atr": 2.1708
 }
 ]
