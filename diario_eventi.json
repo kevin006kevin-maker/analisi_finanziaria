@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:TDUP:2026-08-25",
-"ticker": "TDUP",
-"kind": "short",
-"evento": "uscita",
-"scritto_il": "2026-08-25 00:25",
-"data": "2026-08-25 00:25",
-"prezzo": 2.81,
-"conv": 70,
-"prob_gain": 57,
-"prob_loss": 19,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "in perdita da 9 giorni di Borsa: valuta l'uscita",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:VISN:2026-08-25",
 "ticker": "VISN",
 "kind": "short",
@@ -28169,5 +28149,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:BAMI.MI:2026-10-02",
+"ticker": "BAMI.MI",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-02 14:31",
+"data": "2026-10-02 14:31",
+"prezzo": 14.885,
+"conv": 72,
+"prob_gain": 53,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -0.002,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 16.2427,
+"media20": 16.0412,
+"quattro_atr": 16.4406,
+"meta_caduta": 16.0325,
+"bollinger": 16.7717,
+"consigliata": 16.2427
+},
+"stop": 14.1072,
+"atr": 0.3889
 }
 ]
