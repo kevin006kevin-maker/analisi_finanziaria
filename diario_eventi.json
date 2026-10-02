@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:ITUB:2026-08-16",
-"ticker": "ITUB",
-"kind": "long",
-"evento": "fine_osservazione",
-"scritto_il": "2026-08-25 00:26",
-"data": "2026-08-25 00:23",
-"prezzo": 7.52,
-"conv": 63,
-"prob_gain": 70,
-"prob_loss": 16,
-"reliab": "🟢 Alta",
-"mkt": 3.2332,
-"fonte": "osservazione",
-"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-08-25",
-"soglie": {
-"media50": 8.0422,
-"media20": 7.803,
-"quattro_atr": 8.3754,
-"meta_caduta": 8.07,
-"bollinger": 8.7267,
-"consigliata": 8.0422
-},
-"stop": 7.0923,
-"atr": 0.2139,
-"res": {
-"7g": 3.32,
-"30g": 7.71
-}
-},
-{
 "episodio": "long:KGC:2026-08-16",
 "ticker": "KGC",
 "kind": "long",
@@ -28274,5 +28243,32 @@
 },
 "stop": 31.2357,
 "atr": 1.146
+},
+{
+"episodio": "short:FUN:2026-10-02",
+"ticker": "FUN",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-02 20:01",
+"data": "2026-10-02 20:01",
+"prezzo": 11.5999,
+"conv": 64,
+"prob_gain": 56,
+"prob_loss": 17,
+"reliab": "🔴 Bassa",
+"mkt": -0.3499,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 15.022,
+"media20": 12.6375,
+"quattro_atr": 14.5079,
+"meta_caduta": 15.5299,
+"bollinger": 15.3559,
+"consigliata": 14.5079
+},
+"stop": 10.1459,
+"atr": 0.727
 }
 ]
