@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:BBD:2026-08-16",
-"ticker": "BBD",
-"kind": "long",
-"evento": "fine_osservazione",
-"scritto_il": "2026-08-25 00:26",
-"data": "2026-08-25 00:23",
-"prezzo": 3.15,
-"conv": 74,
-"prob_gain": 67,
-"prob_loss": 17,
-"reliab": "🟢 Alta",
-"mkt": 3.2332,
-"fonte": "osservazione",
-"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-08-25",
-"soglie": {
-"media50": 3.4336,
-"media20": 3.3225,
-"quattro_atr": 3.5328,
-"meta_caduta": 3.44,
-"bollinger": 3.7884,
-"consigliata": 3.4336
-},
-"stop": 2.9586,
-"atr": 0.0957,
-"res": {
-"7g": 5.71,
-"30g": 7.78
-}
-},
-{
 "episodio": "long:CCL:2026-08-16",
 "ticker": "CCL",
 "kind": "long",
@@ -28183,5 +28152,32 @@
 },
 "stop": 39.6122,
 "atr": 0.8589
+},
+{
+"episodio": "short:ISP.MI:2026-10-02",
+"ticker": "ISP.MI",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-02 14:31",
+"data": "2026-10-02 14:31",
+"prezzo": 6.28,
+"conv": 69,
+"prob_gain": 53,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -0.002,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 6.7243,
+"media20": 6.6875,
+"quattro_atr": 6.7835,
+"meta_caduta": 6.5985,
+"bollinger": 6.955,
+"consigliata": 6.7243
+},
+"stop": 6.0282,
+"atr": 0.1259
 }
 ]
