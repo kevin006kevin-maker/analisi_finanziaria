@@ -1,25 +1,5 @@
 [
 {
-"episodio": "long:ITUB:2026-08-16",
-"ticker": "ITUB",
-"kind": "long",
-"evento": "salita_2pct",
-"scritto_il": "2026-08-24 16:03",
-"data": "2026-08-24 16:01",
-"prezzo": 7.56,
-"conv": 60,
-"prob_gain": 69,
-"prob_loss": 16,
-"reliab": "🟢 Alta",
-"mkt": 3.2175,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 7.4",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "long:SNDK:2026-08-24",
 "ticker": "SNDK",
 "kind": "long",
@@ -28315,5 +28295,32 @@
 },
 "stop": 89.5713,
 "atr": 5.9494
+},
+{
+"episodio": "short:NIO:2026-09-29",
+"ticker": "NIO",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-02 02:16",
+"data": "2026-10-02 02:11",
+"prezzo": 3.43,
+"conv": 69,
+"prob_gain": 52,
+"prob_loss": 11,
+"reliab": "🟡 Media",
+"mkt": -0.002,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-02",
+"soglie": {
+"media50": 4.2062,
+"media20": 3.655,
+"quattro_atr": 3.9174,
+"meta_caduta": 4.23,
+"bollinger": 3.8948,
+"consigliata": 3.9174
+},
+"stop": 3.1863,
+"atr": 0.1219
 }
 ]
