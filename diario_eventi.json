@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:VISN:2026-08-25",
-"ticker": "VISN",
-"kind": "short",
-"evento": "uscita",
-"scritto_il": "2026-08-25 00:26",
-"data": "2026-08-25 00:26",
-"prezzo": 10.84,
-"conv": 70,
-"prob_gain": 67,
-"prob_loss": 8,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "in perdita da 9 giorni di Borsa: valuta l'uscita",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "long:BBD:2026-08-16",
 "ticker": "BBD",
 "kind": "long",
@@ -28176,5 +28156,32 @@
 },
 "stop": 14.1072,
 "atr": 0.3889
+},
+{
+"episodio": "short:G.MI:2026-10-02",
+"ticker": "G.MI",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-02 14:31",
+"data": "2026-10-02 14:31",
+"prezzo": 41.33,
+"conv": 71,
+"prob_gain": 56,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -0.002,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 44.1008,
+"media20": 44.2285,
+"quattro_atr": 44.7656,
+"meta_caduta": 43.76,
+"bollinger": 46.9237,
+"consigliata": 44.1008
+},
+"stop": 39.6122,
+"atr": 0.8589
 }
 ]
