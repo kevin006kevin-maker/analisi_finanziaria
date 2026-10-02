@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:FRVO:2026-08-24",
-"ticker": "FRVO",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-08-25 00:23",
-"data": "2026-08-25 00:21",
-"prezzo": 15.47,
-"conv": 71,
-"prob_gain": 53,
-"prob_loss": 15,
-"reliab": "🔴 Bassa",
-"mkt": 3.2332,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 25.562,
-"media20": 20.525,
-"quattro_atr": 24.4524,
-"meta_caduta": 27.72,
-"bollinger": 26.3321,
-"consigliata": 24.4524
-},
-"stop": 10.9788,
-"atr": 2.2456,
-"res": {
-"7g": 21.62,
-"30g": 8.02,
-"soglia": 8.02
-},
-"res_soglia": {
-"media50": {
-"ret": 8.02,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 8.02,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 8.02,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 8.02,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 8.02,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 8.02,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "long:XPEV:2026-08-24",
 "ticker": "XPEV",
 "kind": "long",
@@ -28214,5 +28150,32 @@
 },
 "stop": 17.0946,
 "atr": 0.9477
+},
+{
+"episodio": "short:ENLT:2026-10-01",
+"ticker": "ENLT",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-02 08:10",
+"data": "2026-10-02 08:09",
+"prezzo": 65.3,
+"conv": 70,
+"prob_gain": 52,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": -0.002,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 78.774,
+"media20": 72.7705,
+"quattro_atr": 76.2605,
+"meta_caduta": 78.45,
+"bollinger": 79.9225,
+"consigliata": 76.2605
+},
+"stop": 59.8197,
+"atr": 2.7401
 }
 ]
