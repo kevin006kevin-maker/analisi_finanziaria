@@ -11968,5 +11968,67 @@
 },
 "ret_5d": -15.01,
 "ret_21d": null
+},
+{
+"date": "2026-09-25",
+"ticker": "WHLR",
+"kind": "short",
+"price": 3.74,
+"conv": 54,
+"factors": {
+"discount": 99.9958,
+"histcheap": 0.62,
+"riskadj": -3.3,
+"ddpen": -89.53,
+"momentum": -10.2269,
+"prob": 18,
+"oversold": -29.7074,
+"rebound": 390.6925,
+"trend": -1.0,
+"relstrength": 8.2099
+},
+"ret_5d": null,
+"ret_21d": null,
+"bad_data": true
+},
+{
+"date": "2026-09-25",
+"ticker": "NU",
+"kind": "long",
+"price": 13.56,
+"conv": 52,
+"factors": {
+"discount": 27.7185,
+"histcheap": 0.94,
+"riskadj": -0.67,
+"ddpen": -20.17,
+"momentum": 1.8103,
+"prob": 68,
+"quality": 60.9,
+"valcheap": -1.51,
+"trappen": 3
+},
+"ret_5d": -1.36,
+"ret_21d": null
+},
+{
+"date": "2026-09-25",
+"ticker": "CDE",
+"kind": "long",
+"price": 18.94,
+"conv": 58,
+"factors": {
+"discount": 30.2394,
+"histcheap": -0.03,
+"riskadj": 0.02,
+"ddpen": -28.56,
+"momentum": 0.2107,
+"prob": 35,
+"quality": 77.5,
+"valcheap": -1.2287,
+"trappen": 3
+},
+"ret_5d": -6.63,
+"ret_21d": null
 }
 ]
