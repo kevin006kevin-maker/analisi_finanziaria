@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:TNGX:2026-08-20",
-"ticker": "TNGX",
-"kind": "short",
-"evento": "promozione",
-"scritto_il": "2026-08-25 15:46",
-"data": "2026-08-25 15:46",
-"prezzo": 25.265,
-"conv": 57,
-"prob_gain": 47,
-"prob_loss": 27,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": 28.1953,
-"media20": 26.2983,
-"quattro_atr": 31.4561,
-"meta_caduta": 29.0825,
-"bollinger": 29.5769,
-"consigliata": 28.1953
-},
-"stop": 22.1695,
-"atr": 1.5478,
-"res": {
-"7g": -10.47,
-"30g": -4.81,
-"soglia": -4.81
-},
-"res_soglia": {
-"media50": {
-"ret": -4.81,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -4.81,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -4.81,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -4.81,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -4.81,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -4.81,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "long:UMC:2026-08-17",
 "ticker": "UMC",
 "kind": "long",
@@ -28427,5 +28363,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:NIO:2026-09-29",
+"ticker": "NIO",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-03 03:28",
+"data": "2026-10-03 03:25",
+"prezzo": 3.4,
+"conv": 66,
+"prob_gain": 53,
+"prob_loss": 7,
+"reliab": "🟡 Media",
+"mkt": -0.3225,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 4.1808,
+"media20": 3.632,
+"quattro_atr": 3.8783,
+"meta_caduta": 4.215,
+"bollinger": 3.8772,
+"consigliata": 3.8783
+},
+"stop": 3.1608,
+"atr": 0.1196
 }
 ]
