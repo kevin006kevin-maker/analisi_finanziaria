@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:DKS:2026-08-25",
-"ticker": "DKS",
-"kind": "long",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-25 16:42",
-"data": "2026-08-25 16:42",
-"prezzo": 130.67,
-"conv": 61,
-"prob_gain": 94,
-"prob_loss": 2,
-"reliab": "🟡 Media",
-"mkt": 3.1849,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 210.796,
-"media20": 194.4395,
-"quattro_atr": 172.3996,
-"meta_caduta": 184.92,
-"bollinger": 229.5623,
-"consigliata": 172.3996
-},
-"stop": 109.8052,
-"atr": 10.4324,
-"res": {
-"7g": 2.08,
-"30g": 2.43
-}
-},
-{
 "episodio": "long:MNSO:2026-08-17",
 "ticker": "MNSO",
 "kind": "long",
@@ -28302,5 +28271,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:MMYT:2026-10-03",
+"ticker": "MMYT",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-03 09:05",
+"data": "2026-10-03 09:05",
+"prezzo": 44.62,
+"conv": 61,
+"prob_gain": 50,
+"prob_loss": 16,
+"reliab": "🟡 Media",
+"mkt": -0.3225,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 54.7032,
+"media20": 48.5325,
+"quattro_atr": 53.1031,
+"meta_caduta": 53.92,
+"bollinger": 53.519,
+"consigliata": 53.1031
+},
+"stop": 40.3784,
+"atr": 2.1208
 }
 ]
