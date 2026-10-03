@@ -1,25 +1,5 @@
 [
 {
-"episodio": "long:MNSO:2026-08-17",
-"ticker": "MNSO",
-"kind": "long",
-"evento": "salita_2pct",
-"scritto_il": "2026-08-25 17:39",
-"data": "2026-08-25 17:39",
-"prezzo": 11.21,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 10.96",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:FRVO:2026-08-24",
 "ticker": "FRVO",
 "kind": "short",
@@ -28298,5 +28278,32 @@
 },
 "stop": 40.3784,
 "atr": 2.1208
+},
+{
+"episodio": "long:ORC:2026-10-03",
+"ticker": "ORC",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-03 09:06",
+"data": "2026-10-03 09:06",
+"prezzo": 5.11,
+"conv": 87,
+"prob_gain": 91,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": -0.3225,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 6.3476,
+"media20": 5.9805,
+"quattro_atr": 5.7846,
+"meta_caduta": 6.05,
+"bollinger": 6.7971,
+"consigliata": 5.7846
+},
+"stop": 4.7727,
+"atr": 0.1686
 }
 ]
