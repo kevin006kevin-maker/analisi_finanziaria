@@ -1,66 +1,6 @@
 [
 {
 "date": "2026-09-25",
-"ticker": "SMCI",
-"kind": "long",
-"price": 41.51,
-"conv": 51,
-"factors": {
-"discount": 29.2604,
-"histcheap": -0.88,
-"riskadj": -0.18,
-"ddpen": -43.5,
-"momentum": -2.8748,
-"prob": 11,
-"quality": 71.7,
-"valcheap": 0.6466,
-"trappen": 2
-},
-"ret_5d": 4.58,
-"ret_21d": null
-},
-{
-"date": "2026-09-25",
-"ticker": "BBD",
-"kind": "long",
-"price": 3.38,
-"conv": 73,
-"factors": {
-"discount": 19.715,
-"histcheap": 0.68,
-"riskadj": 0.02,
-"ddpen": -12.87,
-"momentum": 3.4286,
-"prob": 62,
-"quality": 62.4,
-"valcheap": 0.7649,
-"trappen": 3
-},
-"ret_5d": 6.51,
-"ret_21d": null
-},
-{
-"date": "2026-09-25",
-"ticker": "AGNC",
-"kind": "long",
-"price": 9.62,
-"conv": 84,
-"factors": {
-"discount": 20.9532,
-"histcheap": 1.96,
-"riskadj": -0.32,
-"ddpen": -10.39,
-"momentum": 2.9263,
-"prob": 84,
-"quality": 69.6,
-"valcheap": 0.5557,
-"trappen": 3
-},
-"ret_5d": -7.59,
-"ret_21d": null
-},
-{
-"date": "2026-09-25",
 "ticker": "CCL",
 "kind": "long",
 "price": 21.79,
@@ -40295,6 +40235,69 @@
 "quality": 64.6,
 "valcheap": -2.4331,
 "trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-03",
+"ticker": "NNBR",
+"kind": "short",
+"price": 4.51,
+"conv": 24,
+"factors": {
+"discount": -0.0,
+"histcheap": -2.4,
+"riskadj": 1.8,
+"ddpen": -21.02,
+"momentum": -22.8883,
+"prob": 19,
+"oversold": -68.8924,
+"rebound": -20.0133,
+"trend": 1.0,
+"relstrength": 23.1555
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-03",
+"ticker": "AZTA",
+"kind": "short",
+"price": 38.75,
+"conv": 20,
+"factors": {
+"discount": 5.5108,
+"histcheap": -1.66,
+"riskadj": 0.24,
+"ddpen": -30.92,
+"momentum": -13.9036,
+"prob": 35,
+"oversold": -76.6026,
+"rebound": -16.0728,
+"trend": 1.0,
+"relstrength": 14.1708
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-03",
+"ticker": "DDD",
+"kind": "short",
+"price": 3.78,
+"conv": 25,
+"factors": {
+"discount": 2.5773,
+"histcheap": -1.91,
+"riskadj": 0.33,
+"ddpen": -33.73,
+"momentum": -5.8824,
+"prob": 13,
+"oversold": -62.5223,
+"rebound": -11.8254,
+"trend": 1.0,
+"relstrength": 6.1495
 },
 "ret_5d": null,
 "ret_21d": null
