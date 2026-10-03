@@ -1,68 +1,6 @@
 [
 {
 "date": "2026-09-25",
-"ticker": "WHLR",
-"kind": "short",
-"price": 3.74,
-"conv": 54,
-"factors": {
-"discount": 99.9958,
-"histcheap": 0.62,
-"riskadj": -3.3,
-"ddpen": -89.53,
-"momentum": -10.2269,
-"prob": 18,
-"oversold": -29.7074,
-"rebound": 390.6925,
-"trend": -1.0,
-"relstrength": 8.2099
-},
-"ret_5d": null,
-"ret_21d": null,
-"bad_data": true
-},
-{
-"date": "2026-09-25",
-"ticker": "NU",
-"kind": "long",
-"price": 13.56,
-"conv": 52,
-"factors": {
-"discount": 27.7185,
-"histcheap": 0.94,
-"riskadj": -0.67,
-"ddpen": -20.17,
-"momentum": 1.8103,
-"prob": 68,
-"quality": 60.9,
-"valcheap": -1.51,
-"trappen": 3
-},
-"ret_5d": -1.36,
-"ret_21d": null
-},
-{
-"date": "2026-09-25",
-"ticker": "CDE",
-"kind": "long",
-"price": 18.94,
-"conv": 58,
-"factors": {
-"discount": 30.2394,
-"histcheap": -0.03,
-"riskadj": 0.02,
-"ddpen": -28.56,
-"momentum": 0.2107,
-"prob": 35,
-"quality": 77.5,
-"valcheap": -1.2287,
-"trappen": 3
-},
-"ret_5d": -6.63,
-"ret_21d": null
-},
-{
-"date": "2026-09-25",
 "ticker": "SMCI",
 "kind": "long",
 "price": 41.51,
@@ -40297,6 +40235,66 @@
 "rebound": -9.1302,
 "trend": 1.0,
 "relstrength": 0.6239
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-03",
+"ticker": "MU",
+"kind": "long",
+"price": 1097.39,
+"conv": 49,
+"factors": {
+"discount": 9.5727,
+"histcheap": -1.6,
+"riskadj": 3.51,
+"ddpen": -13.39,
+"momentum": -1.5603,
+"prob": 31,
+"quality": 83.1,
+"valcheap": -2.0717,
+"trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-03",
+"ticker": "MAAS",
+"kind": "long",
+"price": 15.81,
+"conv": 20,
+"factors": {
+"discount": 25.565,
+"histcheap": -1.2,
+"riskadj": 2.02,
+"ddpen": -13.82,
+"momentum": -12.6871,
+"prob": 19,
+"quality": 30.6,
+"valcheap": -1.9492,
+"trappen": -2
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-03",
+"ticker": "STX",
+"kind": "long",
+"price": 945.57,
+"conv": 34,
+"factors": {
+"discount": 13.5708,
+"histcheap": -1.39,
+"riskadj": 2.9,
+"ddpen": -13.49,
+"momentum": -4.3768,
+"prob": 44,
+"quality": 64.6,
+"valcheap": -2.4331,
+"trappen": 3
 },
 "ret_5d": null,
 "ret_21d": null
