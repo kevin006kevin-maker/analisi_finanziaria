@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:INTC:2026-08-25",
-"ticker": "INTC",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-25 16:41",
-"data": "2026-08-25 16:41",
-"prezzo": 88.5,
-"conv": 74,
-"prob_gain": 50,
-"prob_loss": 23,
-"reliab": "🔴 Bassa",
-"mkt": 3.1849,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 106.866,
-"media20": 95.5885,
-"quattro_atr": 113.0645,
-"meta_caduta": 114.72,
-"bollinger": 108.3111,
-"consigliata": 106.866
-},
-"stop": 76.2177,
-"atr": 6.1411,
-"res": {
-"7g": 0.22,
-"30g": 42.64,
-"soglia": 20.75
-},
-"res_soglia": {
-"media50": {
-"ret": 20.75,
-"toccato": true,
-"giorni": 23
-},
-"media20": {
-"ret": 8.01,
-"toccato": true,
-"giorni": 10
-},
-"quattro_atr": {
-"ret": 27.76,
-"toccato": true,
-"giorni": 27
-},
-"meta_caduta": {
-"ret": 29.63,
-"toccato": true,
-"giorni": 27
-},
-"bollinger": {
-"ret": 22.39,
-"toccato": true,
-"giorni": 23
-},
-"consigliata": {
-"ret": 20.75,
-"toccato": true,
-"giorni": 23
-}
-}
-},
-{
 "episodio": "long:DKS:2026-08-25",
 "ticker": "DKS",
 "kind": "long",
@@ -28342,6 +28278,26 @@
 "mkt": -0.3225,
 "fonte": "osservazione",
 "note": "prezzo salito di almeno il 2% da 33.5277",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "long:WDC:2026-10-02",
+"ticker": "WDC",
+"kind": "long",
+"evento": "salita_2pct",
+"scritto_il": "2026-10-03 03:31",
+"data": "2026-10-03 03:27",
+"prezzo": 462.56,
+"conv": 50,
+"prob_gain": 70,
+"prob_loss": 21,
+"reliab": "🔴 Bassa",
+"mkt": -0.3225,
+"fonte": "osservazione",
+"note": "prezzo salito di almeno il 2% da 413.61",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
