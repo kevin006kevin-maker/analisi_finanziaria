@@ -6145,7 +6145,6 @@
 "entry_check": "2026-10-03",
 "max_price": 267.58,
 "max_date": "2026-09-02 21:38",
-"incasso_notified": true,
 "warn_since": "2026-10-03",
 "warn": "in perdita da 42 giorni di Borsa: valuta l'uscita"
 },
@@ -10606,8 +10605,7 @@
 "max_date": "2026-09-24 22:29",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-03",
-"incasso_notified": true
+"entry_check": "2026-10-03"
 },
 "TTAN": {
 "kind": "short",
@@ -12154,7 +12152,17 @@
 "max_date": "2026-10-02 20:03",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-03"
+"entry_check": "2026-10-03",
+"incasso": {
+"gain": 15.9,
+"max": 50.35,
+"max_date": "2026-10-02 20:03",
+"giu_dal_max": 0.0,
+"motivo": "bersaglio 47.30 raggiunto (sei a +15.9%): valuta di incassare",
+"urgenza": "incassa",
+"tipo": "bersaglio"
+},
+"incasso_notified": true
 },
 "WING": {
 "kind": "short",
