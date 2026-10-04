@@ -12777,5 +12777,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "PTRN",
+"kind": "short",
+"date": "2026-10-04",
+"promo_price": 17.33,
+"obs_price": 18.04,
+"obs_date": "2026-09-24",
+"pre_price": 17.02,
+"pre_date": "2026-09-26",
+"conf_price": null,
+"conf_date": null,
+"target": 20.6852,
+"stop": 15.3821,
+"reliab": "🔴 Bassa",
+"prob_gain": 50,
+"prob_loss": 22,
+"conv": 66,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-24 19:05",
+"prezzo": 18.04,
+"conv": 68,
+"prob_gain": 54,
+"prob_loss": 20,
+"reliab": "🔴 Bassa",
+"mkt": 0.4711
+},
+"anticipo": {
+"data": "2026-09-26",
+"prezzo": 17.02,
+"conv": 71,
+"prob_gain": 53,
+"prob_loss": 23,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-04 10:48",
+"prezzo": 17.33,
+"conv": 66,
+"prob_gain": 50,
+"prob_loss": 22,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
