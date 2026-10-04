@@ -1,25 +1,5 @@
 [
 {
-"episodio": "long:CHTR:2026-08-20",
-"ticker": "CHTR",
-"kind": "long",
-"evento": "salita_2pct",
-"scritto_il": "2026-08-25 21:57",
-"data": "2026-08-25 21:57",
-"prezzo": 155.7375,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 152.47",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "long:ASO:2026-08-25",
 "ticker": "ASO",
 "kind": "long",
@@ -28292,5 +28272,32 @@
 },
 "stop": 20.4398,
 "atr": 1.3801
+},
+{
+"episodio": "short:MONC.MI:2026-09-10",
+"ticker": "MONC.MI",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-05 00:02",
+"data": "2026-10-03 14:30",
+"prezzo": 43.7,
+"conv": 76,
+"prob_gain": 47,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-05",
+"soglie": {
+"media50": 46.682,
+"media20": 44.2045,
+"quattro_atr": 48.3931,
+"meta_caduta": 47.99,
+"bollinger": 45.8676,
+"consigliata": 46.682
+},
+"stop": 41.3534,
+"atr": 1.1733
 }
 ]
