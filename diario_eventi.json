@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:XPEV:2026-08-24",
-"ticker": "XPEV",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-08-25 17:39",
-"data": "2026-08-25 17:38",
-"prezzo": 11.425,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 11.19",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "long:XPEV:2026-08-24",
 "ticker": "XPEV",
 "kind": "long",
@@ -28312,5 +28292,32 @@
 },
 "stop": 6.3838,
 "atr": 0.3281
+},
+{
+"episodio": "short:XENE:2026-09-18",
+"ticker": "XENE",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-04 10:48",
+"data": "2026-10-04 10:48",
+"prezzo": 38.02,
+"conv": 78,
+"prob_gain": 52,
+"prob_loss": 10,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 56.4302,
+"media20": 47.0905,
+"quattro_atr": 47.5728,
+"meta_caduta": 53.47,
+"bollinger": 67.9371,
+"consigliata": 47.5728
+},
+"stop": 33.2436,
+"atr": 2.3882
 }
 ]
