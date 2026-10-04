@@ -16183,5 +16183,37 @@
 "max_date": "2026-10-04 10:47",
 "auto": true,
 "notified": false
+},
+"XENE": {
+"kind": "short",
+"added": "2026-10-04",
+"note": "🤖 Promossa il 2026-10-04: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +3.5% e la convenienza (75) regge.",
+"name": "XENE",
+"snapshots": [
+{
+"name": "XENE",
+"price": 38.02,
+"rsi": 24.2855,
+"dd_high": -46.4205,
+"occasione": 51,
+"convenienza": 78,
+"prob_gain": 52,
+"prob_loss": 10,
+"exp_ret": 0.6,
+"gain": 48.4224,
+"reliab": "🔴 Bassa",
+"target": 56.4302,
+"stop": 33.2436,
+"date": "2026-10-04 10:48"
+}
+],
+"entry_price": 38.02,
+"entry_target": 56.4302,
+"entry_stop": 33.2436,
+"entry_conv": 78,
+"entry_date": "2026-10-04 10:48",
+"entry_src": "scatto",
+"max_price": 38.02,
+"max_date": "2026-10-04 10:48"
 }
 }
