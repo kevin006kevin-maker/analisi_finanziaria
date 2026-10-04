@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:PUMP:2026-08-26",
-"ticker": "PUMP",
-"kind": "short",
-"evento": "uscita",
-"scritto_il": "2026-08-26 00:24",
-"data": "2026-08-26 00:24",
-"prezzo": 10.6,
-"conv": 69,
-"prob_gain": 44,
-"prob_loss": 24,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "in perdita da 15 giorni di Borsa: valuta l'uscita",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:SION:2026-08-26",
 "ticker": "SION",
 "kind": "short",
@@ -28258,5 +28238,32 @@
 },
 "stop": 6.2338,
 "atr": 0.3931
+},
+{
+"episodio": "short:RELY:2026-09-23",
+"ticker": "RELY",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-05 00:02",
+"data": "2026-10-03 09:08",
+"prezzo": 21.77,
+"conv": 58,
+"prob_gain": 52,
+"prob_loss": 18,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-05",
+"soglie": {
+"media50": 23.8367,
+"media20": 22.1205,
+"quattro_atr": 25.7295,
+"meta_caduta": 24.345,
+"bollinger": 24.8627,
+"consigliata": 23.8367
+},
+"stop": 19.7903,
+"atr": 0.9899
 }
 ]
