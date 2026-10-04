@@ -1,47 +1,5 @@
 [
 {
-"episodio": "long:HBM:2026-08-17",
-"ticker": "HBM",
-"kind": "long",
-"evento": "fine_osservazione",
-"scritto_il": "2026-08-26 00:24",
-"data": "2026-08-25 23:02",
-"prezzo": 30.79,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-08-26",
-"soglie": {
-"media50": null,
-"media20": null,
-"quattro_atr": 36.3569,
-"meta_caduta": 31.33,
-"bollinger": 31.4796,
-"consigliata": 36.3569
-},
-"stop": 28.0066,
-"atr": 1.3917,
-"soglie_contaminate": {
-"media50": null,
-"media20": null,
-"quattro_atr": 36.3567,
-"meta_caduta": 31.33,
-"bollinger": 31.4796,
-"consigliata": 36.3567
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": -11.12,
-"30g": -14.19
-},
-"taglio_corretto": true
-},
-{
 "episodio": "long:MNSO:2026-08-17",
 "ticker": "MNSO",
 "kind": "long",
@@ -28253,5 +28211,32 @@
 },
 "stop": 60.2602,
 "atr": 2.5499
+},
+{
+"episodio": "short:DKNG:2026-09-30",
+"ticker": "DKNG",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-05 00:03",
+"data": "2026-10-03 09:05",
+"prezzo": 18.59,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-05",
+"soglie": {
+"media50": 23.5454,
+"media20": 22.2015,
+"quattro_atr": 23.2172,
+"meta_caduta": 22.5325,
+"bollinger": 26.202,
+"consigliata": 23.2172
+},
+"stop": 16.2764,
+"atr": 1.1568
 }
 ]
