@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:FRVO:2026-08-24",
-"ticker": "FRVO",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-08-25 17:39",
-"data": "2026-08-25 17:38",
-"prezzo": 16.25,
-"conv": 69,
-"prob_gain": 51,
-"prob_loss": 18,
-"reliab": "🔴 Bassa",
-"mkt": 3.2503,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 15.615",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:XPEV:2026-08-24",
 "ticker": "XPEV",
 "kind": "short",
@@ -28305,5 +28285,32 @@
 },
 "stop": 4.7727,
 "atr": 0.1686
+},
+{
+"episodio": "short:ADTN:2026-10-04",
+"ticker": "ADTN",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-04 10:48",
+"data": "2026-10-04 10:48",
+"prezzo": 7.04,
+"conv": 67,
+"prob_gain": 49,
+"prob_loss": 20,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 7.7216,
+"media20": 7.1205,
+"quattro_atr": 8.3524,
+"meta_caduta": 10.24,
+"bollinger": 7.5141,
+"consigliata": 7.7216
+},
+"stop": 6.3838,
+"atr": 0.3281
 }
 ]
