@@ -12606,5 +12606,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "XENE",
+"kind": "short",
+"date": "2026-10-04",
+"promo_price": 38.02,
+"obs_price": 40.25,
+"obs_date": "2026-09-18",
+"pre_price": 39.75,
+"pre_date": "2026-09-21",
+"conf_price": null,
+"conf_date": null,
+"target": 56.4302,
+"stop": 33.2436,
+"reliab": "🔴 Bassa",
+"prob_gain": 52,
+"prob_loss": 10,
+"conv": 78,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-18 16:59",
+"prezzo": 40.25,
+"conv": 83,
+"prob_gain": 56,
+"prob_loss": 1,
+"reliab": "🔴 Bassa",
+"mkt": -0.1712
+},
+"anticipo": {
+"data": "2026-09-21",
+"prezzo": 39.75,
+"conv": 82,
+"prob_gain": 55,
+"prob_loss": 1,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-04 10:48",
+"prezzo": 38.02,
+"conv": 78,
+"prob_gain": 52,
+"prob_loss": 10,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
