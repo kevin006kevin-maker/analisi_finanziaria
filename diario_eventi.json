@@ -1,25 +1,5 @@
 [
 {
-"episodio": "long:BBD:2026-08-16",
-"ticker": "BBD",
-"kind": "long",
-"evento": "salita_2pct",
-"scritto_il": "2026-08-25 20:40",
-"data": "2026-08-25 20:39",
-"prezzo": 3.205,
-"conv": 67,
-"prob_gain": 66,
-"prob_loss": 19,
-"reliab": "🟢 Alta",
-"mkt": 3.2665,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 3.14",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "long:LDO.MI:2026-08-25",
 "ticker": "LDO.MI",
 "kind": "long",
@@ -28296,5 +28276,25 @@
 },
 "stop": 15.3821,
 "atr": 0.974
+},
+{
+"episodio": "short:MTZ:2026-09-17",
+"ticker": "MTZ",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-10-05 00:01",
+"data": "2026-10-05 00:01",
+"prezzo": 215.93,
+"conv": 72,
+"prob_gain": 50,
+"prob_loss": 15,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "in perdita da 9 giorni di Borsa: valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
