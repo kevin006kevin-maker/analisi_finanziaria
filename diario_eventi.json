@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:TE:2026-08-21",
-"ticker": "TE",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-08-25 19:29",
-"data": "2026-08-25 19:27",
-"prezzo": 4.7382,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 4.5828",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:DY:2026-08-25",
 "ticker": "DY",
 "kind": "short",
@@ -28326,5 +28306,32 @@
 },
 "stop": 38.416,
 "atr": 1.997
+},
+{
+"episodio": "short:ERAS:2026-09-23",
+"ticker": "ERAS",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-04 10:48",
+"data": "2026-10-04 10:48",
+"prezzo": 14.74,
+"conv": 63,
+"prob_gain": 52,
+"prob_loss": 22,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 16.9101,
+"media20": 15.1793,
+"quattro_atr": 18.6897,
+"meta_caduta": 18.0,
+"bollinger": 16.7617,
+"consigliata": 16.9101
+},
+"stop": 12.7651,
+"atr": 0.9874
 }
 ]
