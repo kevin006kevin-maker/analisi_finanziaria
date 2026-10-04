@@ -12663,5 +12663,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "PLNT",
+"kind": "short",
+"date": "2026-10-04",
+"promo_price": 42.41,
+"obs_price": 42.325,
+"obs_date": "2026-09-22",
+"pre_price": 42.6,
+"pre_date": "2026-09-23",
+"conf_price": null,
+"conf_date": null,
+"target": 50.1216,
+"stop": 38.416,
+"reliab": "🟡 Media",
+"prob_gain": 56,
+"prob_loss": 10,
+"conv": 71,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-22 19:46",
+"prezzo": 42.325,
+"conv": 73,
+"prob_gain": 56,
+"prob_loss": 7,
+"reliab": "🟡 Media",
+"mkt": 1.477
+},
+"anticipo": {
+"data": "2026-09-23",
+"prezzo": 42.6,
+"conv": 71,
+"prob_gain": 56,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-04 10:48",
+"prezzo": 42.41,
+"conv": 71,
+"prob_gain": 56,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
