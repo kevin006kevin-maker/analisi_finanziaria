@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:GOF:2026-08-21",
-"ticker": "GOF",
-"kind": "short",
-"evento": "promozione",
-"scritto_il": "2026-08-26 00:23",
-"data": "2026-08-26 00:23",
-"prezzo": 9.63,
-"conv": 80,
-"prob_gain": 60,
-"prob_loss": 1,
-"reliab": "🟢 Alta",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": 10.5724,
-"media20": 10.3115,
-"quattro_atr": 10.5656,
-"meta_caduta": 10.38,
-"bollinger": 11.141,
-"consigliata": 10.5656
-},
-"stop": 9.1622,
-"atr": 0.2339,
-"res": {
-"7g": -2.86,
-"30g": -11.89,
-"soglia": -11.89
-},
-"res_soglia": {
-"media50": {
-"ret": -11.89,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -11.89,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -11.89,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -11.89,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -11.89,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -11.89,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:PUMP:2026-08-26",
 "ticker": "PUMP",
 "kind": "short",
@@ -28295,5 +28231,32 @@
 },
 "stop": 4.3659,
 "atr": 0.237
+},
+{
+"episodio": "short:MBC:2026-09-23",
+"ticker": "MBC",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-05 00:02",
+"data": "2026-10-03 09:08",
+"prezzo": 7.02,
+"conv": 69,
+"prob_gain": 51,
+"prob_loss": 20,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-05",
+"soglie": {
+"media50": 8.186,
+"media20": 7.19,
+"quattro_atr": 8.5924,
+"meta_caduta": 8.25,
+"bollinger": 8.1743,
+"consigliata": 8.186
+},
+"stop": 6.2338,
+"atr": 0.3931
 }
 ]
