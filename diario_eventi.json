@@ -1,47 +1,5 @@
 [
 {
-"episodio": "long:SMCI:2026-08-17",
-"ticker": "SMCI",
-"kind": "long",
-"evento": "fine_osservazione",
-"scritto_il": "2026-08-26 00:24",
-"data": "2026-08-25 23:02",
-"prezzo": 38.46,
-"conv": 59,
-"prob_gain": 60,
-"prob_loss": 33,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-08-26",
-"soglie": {
-"media50": null,
-"media20": null,
-"quattro_atr": 48.7858,
-"meta_caduta": 44.315,
-"bollinger": 42.4928,
-"consigliata": 48.7858
-},
-"stop": 33.2971,
-"atr": 2.5815,
-"soglie_contaminate": {
-"media50": null,
-"media20": null,
-"quattro_atr": 48.7858,
-"meta_caduta": 44.315,
-"bollinger": 42.4928,
-"consigliata": 48.7858
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": -5.68,
-"30g": 7.46
-},
-"taglio_corretto": true
-},
-{
 "episodio": "long:STLAM.MI:2026-08-17",
 "ticker": "STLAM.MI",
 "kind": "long",
@@ -28208,5 +28166,32 @@
 },
 "stop": 25.3656,
 "atr": 0.7922
+},
+{
+"episodio": "short:LQDA:2026-09-30",
+"ticker": "LQDA",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-05 00:03",
+"data": "2026-10-04 10:45",
+"prezzo": 28.64,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-05",
+"soglie": {
+"media50": 71.975,
+"media20": 62.3995,
+"quattro_atr": 53.5811,
+"meta_caduta": 59.835,
+"bollinger": 91.476,
+"consigliata": 53.5811
+},
+"stop": 16.1695,
+"atr": 6.2353
 }
 ]
