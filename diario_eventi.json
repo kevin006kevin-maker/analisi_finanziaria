@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:DKS:2026-08-25",
-"ticker": "DKS",
-"kind": "long",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-08-26 03:02",
-"data": "2026-08-26 03:02",
-"prezzo": 124.31,
-"conv": 65,
-"prob_gain": 97,
-"prob_loss": 1,
-"reliab": "🟡 Media",
-"mkt": 3.3451,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 210.6688,
-"media20": 194.1215,
-"quattro_atr": 167.87,
-"meta_caduta": 181.74,
-"bollinger": 231.7044,
-"consigliata": 167.87
-},
-"stop": 102.53,
-"atr": 10.89,
-"res": {
-"7g": 10.73,
-"30g": 8.17
-}
-},
-{
 "episodio": "short:LDO.MI:2026-08-26",
 "ticker": "LDO.MI",
 "kind": "short",
@@ -28101,5 +28070,32 @@
 },
 "stop": 24.6032,
 "atr": 0.6984
+},
+{
+"episodio": "short:INSM:2026-10-05",
+"ticker": "INSM",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-05 17:58",
+"data": "2026-10-05 17:57",
+"prezzo": 103.61,
+"conv": 60,
+"prob_gain": 51,
+"prob_loss": 12,
+"reliab": "🔴 Bassa",
+"mkt": 0.5555,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 119.7496,
+"media20": 119.623,
+"quattro_atr": 124.8809,
+"meta_caduta": 119.18,
+"bollinger": 132.9111,
+"consigliata": 119.7496
+},
+"stop": 92.9746,
+"atr": 5.3177
 }
 ]
