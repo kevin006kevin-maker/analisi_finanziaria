@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:UMC:2026-08-17",
-"ticker": "UMC",
-"kind": "long",
-"evento": "promozione",
-"scritto_il": "2026-08-26 01:24",
-"data": "2026-08-26 01:24",
-"prezzo": 19.6,
-"conv": 66,
-"prob_gain": 61,
-"prob_loss": 29,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 7 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": 21.7416,
-"media20": null,
-"quattro_atr": 23.9608,
-"meta_caduta": 23.805,
-"bollinger": 20.353,
-"consigliata": 21.7416
-},
-"stop": 17.4196,
-"atr": 1.0902,
-"res": {
-"7g": 1.48,
-"30g": 23.49
-}
-},
-{
 "episodio": "long:DKS:2026-08-25",
 "ticker": "DKS",
 "kind": "long",
@@ -28105,5 +28074,32 @@
 },
 "stop": 100.694,
 "atr": 6.978
+},
+{
+"episodio": "short:MB.MI:2026-10-05",
+"ticker": "MB.MI",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-05 17:58",
+"data": "2026-10-05 17:57",
+"prezzo": 26.0,
+"conv": 74,
+"prob_gain": 59,
+"prob_loss": 4,
+"reliab": "🟢 Alta",
+"mkt": 0.5555,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 28.2476,
+"media20": 28.344,
+"quattro_atr": 28.7936,
+"meta_caduta": 27.525,
+"bollinger": 29.8053,
+"consigliata": 28.2476
+},
+"stop": 24.6032,
+"atr": 0.6984
 }
 ]
