@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:GOF:2026-08-21",
-"ticker": "GOF",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-08-26 00:25",
-"data": "2026-08-26 00:23",
-"prezzo": 9.63,
-"conv": 80,
-"prob_gain": 60,
-"prob_loss": 1,
-"reliab": "🟢 Alta",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-08-26",
-"soglie": {
-"media50": 10.5724,
-"media20": 10.3115,
-"quattro_atr": 10.5656,
-"meta_caduta": 10.38,
-"bollinger": 11.141,
-"consigliata": 10.5656
-},
-"stop": 9.1622,
-"atr": 0.2339,
-"res": {
-"7g": -2.86,
-"30g": -11.89,
-"soglia": -11.89
-},
-"res_soglia": {
-"media50": {
-"ret": -11.89,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -11.89,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -11.89,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -11.89,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -11.89,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -11.89,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:OI:2026-08-21",
 "ticker": "OI",
 "kind": "short",
@@ -28322,5 +28258,32 @@
 },
 "stop": 16.9444,
 "atr": 0.7878
+},
+{
+"episodio": "long:CTVA:2026-10-02",
+"ticker": "CTVA",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-05 09:02",
+"data": "2026-10-05 09:01",
+"prezzo": 11.92,
+"conv": 67,
+"prob_gain": 97,
+"prob_loss": 2,
+"reliab": "🔴 Bassa",
+"mkt": -0.3225,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 78.8592,
+"media20": 74.5745,
+"quattro_atr": 37.4873,
+"meta_caduta": 51.215,
+"bollinger": 117.5869,
+"consigliata": 37.4873
+},
+"stop": null,
+"atr": 6.3918
 }
 ]
