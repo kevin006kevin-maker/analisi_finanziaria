@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:ENVX:2026-08-19",
-"ticker": "ENVX",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-08-27 22:42",
-"data": "2026-08-27 22:40",
-"prezzo": 3.59,
-"conv": 64,
-"prob_gain": 47,
-"prob_loss": 26,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "prezzo salito di almeno il 2% da 3.365",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:INTC:2026-08-25",
 "ticker": "INTC",
 "kind": "short",
@@ -28997,5 +28977,32 @@
 },
 "stop": 12.1251,
 "atr": 0.7074
+},
+{
+"episodio": "short:NWG:2026-10-01",
+"ticker": "NWG",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-06 00:39",
+"data": "2026-10-06 00:35",
+"prezzo": 17.5,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-06",
+"soglie": {
+"media50": 18.5916,
+"media20": 18.362,
+"quattro_atr": 19.1211,
+"meta_caduta": 18.46,
+"bollinger": 19.2625,
+"consigliata": 18.5916
+},
+"stop": 16.6894,
+"atr": 0.4053
 }
 ]
