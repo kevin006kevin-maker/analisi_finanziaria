@@ -8890,5 +8890,47 @@
 "7g": -11.5,
 "30g": -7.64
 }
+},
+{
+"episodio": "long:FSM:2026-08-18",
+"ticker": "FSM",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-08-27 02:06",
+"data": "2026-08-26 22:31",
+"prezzo": 12.41,
+"conv": 54,
+"prob_gain": 58,
+"prob_loss": 30,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-08-27",
+"soglie": {
+"media50": null,
+"media20": null,
+"quattro_atr": 14.3326,
+"meta_caduta": 12.43,
+"bollinger": 13.135,
+"consigliata": 14.3326
+},
+"stop": 11.4487,
+"atr": 0.4807,
+"soglie_contaminate": {
+"media50": null,
+"media20": null,
+"quattro_atr": 14.3312,
+"meta_caduta": 12.43,
+"bollinger": 13.135,
+"consigliata": 14.3312
+},
+"soglie_ricalcolate_il": "2026-09-14 21:39",
+"soglie_ritardo_giorni": 1,
+"res": {
+"7g": -2.14,
+"30g": -7.53
+},
+"taglio_corretto": true
 }
 ]
