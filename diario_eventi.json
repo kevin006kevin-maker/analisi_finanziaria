@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:DY:2026-08-26",
-"ticker": "DY",
-"kind": "long",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-26 15:53",
-"data": "2026-08-26 15:53",
-"prezzo": 322.44,
-"conv": 62,
-"prob_gain": 82,
-"prob_loss": 9,
-"reliab": "🟡 Media",
-"mkt": 4.9542,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 425.0286,
-"media20": 400.2885,
-"quattro_atr": 408.7701,
-"meta_caduta": 414.62,
-"bollinger": 449.5066,
-"consigliata": 408.7701
-},
-"stop": 279.2749,
-"atr": 21.5825,
-"res": {
-"7g": -8.01,
-"30g": -14.7
-}
-},
-{
 "episodio": "short:DY:2026-08-25",
 "ticker": "DY",
 "kind": "short",
@@ -28065,5 +28034,32 @@
 },
 "stop": 14.1043,
 "atr": 0.3903
+},
+{
+"episodio": "short:UCG.MI:2026-10-02",
+"ticker": "UCG.MI",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-05 18:00",
+"data": "2026-10-02 14:31",
+"prezzo": 77.15,
+"conv": 68,
+"prob_gain": 53,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 83.5112,
+"media20": 83.1255,
+"quattro_atr": 84.9534,
+"meta_caduta": 81.65,
+"bollinger": 86.3744,
+"consigliata": 83.5112
+},
+"stop": 73.2483,
+"atr": 1.9509
 }
 ]
