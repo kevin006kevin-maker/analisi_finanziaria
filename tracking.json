@@ -11367,5 +11367,37 @@
 "max_date": "2026-10-05 09:02",
 "auto": true,
 "notified": false
+},
+"ALKS": {
+"kind": "short",
+"added": "2026-10-05",
+"note": "🤖 Promossa il 2026-10-05: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.3% e la convenienza (60) regge.",
+"name": "ALKS",
+"snapshots": [
+{
+"name": "ALKS",
+"price": 41.75,
+"rsi": 37.0293,
+"dd_high": -24.3933,
+"occasione": 64,
+"convenienza": 69,
+"prob_gain": 46,
+"prob_loss": 9,
+"exp_ret": -1.6,
+"gain": 12.4565,
+"reliab": "🟡 Media",
+"target": 46.9506,
+"stop": 38.8122,
+"date": "2026-10-05 09:02"
+}
+],
+"entry_price": 41.75,
+"entry_target": 46.9506,
+"entry_stop": 38.8122,
+"entry_conv": 69,
+"entry_date": "2026-10-05 09:02",
+"entry_src": "scatto",
+"max_price": 41.75,
+"max_date": "2026-10-05 09:02"
 }
 }
