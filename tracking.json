@@ -6055,9 +6055,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-10-05",
 "max_price": 35.405,
-"max_date": "2026-08-25 21:57",
-"warn_since": "2026-10-03",
-"warn": "in perdita da 37 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-08-25 21:57"
 },
 "TDS": {
 "kind": "short",
@@ -6884,9 +6882,7 @@
 "max_date": "2026-09-03 15:46",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-05",
-"warn_since": "2026-09-26",
-"warn": "in perdita da 28 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-05"
 },
 "INTR": {
 "kind": "long",
@@ -7081,9 +7077,7 @@
 "max_date": "2026-10-05 18:02",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-05",
-"warn_since": "2026-09-23",
-"warn": "in perdita da 28 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-05"
 },
 "UMC": {
 "kind": "long",
@@ -9992,7 +9986,9 @@
 "max_date": "2026-09-25 23:51",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-05"
+"entry_check": "2026-10-05",
+"warn_since": "2026-10-05",
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "LPLA": {
 "kind": "short",
@@ -10138,10 +10134,8 @@
 "max_price": 328.77,
 "max_date": "2026-10-05 18:02",
 "auto": true,
-"notified": false,
-"entry_check": "2026-10-05",
-"warn_since": "2026-10-02",
-"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
+"notified": true,
+"entry_check": "2026-10-05"
 },
 "ENOV": {
 "kind": "short",
@@ -11178,7 +11172,9 @@
 "max_date": "2026-09-30 19:14",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-05"
+"entry_check": "2026-10-05",
+"warn_since": "2026-10-05",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "MONC.MI": {
 "kind": "short",
@@ -11752,7 +11748,9 @@
 "max_date": "2026-10-02 20:03",
 "auto": true,
 "notified": false,
-"entry_check": "2026-10-05"
+"entry_check": "2026-10-05",
+"warn_since": "2026-10-05",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "GIL": {
 "kind": "short",
@@ -12927,7 +12925,7 @@
 "max_price": 21.5,
 "max_date": "2026-10-05 18:02",
 "auto": true,
-"notified": false,
+"notified": true,
 "entry_check": "2026-10-05"
 },
 "ITG": {
