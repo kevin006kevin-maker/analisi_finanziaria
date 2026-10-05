@@ -29082,7 +29082,18 @@
 },
 "stop": 14.1043,
 "atr": 0.3903,
-"res": {}
+"res": {},
+"soglie_contaminate": {
+"media50": 16.2495,
+"media20": 16.0582,
+"quattro_atr": 16.4463,
+"meta_caduta": 16.0325,
+"bollinger": 16.6836,
+"consigliata": 16.2495
+},
+"soglie_ricalcolate_il": "2026-10-05 18:05",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 3
 },
 {
 "episodio": "short:UCG.MI:2026-10-02",
@@ -29110,7 +29121,18 @@
 },
 "stop": 73.2483,
 "atr": 1.9509,
-"res": {}
+"res": {},
+"soglie_contaminate": {
+"media50": 83.5112,
+"media20": 83.1255,
+"quattro_atr": 84.9534,
+"meta_caduta": 81.65,
+"bollinger": 86.3744,
+"consigliata": 83.5112
+},
+"soglie_ricalcolate_il": "2026-10-05 18:05",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 3
 },
 {
 "episodio": "short:MWA:2026-09-17",
