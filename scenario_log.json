@@ -13685,7 +13685,45 @@
 "prob_gain": null,
 "prob_loss": null,
 "conv": 64,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-10-01 16:46",
+"prezzo": 17.235,
+"conv": 64,
+"prob_gain": 52,
+"prob_loss": 3,
+"reliab": "🟢 Alta",
+"mkt": -0.2598
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-06",
+"prezzo": 17.5,
+"conv": 64,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "XLF",
@@ -13706,6 +13744,44 @@
 "prob_gain": null,
 "prob_loss": null,
 "conv": 66,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-10-01 16:46",
+"prezzo": 52.9899,
+"conv": 63,
+"prob_gain": 50,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -0.2598
+},
+"anticipo": {
+"data": "2026-10-02",
+"prezzo": 53.4,
+"conv": 65,
+"prob_gain": 55,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-06",
+"prezzo": 53.88,
+"conv": 66,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 }
 ]
