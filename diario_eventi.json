@@ -1,47 +1,5 @@
 [
 {
-"episodio": "long:FSM:2026-08-18",
-"ticker": "FSM",
-"kind": "long",
-"evento": "fine_osservazione",
-"scritto_il": "2026-08-27 02:06",
-"data": "2026-08-26 22:31",
-"prezzo": 12.41,
-"conv": 54,
-"prob_gain": 58,
-"prob_loss": 30,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-08-27",
-"soglie": {
-"media50": null,
-"media20": null,
-"quattro_atr": 14.3326,
-"meta_caduta": 12.43,
-"bollinger": 13.135,
-"consigliata": 14.3326
-},
-"stop": 11.4487,
-"atr": 0.4807,
-"soglie_contaminate": {
-"media50": null,
-"media20": null,
-"quattro_atr": 14.3312,
-"meta_caduta": 12.43,
-"bollinger": 13.135,
-"consigliata": 14.3312
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": -2.14,
-"30g": -7.53
-},
-"taglio_corretto": true
-},
-{
 "episodio": "short:CVRX:2026-08-24",
 "ticker": "CVRX",
 "kind": "short",
@@ -29260,5 +29218,32 @@
 },
 "stop": 4.6824,
 "atr": 0.2488
+},
+{
+"episodio": "short:GIL:2026-09-24",
+"ticker": "GIL",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-06 00:39",
+"data": "2026-10-06 00:38",
+"prezzo": 40.68,
+"conv": 82,
+"prob_gain": 53,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-06",
+"soglie": {
+"media50": 50.9954,
+"media20": 45.239,
+"quattro_atr": 47.7817,
+"meta_caduta": 49.595,
+"bollinger": 51.9634,
+"consigliata": 47.7817
+},
+"stop": 37.1291,
+"atr": 1.7754
 }
 ]
