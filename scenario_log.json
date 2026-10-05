@@ -12854,7 +12854,45 @@
 "prob_gain": 51,
 "prob_loss": 10,
 "conv": 64,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-09-29 17:05",
+"prezzo": 3.405,
+"conv": 64,
+"prob_gain": 49,
+"prob_loss": 9,
+"reliab": "🟡 Media",
+"mkt": -0.1905
+},
+"anticipo": {
+"data": "2026-10-03",
+"prezzo": 3.4,
+"conv": 66,
+"prob_gain": 53,
+"prob_loss": 7,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-05",
+"prezzo": 3.37,
+"conv": 64,
+"prob_gain": 51,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "PIPR",
@@ -12875,7 +12913,45 @@
 "prob_gain": 52,
 "prob_loss": 3,
 "conv": 70,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-09-30 01:41",
+"prezzo": 64.72,
+"conv": 68,
+"prob_gain": 55,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": -0.1991
+},
+"anticipo": {
+"data": "2026-10-01",
+"prezzo": 64.72,
+"conv": 77,
+"prob_gain": 55,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-05",
+"prezzo": 65.36,
+"conv": 70,
+"prob_gain": 52,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "MTG",
@@ -12896,7 +12972,45 @@
 "prob_gain": 55,
 "prob_loss": 2,
 "conv": 67,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-09-30 19:01",
+"prezzo": 26.74,
+"conv": 75,
+"prob_gain": 60,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": 1.0504
+},
+"anticipo": {
+"data": "2026-10-01",
+"prezzo": 25.94,
+"conv": 79,
+"prob_gain": 61,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-05",
+"prezzo": 26.95,
+"conv": 67,
+"prob_gain": 55,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "LQDA",
@@ -12917,6 +13031,44 @@
 "prob_gain": 65,
 "prob_loss": 11,
 "conv": 78,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-09-30 23:25",
+"prezzo": 30.26,
+"conv": 77,
+"prob_gain": 62,
+"prob_loss": 12,
+"reliab": "🔴 Bassa",
+"mkt": 0.2895
+},
+"anticipo": {
+"data": "2026-10-01",
+"prezzo": 30.26,
+"conv": 77,
+"prob_gain": 62,
+"prob_loss": 12,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-05",
+"prezzo": 28.64,
+"conv": 78,
+"prob_gain": 65,
+"prob_loss": 11,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 }
 ]
