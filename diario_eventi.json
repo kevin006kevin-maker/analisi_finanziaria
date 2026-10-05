@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:INTC:2026-08-25",
-"ticker": "INTC",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-08-27 22:42",
-"data": "2026-08-27 22:39",
-"prezzo": 92.09,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 88.5",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:BURL:2026-08-28",
 "ticker": "BURL",
 "kind": "short",
@@ -29004,5 +28984,32 @@
 },
 "stop": 16.6894,
 "atr": 0.4053
+},
+{
+"episodio": "short:XLF:2026-10-01",
+"ticker": "XLF",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-06 00:39",
+"data": "2026-10-06 00:35",
+"prezzo": 53.88,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-06",
+"soglie": {
+"media50": 56.7624,
+"media20": 55.3535,
+"quattro_atr": 56.683,
+"meta_caduta": 56.22,
+"bollinger": 58.1417,
+"consigliata": 56.683
+},
+"stop": 52.4785,
+"atr": 0.7008
 }
 ]
