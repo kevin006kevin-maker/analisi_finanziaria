@@ -1,47 +1,5 @@
 [
 {
-"episodio": "long:STUB:2026-08-17",
-"ticker": "STUB",
-"kind": "long",
-"evento": "fine_osservazione",
-"scritto_il": "2026-08-26 00:24",
-"data": "2026-08-25 23:02",
-"prezzo": 6.81,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-08-26",
-"soglie": {
-"media50": 9.7798,
-"media20": 8.0165,
-"quattro_atr": 8.8404,
-"meta_caduta": 10.25,
-"bollinger": 9.8948,
-"consigliata": 8.8404
-},
-"stop": 5.7948,
-"atr": 0.5076,
-"soglie_contaminate": {
-"media50": 9.7798,
-"media20": 8.0165,
-"quattro_atr": 8.839,
-"meta_caduta": 10.25,
-"bollinger": 9.8948,
-"consigliata": 8.839
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": -7.27,
-"30g": -22.69
-},
-"taglio_corretto": true
-},
-{
 "episodio": "long:T:2026-08-17",
 "ticker": "T",
 "kind": "long",
@@ -28356,5 +28314,32 @@
 },
 "stop": 51.4509,
 "atr": 1.1496
+},
+{
+"episodio": "short:G.MI:2026-10-02",
+"ticker": "G.MI",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-05 02:53",
+"data": "2026-10-05 02:51",
+"prezzo": 41.46,
+"conv": 72,
+"prob_gain": 55,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -0.3225,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 44.1034,
+"media20": 44.235,
+"quattro_atr": 44.8984,
+"meta_caduta": 43.825,
+"bollinger": 46.9012,
+"consigliata": 44.1034
+},
+"stop": 39.7408,
+"atr": 0.8596
 }
 ]
