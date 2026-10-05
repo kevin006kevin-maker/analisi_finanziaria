@@ -1,64 +1,5 @@
 [
 {
-"episodio": "short:OI:2026-08-21",
-"ticker": "OI",
-"kind": "short",
-"evento": "promozione",
-"scritto_il": "2026-08-26 15:54",
-"data": "2026-08-26 15:54",
-"prezzo": 7.615,
-"conv": 66,
-"prob_gain": 49,
-"prob_loss": 15,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": 8.3867,
-"media20": null,
-"quattro_atr": 9.2392,
-"meta_caduta": 8.8275,
-"bollinger": 7.8326,
-"consigliata": 8.3867
-},
-"stop": 6.8029,
-"atr": 0.406,
-"res": {
-"7g": -5.25,
-"30g": -23.44,
-"soglia": -23.44
-},
-"res_soglia": {
-"media50": {
-"ret": -23.44,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -23.44,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -23.44,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -23.44,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -23.44,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:AAL:2026-08-21",
 "ticker": "AAL",
 "kind": "short",
@@ -27987,5 +27928,32 @@
 },
 "stop": 55.2138,
 "atr": 3.2381
+},
+{
+"episodio": "short:PIPR:2026-09-30",
+"ticker": "PIPR",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-05 18:01",
+"data": "2026-10-05 18:01",
+"prezzo": 66.205,
+"conv": 79,
+"prob_gain": 51,
+"prob_loss": 2,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 73.9407,
+"media20": 71.6227,
+"quattro_atr": 76.2561,
+"meta_caduta": 72.3125,
+"bollinger": 79.6527,
+"consigliata": 73.9407
+},
+"stop": 61.1794,
+"atr": 2.5128
 }
 ]
