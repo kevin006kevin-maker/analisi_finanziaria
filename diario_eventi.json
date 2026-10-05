@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:CVRX:2026-08-24",
-"ticker": "CVRX",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-08-27 02:06",
-"data": "2026-08-26 22:30",
-"prezzo": 3.27,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-08-27",
-"soglie": {
-"media50": 4.5748,
-"media20": 3.6482,
-"quattro_atr": 4.8285,
-"meta_caduta": 4.605,
-"bollinger": 6.2109,
-"consigliata": 4.5748
-},
-"stop": 2.4907,
-"atr": 0.3896,
-"soglie_contaminate": {
-"media50": 4.5748,
-"media20": 3.6482,
-"quattro_atr": 4.8285,
-"meta_caduta": 4.605,
-"bollinger": 6.2109,
-"consigliata": 4.5748
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": -5.81,
-"30g": -21.1,
-"soglia": -21.1
-},
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": -21.1,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -21.1,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -21.1,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -21.1,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -21.1,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -21.1,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:FRVO:2026-08-24",
 "ticker": "FRVO",
 "kind": "short",
@@ -29245,5 +29170,32 @@
 },
 "stop": 37.1291,
 "atr": 1.7754
+},
+{
+"episodio": "long:ACAD:2026-09-25",
+"ticker": "ACAD",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-06 00:39",
+"data": "2026-10-06 00:36",
+"prezzo": 20.11,
+"conv": 65,
+"prob_gain": 80,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": 0.7171,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-06",
+"soglie": {
+"media50": 26.8556,
+"media20": 24.467,
+"quattro_atr": 23.8953,
+"meta_caduta": 25.34,
+"bollinger": 31.3257,
+"consigliata": 23.8953
+},
+"stop": 18.2174,
+"atr": 0.9463
 }
 ]
