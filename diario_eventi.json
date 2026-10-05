@@ -1,75 +1,5 @@
 [
 {
-"episodio": "short:OI:2026-08-21",
-"ticker": "OI",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-08-26 00:25",
-"data": "2026-08-25 23:01",
-"prezzo": 7.51,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-08-26",
-"soglie": {
-"media50": 8.4142,
-"media20": null,
-"quattro_atr": 9.1929,
-"meta_caduta": 8.775,
-"bollinger": 7.8505,
-"consigliata": 8.4142
-},
-"stop": 6.6685,
-"atr": 0.4207,
-"soglie_contaminate": {
-"media50": 8.4142,
-"media20": null,
-"quattro_atr": 9.1929,
-"meta_caduta": 8.775,
-"bollinger": 7.8505,
-"consigliata": 8.4142
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": -3.66,
-"30g": -21.24,
-"soglia": -21.24
-},
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": -21.24,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -21.24,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -21.24,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -21.24,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -21.24,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:TE:2026-08-21",
 "ticker": "TE",
 "kind": "short",
@@ -28285,5 +28215,32 @@
 },
 "stop": null,
 "atr": 6.3918
+},
+{
+"episodio": "short:KRMN:2026-10-05",
+"ticker": "KRMN",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-05 09:02",
+"data": "2026-10-05 09:02",
+"prezzo": 34.14,
+"conv": 66,
+"prob_gain": 52,
+"prob_loss": 25,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 45.2922,
+"media20": 35.1035,
+"quattro_atr": 44.1821,
+"meta_caduta": 48.15,
+"bollinger": 39.3981,
+"consigliata": 44.1821
+},
+"stop": 29.1189,
+"atr": 2.5105
 }
 ]
