@@ -13127,5 +13127,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "ALKS",
+"kind": "short",
+"date": "2026-10-05",
+"promo_price": 41.75,
+"obs_price": 43.8,
+"obs_date": "2026-09-18",
+"pre_price": 43.39,
+"pre_date": "2026-09-21",
+"conf_price": null,
+"conf_date": null,
+"target": 46.9506,
+"stop": 38.8122,
+"reliab": "🟡 Media",
+"prob_gain": 46,
+"prob_loss": 9,
+"conv": 69,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-18 20:23",
+"prezzo": 43.8,
+"conv": 72,
+"prob_gain": 48,
+"prob_loss": 7,
+"reliab": "🟡 Media",
+"mkt": -0.0839
+},
+"anticipo": {
+"data": "2026-09-21",
+"prezzo": 43.39,
+"conv": 77,
+"prob_gain": 47,
+"prob_loss": 7,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-05 09:02",
+"prezzo": 41.75,
+"conv": 69,
+"prob_gain": 46,
+"prob_loss": 9,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
