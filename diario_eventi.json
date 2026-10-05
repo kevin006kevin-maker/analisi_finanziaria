@@ -1,47 +1,5 @@
 [
 {
-"episodio": "long:T:2026-08-17",
-"ticker": "T",
-"kind": "long",
-"evento": "fine_osservazione",
-"scritto_il": "2026-08-26 00:25",
-"data": "2026-08-25 23:02",
-"prezzo": 25.77,
-"conv": 59,
-"prob_gain": 68,
-"prob_loss": 16,
-"reliab": "🟢 Alta",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-08-26",
-"soglie": {
-"media50": null,
-"media20": null,
-"quattro_atr": 28.0311,
-"meta_caduta": null,
-"bollinger": 26.0189,
-"consigliata": 28.0311
-},
-"stop": 24.6395,
-"atr": 0.5653,
-"soglie_contaminate": {
-"media50": null,
-"media20": null,
-"quattro_atr": 28.0311,
-"meta_caduta": 25.77,
-"bollinger": 26.0189,
-"consigliata": 28.0311
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": 0.97,
-"30g": -0.58
-},
-"taglio_corretto": true
-},
-{
 "episodio": "long:UMC:2026-08-17",
 "ticker": "UMC",
 "kind": "long",
@@ -28341,5 +28299,32 @@
 },
 "stop": 39.7408,
 "atr": 0.8596
+},
+{
+"episodio": "short:ISP.MI:2026-10-02",
+"ticker": "ISP.MI",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-05 02:54",
+"data": "2026-10-05 02:51",
+"prezzo": 6.328,
+"conv": 69,
+"prob_gain": 54,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -0.3225,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 6.7253,
+"media20": 6.6898,
+"quattro_atr": 6.8375,
+"meta_caduta": 6.6225,
+"bollinger": 6.9425,
+"consigliata": 6.7253
+},
+"stop": 6.0732,
+"atr": 0.1274
 }
 ]
