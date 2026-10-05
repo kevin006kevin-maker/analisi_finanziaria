@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:INTC:2026-08-25",
-"ticker": "INTC",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-08-26 01:23",
-"data": "2026-08-26 01:22",
-"prezzo": 87.48,
-"conv": 75,
-"prob_gain": 49,
-"prob_loss": 25,
-"reliab": "🔴 Bassa",
-"mkt": 3.3451,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 106.8456,
-"media20": 95.5375,
-"quattro_atr": 112.0445,
-"meta_caduta": 114.21,
-"bollinger": 108.3873,
-"consigliata": 106.8456
-},
-"stop": 75.1977,
-"atr": 6.1411,
-"res": {
-"7g": 2.95,
-"30g": 44.05,
-"soglia": 22.14
-},
-"res_soglia": {
-"media50": {
-"ret": 22.14,
-"toccato": true,
-"giorni": 22
-},
-"media20": {
-"ret": 9.21,
-"toccato": true,
-"giorni": 9
-},
-"quattro_atr": {
-"ret": 28.08,
-"toccato": true,
-"giorni": 26
-},
-"meta_caduta": {
-"ret": 30.56,
-"toccato": true,
-"giorni": 26
-},
-"bollinger": {
-"ret": 23.9,
-"toccato": true,
-"giorni": 22
-},
-"consigliata": {
-"ret": 22.14,
-"toccato": true,
-"giorni": 22
-}
-}
-},
-{
 "episodio": "long:UMC:2026-08-17",
 "ticker": "UMC",
 "kind": "long",
@@ -28142,5 +28078,32 @@
 },
 "stop": 20.078,
 "atr": 1.056
+},
+{
+"episodio": "short:SPHR:2026-10-05",
+"ticker": "SPHR",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-05 17:57",
+"data": "2026-10-05 17:57",
+"prezzo": 114.65,
+"conv": 78,
+"prob_gain": 57,
+"prob_loss": 9,
+"reliab": "🟡 Media",
+"mkt": 0.5555,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 147.6636,
+"media20": 138.8095,
+"quattro_atr": 142.562,
+"meta_caduta": 145.515,
+"bollinger": 154.4649,
+"consigliata": 142.562
+},
+"stop": 100.694,
+"atr": 6.978
 }
 ]
