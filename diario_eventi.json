@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:DY:2026-08-26",
-"ticker": "DY",
-"kind": "long",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-08-27 22:40",
-"data": "2026-08-27 22:40",
-"prezzo": 308.01,
-"conv": 68,
-"prob_gain": 85,
-"prob_loss": 8,
-"reliab": "🟡 Media",
-"mkt": 3.9324,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 421.5238,
-"media20": 394.255,
-"quattro_atr": 395.0396,
-"meta_caduta": 407.405,
-"bollinger": 460.6471,
-"consigliata": 395.0396
-},
-"stop": 264.4952,
-"atr": 21.7574,
-"res": {
-"7g": -3.8,
-"30g": -12.57
-}
-},
-{
 "episodio": "short:ENVX:2026-08-19",
 "ticker": "ENVX",
 "kind": "short",
@@ -29075,5 +29044,32 @@
 },
 "stop": 11.4046,
 "atr": 0.3727
+},
+{
+"episodio": "short:CTVA:2026-10-01",
+"ticker": "CTVA",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-06 00:39",
+"data": "2026-10-06 00:35",
+"prezzo": 12.39,
+"conv": 70,
+"prob_gain": 95,
+"prob_loss": 2,
+"reliab": "🔴 Bassa",
+"mkt": 0.7171,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-06",
+"soglie": {
+"media50": 77.322,
+"media20": 70.801,
+"quattro_atr": 36.3853,
+"meta_caduta": 51.45,
+"bollinger": 121.467,
+"consigliata": 36.3853
+},
+"stop": 0.3923,
+"atr": 5.9988
 }
 ]
