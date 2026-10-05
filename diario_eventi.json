@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:TE:2026-08-21",
-"ticker": "TE",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-08-26 00:25",
-"data": "2026-08-26 00:21",
-"prezzo": 4.65,
-"conv": 67,
-"prob_gain": 45,
-"prob_loss": 38,
-"reliab": "🔴 Bassa",
-"mkt": 3.3451,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-08-26",
-"soglie": {
-"media50": 6.4102,
-"media20": 4.8405,
-"quattro_atr": 6.9499,
-"meta_caduta": 8.345,
-"bollinger": 5.9492,
-"consigliata": 6.4102
-},
-"stop": 3.5,
-"atr": 0.575,
-"res": {
-"7g": -11.29,
-"30g": -18.06,
-"soglia": -18.06
-},
-"res_soglia": {
-"media50": {
-"ret": -18.06,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 4.1,
-"toccato": true,
-"giorni": 1
-},
-"quattro_atr": {
-"ret": -18.06,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -18.06,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -18.06,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -18.06,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:AAL:2026-08-21",
 "ticker": "AAL",
 "kind": "short",
@@ -28242,5 +28178,32 @@
 },
 "stop": 29.1189,
 "atr": 2.5105
+},
+{
+"episodio": "short:ALKS:2026-09-18",
+"ticker": "ALKS",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-05 09:02",
+"data": "2026-10-05 09:02",
+"prezzo": 41.75,
+"conv": 69,
+"prob_gain": 46,
+"prob_loss": 9,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 46.9506,
+"media20": 43.605,
+"quattro_atr": 47.6257,
+"meta_caduta": 47.36,
+"bollinger": 48.4552,
+"consigliata": 46.9506
+},
+"stop": 38.8122,
+"atr": 1.4689
 }
 ]
