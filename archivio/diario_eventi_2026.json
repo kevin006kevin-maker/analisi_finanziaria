@@ -9007,5 +9007,69 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:FRVO:2026-08-24",
+"ticker": "FRVO",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-08-27 02:07",
+"data": "2026-08-27 02:02",
+"prezzo": 15.44,
+"conv": 71,
+"prob_gain": 48,
+"prob_loss": 22,
+"reliab": "🔴 Bassa",
+"mkt": 4.9145,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-08-27",
+"soglie": {
+"media50": 24.7896,
+"media20": 20.2095,
+"quattro_atr": 23.8973,
+"meta_caduta": 27.705,
+"bollinger": 26.5079,
+"consigliata": 23.8973
+},
+"stop": 11.2114,
+"atr": 2.1143,
+"res": {
+"7g": 13.34,
+"30g": -7.93,
+"soglia": -7.93
+},
+"res_soglia": {
+"media50": {
+"ret": -7.93,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -7.93,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -7.93,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -7.93,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -7.93,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -7.93,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
