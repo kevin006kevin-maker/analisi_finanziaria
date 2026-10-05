@@ -13355,5 +13355,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "PIPR",
+"kind": "short",
+"date": "2026-10-05",
+"promo_price": 66.205,
+"obs_price": 64.72,
+"obs_date": "2026-09-30",
+"pre_price": 64.72,
+"pre_date": "2026-10-01",
+"conf_price": null,
+"conf_date": null,
+"target": 73.9407,
+"stop": 61.1795,
+"reliab": "🟡 Media",
+"prob_gain": 51,
+"prob_loss": 2,
+"conv": 79,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-30 01:41",
+"prezzo": 64.72,
+"conv": 68,
+"prob_gain": 55,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": -0.1991
+},
+"anticipo": {
+"data": "2026-10-01",
+"prezzo": 64.72,
+"conv": 77,
+"prob_gain": 55,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-05 18:01",
+"prezzo": 66.205,
+"conv": 79,
+"prob_gain": 51,
+"prob_loss": 2,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
