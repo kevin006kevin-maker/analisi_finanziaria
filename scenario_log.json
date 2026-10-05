@@ -13070,5 +13070,62 @@
 "mkt": null
 }
 }
+},
+{
+"ticker": "KRMN",
+"kind": "short",
+"date": "2026-10-05",
+"promo_price": 34.14,
+"obs_price": 36.66,
+"obs_date": "2026-09-09",
+"pre_price": 35.22,
+"pre_date": "2026-09-10",
+"conf_price": null,
+"conf_date": null,
+"target": 45.2922,
+"stop": 29.1189,
+"reliab": "🔴 Bassa",
+"prob_gain": 52,
+"prob_loss": 25,
+"conv": 66,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-09 17:00",
+"prezzo": 36.66,
+"conv": 72,
+"prob_gain": 54,
+"prob_loss": 25,
+"reliab": "🔴 Bassa",
+"mkt": -0.983
+},
+"anticipo": {
+"data": "2026-09-10",
+"prezzo": 35.22,
+"conv": 73,
+"prob_gain": 53,
+"prob_loss": 24,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-05 09:02",
+"prezzo": 34.14,
+"conv": 66,
+"prob_gain": 52,
+"prob_loss": 25,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
