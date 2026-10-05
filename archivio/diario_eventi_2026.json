@@ -8517,5 +8517,69 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:SEDG:2026-08-19",
+"ticker": "SEDG",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-08-26 15:54",
+"data": "2026-08-26 15:54",
+"prezzo": 32.3,
+"conv": 65,
+"prob_gain": 49,
+"prob_loss": 23,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 5 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 44.736,
+"media20": 34.226,
+"quattro_atr": 44.3329,
+"meta_caduta": 55.405,
+"bollinger": 45.0577,
+"consigliata": 44.3329
+},
+"stop": 26.2835,
+"atr": 3.0082,
+"res": {
+"7g": 2.63,
+"30g": 0.98,
+"soglia": 0.98
+},
+"res_soglia": {
+"media50": {
+"ret": 0.98,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": 5.96,
+"toccato": true,
+"giorni": 13
+},
+"quattro_atr": {
+"ret": 0.98,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": 0.98,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": 0.98,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": 0.98,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
