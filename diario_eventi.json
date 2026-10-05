@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:ADXN:2026-08-24",
-"ticker": "ADXN",
-"kind": "short",
-"evento": "promozione",
-"scritto_il": "2026-08-27 02:04",
-"data": "2026-08-27 02:04",
-"prezzo": 4.23,
-"conv": 72,
-"prob_gain": 52,
-"prob_loss": 9,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": 5.7232,
-"media20": 5.3757,
-"quattro_atr": 6.1196,
-"meta_caduta": 5.465,
-"bollinger": 6.7306,
-"consigliata": 5.7232
-},
-"stop": 3.2852,
-"atr": 0.4724,
-"res": {
-"7g": -13.48,
-"30g": -31.91,
-"soglia": -31.91
-},
-"res_soglia": {
-"media50": {
-"ret": -31.91,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -31.91,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -31.91,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -31.91,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -31.91,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -31.91,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "long:FN:2026-08-18",
 "ticker": "FN",
 "kind": "long",
@@ -29301,5 +29237,32 @@
 },
 "stop": 24.8388,
 "atr": 0.5806
+},
+{
+"episodio": "long:NESR:2026-09-29",
+"ticker": "NESR",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-06 00:37",
+"data": "2026-10-06 00:36",
+"prezzo": 24.08,
+"conv": 71,
+"prob_gain": 72,
+"prob_loss": 20,
+"reliab": "🟡 Media",
+"mkt": 0.7171,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 31.6422,
+"media20": 30.8143,
+"quattro_atr": 30.4595,
+"meta_caduta": 30.195,
+"bollinger": 37.8895,
+"consigliata": 30.4595
+},
+"stop": 20.8903,
+"atr": 1.5949
 }
 ]
