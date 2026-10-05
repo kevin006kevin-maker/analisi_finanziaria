@@ -13412,5 +13412,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "DKNG",
+"kind": "short",
+"date": "2026-10-05",
+"promo_price": 20.125,
+"obs_price": 19.59,
+"obs_date": "2026-09-30",
+"pre_price": 19.59,
+"pre_date": "2026-10-01",
+"conf_price": null,
+"conf_date": null,
+"target": 23.4877,
+"stop": 17.7445,
+"reliab": "🟡 Media",
+"prob_gain": 54,
+"prob_loss": 13,
+"conv": 71,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-30 01:41",
+"prezzo": 19.59,
+"conv": 61,
+"prob_gain": 55,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": -0.1991
+},
+"anticipo": {
+"data": "2026-10-01",
+"prezzo": 19.59,
+"conv": 71,
+"prob_gain": 52,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-05 18:01",
+"prezzo": 20.125,
+"conv": 71,
+"prob_gain": 54,
+"prob_loss": 13,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
