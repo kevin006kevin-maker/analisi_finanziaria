@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:BURL:2026-08-28",
-"ticker": "BURL",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-28 07:04",
-"data": "2026-08-28 07:04",
-"prezzo": 290.0,
-"conv": 89,
-"prob_gain": 56,
-"prob_loss": 5,
-"reliab": "🟡 Media",
-"mkt": 3.9443,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 340.5888,
-"media20": 346.093,
-"quattro_atr": 337.5291,
-"meta_caduta": 331.095,
-"bollinger": 392.5795,
-"consigliata": 337.5291
-},
-"stop": 266.2354,
-"atr": 11.8823,
-"res": {
-"7g": -9.33,
-"30g": -9.84,
-"soglia": -9.84
-},
-"res_soglia": {
-"media50": {
-"ret": -9.84,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -9.84,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -9.84,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -9.84,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -9.84,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -9.84,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:MNSO:2026-08-28",
 "ticker": "MNSO",
 "kind": "short",
@@ -29011,5 +28947,25 @@
 },
 "stop": 52.4785,
 "atr": 0.7008
+},
+{
+"episodio": "short:FUN:2026-10-02",
+"ticker": "FUN",
+"kind": "short",
+"evento": "salita_2pct",
+"scritto_il": "2026-10-06 00:39",
+"data": "2026-10-06 00:35",
+"prezzo": 12.13,
+"conv": 36,
+"prob_gain": 57,
+"prob_loss": 18,
+"reliab": "🔴 Bassa",
+"mkt": 0.7171,
+"fonte": "osservazione",
+"note": "prezzo salito di almeno il 2% da 11.5999",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
