@@ -2,17 +2,17 @@
 "_audit": {
 "short": {
 "versione": 2,
-"data": "2026-10-05",
+"data": "2026-10-06",
 "adottati": true,
-"righe": 1728,
+"righe": 1986,
 "giorni": 17,
-"scartate_frazionamenti": 123,
+"scartate_frazionamenti": 132,
 "confine": "2026-09-01",
 "righe_train": 1301,
-"righe_verifica": 427,
-"ordina_meglio_appresi": 0.1562,
-"ordina_meglio_a_mano": 0.0864,
-"asticella": 0.0964,
+"righe_verifica": 685,
+"ordina_meglio_appresi": 0.2425,
+"ordina_meglio_a_mano": 0.0247,
+"asticella": 0.0347,
 "esito": "adottati: ordinano meglio dei pesi a mano",
 "quota_appresa": 0.6,
 "fattori_spenti": [
@@ -21,45 +21,45 @@
 },
 "long": {
 "versione": 2,
-"data": "2026-10-05",
+"data": "2026-10-06",
 "adottati": true,
-"righe": 938,
+"righe": 1086,
 "giorni": 17,
-"scartate_frazionamenti": 19,
+"scartate_frazionamenti": 20,
 "confine": "2026-09-01",
 "righe_train": 719,
-"righe_verifica": 219,
-"ordina_meglio_appresi": 0.3153,
-"ordina_meglio_a_mano": 0.2528,
-"asticella": 0.2628,
+"righe_verifica": 367,
+"ordina_meglio_appresi": 0.2511,
+"ordina_meglio_a_mano": 0.0292,
+"asticella": 0.0392,
 "esito": "adottati: ordinano meglio dei pesi a mano",
 "quota_appresa": 0.6,
 "fattori_spenti": [
-"trappen"
+"prob"
 ]
 }
 },
 "short": {
-"oversold": 0.34,
-"rebound": 0.211,
-"momentum": 0.788,
-"discount": 0.298,
-"riskadj": 0.715,
-"ddpen": 1.135,
-"histcheap": 0.19,
-"trend": 0.234,
+"oversold": 0.291,
+"rebound": 0.27,
+"momentum": 0.726,
+"discount": 0.498,
+"riskadj": 0.508,
+"ddpen": 1.28,
+"histcheap": 0.126,
+"trend": 0.254,
 "prob": 0.0,
-"relstrength": 0.485
+"relstrength": 0.455
 },
 "long": {
-"quality": 0.645,
-"valcheap": 0.301,
-"discount": 0.319,
-"histcheap": 0.932,
-"riskadj": 1.495,
-"ddpen": 0.389,
-"momentum": 0.181,
-"prob": 0.123,
-"trappen": 0.0
+"quality": 0.518,
+"valcheap": 0.375,
+"discount": 0.193,
+"histcheap": 1.068,
+"riskadj": 1.488,
+"ddpen": 0.376,
+"momentum": 0.077,
+"prob": 0.0,
+"trappen": 0.016
 }
 }
