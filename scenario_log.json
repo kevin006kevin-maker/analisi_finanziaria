@@ -13241,5 +13241,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "MWA",
+"kind": "short",
+"date": "2026-10-05",
+"promo_price": 21.9097,
+"obs_price": 21.87,
+"obs_date": "2026-09-17",
+"pre_price": 21.3,
+"pre_date": "2026-09-30",
+"conf_price": null,
+"conf_date": null,
+"target": 24.0742,
+"stop": 20.9411,
+"reliab": "🟢 Alta",
+"prob_gain": 51,
+"prob_loss": 2,
+"conv": 77,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-17 17:18",
+"prezzo": 21.87,
+"conv": 83,
+"prob_gain": 52,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": -1.0791
+},
+"anticipo": {
+"data": "2026-09-30",
+"prezzo": 21.3,
+"conv": 69,
+"prob_gain": 52,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-05 18:00",
+"prezzo": 21.9097,
+"conv": 77,
+"prob_gain": 51,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
