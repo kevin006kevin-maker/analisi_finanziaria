@@ -8795,5 +8795,69 @@
 "7g": -1.33,
 "30g": 0.09
 }
+},
+{
+"episodio": "short:ADXN:2026-08-24",
+"ticker": "ADXN",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-08-27 02:04",
+"data": "2026-08-27 02:04",
+"prezzo": 4.23,
+"conv": 72,
+"prob_gain": 52,
+"prob_loss": 9,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 5.7232,
+"media20": 5.3757,
+"quattro_atr": 6.1196,
+"meta_caduta": 5.465,
+"bollinger": 6.7306,
+"consigliata": 5.7232
+},
+"stop": 3.2852,
+"atr": 0.4724,
+"res": {
+"7g": -13.48,
+"30g": -31.91,
+"soglia": -31.91
+},
+"res_soglia": {
+"media50": {
+"ret": -31.91,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -31.91,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -31.91,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -31.91,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -31.91,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -31.91,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
