@@ -9876,6 +9876,14 @@ def sintesi_apprendimento(kind: str = None, orizzonte: str = "30g", momento: str
              if isinstance(e, dict) and e.get("orizzonte") == orizzonte
              and not e.get("dati_sospetti") and not e.get("finestra_incompleta")
              and e.get("resa") is not None]
+    # PER «SISTEMA» ENTRANO ANCHE LE POSIZIONI APERTE, valutate a oggi. Senza, la colonna vedeva
+    # solo chi era gia' uscito - e il sistema esce solo in perdita - quindi raccontava il contrario
+    # della verita' (vedi esiti_sistema_aperti).
+    if orizzonte == "sistema":
+        try:
+            esiti = list(esiti) + esiti_sistema_aperti()
+        except Exception as _e:
+            _log_silenzioso("posizioni aperte non valutate: %r" % _e)
     coppie = []
     for e in esiti:
         p = profili.get(e.get("profilo"))
@@ -10001,7 +10009,17 @@ def sintesi_apprendimento(kind: str = None, orizzonte: str = "30g", momento: str
                                       -(kv[1].get("separazione") or 0)))
     occ_tot_v = {_identita_occasione(p) for p, _ in vinte}
     occ_tot_p = {_identita_occasione(p) for p, _ in perse}
+    # chiuse e aperte contate a parte: una posizione aperta e' una scommessa in corso, non un esito
+    _ap = [e["resa"] for _p, e in coppie if e.get("aperta")]
+    _ch = [e["resa"] for _p, e in coppie if not e.get("aperta")]
+
+    def _blocco(xs):
+        return {"quante": len(xs), "mediana": (_mediana(xs) if xs else None),
+                "in_guadagno_pct": (round(100 * sum(1 for x in xs if x > 0) / len(xs))
+                                    if xs else None)}
+
     return {"orizzonte": orizzonte, "kind": kind, "momento": momento,
+            "chiuse": _blocco(_ch), "aperte": _blocco(_ap),
             "quante_guadagnano": len(occ_tot_v), "quante_perdono": len(occ_tot_p),
             "righe_guadagno": len(vinte), "righe_perdita": len(perse),
             "giornate_totali": len(giorni_ord),
@@ -10026,7 +10044,10 @@ def sintesi_pronta(kind: str = None, orizzonte: str = "30g") -> dict:
     try:
         d = read_data_json(SINTESI_NAME, None) or {}
         v = ((d.get("viste") or {}).get(f"{kind}:{orizzonte}"))
-        if v:
+        # una vista salvata da una versione PRECEDENTE del conto - per «sistema», senza il blocco
+        # delle posizioni aperte - non basta: si ricalcola finche' il lavoro automatico non la rifa'.
+        # Altrimenti la scheda mostrerebbe «0 aperte» per mezza giornata, e sarebbe falso.
+        if v and (orizzonte != "sistema" or "aperte" in v):
             return dict(v, calcolata_il=d.get("aggiornato"), da_file=True)
     except Exception:
         pass
@@ -11257,6 +11278,72 @@ def scala_convenienza(convmap: dict, kind: str) -> dict:
     return {"kind": kind, "quanti": n, "minimo": round(vals[0], 1), "primo_quarto": q(0.25),
             "mediana": q(0.5), "terzo_quarto": q(0.75), "massimo": round(vals[-1], 1),
             "quanti_sopra_il_cancello": sum(1 for v in vals if v >= _OBS_ENTRY_CONV)}
+
+
+def esiti_sistema_aperti() -> list:
+    """Le posizioni che il sistema tiene ANCORA APERTE, valutate al prezzo di oggi, nella stessa
+    forma degli esiti - ma marcate `aperta`, perche' una posizione aperta non e' un risultato: e'
+    una scommessa in corso.
+
+    PERCHE' SERVE. La colonna «sistema» dell'apprendimento contava solo le uscite gia' avvenute, e
+    il sistema esce SOLO in perdita: misurato il 05/10/2026, 70 uscite su 70 per stop o perdita
+    prolungata, nessuna per bersaglio raggiunto. Quindi quella colonna vedeva per costruzione i
+    perdenti - 196 esiti, 15% in guadagno - mentre 94 posizioni ancora aperte stavano a +3,44% di
+    mediana, 64% in guadagno. Sulle righe - una per momento d'acquisto - lo stesso giorno: 168
+    chiuse al 14% in guadagno contro 226 aperte al 58%. Diceva il contrario della verita'.
+    Vale solo per le occasioni PROMOSSE in monitoraggio: le altre il sistema non le ha mai tenute,
+    quindi per loro non esiste una vendita «del sistema». Le aperte NON si scrivono in
+    archivio (cambiano a ogni ora: sono stato, non storia): si calcolano al momento e si contano
+    a parte, come fa gia' resa_regole_sistema con «chiuse» e «aperte»."""
+    righe = load_registro_completo(DIARIO_NAME, load_diario())
+    acquisti = eventi_acquisto()
+    chiusi = {r.get("episodio") for r in righe if r.get("evento") == "uscita"}
+    # UN SOLO episodio aperto per titolo: l'ULTIMO. Se lo stesso titolo ha anche un episodio piu'
+    # vecchio senza uscita, quello era stato lasciato cadere dall'osservazione e poi ripreso da capo
+    # (misurato il 05/10/2026: 6 titoli su 94 - es. RXT osservata il 21/08, scartata, riosservata il
+    # 03/09 e promossa). Valutarlo al prezzo di oggi conterebbe una posizione che non esiste.
+    per_ep = {}
+    for r in righe:
+        if r.get("evento") in acquisti and r.get("prezzo") and r.get("episodio") not in chiusi:
+            per_ep.setdefault(r.get("episodio"), []).append(r)
+    per_titolo = {}
+    for rs in per_ep.values():
+        chiave = (rs[0].get("kind"), str(rs[0].get("ticker") or "").upper())
+        inizio = min(str(r.get("data") or "") for r in rs)
+        if chiave not in per_titolo or inizio > per_titolo[chiave][0]:
+            per_titolo[chiave] = (inizio, rs)
+    oggi = datetime.date.today()
+    fuori = []
+    for tk, e in (load_tracking() or {}).items():
+        if not isinstance(e, dict):
+            continue
+        snaps = [x for x in (e.get("snapshots") or []) if x.get("price")]
+        if not snaps:
+            continue
+        p_out = float(snaps[-1]["price"])
+        kind = e.get("kind") or "short"
+        for a in per_titolo.get((kind, str(tk).upper()), (None, []))[1]:
+            g_acq = str(a.get("data") or "")[:10]
+            if len(g_acq) != 10:
+                continue
+            try:
+                p_in = float(a["prezzo"])
+                if p_in <= 0:
+                    continue
+                resa = round((p_out / p_in - 1) * 100, 2)
+            except (TypeError, ValueError, KeyError):
+                continue
+            if abs(resa) > _RESA_IMPOSSIBILE:
+                continue           # un frazionamento non e' un guadagno
+            fuori.append({
+                "giorno": oggi.isoformat(), "profilo": _profilo_id(g_acq, kind, tk, a.get("evento")),
+                "ticker": str(tk).upper(), "kind": kind, "momento": a.get("evento"),
+                "scartata": False, "comprato_il": g_acq, "prezzo_acquisto": p_in,
+                "orizzonte": "sistema", "giorni": (oggi - datetime.date.fromisoformat(g_acq)).days,
+                "unita": "regole del sistema", "resa": resa, "prezzo_fine": p_out,
+                "aperta": True, "finestra_incompleta": False,
+            })
+    return fuori
 
 
 def esiti_di_sistema(giorni: int = 400) -> dict:

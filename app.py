@@ -3867,6 +3867,32 @@ if section.startswith("Archivio"):
                    help="Da quante giornate diverse vengono questi casi. Sessanta casi di un giorno "
                         "valgono molto meno di sessanta casi di venti giorni, perché le occasioni "
                         "dello stesso giorno salgono e scendono insieme.")
+        if _oriz == "sistema":
+            # CHIUSE E APERTE, SEPARATE. Il sistema esce solo in perdita (70 uscite su 70 per stop o
+            # perdita prolungata, nessuna per bersaglio raggiunto): contare solo le chiuse mostrava
+            # il 15% in guadagno mentre le 94 aperte stavano al 64%. Due numeri, non uno.
+            _ch, _ap = _s.get("chiuse") or {}, _s.get("aperte") or {}
+            _k1, _k2 = st.columns(2)
+            _k1.metric("Chiuse dal sistema", _ch.get("quante") or 0,
+                       (f"mediana {_ch['mediana']:+.2f}% · in guadagno {_ch['in_guadagno_pct']}%"
+                        if _ch.get("mediana") is not None else None), delta_color="off",
+                       help="Occasioni che il sistema ha già tolto. Attenzione: le regole di "
+                            "uscita scattano quasi solo sulle perdite, quindi qui si vedono "
+                            "soprattutto i casi andati male.")
+            _k2.metric("Ancora aperte (al prezzo più recente)", _ap.get("quante") or 0,
+                       (f"mediana {_ap['mediana']:+.2f}% · in guadagno {_ap['in_guadagno_pct']}%"
+                        if _ap.get("mediana") is not None else None), delta_color="off",
+                       help="Posizioni che il sistema tiene ancora, al prezzo di oggi. Non sono "
+                            "risultati: sono scommesse in corso. Ma senza di loro la misura "
+                            "racconterebbe solo chi ha perso.")
+            st.caption("**Perché due numeri.** Le regole di uscita del sistema scattano sulle "
+                       "perdite — stop, «in perdita da troppi giorni» — e praticamente mai sui "
+                       "guadagni: chi va bene resta dentro. Quindi «chi è uscito» è per costruzione "
+                       "un insieme di perdenti, e «chi è dentro» di vincenti non ancora chiusi. "
+                       "La verità sulla strategia sta in mezzo, e si vede solo tenendoli separati. "
+                       "Questa misura esiste solo per le occasioni poi promosse in monitoraggio: le "
+                       "altre il sistema non le ha mai tenute, quindi per i momenti «in osservazione» "
+                       "e «in anticipo» guarda anche le vendite a 7 e 30 giorni.")
         if _s.get("righe_guadagno") is not None:
             st.caption(f"Le righe misurate sono {_s.get('righe_guadagno', 0)} in guadagno e "
                        f"{_s.get('righe_perdita', 0)} in perdita: sono più delle occasioni perché "
