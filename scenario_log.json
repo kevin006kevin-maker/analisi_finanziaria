@@ -13298,5 +13298,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "SAH",
+"kind": "short",
+"date": "2026-10-05",
+"promo_price": 61.69,
+"obs_price": 65.95,
+"obs_date": "2026-09-18",
+"pre_price": 63.66,
+"pre_date": "2026-09-21",
+"conf_price": null,
+"conf_date": null,
+"target": 77.3896,
+"stop": 55.2138,
+"reliab": "🟡 Media",
+"prob_gain": 55,
+"prob_loss": 10,
+"conv": 75,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-18 00:26",
+"prezzo": 65.95,
+"conv": 81,
+"prob_gain": 56,
+"prob_loss": 7,
+"reliab": "🟡 Media",
+"mkt": -0.911
+},
+"anticipo": {
+"data": "2026-09-21",
+"prezzo": 63.66,
+"conv": 84,
+"prob_gain": 60,
+"prob_loss": 7,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-05 18:01",
+"prezzo": 61.69,
+"conv": 75,
+"prob_gain": 55,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
