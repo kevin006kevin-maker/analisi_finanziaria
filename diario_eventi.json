@@ -28558,7 +28558,18 @@
 "consigliata": 28.29
 },
 "stop": 24.8388,
-"atr": 0.5806
+"atr": 0.5806,
+"soglie_contaminate": {
+"media50": 28.29,
+"media20": 28.448,
+"quattro_atr": 28.3223,
+"meta_caduta": 27.525,
+"bollinger": 29.4215,
+"consigliata": 28.29
+},
+"soglie_ricalcolate_il": "2026-10-06 00:40",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "long:NESR:2026-09-29",
@@ -28801,7 +28812,18 @@
 "consigliata": 76.3411
 },
 "stop": 60.7395,
-"atr": 2.6003
+"atr": 2.6003,
+"soglie_contaminate": {
+"media50": 77.8804,
+"media20": 71.5775,
+"quattro_atr": 76.3411,
+"meta_caduta": 78.77,
+"bollinger": 78.6809,
+"consigliata": 76.3411
+},
+"soglie_ricalcolate_il": "2026-10-06 00:40",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "short:GRND:2026-10-01",
