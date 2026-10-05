@@ -13608,5 +13608,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "COUR",
+"kind": "short",
+"date": "2026-10-06",
+"promo_price": 5.18,
+"obs_price": 4.67,
+"obs_date": "2026-10-01",
+"pre_price": 4.67,
+"pre_date": "2026-10-02",
+"conf_price": null,
+"conf_date": null,
+"target": 5.5848,
+"stop": 4.6824,
+"reliab": "🟡 Media",
+"prob_gain": 52,
+"prob_loss": 10,
+"conv": 65,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-01 02:49",
+"prezzo": 4.67,
+"conv": 66,
+"prob_gain": 55,
+"prob_loss": 9,
+"reliab": "🟡 Media",
+"mkt": 0.263
+},
+"anticipo": {
+"data": "2026-10-02",
+"prezzo": 4.67,
+"conv": 66,
+"prob_gain": 55,
+"prob_loss": 9,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-06 00:37",
+"prezzo": 5.18,
+"conv": 65,
+"prob_gain": 52,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
