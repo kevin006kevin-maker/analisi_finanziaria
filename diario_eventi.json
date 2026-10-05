@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:SEDG:2026-08-19",
-"ticker": "SEDG",
-"kind": "short",
-"evento": "promozione",
-"scritto_il": "2026-08-26 15:54",
-"data": "2026-08-26 15:54",
-"prezzo": 32.3,
-"conv": 65,
-"prob_gain": 49,
-"prob_loss": 23,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 5 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": 44.736,
-"media20": 34.226,
-"quattro_atr": 44.3329,
-"meta_caduta": 55.405,
-"bollinger": 45.0577,
-"consigliata": 44.3329
-},
-"stop": 26.2835,
-"atr": 3.0082,
-"res": {
-"7g": 2.63,
-"30g": 0.98,
-"soglia": 0.98
-},
-"res_soglia": {
-"media50": {
-"ret": 0.98,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 5.96,
-"toccato": true,
-"giorni": 13
-},
-"quattro_atr": {
-"ret": 0.98,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 0.98,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 0.98,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 0.98,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:OI:2026-08-21",
 "ticker": "OI",
 "kind": "short",
@@ -28024,5 +27960,32 @@
 },
 "stop": 20.9411,
 "atr": 0.4843
+},
+{
+"episodio": "short:SAH:2026-09-18",
+"ticker": "SAH",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-05 18:01",
+"data": "2026-10-05 18:01",
+"prezzo": 61.69,
+"conv": 75,
+"prob_gain": 55,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 77.3896,
+"media20": 67.5015,
+"quattro_atr": 74.6424,
+"meta_caduta": 87.175,
+"bollinger": 80.0248,
+"consigliata": 74.6424
+},
+"stop": 55.2138,
+"atr": 3.2381
 }
 ]
