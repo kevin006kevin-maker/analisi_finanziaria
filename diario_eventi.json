@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:UMC:2026-08-17",
-"ticker": "UMC",
-"kind": "long",
-"evento": "fine_osservazione",
-"scritto_il": "2026-08-26 00:25",
-"data": "2026-08-26 00:23",
-"prezzo": 19.6,
-"conv": 32,
-"prob_gain": 47,
-"prob_loss": 42,
-"reliab": "🔴 Bassa",
-"mkt": 3.3451,
-"fonte": "osservazione",
-"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-08-26",
-"soglie": {
-"media50": 21.7416,
-"media20": null,
-"quattro_atr": 23.9608,
-"meta_caduta": 23.805,
-"bollinger": 20.353,
-"consigliata": 21.7416
-},
-"stop": 17.4196,
-"atr": 1.0902,
-"res": {
-"7g": 1.48,
-"30g": 23.49
-}
-},
-{
 "episodio": "short:GOF:2026-08-21",
 "ticker": "GOF",
 "kind": "short",
@@ -28326,5 +28295,32 @@
 },
 "stop": 6.0732,
 "atr": 0.1274
+},
+{
+"episodio": "long:IAG:2026-10-05",
+"ticker": "IAG",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-05 09:02",
+"data": "2026-10-04 23:59",
+"prezzo": 18.52,
+"conv": 70,
+"prob_gain": 68,
+"prob_loss": 24,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 18.7478,
+"media20": 19.673,
+"quattro_atr": 21.6712,
+"meta_caduta": 20.345,
+"bollinger": 21.2256,
+"consigliata": 18.7478
+},
+"stop": 16.9444,
+"atr": 0.7878
 }
 ]
