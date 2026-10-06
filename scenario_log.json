@@ -14013,5 +14013,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "XLF",
+"kind": "short",
+"date": "2026-10-06",
+"promo_price": 54.145,
+"obs_price": 52.9899,
+"obs_date": "2026-10-01",
+"pre_price": 53.4,
+"pre_date": "2026-10-02",
+"conf_price": null,
+"conf_date": null,
+"target": 56.7077,
+"stop": 52.7836,
+"reliab": "🟢 Alta",
+"prob_gain": 49,
+"prob_loss": 0,
+"conv": 61,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-01 16:46",
+"prezzo": 52.9899,
+"conv": 63,
+"prob_gain": 50,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -0.2598
+},
+"anticipo": {
+"data": "2026-10-02",
+"prezzo": 53.4,
+"conv": 65,
+"prob_gain": 55,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-06 18:18",
+"prezzo": 54.145,
+"conv": 61,
+"prob_gain": 49,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
