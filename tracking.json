@@ -471,7 +471,7 @@
 "tipo": "bersaglio"
 },
 "incasso_notified": true,
-"exit_notified": true
+"exit_notified": false
 },
 "KGC": {
 "kind": "long",
@@ -1178,7 +1178,7 @@
 "entry_src": "storico",
 "max_price": 22.45,
 "max_date": "2026-10-05 18:01",
-"exit_notified": true,
+"exit_notified": false,
 "incasso": {
 "gain": 36.4,
 "max": 22.45,
@@ -3960,7 +3960,8 @@
 "motivo": "bersaglio 714.68 raggiunto (sei a +9.1%): valuta di incassare",
 "urgenza": "incassa",
 "tipo": "bersaglio"
-}
+},
+"exit_notified": true
 },
 "SOXL": {
 "kind": "short",
@@ -6445,7 +6446,8 @@
 "max_date": "2026-10-06 18:18",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-06"
+"entry_check": "2026-10-06",
+"exit_notified": true
 },
 "UMC": {
 "kind": "long",
