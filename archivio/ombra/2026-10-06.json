@@ -5762,5 +5762,61 @@
 "retroattiva": false,
 "atr_pct": 4.2601,
 "ora": "2026-10-06 16:20"
+},
+{
+"id": "2026-10-06:short:AVBP:sistema_vero",
+"giorno": "2026-10-06",
+"metodo": "sistema_vero",
+"kind": "short",
+"ticker": "AVBP",
+"nome": "ArriVent BioPharma, Inc.",
+"prezzo": 15.09,
+"profilo": "2026-10-06:short:AVBP:ingresso_osservazione",
+"origine_viva": "comprata:ingresso_osservazione",
+"retroattiva": false,
+"atr_pct": 17.2984,
+"ora": "2026-10-06 21:20"
+},
+{
+"id": "2026-10-06:short:XRPN:ombra_regole_nuove",
+"giorno": "2026-10-06",
+"metodo": "ombra_regole_nuove",
+"kind": "short",
+"ticker": "XRPN",
+"nome": "XRPN",
+"prezzo": 19.200000762939453,
+"profilo": "2026-10-06:short:XRPN:punteggio_basso",
+"origine_viva": "scartata:punteggio_basso",
+"retroattiva": false,
+"atr_pct": 29.539,
+"ora": "2026-10-06 21:20"
+},
+{
+"id": "2026-10-06:long:NU:trend_template",
+"giorno": "2026-10-06",
+"metodo": "trend_template",
+"kind": "long",
+"ticker": "NU",
+"nome": "Nu Holdings Ltd.",
+"prezzo": 15.65999984741211,
+"profilo": "2026-10-06:long:NU:punteggio_basso",
+"origine_viva": "scartata:punteggio_basso",
+"retroattiva": false,
+"atr_pct": 4.1505,
+"ora": "2026-10-06 21:20"
+},
+{
+"id": "2026-10-06:long:XRPN:qualita",
+"giorno": "2026-10-06",
+"metodo": "qualita",
+"kind": "long",
+"ticker": "XRPN",
+"nome": "Armada Acquisition Corp II",
+"prezzo": 19.200000762939453,
+"profilo": "2026-10-06:long:XRPN:convenienza_sotto_cancello",
+"origine_viva": "scartata:convenienza_sotto_cancello",
+"retroattiva": false,
+"atr_pct": 29.539,
+"ora": "2026-10-06 21:20"
 }
 ]
