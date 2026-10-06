@@ -13842,5 +13842,62 @@
 "mkt": null
 }
 }
+},
+{
+"ticker": "CTVA",
+"kind": "short",
+"date": "2026-10-06",
+"promo_price": 13.92,
+"obs_price": 12.3399,
+"obs_date": "2026-10-01",
+"pre_price": 12.57,
+"pre_date": "2026-10-02",
+"conf_price": null,
+"conf_date": null,
+"target": 75.8488,
+"stop": 2.5579,
+"reliab": "🔴 Bassa",
+"prob_gain": 93,
+"prob_loss": 3,
+"conv": 78,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-01 16:46",
+"prezzo": 12.3399,
+"conv": 81,
+"prob_gain": 96,
+"prob_loss": 0,
+"reliab": "🔴 Bassa",
+"mkt": -0.2598
+},
+"anticipo": {
+"data": "2026-10-02",
+"prezzo": 12.57,
+"conv": 80,
+"prob_gain": 96,
+"prob_loss": 0,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-06 18:17",
+"prezzo": 13.92,
+"conv": 78,
+"prob_gain": 93,
+"prob_loss": 3,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
