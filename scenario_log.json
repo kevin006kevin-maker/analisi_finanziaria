@@ -13899,5 +13899,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "ENLT",
+"kind": "short",
+"date": "2026-10-06",
+"promo_price": 67.7501,
+"obs_price": 64.78,
+"obs_date": "2026-10-01",
+"pre_price": 65.3,
+"pre_date": "2026-10-02",
+"conf_price": null,
+"conf_date": null,
+"target": 77.4088,
+"stop": 62.5649,
+"reliab": "🟡 Media",
+"prob_gain": 51,
+"prob_loss": 8,
+"conv": 73,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-01 16:46",
+"prezzo": 64.78,
+"conv": 69,
+"prob_gain": 54,
+"prob_loss": 9,
+"reliab": "🟡 Media",
+"mkt": -0.2598
+},
+"anticipo": {
+"data": "2026-10-02",
+"prezzo": 65.3,
+"conv": 70,
+"prob_gain": 52,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-06 18:17",
+"prezzo": 67.7501,
+"conv": 73,
+"prob_gain": 51,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
