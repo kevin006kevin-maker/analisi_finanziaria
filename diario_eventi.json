@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:HMY:2026-08-28",
-"ticker": "HMY",
-"kind": "long",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-28 07:05",
-"data": "2026-08-28 07:05",
-"prezzo": 21.03,
-"conv": 60,
-"prob_gain": 58,
-"prob_loss": 34,
-"reliab": "🔴 Bassa",
-"mkt": 3.9443,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": null,
-"media20": null,
-"quattro_atr": 24.9143,
-"meta_caduta": 22.285,
-"bollinger": 24.273,
-"consigliata": 24.9143
-},
-"stop": 19.0879,
-"atr": 0.9711,
-"res": {
-"7g": -3.52,
-"30g": -15.69
-}
-},
-{
 "episodio": "short:WU:2026-08-28",
 "ticker": "WU",
 "kind": "short",
@@ -28941,5 +28910,32 @@
 },
 "stop": 974.87,
 "atr": 44.545
+},
+{
+"episodio": "long:BMY:2026-10-06",
+"ticker": "BMY",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-06 04:33",
+"data": "2026-10-06 04:32",
+"prezzo": 58.81,
+"conv": 62,
+"prob_gain": 84,
+"prob_loss": 5,
+"reliab": "🟢 Alta",
+"mkt": 0.7171,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 64.441,
+"media20": 62.738,
+"quattro_atr": 64.8427,
+"meta_caduta": 63.45,
+"bollinger": 65.547,
+"consigliata": 64.441
+},
+"stop": 55.7936,
+"atr": 1.5082
 }
 ]
