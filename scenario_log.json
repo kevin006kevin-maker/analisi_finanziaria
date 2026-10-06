@@ -10781,8 +10781,8 @@
 "obs_date": "2026-09-24",
 "pre_price": 40.98,
 "pre_date": "2026-09-28",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 41.154998779296875,
+"conf_date": "2026-10-06",
 "target": 52.0366,
 "stop": 38.5996,
 "reliab": "🟡 Media",
@@ -10818,16 +10818,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-10-06",
+"prezzo": 41.154998779296875,
+"conv": 82,
+"prob_gain": 52,
+"prob_loss": 6,
+"reliab": "🟡 Media",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": 0.43,
+"osservazione|7g": 0.46,
+"promozione|7g": -3.44
+}
 },
 {
 "ticker": "MGM",
@@ -10840,15 +10844,18 @@
 "obs_date": "2026-09-24",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 30.940000534057617,
+"conf_date": "2026-10-06",
 "target": null,
 "stop": null,
 "reliab": "🟡 Media",
 "prob_gain": 54,
 "prob_loss": 1,
 "conv": 86,
-"res": {},
+"res": {
+"osservazione|7g": -8.53,
+"promozione|7g": -2.89
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-09-24 19:05",
@@ -10878,8 +10885,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-10-06",
+"prezzo": 30.940000534057617,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -10899,15 +10906,18 @@
 "obs_date": "2026-09-24",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 17.665000915527344,
+"conf_date": "2026-10-06",
 "target": null,
 "stop": null,
 "reliab": "🔴 Bassa",
 "prob_gain": 55,
 "prob_loss": 20,
 "conv": 67,
-"res": {},
+"res": {
+"osservazione|7g": -2.08,
+"promozione|7g": 5.34
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-09-24 19:05",
@@ -10937,12 +10947,12 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-10-06",
+"prezzo": 17.665000915527344,
+"conv": 66,
+"prob_gain": 54,
+"prob_loss": 20,
+"reliab": "🔴 Bassa",
 "mkt": null
 }
 }
@@ -10958,15 +10968,18 @@
 "obs_date": "2026-09-24",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 179.6699981689453,
+"conf_date": "2026-10-06",
 "target": null,
 "stop": null,
 "reliab": "🟡 Media",
 "prob_gain": 48,
 "prob_loss": 12,
 "conv": 65,
-"res": {},
+"res": {
+"osservazione|7g": 1.34,
+"promozione|7g": 3.87
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-09-24 19:05",
@@ -10996,12 +11009,12 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-10-06",
+"prezzo": 179.6699981689453,
+"conv": 74,
+"prob_gain": 46,
+"prob_loss": 13,
+"reliab": "🟡 Media",
 "mkt": null
 }
 }
@@ -11017,15 +11030,18 @@
 "obs_date": "2026-09-24",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 6.139999866485596,
+"conf_date": "2026-10-06",
 "target": null,
 "stop": null,
 "reliab": "🔴 Bassa",
 "prob_gain": 50,
 "prob_loss": 28,
 "conv": 71,
-"res": {},
+"res": {
+"osservazione|7g": -15.43,
+"promozione|7g": -4.36
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-09-24 22:28",
@@ -11055,12 +11071,12 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-10-06",
+"prezzo": 6.139999866485596,
+"conv": 69,
+"prob_gain": 50,
+"prob_loss": 30,
+"reliab": "🔴 Bassa",
 "mkt": null
 }
 }
@@ -11076,15 +11092,18 @@
 "obs_date": "2026-09-24",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 8.510000228881836,
+"conf_date": "2026-10-06",
 "target": null,
 "stop": null,
 "reliab": "🟡 Media",
 "prob_gain": 57,
 "prob_loss": 12,
 "conv": 65,
-"res": {},
+"res": {
+"osservazione|7g": -0.12,
+"promozione|7g": 1.19
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-09-24 22:28",
@@ -11114,8 +11133,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-10-06",
+"prezzo": 8.510000228881836,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
