@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:NEM:2026-08-19",
-"ticker": "NEM",
-"kind": "long",
-"evento": "fine_osservazione",
-"scritto_il": "2026-08-28 07:06",
-"data": "2026-08-28 07:06",
-"prezzo": 132.29,
-"conv": 54,
-"prob_gain": 60,
-"prob_loss": 27,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-08-28",
-"soglie": {
-"media50": null,
-"media20": null,
-"quattro_atr": 150.0947,
-"meta_caduta": 133.715,
-"bollinger": 142.8113,
-"consigliata": 150.0947
-},
-"stop": 123.3877,
-"atr": 4.4512,
-"res": {
-"7g": -3.87,
-"30g": -12.27
-}
-},
-{
 "episodio": "short:WSO:2026-08-25",
 "ticker": "WSO",
 "kind": "short",
@@ -28997,5 +28966,32 @@
 },
 "stop": 2.5579,
 "atr": 5.6811
+},
+{
+"episodio": "short:ENLT:2026-10-01",
+"ticker": "ENLT",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-06 18:17",
+"data": "2026-10-06 18:17",
+"prezzo": 67.7501,
+"conv": 73,
+"prob_gain": 51,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 77.4088,
+"media20": 71.0895,
+"quattro_atr": 78.1205,
+"meta_caduta": 79.675,
+"bollinger": 77.8074,
+"consigliata": 77.4088
+},
+"stop": 62.5649,
+"atr": 2.5926
 }
 ]
