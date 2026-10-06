@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:DY:2026-08-25",
-"ticker": "DY",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-08-28 07:07",
-"data": "2026-08-28 07:04",
-"prezzo": 308.01,
-"conv": 87,
-"prob_gain": 56,
-"prob_loss": 6,
-"reliab": "🟡 Media",
-"mkt": 3.9443,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-08-28",
-"soglie": {
-"media50": 421.5238,
-"media20": 394.255,
-"quattro_atr": 395.0639,
-"meta_caduta": 407.405,
-"bollinger": 460.6471,
-"consigliata": 395.0639
-},
-"stop": 264.4831,
-"atr": 21.7635,
-"res": {
-"7g": -1.75,
-"30g": -12.57,
-"soglia": -12.57
-},
-"res_soglia": {
-"media50": {
-"ret": -12.57,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -12.57,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -12.57,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -12.57,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -12.57,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -12.57,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:PYPL:2026-08-28",
 "ticker": "PYPL",
 "kind": "short",
@@ -28897,5 +28833,25 @@
 },
 "stop": 52.7836,
 "atr": 0.6807
+},
+{
+"episodio": "short:NIO:2026-09-29",
+"ticker": "NIO",
+"kind": "short",
+"evento": "salita_2pct",
+"scritto_il": "2026-10-06 18:19",
+"data": "2026-10-06 18:15",
+"prezzo": 3.4868,
+"conv": 37,
+"prob_gain": 52,
+"prob_loss": 9,
+"reliab": "🟡 Media",
+"mkt": 2.1125,
+"fonte": "osservazione",
+"note": "prezzo salito di almeno il 2% da 3.405",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
