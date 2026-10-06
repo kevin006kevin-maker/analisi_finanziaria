@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:CABO:2026-08-28",
-"ticker": "CABO",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-28 19:34",
-"data": "2026-08-28 19:34",
-"prezzo": 24.845,
-"conv": 61,
-"prob_gain": 57,
-"prob_loss": 26,
-"reliab": "🔴 Bassa",
-"mkt": 2.9639,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 38.3493,
-"media20": 32.2057,
-"quattro_atr": 38.2888,
-"meta_caduta": 39.2025,
-"bollinger": 47.8131,
-"consigliata": 38.2888
-},
-"stop": 18.1231,
-"atr": 3.361,
-"res": {
-"7g": 6.17,
-"30g": -48.2,
-"soglia": -48.2
-},
-"res_soglia": {
-"media50": {
-"ret": -48.2,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -48.2,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -48.2,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -48.2,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -48.2,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -48.2,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "long:PYPL:2026-08-28",
 "ticker": "PYPL",
 "kind": "long",
@@ -28732,6 +28668,26 @@
 "mkt": null,
 "fonte": "osservazione",
 "note": "prezzo salito di almeno il 2% da 22.19",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:INSM:2026-10-05",
+"ticker": "INSM",
+"kind": "short",
+"evento": "salita_2pct",
+"scritto_il": "2026-10-06 18:20",
+"data": "2026-10-06 18:16",
+"prezzo": 105.89,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "prezzo salito di almeno il 2% da 103.61",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
