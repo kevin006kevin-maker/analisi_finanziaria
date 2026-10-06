@@ -464,6 +464,19 @@ def main():
     except Exception as e:
         log(f"Errore ripasso degli esiti: {e!r}")
 
+    # METODI IN OMBRA: che cosa avrebbe scelto oggi il metodo nuovo, messo a verbale accanto al
+    # vivo senza comprare niente. Le regole sono ferme (vedi METODI_OMBRA nel motore); la prima
+    # volta recupera anche i giorni passati, marcati retroattivi perche' sono quelli su cui le
+    # regole sono state scelte.
+    try:
+        om = fu.registra_ombra()
+        if om["scritte"]:
+            log(f"Metodi in ombra: {om['scritte']} scelte messe a verbale su {om['giorni']} giornate")
+        if om.get("motivo"):
+            log(f"⚠️ Metodi in ombra: {om['motivo']}")
+    except Exception as e:
+        log(f"Errore metodi in ombra: {e!r}")
+
     # Statistiche misurate: due volte al giorno, non a ogni giro (le mediane non cambiano perché
     # sono arrivati due esiti, e ricalcolarle vorrebbe dire rileggere tutto l'archivio 48 volte).
     try:

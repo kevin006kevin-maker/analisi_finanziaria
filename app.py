@@ -2350,7 +2350,8 @@ if section.startswith("Scenari"):
              "s5_fine_verifica": "5️⃣ Dopo la verifica",
              "calendario": "📅 Calendario",
              "confronti": "⚖️ Effetto dei filtri",
-             "voti": "📊 Scheda voti", "lettera": "🎬 Seguendo il sistema"}
+             "voti": "📊 Scheda voti", "lettera": "🎬 Seguendo il sistema",
+             "ombra": "🕶️ Metodo in ombra"}
     if "_goto_tab" in st.session_state:
         st.session_state["scen_tab"] = st.session_state.pop("_goto_tab")
     _stab = st.segmented_control("Che cosa vuoi guardare", list(_TABS.keys()), default="riepilogo",
@@ -3225,6 +3226,113 @@ if section.startswith("Scenari"):
         elif not _ch.get("n"):
             st.info("⏳ Il sistema non ha ancora chiuso nessuna posizione con i prezzi necessari: "
                     "questa scheda si popola alla prima uscita.")
+
+    # =======================================================================
+    # IL METODO NUOVO, IN OMBRA. Non compra niente: mette a verbale che cosa avrebbe scelto e
+    # l'archivio lo misura con gli stessi esiti del metodo vivo, sulle stesse giornate. La prova
+    # vera e' solo dal giorno in cui le regole sono state fissate: i giorni prima sono quelli
+    # guardati per scriverle, e dimostrerebbero solo che le regole descrivono il passato.
+    # =======================================================================
+    elif _stab == "ombra":
+        st.markdown("## 🕶️ Il metodo nuovo, in ombra")
+        st.caption("Dal 5 ottobre 2026 un modo diverso di scegliere le occasioni gira **accanto** a "
+                   "quello vero, senza comprare niente. Ogni giorno mette a verbale che cosa avrebbe "
+                   "scelto, e l'archivio misura quelle scelte con gli stessi esiti delle occasioni "
+                   "vere, sulle **stesse giornate**. Serve a decidere con i numeri, non a sensazione, "
+                   "se cambiare il modo in cui il sistema sceglie. La prova vera è solo quella dal "
+                   "giorno in cui le regole sono state fissate: i giorni prima sono quelli guardati "
+                   "per scriverle, e lì le regole non possono che sembrare buone.")
+        with st.spinner("Leggo le scelte in ombra…"):
+            _om = fu.ombra_pronta(_skind)
+        if _om.get("anteprima"):
+            st.info("👀 Anteprima calcolata adesso con le stesse regole: il lavoro automatico non ha "
+                    "ancora messo a verbale nessuna scelta. Dal prossimo giro le scelte restano "
+                    "scritte in archivio e questa scheda legge quelle.")
+        _NOMI_MOM = {ev: nome for _k, ev, nome, _a in fu.SCENARI_ACQUISTO}
+
+        def _origine_viva(o):
+            o = str(o or "")
+            if o.startswith("comprata:"):
+                return "comprata dal sistema: " + _NOMI_MOM.get(o[9:], o[9:]).lower()
+            if o.startswith("scartata:"):
+                return "scartata: " + str(fu.MOTIVI_SCARTO.get(o[9:], o[9:])).split(":")[0]
+            return o
+
+        _ORIZ_ET = {"7g": "dopo 7 giorni", "30g": "dopo 30 giorni"}
+        _CFG_TAB = {
+            "Ombra: casi": st.column_config.NumberColumn("Ombra: casi", format="%d"),
+            "Ombra: resa tipica": st.column_config.NumberColumn("Ombra: resa tipica", format="%+.2f%%"),
+            "Ombra: in guadagno": st.column_config.NumberColumn("Ombra: in guadagno", format="%d%%"),
+            "Vivo: casi": st.column_config.NumberColumn("Vivo: casi", format="%d"),
+            "Vivo: resa tipica": st.column_config.NumberColumn("Vivo: resa tipica", format="%+.2f%%"),
+            "Vivo: in guadagno": st.column_config.NumberColumn("Vivo: in guadagno", format="%d%%"),
+        }
+        for _m in _om.get("metodi") or []:
+            with st.container(border=True):
+                st.markdown(f"### {_m['nome']}")
+                st.caption(_m["spiegazione"])
+                st.caption("**Perché queste regole.** " + _m["perche"])
+                st.caption("**Regole, fissate il %s:** %s." % (_m["definito_il"],
+                                                                 " · ".join(_m.get("regole_testo") or [])))
+                _c1, _c2, _c3 = st.columns(3)
+                _c1.metric("Scelte a verbale", _m.get("scelte_totali") or 0)
+                _c2.metric("Giornate con scelte", _m.get("giornate_con_scelte") or 0)
+                _c3.metric("Scelte al giorno", (_m.get("scelte_al_giorno")
+                                                if _m.get("scelte_al_giorno") is not None else "—"))
+                _righe = []
+                for _bl, _et_b in (("dopo", "Dal %s (prova vera)" % _m["definito_il"]),
+                                   ("prima", "Prima (giorni usati per scegliere le regole)")):
+                    for _oz in ("7g", "30g"):
+                        _b = ((_m.get("orizzonti") or {}).get(_oz) or {}).get(_bl) or {}
+                        _o, _v = _b.get("ombra") or {}, _b.get("vivo") or {}
+                        _righe.append({
+                            "Periodo": _et_b, "Vendendo": _ORIZ_ET[_oz],
+                            "Ombra: casi": _o.get("quante") or 0, "Ombra: resa tipica": _o.get("mediana"),
+                            "Ombra: in guadagno": _o.get("in_guadagno_pct"),
+                            "Vivo: casi": _v.get("quante") or 0, "Vivo: resa tipica": _v.get("mediana"),
+                            "Vivo: in guadagno": _v.get("in_guadagno_pct"),
+                            "Giornate in cui vince l'ombra": (
+                                f"{_b.get('giornate_ombra_meglio')} su {_b.get('giornate_con_entrambi')}"
+                                if _b.get("giornate_con_entrambi") else "—"),
+                        })
+                st.dataframe(pd.DataFrame(_righe), hide_index=True, use_container_width=True,
+                             column_config=_CFG_TAB)
+                st.caption("«Vivo» sono le occasioni che il sistema vero ha comprato, in qualunque "
+                           "momento, nelle **stesse giornate** delle scelte in ombra: così il confronto "
+                           "non dipende da quali giorni sono capitati a ciascuno. «Resa tipica» è la "
+                           "mediana. Pochi casi: aneddoto, non misura.")
+                _vd = _m.get("verdetto") or {}
+                _mostra = (st.success if _vd.get("stato") == "ok" else
+                           st.error if _vd.get("stato") == "no" else st.info)
+                _mostra(_vd.get("testo") or "")
+                if _m.get("ultime_scelte"):
+                    st.markdown(f"**Che cosa ha scelto il {_m['ultimo_giorno']}**")
+                    st.dataframe(pd.DataFrame([
+                        {"Titolo": r.get("ticker"), "Nome": r.get("nome"), "Prezzo": r.get("prezzo"),
+                         "Il sistema vero": _origine_viva(r.get("origine_viva"))}
+                        for r in _m["ultime_scelte"]]), hide_index=True, use_container_width=True,
+                        column_config={"Prezzo": st.column_config.NumberColumn("Prezzo", format="%.2f")})
+                if _m.get("recenti"):
+                    with st.expander("Le ultime scelte e com'è andata"):
+                        st.dataframe(pd.DataFrame([
+                            {"Giorno": r.get("giorno"), "Titolo": r.get("ticker"), "Nome": r.get("nome"),
+                             "Prezzo": r.get("prezzo"), "Il sistema vero": _origine_viva(r.get("origine_viva")),
+                             "Dopo 7 giorni": r.get("resa_7g"), "Dopo 30 giorni": r.get("resa_30g"),
+                             "Periodo": ("prima" if r.get("retroattiva") else "prova vera")}
+                            for r in _m["recenti"]]), hide_index=True, use_container_width=True,
+                            column_config={
+                                "Prezzo": st.column_config.NumberColumn("Prezzo", format="%.2f"),
+                                "Dopo 7 giorni": st.column_config.NumberColumn("Dopo 7 giorni", format="%+.2f%%"),
+                                "Dopo 30 giorni": st.column_config.NumberColumn("Dopo 30 giorni", format="%+.2f%%"),
+                            })
+                        st.caption("Una casella vuota vuol dire che quell'esito non è ancora maturato.")
+        st.caption("**Regole ferme.** Le regole di un metodo in ombra non si cambiano mai: cambiarle "
+                   "riscriverebbe a posteriori che cosa avrebbe scelto, e la prova non varrebbe più "
+                   "niente. Chi vuole regole diverse ne definisce uno nuovo, che parte da zero. "
+                   "Si decide sui 30 giorni, solo sulla prova vera, e non prima di 30 occasioni e "
+                   "15 giornate con entrambi i metodi."
+                   + ((" Conti aggiornati al **%s**." % _om["calcolata_il"])
+                      if _om.get("da_file") and _om.get("calcolata_il") else ""))
     st.stop()
 
 # ===========================================================================
@@ -3540,7 +3648,11 @@ if section.startswith("Archivio"):
                                "archivio/esiti": "Com'è andata",
                                "archivio/mondo": "Com'era il mondo",
                                "archivio/settori": "Come stavano i settori",
-                               "archivio/notizie": "Notizie col riassunto"}.get(a, a),
+                               "archivio/notizie": "Notizie col riassunto",
+                               "archivio/scatti": "Scatti del monitoraggio",
+                               "archivio/osservazioni": "Punti di osservazione",
+                               "archivio/regole": "Regole del giorno",
+                               "archivio/ombra": "Scelte dei metodi in ombra"}.get(a, a),
                   "File": d["file"], "Righe": d["righe"], "Dal": d["primo"], "Al": d["ultimo"]}
                  for a, d in sorted(_st["aree"].items())]
         if _aree:

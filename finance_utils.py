@@ -10081,7 +10081,356 @@ def salva_sintesi(forza: bool = False, ogni_ore: int = 12) -> bool:
             s = sintesi_apprendimento(kind=kind, orizzonte=oriz)
             if s.get("quante_guadagnano") or s.get("quante_perdono"):
                 fuori["viste"][f"{kind}:{oriz}"] = s
+    # I METODI IN OMBRA, misurati con gli stessi esiti: una lettura sola per entrambi i tipi.
+    try:
+        _dati = _dati_ombra()
+        for kind in ("short", "long"):
+            fuori["viste"][f"ombra:{kind}"] = sintesi_ombra(kind, dati=_dati)
+    except Exception as _e:
+        _log_silenzioso("sintesi in ombra non calcolata: %r" % _e)
     return write_data_json(SINTESI_NAME, fuori)
+
+
+# ---------------------------------------------------------------------------
+# METODI IN OMBRA: un modo diverso di scegliere le occasioni, che gira ACCANTO a quello vero
+# ---------------------------------------------------------------------------
+#
+# PERCHE'. Misurato il 05/10/2026 su 48 giorni: le occasioni comprate rendevano MENO di quelle
+# scartate (a 30 giorni -7,15% contro -3,69%; comprate meglio delle scartate in 4 giornate su 14),
+# e l'archivio indicava dove: il sistema compra coltelli che cadono. Sotto la media a 200 giorni
+# -11,75% di mediana (48 occasioni, 20% in guadagno), sopra +3,07% (15 occasioni, 62%), d'accordo in
+# 12 giornate su 12. Ma 48 giorni sono UN solo regime di mercato (le piccole in calo in tutte le
+# finestre a 30 giorni), e un filtro trovato guardando quei giorni puo' non reggere in un rimbalzo.
+# Quindi il metodo nuovo NON sostituisce quello vivo: gli gira accanto, in ombra, senza comprare
+# niente, e l'archivio misura le sue scelte con gli stessi esiti e sulle stesse giornate.
+#
+# REGOLE FERME. Le regole di un metodo in ombra non si modificano MAI: cambiarle riscriverebbe a
+# posteriori «che cosa avrebbe scelto», e la prova non varrebbe piu' niente. Chi vuole regole
+# diverse definisce un metodo NUOVO, con una chiave nuova, che parte da zero. Il giorno di
+# definizione separa i risultati in «prima» (i giorni guardati per scegliere le regole: non provano
+# nulla, sono marcati retroattivi) e «dopo» (la prova vera). Le scelte di ogni giorno si scrivono in
+# archivio/ombra e restano quelle anche se un domani il codice cambiasse.
+
+ARC_OMBRA = "archivio/ombra"             # una riga per metodo x titolo x giorno di scelta
+_OMBRA_UNA_PER_TITOLO_GG = 30            # lo stesso titolo conta una volta ogni 30 giorni
+_OMBRA_ORIZZONTI = ("7g", "30g")
+# gli scarti che il metodo nuovo ha il diritto di ripescare: quelli dovuti al GIUDIZIO del sistema
+# vivo (punteggio, sconto, convenienza, rischio, affollamento di settore). Non quelli tecnici
+# (prezzo da centesimi, pochi scambi, trappola, storia insufficiente, mai guardata).
+_OMBRA_MOTIVI_VISTI = ("punteggio_basso", "sconto_insufficiente", "convenienza_sotto_cancello",
+                       "rischio_rendimento", "troppi_dello_stesso_settore")
+
+METODI_OMBRA = (
+    {"chiave": "ombra_trend", "nome": "Solo in trend positivo", "definito_il": "2026-10-05",
+     "base": "comprate",
+     "spiegazione": ("Le stesse occasioni che il sistema compra oggi, in qualunque dei cinque "
+                     "momenti, ma tenendo solo quelle sopra la propria media a 200 giorni. "
+                     "Un titolo conta una volta ogni 30 giorni."),
+     "perche": ("Sui primi 48 giorni le comprate sopra la media facevano +3,07% a 30 giorni e "
+                "quelle sotto -11,75%, d'accordo in 12 giornate su 12. E' il filtro «niente "
+                "coltelli che cadono» applicato al metodo di oggi, senza cambiare altro."),
+     "regole": (("above_sma200", "vero", None),)},
+    {"chiave": "ombra_regole_nuove", "nome": "Regole nuove: qualità e trend",
+     "definito_il": "2026-10-05", "base": "viste",
+     "spiegazione": ("Tutto quello che il sistema guarda ogni giorno, compreso ciò che scarta per "
+                     "punteggio, sconto, convenienza o rischio: si tengono i titoli sopra la media "
+                     "a 200 giorni, con rendimento a un anno non peggiore di -10%, prezzo di almeno "
+                     "10 $ e scambi di almeno 5 milioni di dollari al giorno, senza sospetto di "
+                     "trappola di valore. Un titolo conta una volta ogni 30 giorni."),
+     "perche": ("E' il punteggio al contrario: sui primi 48 giorni chi veniva scartato per "
+                "«punteggio basso» faceva -2,2% a 30 giorni contro il -7,15% delle comprate, e "
+                "sconto profondo, prezzo basso e potenziale di rimbalzo alto erano le "
+                "caratteristiche che perdevano di più."),
+     "regole": (("above_sma200", "vero", None), ("perf_1y", ">=", -10.0), ("price", ">=", 10.0),
+                ("avg_dollar_vol", ">=", 5_000_000.0), ("trappola", "assente", None))},
+)
+
+_OMBRA_TESTI = {
+    ("above_sma200", "vero"): "sopra la propria media a 200 giorni",
+    ("perf_1y", ">="): "rendimento a 1 anno almeno {s:+.0f}%",
+    ("price", ">="): "prezzo almeno {s:.0f} $",
+    ("avg_dollar_vol", ">="): "scambi di almeno {m:.0f} milioni di $ al giorno",
+    ("trappola", "assente"): "nessun sospetto di trappola di valore",
+}
+
+
+def _ombra_regole_testo(metodo: dict) -> list:
+    out = []
+    for campo, op, soglia in metodo.get("regole") or ():
+        t = _OMBRA_TESTI.get((campo, op))
+        if t:
+            out.append(t.format(s=(soglia or 0), m=(soglia or 0) / 1e6))
+        else:
+            out.append("%s %s %s" % (nome_caratteristica(campo), op, soglia))
+    return out
+
+
+def _ombra_valore(p: dict, campo: str):
+    if campo == "trappola":
+        return p.get("trappola")
+    return (p.get("titolo") or {}).get(campo)
+
+
+def passa_ombra(p: dict, metodo: dict) -> bool:
+    """True se la riga di profilo `p` sarebbe stata SCELTA dal metodo in ombra. Si valuta sulle
+    caratteristiche registrate in quell'istante: e' il motivo per cui l'archivio le conserva tutte,
+    anche per le occasioni scartate."""
+    if not isinstance(p, dict) or p.get("kind") not in ("short", "long") or not p.get("prezzo"):
+        return False
+    if p.get("scartata"):
+        if metodo.get("base") != "viste" or p.get("motivo") not in _OMBRA_MOTIVI_VISTI:
+            return False
+    elif not p.get("momento"):
+        return False
+    for campo, op, soglia in metodo.get("regole") or ():
+        v = _ombra_valore(p, campo)
+        if op == "vero":
+            if v is not True:
+                return False
+        elif op == "assente":
+            if v:
+                return False
+        elif op in (">=", "<="):
+            if not isinstance(v, (int, float)) or isinstance(v, bool):
+                return False
+            if (op == ">=" and v < soglia) or (op == "<=" and v > soglia):
+                return False
+        else:
+            return False
+    return True
+
+
+def _ombra_origine_viva(p: dict) -> str:
+    """Che cosa ne ha fatto il sistema vero: «comprata:<momento>» oppure «scartata:<motivo>»."""
+    if p.get("scartata"):
+        return "scartata:%s" % p.get("motivo")
+    return "comprata:%s" % p.get("momento")
+
+
+def _ombra_ultime(righe: list) -> dict:
+    """{(metodo, kind, ticker): ultima data di scelta} dalle righe gia' a verbale."""
+    u = {}
+    for r in righe:
+        try:
+            g = datetime.date.fromisoformat(str(r.get("giorno"))[:10])
+        except Exception:
+            continue
+        k = (r.get("metodo"), r.get("kind"), str(r.get("ticker") or "").upper())
+        if k not in u or g > u[k]:
+            u[k] = g
+    return u
+
+
+def _ombra_scegli(profili_del_giorno: list, giorno: str, ultimo: dict) -> list:
+    """Le scelte di UN giorno, per tutti i metodi. `ultimo` tiene l'ultima scelta per
+    (metodo, kind, titolo) e viene aggiornato: serve alla regola «un titolo ogni 30 giorni»."""
+    try:
+        g = datetime.date.fromisoformat(giorno)
+    except Exception:
+        return []
+    ordinati = sorted((p for p in profili_del_giorno
+                       if isinstance(p, dict) and str(p.get("giorno") or "")[:10] == giorno),
+                      key=lambda p: str(p.get("ora") or ""))
+    righe = []
+    for m in METODI_OMBRA:
+        for p in ordinati:
+            if not passa_ombra(p, m):
+                continue
+            tk, kind = str(p.get("ticker") or "").upper(), p.get("kind")
+            k = (m["chiave"], kind, tk)
+            prec = ultimo.get(k)
+            if prec is not None and (g - prec).days < _OMBRA_UNA_PER_TITOLO_GG:
+                continue
+            ultimo[k] = g
+            righe.append({
+                "id": f"{giorno}:{kind}:{tk}:{m['chiave']}", "giorno": giorno,
+                "metodo": m["chiave"], "kind": kind, "ticker": tk, "nome": p.get("nome") or tk,
+                "prezzo": p.get("prezzo"), "profilo": p.get("id"),
+                "origine_viva": _ombra_origine_viva(p),
+                "retroattiva": bool(giorno < m["definito_il"]), "ora": _arc_ora(),
+            })
+    return righe
+
+
+def registra_ombra(giorni: int = 3) -> dict:
+    """Mette a verbale, in archivio/ombra, che cosa avrebbero scelto oggi i metodi in ombra.
+
+    Ripetibile senza danno: i doppioni si scartano per id, e un titolo gia' scelto resta scelto.
+    La PRIMA volta recupera tutti i giorni che hanno profili in archivio, marcandoli retroattivi:
+    sono i giorni guardati per scrivere le regole, e nella scheda stanno in una riga a parte.
+    Nei giri successivi guarda solo gli ultimi `giorni` giorni, e rifa' oggi a ogni giro perche'
+    i profili di oggi arrivano un po' alla volta."""
+    indice = indice_archivio()
+    giorni_profili = sorted({os.path.basename(n)[:10] for n in indice
+                             if n.startswith(ARC_PROFILI + "/")})
+    if not giorni_profili:
+        return {"scritte": 0, "giorni": 0, "candidate": 0, "salvate": True, "motivo": None}
+    gia = [r for r in _arc_leggi_giorni(ARC_OMBRA) if isinstance(r, dict)]
+    oggi = _arc_oggi()
+    if gia:
+        dal = (datetime.date.today() - datetime.timedelta(days=max(0, giorni))).isoformat()
+        da_fare = [g for g in giorni_profili if g >= dal]
+    else:
+        da_fare = list(giorni_profili)          # prima volta: tutto lo storico
+    fatti = {str(r.get("giorno"))[:10] for r in gia}
+    da_fare = [g for g in da_fare if g == oggi or g not in fatti]
+    if not da_fare:
+        return {"scritte": 0, "giorni": 0, "candidate": 0, "salvate": True, "motivo": None}
+    ultimo = _ombra_ultime(gia)
+    # pochi giorni: si leggono uno a uno; molti (prima volta): tutto in una lettura sola
+    if len(da_fare) > 3:
+        per_g = {}
+        for p in _arc_leggi_giorni(ARC_PROFILI, dal=da_fare[0], al=da_fare[-1]):
+            if isinstance(p, dict):
+                per_g.setdefault(str(p.get("giorno") or "")[:10], []).append(p)
+    else:
+        per_g = {g: _arc_leggi_giorni(ARC_PROFILI, dal=g, al=g) for g in da_fare}
+    nuove, n_giorni = [], 0
+    for g in da_fare:                            # in ordine di data: la regola dei 30 giorni e' sequenziale
+        righe = _ombra_scegli(per_g.get(g) or [], g, ultimo)
+        if righe:
+            n_giorni += 1
+            nuove += righe
+    esito = _arc_aggiungi(ARC_OMBRA, nuove, chiave=lambda r: r.get("id"))
+    return {"scritte": esito.get("scritte", 0), "giorni": n_giorni, "candidate": len(nuove),
+            "salvate": bool(esito.get("salvate")), "motivo": esito.get("motivo")}
+
+
+def _ombra_blocco(xs: list) -> dict:
+    return {"quante": len(xs),
+            "mediana": (round(_mediana(xs), 2) if xs else None),
+            "media": (round(sum(xs) / len(xs), 2) if xs else None),
+            "in_guadagno_pct": (round(100 * sum(1 for x in xs if x > 0) / len(xs)) if xs else None)}
+
+
+def _ombra_verdetto(per_oriz: dict) -> dict:
+    """Una frase onesta su dove siamo: si decide sui 30 giorni, sulla sola prova vera («dopo»),
+    e non prima di 30 occasioni e 15 giornate con entrambi i metodi."""
+    b = (per_oriz.get("30g") or {}).get("dopo") or {}
+    o, v = b.get("ombra") or {}, b.get("vivo") or {}
+    n, gg, meglio = o.get("quante") or 0, b.get("giornate_con_entrambi") or 0, b.get("giornate_ombra_meglio") or 0
+    if n < 30 or gg < 15:
+        return {"stato": "presto",
+                "testo": ("⏳ Ancora presto per decidere: nella prova vera ci sono %d occasioni a 30 giorni "
+                          "(ne servono almeno 30) e %d giornate con entrambi i metodi (ne servono 15)."
+                          % (n, gg))}
+    if meglio * 3 >= gg * 2 and (o.get("mediana") or 0) > (v.get("mediana") or 0):
+        return {"stato": "ok",
+                "testo": ("✅ Nella prova vera l'ombra batte il vivo in %d giornate su %d, con resa tipica "
+                          "%+.2f%% contro %+.2f%%: si può valutare il passaggio." % (meglio, gg, o["mediana"], v["mediana"]))}
+    if meglio * 3 <= gg:
+        return {"stato": "no",
+                "testo": ("❌ Nella prova vera l'ombra batte il vivo solo in %d giornate su %d: queste regole "
+                          "non funzionano meglio. Se ne definiscono di nuove, senza toccare queste." % (meglio, gg))}
+    return {"stato": "incerto",
+            "testo": ("➖ Nella prova vera l'ombra batte il vivo in %d giornate su %d: nessuno dei due "
+                      "prevale, serve più tempo." % (meglio, gg))}
+
+
+def _dati_ombra() -> dict:
+    """Le tre letture che servono alla sintesi in ombra, fatte UNA volta per entrambi i tipi."""
+    scelte = [r for r in _arc_leggi_giorni(ARC_OMBRA) if isinstance(r, dict)]
+    profili = [p for p in _arc_leggi_giorni(ARC_PROFILI) if isinstance(p, dict)]
+    esiti = {}
+    for e in _arc_leggi_giorni(ARC_ESITI):
+        if (isinstance(e, dict) and e.get("resa") is not None and not e.get("dati_sospetti")
+                and not e.get("finestra_incompleta") and e.get("orizzonte") in _OMBRA_ORIZZONTI):
+            esiti[(e.get("profilo"), e.get("orizzonte"))] = e
+    return {"scelte": scelte, "profili": profili, "esiti": esiti}
+
+
+def sintesi_ombra(kind: str = "short", dati: dict = None) -> dict:
+    """Com'e' andata al metodo in ombra rispetto a quello vivo, sulle STESSE giornate.
+
+    Il confronto e' per giornata: le occasioni dello stesso giorno salgono e scendono insieme, quindi
+    la domanda giusta non e' «chi ha la mediana piu' alta» ma «in quante giornate l'ombra ha fatto
+    meglio del vivo». I risultati sono divisi in «prima» (giorni usati per scegliere le regole: non
+    provano nulla) e «dopo» (la prova vera). Se non c'e' ancora nulla a verbale si calcola
+    un'ANTEPRIMA al volo con le stesse regole, dichiarandola tale."""
+    d = dati or _dati_ombra()
+    scelte = [r for r in d["scelte"] if r.get("kind") == kind]
+    profili = [p for p in d["profili"] if p.get("kind") == kind]
+    esiti = d["esiti"]
+    anteprima = False
+    if not scelte:
+        anteprima, ultimo, per_g = True, {}, {}
+        for p in profili:
+            per_g.setdefault(str(p.get("giorno") or "")[:10], []).append(p)
+        for g in sorted(per_g):
+            if len(g) == 10:
+                scelte += _ombra_scegli(per_g[g], g, ultimo)
+    vivo = [p for p in profili if not p.get("scartata") and p.get("momento")]
+    metodi = []
+    for m in METODI_OMBRA:
+        mie = [r for r in scelte if r.get("metodo") == m["chiave"]]
+        per_oriz = {}
+        for oriz in _OMBRA_ORIZZONTI:
+            o_rows = [(str(r.get("giorno")), esiti[(r.get("profilo"), oriz)]["resa"])
+                      for r in mie if (r.get("profilo"), oriz) in esiti]
+            v_rows = [(str(p.get("giorno")), esiti[(p.get("id"), oriz)]["resa"])
+                      for p in vivo if (p.get("id"), oriz) in esiti]
+            vp_rows = [(g, x) for (g, x), p in zip(v_rows, [p for p in vivo if (p.get("id"), oriz) in esiti])
+                       if p.get("momento") == "promozione"]
+            blocchi = {}
+            for nome_b, tiene in (("tutto", lambda g: True),
+                                  ("prima", lambda g: g < m["definito_il"]),
+                                  ("dopo", lambda g: g >= m["definito_il"])):
+                o = [(g, x) for g, x in o_rows if tiene(g)]
+                gg = {g for g, _ in o}
+                v = [(g, x) for g, x in v_rows if g in gg]
+                vp = [(g, x) for g, x in vp_rows if g in gg]
+                per_giorno = {}
+                for g, x in o:
+                    per_giorno.setdefault(g, ([], []))[0].append(x)
+                for g, x in v:
+                    if g in per_giorno:
+                        per_giorno[g][1].append(x)
+                coppie = [(_mediana(a), _mediana(b)) for a, b in per_giorno.values() if a and b]
+                blocchi[nome_b] = {"ombra": _ombra_blocco([x for _, x in o]),
+                                   "vivo": _ombra_blocco([x for _, x in v]),
+                                   "vivo_promozione": _ombra_blocco([x for _, x in vp]),
+                                   "giornate_con_entrambi": len(coppie),
+                                   "giornate_ombra_meglio": sum(1 for a, b in coppie if a > b)}
+            per_oriz[oriz] = blocchi
+        recenti = []
+        for r in sorted(mie, key=lambda r: (str(r.get("giorno")), str(r.get("ora") or "")),
+                        reverse=True)[:15]:
+            recenti.append({"giorno": r.get("giorno"), "ticker": r.get("ticker"), "nome": r.get("nome"),
+                            "prezzo": r.get("prezzo"), "origine_viva": r.get("origine_viva"),
+                            "retroattiva": bool(r.get("retroattiva")),
+                            "resa_7g": (esiti.get((r.get("profilo"), "7g")) or {}).get("resa"),
+                            "resa_30g": (esiti.get((r.get("profilo"), "30g")) or {}).get("resa")})
+        ultimo_g = max((str(r.get("giorno")) for r in mie), default=None)
+        giornate = len({r.get("giorno") for r in mie})
+        metodi.append({
+            "chiave": m["chiave"], "nome": m["nome"], "definito_il": m["definito_il"],
+            "spiegazione": m["spiegazione"], "perche": m["perche"],
+            "regole_testo": _ombra_regole_testo(m),
+            "scelte_totali": len(mie), "giornate_con_scelte": giornate,
+            "scelte_al_giorno": (round(len(mie) / giornate, 1) if giornate else None),
+            "orizzonti": per_oriz, "recenti": recenti, "ultimo_giorno": ultimo_g,
+            "ultime_scelte": [{"ticker": r.get("ticker"), "nome": r.get("nome"), "prezzo": r.get("prezzo"),
+                               "origine_viva": r.get("origine_viva")}
+                              for r in mie if str(r.get("giorno")) == ultimo_g] if ultimo_g else [],
+            "verdetto": _ombra_verdetto(per_oriz),
+        })
+    return {"kind": kind, "anteprima": anteprima, "metodi": metodi,
+            "una_per_titolo_gg": _OMBRA_UNA_PER_TITOLO_GG, "aggiornato": _arc_ora()}
+
+
+def ombra_pronta(kind: str = "short") -> dict:
+    """La sintesi in ombra GIA' CALCOLATA dal lavoro automatico; se manca, o se e' solo un'anteprima
+    (il lavoro non aveva ancora scelte a verbale), si ricalcola qui una volta."""
+    try:
+        d = read_data_json(SINTESI_NAME, None) or {}
+        v = (d.get("viste") or {}).get(f"ombra:{kind}")
+        if v and not v.get("anteprima"):
+            return dict(v, calcolata_il=d.get("aggiornato"), da_file=True)
+    except Exception:
+        pass
+    s = sintesi_ombra(kind)
+    s["da_file"] = False
+    return s
 
 
 def stato_archivio() -> dict:
