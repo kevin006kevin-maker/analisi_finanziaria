@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:AA:2026-08-28",
-"ticker": "AA",
-"kind": "short",
-"evento": "uscita",
-"scritto_il": "2026-08-28 07:06",
-"data": "2026-08-28 07:06",
-"prezzo": 51.19,
-"conv": 68,
-"prob_gain": 50,
-"prob_loss": 15,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "in perdita da 13 giorni di Borsa: valuta l'uscita",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "long:NEM:2026-08-19",
 "ticker": "NEM",
 "kind": "long",
@@ -28990,5 +28970,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:CTVA:2026-10-01",
+"ticker": "CTVA",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-06 18:17",
+"data": "2026-10-06 18:17",
+"prezzo": 13.92,
+"conv": 78,
+"prob_gain": 93,
+"prob_loss": 3,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 75.8488,
+"media20": 67.202,
+"quattro_atr": 36.6442,
+"meta_caduta": 52.215,
+"bollinger": 123.2881,
+"consigliata": 36.6442
+},
+"stop": 2.5579,
+"atr": 5.6811
 }
 ]
