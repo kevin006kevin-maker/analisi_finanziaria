@@ -2300,6 +2300,19 @@ _TRACK_RECORD_MAX = 2500       # ~212 byte/riga → ~530 KB
 # anti-cancellazione, e allora il rischio non è più "un esito non calcolato" ma "il registro intero".
 _MARGINE_TETTO = 1.3       # caso peggiore ~860 KB: resta un margine vero sotto il muro di 1 MB
 
+# NESSUN FILE PUO' SUPERARE QUESTO PESO, qualunque cosa sia. I tetti dei singoli registri bastano
+# solo se sono calcolati giusti, e uno non lo era: lo storico delle uscite pesa 2,9 KB a riga e non
+# 0,3 come previsto, quindi col suo tetto di 2.000 righe sarebbe arrivato a 7,6 MB (misurato il
+# 06/10/2026). Una scrittura rifiutata si vede nell'avviso in cima all'app; un file oltre 1 MB no,
+# perche' le protezioni si spengono in silenzio.
+_TETTO_FILE_BYTE = 950_000
+
+# IL TETTO VERO DI UN FILE VIVO SI DECIDE SUL PESO DELLE SUE RIGHE, non solo sul loro numero. Il
+# numero fisso resta il massimo; ma se le righe pesano piu' del previsto il tetto scende da solo,
+# cosi' il file vivo resta sotto ~450 KB (e col margine sotto ~585 KB) anche se domani una riga
+# porta piu' campi di oggi.
+_VIVO_BYTE_OBIETTIVO = 450_000
+
 
 # QUANTE RIGHE DOVREBBE AVERE OGNI REGISTRO. È il dato in più che permette di distinguere «questo
 # file non esiste ancora» da «non riesco a leggerlo» — due situazioni che arrivano identiche (lista
@@ -2314,12 +2327,23 @@ def _quante(obj) -> int:
     return len(obj) if isinstance(obj, (list, dict)) else 0
 
 
-def _conteggi_registri() -> dict:
-    d = read_data_json(CONTEGGI_NAME, None)
+def _nome_conteggi(name=None) -> str:
+    """Dove sta il conteggio di un file: quelli dei file giornalieri dal 2027 in poi stanno nella
+    tabella del loro anno, tutto il resto in quella di sempre. Cresce come l'indice (una voce per
+    file giornaliero), quindi si divide per anno per la stessa ragione."""
+    a = _anno_di_file(name) if name else None
+    if a is None or a <= _ANNO_INIZIO_ARCHIVIO:
+        return CONTEGGI_NAME
+    return f"{ARCHIVIO_DIR}/conteggi_registri_{a}.json"
+
+
+def _conteggi_registri(name: str = None) -> dict:
+    fonte = _nome_conteggi(name)
+    d = read_data_json(fonte, None)
     d = d if isinstance(d, dict) else {}
     if _CONTEGGI_MEM:
         d = dict(d)
-        d.update(_CONTEGGI_MEM)
+        d.update({k: v for k, v in _CONTEGGI_MEM.items() if _nome_conteggi(k) == fonte})
     return d
 
 
@@ -2329,7 +2353,7 @@ def _sotto_il_conteggio_atteso(name: str, obj) -> bool:
     davvero (una voce rimossa è un dato reale) e li protegge _crollo_stato."""
     if name not in _REGISTRI_APPEND_ONLY and not name.startswith("archivio/"):
         return False
-    atteso = (_conteggi_registri().get(name) or {}).get("righe")
+    atteso = (_conteggi_registri(name).get(name) or {}).get("righe")
     try:
         return bool(atteso) and _quante(obj) < int(atteso)
     except (TypeError, ValueError):
@@ -2349,14 +2373,24 @@ def salva_conteggi() -> bool:
     """Mette su disco i conteggi raccolti in questo giro. Da chiamare una volta, alla fine."""
     if not _CONTEGGI_MEM:
         return True
-    letto = read_data_json(CONTEGGI_NAME, None)
+    gruppi = {}
+    for k, v in _CONTEGGI_MEM.items():
+        gruppi.setdefault(_nome_conteggi(k), {})[k] = v
+    tutto_ok = True
+    for fonte, mem in sorted(gruppi.items()):
+        tutto_ok = _salva_conteggi_in(fonte, mem) and tutto_ok
+    return tutto_ok
+
+
+def _salva_conteggi_in(fonte: str, mem: dict) -> bool:
+    letto = read_data_json(fonte, None)
     # SE LA LETTURA FALLISCE non si scrive con force. Questa tabella protegge TUTTI i registri:
     # sostituirla con i pochi conteggi di questo giro spegnerebbe la protezione su tutti gli altri
     # in un colpo, e force=True passerebbe sopra a ogni guardia. Senza force, se il file esiste la
     # guardia anti-riduzione lo rifiuta da sola; se non esiste ancora, la scrittura passa.
     letta_bene = isinstance(letto, dict) and bool(letto)
     fuori = dict(letto) if isinstance(letto, dict) else {}
-    for k, v in _CONTEGGI_MEM.items():
+    for k, v in mem.items():
         vecchio = (fuori.get(k) or {}).get("righe") or 0
         nuovo = v.get("righe") or 0
         # Il conteggio segue SEMPRE la realtà, comprese le riduzioni. E le riduzioni sono legittime:
@@ -2366,19 +2400,20 @@ def salva_conteggi() -> bool:
         # difendere righe che nessuno vuole più. Quando scende si annota da quanto veniva, così un
         # calo inatteso resta visibile invece di passare liscio.
         fuori[k] = dict(v) if nuovo >= vecchio else dict(v, era=vecchio)
-    return write_data_json(CONTEGGI_NAME, fuori, force=letta_bene)
+    return write_data_json(fonte, fuori, force=letta_bene)
 
 
 def azzera_conteggio(name: str) -> bool:
     """Rimette a zero il numero atteso di un registro. Serve quando lo si svuota di proposito —
     per esempio mettendo da parte i dati vecchi — altrimenti la guardia bloccherebbe per sempre
     ogni scrittura successiva, credendo di stare difendendo righe che nessuno vuole più."""
-    fuori = read_data_json(CONTEGGI_NAME, None)
+    fonte = _nome_conteggi(name)
+    fuori = read_data_json(fonte, None)
     if not isinstance(fuori, dict):
         return False
     _CONTEGGI_MEM.pop(name, None)
     fuori[name] = {"righe": 0, "aggiornato": _now_iso(), "azzerato": True}
-    return write_data_json(CONTEGGI_NAME, fuori, force=True)
+    return write_data_json(fonte, fuori, force=True)
 
 
 def _riduce_storico(name: str, nuovo_str: str, vecchio_str: str, force: bool = False) -> bool:
@@ -2509,6 +2544,12 @@ def write_data_json(name: str, obj, force: bool = False) -> bool:
     una lettura remota fallita restituiva [] e il salvataggio lo scriveva sopra i dati buoni.
     Per ridurre davvero un registro serve force=True (scelta esplicita, non un effetto collaterale)."""
     content = json.dumps(obj, ensure_ascii=False, indent=0)
+    # IL MURO DI 1 MB: si rifiuta la scrittura e lo si dice, invece di scavalcarlo in silenzio.
+    _peso = len(content.encode("utf-8"))
+    if _peso > _TETTO_FILE_BYTE:
+        _SALVATAGGI_FALLITI.add(name)
+        _segna_avviso(name, _peso)
+        return False
     if not force and (name in _REGISTRI_APPEND_ONLY or name in _FILE_STATO_VIVO
                       or name.startswith("archivio/")):
         try:
@@ -2613,7 +2654,12 @@ _ANNO_INIZIO_ARCHIVIO = 2026        # primo anno del progetto: prima non esiston
 # messa da parte il 21/08 pesa 2.596.021 byte.
 # Stesso rimedio dei giornalieri: superato il tetto si apre un pezzo nuovo (_b, _c…).
 _ARCHIVIO_TETTO_BYTE = 600_000
-_ARCHIVIO_MAX_PEZZI = 25
+# 25 PEZZI NON BASTAVANO. Misurato il 06/10/2026: l'archivio della convenienza riempie un pezzo da
+# 600 KB ogni 8-11 giorni, cioe' circa 42 pezzi l'anno. Col tetto a 25 l'archiviazione si sarebbe
+# fermata verso l'estate 2027: il file vivo avrebbe ripreso a crescere e in una settimana avrebbe
+# passato 1 MB. Dal 26° pezzo il nome continua con _z025, _z026…: i pezzi gia' esistenti non
+# cambiano nome.
+_ARCHIVIO_MAX_PEZZI = 400
 
 
 def _nome_archivio(name: str, anno, pezzo: int = 0) -> str:
@@ -2621,7 +2667,12 @@ def _nome_archivio(name: str, anno, pezzo: int = 0) -> str:
     per i file giornalieri: il primo pezzo mantiene il nome di sempre, quindi gli archivi gia'
     esistenti restano dove sono e continuano a essere letti."""
     base = name[:-5] if name.endswith(".json") else name
-    coda = "" if pezzo <= 0 else "_" + chr(ord("b") + pezzo - 1)
+    if pezzo <= 0:
+        coda = ""
+    elif pezzo < 25:
+        coda = "_" + chr(ord("b") + pezzo - 1)          # _b … _y, come sempre
+    else:
+        coda = "_z%03d" % pezzo                          # dal 26° pezzo: _z025, _z026 …
     return f"{ARCHIVIO_DIR}/{base}_{anno}{coda}.json"
 
 
@@ -2692,6 +2743,21 @@ def _riga_giovane(riga, giorni: int) -> bool:
         return True          # data illeggibile: nel dubbio la tengo viva
 
 
+def _tetto_vivo_effettivo(rows: list, live_max: int) -> int:
+    """Il tetto di righe del file vivo, abbassato quando le righe pesano piu' del previsto.
+    Si misura sulle ultime 300 righe, che sono quelle con la forma di oggi."""
+    try:
+        campione = rows[-300:]
+        if not campione:
+            return live_max
+        peso = len(json.dumps(campione, ensure_ascii=False, indent=0).encode("utf-8")) / len(campione)
+        if peso <= 0:
+            return live_max
+        return max(20, min(int(live_max), int(_VIVO_BYTE_OBIETTIVO / peso)))
+    except Exception:
+        return live_max
+
+
 def _archivia_e_pota(name: str, rows: list, live_max: int, giorni_protetti: int = 0) -> list:
     """Tiene il registro vivo entro `live_max` righe SPOSTANDO le più vecchie negli archivi
     annuali (niente viene perso). Le righe più recenti di `giorni_protetti` restano vive anche se
@@ -2702,7 +2768,10 @@ def _archivia_e_pota(name: str, rows: list, live_max: int, giorni_protetti: int 
     maturare non è persa e nemmeno abbandonata: i risolutori la completano comunque, perché lavorano
     su archivi + vivo (aggiorna_registro_completo). Se l'archiviazione non riesce NON pota nulla:
     meglio un file vivo più grande che dati buttati. Ritorna le righe da tenere vive."""
-    if not isinstance(rows, list) or len(rows) <= live_max:
+    if not isinstance(rows, list):
+        return rows
+    live_max = _tetto_vivo_effettivo(rows, live_max)
+    if len(rows) <= live_max:
         return rows
     taglio = len(rows) - live_max
     testa, resto = rows[:taglio], rows[taglio:]
@@ -9042,23 +9111,62 @@ def _arc_nome(prefisso: str, giorno: str, pezzo: int = 0) -> str:
     return f"{prefisso}/{giorno}{coda}.json"
 
 
+# L'INDICE SI DIVIDE PER ANNO. Una voce per file giornaliero, circa 8 al giorno: misurato il
+# 06/10/2026, +260 KB l'anno, cioe' 1 MB in meno di quattro anni — e oltre 1 MB l'indice, che e' la
+# mappa di tutto l'archivio, non si sarebbe piu' letto. Il 2026 resta nel file di sempre; dal 2027
+# ogni anno ha il suo (archivio/indice_archivio_2027.json …), che resta sotto i 300 KB.
+def _anno_corrente() -> int:
+    try:
+        return int(_today_iso()[:4])
+    except Exception:
+        return datetime.date.today().year
+
+
+def _anno_di_file(nome):
+    """L'anno di un file giornaliero dal suo nome (…/2027-01-05.json → 2027), altrimenti None."""
+    b = os.path.basename(str(nome or ""))[:10]
+    if len(b) == 10 and b[:4].isdigit() and b[4] == "-" and b[7] == "-":
+        return int(b[:4])
+    return None
+
+
+def _nome_indice(anno=None) -> str:
+    try:
+        a = int(anno)
+    except (TypeError, ValueError):
+        a = None
+    if a is None or a <= _ANNO_INIZIO_ARCHIVIO:
+        return INDICE_NAME
+    return f"{ARCHIVIO_DIR}/indice_archivio_{a}.json"
+
+
+def _nomi_indice() -> list:
+    return [INDICE_NAME] + [_nome_indice(a) for a in
+                            range(_ANNO_INIZIO_ARCHIVIO + 1, _anno_corrente() + 1)]
+
+
 def indice_archivio() -> dict:
     """Cosa contiene l'archivio: per ogni file, quante righe ha. È la fonte che permette di
     distinguere «questo file non esiste ancora» da «la lettura è fallita» — due situazioni che
     read_data_json restituisce in modo IDENTICO (lista vuota) e che nessuna guardia basata sul
     confronto delle lunghezze potrà mai separare. Senza questa distinzione, un archivio nuovo nasce
-    esposto esattamente all'incidente che ha azzerato due registri il 16/08/2026."""
-    d = read_data_json(INDICE_NAME, None)
-    return d if isinstance(d, dict) else {}
+    esposto esattamente all'incidente che ha azzerato due registri il 16/08/2026.
+    Restituisce l'unione degli indici di tutti gli anni."""
+    fuori = {}
+    for n in _nomi_indice():
+        d = read_data_json(n, None)
+        if isinstance(d, dict):
+            fuori.update(d)
+    return fuori
 
 
-def _indice_scrivi(indice: dict) -> bool:
+def _indice_scrivi(indice: dict, anno=None) -> bool:
     """L'indice è sotto archivio/, quindi la guardia anti-riduzione lo protegge da sola: se una
     lettura fallita lo facesse rimpicciolire, la scrittura viene rifiutata."""
-    return write_data_json(INDICE_NAME, indice)
+    return write_data_json(_nome_indice(anno), indice)
 
 
-def _indice_o_niente():
+def _indice_o_niente(anno=None):
     """L'indice, oppure None se non si riesce a stabilire lo stato dell'archivio.
 
     Qui sta il nodo di tutta la faccenda. «Il file non esiste ancora» e «la lettura è fallita»
@@ -9066,8 +9174,10 @@ def _indice_o_niente():
     che li separa è provare a CREARE l'indice vuoto: se l'archivio è davvero nuovo la creazione
     passa; se invece l'indice esiste e la lettura era fallita, scriverne uno vuoto lo
     RIMPICCIOLIREBBE, e la guardia anti-riduzione rifiuta la scrittura da sola. In quel caso si
-    torna None e non si scrive niente. Costa un giro di archivio; l'alternativa costa l'archivio."""
-    d = read_data_json(INDICE_NAME, None)
+    torna None e non si scrive niente. Costa un giro di archivio; l'alternativa costa l'archivio.
+    Vale per l'indice dell'anno indicato (quello del giorno che si sta scrivendo)."""
+    nome_idx = _nome_indice(anno)
+    d = read_data_json(nome_idx, None)
     if isinstance(d, dict) and d:
         return d
     # NON BASTA che write_data_json dica "riuscito": dice riuscito anche col solo successo LOCALE,
@@ -9075,10 +9185,10 @@ def _indice_o_niente():
     # locale e passato, la rilettura (che a quel punto legge il locale) trova l'indice appena
     # scritto con una chiave sola: un indice "vuoto ma valido" che spegnerebbe tutte e tre le
     # regole di _arc_aggiungi proprio nel momento in cui servono.
-    if (not write_data_json(INDICE_NAME, {"_creato": _arc_ora()})
-            or INDICE_NAME in _SALVATAGGI_FALLITI):
+    if (not write_data_json(nome_idx, {"_creato": _arc_ora()})
+            or nome_idx in _SALVATAGGI_FALLITI):
         return None     # rifiutata, o arrivata solo in locale: non so cosa contiene l'archivio
-    d = read_data_json(INDICE_NAME, None)
+    d = read_data_json(nome_idx, None)
     return d if isinstance(d, dict) and d else None
 
 
@@ -9097,7 +9207,8 @@ def _arc_aggiungi(prefisso: str, righe_nuove: list, chiave=None, giorno: str = N
     if not righe_nuove:
         return {"scritte": 0, "salvate": True, "motivo": None}
     giorno = giorno or _arc_oggi()
-    indice = _indice_o_niente()
+    anno_idx = str(giorno)[:4]              # ogni giorno sta nell'indice del suo anno
+    indice = _indice_o_niente(anno_idx)
     if indice is None:
         return {"scritte": 0, "salvate": False,
                 "motivo": "non riesco a leggere l'indice dell'archivio: non scrivo niente, "
@@ -9197,7 +9308,7 @@ def _arc_aggiungi(prefisso: str, righe_nuove: list, chiave=None, giorno: str = N
         # l'indice no, quel file diventa INVISIBILE a chi legge (tutti i lettori enumerano
         # dall'indice) e resta senza la guardia che lo protegge dalla riscrittura. Meglio fermarsi e
         # riprovare al giro dopo, con le righe che restano in coda.
-        if not _indice_scrivi(indice) or INDICE_NAME in _SALVATAGGI_FALLITI:
+        if not _indice_scrivi(indice, anno_idx) or _nome_indice(anno_idx) in _SALVATAGGI_FALLITI:
             return {"scritte": scritte, "salvate": False,
                     "motivo": f"{nome} e stato salvato ma l'elenco dell'archivio non e arrivato al "
                               "deposito: mi fermo, altrimenti quel file resterebbe invisibile"}
@@ -10081,123 +10192,309 @@ def salva_sintesi(forza: bool = False, ogni_ore: int = 12) -> bool:
             s = sintesi_apprendimento(kind=kind, orizzonte=oriz)
             if s.get("quante_guadagnano") or s.get("quante_perdono"):
                 fuori["viste"][f"{kind}:{oriz}"] = s
-    # I METODI IN OMBRA, misurati con gli stessi esiti: una lettura sola per entrambi i tipi.
-    try:
-        _dati = _dati_ombra()
-        for kind in ("short", "long"):
-            fuori["viste"][f"ombra:{kind}"] = sintesi_ombra(kind, dati=_dati)
-    except Exception as _e:
-        _log_silenzioso("sintesi in ombra non calcolata: %r" % _e)
     return write_data_json(SINTESI_NAME, fuori)
 
 
 # ---------------------------------------------------------------------------
-# METODI IN OMBRA: un modo diverso di scegliere le occasioni, che gira ACCANTO a quello vero
+# METODI DI SELEZIONE, IN OMBRA: altri modi di scegliere le occasioni, che girano ACCANTO al
+# sistema vero senza comprare niente
 # ---------------------------------------------------------------------------
 #
-# PERCHE'. Misurato il 05/10/2026 su 48 giorni: le occasioni comprate rendevano MENO di quelle
-# scartate (a 30 giorni -7,15% contro -3,69%; comprate meglio delle scartate in 4 giornate su 14),
-# e l'archivio indicava dove: il sistema compra coltelli che cadono. Sotto la media a 200 giorni
-# -11,75% di mediana (48 occasioni, 20% in guadagno), sopra +3,07% (15 occasioni, 62%), d'accordo in
-# 12 giornate su 12. Ma 48 giorni sono UN solo regime di mercato (le piccole in calo in tutte le
-# finestre a 30 giorni), e un filtro trovato guardando quei giorni puo' non reggere in un rimbalzo.
-# Quindi il metodo nuovo NON sostituisce quello vivo: gli gira accanto, in ombra, senza comprare
-# niente, e l'archivio misura le sue scelte con gli stessi esiti e sulle stesse giornate.
+# PERCHE'. Misurato il 05-06/10/2026 su 49 giorni: le occasioni comprate dal sistema rendevano MENO
+# di quelle che scartava, e a 30 giorni facevano 2,7 punti peggio di tutto quello che il sistema
+# aveva guardato nello stesso giorno. L'archivio indicava il motivo: il sistema compra titoli in
+# caduta, mentre i metodi con piu' prove negli studi comprano forza. Ma 49 giorni sono UN solo
+# andamento di mercato, quindi nessun metodo sostituisce quello vero: girano accanto, in ombra, e
+# l'archivio misura le loro scelte con gli stessi esiti delle occasioni vere.
 #
-# REGOLE FERME. Le regole di un metodo in ombra non si modificano MAI: cambiarle riscriverebbe a
-# posteriori «che cosa avrebbe scelto», e la prova non varrebbe piu' niente. Chi vuole regole
-# diverse definisce un metodo NUOVO, con una chiave nuova, che parte da zero. Il giorno di
-# definizione separa i risultati in «prima» (i giorni guardati per scegliere le regole: non provano
-# nulla, sono marcati retroattivi) e «dopo» (la prova vera). Le scelte di ogni giorno si scrivono in
-# archivio/ombra e restano quelle anche se un domani il codice cambiasse.
+# REGOLE FERME. Le regole di un metodo non si modificano MAI: cambiarle riscriverebbe a posteriori
+# «che cosa avrebbe scelto», e la prova non varrebbe piu' niente. Chi vuole regole diverse definisce
+# un metodo NUOVO, con una chiave nuova: al primo giro il lavoro automatico ne ripassa tutta la
+# storia (quei giorni restano marcati «prima») e da li' lo segue come gli altri.
+#
+# DOVE STANNO I DATI, e perche' non si rompono col tempo:
+#  - le scelte stanno in archivio/ombra, un file per GIORNO DI SCELTA: circa 50 righe e 15 KB al
+#    giorno, e il file si spezza da solo a 450 righe o 600 KB;
+#  - gli esiti NON si duplicano: l'archivio misura gia' a 7, 30 e 365 giorni ogni titolo guardato,
+#    comprato o scartato, e ogni scelta punta al suo profilo;
+#  - i conti per l'app stanno in metodi/<tipo>_<mese>.json, uno per tipo e per mese (decine di KB),
+#    ricalcolati dal lavoro automatico. Non sono storia: se uno si rovina si rifa' dall'archivio. Un
+#    mese si ricalcola finche' i suoi esiti a un anno possono ancora maturare, poi resta fermo.
 
-ARC_OMBRA = "archivio/ombra"             # una riga per metodo x titolo x giorno di scelta
-_OMBRA_UNA_PER_TITOLO_GG = 30            # lo stesso titolo conta una volta ogni 30 giorni
-_OMBRA_ORIZZONTI = ("7g", "30g")
-# gli scarti che il metodo nuovo ha il diritto di ripescare: quelli dovuti al GIUDIZIO del sistema
-# vivo (punteggio, sconto, convenienza, rischio, affollamento di settore). Non quelli tecnici
-# (prezzo da centesimi, pochi scambi, trappola, storia insufficiente, mai guardata).
+ARC_OMBRA = "archivio/ombra"               # una riga per metodo x titolo x giorno di scelta
+ARC_METODI_AVVII = "archivio/metodi_avvii"  # una riga quando un metodo parte e la sua storia e' ripassata
+CONTI_METODI_DIR = "metodi"                # i conti per l'app, un file per tipo e per mese
+_METODI_STATO = "metodi/stato.json"        # quando e' stato fatto l'ultimo ricalcolo completo
+_METODI_PRIMO_MESE = "2026-08"             # primo mese con profili in archivio
+_OMBRA_UNA_PER_TITOLO_GG = 30              # lo stesso titolo conta una volta ogni 30 giorni
+# gli scarti che un metodo ha il diritto di ripescare: quelli dovuti al GIUDIZIO del sistema vero.
+# Non quelli tecnici (prezzo da centesimi, pochi scambi, trappola, storia insufficiente, mai guardata).
 _OMBRA_MOTIVI_VISTI = ("punteggio_basso", "sconto_insufficiente", "convenienza_sotto_cancello",
                        "rischio_rendimento", "troppi_dello_stesso_settore")
+_METODI_ORIZZONTI = ("7g", "30g", "365g")
+METODI_VENDITE = {"short": ("soglia", "7g", "30g"), "long": ("soglia", "30g", "365g")}
+# LA VENDITA AL BERSAGLIO, uguale per tutti i metodi: si vende appena una CHIUSURA arriva a quattro
+# volte il movimento tipico giornaliero del titolo, entro un mese per il breve e un anno per il
+# lungo; altrimenti a fine periodo. Il bersaglio «consigliato» degli scenari (il ritorno alla media
+# a 50 giorni) qui non si puo' usare: per un titolo in salita sta SOTTO il prezzo.
+_METODI_SOGLIA_FINESTRA = {"short": "30g", "long": "365g"}
+_METODI_SOGLIA_ATR = 4.0
+_METODI_RICALCOLO_GG = 400                 # oltre, gli esiti a un anno sono tutti maturi: mese fermo
+_METODI_RICALCOLO_COMPLETO_ORE = 12
+_METODI_TETTO_FILE = 800_000
+_METODI_DECIDE = {"orizzonte": "30g", "casi": 30, "giornate": 15}
+_LIQUIDO = (("price", ">=", 10.0), ("avg_dollar_vol", ">=", 5_000_000.0))
 
 METODI_OMBRA = (
+    {"chiave": "sistema_vero", "nome": "Il sistema vero", "riferimento": True,
+     "definito_il": "2026-08-19", "base": "comprate", "regole": (),
+     "breve": "quello che il sistema compra davvero",
+     "spiegazione": ("Le occasioni che il sistema compra davvero, in qualunque dei cinque momenti "
+                     "d'acquisto. Come per tutti i metodi, ogni titolo conta una volta ogni 30 "
+                     "giorni. È il metro di paragone: ogni metodo si giudica contro questa riga."),
+     "perche": "", "fonte": "il metodo attuale del sistema"},
     {"chiave": "ombra_trend", "nome": "Solo in trend positivo", "definito_il": "2026-10-05",
-     "base": "comprate",
-     "spiegazione": ("Le stesse occasioni che il sistema compra oggi, in qualunque dei cinque "
-                     "momenti, ma tenendo solo quelle sopra la propria media a 200 giorni. "
-                     "Un titolo conta una volta ogni 30 giorni."),
-     "perche": ("Sui primi 48 giorni le comprate sopra la media facevano +3,07% a 30 giorni e "
-                "quelle sotto -11,75%, d'accordo in 12 giornate su 12. E' il filtro «niente "
-                "coltelli che cadono» applicato al metodo di oggi, senza cambiare altro."),
+     "base": "comprate", "breve": "le stesse comprate, ma solo sopra la media a 200 giorni",
+     "spiegazione": ("Le stesse occasioni che il sistema compra, in qualunque momento, ma tenendo "
+                     "solo quelle sopra la propria media a 200 giorni."),
+     "perche": ("Sui primi 48 giorni le comprate sopra la media facevano +3,07% a 30 giorni e quelle "
+                "sotto −11,75%, d'accordo in 12 giornate su 12. È il filtro «niente coltelli che "
+                "cadono» applicato al metodo di oggi, senza cambiare altro."),
+     "fonte": "il filtro di tendenza di Faber (2007), applicato al singolo titolo",
      "regole": (("above_sma200", "vero", None),)},
     {"chiave": "ombra_regole_nuove", "nome": "Regole nuove: qualità e trend",
      "definito_il": "2026-10-05", "base": "viste",
-     "spiegazione": ("Tutto quello che il sistema guarda ogni giorno, compreso ciò che scarta per "
-                     "punteggio, sconto, convenienza o rischio: si tengono i titoli sopra la media "
-                     "a 200 giorni, con rendimento a un anno non peggiore di -10%, prezzo di almeno "
-                     "10 $ e scambi di almeno 5 milioni di dollari al giorno, senza sospetto di "
-                     "trappola di valore. Un titolo conta una volta ogni 30 giorni."),
-     "perche": ("E' il punteggio al contrario: sui primi 48 giorni chi veniva scartato per "
-                "«punteggio basso» faceva -2,2% a 30 giorni contro il -7,15% delle comprate, e "
-                "sconto profondo, prezzo basso e potenziale di rimbalzo alto erano le "
-                "caratteristiche che perdevano di più."),
+     "breve": "in salita, anno non disastroso, titoli grandi e scambiati",
+     "spiegazione": ("Tutto quello che il sistema guarda, compreso ciò che scarta per punteggio, "
+                     "sconto, convenienza o rischio. Si tengono i titoli sopra la media a 200 giorni, "
+                     "con l'ultimo anno non peggiore di −10%, prezzo di almeno 10 dollari, scambi di "
+                     "almeno 5 milioni di dollari al giorno e nessun sospetto di trappola di valore."),
+     "perche": ("È il punteggio del sistema rovesciato: sui primi 48 giorni chi veniva scartato per "
+                "«punteggio basso» faceva −2,2% a 30 giorni contro il −7,15% delle comprate. Sconto "
+                "profondo, prezzo basso e rimbalzo atteso alto erano le caratteristiche che "
+                "perdevano di più."),
+     "fonte": "l'archivio del sistema, primi 48 giorni",
      "regole": (("above_sma200", "vero", None), ("perf_1y", ">=", -10.0), ("price", ">=", 10.0),
                 ("avg_dollar_vol", ">=", 5_000_000.0), ("trappola", "assente", None))},
+    {"chiave": "forza_relativa", "nome": "Forza relativa 12-1", "definito_il": "2026-10-06",
+     "base": "viste", "breve": "chi è salito di più nell'ultimo anno, senza l'ultimo mese",
+     "spiegazione": ("Fra tutti i titoli che il sistema ha guardato quel giorno, il 30% salito di più "
+                     "nell'ultimo anno senza contare l'ultimo mese, purché costi almeno 10 dollari e "
+                     "scambi almeno 5 milioni di dollari al giorno. La classifica si fa a giornata "
+                     "chiusa, quando ci sono tutti i titoli del giorno."),
+     "perche": ("È il fenomeno più studiato della borsa: chi è salito tende a continuare per qualche "
+                "mese. L'ultimo mese si toglie perché nel brevissimo succede il contrario. Sui primi "
+                "49 giorni dell'archivio era il metodo migliore a 30 giorni."),
+     "fonte": "Jegadeesh e Titman (1993); è la stessa idea della «forza relativa» di O'Neil",
+     "regole": (("mom121", "primi_pct", 30),) + _LIQUIDO},
+    {"chiave": "vicino_massimi", "nome": "Vicino ai massimi dell'anno", "definito_il": "2026-10-06",
+     "base": "viste", "breve": "al massimo 10% sotto il massimo dell'ultimo anno",
+     "spiegazione": ("I titoli guardati dal sistema che stanno al massimo il 10% sotto il loro "
+                     "massimo dell'ultimo anno, purché costino almeno 10 dollari e scambino almeno "
+                     "5 milioni di dollari al giorno."),
+     "perche": ("Gli studi trovano che più un titolo è vicino al massimo dell'anno, meglio va nei "
+                "mesi dopo: chi compra esita a pagarlo «così caro», e le notizie buone entrano nel "
+                "prezzo piano piano. È l'opposto di quello che fa oggi il sistema, che cerca i "
+                "titoli lontani dai massimi."),
+     "fonte": "George e Hwang (2004)",
+     "regole": (("dd_high", ">=", -10.0),) + _LIQUIDO},
+    {"chiave": "trend_template", "nome": "Trend template semplificato", "definito_il": "2026-10-06",
+     "base": "viste", "breve": "in salita su più scale: sopra le medie e vicino ai massimi",
+     "spiegazione": ("I titoli sopra la media a 200 giorni e sopra quella a 50, al massimo il 25% "
+                     "sotto il massimo dell'anno e in guadagno sull'ultimo anno, purché costino "
+                     "almeno 10 dollari e scambino almeno 5 milioni di dollari al giorno. È una "
+                     "versione semplificata: l'originale guarda anche la media a 150 giorni e il "
+                     "minimo dell'anno, che l'archivio non registra."),
+     "perche": ("È il filtro con cui molti trader cercano i titoli già in una salita sana, prima di "
+                "scegliere il momento d'ingresso: compra solo forza confermata su più scale di "
+                "tempo."),
+     "fonte": "il «trend template» di Mark Minervini",
+     "regole": (("above_sma200", "vero", None), ("sopra_media50", "vero", None),
+                ("dd_high", ">=", -25.0), ("perf_1y", ">", 0.0)) + _LIQUIDO},
+    {"chiave": "bassa_volatilita", "nome": "Bassa volatilità", "definito_il": "2026-10-06",
+     "base": "viste", "breve": "il 30% più calmo del giorno",
+     "spiegazione": ("Fra tutti i titoli che il sistema ha guardato quel giorno, il 30% con il "
+                     "movimento giornaliero più piccolo, purché costino almeno 10 dollari e scambino "
+                     "almeno 5 milioni di dollari al giorno. La classifica si fa a giornata chiusa."),
+     "perche": ("Gli studi trovano che i titoli calmi rendono quanto quelli agitati, o di più, "
+                "rischiando meno: molti investitori pagano troppo i titoli che si muovono tanto, "
+                "sperando nel colpo grosso."),
+     "fonte": "Blitz e van Vliet (2007); Frazzini e Pedersen (2014)",
+     "regole": (("atr_pct", "ultimi_pct", 30),) + _LIQUIDO},
+    {"chiave": "qualita", "nome": "Qualità dei conti", "definito_il": "2026-10-06", "base": "viste",
+     "breve": "aziende con i conti solidi",
+     "spiegazione": ("I titoli guardati dal sistema con i conti solidi: punteggio di Piotroski almeno "
+                     "7 su 9, oppure redditività del capitale almeno 12% con margine lordo almeno "
+                     "35%. Prezzo di almeno 10 dollari e scambi di almeno 5 milioni di dollari al "
+                     "giorno. Nel breve periodo i dati di bilancio ci sono solo per un titolo su "
+                     "dieci, quindi lì sceglierà poco."),
+     "perche": ("Le aziende che guadagnano bene e hanno i conti in ordine rendono di più nel tempo "
+                "di quelle fragili, e soffrono meno nei cali. È uno dei fattori più solidi negli "
+                "studi."),
+     "fonte": "Piotroski (2000); Novy-Marx (2013)",
+     "regole": (("qualita_conti", "vero", None),) + _LIQUIDO},
+    {"chiave": "qualita_forza", "nome": "Qualità e forza relativa", "definito_il": "2026-10-06",
+     "base": "viste", "breve": "conti solidi e fra i più forti del giorno",
+     "spiegazione": ("Le due regole insieme: conti solidi come nel metodo «Qualità dei conti» e, fra "
+                     "tutti i titoli guardati quel giorno, nel 30% salito di più nell'ultimo anno "
+                     "senza l'ultimo mese. Prezzo di almeno 10 dollari e scambi di almeno 5 milioni "
+                     "di dollari al giorno. La classifica si fa a giornata chiusa."),
+     "perche": ("Gli studi trovano che qualità e forza insieme funzionano meglio di ciascuna da "
+                "sola. Sui primi 49 giorni era il metodo migliore per il lungo periodo."),
+     "fonte": "Novy-Marx (2013); Asness, Frazzini e Pedersen, «quality minus junk» (2019)",
+     "regole": (("qualita_conti", "vero", None), ("mom121", "primi_pct", 30)) + _LIQUIDO},
+    {"chiave": "rimbalzo_grandi", "nome": "Rimbalzo solo sui titoli grandi",
+     "definito_il": "2026-10-06", "base": "viste",
+     "breve": "l'idea di oggi, ma solo su titoli grandi e molto scambiati",
+     "spiegazione": ("La stessa idea del sistema di oggi, comprare chi è appena sceso, ma solo sui "
+                     "titoli grandi: forza del prezzo al massimo 35, prezzo di almeno 10 dollari e "
+                     "scambi di almeno 50 milioni di dollari al giorno."),
+     "perche": ("Gli studi trovano che il rimbalzo di breve esiste, ma soprattutto sui titoli grandi "
+                "e liquidi: sui piccoli i costi e gli scarti di prezzo se lo mangiano. È la prova di "
+                "quanto vale l'idea di oggi, fatta come dicono gli studi."),
+     "fonte": "gli studi sul rimbalzo di breve periodo, per esempio Jegadeesh (1990) e Lehmann (1990)",
+     "regole": (("rsi", "<=", 35.0), ("price", ">=", 10.0), ("avg_dollar_vol", ">=", 50_000_000.0))},
 )
 
 _OMBRA_TESTI = {
-    ("above_sma200", "vero"): "sopra la propria media a 200 giorni",
-    ("perf_1y", ">="): "rendimento a 1 anno almeno {s:+.0f}%",
+    ("above_sma200", "vero"): "sopra la media a 200 giorni",
+    ("sopra_media50", "vero"): "sopra la media a 50 giorni",
+    ("perf_1y", ">="): "ultimo anno almeno {s:+.0f}%",
+    ("perf_1y", ">"): "in guadagno sull'ultimo anno",
     ("price", ">="): "prezzo almeno {s:.0f} $",
     ("avg_dollar_vol", ">="): "scambi di almeno {m:.0f} milioni di $ al giorno",
     ("trappola", "assente"): "nessun sospetto di trappola di valore",
+    ("mom121", "primi_pct"): "nel {s:.0f}% salito di più del giorno, senza l'ultimo mese",
+    ("dd_high", ">="): "al massimo {a:.0f}% sotto il massimo dell'anno",
+    ("atr_pct", "ultimi_pct"): "nel {s:.0f}% più calmo del giorno",
+    ("qualita_conti", "vero"): "conti solidi",
+    ("rsi", "<="): "forza del prezzo al massimo {s:.0f}",
 }
+
+
+def _num(x) -> bool:
+    return isinstance(x, (int, float)) and not isinstance(x, bool)
+
+
+def _metodo_a_classifica(metodo: dict) -> bool:
+    """True se il metodo usa una classifica del giorno (il 30% migliore…): si fa a giornata chiusa."""
+    return any(op in ("primi_pct", "ultimi_pct") for _c, op, _s in (metodo.get("regole") or ()))
 
 
 def _ombra_regole_testo(metodo: dict) -> list:
     out = []
     for campo, op, soglia in metodo.get("regole") or ():
         t = _OMBRA_TESTI.get((campo, op))
-        if t:
-            out.append(t.format(s=(soglia or 0), m=(soglia or 0) / 1e6))
-        else:
-            out.append("%s %s %s" % (nome_caratteristica(campo), op, soglia))
-    return out
+        v = float(soglia) if _num(soglia) else 0.0
+        out.append(t.format(s=v, m=v / 1e6, a=abs(v)) if t
+                   else "%s %s %s" % (nome_caratteristica(campo), op, soglia))
+    return out or ["nessuna regola in più: è quello che il sistema compra"]
 
 
-def _ombra_valore(p: dict, campo: str):
+def metodi_info() -> list:
+    """I metodi come li mostra l'app: tutto tranne le regole grezze, piu' le regole in italiano."""
+    return [dict({k: v for k, v in m.items() if k != "regole"},
+                 regole_testo=_ombra_regole_testo(m), a_classifica=_metodo_a_classifica(m))
+            for m in METODI_OMBRA]
+
+
+def metodo_info(chiave: str) -> dict:
+    for m in metodi_info():
+        if m["chiave"] == chiave:
+            return m
+    return {}
+
+
+def _metodo_valore(p: dict, campo: str):
+    """Il valore di una caratteristica per le regole, comprese le tre ricavate da altre."""
+    t = p.get("titolo") or {}
     if campo == "trappola":
         return p.get("trappola")
-    return (p.get("titolo") or {}).get(campo)
+    if campo == "mom121":
+        # salita sull'anno SENZA l'ultimo mese: (1 + anno) / (1 + mese) − 1
+        a, b = t.get("perf_1y"), t.get("perf_1m")
+        if not (_num(a) and _num(b)) or b <= -99:
+            return None
+        return ((1 + a / 100.0) / (1 + b / 100.0) - 1) * 100.0
+    if campo == "sopra_media50":
+        r = t.get("rebound_pot")                # media a 50 giorni / prezzo − 1: ≤ 0 = sopra la media
+        return (r <= 0) if _num(r) else None
+    if campo == "qualita_conti":
+        f, roic, gm = t.get("fscore"), t.get("roic"), t.get("gross_m")
+        if _num(f) and f >= 7:
+            return True
+        if _num(roic) and _num(gm):
+            return bool(roic >= 12 and gm >= 35)
+        return False if _num(f) else None
+    return t.get(campo)
 
 
-def passa_ombra(p: dict, metodo: dict) -> bool:
-    """True se la riga di profilo `p` sarebbe stata SCELTA dal metodo in ombra. Si valuta sulle
-    caratteristiche registrate in quell'istante: e' il motivo per cui l'archivio le conserva tutte,
-    anche per le occasioni scartate."""
+def _metodi_visto(p: dict) -> bool:
+    """Fa parte di «quello che il sistema ha guardato con un giudizio»: comprato in uno dei cinque
+    momenti, oppure scartato per una ragione di giudizio (non tecnica)."""
     if not isinstance(p, dict) or p.get("kind") not in ("short", "long") or not p.get("prezzo"):
         return False
     if p.get("scartata"):
-        if metodo.get("base") != "viste" or p.get("motivo") not in _OMBRA_MOTIVI_VISTI:
-            return False
-    elif not p.get("momento"):
+        return p.get("motivo") in _OMBRA_MOTIVI_VISTI
+    return bool(p.get("momento"))
+
+
+def passa_ombra(p: dict, metodo: dict, tagli: dict = None) -> bool:
+    """True se la riga di profilo `p` sarebbe stata SCELTA dal metodo. Si valuta sulle
+    caratteristiche registrate in quell'istante: e' il motivo per cui l'archivio le conserva tutte,
+    anche per le occasioni scartate. `tagli` porta le soglie delle classifiche del giorno."""
+    if not _metodi_visto(p):
+        return False
+    if p.get("scartata") and metodo.get("base") != "viste":
         return False
     for campo, op, soglia in metodo.get("regole") or ():
-        v = _ombra_valore(p, campo)
+        v = _metodo_valore(p, campo)
         if op == "vero":
-            if v is not True:
-                return False
+            ok = v is True
         elif op == "assente":
-            if v:
+            ok = not v
+        elif op in (">=", "<=", ">", "<"):
+            if not _num(v):
                 return False
-        elif op in (">=", "<="):
-            if not isinstance(v, (int, float)) or isinstance(v, bool):
+            ok = ((op == ">=" and v >= soglia) or (op == "<=" and v <= soglia)
+                  or (op == ">" and v > soglia) or (op == "<" and v < soglia))
+        elif op in ("primi_pct", "ultimi_pct"):
+            taglio = (tagli or {}).get((p.get("kind"), campo, op, soglia))
+            if taglio is None or not _num(v):
                 return False
-            if (op == ">=" and v < soglia) or (op == "<=" and v > soglia):
-                return False
+            ok = v >= taglio if op == "primi_pct" else v <= taglio
         else:
             return False
+        if not ok:
+            return False
     return True
+
+
+def _metodi_tagli(profili: list, metodi) -> dict:
+    """Le soglie delle classifiche del giorno: fra tutto quello che il sistema ha guardato quel
+    giorno (un titolo una volta), il valore che separa il 30% migliore. Sotto 10 titoli niente
+    classifica: con pochi titoli il «30% migliore» non vuol dire niente."""
+    pop, visti = {}, set()
+    for p in profili:
+        if not _metodi_visto(p):
+            continue
+        k = (p.get("kind"), str(p.get("ticker") or "").upper())
+        if k in visti:
+            continue
+        visti.add(k)
+        pop.setdefault(p.get("kind"), []).append(p)
+    tagli = {}
+    for m in metodi:
+        for campo, op, soglia in m.get("regole") or ():
+            if op not in ("primi_pct", "ultimi_pct"):
+                continue
+            for kind, ps in pop.items():
+                vals = sorted(v for v in (_metodo_valore(p, campo) for p in ps) if _num(v))
+                if len(vals) < 10:
+                    continue
+                q = (1 - soglia / 100.0) if op == "primi_pct" else (soglia / 100.0)
+                tagli[(kind, campo, op, soglia)] = vals[min(len(vals) - 1, int(len(vals) * q))]
+    return tagli
 
 
 def _ombra_origine_viva(p: dict) -> str:
@@ -10211,6 +10508,8 @@ def _ombra_ultime(righe: list) -> dict:
     """{(metodo, kind, ticker): ultima data di scelta} dalle righe gia' a verbale."""
     u = {}
     for r in righe:
+        if not isinstance(r, dict) or not r.get("metodo"):
+            continue
         try:
             g = datetime.date.fromisoformat(str(r.get("giorno"))[:10])
         except Exception:
@@ -10221,217 +10520,480 @@ def _ombra_ultime(righe: list) -> dict:
     return u
 
 
-def _ombra_scegli(profili_del_giorno: list, giorno: str, ultimo: dict) -> list:
-    """Le scelte di UN giorno, per tutti i metodi. `ultimo` tiene l'ultima scelta per
-    (metodo, kind, titolo) e viene aggiornato: serve alla regola «un titolo ogni 30 giorni»."""
+def _metodi_scegli(profili_del_giorno: list, giorno: str, ultimo: dict, metodi=None,
+                   giornata_chiusa: bool = True) -> list:
+    """Le scelte di UN giorno per i metodi indicati. `ultimo` tiene l'ultima scelta per
+    (metodo, tipo, titolo) e viene aggiornato: serve alla regola «un titolo ogni 30 giorni». I
+    metodi con una classifica del giorno si saltano finche' la giornata non e' chiusa: a meta'
+    giornata mancano ancora titoli, e il «30% migliore» cambierebbe da un giro all'altro."""
+    metodi = METODI_OMBRA if metodi is None else metodi
     try:
-        g = datetime.date.fromisoformat(giorno)
+        g = datetime.date.fromisoformat(str(giorno)[:10])
     except Exception:
         return []
-    ordinati = sorted((p for p in profili_del_giorno
-                       if isinstance(p, dict) and str(p.get("giorno") or "")[:10] == giorno),
-                      key=lambda p: str(p.get("ora") or ""))
+    del_giorno = sorted((p for p in (profili_del_giorno or ())
+                         if isinstance(p, dict) and str(p.get("giorno") or "")[:10] == giorno),
+                        key=lambda p: str(p.get("ora") or ""))
+    if not del_giorno:
+        return []
+    tagli = _metodi_tagli(del_giorno, metodi) if any(_metodo_a_classifica(m) for m in metodi) else {}
     righe = []
-    for m in METODI_OMBRA:
-        for p in ordinati:
-            if not passa_ombra(p, m):
+    for m in metodi:
+        if _metodo_a_classifica(m) and not giornata_chiusa:
+            continue
+        for p in del_giorno:
+            if not passa_ombra(p, m, tagli):
                 continue
             tk, kind = str(p.get("ticker") or "").upper(), p.get("kind")
             k = (m["chiave"], kind, tk)
             prec = ultimo.get(k)
-            if prec is not None and (g - prec).days < _OMBRA_UNA_PER_TITOLO_GG:
+            if prec is not None and abs((g - prec).days) < _OMBRA_UNA_PER_TITOLO_GG:
                 continue
-            ultimo[k] = g
+            ultimo[k] = max(prec, g) if prec is not None else g
+            atr = (p.get("titolo") or {}).get("atr_pct")
             righe.append({
                 "id": f"{giorno}:{kind}:{tk}:{m['chiave']}", "giorno": giorno,
                 "metodo": m["chiave"], "kind": kind, "ticker": tk, "nome": p.get("nome") or tk,
                 "prezzo": p.get("prezzo"), "profilo": p.get("id"),
                 "origine_viva": _ombra_origine_viva(p),
-                "retroattiva": bool(giorno < m["definito_il"]), "ora": _arc_ora(),
+                "retroattiva": bool(giorno < m["definito_il"]),
+                "atr_pct": (round(float(atr), 4) if _num(atr) else None), "ora": _arc_ora(),
             })
     return righe
 
 
-def registra_ombra(giorni: int = 3) -> dict:
-    """Mette a verbale, in archivio/ombra, che cosa avrebbero scelto oggi i metodi in ombra.
+def registra_metodi(giorni: int = 7) -> dict:
+    """Mette a verbale, in archivio/ombra, che cosa hanno scelto i metodi di selezione.
 
-    Ripetibile senza danno: i doppioni si scartano per id, e un titolo gia' scelto resta scelto.
-    La PRIMA volta recupera tutti i giorni che hanno profili in archivio, marcandoli retroattivi:
-    sono i giorni guardati per scrivere le regole, e nella scheda stanno in una riga a parte.
-    Nei giri successivi guarda solo gli ultimi `giorni` giorni, e rifa' oggi a ogni giro perche'
-    i profili di oggi arrivano un po' alla volta."""
+    Ogni riga va nel file del SUO giorno di scelta: cosi' il controllo dei doppioni la ritrova
+    sempre, e rifare un giorno non scrive niente due volte. Un metodo nuovo (senza riga di avvio)
+    ripassa tutta la storia una volta, con regole ferme e in ordine di data, e solo quando tutto e'
+    arrivato in archivio viene dichiarato avviato; i metodi gia' avviati guardano gli ultimi
+    `giorni` giorni chiusi, piu' oggi per quelli senza classifica. Ripetibile senza danno."""
+    fuori = {"scritte": 0, "giorni": 0, "candidate": 0, "avviati": [], "salvate": True,
+             "motivo": None}
     indice = indice_archivio()
     giorni_profili = sorted({os.path.basename(n)[:10] for n in indice
                              if n.startswith(ARC_PROFILI + "/")})
+    giorni_profili = [g for g in giorni_profili if len(g) == 10 and g[:4].isdigit()]
     if not giorni_profili:
-        return {"scritte": 0, "giorni": 0, "candidate": 0, "salvate": True, "motivo": None}
-    gia = [r for r in _arc_leggi_giorni(ARC_OMBRA) if isinstance(r, dict)]
+        return fuori
     oggi = _arc_oggi()
-    if gia:
-        dal = (datetime.date.today() - datetime.timedelta(days=max(0, giorni))).isoformat()
-        da_fare = [g for g in giorni_profili if g >= dal]
-    else:
-        da_fare = list(giorni_profili)          # prima volta: tutto lo storico
-    fatti = {str(r.get("giorno"))[:10] for r in gia}
-    da_fare = [g for g in da_fare if g == oggi or g not in fatti]
-    if not da_fare:
-        return {"scritte": 0, "giorni": 0, "candidate": 0, "salvate": True, "motivo": None}
-    ultimo = _ombra_ultime(gia)
-    # pochi giorni: si leggono uno a uno; molti (prima volta): tutto in una lettura sola
-    if len(da_fare) > 3:
-        per_g = {}
-        for p in _arc_leggi_giorni(ARC_PROFILI, dal=da_fare[0], al=da_fare[-1]):
+    avviati = {r.get("metodo") for r in _arc_leggi_giorni(ARC_METODI_AVVII) if isinstance(r, dict)}
+    nuovi = [m for m in METODI_OMBRA if m["chiave"] not in avviati]
+    vecchi = [m for m in METODI_OMBRA if m["chiave"] in avviati]
+    dal_finestra = (datetime.date.today() - datetime.timedelta(days=max(1, giorni))).isoformat()
+    finestra = [g for g in giorni_profili if g >= dal_finestra]
+    per_g = {}
+    if nuovi or finestra:
+        for p in _arc_leggi_giorni(ARC_PROFILI, dal=(None if nuovi else finestra[0])):
             if isinstance(p, dict):
                 per_g.setdefault(str(p.get("giorno") or "")[:10], []).append(p)
+    righe = []
+    if nuovi:
+        ultimo = {}                                    # ripasso deterministico, dal primo giorno
+        for g in giorni_profili:
+            righe += _metodi_scegli(per_g.get(g) or [], g, ultimo, nuovi, giornata_chiusa=(g < oggi))
+    if vecchi and finestra:
+        dal_gia = (datetime.date.today() - datetime.timedelta(
+            days=_OMBRA_UNA_PER_TITOLO_GG + max(1, giorni) + 5)).isoformat()
+        ultimo = _ombra_ultime([r for r in _arc_leggi_giorni(ARC_OMBRA, dal=dal_gia)
+                                if isinstance(r, dict)])
+        for g in finestra:
+            righe += _metodi_scegli(per_g.get(g) or [], g, ultimo, vecchi, giornata_chiusa=(g < oggi))
+    per_giorno = {}
+    for r in righe:
+        per_giorno.setdefault(r["giorno"], []).append(r)
+    problemi = []
+    for g in sorted(per_giorno):
+        es = _arc_aggiungi(ARC_OMBRA, per_giorno[g], chiave=lambda r: r.get("id"), giorno=g)
+        fuori["scritte"] += es.get("scritte", 0)
+        if es.get("scritte"):
+            fuori["giorni"] += 1
+        if not es.get("salvate"):
+            problemi.append(es.get("motivo"))
+    fuori["candidate"] = len(righe)
+    if nuovi and not problemi:
+        es = _arc_aggiungi(ARC_METODI_AVVII, [
+            {"id": m["chiave"], "metodo": m["chiave"], "giorno": oggi, "ora": _arc_ora(),
+             "definito_il": m["definito_il"], "regole": _ombra_regole_testo(m)} for m in nuovi],
+            chiave=lambda r: r.get("id"))
+        if es.get("salvate"):
+            fuori["avviati"] = [m["chiave"] for m in nuovi]
+        else:
+            problemi.append(es.get("motivo"))
+    if problemi:
+        fuori["salvate"] = False
+        fuori["motivo"] = "; ".join(str(x) for x in problemi if x) or "scrittura non riuscita"
+    return fuori
+
+
+registra_ombra = registra_metodi        # il nome di prima, per chi lo chiama ancora
+
+
+# --- I CONTI MENSILI PER L'APP ------------------------------------------------
+
+def _nome_conti_metodi(kind: str, mese: str) -> str:
+    return f"{CONTI_METODI_DIR}/{kind}_{mese}.json"
+
+
+def _mesi_metodi() -> list:
+    """I mesi da quello del primo profilo a quello corrente, «2026-08», «2026-09»…"""
+    try:
+        y, m = (int(x) for x in _METODI_PRIMO_MESE.split("-"))
+    except Exception:
+        y, m = 2026, 8
+    oggi = datetime.date.today()
+    fuori = []
+    while (y, m) <= (oggi.year, oggi.month):
+        fuori.append("%04d-%02d" % (y, m))
+        m += 1
+        if m > 12:
+            y, m = y + 1, 1
+    return fuori
+
+
+def _r2(x, n: int = 2):
+    return round(float(x), n) if _num(x) else None
+
+
+def _calcola_conti_metodi(mesi: list, scelte: list = None) -> dict:
+    """{(tipo, mese): documento} con, per ogni metodo, le scelte di quel mese e com'e' andata, piu'
+    la resa tipica di TUTTO quello che il sistema ha guardato ogni giorno (il riferimento che toglie
+    l'effetto del mercato). Legge solo le scelte e gli esiti: i profili non servono."""
+    mesi = sorted(set(mesi or ()))
+    if not mesi:
+        return {}
+    mesi_set, dal = set(mesi), mesi[0] + "-01"
+    if scelte is None:
+        scelte = [r for r in _arc_leggi_giorni(ARC_OMBRA, dal=dal) if isinstance(r, dict)]
+    viste_id, valide = set(), []
+    for r in scelte:
+        if (r.get("metodo") and r.get("kind") in ("short", "long") and r.get("id") not in viste_id
+                and str(r.get("giorno") or "")[:7] in mesi_set):
+            viste_id.add(r.get("id"))
+            valide.append(r)
+    esiti, universo, visti = {}, {}, set()
+    for e in _arc_leggi_giorni(ARC_ESITI, dal=dal):
+        if (not isinstance(e, dict) or e.get("resa") is None or e.get("dati_sospetti")
+                or e.get("finestra_incompleta") or e.get("orizzonte") not in _METODI_ORIZZONTI):
+            continue
+        pid, oriz = str(e.get("profilo") or ""), e.get("orizzonte")
+        esiti[(pid, oriz)] = e
+        parti = pid.split(":")
+        if len(parti) < 4:
+            continue
+        g_acq, kind, tk, coda = parti[0], parti[1], parti[2].upper(), ":".join(parti[3:])
+        if g_acq[:7] not in mesi_set or kind not in ("short", "long"):
+            continue
+        if e.get("scartata") and coda not in _OMBRA_MOTIVI_VISTI:
+            continue
+        chiave_u = (kind, g_acq, tk, oriz)
+        if chiave_u in visti:
+            continue
+        visti.add(chiave_u)
+        try:
+            universo.setdefault((kind, g_acq), {}).setdefault(oriz, []).append(float(e["resa"]))
+        except (TypeError, ValueError):
+            continue
+    docs = {}
+
+    def doc(kind, mese):
+        return docs.setdefault((kind, mese), {"kind": kind, "mese": mese, "versione": 1,
+                                              "metodi": {}, "universo": {}})
+
+    for r in valide:
+        kind, g = r["kind"], str(r["giorno"])[:10]
+        rs = {o: (esiti.get((r.get("profilo"), o)) or {}) for o in _METODI_ORIZZONTI}
+        atr = r.get("atr_pct")
+        soglia_pct = round(_METODI_SOGLIA_ATR * float(atr), 2) if (_num(atr) and atr > 0) else None
+        fin = rs.get(_METODI_SOGLIA_FINESTRA.get(kind, "30g")) or {}
+        r_soglia = None
+        if soglia_pct is not None and fin.get("resa") is not None:
+            mx = fin.get("max_toccato")
+            r_soglia = soglia_pct if (_num(mx) and mx >= soglia_pct) else _r2(fin.get("resa"))
+        doc(kind, g[:7])["metodi"].setdefault(r["metodo"], []).append([
+            g, str(r.get("ticker") or ""), str(r.get("nome") or r.get("ticker") or ""),
+            _r2(r.get("prezzo"), 4), str(r.get("origine_viva") or ""),
+            1 if r.get("retroattiva") else 0,
+            _r2(rs["7g"].get("resa")), _r2(rs["30g"].get("resa")), _r2(rs["365g"].get("resa")),
+            r_soglia, soglia_pct])
+    for (kind, g), per_o in universo.items():
+        doc(kind, g[:7])["universo"][g] = [
+            max(len(v) for v in per_o.values()),
+            (_r2(_mediana(per_o["7g"])) if per_o.get("7g") else None),
+            (_r2(_mediana(per_o["30g"])) if per_o.get("30g") else None),
+            (_r2(_mediana(per_o["365g"])) if per_o.get("365g") else None)]
+    for d in docs.values():
+        for k in d["metodi"]:
+            d["metodi"][k].sort(key=lambda x: (x[0], x[1]))
+        d["metodi"] = dict(sorted(d["metodi"].items()))
+        d["universo"] = dict(sorted(d["universo"].items()))
+    return docs
+
+
+def _conta_casi(doc) -> int:
+    return sum(len(v) for v in ((doc or {}).get("metodi") or {}).values() if isinstance(v, list))
+
+
+def aggiorna_conti_metodi(tutti: bool = None) -> dict:
+    """Rifa' i conti mensili che legge l'app. A ogni giro gli ultimi due mesi; due volte al giorno
+    (tutti=None decide da solo) tutti i mesi i cui esiti a un anno possono ancora maturare.
+
+    Un file si sovrascrive solo se il ricalcolo ha ALMENO tanti casi quanti ne ha gia': le scelte e
+    gli esiti possono solo crescere, quindi meno casi vuol dire una lettura incompleta dell'archivio,
+    e in quel caso il file resta com'e'. Un file uguale non si riscrive."""
+    mesi_tutti = _mesi_metodi()
+    if tutti is None:
+        stato = read_data_json(_METODI_STATO, None)
+        try:
+            q = datetime.datetime.strptime(str((stato or {}).get("ricalcolo_completo") or ""),
+                                           "%Y-%m-%d %H:%M")
+            tutti = (datetime.datetime.now() - q).total_seconds() >= _METODI_RICALCOLO_COMPLETO_ORE * 3600
+        except Exception:
+            tutti = True
+    if tutti:
+        limite = (datetime.date.today() - datetime.timedelta(days=_METODI_RICALCOLO_GG)).isoformat()[:7]
+        mesi = [m for m in mesi_tutti if m >= limite]
     else:
-        per_g = {g: _arc_leggi_giorni(ARC_PROFILI, dal=g, al=g) for g in da_fare}
-    nuove, n_giorni = [], 0
-    for g in da_fare:                            # in ordine di data: la regola dei 30 giorni e' sequenziale
-        righe = _ombra_scegli(per_g.get(g) or [], g, ultimo)
-        if righe:
-            n_giorni += 1
-            nuove += righe
-    esito = _arc_aggiungi(ARC_OMBRA, nuove, chiave=lambda r: r.get("id"))
-    return {"scritte": esito.get("scritte", 0), "giorni": n_giorni, "candidate": len(nuove),
-            "salvate": bool(esito.get("salvate")), "motivo": esito.get("motivo")}
+        mesi = mesi_tutti[-2:]
+    docs = _calcola_conti_metodi(mesi)
+    fuori = {"scritti": 0, "invariati": 0, "saltati": 0, "mesi": len(mesi),
+             "completo": bool(tutti), "motivo": None}
+    problemi = []
+    for kind in ("short", "long"):
+        for mese in mesi:
+            nome = _nome_conti_metodi(kind, mese)
+            nuovo = docs.get((kind, mese))
+            vecchio = read_data_json(nome, None)
+            if nuovo is None:
+                if isinstance(vecchio, dict) and (_conta_casi(vecchio) or vecchio.get("universo")):
+                    problemi.append(f"{nome}: il ricalcolo non trova niente ma il file ha dei dati, "
+                                    "lettura incompleta dell'archivio: non lo tocco")
+                    fuori["saltati"] += 1
+                continue
+            if isinstance(vecchio, dict):
+                if (_conta_casi(vecchio) > _conta_casi(nuovo)
+                        or len(vecchio.get("universo") or {}) > len(nuovo.get("universo") or {})):
+                    problemi.append(f"{nome}: il ricalcolo ha meno casi del file, lettura "
+                                    "incompleta dell'archivio: non lo sovrascrivo")
+                    fuori["saltati"] += 1
+                    continue
+                if {k: v for k, v in vecchio.items() if k != "aggiornato"} == nuovo:
+                    fuori["invariati"] += 1
+                    continue
+            da_scrivere = dict(nuovo, aggiornato=_arc_ora())
+            peso = len(json.dumps(da_scrivere, ensure_ascii=False, indent=0).encode("utf-8"))
+            if peso > _METODI_TETTO_FILE:
+                _segna_avviso(nome, peso)
+                problemi.append(f"{nome} peserebbe {peso // 1024} KB: non lo scrivo")
+                fuori["saltati"] += 1
+                continue
+            if write_data_json(nome, da_scrivere) and nome not in _SALVATAGGI_FALLITI:
+                fuori["scritti"] += 1
+            else:
+                problemi.append(f"{nome} non salvato")
+    if tutti and not problemi:
+        write_data_json(_METODI_STATO, {"ricalcolo_completo": _arc_ora()})
+    if problemi:
+        fuori["motivo"] = "; ".join(problemi)
+    return fuori
 
 
-def _ombra_blocco(xs: list) -> dict:
-    return {"quante": len(xs),
-            "mediana": (round(_mediana(xs), 2) if xs else None),
-            "media": (round(sum(xs) / len(xs), 2) if xs else None),
+def _caso_metodo(r: list) -> dict:
+    return {"giorno": r[0], "ticker": r[1], "nome": r[2], "prezzo": r[3], "origine": r[4],
+            "retro": bool(r[5]), "7g": r[6], "30g": r[7], "365g": r[8], "soglia": r[9],
+            "soglia_pct": r[10]}
+
+
+def _unisci_conti(docs: list, kind: str, anteprima: bool = False) -> dict:
+    metodi, universo, agg = {}, {}, []
+    for d in docs or ():
+        if not isinstance(d, dict) or d.get("kind") != kind:
+            continue
+        for k, righe in (d.get("metodi") or {}).items():
+            metodi.setdefault(k, []).extend(_caso_metodo(r) for r in (righe or ())
+                                            if isinstance(r, list) and len(r) >= 11)
+        for g, u in (d.get("universo") or {}).items():
+            if isinstance(u, list) and len(u) >= 4:
+                universo[g] = {"n": u[0], "7g": u[1], "30g": u[2], "365g": u[3]}
+        if d.get("aggiornato"):
+            agg.append(str(d["aggiornato"]))
+    for k in metodi:
+        metodi[k].sort(key=lambda c: (c["giorno"], c["ticker"]))
+    return {"kind": kind, "anteprima": anteprima, "aggiornato": (max(agg) if agg else None),
+            "metodi": metodi, "universo": universo}
+
+
+@st.cache_data(ttl=900, show_spinner=False)
+def _conti_metodi_da_file(kind: str):
+    docs = [d for d in (read_data_json(_nome_conti_metodi(kind, m), None) for m in _mesi_metodi())
+            if isinstance(d, dict)]
+    return _unisci_conti(docs, kind) if docs else None
+
+
+def _scelte_in_memoria() -> list:
+    """Le scelte di tutti i metodi ricalcolate al volo dai profili, senza scrivere niente: serve
+    solo all'anteprima, finche' il lavoro automatico non le ha messe a verbale."""
+    per_g = {}
+    for p in _arc_leggi_giorni(ARC_PROFILI):
+        if isinstance(p, dict):
+            per_g.setdefault(str(p.get("giorno") or "")[:10], []).append(p)
+    oggi, ultimo, fuori = _arc_oggi(), {}, []
+    for g in sorted(k for k in per_g if len(k) == 10):
+        fuori += _metodi_scegli(per_g[g], g, ultimo, METODI_OMBRA, giornata_chiusa=(g < oggi))
+    return fuori
+
+
+@st.cache_data(ttl=3600, show_spinner=False)
+def _anteprima_metodi() -> dict:
+    docs = _calcola_conti_metodi(_mesi_metodi(), scelte=_scelte_in_memoria())
+    return {kind: _unisci_conti([d for (k, _m), d in docs.items() if k == kind], kind, anteprima=True)
+            for kind in ("short", "long")}
+
+
+def conti_metodi(kind: str = "short") -> dict:
+    """Quello che legge la sezione «Metodi di selezione»: i conti mensili del lavoro automatico,
+    oppure, se non ci sono ancora, un'anteprima calcolata al volo e dichiarata tale."""
+    c = _conti_metodi_da_file(kind)
+    if c and any((c.get("metodi") or {}).values()):
+        return c
+    return (_anteprima_metodi() or {}).get(kind) or _unisci_conti([], kind, anteprima=True)
+
+
+# --- I CALCOLI CHE LA SEZIONE MOSTRA ------------------------------------------------
+
+def casi_metodo(conti: dict, chiave: str, periodo: str = "tutto") -> list:
+    """Le scelte di un metodo, eventualmente solo nella prova vera (dal giorno in cui le regole
+    sono state fissate) o solo nei giorni prima. Per il sistema vero la data e' quella del primo
+    metodo in ombra, cosi' il confronto copre gli stessi giorni."""
+    cs = list(((conti or {}).get("metodi") or {}).get(chiave) or [])
+    if chiave == "sistema_vero":
+        dal = min((m["definito_il"] for m in METODI_OMBRA if not m.get("riferimento")),
+                  default="0000-00-00")
+    else:
+        dal = (metodo_info(chiave) or {}).get("definito_il") or "0000-00-00"
+    if periodo == "prova":
+        return [c for c in cs if c["giorno"] >= dal]
+    if periodo == "prima":
+        return [c for c in cs if c["giorno"] < dal]
+    return cs
+
+
+def statistica_vendita(casi: list, vendita: str, importo: float = 30.0, fee: float = 1.0,
+                       universo: dict = None) -> dict:
+    """Com'e' andata vendendo con una regola: resa tipica, media, quota in guadagno, netto in euro
+    caso per caso (commissione due volte, tassa sui guadagni) e, per le vendite a giorni fissi,
+    di quanto si e' fatto meglio di tutto quello che il sistema aveva guardato lo stesso giorno."""
+    xs = [(c["giorno"], float(c[vendita])) for c in (casi or ()) if _num(c.get(vendita))]
+    if not xs:
+        return {"n": 0}
+    rese = sorted(x for _, x in xs)
+    n = len(rese)
+    netti = [v for v in (net_eur(x, importo, fee) for _, x in xs) if v is not None]
+    ecc = []
+    if universo and vendita in _METODI_ORIZZONTI:
+        ecc = [x - float(universo[g][vendita]) for g, x in xs
+               if _num((universo.get(g) or {}).get(vendita))]
+    return {"n": n, "giornate": len({g for g, _ in xs}), "med": round(_mediana(rese), 2),
+            "avg": round(sum(rese) / n, 2),
+            "hit": round(100 * sum(1 for x in rese if x > 0) / n),
+            "netto_medio": (round(sum(netti) / len(netti), 2) if netti else None),
+            "netto_totale": (round(sum(netti), 2) if netti else None),
+            "in_utile": sum(1 for v in netti if v > 0),
+            "eccesso": (round(_mediana(ecc), 2) if ecc else None), "n_eccesso": len(ecc),
+            "migliore": round(rese[-1], 2), "peggiore": round(rese[0], 2)}
+
+
+def riepilogo_metodi(conti: dict, importo: float = 30.0, fee: float = 1.0,
+                     periodo: str = "tutto") -> list:
+    vend = METODI_VENDITE.get((conti or {}).get("kind"), METODI_VENDITE["short"])
+    out = []
+    for m in metodi_info():
+        cs = casi_metodo(conti, m["chiave"], periodo)
+        giornate = len({c["giorno"] for c in cs})
+        out.append({"chiave": m["chiave"], "nome": m["nome"], "riferimento": bool(m.get("riferimento")),
+                    "scelte": len(cs), "giornate": giornate,
+                    "al_giorno": (round(len(cs) / giornate, 1) if giornate else None),
+                    "vendite": {v: statistica_vendita(cs, v, importo, fee, (conti or {}).get("universo"))
+                                for v in vend}})
+    return out
+
+
+def _blocco_rese(xs: list) -> dict:
+    return {"quante": len(xs), "mediana": (round(_mediana(xs), 2) if xs else None),
             "in_guadagno_pct": (round(100 * sum(1 for x in xs if x > 0) / len(xs)) if xs else None)}
 
 
-def _ombra_verdetto(per_oriz: dict) -> dict:
-    """Una frase onesta su dove siamo: si decide sui 30 giorni, sulla sola prova vera («dopo»),
-    e non prima di 30 occasioni e 15 giornate con entrambi i metodi."""
-    b = (per_oriz.get("30g") or {}).get("dopo") or {}
-    o, v = b.get("ombra") or {}, b.get("vivo") or {}
-    n, gg, meglio = o.get("quante") or 0, b.get("giornate_con_entrambi") or 0, b.get("giornate_ombra_meglio") or 0
-    if n < 30 or gg < 15:
+def confronto_col_vivo(conti: dict, chiave: str, vendita: str, periodo: str = "prova") -> dict:
+    """Il metodo contro il sistema vero, sulle STESSE giornate: le occasioni dello stesso giorno
+    salgono e scendono insieme, quindi la domanda giusta e' «in quante giornate il metodo ha fatto
+    meglio», non «chi ha la mediana piu' alta»."""
+    mie = [c for c in casi_metodo(conti, chiave, periodo) if _num(c.get(vendita))]
+    vivo = [c for c in (((conti or {}).get("metodi") or {}).get("sistema_vero") or [])
+            if _num(c.get(vendita))]
+    per_g = {}
+    for c in mie:
+        per_g.setdefault(c["giorno"], ([], []))[0].append(float(c[vendita]))
+    for c in vivo:
+        if c["giorno"] in per_g:
+            per_g[c["giorno"]][1].append(float(c[vendita]))
+    coppie = [(_mediana(a), _mediana(b)) for a, b in per_g.values() if a and b]
+    return {"ombra": _blocco_rese([x for a, _ in per_g.values() for x in a]),
+            "vivo": _blocco_rese([x for _, b in per_g.values() for x in b]),
+            "giornate_con_entrambi": len(coppie),
+            "giornate_ombra_meglio": sum(1 for a, b in coppie if a > b)}
+
+
+def verdetto_metodo(conti: dict, chiave: str) -> dict:
+    """Una frase onesta su dove siamo. Si decide a 30 giorni, sulla sola prova vera, e non prima di
+    30 occasioni e 15 giornate con entrambi i metodi."""
+    b = confronto_col_vivo(conti, chiave, _METODI_DECIDE["orizzonte"], "prova")
+    o, v = b["ombra"], b["vivo"]
+    n, gg, meglio = o["quante"], b["giornate_con_entrambi"], b["giornate_ombra_meglio"]
+    if n < _METODI_DECIDE["casi"] or gg < _METODI_DECIDE["giornate"]:
         return {"stato": "presto",
-                "testo": ("⏳ Ancora presto per decidere: nella prova vera ci sono %d occasioni a 30 giorni "
-                          "(ne servono almeno 30) e %d giornate con entrambi i metodi (ne servono 15)."
-                          % (n, gg))}
-    if meglio * 3 >= gg * 2 and (o.get("mediana") or 0) > (v.get("mediana") or 0):
+                "testo": ("⏳ Ancora presto per decidere: nella prova vera ci sono %d occasioni misurate "
+                          "a 30 giorni (ne servono almeno %d) e %d giornate con entrambi (ne servono "
+                          "%d)." % (n, _METODI_DECIDE["casi"], gg, _METODI_DECIDE["giornate"]))}
+    if meglio * 3 >= gg * 2 and (o["mediana"] or 0) > (v["mediana"] or 0):
         return {"stato": "ok",
-                "testo": ("✅ Nella prova vera l'ombra batte il vivo in %d giornate su %d, con resa tipica "
-                          "%+.2f%% contro %+.2f%%: si può valutare il passaggio." % (meglio, gg, o["mediana"], v["mediana"]))}
+                "testo": ("✅ Nella prova vera batte il sistema vero in %d giornate su %d, con resa "
+                          "tipica %+.2f%% contro %+.2f%%: si può valutare il passaggio."
+                          % (meglio, gg, o["mediana"], v["mediana"]))}
     if meglio * 3 <= gg:
         return {"stato": "no",
-                "testo": ("❌ Nella prova vera l'ombra batte il vivo solo in %d giornate su %d: queste regole "
-                          "non funzionano meglio. Se ne definiscono di nuove, senza toccare queste." % (meglio, gg))}
+                "testo": ("❌ Nella prova vera batte il sistema vero solo in %d giornate su %d: queste "
+                          "regole non scelgono meglio." % (meglio, gg))}
     return {"stato": "incerto",
-            "testo": ("➖ Nella prova vera l'ombra batte il vivo in %d giornate su %d: nessuno dei due "
+            "testo": ("➖ Nella prova vera batte il sistema vero in %d giornate su %d: nessuno dei due "
                       "prevale, serve più tempo." % (meglio, gg))}
 
 
-def _dati_ombra() -> dict:
-    """Le tre letture che servono alla sintesi in ombra, fatte UNA volta per entrambi i tipi."""
-    scelte = [r for r in _arc_leggi_giorni(ARC_OMBRA) if isinstance(r, dict)]
-    profili = [p for p in _arc_leggi_giorni(ARC_PROFILI) if isinstance(p, dict)]
-    esiti = {}
-    for e in _arc_leggi_giorni(ARC_ESITI):
-        if (isinstance(e, dict) and e.get("resa") is not None and not e.get("dati_sospetti")
-                and not e.get("finestra_incompleta") and e.get("orizzonte") in _OMBRA_ORIZZONTI):
-            esiti[(e.get("profilo"), e.get("orizzonte"))] = e
-    return {"scelte": scelte, "profili": profili, "esiti": esiti}
-
-
-def sintesi_ombra(kind: str = "short", dati: dict = None) -> dict:
-    """Com'e' andata al metodo in ombra rispetto a quello vivo, sulle STESSE giornate.
-
-    Il confronto e' per giornata: le occasioni dello stesso giorno salgono e scendono insieme, quindi
-    la domanda giusta non e' «chi ha la mediana piu' alta» ma «in quante giornate l'ombra ha fatto
-    meglio del vivo». I risultati sono divisi in «prima» (giorni usati per scegliere le regole: non
-    provano nulla) e «dopo» (la prova vera). Se non c'e' ancora nulla a verbale si calcola
-    un'ANTEPRIMA al volo con le stesse regole, dichiarandola tale."""
-    d = dati or _dati_ombra()
-    scelte = [r for r in d["scelte"] if r.get("kind") == kind]
-    profili = [p for p in d["profili"] if p.get("kind") == kind]
-    esiti = d["esiti"]
-    anteprima = False
-    if not scelte:
-        anteprima, ultimo, per_g = True, {}, {}
-        for p in profili:
-            per_g.setdefault(str(p.get("giorno") or "")[:10], []).append(p)
-        for g in sorted(per_g):
-            if len(g) == 10:
-                scelte += _ombra_scegli(per_g[g], g, ultimo)
-    vivo = [p for p in profili if not p.get("scartata") and p.get("momento")]
-    metodi = []
-    for m in METODI_OMBRA:
-        mie = [r for r in scelte if r.get("metodo") == m["chiave"]]
-        per_oriz = {}
-        for oriz in _OMBRA_ORIZZONTI:
-            o_rows = [(str(r.get("giorno")), esiti[(r.get("profilo"), oriz)]["resa"])
-                      for r in mie if (r.get("profilo"), oriz) in esiti]
-            v_rows = [(str(p.get("giorno")), esiti[(p.get("id"), oriz)]["resa"])
-                      for p in vivo if (p.get("id"), oriz) in esiti]
-            vp_rows = [(g, x) for (g, x), p in zip(v_rows, [p for p in vivo if (p.get("id"), oriz) in esiti])
-                       if p.get("momento") == "promozione"]
-            blocchi = {}
-            for nome_b, tiene in (("tutto", lambda g: True),
-                                  ("prima", lambda g: g < m["definito_il"]),
-                                  ("dopo", lambda g: g >= m["definito_il"])):
-                o = [(g, x) for g, x in o_rows if tiene(g)]
-                gg = {g for g, _ in o}
-                v = [(g, x) for g, x in v_rows if g in gg]
-                vp = [(g, x) for g, x in vp_rows if g in gg]
-                per_giorno = {}
-                for g, x in o:
-                    per_giorno.setdefault(g, ([], []))[0].append(x)
-                for g, x in v:
-                    if g in per_giorno:
-                        per_giorno[g][1].append(x)
-                coppie = [(_mediana(a), _mediana(b)) for a, b in per_giorno.values() if a and b]
-                blocchi[nome_b] = {"ombra": _ombra_blocco([x for _, x in o]),
-                                   "vivo": _ombra_blocco([x for _, x in v]),
-                                   "vivo_promozione": _ombra_blocco([x for _, x in vp]),
-                                   "giornate_con_entrambi": len(coppie),
-                                   "giornate_ombra_meglio": sum(1 for a, b in coppie if a > b)}
-            per_oriz[oriz] = blocchi
-        recenti = []
-        for r in sorted(mie, key=lambda r: (str(r.get("giorno")), str(r.get("ora") or "")),
-                        reverse=True)[:15]:
-            recenti.append({"giorno": r.get("giorno"), "ticker": r.get("ticker"), "nome": r.get("nome"),
-                            "prezzo": r.get("prezzo"), "origine_viva": r.get("origine_viva"),
-                            "retroattiva": bool(r.get("retroattiva")),
-                            "resa_7g": (esiti.get((r.get("profilo"), "7g")) or {}).get("resa"),
-                            "resa_30g": (esiti.get((r.get("profilo"), "30g")) or {}).get("resa")})
-        ultimo_g = max((str(r.get("giorno")) for r in mie), default=None)
-        giornate = len({r.get("giorno") for r in mie})
-        metodi.append({
-            "chiave": m["chiave"], "nome": m["nome"], "definito_il": m["definito_il"],
-            "spiegazione": m["spiegazione"], "perche": m["perche"],
-            "regole_testo": _ombra_regole_testo(m),
-            "scelte_totali": len(mie), "giornate_con_scelte": giornate,
-            "scelte_al_giorno": (round(len(mie) / giornate, 1) if giornate else None),
-            "orizzonti": per_oriz, "recenti": recenti, "ultimo_giorno": ultimo_g,
-            "ultime_scelte": [{"ticker": r.get("ticker"), "nome": r.get("nome"), "prezzo": r.get("prezzo"),
-                               "origine_viva": r.get("origine_viva")}
-                              for r in mie if str(r.get("giorno")) == ultimo_g] if ultimo_g else [],
-            "verdetto": _ombra_verdetto(per_oriz),
-        })
-    return {"kind": kind, "anteprima": anteprima, "metodi": metodi,
-            "una_per_titolo_gg": _OMBRA_UNA_PER_TITOLO_GG, "aggiornato": _arc_ora()}
-
-
-def ombra_pronta(kind: str = "short") -> dict:
-    """La sintesi in ombra GIA' CALCOLATA dal lavoro automatico; se manca, o se e' solo un'anteprima
-    (il lavoro non aveva ancora scelte a verbale), si ricalcola qui una volta."""
-    try:
-        d = read_data_json(SINTESI_NAME, None) or {}
-        v = (d.get("viste") or {}).get(f"ombra:{kind}")
-        if v and not v.get("anteprima"):
-            return dict(v, calcolata_il=d.get("aggiornato"), da_file=True)
-    except Exception:
-        pass
-    s = sintesi_ombra(kind)
-    s["da_file"] = False
-    return s
-
+def calendario_metodi(conti: dict, vendita: str, granularita: str = "settimana",
+                      importo: float = 30.0, fee: float = 1.0, periodo: str = "tutto") -> list:
+    """Gli stessi metodi divisi per periodo di SCELTA (dal piu' recente): si vede se un metodo va
+    bene sempre o solo in certe settimane."""
+    gruppi = {}
+    for m in metodi_info():
+        for c in casi_metodo(conti, m["chiave"], periodo):
+            try:
+                chiave_p, etichetta, primo, ultimo = _periodo_di(c["giorno"], granularita)
+            except Exception:
+                continue
+            gr = gruppi.setdefault(chiave_p, {"chiave": chiave_p, "etichetta": etichetta,
+                                              "dal": primo.isoformat(), "al": ultimo.isoformat(),
+                                              "casi": {}})
+            gr["casi"].setdefault(m["chiave"], []).append(c)
+    out = []
+    for k in sorted(gruppi, reverse=True):
+        gr = gruppi[k]
+        out.append({"chiave": k, "etichetta": gr["etichetta"], "dal": gr["dal"], "al": gr["al"],
+                    "celle": {mk: dict(statistica_vendita(cs, vendita, importo, fee,
+                                                          (conti or {}).get("universo")),
+                                       scelte=len(cs))
+                              for mk, cs in gr["casi"].items()}})
+    return out
 
 def stato_archivio() -> dict:
     """A che punto è l'archivio: quanti file, quante righe, da quando. Serve perché «non si è perso
@@ -10765,23 +11327,29 @@ def ripara_indice() -> dict:
     file ha 80 righe» e il file ne abbia 50: quella discordanza blocca le scritture per non
     rischiare di cancellare, ed è giusto che le blocchi, ma deve esistere un modo di sbloccarla
     guardando i fatti invece di forzare. Non cancella niente: riscrive solo i conteggi."""
-    indice = read_data_json(INDICE_NAME, None)
-    if not isinstance(indice, dict):
-        return {"riparate": 0, "motivo": "l'indice non si legge: non tocco niente"}
-    cambi = []
-    for nome in sorted(indice):
-        if "/" not in nome or not isinstance(indice.get(nome), dict):
+    cambi, letti = [], 0
+    for nome_idx in _nomi_indice():             # un indice per anno: si ripara ciascuno
+        indice = read_data_json(nome_idx, None)
+        if not isinstance(indice, dict):
             continue
-        righe = read_data_json(nome, None)
-        if not isinstance(righe, list):
-            continue        # non si legge: si lascia stare, non si azzera
-        atteso = indice[nome].get("righe")
-        if atteso != len(righe):
-            cambi.append({"file": nome, "prima": atteso, "adesso": len(righe)})
-            indice[nome] = {"righe": len(righe), "aggiornato": _arc_ora(),
-                            "riparato": True}
-    if cambi:
-        _indice_scrivi(indice)
+        letti += 1
+        cambi_qui = []
+        for nome in sorted(indice):
+            if "/" not in nome or not isinstance(indice.get(nome), dict):
+                continue
+            righe = read_data_json(nome, None)
+            if not isinstance(righe, list):
+                continue        # non si legge: si lascia stare, non si azzera
+            atteso = indice[nome].get("righe")
+            if atteso != len(righe):
+                cambi_qui.append({"file": nome, "prima": atteso, "adesso": len(righe)})
+                indice[nome] = {"righe": len(righe), "aggiornato": _arc_ora(),
+                                "riparato": True}
+        if cambi_qui:
+            write_data_json(nome_idx, indice)
+            cambi += cambi_qui
+    if not letti:
+        return {"riparate": 0, "motivo": "l'indice non si legge: non tocco niente"}
     return {"riparate": len(cambi), "dettagli": cambi}
 
 

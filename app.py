@@ -484,12 +484,14 @@ if "_goto_section" in st.session_state:
 section = st.sidebar.radio(
     "Sezione", ["Analisi di un titolo", "Occasioni di mercato",
                 "In osservazione", "In anticipo", "Monitoraggio", "Portafoglio",
-                "Scenari", "Diario dei dati", "Archivio", "Attualità"], key="section_radio",
+                "Scenari", "Metodi di selezione", "Diario dei dati", "Archivio", "Attualità"],
+    key="section_radio",
     help="«Analisi di un titolo» studia una singola azienda/ETF. «Occasioni» scansiona il mercato per cali interessanti. "
          "«In osservazione» mostra le occasioni che il sistema sta seguendo verso un'eventuale promozione. "
          "«In anticipo» mostra le più solide tra quelle in osservazione, per entrare PRIMA della conferma (più rischio). "
          "«Monitoraggio» segue nel tempo le occasioni che hai scelto. «Portafoglio» registra i tuoi acquisti veri e mostra il guadagno/perdita. "
-         "«Scenari» misura quanto avresti guadagnato e quale momento di acquisto/vendita rende di più. «Diario dei dati» mostra cosa il sistema mette a verbale, evento per evento, su ogni occasione. "
+         "«Scenari» misura quanto avresti guadagnato e quale momento di acquisto/vendita rende di più. "
+         "«Metodi di selezione» confronta con il sistema altri modi di scegliere le occasioni, presi dagli studi: girano in ombra, senza comprare niente. «Diario dei dati» mostra cosa il sistema mette a verbale, evento per evento, su ogni occasione. "
          "«Archivio» è l'esperienza del sistema: giorno per giorno, tutte le occasioni viste — comprate e bocciate — con le loro caratteristiche, le notizie, com'era il mondo e com'è andata. "
          "«Attualità» raccoglie le classifiche di mercato (rialzi/ribassi/più scambiati) e le notizie recenti divise per azienda/ETF.",
 )
@@ -2350,8 +2352,10 @@ if section.startswith("Scenari"):
              "s5_fine_verifica": "5️⃣ Dopo la verifica",
              "calendario": "📅 Calendario",
              "confronti": "⚖️ Effetto dei filtri",
-             "voti": "📊 Scheda voti", "lettera": "🎬 Seguendo il sistema",
-             "ombra": "🕶️ Metodo in ombra"}
+             "voti": "📊 Scheda voti", "lettera": "🎬 Seguendo il sistema"}
+    # la scheda «Metodo in ombra» si e' spostata nella sezione «Metodi di selezione»
+    if "scen_tab" in st.session_state and st.session_state["scen_tab"] not in _TABS:
+        del st.session_state["scen_tab"]
     if "_goto_tab" in st.session_state:
         st.session_state["scen_tab"] = st.session_state.pop("_goto_tab")
     _stab = st.segmented_control("Che cosa vuoi guardare", list(_TABS.keys()), default="riepilogo",
@@ -3226,114 +3230,482 @@ if section.startswith("Scenari"):
         elif not _ch.get("n"):
             st.info("⏳ Il sistema non ha ancora chiuso nessuna posizione con i prezzi necessari: "
                     "questa scheda si popola alla prima uscita.")
+    st.stop()
 
-    # =======================================================================
-    # IL METODO NUOVO, IN OMBRA. Non compra niente: mette a verbale che cosa avrebbe scelto e
-    # l'archivio lo misura con gli stessi esiti del metodo vivo, sulle stesse giornate. La prova
-    # vera e' solo dal giorno in cui le regole sono state fissate: i giorni prima sono quelli
-    # guardati per scriverle, e dimostrerebbero solo che le regole descrivono il passato.
-    # =======================================================================
-    elif _stab == "ombra":
-        st.markdown("## 🕶️ Il metodo nuovo, in ombra")
-        st.caption("Dal 5 ottobre 2026 un modo diverso di scegliere le occasioni gira **accanto** a "
-                   "quello vero, senza comprare niente. Ogni giorno mette a verbale che cosa avrebbe "
-                   "scelto, e l'archivio misura quelle scelte con gli stessi esiti delle occasioni "
-                   "vere, sulle **stesse giornate**. Serve a decidere con i numeri, non a sensazione, "
-                   "se cambiare il modo in cui il sistema sceglie. La prova vera è solo quella dal "
-                   "giorno in cui le regole sono state fissate: i giorni prima sono quelli guardati "
-                   "per scriverle, e lì le regole non possono che sembrare buone.")
-        with st.spinner("Leggo le scelte in ombra…"):
-            _om = fu.ombra_pronta(_skind)
-        if _om.get("anteprima"):
-            st.info("👀 Anteprima calcolata adesso con le stesse regole: il lavoro automatico non ha "
-                    "ancora messo a verbale nessuna scelta. Dal prossimo giro le scelte restano "
-                    "scritte in archivio e questa scheda legge quelle.")
-        _NOMI_MOM = {ev: nome for _k, ev, nome, _a in fu.SCENARI_ACQUISTO}
+# ===========================================================================
+# SEZIONE: METODI DI SELEZIONE — altri modi di scegliere le occasioni, misurati in ombra
+# ===========================================================================
+# Costruita come gli Scenari: le stesse scelte in cima, un riepilogo, una scheda per metodo, il
+# calendario e il confronto. I numeri vengono dai conti mensili che il lavoro automatico tiene
+# aggiornati: aprire la pagina non riscarica l'archivio.
+if section.startswith("Metodi"):
+    page_header("Metodi di selezione",
+                "Altri modi di scegliere le occasioni, presi dagli studi sulla borsa: girano accanto "
+                "al sistema senza comprare niente, e qui si vede come sarebbero andati.")
+    st.caption("Ogni giorno il lavoro automatico guarda gli stessi titoli del sistema e mette a "
+               "verbale che cosa avrebbe scelto ciascun metodo. L'archivio misura quelle scelte con "
+               "gli stessi esiti delle occasioni vere. **Nessun metodo compra niente**: servono a "
+               "capire, con i numeri, se cambiare il modo in cui il sistema sceglie.")
+    _MTABS = {"riepilogo": "📋 Riepilogo", "metodo": "🔎 Metodo per metodo",
+              "calendario": "📅 Calendario", "confronto": "⚖️ Contro il sistema vero"}
+    if "met_tab" in st.session_state and st.session_state["met_tab"] not in _MTABS:
+        del st.session_state["met_tab"]
+    _mtab = st.segmented_control("Che cosa vuoi guardare", list(_MTABS), default="riepilogo",
+                                 format_func=lambda k: _MTABS[k], required=True,
+                                 key="met_tab") or "riepilogo"
+    _mkind = st.segmented_control(
+        "Tipo di occasione", ["short", "long"], default="short",
+        format_func=lambda k: "⚡ Breve periodo" if k == "short" else "🏛️ Lungo periodo",
+        required=True, key="met_kind",
+        help="Il breve si vende al bersaglio, dopo una settimana o dopo un mese. Il lungo al "
+             "bersaglio, dopo un mese o dopo un anno.") or "short"
+    with st.container(border=True):
+        _mc1, _mc2 = st.columns(2)
+        _amt = _mc1.number_input("💶 Investo per occasione (€)", min_value=1.0, value=30.0,
+                                 step=10.0, key="met_amt",
+                                 help="Quanto metteresti su ogni scelta: il guadagno in euro si "
+                                      "ricalcola subito.")
+        _fee = _mc2.number_input("Commissione per ordine (€)", min_value=0.0, value=1.0, step=0.5,
+                                 key="met_fee",
+                                 help="Quanto costa un ordine. Comprare e vendere sono due ordini, e "
+                                      "il conto li considera entrambi.")
+        _mper = st.segmented_control(
+            "Quali giorni", ["tutto", "prova", "prima"], default="tutto",
+            format_func=lambda k: {"tutto": "📚 Tutti i giorni", "prova": "🧪 Solo la prova vera",
+                                   "prima": "🔙 Solo i giorni prima delle regole"}[k],
+            required=True, key="met_periodo",
+            help="La prova vera parte dal giorno in cui le regole sono state fissate: il 5 ottobre "
+                 "2026 per le due ombre di partenza, il 6 ottobre per gli altri metodi. I giorni "
+                 "prima sono quelli guardati per scegliere le regole: lì le regole non possono che "
+                 "sembrare buone, quindi non provano niente.") or "tutto"
+    with st.spinner("Leggo le scelte dei metodi… la prima volta può volerci un minuto."):
+        _cm = fu.conti_metodi(_mkind)
+    if _cm.get("anteprima"):
+        st.info("👀 **Anteprima** calcolata adesso dall'archivio, con le stesse regole: il lavoro "
+                "automatico non ha ancora messo a verbale le scelte dei metodi. Dal suo prossimo "
+                "giro le scelte restano scritte e questa pagina legge quelle.")
+    _vend = fu.METODI_VENDITE[_mkind]
+    _ETV = {"soglia": "🎯 Al bersaglio", "7g": "📅 Dopo 1 settimana", "30g": "📅 Dopo 1 mese",
+            "365g": "📅 Dopo 1 anno"}
+    _ETV_BREVE = {"soglia": "al bersaglio", "7g": "dopo 1 settimana", "30g": "dopo 1 mese",
+                  "365g": "dopo 1 anno"}
+    _SCALE = {"totale": "Totale in tasca", "media": "Media per operazione"}
+    # Blu per il metodo, arancione per il sistema vero, in tutta la sezione: una coppia verificata
+    # sullo sfondo scuro dell'app per contrasto e per chi distingue male i colori.
+    _COL_MET, _COL_VIVO = "#3987e5", "#d95926"
+    _CFG = {"displayModeBar": False, "scrollZoom": False, "doubleClick": False}
+    _infos = fu.metodi_info()
+    _info = {m["chiave"]: m for m in _infos}
+    _metodi_veri = [m["chiave"] for m in _infos if not m.get("riferimento")]
+    _uni = _cm.get("universo") or {}
+    _NOMI_MOM = {ev: nome for _k, ev, nome, _a in fu.SCENARI_ACQUISTO}
 
-        def _origine_viva(o):
-            o = str(o or "")
-            if o.startswith("comprata:"):
-                return "comprata dal sistema: " + _NOMI_MOM.get(o[9:], o[9:]).lower()
-            if o.startswith("scartata:"):
-                return "scartata: " + str(fu.MOTIVI_SCARTO.get(o[9:], o[9:])).split(":")[0]
-            return o
+    def _nome_m(k):
+        return ("⭐ " if _info[k].get("riferimento") else "") + _info[k]["nome"]
 
-        _ORIZ_ET = {"7g": "dopo 7 giorni", "30g": "dopo 30 giorni"}
-        _CFG_TAB = {
-            "Ombra: casi": st.column_config.NumberColumn("Ombra: casi", format="%d"),
-            "Ombra: resa tipica": st.column_config.NumberColumn("Ombra: resa tipica", format="%+.2f%%"),
-            "Ombra: in guadagno": st.column_config.NumberColumn("Ombra: in guadagno", format="%d%%"),
-            "Vivo: casi": st.column_config.NumberColumn("Vivo: casi", format="%d"),
-            "Vivo: resa tipica": st.column_config.NumberColumn("Vivo: resa tipica", format="%+.2f%%"),
-            "Vivo: in guadagno": st.column_config.NumberColumn("Vivo: in guadagno", format="%d%%"),
-        }
-        for _m in _om.get("metodi") or []:
+    def _origine_viva(o):
+        o = str(o or "")
+        if o.startswith("comprata:"):
+            return "comprata: " + _NOMI_MOM.get(o[9:], o[9:]).lower()
+        if o.startswith("scartata:"):
+            return "scartata: " + str(fu.MOTIVI_SCARTO.get(o[9:], o[9:])).split(":")[0]
+        return o
+
+    def _data_it(iso):
+        try:
+            _g = datetime.date.fromisoformat(str(iso)[:10])
+            return f"{_g.day} {fu._MESI_IT[_g.month - 1]} {_g.year}"
+        except Exception:
+            return str(iso)
+
+    def _serie_cumulata(casi, vend, scala):
+        """Il guadagno in euro accumulato scelta dopo scelta, in ordine di data d'acquisto."""
+        xs, ys, tx, cum, i = [], [], [], 0.0, 0
+        for c in sorted(casi, key=lambda c: (c["giorno"], c["ticker"])):
+            if c.get(vend) is None:
+                continue
+            nn = fu.net_eur(c[vend], _amt, _fee)
+            if nn is None:
+                continue
+            i += 1
+            cum += nn
+            xs.append(c["giorno"])
+            ys.append(round(cum / i if scala == "media" else cum, 2))
+            tx.append(f"{c['ticker']}: {c[vend]:+.2f}% → {nn:+.2f} €")
+        return xs, ys, tx
+
+    # -----------------------------------------------------------------------
+    # RIEPILOGO: tutti i metodi a confronto, con il sistema vero come metro
+    # -----------------------------------------------------------------------
+    if _mtab == "riepilogo":
+        st.markdown("## 📋 Tutti i metodi a confronto")
+        st.caption("Una riga per metodo, più ⭐ **il sistema vero** come metro di paragone. Per tutti, "
+                   "ogni titolo conta una volta ogni 30 giorni. «Meglio del guardato» è la resa meno "
+                   "quella tipica di **tutto** quello che il sistema ha guardato lo stesso giorno: "
+                   "toglie l'effetto del mercato, e sopra zero vuol dire che il metodo ha scelto "
+                   "meglio del caso.")
+        _rc1, _rc2 = st.columns([3, 2])
+        _sv = _rc1.segmented_control("Vendendo", list(_vend), default=_vend[1],
+                                     format_func=lambda k: _ETV[k], required=True,
+                                     key="met_vend") or _vend[1]
+        _scala = _rc2.segmented_control("Cosa mostra il grafico", list(_SCALE), default="totale",
+                                        format_func=lambda k: _SCALE[k], required=True,
+                                        key="met_scala") or "totale"
+        _rp = fu.riepilogo_metodi(_cm, _amt, _fee, _mper)
+        _netto_col = f"Netto medio su €{_amt:,.0f}"
+        st.dataframe(pd.DataFrame([{
+            "Metodo": _nome_m(r["chiave"]),
+            "Scelte": r["scelte"], "Al giorno": r["al_giorno"],
+            "Casi maturi": (r["vendite"].get(_sv) or {}).get("n") or 0,
+            "Resa tipica": (r["vendite"].get(_sv) or {}).get("med"),
+            "Media": (r["vendite"].get(_sv) or {}).get("avg"),
+            "In guadagno": (r["vendite"].get(_sv) or {}).get("hit"),
+            "Meglio del guardato": (r["vendite"].get(_sv) or {}).get("eccesso"),
+            _netto_col: (r["vendite"].get(_sv) or {}).get("netto_medio"),
+            "In tasca in tutto": (r["vendite"].get(_sv) or {}).get("netto_totale"),
+        } for r in _rp]), hide_index=True, use_container_width=True, column_config={
+            "Al giorno": st.column_config.NumberColumn("Al giorno", format="%.1f"),
+            "Resa tipica": st.column_config.NumberColumn("Resa tipica", format="%+.2f%%"),
+            "Media": st.column_config.NumberColumn("Media", format="%+.2f%%"),
+            "In guadagno": st.column_config.NumberColumn("In guadagno", format="%d%%"),
+            "Meglio del guardato": st.column_config.NumberColumn("Meglio del guardato",
+                                                                 format="%+.2f"),
+            _netto_col: st.column_config.NumberColumn(_netto_col, format="%+.2f €"),
+            "In tasca in tutto": st.column_config.NumberColumn("In tasca in tutto",
+                                                               format="%+.2f €"),
+        })
+        if _sv == "soglia":
+            st.caption("🎯 **Al bersaglio** si vende appena una chiusura arriva a quattro volte il "
+                       "movimento tipico giornaliero del titolo, per esempio +12% per un titolo che si "
+                       "muove del 3% al giorno, entro un mese per il breve e un anno per il lungo. "
+                       "Se non ci arriva, si vende a fine periodo. Il bersaglio è uguale per tutti i "
+                       "metodi, così il confronto è alla pari. «Meglio del guardato» qui resta vuoto: "
+                       "per i titoli scartati il bersaglio non è registrato.")
+        else:
+            st.caption("«Resa tipica» è la mediana: metà dei casi ha fatto meglio, metà peggio. Pochi "
+                       "casi maturi vogliono dire un aneddoto, non una misura.")
+
+        _campo = "eccesso" if _sv != "soglia" else "med"
+        _barre = [(_nome_m(r["chiave"]), (r["vendite"].get(_sv) or {}), r["riferimento"]) for r in _rp]
+        _barre = [(n, s.get(_campo), s.get("n") or 0, rif) for n, s, rif in _barre
+                  if s.get(_campo) is not None]
+        if _barre:
+            _barre.sort(key=lambda b: b[1])
+            st.markdown("##### " + ("📊 Chi sceglie meglio di tutto quello che il sistema guarda"
+                                    if _campo == "eccesso" else "📊 La resa tipica, metodo per metodo"))
+            _fb = go.Figure(go.Bar(
+                x=[b[1] for b in _barre], y=[b[0] for b in _barre], orientation="h",
+                marker=dict(color=[_COL_VIVO if b[3] else _COL_MET for b in _barre]),
+                text=[f"{b[1]:+.2f}" for b in _barre], textposition="outside", cliponaxis=False,
+                customdata=[b[2] for b in _barre],
+                hovertemplate="%{y}: %{x:+.2f} · %{customdata} casi<extra></extra>"))
+            _fb.add_vline(x=0, line=dict(color="gray", width=1))
+            _fb.update_layout(height=90 + 34 * len(_barre), margin=dict(t=10, b=10, l=10, r=60),
+                              showlegend=False, bargap=0.3,
+                              xaxis_title=("Punti sopra o sotto il guardato dello stesso giorno"
+                                           if _campo == "eccesso" else "Resa tipica (%)"))
+            _fb.update_xaxes(fixedrange=True)
+            _fb.update_yaxes(fixedrange=True)
+            st.plotly_chart(_fb, use_container_width=True, key="met_barre", config=_CFG)
+            st.caption("In blu i metodi, in arancione il sistema vero."
+                       + (" Sotto zero vuol dire che, nello stesso giorno, prendere a caso fra i "
+                          "titoli guardati sarebbe andato meglio." if _campo == "eccesso" else ""))
+
+        st.markdown(f"##### 📈 Il guadagno accumulato nel tempo, vendendo {_ETV_BREVE[_sv]}")
+        _vx, _vy, _vt = _serie_cumulata(fu.casi_metodo(_cm, "sistema_vero", _mper), _sv, _scala)
+        _fig = make_subplots(rows=3, cols=3, shared_xaxes=True, shared_yaxes=True,
+                             subplot_titles=[_info[k]["nome"] for k in _metodi_veri],
+                             vertical_spacing=0.1, horizontal_spacing=0.04)
+        _leg_m = _leg_v = _qualcosa = False
+        for _i, _k in enumerate(_metodi_veri):
+            _r, _c = _i // 3 + 1, _i % 3 + 1
+            if _vx:
+                _fig.add_trace(go.Scatter(
+                    x=_vx, y=_vy, mode="lines", name="⭐ Il sistema vero", legendgroup="vivo",
+                    showlegend=not _leg_v, text=_vt, line=dict(color=_COL_VIVO, width=1.6),
+                    hovertemplate="Il sistema vero · %{text}<br>%{y:+.2f} €<extra></extra>"),
+                    row=_r, col=_c)
+                _leg_v = _qualcosa = True
+            _xs, _ys, _tx = _serie_cumulata(fu.casi_metodo(_cm, _k, _mper), _sv, _scala)
+            if _xs:
+                _fig.add_trace(go.Scatter(
+                    x=_xs, y=_ys, mode="lines", name="Il metodo del riquadro", legendgroup="metodo",
+                    showlegend=not _leg_m, text=_tx, line=dict(color=_COL_MET, width=2.2),
+                    hovertemplate=_info[_k]["nome"] + " · %{text}<br>%{y:+.2f} €<extra></extra>"),
+                    row=_r, col=_c)
+                _leg_m = _qualcosa = True
+        if _qualcosa:
+            _fig.add_hline(y=0, line=dict(color="gray", width=1), row="all", col="all")
+            _fig.update_layout(height=780, margin=dict(t=70, b=10, l=10, r=10), hovermode="closest",
+                               legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0))
+            _fig.update_annotations(font_size=12)
+            _fig.update_xaxes(fixedrange=True, tickformat="%d/%m", showticklabels=True)
+            _fig.update_yaxes(fixedrange=True)
+            st.plotly_chart(_fig, use_container_width=True, key="met_pannelli", config=_CFG)
+            st.caption("Un riquadro per metodo, sempre contro il sistema vero, con la stessa scala "
+                       "per tutti. Con «Totale in tasca» conta anche quante scelte fa un metodo: chi "
+                       "sceglie di più va più in alto o più in basso anche a parità di resa. Con "
+                       "«Media per operazione» si confronta la qualità di ogni singola scelta.")
+        else:
+            st.info("⏳ Il grafico compare quando ci sono risultati maturi con questa regola di "
+                    "vendita. La vendita dopo una settimana matura per prima, quella dopo un anno "
+                    "per ultima.")
+
+    # -----------------------------------------------------------------------
+    # METODO PER METODO: come funziona, come è andato, che cosa ha scelto
+    # -----------------------------------------------------------------------
+    elif _mtab == "metodo":
+        _sel = st.selectbox("Quale metodo", _metodi_veri + ["sistema_vero"],
+                            format_func=lambda k: _nome_m(k) + " — " + _info[k]["breve"],
+                            key="met_sel")
+        _m = _info[_sel]
+        _rif = bool(_m.get("riferimento"))
+        st.markdown(f"## {_nome_m(_sel)}")
+        st.caption(_m["spiegazione"])
+        if _m.get("perche"):
+            st.caption("**Perché può funzionare.** " + _m["perche"])
+        st.caption("**Da dove viene.** " + _m["fonte"][:1].upper() + _m["fonte"][1:] + ".")
+        if not _rif:
+            st.caption("**Regole, fissate il %s:** %s." % (_data_it(_m["definito_il"]),
+                                                             " · ".join(_m["regole_testo"])))
+        _cs = fu.casi_metodo(_cm, _sel, _mper)
+        _vivo_cs = fu.casi_metodo(_cm, "sistema_vero", _mper)
+        _gg = len({c["giorno"] for c in _cs})
+        _k1, _k2, _k3 = st.columns(3)
+        _k1.metric("Scelte", len(_cs))
+        _k2.metric("Giornate con scelte", _gg)
+        _k3.metric("Scelte al giorno", f"{len(_cs) / _gg:.1f}" if _gg else "—")
+        for _col, _v in zip(st.columns(len(_vend)), _vend):
+            _s = fu.statistica_vendita(_cs, _v, _amt, _fee, _uni)
+            _col.metric(_ETV[_v], (f"{_s['med']:+.2f}%" if _s.get("n") else "—"),
+                        (f"in guadagno {_s['hit']}% · {_s['n']} casi" if _s.get("n")
+                         else "nessun caso maturo"), delta_color="off",
+                        help="La resa tipica, cioè la mediana, vendendo con questa regola.")
+
+        _scala_m = st.segmented_control("Cosa mostra il grafico", list(_SCALE), default="totale",
+                                        format_func=lambda k: _SCALE[k], required=True,
+                                        key="met_scala_m") or "totale"
+        st.markdown("##### 📈 Il guadagno accumulato, regola di vendita per regola di vendita")
+        _fig = make_subplots(rows=1, cols=len(_vend), shared_yaxes=True,
+                             subplot_titles=[_ETV[v] for v in _vend], horizontal_spacing=0.05)
+        _leg_m = _leg_v = _qualcosa = False
+        for _j, _v in enumerate(_vend, 1):
+            if not _rif:
+                _vx, _vy, _vt = _serie_cumulata(_vivo_cs, _v, _scala_m)
+                if _vx:
+                    _fig.add_trace(go.Scatter(
+                        x=_vx, y=_vy, mode="lines", name="⭐ Il sistema vero", legendgroup="vivo",
+                        showlegend=not _leg_v, text=_vt, line=dict(color=_COL_VIVO, width=1.6),
+                        hovertemplate="Il sistema vero · %{text}<br>%{y:+.2f} €<extra></extra>"),
+                        row=1, col=_j)
+                    _leg_v = _qualcosa = True
+            _xs, _ys, _tx = _serie_cumulata(_cs, _v, _scala_m)
+            if _xs:
+                _fig.add_trace(go.Scatter(
+                    x=_xs, y=_ys, mode="lines", name=_nome_m(_sel), legendgroup="metodo",
+                    showlegend=not _leg_m, text=_tx,
+                    line=dict(color=(_COL_VIVO if _rif else _COL_MET), width=2.2),
+                    hovertemplate=_m["nome"] + " · %{text}<br>%{y:+.2f} €<extra></extra>"),
+                    row=1, col=_j)
+                _leg_m = _qualcosa = True
+        if _qualcosa:
+            _fig.add_hline(y=0, line=dict(color="gray", width=1), row="all", col="all")
+            _fig.update_layout(height=360, margin=dict(t=70, b=10, l=10, r=10), hovermode="closest",
+                               legend=dict(orientation="h", yanchor="bottom", y=1.1, x=0))
+            _fig.update_annotations(font_size=12)
+            _fig.update_xaxes(fixedrange=True, tickformat="%d/%m")
+            _fig.update_yaxes(fixedrange=True)
+            st.plotly_chart(_fig, use_container_width=True, key="met_metodo_cum", config=_CFG)
+        else:
+            st.info("⏳ Il grafico compare quando questo metodo ha i primi risultati maturi.")
+
+        _vd = st.segmented_control("Come si distribuiscono i risultati, vendendo", list(_vend),
+                                   default=_vend[1], format_func=lambda k: _ETV[k], required=True,
+                                   key="met_vend_d") or _vend[1]
+        _xm = [float(c[_vd]) for c in _cs if c.get(_vd) is not None]
+        _xv = ([float(c[_vd]) for c in _vivo_cs if c.get(_vd) is not None] if not _rif else [])
+        if _xm:
+            _fh = go.Figure()
+            _fh.add_trace(go.Histogram(
+                x=_xm, name=_nome_m(_sel), histnorm="percent", xbins=dict(size=2), opacity=0.85,
+                marker=dict(color=(_COL_VIVO if _rif else _COL_MET), line=dict(color="#13151a", width=1)),
+                hovertemplate="%{x}: %{y:.0f}% dei casi<extra></extra>"))
+            if _xv:
+                _fh.add_trace(go.Histogram(
+                    x=_xv, name="⭐ Il sistema vero", histnorm="percent", xbins=dict(size=2),
+                    opacity=0.55, marker=dict(color=_COL_VIVO, line=dict(color="#13151a", width=1)),
+                    hovertemplate="%{x}: %{y:.0f}% dei casi<extra></extra>"))
+            _fh.add_vline(x=0, line=dict(color="gray", width=1))
+            _fh.update_layout(barmode="overlay", height=300, margin=dict(t=50, b=10, l=10, r=10),
+                              xaxis_title="Resa (%)", yaxis_title="Quota dei casi (%)",
+                              legend=dict(orientation="h", yanchor="bottom", y=1.02, x=0))
+            _fh.update_xaxes(fixedrange=True)
+            _fh.update_yaxes(fixedrange=True)
+            st.plotly_chart(_fh, use_container_width=True, key="met_istogramma", config=_CFG)
+            st.caption("Quanta parte dei casi è finita in ogni fascia di resa, a passi di 2 punti. Si "
+                       "confrontano le forme, non le altezze: i due insiemi hanno un numero di casi "
+                       "diverso, per questo l'altezza è una percentuale.")
+
+        _ultimo = max((c["giorno"] for c in _cs), default=None)
+        if _ultimo:
+            st.markdown(f"##### 🗓️ Che cosa ha scelto il {_data_it(_ultimo)}")
+            st.dataframe(pd.DataFrame([
+                {"Titolo": c["ticker"], "Nome": c["nome"], "Prezzo": c["prezzo"],
+                 "Che cosa ne ha fatto il sistema": _origine_viva(c["origine"])}
+                for c in _cs if c["giorno"] == _ultimo]), hide_index=True, use_container_width=True,
+                column_config={"Prezzo": st.column_config.NumberColumn("Prezzo", format="%.2f")})
+            with st.expander(f"Tutte le scelte e com'è andata ({len(_cs)})"):
+                _cfg_t = {"Prezzo": st.column_config.NumberColumn("Prezzo", format="%.2f"),
+                          "Bersaglio": st.column_config.NumberColumn("Bersaglio", format="+%.1f%%")}
+                for _v in _vend:
+                    _cfg_t[_ETV_BREVE[_v].capitalize()] = st.column_config.NumberColumn(
+                        _ETV_BREVE[_v].capitalize(), format="%+.2f%%")
+                st.dataframe(pd.DataFrame([dict(
+                    {"Giorno": c["giorno"], "Titolo": c["ticker"], "Nome": c["nome"],
+                     "Prezzo": c["prezzo"],
+                     "Che cosa ne ha fatto il sistema": _origine_viva(c["origine"])},
+                    **{_ETV_BREVE[_v].capitalize(): c.get(_v) for _v in _vend},
+                    **{"Bersaglio": c.get("soglia_pct"),
+                       "Periodo": ("prima delle regole" if c["retro"] else "prova vera")})
+                    for c in sorted(_cs, key=lambda c: (c["giorno"], c["ticker"]), reverse=True)]),
+                    hide_index=True, use_container_width=True, column_config=_cfg_t)
+                st.caption("Una casella vuota vuol dire che quell'esito non è ancora maturato. "
+                           "«Bersaglio» è il guadagno a cui si sarebbe venduto con la vendita al "
+                           "bersaglio.")
+        else:
+            st.info("⏳ Questo metodo non ha ancora scelto niente con queste impostazioni.")
+
+    # -----------------------------------------------------------------------
+    # CALENDARIO: gli stessi metodi divisi per periodo di scelta
+    # -----------------------------------------------------------------------
+    elif _mtab == "calendario":
+        st.markdown("## 📅 Calendario dei risultati")
+        st.caption("Gli stessi metodi, divisi per il periodo in cui hanno scelto: si vede se un metodo "
+                   "va bene sempre o solo in certe settimane, e se sta migliorando o peggiorando. La "
+                   "resa di un periodo matura nei giorni successivi.")
+        _cg1, _cg2 = st.columns([1, 2])
+        _gran = _cg1.segmented_control(
+            "Raggruppa per", ["settimana", "mese"], default="settimana",
+            format_func=lambda k: "📆 Settimana" if k == "settimana" else "🗓️ Mese",
+            required=True, key="met_gran") or "settimana"
+        _svc = _cg2.segmented_control("Vendendo", list(_vend), default=_vend[1],
+                                      format_func=lambda k: _ETV[k], required=True,
+                                      key="met_vend_c") or _vend[1]
+        _cal = fu.calendario_metodi(_cm, _svc, _gran, _amt, _fee, _mper)
+        _ordine = ["sistema_vero"] + _metodi_veri
+        if not any((p["celle"].get(k) or {}).get("n") for p in _cal for k in _ordine):
+            st.info("⏳ Nessun risultato maturo con questa regola di vendita: il calendario si riempie "
+                    "man mano che le scelte maturano.")
+        else:
+            st.dataframe(pd.DataFrame([dict(
+                {"Periodo": p["etichetta"]},
+                **{_nome_m(k): ((p["celle"].get(k) or {}).get("med")
+                                if (p["celle"].get(k) or {}).get("n") else None) for k in _ordine})
+                for p in _cal]), hide_index=True, use_container_width=True,
+                column_config={_nome_m(k): st.column_config.NumberColumn(_nome_m(k), format="%+.2f%%")
+                               for k in _ordine})
+            st.caption("Ogni casella è la resa tipica delle scelte fatte in quel periodo. Vuota: "
+                       "nessun caso maturo.")
+            _segui = st.selectbox("Quale metodo seguire nel tempo", _metodi_veri,
+                                  format_func=lambda k: _info[k]["nome"], key="met_cal_sel")
+            _netto_c = f"Netto medio su €{_amt:,.0f}"
+            _righe_c = []
+            for p in _cal:
+                c = p["celle"].get(_segui) or {}
+                v = p["celle"].get("sistema_vero") or {}
+                _righe_c.append({
+                    "Periodo": p["etichetta"], "Scelte": c.get("scelte") or 0,
+                    "Casi maturi": c.get("n") or 0,
+                    "Resa tipica": (c.get("med") if c.get("n") else None),
+                    "In guadagno": (c.get("hit") if c.get("n") else None),
+                    _netto_c: (c.get("netto_medio") if c.get("n") else None),
+                    "In tasca in tutto": (c.get("netto_totale") if c.get("n") else None),
+                    "Sistema vero, resa tipica": (v.get("med") if v.get("n") else None)})
+            st.dataframe(pd.DataFrame(_righe_c), hide_index=True, use_container_width=True,
+                         column_config={
+                             "Resa tipica": st.column_config.NumberColumn("Resa tipica", format="%+.2f%%"),
+                             "In guadagno": st.column_config.NumberColumn("In guadagno", format="%d%%"),
+                             _netto_c: st.column_config.NumberColumn(_netto_c, format="%+.2f €"),
+                             "In tasca in tutto": st.column_config.NumberColumn("In tasca in tutto", format="%+.2f €"),
+                             "Sistema vero, resa tipica": st.column_config.NumberColumn(
+                                 "Sistema vero, resa tipica", format="%+.2f%%")})
+            _per = list(reversed(_cal))
+            _fc = go.Figure()
+            for _k, _colr, _nm in ((_segui, _COL_MET, _info[_segui]["nome"]),
+                                   ("sistema_vero", _COL_VIVO, "⭐ Il sistema vero")):
+                _pts = [(p["etichetta"], (p["celle"].get(_k) or {}).get("med"),
+                         (p["celle"].get(_k) or {}).get("n") or 0) for p in _per]
+                _pts = [x for x in _pts if x[1] is not None and x[2]]
+                if _pts:
+                    _fc.add_trace(go.Scatter(
+                        x=[x[0] for x in _pts], y=[x[1] for x in _pts], mode="lines+markers",
+                        name=_nm, line=dict(color=_colr, width=2), marker=dict(size=8),
+                        customdata=[x[2] for x in _pts],
+                        hovertemplate=_nm + " · %{x}: %{y:+.2f}% (%{customdata} casi)<extra></extra>"))
+            if _fc.data:
+                _fc.add_hline(y=0, line=dict(color="gray", width=1))
+                _fc.update_layout(height=320, margin=dict(t=50, b=10, l=10, r=10),
+                                  yaxis_title="Resa tipica (%)", hovermode="closest",
+                                  legend=dict(orientation="h", yanchor="bottom", y=1.02, x=0))
+                _fc.update_xaxes(fixedrange=True, categoryorder="array",
+                                 categoryarray=[p["etichetta"] for p in _per])
+                _fc.update_yaxes(fixedrange=True)
+                st.plotly_chart(_fc, use_container_width=True, key="met_calendario", config=_CFG)
+
+    # -----------------------------------------------------------------------
+    # CONTRO IL SISTEMA VERO: giornata per giornata, prova vera separata, e un verdetto onesto
+    # -----------------------------------------------------------------------
+    elif _mtab == "confronto":
+        st.markdown("## ⚖️ Ogni metodo contro il sistema vero")
+        st.caption("Il confronto si fa **giornata per giornata**: le occasioni dello stesso giorno "
+                   "salgono e scendono insieme, quindi la domanda giusta non è «chi ha la resa più "
+                   "alta» ma «in quante giornate il metodo ha scelto meglio del sistema vero». Conta "
+                   "la **prova vera**, cioè i giorni da quando le regole sono state fissate: quelli "
+                   "prima sono serviti a sceglierle. Si decide sulla vendita dopo un mese, e non "
+                   "prima di 30 occasioni e 15 giornate.")
+        _vc = [v for v in _vend if v != "soglia"]
+        _cfg_c = {"Metodo, resa tipica": st.column_config.NumberColumn("Metodo, resa tipica", format="%+.2f%%"),
+                  "Metodo, in guadagno": st.column_config.NumberColumn("Metodo, in guadagno", format="%d%%"),
+                  "Sistema vero, resa tipica": st.column_config.NumberColumn("Sistema vero, resa tipica", format="%+.2f%%"),
+                  "Sistema vero, in guadagno": st.column_config.NumberColumn("Sistema vero, in guadagno", format="%d%%")}
+        for _k in _metodi_veri:
+            _m = _info[_k]
             with st.container(border=True):
                 st.markdown(f"### {_m['nome']}")
-                st.caption(_m["spiegazione"])
-                st.caption("**Perché queste regole.** " + _m["perche"])
-                st.caption("**Regole, fissate il %s:** %s." % (_m["definito_il"],
-                                                                 " · ".join(_m.get("regole_testo") or [])))
-                _c1, _c2, _c3 = st.columns(3)
-                _c1.metric("Scelte a verbale", _m.get("scelte_totali") or 0)
-                _c2.metric("Giornate con scelte", _m.get("giornate_con_scelte") or 0)
-                _c3.metric("Scelte al giorno", (_m.get("scelte_al_giorno")
-                                                if _m.get("scelte_al_giorno") is not None else "—"))
-                _righe = []
-                for _bl, _et_b in (("dopo", "Dal %s (prova vera)" % _m["definito_il"]),
-                                   ("prima", "Prima (giorni usati per scegliere le regole)")):
-                    for _oz in ("7g", "30g"):
-                        _b = ((_m.get("orizzonti") or {}).get(_oz) or {}).get(_bl) or {}
-                        _o, _v = _b.get("ombra") or {}, _b.get("vivo") or {}
-                        _righe.append({
-                            "Periodo": _et_b, "Vendendo": _ORIZ_ET[_oz],
-                            "Ombra: casi": _o.get("quante") or 0, "Ombra: resa tipica": _o.get("mediana"),
-                            "Ombra: in guadagno": _o.get("in_guadagno_pct"),
-                            "Vivo: casi": _v.get("quante") or 0, "Vivo: resa tipica": _v.get("mediana"),
-                            "Vivo: in guadagno": _v.get("in_guadagno_pct"),
-                            "Giornate in cui vince l'ombra": (
-                                f"{_b.get('giornate_ombra_meglio')} su {_b.get('giornate_con_entrambi')}"
-                                if _b.get("giornate_con_entrambi") else "—"),
-                        })
-                st.dataframe(pd.DataFrame(_righe), hide_index=True, use_container_width=True,
-                             column_config=_CFG_TAB)
-                st.caption("«Vivo» sono le occasioni che il sistema vero ha comprato, in qualunque "
-                           "momento, nelle **stesse giornate** delle scelte in ombra: così il confronto "
-                           "non dipende da quali giorni sono capitati a ciascuno. «Resa tipica» è la "
-                           "mediana. Pochi casi: aneddoto, non misura.")
-                _vd = _m.get("verdetto") or {}
-                _mostra = (st.success if _vd.get("stato") == "ok" else
-                           st.error if _vd.get("stato") == "no" else st.info)
-                _mostra(_vd.get("testo") or "")
-                if _m.get("ultime_scelte"):
-                    st.markdown(f"**Che cosa ha scelto il {_m['ultimo_giorno']}**")
-                    st.dataframe(pd.DataFrame([
-                        {"Titolo": r.get("ticker"), "Nome": r.get("nome"), "Prezzo": r.get("prezzo"),
-                         "Il sistema vero": _origine_viva(r.get("origine_viva"))}
-                        for r in _m["ultime_scelte"]]), hide_index=True, use_container_width=True,
-                        column_config={"Prezzo": st.column_config.NumberColumn("Prezzo", format="%.2f")})
-                if _m.get("recenti"):
-                    with st.expander("Le ultime scelte e com'è andata"):
-                        st.dataframe(pd.DataFrame([
-                            {"Giorno": r.get("giorno"), "Titolo": r.get("ticker"), "Nome": r.get("nome"),
-                             "Prezzo": r.get("prezzo"), "Il sistema vero": _origine_viva(r.get("origine_viva")),
-                             "Dopo 7 giorni": r.get("resa_7g"), "Dopo 30 giorni": r.get("resa_30g"),
-                             "Periodo": ("prima" if r.get("retroattiva") else "prova vera")}
-                            for r in _m["recenti"]]), hide_index=True, use_container_width=True,
-                            column_config={
-                                "Prezzo": st.column_config.NumberColumn("Prezzo", format="%.2f"),
-                                "Dopo 7 giorni": st.column_config.NumberColumn("Dopo 7 giorni", format="%+.2f%%"),
-                                "Dopo 30 giorni": st.column_config.NumberColumn("Dopo 30 giorni", format="%+.2f%%"),
-                            })
-                        st.caption("Una casella vuota vuol dire che quell'esito non è ancora maturato.")
-        st.caption("**Regole ferme.** Le regole di un metodo in ombra non si cambiano mai: cambiarle "
-                   "riscriverebbe a posteriori che cosa avrebbe scelto, e la prova non varrebbe più "
-                   "niente. Chi vuole regole diverse ne definisce uno nuovo, che parte da zero. "
-                   "Si decide sui 30 giorni, solo sulla prova vera, e non prima di 30 occasioni e "
-                   "15 giornate con entrambi i metodi."
-                   + ((" Conti aggiornati al **%s**." % _om["calcolata_il"])
-                      if _om.get("da_file") and _om.get("calcolata_il") else ""))
+                st.caption(f"{_m['breve'][:1].upper()}{_m['breve'][1:]}. Regole fissate il "
+                           f"{_data_it(_m['definito_il'])}.")
+                _rr = []
+                for _pk, _pet in (("prova", "Prova vera"), ("prima", "Prima delle regole")):
+                    for _v in _vc:
+                        _b = fu.confronto_col_vivo(_cm, _k, _v, _pk)
+                        _o, _vv = _b["ombra"], _b["vivo"]
+                        _rr.append({
+                            "Periodo": _pet, "Vendendo": _ETV_BREVE[_v],
+                            "Metodo, casi": _o["quante"], "Metodo, resa tipica": _o["mediana"],
+                            "Metodo, in guadagno": _o["in_guadagno_pct"],
+                            "Sistema vero, casi": _vv["quante"],
+                            "Sistema vero, resa tipica": _vv["mediana"],
+                            "Sistema vero, in guadagno": _vv["in_guadagno_pct"],
+                            "Giornate vinte dal metodo": (
+                                f"{_b['giornate_ombra_meglio']} su {_b['giornate_con_entrambi']}"
+                                if _b["giornate_con_entrambi"] else "—")})
+                st.dataframe(pd.DataFrame(_rr), hide_index=True, use_container_width=True,
+                             column_config=_cfg_c)
+                _vdt = fu.verdetto_metodo(_cm, _k)
+                (st.success if _vdt["stato"] == "ok" else
+                 st.error if _vdt["stato"] == "no" else st.info)(_vdt["testo"])
+        st.caption("«Sistema vero» sono le occasioni che il sistema ha comprato nelle **stesse "
+                   "giornate** in cui il metodo ha scelto qualcosa: così il confronto non dipende da "
+                   "quali giorni sono capitati a ciascuno.")
+
+    st.caption("**Regole ferme.** Le regole di un metodo non si cambiano mai: cambiarle riscriverebbe "
+               "a posteriori che cosa avrebbe scelto, e la prova non varrebbe più niente. Chi vuole "
+               "regole diverse ne definisce uno nuovo, che parte da zero. Tutte le scelte restano in "
+               "archivio per sempre, giorno per giorno."
+               + (f" Conti aggiornati al **{_cm['aggiornato']}**."
+                  if _cm.get("aggiornato") and not _cm.get("anteprima") else ""))
     st.stop()
+
 
 # ===========================================================================
 # SEZIONE: DIARIO DEI DATI — il registro permanente di tutto ciò che gli scenari misurano
@@ -3652,7 +4024,8 @@ if section.startswith("Archivio"):
                                "archivio/scatti": "Scatti del monitoraggio",
                                "archivio/osservazioni": "Punti di osservazione",
                                "archivio/regole": "Regole del giorno",
-                               "archivio/ombra": "Scelte dei metodi in ombra"}.get(a, a),
+                               "archivio/ombra": "Scelte dei metodi in ombra",
+                               "archivio/metodi_avvii": "Avvio dei metodi"}.get(a, a),
                   "File": d["file"], "Righe": d["righe"], "Dal": d["primo"], "Al": d["ultimo"]}
                  for a, d in sorted(_st["aree"].items())]
         if _aree:

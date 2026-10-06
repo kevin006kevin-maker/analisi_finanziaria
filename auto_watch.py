@@ -464,18 +464,19 @@ def main():
     except Exception as e:
         log(f"Errore ripasso degli esiti: {e!r}")
 
-    # METODI IN OMBRA: che cosa avrebbe scelto oggi il metodo nuovo, messo a verbale accanto al
-    # vivo senza comprare niente. Le regole sono ferme (vedi METODI_OMBRA nel motore); la prima
-    # volta recupera anche i giorni passati, marcati retroattivi perche' sono quelli su cui le
-    # regole sono state scelte.
+    # METODI DI SELEZIONE IN OMBRA: che cosa avrebbe scelto oggi ciascun metodo, messo a verbale
+    # accanto al sistema vero senza comprare niente. Le regole sono ferme (METODI_OMBRA nel motore):
+    # un metodo nuovo, al primo giro, ripassa tutta la storia e quei giorni restano marcati «prima».
     try:
-        om = fu.registra_ombra()
+        om = fu.registra_metodi()
         if om["scritte"]:
-            log(f"Metodi in ombra: {om['scritte']} scelte messe a verbale su {om['giorni']} giornate")
+            log(f"Metodi di selezione: {om['scritte']} scelte messe a verbale su {om['giorni']} giornate")
+        if om.get("avviati"):
+            log("Metodi avviati, storia ripassata: " + ", ".join(om["avviati"]))
         if om.get("motivo"):
-            log(f"⚠️ Metodi in ombra: {om['motivo']}")
+            log(f"⚠️ Metodi di selezione: {om['motivo']}")
     except Exception as e:
-        log(f"Errore metodi in ombra: {e!r}")
+        log(f"Errore metodi di selezione: {e!r}")
 
     # Statistiche misurate: due volte al giorno, non a ogni giro (le mediane non cambiano perché
     # sono arrivati due esiti, e ricalcolarle vorrebbe dire rileggere tutto l'archivio 48 volte).
@@ -483,6 +484,18 @@ def main():
         fu.salva_sintesi()
     except Exception as e:
         log(f"Errore statistiche dell'archivio: {e!r}")
+
+    # CONTI DEI METODI PER L'APP: un file per tipo e per mese. A ogni giro si rifanno gli ultimi due
+    # mesi; due volte al giorno tutti quelli i cui esiti a un anno possono ancora maturare.
+    try:
+        cm = fu.aggiorna_conti_metodi()
+        if cm["scritti"]:
+            log(f"Conti dei metodi: {cm['scritti']} file aggiornati su {cm['mesi']} mesi"
+                + (" (ricalcolo completo)" if cm.get("completo") else ""))
+        if cm.get("motivo"):
+            log(f"⚠️ Conti dei metodi: {cm['motivo']}")
+    except Exception as e:
+        log(f"Errore conti dei metodi: {e!r}")
 
     # SCATTI DEL MONITORAGGIO: i vecchi vanno in file giornalieri e il file vivo torna piccolo.
     # Non è un riordino: a 1,89 MB il file dei titoli seguiti aveva le protezioni SPENTE, perché
