@@ -1,64 +1,5 @@
 [
 {
-"episodio": "short:PYPL:2026-08-28",
-"ticker": "PYPL",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-28 19:34",
-"data": "2026-08-28 19:34",
-"prezzo": 53.9541,
-"conv": 65,
-"prob_gain": 56,
-"prob_loss": 9,
-"reliab": "🟡 Media",
-"mkt": 2.9639,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": null,
-"media20": 59.9947,
-"quattro_atr": 61.8252,
-"meta_caduta": 58.127,
-"bollinger": 64.0236,
-"consigliata": 61.8252
-},
-"stop": 50.0186,
-"atr": 1.9678,
-"res": {
-"7g": 2.38,
-"30g": -0.38,
-"soglia": -0.38
-},
-"res_soglia": {
-"media20": {
-"ret": -0.38,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -0.38,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -0.38,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -0.38,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -0.38,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:SSTK:2026-08-28",
 "ticker": "SSTK",
 "kind": "short",
@@ -28849,6 +28790,26 @@
 "mkt": 2.1125,
 "fonte": "osservazione",
 "note": "prezzo salito di almeno il 2% da 3.405",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:XLF:2026-10-01",
+"ticker": "XLF",
+"kind": "short",
+"evento": "salita_2pct",
+"scritto_il": "2026-10-06 18:19",
+"data": "2026-10-06 18:17",
+"prezzo": 54.095,
+"conv": 61,
+"prob_gain": 49,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "prezzo salito di almeno il 2% da 52.9899",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
