@@ -13803,6 +13803,44 @@
 "prob_gain": 95,
 "prob_loss": 2,
 "conv": 73,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-10-01 16:46",
+"prezzo": 12.3399,
+"conv": 81,
+"prob_gain": 96,
+"prob_loss": 0,
+"reliab": "🔴 Bassa",
+"mkt": -0.2598
+},
+"anticipo": {
+"data": "2026-10-02",
+"prezzo": 12.57,
+"conv": 80,
+"prob_gain": 96,
+"prob_loss": 0,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-06",
+"prezzo": 12.39,
+"conv": 73,
+"prob_gain": 95,
+"prob_loss": 2,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 }
 ]
