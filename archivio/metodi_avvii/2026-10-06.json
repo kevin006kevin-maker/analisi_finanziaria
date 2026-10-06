@@ -1,0 +1,124 @@
+[
+{
+"id": "sistema_vero",
+"metodo": "sistema_vero",
+"giorno": "2026-10-06",
+"ora": "2026-10-06 16:23",
+"definito_il": "2026-08-19",
+"regole": [
+"nessuna regola in più: è quello che il sistema compra"
+]
+},
+{
+"id": "ombra_trend",
+"metodo": "ombra_trend",
+"giorno": "2026-10-06",
+"ora": "2026-10-06 16:23",
+"definito_il": "2026-10-05",
+"regole": [
+"sopra la media a 200 giorni"
+]
+},
+{
+"id": "ombra_regole_nuove",
+"metodo": "ombra_regole_nuove",
+"giorno": "2026-10-06",
+"ora": "2026-10-06 16:23",
+"definito_il": "2026-10-05",
+"regole": [
+"sopra la media a 200 giorni",
+"ultimo anno almeno -10%",
+"prezzo almeno 10 $",
+"scambi di almeno 5 milioni di $ al giorno",
+"nessun sospetto di trappola di valore"
+]
+},
+{
+"id": "forza_relativa",
+"metodo": "forza_relativa",
+"giorno": "2026-10-06",
+"ora": "2026-10-06 16:23",
+"definito_il": "2026-10-06",
+"regole": [
+"nel 30% salito di più del giorno, senza l'ultimo mese",
+"prezzo almeno 10 $",
+"scambi di almeno 5 milioni di $ al giorno"
+]
+},
+{
+"id": "vicino_massimi",
+"metodo": "vicino_massimi",
+"giorno": "2026-10-06",
+"ora": "2026-10-06 16:23",
+"definito_il": "2026-10-06",
+"regole": [
+"al massimo 10% sotto il massimo dell'anno",
+"prezzo almeno 10 $",
+"scambi di almeno 5 milioni di $ al giorno"
+]
+},
+{
+"id": "trend_template",
+"metodo": "trend_template",
+"giorno": "2026-10-06",
+"ora": "2026-10-06 16:23",
+"definito_il": "2026-10-06",
+"regole": [
+"sopra la media a 200 giorni",
+"sopra la media a 50 giorni",
+"al massimo 25% sotto il massimo dell'anno",
+"in guadagno sull'ultimo anno",
+"prezzo almeno 10 $",
+"scambi di almeno 5 milioni di $ al giorno"
+]
+},
+{
+"id": "bassa_volatilita",
+"metodo": "bassa_volatilita",
+"giorno": "2026-10-06",
+"ora": "2026-10-06 16:23",
+"definito_il": "2026-10-06",
+"regole": [
+"nel 30% più calmo del giorno",
+"prezzo almeno 10 $",
+"scambi di almeno 5 milioni di $ al giorno"
+]
+},
+{
+"id": "qualita",
+"metodo": "qualita",
+"giorno": "2026-10-06",
+"ora": "2026-10-06 16:23",
+"definito_il": "2026-10-06",
+"regole": [
+"conti solidi",
+"prezzo almeno 10 $",
+"scambi di almeno 5 milioni di $ al giorno"
+]
+},
+{
+"id": "qualita_forza",
+"metodo": "qualita_forza",
+"giorno": "2026-10-06",
+"ora": "2026-10-06 16:23",
+"definito_il": "2026-10-06",
+"regole": [
+"conti solidi",
+"nel 30% salito di più del giorno, senza l'ultimo mese",
+"prezzo almeno 10 $",
+"scambi di almeno 5 milioni di $ al giorno"
+]
+},
+{
+"id": "rimbalzo_grandi",
+"metodo": "rimbalzo_grandi",
+"giorno": "2026-10-06",
+"ora": "2026-10-06 16:23",
+"definito_il": "2026-10-06",
+"regole": [
+"forza del prezzo al massimo 35",
+"prezzo almeno 10 $",
+"scambi di almeno 50 milioni di $ al giorno"
+]
+}
+]
