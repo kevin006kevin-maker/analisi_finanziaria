@@ -1,64 +1,5 @@
 [
 {
-"episodio": "short:ENI.MI:2026-08-28",
-"ticker": "ENI.MI",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-28 19:34",
-"data": "2026-08-28 19:34",
-"prezzo": 22.79,
-"conv": 62,
-"prob_gain": 52,
-"prob_loss": 2,
-"reliab": "🟢 Alta",
-"mkt": 2.9639,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": null,
-"media20": 23.5657,
-"quattro_atr": 24.8571,
-"meta_caduta": 23.67,
-"bollinger": 24.5056,
-"consigliata": 24.8571
-},
-"stop": 21.7564,
-"atr": 0.5168,
-"res": {
-"7g": 3.8,
-"30g": 7.28,
-"soglia": 7.28
-},
-"res_soglia": {
-"media20": {
-"ret": 3.4,
-"toccato": true,
-"giorni": 4
-},
-"quattro_atr": {
-"ret": 7.28,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 3.86,
-"toccato": true,
-"giorni": 5
-},
-"bollinger": {
-"ret": 7.28,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 7.28,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:CABO:2026-08-28",
 "ticker": "CABO",
 "kind": "short",
@@ -28771,6 +28712,26 @@
 "mkt": null,
 "fonte": "monitoraggio",
 "note": "prezzo salito di almeno il 2% da 12.57",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:MRP:2026-10-05",
+"ticker": "MRP",
+"kind": "short",
+"evento": "salita_2pct",
+"scritto_il": "2026-10-06 18:19",
+"data": "2026-10-06 18:16",
+"prezzo": 23.085,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "prezzo salito di almeno il 2% da 22.19",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
