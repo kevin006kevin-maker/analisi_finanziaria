@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:WU:2026-08-28",
-"ticker": "WU",
-"kind": "short",
-"evento": "uscita",
-"scritto_il": "2026-08-28 07:06",
-"data": "2026-08-28 07:06",
-"prezzo": 7.21,
-"conv": 74,
-"prob_gain": 51,
-"prob_loss": 5,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "in perdita da 17 giorni di Borsa: valuta l'uscita",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:AA:2026-08-28",
 "ticker": "AA",
 "kind": "short",
@@ -28937,5 +28917,25 @@
 },
 "stop": 55.7936,
 "atr": 1.5082
+},
+{
+"episodio": "short:G.MI:2026-10-02",
+"ticker": "G.MI",
+"kind": "short",
+"evento": "salita_2pct",
+"scritto_il": "2026-10-06 11:29",
+"data": "2026-10-06 11:24",
+"prezzo": 42.37,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "prezzo salito di almeno il 2% da 41.33",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
