@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:GAP:2026-08-29",
-"ticker": "GAP",
-"kind": "long",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-29 10:04",
-"data": "2026-08-29 10:04",
-"prezzo": 20.79,
-"conv": 60,
-"prob_gain": 60,
-"prob_loss": 26,
-"reliab": "🟡 Media",
-"mkt": 3.9443,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": null,
-"media20": null,
-"quattro_atr": 23.4864,
-"meta_caduta": 21.445,
-"bollinger": 21.322,
-"consigliata": 23.4864
-},
-"stop": 19.4418,
-"atr": 0.6741,
-"res": {
-"7g": 7.26,
-"30g": 8.32
-}
-},
-{
 "episodio": "short:INTC:2026-08-25",
 "ticker": "INTC",
 "kind": "short",
@@ -28703,5 +28672,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:BBOT:2026-09-09",
+"ticker": "BBOT",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-07 03:08",
+"data": "2026-10-07 03:06",
+"prezzo": 3.6,
+"conv": 74,
+"prob_gain": 63,
+"prob_loss": 14,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-07",
+"soglie": {
+"media50": 7.2698,
+"media20": 4.7557,
+"quattro_atr": 5.158,
+"meta_caduta": 6.6,
+"bollinger": 7.1822,
+"consigliata": 5.158
+},
+"stop": 2.821,
+"atr": 0.3895
 }
 ]
