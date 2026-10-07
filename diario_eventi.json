@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:IAG:2026-08-20",
-"ticker": "IAG",
-"kind": "long",
-"evento": "promozione",
-"scritto_il": "2026-08-31 00:23",
-"data": "2026-08-31 00:23",
-"prezzo": 20.59,
-"conv": 56,
-"prob_gain": 64,
-"prob_loss": 26,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 7 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": null,
-"media20": null,
-"quattro_atr": 24.2881,
-"meta_caduta": 21.38,
-"bollinger": 23.4116,
-"consigliata": 24.2881
-},
-"stop": 18.7409,
-"atr": 0.9245,
-"res": {
-"7g": -0.95,
-"30g": -10.51
-}
-},
-{
 "episodio": "long:CHTR:2026-08-20",
 "ticker": "CHTR",
 "kind": "long",
@@ -28597,5 +28566,32 @@
 },
 "stop": 51.9385,
 "atr": 1.0757
+},
+{
+"episodio": "short:STLA:2026-10-02",
+"ticker": "STLA",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-07 03:09",
+"data": "2026-10-06 18:16",
+"prezzo": 4.61,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-07",
+"soglie": {
+"media50": 5.1984,
+"media20": 4.803,
+"quattro_atr": 5.4216,
+"meta_caduta": 5.31,
+"bollinger": 5.4623,
+"consigliata": 5.1984
+},
+"stop": 4.2042,
+"atr": 0.2029
 }
 ]
