@@ -14266,5 +14266,62 @@
 "prob_loss": null,
 "conv": 72,
 "res": {}
+},
+{
+"ticker": "ISP.MI",
+"kind": "short",
+"date": "2026-10-07",
+"promo_price": 6.426,
+"obs_price": 6.28,
+"obs_date": "2026-10-02",
+"pre_price": 6.328,
+"pre_date": "2026-10-05",
+"conf_price": null,
+"conf_date": null,
+"target": 6.7237,
+"stop": 6.1694,
+"reliab": "🟢 Alta",
+"prob_gain": 55,
+"prob_loss": 0,
+"conv": 60,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-02 14:31",
+"prezzo": 6.28,
+"conv": 69,
+"prob_gain": 53,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -0.002
+},
+"anticipo": {
+"data": "2026-10-05",
+"prezzo": 6.328,
+"conv": 69,
+"prob_gain": 54,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-07 03:05",
+"prezzo": 6.426,
+"conv": 60,
+"prob_gain": 55,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
