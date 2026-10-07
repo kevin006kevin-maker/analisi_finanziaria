@@ -1,25 +1,5 @@
 [
 {
-"episodio": "long:STLAM.MI:2026-08-17",
-"ticker": "STLAM.MI",
-"kind": "long",
-"evento": "salita_2pct",
-"scritto_il": "2026-08-31 16:52",
-"data": "2026-08-31 16:49",
-"prezzo": 4.776,
-"conv": 40,
-"prob_gain": 63,
-"prob_loss": 26,
-"reliab": "🟡 Media",
-"mkt": 0.9484,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 4.6255",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:ENI.MI:2026-08-28",
 "ticker": "ENI.MI",
 "kind": "short",
@@ -28350,5 +28330,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:MIAX:2026-10-07",
+"ticker": "MIAX",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-07 09:12",
+"data": "2026-10-07 09:12",
+"prezzo": 30.79,
+"conv": 62,
+"prob_gain": 55,
+"prob_loss": 11,
+"reliab": "🟡 Media",
+"mkt": 1.895,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 40.9784,
+"media20": 36.8425,
+"quattro_atr": 37.5675,
+"meta_caduta": 38.915,
+"bollinger": 43.8119,
+"consigliata": 37.5675
+},
+"stop": 27.4013,
+"atr": 1.6944
 }
 ]
