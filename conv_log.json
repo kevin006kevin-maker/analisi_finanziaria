@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-09-30",
-"ticker": "QQQ",
-"kind": "short",
-"price": 737.93,
-"conv": 34,
-"factors": {
-"discount": 1.275,
-"histcheap": -1.54,
-"riskadj": 1.35,
-"ddpen": -4.09,
-"momentum": 1.275,
-"prob": 46,
-"oversold": -59.2094,
-"rebound": -3.2002,
-"trend": 1.0,
-"relstrength": -0.0669
-},
-"ret_5d": null,
-"ret_21d": null
-},
-{
-"date": "2026-09-30",
 "ticker": "VOO",
 "kind": "short",
 "price": 702.46,
@@ -38354,6 +38333,46 @@
 "rebound": -17.5719,
 "trend": 1.0,
 "relstrength": 13.6007
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-07",
+"ticker": "PBR-A",
+"kind": "long",
+"price": 21.515,
+"conv": 67,
+"factors": {
+"discount": 2.7351,
+"histcheap": -2.07,
+"riskadj": 2.87,
+"ddpen": -11.28,
+"momentum": -13.2965,
+"prob": 39,
+"quality": 71.0,
+"valcheap": 0.6745,
+"trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-07",
+"ticker": "SAN",
+"kind": "long",
+"price": 13.585,
+"conv": 60,
+"factors": {
+"discount": 9.7342,
+"histcheap": -0.84,
+"riskadj": 1.32,
+"ddpen": -6.83,
+"momentum": 1.7715,
+"prob": 77,
+"quality": 68.9,
+"valcheap": 0.0681,
+"trappen": 3
 },
 "ret_5d": null,
 "ret_21d": null
