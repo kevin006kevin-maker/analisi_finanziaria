@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:MNSO:2026-08-28",
-"ticker": "MNSO",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-08-31 00:22",
-"data": "2026-08-31 00:21",
-"prezzo": 10.33,
-"conv": 81,
-"prob_gain": 52,
-"prob_loss": 3,
-"reliab": "🟡 Media",
-"mkt": 2.9646,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 11.9122,
-"media20": 11.6175,
-"quattro_atr": 11.8271,
-"meta_caduta": 11.82,
-"bollinger": 13.1155,
-"consigliata": 11.8271
-},
-"stop": 9.5815,
-"atr": 0.3743,
-"res": {
-"7g": -9.68,
-"30g": -9.92,
-"soglia": -9.92
-},
-"res_soglia": {
-"media50": {
-"ret": -9.92,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -9.92,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -9.92,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -9.92,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -9.92,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -9.92,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:STMMI.MI:2026-08-31",
 "ticker": "STMMI.MI",
 "kind": "short",
@@ -28690,5 +28626,32 @@
 },
 "stop": 5.1018,
 "atr": 1.0041
+},
+{
+"episodio": "long:GFI:2026-09-28",
+"ticker": "GFI",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-07 03:08",
+"data": "2026-10-07 03:04",
+"prezzo": 36.17,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-07",
+"soglie": {
+"media50": 41.2298,
+"media20": 40.4525,
+"quattro_atr": 42.7085,
+"meta_caduta": 42.52,
+"bollinger": 48.0677,
+"consigliata": 41.2298
+},
+"stop": 32.9007,
+"atr": 1.6346
 }
 ]
