@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:TKC:2026-08-31",
-"ticker": "TKC",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-31 16:48",
-"data": "2026-08-31 16:48",
-"prezzo": 5.0001,
-"conv": 85,
-"prob_gain": 55,
-"prob_loss": 1,
-"reliab": "🟢 Alta",
-"mkt": 0.9484,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 5.6314,
-"media20": 5.421,
-"quattro_atr": 5.5201,
-"meta_caduta": 5.58,
-"bollinger": 5.641,
-"consigliata": 5.5201
-},
-"stop": 4.7401,
-"atr": 0.13,
-"res": {
-"7g": 4.75,
-"30g": -0.39,
-"soglia": -0.39
-},
-"res_soglia": {
-"media50": {
-"ret": -0.39,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -0.39,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -0.39,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -0.39,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -0.39,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -0.39,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:FINV:2026-08-31",
 "ticker": "FINV",
 "kind": "short",
@@ -28479,5 +28415,32 @@
 },
 "stop": 40.2407,
 "atr": 0.8496
+},
+{
+"episodio": "short:ISP.MI:2026-10-02",
+"ticker": "ISP.MI",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-07 03:09",
+"data": "2026-10-07 03:05",
+"prezzo": 6.426,
+"conv": 60,
+"prob_gain": 55,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-07",
+"soglie": {
+"media50": 6.7237,
+"media20": 6.6744,
+"quattro_atr": 6.9391,
+"meta_caduta": 6.6715,
+"bollinger": 6.9521,
+"consigliata": 6.7237
+},
+"stop": 6.1694,
+"atr": 0.1283
 }
 ]
