@@ -1,47 +1,5 @@
 [
 {
-"episodio": "long:AEO:2026-08-28",
-"ticker": "AEO",
-"kind": "long",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-08-31 00:23",
-"data": "2026-08-30 21:39",
-"prezzo": 16.87,
-"conv": 65,
-"prob_gain": 45,
-"prob_loss": 45,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 17.152,
-"media20": 17.007,
-"quattro_atr": 19.6765,
-"meta_caduta": 17.83,
-"bollinger": 18.5202,
-"consigliata": 17.152
-},
-"stop": 15.4667,
-"atr": 0.7016,
-"res": {
-"7g": 1.87,
-"30g": 4.53
-},
-"soglie_contaminate": {
-"media50": 17.152,
-"media20": 17.007,
-"quattro_atr": 19.6765,
-"meta_caduta": 17.83,
-"bollinger": 18.5202,
-"consigliata": 17.152
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"taglio_corretto": true
-},
-{
 "episodio": "long:IAG:2026-08-20",
 "ticker": "IAG",
 "kind": "long",
@@ -28612,5 +28570,32 @@
 },
 "stop": 4.7163,
 "atr": 0.2569
+},
+{
+"episodio": "short:BAC:2026-10-02",
+"ticker": "BAC",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-07 03:08",
+"data": "2026-10-07 03:01",
+"prezzo": 54.09,
+"conv": 64,
+"prob_gain": 52,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": 1.895,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-07",
+"soglie": {
+"media50": 60.5484,
+"media20": 57.202,
+"quattro_atr": 58.393,
+"meta_caduta": 59.45,
+"bollinger": 63.0999,
+"consigliata": 58.393
+},
+"stop": 51.9385,
+"atr": 1.0757
 }
 ]
