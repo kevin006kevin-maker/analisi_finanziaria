@@ -1,25 +1,5 @@
 [
 {
-"episodio": "long:AEO:2026-08-28",
-"ticker": "AEO",
-"kind": "long",
-"evento": "salita_2pct",
-"scritto_il": "2026-08-28 19:38",
-"data": "2026-08-28 19:36",
-"prezzo": 17.025,
-"conv": 57,
-"prob_gain": 46,
-"prob_loss": 43,
-"reliab": "🔴 Bassa",
-"mkt": 2.9639,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 16.69",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:VISN:2026-08-29",
 "ticker": "VISN",
 "kind": "short",
@@ -28758,5 +28738,32 @@
 },
 "stop": 12.097,
 "atr": 1.4965
+},
+{
+"episodio": "short:TDOC:2026-09-15",
+"ticker": "TDOC",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-07 03:05",
+"data": "2026-10-07 03:05",
+"prezzo": 5.79,
+"conv": 67,
+"prob_gain": 53,
+"prob_loss": 17,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 6.5456,
+"media20": 6.105,
+"quattro_atr": 6.8012,
+"meta_caduta": 7.755,
+"bollinger": 6.6796,
+"consigliata": 6.5456
+},
+"stop": 5.2844,
+"atr": 0.2528
 }
 ]
