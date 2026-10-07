@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:IAG:2026-08-20",
-"ticker": "IAG",
-"kind": "long",
-"evento": "fine_osservazione",
-"scritto_il": "2026-08-31 00:25",
-"data": "2026-08-31 00:23",
-"prezzo": 20.59,
-"conv": 56,
-"prob_gain": 64,
-"prob_loss": 26,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-08-31",
-"soglie": {
-"media50": null,
-"media20": null,
-"quattro_atr": 24.2881,
-"meta_caduta": 21.38,
-"bollinger": 23.4116,
-"consigliata": 24.2881
-},
-"stop": 18.7409,
-"atr": 0.9245,
-"res": {
-"7g": -0.95,
-"30g": -10.51
-}
-},
-{
 "episodio": "short:LDO.MI:2026-08-26",
 "ticker": "LDO.MI",
 "kind": "short",
@@ -28589,5 +28558,32 @@
 },
 "stop": 10.4536,
 "atr": 0.6132
+},
+{
+"episodio": "short:PPC:2026-10-02",
+"ticker": "PPC",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-07 03:09",
+"data": "2026-10-06 23:14",
+"prezzo": 27.89,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-07",
+"soglie": {
+"media50": 29.1058,
+"media20": 28.5865,
+"quattro_atr": 32.5244,
+"meta_caduta": 30.16,
+"bollinger": 31.3966,
+"consigliata": 29.1058
+},
+"stop": 25.5728,
+"atr": 1.1586
 }
 ]
