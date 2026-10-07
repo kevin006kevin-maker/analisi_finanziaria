@@ -6208,7 +6208,7 @@
 "max_date": "2026-08-25 20:40",
 "exit_notified": false,
 "warn_since": "2026-09-28",
-"warn": "in perdita da 39 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 40 giorni di Borsa: valuta l'uscita"
 },
 "CELH": {
 "kind": "short",
@@ -6985,7 +6985,9 @@
 "max_date": "2026-08-27 22:41",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-06"
+"entry_check": "2026-10-06",
+"warn_since": "2026-10-07",
+"warn": "in perdita da 33 giorni di Borsa: valuta l'uscita"
 },
 "DUOL": {
 "kind": "long",
@@ -9298,7 +9300,9 @@
 "max_date": "2026-09-22 23:18",
 "auto": true,
 "notified": false,
-"entry_check": "2026-10-06"
+"entry_check": "2026-10-06",
+"warn_since": "2026-10-07",
+"warn": "in perdita da 16 giorni di Borsa: valuta l'uscita"
 },
 "YSS": {
 "kind": "short",
@@ -9461,9 +9465,7 @@
 "max_date": "2026-09-25 15:43",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-06",
-"warn_since": "2026-10-06",
-"warn": "in perdita da 14 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-06"
 },
 "MYGN": {
 "kind": "short",
@@ -10242,155 +10244,6 @@
 },
 "exit_notified": false
 },
-"IONS": {
-"kind": "short",
-"added": "2026-09-22",
-"note": "🤖 Promossa il 2026-09-22: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.0% e la convenienza (71) regge.",
-"name": "IONS",
-"snapshots": [
-{
-"name": "IONS",
-"price": 43.54,
-"rsi": 30.4012,
-"dd_high": -49.6647,
-"occasione": 42,
-"convenienza": 81,
-"prob_gain": 64,
-"prob_loss": 13,
-"exp_ret": 3.6,
-"gain": 23.8098,
-"reliab": "🟡 Media",
-"target": 53.9068,
-"stop": 39.3388,
-"date": "2026-10-03 00:13"
-},
-{
-"name": "IONS",
-"price": 44.0,
-"rsi": 31.2709,
-"dd_high": -49.1329,
-"occasione": 41,
-"convenienza": 80,
-"prob_gain": 60,
-"prob_loss": 16,
-"exp_ret": 2.9,
-"gain": 23.0759,
-"reliab": "🟡 Media",
-"target": 54.1534,
-"stop": 39.6188,
-"date": "2026-10-03 03:29"
-},
-{
-"name": "IONS",
-"price": 43.54,
-"rsi": 30.4012,
-"dd_high": -49.6647,
-"occasione": 42,
-"convenienza": 81,
-"prob_gain": 64,
-"prob_loss": 13,
-"exp_ret": 3.6,
-"gain": 23.8098,
-"reliab": "🟡 Media",
-"target": 53.9068,
-"stop": 39.3388,
-"date": "2026-10-03 09:08"
-},
-{
-"name": "IONS",
-"price": 43.26,
-"rsi": 29.7049,
-"dd_high": -50.0809,
-"occasione": 44,
-"convenienza": 81,
-"prob_gain": 64,
-"prob_loss": 12,
-"exp_ret": 3.4,
-"gain": 24.2228,
-"reliab": "🟡 Media",
-"target": 53.6394,
-"stop": 39.1175,
-"date": "2026-10-05 16:12"
-},
-{
-"name": "IONS",
-"price": 43.2,
-"rsi": 29.7617,
-"dd_high": -50.0462,
-"occasione": 44,
-"convenienza": 81,
-"prob_gain": 65,
-"prob_loss": 13,
-"exp_ret": 4.2,
-"gain": 24.1379,
-"reliab": "🟡 Media",
-"target": 53.64,
-"stop": 39.1475,
-"date": "2026-10-05 18:02"
-},
-{
-"name": "IONS",
-"price": 43.5,
-"rsi": 30.3222,
-"dd_high": -49.711,
-"occasione": 43,
-"convenienza": 81,
-"prob_gain": 62,
-"prob_loss": 14,
-"exp_ret": 3.3,
-"gain": 23.3237,
-"reliab": "🟡 Media",
-"target": 53.6458,
-"stop": 39.4089,
-"date": "2026-10-06 00:38"
-},
-{
-"name": "IONS",
-"price": 44.195,
-"rsi": 33.9265,
-"dd_high": -48.8092,
-"occasione": 67,
-"convenienza": 80,
-"prob_gain": 62,
-"prob_loss": 14,
-"exp_ret": 3.2,
-"gain": 20.6238,
-"reliab": "🟡 Media",
-"target": 53.4122,
-"stop": 40.269,
-"date": "2026-10-06 18:18"
-},
-{
-"name": "IONS",
-"price": 44.0,
-"rsi": 32.6764,
-"dd_high": -49.1329,
-"occasione": 70,
-"convenienza": 80,
-"prob_gain": 62,
-"prob_loss": 16,
-"exp_ret": 2.7,
-"gain": 21.3786,
-"reliab": "🟡 Media",
-"target": 53.4066,
-"stop": 39.989,
-"date": "2026-10-06 23:17"
-}
-],
-"entry_price": 45.75,
-"entry_target": 55.4874,
-"entry_stop": 41.0547,
-"entry_conv": 83,
-"entry_date": "2026-09-22 23:17",
-"entry_src": "scatto",
-"max_price": 45.89,
-"max_date": "2026-09-29 22:03",
-"auto": true,
-"notified": false,
-"entry_check": "2026-10-06",
-"warn_since": "2026-10-01",
-"warn": "in perdita da 10 giorni di Borsa: valuta l'uscita"
-},
 "FLNC": {
 "kind": "short",
 "added": "2026-09-23",
@@ -10848,7 +10701,7 @@
 "notified": false,
 "entry_check": "2026-10-06",
 "warn_since": "2026-10-06",
-"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "CASY": {
 "kind": "short",
@@ -11291,7 +11144,7 @@
 "notified": true,
 "entry_check": "2026-10-06",
 "warn_since": "2026-10-02",
-"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "GT": {
 "kind": "short",
@@ -11440,7 +11293,7 @@
 "notified": false,
 "entry_check": "2026-10-06",
 "warn_since": "2026-10-05",
-"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
 },
 "KNF": {
 "kind": "short",
@@ -11605,7 +11458,7 @@
 "notified": false,
 "entry_check": "2026-10-06",
 "warn_since": "2026-10-05",
-"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
 },
 "NAMS": {
 "kind": "short",
@@ -11770,7 +11623,7 @@
 "notified": true,
 "entry_check": "2026-10-06",
 "warn_since": "2026-10-05",
-"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
 },
 "MONC.MI": {
 "kind": "short",
@@ -11919,7 +11772,7 @@
 "notified": false,
 "entry_check": "2026-10-06",
 "warn_since": "2026-10-05",
-"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
 },
 "RELY": {
 "kind": "short",
@@ -12247,7 +12100,7 @@
 "notified": true,
 "entry_check": "2026-10-06",
 "warn_since": "2026-10-06",
-"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
 },
 "MBC": {
 "kind": "short",
@@ -12559,7 +12412,7 @@
 "notified": false,
 "entry_check": "2026-10-06",
 "warn_since": "2026-10-06",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
 },
 "RARE": {
 "kind": "short",
@@ -12722,7 +12575,9 @@
 "max_date": "2026-09-30 01:46",
 "auto": true,
 "notified": false,
-"entry_check": "2026-10-06"
+"entry_check": "2026-10-06",
+"warn_since": "2026-10-07",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "WYY": {
 "kind": "short",
@@ -12869,7 +12724,9 @@
 "max_date": "2026-09-30 19:14",
 "auto": true,
 "notified": false,
-"entry_check": "2026-10-06"
+"entry_check": "2026-10-06",
+"warn_since": "2026-10-07",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "CAR": {
 "kind": "short",
@@ -13294,7 +13151,9 @@
 "max_date": "2026-09-30 13:24",
 "auto": true,
 "notified": false,
-"entry_check": "2026-10-06"
+"entry_check": "2026-10-06",
+"warn_since": "2026-10-07",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "BBOT": {
 "kind": "short",
@@ -13457,7 +13316,9 @@
 "max_date": "2026-09-30 23:27",
 "auto": true,
 "notified": false,
-"entry_check": "2026-10-06"
+"entry_check": "2026-10-06",
+"warn_since": "2026-10-07",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "RSI": {
 "kind": "short",
@@ -14428,7 +14289,7 @@
 "max_price": 695.46,
 "max_date": "2026-10-06 23:17",
 "auto": true,
-"notified": false,
+"notified": true,
 "entry_check": "2026-10-06"
 },
 "DCX": {
@@ -14869,7 +14730,7 @@
 "max_price": 7.62,
 "max_date": "2026-10-06 23:17",
 "auto": true,
-"notified": false,
+"notified": true,
 "entry_check": "2026-10-06"
 },
 "XENE": {
