@@ -14323,5 +14323,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "UCG.MI",
+"kind": "short",
+"date": "2026-10-07",
+"promo_price": 79.8,
+"obs_price": 77.15,
+"obs_date": "2026-10-02",
+"pre_price": 77.15,
+"pre_date": "2026-10-05",
+"conf_price": null,
+"conf_date": null,
+"target": 83.4724,
+"stop": 75.8927,
+"reliab": "🟢 Alta",
+"prob_gain": 54,
+"prob_loss": 1,
+"conv": 60,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-02 14:31",
+"prezzo": 77.15,
+"conv": 68,
+"prob_gain": 53,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": -0.002
+},
+"anticipo": {
+"data": "2026-10-05",
+"prezzo": 77.15,
+"conv": 68,
+"prob_gain": 53,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-07 03:06",
+"prezzo": 79.8,
+"conv": 60,
+"prob_gain": 54,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
