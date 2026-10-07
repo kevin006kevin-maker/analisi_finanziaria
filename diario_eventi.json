@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:VISN:2026-08-29",
-"ticker": "VISN",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-08-29 10:05",
-"data": "2026-08-29 10:03",
-"prezzo": 11.63,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 6.06",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "long:GAP:2026-08-29",
 "ticker": "GAP",
 "kind": "long",
@@ -28676,5 +28656,32 @@
 },
 "stop": 163.2159,
 "atr": 8.2921
+},
+{
+"episodio": "short:TRT:2026-09-24",
+"ticker": "TRT",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-07 03:08",
+"data": "2026-10-06 23:17",
+"prezzo": 6.11,
+"conv": 69,
+"prob_gain": 51,
+"prob_loss": 30,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-07",
+"soglie": {
+"media50": 9.8798,
+"media20": 8.727,
+"quattro_atr": 9.204,
+"meta_caduta": 8.895,
+"bollinger": 13.1398,
+"consigliata": 9.204
+},
+"stop": 4.563,
+"atr": 0.7735
 }
 ]
