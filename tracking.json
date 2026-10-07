@@ -8611,9 +8611,7 @@
 "max_date": "2026-09-22 23:18",
 "auto": true,
 "notified": false,
-"entry_check": "2026-10-07",
-"warn_since": "2026-10-07",
-"warn": "in perdita da 16 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-07"
 },
 "YSS": {
 "kind": "short",
@@ -9686,9 +9684,7 @@
 "max_date": "2026-10-06 23:17",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-07",
-"warn_since": "2026-10-07",
-"warn": "in perdita da 10 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-07"
 },
 "LPLA": {
 "kind": "short",
@@ -10214,7 +10210,9 @@
 "max_date": "2026-10-01 22:21",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-07"
+"entry_check": "2026-10-07",
+"warn_since": "2026-10-07",
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "SMST": {
 "kind": "short",
@@ -12143,9 +12141,7 @@
 "max_date": "2026-10-07 22:37",
 "auto": true,
 "notified": false,
-"entry_check": "2026-10-07",
-"warn_since": "2026-10-07",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-07"
 },
 "TRT": {
 "kind": "short",
