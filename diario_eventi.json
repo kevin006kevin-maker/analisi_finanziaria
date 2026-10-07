@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:CABO:2026-08-28",
-"ticker": "CABO",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-08-29 03:28",
-"data": "2026-08-29 03:25",
-"prezzo": 25.5,
-"conv": 61,
-"prob_gain": 51,
-"prob_loss": 28,
-"reliab": "🔴 Bassa",
-"mkt": 2.9646,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 24.845",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:AXTI:2026-08-29",
 "ticker": "AXTI",
 "kind": "short",
@@ -28735,5 +28715,32 @@
 },
 "stop": 6.1694,
 "atr": 0.1283
+},
+{
+"episodio": "short:UCG.MI:2026-10-02",
+"ticker": "UCG.MI",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-07 03:06",
+"data": "2026-10-07 03:06",
+"prezzo": 79.8,
+"conv": 60,
+"prob_gain": 54,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 83.4724,
+"media20": 82.908,
+"quattro_atr": 87.6146,
+"meta_caduta": 82.975,
+"bollinger": 86.4383,
+"consigliata": 83.4724
+},
+"stop": 75.8927,
+"atr": 1.9536
 }
 ]
