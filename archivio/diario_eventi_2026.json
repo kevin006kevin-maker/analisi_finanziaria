@@ -11582,5 +11582,69 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:AON:2026-09-01",
+"ticker": "AON",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-01 02:21",
+"data": "2026-09-01 02:21",
+"prezzo": 321.52,
+"conv": 72,
+"prob_gain": 53,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": 1.1268,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 352.5144,
+"media20": 352.7325,
+"quattro_atr": 360.662,
+"meta_caduta": 351.39,
+"bollinger": 369.9461,
+"consigliata": 352.5144
+},
+"stop": 301.949,
+"atr": 9.7855,
+"res": {
+"7g": -0.63,
+"30g": -14.37,
+"soglia": -14.37
+},
+"res_soglia": {
+"media50": {
+"ret": -14.37,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -14.37,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -14.37,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -14.37,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -14.37,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -14.37,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
