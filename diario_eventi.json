@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:HWM:2026-08-31",
-"ticker": "HWM",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-31 16:48",
-"data": "2026-08-31 16:48",
-"prezzo": 244.915,
-"conv": 87,
-"prob_gain": 53,
-"prob_loss": 1,
-"reliab": "🟢 Alta",
-"mkt": 0.9484,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 276.8901,
-"media20": 277.7278,
-"quattro_atr": 281.6072,
-"meta_caduta": 268.7825,
-"bollinger": 302.5573,
-"consigliata": 276.8901
-},
-"stop": 226.5689,
-"atr": 9.1731,
-"res": {
-"7g": -2.1,
-"30g": -6.81,
-"soglia": -6.81
-},
-"res_soglia": {
-"media50": {
-"ret": -6.81,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -6.81,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -6.81,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -6.81,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -6.81,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -6.81,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:TKC:2026-08-31",
 "ticker": "TKC",
 "kind": "short",
@@ -28516,5 +28452,32 @@
 },
 "stop": 14.5101,
 "atr": 0.3799
+},
+{
+"episodio": "short:G.MI:2026-10-02",
+"ticker": "G.MI",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-07 03:09",
+"data": "2026-10-07 03:01",
+"prezzo": 41.94,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-07",
+"soglie": {
+"media50": 44.0706,
+"media20": 44.093,
+"quattro_atr": 45.3385,
+"meta_caduta": 44.065,
+"bollinger": 46.9338,
+"consigliata": 44.0706
+},
+"stop": 40.2407,
+"atr": 0.8496
 }
 ]
