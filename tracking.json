@@ -15527,5 +15527,37 @@
 "auto": true,
 "notified": false,
 "entry_check": "2026-10-06"
+},
+"TDOC": {
+"kind": "short",
+"added": "2026-10-07",
+"note": "🤖 Promossa il 2026-10-07: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +4.9% e la convenienza (57) regge.",
+"name": "TDOC",
+"snapshots": [
+{
+"name": "TDOC",
+"price": 5.79,
+"rsi": 38.8305,
+"dd_high": -40.4321,
+"occasione": 60,
+"convenienza": 67,
+"prob_gain": 53,
+"prob_loss": 17,
+"exp_ret": 1.1,
+"gain": 13.0501,
+"reliab": "🔴 Bassa",
+"target": 6.5456,
+"stop": 5.2844,
+"date": "2026-10-07 03:05"
+}
+],
+"entry_price": 5.79,
+"entry_target": 6.5456,
+"entry_stop": 5.2844,
+"entry_conv": 67,
+"entry_date": "2026-10-07 03:05",
+"entry_src": "scatto",
+"max_price": 5.79,
+"max_date": "2026-10-07 03:05"
 }
 }
