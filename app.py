@@ -3413,9 +3413,10 @@ if section.startswith("Metodi"):
 
         st.markdown(f"##### 📈 Il guadagno accumulato nel tempo, vendendo {_ETV_BREVE[_sv]}")
         _vx, _vy, _vt = _serie_cumulata(fu.casi_metodo(_cm, "sistema_vero", _mper), _sv, _scala)
-        _fig = make_subplots(rows=3, cols=3, shared_xaxes=True, shared_yaxes=True,
+        _righe_g = max(1, (len(_metodi_veri) + 2) // 3)     # tre riquadri per riga
+        _fig = make_subplots(rows=_righe_g, cols=3, shared_xaxes=True, shared_yaxes=True,
                              subplot_titles=[_info[k]["nome"] for k in _metodi_veri],
-                             vertical_spacing=0.1, horizontal_spacing=0.04)
+                             vertical_spacing=min(0.1, 0.35 / _righe_g), horizontal_spacing=0.04)
         _leg_m = _leg_v = _qualcosa = False
         for _i, _k in enumerate(_metodi_veri):
             _r, _c = _i // 3 + 1, _i % 3 + 1
@@ -3436,7 +3437,8 @@ if section.startswith("Metodi"):
                 _leg_m = _qualcosa = True
         if _qualcosa:
             _fig.add_hline(y=0, line=dict(color="gray", width=1), row="all", col="all")
-            _fig.update_layout(height=780, margin=dict(t=70, b=10, l=10, r=10), hovermode="closest",
+            _fig.update_layout(height=60 + 240 * _righe_g, margin=dict(t=70, b=10, l=10, r=10),
+                               hovermode="closest",
                                legend=dict(orientation="h", yanchor="bottom", y=1.05, x=0))
             _fig.update_annotations(font_size=12)
             _fig.update_xaxes(fixedrange=True, tickformat="%d/%m", showticklabels=True)

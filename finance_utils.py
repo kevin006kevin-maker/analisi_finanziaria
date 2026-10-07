@@ -3205,13 +3205,31 @@ def _reliab_factor(sig_a, n) -> float:
 # --- Parametri operativi del breve periodo (rimbalzo / ipervenduto) ---
 _ATR_STOP_K = 2.0          # stop = prezzo − k·ATR (volatilità reale, non minimo a 20gg)
 _RR_MIN = 1.5              # scarta i setup con Rischio/Rendimento sotto questa soglia
-_MIN_PRICE = 3.0           # sotto questo prezzo l'RSI è inaffidabile (penny) → escluso
-_MIN_DOLLAR_VOL = 1_000_000  # liquidità minima (~$ scambiati/giorno) → niente illiquidi
+# LE CORREZIONI DEL 07/10/2026. Misurato sull'archivio (49 giorni, decisioni confrontate fra titoli
+# dello stesso giorno): chi veniva fermato dal prezzo minimo faceva -18,9% a 30 giorni contro -2,7%
+# di chi passava, in 17 giornate su 17; ma anche fra 3 e 10 dollari si perdevano 2-7 punti sulla
+# giornata, mentre sopra i 20 si guadagnava. Lo stesso per gli scambi: si guadagnava solo sopra i
+# 100 milioni di dollari al giorno. E i titoli crollati di oltre il 30% nell'anno facevano 12,6 punti
+# peggio della giornata. Sono correzioni sulla QUALITA' dei titoli, che anche gli studi confermano,
+# quindi non dipendono dall'andamento del mercato. La catena di prima resta calcolata accanto
+# (_CATENA_PRIMA): il suo verdetto va a verbale, e il metodo in ombra «Il sistema di prima» la tiene
+# viva per misurare se le correzioni aiutano davvero.
+_MIN_PRICE = 10.0              # era 3,0
+_MIN_DOLLAR_VOL = 20_000_000   # era 1.000.000
+_CROLLO_ANNO_MAX = -30.0       # nuovo: chi ha perso piu' del 30% nell'ultimo anno resta fuori
 _SECTOR_CAP_LONG = 4       # max occasioni di lungo per settore (no liste tutte-banche)
 # Filtri liquidità/prezzo anche sul LUNGO (prima assenti): soglia più bassa del breve, così
 # restano incluse small/mid cap europee legittime ma si escludono penny/illiquidi inaffidabili.
-_MIN_PRICE_LONG = 1.0        # prezzo minimo per le occasioni di lungo
-_MIN_DOLLAR_VOL_LONG = 300_000  # liquidità minima sul lungo (~$ scambiati/giorno)
+_MIN_PRICE_LONG = 10.0             # era 1,0 (correzioni del 07/10/2026, vedi sopra)
+_MIN_DOLLAR_VOL_LONG = 20_000_000  # era 300.000
+
+# Le due catene di filtri iniziali: quella in vigore e quella di prima delle correzioni.
+_CATENA_ORA = {"short": {"prezzo": _MIN_PRICE, "scambi": _MIN_DOLLAR_VOL, "crollo_anno": _CROLLO_ANNO_MAX},
+               "long": {"prezzo": _MIN_PRICE_LONG, "scambi": _MIN_DOLLAR_VOL_LONG,
+                        "crollo_anno": _CROLLO_ANNO_MAX}}
+_CATENA_PRIMA = {"short": {"prezzo": 3.0, "scambi": 1_000_000, "crollo_anno": None},
+                 "long": {"prezzo": 1.0, "scambi": 300_000, "crollo_anno": None}}
+_MOTIVI_DELLE_CORREZIONI = ("prezzo_basso", "poco_scambiato", "crollato_nell_anno")
 
 
 def _short_score(r, regime=1.0):
@@ -3321,6 +3339,56 @@ def _long_score(r):
     trap = r.get("trap") or {}
     base *= trap.get("factor", 1.0)             # anti-trappola: declassa i fondamentali in peggioramento
     return max(0.0, min(100.0, base))
+
+
+def _verdetto_catena(r: dict, kind: str, regime: float = 1.0, soglie: dict = None):
+    """I filtri del passaggio iniziale, nell'ordine in cui scattano: (motivo, dettaglio, punteggio).
+    motivo None vuol dire che il titolo passa. Una funzione sola per la catena di oggi e per quella
+    di prima delle correzioni: cambiano solo le soglie, la logica e' la stessa riga per riga."""
+    s = soglie or _CATENA_ORA[kind]
+    dd = r["dd_high"]
+    p1y = r.get("perf_1y")
+    if kind == "short":
+        # Filtro liquidità/prezzo: sotto la soglia o con pochi scambi i titoli hanno reso molto peggio
+        if r["price"] < s["prezzo"]:
+            return "prezzo_basso", r["price"], None
+        liq = r.get("avg_dollar_vol")
+        if liq is not None and liq < s["scambi"]:
+            return "poco_scambiato", liq, None
+        if s.get("crollo_anno") is not None and p1y is not None and p1y < s["crollo_anno"]:
+            return "crollato_nell_anno", round(float(p1y), 1), None
+        sc = _short_score(r, regime=regime)
+        if sc is None or not np.isfinite(sc) or sc < 35:   # setup da ipervenduto / zona bassa
+            return "punteggio_basso", (None if sc is None else round(float(sc), 1)), None
+        if dd is None or dd > -8:           # dev'essere un calo reale, non un titolo ai massimi
+            return "sconto_insufficiente", dd, sc
+        # Filtro Rischio/Rendimento: via i setup asimmetrici perdenti (R:R < 1,5)
+        if r.get("rr") is not None and r["rr"] < _RR_MIN:
+            return "rischio_rendimento", r["rr"], sc
+        # In regime di alta volatilità scarta chi crolla MOLTO più del mercato (coltello che cade
+        # beta-driven): pretende forza relativa non troppo negativa vs l'indice.
+        if regime < 0.85:
+            _mom = r.get("perf_5d") if r.get("perf_5d") is not None else r.get("perf_1m")
+            _bm = r.get("bench_5d") if r.get("perf_5d") is not None else r.get("bench_1m")
+            if _mom is not None and _bm is not None and (_mom - _bm) < -3.0:
+                return "cade_piu_del_mercato", round(_mom - _bm, 2), sc
+        return None, None, sc
+    if r["price"] < s["prezzo"]:
+        return "prezzo_basso", r["price"], None
+    liq = r.get("avg_dollar_vol")
+    if liq is not None and liq < s["scambi"]:
+        return "poco_scambiato", liq, None
+    if s.get("crollo_anno") is not None and p1y is not None and p1y < s["crollo_anno"]:
+        return "crollato_nell_anno", round(float(p1y), 1), None
+    # Trappola di valore CONCLAMATA: esclusa del tutto (non solo declassata del 25%)
+    if (r.get("trap") or {}).get("strong"):
+        return "trappola_di_valore", (r.get("trap") or {}).get("signals"), None
+    sc = _long_score(r)
+    if sc is None or not np.isfinite(sc) or sc < 50:
+        return "punteggio_basso", (None if sc is None else round(float(sc), 1)), None
+    if dd is None or dd > -12:              # richiede uno sconto significativo dai massimi
+        return "sconto_insufficiente", dd, sc
+    return None, None, sc
 
 
 def _long_reasons(r):
@@ -4125,9 +4193,10 @@ def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
     _arc_on = os.environ.get("DATA_LOCAL_FIRST") == "1"
     _arc_ctx = _prepara_contesto_scansione(kind, list(rmap.values())) if _arc_on else None
 
-    def _scarta(r, motivo, dettaglio=None, conv=None, punteggio=None):
+    def _scarta(r, motivo, dettaglio=None, conv=None, punteggio=None, prima=None):
         if _arc_on:
-            _accoda_scarto(r, kind, motivo, dettaglio, conv, punteggio, _arc_ctx)
+            _accoda_scarto(r, kind, motivo, dettaglio, conv, punteggio, _arc_ctx,
+                           catena_di_prima=prima)
 
     if _arc_on:
         # I due punti ciechi, messi a verbale col nome: quelli senza storia sufficiente e quelli
@@ -4142,39 +4211,22 @@ def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
         except Exception:
             pass
 
-    # PASSO 3 — filtra le vere occasioni e costruisci la tabella
+    # PASSO 3 — filtra le vere occasioni e costruisci la tabella. I filtri stanno tutti in
+    # _verdetto_catena, nell'ordine in cui scattano: qui si decide soltanto. Quando a fermare un titolo
+    # e' una delle correzioni del 07/10/2026, si mette a verbale anche che cosa avrebbe deciso la catena
+    # di prima: senza, il metodo in ombra «Il sistema di prima» non potrebbe piu' sapere cosa sceglieva.
     rows = []
     for tk, r in rmap.items():
         dd = r["dd_high"]
         conv = convmap.get(tk, 50)
+        motivo, dettaglio, sc = _verdetto_catena(r, kind, regime, _CATENA_ORA[kind])
+        if motivo:
+            prima = None
+            if motivo in _MOTIVI_DELLE_CORREZIONI:
+                prima = _verdetto_catena(r, kind, regime, _CATENA_PRIMA[kind])[0] or "tenuta"
+            _scarta(r, motivo, dettaglio, conv, sc, prima=prima)
+            continue
         if kind == "short":
-            # Filtro liquidità/penny: sotto ~3$ o pochi scambi l'RSI è inaffidabile → escludi
-            if r["price"] < _MIN_PRICE:
-                _scarta(r, "prezzo_basso", r["price"], conv)
-                continue
-            liq = r.get("avg_dollar_vol")
-            if liq is not None and liq < _MIN_DOLLAR_VOL:
-                _scarta(r, "poco_scambiato", liq, conv)
-                continue
-            sc = _short_score(r, regime=regime)
-            if sc is None or not np.isfinite(sc) or sc < 35:   # setup da ipervenduto / zona bassa
-                _scarta(r, "punteggio_basso", (None if sc is None else round(float(sc), 1)), conv)
-                continue
-            if dd is None or dd > -8:           # dev'essere un calo reale, non un titolo ai massimi
-                _scarta(r, "sconto_insufficiente", dd, conv, sc)
-                continue
-            # Filtro Rischio/Rendimento: via i setup asimmetrici perdenti (R:R < 1,5)
-            if r.get("rr") is not None and r["rr"] < _RR_MIN:
-                _scarta(r, "rischio_rendimento", r["rr"], conv, sc)
-                continue
-            # In regime di alta volatilità scarta chi crolla MOLTO più del mercato (coltello che cade
-            # beta-driven): pretende forza relativa non troppo negativa vs l'indice.
-            if regime < 0.85:
-                _mom = r.get("perf_5d") if r.get("perf_5d") is not None else r.get("perf_1m")
-                _bm = r.get("bench_5d") if r.get("perf_5d") is not None else r.get("bench_1m")
-                if _mom is not None and _bm is not None and (_mom - _bm) < -3.0:
-                    _scarta(r, "cade_piu_del_mercato", round(_mom - _bm, 2), conv, sc)
-                    continue
             gain = r["rebound_pot"] if r["rebound_pot"] is not None else r["exp_ret"]
             rows.append({"Ticker": r["ticker"], "Nome": r["name"], "Convenienza": conv,
                          "Prezzo": r["price"], "RSI": r["rsi"], "% dal max": dd, "Perf 1 mese": r["perf_1m"],
@@ -4185,25 +4237,6 @@ def scan_opportunities(tickers: list, kind: str) -> pd.DataFrame:
                          "Rischio perdita": r["prob_loss"], "Affidabilità": r["reliab"],
                          "Perché": _short_reasons(r)})
         else:
-            # Liquidità/prezzo anche sul lungo (prima assenti): via penny/illiquidi inaffidabili
-            if r["price"] < _MIN_PRICE_LONG:
-                _scarta(r, "prezzo_basso", r["price"], conv)
-                continue
-            liq = r.get("avg_dollar_vol")
-            if liq is not None and liq < _MIN_DOLLAR_VOL_LONG:
-                _scarta(r, "poco_scambiato", liq, conv)
-                continue
-            # Trappola di valore CONCLAMATA: esclusa del tutto (non solo declassata del 25%)
-            if (r.get("trap") or {}).get("strong"):
-                _scarta(r, "trappola_di_valore", (r.get("trap") or {}).get("signals"), conv)
-                continue
-            sc = _long_score(r)
-            if sc is None or not np.isfinite(sc) or sc < 50:
-                _scarta(r, "punteggio_basso", (None if sc is None else round(float(sc), 1)), conv)
-                continue
-            if dd is None or dd > -12:          # richiede uno sconto significativo dai massimi
-                _scarta(r, "sconto_insufficiente", dd, conv, sc)
-                continue
             rows.append({"Ticker": r["ticker"], "Nome": r["name"], "Convenienza": conv,
                          "Settore": r.get("sector"),
                          "Qualità trend": (r.get("trap") or {}).get("label"),
@@ -9048,8 +9081,9 @@ _PROF_PUNTEGGI = ("prob_gain", "prob_loss", "exp_ret", "reliab", "reliab_factor"
 # catturati NELL'ISTANTE dello scarto: a posteriori 1.377 scarti su 2.826 non sono ricostruibili dai
 # soli dati che oggi si salvano, quindi senza questo non si scopre mai se è il filtro a sbagliare.
 MOTIVI_SCARTO = {
-    "prezzo_basso": "prezzo sotto il minimo: sui titoli da pochi centesimi gli indicatori non tengono",
+    "prezzo_basso": "prezzo sotto il minimo: i titoli a prezzo basso hanno reso molto peggio degli altri",
     "poco_scambiato": "troppo pochi scambi al giorno: non ci si entra e non ci si esce",
+    "crollato_nell_anno": "ha perso più del 30% nell'ultimo anno: i titoli crollati hanno continuato a scendere più degli altri",
     "punteggio_basso": "il punteggio dell'occasione è sotto il minimo",
     "sconto_insufficiente": "non è scesa abbastanza dai suoi massimi: non è un'occasione, è un titolo caro",
     "rischio_rendimento": "quello che si rischia è troppo rispetto a quello che si può guadagnare",
@@ -9862,6 +9896,8 @@ def risolvi_esiti(max_titoli: int = 60, recupero_giorni: int = 10) -> dict:
                     "scartata": p.get("scartata"), "comprato_il": p.get("giorno"),
                     "prezzo_acquisto": p.get("prezzo"), "orizzonte": nome,
                     "giorni": gg, "unita": unita}
+            if p.get("catena_di_prima"):
+                riga["catena_di_prima"] = p["catena_di_prima"]
             riga.update(res)
             nuove.append(riga)
     esito = _arc_aggiungi(ARC_ESITI, nuove,
@@ -10251,12 +10287,45 @@ METODI_OMBRA = (
      "breve": "quello che il sistema compra davvero",
      "spiegazione": ("Le occasioni che il sistema compra davvero, in qualunque dei cinque momenti "
                      "d'acquisto. Come per tutti i metodi, ogni titolo conta una volta ogni 30 "
-                     "giorni. È il metro di paragone: ogni metodo si giudica contro questa riga."),
+                     "giorni. È il metro di paragone: ogni metodo si giudica contro questa riga. "
+                     "Dal 7 ottobre 2026 il sistema usa i filtri corretti: prezzo di almeno 10 "
+                     "dollari, scambi di almeno 20 milioni di dollari al giorno e niente titoli "
+                     "crollati di oltre il 30% nell'anno."),
      "perche": "", "fonte": "il metodo attuale del sistema"},
+    {"chiave": "sistema_di_prima", "nome": "Il sistema di prima", "definito_il": "2026-10-07",
+     "base": "comprate_prima", "regole": (),
+     "breve": "la scelta del sistema senza le correzioni del 7 ottobre",
+     "spiegazione": ("Quello che il sistema avrebbe comprato senza le correzioni del 7 ottobre: "
+                     "prezzo minimo 3 dollari nel breve e 1 nel lungo, scambi minimi un milione di "
+                     "dollari al giorno nel breve e 300 mila nel lungo, nessun limite sui titoli "
+                     "crollati nell'anno. Fino al 6 ottobre coincide con il sistema vero. Da lì in "
+                     "poi dice quanto valgono le correzioni."),
+     "perche": ("Le correzioni sono state scelte guardando gli stessi 49 giorni su cui si misurano: "
+                "questo metodo serve a verificare, nei giorni nuovi, che tolgano davvero le "
+                "occasioni peggiori."),
+     "fonte": "la catena di filtri usata fino al 6 ottobre 2026"},
+    {"chiave": "sistema_corretto", "nome": "Sistema corretto", "definito_il": "2026-10-07",
+     "base": "tutte", "breve": "i filtri di oggi senza punteggio e rischio/rendimento",
+     "spiegazione": ("La catena di filtri del sistema di oggi senza i due criteri che l'indagine ha "
+                     "trovato al contrario: il punteggio e il rischio/rendimento. Restano il prezzo di "
+                     "almeno 10 dollari, gli scambi di almeno 20 milioni di dollari al giorno, l'ultimo "
+                     "anno non peggiore di −30%, nel lungo nessuna trappola di valore conclamata, lo "
+                     "sconto minimo dai massimi e la convenienza di almeno 60 per entrare in "
+                     "osservazione."),
+     "perche": ("Nell'indagine del 6 ottobre chi veniva fermato dal punteggio andava meglio di chi "
+                "passava in 15 giornate su 17, e lo stesso per il rischio/rendimento in 12 su 16. "
+                "Potrebbe dipendere dal momento del mercato: per questo si prova qui, in ombra, "
+                "prima di toglierli dal sistema vero."),
+     "fonte": "l'indagine sui criteri del sistema, 6 ottobre 2026",
+     "regole": (("price", ">=", 10.0), ("avg_dollar_vol", ">=", 20_000_000.0),
+                ("perf_1y", ">=", -30.0), ("trappola_conclamata", "assente", None),
+                ("sconto_catena", "vero", None), ("convenienza", ">=", 60.0))},
     {"chiave": "ombra_trend", "nome": "Solo in trend positivo", "definito_il": "2026-10-05",
-     "base": "comprate", "breve": "le stesse comprate, ma solo sopra la media a 200 giorni",
+     "base": "comprate_prima", "breve": "le stesse comprate, ma solo sopra la media a 200 giorni",
      "spiegazione": ("Le stesse occasioni che il sistema compra, in qualunque momento, ma tenendo "
-                     "solo quelle sopra la propria media a 200 giorni."),
+                     "solo quelle sopra la propria media a 200 giorni. Dal 7 ottobre si parte dalla "
+                     "scelta del sistema di prima delle correzioni, così le regole restano quelle "
+                     "del 5 ottobre."),
      "perche": ("Sui primi 48 giorni le comprate sopra la media facevano +3,07% a 30 giorni e quelle "
                 "sotto −11,75%, d'accordo in 12 giornate su 12. È il filtro «niente coltelli che "
                 "cadono» applicato al metodo di oggi, senza cambiare altro."),
@@ -10369,6 +10438,9 @@ _OMBRA_TESTI = {
     ("atr_pct", "ultimi_pct"): "nel {s:.0f}% più calmo del giorno",
     ("qualita_conti", "vero"): "conti solidi",
     ("rsi", "<="): "forza del prezzo al massimo {s:.0f}",
+    ("trappola_conclamata", "assente"): "nessuna trappola di valore conclamata",
+    ("sconto_catena", "vero"): "sconto dai massimi di almeno l'8% nel breve e il 12% nel lungo",
+    ("convenienza", ">="): "convenienza almeno {s:.0f}",
 }
 
 
@@ -10410,6 +10482,14 @@ def _metodo_valore(p: dict, campo: str):
     t = p.get("titolo") or {}
     if campo == "trappola":
         return p.get("trappola")
+    if campo == "trappola_conclamata":
+        return bool((p.get("trappola") or {}).get("conclamata"))
+    if campo == "convenienza":
+        return p.get("convenienza")
+    if campo == "sconto_catena":
+        # lo sconto minimo dai massimi della catena: 8% nel breve, 12% nel lungo
+        dd = t.get("dd_high")
+        return (dd <= (-8.0 if p.get("kind") == "short" else -12.0)) if _num(dd) else None
     if campo == "mom121":
         # salita sull'anno SENZA l'ultimo mese: (1 + anno) / (1 + mese) − 1
         a, b = t.get("perf_1y"), t.get("perf_1m")
@@ -10429,23 +10509,61 @@ def _metodo_valore(p: dict, campo: str):
     return t.get(campo)
 
 
+def _verdetto_di_prima(p: dict):
+    """Che cosa decideva, per questo titolo, la catena di filtri di PRIMA delle correzioni del
+    07/10/2026: un motivo di scarto oppure «tenuta». Per i titoli fermati dalle correzioni sta scritto
+    nel profilo; per tutti gli altri coincide con quello che ha deciso la catena di oggi."""
+    if not isinstance(p, dict):
+        return None
+    v = p.get("catena_di_prima")
+    if v:
+        return v
+    if p.get("scartata"):
+        m = p.get("motivo")
+        return "tenuta" if m == "convenienza_sotto_cancello" else m
+    return "tenuta" if p.get("momento") else None
+
+
 def _metodi_visto(p: dict) -> bool:
     """Fa parte di «quello che il sistema ha guardato con un giudizio»: comprato in uno dei cinque
-    momenti, oppure scartato per una ragione di giudizio (non tecnica)."""
+    momenti, oppure scartato per una ragione di giudizio (non tecnica). Si decide sul verdetto della
+    catena di PRIMA: cosi' le correzioni del 07/10/2026 non cambiano l'insieme da cui i metodi in
+    ombra scelgono, e le loro regole restano davvero ferme."""
     if not isinstance(p, dict) or p.get("kind") not in ("short", "long") or not p.get("prezzo"):
         return False
-    if p.get("scartata"):
-        return p.get("motivo") in _OMBRA_MOTIVI_VISTI
-    return bool(p.get("momento"))
+    v = _verdetto_di_prima(p)
+    return v == "tenuta" or v in _OMBRA_MOTIVI_VISTI
+
+
+def _metodo_in_base(p: dict, base: str) -> bool:
+    """Da quale insieme di titoli sceglie un metodo:
+    «viste»: tutto quello che il sistema guarda con un giudizio;
+    «comprate»: quello che compra il sistema di OGGI;
+    «comprate_prima»: quello che comprava il sistema di prima delle correzioni del 07/10/2026;
+    «tutte»: ogni titolo guardato di cui si conoscono le caratteristiche, anche quelli fermati dai
+    filtri tecnici. Serve ai metodi che rifanno da capo la catena dei filtri."""
+    if base == "tutte":
+        return (isinstance(p, dict) and p.get("kind") in ("short", "long") and bool(p.get("prezzo"))
+                and bool(p.get("titolo")))
+    if not _metodi_visto(p):
+        return False
+    if base == "viste":
+        return True
+    comprata_oggi = (not p.get("scartata")) and bool(p.get("momento"))
+    if base == "comprate":
+        return comprata_oggi
+    if base == "comprate_prima":
+        conv = p.get("convenienza")
+        return comprata_oggi or (p.get("catena_di_prima") == "tenuta" and _num(conv)
+                                 and conv >= _OBS_ENTRY_CONV)
+    return False
 
 
 def passa_ombra(p: dict, metodo: dict, tagli: dict = None) -> bool:
     """True se la riga di profilo `p` sarebbe stata SCELTA dal metodo. Si valuta sulle
     caratteristiche registrate in quell'istante: e' il motivo per cui l'archivio le conserva tutte,
     anche per le occasioni scartate. `tagli` porta le soglie delle classifiche del giorno."""
-    if not _metodi_visto(p):
-        return False
-    if p.get("scartata") and metodo.get("base") != "viste":
+    if not _metodo_in_base(p, metodo.get("base")):
         return False
     for campo, op, soglia in metodo.get("regole") or ():
         v = _metodo_valore(p, campo)
@@ -10686,7 +10804,10 @@ def _calcola_conti_metodi(mesi: list, scelte: list = None) -> dict:
         g_acq, kind, tk, coda = parti[0], parti[1], parti[2].upper(), ":".join(parti[3:])
         if g_acq[:7] not in mesi_set or kind not in ("short", "long"):
             continue
-        if e.get("scartata") and coda not in _OMBRA_MOTIVI_VISTI:
+        # il riferimento resta «quello che la catena di PRIMA guardava con un giudizio»: le
+        # correzioni del 07/10/2026 non devono spostare il metro con cui si misurano i metodi
+        verdetto = e.get("catena_di_prima") or coda
+        if e.get("scartata") and verdetto not in _OMBRA_MOTIVI_VISTI and verdetto != "tenuta":
             continue
         chiave_u = (kind, g_acq, tk, oriz)
         if chiave_u in visti:
@@ -11130,7 +11251,7 @@ def _mondo_per_riga(r: dict, ctx: dict) -> dict:
 
 
 def _accoda_scarto(r: dict, kind: str, motivo: str, dettaglio=None, conv=None,
-                   punteggio=None, ctx: dict = None) -> None:
+                   punteggio=None, ctx: dict = None, catena_di_prima: str = None) -> None:
     """Mette in coda un'occasione BOCCIATA, col motivo preso nell'istante del rifiuto.
     Sono le righe più preziose dell'archivio: senza contro-esempi non si impara niente, e senza il
     motivo non si scopre mai che è il filtro a sbagliare invece del titolo."""
@@ -11150,6 +11271,9 @@ def _accoda_scarto(r: dict, kind: str, motivo: str, dettaglio=None, conv=None,
             fattori=_fat, mondo=_mondo_per_riga(r, ctx),
             origine=(ctx.get("origine") or {}).get(r.get("ticker")),
             giorno=ctx.get("giorno"))
+        if catena_di_prima:
+            # che cosa avrebbe deciso la catena di prima delle correzioni del 07/10/2026
+            prof["catena_di_prima"] = catena_di_prima
         accoda_profilo(prof)
         # Le notizie costano chiamate, quindi si spendono dove servono: sugli scarti che avevano
         # convenienza da promozione. Sono il contro-esempio più informativo che esista — «il sistema
@@ -12148,10 +12272,12 @@ def regole_del_giorno(giorno: str = None) -> dict:
         "filtri_breve": {
             "prezzo_minimo": _MIN_PRICE, "scambi_minimi": _MIN_DOLLAR_VOL,
             "rischio_rendimento_minimo": _RR_MIN, "sconto_minimo_dai_massimi": -8,
+            "crollo_massimo_nell_anno": _CROLLO_ANNO_MAX,
             "punteggio_minimo": 35,
         },
         "filtri_lungo": {
             "prezzo_minimo": _MIN_PRICE_LONG, "scambi_minimi": _MIN_DOLLAR_VOL_LONG,
+            "crollo_massimo_nell_anno": _CROLLO_ANNO_MAX,
             "sconto_minimo_dai_massimi": -12, "punteggio_minimo": 50,
             "massimo_per_settore": _SECTOR_CAP_LONG,
         },
