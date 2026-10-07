@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:STMMI.MI:2026-08-31",
-"ticker": "STMMI.MI",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-08-31 00:22",
-"data": "2026-08-31 00:21",
-"prezzo": 43.575,
-"conv": 79,
-"prob_gain": 54,
-"prob_loss": 15,
-"reliab": "🟡 Media",
-"mkt": 2.9646,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 53.1941,
-"media20": 45.6073,
-"quattro_atr": 51.8843,
-"meta_caduta": 56.4625,
-"bollinger": 50.0527,
-"consigliata": 51.8843
-},
-"stop": 39.4204,
-"atr": 2.0773,
-"res": {
-"7g": 5.97,
-"30g": 7.22,
-"soglia": 7.22
-},
-"res_soglia": {
-"media50": {
-"ret": 7.22,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 4.66,
-"toccato": true,
-"giorni": 7
-},
-"quattro_atr": {
-"ret": 7.22,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 7.22,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 7.22,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 7.22,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "long:HMY:2026-08-28",
 "ticker": "HMY",
 "kind": "long",
@@ -28653,5 +28589,32 @@
 },
 "stop": 32.9007,
 "atr": 1.6346
+},
+{
+"episodio": "short:RARE:2026-09-30",
+"ticker": "RARE",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-07 03:08",
+"data": "2026-10-07 03:06",
+"prezzo": 14.5,
+"conv": 71,
+"prob_gain": 60,
+"prob_loss": 19,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-07",
+"soglie": {
+"media50": 20.9421,
+"media20": 14.5052,
+"quattro_atr": 18.9679,
+"meta_caduta": 23.86,
+"bollinger": 15.8599,
+"consigliata": 18.9679
+},
+"stop": 12.2661,
+"atr": 1.117
 }
 ]
