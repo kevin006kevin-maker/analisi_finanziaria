@@ -1,25 +1,5 @@
 [
 {
-"episodio": "long:DKS:2026-08-25",
-"ticker": "DKS",
-"kind": "long",
-"evento": "salita_2pct",
-"scritto_il": "2026-08-28 19:38",
-"data": "2026-08-28 19:36",
-"prezzo": 134.42,
-"conv": 54,
-"prob_gain": 77,
-"prob_loss": 13,
-"reliab": "🟡 Media",
-"mkt": 2.9639,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 130.67",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "long:AEO:2026-08-28",
 "ticker": "AEO",
 "kind": "long",
@@ -28751,5 +28731,32 @@
 },
 "stop": 9.8694,
 "atr": 2.6103
+},
+{
+"episodio": "short:AVBP:2026-10-06",
+"ticker": "AVBP",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-07 03:05",
+"data": "2026-10-06 23:14",
+"prezzo": 15.09,
+"conv": 70,
+"prob_gain": 63,
+"prob_loss": 7,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 29.849,
+"media20": 29.1455,
+"quattro_atr": 21.076,
+"meta_caduta": 24.365,
+"bollinger": 30.8474,
+"consigliata": 21.076
+},
+"stop": 12.097,
+"atr": 1.4965
 }
 ]
