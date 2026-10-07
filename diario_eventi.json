@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:FINV:2026-08-31",
-"ticker": "FINV",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-31 16:48",
-"data": "2026-08-31 16:48",
-"prezzo": 3.615,
-"conv": 80,
-"prob_gain": 56,
-"prob_loss": 8,
-"reliab": "🟡 Media",
-"mkt": 0.9484,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 4.6285,
-"media20": 4.3983,
-"quattro_atr": 4.4194,
-"meta_caduta": 4.3225,
-"bollinger": 5.172,
-"consigliata": 4.4194
-},
-"stop": 3.2128,
-"atr": 0.2011,
-"res": {
-"7g": -6.22,
-"30g": -15.49,
-"soglia": -15.49
-},
-"res_soglia": {
-"media50": {
-"ret": -15.49,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -15.49,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -15.49,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -15.49,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -15.49,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -15.49,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:XLU:2026-08-31",
 "ticker": "XLU",
 "kind": "short",
@@ -28442,5 +28378,32 @@
 },
 "stop": 6.1694,
 "atr": 0.1283
+},
+{
+"episodio": "short:UCG.MI:2026-10-02",
+"ticker": "UCG.MI",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-07 03:09",
+"data": "2026-10-07 03:06",
+"prezzo": 79.8,
+"conv": 60,
+"prob_gain": 54,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-07",
+"soglie": {
+"media50": 83.4724,
+"media20": 82.908,
+"quattro_atr": 87.6146,
+"meta_caduta": 82.975,
+"bollinger": 86.4383,
+"consigliata": 83.4724
+},
+"stop": 75.8927,
+"atr": 1.9536
 }
 ]
