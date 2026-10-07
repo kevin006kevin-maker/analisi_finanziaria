@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:BW:2026-08-31",
-"ticker": "BW",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-31 22:37",
-"data": "2026-08-31 22:37",
-"prezzo": 7.54,
-"conv": 72,
-"prob_gain": 50,
-"prob_loss": 30,
-"reliab": "🔴 Bassa",
-"mkt": 1.1119,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 10.6466,
-"media20": 8.928,
-"quattro_atr": 10.8483,
-"meta_caduta": 13.09,
-"bollinger": 10.7221,
-"consigliata": 10.6466
-},
-"stop": 5.8858,
-"atr": 0.8271,
-"res": {
-"7g": 4.71,
-"30g": -22.55,
-"soglia": -22.55
-},
-"res_soglia": {
-"media50": {
-"ret": -22.55,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -22.55,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -22.55,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -22.55,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -22.55,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -22.55,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:SSTK:2026-08-28",
 "ticker": "SSTK",
 "kind": "short",
@@ -28464,5 +28400,32 @@
 "stop": 23.383,
 "atr": 0.6485,
 "res": {}
+},
+{
+"episodio": "short:HESM:2026-10-07",
+"ticker": "HESM",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-07 16:45",
+"data": "2026-10-07 16:45",
+"prezzo": 32.1459,
+"conv": 74,
+"prob_gain": 63,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": 1.7011,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 39.4717,
+"media20": 38.6258,
+"quattro_atr": 37.1865,
+"meta_caduta": 36.558,
+"bollinger": 42.1773,
+"consigliata": 37.1865
+},
+"stop": 29.6256,
+"atr": 1.2601
 }
 ]
