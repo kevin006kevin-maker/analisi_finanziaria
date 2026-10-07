@@ -10797,5 +10797,36 @@
 "7g": -4.92,
 "30g": -28.33
 }
+},
+{
+"episodio": "long:IAG:2026-08-20",
+"ticker": "IAG",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-08-31 00:25",
+"data": "2026-08-31 00:23",
+"prezzo": 20.59,
+"conv": 56,
+"prob_gain": 64,
+"prob_loss": 26,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-08-31",
+"soglie": {
+"media50": null,
+"media20": null,
+"quattro_atr": 24.2881,
+"meta_caduta": 21.38,
+"bollinger": 23.4116,
+"consigliata": 24.2881
+},
+"stop": 18.7409,
+"atr": 0.9245,
+"res": {
+"7g": -0.95,
+"30g": -10.51
+}
 }
 ]
