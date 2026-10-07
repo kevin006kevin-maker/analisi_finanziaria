@@ -1,25 +1,5 @@
 [
 {
-"episodio": "long:PYPL:2026-08-28",
-"ticker": "PYPL",
-"kind": "long",
-"evento": "salita_2pct",
-"scritto_il": "2026-08-29 10:05",
-"data": "2026-08-29 10:04",
-"prezzo": 61.47,
-"conv": 57,
-"prob_gain": 68,
-"prob_loss": 21,
-"reliab": "🟡 Media",
-"mkt": 3.9443,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 53.9541",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:VISN:2026-08-29",
 "ticker": "VISN",
 "kind": "short",
@@ -28669,5 +28649,32 @@
 },
 "stop": 100.7204,
 "atr": 5.9648
+},
+{
+"episodio": "short:FSLR:2026-09-24",
+"ticker": "FSLR",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-07 03:08",
+"data": "2026-10-06 23:17",
+"prezzo": 179.8,
+"conv": 72,
+"prob_gain": 47,
+"prob_loss": 13,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-07",
+"soglie": {
+"media50": 206.4608,
+"media20": 189.3535,
+"quattro_atr": 212.9683,
+"meta_caduta": 214.925,
+"bollinger": 217.0505,
+"consigliata": 206.4608
+},
+"stop": 163.2159,
+"atr": 8.2921
 }
 ]
