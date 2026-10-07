@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:CHTR:2026-08-20",
-"ticker": "CHTR",
-"kind": "long",
-"evento": "fine_osservazione",
-"scritto_il": "2026-08-31 00:25",
-"data": "2026-08-31 00:22",
-"prezzo": 153.62,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-08-31",
-"soglie": {
-"media50": null,
-"media20": null,
-"quattro_atr": 182.9774,
-"meta_caduta": 155.655,
-"bollinger": 159.5948,
-"consigliata": 182.9774
-},
-"stop": 138.9413,
-"atr": 7.3393,
-"res": {
-"7g": -4.92,
-"30g": -28.33
-}
-},
-{
 "episodio": "long:IAG:2026-08-20",
 "ticker": "IAG",
 "kind": "long",
@@ -28593,5 +28562,32 @@
 },
 "stop": 4.2042,
 "atr": 0.2029
+},
+{
+"episodio": "short:RKT:2026-10-02",
+"ticker": "RKT",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-07 03:09",
+"data": "2026-10-07 03:01",
+"prezzo": 11.68,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-07",
+"soglie": {
+"media50": 13.3426,
+"media20": 12.4795,
+"quattro_atr": 14.1328,
+"meta_caduta": 13.36,
+"bollinger": 13.9104,
+"consigliata": 13.3426
+},
+"stop": 10.4536,
+"atr": 0.6132
 }
 ]
