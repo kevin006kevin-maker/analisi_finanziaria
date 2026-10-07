@@ -14693,5 +14693,62 @@
 "prob_loss": null,
 "conv": 55,
 "res": {}
+},
+{
+"ticker": "PPC",
+"kind": "short",
+"date": "2026-10-07",
+"promo_price": 27.91,
+"obs_price": 25.2,
+"obs_date": "2026-10-02",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": 29.0678,
+"stop": 25.6769,
+"reliab": "🟡 Media",
+"prob_gain": 49,
+"prob_loss": 3,
+"conv": 69,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-02 08:09",
+"prezzo": 25.2,
+"conv": 71,
+"prob_gain": 58,
+"prob_loss": 3,
+"reliab": "🟢 Alta",
+"mkt": -0.002
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-07 16:48",
+"prezzo": 27.91,
+"conv": 69,
+"prob_gain": 49,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
