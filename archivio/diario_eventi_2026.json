@@ -11269,5 +11269,80 @@
 "7g": 11.96,
 "30g": -8.25
 }
+},
+{
+"episodio": "short:BURL:2026-08-28",
+"ticker": "BURL",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-08-31 16:49",
+"data": "2026-08-29 10:03",
+"prezzo": 290.0,
+"conv": 89,
+"prob_gain": 57,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 339.4326,
+"media20": 341.3165,
+"quattro_atr": 339.7856,
+"meta_caduta": 331.095,
+"bollinger": 396.8657,
+"consigliata": 339.4326
+},
+"stop": 265.1072,
+"atr": 12.4464,
+"res": {
+"7g": -11.04,
+"30g": -9.84,
+"soglia": -9.84
+},
+"soglie_contaminate": {
+"media50": 339.4326,
+"media20": 341.3165,
+"quattro_atr": 339.7856,
+"meta_caduta": 331.095,
+"bollinger": 396.8657,
+"consigliata": 339.4326
+},
+"soglie_ricalcolate_il": "2026-09-14 21:39",
+"soglie_ritardo_giorni": 2,
+"taglio_corretto": true,
+"res_soglia": {
+"media50": {
+"ret": -9.84,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -9.84,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -9.84,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -9.84,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -9.84,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -9.84,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
