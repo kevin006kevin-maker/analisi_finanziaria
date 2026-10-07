@@ -14089,5 +14089,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "TDOC",
+"kind": "short",
+"date": "2026-10-07",
+"promo_price": 5.79,
+"obs_price": 6.16,
+"obs_date": "2026-09-15",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": 6.5456,
+"stop": 5.2844,
+"reliab": "🔴 Bassa",
+"prob_gain": 53,
+"prob_loss": 17,
+"conv": 67,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-15 03:24",
+"prezzo": 6.16,
+"conv": 67,
+"prob_gain": 57,
+"prob_loss": 17,
+"reliab": "🔴 Bassa",
+"mkt": -2.1293
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-07 03:05",
+"prezzo": 5.79,
+"conv": 67,
+"prob_gain": 53,
+"prob_loss": 17,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
