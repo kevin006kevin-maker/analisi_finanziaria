@@ -1,64 +1,5 @@
 [
 {
-"episodio": "short:AXTI:2026-08-29",
-"ticker": "AXTI",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-08-29 10:03",
-"data": "2026-08-29 10:03",
-"prezzo": 66.92,
-"conv": 62,
-"prob_gain": 52,
-"prob_loss": 33,
-"reliab": "🔴 Bassa",
-"mkt": 3.9443,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": null,
-"media20": 73.62,
-"quattro_atr": 104.1258,
-"meta_caduta": 88.83,
-"bollinger": 90.9554,
-"consigliata": 104.1258
-},
-"stop": 48.3171,
-"atr": 9.3014,
-"res": {
-"7g": 3.79,
-"30g": 8.63,
-"soglia": 8.63
-},
-"res_soglia": {
-"media20": {
-"ret": 10.01,
-"toccato": true,
-"giorni": 23
-},
-"quattro_atr": {
-"ret": 8.63,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 8.63,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 8.63,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 8.63,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "long:GAP:2026-08-29",
 "ticker": "GAP",
 "kind": "long",
@@ -28742,5 +28683,25 @@
 },
 "stop": 75.8927,
 "atr": 1.9536
+},
+{
+"episodio": "short:IONS:2026-09-15",
+"ticker": "IONS",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-10-07 03:07",
+"data": "2026-10-07 03:07",
+"prezzo": 44.0,
+"conv": 80,
+"prob_gain": 62,
+"prob_loss": 16,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "in perdita da 11 giorni di Borsa: valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
