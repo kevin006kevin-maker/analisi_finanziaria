@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:SSTK:2026-08-28",
-"ticker": "SSTK",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-08-29 03:28",
-"data": "2026-08-29 03:25",
-"prezzo": 5.97,
-"conv": 61,
-"prob_gain": 57,
-"prob_loss": 17,
-"reliab": "🔴 Bassa",
-"mkt": 2.9646,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 5.81",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:CABO:2026-08-28",
 "ticker": "CABO",
 "kind": "short",
@@ -28728,5 +28708,32 @@
 },
 "stop": 14.5101,
 "atr": 0.3799
+},
+{
+"episodio": "short:ISP.MI:2026-10-02",
+"ticker": "ISP.MI",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-07 03:06",
+"data": "2026-10-07 03:06",
+"prezzo": 6.426,
+"conv": 60,
+"prob_gain": 55,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 6.7237,
+"media20": 6.6744,
+"quattro_atr": 6.9391,
+"meta_caduta": 6.6715,
+"bollinger": 6.9521,
+"consigliata": 6.7237
+},
+"stop": 6.1694,
+"atr": 0.1283
 }
 ]
