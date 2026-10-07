@@ -10390,5 +10390,69 @@
 "7g": 7.26,
 "30g": 8.32
 }
+},
+{
+"episodio": "short:INTC:2026-08-25",
+"ticker": "INTC",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-08-29 10:04",
+"data": "2026-08-29 10:04",
+"prezzo": 92.09,
+"conv": 62,
+"prob_gain": 48,
+"prob_loss": 25,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 105.554,
+"media20": 95.9035,
+"quattro_atr": 115.3194,
+"meta_caduta": 116.515,
+"bollinger": 107.5185,
+"consigliata": 105.554
+},
+"stop": 80.4753,
+"atr": 5.8074,
+"res": {
+"7g": 14.48,
+"30g": 25.27,
+"soglia": 14.62
+},
+"res_soglia": {
+"media50": {
+"ret": 14.62,
+"toccato": true,
+"giorni": 11
+},
+"media20": {
+"ret": 4.14,
+"toccato": true,
+"giorni": 10
+},
+"quattro_atr": {
+"ret": 25.22,
+"toccato": true,
+"giorni": 23
+},
+"meta_caduta": {
+"ret": 26.52,
+"toccato": true,
+"giorni": 23
+},
+"bollinger": {
+"ret": 16.75,
+"toccato": true,
+"giorni": 19
+},
+"consigliata": {
+"ret": 14.62,
+"toccato": true,
+"giorni": 11
+}
+}
 }
 ]
