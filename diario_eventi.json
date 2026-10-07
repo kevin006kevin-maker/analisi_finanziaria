@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:PYPL:2026-08-28",
-"ticker": "PYPL",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-08-29 10:05",
-"data": "2026-08-29 10:03",
-"prezzo": 61.47,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 53.9541",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "long:PYPL:2026-08-28",
 "ticker": "PYPL",
 "kind": "long",
@@ -28662,5 +28642,32 @@
 },
 "stop": 18.6481,
 "atr": 1.171
+},
+{
+"episodio": "short:CAR:2026-09-22",
+"ticker": "CAR",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-07 03:08",
+"data": "2026-10-06 23:17",
+"prezzo": 112.65,
+"conv": 62,
+"prob_gain": 42,
+"prob_loss": 27,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-07",
+"soglie": {
+"media50": 130.6462,
+"media20": 113.355,
+"quattro_atr": 136.5092,
+"meta_caduta": 139.485,
+"bollinger": 129.1488,
+"consigliata": 130.6462
+},
+"stop": 100.7204,
+"atr": 5.9648
 }
 ]
