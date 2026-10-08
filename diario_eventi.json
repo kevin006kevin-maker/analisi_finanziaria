@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:HWM:2026-08-31",
-"ticker": "HWM",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-01 17:05",
-"data": "2026-09-01 17:03",
-"prezzo": 253.22,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 244.915",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:OSW:2026-09-01",
 "ticker": "OSW",
 "kind": "short",
@@ -28280,5 +28260,32 @@
 },
 "stop": 21.0903,
 "atr": 1.0399
+},
+{
+"episodio": "short:SPHR:2026-10-05",
+"ticker": "SPHR",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-08 02:31",
+"data": "2026-10-08 02:24",
+"prezzo": 105.38,
+"conv": 74,
+"prob_gain": 59,
+"prob_loss": 9,
+"reliab": "🟡 Media",
+"mkt": 2.1661,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-08",
+"soglie": {
+"media50": 146.8952,
+"media20": 136.7655,
+"quattro_atr": 134.4802,
+"meta_caduta": 140.88,
+"bollinger": 159.1781,
+"consigliata": 134.4802
+},
+"stop": 90.8299,
+"atr": 7.275
 }
 ]
