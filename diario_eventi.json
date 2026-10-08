@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:MONC.MI:2026-09-01",
-"ticker": "MONC.MI",
-"kind": "short",
-"evento": "uscita",
-"scritto_il": "2026-09-01 02:24",
-"data": "2026-09-01 02:24",
-"prezzo": 47.72,
-"conv": 72,
-"prob_gain": 46,
-"prob_loss": 1,
-"reliab": "🟢 Alta",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "in perdita da 25 giorni di Borsa: valuta l'uscita",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:RBKB:2026-09-01",
 "ticker": "RBKB",
 "kind": "short",
@@ -28389,5 +28369,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:HESM:2026-10-07",
+"ticker": "HESM",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-08 02:27",
+"data": "2026-10-07 16:45",
+"prezzo": 32.1459,
+"conv": 74,
+"prob_gain": 63,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 39.6284,
+"media20": 39.047,
+"quattro_atr": 35.5127,
+"meta_caduta": 36.558,
+"bollinger": 41.0021,
+"consigliata": 35.5127
+},
+"stop": 30.4625,
+"atr": 0.8417
 }
 ]
