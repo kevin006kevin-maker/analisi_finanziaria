@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:TNGX:2026-08-20",
-"ticker": "TNGX",
-"kind": "short",
-"evento": "fine_verifica",
-"scritto_il": "2026-09-01 02:25",
-"data": "2026-08-31 22:38",
-"prezzo": 22.84,
-"conv": 63,
-"prob_gain": 47,
-"prob_loss": 27,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 5 giorni di Borsa dalla promozione",
-"dovuto_il": "2026-09-01",
-"soglie": {
-"media50": 27.6176,
-"media20": 25.7295,
-"quattro_atr": 29.2865,
-"meta_caduta": 27.87,
-"bollinger": 29.4249,
-"consigliata": 27.6176
-},
-"stop": 19.6167,
-"atr": 1.6116,
-"soglie_contaminate": {
-"media50": 27.6176,
-"media20": 25.7295,
-"quattro_atr": 29.2865,
-"meta_caduta": 27.87,
-"bollinger": 29.4249,
-"consigliata": 27.6176
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": 0.13,
-"30g": 6.26,
-"soglia": 6.26
-},
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": 6.26,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 6.26,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 6.26,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 6.26,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 6.26,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 6.26,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "long:OSIS:2026-08-21",
 "ticker": "OSIS",
 "kind": "long",
@@ -28403,5 +28328,32 @@
 },
 "stop": 169.4318,
 "atr": 7.3441
+},
+{
+"episodio": "short:ALHC:2026-09-15",
+"ticker": "ALHC",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-08 02:30",
+"data": "2026-10-08 02:28",
+"prezzo": 8.37,
+"conv": 70,
+"prob_gain": 50,
+"prob_loss": 22,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-08",
+"soglie": {
+"media50": 12.1295,
+"media20": 9.204,
+"quattro_atr": 11.068,
+"meta_caduta": 14.935,
+"bollinger": 13.1009,
+"consigliata": 11.068
+},
+"stop": 7.021,
+"atr": 0.6745
 }
 ]
