@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:OSIS:2026-08-21",
-"ticker": "OSIS",
-"kind": "long",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-01 02:25",
-"data": "2026-09-01 02:22",
-"prezzo": 207.91,
-"conv": 33,
-"prob_gain": 70,
-"prob_loss": 18,
-"reliab": "🟡 Media",
-"mkt": 1.1268,
-"fonte": "osservazione",
-"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-01",
-"soglie": {
-"media50": 218.693,
-"media20": 221.9085,
-"quattro_atr": 240.8223,
-"meta_caduta": 222.505,
-"bollinger": 246.4924,
-"consigliata": 218.693
-},
-"stop": 191.4539,
-"atr": 8.2281,
-"res": {
-"7g": -1.86,
-"30g": -6.07
-}
-},
-{
 "episodio": "short:PCG:2026-09-01",
 "ticker": "PCG",
 "kind": "short",
@@ -28355,5 +28324,32 @@
 },
 "stop": 7.021,
 "atr": 0.6745
+},
+{
+"episodio": "short:NU:2026-09-28",
+"ticker": "NU",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-08 02:30",
+"data": "2026-10-08 02:28",
+"prezzo": 15.66,
+"conv": 50,
+"prob_gain": 47,
+"prob_loss": 7,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-08",
+"soglie": {
+"media50": null,
+"media20": null,
+"quattro_atr": 18.2598,
+"meta_caduta": 15.67,
+"bollinger": 15.7425,
+"consigliata": 18.2598
+},
+"stop": 14.3601,
+"atr": 0.65
 }
 ]
