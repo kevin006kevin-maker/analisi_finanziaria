@@ -15016,7 +15016,45 @@
 "prob_gain": null,
 "prob_loss": null,
 "conv": 59,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-09-30 19:01",
+"prezzo": 37.83,
+"conv": 80,
+"prob_gain": 57,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": 1.0504
+},
+"anticipo": {
+"data": "2026-10-02",
+"prezzo": 37.32,
+"conv": 86,
+"prob_gain": 61,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-08",
+"prezzo": 39.54,
+"conv": 59,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "GRND",
