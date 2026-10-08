@@ -15017,5 +15017,62 @@
 "prob_loss": null,
 "conv": 59,
 "res": {}
+},
+{
+"ticker": "GRND",
+"kind": "short",
+"date": "2026-10-08",
+"promo_price": 14.34,
+"obs_price": 13.755,
+"obs_date": "2026-10-01",
+"pre_price": 13.755,
+"pre_date": "2026-10-02",
+"conf_price": null,
+"conf_date": null,
+"target": 15.7444,
+"stop": 12.9356,
+"reliab": "🟡 Media",
+"prob_gain": 51,
+"prob_loss": 12,
+"conv": 60,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-01 16:46",
+"prezzo": 13.755,
+"conv": 67,
+"prob_gain": 56,
+"prob_loss": 9,
+"reliab": "🟡 Media",
+"mkt": -0.2598
+},
+"anticipo": {
+"data": "2026-10-02",
+"prezzo": 13.755,
+"conv": 67,
+"prob_gain": 56,
+"prob_loss": 9,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-08 08:39",
+"prezzo": 14.34,
+"conv": 60,
+"prob_gain": 51,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
