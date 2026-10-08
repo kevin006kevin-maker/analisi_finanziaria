@@ -4881,7 +4881,7 @@
 "urgenza": "incassa",
 "tipo": "bersaglio"
 },
-"exit_notified": true
+"exit_notified": false
 },
 "ALNY": {
 "kind": "short",
@@ -9233,7 +9233,7 @@
 "auto": true,
 "notified": true,
 "entry_check": "2026-10-08",
-"exit_notified": true,
+"exit_notified": false,
 "incasso": {
 "gain": 27.4,
 "max": 4.51,
@@ -9486,7 +9486,7 @@
 "auto": true,
 "notified": true,
 "entry_check": "2026-10-08",
-"exit_notified": true,
+"exit_notified": false,
 "incasso": {
 "gain": 23.3,
 "max": 10.15,
@@ -18241,7 +18241,8 @@
 "max_date": "2026-10-07 22:38",
 "auto": true,
 "notified": false,
-"entry_check": "2026-10-07"
+"entry_check": "2026-10-07",
+"exit_notified": true
 },
 "ENLT": {
 "kind": "short",
