@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-09-30",
-"ticker": "SLDP",
-"kind": "short",
-"price": 2.395,
-"conv": 34,
-"factors": {
-"discount": 71.8566,
-"histcheap": 0.99,
-"riskadj": -0.72,
-"ddpen": -57.33,
-"momentum": -1.9149,
-"prob": 10,
-"oversold": -50.076,
-"rebound": -2.618,
-"trend": -1.0,
-"relstrength": 1.8422
-},
-"ret_5d": -3.55,
-"ret_21d": null
-},
-{
-"date": "2026-09-30",
 "ticker": "CAPR",
 "kind": "short",
 "price": 9.65,
@@ -38871,6 +38850,26 @@
 "rebound": 0.3224,
 "trend": 1.0,
 "relstrength": 6.7076
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-08",
+"ticker": "ARGX",
+"kind": "long",
+"price": 809.6,
+"conv": 50,
+"factors": {
+"discount": 23.5433,
+"histcheap": 0.56,
+"riskadj": -0.07,
+"ddpen": -11.31,
+"momentum": 13.5043,
+"prob": 78,
+"quality": 71.3,
+"valcheap": -2.3767,
+"trappen": 3
 },
 "ret_5d": null,
 "ret_21d": null
