@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:BW:2026-08-31",
-"ticker": "BW",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-01 20:43",
-"data": "2026-09-01 20:42",
-"prezzo": 6.935,
-"conv": 72,
-"prob_gain": 50,
-"prob_loss": 31,
-"reliab": "🔴 Bassa",
-"mkt": 0.2438,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 10.2257,
-"media20": 8.6498,
-"quattro_atr": 10.1374,
-"meta_caduta": 12.3475,
-"bollinger": 10.6508,
-"consigliata": 10.1374
-},
-"stop": 5.3338,
-"atr": 0.8006,
-"res": {
-"7g": 13.84,
-"30g": -16.44,
-"soglia": -16.44
-},
-"res_soglia": {
-"media50": {
-"ret": -16.44,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -16.44,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -16.44,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -16.44,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -16.44,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -16.44,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:EIX:2026-08-31",
 "ticker": "EIX",
 "kind": "short",
@@ -28246,5 +28182,25 @@
 },
 "stop": 94.4132,
 "atr": 5.4084
+},
+{
+"episodio": "short:CW:2026-10-07",
+"ticker": "CW",
+"kind": "short",
+"evento": "salita_2pct",
+"scritto_il": "2026-10-08 02:31",
+"data": "2026-10-08 02:24",
+"prezzo": 553.35,
+"conv": 53,
+"prob_gain": 50,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": 2.1661,
+"fonte": "osservazione",
+"note": "prezzo salito di almeno il 2% da 510.32",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
