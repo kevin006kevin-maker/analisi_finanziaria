@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:RBKB:2026-09-01",
-"ticker": "RBKB",
-"kind": "short",
-"evento": "uscita",
-"scritto_il": "2026-09-01 02:24",
-"data": "2026-09-01 02:24",
-"prezzo": 12.595,
-"conv": 50,
-"prob_gain": 46,
-"prob_loss": 4,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "in perdita da 12 giorni di Borsa: valuta l'uscita",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:TNGX:2026-08-20",
 "ticker": "TNGX",
 "kind": "short",
@@ -28396,5 +28376,32 @@
 },
 "stop": 30.4625,
 "atr": 0.8417
+},
+{
+"episodio": "short:ENVA:2026-10-08",
+"ticker": "ENVA",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-08 02:27",
+"data": "2026-10-08 02:27",
+"prezzo": 184.12,
+"conv": 69,
+"prob_gain": 49,
+"prob_loss": 13,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 221.4094,
+"media20": null,
+"quattro_atr": 213.4964,
+"meta_caduta": 224.785,
+"bollinger": 226.0946,
+"consigliata": 213.4964
+},
+"stop": 169.4318,
+"atr": 7.3441
 }
 ]
