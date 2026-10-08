@@ -14898,7 +14898,45 @@
 "prob_gain": 59,
 "prob_loss": 9,
 "conv": 74,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-10-05 17:57",
+"prezzo": 114.65,
+"conv": 78,
+"prob_gain": 57,
+"prob_loss": 9,
+"reliab": "🟡 Media",
+"mkt": 0.5555
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-08",
+"prezzo": 105.38,
+"conv": 74,
+"prob_gain": 59,
+"prob_loss": 9,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "MB.MI",
@@ -14919,6 +14957,44 @@
 "prob_gain": null,
 "prob_loss": null,
 "conv": 73,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-10-05 17:57",
+"prezzo": 26.0,
+"conv": 74,
+"prob_gain": 59,
+"prob_loss": 4,
+"reliab": "🟢 Alta",
+"mkt": 0.5555
+},
+"anticipo": {
+"data": "2026-10-06",
+"prezzo": 26.0,
+"conv": 74,
+"prob_gain": 59,
+"prob_loss": 4,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-08",
+"prezzo": 26.13,
+"conv": 73,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 }
 ]
