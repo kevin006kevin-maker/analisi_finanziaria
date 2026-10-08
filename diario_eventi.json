@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:OSW:2026-09-01",
-"ticker": "OSW",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-01 20:42",
-"data": "2026-09-01 20:42",
-"prezzo": 22.911,
-"conv": 75,
-"prob_gain": 53,
-"prob_loss": 2,
-"reliab": "🟢 Alta",
-"mkt": 0.2438,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 26.6082,
-"media20": 26.1695,
-"quattro_atr": 26.3902,
-"meta_caduta": 25.7955,
-"bollinger": 27.9612,
-"consigliata": 26.3902
-},
-"stop": 21.1714,
-"atr": 0.8698,
-"res": {
-"7g": -0.81,
-"30g": -0.96,
-"soglia": -0.96
-},
-"res_soglia": {
-"media50": {
-"ret": -0.96,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -0.96,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -0.96,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -0.96,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -0.96,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -0.96,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "long:PURR:2026-09-01",
 "ticker": "PURR",
 "kind": "long",
@@ -28287,5 +28223,32 @@
 },
 "stop": 90.8299,
 "atr": 7.275
+},
+{
+"episodio": "short:MB.MI:2026-10-05",
+"ticker": "MB.MI",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-08 02:31",
+"data": "2026-10-08 02:24",
+"prezzo": 26.13,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-08",
+"soglie": {
+"media50": 28.2128,
+"media20": 28.245,
+"quattro_atr": 28.824,
+"meta_caduta": 27.59,
+"bollinger": 30.0098,
+"consigliata": 28.2128
+},
+"stop": 24.783,
+"atr": 0.6735
 }
 ]
