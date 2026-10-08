@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:NIO:2026-09-01",
-"ticker": "NIO",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-01 17:03",
-"data": "2026-09-01 17:03",
-"prezzo": 4.065,
-"conv": 70,
-"prob_gain": 50,
-"prob_loss": 10,
-"reliab": "🟡 Media",
-"mkt": 0.6577,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 4.7073,
-"media20": 4.5033,
-"quattro_atr": 4.6641,
-"meta_caduta": 4.7575,
-"bollinger": 4.8531,
-"consigliata": 4.6641
-},
-"stop": 3.7654,
-"atr": 0.1498,
-"res": {
-"7g": -5.66,
-"30g": -16.36,
-"soglia": -16.36
-},
-"res_soglia": {
-"media50": {
-"ret": -16.36,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -16.36,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -16.36,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -16.36,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -16.36,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -16.36,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "long:AGNC:2026-09-01",
 "ticker": "AGNC",
 "kind": "long",
@@ -28314,5 +28250,32 @@
 },
 "stop": 6.0408,
 "atr": 1.0946
+},
+{
+"episodio": "short:ACET:2026-09-28",
+"ticker": "ACET",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-08 02:30",
+"data": "2026-10-08 02:28",
+"prezzo": 6.25,
+"conv": 67,
+"prob_gain": 55,
+"prob_loss": 18,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-08",
+"soglie": {
+"media50": 8.606,
+"media20": 8.2035,
+"quattro_atr": 8.9269,
+"meta_caduta": 7.99,
+"bollinger": 10.7465,
+"consigliata": 8.606
+},
+"stop": 4.9115,
+"atr": 0.6692
 }
 ]
