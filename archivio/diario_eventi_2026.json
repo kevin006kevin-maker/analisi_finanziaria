@@ -11843,5 +11843,69 @@
 "7g": -1.86,
 "30g": -6.07
 }
+},
+{
+"episodio": "short:PCG:2026-09-01",
+"ticker": "PCG",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-01 17:03",
+"data": "2026-09-01 17:03",
+"prezzo": 13.37,
+"conv": 91,
+"prob_gain": 59,
+"prob_loss": 1,
+"reliab": "🟡 Media",
+"mkt": 0.6577,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 17.2648,
+"media20": 17.1545,
+"quattro_atr": 16.688,
+"meta_caduta": 15.865,
+"bollinger": 19.918,
+"consigliata": 16.688
+},
+"stop": 11.711,
+"atr": 0.8295,
+"res": {
+"7g": 11.08,
+"30g": -10.81,
+"soglia": -10.81
+},
+"res_soglia": {
+"media50": {
+"ret": -10.81,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -10.81,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -10.81,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -10.81,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -10.81,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -10.81,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
