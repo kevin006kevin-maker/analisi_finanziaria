@@ -1,25 +1,5 @@
 [
 {
-"episodio": "long:PCG:2026-08-31",
-"ticker": "PCG",
-"kind": "long",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-01 20:44",
-"data": "2026-09-01 20:43",
-"prezzo": 13.8599,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 13.265",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:PCG:2026-09-01",
 "ticker": "PCG",
 "kind": "short",
@@ -28227,5 +28207,25 @@
 },
 "stop": 12.9356,
 "atr": 0.7022
+},
+{
+"episodio": "short:ISP.MI:2026-10-02",
+"ticker": "ISP.MI",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-10-08 16:04",
+"data": "2026-10-08 16:04",
+"prezzo": 6.142,
+"conv": 67,
+"prob_gain": 57,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
