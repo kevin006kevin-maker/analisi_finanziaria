@@ -779,7 +779,9 @@
 "entry_src": "storico",
 "max_price": 33.48,
 "max_date": "2026-08-25 23:02",
-"exit_notified": false
+"exit_notified": false,
+"warn_since": "2026-10-08",
+"warn": "in perdita da 63 giorni di Borsa: valuta l'uscita"
 },
 "T": {
 "kind": "long",
@@ -6564,7 +6566,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-10-08",
 "max_price": 35.405,
-"max_date": "2026-08-25 21:57"
+"max_date": "2026-08-25 21:57",
+"warn_since": "2026-10-08",
+"warn": "in perdita da 40 giorni di Borsa: valuta l'uscita"
 },
 "TDS": {
 "kind": "short",
@@ -7258,7 +7262,9 @@
 "max_date": "2026-08-27 22:41",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-08"
+"entry_check": "2026-10-08",
+"warn_since": "2026-10-08",
+"warn": "in perdita da 34 giorni di Borsa: valuta l'uscita"
 },
 "DUOL": {
 "kind": "long",
@@ -11587,7 +11593,9 @@
 "max_date": "2026-10-01 22:21",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-07"
+"entry_check": "2026-10-07",
+"warn_since": "2026-10-08",
+"warn": "in perdita da 9 giorni di Borsa: valuta l'uscita"
 },
 "SMST": {
 "kind": "short",
@@ -11750,9 +11758,7 @@
 "max_date": "2026-09-30 23:29",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-07",
-"warn_since": "2026-10-08",
-"warn": "in perdita da 9 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-07"
 },
 "GT": {
 "kind": "short",
@@ -13063,7 +13069,9 @@
 "max_date": "2026-10-06 18:18",
 "auto": true,
 "notified": false,
-"entry_check": "2026-10-07"
+"entry_check": "2026-10-07",
+"warn_since": "2026-10-08",
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "GIL": {
 "kind": "short",
@@ -14441,7 +14449,9 @@
 "max_date": "2026-10-05 18:02",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-07"
+"entry_check": "2026-10-07",
+"warn_since": "2026-10-08",
+"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
 },
 "ITG": {
 "kind": "short",
@@ -14636,7 +14646,9 @@
 "max_date": "2026-10-06 18:18",
 "auto": true,
 "notified": false,
-"entry_check": "2026-10-07"
+"entry_check": "2026-10-07",
+"warn_since": "2026-10-08",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "ACET": {
 "kind": "short",
