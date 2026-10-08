@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:EIX:2026-08-31",
-"ticker": "EIX",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-01 20:44",
-"data": "2026-09-01 20:42",
-"prezzo": 57.38,
-"conv": 83,
-"prob_gain": 64,
-"prob_loss": 2,
-"reliab": "🟡 Media",
-"mkt": 0.2438,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 53.955",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "long:EIX:2026-08-31",
 "ticker": "EIX",
 "kind": "long",
@@ -28213,5 +28193,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:CELC:2026-10-08",
+"ticker": "CELC",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-08 08:38",
+"data": "2026-10-08 08:38",
+"prezzo": 65.78,
+"conv": 63,
+"prob_gain": 55,
+"prob_loss": 15,
+"reliab": "🔴 Bassa",
+"mkt": 2.1661,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 86.5282,
+"media20": 79.2335,
+"quattro_atr": 85.6188,
+"meta_caduta": 81.105,
+"bollinger": 89.7711,
+"consigliata": 85.6188
+},
+"stop": 55.8606,
+"atr": 4.9597
 }
 ]
