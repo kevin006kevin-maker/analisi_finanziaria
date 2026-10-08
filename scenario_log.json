@@ -14821,5 +14821,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "ENVA",
+"kind": "short",
+"date": "2026-10-08",
+"promo_price": 184.12,
+"obs_price": 172.9031,
+"obs_date": "2026-09-15",
+"pre_price": 173.61,
+"pre_date": "2026-09-16",
+"conf_price": null,
+"conf_date": null,
+"target": 221.4094,
+"stop": 168.1918,
+"reliab": "🟡 Media",
+"prob_gain": 49,
+"prob_loss": 13,
+"conv": 69,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-15 19:40",
+"prezzo": 172.9031,
+"conv": 83,
+"prob_gain": 54,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": -2.099
+},
+"anticipo": {
+"data": "2026-09-16",
+"prezzo": 173.61,
+"conv": 84,
+"prob_gain": 54,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-08 02:27",
+"prezzo": 184.12,
+"conv": 69,
+"prob_gain": 49,
+"prob_loss": 13,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
