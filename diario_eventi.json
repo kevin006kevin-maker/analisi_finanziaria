@@ -1,25 +1,5 @@
 [
 {
-"episodio": "long:EIX:2026-08-31",
-"ticker": "EIX",
-"kind": "long",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-01 20:44",
-"data": "2026-09-01 20:43",
-"prezzo": 57.38,
-"conv": 80,
-"prob_gain": 95,
-"prob_loss": 1,
-"reliab": "🟡 Media",
-"mkt": 0.2438,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 53.955",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "long:PCG:2026-08-31",
 "ticker": "PCG",
 "kind": "long",
@@ -28220,5 +28200,32 @@
 },
 "stop": 55.8606,
 "atr": 4.9597
+},
+{
+"episodio": "short:GRND:2026-10-01",
+"ticker": "GRND",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-08 08:39",
+"data": "2026-10-08 08:39",
+"prezzo": 14.34,
+"conv": 60,
+"prob_gain": 51,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 15.7444,
+"media20": 15.1815,
+"quattro_atr": 17.1487,
+"meta_caduta": 16.14,
+"bollinger": 16.8215,
+"consigliata": 15.7444
+},
+"stop": 12.9356,
+"atr": 0.7022
 }
 ]
