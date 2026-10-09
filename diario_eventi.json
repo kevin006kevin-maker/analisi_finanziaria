@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:CABO:2026-08-28",
-"ticker": "CABO",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-02 01:51",
-"data": "2026-09-01 23:34",
-"prezzo": 23.87,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-02",
-"soglie": {
-"media50": 37.749,
-"media20": 30.3175,
-"quattro_atr": 37.5048,
-"meta_caduta": 38.715,
-"bollinger": 43.6969,
-"consigliata": 37.5048
-},
-"stop": 17.0526,
-"atr": 3.4087,
-"soglie_contaminate": {
-"media50": 37.749,
-"media20": 30.3175,
-"quattro_atr": 37.5019,
-"meta_caduta": 38.715,
-"bollinger": 43.6969,
-"consigliata": 37.5019
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": -4.27,
-"30g": -57.94,
-"soglia": -57.94
-},
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": -57.94,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -57.94,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -57.94,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -57.94,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -57.94,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -57.94,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:VISN:2026-08-29",
 "ticker": "VISN",
 "kind": "short",
@@ -28003,5 +27928,32 @@
 },
 "stop": 471.8042,
 "atr": 17.7429
+},
+{
+"episodio": "short:TIGO:2026-10-09",
+"ticker": "TIGO",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-09 16:21",
+"data": "2026-10-09 16:21",
+"prezzo": 83.01,
+"conv": 69,
+"prob_gain": 56,
+"prob_loss": 1,
+"reliab": "🟡 Media",
+"mkt": 1.7397,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 93.1882,
+"media20": 91.386,
+"quattro_atr": 96.0626,
+"meta_caduta": 93.66,
+"bollinger": 98.665,
+"consigliata": 93.1882
+},
+"stop": 76.4837,
+"atr": 3.2631
 }
 ]
