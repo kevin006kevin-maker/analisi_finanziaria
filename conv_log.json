@@ -1,48 +1,6 @@
 [
 {
 "date": "2026-10-02",
-"ticker": "NU",
-"kind": "short",
-"price": 12.66,
-"conv": 64,
-"factors": {
-"discount": 32.516,
-"histcheap": 1.45,
-"riskadj": -0.73,
-"ddpen": -20.6,
-"momentum": 7.0485,
-"prob": 47,
-"oversold": -35.1699,
-"rebound": 12.891,
-"trend": -1.0,
-"relstrength": -6.5594
-},
-"ret_5d": 22.75,
-"ret_21d": null
-},
-{
-"date": "2026-10-02",
-"ticker": "INTC",
-"kind": "short",
-"price": 120.23,
-"conv": 34,
-"factors": {
-"discount": 14.6942,
-"histcheap": -1.45,
-"riskadj": 2.52,
-"ddpen": -17.5,
-"momentum": 1.9331,
-"prob": 29,
-"oversold": -61.8234,
-"rebound": -16.7053,
-"trend": 1.0,
-"relstrength": -1.444
-},
-"ret_5d": -11.9,
-"ret_21d": null
-},
-{
-"date": "2026-10-02",
 "ticker": "NVDA",
 "kind": "short",
 "price": 228.38,
@@ -38731,6 +38689,46 @@
 "rebound": -8.9431,
 "trend": 1.0,
 "relstrength": -2.5167
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-09",
+"ticker": "SXTC",
+"kind": "long",
+"price": 0.1426,
+"conv": 33,
+"factors": {
+"discount": 99.9994,
+"histcheap": 0.6,
+"riskadj": -2.25,
+"ddpen": -86.17,
+"momentum": 94.083,
+"prob": 46,
+"quality": null,
+"valcheap": null,
+"trappen": 0
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-09",
+"ticker": "DKI",
+"kind": "long",
+"price": 0.3444,
+"conv": 46,
+"factors": {
+"discount": 94.5764,
+"histcheap": 0.83,
+"riskadj": -0.52,
+"ddpen": -46.75,
+"momentum": 75.0435,
+"prob": 31,
+"quality": null,
+"valcheap": null,
+"trappen": 0
 },
 "ret_5d": null,
 "ret_21d": null
