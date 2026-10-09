@@ -727,7 +727,7 @@
 "tipo": "bersaglio"
 },
 "incasso_notified": true,
-"exit_notified": true
+"exit_notified": false
 },
 "KGC": {
 "kind": "long",
@@ -1676,7 +1676,7 @@
 "entry_src": "storico",
 "max_price": 22.45,
 "max_date": "2026-10-05 18:01",
-"exit_notified": true
+"exit_notified": false
 },
 "SNPS": {
 "kind": "short",
@@ -10877,7 +10877,7 @@
 "tipo": "bersaglio"
 },
 "incasso_notified": true,
-"exit_notified": false
+"exit_notified": true
 },
 "RXT": {
 "kind": "short",
@@ -22097,7 +22097,7 @@
 "auto": true,
 "notified": true,
 "entry_check": "2026-10-08",
-"exit_notified": false
+"exit_notified": true
 },
 "ENLT": {
 "kind": "short",
