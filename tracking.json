@@ -7603,9 +7603,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-10-09",
 "max_price": 35.405,
-"max_date": "2026-08-25 21:57",
-"warn_since": "2026-10-09",
-"warn": "in perdita da 41 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-08-25 21:57"
 },
 "TDS": {
 "kind": "short",
@@ -8427,9 +8425,7 @@
 "max_date": "2026-08-27 22:41",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-09",
-"warn_since": "2026-10-09",
-"warn": "in perdita da 35 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-09"
 },
 "DUOL": {
 "kind": "long",
@@ -12607,7 +12603,9 @@
 "max_date": "2026-10-06 23:17",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-08"
+"entry_check": "2026-10-08",
+"warn_since": "2026-10-09",
+"warn": "in perdita da 12 giorni di Borsa: valuta l'uscita"
 },
 "LPLA": {
 "kind": "short",
@@ -18336,9 +18334,7 @@
 "max_date": "2026-10-08 21:57",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-08",
-"warn_since": "2026-10-09",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-08"
 },
 "PTRN": {
 "kind": "short",
