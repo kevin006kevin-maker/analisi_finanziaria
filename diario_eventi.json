@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:MNSO:2026-08-28",
-"ticker": "MNSO",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-02 01:51",
-"data": "2026-09-02 01:46",
-"prezzo": 9.56,
-"conv": 74,
-"prob_gain": 56,
-"prob_loss": 2,
-"reliab": "🟡 Media",
-"mkt": -1.3578,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-02",
-"soglie": {
-"media50": 11.8198,
-"media20": 11.2985,
-"quattro_atr": 11.2537,
-"meta_caduta": 11.385,
-"bollinger": 13.1403,
-"consigliata": 11.2537
-},
-"stop": 8.7131,
-"atr": 0.4234,
-"res": {
-"7g": -3.87,
-"30g": -7.74,
-"soglia": -7.74
-},
-"res_soglia": {
-"media50": {
-"ret": -7.74,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -7.74,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -7.74,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -7.74,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -7.74,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -7.74,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:PYPL:2026-08-28",
 "ticker": "PYPL",
 "kind": "short",
@@ -28141,5 +28077,32 @@
 },
 "stop": null,
 "atr": 10.0664
+},
+{
+"episodio": "short:ADTN:2026-10-04",
+"ticker": "ADTN",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-09 02:27",
+"data": "2026-10-09 02:24",
+"prezzo": 7.76,
+"conv": 62,
+"prob_gain": 52,
+"prob_loss": 22,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-09",
+"soglie": {
+"media50": null,
+"media20": null,
+"quattro_atr": 9.1232,
+"meta_caduta": 9.95,
+"bollinger": null,
+"consigliata": 9.1232
+},
+"stop": 7.0784,
+"atr": 0.3408
 }
 ]
