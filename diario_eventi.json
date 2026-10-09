@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:STMMI.MI:2026-08-17",
-"ticker": "STMMI.MI",
-"kind": "long",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-01 23:34",
-"data": "2026-09-01 23:34",
-"prezzo": 42.29,
-"conv": 66,
-"prob_gain": 67,
-"prob_loss": 25,
-"reliab": "🟡 Media",
-"mkt": -1.3432,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 51.7497,
-"media20": 45.1458,
-"quattro_atr": 50.1166,
-"meta_caduta": 55.82,
-"bollinger": 49.9704,
-"consigliata": 50.1166
-},
-"stop": 38.3767,
-"atr": 1.9567,
-"res": {
-"7g": 8.43,
-"30g": 12.97
-}
-},
-{
 "episodio": "short:PCG:2026-09-01",
 "ticker": "PCG",
 "kind": "short",
@@ -28488,5 +28457,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:AVBP:2026-10-06",
+"ticker": "AVBP",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-09 02:22",
+"data": "2026-10-09 02:22",
+"prezzo": 16.89,
+"conv": 77,
+"prob_gain": 65,
+"prob_loss": 6,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 29.2858,
+"media20": 27.741,
+"quattro_atr": 27.2673,
+"meta_caduta": 25.04,
+"bollinger": 35.9534,
+"consigliata": 27.2673
+},
+"stop": 11.7014,
+"atr": 2.5943
 }
 ]
