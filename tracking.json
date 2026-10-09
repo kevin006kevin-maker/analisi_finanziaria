@@ -8967,9 +8967,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-10-09",
 "max_price": 37.94,
-"max_date": "2026-09-08 22:03",
-"warn_since": "2026-10-09",
-"warn": "in perdita da 41 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-09-08 22:03"
 },
 "CAPR": {
 "kind": "short",
@@ -15614,9 +15612,7 @@
 "max_date": "2026-10-08 16:04",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-09",
-"warn_since": "2026-10-09",
-"warn": "in perdita da 10 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-09"
 },
 "RELY": {
 "kind": "short",
@@ -17080,9 +17076,7 @@
 "max_date": "2026-09-30 19:14",
 "auto": true,
 "notified": false,
-"entry_check": "2026-10-09",
-"warn_since": "2026-10-07",
-"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-09"
 },
 "CAR": {
 "kind": "short",
@@ -17309,7 +17303,9 @@
 "max_date": "2026-10-06 23:17",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-09"
+"entry_check": "2026-10-09",
+"warn_since": "2026-10-09",
+"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
 },
 "FSLR": {
 "kind": "short",
