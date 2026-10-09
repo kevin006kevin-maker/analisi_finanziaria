@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:XPEV:2026-08-24",
-"ticker": "XPEV",
-"kind": "long",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-02 01:51",
-"data": "2026-09-02 01:47",
-"prezzo": 11.17,
-"conv": 68,
-"prob_gain": 32,
-"prob_loss": 55,
-"reliab": "🟡 Media",
-"mkt": -1.3578,
-"fonte": "osservazione",
-"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-02",
-"soglie": {
-"media50": 12.4792,
-"media20": 11.732,
-"quattro_atr": 12.9469,
-"meta_caduta": 13.5,
-"bollinger": 12.3543,
-"consigliata": 12.4792
-},
-"stop": 10.2816,
-"atr": 0.4442,
-"res": {
-"7g": -4.74,
-"30g": -17.46
-}
-},
-{
 "episodio": "short:BURL:2026-08-28",
 "ticker": "BURL",
 "kind": "short",
@@ -28182,5 +28151,32 @@
 },
 "stop": 573.569,
 "atr": 54.1005
+},
+{
+"episodio": "short:JLHL:2026-09-29",
+"ticker": "JLHL",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-09 02:27",
+"data": "2026-10-09 02:24",
+"prezzo": 4.36,
+"conv": 64,
+"prob_gain": 52,
+"prob_loss": 33,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-09",
+"soglie": {
+"media50": 6.1833,
+"media20": 5.1148,
+"quattro_atr": 6.8756,
+"meta_caduta": 7.555,
+"bollinger": 6.8058,
+"consigliata": 6.1833
+},
+"stop": 3.1022,
+"atr": 0.6289
 }
 ]
