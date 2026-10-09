@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:AAL:2026-08-21",
-"ticker": "AAL",
-"kind": "short",
-"evento": "fine_verifica",
-"scritto_il": "2026-09-02 01:51",
-"data": "2026-09-01 23:35",
-"prezzo": 12.95,
-"conv": 70,
-"prob_gain": 50,
-"prob_loss": 13,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 5 giorni di Borsa dalla promozione",
-"dovuto_il": "2026-09-02",
-"soglie": {
-"media50": 15.499,
-"media20": 14.425,
-"quattro_atr": 14.9414,
-"meta_caduta": 15.55,
-"bollinger": 16.4006,
-"consigliata": 14.9414
-},
-"stop": 11.9543,
-"atr": 0.4978,
-"soglie_contaminate": {
-"media50": 15.499,
-"media20": 14.425,
-"quattro_atr": 14.9414,
-"meta_caduta": 15.55,
-"bollinger": 16.4006,
-"consigliata": 14.9414
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": 0.77,
-"30g": 1.31,
-"soglia": 1.31
-},
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": 1.31,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 1.31,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 1.31,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 1.31,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 1.31,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 1.31,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "long:SNDK:2026-08-24",
 "ticker": "SNDK",
 "kind": "long",
@@ -28245,5 +28170,32 @@
 },
 "stop": 12.1755,
 "atr": 0.9722
+},
+{
+"episodio": "short:PTRN:2026-09-24",
+"ticker": "PTRN",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-09 02:27",
+"data": "2026-10-09 02:24",
+"prezzo": 17.71,
+"conv": 65,
+"prob_gain": 52,
+"prob_loss": 21,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-09",
+"soglie": {
+"media50": 20.372,
+"media20": 18.571,
+"quattro_atr": 21.34,
+"meta_caduta": 23.445,
+"bollinger": 21.1931,
+"consigliata": 20.372
+},
+"stop": 15.895,
+"atr": 0.9075
 }
 ]
