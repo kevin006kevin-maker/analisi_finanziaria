@@ -1,64 +1,5 @@
 [
 {
-"episodio": "short:SEDG:2026-08-19",
-"ticker": "SEDG",
-"kind": "short",
-"evento": "fine_verifica",
-"scritto_il": "2026-09-02 01:51",
-"data": "2026-09-02 01:50",
-"prezzo": 32.49,
-"conv": 64,
-"prob_gain": 50,
-"prob_loss": 28,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 5 giorni di Borsa dalla promozione",
-"dovuto_il": "2026-09-02",
-"soglie": {
-"media50": 42.7952,
-"media20": null,
-"quattro_atr": 43.4165,
-"meta_caduta": 48.22,
-"bollinger": 34.2996,
-"consigliata": 42.7952
-},
-"stop": 27.0268,
-"atr": 2.7316,
-"res": {
-"7g": 9.36,
-"30g": 0.4,
-"soglia": 0.4
-},
-"res_soglia": {
-"media50": {
-"ret": 0.4,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 0.4,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 0.4,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 5.57,
-"toccato": true,
-"giorni": 6
-},
-"consigliata": {
-"ret": 0.4,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:GOF:2026-08-21",
 "ticker": "GOF",
 "kind": "short",
@@ -28357,5 +28298,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:XENE:2026-09-18",
+"ticker": "XENE",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-09 02:27",
+"data": "2026-10-09 02:24",
+"prezzo": 36.41,
+"conv": 79,
+"prob_gain": 54,
+"prob_loss": 8,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-09",
+"soglie": {
+"media50": 54.7184,
+"media20": 43.704,
+"quattro_atr": 45.1272,
+"meta_caduta": 52.335,
+"bollinger": 62.5854,
+"consigliata": 45.1272
+},
+"stop": 32.0514,
+"atr": 2.1793
 }
 ]
