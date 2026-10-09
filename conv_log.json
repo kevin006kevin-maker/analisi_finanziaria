@@ -1,86 +1,6 @@
 [
 {
 "date": "2026-10-01",
-"ticker": "ONON",
-"kind": "long",
-"price": 29.55,
-"conv": 46,
-"factors": {
-"discount": 41.6354,
-"histcheap": 1.58,
-"riskadj": -0.89,
-"ddpen": -24.69,
-"momentum": -0.5444,
-"prob": 24,
-"quality": 78.0,
-"valcheap": -1.2921,
-"trappen": 1
-},
-"ret_5d": 13.03,
-"ret_21d": null
-},
-{
-"date": "2026-10-01",
-"ticker": "FIS",
-"kind": "long",
-"price": 33.35,
-"conv": 29,
-"factors": {
-"discount": 51.3636,
-"histcheap": 1.63,
-"riskadj": -2.84,
-"ddpen": -30.12,
-"momentum": 4.6053,
-"prob": 42,
-"quality": 35.5,
-"valcheap": -0.2051,
-"trappen": 1
-},
-"ret_5d": 1.51,
-"ret_21d": null
-},
-{
-"date": "2026-10-01",
-"ticker": "LULU",
-"kind": "long",
-"price": 96.87,
-"conv": 71,
-"factors": {
-"discount": 55.1278,
-"histcheap": 1.66,
-"riskadj": -1.68,
-"ddpen": -32.21,
-"momentum": 6.6133,
-"prob": 50,
-"quality": 77.6,
-"valcheap": 0.6721,
-"trappen": 1
-},
-"ret_5d": -5.13,
-"ret_21d": null
-},
-{
-"date": "2026-10-01",
-"ticker": "FICO",
-"kind": "long",
-"price": 617.87,
-"conv": 64,
-"factors": {
-"discount": 67.1267,
-"histcheap": 2.5,
-"riskadj": -1.44,
-"ddpen": -32.85,
-"momentum": 32.4348,
-"prob": 73,
-"quality": 75.2,
-"valcheap": -1.6915,
-"trappen": 1
-},
-"ret_5d": 12.65,
-"ret_21d": null
-},
-{
-"date": "2026-10-01",
 "ticker": "RELY",
 "kind": "long",
 "price": 21.47,
@@ -39242,6 +39162,90 @@
 "quality": 69.6,
 "valcheap": 0.758,
 "trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-09",
+"ticker": "PCRX",
+"kind": "short",
+"price": 36.39,
+"conv": 29,
+"factors": {
+"discount": -0.0,
+"histcheap": -6.71,
+"riskadj": 1.45,
+"ddpen": -11.6,
+"momentum": -45.5018,
+"prob": 29,
+"oversold": -85.0717,
+"rebound": -30.2611,
+"trend": 1.0,
+"relstrength": 44.2116
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-09",
+"ticker": "CABO",
+"kind": "short",
+"price": 15.38,
+"conv": 29,
+"factors": {
+"discount": 90.7755,
+"histcheap": 1.51,
+"riskadj": -3.71,
+"ddpen": -58.3,
+"momentum": -48.4556,
+"prob": 23,
+"oversold": -43.7877,
+"rebound": 59.5748,
+"trend": -1.0,
+"relstrength": 47.1654
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-09",
+"ticker": "PLAY",
+"kind": "short",
+"price": 6.97,
+"conv": 34,
+"factors": {
+"discount": 67.0761,
+"histcheap": 1.69,
+"riskadj": -1.98,
+"ddpen": -40.72,
+"momentum": -8.3981,
+"prob": 21,
+"oversold": -43.6801,
+"rebound": 23.7704,
+"trend": -1.0,
+"relstrength": 7.108
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-09",
+"ticker": "YELP",
+"kind": "short",
+"price": 19.37,
+"conv": 36,
+"factors": {
+"discount": 42.7431,
+"histcheap": 1.68,
+"riskadj": -1.52,
+"ddpen": -26.17,
+"momentum": -6.9575,
+"prob": 35,
+"oversold": -46.8501,
+"rebound": 12.8012,
+"trend": -1.0,
+"relstrength": 5.6673
 },
 "ret_5d": null,
 "ret_21d": null
