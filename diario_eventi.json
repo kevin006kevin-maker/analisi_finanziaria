@@ -1,64 +1,5 @@
 [
 {
-"episodio": "short:ENI.MI:2026-08-28",
-"ticker": "ENI.MI",
-"kind": "short",
-"evento": "promozione",
-"scritto_il": "2026-09-02 01:48",
-"data": "2026-09-02 01:48",
-"prezzo": 23.305,
-"conv": 56,
-"prob_gain": 53,
-"prob_loss": 2,
-"reliab": "🟢 Alta",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": null,
-"media20": 23.5462,
-"quattro_atr": 25.4031,
-"meta_caduta": 23.9275,
-"bollinger": 24.4909,
-"consigliata": 25.4031
-},
-"stop": 22.256,
-"atr": 0.5245,
-"res": {
-"7g": 2.34,
-"30g": 3.09,
-"soglia": 3.09
-},
-"res_soglia": {
-"media20": {
-"ret": 1.03,
-"toccato": true,
-"giorni": 1
-},
-"quattro_atr": {
-"ret": 3.09,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 2.67,
-"toccato": true,
-"giorni": 7
-},
-"bollinger": {
-"ret": 5.09,
-"toccato": true,
-"giorni": 26
-},
-"consigliata": {
-"ret": 3.09,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:VISN:2026-08-29",
 "ticker": "VISN",
 "kind": "short",
@@ -28432,6 +28373,26 @@
 "conv": 77,
 "prob_gain": 55,
 "prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "in perdita da 9 giorni di Borsa: valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:KNF:2026-09-23",
+"ticker": "KNF",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-10-09 02:25",
+"data": "2026-10-09 02:25",
+"prezzo": 50.54,
+"conv": 79,
+"prob_gain": 50,
+"prob_loss": 11,
 "reliab": "🟡 Media",
 "mkt": null,
 "fonte": "monitoraggio",
