@@ -1,64 +1,5 @@
 [
 {
-"episodio": "short:SSTK:2026-08-28",
-"ticker": "SSTK",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-02 01:51",
-"data": "2026-09-02 01:46",
-"prezzo": 5.75,
-"conv": 60,
-"prob_gain": 55,
-"prob_loss": 20,
-"reliab": "🔴 Bassa",
-"mkt": -1.3578,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-02",
-"soglie": {
-"media50": 7.4832,
-"media20": null,
-"quattro_atr": 7.4543,
-"meta_caduta": 10.73,
-"bollinger": 6.1571,
-"consigliata": 7.4543
-},
-"stop": 4.8979,
-"atr": 0.4261,
-"res": {
-"7g": -12.78,
-"30g": -31.74,
-"soglia": -31.74
-},
-"res_soglia": {
-"media50": {
-"ret": -31.74,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -31.74,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -31.74,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -31.74,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -31.74,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:ENI.MI:2026-08-28",
 "ticker": "ENI.MI",
 "kind": "short",
@@ -28067,5 +28008,32 @@
 },
 "stop": 11.7014,
 "atr": 2.5943
+},
+{
+"episodio": "short:ARGX:2026-10-09",
+"ticker": "ARGX",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-09 08:39",
+"data": "2026-10-09 08:39",
+"prezzo": 818.63,
+"conv": 64,
+"prob_gain": 52,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": 2.2875,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 957.29,
+"media20": 954.624,
+"quattro_atr": 949.8689,
+"meta_caduta": 938.765,
+"bollinger": 1036.3691,
+"consigliata": 949.8689
+},
+"stop": 753.0105,
+"atr": 32.8097
 }
 ]
