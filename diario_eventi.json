@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:VISN:2026-08-29",
-"ticker": "VISN",
-"kind": "short",
-"evento": "promozione",
-"scritto_il": "2026-09-02 01:49",
-"data": "2026-09-02 01:49",
-"prezzo": 6.22,
-"conv": 75,
-"prob_gain": 77,
-"prob_loss": 11,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": 11.5482,
-"media20": 10.544,
-"quattro_atr": 9.2364,
-"meta_caduta": 9.55,
-"bollinger": 14.3916,
-"consigliata": 9.2364
-},
-"stop": 4.7118,
-"atr": 0.7541,
-"res": {
-"7g": 3.38,
-"30g": -0.84,
-"soglia": -0.84
-},
-"res_soglia": {
-"media50": {
-"ret": -0.84,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -0.84,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -0.84,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -0.84,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -0.84,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -0.84,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:EYPT:2026-08-17",
 "ticker": "EYPT",
 "kind": "short",
@@ -28393,6 +28329,26 @@
 "conv": 79,
 "prob_gain": 50,
 "prob_loss": 11,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "in perdita da 9 giorni di Borsa: valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:NAMS:2026-09-09",
+"ticker": "NAMS",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-10-09 02:25",
+"data": "2026-10-09 02:25",
+"prezzo": 22.13,
+"conv": 73,
+"prob_gain": 48,
+"prob_loss": 14,
 "reliab": "🟡 Media",
 "mkt": null,
 "fonte": "monitoraggio",
