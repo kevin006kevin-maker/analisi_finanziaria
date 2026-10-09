@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:GOF:2026-08-21",
-"ticker": "GOF",
-"kind": "short",
-"evento": "fine_verifica",
-"scritto_il": "2026-09-02 01:51",
-"data": "2026-09-01 23:35",
-"prezzo": 9.34,
-"conv": 83,
-"prob_gain": 54,
-"prob_loss": 1,
-"reliab": "🟢 Alta",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 5 giorni di Borsa dalla promozione",
-"dovuto_il": "2026-09-02",
-"soglie": {
-"media50": 10.4456,
-"media20": 10.0785,
-"quattro_atr": 10.3004,
-"meta_caduta": 10.19,
-"bollinger": 11.1209,
-"consigliata": 10.3004
-},
-"stop": 8.8598,
-"atr": 0.2401,
-"soglie_contaminate": {
-"media50": 10.4456,
-"media20": 10.0785,
-"quattro_atr": 10.3004,
-"meta_caduta": 10.19,
-"bollinger": 11.1209,
-"consigliata": 10.3004
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": -0.48,
-"30g": -8.4,
-"soglia": -8.4
-},
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": -8.4,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -8.4,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -8.4,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -8.4,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -8.4,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -8.4,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:OI:2026-08-21",
 "ticker": "OI",
 "kind": "short",
@@ -28325,5 +28250,32 @@
 },
 "stop": 32.0514,
 "atr": 2.1793
+},
+{
+"episodio": "short:PLNT:2026-09-22",
+"ticker": "PLNT",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-09 02:27",
+"data": "2026-10-09 02:24",
+"prezzo": 43.09,
+"conv": 70,
+"prob_gain": 55,
+"prob_loss": 11,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-09",
+"soglie": {
+"media50": 49.397,
+"media20": 45.065,
+"quattro_atr": 50.5449,
+"meta_caduta": 49.84,
+"bollinger": 53.4148,
+"consigliata": 49.397
+},
+"stop": 39.3626,
+"atr": 1.8637
 }
 ]
