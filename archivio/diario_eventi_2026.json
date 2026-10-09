@@ -13404,5 +13404,80 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:AXTI:2026-08-29",
+"ticker": "AXTI",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-02 01:51",
+"data": "2026-09-01 23:34",
+"prezzo": 56.11,
+"conv": 65,
+"prob_gain": 56,
+"prob_loss": 30,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-02",
+"soglie": {
+"media50": 63.7532,
+"media20": 72.669,
+"quattro_atr": 90.8803,
+"meta_caduta": 83.425,
+"bollinger": 92.3599,
+"consigliata": 63.7532
+},
+"stop": 38.7249,
+"atr": 8.6926,
+"soglie_contaminate": {
+"media50": 63.7532,
+"media20": 72.669,
+"quattro_atr": 90.8803,
+"meta_caduta": 83.425,
+"bollinger": 92.3599,
+"consigliata": 63.7532
+},
+"soglie_ricalcolate_il": "2026-09-14 21:39",
+"soglie_ritardo_giorni": 1,
+"res": {
+"7g": 23.78,
+"30g": 47.49,
+"soglia": 13.62
+},
+"taglio_corretto": true,
+"res_soglia": {
+"media50": {
+"ret": 13.62,
+"toccato": true,
+"giorni": 7
+},
+"media20": {
+"ret": 29.51,
+"toccato": true,
+"giorni": 20
+},
+"quattro_atr": {
+"ret": 47.49,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": 47.49,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": 47.49,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": 13.62,
+"toccato": true,
+"giorni": 7
+}
+}
 }
 ]
