@@ -1,48 +1,6 @@
 [
 {
 "date": "2026-10-02",
-"ticker": "ZLAB",
-"kind": "short",
-"price": 23.84,
-"conv": 40,
-"factors": {
-"discount": 29.5716,
-"histcheap": -0.68,
-"riskadj": -1.31,
-"ddpen": -39.01,
-"momentum": 4.5636,
-"prob": 38,
-"oversold": -41.333,
-"rebound": 1.4992,
-"trend": 1.0,
-"relstrength": -4.2691
-},
-"ret_5d": 6.59,
-"ret_21d": null
-},
-{
-"date": "2026-10-02",
-"ticker": "AXGN",
-"kind": "short",
-"price": 37.47,
-"conv": 75,
-"factors": {
-"discount": 27.5662,
-"histcheap": -0.21,
-"riskadj": 2.26,
-"ddpen": -7.9,
-"momentum": 13.6437,
-"prob": 48,
-"oversold": -27.6258,
-"rebound": 22.1356,
-"trend": -1.0,
-"relstrength": -13.3491
-},
-"ret_5d": -3.12,
-"ret_21d": null
-},
-{
-"date": "2026-10-02",
 "ticker": "ACN",
 "kind": "short",
 "price": 199.82,
@@ -39160,6 +39118,46 @@
 "rebound": -46.386,
 "trend": -1.0,
 "relstrength": 70.0211
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-10",
+"ticker": "SEQUX",
+"kind": "long",
+"price": 204.01,
+"conv": 41,
+"factors": {
+"discount": 5.2922,
+"histcheap": -0.35,
+"riskadj": -0.5,
+"ddpen": -7.06,
+"momentum": -0.2851,
+"prob": 15,
+"quality": null,
+"valcheap": null,
+"trappen": null
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-10",
+"ticker": "SXTC",
+"kind": "long",
+"price": 0.149,
+"conv": 35,
+"factors": {
+"discount": 99.9994,
+"histcheap": 0.59,
+"riskadj": -2.23,
+"ddpen": -86.32,
+"momentum": 93.8174,
+"prob": 37,
+"quality": null,
+"valcheap": null,
+"trappen": 0
 },
 "ret_5d": null,
 "ret_21d": null
