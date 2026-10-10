@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:OSW:2026-09-02",
-"ticker": "OSW",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-02 18:50",
-"data": "2026-09-02 18:49",
-"prezzo": 22.585,
-"conv": 82,
-"prob_gain": 51,
-"prob_loss": 3,
-"reliab": "🟢 Alta",
-"mkt": -0.7699,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 26.4477,
-"media20": 25.8677,
-"quattro_atr": 26.219,
-"meta_caduta": 25.6325,
-"bollinger": 28.4448,
-"consigliata": 26.219
-},
-"stop": 20.768,
-"atr": 0.9085,
-"res": {
-"7g": -2.37,
-"30g": 4.41,
-"soglia": 4.41
-},
-"res_soglia": {
-"media50": {
-"ret": 4.41,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 4.41,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 4.41,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 4.41,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 4.41,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 4.41,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:NIO:2026-09-01",
 "ticker": "NIO",
 "kind": "short",
@@ -28978,6 +28914,26 @@
 "mkt": null,
 "fonte": "osservazione",
 "note": "prezzo salito di almeno il 2% da 83.01",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:VZ:2026-10-09",
+"ticker": "VZ",
+"kind": "short",
+"evento": "salita_2pct",
+"scritto_il": "2026-10-10 02:06",
+"data": "2026-10-10 02:01",
+"prezzo": 46.35,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "prezzo salito di almeno il 2% da 43.255",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
