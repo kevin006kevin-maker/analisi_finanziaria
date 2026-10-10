@@ -1,46 +1,6 @@
 [
 {
 "date": "2026-10-02",
-"ticker": "GAP",
-"kind": "long",
-"price": 22.84,
-"conv": 43,
-"factors": {
-"discount": 21.5929,
-"histcheap": 0.26,
-"riskadj": 0.05,
-"ddpen": -19.35,
-"momentum": -7.3308,
-"prob": 45,
-"quality": 74.3,
-"valcheap": 0.3967,
-"trappen": 2
-},
-"ret_5d": 1.25,
-"ret_21d": null
-},
-{
-"date": "2026-10-02",
-"ticker": "EIX",
-"kind": "long",
-"price": 53.73,
-"conv": 60,
-"factors": {
-"discount": 33.155,
-"histcheap": 1.58,
-"riskadj": -0.11,
-"ddpen": -10.6,
-"momentum": -0.4111,
-"prob": 58,
-"quality": 59.9,
-"valcheap": 0.7192,
-"trappen": 3
-},
-"ret_5d": 1.41,
-"ret_21d": null
-},
-{
-"date": "2026-10-02",
 "ticker": "PCG",
 "kind": "long",
 "price": 12.25,
@@ -39268,6 +39228,48 @@
 "quality": 69.6,
 "valcheap": 0.7606,
 "trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-10",
+"ticker": "MAAS",
+"kind": "short",
+"price": 11.56,
+"conv": 65,
+"factors": {
+"discount": 45.5744,
+"histcheap": -0.38,
+"riskadj": 1.68,
+"ddpen": -15.11,
+"momentum": 15.6204,
+"prob": 28,
+"oversold": -34.9985,
+"rebound": 39.3443,
+"trend": 1.0,
+"relstrength": -16.7705
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-10",
+"ticker": "KLRA",
+"kind": "short",
+"price": 11.61,
+"conv": 33,
+"factors": {
+"discount": 55.3462,
+"histcheap": 1.76,
+"riskadj": -3.78,
+"ddpen": -32.09,
+"momentum": -11.7421,
+"prob": 20,
+"oversold": -43.0244,
+"rebound": 29.621,
+"trend": null,
+"relstrength": 10.5919
 },
 "ret_5d": null,
 "ret_21d": null
