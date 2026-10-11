@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:ALMS:2026-09-01",
-"ticker": "ALMS",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-02 18:52",
-"data": "2026-09-02 18:49",
-"prezzo": 10.34,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 9.47",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "long:DKS:2026-08-25",
 "ticker": "DKS",
 "kind": "long",
@@ -28860,5 +28840,32 @@
 },
 "stop": 21.106,
 "atr": 1.032
+},
+{
+"episodio": "short:SPHR:2026-10-05",
+"ticker": "SPHR",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-11 08:27",
+"data": "2026-10-08 21:54",
+"prezzo": 109.805,
+"conv": 68,
+"prob_gain": 56,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 145.5756,
+"media20": 133.401,
+"quattro_atr": 139.0373,
+"meta_caduta": 143.0925,
+"bollinger": 161.7053,
+"consigliata": 139.0373
+},
+"stop": 95.1889,
+"atr": 7.3081
 }
 ]
