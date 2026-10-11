@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:CDNL:2026-08-18",
-"ticker": "CDNL",
-"kind": "short",
-"evento": "uscita",
-"scritto_il": "2026-09-03 00:23",
-"data": "2026-09-03 00:23",
-"prezzo": 35.44,
-"conv": 68,
-"prob_gain": 55,
-"prob_loss": 26,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "in perdita da 14 giorni di Borsa: valuta l'uscita",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:ENVX:2026-08-19",
 "ticker": "ENVX",
 "kind": "short",
@@ -28804,5 +28784,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:MWA:2026-09-17",
+"ticker": "MWA",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-12 00:34",
+"data": "2026-10-10 07:47",
+"prezzo": 21.67,
+"conv": 78,
+"prob_gain": 45,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-12",
+"soglie": {
+"media50": 23.779,
+"media20": 21.849,
+"quattro_atr": 23.5892,
+"meta_caduta": 24.38,
+"bollinger": 22.8265,
+"consigliata": 23.5892
+},
+"stop": 20.7104,
+"atr": 0.4798
 }
 ]
