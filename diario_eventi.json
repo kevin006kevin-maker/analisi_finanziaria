@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:DKS:2026-08-25",
-"ticker": "DKS",
-"kind": "long",
-"evento": "promozione",
-"scritto_il": "2026-09-03 00:21",
-"data": "2026-09-03 00:21",
-"prezzo": 137.34,
-"conv": 80,
-"prob_gain": 69,
-"prob_loss": 18,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 7 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": 199.1262,
-"media20": 174.0325,
-"quattro_atr": 173.3213,
-"meta_caduta": 188.255,
-"bollinger": 239.4229,
-"consigliata": 173.3213
-},
-"stop": 119.3493,
-"atr": 8.9953,
-"res": {
-"7g": -2.81,
-"30g": -0.55
-}
-},
-{
 "episodio": "short:EIX:2026-08-31",
 "ticker": "EIX",
 "kind": "short",
@@ -28867,5 +28836,32 @@
 },
 "stop": 95.1889,
 "atr": 7.3081
+},
+{
+"episodio": "short:ZTO:2026-09-22",
+"ticker": "ZTO",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-11 08:27",
+"data": "2026-10-11 08:27",
+"prezzo": 20.15,
+"conv": 72,
+"prob_gain": 44,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 21.262,
+"media20": null,
+"quattro_atr": 21.6397,
+"meta_caduta": 22.385,
+"bollinger": 20.9279,
+"consigliata": 21.262
+},
+"stop": 19.4052,
+"atr": 0.3724
 }
 ]
