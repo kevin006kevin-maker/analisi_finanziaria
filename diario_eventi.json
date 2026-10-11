@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:LDO.MI:2026-08-25",
-"ticker": "LDO.MI",
-"kind": "long",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-03 00:24",
-"data": "2026-09-03 00:20",
-"prezzo": 51.05,
-"conv": 43,
-"prob_gain": 77,
-"prob_loss": 12,
-"reliab": "🟡 Media",
-"mkt": -0.7374,
-"fonte": "osservazione",
-"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-03",
-"soglie": {
-"media50": 53.5552,
-"media20": 56.7625,
-"quattro_atr": 57.3579,
-"meta_caduta": 55.475,
-"bollinger": 62.3552,
-"consigliata": 53.5552
-},
-"stop": 47.896,
-"atr": 1.577,
-"res": {
-"7g": -1.84,
-"30g": -5.39
-}
-},
-{
 "episodio": "short:EIX:2026-08-31",
 "ticker": "EIX",
 "kind": "short",
@@ -28692,5 +28661,32 @@
 },
 "stop": 17.3588,
 "atr": 1.1106
+},
+{
+"episodio": "long:FSM:2026-10-01",
+"ticker": "FSM",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-12 00:35",
+"data": "2026-10-12 00:30",
+"prezzo": 10.92,
+"conv": 64,
+"prob_gain": 67,
+"prob_loss": 22,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-12",
+"soglie": {
+"media50": 11.3086,
+"media20": 11.382,
+"quattro_atr": 12.8149,
+"meta_caduta": 11.865,
+"bollinger": 12.3424,
+"consigliata": 11.3086
+},
+"stop": 9.9726,
+"atr": 0.4737
 }
 ]
