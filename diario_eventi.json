@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:ENVX:2026-08-19",
-"ticker": "ENVX",
-"kind": "short",
-"evento": "fine_verifica",
-"scritto_il": "2026-09-03 00:24",
-"data": "2026-09-03 00:22",
-"prezzo": 3.33,
-"conv": 65,
-"prob_gain": 48,
-"prob_loss": 25,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 5 giorni di Borsa dalla promozione",
-"dovuto_il": "2026-09-03",
-"soglie": {
-"media50": 4.4687,
-"media20": 3.791,
-"quattro_atr": 4.4792,
-"meta_caduta": 5.205,
-"bollinger": 5.0008,
-"consigliata": 4.4687
-},
-"stop": 2.7554,
-"atr": 0.2873,
-"res": {
-"7g": -4.51,
-"30g": -19.07,
-"soglia": -19.07
-},
-"res_soglia": {
-"media50": {
-"ret": -19.07,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -19.07,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -19.07,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -19.07,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -19.07,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -19.07,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:FRVO:2026-08-24",
 "ticker": "FRVO",
 "kind": "short",
@@ -28811,5 +28747,32 @@
 },
 "stop": 20.7104,
 "atr": 0.4798
+},
+{
+"episodio": "short:SAH:2026-09-18",
+"ticker": "SAH",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-12 00:34",
+"data": "2026-10-10 07:47",
+"prezzo": 60.56,
+"conv": 75,
+"prob_gain": 50,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-12",
+"soglie": {
+"media50": 73.8668,
+"media20": 64.4945,
+"quattro_atr": 72.3889,
+"meta_caduta": 86.61,
+"bollinger": 73.9929,
+"consigliata": 72.3889
+},
+"stop": 54.6456,
+"atr": 2.9572
 }
 ]
