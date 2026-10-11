@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:ASO:2026-08-25",
-"ticker": "ASO",
-"kind": "long",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-03 00:24",
-"data": "2026-09-03 00:20",
-"prezzo": 43.6,
-"conv": 64,
-"prob_gain": 67,
-"prob_loss": 18,
-"reliab": "🟡 Media",
-"mkt": -0.7374,
-"fonte": "osservazione",
-"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-03",
-"soglie": {
-"media50": 47.0744,
-"media20": 46.0905,
-"quattro_atr": 50.3286,
-"meta_caduta": 47.965,
-"bollinger": 51.0253,
-"consigliata": 47.0744
-},
-"stop": 40.2357,
-"atr": 1.6822,
-"res": {
-"7g": 21.69,
-"30g": 15.5
-}
-},
-{
 "episodio": "long:DKS:2026-08-25",
 "ticker": "DKS",
 "kind": "long",
@@ -28700,5 +28669,32 @@
 },
 "stop": 25.9229,
 "atr": 0.6335
+},
+{
+"episodio": "short:PIPR:2026-09-30",
+"ticker": "PIPR",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-12 00:34",
+"data": "2026-10-10 07:47",
+"prezzo": 65.28,
+"conv": 79,
+"prob_gain": 49,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-12",
+"soglie": {
+"media50": 73.0378,
+"media20": 69.2075,
+"quattro_atr": 74.8233,
+"meta_caduta": 71.85,
+"bollinger": 76.9037,
+"consigliata": 73.0378
+},
+"stop": 60.5083,
+"atr": 2.3858
 }
 ]
