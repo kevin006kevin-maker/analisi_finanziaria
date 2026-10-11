@@ -15330,5 +15330,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "XRAY",
+"kind": "short",
+"date": "2026-10-11",
+"promo_price": 8.83,
+"obs_price": 9.44,
+"obs_date": "2026-09-23",
+"pre_price": 9.78,
+"pre_date": "2026-09-24",
+"conf_price": null,
+"conf_date": null,
+"target": 10.6482,
+"stop": 8.1164,
+"reliab": "🟡 Media",
+"prob_gain": 51,
+"prob_loss": 12,
+"conv": 78,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-23 06:40",
+"prezzo": 9.44,
+"conv": 70,
+"prob_gain": 53,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": 1.177
+},
+"anticipo": {
+"data": "2026-09-24",
+"prezzo": 9.78,
+"conv": 65,
+"prob_gain": 52,
+"prob_loss": 11,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-11 08:27",
+"prezzo": 8.83,
+"conv": 78,
+"prob_gain": 51,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
