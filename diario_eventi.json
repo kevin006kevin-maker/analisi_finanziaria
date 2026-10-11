@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:HWM:2026-08-31",
-"ticker": "HWM",
-"kind": "short",
-"evento": "promozione",
-"scritto_il": "2026-09-03 00:21",
-"data": "2026-09-03 00:21",
-"prezzo": 252.96,
-"conv": 69,
-"prob_gain": 46,
-"prob_loss": 3,
-"reliab": "🟢 Alta",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": 275.938,
-"media20": 274.141,
-"quattro_atr": 290.562,
-"meta_caduta": 272.805,
-"bollinger": 301.3117,
-"consigliata": 275.938
-},
-"stop": 234.159,
-"atr": 9.4005,
-"res": {
-"7g": -8.77,
-"30g": -8.46,
-"soglia": -8.46
-},
-"res_soglia": {
-"media50": {
-"ret": -8.46,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -8.46,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -8.46,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -8.46,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -8.46,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -8.46,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:IMSR:2026-09-03",
 "ticker": "IMSR",
 "kind": "short",
@@ -28848,5 +28784,25 @@
 },
 "stop": 8.1164,
 "atr": 0.3568
+},
+{
+"episodio": "long:AGI:2026-10-12",
+"ticker": "AGI",
+"kind": "long",
+"evento": "uscita",
+"scritto_il": "2026-10-12 00:32",
+"data": "2026-10-12 00:32",
+"prezzo": 32.9,
+"conv": 74,
+"prob_gain": 61,
+"prob_loss": 27,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "in perdita da 43 giorni di Borsa: valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
