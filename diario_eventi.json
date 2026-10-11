@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:EIX:2026-08-31",
-"ticker": "EIX",
-"kind": "short",
-"evento": "promozione",
-"scritto_il": "2026-09-03 00:21",
-"data": "2026-09-03 00:21",
-"prezzo": 55.19,
-"conv": 83,
-"prob_gain": 68,
-"prob_loss": 2,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": 73.2692,
-"media20": 69.241,
-"quattro_atr": 71.0334,
-"meta_caduta": 67.785,
-"bollinger": 81.6457,
-"consigliata": 71.0334
-},
-"stop": 47.2683,
-"atr": 3.9608,
-"res": {
-"7g": 3.12,
-"30g": -2.73,
-"soglia": -2.73
-},
-"res_soglia": {
-"media50": {
-"ret": -2.73,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -2.73,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -2.73,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -2.73,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -2.73,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -2.73,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:HWM:2026-08-31",
 "ticker": "HWM",
 "kind": "short",
@@ -28863,5 +28799,32 @@
 },
 "stop": 19.4052,
 "atr": 0.3724
+},
+{
+"episodio": "short:XRAY:2026-09-23",
+"ticker": "XRAY",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-11 08:27",
+"data": "2026-10-11 08:27",
+"prezzo": 8.83,
+"conv": 78,
+"prob_gain": 51,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 10.6482,
+"media20": 9.252,
+"quattro_atr": 10.2571,
+"meta_caduta": 11.55,
+"bollinger": 10.3981,
+"consigliata": 10.2571
+},
+"stop": 8.1164,
+"atr": 0.3568
 }
 ]
