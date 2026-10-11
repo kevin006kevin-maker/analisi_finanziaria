@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:DKS:2026-08-25",
-"ticker": "DKS",
-"kind": "long",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-03 00:24",
-"data": "2026-09-03 00:21",
-"prezzo": 137.34,
-"conv": 80,
-"prob_gain": 69,
-"prob_loss": 18,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-03",
-"soglie": {
-"media50": 199.1262,
-"media20": 174.0325,
-"quattro_atr": 173.3213,
-"meta_caduta": 188.255,
-"bollinger": 239.4229,
-"consigliata": 173.3213
-},
-"stop": 119.3493,
-"atr": 8.9953,
-"res": {
-"7g": -2.81,
-"30g": -0.55
-}
-},
-{
 "episodio": "long:LDO.MI:2026-08-25",
 "ticker": "LDO.MI",
 "kind": "long",
@@ -28696,5 +28665,32 @@
 },
 "stop": 60.5083,
 "atr": 2.3858
+},
+{
+"episodio": "short:DKNG:2026-09-30",
+"ticker": "DKNG",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-12 00:34",
+"data": "2026-10-10 07:47",
+"prezzo": 19.58,
+"conv": 71,
+"prob_gain": 50,
+"prob_loss": 14,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-12",
+"soglie": {
+"media50": 23.1042,
+"media20": 21.0995,
+"quattro_atr": 24.0223,
+"meta_caduta": 22.875,
+"bollinger": 24.9171,
+"consigliata": 23.1042
+},
+"stop": 17.3588,
+"atr": 1.1106
 }
 ]
