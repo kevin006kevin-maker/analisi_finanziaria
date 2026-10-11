@@ -15466,7 +15466,45 @@
 "prob_gain": 55,
 "prob_loss": 1,
 "conv": 69,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-10-07 16:45",
+"prezzo": 32.1459,
+"conv": 74,
+"prob_gain": 63,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": 1.7011
+},
+"anticipo": {
+"data": "2026-10-08",
+"prezzo": 32.1459,
+"conv": 74,
+"prob_gain": 63,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-12",
+"prezzo": 32.26,
+"conv": 69,
+"prob_gain": 55,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "CW",
@@ -15487,6 +15525,44 @@
 "prob_gain": 50,
 "prob_loss": 4,
 "conv": 56,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-10-07 16:45",
+"prezzo": 510.32,
+"conv": 63,
+"prob_gain": 53,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": 1.7011
+},
+"anticipo": {
+"data": "2026-10-09",
+"prezzo": 507.29,
+"conv": 67,
+"prob_gain": 51,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-12",
+"prezzo": 512.6,
+"conv": 56,
+"prob_gain": 50,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 }
 ]
