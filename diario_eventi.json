@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:XLU:2026-08-31",
-"ticker": "XLU",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-03 00:24",
-"data": "2026-09-03 00:18",
-"prezzo": 42.67,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-03",
-"soglie": {
-"media50": 44.5456,
-"media20": 43.4055,
-"quattro_atr": 45.3109,
-"meta_caduta": 44.48,
-"bollinger": 44.5904,
-"consigliata": 44.5456
-},
-"stop": 41.3495,
-"atr": 0.6602,
-"res": {
-"7g": 0.14,
-"30g": -5.99,
-"soglia": -5.99
-},
-"res_soglia": {
-"media50": {
-"ret": -5.99,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 1.72,
-"toccato": true,
-"giorni": 5
-},
-"quattro_atr": {
-"ret": -5.99,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -5.99,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -5.99,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -5.99,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:BW:2026-08-31",
 "ticker": "BW",
 "kind": "short",
@@ -28540,5 +28476,32 @@
 },
 "stop": 29.6199,
 "atr": 1.32
+},
+{
+"episodio": "short:CW:2026-10-07",
+"ticker": "CW",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-12 00:35",
+"data": "2026-10-12 00:27",
+"prezzo": 512.6,
+"conv": 56,
+"prob_gain": 50,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": 2.0186,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-12",
+"soglie": {
+"media50": 605.8922,
+"media20": 544.547,
+"quattro_atr": 581.2536,
+"meta_caduta": 634.955,
+"bollinger": 582.2317,
+"consigliata": 581.2536
+},
+"stop": 478.2732,
+"atr": 17.1634
 }
 ]
