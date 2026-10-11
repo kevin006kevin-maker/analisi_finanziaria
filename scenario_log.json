@@ -15273,5 +15273,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "ZTO",
+"kind": "short",
+"date": "2026-10-11",
+"promo_price": 20.15,
+"obs_price": 19.45,
+"obs_date": "2026-09-22",
+"pre_price": 19.45,
+"pre_date": "2026-09-24",
+"conf_price": null,
+"conf_date": null,
+"target": 21.262,
+"stop": 19.4052,
+"reliab": "🟢 Alta",
+"prob_gain": 44,
+"prob_loss": 2,
+"conv": 72,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-22 01:15",
+"prezzo": 19.45,
+"conv": 77,
+"prob_gain": 54,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": 1.177
+},
+"anticipo": {
+"data": "2026-09-24",
+"prezzo": 19.45,
+"conv": 80,
+"prob_gain": 52,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-11 08:27",
+"prezzo": 20.15,
+"conv": 72,
+"prob_gain": 44,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
