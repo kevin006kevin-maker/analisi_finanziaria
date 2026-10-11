@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:EIX:2026-08-31",
-"ticker": "EIX",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-03 00:24",
-"data": "2026-09-03 00:21",
-"prezzo": 55.19,
-"conv": 83,
-"prob_gain": 68,
-"prob_loss": 2,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-03",
-"soglie": {
-"media50": 73.2692,
-"media20": 69.241,
-"quattro_atr": 71.0334,
-"meta_caduta": 67.785,
-"bollinger": 81.6457,
-"consigliata": 71.0334
-},
-"stop": 47.2683,
-"atr": 3.9608,
-"res": {
-"7g": 3.12,
-"30g": -2.73,
-"soglia": -2.73
-},
-"res_soglia": {
-"media50": {
-"ret": -2.73,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -2.73,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -2.73,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -2.73,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -2.73,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -2.73,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:HWM:2026-08-31",
 "ticker": "HWM",
 "kind": "short",
@@ -28688,5 +28624,32 @@
 },
 "stop": 9.9726,
 "atr": 0.4737
+},
+{
+"episodio": "long:LYG:2026-10-01",
+"ticker": "LYG",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-12 00:35",
+"data": "2026-10-10 07:46",
+"prezzo": 5.41,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-12",
+"soglie": {
+"media50": 5.9066,
+"media20": 5.6655,
+"quattro_atr": 5.892,
+"meta_caduta": 5.845,
+"bollinger": 6.0443,
+"consigliata": 5.892
+},
+"stop": 5.169,
+"atr": 0.1205
 }
 ]
