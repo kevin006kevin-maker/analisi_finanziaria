@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:AON:2026-09-01",
-"ticker": "AON",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-02 18:52",
-"data": "2026-09-02 18:49",
-"prezzo": 330.03,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 321.52",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:ALMS:2026-09-01",
 "ticker": "ALMS",
 "kind": "short",
@@ -28853,5 +28833,32 @@
 },
 "stop": 9.2577,
 "atr": 0.4312
+},
+{
+"episodio": "short:MRP:2026-10-05",
+"ticker": "MRP",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-11 08:27",
+"data": "2026-10-08 02:24",
+"prezzo": 23.17,
+"conv": 70,
+"prob_gain": 57,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 28.6958,
+"media20": 26.6615,
+"quattro_atr": 27.298,
+"meta_caduta": 27.595,
+"bollinger": 31.6276,
+"consigliata": 27.298
+},
+"stop": 21.106,
+"atr": 1.032
 }
 ]
