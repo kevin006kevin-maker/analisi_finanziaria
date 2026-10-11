@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:ADXN:2026-08-24",
-"ticker": "ADXN",
-"kind": "short",
-"evento": "fine_verifica",
-"scritto_il": "2026-09-03 00:24",
-"data": "2026-09-03 00:22",
-"prezzo": 3.52,
-"conv": 72,
-"prob_gain": 56,
-"prob_loss": 12,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 5 giorni di Borsa dalla promozione",
-"dovuto_il": "2026-09-03",
-"soglie": {
-"media50": 5.467,
-"media20": 4.946,
-"quattro_atr": 5.2238,
-"meta_caduta": 5.02,
-"bollinger": 6.8897,
-"consigliata": 5.2238
-},
-"stop": 2.6681,
-"atr": 0.426,
-"res": {
-"7g": 2.56,
-"30g": -11.93,
-"soglia": -11.93
-},
-"res_soglia": {
-"media50": {
-"ret": -11.93,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -11.93,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -11.93,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -11.93,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -11.93,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -11.93,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "long:ASO:2026-08-25",
 "ticker": "ASO",
 "kind": "long",
@@ -28737,5 +28673,32 @@
 },
 "stop": 37.6976,
 "atr": 1.4562
+},
+{
+"episodio": "short:BBT:2026-09-22",
+"ticker": "BBT",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-12 00:34",
+"data": "2026-10-10 07:47",
+"prezzo": 27.19,
+"conv": 77,
+"prob_gain": 57,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-12",
+"soglie": {
+"media50": 30.4836,
+"media20": 28.7455,
+"quattro_atr": 29.7242,
+"meta_caduta": 29.9,
+"bollinger": 31.6591,
+"consigliata": 29.7242
+},
+"stop": 25.9229,
+"atr": 0.6335
 }
 ]
