@@ -28744,7 +28744,18 @@
 "consigliata": 27.298
 },
 "stop": 21.106,
-"atr": 1.032
+"atr": 1.032,
+"soglie_contaminate": {
+"media50": 28.6958,
+"media20": 26.6615,
+"quattro_atr": 27.298,
+"meta_caduta": 27.595,
+"bollinger": 31.6276,
+"consigliata": 27.298
+},
+"soglie_ricalcolate_il": "2026-10-11 08:30",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 3
 },
 {
 "episodio": "short:SPHR:2026-10-05",
@@ -28771,7 +28782,18 @@
 "consigliata": 139.0373
 },
 "stop": 95.1889,
-"atr": 7.3081
+"atr": 7.3081,
+"soglie_contaminate": {
+"media50": 145.5756,
+"media20": 133.401,
+"quattro_atr": 139.0373,
+"meta_caduta": 143.0925,
+"bollinger": 161.7053,
+"consigliata": 139.0373
+},
+"soglie_ricalcolate_il": "2026-10-11 08:30",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 3
 },
 {
 "episodio": "short:ZTO:2026-09-22",
