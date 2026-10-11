@@ -13671,5 +13671,80 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:AON:2026-09-01",
+"ticker": "AON",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-02 18:50",
+"data": "2026-09-01 17:03",
+"prezzo": 320.905,
+"conv": 74,
+"prob_gain": 53,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 352.7678,
+"media20": 351.215,
+"quattro_atr": 361.7083,
+"meta_caduta": 351.0825,
+"bollinger": 371.9628,
+"consigliata": 352.7678
+},
+"stop": 300.5034,
+"atr": 10.2008,
+"res": {
+"7g": -0.43,
+"30g": -14.2,
+"soglia": -14.2
+},
+"soglie_contaminate": {
+"media50": 352.9536,
+"media20": 349.718,
+"quattro_atr": 360.6102,
+"meta_caduta": 351.0825,
+"bollinger": 372.0648,
+"consigliata": 352.9536
+},
+"soglie_ricalcolate_il": "2026-09-14 21:39",
+"soglie_ritardo_giorni": 1,
+"taglio_corretto": true,
+"res_soglia": {
+"media50": {
+"ret": -14.2,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -14.2,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -14.2,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -14.2,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -14.2,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -14.2,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
