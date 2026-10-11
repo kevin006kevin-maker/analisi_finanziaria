@@ -3,81 +3,6 @@
 "episodio": "short:AON:2026-09-01",
 "ticker": "AON",
 "kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-02 18:50",
-"data": "2026-09-01 17:03",
-"prezzo": 320.905,
-"conv": 74,
-"prob_gain": 53,
-"prob_loss": 0,
-"reliab": "🟢 Alta",
-"mkt": null,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 352.7678,
-"media20": 351.215,
-"quattro_atr": 361.7083,
-"meta_caduta": 351.0825,
-"bollinger": 371.9628,
-"consigliata": 352.7678
-},
-"stop": 300.5034,
-"atr": 10.2008,
-"res": {
-"7g": -0.43,
-"30g": -14.2,
-"soglia": -14.2
-},
-"soglie_contaminate": {
-"media50": 352.9536,
-"media20": 349.718,
-"quattro_atr": 360.6102,
-"meta_caduta": 351.0825,
-"bollinger": 372.0648,
-"consigliata": 352.9536
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": -14.2,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -14.2,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -14.2,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -14.2,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -14.2,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -14.2,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
-"episodio": "short:AON:2026-09-01",
-"ticker": "AON",
-"kind": "short",
 "evento": "salita_2pct",
 "scritto_il": "2026-09-02 18:52",
 "data": "2026-09-02 18:49",
@@ -28901,5 +28826,32 @@
 },
 "stop": 17.827,
 "atr": 0.4765
+},
+{
+"episodio": "short:BKD:2026-10-11",
+"ticker": "BKD",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-11 08:25",
+"data": "2026-10-11 08:25",
+"prezzo": 10.12,
+"conv": 61,
+"prob_gain": 47,
+"prob_loss": 9,
+"reliab": "🟡 Media",
+"mkt": 2.0186,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 12.0272,
+"media20": 11.117,
+"quattro_atr": 11.8447,
+"meta_caduta": 12.795,
+"bollinger": 12.0059,
+"consigliata": 11.8447
+},
+"stop": 9.2577,
+"atr": 0.4312
 }
 ]
