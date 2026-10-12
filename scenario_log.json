@@ -15694,7 +15694,45 @@
 "prob_gain": 48,
 "prob_loss": 26,
 "conv": 55,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-09-08 19:03",
+"prezzo": 43.02,
+"conv": 66,
+"prob_gain": 47,
+"prob_loss": 25,
+"reliab": "🔴 Bassa",
+"mkt": -0.7864
+},
+"anticipo": {
+"data": "2026-09-09",
+"prezzo": 40.38,
+"conv": 71,
+"prob_gain": 48,
+"prob_loss": 26,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-12",
+"prezzo": 24.15,
+"conv": 55,
+"prob_gain": 48,
+"prob_loss": 26,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "JBHT",
