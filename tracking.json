@@ -13110,5 +13110,37 @@
 "max_date": "2026-10-12 21:03",
 "auto": true,
 "notified": false
+},
+"LQDA": {
+"kind": "short",
+"added": "2026-10-12",
+"note": "🤖 Promossa il 2026-10-12: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +6.9% e la convenienza (63) regge.",
+"name": "LQDA",
+"snapshots": [
+{
+"name": "LQDA",
+"price": 27.82,
+"rsi": 22.9807,
+"dd_high": -69.5815,
+"occasione": 89,
+"convenienza": 74,
+"prob_gain": 64,
+"prob_loss": 16,
+"exp_ret": 7.9,
+"gain": 134.5164,
+"reliab": "🔴 Bassa",
+"target": 64.9376,
+"stop": 17.7176,
+"date": "2026-10-12 21:03"
+}
+],
+"entry_price": 27.82,
+"entry_target": 64.9376,
+"entry_stop": 17.7176,
+"entry_conv": 74,
+"entry_date": "2026-10-12 21:03",
+"entry_src": "scatto",
+"max_price": 27.82,
+"max_date": "2026-10-12 21:03"
 }
 }
