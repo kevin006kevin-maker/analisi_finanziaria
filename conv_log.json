@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-10-05",
-"ticker": "CABA",
-"kind": "short",
-"price": 2.0,
-"conv": 69,
-"factors": {
-"discount": 51.8072,
-"histcheap": 1.82,
-"riskadj": -0.43,
-"ddpen": -27.35,
-"momentum": 3.3816,
-"prob": 26,
-"oversold": -31.6473,
-"rebound": 37.97,
-"trend": -1.0,
-"relstrength": -3.1144
-},
-"ret_5d": null,
-"ret_21d": null
-},
-{
-"date": "2026-10-05",
 "ticker": "RXT",
 "kind": "short",
 "price": 4.12,
@@ -38300,6 +38279,26 @@
 "rebound": 17.067,
 "trend": -1.0,
 "relstrength": -4.9645
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-12",
+"ticker": "VG",
+"kind": "long",
+"price": 13.16,
+"conv": 46,
+"factors": {
+"discount": 24.9287,
+"histcheap": -0.65,
+"riskadj": 0.69,
+"ddpen": -22.54,
+"momentum": -0.2285,
+"prob": 29,
+"quality": 65.2,
+"valcheap": -1.1276,
+"trappen": 2
 },
 "ret_5d": null,
 "ret_21d": null
