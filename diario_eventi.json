@@ -5146,7 +5146,8 @@
 "atr": 34.4774,
 "res": {
 "7g": -5.27
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:TBBK:2026-09-09",
@@ -5176,7 +5177,8 @@
 "atr": 2.9704,
 "res": {
 "7g": 0.4
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:SYK:2026-09-09",
@@ -5206,7 +5208,8 @@
 "atr": 10.8871,
 "res": {
 "7g": 1.94
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:NAMS:2026-09-09",
@@ -5236,7 +5239,8 @@
 "atr": 1.4236,
 "res": {
 "7g": -2.54
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:BBOT:2026-09-09",
@@ -5295,7 +5299,8 @@
 "atr": 6.3632,
 "res": {
 "7g": 0.07
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:KRMN:2026-09-09",
@@ -5325,7 +5330,8 @@
 "atr": 3.0428,
 "res": {
 "7g": 1.79
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:LDO.MI:2026-09-09",
@@ -5430,7 +5436,8 @@
 "atr": 0.7719,
 "res": {
 "7g": -28.7
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:PST.MI:2026-09-07",
@@ -5459,7 +5466,41 @@
 "stop": 25.3698,
 "atr": 0.5101,
 "res": {
-"7g": 1.48
+"7g": 1.48,
+"30g": -8.03,
+"soglia": -8.03
+},
+"res_soglia": {
+"media50": {
+"ret": -8.03,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -8.03,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -8.03,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -8.03,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -8.03,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -8.03,
+"toccato": false,
+"giorni": null
+}
 }
 },
 {
@@ -5814,7 +5855,8 @@
 "atr": 7.9893,
 "res": {
 "7g": -35.77
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:LULG:2026-09-04",
@@ -5919,7 +5961,8 @@
 "atr": 0.982,
 "res": {
 "7g": 7.25
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:PST.MI:2026-09-07",
@@ -5948,7 +5991,41 @@
 "stop": 25.3698,
 "atr": 0.5101,
 "res": {
-"7g": 1.48
+"7g": 1.48,
+"30g": -8.03,
+"soglia": -8.03
+},
+"res_soglia": {
+"media50": {
+"ret": -8.03,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -8.03,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -8.03,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -8.03,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -8.03,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -8.03,
+"toccato": false,
+"giorni": null
+}
 }
 },
 {
@@ -6028,7 +6105,8 @@
 "atr": 1.4521,
 "res": {
 "7g": -12.75
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:ENOV:2026-09-09",
@@ -6058,7 +6136,8 @@
 "atr": 1.4595,
 "res": {
 "7g": -9.16
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:ADTN:2026-09-09",
@@ -6088,7 +6167,8 @@
 "atr": 0.4391,
 "res": {
 "7g": -5.41
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:GRAB:2026-09-09",
@@ -6193,7 +6273,8 @@
 "atr": 0.5911,
 "res": {
 "7g": -14.32
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:CASY:2026-09-09",
@@ -6362,7 +6443,41 @@
 "stop": 41.5461,
 "atr": 1.222,
 "res": {
-"7g": 2.61
+"7g": 2.61,
+"30g": -1.09,
+"soglia": -1.09
+},
+"res_soglia": {
+"media50": {
+"ret": -1.09,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -1.09,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -1.09,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -1.09,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -1.09,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -1.09,
+"toccato": false,
+"giorni": null
+}
 }
 },
 {
@@ -6433,7 +6548,8 @@
 "atr": 2.6329,
 "res": {
 "7g": -3.83
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:NAVN:2026-09-10",
@@ -6463,7 +6579,8 @@
 "atr": 1.723,
 "res": {
 "7g": 10.4
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:AEO:2026-09-10",
@@ -6493,7 +6610,8 @@
 "atr": 0.8257,
 "res": {
 "7g": 5.45
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:RVLV:2026-09-10",
@@ -6523,7 +6641,8 @@
 "atr": 0.9416,
 "res": {
 "7g": 1.17
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:AEO:2026-09-10",
@@ -6573,7 +6692,8 @@
 "atr": 2.6329,
 "res": {
 "7g": 1.9
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:NAVN:2026-09-10",
@@ -6603,7 +6723,8 @@
 "atr": 1.723,
 "res": {
 "7g": 5.87
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:CDNL:2026-09-11",
@@ -6707,7 +6828,9 @@
 "stop": 41.1461,
 "atr": 1.227,
 "res": {
-"7g": 3.53
+"7g": 3.53,
+"30g": -0.21,
+"soglia": -0.21
 },
 "soglie_contaminate": {
 "media50": 49.0364,
@@ -6719,7 +6842,39 @@
 },
 "soglie_ricalcolate_il": "2026-09-14 21:39",
 "soglie_ritardo_giorni": 1,
-"taglio_corretto": true
+"taglio_corretto": true,
+"res_soglia": {
+"media50": {
+"ret": -0.21,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -0.21,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -0.21,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -0.21,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -0.21,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -0.21,
+"toccato": false,
+"giorni": null
+}
+}
 },
 {
 "episodio": "short:EIX:2026-08-31",
@@ -6760,7 +6915,8 @@
 },
 "soglie_ricalcolate_il": "2026-09-14 21:39",
 "soglie_ritardo_giorni": 1,
-"taglio_corretto": true
+"taglio_corretto": true,
+"res_soglia": {}
 },
 {
 "episodio": "short:HWM:2026-08-31",
@@ -6936,7 +7092,8 @@
 },
 "soglie_ricalcolate_il": "2026-09-14 21:39",
 "soglie_ritardo_giorni": 1,
-"taglio_corretto": true
+"taglio_corretto": true,
+"res_soglia": {}
 },
 {
 "episodio": "short:GPCR:2026-09-08",
@@ -6966,7 +7123,8 @@
 "atr": 2.6989,
 "res": {
 "7g": -12.01
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:FLNC:2026-09-08",
@@ -6996,7 +7154,8 @@
 "atr": 0.8209,
 "res": {
 "7g": -25.95
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:MONC.MI:2026-09-10",
@@ -7046,7 +7205,8 @@
 "atr": 2.134,
 "res": {
 "7g": 14.81
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:MYGN:2026-09-11",
@@ -7076,7 +7236,8 @@
 "atr": 0.2082,
 "res": {
 "7g": 24.45
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:RVLV:2026-09-10",
@@ -7106,7 +7267,8 @@
 "atr": 0.9171,
 "res": {
 "7g": 6.05
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:BAND:2026-09-10",
@@ -7306,7 +7468,8 @@
 "atr": 10.7955,
 "res": {
 "7g": -1.8
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "long:LDO.MI:2026-08-25",
@@ -7335,7 +7498,8 @@
 "stop": 47.0124,
 "atr": 1.4938,
 "res": {
-"7g": 1.52
+"7g": 1.52,
+"30g": -5.44
 }
 },
 {
@@ -7592,7 +7756,8 @@
 "res": {
 "7g": -4.31
 },
-"taglio_corretto": true
+"taglio_corretto": true,
+"res_soglia": {}
 },
 {
 "episodio": "short:ALMS:2026-09-01",
@@ -7633,7 +7798,8 @@
 "res": {
 "7g": -16.34
 },
-"taglio_corretto": true
+"taglio_corretto": true,
+"res_soglia": {}
 },
 {
 "episodio": "short:SYK:2026-09-09",
@@ -7912,9 +8078,43 @@
 "soglie_ricalcolate_il": "2026-09-14 21:39",
 "soglie_ritardo_giorni": 2,
 "res": {
-"7g": 0.76
+"7g": 0.76,
+"30g": -5.44,
+"soglia": -5.44
 },
-"taglio_corretto": true
+"taglio_corretto": true,
+"res_soglia": {
+"media50": {
+"ret": -5.44,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -5.44,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -5.44,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -5.44,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -5.44,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -5.44,
+"toccato": false,
+"giorni": null
+}
+}
 },
 {
 "episodio": "short:GRAB:2026-09-09",
@@ -8015,7 +8215,8 @@
 "res": {
 "7g": -4.85
 },
-"taglio_corretto": true
+"taglio_corretto": true,
+"res_soglia": {}
 },
 {
 "episodio": "short:RWT:2026-09-14",
@@ -8086,7 +8287,8 @@
 },
 "soglie_ricalcolate_il": "2026-09-14 21:39",
 "taglio_corretto": true,
-"soglie_ritardo_giorni": 3
+"soglie_ritardo_giorni": 3,
+"res_soglia": {}
 },
 {
 "episodio": "short:SYK:2026-09-09",
@@ -23936,7 +24138,9 @@
 },
 "stop": 41.3534,
 "atr": 1.1733,
-"res": {},
+"res": {
+"7g": -0.43
+},
 "soglie_contaminate": {
 "media50": 46.682,
 "media20": 44.2045,
@@ -24421,7 +24625,9 @@
 },
 "stop": 39.7408,
 "atr": 0.8596,
-"res": {}
+"res": {
+"7g": 1.18
+}
 },
 {
 "episodio": "short:ISP.MI:2026-10-02",
@@ -24449,7 +24655,9 @@
 },
 "stop": 6.0732,
 "atr": 0.1274,
-"res": {}
+"res": {
+"7g": -2.21
+}
 },
 {
 "episodio": "long:IAG:2026-10-05",
@@ -24684,7 +24892,9 @@
 },
 "stop": 24.6032,
 "atr": 0.6984,
-"res": {}
+"res": {
+"7g": -2.0
+}
 },
 {
 "episodio": "short:INSM:2026-10-05",
@@ -25005,7 +25215,9 @@
 "soglie_ricalcolate_il": "2026-10-06 00:40",
 "taglio_corretto": true,
 "soglie_ritardo_giorni": 1,
-"res": {}
+"res": {
+"7g": -2.0
+}
 },
 {
 "episodio": "long:NESR:2026-09-29",
@@ -27746,7 +27958,8 @@
 "consigliata": 457.5768
 },
 "stop": 342.6859,
-"atr": 26.5771
+"atr": 26.5771,
+"res": {}
 },
 {
 "episodio": "short:TIGO:2026-10-09",
@@ -27813,7 +28026,8 @@
 "consigliata": 20.686
 },
 "stop": 17.827,
-"atr": 0.4765
+"atr": 0.4765,
+"res": {}
 },
 {
 "episodio": "short:BKD:2026-10-11",
@@ -27840,7 +28054,8 @@
 "consigliata": 11.8447
 },
 "stop": 9.2577,
-"atr": 0.4312
+"atr": 0.4312,
+"res": {}
 },
 {
 "episodio": "short:MRP:2026-10-05",
@@ -27878,7 +28093,8 @@
 },
 "soglie_ricalcolate_il": "2026-10-11 08:30",
 "taglio_corretto": true,
-"soglie_ritardo_giorni": 3
+"soglie_ritardo_giorni": 3,
+"res": {}
 },
 {
 "episodio": "short:SPHR:2026-10-05",
@@ -27916,7 +28132,8 @@
 },
 "soglie_ricalcolate_il": "2026-10-11 08:30",
 "taglio_corretto": true,
-"soglie_ritardo_giorni": 3
+"soglie_ritardo_giorni": 3,
+"res": {}
 },
 {
 "episodio": "short:ZTO:2026-09-22",
@@ -27943,7 +28160,8 @@
 "consigliata": 21.262
 },
 "stop": 19.4052,
-"atr": 0.3724
+"atr": 0.3724,
+"res": {}
 },
 {
 "episodio": "short:XRAY:2026-09-23",
@@ -27970,7 +28188,8 @@
 "consigliata": 10.2571
 },
 "stop": 8.1164,
-"atr": 0.3568
+"atr": 0.3568,
+"res": {}
 },
 {
 "episodio": "long:AGI:2026-10-12",
@@ -28088,7 +28307,8 @@
 },
 "soglie_ricalcolate_il": "2026-10-12 00:36",
 "taglio_corretto": true,
-"soglie_ritardo_giorni": 2
+"soglie_ritardo_giorni": 2,
+"res": {}
 },
 {
 "episodio": "short:SAH:2026-09-18",
@@ -28126,7 +28346,8 @@
 },
 "soglie_ricalcolate_il": "2026-10-12 00:36",
 "taglio_corretto": true,
-"soglie_ritardo_giorni": 2
+"soglie_ritardo_giorni": 2,
+"res": {}
 },
 {
 "episodio": "short:ALKS:2026-09-18",
@@ -28164,7 +28385,8 @@
 },
 "soglie_ricalcolate_il": "2026-10-12 00:36",
 "taglio_corretto": true,
-"soglie_ritardo_giorni": 2
+"soglie_ritardo_giorni": 2,
+"res": {}
 },
 {
 "episodio": "short:BBT:2026-09-22",
@@ -28202,7 +28424,8 @@
 },
 "soglie_ricalcolate_il": "2026-10-12 00:36",
 "taglio_corretto": true,
-"soglie_ritardo_giorni": 2
+"soglie_ritardo_giorni": 2,
+"res": {}
 },
 {
 "episodio": "short:PIPR:2026-09-30",
@@ -28240,7 +28463,8 @@
 },
 "soglie_ricalcolate_il": "2026-10-12 00:36",
 "taglio_corretto": true,
-"soglie_ritardo_giorni": 2
+"soglie_ritardo_giorni": 2,
+"res": {}
 },
 {
 "episodio": "short:DKNG:2026-09-30",
@@ -28278,7 +28502,8 @@
 },
 "soglie_ricalcolate_il": "2026-10-12 00:36",
 "taglio_corretto": true,
-"soglie_ritardo_giorni": 2
+"soglie_ritardo_giorni": 2,
+"res": {}
 },
 {
 "episodio": "long:FSM:2026-10-01",
@@ -28305,7 +28530,8 @@
 "consigliata": 11.3086
 },
 "stop": 9.9726,
-"atr": 0.4737
+"atr": 0.4737,
+"res": {}
 },
 {
 "episodio": "long:LYG:2026-10-01",
@@ -28343,7 +28569,8 @@
 },
 "soglie_ricalcolate_il": "2026-10-12 00:36",
 "taglio_corretto": true,
-"soglie_ritardo_giorni": 2
+"soglie_ritardo_giorni": 2,
+"res": {}
 },
 {
 "episodio": "short:KRMN:2026-10-05",
@@ -28381,7 +28608,8 @@
 },
 "soglie_ricalcolate_il": "2026-10-12 00:36",
 "taglio_corretto": true,
-"soglie_ritardo_giorni": 2
+"soglie_ritardo_giorni": 2,
+"res": {}
 },
 {
 "episodio": "short:MIAX:2026-10-07",
@@ -28408,7 +28636,8 @@
 "consigliata": 37.2026
 },
 "stop": 27.4637,
-"atr": 1.6232
+"atr": 1.6232,
+"res": {}
 },
 {
 "episodio": "short:HESM:2026-10-07",
@@ -28435,7 +28664,8 @@
 "consigliata": 37.5401
 },
 "stop": 29.6199,
-"atr": 1.32
+"atr": 1.32,
+"res": {}
 },
 {
 "episodio": "short:CW:2026-10-07",
@@ -28462,7 +28692,8 @@
 "consigliata": 581.2536
 },
 "stop": 478.2732,
-"atr": 17.1634
+"atr": 17.1634,
+"res": {}
 },
 {
 "episodio": "short:TIGO:2026-10-09",
@@ -28489,7 +28720,8 @@
 "consigliata": 93.1176
 },
 "stop": 72.4409,
-"atr": 3.5196
+"atr": 3.5196,
+"res": {}
 },
 {
 "episodio": "short:VZ:2026-10-09",
@@ -28516,6 +28748,7 @@
 "consigliata": 46.4425
 },
 "stop": 39.2538,
-"atr": 1.1981
+"atr": 1.1981,
+"res": {}
 }
 ]
