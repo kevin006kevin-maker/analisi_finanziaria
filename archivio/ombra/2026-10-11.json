@@ -138,5 +138,61 @@
 "retroattiva": false,
 "atr_pct": 2.5775,
 "ora": "2026-10-11 22:37"
+},
+{
+"id": "2026-10-11:short:HPQ:forza_relativa",
+"giorno": "2026-10-11",
+"metodo": "forza_relativa",
+"kind": "short",
+"ticker": "HPQ",
+"nome": "HPQ",
+"prezzo": 30.200000762939453,
+"profilo": "2026-10-11:short:HPQ:punteggio_basso",
+"origine_viva": "scartata:punteggio_basso",
+"retroattiva": false,
+"atr_pct": 4.5025,
+"ora": "2026-10-12 01:53"
+},
+{
+"id": "2026-10-11:short:NMIH:forza_relativa",
+"giorno": "2026-10-11",
+"metodo": "forza_relativa",
+"kind": "short",
+"ticker": "NMIH",
+"nome": "NMIH",
+"prezzo": 40.0099983215332,
+"profilo": "2026-10-11:short:NMIH:punteggio_basso",
+"origine_viva": "scartata:punteggio_basso",
+"retroattiva": false,
+"atr_pct": 2.7139,
+"ora": "2026-10-12 01:53"
+},
+{
+"id": "2026-10-11:short:GRND:forza_relativa",
+"giorno": "2026-10-11",
+"metodo": "forza_relativa",
+"kind": "short",
+"ticker": "GRND",
+"nome": "GRND",
+"prezzo": 15.029999732971191,
+"profilo": "2026-10-11:short:GRND:rischio_rendimento",
+"origine_viva": "scartata:rischio_rendimento",
+"retroattiva": false,
+"atr_pct": 4.598,
+"ora": "2026-10-12 01:53"
+},
+{
+"id": "2026-10-11:short:BKD:qualita_forza",
+"giorno": "2026-10-11",
+"metodo": "qualita_forza",
+"kind": "short",
+"ticker": "BKD",
+"nome": "Brookdale Senior Living Inc",
+"prezzo": 10.12,
+"profilo": "2026-10-11:short:BKD:ingresso_osservazione",
+"origine_viva": "comprata:ingresso_osservazione",
+"retroattiva": false,
+"atr_pct": 4.2606,
+"ora": "2026-10-12 01:53"
 }
 ]
