@@ -1,69 +1,6 @@
 [
 {
 "date": "2026-10-04",
-"ticker": "ENOV",
-"kind": "short",
-"price": 17.77,
-"conv": 62,
-"factors": {
-"discount": 45.9385,
-"histcheap": 1.98,
-"riskadj": -1.38,
-"ddpen": -26.21,
-"momentum": 3.7378,
-"prob": 38,
-"oversold": -34.8188,
-"rebound": 29.632,
-"trend": -1.0,
-"relstrength": -3.4706
-},
-"ret_5d": null,
-"ret_21d": null
-},
-{
-"date": "2026-10-04",
-"ticker": "ADTN",
-"kind": "short",
-"price": 7.04,
-"conv": 48,
-"factors": {
-"discount": 63.7113,
-"histcheap": 1.17,
-"riskadj": -0.49,
-"ddpen": -31.25,
-"momentum": 1.2623,
-"prob": 29,
-"oversold": -42.2107,
-"rebound": 9.6818,
-"trend": -1.0,
-"relstrength": -0.9951
-},
-"ret_5d": null,
-"ret_21d": null
-},
-{
-"date": "2026-10-04",
-"ticker": "CASY",
-"kind": "short",
-"price": 617.76,
-"conv": 60,
-"factors": {
-"discount": 32.5796,
-"histcheap": 0.65,
-"riskadj": 0.21,
-"ddpen": -11.14,
-"momentum": -3.2249,
-"prob": 44,
-"oversold": -36.91,
-"rebound": 20.6746,
-"trend": -1.0,
-"relstrength": 3.4921
-},
-"ret_5d": null,
-"ret_21d": null
-},
-{
-"date": "2026-10-04",
 "ticker": "TBBK",
 "kind": "short",
 "price": 48.81,
@@ -39067,6 +39004,46 @@
 "rebound": -19.3209,
 "trend": 1.0,
 "relstrength": 16.6581
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-12",
+"ticker": "TMUS",
+"kind": "long",
+"price": 148.58,
+"conv": 48,
+"factors": {
+"discount": 35.4253,
+"histcheap": 2.82,
+"riskadj": -1.6,
+"ddpen": -16.98,
+"momentum": 9.2031,
+"prob": 84,
+"quality": 54.2,
+"valcheap": -0.3372,
+"trappen": 2
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-12",
+"ticker": "ASTS",
+"kind": "long",
+"price": 50.965,
+"conv": 33,
+"factors": {
+"discount": 61.7064,
+"histcheap": 1.65,
+"riskadj": -0.79,
+"ddpen": -36.64,
+"momentum": 12.8058,
+"prob": 35,
+"quality": 33.4,
+"valcheap": -3.0,
+"trappen": 2
 },
 "ret_5d": null,
 "ret_21d": null
