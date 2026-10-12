@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:BW:2026-08-31",
-"ticker": "BW",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-03 00:24",
-"data": "2026-09-03 00:18",
-"prezzo": 7.03,
-"conv": 72,
-"prob_gain": 52,
-"prob_loss": 31,
-"reliab": "🔴 Bassa",
-"mkt": -0.7374,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-03",
-"soglie": {
-"media50": 10.0464,
-"media20": 8.5205,
-"quattro_atr": 10.1444,
-"meta_caduta": 12.395,
-"bollinger": 10.6174,
-"consigliata": 10.0464
-},
-"stop": 5.4728,
-"atr": 0.7786,
-"res": {
-"7g": 4.41,
-"30g": -19.84,
-"soglia": -19.84
-},
-"res_soglia": {
-"media50": {
-"ret": -19.84,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -19.84,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -19.84,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -19.84,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -19.84,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -19.84,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:ALMS:2026-09-01",
 "ticker": "ALMS",
 "kind": "short",
@@ -28591,5 +28527,32 @@
 },
 "stop": 478.2732,
 "atr": 17.1634
+},
+{
+"episodio": "short:TIGO:2026-10-09",
+"ticker": "TIGO",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-12 03:47",
+"data": "2026-10-12 03:45",
+"prezzo": 79.48,
+"conv": 68,
+"prob_gain": 55,
+"prob_loss": 1,
+"reliab": "🟡 Media",
+"mkt": 2.0186,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 93.1176,
+"media20": 91.2095,
+"quattro_atr": 93.5583,
+"meta_caduta": 91.895,
+"bollinger": 99.4512,
+"consigliata": 93.1176
+},
+"stop": 72.4409,
+"atr": 3.5196
 }
 ]
