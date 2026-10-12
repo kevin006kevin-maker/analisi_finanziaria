@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:TSN:2026-09-03",
-"ticker": "TSN",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-03 15:45",
-"data": "2026-09-03 15:45",
-"prezzo": 51.42,
-"conv": 78,
-"prob_gain": 56,
-"prob_loss": 2,
-"reliab": "🟢 Alta",
-"mkt": -0.1053,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 57.7718,
-"media20": 56.847,
-"quattro_atr": 57.7534,
-"meta_caduta": 56.3,
-"bollinger": 60.4042,
-"consigliata": 57.7534
-},
-"stop": 48.2533,
-"atr": 1.5833,
-"res": {
-"7g": 1.91,
-"30g": 0.94,
-"soglia": 0.94
-},
-"res_soglia": {
-"media50": {
-"ret": 0.94,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 0.94,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 0.94,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 0.94,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 0.94,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 0.94,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:MXL:2026-09-03",
 "ticker": "MXL",
 "kind": "short",
@@ -28750,5 +28686,32 @@
 "stop": 39.2538,
 "atr": 1.1981,
 "res": {}
+},
+{
+"episodio": "long:BMY:2026-10-06",
+"ticker": "BMY",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-12 21:02",
+"data": "2026-10-12 21:02",
+"prezzo": 57.425,
+"conv": 67,
+"prob_gain": 80,
+"prob_loss": 5,
+"reliab": "🟢 Alta",
+"mkt": 2.3532,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 63.9607,
+"media20": 61.4793,
+"quattro_atr": 63.7511,
+"meta_caduta": 62.7575,
+"bollinger": 65.2046,
+"consigliata": 63.7511
+},
+"stop": 54.2619,
+"atr": 1.5815
 }
 ]
