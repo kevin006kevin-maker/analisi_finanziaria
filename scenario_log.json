@@ -15593,5 +15593,62 @@
 "prob_loss": 26,
 "conv": 55,
 "res": {}
+},
+{
+"ticker": "JBHT",
+"kind": "short",
+"date": "2026-10-12",
+"promo_price": 228.395,
+"obs_price": 238.581,
+"obs_date": "2026-09-16",
+"pre_price": 236.73,
+"pre_date": "2026-09-17",
+"conf_price": null,
+"conf_date": null,
+"target": 254.7251,
+"stop": 214.9815,
+"reliab": "🟡 Media",
+"prob_gain": 47,
+"prob_loss": 8,
+"conv": 73,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-16 16:54",
+"prezzo": 238.581,
+"conv": 66,
+"prob_gain": 53,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": -1.0814
+},
+"anticipo": {
+"data": "2026-09-17",
+"prezzo": 236.73,
+"conv": 77,
+"prob_gain": 56,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-12 21:03",
+"prezzo": 228.395,
+"conv": 73,
+"prob_gain": 47,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
