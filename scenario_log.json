@@ -15650,5 +15650,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "LQDA",
+"kind": "short",
+"date": "2026-10-12",
+"promo_price": 27.69,
+"obs_price": 30.26,
+"obs_date": "2026-09-30",
+"pre_price": 30.26,
+"pre_date": "2026-10-01",
+"conf_price": null,
+"conf_date": null,
+"target": 64.9376,
+"stop": 17.7176,
+"reliab": "🔴 Bassa",
+"prob_gain": 64,
+"prob_loss": 16,
+"conv": 74,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-30 23:25",
+"prezzo": 30.26,
+"conv": 77,
+"prob_gain": 62,
+"prob_loss": 12,
+"reliab": "🔴 Bassa",
+"mkt": 0.2895
+},
+"anticipo": {
+"data": "2026-10-01",
+"prezzo": 30.26,
+"conv": 77,
+"prob_gain": 62,
+"prob_loss": 12,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-12 21:03",
+"prezzo": 27.69,
+"conv": 74,
+"prob_gain": 64,
+"prob_loss": 16,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
