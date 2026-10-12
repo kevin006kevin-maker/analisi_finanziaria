@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:XLU:2026-08-31",
-"ticker": "XLU",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-03 15:47",
-"data": "2026-09-03 15:45",
-"prezzo": 42.97,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 42.07",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "long:PURR:2026-09-01",
 "ticker": "PURR",
 "kind": "long",
@@ -28676,5 +28656,32 @@
 },
 "stop": 214.9815,
 "atr": 6.7067
+},
+{
+"episodio": "short:LQDA:2026-09-30",
+"ticker": "LQDA",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-12 21:03",
+"data": "2026-10-12 21:03",
+"prezzo": 27.69,
+"conv": 74,
+"prob_gain": 64,
+"prob_loss": 16,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 64.9376,
+"media20": 50.2975,
+"quattro_atr": 47.6348,
+"meta_caduta": 59.36,
+"bollinger": 92.2149,
+"consigliata": 47.6348
+},
+"stop": 17.7176,
+"atr": 4.9862
 }
 ]
