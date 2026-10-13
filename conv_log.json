@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-10-06",
-"ticker": "SPCX",
-"kind": "short",
-"price": 171.09,
-"conv": 32,
-"factors": {
-"discount": 19.0643,
-"histcheap": -1.41,
-"riskadj": 0.29,
-"ddpen": -32.94,
-"momentum": -17.6119,
-"prob": 10,
-"oversold": -69.5871,
-"rebound": -18.1261,
-"trend": null,
-"relstrength": 16.4372
-},
-"ret_5d": -7.62,
-"ret_21d": null
-},
-{
-"date": "2026-10-06",
 "ticker": "BBD",
 "kind": "short",
 "price": 4.33,
@@ -38229,6 +38208,46 @@
 "rebound": 53.8907,
 "trend": -1.0,
 "relstrength": -20.6917
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-13",
+"ticker": "WFF",
+"kind": "long",
+"price": 2.12,
+"conv": 43,
+"factors": {
+"discount": 87.7315,
+"histcheap": 0.21,
+"riskadj": -0.24,
+"ddpen": -50.57,
+"momentum": -5.4726,
+"prob": 10,
+"quality": null,
+"valcheap": null,
+"trappen": 0
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-13",
+"ticker": "TGL",
+"kind": "long",
+"price": 0.278,
+"conv": 37,
+"factors": {
+"discount": 98.9072,
+"histcheap": 1.24,
+"riskadj": -2.18,
+"ddpen": -78.21,
+"momentum": 77.9365,
+"prob": 78,
+"quality": null,
+"valcheap": null,
+"trappen": 0
 },
 "ret_5d": null,
 "ret_21d": null
