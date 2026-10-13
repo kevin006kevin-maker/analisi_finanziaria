@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:PL:2026-09-03",
-"ticker": "PL",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-03 19:30",
-"data": "2026-09-03 19:29",
-"prezzo": 18.165,
-"conv": 71,
-"prob_gain": 53,
-"prob_loss": 28,
-"reliab": "🔴 Bassa",
-"mkt": 0.4154,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 23.7271,
-"media20": 22.1088,
-"quattro_atr": 23.4707,
-"meta_caduta": 26.1675,
-"bollinger": 26.0399,
-"consigliata": 23.4707
-},
-"stop": 15.5121,
-"atr": 1.3264,
-"res": {
-"7g": -5.53,
-"30g": -4.65,
-"soglia": -4.65
-},
-"res_soglia": {
-"media50": {
-"ret": -4.65,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -4.65,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -4.65,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -4.65,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -4.65,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -4.65,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:RXT:2026-09-03",
 "ticker": "RXT",
 "kind": "short",
@@ -29774,6 +29710,26 @@
 "mkt": null,
 "fonte": "monitoraggio",
 "note": "in perdita da 19 giorni di Borsa: valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:TRT:2026-09-24",
+"ticker": "TRT",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-10-13 03:25",
+"data": "2026-10-13 03:25",
+"prezzo": 5.48,
+"conv": 70,
+"prob_gain": 52,
+"prob_loss": 28,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "in perdita da 9 giorni di Borsa: valuta l'uscita",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
