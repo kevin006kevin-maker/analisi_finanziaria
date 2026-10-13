@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:NIO:2026-09-01",
-"ticker": "NIO",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-04 00:49",
-"data": "2026-09-04 00:43",
-"prezzo": 3.86,
-"conv": 71,
-"prob_gain": 52,
-"prob_loss": 10,
-"reliab": "🟡 Media",
-"mkt": 0.4896,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-04",
-"soglie": {
-"media50": 4.6618,
-"media20": 4.4265,
-"quattro_atr": 4.4862,
-"meta_caduta": 4.545,
-"bollinger": 4.9425,
-"consigliata": 4.4862
-},
-"stop": 3.5469,
-"atr": 0.1565,
-"res": {
-"7g": -4.66,
-"30g": -11.4,
-"soglia": -11.4
-},
-"res_soglia": {
-"media50": {
-"ret": -11.4,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -11.4,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -11.4,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -11.4,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -11.4,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -11.4,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:OSW:2026-09-01",
 "ticker": "OSW",
 "kind": "short",
@@ -29389,5 +29325,25 @@
 },
 "stop": 233.667,
 "atr": 6.0965
+},
+{
+"episodio": "short:FSLR:2026-09-24",
+"ticker": "FSLR",
+"kind": "short",
+"evento": "salita_2pct",
+"scritto_il": "2026-10-13 18:28",
+"data": "2026-10-13 18:27",
+"prezzo": 185.81,
+"conv": 68,
+"prob_gain": 44,
+"prob_loss": 16,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "prezzo salito di almeno il 2% da 177.29",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
