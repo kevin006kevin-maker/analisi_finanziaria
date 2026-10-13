@@ -1,25 +1,5 @@
 [
 {
-"episodio": "long:PURR:2026-09-01",
-"ticker": "PURR",
-"kind": "long",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-03 15:47",
-"data": "2026-09-03 15:46",
-"prezzo": 11.865,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 11.185",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:PL:2026-09-03",
 "ticker": "PL",
 "kind": "short",
@@ -29778,5 +29758,25 @@
 "stop": 17.7176,
 "atr": 4.9862,
 "res": {}
+},
+{
+"episodio": "short:YSS:2026-09-05",
+"ticker": "YSS",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-10-13 03:25",
+"data": "2026-10-13 03:25",
+"prezzo": 7.11,
+"conv": 65,
+"prob_gain": 50,
+"prob_loss": 28,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "in perdita da 19 giorni di Borsa: valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
