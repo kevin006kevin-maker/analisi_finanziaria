@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:PCG:2026-09-01",
-"ticker": "PCG",
-"kind": "short",
-"evento": "promozione",
-"scritto_il": "2026-09-04 00:45",
-"data": "2026-09-04 00:45",
-"prezzo": 13.96,
-"conv": 82,
-"prob_gain": 57,
-"prob_loss": 3,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": 17.1466,
-"media20": 16.8435,
-"quattro_atr": 17.7787,
-"meta_caduta": 16.16,
-"bollinger": 20.2277,
-"consigliata": 17.1466
-},
-"stop": 12.0507,
-"atr": 0.9547,
-"res": {
-"7g": -0.54,
-"30g": -11.59,
-"soglia": -11.59
-},
-"res_soglia": {
-"media50": {
-"ret": -11.59,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -11.59,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -11.59,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -11.59,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -11.59,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -11.59,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:ALMS:2026-09-01",
 "ticker": "ALMS",
 "kind": "short",
@@ -29589,5 +29525,32 @@
 },
 "stop": 11.8718,
 "atr": 0.6841
+},
+{
+"episodio": "long:WDC:2026-10-02",
+"ticker": "WDC",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-13 03:27",
+"data": "2026-10-13 03:22",
+"prezzo": 386.94,
+"conv": 61,
+"prob_gain": 70,
+"prob_loss": 24,
+"reliab": "🔴 Bassa",
+"mkt": 2.4575,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-13",
+"soglie": {
+"media50": 454.4476,
+"media20": 433.1195,
+"quattro_atr": 488.9091,
+"meta_caduta": 472.62,
+"bollinger": 486.1745,
+"consigliata": 454.4476
+},
+"stop": 335.9554,
+"atr": 25.4923
 }
 ]
