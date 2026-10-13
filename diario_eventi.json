@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:RXT:2026-09-03",
-"ticker": "RXT",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-03 22:07",
-"data": "2026-09-03 22:04",
-"prezzo": 3.29,
-"conv": 68,
-"prob_gain": 42,
-"prob_loss": 46,
-"reliab": "🔴 Bassa",
-"mkt": 0.4969,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 3.185",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:PL:2026-09-03",
 "ticker": "PL",
 "kind": "short",
@@ -29619,5 +29599,32 @@
 },
 "stop": 16.4886,
 "atr": 0.3757
+},
+{
+"episodio": "short:XLF:2026-10-01",
+"ticker": "XLF",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-13 03:27",
+"data": "2026-10-13 03:24",
+"prezzo": 55.05,
+"conv": 54,
+"prob_gain": 48,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-13",
+"soglie": {
+"media50": 56.4958,
+"media20": null,
+"quattro_atr": 57.7134,
+"meta_caduta": 56.805,
+"bollinger": 56.6238,
+"consigliata": 56.4958
+},
+"stop": 53.7183,
+"atr": 0.6659
 }
 ]
