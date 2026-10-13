@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:MXL:2026-09-03",
-"ticker": "MXL",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-03 19:33",
-"data": "2026-09-03 19:29",
-"prezzo": 58.5595,
-"conv": 68,
-"prob_gain": 38,
-"prob_loss": 35,
-"reliab": "🔴 Bassa",
-"mkt": 0.4154,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 57.04",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:RARE:2026-09-03",
 "ticker": "RARE",
 "kind": "short",
@@ -29690,5 +29670,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:COUR:2026-10-01",
+"ticker": "COUR",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-13 03:27",
+"data": "2026-10-13 03:24",
+"prezzo": 5.16,
+"conv": 65,
+"prob_gain": 50,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-13",
+"soglie": {
+"media50": 5.5394,
+"media20": null,
+"quattro_atr": 6.095,
+"meta_caduta": 5.84,
+"bollinger": 5.4582,
+"consigliata": 5.5394
+},
+"stop": 4.6925,
+"atr": 0.2338
 }
 ]
