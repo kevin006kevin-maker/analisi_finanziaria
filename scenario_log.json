@@ -15847,5 +15847,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "BAC",
+"kind": "short",
+"date": "2026-10-13",
+"promo_price": 54.58,
+"obs_price": 54.43,
+"obs_date": "2026-10-02",
+"pre_price": 53.75,
+"pre_date": "2026-10-05",
+"conf_price": null,
+"conf_date": null,
+"target": 59.9216,
+"stop": 52.4468,
+"reliab": "🟢 Alta",
+"prob_gain": 49,
+"prob_loss": 1,
+"conv": 70,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-02 02:11",
+"prezzo": 54.43,
+"conv": 72,
+"prob_gain": 51,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": -0.002
+},
+"anticipo": {
+"data": "2026-10-05",
+"prezzo": 53.75,
+"conv": 74,
+"prob_gain": 55,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-13 10:27",
+"prezzo": 54.58,
+"conv": 70,
+"prob_gain": 49,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
