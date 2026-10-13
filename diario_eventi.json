@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:AON:2026-09-01",
-"ticker": "AON",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-04 00:49",
-"data": "2026-09-04 00:43",
-"prezzo": 327.0,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-04",
-"soglie": {
-"media50": 353.001,
-"media20": 348.073,
-"quattro_atr": 367.067,
-"meta_caduta": 354.13,
-"bollinger": 371.8243,
-"consigliata": 353.001
-},
-"stop": 306.9665,
-"atr": 10.0168,
-"res": {
-"7g": -6.69,
-"30g": -16.98,
-"soglia": -16.98
-},
-"res_soglia": {
-"media50": {
-"ret": -16.98,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -16.98,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -16.98,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -16.98,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -16.98,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -16.98,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:PCG:2026-09-01",
 "ticker": "PCG",
 "kind": "short",
@@ -29463,5 +29399,32 @@
 },
 "stop": 52.4468,
 "atr": 1.0666
+},
+{
+"episodio": "short:G.MI:2026-10-02",
+"ticker": "G.MI",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-13 10:27",
+"data": "2026-10-13 10:27",
+"prezzo": 42.28,
+"conv": 61,
+"prob_gain": 52,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 43.8488,
+"media20": 43.33,
+"quattro_atr": 45.5436,
+"meta_caduta": 44.235,
+"bollinger": 46.6518,
+"consigliata": 43.8488
+},
+"stop": 40.6482,
+"atr": 0.8159
 }
 ]
