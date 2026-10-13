@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:OSW:2026-09-01",
-"ticker": "OSW",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-04 00:49",
-"data": "2026-09-04 00:43",
-"prezzo": 22.27,
-"conv": 78,
-"prob_gain": 54,
-"prob_loss": 2,
-"reliab": "🟢 Alta",
-"mkt": 0.4896,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-04",
-"soglie": {
-"media50": 26.327,
-"media20": 25.6202,
-"quattro_atr": 25.9854,
-"meta_caduta": 25.475,
-"bollinger": 28.792,
-"consigliata": 25.9854
-},
-"stop": 20.4123,
-"atr": 0.9289,
-"res": {
-"7g": -0.52,
-"30g": 4.45,
-"soglia": 4.45
-},
-"res_soglia": {
-"media50": {
-"ret": 4.45,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 4.45,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 4.45,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 4.45,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 4.45,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 4.45,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:ALMS:2026-09-01",
 "ticker": "ALMS",
 "kind": "short",
@@ -29341,6 +29277,26 @@
 "mkt": null,
 "fonte": "monitoraggio",
 "note": "prezzo salito di almeno il 2% da 177.29",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "long:BCE:2026-10-10",
+"ticker": "BCE",
+"kind": "long",
+"evento": "salita_2pct",
+"scritto_il": "2026-10-13 18:28",
+"data": "2026-10-13 18:26",
+"prezzo": 19.47,
+"conv": 58,
+"prob_gain": 82,
+"prob_loss": 5,
+"reliab": "🟢 Alta",
+"mkt": 2.8142,
+"fonte": "osservazione",
+"note": "prezzo salito di almeno il 2% da 18.78",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
