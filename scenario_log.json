@@ -15904,5 +15904,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "G.MI",
+"kind": "short",
+"date": "2026-10-13",
+"promo_price": 42.28,
+"obs_price": 41.33,
+"obs_date": "2026-10-02",
+"pre_price": 41.46,
+"pre_date": "2026-10-05",
+"conf_price": null,
+"conf_date": null,
+"target": 43.8488,
+"stop": 40.6482,
+"reliab": "🟢 Alta",
+"prob_gain": 52,
+"prob_loss": 0,
+"conv": 61,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-02 14:31",
+"prezzo": 41.33,
+"conv": 71,
+"prob_gain": 56,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -0.002
+},
+"anticipo": {
+"data": "2026-10-05",
+"prezzo": 41.46,
+"conv": 72,
+"prob_gain": 55,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-13 10:27",
+"prezzo": 42.28,
+"conv": 61,
+"prob_gain": 52,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
