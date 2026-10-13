@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:RARE:2026-09-03",
-"ticker": "RARE",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-03 22:04",
-"data": "2026-09-03 22:04",
-"prezzo": 14.85,
-"conv": 77,
-"prob_gain": 65,
-"prob_loss": 14,
-"reliab": "🔴 Bassa",
-"mkt": 0.4969,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 27.9897,
-"media20": 25.565,
-"quattro_atr": 23.2914,
-"meta_caduta": 25.36,
-"bollinger": 30.7093,
-"consigliata": 23.2914
-},
-"stop": 10.6293,
-"atr": 2.1103,
-"res": {
-"7g": -3.1,
-"30g": -1.68,
-"soglia": -1.68
-},
-"res_soglia": {
-"media50": {
-"ret": -1.68,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -1.68,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -1.68,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -1.68,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -1.68,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -1.68,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:PSNY:2026-09-03",
 "ticker": "PSNY",
 "kind": "short",
@@ -29697,5 +29633,32 @@
 },
 "stop": 4.6925,
 "atr": 0.2338
+},
+{
+"episodio": "short:CTVA:2026-10-01",
+"ticker": "CTVA",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-13 03:27",
+"data": "2026-10-13 03:24",
+"prezzo": 13.24,
+"conv": 52,
+"prob_gain": 54,
+"prob_loss": 4,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-13",
+"soglie": {
+"media50": null,
+"media20": null,
+"quattro_atr": 15.9764,
+"meta_caduta": 13.845,
+"bollinger": 14.0175,
+"consigliata": 15.9764
+},
+"stop": 11.8718,
+"atr": 0.6841
 }
 ]
