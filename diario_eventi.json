@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:PSNY:2026-09-03",
-"ticker": "PSNY",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-03 22:05",
-"data": "2026-09-03 22:04",
-"prezzo": 8.69,
-"conv": 76,
-"prob_gain": 54,
-"prob_loss": 19,
-"reliab": "🔴 Bassa",
-"mkt": 0.4969,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 14.9862,
-"media20": 13.037,
-"quattro_atr": 12.6603,
-"meta_caduta": 14.72,
-"bollinger": 15.5868,
-"consigliata": 12.6603
-},
-"stop": 6.7049,
-"atr": 0.9926,
-"res": {
-"7g": -12.66,
-"30g": -30.32,
-"soglia": -30.32
-},
-"res_soglia": {
-"media50": {
-"ret": -30.32,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -30.32,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -30.32,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -30.32,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -30.32,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -30.32,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "long:STLAM.MI:2026-08-17",
 "ticker": "STLAM.MI",
 "kind": "long",
@@ -29660,5 +29596,32 @@
 },
 "stop": 11.8718,
 "atr": 0.6841
+},
+{
+"episodio": "short:ENLT:2026-10-01",
+"ticker": "ENLT",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-13 03:27",
+"data": "2026-10-13 03:24",
+"prezzo": 67.41,
+"conv": 73,
+"prob_gain": 53,
+"prob_loss": 11,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-13",
+"soglie": {
+"media50": 76.3448,
+"media20": 69.893,
+"quattro_atr": 77.2585,
+"meta_caduta": 79.505,
+"bollinger": 76.3405,
+"consigliata": 76.3448
+},
+"stop": 62.4858,
+"atr": 2.4621
 }
 ]
