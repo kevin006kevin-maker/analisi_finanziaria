@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-10-05",
-"ticker": "AESI",
-"kind": "short",
-"price": 12.97,
-"conv": 33,
-"factors": {
-"discount": 34.3291,
-"histcheap": -0.08,
-"riskadj": 0.12,
-"ddpen": -22.87,
-"momentum": -5.4472,
-"prob": 23,
-"oversold": -52.9501,
-"rebound": -4.9391,
-"trend": -1.0,
-"relstrength": 4.4348
-},
-"ret_5d": -7.98,
-"ret_21d": null
-},
-{
-"date": "2026-10-05",
 "ticker": "TGE",
 "kind": "short",
 "price": 1.2002,
@@ -38254,6 +38233,66 @@
 "rebound": -12.8253,
 "trend": 1.0,
 "relstrength": 4.9448
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-13",
+"ticker": "CVE",
+"kind": "long",
+"price": 32.635,
+"conv": 64,
+"factors": {
+"discount": 3.7883,
+"histcheap": -1.45,
+"riskadj": 2.74,
+"ddpen": -7.87,
+"momentum": -4.4654,
+"prob": 27,
+"quality": 67.5,
+"valcheap": -0.0142,
+"trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-13",
+"ticker": "CIFR",
+"kind": "long",
+"price": 11.345,
+"conv": 30,
+"factors": {
+"discount": 61.1206,
+"histcheap": 2.0,
+"riskadj": -0.97,
+"ddpen": -32.52,
+"momentum": 26.8064,
+"prob": 50,
+"quality": 28.6,
+"valcheap": -2.9137,
+"trappen": 0
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-13",
+"ticker": "PS",
+"kind": "long",
+"price": 47.855,
+"conv": 35,
+"factors": {
+"discount": 19.908,
+"histcheap": -1.14,
+"riskadj": 2.85,
+"ddpen": -26.53,
+"momentum": 19.908,
+"prob": -41,
+"quality": 21.2,
+"valcheap": -2.5851,
+"trappen": 0
 },
 "ret_5d": null,
 "ret_21d": null
