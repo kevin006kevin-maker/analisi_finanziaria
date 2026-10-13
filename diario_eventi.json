@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:ALMS:2026-09-01",
-"ticker": "ALMS",
-"kind": "short",
-"evento": "promozione",
-"scritto_il": "2026-09-04 00:46",
-"data": "2026-09-04 00:46",
-"prezzo": 11.36,
-"conv": 74,
-"prob_gain": 53,
-"prob_loss": 21,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": 25.6034,
-"media20": 22.318,
-"quattro_atr": 20.4311,
-"meta_caduta": 20.83,
-"bollinger": 33.0364,
-"consigliata": 20.4311
-},
-"stop": 6.8244,
-"atr": 2.2678,
-"res": {
-"7g": -17.12,
-"30g": -39.48,
-"soglia": -39.48
-},
-"res_soglia": {
-"media50": {
-"ret": -39.48,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -39.48,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -39.48,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -39.48,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -39.48,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -39.48,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:INTC:2026-08-25",
 "ticker": "INTC",
 "kind": "short",
@@ -29552,5 +29488,32 @@
 },
 "stop": 335.9554,
 "atr": 25.4923
+},
+{
+"episodio": "long:ORC:2026-10-03",
+"ticker": "ORC",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-13 03:27",
+"data": "2026-10-13 03:22",
+"prezzo": 5.08,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-13",
+"soglie": {
+"media50": 6.1962,
+"media20": 5.628,
+"quattro_atr": 5.73,
+"meta_caduta": 5.965,
+"bollinger": 6.5349,
+"consigliata": 5.73
+},
+"stop": 4.755,
+"atr": 0.1625
 }
 ]
