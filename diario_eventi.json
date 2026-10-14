@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:LULU:2026-09-04",
-"ticker": "LULU",
-"kind": "long",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-04 19:25",
-"data": "2026-09-04 19:25",
-"prezzo": 100.525,
-"conv": 73,
-"prob_gain": 89,
-"prob_loss": 4,
-"reliab": "🟡 Media",
-"mkt": -0.5293,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 118.4001,
-"media20": 118.9123,
-"quattro_atr": 124.0993,
-"meta_caduta": 114.5525,
-"bollinger": 129.6231,
-"consigliata": 118.4001
-},
-"stop": 88.7379,
-"atr": 5.8936,
-"res": {
-"7g": -2.86,
-"30g": -8.06
-}
-},
-{
 "episodio": "short:TSN:2026-09-03",
 "ticker": "TSN",
 "kind": "short",
@@ -29213,5 +29182,32 @@
 },
 "stop": 749.7272,
 "atr": 31.2864
+},
+{
+"episodio": "short:TIGO:2026-10-09",
+"ticker": "TIGO",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-14 02:45",
+"data": "2026-10-14 02:36",
+"prezzo": 80.28,
+"conv": 66,
+"prob_gain": 50,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": 2.8965,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-14",
+"soglie": {
+"media50": 92.8136,
+"media20": 90.452,
+"quattro_atr": 94.4384,
+"meta_caduta": 92.295,
+"bollinger": 99.7744,
+"consigliata": 92.8136
+},
+"stop": 73.2008,
+"atr": 3.5396
 }
 ]
