@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:RARE:2026-09-03",
-"ticker": "RARE",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-04 02:43",
-"data": "2026-09-04 02:41",
-"prezzo": 26.53,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 14.85",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:PSNY:2026-09-03",
 "ticker": "PSNY",
 "kind": "short",
@@ -29226,5 +29206,32 @@
 },
 "stop": 5.4312,
 "atr": 0.2444
+},
+{
+"episodio": "short:PPC:2026-10-02",
+"ticker": "PPC",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-14 02:44",
+"data": "2026-10-14 02:41",
+"prezzo": 28.78,
+"conv": 65,
+"prob_gain": 48,
+"prob_loss": 5,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-14",
+"soglie": {
+"media50": 29.0576,
+"media20": null,
+"quattro_atr": 32.8938,
+"meta_caduta": 30.605,
+"bollinger": 30.5753,
+"consigliata": 29.0576
+},
+"stop": 26.7231,
+"atr": 1.0285
 }
 ]
