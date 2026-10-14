@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:PSNY:2026-09-03",
-"ticker": "PSNY",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-05 02:16",
-"data": "2026-09-05 02:15",
-"prezzo": 8.69,
-"conv": 77,
-"prob_gain": 58,
-"prob_loss": 20,
-"reliab": "🔴 Bassa",
-"mkt": -0.5032,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 14.9862,
-"media20": 13.037,
-"quattro_atr": 12.6603,
-"meta_caduta": 14.72,
-"bollinger": 15.5868,
-"consigliata": 12.6603
-},
-"stop": 6.7049,
-"atr": 0.9926,
-"res": {
-"7g": -15.65,
-"30g": -30.32,
-"soglia": -30.32
-},
-"res_soglia": {
-"media50": {
-"ret": -30.32,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -30.32,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -30.32,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -30.32,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -30.32,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -30.32,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "long:LULU:2026-09-04",
 "ticker": "LULU",
 "kind": "long",
@@ -29604,6 +29540,26 @@
 "mkt": null,
 "fonte": "monitoraggio",
 "note": "in perdita da 16 giorni di Borsa: valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:WYY:2026-09-25",
+"ticker": "WYY",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-10-15 01:15",
+"data": "2026-10-15 01:15",
+"prezzo": 6.61,
+"conv": 66,
+"prob_gain": 50,
+"prob_loss": 29,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "in perdita da 11 giorni di Borsa: valuta l'uscita",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
