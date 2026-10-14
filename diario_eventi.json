@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:MOMO:2026-09-04",
-"ticker": "MOMO",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-04 15:58",
-"data": "2026-09-04 15:58",
-"prezzo": 5.37,
-"conv": 65,
-"prob_gain": 55,
-"prob_loss": 0,
-"reliab": "🟢 Alta",
-"mkt": -0.2229,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 5.8319,
-"media20": 5.6675,
-"quattro_atr": 5.983,
-"meta_caduta": 5.79,
-"bollinger": 6.0491,
-"consigliata": 5.8319
-},
-"stop": 5.0635,
-"atr": 0.1532,
-"res": {
-"7g": -6.7,
-"30g": -11.92,
-"soglia": -11.92
-},
-"res_soglia": {
-"media50": {
-"ret": -11.92,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -11.92,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -11.92,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -11.92,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -11.92,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -11.92,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "long:LULU:2026-09-04",
 "ticker": "LULU",
 "kind": "long",
@@ -29250,5 +29186,32 @@
 },
 "stop": 23.1559,
 "atr": 0.597
+},
+{
+"episodio": "short:ARGX:2026-10-09",
+"ticker": "ARGX",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-14 02:45",
+"data": "2026-10-14 02:36",
+"prezzo": 812.3,
+"conv": 60,
+"prob_gain": 51,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": 2.8965,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-14",
+"soglie": {
+"media50": 955.5086,
+"media20": 937.744,
+"quattro_atr": 937.4456,
+"meta_caduta": 935.6,
+"bollinger": 1050.9897,
+"consigliata": 937.4456
+},
+"stop": 749.7272,
+"atr": 31.2864
 }
 ]
