@@ -1899,7 +1899,9 @@
 },
 "incasso_notified": true,
 "max_price": 22.21,
-"max_date": "2026-08-27 22:41"
+"max_date": "2026-08-27 22:41",
+"warn_since": "2026-10-14",
+"warn": "in perdita da 55 giorni di Borsa: valuta l'uscita"
 },
 "GOOGL": {
 "kind": "short",
@@ -5430,7 +5432,9 @@
 "urgenza": "incassa",
 "tipo": "sgonfia"
 },
-"incasso_notified": true
+"incasso_notified": true,
+"warn_since": "2026-10-14",
+"warn": "in perdita da 44 giorni di Borsa: valuta l'uscita"
 },
 "CAPR": {
 "kind": "short",
@@ -5865,7 +5869,9 @@
 "max_date": "2026-08-27 22:41",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-14"
+"entry_check": "2026-10-14",
+"warn_since": "2026-10-14",
+"warn": "in perdita da 38 giorni di Borsa: valuta l'uscita"
 },
 "DUOL": {
 "kind": "long",
@@ -6610,7 +6616,9 @@
 "max_date": "2026-09-08 19:06",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-14"
+"entry_check": "2026-10-14",
+"warn_since": "2026-10-14",
+"warn": "in perdita da 34 giorni di Borsa: valuta l'uscita"
 },
 "INTC": {
 "kind": "short",
@@ -8247,7 +8255,9 @@
 "notified": true,
 "entry_check": "2026-10-14",
 "exit_notified": false,
-"incasso_notified": true
+"incasso_notified": true,
+"warn_since": "2026-10-14",
+"warn": "in perdita da 18 giorni di Borsa: valuta l'uscita"
 },
 "WING": {
 "kind": "short",
@@ -9938,7 +9948,9 @@
 "max_date": "2026-10-06 23:17",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-14"
+"entry_check": "2026-10-14",
+"warn_since": "2026-10-14",
+"warn": "in perdita da 10 giorni di Borsa: valuta l'uscita"
 },
 "FSLR": {
 "kind": "short",
@@ -11509,7 +11521,9 @@
 "max_date": "2026-10-10 07:47",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-14"
+"entry_check": "2026-10-14",
+"warn_since": "2026-10-14",
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "PTRN": {
 "kind": "short",
@@ -13446,7 +13460,9 @@
 "max_date": "2026-10-13 18:27",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-14"
+"entry_check": "2026-10-14",
+"warn_since": "2026-10-14",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "PST.MI": {
 "kind": "short",
@@ -14769,121 +14785,6 @@
 "entry_src": "scatto",
 "max_price": 33.77,
 "max_date": "2026-10-14 17:29",
-"auto": true,
-"notified": false,
-"entry_check": "2026-10-14"
-},
-"BAC": {
-"kind": "short",
-"added": "2026-10-13",
-"note": "🤖 Promossa il 2026-10-13: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +3.1% e la convenienza (57) regge.",
-"name": "BAC",
-"snapshots": [
-{
-"name": "BAC",
-"price": 54.58,
-"rsi": 34.347,
-"dd_high": -15.7846,
-"occasione": 53,
-"convenienza": 70,
-"prob_gain": 49,
-"prob_loss": 1,
-"exp_ret": -0.3,
-"gain": 9.7867,
-"reliab": "🟢 Alta",
-"target": 59.9216,
-"stop": 52.4468,
-"date": "2026-10-13 10:27"
-},
-{
-"name": "BAC",
-"price": 53.925,
-"rsi": 31.3341,
-"dd_high": -16.7567,
-"occasione": 27,
-"convenienza": 72,
-"prob_gain": 52,
-"prob_loss": 1,
-"exp_ret": 0.4,
-"gain": 10.7525,
-"reliab": "🟢 Alta",
-"target": 59.751,
-"stop": 51.7964,
-"date": "2026-10-13 18:27"
-},
-{
-"name": "BAC",
-"price": 53.96,
-"rsi": 31.3778,
-"dd_high": -16.7412,
-"occasione": 27,
-"convenienza": 71,
-"prob_gain": 52,
-"prob_loss": 1,
-"exp_ret": 0.2,
-"gain": 10.7324,
-"reliab": "🟢 Alta",
-"target": 59.7512,
-"stop": 51.8064,
-"date": "2026-10-13 23:33"
-},
-{
-"name": "BAC",
-"price": 54.58,
-"rsi": 34.347,
-"dd_high": -15.7846,
-"occasione": 53,
-"convenienza": 69,
-"prob_gain": 52,
-"prob_loss": 2,
-"exp_ret": 0.4,
-"gain": 9.7867,
-"reliab": "🟢 Alta",
-"target": 59.9216,
-"stop": 52.4468,
-"date": "2026-10-14 02:42"
-},
-{
-"name": "BAC",
-"price": 53.96,
-"rsi": 31.3778,
-"dd_high": -16.7412,
-"occasione": 27,
-"convenienza": 71,
-"prob_gain": 49,
-"prob_loss": 2,
-"exp_ret": -0.3,
-"gain": 10.7324,
-"reliab": "🟢 Alta",
-"target": 59.7512,
-"stop": 51.8063,
-"date": "2026-10-14 07:26"
-},
-{
-"name": "BAC",
-"price": 50.235,
-"rsi": 20.0744,
-"dd_high": -22.5274,
-"occasione": 53,
-"convenienza": 82,
-"prob_gain": 52,
-"prob_loss": 1,
-"exp_ret": 0.4,
-"gain": 18.4971,
-"reliab": "🟢 Alta",
-"target": 59.4974,
-"stop": 47.538,
-"date": "2026-10-14 17:29"
-}
-],
-"entry_price": 54.58,
-"entry_target": 59.9216,
-"entry_stop": 52.4468,
-"entry_conv": 70,
-"entry_date": "2026-10-13 10:27",
-"entry_src": "scatto",
-"max_price": 54.58,
-"max_date": "2026-10-13 10:27",
 "auto": true,
 "notified": false,
 "entry_check": "2026-10-14"
