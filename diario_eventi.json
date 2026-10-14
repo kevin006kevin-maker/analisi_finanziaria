@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:FIS:2026-09-04",
-"ticker": "FIS",
-"kind": "long",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-04 07:26",
-"data": "2026-09-04 07:26",
-"prezzo": 42.28,
-"conv": 68,
-"prob_gain": 72,
-"prob_loss": 13,
-"reliab": "🟢 Alta",
-"mkt": 0.4896,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": null,
-"media20": null,
-"quattro_atr": 47.6937,
-"meta_caduta": 44.545,
-"bollinger": 43.6278,
-"consigliata": 47.6937
-},
-"stop": 39.5731,
-"atr": 1.3534,
-"res": {
-"7g": -10.29,
-"30g": -21.71
-}
-},
-{
 "episodio": "long:ONON:2026-09-04",
 "ticker": "ONON",
 "kind": "long",
@@ -29240,5 +29209,32 @@
 },
 "stop": 14.1393,
 "atr": 0.3628
+},
+{
+"episodio": "short:ISP.MI:2026-10-02",
+"ticker": "ISP.MI",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-14 02:44",
+"data": "2026-10-14 02:36",
+"prezzo": 6.184,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-14",
+"soglie": {
+"media50": 6.6923,
+"media20": 6.5526,
+"quattro_atr": 6.7344,
+"meta_caduta": 6.5505,
+"bollinger": 7.0522,
+"consigliata": 6.6923
+},
+"stop": 5.9088,
+"atr": 0.1376
 }
 ]
