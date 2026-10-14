@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:PL:2026-09-03",
-"ticker": "PL",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-04 02:43",
-"data": "2026-09-04 02:41",
-"prezzo": 19.99,
-"conv": 68,
-"prob_gain": 50,
-"prob_loss": 29,
-"reliab": "🔴 Bassa",
-"mkt": 0.4896,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 18.165",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:RARE:2026-09-03",
 "ticker": "RARE",
 "kind": "short",
@@ -29219,5 +29199,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:TDOC:2026-09-15",
+"ticker": "TDOC",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-14 02:44",
+"data": "2026-10-14 02:41",
+"prezzo": 5.92,
+"conv": 63,
+"prob_gain": 51,
+"prob_loss": 18,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-14",
+"soglie": {
+"media50": 6.302,
+"media20": 5.9775,
+"quattro_atr": 6.8976,
+"meta_caduta": 7.815,
+"bollinger": 6.6158,
+"consigliata": 6.302
+},
+"stop": 5.4312,
+"atr": 0.2444
 }
 ]
