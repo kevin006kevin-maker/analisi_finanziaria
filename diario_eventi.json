@@ -1,25 +1,5 @@
 [
 {
-"episodio": "long:ONON:2026-09-04",
-"ticker": "ONON",
-"kind": "long",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-04 07:28",
-"data": "2026-09-04 07:26",
-"prezzo": 28.36,
-"conv": 59,
-"prob_gain": 68,
-"prob_loss": 21,
-"reliab": "🟡 Media",
-"mkt": 0.4896,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 27.8",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:STLAM.MI:2026-08-16",
 "ticker": "STLAM.MI",
 "kind": "short",
@@ -29236,5 +29216,32 @@
 },
 "stop": 5.9088,
 "atr": 0.1376
+},
+{
+"episodio": "short:UCG.MI:2026-10-02",
+"ticker": "UCG.MI",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-14 02:44",
+"data": "2026-10-14 02:36",
+"prezzo": 76.25,
+"conv": 60,
+"prob_gain": 52,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": 2.8965,
+"fonte": "osservazione",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-14",
+"soglie": {
+"media50": 83.0342,
+"media20": 81.1305,
+"quattro_atr": 84.3973,
+"meta_caduta": 81.2,
+"bollinger": 86.9608,
+"consigliata": 83.0342
+},
+"stop": 72.1764,
+"atr": 2.0368
 }
 ]
