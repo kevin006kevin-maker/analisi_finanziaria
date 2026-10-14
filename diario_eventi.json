@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:PSNY:2026-09-03",
-"ticker": "PSNY",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-04 02:43",
-"data": "2026-09-04 02:41",
-"prezzo": 11.99,
-"conv": 66,
-"prob_gain": 51,
-"prob_loss": 24,
-"reliab": "🔴 Bassa",
-"mkt": 0.4896,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 8.69",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "long:FIS:2026-09-04",
 "ticker": "FIS",
 "kind": "long",
@@ -29233,5 +29213,32 @@
 },
 "stop": 26.7231,
 "atr": 1.0285
+},
+{
+"episodio": "short:BAMI.MI:2026-10-02",
+"ticker": "BAMI.MI",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-14 02:44",
+"data": "2026-10-14 02:41",
+"prezzo": 14.865,
+"conv": 66,
+"prob_gain": 56,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-14",
+"soglie": {
+"media50": 16.1581,
+"media20": 15.7,
+"quattro_atr": 16.3163,
+"meta_caduta": 16.0225,
+"bollinger": 16.9225,
+"consigliata": 16.1581
+},
+"stop": 14.1393,
+"atr": 0.3628
 }
 ]
