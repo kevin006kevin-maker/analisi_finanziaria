@@ -1,26 +1,6 @@
 [
 {
 "date": "2026-10-06",
-"ticker": "EIX",
-"kind": "long",
-"price": 54.24,
-"conv": 58,
-"factors": {
-"discount": 32.5205,
-"histcheap": 1.5,
-"riskadj": -0.1,
-"ddpen": -11.17,
-"momentum": -5.3818,
-"prob": 50,
-"quality": 59.9,
-"valcheap": 0.6426,
-"trappen": 3
-},
-"ret_5d": -0.57,
-"ret_21d": null
-},
-{
-"date": "2026-10-06",
 "ticker": "PCG",
 "kind": "long",
 "price": 12.35,
@@ -39112,6 +39092,27 @@
 "quality": 68.9,
 "valcheap": 0.0224,
 "trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-14",
+"ticker": "EVH",
+"kind": "short",
+"price": 4.6,
+"conv": 23,
+"factors": {
+"discount": 43.7653,
+"histcheap": -0.39,
+"riskadj": -1.04,
+"ddpen": -51.83,
+"momentum": -19.7917,
+"prob": 24,
+"oversold": -66.9711,
+"rebound": -11.5435,
+"trend": 1.0,
+"relstrength": 19.9641
 },
 "ret_5d": null,
 "ret_21d": null
