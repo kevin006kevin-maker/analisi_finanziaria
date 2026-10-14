@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:FICO:2026-09-06",
-"ticker": "FICO",
-"kind": "long",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-06 03:13",
-"data": "2026-09-06 03:13",
-"prezzo": 932.26,
-"conv": 62,
-"prob_gain": 80,
-"prob_loss": 12,
-"reliab": "🟡 Media",
-"mkt": -0.5032,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 1167.582,
-"media20": 1105.23,
-"quattro_atr": 1176.9402,
-"meta_caduta": 1152.67,
-"bollinger": 1223.3787,
-"consigliata": 1167.582
-},
-"stop": 809.9199,
-"atr": 61.1701,
-"res": {
-"7g": 7.25,
-"30g": -26.81
-}
-},
-{
 "episodio": "short:ENEL.MI:2026-09-02",
 "ticker": "ENEL.MI",
 "kind": "short",
@@ -29564,5 +29533,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:GRND:2026-10-01",
+"ticker": "GRND",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-15 01:16",
+"data": "2026-10-15 01:14",
+"prezzo": 15.06,
+"conv": 55,
+"prob_gain": 50,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-15",
+"soglie": {
+"media50": 15.5098,
+"media20": 15.0985,
+"quattro_atr": 17.7483,
+"meta_caduta": 16.5,
+"bollinger": 16.7092,
+"consigliata": 15.5098
+},
+"stop": 13.7159,
+"atr": 0.6721
 }
 ]
