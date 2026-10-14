@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:YSS:2026-09-05",
-"ticker": "YSS",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-05 00:04",
-"data": "2026-09-05 00:04",
-"prezzo": 8.96,
-"conv": 69,
-"prob_gain": 46,
-"prob_loss": 34,
-"reliab": "🔴 Bassa",
-"mkt": -0.5032,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 15.157,
-"media20": 9.738,
-"quattro_atr": 13.0192,
-"meta_caduta": 21.34,
-"bollinger": 11.543,
-"consigliata": 13.0192
-},
-"stop": 6.9304,
-"atr": 1.0148,
-"res": {
-"7g": -12.67,
-"30g": -8.98,
-"soglia": -8.98
-},
-"res_soglia": {
-"media50": {
-"ret": -8.98,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 8.68,
-"toccato": true,
-"giorni": 16
-},
-"quattro_atr": {
-"ret": -8.98,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -8.98,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -8.98,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -8.98,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:RARE:2026-09-03",
 "ticker": "RARE",
 "kind": "short",
@@ -29137,6 +29073,26 @@
 "conv": 70,
 "prob_gain": 56,
 "prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:BAC:2026-10-02",
+"ticker": "BAC",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-10-14 17:30",
+"data": "2026-10-14 17:30",
+"prezzo": 50.235,
+"conv": 82,
+"prob_gain": 52,
+"prob_loss": 1,
 "reliab": "🟢 Alta",
 "mkt": null,
 "fonte": "monitoraggio",
