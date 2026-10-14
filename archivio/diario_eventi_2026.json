@@ -16435,5 +16435,69 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:LULG:2026-09-04",
+"ticker": "LULG",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-04 21:47",
+"data": "2026-09-04 21:47",
+"prezzo": 4.265,
+"conv": 67,
+"prob_gain": 54,
+"prob_loss": 23,
+"reliab": "🔴 Bassa",
+"mkt": -0.5759,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 6.376,
+"media20": 6.3196,
+"quattro_atr": 6.7161,
+"meta_caduta": 5.88,
+"bollinger": 7.5289,
+"consigliata": 6.376
+},
+"stop": 3.0394,
+"atr": 0.6128,
+"res": {
+"7g": -6.45,
+"30g": -17.7,
+"soglia": -17.7
+},
+"res_soglia": {
+"media50": {
+"ret": -17.7,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -17.7,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -17.7,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -17.7,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -17.7,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -17.7,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
