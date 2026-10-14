@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:TSN:2026-09-03",
-"ticker": "TSN",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-04 19:25",
-"data": "2026-09-04 19:24",
-"prezzo": 51.4805,
-"conv": 83,
-"prob_gain": 57,
-"prob_loss": 2,
-"reliab": "🟢 Alta",
-"mkt": -0.5293,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 57.604,
-"media20": 56.379,
-"quattro_atr": 57.453,
-"meta_caduta": 56.3303,
-"bollinger": 60.4508,
-"consigliata": 57.453
-},
-"stop": 48.4942,
-"atr": 1.4931,
-"res": {
-"7g": 1.69,
-"30g": 0.82,
-"soglia": 0.82
-},
-"res_soglia": {
-"media50": {
-"ret": 0.82,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 0.82,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 0.82,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 0.82,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 0.82,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 0.82,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "long:SMCI:2026-08-17",
 "ticker": "SMCI",
 "kind": "long",
@@ -29209,5 +29145,32 @@
 },
 "stop": 73.2008,
 "atr": 3.5396
+},
+{
+"episodio": "short:VZ:2026-10-09",
+"ticker": "VZ",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-14 02:45",
+"data": "2026-10-14 02:36",
+"prezzo": 42.78,
+"conv": 62,
+"prob_gain": 53,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": 2.8965,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-14",
+"soglie": {
+"media50": 48.0448,
+"media20": 46.5745,
+"quattro_atr": 47.5559,
+"meta_caduta": 47.115,
+"bollinger": 50.7601,
+"consigliata": 47.5559
+},
+"stop": 40.3921,
+"atr": 1.194
 }
 ]
