@@ -683,9 +683,7 @@
 "entry_src": "storico",
 "max_price": 33.48,
 "max_date": "2026-08-25 23:02",
-"exit_notified": false,
-"warn_since": "2026-10-13",
-"warn": "in perdita da 66 giorni di Borsa: valuta l'uscita"
+"exit_notified": false
 },
 "T": {
 "kind": "long",
@@ -6127,9 +6125,7 @@
 "max_date": "2026-09-03 15:46",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-13",
-"warn_since": "2026-10-13",
-"warn": "in perdita da 34 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-13"
 },
 "INTR": {
 "kind": "long",
@@ -6757,7 +6753,9 @@
 "max_date": "2026-09-08 19:06",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-13"
+"entry_check": "2026-10-13",
+"warn_since": "2026-10-14",
+"warn": "in perdita da 34 giorni di Borsa: valuta l'uscita"
 },
 "INTC": {
 "kind": "short",
@@ -9014,7 +9012,7 @@
 "notified": true,
 "entry_check": "2026-10-13",
 "warn_since": "2026-10-09",
-"warn": "in perdita da 14 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 15 giorni di Borsa: valuta l'uscita"
 },
 "LPLA": {
 "kind": "short",
@@ -9407,9 +9405,7 @@
 "max_date": "2026-10-01 22:21",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-13",
-"warn_since": "2026-10-13",
-"warn": "in perdita da 12 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-13"
 },
 "SMST": {
 "kind": "short",
@@ -9705,155 +9701,6 @@
 "notified": true,
 "entry_check": "2026-10-13"
 },
-"MBC": {
-"kind": "short",
-"added": "2026-09-28",
-"note": "🤖 Promossa il 2026-09-28: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.1% e la convenienza (74) regge.",
-"name": "MBC",
-"snapshots": [
-{
-"name": "MBC",
-"price": 6.93,
-"rsi": 38.3529,
-"dd_high": -49.8553,
-"occasione": 27,
-"convenienza": 71,
-"prob_gain": 53,
-"prob_loss": 15,
-"exp_ret": 1.3,
-"gain": 16.1587,
-"reliab": "🟡 Media",
-"target": 8.0498,
-"stop": 6.2042,
-"date": "2026-10-10 02:04"
-},
-{
-"name": "MBC",
-"price": 6.61,
-"rsi": 32.5416,
-"dd_high": -52.1708,
-"occasione": 39,
-"convenienza": 73,
-"prob_gain": 55,
-"prob_loss": 17,
-"exp_ret": 2.1,
-"gain": 21.3162,
-"reliab": "🟡 Media",
-"target": 8.019,
-"stop": 5.8624,
-"date": "2026-10-10 07:47"
-},
-{
-"name": "MBC",
-"price": 6.495,
-"rsi": 30.739,
-"dd_high": -53.0029,
-"occasione": 43,
-"convenienza": 74,
-"prob_gain": 53,
-"prob_loss": 15,
-"exp_ret": 1.2,
-"gain": 22.9238,
-"reliab": "🟡 Media",
-"target": 7.9839,
-"stop": 5.7623,
-"date": "2026-10-12 21:04"
-},
-{
-"name": "MBC",
-"price": 6.61,
-"rsi": 32.5416,
-"dd_high": -52.1708,
-"occasione": 39,
-"convenienza": 73,
-"prob_gain": 53,
-"prob_loss": 17,
-"exp_ret": 1.3,
-"gain": 21.3162,
-"reliab": "🟡 Media",
-"target": 8.019,
-"stop": 5.8624,
-"date": "2026-10-13 03:24"
-},
-{
-"name": "MBC",
-"price": 6.43,
-"rsi": 29.8058,
-"dd_high": -53.4732,
-"occasione": 57,
-"convenienza": 75,
-"prob_gain": 53,
-"prob_loss": 16,
-"exp_ret": 1.3,
-"gain": 24.1462,
-"reliab": "🟡 Media",
-"target": 7.9826,
-"stop": 5.6965,
-"date": "2026-10-13 10:28"
-},
-{
-"name": "MBC",
-"price": 6.605,
-"rsi": 35.4846,
-"dd_high": -52.2069,
-"occasione": 66,
-"convenienza": 71,
-"prob_gain": 51,
-"prob_loss": 21,
-"exp_ret": 0.4,
-"gain": 20.1559,
-"reliab": "🟡 Media",
-"target": 7.9363,
-"stop": 5.8897,
-"date": "2026-10-13 18:26"
-},
-{
-"name": "MBC",
-"price": 6.66,
-"rsi": 37.0843,
-"dd_high": -51.809,
-"occasione": 63,
-"convenienza": 71,
-"prob_gain": 53,
-"prob_loss": 18,
-"exp_ret": 1.2,
-"gain": 19.1802,
-"reliab": "🟡 Media",
-"target": 7.9374,
-"stop": 5.9297,
-"date": "2026-10-13 23:33"
-},
-{
-"name": "MBC",
-"price": 6.43,
-"rsi": 29.8058,
-"dd_high": -53.4732,
-"occasione": 57,
-"convenienza": 75,
-"prob_gain": 52,
-"prob_loss": 15,
-"exp_ret": 0.5,
-"gain": 24.1462,
-"reliab": "🟡 Media",
-"target": 7.9826,
-"stop": 5.6965,
-"date": "2026-10-14 02:41"
-}
-],
-"entry_price": 6.96,
-"entry_target": 8.299,
-"entry_stop": 6.1127,
-"entry_conv": 70,
-"entry_date": "2026-09-28 23:55",
-"entry_src": "scatto",
-"max_price": 7.145,
-"max_date": "2026-10-06 18:18",
-"auto": true,
-"notified": false,
-"entry_check": "2026-10-13",
-"warn_since": "2026-10-08",
-"warn": "in perdita da 11 giorni di Borsa: valuta l'uscita"
-},
 "RARE": {
 "kind": "short",
 "added": "2026-09-30",
@@ -10001,7 +9848,7 @@
 "notified": false,
 "entry_check": "2026-10-13",
 "warn_since": "2026-10-13",
-"warn": "in perdita da 9 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 10 giorni di Borsa: valuta l'uscita"
 },
 "WYY": {
 "kind": "short",
@@ -10134,7 +9981,7 @@
 "notified": false,
 "entry_check": "2026-10-13",
 "warn_since": "2026-10-10",
-"warn": "in perdita da 9 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 10 giorni di Borsa: valuta l'uscita"
 },
 "CAR": {
 "kind": "short",
@@ -10265,7 +10112,9 @@
 "max_date": "2026-10-06 23:17",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-13"
+"entry_check": "2026-10-13",
+"warn_since": "2026-10-14",
+"warn": "in perdita da 10 giorni di Borsa: valuta l'uscita"
 },
 "FSLR": {
 "kind": "short",
@@ -10545,156 +10394,7 @@
 "notified": true,
 "entry_check": "2026-10-13",
 "warn_since": "2026-10-09",
-"warn": "in perdita da 9 giorni di Borsa: valuta l'uscita"
-},
-"ITG": {
-"kind": "short",
-"added": "2026-10-01",
-"note": "🤖 Promossa il 2026-10-01: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +15.5% e la convenienza (74) regge.",
-"name": "ITG",
-"snapshots": [
-{
-"name": "ITG",
-"price": 7.62,
-"rsi": 33.7141,
-"dd_high": -56.9735,
-"occasione": 39,
-"convenienza": 68,
-"prob_gain": 60,
-"prob_loss": 25,
-"exp_ret": 10.1,
-"gain": 52.9528,
-"reliab": "🔴 Bassa",
-"target": 11.655,
-"stop": 5.5516,
-"date": "2026-10-10 02:04"
-},
-{
-"name": "ITG",
-"price": 7.57,
-"rsi": 33.4943,
-"dd_high": -57.2558,
-"occasione": 40,
-"convenienza": 68,
-"prob_gain": 60,
-"prob_loss": 23,
-"exp_ret": 9.4,
-"gain": 52.5707,
-"reliab": "🔴 Bassa",
-"target": 11.5496,
-"stop": 5.5436,
-"date": "2026-10-10 07:47"
-},
-{
-"name": "ITG",
-"price": 7.64,
-"rsi": 33.958,
-"dd_high": -56.9735,
-"occasione": 71,
-"convenienza": 68,
-"prob_gain": 60,
-"prob_loss": 24,
-"exp_ret": 9.9,
-"gain": 50.1732,
-"reliab": "🔴 Bassa",
-"target": 11.4432,
-"stop": 5.6712,
-"date": "2026-10-12 21:04"
-},
-{
-"name": "ITG",
-"price": 7.57,
-"rsi": 33.4943,
-"dd_high": -57.2558,
-"occasione": 40,
-"convenienza": 68,
-"prob_gain": 60,
-"prob_loss": 23,
-"exp_ret": 9.4,
-"gain": 52.5707,
-"reliab": "🔴 Bassa",
-"target": 11.5496,
-"stop": 5.5436,
-"date": "2026-10-13 03:24"
-},
-{
-"name": "ITG",
-"price": 7.48,
-"rsi": 33.0763,
-"dd_high": -57.764,
-"occasione": 41,
-"convenienza": 68,
-"prob_gain": 60,
-"prob_loss": 24,
-"exp_ret": 11.1,
-"gain": 52.9465,
-"reliab": "🔴 Bassa",
-"target": 11.4404,
-"stop": 5.514,
-"date": "2026-10-13 10:29"
-},
-{
-"name": "ITG",
-"price": 7.25,
-"rsi": 31.9781,
-"dd_high": -59.0627,
-"occasione": 43,
-"convenienza": 69,
-"prob_gain": 62,
-"prob_loss": 23,
-"exp_ret": 12.3,
-"gain": 56.0662,
-"reliab": "🔴 Bassa",
-"target": 11.3148,
-"stop": 5.3566,
-"date": "2026-10-13 18:27"
-},
-{
-"name": "ITG",
-"price": 7.5,
-"rsi": 33.2756,
-"dd_high": -57.651,
-"occasione": 72,
-"convenienza": 68,
-"prob_gain": 59,
-"prob_loss": 25,
-"exp_ret": 11.1,
-"gain": 50.9307,
-"reliab": "🔴 Bassa",
-"target": 11.3198,
-"stop": 5.6009,
-"date": "2026-10-13 23:33"
-},
-{
-"name": "ITG",
-"price": 7.48,
-"rsi": 33.0763,
-"dd_high": -57.764,
-"occasione": 41,
-"convenienza": 68,
-"prob_gain": 60,
-"prob_loss": 24,
-"exp_ret": 11.1,
-"gain": 52.9465,
-"reliab": "🔴 Bassa",
-"target": 11.4404,
-"stop": 5.514,
-"date": "2026-10-14 02:41"
-}
-],
-"entry_price": 8.16,
-"entry_target": 12.4102,
-"entry_stop": 5.8462,
-"entry_conv": 70,
-"entry_date": "2026-10-01 02:53",
-"entry_src": "scatto",
-"max_price": 8.25,
-"max_date": "2026-10-06 18:18",
-"auto": true,
-"notified": false,
-"entry_check": "2026-10-13",
-"warn_since": "2026-10-08",
-"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 10 giorni di Borsa: valuta l'uscita"
 },
 "ALHC": {
 "kind": "short",
@@ -10841,7 +10541,9 @@
 "max_date": "2026-10-08 21:57",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-13"
+"entry_check": "2026-10-13",
+"warn_since": "2026-10-14",
+"warn": "in perdita da 9 giorni di Borsa: valuta l'uscita"
 },
 "NU": {
 "kind": "short",
@@ -11278,7 +10980,7 @@
 "notified": false,
 "entry_check": "2026-10-13",
 "warn_since": "2026-10-09",
-"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "JLHL": {
 "kind": "short",
@@ -11542,7 +11244,7 @@
 "notified": true,
 "entry_check": "2026-10-13",
 "warn_since": "2026-10-12",
-"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "XENE": {
 "kind": "short",
@@ -11691,7 +11393,7 @@
 "notified": false,
 "entry_check": "2026-10-13",
 "warn_since": "2026-10-09",
-"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "PLNT": {
 "kind": "short",
@@ -12132,9 +11834,7 @@
 "max_date": "2026-10-08 21:57",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-13",
-"warn_since": "2026-10-13",
-"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-13"
 },
 "KRMN": {
 "kind": "short",
@@ -12267,7 +11967,7 @@
 "notified": false,
 "entry_check": "2026-10-13",
 "warn_since": "2026-10-12",
-"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
 },
 "ALKS": {
 "kind": "short",
@@ -12400,7 +12100,7 @@
 "notified": false,
 "entry_check": "2026-10-13",
 "warn_since": "2026-10-12",
-"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
 },
 "BBT": {
 "kind": "short",
@@ -12533,7 +12233,7 @@
 "notified": false,
 "entry_check": "2026-10-13",
 "warn_since": "2026-10-12",
-"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
 },
 "MWA": {
 "kind": "short",
@@ -12666,7 +12366,7 @@
 "notified": false,
 "entry_check": "2026-10-13",
 "warn_since": "2026-10-13",
-"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
 },
 "SAH": {
 "kind": "short",
@@ -12783,7 +12483,7 @@
 "notified": false,
 "entry_check": "2026-10-13",
 "warn_since": "2026-10-12",
-"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
 },
 "PIPR": {
 "kind": "short",
@@ -12916,7 +12616,7 @@
 "notified": false,
 "entry_check": "2026-10-13",
 "warn_since": "2026-10-12",
-"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
 },
 "DKNG": {
 "kind": "short",
@@ -13065,7 +12765,7 @@
 "notified": false,
 "entry_check": "2026-10-13",
 "warn_since": "2026-10-12",
-"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
 },
 "COUR": {
 "kind": "short",
@@ -13214,7 +12914,7 @@
 "notified": false,
 "entry_check": "2026-10-13",
 "warn_since": "2026-10-13",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
 },
 "CTVA": {
 "kind": "short",
@@ -13364,7 +13064,7 @@
 "entry_check": "2026-10-13",
 "exit_notified": false,
 "warn_since": "2026-10-13",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
 },
 "ENLT": {
 "kind": "short",
@@ -13644,7 +13344,7 @@
 "notified": false,
 "entry_check": "2026-10-13",
 "warn_since": "2026-10-13",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
 },
 "XLF": {
 "kind": "short",
@@ -14101,7 +13801,9 @@
 "max_date": "2026-10-08 02:29",
 "auto": true,
 "notified": false,
-"entry_check": "2026-10-13"
+"entry_check": "2026-10-13",
+"warn_since": "2026-10-14",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "PST.MI": {
 "kind": "short",
@@ -14264,7 +13966,9 @@
 "max_date": "2026-10-08 02:29",
 "auto": true,
 "notified": false,
-"entry_check": "2026-10-13"
+"entry_check": "2026-10-13",
+"warn_since": "2026-10-14",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "PPC": {
 "kind": "short",
