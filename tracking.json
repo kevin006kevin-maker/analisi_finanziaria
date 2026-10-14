@@ -765,7 +765,7 @@
 "max_date": "2026-08-25 23:02",
 "exit_notified": false,
 "warn_since": "2026-10-14",
-"warn": "in perdita da 67 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 68 giorni di Borsa: valuta l'uscita"
 },
 "T": {
 "kind": "long",
@@ -2294,7 +2294,7 @@
 "max_price": 22.21,
 "max_date": "2026-08-27 22:41",
 "warn_since": "2026-10-14",
-"warn": "in perdita da 55 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 56 giorni di Borsa: valuta l'uscita"
 },
 "GOOGL": {
 "kind": "short",
@@ -5876,7 +5876,7 @@
 "max_price": 5.48,
 "max_date": "2026-09-09 20:30",
 "warn_since": "2026-10-14",
-"warn": "in perdita da 49 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 50 giorni di Borsa: valuta l'uscita"
 },
 "NOK": {
 "kind": "short",
@@ -6041,7 +6041,7 @@
 "max_price": 11.13,
 "max_date": "2026-09-11 23:34",
 "warn_since": "2026-10-14",
-"warn": "in perdita da 47 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 48 giorni di Borsa: valuta l'uscita"
 },
 "SUJA": {
 "kind": "short",
@@ -6394,9 +6394,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-10-14",
 "max_price": 35.405,
-"max_date": "2026-08-25 21:57",
-"warn_since": "2026-10-14",
-"warn": "in perdita da 44 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-08-25 21:57"
 },
 "TDS": {
 "kind": "short",
@@ -7092,7 +7090,7 @@
 "notified": true,
 "entry_check": "2026-10-14",
 "warn_since": "2026-10-14",
-"warn": "in perdita da 38 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 39 giorni di Borsa: valuta l'uscita"
 },
 "DUOL": {
 "kind": "long",
@@ -7273,7 +7271,7 @@
 "notified": true,
 "entry_check": "2026-10-14",
 "warn_since": "2026-10-14",
-"warn": "in perdita da 35 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 36 giorni di Borsa: valuta l'uscita"
 },
 "INTR": {
 "kind": "long",
@@ -7967,7 +7965,7 @@
 "notified": true,
 "entry_check": "2026-10-14",
 "warn_since": "2026-10-14",
-"warn": "in perdita da 34 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 35 giorni di Borsa: valuta l'uscita"
 },
 "INTC": {
 "kind": "short",
@@ -8701,7 +8699,7 @@
 "entry_check": "2026-10-14",
 "incasso_notified": true,
 "warn_since": "2026-10-14",
-"warn": "in perdita da 25 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 26 giorni di Borsa: valuta l'uscita"
 },
 "TTAN": {
 "kind": "short",
@@ -9916,9 +9914,7 @@
 "auto": true,
 "notified": true,
 "entry_check": "2026-10-14",
-"exit_notified": false,
-"warn_since": "2026-10-14",
-"warn": "in perdita da 18 giorni di Borsa: valuta l'uscita"
+"exit_notified": false
 },
 "WING": {
 "kind": "short",
@@ -10456,187 +10452,6 @@
 },
 "exit_notified": false
 },
-"FLNC": {
-"kind": "short",
-"added": "2026-09-23",
-"note": "🤖 Promossa il 2026-09-23: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +3.7% e la convenienza (72) regge.",
-"name": "FLNC",
-"snapshots": [
-{
-"name": "FLNC",
-"price": 7.075,
-"rsi": 31.3858,
-"dd_high": -78.0949,
-"occasione": 45,
-"convenienza": 68,
-"prob_gain": 48,
-"prob_loss": 31,
-"exp_ret": -1.3,
-"gain": 43.8343,
-"reliab": "🔴 Bassa",
-"target": 10.1547,
-"stop": 5.9593,
-"date": "2026-10-12 21:04"
-},
-{
-"name": "FLNC",
-"price": 7.43,
-"rsi": 34.4457,
-"dd_high": -76.9469,
-"occasione": 39,
-"convenienza": 66,
-"prob_gain": 45,
-"prob_loss": 34,
-"exp_ret": -3.5,
-"gain": 38.5209,
-"reliab": "🔴 Bassa",
-"target": 10.2921,
-"stop": 6.3031,
-"date": "2026-10-13 03:24"
-},
-{
-"name": "FLNC",
-"price": 7.07,
-"rsi": 31.4613,
-"dd_high": -78.0639,
-"occasione": 45,
-"convenienza": 68,
-"prob_gain": 46,
-"prob_loss": 33,
-"exp_ret": -3.7,
-"gain": 43.6337,
-"reliab": "🔴 Bassa",
-"target": 10.1549,
-"stop": 5.9686,
-"date": "2026-10-13 10:28"
-},
-{
-"name": "FLNC",
-"price": 6.685,
-"rsi": 28.6068,
-"dd_high": -79.2585,
-"occasione": 40,
-"convenienza": 69,
-"prob_gain": 46,
-"prob_loss": 32,
-"exp_ret": -2.5,
-"gain": 49.5497,
-"reliab": "🔴 Bassa",
-"target": 9.9974,
-"stop": 5.5966,
-"date": "2026-10-13 18:26"
-},
-{
-"name": "FLNC",
-"price": 6.78,
-"rsi": 29.2619,
-"dd_high": -78.9637,
-"occasione": 27,
-"convenienza": 68,
-"prob_gain": 48,
-"prob_loss": 30,
-"exp_ret": -1.5,
-"gain": 47.4823,
-"reliab": "🔴 Bassa",
-"target": 9.9993,
-"stop": 5.6916,
-"date": "2026-10-13 23:33"
-},
-{
-"name": "FLNC",
-"price": 7.07,
-"rsi": 31.4613,
-"dd_high": -78.0639,
-"occasione": 45,
-"convenienza": 67,
-"prob_gain": 48,
-"prob_loss": 32,
-"exp_ret": -2.6,
-"gain": 43.6337,
-"reliab": "🔴 Bassa",
-"target": 10.1549,
-"stop": 5.9686,
-"date": "2026-10-14 02:41"
-},
-{
-"name": "FLNC",
-"price": 6.78,
-"rsi": 29.2619,
-"dd_high": -78.9637,
-"occasione": 27,
-"convenienza": 68,
-"prob_gain": 48,
-"prob_loss": 30,
-"exp_ret": -1.5,
-"gain": 47.4823,
-"reliab": "🔴 Bassa",
-"target": 9.9993,
-"stop": 5.6916,
-"date": "2026-10-14 07:26"
-},
-{
-"name": "FLNC",
-"price": 6.32,
-"rsi": 26.1403,
-"dd_high": -80.3909,
-"occasione": 45,
-"convenienza": 70,
-"prob_gain": 54,
-"prob_loss": 29,
-"exp_ret": 2.7,
-"gain": 55.2579,
-"reliab": "🔴 Bassa",
-"target": 9.8123,
-"stop": 5.2436,
-"date": "2026-10-14 17:29"
-},
-{
-"name": "FLNC",
-"price": 6.235,
-"rsi": 25.635,
-"dd_high": -80.6547,
-"occasione": 46,
-"convenienza": 69,
-"prob_gain": 48,
-"prob_loss": 31,
-"exp_ret": -2.1,
-"gain": 57.3472,
-"reliab": "🔴 Bassa",
-"target": 9.8106,
-"stop": 5.1329,
-"date": "2026-10-14 21:42"
-},
-{
-"name": "FLNC",
-"price": 6.21,
-"rsi": 25.49,
-"dd_high": -80.7322,
-"occasione": 46,
-"convenienza": 70,
-"prob_gain": 52,
-"prob_loss": 30,
-"exp_ret": 1.0,
-"gain": 57.9726,
-"reliab": "🔴 Bassa",
-"target": 9.8101,
-"stop": 5.1079,
-"date": "2026-10-15 01:14"
-}
-],
-"entry_price": 7.605,
-"entry_target": 11.9733,
-"entry_stop": 6.0894,
-"entry_conv": 71,
-"entry_date": "2026-09-23 17:01",
-"entry_src": "scatto",
-"max_price": 8.03,
-"max_date": "2026-10-06 23:17",
-"auto": true,
-"notified": true,
-"entry_check": "2026-10-14",
-"warn_since": "2026-10-09",
-"warn": "in perdita da 15 giorni di Borsa: valuta l'uscita"
-},
 "LPLA": {
 "kind": "short",
 "added": "2026-09-25",
@@ -11126,7 +10941,7 @@
 "notified": true,
 "entry_check": "2026-10-14",
 "warn_since": "2026-10-14",
-"warn": "in perdita da 13 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 14 giorni di Borsa: valuta l'uscita"
 },
 "SMST": {
 "kind": "short",
@@ -11665,172 +11480,7 @@
 "notified": false,
 "entry_check": "2026-10-14",
 "warn_since": "2026-10-13",
-"warn": "in perdita da 10 giorni di Borsa: valuta l'uscita"
-},
-"WYY": {
-"kind": "short",
-"added": "2026-09-30",
-"note": "🤖 Promossa il 2026-09-30: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +34.4% e la convenienza (73) regge.",
-"name": "WYY",
-"snapshots": [
-{
-"name": "WYY",
-"price": 7.03,
-"rsi": 36.4368,
-"dd_high": -65.198,
-"occasione": 35,
-"convenienza": 65,
-"prob_gain": 51,
-"prob_loss": 26,
-"exp_ret": 0.8,
-"gain": 39.2916,
-"reliab": "🔴 Bassa",
-"target": 9.7922,
-"stop": 5.327,
-"date": "2026-10-12 21:04"
-},
-{
-"name": "WYY",
-"price": 6.95,
-"rsi": 36.0187,
-"dd_high": -65.5941,
-"occasione": 36,
-"convenienza": 65,
-"prob_gain": 53,
-"prob_loss": 29,
-"exp_ret": 1.9,
-"gain": 40.8719,
-"reliab": "🔴 Bassa",
-"target": 9.7906,
-"stop": 5.247,
-"date": "2026-10-13 03:24"
-},
-{
-"name": "WYY",
-"price": 6.9438,
-"rsi": 35.9842,
-"dd_high": -65.6248,
-"occasione": 36,
-"convenienza": 65,
-"prob_gain": 53,
-"prob_loss": 27,
-"exp_ret": 2.4,
-"gain": 40.0051,
-"reliab": "🔴 Bassa",
-"target": 9.7217,
-"stop": 5.311,
-"date": "2026-10-13 18:27"
-},
-{
-"name": "WYY",
-"price": 6.89,
-"rsi": 35.6879,
-"dd_high": -65.8911,
-"occasione": 37,
-"convenienza": 66,
-"prob_gain": 55,
-"prob_loss": 25,
-"exp_ret": 3.9,
-"gain": 41.0827,
-"reliab": "🔴 Bassa",
-"target": 9.7206,
-"stop": 5.2572,
-"date": "2026-10-13 23:33"
-},
-{
-"name": "WYY",
-"price": 6.95,
-"rsi": 36.0187,
-"dd_high": -65.5941,
-"occasione": 36,
-"convenienza": 64,
-"prob_gain": 50,
-"prob_loss": 32,
-"exp_ret": -0.1,
-"gain": 40.8719,
-"reliab": "🔴 Bassa",
-"target": 9.7906,
-"stop": 5.247,
-"date": "2026-10-14 02:41"
-},
-{
-"name": "WYY",
-"price": 6.89,
-"rsi": 35.6879,
-"dd_high": -65.8911,
-"occasione": 37,
-"convenienza": 66,
-"prob_gain": 55,
-"prob_loss": 25,
-"exp_ret": 3.9,
-"gain": 41.0827,
-"reliab": "🔴 Bassa",
-"target": 9.7206,
-"stop": 5.2558,
-"date": "2026-10-14 07:26"
-},
-{
-"name": "WYY",
-"price": 6.825,
-"rsi": 35.3096,
-"dd_high": -66.2129,
-"occasione": 37,
-"convenienza": 66,
-"prob_gain": 52,
-"prob_loss": 27,
-"exp_ret": 1.4,
-"gain": 41.2967,
-"reliab": "🔴 Bassa",
-"target": 9.6435,
-"stop": 5.2846,
-"date": "2026-10-14 17:29"
-},
-{
-"name": "WYY",
-"price": 6.63,
-"rsi": 34.2215,
-"dd_high": -67.1782,
-"occasione": 39,
-"convenienza": 66,
-"prob_gain": 51,
-"prob_loss": 28,
-"exp_ret": 0.7,
-"gain": 45.3937,
-"reliab": "🔴 Bassa",
-"target": 9.6396,
-"stop": 5.0611,
-"date": "2026-10-14 21:42"
-},
-{
-"name": "WYY",
-"price": 6.61,
-"rsi": 34.1136,
-"dd_high": -67.2772,
-"occasione": 40,
-"convenienza": 66,
-"prob_gain": 50,
-"prob_loss": 29,
-"exp_ret": 0.4,
-"gain": 45.8275,
-"reliab": "🔴 Bassa",
-"target": 9.6392,
-"stop": 5.0353,
-"date": "2026-10-15 01:14"
-}
-],
-"entry_price": 7.35,
-"entry_target": 10.3842,
-"entry_stop": 4.9824,
-"entry_conv": 66,
-"entry_date": "2026-09-30 01:46",
-"entry_src": "scatto",
-"max_price": 7.975,
-"max_date": "2026-09-30 19:14",
-"auto": true,
-"notified": false,
-"entry_check": "2026-10-14",
-"warn_since": "2026-10-10",
-"warn": "in perdita da 10 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 11 giorni di Borsa: valuta l'uscita"
 },
 "CAR": {
 "kind": "short",
@@ -11995,7 +11645,7 @@
 "notified": true,
 "entry_check": "2026-10-14",
 "warn_since": "2026-10-14",
-"warn": "in perdita da 10 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 11 giorni di Borsa: valuta l'uscita"
 },
 "FSLR": {
 "kind": "short",
@@ -12159,187 +11809,6 @@
 "auto": true,
 "notified": true,
 "entry_check": "2026-10-14"
-},
-"RSI": {
-"kind": "short",
-"added": "2026-09-30",
-"note": "🤖 Promossa il 2026-09-30: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.3% e la convenienza (64) regge.",
-"name": "RSI",
-"snapshots": [
-{
-"name": "RSI",
-"price": 18.78,
-"rsi": 27.12,
-"dd_high": -45.5388,
-"occasione": 47,
-"convenienza": 78,
-"prob_gain": 51,
-"prob_loss": 14,
-"exp_ret": 0.3,
-"gain": 27.8532,
-"reliab": "🟡 Media",
-"target": 24.0364,
-"stop": 16.5837,
-"date": "2026-10-12 21:04"
-},
-{
-"name": "RSI",
-"price": 18.9,
-"rsi": 27.4957,
-"dd_high": -45.2491,
-"occasione": 46,
-"convenienza": 78,
-"prob_gain": 57,
-"prob_loss": 11,
-"exp_ret": 3.0,
-"gain": 28.0349,
-"reliab": "🟡 Media",
-"target": 24.1986,
-"stop": 16.6132,
-"date": "2026-10-13 03:24"
-},
-{
-"name": "RSI",
-"price": 18.71,
-"rsi": 26.7906,
-"dd_high": -45.7995,
-"occasione": 48,
-"convenienza": 79,
-"prob_gain": 60,
-"prob_loss": 13,
-"exp_ret": 2.8,
-"gain": 28.4586,
-"reliab": "🟡 Media",
-"target": 24.0346,
-"stop": 16.4923,
-"date": "2026-10-13 10:29"
-},
-{
-"name": "RSI",
-"price": 19.14,
-"rsi": 31.472,
-"dd_high": -44.438,
-"occasione": 70,
-"convenienza": 77,
-"prob_gain": 56,
-"prob_loss": 14,
-"exp_ret": 1.4,
-"gain": 24.3743,
-"reliab": "🟡 Media",
-"target": 23.855,
-"stop": 16.9807,
-"date": "2026-10-13 18:27"
-},
-{
-"name": "RSI",
-"price": 19.07,
-"rsi": 30.4309,
-"dd_high": -44.7567,
-"occasione": 72,
-"convenienza": 77,
-"prob_gain": 55,
-"prob_loss": 16,
-"exp_ret": 1.8,
-"gain": 25.0802,
-"reliab": "🟡 Media",
-"target": 23.8528,
-"stop": 16.8707,
-"date": "2026-10-13 23:33"
-},
-{
-"name": "RSI",
-"price": 18.71,
-"rsi": 26.7906,
-"dd_high": -45.7995,
-"occasione": 48,
-"convenienza": 78,
-"prob_gain": 57,
-"prob_loss": 13,
-"exp_ret": 2.3,
-"gain": 28.4586,
-"reliab": "🟡 Media",
-"target": 24.0346,
-"stop": 16.4923,
-"date": "2026-10-14 02:41"
-},
-{
-"name": "RSI",
-"price": 19.07,
-"rsi": 30.4309,
-"dd_high": -44.7567,
-"occasione": 72,
-"convenienza": 77,
-"prob_gain": 55,
-"prob_loss": 16,
-"exp_ret": 1.8,
-"gain": 25.0802,
-"reliab": "🟡 Media",
-"target": 23.8528,
-"stop": 16.8678,
-"date": "2026-10-14 07:26"
-},
-{
-"name": "RSI",
-"price": 18.525,
-"rsi": 28.0524,
-"dd_high": -46.4079,
-"occasione": 46,
-"convenienza": 78,
-"prob_gain": 55,
-"prob_loss": 14,
-"exp_ret": 1.9,
-"gain": 27.8649,
-"reliab": "🟡 Media",
-"target": 23.655,
-"stop": 16.358,
-"date": "2026-10-14 17:29"
-},
-{
-"name": "RSI",
-"price": 18.5,
-"rsi": 28.0524,
-"dd_high": -46.4079,
-"occasione": 46,
-"convenienza": 78,
-"prob_gain": 55,
-"prob_loss": 14,
-"exp_ret": 1.9,
-"gain": 27.8649,
-"reliab": "🟡 Media",
-"target": 23.655,
-"stop": 16.353,
-"date": "2026-10-14 21:42"
-},
-{
-"name": "RSI",
-"price": 18.49,
-"rsi": 28.014,
-"dd_high": -46.4368,
-"occasione": 46,
-"convenienza": 78,
-"prob_gain": 58,
-"prob_loss": 11,
-"exp_ret": 3.1,
-"gain": 27.9329,
-"reliab": "🟡 Media",
-"target": 23.6548,
-"stop": 16.343,
-"date": "2026-10-15 01:14"
-}
-],
-"entry_price": 20.33,
-"entry_target": 25.6552,
-"entry_stop": 17.9393,
-"entry_conv": 77,
-"entry_date": "2026-09-30 23:27",
-"entry_src": "scatto",
-"max_price": 21.5,
-"max_date": "2026-10-05 18:02",
-"auto": true,
-"notified": true,
-"entry_check": "2026-10-14",
-"warn_since": "2026-10-09",
-"warn": "in perdita da 10 giorni di Borsa: valuta l'uscita"
 },
 "ALHC": {
 "kind": "short",
@@ -12872,187 +12341,6 @@
 "notified": true,
 "entry_check": "2026-10-14"
 },
-"DCX": {
-"kind": "short",
-"added": "2026-10-02",
-"note": "🤖 Promossa il 2026-10-02: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.2% e la convenienza (70) regge.",
-"name": "DCX",
-"snapshots": [
-{
-"name": "DCX",
-"price": 2.3001,
-"rsi": 19.6069,
-"dd_high": -99.9901,
-"occasione": 35,
-"convenienza": 66,
-"prob_gain": 61,
-"prob_loss": 30,
-"exp_ret": 16.6,
-"gain": 3598.9224,
-"reliab": "🔴 Bassa",
-"target": 86.3698,
-"stop": -13.974,
-"date": "2026-10-12 21:04"
-},
-{
-"name": "DCX",
-"price": 2.727,
-"rsi": 19.7391,
-"dd_high": -99.9885,
-"occasione": 35,
-"convenienza": 65,
-"prob_gain": 60,
-"prob_loss": 33,
-"exp_ret": 19.7,
-"gain": 3192.231,
-"reliab": "🔴 Bassa",
-"target": 89.7791,
-"stop": -14.7172,
-"date": "2026-10-13 03:24"
-},
-{
-"name": "DCX",
-"price": 2.2,
-"rsi": 19.5618,
-"dd_high": -99.9907,
-"occasione": 35,
-"convenienza": 66,
-"prob_gain": 61,
-"prob_loss": 30,
-"exp_ret": 21.0,
-"gain": 3825.779,
-"reliab": "🔴 Bassa",
-"target": 86.3671,
-"stop": -14.109,
-"date": "2026-10-13 10:29"
-},
-{
-"name": "DCX",
-"price": 1.6973,
-"rsi": 19.383,
-"dd_high": -99.9928,
-"occasione": 35,
-"convenienza": 67,
-"prob_gain": 65,
-"prob_loss": 28,
-"exp_ret": 26.2,
-"gain": 4804.7951,
-"reliab": "🔴 Bassa",
-"target": 83.2491,
-"stop": -13.5954,
-"date": "2026-10-13 18:27"
-},
-{
-"name": "DCX",
-"price": 2.05,
-"rsi": 19.5081,
-"dd_high": -99.991,
-"occasione": 35,
-"convenienza": 66,
-"prob_gain": 60,
-"prob_loss": 32,
-"exp_ret": 20.0,
-"gain": 3961.2752,
-"reliab": "🔴 Bassa",
-"target": 83.2561,
-"stop": -13.2426,
-"date": "2026-10-13 23:33"
-},
-{
-"name": "DCX",
-"price": 2.2,
-"rsi": 19.5618,
-"dd_high": -99.9904,
-"occasione": 35,
-"convenienza": 66,
-"prob_gain": 61,
-"prob_loss": 30,
-"exp_ret": 21.3,
-"gain": 3825.779,
-"reliab": "🔴 Bassa",
-"target": 86.3671,
-"stop": -14.109,
-"date": "2026-10-14 02:41"
-},
-{
-"name": "DCX",
-"price": 2.05,
-"rsi": 19.5081,
-"dd_high": -99.991,
-"occasione": 35,
-"convenienza": 66,
-"prob_gain": 60,
-"prob_loss": 32,
-"exp_ret": 20.0,
-"gain": 3961.2752,
-"reliab": "🔴 Bassa",
-"target": 83.2561,
-"stop": -13.2426,
-"date": "2026-10-14 07:26"
-},
-{
-"name": "DCX",
-"price": 1.9002,
-"rsi": 19.4507,
-"dd_high": -99.9917,
-"occasione": 35,
-"convenienza": 65,
-"prob_gain": 58,
-"prob_loss": 33,
-"exp_ret": 16.1,
-"gain": 4111.6695,
-"reliab": "🔴 Bassa",
-"target": 80.0301,
-"stop": -12.3587,
-"date": "2026-10-14 17:29"
-},
-{
-"name": "DCX",
-"price": 1.83,
-"rsi": 19.4239,
-"dd_high": -99.992,
-"occasione": 35,
-"convenienza": 66,
-"prob_gain": 59,
-"prob_loss": 31,
-"exp_ret": 22.5,
-"gain": 4273.1551,
-"reliab": "🔴 Bassa",
-"target": 80.0287,
-"stop": -12.4289,
-"date": "2026-10-14 21:42"
-},
-{
-"name": "DCX",
-"price": 1.81,
-"rsi": 19.4163,
-"dd_high": -99.9919,
-"occasione": 35,
-"convenienza": 66,
-"prob_gain": 61,
-"prob_loss": 31,
-"exp_ret": 17.2,
-"gain": 4321.4554,
-"reliab": "🔴 Bassa",
-"target": 80.0283,
-"stop": -12.4489,
-"date": "2026-10-15 01:14"
-}
-],
-"entry_price": 3.74,
-"entry_target": 106.3478,
-"entry_stop": -22.9064,
-"entry_conv": 67,
-"entry_date": "2026-10-02 08:10",
-"entry_src": "scatto",
-"max_price": 3.88,
-"max_date": "2026-10-03 00:13",
-"auto": true,
-"notified": false,
-"entry_check": "2026-10-14",
-"warn_since": "2026-10-09",
-"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
-},
 "JLHL": {
 "kind": "short",
 "added": "2026-10-03",
@@ -13389,188 +12677,7 @@
 "notified": true,
 "entry_check": "2026-10-14",
 "warn_since": "2026-10-12",
-"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
-},
-"XENE": {
-"kind": "short",
-"added": "2026-10-04",
-"note": "🤖 Promossa il 2026-10-04: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +3.5% e la convenienza (75) regge.",
-"name": "XENE",
-"snapshots": [
-{
-"name": "XENE",
-"price": 35.735,
-"rsi": 22.2745,
-"dd_high": -49.6054,
-"occasione": 53,
-"convenienza": 79,
-"prob_gain": 50,
-"prob_loss": 8,
-"exp_ret": -0.0,
-"gain": 48.4519,
-"reliab": "🔴 Bassa",
-"target": 53.0864,
-"stop": 31.8942,
-"date": "2026-10-12 21:04"
-},
-{
-"name": "XENE",
-"price": 36.44,
-"rsi": 23.3103,
-"dd_high": -48.6471,
-"occasione": 84,
-"convenienza": 79,
-"prob_gain": 49,
-"prob_loss": 8,
-"exp_ret": -0.4,
-"gain": 47.1586,
-"reliab": "🔴 Bassa",
-"target": 53.6246,
-"stop": 32.3999,
-"date": "2026-10-13 03:24"
-},
-{
-"name": "XENE",
-"price": 35.81,
-"rsi": 22.3475,
-"dd_high": -49.5349,
-"occasione": 53,
-"convenienza": 79,
-"prob_gain": 54,
-"prob_loss": 9,
-"exp_ret": 1.2,
-"gain": 48.2474,
-"reliab": "🔴 Bassa",
-"target": 53.0874,
-"stop": 31.9199,
-"date": "2026-10-13 10:29"
-},
-{
-"name": "XENE",
-"price": 35.075,
-"rsi": 21.2237,
-"dd_high": -50.5919,
-"occasione": 53,
-"convenienza": 80,
-"prob_gain": 52,
-"prob_loss": 9,
-"exp_ret": 0.4,
-"gain": 49.8671,
-"reliab": "🔴 Bassa",
-"target": 52.5434,
-"stop": 31.3231,
-"date": "2026-10-13 18:27"
-},
-{
-"name": "XENE",
-"price": 34.42,
-"rsi": 20.3504,
-"dd_high": -51.4938,
-"occasione": 53,
-"convenienza": 80,
-"prob_gain": 55,
-"prob_loss": 8,
-"exp_ret": 1.2,
-"gain": 52.6165,
-"reliab": "🔴 Bassa",
-"target": 52.5306,
-"stop": 30.596,
-"date": "2026-10-13 23:33"
-},
-{
-"name": "XENE",
-"price": 35.81,
-"rsi": 22.3475,
-"dd_high": -49.5349,
-"occasione": 53,
-"convenienza": 79,
-"prob_gain": 54,
-"prob_loss": 9,
-"exp_ret": 1.0,
-"gain": 48.2474,
-"reliab": "🔴 Bassa",
-"target": 53.0874,
-"stop": 31.9199,
-"date": "2026-10-14 02:41"
-},
-{
-"name": "XENE",
-"price": 34.42,
-"rsi": 20.3504,
-"dd_high": -51.4938,
-"occasione": 53,
-"convenienza": 80,
-"prob_gain": 55,
-"prob_loss": 8,
-"exp_ret": 1.2,
-"gain": 52.6165,
-"reliab": "🔴 Bassa",
-"target": 52.5306,
-"stop": 30.5903,
-"date": "2026-10-14 07:26"
-},
-{
-"name": "XENE",
-"price": 34.07,
-"rsi": 19.885,
-"dd_high": -51.9701,
-"occasione": 54,
-"convenienza": 80,
-"prob_gain": 50,
-"prob_loss": 9,
-"exp_ret": 0.1,
-"gain": 52.3738,
-"reliab": "🔴 Bassa",
-"target": 51.932,
-"stop": 30.3894,
-"date": "2026-10-14 17:29"
-},
-{
-"name": "XENE",
-"price": 33.81,
-"rsi": 19.6038,
-"dd_high": -52.2689,
-"occasione": 54,
-"convenienza": 80,
-"prob_gain": 51,
-"prob_loss": 9,
-"exp_ret": 0.2,
-"gain": 53.315,
-"reliab": "🔴 Bassa",
-"target": 51.9278,
-"stop": 30.126,
-"date": "2026-10-14 21:42"
-},
-{
-"name": "XENE",
-"price": 33.9,
-"rsi": 19.6431,
-"dd_high": -52.2266,
-"occasione": 54,
-"convenienza": 80,
-"prob_gain": 55,
-"prob_loss": 7,
-"exp_ret": 1.5,
-"gain": 53.1811,
-"reliab": "🔴 Bassa",
-"target": 51.9284,
-"stop": 30.156,
-"date": "2026-10-15 01:14"
-}
-],
-"entry_price": 38.02,
-"entry_target": 56.4302,
-"entry_stop": 33.2436,
-"entry_conv": 78,
-"entry_date": "2026-10-04 10:48",
-"entry_src": "scatto",
-"max_price": 38.02,
-"max_date": "2026-10-04 10:48",
-"auto": true,
-"notified": false,
-"entry_check": "2026-10-14",
-"warn_since": "2026-10-09",
-"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 9 giorni di Borsa: valuta l'uscita"
 },
 "PLNT": {
 "kind": "short",
@@ -13930,7 +13037,7 @@
 "notified": true,
 "entry_check": "2026-10-14",
 "warn_since": "2026-10-14",
-"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 9 giorni di Borsa: valuta l'uscita"
 },
 "PTRN": {
 "kind": "short",
@@ -14111,7 +13218,7 @@
 "notified": true,
 "entry_check": "2026-10-14",
 "warn_since": "2026-10-14",
-"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 9 giorni di Borsa: valuta l'uscita"
 },
 "KRMN": {
 "kind": "short",
@@ -14276,7 +13383,7 @@
 "notified": false,
 "entry_check": "2026-10-14",
 "warn_since": "2026-10-12",
-"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "ALKS": {
 "kind": "short",
@@ -14441,7 +13548,7 @@
 "notified": false,
 "entry_check": "2026-10-14",
 "warn_since": "2026-10-12",
-"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "MWA": {
 "kind": "short",
@@ -14606,7 +13713,7 @@
 "notified": false,
 "entry_check": "2026-10-14",
 "warn_since": "2026-10-13",
-"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "SAH": {
 "kind": "short",
@@ -14755,7 +13862,7 @@
 "notified": false,
 "entry_check": "2026-10-14",
 "warn_since": "2026-10-12",
-"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "PIPR": {
 "kind": "short",
@@ -14918,7 +14025,9 @@
 "max_date": "2026-10-14 21:43",
 "auto": true,
 "notified": false,
-"entry_check": "2026-10-14"
+"entry_check": "2026-10-14",
+"warn_since": "2026-10-15",
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "DKNG": {
 "kind": "short",
@@ -15099,7 +14208,7 @@
 "notified": false,
 "entry_check": "2026-10-14",
 "warn_since": "2026-10-12",
-"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "COUR": {
 "kind": "short",
@@ -15280,7 +14389,7 @@
 "notified": false,
 "entry_check": "2026-10-14",
 "warn_since": "2026-10-13",
-"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
 },
 "CTVA": {
 "kind": "short",
@@ -15462,7 +14571,7 @@
 "entry_check": "2026-10-14",
 "exit_notified": false,
 "warn_since": "2026-10-13",
-"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
 },
 "ENLT": {
 "kind": "short",
@@ -15806,7 +14915,7 @@
 "notified": false,
 "entry_check": "2026-10-14",
 "warn_since": "2026-10-13",
-"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
 },
 "XLF": {
 "kind": "short",
@@ -16132,9 +15241,7 @@
 "max_date": "2026-10-13 18:27",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-14",
-"warn_since": "2026-10-14",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-14"
 },
 "PST.MI": {
 "kind": "short",
@@ -16331,7 +15438,7 @@
 "notified": false,
 "entry_check": "2026-10-14",
 "warn_since": "2026-10-14",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
 },
 "PPC": {
 "kind": "short",
@@ -16673,7 +15780,9 @@
 "max_date": "2026-10-08 08:41",
 "auto": true,
 "notified": false,
-"entry_check": "2026-10-14"
+"entry_check": "2026-10-14",
+"warn_since": "2026-10-15",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "GRND": {
 "kind": "short",
@@ -17746,7 +16855,7 @@
 "max_price": 33.94,
 "max_date": "2026-10-15 01:14",
 "auto": true,
-"notified": false,
+"notified": true,
 "entry_check": "2026-10-14"
 },
 "G.MI": {
