@@ -1,25 +1,5 @@
 [
 {
-"episodio": "long:SMCI:2026-08-17",
-"ticker": "SMCI",
-"kind": "long",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-04 19:26",
-"data": "2026-09-04 19:25",
-"prezzo": 40.565,
-"conv": 57,
-"prob_gain": 54,
-"prob_loss": 39,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "prezzo salito di almeno il 2% da 38.59",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:FGL:2026-09-04",
 "ticker": "FGL",
 "kind": "short",
@@ -29172,5 +29152,32 @@
 },
 "stop": 40.3921,
 "atr": 1.194
+},
+{
+"episodio": "short:BKD:2026-10-11",
+"ticker": "BKD",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-14 02:45",
+"data": "2026-10-14 02:36",
+"prezzo": 10.24,
+"conv": 53,
+"prob_gain": 49,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": 2.8965,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-14",
+"soglie": {
+"media50": 11.94,
+"media20": 11.0335,
+"quattro_atr": 11.9044,
+"meta_caduta": 12.855,
+"bollinger": 11.9225,
+"consigliata": 11.9044
+},
+"stop": 9.4078,
+"atr": 0.4161
 }
 ]
