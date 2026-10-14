@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:ENEL.MI:2026-09-02",
-"ticker": "ENEL.MI",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-07 01:29",
-"data": "2026-09-06 23:31",
-"prezzo": 9.066,
-"conv": 74,
-"prob_gain": 51,
-"prob_loss": 0,
-"reliab": "🟢 Alta",
-"mkt": -0.5032,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-07",
-"soglie": {
-"media50": 9.7979,
-"media20": 9.4638,
-"quattro_atr": 9.6964,
-"meta_caduta": 9.673,
-"bollinger": 9.9528,
-"consigliata": 9.6964
-},
-"stop": 8.7508,
-"atr": 0.1576,
-"soglie_contaminate": {
-"media50": 9.7979,
-"media20": 9.4638,
-"quattro_atr": 9.6964,
-"meta_caduta": 9.673,
-"bollinger": 9.9528,
-"consigliata": 9.6964
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": -2.69,
-"30g": -2.69,
-"soglia": -2.69
-},
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": -2.69,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -2.69,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -2.69,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -2.69,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -2.69,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -2.69,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:PST.MI:2026-09-07",
 "ticker": "PST.MI",
 "kind": "short",
@@ -29560,5 +29485,32 @@
 },
 "stop": 13.7159,
 "atr": 0.6721
+},
+{
+"episodio": "long:MU:2026-10-06",
+"ticker": "MU",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-15 01:17",
+"data": "2026-10-15 01:13",
+"prezzo": 914.13,
+"conv": 65,
+"prob_gain": 68,
+"prob_loss": 25,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-15",
+"soglie": {
+"media50": 982.4094,
+"media20": 1042.164,
+"quattro_atr": 1101.0283,
+"meta_caduta": 1005.76,
+"bollinger": 1141.6403,
+"consigliata": 982.4094
+},
+"stop": 820.6809,
+"atr": 46.7246
 }
 ]
