@@ -16192,5 +16192,69 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:MOMO:2026-09-04",
+"ticker": "MOMO",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-04 15:58",
+"data": "2026-09-04 15:58",
+"prezzo": 5.37,
+"conv": 65,
+"prob_gain": 55,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -0.2229,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 5.8319,
+"media20": 5.6675,
+"quattro_atr": 5.983,
+"meta_caduta": 5.79,
+"bollinger": 6.0491,
+"consigliata": 5.8319
+},
+"stop": 5.0635,
+"atr": 0.1532,
+"res": {
+"7g": -6.7,
+"30g": -11.92,
+"soglia": -11.92
+},
+"res_soglia": {
+"media50": {
+"ret": -11.92,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -11.92,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -11.92,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -11.92,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -11.92,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -11.92,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
