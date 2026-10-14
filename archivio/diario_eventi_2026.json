@@ -15902,5 +15902,80 @@
 "7g": -1.08,
 "30g": 13.18
 }
+},
+{
+"episodio": "short:MXL:2026-09-03",
+"ticker": "MXL",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-04 02:42",
+"data": "2026-09-03 19:29",
+"prezzo": 58.5595,
+"conv": 68,
+"prob_gain": 38,
+"prob_loss": 35,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 77.3198,
+"media20": 67.9155,
+"quattro_atr": 82.5394,
+"meta_caduta": 93.2947,
+"bollinger": 83.7234,
+"consigliata": 77.3198
+},
+"stop": 46.5695,
+"atr": 5.995,
+"soglie_contaminate": {
+"media50": 77.8306,
+"media20": 68.453,
+"quattro_atr": 83.101,
+"meta_caduta": 93.2947,
+"bollinger": 83.7724,
+"consigliata": 77.8306
+},
+"soglie_ricalcolate_il": "2026-09-14 21:39",
+"soglie_ritardo_giorni": 1,
+"res": {
+"7g": 15.97,
+"30g": 83.3,
+"soglia": 32.04
+},
+"taglio_corretto": true,
+"res_soglia": {
+"media50": {
+"ret": 32.04,
+"toccato": true,
+"giorni": 15
+},
+"media20": {
+"ret": 15.98,
+"toccato": true,
+"giorni": 6
+},
+"quattro_atr": {
+"ret": 40.95,
+"toccato": true,
+"giorni": 18
+},
+"meta_caduta": {
+"ret": 59.32,
+"toccato": true,
+"giorni": 22
+},
+"bollinger": {
+"ret": 42.97,
+"toccato": true,
+"giorni": 18
+},
+"consigliata": {
+"ret": 32.04,
+"toccato": true,
+"giorni": 15
+}
+}
 }
 ]
