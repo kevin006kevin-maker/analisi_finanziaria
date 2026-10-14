@@ -5974,7 +5974,10 @@
 "conv": 64,
 "res": {
 "osservazione|7g": 3.05,
-"promozione|7g": 1.54
+"promozione|7g": 1.54,
+"osservazione|30g": -3.31,
+"promozione|30g": -4.73,
+"conferma|30g": -6.17
 },
 "passaggi": {
 "osservazione": {
@@ -14552,8 +14555,8 @@
 "obs_date": "2026-10-02",
 "pre_price": 14.885,
 "pre_date": "2026-10-05",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 14.5,
+"conf_date": "2026-10-14",
 "target": 16.2392,
 "stop": 14.5101,
 "reliab": "🟢 Alta",
@@ -14589,16 +14592,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-10-14",
+"prezzo": 14.5,
+"conv": 68,
+"prob_gain": 52,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": -2.59,
+"osservazione|7g": -2.59,
+"promozione|7g": -5.04
+}
 },
 {
 "ticker": "G.MI",
@@ -14611,15 +14618,18 @@
 "obs_date": "2026-10-02",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 42.13999938964844,
+"conf_date": "2026-10-14",
 "target": null,
 "stop": null,
 "reliab": null,
 "prob_gain": null,
 "prob_loss": null,
 "conv": 72,
-"res": {},
+"res": {
+"osservazione|7g": 1.96,
+"promozione|7g": 0.48
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-10-02 14:31",
@@ -14649,12 +14659,12 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-10-14",
+"prezzo": 42.13999938964844,
+"conv": 62,
+"prob_gain": 52,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
 "mkt": null
 }
 }
@@ -14668,8 +14678,8 @@
 "obs_date": "2026-10-02",
 "pre_price": 6.328,
 "pre_date": "2026-10-05",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 6.165999889373779,
+"conf_date": "2026-10-14",
 "target": 6.7237,
 "stop": 6.1694,
 "reliab": "🟢 Alta",
@@ -14705,8 +14715,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-10-14",
+"prezzo": 6.165999889373779,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -14714,7 +14724,11 @@
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": -2.56,
+"osservazione|7g": -1.82,
+"promozione|7g": -4.05
+}
 },
 {
 "ticker": "UCG.MI",
@@ -14725,8 +14739,8 @@
 "obs_date": "2026-10-02",
 "pre_price": 77.15,
 "pre_date": "2026-10-05",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 77.08999633789062,
+"conf_date": "2026-10-14",
 "target": 83.4724,
 "stop": 75.8927,
 "reliab": "🟢 Alta",
@@ -14762,8 +14776,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-10-14",
+"prezzo": 77.08999633789062,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -14771,7 +14785,11 @@
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": -0.08,
+"osservazione|7g": -0.08,
+"promozione|7g": -3.4
+}
 },
 {
 "ticker": "AXGN",
@@ -14841,8 +14859,8 @@
 "obs_date": "2026-09-07",
 "pre_price": 25.81,
 "pre_date": "2026-09-08",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 24.440000534057617,
+"conf_date": "2026-10-14",
 "target": 26.5206,
 "stop": 23.383,
 "reliab": "🟢 Alta",
@@ -14878,16 +14896,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-10-14",
+"prezzo": 24.440000534057617,
+"conv": 68,
+"prob_gain": 54,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": -5.31,
+"osservazione|7g": -5.31,
+"promozione|7g": -0.97
+}
 },
 {
 "ticker": "F",
