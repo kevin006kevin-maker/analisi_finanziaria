@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:FIS:2026-09-04",
-"ticker": "FIS",
-"kind": "long",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-08 19:05",
-"data": "2026-09-08 19:05",
-"prezzo": 39.66,
-"conv": 78,
-"prob_gain": 80,
-"prob_loss": 8,
-"reliab": "🟢 Alta",
-"mkt": -0.7864,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 41.9284,
-"media20": 41.4115,
-"quattro_atr": 45.398,
-"meta_caduta": 43.235,
-"bollinger": 43.4895,
-"consigliata": 41.9284
-},
-"stop": 36.791,
-"atr": 1.4345,
-"res": {
-"7g": -4.41,
-"30g": -14.74
-}
-},
-{
 "episodio": "short:AXTI:2026-08-29",
 "ticker": "AXTI",
 "kind": "short",
@@ -29982,5 +29951,32 @@
 },
 "stop": 8.1039,
 "atr": 0.363
+},
+{
+"episodio": "short:AVBP:2026-10-06",
+"ticker": "AVBP",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-16 01:54",
+"data": "2026-10-15 23:21",
+"prezzo": 16.79,
+"conv": 76,
+"prob_gain": 63,
+"prob_loss": 11,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-16",
+"soglie": {
+"media50": 27.6202,
+"media20": 24.1775,
+"quattro_atr": 24.8713,
+"meta_caduta": 24.26,
+"bollinger": 37.3309,
+"consigliata": 24.8713
+},
+"stop": 12.7494,
+"atr": 2.0203
 }
 ]
