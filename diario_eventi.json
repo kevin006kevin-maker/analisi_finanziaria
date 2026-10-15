@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:GPCR:2026-09-08",
-"ticker": "GPCR",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-08 19:03",
-"data": "2026-09-08 19:03",
-"prezzo": 43.02,
-"conv": 66,
-"prob_gain": 47,
-"prob_loss": 25,
-"reliab": "🔴 Bassa",
-"mkt": -0.7864,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 50.5589,
-"media20": 49.9845,
-"quattro_atr": 53.0175,
-"meta_caduta": 49.825,
-"bollinger": 56.6116,
-"consigliata": 50.5589
-},
-"stop": 38.0212,
-"atr": 2.4994,
-"res": {
-"7g": -10.23,
-"30g": -39.06,
-"soglia": -39.06
-},
-"res_soglia": {
-"media50": {
-"ret": -39.06,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -39.06,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -39.06,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -39.06,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -39.06,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -39.06,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:MOMO:2026-09-04",
 "ticker": "MOMO",
 "kind": "short",
@@ -30067,5 +30003,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:ZTO:2026-09-22",
+"ticker": "ZTO",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-16 01:54",
+"data": "2026-10-15 23:22",
+"prezzo": 20.02,
+"conv": 73,
+"prob_gain": 48,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-16",
+"soglie": {
+"media50": 20.9658,
+"media20": null,
+"quattro_atr": 21.5487,
+"meta_caduta": 22.32,
+"bollinger": 20.7515,
+"consigliata": 20.9658
+},
+"stop": 19.2557,
+"atr": 0.3822
 }
 ]
