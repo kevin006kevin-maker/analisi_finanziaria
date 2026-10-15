@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:ONON:2026-09-04",
-"ticker": "ONON",
-"kind": "long",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-08 01:57",
-"data": "2026-09-08 01:56",
-"prezzo": 27.99,
-"conv": 72,
-"prob_gain": 67,
-"prob_loss": 20,
-"reliab": "🟡 Media",
-"mkt": -0.5032,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 34.2964,
-"media20": 30.189,
-"quattro_atr": 32.469,
-"meta_caduta": 33.6,
-"bollinger": 35.0805,
-"consigliata": 32.469
-},
-"stop": 25.7505,
-"atr": 1.1198,
-"res": {
-"7g": -4.82,
-"30g": 19.33
-}
-},
-{
 "episodio": "short:TNGX:2026-08-20",
 "ticker": "TNGX",
 "kind": "short",
@@ -30126,5 +30095,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:HWM:2026-10-16",
+"ticker": "HWM",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-16 01:52",
+"data": "2026-09-09 12:41",
+"prezzo": 231.53,
+"conv": 76,
+"prob_gain": 53,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": -1.0266,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 273.8834,
+"media20": 266.504,
+"quattro_atr": 274.0381,
+"meta_caduta": 262.09,
+"bollinger": 301.5721,
+"consigliata": 273.8834
+},
+"stop": 210.276,
+"atr": 10.627
 }
 ]
