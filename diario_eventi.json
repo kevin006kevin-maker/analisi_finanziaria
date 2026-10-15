@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:AXTI:2026-08-29",
-"ticker": "AXTI",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-08 19:07",
-"data": "2026-09-08 19:05",
-"prezzo": 69.12,
-"conv": 59,
-"prob_gain": 51,
-"prob_loss": 35,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "prezzo salito di almeno il 2% da 66.92",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:FLNC:2026-09-08",
 "ticker": "FLNC",
 "kind": "short",
@@ -29978,5 +29958,32 @@
 },
 "stop": 12.7494,
 "atr": 2.0203
+},
+{
+"episodio": "short:JNJ:2026-10-13",
+"ticker": "JNJ",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-16 01:54",
+"data": "2026-10-15 23:18",
+"prezzo": 253.28,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-16",
+"soglie": {
+"media50": 265.259,
+"media20": 262.114,
+"quattro_atr": 278.6729,
+"meta_caduta": 265.855,
+"bollinger": 277.1138,
+"consigliata": 265.259
+},
+"stop": 240.5835,
+"atr": 6.3482
 }
 ]
