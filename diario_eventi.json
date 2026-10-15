@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:NVS:2026-09-08",
-"ticker": "NVS",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-08 19:03",
-"data": "2026-09-08 19:03",
-"prezzo": 137.705,
-"conv": 74,
-"prob_gain": 62,
-"prob_loss": 0,
-"reliab": "🟢 Alta",
-"mkt": -0.7864,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 155.2699,
-"media20": 155.6008,
-"quattro_atr": 156.8261,
-"meta_caduta": 150.3975,
-"bollinger": 166.9942,
-"consigliata": 155.2699
-},
-"stop": 128.1445,
-"atr": 4.7803,
-"res": {
-"7g": 0.8,
-"30g": 2.85,
-"soglia": 2.85
-},
-"res_soglia": {
-"media50": {
-"ret": 2.85,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 2.85,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 2.85,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 2.85,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 2.85,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 2.85,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:GPCR:2026-09-08",
 "ticker": "GPCR",
 "kind": "short",
@@ -30103,6 +30039,26 @@
 "conv": 71,
 "prob_gain": 48,
 "prob_loss": 7,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "in perdita da 9 giorni di Borsa: valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:DKNG:2026-09-30",
+"ticker": "DKNG",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-10-16 01:53",
+"data": "2026-10-16 01:53",
+"prezzo": 19.31,
+"conv": 71,
+"prob_gain": 49,
+"prob_loss": 13,
 "reliab": "🟡 Media",
 "mkt": null,
 "fonte": "monitoraggio",
