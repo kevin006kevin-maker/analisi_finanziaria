@@ -17056,5 +17056,69 @@
 "atr": 8.8428,
 "res": {},
 "bad_data": "salto di prezzo oltre il 25%: probabile raggruppamento di azioni"
+},
+{
+"episodio": "short:LULG:2026-09-04",
+"ticker": "LULG",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-08 01:57",
+"data": "2026-09-08 01:56",
+"prezzo": 4.27,
+"conv": 72,
+"prob_gain": 57,
+"prob_loss": 18,
+"reliab": "🔴 Bassa",
+"mkt": -0.5032,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 6.3761,
+"media20": 6.3199,
+"quattro_atr": 6.7268,
+"meta_caduta": 5.8825,
+"bollinger": 7.5274,
+"consigliata": 6.3761
+},
+"stop": 3.0416,
+"atr": 0.6142,
+"res": {
+"7g": -6.09,
+"30g": -19.2,
+"soglia": -19.2
+},
+"res_soglia": {
+"media50": {
+"ret": -19.2,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -19.2,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -19.2,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -19.2,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -19.2,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -19.2,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
