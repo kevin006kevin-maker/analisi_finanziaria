@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-10-07",
-"ticker": "ENI.MI",
-"kind": "short",
-"price": 24.41,
-"conv": 61,
-"factors": {
-"discount": 1.9088,
-"histcheap": -1.2,
-"riskadj": 2.1,
-"ddpen": -6.49,
-"momentum": 0.6916,
-"prob": 52,
-"oversold": -57.0347,
-"rebound": -2.7608,
-"trend": 1.0,
-"relstrength": -2.6222
-},
-"ret_5d": 5.55,
-"ret_21d": null
-},
-{
-"date": "2026-10-07",
 "ticker": "ISP.MI",
 "kind": "short",
 "price": 6.426,
@@ -39089,6 +39068,66 @@
 "quality": 69.6,
 "valcheap": 0.7959,
 "trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-15",
+"ticker": "HL",
+"kind": "long",
+"price": 14.9,
+"conv": 48,
+"factors": {
+"discount": 53.1594,
+"histcheap": 0.98,
+"riskadj": 0.05,
+"ddpen": -36.52,
+"momentum": 9.0909,
+"prob": 53,
+"quality": 72.9,
+"valcheap": -2.3756,
+"trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-15",
+"ticker": "AEG",
+"kind": "long",
+"price": 8.24,
+"conv": 40,
+"factors": {
+"discount": 13.5362,
+"histcheap": -0.15,
+"riskadj": 0.2,
+"ddpen": -5.69,
+"momentum": 1.3174,
+"prob": 56,
+"quality": 43.0,
+"valcheap": 0.569,
+"trappen": -1
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-15",
+"ticker": "SKYD",
+"kind": "long",
+"price": 7.06,
+"conv": 37,
+"factors": {
+"discount": 59.4951,
+"histcheap": 1.9,
+"riskadj": -2.01,
+"ddpen": -37.13,
+"momentum": 20.5849,
+"prob": 18,
+"quality": null,
+"valcheap": null,
+"trappen": 0
 },
 "ret_5d": null,
 "ret_21d": null
