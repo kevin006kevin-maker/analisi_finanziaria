@@ -4592,7 +4592,9 @@
 "urgenza": "incassa",
 "tipo": "sgonfia"
 },
-"incasso_notified": true
+"incasso_notified": true,
+"warn_since": "2026-10-15",
+"warn": "in perdita da 52 giorni di Borsa: valuta l'uscita"
 },
 "EEM": {
 "kind": "short",
@@ -4771,7 +4773,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-10-15",
 "max_price": 69.1,
-"max_date": "2026-09-22 23:17"
+"max_date": "2026-09-22 23:17",
+"warn_since": "2026-10-15",
+"warn": "in perdita da 52 giorni di Borsa: valuta l'uscita"
 },
 "QQQ": {
 "kind": "short",
@@ -5150,7 +5154,9 @@
 "motivo": "scesa 33% dal massimo (166.17) restando in guadagno (+3.7%): il guadagno si sta sgonfiando",
 "urgenza": "incassa",
 "tipo": "sgonfia"
-}
+},
+"warn_since": "2026-10-15",
+"warn": "in perdita da 52 giorni di Borsa: valuta l'uscita"
 },
 "XLK": {
 "kind": "short",
@@ -7882,9 +7888,7 @@
 "max_date": "2026-09-03 15:46",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-15",
-"warn_since": "2026-10-14",
-"warn": "in perdita da 36 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-15"
 },
 "INTR": {
 "kind": "long",
@@ -11547,9 +11551,7 @@
 "max_date": "2026-10-01 22:21",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-15",
-"warn_since": "2026-10-14",
-"warn": "in perdita da 14 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-15"
 },
 "SMST": {
 "kind": "short",
@@ -12315,9 +12317,7 @@
 "max_date": "2026-10-06 23:17",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-15",
-"warn_since": "2026-10-14",
-"warn": "in perdita da 11 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-15"
 },
 "FSLR": {
 "kind": "short",
@@ -13835,9 +13835,7 @@
 "max_date": "2026-10-10 07:47",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-15",
-"warn_since": "2026-10-14",
-"warn": "in perdita da 9 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-15"
 },
 "PTRN": {
 "kind": "short",
@@ -14032,9 +14030,7 @@
 "max_date": "2026-10-08 21:57",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-15",
-"warn_since": "2026-10-14",
-"warn": "in perdita da 9 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-15"
 },
 "KRMN": {
 "kind": "short",
@@ -14739,10 +14735,8 @@
 "max_price": 64.02,
 "max_date": "2026-10-15 19:47",
 "auto": true,
-"notified": false,
-"entry_check": "2026-10-15",
-"warn_since": "2026-10-12",
-"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
+"notified": true,
+"entry_check": "2026-10-15"
 },
 "PIPR": {
 "kind": "short",
