@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-10-07",
-"ticker": "XLI",
-"kind": "short",
-"price": 171.58,
-"conv": 58,
-"factors": {
-"discount": 8.0049,
-"histcheap": -0.29,
-"riskadj": 0.72,
-"ddpen": -4.24,
-"momentum": -1.4486,
-"prob": 46,
-"oversold": -49.3941,
-"rebound": 2.7844,
-"trend": -1.0,
-"relstrength": -0.482
-},
-"ret_5d": -2.89,
-"ret_21d": null
-},
-{
-"date": "2026-10-07",
 "ticker": "XLU",
 "kind": "short",
 "price": 41.16,
@@ -39044,6 +39023,26 @@
 "rebound": 13.7227,
 "trend": -1.0,
 "relstrength": -9.0715
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-15",
+"ticker": "MAN",
+"kind": "long",
+"price": 43.295,
+"conv": 34,
+"factors": {
+"discount": 31.2232,
+"histcheap": -0.52,
+"riskadj": 0.25,
+"ddpen": -18.95,
+"momentum": 20.355,
+"prob": 62,
+"quality": 36.1,
+"valcheap": 0.2375,
+"trappen": 2
 },
 "ret_5d": null,
 "ret_21d": null
