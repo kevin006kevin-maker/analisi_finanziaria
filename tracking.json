@@ -358,7 +358,7 @@
 ],
 "auto": true,
 "notified": true,
-"exit_notified": true,
+"exit_notified": false,
 "entry_check": "2026-10-15",
 "entry_price": 54.64,
 "entry_target": 56.7535,
@@ -567,7 +567,7 @@
 "tipo": "bersaglio"
 },
 "incasso_notified": true,
-"exit_notified": true
+"exit_notified": false
 },
 "KGC": {
 "kind": "long",
@@ -1516,7 +1516,7 @@
 "entry_src": "storico",
 "max_price": 23.06,
 "max_date": "2026-10-15 01:13",
-"exit_notified": true,
+"exit_notified": false,
 "incasso": {
 "gain": 42.2,
 "max": 23.06,
@@ -6764,7 +6764,7 @@
 "urgenza": "incassa",
 "tipo": "bersaglio"
 },
-"exit_notified": true
+"exit_notified": false
 },
 "CELH": {
 "kind": "short",
