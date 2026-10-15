@@ -7667,7 +7667,8 @@
 "atr": 0.2054,
 "res": {
 "7g": 6.79
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:WSO:2026-08-25",
@@ -7832,7 +7833,8 @@
 "atr": 1.6307,
 "res": {
 "7g": -1.87
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:PSN:2026-09-15",
@@ -7932,7 +7934,8 @@
 "atr": 4.5631,
 "res": {
 "7g": 15.08
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:MONC.MI:2026-09-10",
@@ -7961,7 +7964,41 @@
 "stop": 42.1642,
 "atr": 1.2629,
 "res": {
-"7g": -2.13
+"7g": -2.13,
+"30g": 0.56,
+"soglia": 0.56
+},
+"res_soglia": {
+"media50": {
+"ret": 0.56,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": 0.56,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": 0.56,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": 0.56,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": 0.56,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": 0.56,
+"toccato": false,
+"giorni": null
+}
 }
 },
 {
@@ -7992,7 +8029,8 @@
 "atr": 2.5363,
 "res": {
 "7g": 1.71
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:NAVN:2026-09-10",
@@ -8022,7 +8060,8 @@
 "atr": 1.6307,
 "res": {
 "7g": -1.87
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:AEO:2026-09-10",
@@ -8052,7 +8091,8 @@
 "atr": 0.8285,
 "res": {
 "7g": 3.37
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:RVLV:2026-09-10",
@@ -8082,7 +8122,8 @@
 "atr": 0.942,
 "res": {
 "7g": 3.22
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:TDOC:2026-09-15",
@@ -8112,7 +8153,8 @@
 "atr": 0.2816,
 "res": {
 "7g": 1.54
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:INIO:2026-09-15",
@@ -8142,7 +8184,8 @@
 "atr": 1.631,
 "res": {
 "7g": -4.91
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:HWM:2026-09-15",
@@ -8277,7 +8320,8 @@
 "atr": 0.9275,
 "res": {
 "7g": 0.09
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "long:ASO:2026-08-25",
@@ -8347,7 +8391,8 @@
 "atr": 10.9679,
 "res": {
 "7g": -2.19
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:IONS:2026-09-15",
@@ -8377,7 +8422,8 @@
 "atr": 2.4295,
 "res": {
 "7g": -4.2
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:ALHC:2026-09-15",
@@ -8407,7 +8453,8 @@
 "atr": 0.8499,
 "res": {
 "7g": -20.35
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:AXON:2026-09-15",
@@ -8437,7 +8484,8 @@
 "atr": 30.0835,
 "res": {
 "7g": 4.72
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:XLU:2026-09-15",
@@ -8467,7 +8515,8 @@
 "atr": 0.6491,
 "res": {
 "7g": -1.99
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "long:ENVA:2026-09-15",
@@ -8527,7 +8576,8 @@
 "atr": 2.8393,
 "res": {
 "7g": -10.75
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "long:GAP:2026-08-29",
@@ -8958,7 +9008,8 @@
 "soglie_ritardo_giorni": 1,
 "res": {
 "7g": 26.94
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:RXT:2026-09-03",
@@ -8999,7 +9050,8 @@
 "soglie_ritardo_giorni": 1,
 "res": {
 "7g": 24.13
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:RARE:2026-09-03",
@@ -9040,7 +9092,8 @@
 "soglie_ritardo_giorni": 1,
 "res": {
 "7g": 21.27
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:PSNY:2026-09-03",
@@ -9081,7 +9134,8 @@
 "soglie_ritardo_giorni": 1,
 "res": {
 "7g": 3.14
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "long:ONON:2026-09-04",
@@ -9264,7 +9318,8 @@
 "soglie_ritardo_giorni": 1,
 "res": {
 "7g": -0.67
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:MYGN:2026-09-11",
@@ -9305,7 +9360,8 @@
 "soglie_ritardo_giorni": 1,
 "res": {
 "7g": 1.8
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:KAI:2026-09-11",
@@ -26716,7 +26772,9 @@
 },
 "stop": 24.783,
 "atr": 0.6735,
-"res": {}
+"res": {
+"7g": -2.37
+}
 },
 {
 "episodio": "short:INSM:2026-10-05",
@@ -29316,7 +29374,8 @@
 "consigliata": 15.5098
 },
 "stop": 13.7159,
-"atr": 0.6721
+"atr": 0.6721,
+"res": {}
 },
 {
 "episodio": "long:MU:2026-10-06",
@@ -29343,7 +29402,8 @@
 "consigliata": 982.4094
 },
 "stop": 820.6809,
-"atr": 46.7246
+"atr": 46.7246,
+"res": {}
 },
 {
 "episodio": "long:BMY:2026-10-06",
@@ -29370,7 +29430,8 @@
 "consigliata": 63.6556
 },
 "stop": 55.9039,
-"atr": 1.6881
+"atr": 1.6881,
+"res": {}
 },
 {
 "episodio": "short:ENVA:2026-10-08",
@@ -29397,7 +29458,8 @@
 "consigliata": 200.3974
 },
 "stop": 161.0713,
-"atr": 6.5543
+"atr": 6.5543,
+"res": {}
 },
 {
 "episodio": "short:STMMI.MI:2026-10-15",
