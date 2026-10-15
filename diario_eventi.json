@@ -29815,41 +29815,19 @@
 "atr": 10.627,
 "res": {
 "7g": -1.64,
-"30g": -2.71,
-"soglia": -2.71
+"30g": -2.71
 },
-"res_soglia": {
-"media50": {
-"ret": -2.71,
-"toccato": false,
-"giorni": null
+"soglie_contaminate": {
+"media50": 273.8834,
+"media20": 266.504,
+"quattro_atr": 274.0381,
+"meta_caduta": 262.09,
+"bollinger": 301.5721,
+"consigliata": 273.8834
 },
-"media20": {
-"ret": -2.71,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -2.71,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -2.71,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -2.71,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -2.71,
-"toccato": false,
-"giorni": null
-}
-}
+"soglie_ricalcolate_il": "2026-10-16 01:55",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 37
 },
 {
 "episodio": "short:ADTN:2026-10-16",
@@ -29957,7 +29935,18 @@
 },
 "stop": 19.2557,
 "atr": 0.3822,
-"res": {}
+"res": {},
+"soglie_contaminate": {
+"media50": 20.9658,
+"media20": null,
+"quattro_atr": 21.5487,
+"meta_caduta": 22.32,
+"bollinger": 20.7515,
+"consigliata": 20.9658
+},
+"soglie_ricalcolate_il": "2026-10-16 01:55",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "short:XRAY:2026-09-23",
@@ -29985,7 +29974,18 @@
 },
 "stop": 8.1039,
 "atr": 0.363,
-"res": {}
+"res": {},
+"soglie_contaminate": {
+"media50": 10.2234,
+"media20": 8.981,
+"quattro_atr": 10.2821,
+"meta_caduta": 11.55,
+"bollinger": 9.929,
+"consigliata": 10.2234
+},
+"soglie_ricalcolate_il": "2026-10-16 01:55",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "short:AVBP:2026-10-06",
@@ -30013,7 +30013,18 @@
 },
 "stop": 12.7494,
 "atr": 2.0203,
-"res": {}
+"res": {},
+"soglie_contaminate": {
+"media50": 27.6202,
+"media20": 24.1775,
+"quattro_atr": 24.8713,
+"meta_caduta": 24.26,
+"bollinger": 37.3309,
+"consigliata": 24.8713
+},
+"soglie_ricalcolate_il": "2026-10-16 01:55",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "short:JNJ:2026-10-13",
@@ -30041,6 +30052,17 @@
 },
 "stop": 240.5835,
 "atr": 6.3482,
-"res": {}
+"res": {},
+"soglie_contaminate": {
+"media50": 265.259,
+"media20": 262.114,
+"quattro_atr": 278.6729,
+"meta_caduta": 265.855,
+"bollinger": 277.1138,
+"consigliata": 265.259
+},
+"soglie_ricalcolate_il": "2026-10-16 01:55",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 1
 }
 ]
