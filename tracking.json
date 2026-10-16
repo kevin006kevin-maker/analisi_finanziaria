@@ -4803,7 +4803,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-10-16",
 "max_price": 230.01,
-"max_date": "2026-09-25 15:43"
+"max_date": "2026-09-25 15:43",
+"warn_since": "2026-10-16",
+"warn": "in perdita da 53 giorni di Borsa: valuta l'uscita"
 },
 "EEM": {
 "kind": "short",
@@ -4998,7 +5000,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-10-16",
 "max_price": 69.1,
-"max_date": "2026-09-22 23:17"
+"max_date": "2026-09-22 23:17",
+"warn_since": "2026-10-16",
+"warn": "in perdita da 53 giorni di Borsa: valuta l'uscita"
 },
 "QQQ": {
 "kind": "short",
@@ -5399,7 +5403,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-10-16",
 "max_price": 166.17,
-"max_date": "2026-10-06 18:18"
+"max_date": "2026-10-06 18:18",
+"warn_since": "2026-10-16",
+"warn": "in perdita da 53 giorni di Borsa: valuta l'uscita"
 },
 "XLK": {
 "kind": "short",
@@ -8148,7 +8154,9 @@
 "max_date": "2026-08-27 22:41",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-16"
+"entry_check": "2026-10-16",
+"warn_since": "2026-10-16",
+"warn": "in perdita da 40 giorni di Borsa: valuta l'uscita"
 },
 "DUOL": {
 "kind": "long",
@@ -9035,9 +9043,7 @@
 "max_date": "2026-09-08 19:06",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-16",
-"warn_since": "2026-10-14",
-"warn": "in perdita da 36 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-16"
 },
 "INTC": {
 "kind": "short",
@@ -13454,9 +13460,7 @@
 "max_date": "2026-10-08 21:57",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-16",
-"warn_since": "2026-10-16",
-"warn": "in perdita da 11 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-16"
 },
 "NU": {
 "kind": "short",
@@ -14505,7 +14509,9 @@
 "max_date": "2026-10-10 07:47",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-16"
+"entry_check": "2026-10-16",
+"warn_since": "2026-10-16",
+"warn": "in perdita da 10 giorni di Borsa: valuta l'uscita"
 },
 "PTRN": {
 "kind": "short",
@@ -16318,7 +16324,7 @@
 "max_price": 55.775,
 "max_date": "2026-10-16 16:16",
 "auto": true,
-"notified": false,
+"notified": true,
 "entry_check": "2026-10-16"
 },
 "TDOC": {
@@ -17589,9 +17595,7 @@
 "max_date": "2026-10-09 16:24",
 "auto": true,
 "notified": false,
-"entry_check": "2026-10-16",
-"warn_since": "2026-10-16",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-16"
 },
 "ZTO": {
 "kind": "short",
