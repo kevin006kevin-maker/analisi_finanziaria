@@ -9652,9 +9652,42 @@
 "stop": 46.6349,
 "atr": 1.4976,
 "res": {
-"7g": 0.51
+"7g": 0.51,
+"30g": 1.13,
+"soglia": 1.13
 },
-"res_soglia": {}
+"res_soglia": {
+"media50": {
+"ret": 1.13,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": 1.13,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": 1.13,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": 1.13,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": 1.13,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": 1.13,
+"toccato": false,
+"giorni": null
+}
+}
 },
 {
 "episodio": "short:JBHT:2026-09-16",
