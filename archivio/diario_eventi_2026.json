@@ -17540,5 +17540,69 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:FLNC:2026-09-08",
+"ticker": "FLNC",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-08 22:02",
+"data": "2026-09-08 22:02",
+"prezzo": 11.04,
+"conv": 62,
+"prob_gain": 47,
+"prob_loss": 35,
+"reliab": "🔴 Bassa",
+"mkt": -1.0187,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 13.6603,
+"media20": 11.536,
+"quattro_atr": 14.3998,
+"meta_caduta": 18.115,
+"bollinger": 13.5673,
+"consigliata": 13.6603
+},
+"stop": 9.3601,
+"atr": 0.8399,
+"res": {
+"7g": -15.08,
+"30g": -31.66,
+"soglia": -31.66
+},
+"res_soglia": {
+"media50": {
+"ret": -31.66,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -31.66,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -31.66,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -31.66,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -31.66,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -31.66,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
