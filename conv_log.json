@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-10-07",
-"ticker": "CTOS",
-"kind": "short",
-"price": 9.2,
-"conv": 55,
-"factors": {
-"discount": 23.1412,
-"histcheap": -0.6,
-"riskadj": 1.04,
-"ddpen": -12.26,
-"momentum": -0.9879,
-"prob": 44,
-"oversold": -45.0433,
-"rebound": 5.4391,
-"trend": 1.0,
-"relstrength": -0.5114
-},
-"ret_5d": 2.83,
-"ret_21d": null
-},
-{
-"date": "2026-10-07",
 "ticker": "SKYD",
 "kind": "short",
 "price": 8.815,
@@ -39200,6 +39179,26 @@
 "rebound": 5.7751,
 "trend": 1.0,
 "relstrength": -0.4799
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-16",
+"ticker": "CVE",
+"kind": "long",
+"price": 31.97,
+"conv": 65,
+"factors": {
+"discount": 5.7488,
+"histcheap": -1.3,
+"riskadj": 2.85,
+"ddpen": -7.87,
+"momentum": -1.5243,
+"prob": 28,
+"quality": 67.3,
+"valcheap": -0.06,
+"trappen": 3
 },
 "ret_5d": null,
 "ret_21d": null
