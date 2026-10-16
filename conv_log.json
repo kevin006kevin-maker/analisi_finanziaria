@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-10-08",
-"ticker": "NVA",
-"kind": "short",
-"price": 5.66,
-"conv": 27,
-"factors": {
-"discount": 60.6069,
-"histcheap": 0.64,
-"riskadj": 0.17,
-"ddpen": -53.83,
-"momentum": -4.8148,
-"prob": 12,
-"oversold": -49.9232,
-"rebound": -2.6749,
-"trend": -1.0,
-"relstrength": 2.8514
-},
-"ret_5d": -37.1,
-"ret_21d": null
-},
-{
-"date": "2026-10-08",
 "ticker": "GRAB",
 "kind": "short",
 "price": 3.07,
@@ -38926,6 +38905,26 @@
 "rebound": 18.8234,
 "trend": -1.0,
 "relstrength": -4.4829
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-16",
+"ticker": "BSP",
+"kind": "long",
+"price": 47.455,
+"conv": 26,
+"factors": {
+"discount": 14.9094,
+"histcheap": -1.67,
+"riskadj": 0.78,
+"ddpen": -23.67,
+"momentum": -24.8487,
+"prob": 19,
+"quality": 20.6,
+"valcheap": -3.0,
+"trappen": 0
 },
 "ret_5d": null,
 "ret_21d": null
