@@ -16336,5 +16336,62 @@
 "mkt": null
 }
 }
+},
+{
+"ticker": "JNJ",
+"kind": "short",
+"date": "2026-10-16",
+"promo_price": 256.915,
+"obs_price": 245.86,
+"obs_date": "2026-10-13",
+"pre_price": 245.86,
+"pre_date": "2026-10-14",
+"conf_price": null,
+"conf_date": null,
+"target": 265.2577,
+"stop": 244.5255,
+"reliab": "🟢 Alta",
+"prob_gain": 49,
+"prob_loss": 0,
+"conv": 61,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-13 18:25",
+"prezzo": 245.86,
+"conv": 68,
+"prob_gain": 51,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": 2.8142
+},
+"anticipo": {
+"data": "2026-10-14",
+"prezzo": 245.86,
+"conv": 68,
+"prob_gain": 51,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-16 16:15",
+"prezzo": 256.915,
+"conv": 61,
+"prob_gain": 49,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
