@@ -1,48 +1,6 @@
 [
 {
 "date": "2026-10-07",
-"ticker": "ALEC",
-"kind": "short",
-"price": 1.92,
-"conv": 37,
-"factors": {
-"discount": 41.994,
-"histcheap": 0.04,
-"riskadj": -0.48,
-"ddpen": -43.65,
-"momentum": -3.7838,
-"prob": 37,
-"oversold": -46.9381,
-"rebound": 6.3021,
-"trend": -1.0,
-"relstrength": 1.8285
-},
-"ret_5d": -3.12,
-"ret_21d": null
-},
-{
-"date": "2026-10-07",
-"ticker": "CCOI",
-"kind": "short",
-"price": 9.94,
-"conv": 30,
-"factors": {
-"discount": 77.9601,
-"histcheap": 1.1,
-"riskadj": -1.56,
-"ddpen": -59.91,
-"momentum": -27.5995,
-"prob": 27,
-"oversold": -58.9896,
-"rebound": -0.8491,
-"trend": -1.0,
-"relstrength": 25.6442
-},
-"ret_5d": -19.42,
-"ret_21d": null
-},
-{
-"date": "2026-10-07",
 "ticker": "CNXC",
 "kind": "short",
 "price": 26.16,
@@ -39094,6 +39052,46 @@
 "rebound": 38.0368,
 "trend": -1.0,
 "relstrength": -1.9686
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-16",
+"ticker": "TLK",
+"kind": "long",
+"price": 11.045,
+"conv": 37,
+"factors": {
+"discount": 52.8596,
+"histcheap": 2.18,
+"riskadj": -1.56,
+"ddpen": -27.19,
+"momentum": 13.9127,
+"prob": 43,
+"quality": 54.0,
+"valcheap": 0.1722,
+"trappen": -1
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-16",
+"ticker": "SLS",
+"kind": "long",
+"price": 10.25,
+"conv": 37,
+"factors": {
+"discount": 33.6999,
+"histcheap": -0.79,
+"riskadj": 2.61,
+"ddpen": -19.0,
+"momentum": 12.0172,
+"prob": 41,
+"quality": 26.5,
+"valcheap": -3.0,
+"trappen": 1
 },
 "ret_5d": null,
 "ret_21d": null
