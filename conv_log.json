@@ -1,48 +1,6 @@
 [
 {
 "date": "2026-10-08",
-"ticker": "VOO",
-"kind": "short",
-"price": 716.2,
-"conv": 52,
-"factors": {
-"discount": -0.0,
-"histcheap": -1.71,
-"riskadj": 1.32,
-"ddpen": -2.22,
-"momentum": -1.956,
-"prob": 47,
-"oversold": -61.3718,
-"rebound": -1.7578,
-"trend": 1.0,
-"relstrength": -0.0074
-},
-"ret_5d": -0.97,
-"ret_21d": null
-},
-{
-"date": "2026-10-08",
-"ticker": "VTI",
-"kind": "short",
-"price": 382.54,
-"conv": 53,
-"factors": {
-"discount": 0.458,
-"histcheap": -1.62,
-"riskadj": 1.26,
-"ddpen": -2.23,
-"momentum": -1.94,
-"prob": 49,
-"oversold": -59.9513,
-"rebound": -1.391,
-"trend": 1.0,
-"relstrength": -0.0234
-},
-"ret_5d": -1.15,
-"ret_21d": null
-},
-{
-"date": "2026-10-08",
 "ticker": "IWM",
 "kind": "short",
 "price": 281.34,
@@ -38588,6 +38546,46 @@
 "rebound": 12.2699,
 "trend": -1.0,
 "relstrength": 5.3142
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-16",
+"ticker": "MDXH",
+"kind": "long",
+"price": 0.2066,
+"conv": 38,
+"factors": {
+"discount": 95.868,
+"histcheap": 1.31,
+"riskadj": -1.83,
+"ddpen": -64.42,
+"momentum": 64.9831,
+"prob": 48,
+"quality": null,
+"valcheap": null,
+"trappen": 0
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-16",
+"ticker": "GUTS",
+"kind": "long",
+"price": 1.55,
+"conv": 42,
+"factors": {
+"discount": 94.5499,
+"histcheap": 1.41,
+"riskadj": -1.12,
+"ddpen": -63.2,
+"momentum": 64.9321,
+"prob": 38,
+"quality": null,
+"valcheap": null,
+"trappen": 0
 },
 "ret_5d": null,
 "ret_21d": null
