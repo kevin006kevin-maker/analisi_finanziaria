@@ -96,5 +96,33 @@
 "retroattiva": false,
 "atr_pct": 8.2819,
 "ora": "2026-10-17 00:31"
+},
+{
+"id": "2026-10-17:short:IWM:rimbalzo_grandi",
+"giorno": "2026-10-17",
+"metodo": "rimbalzo_grandi",
+"kind": "short",
+"ticker": "IWM",
+"nome": "IWM",
+"prezzo": 270.44000244140625,
+"profilo": "2026-10-17:short:IWM:punteggio_basso",
+"origine_viva": "scartata:punteggio_basso",
+"retroattiva": false,
+"atr_pct": 1.4277,
+"ora": "2026-10-17 05:00"
+},
+{
+"id": "2026-10-17:long:VICR:rimbalzo_grandi",
+"giorno": "2026-10-17",
+"metodo": "rimbalzo_grandi",
+"kind": "long",
+"ticker": "VICR",
+"nome": "Vicor Corp",
+"prezzo": 191.5,
+"profilo": "2026-10-17:long:VICR:convenienza_sotto_cancello",
+"origine_viva": "scartata:convenienza_sotto_cancello",
+"retroattiva": false,
+"atr_pct": 11.3209,
+"ora": "2026-10-17 05:00"
 }
 ]
