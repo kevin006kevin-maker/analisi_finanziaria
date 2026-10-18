@@ -17759,5 +17759,69 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:DYN:2026-09-09",
+"ticker": "DYN",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-09 00:52",
+"data": "2026-09-09 00:52",
+"prezzo": 20.31,
+"conv": 74,
+"prob_gain": 52,
+"prob_loss": 13,
+"reliab": "🔴 Bassa",
+"mkt": -1.0266,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 24.7474,
+"media20": 25.5305,
+"quattro_atr": 26.1183,
+"meta_caduta": 23.545,
+"bollinger": 28.2944,
+"consigliata": 24.7474
+},
+"stop": 17.4059,
+"atr": 1.4521,
+"res": {
+"7g": -13.24,
+"30g": -15.56,
+"soglia": -15.56
+},
+"res_soglia": {
+"media50": {
+"ret": -15.56,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -15.56,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -15.56,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -15.56,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -15.56,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -15.56,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
