@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:ENOV:2026-09-09",
-"ticker": "ENOV",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-09 00:52",
-"data": "2026-09-09 00:52",
-"prezzo": 19.98,
-"conv": 72,
-"prob_gain": 54,
-"prob_loss": 11,
-"reliab": "🔴 Bassa",
-"mkt": -1.0266,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 25.435,
-"media20": 23.958,
-"quattro_atr": 25.8165,
-"meta_caduta": 25.7,
-"bollinger": 29.1297,
-"consigliata": 25.435
-},
-"stop": 17.0617,
-"atr": 1.4591,
-"res": {
-"7g": -8.71,
-"30g": -10.71,
-"soglia": -10.71
-},
-"res_soglia": {
-"media50": {
-"ret": -10.71,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -10.71,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -10.71,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -10.71,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -10.71,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -10.71,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:NVS:2026-09-08",
 "ticker": "NVS",
 "kind": "short",
@@ -30517,5 +30453,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:JBHT:2026-09-16",
+"ticker": "JBHT",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-19 01:12",
+"data": "2026-10-17 06:58",
+"prezzo": 228.78,
+"conv": 72,
+"prob_gain": 54,
+"prob_loss": 5,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-19",
+"soglie": {
+"media50": 251.6032,
+"media20": 229.6605,
+"quattro_atr": 255.8667,
+"meta_caduta": 258.54,
+"bollinger": 237.8973,
+"consigliata": 251.6032
+},
+"stop": 215.2367,
+"atr": 6.7717
 }
 ]
