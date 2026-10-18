@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:FICO:2026-09-06",
-"ticker": "FICO",
-"kind": "long",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-08 22:03",
-"data": "2026-09-08 22:03",
-"prezzo": 932.4,
-"conv": 69,
-"prob_gain": 77,
-"prob_loss": 14,
-"reliab": "🟡 Media",
-"mkt": -1.0187,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 1162.5742,
-"media20": 1099.363,
-"quattro_atr": 1170.9573,
-"meta_caduta": 1152.74,
-"bollinger": 1238.842,
-"consigliata": 1162.5742
-},
-"stop": 813.1213,
-"atr": 59.6393,
-"res": {
-"7g": 5.84,
-"30g": -25.21
-}
-},
-{
 "episodio": "short:OI:2026-08-21",
 "ticker": "OI",
 "kind": "short",
@@ -30609,5 +30578,32 @@
 "stop": 244.5255,
 "atr": 6.1948,
 "res": {}
+},
+{
+"episodio": "short:TIGO:2026-10-09",
+"ticker": "TIGO",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-18 08:36",
+"data": "2026-10-18 08:36",
+"prezzo": 82.865,
+"conv": 69,
+"prob_gain": 54,
+"prob_loss": 2,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 91.6447,
+"media20": 87.6267,
+"quattro_atr": 95.6579,
+"meta_caduta": 93.5875,
+"bollinger": 97.9435,
+"consigliata": 91.6447
+},
+"stop": 76.4686,
+"atr": 3.1982
 }
 ]
