@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:SYK:2026-09-09",
-"ticker": "SYK",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-09 00:52",
-"data": "2026-09-09 00:52",
-"prezzo": 276.43,
-"conv": 82,
-"prob_gain": 59,
-"prob_loss": 2,
-"reliab": "🟢 Alta",
-"mkt": -1.0266,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 327.7832,
-"media20": 325.883,
-"quattro_atr": 321.0404,
-"meta_caduta": 314.34,
-"bollinger": 359.1687,
-"consigliata": 321.0404
-},
-"stop": 254.1248,
-"atr": 11.1526,
-"res": {
-"7g": 3.93,
-"30g": 1.38,
-"soglia": 1.38
-},
-"res_soglia": {
-"media50": {
-"ret": 1.38,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 1.38,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 1.38,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 1.38,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 1.38,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 1.38,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:DYN:2026-09-09",
 "ticker": "DYN",
 "kind": "short",
@@ -30598,6 +30534,26 @@
 "prob_gain": 51,
 "prob_loss": 8,
 "reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "in perdita da 9 giorni di Borsa: valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:CTVA:2026-10-01",
+"ticker": "CTVA",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-10-19 01:10",
+"data": "2026-10-19 01:10",
+"prezzo": 12.88,
+"conv": 57,
+"prob_gain": 57,
+"prob_loss": 3,
+"reliab": "🟢 Alta",
 "mkt": null,
 "fonte": "monitoraggio",
 "note": "in perdita da 9 giorni di Borsa: valuta l'uscita",
