@@ -30415,7 +30415,18 @@
 "consigliata": 251.6032
 },
 "stop": 215.2367,
-"atr": 6.7717
+"atr": 6.7717,
+"soglie_contaminate": {
+"media50": 251.6032,
+"media20": 229.6605,
+"quattro_atr": 255.8667,
+"meta_caduta": 258.54,
+"bollinger": 237.8973,
+"consigliata": 251.6032
+},
+"soglie_ricalcolate_il": "2026-10-19 01:13",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 2
 },
 {
 "episodio": "short:LQDA:2026-09-30",
@@ -30442,6 +30453,17 @@
 "consigliata": 53.8519
 },
 "stop": 24.5991,
-"atr": 4.8755
+"atr": 4.8755,
+"soglie_contaminate": {
+"media50": 60.5194,
+"media20": 43.3185,
+"quattro_atr": 53.8519,
+"meta_caduta": 62.69,
+"bollinger": 83.1009,
+"consigliata": 53.8519
+},
+"soglie_ricalcolate_il": "2026-10-19 01:13",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 2
 }
 ]
