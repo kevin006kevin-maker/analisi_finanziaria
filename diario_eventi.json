@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:OI:2026-08-21",
-"ticker": "OI",
-"kind": "short",
-"evento": "uscita",
-"scritto_il": "2026-09-08 22:04",
-"data": "2026-09-08 22:04",
-"prezzo": 6.755,
-"conv": 71,
-"prob_gain": 54,
-"prob_loss": 17,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:AAL:2026-08-21",
 "ticker": "AAL",
 "kind": "short",
@@ -30605,5 +30585,25 @@
 },
 "stop": 76.4686,
 "atr": 3.1982
+},
+{
+"episodio": "short:RARE:2026-10-19",
+"ticker": "RARE",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-10-19 01:10",
+"data": "2026-10-19 01:10",
+"prezzo": 14.54,
+"conv": 70,
+"prob_gain": 59,
+"prob_loss": 20,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "in perdita da 13 giorni di Borsa: valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
