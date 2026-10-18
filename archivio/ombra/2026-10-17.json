@@ -124,5 +124,47 @@
 "retroattiva": false,
 "atr_pct": 11.3209,
 "ora": "2026-10-17 05:00"
+},
+{
+"id": "2026-10-17:short:AAPL:forza_relativa",
+"giorno": "2026-10-17",
+"metodo": "forza_relativa",
+"kind": "short",
+"ticker": "AAPL",
+"nome": "AAPL",
+"prezzo": 342.0,
+"profilo": "2026-10-17:short:AAPL:punteggio_basso",
+"origine_viva": "scartata:punteggio_basso",
+"retroattiva": false,
+"atr_pct": 1.9437,
+"ora": "2026-10-18 01:36"
+},
+{
+"id": "2026-10-17:long:TLK:bassa_volatilita",
+"giorno": "2026-10-17",
+"metodo": "bassa_volatilita",
+"kind": "long",
+"ticker": "TLK",
+"nome": "Telkom Indonesia (Persero) Tbk PT",
+"prezzo": 12.779999732971191,
+"profilo": "2026-10-17:long:TLK:poco_scambiato",
+"origine_viva": "scartata:poco_scambiato",
+"retroattiva": false,
+"atr_pct": 2.0027,
+"ora": "2026-10-18 01:36"
+},
+{
+"id": "2026-10-17:long:XLK:bassa_volatilita",
+"giorno": "2026-10-17",
+"metodo": "bassa_volatilita",
+"kind": "long",
+"ticker": "XLK",
+"nome": "State Street Technology Select ",
+"prezzo": 189.19000244140625,
+"profilo": "2026-10-17:long:XLK:punteggio_basso",
+"origine_viva": "scartata:punteggio_basso",
+"retroattiva": false,
+"atr_pct": 1.8038,
+"ora": "2026-10-18 01:36"
 }
 ]
