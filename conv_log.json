@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-10-09",
-"ticker": "DNA",
-"kind": "short",
-"price": 12.865,
-"conv": 21,
-"factors": {
-"discount": 18.7303,
-"histcheap": -2.12,
-"riskadj": -0.26,
-"ddpen": -45.63,
-"momentum": -4.17,
-"prob": 22,
-"oversold": -62.5692,
-"rebound": -33.3626,
-"trend": 1.0,
-"relstrength": 3.2964
-},
-"ret_5d": -12.79,
-"ret_21d": null
-},
-{
-"date": "2026-10-09",
 "ticker": "ABSI",
 "kind": "short",
 "price": 9.9031,
@@ -39234,6 +39213,46 @@
 "rebound": 38.126,
 "trend": -1.0,
 "relstrength": -31.0308
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-18",
+"ticker": "MDXH",
+"kind": "long",
+"price": 0.207,
+"conv": 38,
+"factors": {
+"discount": 95.86,
+"histcheap": 1.31,
+"riskadj": -1.83,
+"ddpen": -64.42,
+"momentum": 64.9153,
+"prob": 45,
+"quality": null,
+"valcheap": null,
+"trappen": 0
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-18",
+"ticker": "GUTS",
+"kind": "long",
+"price": 1.55,
+"conv": 42,
+"factors": {
+"discount": 94.5499,
+"histcheap": 1.41,
+"riskadj": -1.12,
+"ddpen": -63.2,
+"momentum": 64.9321,
+"prob": 38,
+"quality": null,
+"valcheap": null,
+"trappen": 0
 },
 "ret_5d": null,
 "ret_21d": null
