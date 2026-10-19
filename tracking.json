@@ -1600,8 +1600,6 @@
 "entry_check": "2026-10-19",
 "max_price": 97.57,
 "max_date": "2026-08-17 19:56",
-"warn_since": "2026-10-16",
-"warn": "in perdita da 60 giorni di Borsa: valuta l'uscita",
 "incasso_notified": true
 },
 "NEM": {
@@ -5127,7 +5125,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-10-19",
 "max_price": 37.94,
-"max_date": "2026-09-08 22:03"
+"max_date": "2026-09-08 22:03",
+"warn_since": "2026-10-19",
+"warn": "in perdita da 47 giorni di Borsa: valuta l'uscita"
 },
 "CAPR": {
 "kind": "short",
@@ -6579,8 +6579,6 @@
 "notified": true,
 "entry_check": "2026-10-19",
 "exit_notified": false,
-"warn_since": "2026-10-16",
-"warn": "in perdita da 35 giorni di Borsa: valuta l'uscita",
 "incasso_notified": true
 },
 "ENI.MI": {
@@ -8186,7 +8184,9 @@
 "max_date": "2026-10-09 21:47",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-19"
+"entry_check": "2026-10-19",
+"warn_since": "2026-10-19",
+"warn": "in perdita da 16 giorni di Borsa: valuta l'uscita"
 },
 "CASY": {
 "kind": "short",
@@ -10915,10 +10915,8 @@
 "max_price": 17.6,
 "max_date": "2026-10-19 16:40",
 "auto": true,
-"notified": false,
-"entry_check": "2026-10-19",
-"warn_since": "2026-10-16",
-"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
+"notified": true,
+"entry_check": "2026-10-19"
 },
 "ZTO": {
 "kind": "short",
@@ -11033,7 +11031,9 @@
 "max_date": "2026-10-13 18:27",
 "auto": true,
 "notified": false,
-"entry_check": "2026-10-19"
+"entry_check": "2026-10-19",
+"warn_since": "2026-10-19",
+"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
 },
 "XRAY": {
 "kind": "short",
@@ -11265,7 +11265,9 @@
 "max_date": "2026-10-15 23:22",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-19"
+"entry_check": "2026-10-19",
+"warn_since": "2026-10-19",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "LQDA": {
 "kind": "short",
