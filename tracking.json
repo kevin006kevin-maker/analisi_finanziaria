@@ -2201,7 +2201,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-10-19",
 "max_price": 22.21,
-"max_date": "2026-08-27 22:41"
+"max_date": "2026-08-27 22:41",
+"warn_since": "2026-10-19",
+"warn": "in perdita da 58 giorni di Borsa: valuta l'uscita"
 },
 "GOOGL": {
 "kind": "short",
@@ -3205,9 +3207,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-10-19",
 "max_price": 16.06,
-"max_date": "2026-09-02 21:38",
-"warn_since": "2026-10-16",
-"warn": "in perdita da 55 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-09-02 21:38"
 },
 "AAUC": {
 "kind": "short",
@@ -7309,7 +7309,9 @@
 "auto": true,
 "notified": true,
 "entry_check": "2026-10-19",
-"exit_notified": false
+"exit_notified": false,
+"warn_since": "2026-10-19",
+"warn": "in perdita da 35 giorni di Borsa: valuta l'uscita"
 },
 "ENI.MI": {
 "kind": "short",
@@ -10865,9 +10867,7 @@
 "max_date": "2026-10-08 21:57",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-19",
-"warn_since": "2026-10-16",
-"warn": "in perdita da 11 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-19"
 },
 "SAH": {
 "kind": "short",
