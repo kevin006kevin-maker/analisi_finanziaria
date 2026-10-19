@@ -17951,5 +17951,69 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:GPCR:2026-09-08",
+"ticker": "GPCR",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-09 00:53",
+"data": "2026-09-09 00:52",
+"prezzo": 40.38,
+"conv": 71,
+"prob_gain": 48,
+"prob_loss": 26,
+"reliab": "🔴 Bassa",
+"mkt": -1.0266,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 50.5061,
+"media20": 49.8525,
+"quattro_atr": 50.8546,
+"meta_caduta": 48.505,
+"bollinger": 57.1363,
+"consigliata": 50.5061
+},
+"stop": 35.1427,
+"atr": 2.6187,
+"res": {
+"7g": -6.27,
+"30g": -35.69,
+"soglia": -35.69
+},
+"res_soglia": {
+"media50": {
+"ret": -35.69,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -35.69,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -35.69,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -35.69,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -35.69,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -35.69,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
