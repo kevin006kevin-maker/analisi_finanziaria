@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:GPCR:2026-09-08",
-"ticker": "GPCR",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-09 00:53",
-"data": "2026-09-09 00:52",
-"prezzo": 40.38,
-"conv": 71,
-"prob_gain": 48,
-"prob_loss": 26,
-"reliab": "🔴 Bassa",
-"mkt": -1.0266,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 50.5061,
-"media20": 49.8525,
-"quattro_atr": 50.8546,
-"meta_caduta": 48.505,
-"bollinger": 57.1363,
-"consigliata": 50.5061
-},
-"stop": 35.1427,
-"atr": 2.6187,
-"res": {
-"7g": -6.27,
-"30g": -35.69,
-"soglia": -35.69
-},
-"res_soglia": {
-"media50": {
-"ret": -35.69,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -35.69,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -35.69,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -35.69,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -35.69,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -35.69,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "long:CCL:2026-09-09",
 "ticker": "CCL",
 "kind": "long",
@@ -30465,5 +30401,32 @@
 "soglie_ricalcolate_il": "2026-10-19 01:13",
 "taglio_corretto": true,
 "soglie_ritardo_giorni": 2
+},
+{
+"episodio": "short:HTO:2026-10-19",
+"ticker": "HTO",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-19 16:38",
+"data": "2026-10-19 16:37",
+"prezzo": 55.36,
+"conv": 64,
+"prob_gain": 53,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -0.796,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 61.817,
+"media20": 59.5245,
+"quattro_atr": 60.8341,
+"meta_caduta": 60.085,
+"bollinger": 63.8158,
+"consigliata": 60.8341
+},
+"stop": 52.623,
+"atr": 1.3685
 }
 ]
