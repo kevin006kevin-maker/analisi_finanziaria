@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:CCL:2026-09-09",
-"ticker": "CCL",
-"kind": "long",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-09 00:53",
-"data": "2026-09-09 00:52",
-"prezzo": 23.2,
-"conv": 66,
-"prob_gain": 71,
-"prob_loss": 17,
-"reliab": "🟡 Media",
-"mkt": -1.0266,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 26.7128,
-"media20": 25.6465,
-"quattro_atr": 26.397,
-"meta_caduta": 27.05,
-"bollinger": 29.1923,
-"consigliata": 26.397
-},
-"stop": 21.6015,
-"atr": 0.7993,
-"res": {
-"7g": -3.43,
-"30g": 13.87
-}
-},
-{
 "episodio": "long:AEO:2026-08-28",
 "ticker": "AEO",
 "kind": "long",
@@ -30428,5 +30397,32 @@
 },
 "stop": 52.623,
 "atr": 1.3685
+},
+{
+"episodio": "short:SPHR:2026-10-05",
+"ticker": "SPHR",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-19 16:39",
+"data": "2026-10-19 16:39",
+"prezzo": 105.32,
+"conv": 80,
+"prob_gain": 54,
+"prob_loss": 17,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 138.833,
+"media20": 119.399,
+"quattro_atr": 131.0141,
+"meta_caduta": 140.85,
+"bollinger": 150.6253,
+"consigliata": 131.0141
+},
+"stop": 92.473,
+"atr": 6.4235
 }
 ]
