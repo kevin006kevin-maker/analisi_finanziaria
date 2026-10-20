@@ -13045,7 +13045,41 @@
 "stop": 39.9233,
 "atr": 1.7534,
 "res": {
-"7g": 3.58
+"7g": 3.58,
+"30g": -7.87,
+"soglia": 8.91
+},
+"res_soglia": {
+"media50": {
+"ret": 8.91,
+"toccato": true,
+"giorni": 12
+},
+"media20": {
+"ret": 0.05,
+"toccato": true,
+"giorni": 1
+},
+"quattro_atr": {
+"ret": 16.15,
+"toccato": true,
+"giorni": 15
+},
+"meta_caduta": {
+"ret": -7.87,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": 5.72,
+"toccato": true,
+"giorni": 2
+},
+"consigliata": {
+"ret": 8.91,
+"toccato": true,
+"giorni": 12
+}
 }
 },
 {
@@ -30395,7 +30429,9 @@
 },
 "stop": 40.6482,
 "atr": 0.8159,
-"res": {}
+"res": {
+"7g": -0.8
+}
 },
 {
 "episodio": "short:JNJ:2026-10-13",
@@ -31933,7 +31969,8 @@
 },
 "soglie_ricalcolate_il": "2026-10-20 02:03",
 "taglio_corretto": true,
-"soglie_ritardo_giorni": 1
+"soglie_ritardo_giorni": 1,
+"res": {}
 },
 {
 "episodio": "short:G.MI:2026-10-02",
@@ -31960,7 +31997,8 @@
 "consigliata": 43.6606
 },
 "stop": 41.4876,
-"atr": 0.7212
+"atr": 0.7212,
+"res": {}
 },
 {
 "episodio": "long:BCE:2026-10-10",
@@ -31987,7 +32025,8 @@
 "consigliata": 21.8162
 },
 "stop": 18.8219,
-"atr": 0.4991
+"atr": 0.4991,
+"res": {}
 },
 {
 "episodio": "long:AA:2026-10-20",
@@ -32014,6 +32053,7 @@
 "consigliata": 46.7446
 },
 "stop": 38.3339,
-"atr": 1.668
+"atr": 1.668,
+"res": {}
 }
 ]
