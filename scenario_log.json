@@ -16742,5 +16742,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "IWM",
+"kind": "short",
+"date": "2026-10-20",
+"promo_price": 276.85,
+"obs_price": 279.18,
+"obs_date": "2026-09-28",
+"pre_price": 279.01,
+"pre_date": "2026-10-01",
+"conf_price": null,
+"conf_date": null,
+"target": 288.0016,
+"stop": 269.0984,
+"reliab": "🟢 Alta",
+"prob_gain": 48,
+"prob_loss": 0,
+"conv": 63,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-28 17:57",
+"prezzo": 279.18,
+"conv": 62,
+"prob_gain": 49,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -0.3755
+},
+"anticipo": {
+"data": "2026-10-01",
+"prezzo": 279.01,
+"conv": 67,
+"prob_gain": 50,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-20 17:05",
+"prezzo": 276.85,
+"conv": 63,
+"prob_gain": 48,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
