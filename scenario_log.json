@@ -7789,7 +7789,15 @@
 "res": {
 "anticipo|7g": 3.24,
 "osservazione|7g": -7.02,
-"promozione|7g": 3.58
+"promozione|7g": 3.58,
+"anticipo|30g": -8.18,
+"osservazione|30g": -17.3,
+"promozione|30g": -7.87,
+"conferma|30g": -13.26,
+"anticipo|bersaglio": 8.55,
+"osservazione|bersaglio": -2.23,
+"promozione|bersaglio": 8.91,
+"conferma|bersaglio": 2.55
 }
 },
 {
@@ -16217,8 +16225,8 @@
 "obs_date": "2026-10-02",
 "pre_price": 41.46,
 "pre_date": "2026-10-05",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 41.939998626708984,
+"conf_date": "2026-10-20",
 "target": 43.8488,
 "stop": 40.6482,
 "reliab": "🟢 Alta",
@@ -16254,16 +16262,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-10-20",
+"prezzo": 41.939998626708984,
+"conv": 63,
+"prob_gain": 49,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": 1.16,
+"osservazione|7g": 1.48,
+"promozione|7g": -0.8
+}
 },
 {
 "ticker": "ARGX",
