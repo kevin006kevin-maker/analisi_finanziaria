@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-10-11",
-"ticker": "NMIH",
-"kind": "short",
-"price": 40.01,
-"conv": 53,
-"factors": {
-"discount": 12.4699,
-"histcheap": -0.14,
-"riskadj": 0.44,
-"ddpen": -6.91,
-"momentum": -3.0389,
-"prob": 48,
-"oversold": -40.9283,
-"rebound": 8.3017,
-"trend": -1.0,
-"relstrength": 1.8888
-},
-"ret_5d": 2.57,
-"ret_21d": null
-},
-{
-"date": "2026-10-11",
 "ticker": "MTG",
 "kind": "short",
 "price": 27.43,
@@ -38858,6 +38837,46 @@
 "rebound": 4.465,
 "trend": 1.0,
 "relstrength": -2.2767
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-20",
+"ticker": "AA",
+"kind": "long",
+"price": 41.67,
+"conv": 59,
+"factors": {
+"discount": 50.2685,
+"histcheap": 1.14,
+"riskadj": 0.11,
+"ddpen": -26.33,
+"momentum": -0.0,
+"prob": 41,
+"quality": 64.2,
+"valcheap": 0.8267,
+"trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-20",
+"ticker": "TLK",
+"kind": "long",
+"price": 10.45,
+"conv": 40,
+"factors": {
+"discount": 55.3991,
+"histcheap": 2.33,
+"riskadj": -1.71,
+"ddpen": -27.47,
+"momentum": 18.2316,
+"prob": 52,
+"quality": 54.7,
+"valcheap": 0.2701,
+"trappen": -1
 },
 "ret_5d": null,
 "ret_21d": null
