@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:HMY:2026-08-28",
-"ticker": "HMY",
-"kind": "long",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-09 00:54",
-"data": "2026-09-09 00:52",
-"prezzo": 20.23,
-"conv": 58,
-"prob_gain": 63,
-"prob_loss": 28,
-"reliab": "🔴 Bassa",
-"mkt": -1.0266,
-"fonte": "osservazione",
-"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-09",
-"soglie": {
-"media50": null,
-"media20": 20.6535,
-"quattro_atr": 23.8301,
-"meta_caduta": 21.885,
-"bollinger": 23.4156,
-"consigliata": 23.8301
-},
-"stop": 18.43,
-"atr": 0.9,
-"res": {
-"7g": -3.81,
-"30g": -17.05
-}
-},
-{
 "episodio": "short:ENI.MI:2026-08-28",
 "ticker": "ENI.MI",
 "kind": "short",
@@ -32019,5 +31988,32 @@
 },
 "stop": 18.8219,
 "atr": 0.4991
+},
+{
+"episodio": "long:AA:2026-10-20",
+"ticker": "AA",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-20 12:00",
+"data": "2026-10-20 12:00",
+"prezzo": 41.67,
+"conv": 60,
+"prob_gain": 66,
+"prob_loss": 25,
+"reliab": "🟡 Media",
+"mkt": -0.9526,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 46.7446,
+"media20": 42.272,
+"quattro_atr": 48.3421,
+"meta_caduta": 47.875,
+"bollinger": 44.4586,
+"consigliata": 46.7446
+},
+"stop": 38.3339,
+"atr": 1.668
 }
 ]
