@@ -16803,5 +16803,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "NESR",
+"kind": "short",
+"date": "2026-10-21",
+"promo_price": 21.09,
+"obs_price": 26.12,
+"obs_date": "2026-09-29",
+"pre_price": 26.49,
+"pre_date": "2026-10-01",
+"conf_price": null,
+"conf_date": null,
+"target": 30.142,
+"stop": 18.2326,
+"reliab": "🟡 Media",
+"prob_gain": 52,
+"prob_loss": 20,
+"conv": 77,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-29 17:05",
+"prezzo": 26.12,
+"conv": 77,
+"prob_gain": 57,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": -0.1905
+},
+"anticipo": {
+"data": "2026-10-01",
+"prezzo": 26.49,
+"conv": 81,
+"prob_gain": 58,
+"prob_loss": 9,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-21 00:41",
+"prezzo": 21.09,
+"conv": 77,
+"prob_gain": 52,
+"prob_loss": 20,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
