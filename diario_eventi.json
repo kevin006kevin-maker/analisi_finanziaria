@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:MXL:2026-09-03",
-"ticker": "MXL",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-09 00:54",
-"data": "2026-09-08 22:02",
-"prezzo": 66.5,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-09",
-"soglie": {
-"media50": 76.0832,
-"media20": 67.2065,
-"quattro_atr": 89.5809,
-"meta_caduta": 97.265,
-"bollinger": 82.8036,
-"consigliata": 76.0832
-},
-"stop": 54.9596,
-"atr": 5.7702,
-"soglie_contaminate": {
-"media50": 76.0832,
-"media20": 67.2065,
-"quattro_atr": 89.5801,
-"meta_caduta": 97.265,
-"bollinger": 82.8036,
-"consigliata": 76.0832
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": 0.24,
-"30g": 53.17,
-"soglia": 14.41
-},
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": 14.41,
-"toccato": true,
-"giorni": 10
-},
-"media20": {
-"ret": 1.06,
-"toccato": true,
-"giorni": 1
-},
-"quattro_atr": {
-"ret": 34.71,
-"toccato": true,
-"giorni": 17
-},
-"meta_caduta": {
-"ret": 46.26,
-"toccato": true,
-"giorni": 24
-},
-"bollinger": {
-"ret": 24.52,
-"toccato": true,
-"giorni": 13
-},
-"consigliata": {
-"ret": 14.41,
-"toccato": true,
-"giorni": 10
-}
-}
-},
-{
 "episodio": "short:PL:2026-09-03",
 "ticker": "PL",
 "kind": "short",
@@ -31992,5 +31917,32 @@
 },
 "stop": 18.2326,
 "atr": 1.4287
+},
+{
+"episodio": "short:MRP:2026-10-05",
+"ticker": "MRP",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-21 00:41",
+"data": "2026-10-21 00:41",
+"prezzo": 23.46,
+"conv": 75,
+"prob_gain": 54,
+"prob_loss": 5,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 27.66,
+"media20": 23.9515,
+"quattro_atr": 27.4384,
+"meta_caduta": 27.74,
+"bollinger": 27.9857,
+"consigliata": 27.4384
+},
+"stop": 21.4708,
+"atr": 0.9946
 }
 ]
