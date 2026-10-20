@@ -16860,5 +16860,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "MRP",
+"kind": "short",
+"date": "2026-10-21",
+"promo_price": 23.46,
+"obs_price": 22.19,
+"obs_date": "2026-10-05",
+"pre_price": 23.17,
+"pre_date": "2026-10-11",
+"conf_price": null,
+"conf_date": null,
+"target": 27.66,
+"stop": 21.4708,
+"reliab": "🟢 Alta",
+"prob_gain": 54,
+"prob_loss": 5,
+"conv": 75,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-05 17:57",
+"prezzo": 22.19,
+"conv": 89,
+"prob_gain": 61,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": 0.5555
+},
+"anticipo": {
+"data": "2026-10-11",
+"prezzo": 23.17,
+"conv": 70,
+"prob_gain": 57,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-21 00:41",
+"prezzo": 23.46,
+"conv": 75,
+"prob_gain": 54,
+"prob_loss": 5,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
