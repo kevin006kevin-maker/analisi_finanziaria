@@ -6275,7 +6275,7 @@
 "urgenza": "tieni d'occhio",
 "tipo": "ipercomprato"
 },
-"exit_notified": true
+"exit_notified": false
 },
 "MXL": {
 "kind": "short",
@@ -7068,7 +7068,8 @@
 "motivo": "bersaglio 4.10 raggiunto (sei a +8.8%): valuta di incassare",
 "urgenza": "incassa",
 "tipo": "bersaglio"
-}
+},
+"exit_notified": true
 },
 "WING": {
 "kind": "short",
@@ -7178,7 +7179,7 @@
 "tipo": "bersaglio"
 },
 "incasso_notified": true,
-"exit_notified": true
+"exit_notified": false
 },
 "ON": {
 "kind": "short",
