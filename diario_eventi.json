@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:PSNY:2026-09-03",
-"ticker": "PSNY",
-"kind": "short",
-"evento": "promozione",
-"scritto_il": "2026-09-09 00:53",
-"data": "2026-09-09 00:53",
-"prezzo": 8.93,
-"conv": 71,
-"prob_gain": 52,
-"prob_loss": 22,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": 14.621,
-"media20": 12.5405,
-"quattro_atr": 12.9715,
-"meta_caduta": 14.84,
-"bollinger": 15.9556,
-"consigliata": 12.9715
-},
-"stop": 6.9092,
-"atr": 1.0104,
-"res": {
-"7g": -19.82,
-"30g": -40.2,
-"soglia": -40.2
-},
-"res_soglia": {
-"media50": {
-"ret": -40.2,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -40.2,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -40.2,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -40.2,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -40.2,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -40.2,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:GOF:2026-08-21",
 "ticker": "GOF",
 "kind": "short",
@@ -32071,6 +32007,26 @@
 "mkt": null,
 "fonte": "monitoraggio",
 "note": "in perdita da 53 giorni di Borsa: valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:RXT:2026-09-03",
+"ticker": "RXT",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-10-20 02:00",
+"data": "2026-10-20 02:00",
+"prezzo": 2.74,
+"conv": 62,
+"prob_gain": 43,
+"prob_loss": 45,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "in perdita da 29 giorni di Borsa: valuta l'uscita",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
