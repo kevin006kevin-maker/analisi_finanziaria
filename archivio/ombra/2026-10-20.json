@@ -1426,5 +1426,47 @@
 "retroattiva": false,
 "atr_pct": 2.9364,
 "ora": "2026-10-20 15:10"
+},
+{
+"id": "2026-10-20:short:NVAX:ombra_regole_nuove",
+"giorno": "2026-10-20",
+"metodo": "ombra_regole_nuove",
+"kind": "short",
+"ticker": "NVAX",
+"nome": "NVAX",
+"prezzo": 11.505000114440918,
+"profilo": "2026-10-20:short:NVAX:punteggio_basso",
+"origine_viva": "scartata:punteggio_basso",
+"retroattiva": false,
+"atr_pct": 8.6363,
+"ora": "2026-10-20 19:16"
+},
+{
+"id": "2026-10-20:long:BMY:vicino_massimi",
+"giorno": "2026-10-20",
+"metodo": "vicino_massimi",
+"kind": "long",
+"ticker": "BMY",
+"nome": "Bristol-Myers Squibb Company",
+"prezzo": 61.60499954223633,
+"profilo": "2026-10-20:long:BMY:punteggio_basso",
+"origine_viva": "scartata:punteggio_basso",
+"retroattiva": false,
+"atr_pct": 2.9896,
+"ora": "2026-10-20 19:16"
+},
+{
+"id": "2026-10-20:short:NVAX:trend_template",
+"giorno": "2026-10-20",
+"metodo": "trend_template",
+"kind": "short",
+"ticker": "NVAX",
+"nome": "NVAX",
+"prezzo": 11.505000114440918,
+"profilo": "2026-10-20:short:NVAX:punteggio_basso",
+"origine_viva": "scartata:punteggio_basso",
+"retroattiva": false,
+"atr_pct": 8.6363,
+"ora": "2026-10-20 19:16"
 }
 ]
