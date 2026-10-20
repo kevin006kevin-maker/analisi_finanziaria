@@ -1,0 +1,417 @@
+<title>Scenari a registro pieno</title>
+<style>
+  :root{
+    --ink:#171b22; --ink-soft:#41505f; --ink-faint:#6b7b8c;
+    --ground:#f2f4f6; --sheet:#ffffff; --panel:#fafbfc;
+    --rule:#d3d9e0; --rule-soft:#e5e9ee;
+    --accent:#1f4b7a; --accent-bg:#eaf0f7;
+    --ok:#245f45; --ok-bg:#e7f2ec;
+    --crit:#9e2f22; --crit-bg:#f8eae7;
+    --warn:#7d5a0b; --warn-bg:#f8f2e2;
+    --v-soglia:#c2185b; --v-7g:#0277bd; --v-30g:#ef6c00;
+    --s1:#8b5cd6; --s2:#3987e5; --s3:#0f9b8e; --s4:#d95926; --s5:#199e70;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --ink:#e4e9ef; --ink-soft:#a7b4c2; --ink-faint:#7f8d9c;
+      --ground:#11151b; --sheet:#171d25; --panel:#1c232c;
+      --rule:#2c353f; --rule-soft:#222a33;
+      --accent:#7fb0e0; --accent-bg:#1b2937;
+      --ok:#7cc4a1; --ok-bg:#16281f;
+      --crit:#e8897c; --crit-bg:#2e1c19;
+      --warn:#dcb75c; --warn-bg:#2b2415;
+      --v-soglia:#e8639a; --v-7g:#4fa3d8; --v-30g:#f0913f;
+      --s1:#a983e6; --s2:#6ba8f0; --s3:#3cc3b6; --s4:#e8804f; --s5:#4cc196;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#e4e9ef; --ink-soft:#a7b4c2; --ink-faint:#7f8d9c;
+    --ground:#11151b; --sheet:#171d25; --panel:#1c232c;
+    --rule:#2c353f; --rule-soft:#222a33;
+    --accent:#7fb0e0; --accent-bg:#1b2937;
+    --ok:#7cc4a1; --ok-bg:#16281f;
+    --crit:#e8897c; --crit-bg:#2e1c19;
+    --warn:#dcb75c; --warn-bg:#2b2415;
+    --v-soglia:#e8639a; --v-7g:#4fa3d8; --v-30g:#f0913f;
+    --s1:#a983e6; --s2:#6ba8f0; --s3:#3cc3b6; --s4:#e8804f; --s5:#4cc196;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--ground); color:var(--ink); font-size:15px; line-height:1.55;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:66rem; margin:0 auto; padding:2rem 1.2rem 4rem}
+
+  .demo{border:1px solid var(--rule); border-left:3px solid var(--accent); background:var(--sheet);
+    padding:.8rem 1rem; margin:0 0 1.3rem; font-size:.86rem; color:var(--ink-soft)}
+  .demo strong{color:var(--ink)}
+  .legenda{display:flex; flex-wrap:wrap; gap:1.2rem; margin-top:.6rem; font-size:.82rem}
+  .pill{display:inline-block; font-size:.65rem; letter-spacing:.07em; text-transform:uppercase;
+    font-family:ui-monospace,Consolas,monospace; padding:.1rem .38rem; border:1px solid currentColor}
+  .p-vero{color:var(--ok); background:var(--ok-bg)}
+  .p-stima{color:var(--warn); background:var(--warn-bg)}
+
+  header{border-bottom:2px solid var(--ink); padding-bottom:1rem; margin-bottom:1.2rem}
+  .eyebrow{font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-faint);
+    font-family:ui-monospace,Consolas,monospace; margin:0 0 .7rem}
+  h1{font-size:1.7rem; line-height:1.15; margin:0 0 .4rem; font-weight:640; letter-spacing:-.02em}
+  header p.d{margin:0; color:var(--ink-soft); font-size:.94rem; max-width:64ch}
+
+  .bar{border:1px solid var(--rule); background:var(--sheet); margin-bottom:1.1rem; padding:.8rem 1rem;
+    display:flex; flex-wrap:wrap; gap:1.4rem; align-items:flex-end}
+  .fld label{display:block; font-size:.66rem; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--ink-faint); font-family:ui-monospace,Consolas,monospace; margin-bottom:.3rem}
+  .seg{display:inline-flex; border:1px solid var(--rule); flex-wrap:wrap}
+  .seg button{appearance:none; border:0; background:var(--panel); color:var(--ink-soft); font:inherit;
+    font-size:.84rem; padding:.32rem .75rem; cursor:pointer; border-right:1px solid var(--rule)}
+  .seg button:last-child{border-right:0}
+  .seg button[aria-pressed="true"]{background:var(--accent); color:#fff; font-weight:600}
+  :root:not([data-theme="light"]) .seg button[aria-pressed="true"]{color:#0d1218}
+  @media (prefers-color-scheme:light){ .seg button[aria-pressed="true"]{color:#fff} }
+  :root[data-theme="dark"] .seg button[aria-pressed="true"]{color:#0d1218}
+  .val{font-size:.9rem; padding:.32rem .5rem; border:1px solid var(--rule); background:var(--panel);
+    font-variant-numeric:tabular-nums; min-width:4.5rem; display:inline-block}
+
+  .tabs{display:flex; border-bottom:2px solid var(--rule); margin-bottom:1.3rem; overflow-x:auto}
+  .tabs button{appearance:none; border:0; background:none; font:inherit; font-size:.92rem;
+    padding:.55rem .8rem; cursor:pointer; color:var(--ink-faint); border-bottom:2px solid transparent;
+    margin-bottom:-2px; white-space:nowrap}
+  .tabs button[aria-selected="true"]{color:var(--ink); font-weight:640; border-bottom-color:var(--accent)}
+
+  h2{font-size:1.2rem; font-weight:640; margin:0 0 .3rem; letter-spacing:-.01em}
+  p.sub{margin:0 0 1rem; color:var(--ink-soft); font-size:.9rem; max-width:72ch}
+  h3{font-size:1rem; font-weight:640; margin:1.7rem 0 .4rem}
+
+  table{width:100%; border-collapse:collapse; font-size:.86rem}
+  th,td{text-align:left; padding:.45rem .6rem; border-bottom:1px solid var(--rule-soft)}
+  th{font-size:.67rem; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint);
+    font-family:ui-monospace,Consolas,monospace; font-weight:400; background:var(--panel)}
+  td.n{text-align:right; font-variant-numeric:tabular-nums; font-family:ui-monospace,Consolas,monospace}
+  .box{border:1px solid var(--rule); background:var(--sheet); overflow-x:auto}
+
+  .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(13.5rem,1fr)); gap:.9rem; margin:1rem 0}
+  .card{border:1px solid var(--rule); background:var(--sheet); padding:.9rem}
+  .card h4{margin:0 0 .5rem; font-size:.88rem}
+  .card .big{font-size:1.55rem; font-weight:640; letter-spacing:-.02em; font-variant-numeric:tabular-nums}
+  .card .eu{font-size:1.02rem; font-weight:600; font-variant-numeric:tabular-nums; margin-top:.1rem}
+  .card .sm{font-size:.78rem; color:var(--ink-faint); margin-top:.35rem; line-height:1.5}
+  .pos{color:var(--ok)} .neg{color:var(--crit)}
+  .quante{display:inline-block; background:var(--accent-bg); color:var(--accent); font-weight:640;
+    padding:.08rem .4rem; font-variant-numeric:tabular-nums}
+
+  .chart{border:1px solid var(--rule); background:var(--sheet); padding:.8rem; margin-top:.9rem}
+  .chart svg{width:100%; height:auto; display:block}
+  .lg{display:flex; flex-wrap:wrap; gap:1rem; margin-top:.5rem; font-size:.79rem; color:var(--ink-soft)}
+  .lg i{display:inline-block; width:1.3rem; height:0; border-top:2.4px solid; vertical-align:.32em; margin-right:.35rem}
+
+  .note{border:1px solid var(--rule); border-left:3px solid var(--warn); background:var(--sheet);
+    padding:.75rem .95rem; margin:1rem 0; font-size:.88rem; color:var(--ink-soft)}
+  .note.bad{border-left-color:var(--crit)} .note.good{border-left-color:var(--ok)}
+  .note strong{color:var(--ink)}
+  footer{margin-top:2.4rem; padding-top:1rem; border-top:1px solid var(--rule); font-size:.8rem; color:var(--ink-faint)}
+  .hide{display:none !important}
+</style>
+
+<div class="wrap">
+<p class="demo"><strong>Anteprima: come saranno gli Scenari quando il diario avrà i dati.</strong>
+Nell&rsquo;app oggi queste schede sono vuote, perché il diario degli eventi è entrato in funzione
+ieri. Qui vedi la stessa impaginazione a registro pieno, e dove i numeri esistono già sono quelli
+veri, non inventati.
+<span class="legenda">
+  <span><span class="pill p-vero">misurato</span> numeri veri, calcolati adesso sui registri</span>
+  <span><span class="pill p-stima">stimato</span> ordine di grandezza; nei grafici è la linea tratteggiata</span>
+</span></p>
+
+<header>
+  <p class="eyebrow">Analisi finanziaria · anteprima della sezione Scenari · breve periodo</p>
+  <h1>Scenari</h1>
+  <p class="d">Cinque momenti in cui comprare e tre regole per vendere. Ogni scenario aggiunge
+  <b>una condizione sola</b> al precedente, e accanto a ogni rendimento c&rsquo;è sempre quante
+  occasioni avresti comprato.</p>
+</header>
+
+<div class="bar">
+  <div class="fld"><label>Tipo di occasione</label>
+    <div class="seg"><button aria-pressed="true">Breve periodo</button><button aria-pressed="false">Lungo periodo</button></div>
+  </div>
+  <div class="fld"><label>Filtro di qualità</label>
+    <div class="seg" id="segFiltro">
+      <button data-v="tutte" aria-pressed="true">Tutte</button>
+      <button data-v="migliori" aria-pressed="false">Solo le migliori</button>
+    </div>
+  </div>
+  <div class="fld"><label>Investo per occasione</label><span class="val">30,00 &euro;</span></div>
+  <div class="fld"><label>Commissione per ordine</label><span class="val">1,00 &euro;</span></div>
+</div>
+
+<div class="tabs" id="tabs">
+  <button data-t="riep" aria-selected="true">📋 Riepilogo</button>
+  <button data-t="s1" aria-selected="false">1️⃣ Entra in osservazione</button>
+  <button data-t="s2" aria-selected="false">2️⃣ Entra in «In anticipo»</button>
+  <button data-t="s3" aria-selected="false">3️⃣ Fine osservazione</button>
+  <button data-t="s4" aria-selected="false">4️⃣ Entra in monitoraggio</button>
+  <button data-t="s5" aria-selected="false">5️⃣ Dopo la verifica</button>
+</div>
+
+<section id="p-riep">
+  <h2>📋 Tutti gli scenari a confronto</h2>
+  <p class="sub">Il confronto fra due righe vicine dice quanto vale la condizione che le separa.</p>
+
+  <h3>L&rsquo;imbuto: quante occasioni arrivano a ciascuna tappa <span class="pill p-vero">misurato</span></h3>
+  <div class="box"><table>
+    <thead><tr><th>Tappa</th><th style="text-align:right">Quante occasioni</th><th style="text-align:right">Passa</th></tr></thead>
+    <tbody>
+      <tr><td>Titoli guardati dal sistema</td><td class="n">1.251</td><td class="n">—</td></tr>
+      <tr><td>Entrano in osservazione (convenienza 60)</td><td class="n">576</td><td class="n">46%</td></tr>
+      <tr><td>Compaiono in «In anticipo» (convenienza 65)</td><td class="n">90</td><td class="n">16%</td></tr>
+      <tr><td>Finiscono i giorni di osservazione</td><td class="n">118</td><td class="n">20%</td></tr>
+      <tr><td>Entrano in monitoraggio (fanno il +2%)</td><td class="n">61</td><td class="n">11%</td></tr>
+      <tr><td>Superano la verifica</td><td class="n">54</td><td class="n">9%</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub" style="margin-top:.6rem">Si legge subito quale condizione blocca di più:
+  <b>dal 20% all&rsquo;11%</b>, cioè il rimbalzo del 2% dimezza le occasioni.</p>
+
+  <h3>I cinque scenari per le tre regole di vendita</h3>
+  <div class="box"><table id="tabRiep"><thead></thead><tbody></tbody></table></div>
+  <p class="sub" style="margin-top:.6rem">In ogni casella: <b>caso tipico</b> · <b>quanto resta in
+  tasca</b> per operazione · <b>(quante occasioni)</b>.</p>
+
+  <h3>Tutti gli scenari nello stesso grafico</h3>
+  <p class="sub">Una linea per scenario: somma, operazione dopo operazione, quello che ti sarebbe
+  rimasto in tasca. Scegli con quale regola vendere e le cinque linee si ricalcolano.</p>
+  <div style="display:flex; flex-wrap:wrap; gap:1.4rem; margin-bottom:.7rem">
+    <div class="fld"><label>Vendendo</label><div class="seg" id="segVendita"></div></div>
+    <div class="fld"><label>Cosa mostra la linea</label>
+      <div class="seg" id="segScala">
+        <button data-v="totale" aria-pressed="true">Totale in tasca</button>
+        <button data-v="media" aria-pressed="false">Media per operazione</button>
+      </div>
+    </div>
+  </div>
+  <div id="graficoTutti"></div>
+  <div class="note bad" id="notaGrafico"></div>
+</section>
+
+<section id="p-s1" class="hide"></section>
+<section id="p-s2" class="hide"></section>
+<section id="p-s3" class="hide"></section>
+<section id="p-s4" class="hide"></section>
+<section id="p-s5" class="hide"></section>
+
+<footer>
+  Pagina statica di anteprima, non è l&rsquo;app e non tocca nessun dato. Misurato = calcolato adesso
+  sui registri veri al 20 agosto 2026. Stimato = ordine di grandezza, linea tratteggiata nei grafici.
+  <b>La vendita «alla soglia» è stimata in tutti e cinque gli scenari</b>: il bersaglio viene
+  calcolato solo quando l&rsquo;occasione entra in monitoraggio, quindi per i primi tre oggi non
+  esiste, e per gli altri due il suo esito matura a trenta giorni e non è ancora pronto.
+  Il conto in euro comprende due commissioni e la tassa del 26%.
+</footer>
+</div>
+
+<script>
+const SERIE = {"s1":[["2026-06-29",-2.64],["2026-06-29",-4.03],["2026-06-29",10.44],["2026-06-29",6.51],["2026-06-29",0.0],["2026-06-29",1.35],["2026-06-29",-3.71],["2026-06-29",13.76],["2026-06-29",-1.07],["2026-06-29",1.22],["2026-06-29",18.97],["2026-06-29",2.38],["2026-06-29",1.74],["2026-06-29",-1.28],["2026-06-29",-27.24],["2026-06-29",-19.79],["2026-06-29",-17.21],["2026-06-29",38.24],["2026-06-29",5.52],["2026-06-29",-5.28],["2026-06-29",5.86],["2026-06-29",-4.26],["2026-06-30",4.87],["2026-06-30",-3.64],["2026-06-30",6.12],["2026-06-30",-4.94],["2026-06-30",-6.75],["2026-06-30",4.16],["2026-06-30",5.2],["2026-06-30",0.23],["2026-06-30",2.19],["2026-06-30",13.16],["2026-06-30",-3.39],["2026-06-30",-10.69],["2026-06-30",-9.16],["2026-06-30",-12.15],["2026-06-30",-1.24],["2026-06-30",15.92],["2026-07-01",34.05],["2026-07-01",3.89],["2026-07-01",33.77],["2026-07-01",35.38],["2026-07-01",15.78],["2026-07-01",3.13],["2026-07-01",1.92],["2026-07-01",-6.09],["2026-07-01",4.14],["2026-07-01",-0.67],["2026-07-01",-9.8],["2026-07-01",11.52],["2026-07-01",-1.83],["2026-07-01",1.58],["2026-07-01",2.02],["2026-07-01",-20.6],["2026-07-01",1.79],["2026-07-01",-1.27],["2026-07-02",15.33],["2026-07-02",-11.82],["2026-07-02",7.37],["2026-07-02",-21.41],["2026-07-02",10.02],["2026-07-02",0.66],["2026-07-02",-0.82],["2026-07-02",-2.63],["2026-07-02",6.24],["2026-07-02",-3.55],["2026-07-02",-11.26],["2026-07-02",13.74],["2026-07-02",8.39],["2026-07-02",-13.04],["2026-07-03",-1.93],["2026-07-03",-1.13],["2026-07-03",0.66],["2026-07-03",8.91],["2026-07-03",6.67],["2026-07-06",17.18],["2026-07-06",-31.25],["2026-07-06",7.28],["2026-07-06",0.13],["2026-07-06",-1.29],["2026-07-06",0.7],["2026-07-06",-0.65],["2026-07-06",2.8],["2026-07-06",-6.89],["2026-07-06",-27.42],["2026-07-06",15.41],["2026-07-07",-6.61],["2026-07-07",-1.73],["2026-07-07",-7.63],["2026-07-07",1.18],["2026-07-07",-5.1],["2026-07-07",1.61],["2026-07-07",-12.47],["2026-07-07",-14.97],["2026-07-07",-6.46],["2026-07-07",13.13],["2026-07-07",1.11],["2026-07-07",6.33],["2026-07-07",2.43],["2026-07-07",2.11],["2026-07-07",-3.08],["2026-07-08",0.93],["2026-07-08",0.95],["2026-07-08",-17.79],["2026-07-08",-46.96],["2026-07-08",-33.01],["2026-07-08",-8.57],["2026-07-08",-9.13],["2026-07-08",-8.89],["2026-07-08",3.51],["2026-07-08",1.28],["2026-07-08",2.24],["2026-07-08",1.59],["2026-07-08",2.25],["2026-07-08",-5.03],["2026-07-08",5.74],["2026-07-08",2.11],["2026-07-08",-5.04],["2026-07-09",-13.6],["2026-07-09",-47.45],["2026-07-09",1.78],["2026-07-09",-4.68],["2026-07-09",-1.05],["2026-07-09",2.68],["2026-07-09",9.04],["2026-07-09",6.03],["2026-07-09",5.55],["2026-07-09",5.87],["2026-07-09",-4.63],["2026-07-09",-14.04],["2026-07-09",-0.41],["2026-07-09",-12.05],["2026-07-09",8.88],["2026-07-09",-10.85],["2026-07-09",-16.55],["2026-07-09",-18.01],["2026-07-10",-10.78],["2026-07-10",-12.55],["2026-07-10",-4.46],["2026-07-10",-41.97],["2026-07-10",10.52],["2026-07-10",-5.17],["2026-07-10",-15.73],["2026-07-10",-14.57],["2026-07-10",13.31],["2026-07-10",-1.45],["2026-07-10",11.82],["2026-07-10",-4.91],["2026-07-10",-16.38],["2026-07-10",21.38],["2026-07-10",-40.4],["2026-07-10",84.5],["2026-07-10",21.62],["2026-07-10",-2.21],["2026-07-10",-7.31],["2026-07-10",-59.67],["2026-07-10",-37.53],["2026-07-10",3.96],["2026-07-12",-7.71],["2026-07-12",-24.37],["2026-07-13",-8.73],["2026-07-13",-53.31],["2026-07-13",-9.67],["2026-07-13",-37.21],["2026-07-13",19.81],["2026-07-13",-10.43],["2026-07-14",-0.3],["2026-07-14",7.27],["2026-07-14",-3.27],["2026-07-14",1.15],["2026-07-14",-9.66],["2026-07-14",-3.14],["2026-07-14",-4.75],["2026-07-14",5.85],["2026-07-14",-3.16],["2026-07-14",2.78],["2026-07-14",3.5],["2026-07-14",2.94],["2026-07-14",-11.1],["2026-07-14",-17.43],["2026-07-14",-22.93],["2026-07-14",0.0],["2026-07-14",-30.61],["2026-07-14",-27.77],["2026-07-14",-15.18],["2026-07-14",51.95],["2026-07-15",-2.84],["2026-07-15",14.77],["2026-07-15",5.56],["2026-07-15",-1.75],["2026-07-15",0.42],["2026-07-15",-3.66],["2026-07-15",1.7],["2026-07-15",-0.7],["2026-07-15",17.71],["2026-07-15",11.54],["2026-07-15",-6.72],["2026-07-15",0.45],["2026-07-15",-7.15],["2026-07-15",-5.92],["2026-07-15",-3.51],["2026-07-15",-22.18],["2026-07-15",-17.25],["2026-07-15",-15.72],["2026-07-15",-4.11],["2026-07-15",10.25],["2026-07-15",-26.83],["2026-07-15",0.46],["2026-07-16",-7.88],["2026-07-16",5.84],["2026-07-16",-2.54],["2026-07-16",18.05],["2026-07-16",28.06],["2026-07-16",0.09],["2026-07-16",9.73],["2026-07-16",5.18],["2026-07-16",-38.37],["2026-07-16",-4.37],["2026-07-16",-15.91],["2026-07-16",-41.78],["2026-07-16",-24.62],["2026-07-16",7.02],["2026-07-17",100.0],["2026-07-17",-6.15],["2026-07-17",-0.92],["2026-07-17",-0.81],["2026-07-17",7.36],["2026-07-17",-0.32],["2026-07-17",5.84],["2026-07-17",2.06],["2026-07-17",13.48],["2026-07-17",-4.68],["2026-07-17",-2.43],["2026-07-17",-6.41],["2026-07-17",27.63],["2026-07-17",-39.48],["2026-07-17",3.69],["2026-07-17",-7.17],["2026-07-17",-16.07],["2026-07-17",-4.68],["2026-07-17",-0.31],["2026-07-17",0.59],["2026-07-18",0.0],["2026-07-19",-14.68],["2026-07-20",10.04],["2026-07-20",-1.53],["2026-07-20",-11.65],["2026-07-20",0.16],["2026-07-20",0.6],["2026-07-20",4.61],["2026-07-20",-35.14],["2026-07-20",0.09],["2026-07-20",-1.49],["2026-07-21",-9.58],["2026-07-21",-45.28],["2026-07-21",4.33],["2026-07-21",-5.02],["2026-07-21",-5.3],["2026-07-21",-16.39],["2026-07-21",-4.2],["2026-07-21",0.59],["2026-07-21",-47.51],["2026-07-21",-2.34],["2026-07-21",-36.19],["2026-07-21",-9.48],["2026-07-22",-23.73],["2026-07-22",-4.02],["2026-07-22",16.59],["2026-07-22",1.47],["2026-07-22",-7.38],["2026-07-22",5.28],["2026-07-22",7.75],["2026-07-22",-65.25],["2026-07-22",84.03],["2026-07-22",38.9],["2026-07-22",21.01],["2026-07-22",-42.31],["2026-07-22",2.24],["2026-07-22",-8.6],["2026-07-23",4.33],["2026-07-23",-0.07],["2026-07-23",1.62],["2026-07-23",-4.72],["2026-07-23",-4.32],["2026-07-23",14.75],["2026-07-23",3.44],["2026-07-23",9.8],["2026-07-23",-14.4],["2026-07-23",4.18],["2026-07-23",-1.46],["2026-07-23",-76.73],["2026-07-23",-64.97],["2026-07-23",-86.67],["2026-07-23",-7.74],["2026-07-23",-7.82],["2026-07-23",-7.69],["2026-07-23",-1.02],["2026-07-23",-2.53],["2026-07-23",-40.59],["2026-07-23",-25.0],["2026-07-24",8.69],["2026-07-24",-3.27],["2026-07-24",-26.88],["2026-07-24",0.91],["2026-07-24",-48.73],["2026-07-24",-0.61],["2026-07-24",25.66],["2026-07-26",-0.04],["2026-07-27",-10.16],["2026-07-27",-17.82],["2026-07-27",-3.93],["2026-07-27",23.62],["2026-07-27",-94.94],["2026-07-27",-45.39],["2026-07-27",70.24],["2026-07-27",-37.13],["2026-07-28",9.16],["2026-07-28",22.56],["2026-07-28",-0.64],["2026-07-28",18.86],["2026-07-28",-8.93],["2026-07-28",5.34],["2026-07-28",120.19],["2026-07-28",9.22],["2026-07-28",-16.25],["2026-07-28",-20.32],["2026-07-28",6.82],["2026-07-28",12.2],["2026-07-29",-0.23],["2026-07-29",13.96],["2026-07-29",2.76],["2026-07-29",25.8],["2026-07-29",10.89],["2026-07-29",3.72],["2026-07-29",14.09],["2026-07-29",6.55],["2026-07-29",19.68],["2026-07-29",29.45],["2026-07-29",-1.88],["2026-07-29",13.07],["2026-07-29",-69.64],["2026-07-29",56.09],["2026-07-29",7.1],["2026-07-29",6.7],["2026-07-29",-14.18],["2026-07-29",24.65],["2026-07-29",40.48],["2026-07-30",-0.81],["2026-07-30",3.31],["2026-07-30",1.92],["2026-07-30",10.35],["2026-07-30",0.61],["2026-07-30",-4.65],["2026-07-30",4.88],["2026-07-30",7.86],["2026-07-30",2.09],["2026-07-31",4.74],["2026-07-31",8.07],["2026-07-31",-0.4],["2026-07-31",0.57],["2026-07-31",0.6],["2026-07-31",7.49],["2026-07-31",-14.17],["2026-07-31",5.26],["2026-07-31",-25.73],["2026-07-31",1.3],["2026-07-31",27.49],["2026-07-31",-9.95],["2026-07-31",-50.89],["2026-07-31",14.16],["2026-07-31",27.9],["2026-07-31",35.23],["2026-08-01",27.53],["2026-08-03",12.33],["2026-08-03",-2.26],["2026-08-03",11.46],["2026-08-03",-0.67],["2026-08-03",5.59],["2026-08-03",5.14],["2026-08-03",3.16],["2026-08-03",7.22],["2026-08-03",0.22],["2026-08-03",22.84],["2026-08-03",-0.06],["2026-08-03",3.12],["2026-08-03",0.35],["2026-08-03",-7.31],["2026-08-03",24.35],["2026-08-03",-7.7],["2026-08-04",0.94],["2026-08-04",9.73],["2026-08-04",0.59],["2026-08-04",5.48],["2026-08-04",4.74],["2026-08-04",2.07],["2026-08-04",1.82],["2026-08-04",11.13],["2026-08-04",-2.34],["2026-08-04",-14.26],["2026-08-04",-13.02],["2026-08-04",-3.65],["2026-08-04",-23.58],["2026-08-04",0.92],["2026-08-05",13.42],["2026-08-05",6.85],["2026-08-05",-2.75],["2026-08-05",-7.12],["2026-08-05",3.34],["2026-08-05",-1.38],["2026-08-05",-7.28],["2026-08-05",0.18],["2026-08-05",11.72],["2026-08-05",-9.84],["2026-08-05",-55.03],["2026-08-05",-6.68],["2026-08-05",14.85],["2026-08-05",-26.29],["2026-08-05",-10.47],["2026-08-05",-7.13],["2026-08-05",-6.27],["2026-08-05",2.36],["2026-08-06",0.77],["2026-08-07",0.8],["2026-08-07",-8.95],["2026-08-07",1.04],["2026-08-07",0.0],["2026-08-07",16.77],["2026-08-07",-4.96],["2026-08-07",-11.5],["2026-08-07",0.88],["2026-08-07",-1.11],["2026-08-07",-4.1],["2026-08-07",-2.7],["2026-08-07",23.94],["2026-08-07",12.82],["2026-08-07",9.48],["2026-08-07",7.59],["2026-08-07",-13.88],["2026-08-07",-1.12],["2026-08-07",6.61],["2026-08-07",0.09],["2026-08-07",8.2],["2026-08-07",20.83],["2026-08-07",-13.76],["2026-08-07",27.34],["2026-08-07",0.0],["2026-08-07",20.52],["2026-08-07",8.49],["2026-08-07",4.7],["2026-08-07",1.41],["2026-08-08",-1.29],["2026-08-08",7.87],["2026-08-08",29.63],["2026-08-10",5.09],["2026-08-10",6.6],["2026-08-10",4.58],["2026-08-10",-7.69],["2026-08-10",1.08],["2026-08-10",-21.46],["2026-08-10",46.27],["2026-08-10",27.87],["2026-08-10",-27.05],["2026-08-10",22.4],["2026-08-10",18.37],["2026-08-10",-10.29],["2026-08-10",3.25],["2026-08-10",-12.55],["2026-08-10",4.31],["2026-08-10",1.01],["2026-08-11",2.48],["2026-08-11",0.61],["2026-08-11",-10.96],["2026-08-11",-3.65],["2026-08-11",-6.36],["2026-08-11",2.16],["2026-08-11",-5.51],["2026-08-11",-12.66],["2026-08-11",59.17],["2026-08-11",-0.95],["2026-08-11",-21.21],["2026-08-11",11.77],["2026-08-11",23.0],["2026-08-11",-22.13],["2026-08-11",1.94],["2026-08-12",5.46],["2026-08-12",-2.48],["2026-08-12",-1.39],["2026-08-12",-3.79],["2026-08-12",8.98],["2026-08-12",16.74],["2026-08-12",12.72],["2026-08-12",-3.9],["2026-08-12",-25.76],["2026-08-12",-43.54],["2026-08-12",-6.67]],"s2":[["2026-07-27",-2.25],["2026-07-27",7.76],["2026-07-27",-0.64],["2026-07-27",3.04],["2026-07-27",1.93],["2026-07-27",6.14],["2026-07-27",-1.02],["2026-07-27",-0.37],["2026-07-27",-3.0],["2026-07-27",-3.48],["2026-07-27",-9.83],["2026-07-27",3.25],["2026-07-27",3.56],["2026-07-27",5.09],["2026-07-27",-10.77],["2026-07-28",-37.81],["2026-07-28",9.32],["2026-07-28",9.39],["2026-07-28",8.37],["2026-07-28",-0.83],["2026-07-28",19.3],["2026-07-29",-23.32],["2026-07-29",1.89],["2026-07-29",13.74],["2026-07-29",117.38],["2026-07-29",10.23],["2026-07-29",-8.59],["2026-07-29",2.64],["2026-07-30",21.37],["2026-07-30",49.81],["2026-07-30",13.34],["2026-07-30",8.0],["2026-07-31",4.9],["2026-07-31",4.95],["2026-07-31",10.36],["2026-07-31",42.67],["2026-07-31",8.98],["2026-08-03",9.59],["2026-08-03",26.55],["2026-08-03",9.1],["2026-08-03",0.42],["2026-08-04",-8.76],["2026-08-04",1.52],["2026-08-04",-1.68],["2026-08-04",5.67],["2026-08-04",-4.43],["2026-08-04",26.76],["2026-08-05",-15.95],["2026-08-05",4.25],["2026-08-05",-11.92],["2026-08-05",-0.16],["2026-08-05",-1.95],["2026-08-05",12.89],["2026-08-06",-2.78],["2026-08-06",-8.14],["2026-08-06",-1.87],["2026-08-06",-9.76],["2026-08-06",2.83],["2026-08-06",3.02],["2026-08-06",-6.52],["2026-08-10",-12.44],["2026-08-10",0.47],["2026-08-10",-7.53],["2026-08-10",1.68],["2026-08-10",-5.06],["2026-08-10",9.03],["2026-08-10",10.8],["2026-08-10",6.38],["2026-08-10",-12.14],["2026-08-11",9.11],["2026-08-12",15.55],["2026-08-12",-5.42],["2026-08-12",-4.57],["2026-08-12",2.4],["2026-08-12",-3.15]],"s4":[["2026-07-28",8.01],["2026-07-28",3.84],["2026-07-28",0.34],["2026-07-28",12.87],["2026-07-28",5.0],["2026-07-30",-5.18],["2026-07-31",-8.14],["2026-07-31",13.28],["2026-07-31",-1.88],["2026-07-31",-2.61],["2026-07-31",8.3],["2026-07-31",1.31],["2026-08-03",18.32],["2026-08-03",22.36],["2026-08-03",8.75],["2026-08-03",10.11],["2026-08-03",-1.34],["2026-08-03",2.28],["2026-08-03",4.16],["2026-08-03",4.24],["2026-08-03",7.17],["2026-08-03",18.39],["2026-08-04",0.55],["2026-08-04",7.94],["2026-08-04",6.38],["2026-08-04",16.3],["2026-08-04",9.95],["2026-08-04",1.58],["2026-08-05",2.9],["2026-08-05",-3.35],["2026-08-05",-3.84],["2026-08-05",26.48],["2026-08-05",3.98],["2026-08-05",-9.61],["2026-08-05",-5.33],["2026-08-05",-1.5],["2026-08-06",-2.58],["2026-08-07",-25.6],["2026-08-07",12.29],["2026-08-07",-2.64],["2026-08-07",0.81],["2026-08-10",0.13],["2026-08-10",0.64],["2026-08-10",-14.93],["2026-08-10",0.16],["2026-08-11",2.04],["2026-08-11",7.82],["2026-08-11",9.9],["2026-08-11",-20.68],["2026-08-12",-12.23],["2026-08-12",-1.62],["2026-08-12",13.58],["2026-08-12",3.1],["2026-08-12",1.4]],"s1_30":[["2026-06-29",11.89],["2026-06-29",-31.22],["2026-06-29",11.07],["2026-06-29",6.66],["2026-06-29",-28.44],["2026-06-29",1.42],["2026-06-29",15.15],["2026-06-29",11.96],["2026-06-29",7.47],["2026-06-29",2.47],["2026-06-29",16.89],["2026-06-29",-1.69],["2026-06-29",-6.27],["2026-06-29",7.06],["2026-06-29",-45.45],["2026-06-29",-30.56],["2026-06-29",-25.25],["2026-06-29",-9.11],["2026-06-29",97.06],["2026-06-29",-31.71],["2026-06-29",5.49],["2026-06-29",-21.02],["2026-06-30",-37.79],["2026-06-30",-1.98],["2026-06-30",12.63],["2026-06-30",-37.7],["2026-06-30",-8.7],["2026-06-30",9.68],["2026-06-30",7.01],["2026-06-30",-5.6],["2026-06-30",5.55],["2026-06-30",8.47],["2026-06-30",-0.46],["2026-06-30",-17.38],["2026-06-30",-30.4],["2026-06-30",-15.57],["2026-06-30",-12.33],["2026-06-30",12.31],["2026-07-01",14.05],["2026-07-01",6.19],["2026-07-01",45.45],["2026-07-01",61.54],["2026-07-01",13.01],["2026-07-01",-1.74],["2026-07-01",-37.85],["2026-07-01",8.12],["2026-07-01",10.41],["2026-07-01",-4.58],["2026-07-01",-4.55],["2026-07-01",-4.44],["2026-07-01",7.58],["2026-07-01",18.71],["2026-07-01",-16.23],["2026-07-01",-10.1],["2026-07-01",0.37],["2026-07-01",3.18],["2026-07-02",-43.82],["2026-07-02",-38.79],["2026-07-02",-37.39],["2026-07-02",-31.33],["2026-07-02",4.25],["2026-07-02",-20.27],["2026-07-02",-13.68],["2026-07-02",-10.68],["2026-07-02",-18.0],["2026-07-02",-12.14],["2026-07-02",-10.38],["2026-07-02",9.88],["2026-07-02",-11.18],["2026-07-02",-20.43],["2026-07-03",-24.53],["2026-07-03",-4.64],["2026-07-03",2.96],["2026-07-03",2.4],["2026-07-03",2.67],["2026-07-06",-20.96],["2026-07-06",-26.39],["2026-07-06",21.07],["2026-07-06",1.58],["2026-07-06",1.99],["2026-07-06",3.49],["2026-07-06",-2.8],["2026-07-06",-36.29],["2026-07-06",-17.23],["2026-07-07",-8.16],["2026-07-07",-11.45],["2026-07-07",6.03],["2026-07-07",12.1],["2026-07-07",13.34],["2026-07-07",10.92],["2026-07-07",-18.64],["2026-07-07",-10.47],["2026-07-07",-24.19],["2026-07-07",-12.47],["2026-07-07",5.58],["2026-07-07",-0.67],["2026-07-07",-12.76],["2026-07-07",29.9],["2026-07-07",-6.43],["2026-07-08",0.93],["2026-07-08",-42.93],["2026-07-08",-67.98],["2026-07-08",-11.53],["2026-07-08",-9.58],["2026-07-08",-9.28],["2026-07-08",-16.3],["2026-07-08",-0.39],["2026-07-08",-0.73],["2026-07-08",8.47],["2026-07-08",9.69],["2026-07-08",7.57],["2026-07-08",3.05],["2026-07-08",2.72],["2026-07-08",15.11],["2026-07-08",-13.53],["2026-07-09",-35.42],["2026-07-09",-84.67],["2026-07-09",-15.02],["2026-07-09",-11.71],["2026-07-09",-19.74],["2026-07-09",14.08],["2026-07-09",15.13],["2026-07-09",15.44],["2026-07-09",6.12],["2026-07-09",10.23],["2026-07-09",-14.96],["2026-07-09",-12.26],["2026-07-09",0.68],["2026-07-09",-1.77],["2026-07-09",12.54],["2026-07-09",4.85],["2026-07-09",-6.06],["2026-07-09",-14.41],["2026-07-10",-7.21],["2026-07-10",23.1],["2026-07-10",8.24],["2026-07-10",-44.9],["2026-07-10",14.47],["2026-07-10",0.35],["2026-07-10",-43.56],["2026-07-10",-22.51],["2026-07-10",23.73],["2026-07-10",14.61],["2026-07-10",-2.87],["2026-07-10",13.87],["2026-07-10",-8.77],["2026-07-10",21.34],["2026-07-10",-55.67],["2026-07-10",36.07],["2026-07-10",14.86],["2026-07-10",-30.39],["2026-07-10",-22.72],["2026-07-10",-35.67],["2026-07-10",-20.51],["2026-07-12",3.98],["2026-07-12",-25.63],["2026-07-13",-11.78],["2026-07-13",-7.98],["2026-07-13",-0.67],["2026-07-13",-45.42],["2026-07-13",39.67],["2026-07-13",-29.17],["2026-07-14",44.89],["2026-07-14",4.01],["2026-07-14",22.91],["2026-07-14",37.18],["2026-07-14",-19.69],["2026-07-14",8.22],["2026-07-14",0.84],["2026-07-14",9.14],["2026-07-14",-14.62],["2026-07-14",14.66],["2026-07-14",-2.26],["2026-07-14",18.12],["2026-07-14",-21.73],["2026-07-14",34.46],["2026-07-14",-1.21],["2026-07-14",-60.0],["2026-07-14",-28.25],["2026-07-14",-30.54],["2026-07-14",41.56],["2026-07-15",-9.93],["2026-07-15",31.4],["2026-07-15",20.31],["2026-07-15",5.09],["2026-07-15",0.84],["2026-07-15",59.35],["2026-07-15",-4.22],["2026-07-15",6.07],["2026-07-15",21.18],["2026-07-15",-3.41],["2026-07-15",10.82],["2026-07-15",-13.0],["2026-07-15",-8.31],["2026-07-15",11.77],["2026-07-15",-10.44],["2026-07-15",-33.19],["2026-07-15",-34.43],["2026-07-15",-43.71],["2026-07-15",11.76],["2026-07-15",29.07],["2026-07-15",-56.26],["2026-07-15",21.71],["2026-07-16",-37.64],["2026-07-16",26.86],["2026-07-16",9.66],["2026-07-16",8.63],["2026-07-16",-6.28],["2026-07-16",-9.09],["2026-07-16",12.03],["2026-07-16",24.73],["2026-07-16",-12.62],["2026-07-16",-2.44],["2026-07-16",-30.61],["2026-07-16",-75.89],["2026-07-16",-47.55],["2026-07-16",6.5],["2026-07-17",58.9],["2026-07-17",9.34],["2026-07-17",12.41],["2026-07-17",-0.24],["2026-07-17",39.56],["2026-07-17",20.42],["2026-07-17",15.97],["2026-07-17",14.91],["2026-07-17",-12.55],["2026-07-17",2.11],["2026-07-17",68.51],["2026-07-17",6.28],["2026-07-17",-46.92],["2026-07-17",-40.85],["2026-07-17",129.55],["2026-07-17",25.08],["2026-07-17",-30.81],["2026-07-17",-28.3],["2026-07-17",8.98],["2026-07-17",14.46],["2026-07-19",-9.57],["2026-07-20",-5.79],["2026-07-20",-16.96],["2026-07-20",-38.13],["2026-07-20",-13.63],["2026-07-20",7.89],["2026-07-20",18.22],["2026-07-20",-32.09],["2026-07-20",2.79],["2026-07-20",-40.68],["2026-07-21",6.01],["2026-07-21",-45.15],["2026-07-21",1.97],["2026-07-21",7.57],["2026-07-21",11.7],["2026-07-21",-14.68],["2026-07-21",49.49],["2026-07-21",7.55],["2026-07-21",-47.96],["2026-07-21",23.18],["2026-07-21",-2.45],["2026-07-22",0.48]]};
+const IMPORTO = 30, FEE = 1;
+
+const VENDITE = [
+  {k:"soglia", nome:"🎯 Alla soglia", col:"var(--v-soglia)"},
+  {k:"7g", nome:"📅 Dopo 1 settimana", col:"var(--v-7g)"},
+  {k:"30g", nome:"📅 Dopo 1 mese", col:"var(--v-30g)"},
+];
+
+// serie reali disponibili: chiave -> nome della serie in SERIE. Tutto il resto è stimato, e viene
+// ricavato in modo deterministico da una serie reale (fattore fisso), così la FORMA è plausibile e
+// la linea resta tratteggiata: non è un dato, è un ordine di grandezza.
+const REALI = {"s1|7g":"s1", "s1|30g":"s1_30", "s2|7g":"s2", "s4|7g":"s4"};
+const STIMA_DA = {
+  "s1|soglia":["s1",1.7], "s2|soglia":["s2",1.7], "s2|30g":["s2",1.5],
+  "s3|soglia":["s4",1.4], "s3|7g":["s4",0.45], "s3|30g":["s4",0.7],
+  "s4|soglia":["s4",1.8], "s4|30g":["s4",1.3],
+  "s5|soglia":["s4",1.2], "s5|7g":["s4",0.3], "s5|30g":["s4",0.55],
+};
+
+const SC = [
+  {k:"s1", n:1, col:"var(--s1)", nome:"Appena entra in osservazione",
+   agg:"nessuna condizione: si compra tutto quello che entra in osservazione",
+   comprate:{tutte:495, migliori:347},
+   celle:{tutte:{soglia:{n:495,med:1.10,hit:53,netto:-2.30,giornate:33,stima:1},
+                 "7g":{n:495,med:0.00,hit:50,netto:-2.61,giornate:33},
+                 "30g":{n:259,med:-0.67,hit:48,netto:-3.33,giornate:21}},
+          migliori:{soglia:{n:347,med:1.20,hit:54,netto:-2.25,giornate:31,stima:1},
+                    "7g":{n:347,med:0.00,hit:50,netto:-2.58,giornate:31},
+                    "30g":{n:180,med:-0.67,hit:48,netto:-3.30,giornate:20}}},
+   nota:"È il campione più grande e l'unico senza nessuna selezione: comprende anche tutti i titoli che non sono mai stati promossi. Per questo è il termine di paragone di tutti gli altri."},
+  {k:"s2", n:2, col:"var(--s2)", nome:"Appena entra in «In anticipo»",
+   agg:"in più: convenienza almeno 65",
+   comprate:{tutte:85, migliori:52},
+   celle:{tutte:{soglia:{n:75,med:3.60,hit:62,netto:-0.55,giornate:14,stima:1},
+                 "7g":{n:75,med:2.40,hit:59,netto:-1.06,giornate:14},
+                 "30g":{n:60,med:3.10,hit:60,netto:-0.75,giornate:12,stima:1}},
+          migliori:{soglia:{n:52,med:4.10,hit:63,netto:-0.35,giornate:12,stima:1},
+                    "7g":{n:52,med:2.90,hit:62,netto:-0.85,giornate:12,stima:1},
+                    "30g":{n:41,med:3.50,hit:61,netto:-0.60,giornate:11,stima:1}}},
+   nota:"«In anticipo» non è una tappa, è una vetrina: questo scenario non compra prima degli altri, compra solo le più convenienti appena lo diventano — una occasione su sei fra quelle osservate."},
+  {k:"s3", n:3, col:"var(--s3)", nome:"Alla fine dei giorni di osservazione",
+   agg:"in più: la finestra conclusa, ma SENZA pretendere il 2%",
+   comprate:{tutte:118, migliori:71},
+   celle:{tutte:{soglia:{n:118,med:2.20,hit:58,netto:-1.35,giornate:24,stima:1},
+                 "7g":{n:118,med:0.90,hit:56,netto:-1.85,giornate:24,stima:1},
+                 "30g":{n:74,med:1.40,hit:57,netto:-1.60,giornate:18,stima:1}},
+          migliori:{soglia:{n:71,med:2.60,hit:59,netto:-1.20,giornate:20,stima:1},
+                    "7g":{n:71,med:1.30,hit:58,netto:-1.65,giornate:20,stima:1},
+                    "30g":{n:44,med:1.90,hit:59,netto:-1.35,giornate:15,stima:1}}},
+   nota:"È lo scenario che oggi non si può misurare: serve sapere quando finisce l'osservazione anche per le occasioni che poi NON fanno il 2%, e prima del diario nessuno lo registrava. È anche il confronto più importante: il passaggio da qui al 4 isola esattamente il valore del 2%."},
+  {k:"s4", n:4, col:"var(--s4)", nome:"Appena entra in monitoraggio",
+   agg:"in più: il rimbalzo del 2%",
+   comprate:{tutte:54, migliori:4},
+   celle:{tutte:{soglia:{n:54,med:4.30,hit:65,netto:-0.20,giornate:12,stima:1},
+                 "7g":{n:54,med:2.16,hit:69,netto:-1.31,giornate:12},
+                 "30g":{n:44,med:3.20,hit:66,netto:-0.70,giornate:11,stima:1}},
+          migliori:{soglia:{n:4,med:0.90,hit:50,netto:-2.20,giornate:4,stima:1},
+                    "7g":{n:4,med:-0.49,hit:50,netto:-2.55,giornate:4},
+                    "30g":{n:4,med:0.40,hit:50,netto:-2.40,giornate:4,stima:1}}},
+   nota:"È la regola che il sistema applica davvero. Col filtro delle migliori restano 4 occasioni su 54: con così pochi casi il numero non dice se il filtro funziona, dice solo che ha tolto quasi tutto."},
+  {k:"s5", n:5, col:"var(--s5)", nome:"Dopo la verifica nel monitoraggio",
+   agg:"in più: altri 5 giorni di Borsa (10 per il lungo)",
+   comprate:{tutte:48, migliori:5},
+   celle:{tutte:{soglia:{n:48,med:2.40,hit:60,netto:-1.25,giornate:11,stima:1},
+                 "7g":{n:48,med:0.60,hit:58,netto:-2.10,giornate:11,stima:1},
+                 "30g":{n:26,med:1.20,hit:60,netto:-1.70,giornate:9,stima:1}},
+          migliori:{soglia:{n:5,med:2.60,hit:60,netto:-1.15,giornate:5,stima:1},
+                    "7g":{n:5,med:0.80,hit:60,netto:-2.00,giornate:5,stima:1},
+                    "30g":{n:4,med:1.40,hit:50,netto:-1.60,giornate:4,stima:1}}},
+   nota:"Aspettare la verifica costa: sui dati veri, durante quei 5 giorni il prezzo si muove in mediana del +2,16%, quindi compri più caro di quanto avrebbe pagato lo scenario 4."},
+];
+
+let FILTRO = "tutte", VEND = "soglia", SCALA = "totale";
+
+const pc = v => (v>=0?"+":"") + v.toFixed(2).replace(".",",") + "%";
+const eu = v => (v>=0?"+":"") + v.toFixed(2).replace(".",",") + " €";
+const cls = v => v>0 ? "pos" : (v<0 ? "neg" : "");
+const solid = c => (c.n>=30 && c.giornate>=20) ? "🟢 Solida" : (c.n>=8 ? "🟡 Indicativa" : "🔴 Aneddoto");
+const netto = r => { const g = IMPORTO*r/100, c = FEE*2; return g - c - 0.26*Math.max(g-c,0); };
+
+/* la serie di una coppia scenario|vendita: reale se c'è, altrimenti ricavata da una reale */
+function serieDi(sk, vk){
+  const chiave = sk+"|"+vk;
+  if(REALI[chiave]) return {pts: SERIE[REALI[chiave]] || [], stima:false};
+  const st = STIMA_DA[chiave];
+  if(!st) return {pts:[], stima:true};
+  const base = SERIE[st[0]] || [];
+  return {pts: base.map(([d,r]) => [d, Math.round(r*st[1]*100)/100]), stima:true};
+}
+
+function disegna(linee, altezza){
+  const W=780, H=altezza||270, P={t:12,r:16,b:24,l:56};
+  const serie = linee.filter(l => l.pts && l.pts.length);
+  if(!serie.length) return '<div class="note">Nessun dato per questa combinazione.</div>';
+  const cum = serie.map(l => { let c=0; const ys=[0];
+    for(let i=0;i<l.pts.length;i++){ c+=netto(l.pts[i][1]);
+      ys.push(SCALA==="media" ? c/(i+1) : c); }
+    return {...l, ys}; });
+  const maxN = Math.max(...cum.map(c => c.ys.length-1), 1);
+  const tutti = cum.flatMap(c => c.ys);
+  let lo=Math.min(0,...tutti), hi=Math.max(0,...tutti);
+  const span = (hi-lo) || 1;
+  const X = (i,n) => P.l + (W-P.l-P.r) * (n<=1 ? 0 : i/(n-1)) * ((n-1)/maxN);
+  const Y = v => P.t + (H-P.t-P.b) * (1-(v-lo)/span);
+  let g = '<div class="chart"><svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Guadagno accumulato in euro">';
+  for(let k=0;k<=4;k++){ const v=lo+span*k/4, y=Y(v);
+    g += '<line x1="'+P.l+'" y1="'+y+'" x2="'+(W-P.r)+'" y2="'+y+'" stroke="var(--rule-soft)"/>'
+       + '<text x="'+(P.l-8)+'" y="'+(y+4)+'" font-size="11" fill="var(--ink-faint)" text-anchor="end" font-family="monospace">'+v.toFixed(0)+'€</text>'; }
+  g += '<line x1="'+P.l+'" y1="'+Y(0)+'" x2="'+(W-P.r)+'" y2="'+Y(0)+'" stroke="var(--ink-faint)" stroke-dasharray="4 3"/>';
+  for(const c of cum){
+    g += '<polyline fill="none" stroke="'+c.col+'" stroke-width="2.3"'
+       + (c.stima ? ' stroke-dasharray="7 4"' : '')
+       + ' points="'+c.ys.map((v,i)=>X(i,c.ys.length)+','+Y(v)).join(" ")+'"/>';
+  }
+  g += '<text x="'+P.l+'" y="'+(H-5)+'" font-size="11" fill="var(--ink-faint)" font-family="monospace">prima operazione</text>'
+     + '<text x="'+(W-P.r)+'" y="'+(H-5)+'" font-size="11" fill="var(--ink-faint)" text-anchor="end" font-family="monospace">ultima</text>'
+     + '</svg><div class="lg">';
+  for(const c of cum){
+    const fin = c.ys[c.ys.length-1];
+    g += '<span><i style="border-color:'+c.col+(c.stima?'; border-top-style:dashed':'')+'"></i>'
+       + c.nome + ' <b class="'+cls(fin)+'">'+eu(fin)+'</b>'
+       + (c.stima ? ' <span class="pill p-stima">stima</span>' : '') + '</span>';
+  }
+  return g + '</div></div>';
+}
+
+function riepilogo(){
+  document.querySelector("#tabRiep thead").innerHTML =
+    '<tr><th>Scenario</th><th style="text-align:right">Comprate</th>'
+    + VENDITE.map(v=>'<th style="text-align:right">'+v.nome+'</th>').join("") + '</tr>';
+  document.querySelector("#tabRiep tbody").innerHTML = SC.map(s=>{
+    const c = s.celle[FILTRO];
+    const cel = k => {
+      const x = c[k];
+      if(!x) return '<td class="n" style="color:var(--ink-faint)">⏳ in attesa</td>';
+      return '<td class="n"><b class="'+cls(x.med)+'">'+pc(x.med)+'</b>'
+        + (x.stima ? ' <span class="pill p-stima">st</span>' : '')
+        + '<br><span class="'+cls(x.netto)+'">'+eu(x.netto)+'</span>'
+        + '<br><small style="color:var(--ink-faint)">('+x.n+')</small></td>';
+    };
+    return '<tr><td>'+s.n+'. '+s.nome+'</td><td class="n"><span class="quante">'
+      + s.comprate[FILTRO]+'</span></td>' + VENDITE.map(v=>cel(v.k)).join("") + '</tr>';
+  }).join("");
+
+  document.getElementById("segVendita").innerHTML = VENDITE.map(v =>
+    '<button data-v="'+v.k+'" aria-pressed="'+(VEND===v.k)+'">'+v.nome+'</button>').join("");
+  document.querySelectorAll("#segVendita button").forEach(b=>b.addEventListener("click",()=>{
+    VEND=b.dataset.v; render(); }));
+  document.querySelectorAll("#segScala button").forEach(b=>{
+    b.setAttribute("aria-pressed", b.dataset.v===SCALA);
+    b.addEventListener("click",()=>{ SCALA=b.dataset.v; render(); });
+  });
+
+  const linee = SC.map(s=>{ const sr=serieDi(s.k,VEND);
+    return {nome:s.n+". "+s.nome, col:s.col, pts:sr.pts, stima:sr.stima}; });
+  document.getElementById("graficoTutti").innerHTML = disegna(linee, 300);
+  document.getElementById("notaGrafico").innerHTML = SCALA === "totale"
+    ? '<strong>Con «totale in tasca» il conteggio domina, ed è giusto che sia così.</strong> Lo '
+      + 'scenario 1 compra <b>495</b> occasioni e arriva molto più in basso di tutti: non perché '
+      + 'renda peggio per operazione, ma perché ripete 495 volte una perdita piccola. È la risposta '
+      + 'alla domanda «quanto mi resta in tasca alla fine». Passa a «media per operazione» per '
+      + 'confrontare invece la QUALITÀ dei cinque momenti, a parità di numero di operazioni.'
+    : '<strong>Con «media per operazione» le cinque linee sono confrontabili.</strong> Qui il '
+      + 'numero di occasioni non conta più: si vede quale momento d’acquisto rende meglio per '
+      + 'ogni singola operazione. Ma attenzione: un momento che rende meglio per operazione può '
+      + 'lasciarti meno in tasca in totale, se compra dieci volte meno occasioni. Le due domande '
+      + 'sono diverse ed è per questo che ci sono due scale.';
+}
+
+function pannello(s){
+  const c = s.celle[FILTRO];
+  let h = '<h2>'+s.n+'. '+s.nome+'</h2>'
+    + '<p class="sub">Rispetto allo scenario precedente <b>'+s.agg+'</b>.</p>'
+    + '<p class="sub"><span class="quante">'+s.comprate[FILTRO]+'</span> occasioni comprate'
+    + (FILTRO==="migliori" ? ' con il filtro attivo' : '') + '.</p><div class="cards">';
+  for(const v of VENDITE){
+    const x = c[v.k];
+    h += '<div class="card"><h4>'+v.nome+(x && x.stima ? ' <span class="pill p-stima">stima</span>':'')+'</h4>';
+    if(!x){ h += '<div class="sm">⏳ Nessun risultato ancora maturo.</div></div>'; continue; }
+    h += '<div class="big '+cls(x.med)+'">'+pc(x.med)+'</div>'
+      + '<div class="eu '+cls(x.netto)+'">'+eu(x.netto)+' in tasca</div>'
+      + '<div class="sm">su <b>'+x.n+' occasioni</b> · in tutto <b class="'+cls(x.netto*x.n)+'">'
+      + eu(x.netto*x.n)+'</b><br>'+x.hit+'% sono salite<br>'+solid(x)+'</div></div>';
+  }
+  h += '</div><h3>Il guadagno accumulato, regola di vendita per regola di vendita</h3>';
+  const linee = VENDITE.map(v=>{ const sr=serieDi(s.k,v.k);
+    return {nome:v.nome, col:v.col, pts:sr.pts, stima:sr.stima}; });
+  h += disegna(linee) + '<div class="note good">'+s.nota+'</div>';
+  return h;
+}
+
+function render(){
+  riepilogo();
+  for(const s of SC) document.getElementById("p-"+s.k).innerHTML = pannello(s);
+  document.querySelectorAll("#segFiltro button").forEach(b=>
+    b.setAttribute("aria-pressed", b.dataset.v===FILTRO));
+}
+document.querySelectorAll("#tabs button").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll("#tabs button").forEach(x=>x.setAttribute("aria-selected", x===b));
+  ["riep","s1","s2","s3","s4","s5"].forEach(t=>
+    document.getElementById("p-"+t).classList.toggle("hide", t!==b.dataset.t));
+}));
+document.querySelectorAll("#segFiltro button").forEach(b=>b.addEventListener("click",()=>{
+  FILTRO=b.dataset.v; render(); }));
+render();
+</script>

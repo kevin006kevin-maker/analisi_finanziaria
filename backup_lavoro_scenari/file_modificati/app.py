@@ -1,0 +1,4441 @@
+"""
+Analisi Finanziaria — app Streamlit
+Analisi fondamentale, tecnica e confronto/screener di azioni, ETF e indici.
+
+Avvio:  streamlit run app.py --server.port 8507
+
+NOTA: strumento di analisi e supporto decisionale, NON consulenza finanziaria.
+I dati (yfinance) sono gratuiti e possono avere ritardo (~15 min) o essere incompleti.
+"""
+
+import os
+import hmac
+import datetime
+
+import numpy as np
+import pandas as pd
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import streamlit as st
+from streamlit_autorefresh import st_autorefresh
+
+import finance_utils as fu
+
+st.set_page_config(page_title="Analisi Finanziaria", page_icon="📈", layout="wide",
+                   initial_sidebar_state="expanded")
+
+# --- Stile: aspetto sobrio e professionale (tipografia Inter, palette scura raffinata) ---
+st.markdown("""
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+html, body, [class*="css"], .stApp, button, input, textarea, select {
+    font-family: 'Inter', -apple-system, "Segoe UI", system-ui, sans-serif;
+}
+.stApp { background: #13151a; color: #e8eaed; }
+
+/* Nasconde solo gli elementi superflui SENZA toccare la barra in alto di Streamlit,
+   così resta SEMPRE il pulsante nativo per aprire/chiudere il menu laterale (anche da telefono). */
+[data-testid="stDecoration"] { display: none; }
+footer { visibility: hidden; }
+.block-container { padding-top: 2.2rem; max-width: 1250px; }
+
+/* Sidebar */
+section[data-testid="stSidebar"] {
+    background: #101216;
+    border-right: 1px solid rgba(255,255,255,0.06);
+}
+section[data-testid="stSidebar"] .stRadio [role="radiogroup"] { gap: 2px; }
+
+/* Tipografia titoli: sobria, non gridata */
+h1 { font-weight: 700; font-size: 1.85rem; letter-spacing: -0.022em; }
+h2 { font-weight: 600; letter-spacing: -0.012em; margin-top: 0.4rem; }
+h3 { font-weight: 600; letter-spacing: -0.01em; color: #f2f4f7; }
+h4, h5, h6 { font-weight: 600; color: #cdd3db; }
+
+/* Metriche come schede eleganti */
+[data-testid="stMetric"] {
+    background: linear-gradient(180deg, #1b1e25, #16181d);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    padding: 14px 18px;
+}
+[data-testid="stMetricLabel"] { opacity: 0.72; font-weight: 500; }
+[data-testid="stMetricValue"] { font-weight: 700; letter-spacing: -0.01em; }
+
+/* Contenitori, expander, tabelle */
+div[data-testid="stVerticalBlockBorderWrapper"] { border-radius: 16px; }
+[data-testid="stExpander"] {
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.07);
+    background: #15171c;
+}
+[data-testid="stExpander"] summary { font-weight: 500; }
+[data-testid="stExpander"] summary:hover { color: #6ea8fe; }
+[data-testid="stDataFrame"] {
+    border-radius: 12px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.06);
+}
+
+/* Bottoni raffinati */
+.stButton > button, .stDownloadButton > button, .stFormSubmitButton > button {
+    border-radius: 9px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: #1b1e24;
+    font-weight: 500;
+    transition: all .15s ease;
+}
+.stButton > button:hover, .stDownloadButton > button:hover {
+    border-color: #6ea8fe; color: #cfe0ff; background: #1f2530;
+}
+.stButton > button[kind="primary"], .stFormSubmitButton > button {
+    background: #2f6fed; border-color: #2f6fed; color: #fff;
+}
+.stButton > button[kind="primary"]:hover { background: #2a63d4; border-color: #2a63d4; color: #fff; }
+
+/* Tab e link */
+.stTabs [data-baseweb="tab-list"] { gap: 2px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+.stTabs [data-baseweb="tab"] { font-weight: 500; }
+a, a:visited { color: #6ea8fe; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Didascalie un filo più tenui */
+[data-testid="stCaptionContainer"] { opacity: 0.82; }
+
+/* Intestazione di pagina (banner) */
+.page-header {
+    padding: 20px 24px; margin: 0 0 20px 0; border-radius: 16px;
+    background: linear-gradient(135deg, #1d2330 0%, #15181e 70%);
+    border: 1px solid rgba(255,255,255,0.07);
+    box-shadow: 0 6px 22px rgba(0,0,0,0.25);
+}
+.page-header .ph-title { font-size: 1.7rem; font-weight: 700; letter-spacing: -0.02em; color: #f3f5f8; }
+.page-header .ph-sub { margin-top: 6px; color: #9aa4b2; font-size: 0.95rem; line-height: 1.4; }
+.page-header .ph-accent { display:inline-block; width:34px; height:3px; border-radius:3px;
+    background: linear-gradient(90deg,#3b82f6,#22d3ee); margin-bottom:12px; }
+
+/* Testata di marca nella sidebar */
+.app-brand { padding: 6px 2px 14px; }
+.app-brand .ab-name { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em; color: #f3f5f8; }
+.app-brand .ab-name span { color: #3b82f6; }
+.app-brand .ab-tag { font-size: 0.78rem; color: #8b94a3; margin-top: 2px; }
+
+/* Schermata iniziale (hero) */
+.hero {
+    padding: 30px 28px; border-radius: 18px; margin-bottom: 22px;
+    background: radial-gradient(1200px 240px at 0% 0%, rgba(59,130,246,0.16), transparent 60%), #16191f;
+    border: 1px solid rgba(255,255,255,0.07);
+}
+.hero h2 { margin: 0; font-size: 1.7rem; font-weight: 750; color: #f3f5f8; }
+.hero p { margin: 10px 0 0; color: #aab3c0; max-width: 680px; line-height: 1.5; }
+
+/* ---- Adattamento per telefono (schermi stretti) ---- */
+@media (max-width: 640px) {
+    .block-container { padding-top: 1.3rem; padding-left: 0.8rem; padding-right: 0.8rem; }
+    /* Le colonne si impilano in verticale invece di restare strette affiancate */
+    [data-testid="stHorizontalBlock"] { flex-direction: column !important; gap: 0.5rem !important; }
+    [data-testid="stHorizontalBlock"] > div,
+    [data-testid="stColumn"], [data-testid="column"] {
+        width: 100% !important; flex: 1 1 100% !important; min-width: 0 !important;
+    }
+    /* Intestazioni e titoli più contenuti */
+    .page-header { padding: 15px 16px; }
+    .page-header .ph-title { font-size: 1.35rem; }
+    .hero { padding: 22px 18px; }
+    .hero h2 { font-size: 1.4rem; }
+    .hero p { font-size: 0.92rem; }
+    h1 { font-size: 1.45rem; }
+    h2 { font-size: 1.25rem; }
+    [data-testid="stMetric"] { padding: 10px 13px; }
+    [data-testid="stMetricValue"] { font-size: 1.4rem; }
+}
+</style>
+""", unsafe_allow_html=True)
+
+
+def page_header(title: str, subtitle: str = ""):
+    """Intestazione di pagina con banner (sostituisce il semplice st.title)."""
+    safe = str(title).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+    sub = f"<div class='ph-sub'>{subtitle}</div>" if subtitle else ""
+    st.markdown(
+        f"<div class='page-header'><div class='ph-accent'></div>"
+        f"<div class='ph-title'>{safe}</div>{sub}</div>",
+        unsafe_allow_html=True,
+    )
+
+
+def show_chart(fig, use_container_width=True, config=None, key=None, **kw):
+    """Grafico ottimizzato per il telefono: niente zoom fastidioso al tocco; toccando un punto
+    della linea compare il valore con una linea-guida verticale. Dove il browser mobile lo
+    consente, il valore segue anche il trascinamento del dito.
+    Assegna una chiave univoca a ogni grafico per evitare collisioni di ID (es. stesso titolo
+    nelle occasioni di breve e di lungo)."""
+    try:
+        fig.update_layout(autosize=True, dragmode=False, hovermode="x unified",
+                          hoverdistance=120, spikedistance=1000)
+        fig.update_xaxes(fixedrange=True, showspikes=True, spikemode="across",
+                         spikethickness=1, spikedash="dot", spikecolor="rgba(255,255,255,0.5)")
+        fig.update_yaxes(fixedrange=True)
+        # Su telefono (schermo stretto) una legenda ORIZZONTALE va a capo su 2-3 righe e, coi
+        # margini stretti, finisce sopra il grafico schiacciandolo. Le riservo spazio in alto e
+        # aggancio la legenda appena sopra l'area, così non si sovrappone.
+        leg = getattr(fig.layout, "legend", None)
+        if getattr(leg, "orientation", None) == "h":
+            cur_t = fig.layout.margin.t if (fig.layout.margin and fig.layout.margin.t is not None) else 0
+            fig.update_layout(margin_t=max(cur_t, 64),
+                              legend=dict(orientation="h", yanchor="bottom", y=1.02,
+                                          xanchor="left", x=0))
+    except Exception:
+        pass
+    cfg = {"displayModeBar": False, "scrollZoom": False, "doubleClick": False}
+    if config:
+        cfg.update(config)
+    if key is None:
+        _n = st.session_state.get("_chart_seq", 0) + 1
+        st.session_state["_chart_seq"] = _n
+        key = f"_chart_{_n}"
+    st.plotly_chart(fig, use_container_width=use_container_width, config=cfg, key=key, **kw)
+
+
+def filtri_qualita(prefix: str, nota: str = ""):
+    """Riquadro RIUSABILE dei filtri di qualità («mostrami solo…»), identico in tutte le sezioni.
+    Ritorna (affidabilità minima — sempre 0, prob. salita minima %, rischio massimo %, conv. minima).
+
+    L'AFFIDABILITÀ NON È PIÙ FILTRABILE (ago 2026). Non era un voto all'occasione ma al dato
+    (volatilità del titolo + lunghezza dello storico), quindi come filtro d'acquisto scartava i
+    titoli che si muovono invece di quelli che perdono; era già contenuta nella convenienza in
+    forma continua, e messa alla prova sugli esiti veri non separava niente (differenza fra fascia
+    Alta e Bassa +0,97 punti, che il caso produce 81 volte su 100 — vedi `indicatori_report`).
+    Resta come COLONNA nelle tabelle, perché sapere quanto è solida una stima è utile; non come
+    requisito. Il primo posto della tupla resta per non toccare i chiamanti e il motore, che la
+    supporta ancora."""
+    kg, kl, kc = f"{prefix}_pg", f"{prefix}_pl", f"{prefix}_cv"
+    # valori di partenza messi PRIMA di creare i widget: così i pulsanti-scorciatoia possono
+    # scriverli senza che Streamlit segnali il conflitto "default + valore da sessione".
+    for _k, _v in ((kg, 0), (kl, 100), (kc, 0)):
+        st.session_state.setdefault(_k, _v)
+
+    def _best():
+        # PRESET SCELTO CON L'UTENTE (ago 2026): probabilità di salita ≥60% per sua decisione
+        # esplicita, gli altri due tarati sui dati veri perché quella soglia non resti sterile.
+        #  · RISCHIO DI PERDITA ≤25% e non ≤10%: chi ha una probabilità di salita alta è per forza
+        #    un titolo che si muove, e fra le occasioni in osservazione con salita ≥60% il rischio
+        #    di perdita parte da 11 — quindi «salita ≥60 + perdita ≤10» dà ZERO occasioni sempre,
+        #    per costruzione. Con ≤25 restano 12 su 17 e si esclude solo la coda peggiore.
+        #  · CONVENIENZA ≥65 e non ≥70: 65 è appena sopra il valore tipico delle occasioni
+        #    promosse (mediana 61-64), quindi seleziona la parte alta senza svuotare; e nel
+        #    registro degli scenari tiene TUTTE le occasioni con salita ≥60 (la loro convenienza
+        #    va da 69 a 77), mentre ≥70 ne butterebbe via alcune e lascerebbe 2 occasioni vive
+        #    su 78 — un filtro che mostra due righe non è una selezione, è un sorteggio.
+        # ONESTÀ SUL RISULTATO: sui pochi esiti maturi questo preset misura +0,64% di resa tipica
+        # contro +2,28% senza filtri (3 casi contro 49). Tre casi non dimostrano niente, ma la
+        # direzione è la stessa già vista: chiedere una salita alta finora non ha migliorato le rese.
+        st.session_state[kg] = 60
+        st.session_state[kl], st.session_state[kc] = 25, 65
+
+    def _tutte():
+        st.session_state[kg] = 0
+        st.session_state[kl], st.session_state[kc] = 100, 0
+
+    attivi = bool(st.session_state.get(kg, 0)
+                  or st.session_state.get(kl, 100) != 100 or st.session_state.get(kc, 0))
+    with st.expander("🎚️ Filtri di qualità" + (" — ⚠️ ATTIVI" if attivi else ""), expanded=False):
+        st.caption("Mostra solo le occasioni che rispettano questi requisiti al momento attuale. "
+                   + (nota or ""))
+        b1, b2, _sp = st.columns([1, 1, 2])
+        b1.button("⭐ Solo le migliori", key=f"{prefix}_best", on_click=_best, use_container_width=True,
+                  help="Probabilità di salita ≥60%, rischio di perdita ≤25%, convenienza ≥65. "
+                       "Il rischio è a 25 e non a 10 perché un titolo con salita ≥60% è per forza "
+                       "un titolo che si muove: fra le occasioni in osservazione il suo rischio "
+                       "parte da 11, quindi «salita ≥60 + perdita ≤10» non lascerebbe passare "
+                       "MAI nulla. La convenienza è a 65 perché è appena sopra il valore tipico "
+                       "delle occasioni promosse. "
+                       "DA SAPERE: sui pochi esiti maturi questo preset misura una resa tipica "
+                       "PIÙ BASSA che senza filtri (+0,6% contro +2,3%, su 3 casi contro 49). Tre "
+                       "casi non dimostrano niente, ma finora chiedere una salita alta non ha "
+                       "migliorato le rese: la misura è in «Scenari → 🎯 Quali indicatori "
+                       "funzionano». È una scelta di prudenza, non una regola dimostrata.")
+        b2.button("↺ Tutte", key=f"{prefix}_all", on_click=_tutte, use_container_width=True)
+        q1, q2, q3 = st.columns(3)
+        mg = q1.slider("Probabilità di salita ≥", 0, 80, key=kg, step=5, format="%d%%",
+                       help="Probabilità stimata che il prezzo sia più alto alla scadenza. "
+                            "Attenzione: le occasioni con questo numero alto sono quelle che si "
+                            "muovono di più, quindi hanno anche un rischio di perdita alto — "
+                            "chiedere insieme «salita alta» e «rischio molto basso» può non "
+                            "lasciare passare nulla.")
+        ml = q2.slider("Rischio di perdita ≤", 0, 100, key=kl, step=5, format="%d%%",
+                       help="Probabilità stimata di una perdita oltre il 15%.")
+        mc = q3.slider("Convenienza minima", 0, 90, key=kc, step=5,
+                       help="Il punteggio 0-100 del sistema. Nelle occasioni promosse il valore "
+                            "tipico è 61-64: chiedere più di 75 lascia passare pochissimo.")
+        st.caption("L'affidabilità non è più un filtro: misurava la solidità del dato (volatilità e "
+                   "lunghezza dello storico), non la bontà dell'occasione, e messa alla prova sugli "
+                   "esiti veri non separava i risultati. Resta come colonna nelle tabelle — vedi "
+                   "«Scenari → 🎯 Quali indicatori funzionano».")
+    # il primo posto era l'affidabilità minima: resta a 0 (filtro rimosso), il motore la supporta ancora
+    return (0, mg, ml, mc)
+
+
+def passa_qualita(reliab, prob_gain, prob_loss, conv, filtri) -> bool:
+    """True se supera i filtri. Un dato MANCANTE non esclude (si popola coi prossimi controlli):
+    le sezioni dicono quante righe hanno dati incompleti, così il filtro non «nasconde» in silenzio."""
+    mr, mg, ml, mc = filtri
+    if reliab is not None and fu._rel_rank(reliab) < mr:
+        return False
+    if prob_gain is not None and prob_gain < mg:
+        return False
+    if prob_loss is not None and prob_loss > ml:
+        return False
+    if conv is not None and conv < mc:
+        return False
+    return True
+
+
+def euro_cella(punti, importo, fee):
+    """Il risultato in EURO di una casella degli scenari: media e somma dei netti calcolati
+    CASO PER CASO, più quante operazioni avrebbero chiuso in utile.
+
+    Perché non si calcola sul rendimento medio: la commissione è fissa e la tassa del 26% si paga
+    solo sui guadagni, quindi «il netto della media» e «la media dei netti» sono due numeri
+    diversi. Non è una sottigliezza: sulla casella «In anticipo → dopo 1 settimana» erano +1,17 €
+    e +0,79 €, e l'app mostrava il primo sul pulsante e il secondo nel dettaglio — due risposte
+    diverse alla stessa domanda, nella stessa schermata. Quella giusta è la media dei netti: è
+    l'unica che corrisponde a quello che ti resterebbe in tasca operazione per operazione."""
+    nets = [fu.net_eur(p["ret"], importo, fee) for p in punti]
+    nets = [n for n in nets if n is not None]
+    if not nets:
+        return None
+    return {"medio": round(sum(nets) / len(nets), 2), "totale": round(sum(nets), 2),
+            "in_utile": sum(1 for n in nets if n > 0), "n": len(nets)}
+
+
+_MESI_IT = ("gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio",
+            "agosto", "settembre", "ottobre", "novembre", "dicembre")
+
+
+def data_it(iso, con_anno=None) -> str:
+    """Data in italiano leggibile: «27 agosto», e con l'anno se cade in un anno diverso da questo
+    (serve alle colonne lunghe, che maturano nel 2027: prima l'anno era scritto a mano nel testo e
+    andava aggiornato ogni gennaio)."""
+    try:
+        d = datetime.date.fromisoformat(str(iso)[:10])
+    except Exception:
+        return "—"
+    anno = con_anno if con_anno is not None else (d.year != _now_rome().year)
+    return f"{d.day} {_MESI_IT[d.month - 1]}" + (f" {d.year}" if anno else "")
+
+
+def solidita_campione(n: int, giornate: int):
+    """Quanto fidarsi di una casella, con UNA regola sola per tutta la sezione: (etichetta, perché).
+
+    Prima ce n'erano due, opposte, a due schede di distanza: la matrice chiamava «🟢 Alta» un
+    campione di 20 casi senza guardare in quante giornate diverse fossero, e la scheda degli
+    indicatori — sugli stessi dati — pretendeva 30 casi in 20 giornate prima di dire qualcosa.
+    Vince la più prudente, perché il rischio vero non è il numero di casi ma la loro
+    CONCENTRAZIONE: 30 promozioni fatte tutte nella stessa settimana di rialzo misurano il mercato
+    di quella settimana, non il sistema."""
+    if n >= 30 and giornate >= 20:
+        return "🟢 Solida", "abbastanza casi, e distribuiti su abbastanza giornate diverse"
+    if n >= 8:
+        return "🟡 Indicativa", (f"{n} casi in {giornate} giornate: leggila come un indizio, "
+                                f"non come una misura (servono 30 casi in 20 giornate)")
+    return "🔴 Aneddoto", f"con {n} casi un solo titolo sposta tutto"
+
+
+def qualita_incompleta(reliab, prob_gain, prob_loss, conv, filtri) -> bool:
+    """True se un filtro ATTIVO non è applicabile perché quel dato non è ancora stato registrato."""
+    mr, mg, ml, mc = filtri
+    return bool((mr > 0 and reliab is None) or (mg > 0 and prob_gain is None)
+                or (ml < 100 and prob_loss is None) or (mc > 0 and conv is None))
+
+
+def chart_history(ticker, period):
+    """Storico per i grafici (intraday sui periodi brevi). Robusto alla finestra push→reboot di
+    Streamlit Cloud: se il modulo in cache è ancora vecchio (senza get_chart_history) ripiega su
+    get_history (giornaliero) invece di far crashare l'app."""
+    fn = getattr(fu, "get_chart_history", None)
+    if fn is not None:
+        return fn(ticker, period)
+    df = fu.get_history(ticker, period)
+    try:
+        df.attrs["intraday"] = False
+    except Exception:
+        pass
+    return df
+
+
+def _now_rome():
+    """Ora locale italiana (il server cloud gira in UTC)."""
+    try:
+        from zoneinfo import ZoneInfo
+        return datetime.datetime.now(ZoneInfo("Europe/Rome"))
+    except Exception:
+        return datetime.datetime.utcnow() + datetime.timedelta(hours=2)
+
+
+# ---------------------------------------------------------------------------
+# PROTEZIONE CON PASSWORD
+# La password si imposta in .streamlit/secrets.toml (locale) o nei "Secrets" di
+# Streamlit Cloud, come:  app_password = "la-tua-password"
+# Se nessuna password è configurata, l'accesso è libero (utile in sviluppo).
+# ---------------------------------------------------------------------------
+def check_password():
+    try:
+        pwd = st.secrets["app_password"]
+    except Exception:
+        pwd = os.environ.get("APP_PASSWORD", "")
+    if not pwd:
+        return  # nessuna password impostata → accesso libero
+    if st.session_state.get("auth_ok"):
+        return
+
+    def _verify():
+        # .strip() su entrambi i lati: evita il classico "password giusta rifiutata" per uno
+        # spazio o un a-capo in coda (nel secret o in un incolla dal telefono).
+        typed = str(st.session_state.get("pwd_in", "")).strip()
+        if hmac.compare_digest(typed, str(pwd).strip()):
+            st.session_state["auth_ok"] = True
+            st.session_state.pop("pwd_in", None)
+        else:
+            st.session_state["auth_ok"] = False
+
+    st.markdown("## 🔒 Analisi Finanziaria")
+    st.caption("Inserisci la password per accedere.")
+    st.text_input("Password", type="password", key="pwd_in", on_change=_verify)
+    if st.session_state.get("auth_ok") is False:
+        st.error("Password errata, riprova.")
+    st.stop()
+
+
+check_password()
+
+# Azzera a ogni esecuzione il contatore delle chiavi dei grafici (vedi show_chart):
+# garantisce ID univoci e stabili per ogni grafico nella stessa pagina.
+st.session_state["_chart_seq"] = 0
+
+# ---------------------------------------------------------------------------
+# STILE GIUDIZI
+# ---------------------------------------------------------------------------
+COLORS = {"positivo": "#1a7f37", "negativo": "#cf222e", "neutro": "#9a6700", None: "#8b949e"}
+ICONS = {"positivo": "🟢", "negativo": "🔴", "neutro": "🟡", None: "⚪"}
+
+
+def badge(label, value, judgement, help_text="", reason=""):
+    color = COLORS.get(judgement, "#8b949e")
+    icon = ICONS.get(judgement, "⚪")
+    info_icon = ""
+    if help_text:
+        safe = help_text.replace('"', "&quot;")
+        info_icon = (
+            f" <span title=\"{safe}\" "
+            f"style='cursor:help;color:#0969da;font-size:0.85em'>&#9432;</span>"
+        )
+    reason_html = ""
+    if reason:
+        reason_html = (
+            f"<div style='font-size:0.82em;color:#a9b1ba;margin-left:1.5em;margin-top:1px'>"
+            f"↳ {reason}</div>"
+        )
+    st.markdown(
+        f"<div style='padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.12);'>"
+        f"{icon} <b>{label}</b>{info_icon}: "
+        f"<span style='color:{color};font-weight:600'>{value}</span>"
+        f"{reason_html}</div>",
+        unsafe_allow_html=True,
+    )
+
+
+# ---------------------------------------------------------------------------
+# SIDEBAR
+# ---------------------------------------------------------------------------
+st.sidebar.markdown(
+    "<div class='app-brand'><div class='ab-name'>Analisi<span>·</span>Finanziaria</div>"
+    "<div class='ab-tag'>Analisi titoli · occasioni · portafoglio</div></div>",
+    unsafe_allow_html=True,
+)
+
+# Cambio sezione programmatico (es. bottone "📊 Analizza" dal Monitoraggio):
+# va impostato PRIMA che il widget radio venga creato, altrimenti Streamlit
+# vieta di modificare la chiave del widget già istanziato.
+if "_goto_section" in st.session_state:
+    st.session_state["section_radio"] = st.session_state.pop("_goto_section")
+
+# --- Sezione principale ---
+section = st.sidebar.radio(
+    "Sezione", ["Analisi di un titolo", "Occasioni di mercato",
+                "In osservazione", "In anticipo", "Monitoraggio", "Portafoglio",
+                "Scenari", "Attualità"], key="section_radio",
+    help="«Analisi di un titolo» studia una singola azienda/ETF. «Occasioni» scansiona il mercato per cali interessanti. "
+         "«In osservazione» mostra le occasioni che il sistema sta seguendo verso un'eventuale promozione. "
+         "«In anticipo» mostra le più solide tra quelle in osservazione, per entrare PRIMA della conferma (più rischio). "
+         "«Monitoraggio» segue nel tempo le occasioni che hai scelto. «Portafoglio» registra i tuoi acquisti veri e mostra il guadagno/perdita. "
+         "«Scenari» misura quanto avresti guadagnato e quale momento di acquisto/vendita rende di più. "
+         "«Attualità» raccoglie le classifiche di mercato (rialzi/ribassi/più scambiati) e le notizie recenti divise per azienda/ETF.",
+)
+st.sidebar.markdown("---")
+
+# Impostazioni FISSE (prima erano interruttori nella barra laterale, tolti perché inutili):
+# - sempre modalità completa: tutti gli indicatori e i blocchi avanzati, senza scelte da fare;
+# - traduzione in italiano SEMPRE attiva (notizie e descrizioni);
+# - periodo storico fisso a 1 anno: i grafici che contano hanno già il loro selettore di periodo.
+expert = True
+translate_news = True
+period_label, period = "1 anno", "1y"
+
+# --- Ricerca: nome O sigla, anche parziale (sostituisce la vecchia casella "Ticker da analizzare") ---
+st.sidebar.caption("Scrivi il **nome** dell'azienda o la sua **sigla**, anche parziale.")
+query = st.sidebar.text_input("🔎 Cerca un titolo", key="ricerca_titolo",
+                              placeholder="es. Apple, AAPL, Eni, micro, S&P 500",
+                              help="Cerca per nome o per sigla, anche scrivendone solo una parte. "
+                                   "Poi scegli dall'elenco dei risultati.")
+_q = (query or "").strip()
+_scelte = []                                    # [(sigla, etichetta da mostrare)]
+if len(_q) >= 2:
+    try:
+        for _s, _n, _t, _b in fu.search_symbols(_q):
+            _et = f"{_s} — {_n}  ·  {_b or _t}" if _n else str(_s)
+            _scelte.append((_s, _et))
+    except Exception:
+        pass
+    # La sigla scritta a mano resta sempre utilizzabile, anche se la ricerca non la trova
+    # (utile per ETF e titoli esteri: VWCE.DE, ISP.MI, ^GSPC…).
+    _grezzo = _q.upper()
+    if all(c.isalnum() or c in ".-^=" for c in _grezzo) \
+            and _grezzo not in [s for s, _ in _scelte]:
+        _scelte.append((_grezzo, f"{_grezzo} — usa questa sigla esatta"))
+
+if _scelte:
+    # La chiave contiene la ricerca: a ogni nuova ricerca la scelta riparte dal PRIMO risultato
+    # (il più pertinente) invece di restare sulla posizione selezionata nella ricerca precedente.
+    _i = st.sidebar.selectbox("Risultati", range(len(_scelte)), key=f"ris_{_q.upper()}",
+                              format_func=lambda i: _scelte[i][1])
+    _scelto = _scelte[min(_i, len(_scelte) - 1)][0]
+    # Applica la scelta SOLO quando cambia davvero: così il ticker impostato da altre sezioni
+    # (bottone «📊 Analizza») non viene sovrascritto dalla ricerca rimasta scritta nella casella.
+    if st.session_state.get("_ultima_ricerca") != (_q.upper(), _scelto):
+        st.session_state["_ultima_ricerca"] = (_q.upper(), _scelto)
+        st.session_state["ticker"] = _scelto
+elif len(_q) >= 2:
+    st.sidebar.caption("Nessun risultato — prova con meno lettere o con la sigla.")
+
+ticker = (st.session_state.get("ticker") or "").strip().upper()
+if ticker:
+    st.sidebar.caption(f"📌 In analisi: **{ticker}**")
+
+# --- Watchlist (preferiti) ---
+st.sidebar.markdown("---")
+st.sidebar.markdown("### ⭐ La mia watchlist")
+watchlist = fu.load_watchlist()
+
+wc1, wc2 = st.sidebar.columns(2)
+if wc1.button("➕ Aggiungi", use_container_width=True, help=f"Aggiungi {ticker} ai preferiti"):
+    if ticker and ticker not in watchlist:
+        watchlist.append(ticker)
+        fu.save_watchlist(watchlist)
+        st.rerun()
+if wc2.button("➖ Rimuovi", use_container_width=True, help=f"Togli {ticker} dai preferiti"):
+    if ticker in watchlist:
+        watchlist.remove(ticker)
+        fu.save_watchlist(watchlist)
+        st.rerun()
+
+if watchlist:
+    for w in watchlist:
+        q = fu.quick_quote(w)
+        chg = q.get("change_pct")
+        price = q.get("price")
+        arrow = "▲" if (chg or 0) >= 0 else "▼"
+        col = "#1a7f37" if (chg or 0) >= 0 else "#cf222e"
+        price_txt = f"{price:,.2f}" if price is not None else "n/d"
+        chg_txt = f"{arrow} {chg:+.2f}%" if chg is not None else ""
+        bcol, icol = st.sidebar.columns([3, 2])
+        if bcol.button(w, key=f"wl_{w}", use_container_width=True):
+            st.session_state["ticker"] = w
+            st.rerun()
+        icol.markdown(
+            f"<div style='text-align:right;padding-top:6px'>{price_txt}<br>"
+            f"<span style='color:{col};font-size:0.85em'>{chg_txt}</span></div>",
+            unsafe_allow_html=True,
+        )
+else:
+    st.sidebar.caption("Vuota. Premi ➕ per salvare il titolo che stai analizzando.")
+
+# --- Monitoraggio occasioni (conteggio) ---
+tracked = fu.load_tracking()
+if tracked:
+    st.sidebar.caption(f"📌 Stai monitorando **{len(tracked)}** occasion{'e' if len(tracked)==1 else 'i'} "
+                       "(vedi la sezione «Monitoraggio»).")
+
+st.sidebar.markdown("---")
+st.sidebar.caption(
+    "⚠️ Strumento di analisi a scopo informativo. **Non è consulenza finanziaria.** "
+    "I dati gratuiti possono avere ritardo o essere incompleti."
+)
+
+# ---------------------------------------------------------------------------
+# NAVIGAZIONE "INDIETRO" INTERNA
+# Il tasto indietro del telefono uscirebbe dall'app; questo pulsante riporta in
+# modo affidabile alla schermata precedente (sezione + titolo) dentro l'app.
+# ---------------------------------------------------------------------------
+_cur_view = (section, ticker)
+if st.session_state.pop("_nav_back", False):
+    st.session_state["_nav_current"] = _cur_view            # arrivo da "Indietro": non impilare
+else:
+    _prev = st.session_state.get("_nav_current")
+    if _prev is not None and _prev != _cur_view:
+        _stack = st.session_state.setdefault("_nav_stack", [])
+        if not _stack or _stack[-1] != _prev:
+            _stack.append(_prev)
+        del _stack[:-30]                                     # conserva solo le ultime 30 schermate
+    st.session_state["_nav_current"] = _cur_view
+
+if st.session_state.get("_nav_stack"):
+    _bcol, _ = st.columns([1, 4])
+    if _bcol.button("← Indietro", use_container_width=True, key="nav_back_btn",
+                    help="Torna alla schermata precedente. Usa questo invece del tasto «indietro» del telefono."):
+        _dest_section, _dest_ticker = st.session_state["_nav_stack"].pop()
+        st.session_state["_goto_section"] = _dest_section
+        st.session_state["ticker"] = _dest_ticker
+        st.session_state["_nav_back"] = True
+        st.rerun()
+
+# ===========================================================================
+# SEZIONE: OCCASIONI DI MERCATO (pagina a sé, indipendente dal titolo)
+# ===========================================================================
+if section.startswith("Occasioni"):
+    page_header("Occasioni di mercato",
+                "Titoli ed ETF in calo con segnali tipici da rimbalzo o sconto — spunti da approfondire, non consigli.")
+    st.caption("Parto dalle classifiche di mercato (USA). Puoi aggiungere ticker tuoi (anche .MI / ETF europei) "
+               "e includere la watchlist, così copre qualsiasi titolo.")
+
+    extra_raw = st.text_area("Ticker extra da includere (separati da virgola, opzionale)",
+                             value="", height=68, key="opp_extra")
+    extra = [t.strip().upper() for t in extra_raw.replace(";", ",").split(",") if t.strip()]
+    ic1, ic2, ic3 = st.columns(3)
+    inc_wl = ic1.checkbox("Includi la mia watchlist", value=bool(watchlist), key="opp_wl")
+    inc_eu = ic2.checkbox("Includi Borsa Italiana / Europa", value=True, key="opp_eu",
+                          help="Aggiunge alla ricerca i principali titoli di Milano e d'Europa (le classifiche "
+                               "automatiche gratuite coprono solo gli USA).")
+    inc_etf = ic3.checkbox("Includi ETF", value=True, key="opp_etf",
+                           help="Aggiunge alla ricerca i principali ETF (USA e UCITS europei): "
+                                "anche un ETF può essere un'occasione quando scende parecchio.")
+
+    # Salva la config (ticker extra + watchlist + preferenze EU/ETF) sul data-layer: così il
+    # SISTEMA AUTONOMO osserva lo STESSO universo che vedi qui, non solo quello standard.
+    fu.save_opp_config(extra + (watchlist if inc_wl else []), inc_eu, inc_etf)
+
+    refresh_choice = st.selectbox(
+        "🔄 Aggiornamento automatico", ["Disattivato", "Ogni 15 minuti", "Ogni 30 minuti"],
+        index=1, key="opp_refresh_int",
+        help="Le occasioni vengono cercate da sole. Con l'aggiornamento attivo si riscansionano in autonomia "
+             "(i dati si rinnovano davvero ~ogni 15 minuti: indicatori giornalieri + limiti delle API).")
+
+    # Le occasioni vengono cercate in automatico all'apertura della sezione (nessun pulsante)
+    if True:
+        if refresh_choice != "Disattivato":
+            st_autorefresh(interval=(900000 if "15" in refresh_choice else 1800000), key="opp_auto")
+            st.caption(f"🔄 Ricarico questa pagina automaticamente ({refresh_choice.lower()}) · "
+                       f"pagina ricaricata alle {_now_rome().strftime('%H:%M')}")
+
+        cloud = fu.cloud_mode()
+        if cloud:
+            # FRESCHEZZA VERA dei dati del server, non l'orologio del computer. Prima qui c'era scritto
+            # «ultimo aggiornamento: <ora locale>», cioè sempre «adesso»: con i dati del server fermi
+            # l'app affermava il contrario del vero, ed era impossibile accorgersene da dentro l'app.
+            _fr = fu.freschezza_dati()
+            (st.warning if _fr["allarme"] else st.caption)(
+                ("⚠️ " if _fr["allarme"] else "🤖 ") + _fr["testo"]
+                + (". Il sistema autonomo scrive solo quando qualcosa cambia, quindi a mercati chiusi "
+                   "qualche ora di silenzio è normale; molte ore a mercati aperti no."
+                   if not _fr["allarme"] else
+                   ". Se i mercati sono aperti, qualcosa non sta funzionando: controlla la scheda "
+                   "«Actions» del repository."))
+            st.caption("🤖 **Sistema autonomo attivo sul server**: le occasioni vengono ricontrollate "
+                       "ogni **30 minuti** anche a PC spento, e quelle che superano i controlli "
+                       "finiscono da sole nel «Monitoraggio».")
+            auto_promote_on = True
+        else:
+            auto_promote_on = st.checkbox(
+                "🤖 Salva da solo le occasioni che migliorano per 3 giorni di fila", value=True,
+                key="auto_promote",
+                help="A ogni aggiornamento il sistema registra l'evoluzione di tutte le occasioni. Quando la convenienza "
+                     "di un titolo sale per 3 giorni consecutivi, lo aggiunge da solo al «Monitoraggio». "
+                     "Nota (modalità locale): il controllo avviene mentre questa pagina è aperta; i 3 giorni si contano "
+                     "sui giorni in cui apri l'app. Per renderlo automatico anche a PC spento vedi README_AUTONOMIA.md.")
+
+        with st.expander("🎛️ Filtri", expanded=False):
+            fco1, fco2, fco3 = st.columns(3)
+            f_min_conv = fco1.slider("Convenienza minima", 0, 100, 0, key="f_conv")
+            # Al posto del filtro sull'affidabilità (tolto: misurava la solidità del dato, non la
+            # bontà dell'occasione, e sugli esiti veri non separava niente) c'è la probabilità di
+            # salita, che è il requisito usato negli altri filtri dell'app.
+            f_min_gain = fco2.slider("Probabilità di salita ≥ (%)", 0, 80, 0, key="f_gain",
+                                     step=5,
+                                     help="Le occasioni con questo numero alto sono quelle che si "
+                                          "muovono di più, quindi hanno anche un rischio di perdita "
+                                          "alto: chiedere insieme salita alta e rischio molto basso "
+                                          "può non lasciare passare nulla.")
+            f_max_loss = fco3.slider("Rischio di perdita massimo (%)", 0, 100, 100, key="f_loss")
+            st.caption("L'affidabilità non è più un filtro (resta come colonna): misurava quanto è "
+                       "solida la stima — volatilità e lunghezza dello storico — non quanto "
+                       "l'occasione può rendere. Vedi «Scenari → 🎯 Quali indicatori funzionano».")
+
+        with st.expander("📐 Dimensionamento posizione (rischio fisso)", expanded=False):
+            st.caption("Per ogni occasione di breve calcola **quante azioni** comprare rischiando una quota fissa "
+                       "del capitale, dato lo **stop = prezzo − 2×ATR**. Regola d'oro: non rischiare più dell'1-2% "
+                       "del capitale per singola operazione.")
+            psc1, psc2 = st.columns(2)
+            pos_capital = psc1.number_input("Capitale da impiegare (€)", min_value=0.0, value=10000.0,
+                                            step=500.0, key="pos_capital")
+            pos_risk = psc2.slider("Rischio per operazione (%)", 0.25, 5.0, 1.0, 0.25, key="pos_risk")
+
+        # Regime di volatilità: moltiplicatore globale del breve (il rimbalzo si rompe nei crash)
+        regime = fu.volatility_regime()
+        rg_factor, rg_label, rg_vix = regime["factor"], regime["label"], regime["vix"]
+        rgvix = f" · VIX ~{rg_vix:.0f}" if rg_vix is not None else ""
+        if rg_factor >= 1.0:
+            st.success(f"🌡️ **Regime di volatilità: {rg_label}**{rgvix} — condizioni normali per i rimbalzi da ipervenduto.")
+        elif rg_factor >= 0.75:
+            st.info(f"🌡️ **Regime di volatilità: {rg_label}**{rgvix} — i punteggi di breve sono **ridotti** "
+                    f"(×{rg_factor:.2f}): nei mercati nervosi il rimbalzo è meno affidabile.")
+        else:
+            st.error(f"🌡️ **Regime di volatilità: {rg_label}**{rgvix} — punteggi di breve **fortemente ridotti** "
+                     f"(×{rg_factor:.2f}): in un crash il mean-reversion (rimbalzo) tende a rompersi. Prudenza.")
+
+        mkt_1m = fu.market_perf_1m()
+
+        # --- Scansione unica (poi riusata da shortlist, sistema autonomo e tabelle) ---
+        def _scan(kind):
+            base = fu.opportunity_candidates(kind, include_eu=inc_eu, include_etf=inc_etf)
+            # + sticky watch: ri-scansiona i titoli già in osservazione con finestra aperta,
+            # così non spariscono dopo un giorno e possono maturare verso il Monitoraggio.
+            universe = list(dict.fromkeys(base + extra + (watchlist if inc_wl else [])
+                                          + fu.sticky_watch_tickers(kind)))
+            return fu.scan_opportunities(universe, kind)
+
+        with st.spinner("Analizzo il mercato…"):
+            full_short, full_long = _scan("short"), _scan("long")
+
+        # --- 🤖 Sistema autonomo: registra l'evoluzione e promuove chi migliora da 3 giorni ---
+        # In modalità cloud è il job su GitHub Actions a registrare/promuovere (anche a PC spento);
+        # l'app si limita a LEGGERE i risultati. In locale puro, lo fa l'app a ogni refresh.
+        promoted = []
+        if auto_promote_on and not cloud:
+            fu.record_observations(full_short, "short")
+            fu.record_observations(full_long, "long")
+            # Sticky: per i titoli già in osservazione (finestra aperta) NON tra le occasioni di oggi,
+            # registra comunque il prezzo → i giorni avanzano e la promozione resta possibile.
+            fu.record_sticky_observations("short", full_short)
+            fu.record_sticky_observations("long", full_long)
+            # Calibrazione (locale): registra la P(salita) di ogni occasione per il backtest
+            for _df, _h in ((full_short, 21), (full_long, 252)):
+                if _df is not None and not _df.empty:
+                    for _tk, _rr in _df.iterrows():
+                        fu.log_forecast(_tk, _h, _rr.get("Prob. salita"), _rr.get("Prezzo"))
+            promoted = fu.auto_promote_opportunities()
+            fu.manage_monitoring()      # rimozioni delle perdenti + (eventuali) prime notifiche
+        if promoted:
+            st.success("🤖 **Aggiunte da sole al Monitoraggio** (prezzo in ripresa dopo la fase di osservazione): "
+                       + ", ".join(f"**{t}**" for t in promoted) + ". Le trovi nella sezione «Monitoraggio».")
+
+        # (Le occasioni «in osservazione» hanno ora una sezione dedicata nel menu: «In osservazione».)
+
+        # --- 🏆 Le migliori da seguire (shortlist automatica) ---
+        def _best_picks(df, n=3):
+            if df is None or df.empty:
+                return df
+            d = df[df["Affidabilità"].isin(["🟢 Alta", "🟡 Media"])]   # scarta le stime poco affidabili
+            return d.sort_values("Convenienza", ascending=False).head(n)
+
+        with st.container(border=True):
+            st.markdown("### Le migliori da seguire")
+            st.caption("Selezione automatica delle occasioni con la **convenienza più alta** e affidabilità almeno 🟡 media, "
+                       "di breve e di lungo periodo. È il punto di partenza più sensato: seguile qualche giorno nel "
+                       "**📌 Monitoraggio** e compra quelle il cui segnale si **rafforza** (non quelle che continuano a scendere).")
+            best_s, best_l = _best_picks(full_short), _best_picks(full_long)
+            picks, rows_view = [], []
+            for kind_b, label_b, dfb_src in [("short", "⚡ Breve", best_s), ("long", "🏛️ Lungo", best_l)]:
+                if dfb_src is None or dfb_src.empty:
+                    continue
+                for tk, r in dfb_src.iterrows():
+                    picks.append((tk, kind_b))
+                    rows_view.append({"Tipo": label_b, "Ticker": tk, "Azienda": r["Nome"],
+                                      "Conv.": int(r["Convenienza"]), "Prob. salita": r.get("Prob. salita"),
+                                      "Rischio": r.get("Rischio perdita"), "Affid.": r["Affidabilità"]})
+            if not rows_view:
+                st.info("Al momento nessuna occasione con affidabilità almeno media. Guarda comunque le tabelle qui sotto.")
+            else:
+                dfb = pd.DataFrame(rows_view).set_index("Ticker")
+                st.dataframe(dfb, use_container_width=True, column_config={
+                    "Conv.": st.column_config.ProgressColumn("🏅 Convenienza", min_value=0, max_value=100, format="%d",
+                        help="Più alto = prospettive migliori (fonde prob. salita, guadagno atteso, rischio e affidabilità)."),
+                    "Prob. salita": st.column_config.NumberColumn("📈 Prob. salita", format="%.0f%%"),
+                    "Rischio": st.column_config.NumberColumn("📉 Rischio perdita", format="%.0f%%"),
+                    "Affid.": st.column_config.TextColumn("📊 Affidabilità"),
+                })
+                already = fu.load_tracking()
+                new_picks = [(tk, k) for tk, k in picks if tk not in already]
+                bcol1, bcol2 = st.columns([1, 2])
+                if new_picks:
+                    if bcol1.button(f"📌 Segui tutte ({len(new_picks)})", use_container_width=True, type="primary",
+                                    key="follow_best"):
+                        fu.track_many(new_picks)   # un'unica scrittura: le salva tutte (anche sul cloud)
+                        st.success(f"📌 Aggiunte {len(new_picks)} occasioni al Monitoraggio.")
+                        st.rerun()
+                    bcol2.caption("Le aggiunge tutte alla sezione «Monitoraggio» con lo scatto di oggi. "
+                                  "Potrai sempre toglierne qualcuna lì.")
+                else:
+                    bcol1.caption("✅ Le stai già seguendo tutte (vedi «Monitoraggio»).")
+        st.markdown("---")
+
+        def render_opps(df_full, kind, header, help_txt, cols_cfg):
+            st.markdown(f"### {header}")
+            st.caption(help_txt)
+            with st.expander("ℹ️ Come leggere queste occasioni (e i rischi)"):
+                if kind == "short":
+                    st.markdown(
+                        "**Cosa cerchiamo:** titoli **scesi molto** e tecnicamente **«ipervenduti»**. "
+                        "Storicamente, dopo cali eccessivi e improvvisi, il prezzo tende a **rimbalzare** nel breve (settimane).\n\n"
+                        "- **RSI** (0-100): misura la «foga» di vendita. Sotto 30 = ipervenduto, possibile rimbalzo.\n"
+                        "- **% dal max**: quanto è sceso dal massimo dell'ultimo anno.\n"
+                        "- **Banda di Bollinger**: se il prezzo la sfora verso il basso, è a un estremo.\n"
+                        "- **🔄 Conferma d'inversione**: non segnaliamo un rimbalzo finché il titolo **non ha girato** "
+                        "(chiusura verde, RSI in risalita o rientro dentro le bande). È il rimedio diretto al «coltello che cade».\n"
+                        "- **🔊 RVOL** (volume relativo): un giorno verde con volume sopra la media segnala "
+                        "**capitolazione + ripartenza** credibile.\n"
+                        "- **⚖️ R:R** (rischio/rendimento): bersaglio (media 50gg) vs **stop = prezzo − 2×ATR**. "
+                        "Mostriamo solo setup con R:R **≥ 1,5** (scartiamo le scommesse asimmetriche).\n"
+                        "- **🌡️ Regime di volatilità**: nei mercati turbolenti (VIX alto) i punteggi del breve sono ridotti, "
+                        "perché il rimbalzo da ipervenduto si rompe nei crash.\n"
+                        "- **Trend di fondo**: se il prezzo è sopra la media a 200 giorni il rimbalzo è più probabile.\n"
+                        "- **💎 Segnale**: forza del setup (ipervenduto + trend sano + inversione confermata + volume).\n\n"
+                        "⚠️ **Rischio:** un titolo che rimbalza dopo un calo è una *scommessa di breve*. "
+                        "Cali fortissimi possono continuare (il «coltello che cade»). Spunto da approfondire, non un segnale di acquisto."
+                    )
+                else:
+                    st.markdown(
+                        "**Cosa cerchiamo:** aziende con **buoni fondamentali** (o ETF diversificati) **scese parecchio dai massimi**: "
+                        "l'idea è comprare qualità «in saldo» e tenere per **anni**.\n\n"
+                        "- **🧭 Qualità (trend) — anti-trappola di valore**: incrociamo il calo di prezzo col **trend dei conti**. "
+                        "Prezzo giù + ricavi/utili/margini stabili = vera occasione; prezzo giù + conti in calo = **trappola**. È la protezione n°1.\n"
+                        "- **💎 Valore**: qualità del business a **pilastri pesati** (Qualità 35% / Solidità 25% / Valutazione 25% / Crescita 15%) "
+                        "— non più un conteggio di pallini dove il P/S pesava quanto la redditività — combinata con lo sconto dai massimi.\n"
+                        "- **Radar qualità** (nel dettaglio): Valore / Qualità / Salute / Crescita / Dividendo, 0-100.\n"
+                        "- **Metriche serie** (nel dettaglio): **ROIC** vs costo del capitale, **EV/EBITDA**, **FCF yield**, "
+                        "**copertura del dividendo col flusso di cassa**, indice di salute (Piotroski semplificato), **Altman Z** (industriali USA).\n"
+                        "- **Settore**: limitiamo le occasioni a poche per settore (niente liste tutte-banche).\n\n"
+                        "⚠️ **Rischio:** uno sconto **non garantisce** la risalita. Chiediti sempre *perché* il titolo è sceso: "
+                        "difficoltà temporanea (possibile occasione) o problema strutturale (trappola di valore)?"
+                    )
+            if df_full is None or df_full.empty:
+                st.info("Nessuna occasione che soddisfi i criteri in questo momento.")
+                return
+            df = df_full.copy()
+            # Filtri scelti dall'utente
+            df = df[df["Convenienza"] >= f_min_conv]
+            if f_min_gain > 0 and "Prob. salita" in df.columns:
+                df = df[df["Prob. salita"].isna() | (df["Prob. salita"] >= f_min_gain)]
+            df = df[df["Rischio perdita"].isna() | (df["Rischio perdita"] <= f_max_loss)]
+            if df.empty:
+                st.info("Nessuna occasione con i filtri scelti. Allarga i criteri nei 🎛️ Filtri.")
+                return
+            orizz = "~1 anno" if kind == "long" else "~1 mese"
+
+            def _block(df_sub, subtitle=None):
+                if subtitle:
+                    st.markdown(f"**{subtitle}**")
+                if df_sub.empty:
+                    st.caption("Nessun titolo in questa fascia con i filtri scelti.")
+                    return
+                st.dataframe(df_sub, use_container_width=True,
+                             height=min(60 + 38 * len(df_sub), 460), column_config=cols_cfg)
+                st.caption(f"📈 **Prob. salita** e 📉 **Rischio perdita** sono **stime statistiche** dai rendimenti "
+                           f"storici (orizzonte {orizz}), **non previsioni**.")
+                st.markdown("###### Approfondimenti — notizie recenti e perché")
+                for tk, row in df_sub.head(5).iterrows():
+                    pg, pl = row.get("Prob. salita"), row.get("Rischio perdita")
+                    with st.expander(f"{tk} — {row['Nome']}   ·   💎 {int(row['Occasione'])}"):
+                        st.markdown(f"**Perché è un'occasione:** {row['Perché']}")
+                        bits = []
+                        if pg is not None and not pd.isna(pg):
+                            bits.append(f"📈 probabilità di salita **~{pg:.0f}%**")
+                        eg = row.get("Guadagno atteso")
+                        if eg is not None and not pd.isna(eg):
+                            bits.append(f"🎯 guadagno atteso **{eg:+.1f}%**")
+                        if pl is not None and not pd.isna(pl):
+                            bits.append(f"📉 rischio di perdita oltre il 15% **~{pl:.0f}%**")
+                        rel = row.get("Affidabilità")
+                        if bits:
+                            line = f"**Stima statistica ({orizz}):** " + " · ".join(bits)
+                            if rel and not pd.isna(rel):
+                                line += f"  \nAffidabilità della stima: **{rel}**"
+                            line += "  \n_Stima dai dati storici, non una previsione._"
+                            st.markdown(line)
+                        det = fu.opportunity_row(tk, with_fundamentals=(kind == "long"))
+                        if det:
+                            price = det.get("price")
+                            tgt, stp = det.get("target_price"), det.get("stop_price")
+                            cper = {"1 giorno": "1d", "1 settimana": "5d", "1 mese": "1mo",
+                                    "1 anno": "1y", "Tutto": "max"}
+                            csel = st.radio("Periodo del grafico", list(cper.keys()), index=3,
+                                            horizontal=True, key=f"oppchart_{kind}_{tk}")
+                            # giorno → intraday ~15 min · settimana → intraday ~1 ora · altri → 1/giorno
+                            hc = chart_history(tk, cper[csel])
+                            if not hc.empty:
+                                sfig = go.Figure()
+                                sfig.add_trace(go.Scatter(x=hc.index, y=hc["Close"], mode="lines",
+                                                          line=dict(color="#0969da", width=2), name="Prezzo"))
+                                if tgt:
+                                    sfig.add_hline(y=tgt, line=dict(color="#1a7f37", dash="dash", width=1),
+                                                   annotation_text="🎯 bersaglio (media 50gg)", annotation_position="top left")
+                                if stp:
+                                    sfig.add_hline(y=stp, line=dict(color="#cf222e", dash="dash", width=1),
+                                                   annotation_text="🛑 stop", annotation_position="bottom left")
+                                sfig.update_layout(height=230, margin=dict(t=10, b=10, l=10, r=10),
+                                                   showlegend=False, yaxis_title=None, xaxis_title=None)
+                                show_chart(sfig, use_container_width=True)
+                                _id = bool(hc.attrs.get("intraday"))
+                                _gran = "~15 min" if cper[csel] == "1d" else "~1 ora"
+                                st.caption(f"📅 Ultimo dato: {hc.index[-1].strftime('%d/%m/%Y %H:%M' if _id else '%d/%m/%Y')}"
+                                           + (f" · prezzo intraday {_gran}" if _id else " · chiusura giornaliera"))
+                            lvl = []
+                            if tgt and price:
+                                lvl.append(f"🎯 Bersaglio: **{tgt:,.2f}** ({(tgt/price-1)*100:+.0f}%)")
+                            if stp and price:
+                                lvl.append(f"🛑 Stop: **{stp:,.2f}** ({(stp/price-1)*100:+.0f}%)")
+                            rr_v = det.get("rr")
+                            if rr_v is not None:
+                                lvl.append(f"⚖️ R:R **{rr_v:.1f}**")
+                            atrp = det.get("atr_pct")
+                            if atrp is not None:
+                                lvl.append(f"📐 ATR **{atrp:.1f}%**")
+                            rvol_v = det.get("rvol")
+                            if rvol_v is not None:
+                                lvl.append(f"🔊 RVOL **{rvol_v:.1f}×**")
+                            if lvl:
+                                st.markdown(" · ".join(lvl))
+                            st.caption("👀 **Come leggere:** la linea blu è il prezzo degli ultimi ~3 mesi. "
+                                       "La linea **verde** è la media a 50 giorni (il *bersaglio* di un rimbalzo): "
+                                       "se il prezzo le sta **sotto**, c'è spazio per risalire. La **rossa** è lo stop "
+                                       "(**prezzo − 2×ATR**, tarato sulla volatilità del titolo): sotto di esso l'idea di "
+                                       "rimbalzo salta. Livelli indicativi, non consigli.")
+                            # --- Dimensionamento a rischio fisso (solo breve, con stop ATR) ---
+                            if kind == "short" and stp and price:
+                                ps = fu.position_size(pos_capital, pos_risk, price, stp)
+                                if ps:
+                                    st.markdown(
+                                        f"📐 **Quanto comprare** (rischio {pos_risk:.2f}% di € {pos_capital:,.0f}): "
+                                        f"**{ps['qty']:.2f}** azioni ≈ **€ {ps['value']:,.0f}** investiti · "
+                                        f"perdita massima allo stop ≈ **€ {ps['risk_eur']:,.0f}** "
+                                        f"({ps['stop_pct']:+.1f}% dal prezzo).")
+                                    st.caption("Calcolo a rischio fisso: qty = capitale × rischio% / (prezzo − stop). "
+                                               "Così ogni operazione mette a rischio la **stessa** cifra, qualunque sia la volatilità.")
+                                # First-passage: P(il prezzo tocca lo stop lungo il percorso, ~1 mese)
+                                if stp and price and price > stp:
+                                    hp = fu.get_history(tk, period="1y")
+                                    fp = fu.forecast_paths(hp, 21, stop_pct=(stp / price - 1))
+                                    if fp and fp.get("p_touch_stop") is not None:
+                                        _net = fu.net_return_pct(fp.get("expectancy"))
+                                        st.caption(f"🎲 **Probabilità di toccare lo stop entro ~1 mese: ~{fp['p_touch_stop']}%** "
+                                                   f"· P(salita) ~{fp['p_up']}% (intervallo {fp['p_up_lo']}–{fp['p_up_hi']}%) "
+                                                   f"· rendimento atteso ~{fp['expectancy']:+.1f}% (netto ~{_net:+.1f}%) "
+                                                   f"· ventaglio a 1 mese: da {fp['ret_p10']:+.0f}% (sfortuna) "
+                                                   f"a {fp['ret_p90']:+.0f}% (fortuna), mediana {fp['ret_p50']:+.0f}%. "
+                                                   "Stima da block bootstrap dei rendimenti reali (code grasse), non una previsione.")
+                            s1m = det.get("perf_1m")
+                            if mkt_1m is not None and s1m is not None:
+                                if abs(s1m - mkt_1m) <= 1:
+                                    conf = "in linea col mercato"
+                                elif s1m < mkt_1m:
+                                    conf = "**peggio del mercato** (calo più specifico del titolo)"
+                                else:
+                                    conf = "**meglio del mercato**"
+                                st.caption(f"📊 Ultimo mese: {tk} {s1m:+.0f}% · mercato S&P 500 {mkt_1m:+.0f}% → {conf}.")
+                            # --- Qualità in saldo: anti-trappola, radar, metriche serie (solo lungo) ---
+                            if kind == "long":
+                                trap = det.get("trap")
+                                if trap:
+                                    msg = f"**Anti-trappola di valore:** {trap['label']}"
+                                    if trap.get("reasons"):
+                                        msg += " — " + ", ".join(trap["reasons"])
+                                    v = trap.get("verdict")
+                                    (st.success if v == "occasione" else
+                                     st.error if v == "trappola" else st.warning)(msg)
+                                    st.caption("Incrocia il **calo di prezzo** col **trend dei fondamentali**: prezzo giù + "
+                                               "conti stabili = occasione; prezzo giù + conti in calo = trappola. "
+                                               "È la protezione più importante: uno sconto da solo non basta.")
+                                radar = det.get("radar") or {}
+                                rvals = [(k, radar.get(k)) for k in
+                                         ["Valore", "Qualità", "Salute", "Crescita", "Dividendo"]
+                                         if radar.get(k) is not None]
+                                if len(rvals) >= 3:
+                                    cats = [k for k, _ in rvals] + [rvals[0][0]]
+                                    vals = [val for _, val in rvals] + [rvals[0][1]]
+                                    rfig = go.Figure()
+                                    rfig.add_trace(go.Scatterpolar(r=vals, theta=cats, fill="toself",
+                                                                   line=dict(color="#3b82f6"), name="Qualità"))
+                                    rfig.update_layout(height=300, margin=dict(t=30, b=30, l=40, r=40),
+                                                       polar=dict(radialaxis=dict(range=[0, 100])),
+                                                       showlegend=False)
+                                    show_chart(rfig, use_container_width=True)
+                                    st.caption("👀 **Radar qualità** (0-100, più ampio = meglio): "
+                                               "Valore = a buon prezzo · Qualità = redditività/ROIC · "
+                                               "Salute = solidità finanziaria · Crescita = ricavi/utili · "
+                                               "Dividendo = rendimento sostenibile.")
+                                # Metriche serie dai bilanci ufficiali SEC (USA, on-demand; stessa
+                                # companyfacts in cache → una sola chiamata di rete per Altman/EV-EBIT/Piotroski)
+                                is_fin = fu._is_financial_sector(det.get("sector"))
+                                ev_ebit_real = fu.ev_ebit_from_sec(tk) if not is_fin else None
+                                piotroski = fu.piotroski_from_sec(tk) if not is_fin else None
+                                mbits = []
+                                if det.get("roic") is not None:
+                                    mbits.append(f"**ROIC** {det['roic'] * 100:.0f}% (vs costo capitale ~9%)")
+                                if ev_ebit_real is not None:
+                                    mbits.append(f"**EV/EBIT** {ev_ebit_real:.1f} (SEC)")
+                                elif det.get("ev_ebit") is not None:
+                                    mbits.append(f"**EV/EBITDA** {det['ev_ebit']:.1f}")
+                                if det.get("fcf_yield") is not None:
+                                    mbits.append(f"**FCF yield** {det['fcf_yield']:.1f}%")
+                                if det.get("gross_m") is not None:
+                                    mbits.append(f"**Margine lordo** {det['gross_m'] * 100:.0f}%")
+                                if det.get("interest_cov") is not None:
+                                    mbits.append(f"**Copertura interessi** {det['interest_cov']:.1f}×")
+                                if piotroski is not None:
+                                    mbits.append(f"**Piotroski F-Score** {piotroski['score']}/{piotroski['max']} (SEC)")
+                                elif det.get("fscore_health") is not None:
+                                    mbits.append(f"**Salute (Piotroski sempl.)** {det['fscore_health']:.0f}/9")
+                                if det.get("div_cov") is not None:
+                                    mbits.append(f"**Dividendo coperto dal FCF** {det['div_cov']:.1f}×")
+                                if det.get("rev_cagr3") is not None:
+                                    mbits.append(f"**Ricavi 3 anni** {det['rev_cagr3'] * 100:+.0f}%/anno")
+                                if det.get("eps_cagr3") is not None:
+                                    mbits.append(f"**Utili 3 anni** {det['eps_cagr3'] * 100:+.0f}%/anno")
+                                if mbits:
+                                    st.markdown("**Metriche di qualità**  \n" + " · ".join(mbits))
+                                if piotroski is not None:
+                                    with st.expander(f"📋 Piotroski F-Score {piotroski['score']}/{piotroski['max']} — "
+                                                     "i 9 test (dai bilanci SEC)"):
+                                        for label, ok in piotroski["details"]:
+                                            st.markdown(f"- {'✅' if ok else '❌'} {label}")
+                                        st.caption("F-Score validato da Piotroski (2000): ≥7 = bilancio solido · "
+                                                   "≤3 = debole. Calcolato dai bilanci ufficiali anno-su-anno.")
+                                if not is_fin:
+                                    az = fu.altman_z_from_sec(tk)
+                                    if az:
+                                        st.markdown(f"**Altman Z-Score:** {az['z']} → {az['zone']} ({az['note']}) "
+                                                    "  \n_Rischio di dissesto; modello per le industriali, dai bilanci SEC (USA)._")
+                                # DCF inversa + rendimento atteso dai fondamentali (no fair value a numero singolo)
+                                _fi = {"trailingPE": det.get("pe"), "epsGrowth3Y": det.get("eps_cagr3"),
+                                       "revenueGrowth": det.get("rev_cagr3")}
+                                rdcf = fu.reverse_dcf_growth(_fi)
+                                fdr = fu.fundamental_drift(_fi)
+                                fvbits = []
+                                if rdcf is not None:
+                                    fvbits.append(f"📐 **DCF inversa:** al prezzo attuale il mercato sconta una crescita "
+                                                  f"perpetua implicita di **~{rdcf:+.1f}%/anno** (Gordon, r=9%). "
+                                                  f"Confrontala con la crescita che ritieni realistica.")
+                                if fdr is not None:
+                                    fvbits.append(f"🧮 **Rendimento atteso dai fondamentali** (earnings yield + crescita): "
+                                                  f"~**{fdr * 100:.0f}%/anno** — un'ancora ragionata, non una previsione.")
+                                if fvbits:
+                                    st.markdown("  \n".join(fvbits))
+                                st.caption("ℹ️ Niente «valore equo» a numero singolo (falsa precisione): qui contano i multipli "
+                                           "rispetto a settore e storia, la qualità a pilastri, la copertura del dividendo col "
+                                           "flusso di cassa e la **crescita implicita** (DCF inversa).")
+                        # --- Segui questa occasione nel tempo ---
+                        is_tracked = tk in tracked
+                        tlabel = ("✅ Già in monitoraggio — registra lo scatto di oggi"
+                                  if is_tracked else "📌 Segui nel tempo")
+                        if st.button(tlabel, key=f"track_{kind}_{tk}", use_container_width=True,
+                                     help="Salva questa occasione per osservarne l'evoluzione nei prossimi giorni "
+                                          "(sezione «Monitoraggio»)."):
+                            snap = {
+                                "name": row["Nome"], "price": row["Prezzo"], "rsi": row.get("RSI"),
+                                "dd_high": row["% dal max"], "occasione": int(row["Occasione"]),
+                                "convenienza": int(row["Convenienza"]),
+                                "prob_gain": row.get("Prob. salita"), "prob_loss": row.get("Rischio perdita"),
+                                "exp_ret": row.get("Guadagno atteso"), "gain": row.get("Guadagno atteso"),
+                                "reliab": row.get("Affidabilità"),
+                                "target": (det or {}).get("target_price"),
+                                "stop": (det or {}).get("stop_price"),
+                            }
+                            fu.track_opportunity(tk, kind, snapshot=snap)
+                            st.success(f"📌 {tk} aggiunto al monitoraggio. Lo trovi nella sezione «Monitoraggio».")
+                            st.rerun()
+                        news = fu.get_news(tk, 4)
+                        if news:
+                            # Flag DIFENSIVO (non un bonus): frode/causa/indagine fresca su un
+                            # titolo già ipervenduto è un problema reale, non un saldo.
+                            flags = fu.news_red_flags(news)
+                            if flags:
+                                st.error("⚠️ **Allarme difensivo:** nelle notizie compaiono termini di tipo "
+                                         f"legale/contabile ({', '.join(flags)}). Su un titolo già ipervenduto questo è "
+                                         "spesso il **motivo del calo**, non un'occasione: il prezzo può continuare a "
+                                         "scendere. Approfondisci la causa prima di considerarlo.")
+                            sent_label, _ = fu.news_sentiment(news)
+                            st.markdown(f"**Notizie recenti** · tono indicativo: {sent_label} "
+                                        "_(spunto di contesto, non un segnale di acquisto)_")
+                            for n in news[:3]:
+                                title = fu.translate_text(n["title"]) if translate_news else n["title"]
+                                link = f"[{title}]({n['url']})" if n["url"] else title
+                                meta = f"  ·  _{n['date']}_" if n["date"] else ""
+                                st.markdown(f"- {link}{meta}")
+                        else:
+                            st.caption("Nessuna notizia recente trovata per questo titolo.")
+
+            if kind == "short":
+                soglia = 10
+                _block(df[df["Prezzo"] < soglia],
+                       f"💰 Titoli economici (sotto i {soglia}$) — più speculativi")
+                st.markdown("---")
+                _block(df[df["Prezzo"] >= soglia],
+                       f"🏢 Titoli a prezzo più alto (da {soglia}$ in su)")
+            else:
+                _block(df)
+            return
+
+        short_cfg = {
+            "Nome": st.column_config.TextColumn("Azienda", width="medium"),
+            "Convenienza": st.column_config.ProgressColumn("🏅 Convenienza", min_value=0, max_value=100, format="%d",
+                help="Punteggio RELATIVO alle occasioni di QUESTO scan (z-score): confronta il titolo con gli altri trovati ORA, non è un voto assoluto. Combina sconto/qualità, rischio, momentum e probabilità. La tabella è ordinata da qui (più alto = più conveniente dei pari)."),
+            "Prezzo": st.column_config.NumberColumn("Prezzo", format="%.2f"),
+            "RSI": st.column_config.NumberColumn("RSI", format="%.0f",
+                help="Sotto 30-35 = ipervenduto (possibile rimbalzo)."),
+            "% dal max": st.column_config.NumberColumn("% dal max", format="%.0f%%",
+                help="Quanto è sceso dal massimo di 52 settimane."),
+            "Perf 1 mese": st.column_config.NumberColumn("1 mese", format="%.0f%%"),
+            "Occasione": st.column_config.ProgressColumn("💎 Segnale", min_value=0, max_value=100, format="%.0f",
+                help="Forza del setup da rimbalzo: più alto = più ipervenduto, con trend sano, inversione confermata e volume. Ridotto dal regime di volatilità."),
+            "Conferma": st.column_config.TextColumn("🔄 Conferma",
+                help="Stato dell'inversione: ✅ confermata (giorno verde + RSI in risalita o rientro in Bollinger) · 🟢 1° verde · ⏳ ancora in calo · ⚠️ in caduta verticale. Non si segnala un rimbalzo finché non ha girato."),
+            "RVOL": st.column_config.NumberColumn("🔊 RVOL", format="%.1f×",
+                help="Volume di oggi rispetto alla media di 20 sedute. Sopra 1,2-1,5× su un giorno verde = capitolazione + ripartenza credibile."),
+            "R:R": st.column_config.NumberColumn("⚖️ R:R", format="%.1f",
+                help="Rapporto Rischio/Rendimento: (bersaglio − prezzo) / (prezzo − stop ATR). Mostrati solo i setup con R:R ≥ 1,5."),
+            "Prob. salita": st.column_config.NumberColumn("📈 Prob. salita", format="%.0f%%",
+                help="Stima statistica (dai rendimenti storici, ~1 mese) della probabilità che il prezzo salga. NON è una previsione."),
+            "Guadagno atteso": st.column_config.NumberColumn("🎯 Potenziale rimbalzo", format="%+.1f%%",
+                help="Quanto salirebbe il titolo se tornasse alla sua media a 50 giorni (bersaglio tipico di un rimbalzo). Indicativo."),
+            "Guadagno netto": st.column_config.NumberColumn("💶 Netto", format="%+.1f%%",
+                help="Guadagno atteso al NETTO della tassa italiana 26% sulle plusvalenze (le perdite non sono tassate). Le commissioni sono importi fissi e contano nel Portafoglio."),
+            "Rischio perdita": st.column_config.NumberColumn("📉 Rischio perdita", format="%.0f%%",
+                help="Stima statistica della probabilità di perdere oltre il 15% (~1 mese). NON è una previsione."),
+            "Affidabilità": st.column_config.TextColumn("📊 Affidabilità",
+                help="Quanto è solida la stima: dipende da volatilità e lunghezza dello storico. 🟢 Alta · 🟡 Media · 🔴 Bassa (molto volatile)."),
+            "Perché": st.column_config.TextColumn("Perché", width="large"),
+        }
+        long_cfg = {
+            "Nome": st.column_config.TextColumn("Azienda", width="medium"),
+            "Settore": st.column_config.TextColumn("Settore", width="small",
+                help="Settore di appartenenza. Le occasioni sono limitate a poche per settore, così la lista non è tutta-banche o tutta-stesso-settore."),
+            "Qualità trend": st.column_config.TextColumn("🧭 Qualità (trend)",
+                help="Anti-trappola di valore: ✅ conti che tengono (ricavi/utili/margini stabili o in crescita) · ⚠️ trend incerto · 🛑 fondamentali in peggioramento (possibile trappola di valore). È la protezione più importante: uno sconto NON basta."),
+            "Convenienza": st.column_config.ProgressColumn("🏅 Convenienza", min_value=0, max_value=100, format="%d",
+                help="Punteggio RELATIVO alle occasioni di QUESTO scan (z-score): confronta il titolo con gli altri trovati ORA, non è un voto assoluto. Combina sconto/qualità, rischio, momentum e probabilità. La tabella è ordinata da qui (più alto = più conveniente dei pari)."),
+            "Prezzo": st.column_config.NumberColumn("Prezzo", format="%.2f"),
+            "% dal max": st.column_config.NumberColumn("% dal max", format="%.0f%%",
+                help="Sconto rispetto al massimo di 52 settimane."),
+            "Perf 1 anno": st.column_config.NumberColumn("1 anno", format="%.0f%%"),
+            "Occasione": st.column_config.ProgressColumn("💎 Valore", min_value=0, max_value=100, format="%.0f",
+                help="Qualità del business (pilastri pesati: Qualità 35% / Solidità 25% / Valutazione 25% / Crescita 15%) combinata con lo sconto dai massimi, e declassata se i fondamentali peggiorano."),
+            "Prob. salita": st.column_config.NumberColumn("📈 Prob. salita", format="%.0f%%",
+                help="Stima statistica (dai rendimenti storici, ~1 anno) della probabilità che il prezzo salga. NON è una previsione."),
+            "Guadagno atteso": st.column_config.NumberColumn("🎯 Guadagno atteso", format="%+.1f%%",
+                help="Stima del rendimento atteso (mediano) sull'orizzonte ~1 anno. Indicativo, non una previsione."),
+            "Guadagno netto": st.column_config.NumberColumn("💶 Netto", format="%+.1f%%",
+                help="Guadagno atteso al NETTO della tassa italiana 26% sulle plusvalenze. Indicativo."),
+            "Rischio perdita": st.column_config.NumberColumn("📉 Rischio perdita", format="%.0f%%",
+                help="Stima statistica della probabilità di perdere oltre il 15% (~1 anno). NON è una previsione."),
+            "Affidabilità": st.column_config.TextColumn("📊 Affidabilità",
+                help="Quanto è solida la stima: dipende da volatilità e lunghezza dello storico. 🟢 Alta · 🟡 Media · 🔴 Bassa (molto volatile)."),
+            "Perché": st.column_config.TextColumn("Perché", width="large"),
+        }
+
+        render_opps(full_short, "short", "⚡ Breve periodo — rimbalzo tecnico",
+                    "Titoli **ipervenduti** (RSI basso, spesso sotto la banda di Bollinger) ma con trend di fondo "
+                    "ancora sano: storicamente più inclini a un rimbalzo. Orizzonte: settimane.", short_cfg)
+        st.markdown("---")
+        render_opps(full_long, "long", "🏛️ Lungo periodo — qualità in saldo",
+                    "Aziende con **buoni fondamentali** (o ETF diversificati) scese parecchio **dai massimi**: "
+                    "possibile occasione di valore. Orizzonte: anni.", long_cfg)
+        st.caption("👀 **Come leggere:** la barra 🏅 è la convenienza complessiva (la tabella è ordinata da lì). "
+                   "Per i dettagli (grafico, livelli, notizie) apri l'approfondimento di un titolo.")
+    st.stop()
+
+# ===========================================================================
+# SEZIONE: IN OSSERVAZIONE — occasioni che il sistema segue verso la promozione
+# ===========================================================================
+if section.startswith("In osservazione"):
+    page_header("In osservazione",
+                "Le occasioni che il sistema sta seguendo verso un'eventuale promozione nel Monitoraggio.")
+    st.caption("Qui vedi le occasioni **prima** che entrino nel Monitoraggio: è il posto per coglierle in "
+               "anticipo. Tutte quelle trovate in «Occasioni di mercato» vengono osservate per una finestra "
+               "(**breve: 3 giorni di Borsa**, **lungo: 7**). Al termine passano nel «Monitoraggio» **solo se "
+               "la tesi regge**: prezzo risalito ≥2%, convenienza ancora alta (≥55) e non in calo e — sul lungo "
+               "— fondamentali non peggiorati. Guarda **Rendimento** (quanto è già salita), **Tendenza** (se il "
+               "segnale si rafforza) e **Mancano** (giorni alla valutazione): se una sta già salendo bene puoi "
+               "seguirla a mano dalle «Occasioni» senza aspettare la promozione. Ordinate per giorni mancanti.")
+    if fu.cloud_mode():
+        st.caption("🤖 Aggiornate dal sistema autonomo sul server (~ogni 15 min, anche a PC spento).")
+
+    _status = fu.observation_status()
+    _tracked_now = fu.load_tracking()
+    _obs_tutte = [s for s in _status if s.get("ticker") not in _tracked_now]
+    _fqo = filtri_qualita("oss", "Si applicano agli ultimi valori registrati durante l'osservazione.")
+    obs_all = [s for s in _obs_tutte
+               if passa_qualita(s.get("reliab"), s.get("prob_gain"), s.get("prob_loss"),
+                                s.get("last_conv"), _fqo)]
+    _obs_escl = len(_obs_tutte) - len(obs_all)
+    _obs_inc = sum(1 for s in obs_all
+                   if qualita_incompleta(s.get("reliab"), s.get("prob_gain"), s.get("prob_loss"),
+                                         s.get("last_conv"), _fqo))
+    if _obs_escl or _obs_inc:
+        st.caption((f"🎚️ **{_obs_escl}** nascoste dai filtri di qualità. " if _obs_escl else "")
+                   + (f"⚠️ {_obs_inc} mostrate senza tutti i dati dei filtri (non ancora registrati)."
+                      if _obs_inc else ""))
+    _obs_key = lambda s: (s.get("remaining", 0), -(s.get("ret") or 0.0))
+    obs_short = sorted([s for s in obs_all if s.get("kind") == "short"], key=_obs_key)
+    obs_long = sorted([s for s in obs_all if s.get("kind") != "short"], key=_obs_key)
+    _obs_cols = {
+        "Azienda": st.column_config.TextColumn("Azienda", width="medium"),
+        "Giorni osservata": st.column_config.NumberColumn("📅 Giorni", format="%d",
+            help="Giorni da cui il sistema osserva questa occasione."),
+        "Rendimento": st.column_config.NumberColumn("📈 Rendimento", format="%+.1f%%",
+            help="Variazione del PREZZO dal primo giorno di osservazione. Negativo = sta ancora scendendo "
+                 "(non verrà promossa finché non torna positivo)."),
+        "Convenienza": st.column_config.ProgressColumn("🏅 Convenienza (saldo)", min_value=0, max_value=100, format="%d",
+            help="Convenienza relativa alle occasioni dello scan (più alta = più a sconto/interessante dei pari). Ultima nota durante l'osservazione."),
+        "Tendenza": st.column_config.TextColumn("🧭 Tendenza",
+            help="Andamento della convenienza sui giorni osservati (mediana giornaliera, così un calo di mezza "
+                 "giornata non conta): Δ punti dal 1° giorno e giorni consecutivi di salita tollerante."),
+        "Mancano": st.column_config.NumberColumn("⏳ Mancano (gg)", format="%d",
+            help="Giorni al termine della finestra (breve 3 / lungo 7); a 0 viene valutata per la promozione."),
+    }
+
+    def _trend_label(s):
+        d = s.get("dconv", 0) or 0
+        run = s.get("run", 0) or 0
+        icon = "📈" if d >= 6 else "📉" if d <= -6 else "➡️"
+        return f"{icon} {d:+.0f} ({run}g)"
+
+    def _obs_table(items):
+        if not items:
+            st.caption("Nessuna occasione in osservazione in questa categoria.")
+            return
+        df_obs = pd.DataFrame([{
+            "Ticker": s.get("ticker"), "Azienda": s.get("name", ""),
+            "Giorni osservata": s.get("days", 0), "Rendimento": s.get("ret", 0.0),
+            "Convenienza": s.get("last_conv"), "Tendenza": _trend_label(s),
+            "Mancano": s.get("remaining", 0),
+        } for s in items]).set_index("Ticker")
+        st.dataframe(df_obs, use_container_width=True,
+                     height=min(60 + 36 * len(items), 600), column_config=_obs_cols)
+
+    if not obs_all:
+        st.info("Nessuna occasione in osservazione al momento. Apri «Occasioni di mercato» per popolarla, "
+                "oppure attendi il prossimo aggiornamento del sistema autonomo.")
+    else:
+        st.markdown(f"### ⚡ Breve termine — {len(obs_short)} in osservazione")
+        _obs_table(obs_short)
+        st.markdown(f"### 🏛️ Lungo termine — {len(obs_long)} in osservazione")
+        _obs_table(obs_long)
+    st.stop()
+
+# ===========================================================================
+# SEZIONE: IN ANTICIPO (PRE-SEGNALE) — entrare PRIMA della conferma
+# ===========================================================================
+if section.startswith("In anticipo"):
+    page_header("In anticipo (pre-segnale)",
+                "Le più solide tra le occasioni in osservazione: le vedi prima della promozione e decidi tu.")
+    st.caption("Il sistema promuove un'occasione solo DOPO la conferma (finestra conclusa + rimbalzo ≥2%): "
+               "prudente, ma spesso significa comprare quando parte del rimbalzo è già avvenuta. Qui vedi le "
+               "candidate **prima**: segnale **anticipato e più rischioso** — il rimbalzo non è confermato e "
+               "il prezzo può ancora scendere. Con «📌 Segui ora» la porti subito nel Monitoraggio al prezzo "
+               "di adesso (scelta tua: non verrà mai rimossa in automatico).")
+    if not fu.cloud_mode():
+        try:
+            fu.record_presignals()      # in locale registra/verifica il pre-segnale (sul cloud lo fa il job)
+            fu.resolve_presignals()
+        except Exception:
+            pass
+
+    # 📏 Affidabilità del pre-segnale: l'esito REALE dei segnali "solidi" registrati finora
+    _pst = fu.presignal_stats()
+    _aff = []
+    for _k, _kl in (("short", "⚡ Breve"), ("long", "🏛️ Lungo")):
+        _d = _pst.get(_k) or {}
+        _pezzi = []
+        for _lab, _titolo in (("d7", "dopo 7 giorni"), ("d30", "dopo 30 giorni")):
+            _x = _d.get(_lab)
+            if _x:
+                _pezzi.append(f"{_titolo} **{_x['avg']:+.1f}%** ({_x['hit']}% positivi, {_x['n']} casi)")
+        if _pezzi:
+            _aff.append(f"**{_kl}**: " + " · ".join(_pezzi))
+    if _aff:
+        st.info("📏 **Quanto è affidabile il pre-segnale?** Esito reale dei segnali «solidi» registrati "
+                "nei giorni scorsi:\n\n" + "\n\n".join(_aff))
+    else:
+        st.caption(f"📏 L'**affidabilità del pre-segnale** si sta misurando da sola: ogni giorno il sistema "
+                   f"registra le candidate più solide ({_pst.get('n_rows', 0)} registrate finora) e dopo 7 e "
+                   "30 giorni ne verifica l'esito reale. I primi numeri compariranno qui tra circa una settimana.")
+
+    _tracked_pre = fu.load_tracking()
+    try:
+        _pre_cool = fu._load_exit_cooldown()
+        pre_all = [s for s in fu.observation_status()
+                   if s.get("ticker") and s["ticker"] not in _tracked_pre
+                   and not fu._in_exit_cooldown(s["ticker"], _pre_cool)]
+    except Exception:
+        pre_all = []
+    solide = fu.solid_presignals()      # stessi criteri del registro di affidabilità (coerenza)
+    _watch_pre = fu.load_opp_watch()
+
+    def _pre_card(s):
+        """Scheda COMPLETA, identica a quelle del Monitoraggio: verdetto di tendenza, metriche con
+        variazione da inizio osservazione, grafico con selettore del periodo. Al posto degli scatti
+        del monitoraggio usa le OSSERVAZIONI registrate dal sistema (prezzo + convenienza)."""
+        tk = s["ticker"]
+        knd = s.get("kind", "short")
+        wobs = [o for o in (_watch_pre.get(f"{knd}:{tk}") or {}).get("obs", []) if o.get("price")]
+        first = wobs[0] if wobs else {}
+        last = wobs[-1] if wobs else {}
+        # pseudo-scatti nel formato del Monitoraggio → stesso verdetto di tendenza delle card normali
+        psnaps = [{"date": o.get("date"), "price": o.get("price"), "convenienza": o.get("conv")}
+                  for o in wobs]
+        trend = fu.tracking_trend(psnaps)
+
+        with st.container(border=True):
+            tc1, tc2 = st.columns([4, 1])
+            nm = s.get("name") or tk
+            tc1.markdown(f"### {nm}  ·  `{tk}` 🔭")
+            tc1.caption(f"{'⚡ Breve' if knd == 'short' else '🏛️ Lungo'} · pre-segnale (rimbalzo NON confermato) · "
+                        f"osservata da **{s.get('days', 0)}** giorn{'o' if s.get('days') == 1 else 'i'} di Borsa "
+                        f"su {s.get('window', '?')} (**mancano ~{s.get('remaining', '?')}** alla valutazione) · "
+                        f"{len(wobs)} osservazion{'e' if len(wobs) == 1 else 'i'}")
+            if tc2.button("📌 Segui ora", key=f"pre_track_{knd}_{tk}", use_container_width=True,
+                          help="Ingresso ANTICIPATO: entra nel Monitoraggio al prezzo di adesso, "
+                               "prima della conferma del rimbalzo (più rischio, prezzo più basso)."):
+                fu.track_opportunity(tk, knd,
+                                     note=f"📍 Ingresso anticipato (pre-segnale) il {datetime.date.today().isoformat()}: "
+                                          f"scelto PRIMA della conferma del rimbalzo.")
+                st.rerun()
+            if tc2.button("📊 Analizza", key=f"pre_goto_{knd}_{tk}", use_container_width=True):
+                st.session_state["ticker"] = tk
+                st.session_state["_goto_section"] = "Analisi di un titolo"
+                st.rerun()
+
+            # Verdetto di tendenza (stesso riquadro del Monitoraggio)
+            if trend:
+                arrow_p = (f" · prezzo {trend['dprice']:+.1f}%" if trend["dprice"] is not None else "")
+                st.markdown(
+                    f"<div style='padding:8px 12px;border-radius:8px;background:{trend['color']}14;"
+                    f"border-left:5px solid {trend['color']};margin-bottom:8px'>"
+                    f"<b style='color:{trend['color']}'>{trend['emoji']} {trend['label']}</b> — "
+                    f"convenienza {trend['dconv']:+.0f} punti{arrow_p} da inizio osservazione.</div>",
+                    unsafe_allow_html=True)
+            else:
+                st.caption("📅 Servono almeno **2 giorni** di osservazioni per valutare la tendenza.")
+
+            # Metriche attuali con variazione dalla prima osservazione (come nel Monitoraggio)
+            m1, m2, m3, m4 = st.columns(4)
+            price = last.get("price")
+            dprice = (price / first["price"] - 1) * 100 if (price and first.get("price")) else None
+            m1.metric("Prezzo", f"{price:,.2f}" if price else "n/d",
+                      f"{dprice:+.1f}%" if dprice is not None else None)
+            conv = s.get("last_conv")
+            m2.metric("🏅 Convenienza", f"{conv:.0f}/100" if conv is not None else "n/d",
+                      f"{s['dconv']:+.0f}" if s.get("dconv") is not None else None)
+            occ = last.get("occ")
+            docc = (occ - first["occ"]) if (occ is not None and first.get("occ") is not None) else None
+            m3.metric("Occasione", f"{occ:.0f}/100" if occ is not None else "n/d",
+                      f"{docc:+.0f}" if docc is not None else None)
+            pg = last.get("prob_gain")
+            m4.metric("📈 Prob. salita", f"{pg:.0f}%" if pg is not None else "n/d")
+
+            # Grafico con selettore del periodo (identico al Monitoraggio)
+            TPRE = {"Giorni": "track", "1 settimana": "5d", "1 mese": "1mo",
+                    "6 mesi": "6mo", "1 anno": "1y", "Max": "max"}
+            tsel = st.radio("Periodo del grafico", list(TPRE.keys()), index=0,
+                            horizontal=True, key=f"preper_{knd}_{tk}",
+                            help="«Giorni» mostra solo il periodo di osservazione; gli altri allargano lo storico del prezzo.")
+            sel = TPRE[tsel]
+            fig = go.Figure()
+            x_min = None
+            last_dt = None
+            price_note = ""
+            if sel == "track":
+                # «Giorni» = il periodo di osservazione: prezzo E convenienza dalle osservazioni
+                pp = [(pd.to_datetime(o["date"]), o["price"]) for o in wobs]
+                if pp:
+                    fig.add_trace(go.Scatter(x=[d for d, _ in pp], y=[v for _, v in pp], name="Prezzo",
+                                             mode="lines+markers", line=dict(color="#0969da", width=2)))
+                    x_min, last_dt = pp[0][0], pp[-1][0]
+                    price_note = " (osservazioni del sistema, ~1/ora)"
+                has_price = bool(pp)
+            else:
+                # periodi più ampi: storico di mercato (settimana → intraday ~1 ora; altri → daily)
+                hc = chart_history(tk, sel)
+                if not hc.empty and getattr(hc.index, "tz", None) is not None:
+                    hc = hc.copy()
+                    hc.index = hc.index.tz_localize(None)
+                if not hc.empty:
+                    fig.add_trace(go.Scatter(x=hc.index, y=hc["Close"], name="Prezzo",
+                                             line=dict(color="#0969da", width=2)))
+                    x_min, last_dt = hc.index.min(), hc.index[-1]
+                    price_note = " (intraday ~1 ora)" if hc.attrs.get("intraday") else " (chiusura giornaliera)"
+                has_price = not hc.empty
+            # punti di convenienza: solo quelli dentro la finestra mostrata
+            cs = [(pd.to_datetime(o["date"]), o["conv"]) for o in wobs
+                  if o.get("conv") is not None
+                  and (x_min is None or pd.to_datetime(o["date"]) >= x_min)]
+            if cs:
+                fig.add_trace(go.Scatter(
+                    x=[d for d, _ in cs], y=[v for _, v in cs],
+                    name="Convenienza", yaxis="y2", mode="lines+markers",
+                    line=dict(color="#8250df", width=2), marker=dict(size=8)))
+            fig.update_layout(
+                height=300, margin=dict(t=10, b=10, l=10, r=10),
+                legend=dict(orientation="h"), hovermode="x unified",
+                yaxis=dict(title="Prezzo"),
+                yaxis2=dict(title="Convenienza", overlaying="y", side="right",
+                            range=[0, 100], showgrid=False))
+            if not has_price and not cs:
+                st.caption("Ancora nessun dato per il periodo scelto: le osservazioni si accumulano "
+                           "man mano (un punto circa ogni ora mentre la borsa è aperta).")
+            else:
+                show_chart(fig, use_container_width=True)
+                if last_dt is not None:
+                    st.caption(f"📅 Ultimo prezzo: {last_dt.strftime('%d/%m/%Y %H:%M')}{price_note}")
+            st.caption("👀 **Linea blu** = prezzo del titolo nel periodo scelto qui sopra. **Linea viola** = la "
+                       "convenienza registrata mentre il sistema osserva il titolo (sale = il segnale migliora).")
+
+    # --- Filtri: tipo, «solo le più solide», e i filtri di qualità condivisi ---
+    _fpre = st.segmented_control(
+        "Tipo di occasione", ["short", "long"], default="short",
+        format_func=lambda k: "⚡ Breve periodo" if k == "short" else "🏛️ Lungo periodo",
+        required=True, key="pre_kind_filter") or "short"
+    _solo_solide = st.checkbox("Solo le più solide", value=True, key="pre_solo_solide",
+                               help="Criteri del pre-segnale: convenienza ≥65 (l'ingresso in "
+                                    "osservazione parte da 60), tendenza della convenienza non in calo, "
+                                    "almeno 2 giorni di osservazione. Togli la spunta per vedere tutte "
+                                    "le osservate.")
+    _fq = filtri_qualita("pre", "I dati non ancora registrati non escludono nulla: qui sotto "
+                                "trovi il conteggio delle righe con dati incompleti.")
+
+    # Le candidate che hanno GIÀ FATTO il movimento vengono TOLTE dall'elenco, non spostate in una
+    # sezione a parte: sono le stesse occasioni che si vedono già in «In osservazione», e mostrarle
+    # in due posti contemporaneamente non aggiunge niente. Il fatto che siano già corse non è una
+    # categoria da sfogliare, è un MOTIVO PER NON PROPORLE — e come tale si dichiara in una riga.
+    _corse = {s["kind"] + ":" + s["ticker"]: _c for s in pre_all
+              for _c in [fu.gia_corsa(_watch_pre.get(f"{s['kind']}:{s['ticker']}") or {}, s)] if _c}
+
+    _base = [s for s in (solide if _solo_solide else pre_all) if s.get("kind") == _fpre]
+    _escluse_corse = [s for s in _base if f"{s['kind']}:{s['ticker']}" in _corse]
+    _base = [s for s in _base if f"{s['kind']}:{s['ticker']}" not in _corse]
+    _items_pre = [s for s in _base
+                  if passa_qualita(s.get("reliab"), s.get("prob_gain"), s.get("prob_loss"),
+                                   s.get("last_conv"), _fq)]
+    _incompl = sum(1 for s in _items_pre
+                   if qualita_incompleta(s.get("reliab"), s.get("prob_gain"), s.get("prob_loss"),
+                                         s.get("last_conv"), _fq))
+    _items_pre.sort(key=lambda s: -(s.get("last_conv") or 0))
+
+    st.markdown(f"## 🔭 {'Le più solide' if _solo_solide else 'Tutte le osservate'} — "
+                f"{len(_items_pre)} su {len([s for s in pre_all if s.get('kind') == _fpre])}")
+    st.caption("Ordinate dalla **più conveniente** alla meno. Clicca una riga per la scheda completa."
+               + (f"  ⚠️ {_incompl} righe non hanno ancora tutti i dati dei filtri (si popolano coi "
+                  "prossimi controlli) e restano visibili." if _incompl else ""))
+    if _escluse_corse:
+        _nomi = ", ".join(f"**{s['ticker']}**" for s in _escluse_corse[:8])
+        st.caption(f"🏃 **{len(_escluse_corse)} non sono in elenco** perché hanno già fatto il "
+                   f"movimento (risalite oltre l'8% da quando sono osservate, o già ritracciate dal "
+                   f"loro massimo): {_nomi}"
+                   + (f" e altre {len(_escluse_corse) - 8}" if len(_escluse_corse) > 8 else "")
+                   + ". Entrare adesso vorrebbe dire comprarne la coda. Le trovi comunque in "
+                     "«👀 In osservazione», dove il sistema continua a seguirle.")
+
+    if not _items_pre:
+        st.info("Nessuna candidata con questi filtri. Prova a togliere la spunta «Solo le più solide» "
+                "o ad allentare i filtri di qualità.")
+    else:
+        _rows_pre = []
+        for s in _items_pre:
+            _t = fu.tracking_trend([{"date": o.get("date"), "price": o.get("price"),
+                                     "convenienza": o.get("conv")}
+                                    for o in (_watch_pre.get(f"{s['kind']}:{s['ticker']}") or {}).get("obs", [])
+                                    if o.get("price")])
+            if _t:
+                _verso = ("📈 più conveniente" if _t["dconv"] >= 6 else
+                          "📉 meno conveniente" if _t["dconv"] <= -6 else "➡️ stabile")
+                _tend = f"{_verso} ({_t['dconv']:+.0f} punti)"
+            else:
+                _tend = "in attesa (servono 2 giorni)"
+            _nm = s.get("name") or s["ticker"]
+            _rows_pre.append({
+                "Titolo": f"{_nm} · {s['ticker']}" if str(_nm).upper() != str(s["ticker"]).upper() else s["ticker"],
+                "🏅 Convenienza": s.get("last_conv"),
+                "Affidabilità": s.get("reliab") or "—",
+                "📈 Salita": s.get("prob_gain"),
+                "📉 Perdita": s.get("prob_loss"),
+                "Prezzo": s.get("ret"),
+                "Convenienza: come va": _tend,
+                "Mancano": s.get("remaining"),
+            })
+        _tk_pre = [s["ticker"] for s in _items_pre]
+        # Il contatore nella chiave serve a CHIUDERE la scheda: azzerare la nostra memoria non
+        # bastava, perché la tabella continuava a riportare la stessa riga selezionata e la scheda si
+        # riapriva subito. Cambiando la chiave la tabella nasce di nuovo, senza selezione — e la
+        # stessa riga può essere ricliccata per riaprirla.
+        _npre = st.session_state.get(f"pre_nonce_{_fpre}", 0)
+        _evp = st.dataframe(
+            pd.DataFrame(_rows_pre), use_container_width=True, hide_index=True,
+            on_select="rerun", selection_mode="single-row",
+            key=f"pretab_{_fpre}_{_npre}_{'|'.join(_tk_pre)}",
+            column_config={
+                "Titolo": st.column_config.TextColumn("Titolo", width="medium",
+                    help="Clicca la riga per aprire la scheda completa."),
+                "🏅 Convenienza": st.column_config.ProgressColumn("🏅 Convenienza", format="%d",
+                    min_value=0, max_value=100, width="small",
+                    help="Punteggio attuale di convenienza (l'ingresso in osservazione parte da 60)."),
+                "Affidabilità": st.column_config.TextColumn("Affidabilità", width="small",
+                    help="🟢 Alta / 🟡 Media / 🔴 Bassa: quanto è solida la stima. «—» = non ancora registrata."),
+                "📈 Salita": st.column_config.NumberColumn("📈 Salita", format="%d%%", width="small",
+                    help="Probabilità stimata che il prezzo salga. Stima statistica, non una previsione."),
+                "📉 Perdita": st.column_config.NumberColumn("📉 Perdita", format="%d%%", width="small",
+                    help="Probabilità stimata di una perdita rilevante (oltre il 15%)."),
+                "Prezzo": st.column_config.NumberColumn("Prezzo", format="%+.1f%%", width="small",
+                    help="Variazione del prezzo da inizio osservazione. Non è un tuo guadagno: non hai comprato."),
+                "Convenienza: come va": st.column_config.TextColumn("Convenienza: come va", width="medium",
+                    help="Come sta cambiando il PUNTEGGIO da inizio osservazione. NON è il prezzo: un titolo "
+                         "può diventare più conveniente proprio perché il prezzo scende."),
+                "Mancano": st.column_config.NumberColumn("Mancano", format="%d gg", width="small",
+                    help="Giorni di Borsa che mancano alla valutazione per l'eventuale promozione."),
+            })
+        _sel_pre = []
+        try:
+            _ss = _evp["selection"] if isinstance(_evp, dict) else getattr(_evp, "selection", {})
+            _sel_pre = list((_ss or {}).get("rows", []) or [])
+        except Exception:
+            _sel_pre = []
+        _selkey_pre = f"pre_sel_{_fpre}"
+        if _sel_pre and _sel_pre[0] < len(_tk_pre):
+            st.session_state[_selkey_pre] = _tk_pre[_sel_pre[0]]
+        _tks = st.session_state.get(_selkey_pre)
+        _scelto = next((s for s in _items_pre if s["ticker"] == _tks), None)
+        if _scelto:
+            st.markdown("---")
+            # `on_click` invece di controllare il valore del bottone: la funzione gira PRIMA che la
+            # pagina venga ridisegnata, quindi la scheda si chiude al primo clic. Controllando il
+            # valore del bottone servirebbe un giro in più, perché la decisione se disegnare la
+            # scheda è già stata presa più in alto.
+            def _chiudi_pre(_k=_selkey_pre, _n=_npre, _f=_fpre):
+                st.session_state.pop(_k, None)
+                st.session_state[f"pre_nonce_{_f}"] = _n + 1   # tabella nuova = niente selezione
+            st.button("✖️ Chiudi la scheda", key=f"pre_close_{_fpre}", on_click=_chiudi_pre)
+            _pre_card(_scelto)
+        else:
+            st.session_state.pop(_selkey_pre, None)
+            st.caption("👆 **Clicca una riga** per aprire la scheda completa (grafico, andamento della "
+                       "convenienza e il pulsante «📌 Segui ora»).")
+    st.stop()
+
+# ===========================================================================
+# SEZIONE: MONITORAGGIO — segui le occasioni nel tempo
+# ===========================================================================
+if section.startswith("Monitoraggio"):
+    page_header("Monitoraggio delle occasioni",
+                "Segui nel tempo le occasioni scelte e decidi con calma quando comprare.")
+    st.caption("Qui osservi nel tempo le occasioni che hai scelto di seguire (dalla sezione «Occasioni di mercato»). "
+               "Ogni giorno che apri l'app viene registrato uno «scatto» dei valori: così vedi se il segnale si "
+               "rafforza o si indebolisce **prima** di decidere se comprare.")
+    st.caption("Strumento per seguire un'idea per più giorni con calma; non è un consiglio di acquisto. "
+               "La storia si costruisce in avanti: un punto per ogni giorno in cui apri l'app.")
+
+    # (La «Scheda voti» e la «Calibrazione delle probabilità» sono nella sezione «Scenari»,
+    #  insieme agli altri strumenti di misura del sistema.)
+
+    # --- 🧪 Validazione del sistema (backtest tecnico + verifica ML) — su richiesta, pesanti ---
+    with st.expander("🧪 Validazione del sistema (backtest + verifica ML)", expanded=False):
+        st.caption("Mette alla prova il sistema sui DATI STORICI (non sui soldi veri). Il **backtest** "
+                   "ricostruisce le regole delle occasioni giorno per giorno usando solo i dati "
+                   "disponibili fino a quel momento (walk-forward, niente 'senno di poi') e simula gli "
+                   "acquisti, mostrando: quanti finiscono in positivo (**hit-rate**), il **guadagno medio "
+                   "NETTO** (tassa 26%), il confronto col semplice **compra-e-tieni l'indice**, e la resa "
+                   "per **fascia di convenienza** (verifica se la convenienza alta rende davvero di più). "
+                   "La **verifica ML** controlla se un modello di machine learning batte i metodi semplici "
+                   "(di norma no: i mercati sono ~imprevedibili). Sono pesanti → si avviano col pulsante. "
+                   "Limite onesto: valida solo il ramo TECNICO/prezzo del breve (i fondamentali storici "
+                   "non sono ricostruibili da fonti gratuite).")
+        bcol1, bcol2 = st.columns(2)
+        if bcol1.button("▶️ Backtest occasioni (breve)", key="run_backtest", use_container_width=True):
+            with st.spinner("Backtest walk-forward in corso… (~1-2 min)"):
+                try:
+                    import backtest as _bt
+                    st.session_state["_bt_res"] = _bt.run_backtest(horizon=21, max_tickers=25)
+                except Exception as e:
+                    st.session_state["_bt_res"] = {"errore": str(e)}
+        if bcol2.button("▶️ Verifica ML vs metodi semplici", key="run_mlverify", use_container_width=True):
+            with st.spinner("Verifica ML in corso… (~1-2 min, richiede scikit-learn)"):
+                try:
+                    import ml_verify as _mlv
+                    st.session_state["_ml_res"] = _mlv.run_ml_verify()
+                except Exception as e:
+                    st.session_state["_ml_res"] = {"errore": str(e)}
+        _btr = st.session_state.get("_bt_res")
+        if _btr:
+            if _btr.get("errore"):
+                st.error("Backtest non riuscito: " + _btr["errore"])
+            elif not _btr.get("n_trades"):
+                st.info("Nessun trade simulato (dati insufficienti).")
+            else:
+                vb1, vb2, vb3 = st.columns(3)
+                vb1.metric("Trade simulati", _btr["n_trades"])
+                vb2.metric("In positivo", f"{_btr['hit_rate']}%")
+                vb3.metric("Resa netta media", f"{_btr['avg_net']:+.2f}%")
+                _bench = _btr.get("bench_avg")
+                st.caption(f"Orizzonte {_btr['horizon']} gg di Borsa · mediana netta {_btr['median_net']:+.2f}%"
+                           + (f" · compra-e-tieni indice {_bench:+.2f}%" if _bench is not None else ""))
+                if _btr.get("by_band"):
+                    st.dataframe(pd.DataFrame(_btr["by_band"]).set_index("banda"), use_container_width=True,
+                                 column_config={
+                                     "n": st.column_config.NumberColumn("Trade", format="%d"),
+                                     "avg_net": st.column_config.NumberColumn("Resa netta media", format="%+.2f%%"),
+                                     "hit": st.column_config.NumberColumn("In positivo", format="%d%%")})
+                st.caption("Walk-forward: ogni ingresso usa solo i dati fino a quel giorno. Stima storica, non una promessa.")
+        _mlr = st.session_state.get("_ml_res")
+        if _mlr:
+            if _mlr.get("errore"):
+                st.error("Verifica ML non riuscita (scikit-learn installato?): " + _mlr["errore"])
+            elif not _mlr.get("count"):
+                st.info("Dati insufficienti per la verifica ML.")
+            else:
+                st.caption(f"Errore medio (MAE, più basso = meglio): ML {_mlr['ml_mae']}% · drift {_mlr['drift_mae']}% · "
+                           f"naive {_mlr['naive_mae']}% — ML batte il naive in {_mlr['ml_beats_naive']}/{_mlr['count']} titoli.")
+                (st.success if _mlr["verdict"].startswith("✅") else st.info)(_mlr["verdict"])
+    st.markdown("---")
+
+    tracked = fu.load_tracking()
+    if not tracked:
+        st.info("Non stai ancora monitorando nessuna occasione.\n\n"
+                "Vai su **💎 Occasioni di mercato**, apri l'approfondimento di un titolo interessante e premi "
+                "**📌 Segui nel tempo**. Tornerà qui, e da domani vedrai come si evolve.")
+        st.stop()
+
+    with st.spinner("Aggiorno gli scatti di oggi…"):
+        tracked = fu.auto_snapshot_tracked()
+
+    cc1, cc2 = st.columns([1, 3])
+    if cc1.button("🔄 Aggiorna ora", use_container_width=True,
+                  help="Forza un nuovo scatto dei valori di oggi per tutti i titoli seguiti."):
+        fu.get_history.clear()          # dati freschi
+        fu.opportunity_row.clear()
+        for tk in list(tracked):
+            snap = fu.opportunity_snapshot(tk, tracked[tk].get("kind", "short"))
+            if snap:
+                fu.track_opportunity(tk, tracked[tk].get("kind", "short"), snapshot=snap)
+        st.rerun()
+    cc2.caption(f"Ultimo accesso: **{_now_rome().strftime('%d/%m %H:%M')}** · "
+                f"i dati gratuiti si rinnovano ~ogni 15 minuti.")
+
+    def render_tracked(tk, entry):
+        snaps = entry.get("snapshots", [])
+        last = snaps[-1] if snaps else {}
+        # Valori del giorno d'INGRESSO (congelati): il "primo scatto ancora in memoria" non è
+        # l'ingresso, perché degli scatti si conservano solo le ultime settimane.
+        ing = fu._ingresso(entry)
+        nm = entry.get("name") or last.get("name") or tk
+        kind = entry.get("kind", "short")
+        kind_badge = "⚡ Breve" if kind == "short" else "🏛️ Lungo"
+        try:
+            d0 = datetime.date.fromisoformat(entry.get("added", ""))
+            giorni = fu._trading_days_between(entry.get("added", ""), fu._today_iso(), tk)
+        except Exception:
+            giorni = len(snaps) - 1
+        trend = fu.tracking_trend(snaps, ing.get("conv"), ing.get("price"))
+
+        with st.container(border=True):
+            tc1, tc2 = st.columns([4, 1])
+            auto_tag = " 🤖" if entry.get("auto") else ""
+            tc1.markdown(f"### {nm}  ·  `{tk}`{auto_tag}")
+            origine = "aggiunta automatica" if entry.get("auto") else "aggiunta manuale"
+            tc1.caption(f"{kind_badge} · {origine} · seguito da **{max(giorni,0)}** giorn{'o' if giorni==1 else 'i'} di Borsa "
+                        f"(dal {entry.get('added','?')}) · {len(snaps)} scatt{'o' if len(snaps)==1 else 'i'}")
+            if tc2.button("🗑️ Smetti", key=f"untrack_{tk}", use_container_width=True):
+                fu.untrack_opportunity(tk)
+                st.rerun()
+
+            # Verdetto di tendenza
+            if trend:
+                arrow_p = (f" · prezzo {trend['dprice']:+.1f}%" if trend["dprice"] is not None else "")
+                st.markdown(
+                    f"<div style='padding:8px 12px;border-radius:8px;background:{trend['color']}14;"
+                    f"border-left:5px solid {trend['color']};margin-bottom:8px'>"
+                    f"<b style='color:{trend['color']}'>{trend['emoji']} {trend['label']}</b> — "
+                    f"convenienza {trend['dconv']:+.0f} punti{arrow_p} da quando lo segui.</div>",
+                    unsafe_allow_html=True)
+            else:
+                st.caption("📅 Servono almeno **2 giorni** di scatti per valutare la tendenza. Riapri l'app domani.")
+
+            # Avviso sul lato PERDITA (per le auto-promosse è il preavviso di una rimozione)
+            if entry.get("warn"):
+                st.markdown(
+                    f"<div style='padding:6px 10px;border-radius:8px;background:#cf222e14;"
+                    f"border-left:5px solid #cf222e;margin-bottom:8px'>⚠️ <b>Attenzione:</b> "
+                    f"{entry['warn']}.</div>", unsafe_allow_html=True)
+            # Avviso sul lato GUADAGNO: ha già dato quello che doveva dare
+            _inc = entry.get("incasso") or {}
+            if _inc:
+                _extra = ""
+                if _inc.get("max") is not None and _inc.get("giu_dal_max") is not None:
+                    _extra = (f" · massimo toccato <b>{_inc['max']:,.2f}</b>"
+                              + (f" il {str(_inc.get('max_date'))[:10]}" if _inc.get("max_date") else "")
+                              + f", da lì {_inc['giu_dal_max']:+.1f}%")
+                st.markdown(
+                    f"<div style='padding:6px 10px;border-radius:8px;background:#1a7f3714;"
+                    f"border-left:5px solid #1a7f37;margin-bottom:8px'>💰 <b>Da valutare per "
+                    f"l'incasso:</b> {_inc.get('motivo')}{_extra}.<br>"
+                    f"<span style='font-size:0.85em'>Il sistema non vende e non toglie l'occasione: "
+                    f"non sa quanto hai comprato, quindi la scelta resta tua.</span></div>",
+                    unsafe_allow_html=True)
+
+            # Metriche attuali con variazione dal GIORNO D'INGRESSO
+            def _delta(curr, prev):
+                if curr is None or prev is None:
+                    return None
+                return curr - prev
+            m1, m2, m3, m4 = st.columns(4)
+            price = last.get("price")
+            dprice = None
+            if price and ing.get("price"):
+                dprice = (price / ing["price"] - 1) * 100
+            m1.metric("Prezzo", f"{price:,.2f}" if price else "n/d",
+                      f"{dprice:+.1f}%" if dprice is not None else None,
+                      help="Variazione dal giorno in cui l'occasione è entrata nel Monitoraggio."
+                           + ("" if ing.get("sicuro") else
+                              " ⚠️ Il prezzo d'ingresso di questa occasione non è ancora stato "
+                              "verificato: la variazione parte dal controllo più vecchio in memoria."))
+            conv = last.get("convenienza")
+            dc = _delta(conv, ing.get("conv"))
+            m2.metric("🏅 Convenienza", f"{conv:.0f}/100" if conv is not None else "n/d",
+                      f"{dc:+.0f}" if dc is not None else None)
+            pg = last.get("prob_gain")
+            m3.metric("📈 Prob. salita", f"{pg:.0f}%" if pg is not None else "n/d")
+            pl = last.get("prob_loss")
+            m4.metric("📉 Rischio perdita", f"{pl:.0f}%" if pl is not None else "n/d")
+
+            rsi = last.get("rsi")
+            dd = last.get("dd_high")
+            rel = last.get("reliab")
+            extra = []
+            if rsi is not None:
+                extra.append(f"RSI **{rsi:.0f}**")
+            if dd is not None:
+                extra.append(f"**{dd:.0f}%** dal massimo")
+            if rel:
+                extra.append(f"affidabilità {rel}")
+            if extra:
+                st.caption(" · ".join(extra))
+
+            # --- 💶 LA MIA SOGLIA: pareggio e prezzo di vendita calcolati dai TUOI numeri ---
+            # (Le simulazioni hanno mostrato che con importi piccoli la commissione fissa domina:
+            # €1 su €30 = +3,3% solo per pareggiare. Qui lo vedi subito, e imposti una soglia TUA.)
+            if price:
+                ci1, ci2, ci3, ci4 = st.columns([1.2, 1, 0.7, 1])
+                amt = ci1.number_input("💶 Importo da investire (€)", min_value=0.0, value=30.0, step=10.0,
+                                       key=f"amt_{tk}",
+                                       help="Quanto investiresti su questo titolo. Con importi piccoli le "
+                                            "commissioni fisse pesano molto: il pareggio qui sotto lo mostra.")
+                fee = ci2.number_input("Commissione per operazione (€)", min_value=0.0, value=1.0, step=0.5,
+                                       key=f"fee_{tk}",
+                                       help="Quanto ti costa UN ordine. Un'operazione completa ne paga due "
+                                            "(comprare e vendere), e il calcolo qui sotto le conta entrambe. "
+                                            "Es. 1 € per ordine = 2 € per andata e ritorno.")
+                gmode = ci3.radio("Obiettivo", ["€", "%"], horizontal=True, key=f"goalmode_{tk}",
+                                  help="Il guadagno netto desiderato: in euro o in % dell'importo.")
+                if gmode == "€":
+                    goal = ci4.number_input("Netto desiderato (€)", min_value=0.0, value=2.0, step=0.5,
+                                            key=f"goal_{tk}")
+                    desired_net = goal
+                else:
+                    goalp = ci4.number_input("Netto desiderato (%)", min_value=0.0, value=5.0, step=1.0,
+                                             key=f"goalp_{tk}")
+                    desired_net = amt * goalp / 100.0
+                lv = fu.personal_levels(price, amt, fee, desired_net)
+                if lv:
+                    st.markdown(f"⚖️ Pareggio: **{lv['break_even']:,.2f}** (+{lv['be_pct']:.1f}% solo per "
+                                f"coprire le commissioni)"
+                                + (f" · 🎯 per **€{desired_net:,.2f} netti** serve **{lv['target']:,.2f}** "
+                                   f"(+{lv['target_pct']:.1f}%)" if lv.get("target") else ""))
+                    st.caption("Tassa 26% solo sui guadagni; oscillazione del cambio ignorata "
+                               "(trascurabile rispetto alle commissioni su importi piccoli).")
+                    sb1, sb2 = st.columns([1, 3])
+                    if lv.get("target") and sb1.button("🔔 Avvisami a questa soglia", key=f"savetgt_{tk}",
+                                                       use_container_width=True,
+                                                       help="Salva la soglia: il sistema ti manda un Telegram "
+                                                            "quando il prezzo la raggiunge."):
+                        fu.set_my_target(tk, lv["target"])
+                        st.rerun()
+                    if entry.get("my_target_price"):
+                        sb2.caption(f"🔔 Soglia salvata: **{entry['my_target_price']:,.2f}** "
+                                    f"(dal {entry.get('my_target_set', '?')}) — Telegram ti avvisa al raggiungimento.")
+                        if sb2.button("Rimuovi soglia", key=f"deltgt_{tk}"):
+                            fu.set_my_target(tk, None)
+                            st.rerun()
+            # L'SMA50 resta solo come INFO di potenziale: nei test venderci ha PEGGIORATO i risultati.
+            tgt_now = last.get("target")
+            if tgt_now and price:
+                pot = (tgt_now / price - 1) * 100
+                st.caption(f"ℹ️ Media 50 giorni ≈ {tgt_now:,.2f} ({pot:+.1f}% da qui): livello **indicativo** "
+                           f"del potenziale di rimbalzo. **Non usarla come livello di vendita**: nei test, "
+                           f"vendere lì ha peggiorato i risultati (taglia i guadagni migliori).")
+
+            # Grafico: prezzo reale + convenienza accumulata (asse destro) + livelli.
+            # Periodo selezionabile: dai giorni di monitoraggio fino al massimo storico.
+            TPER = {"Giorni": "track", "1 settimana": "5d", "1 mese": "1mo",
+                    "6 mesi": "6mo", "1 anno": "1y", "Max": "max"}
+            tsel = st.radio("Periodo del grafico", list(TPER.keys()), index=0,
+                            horizontal=True, key=f"trackper_{tk}",
+                            help="«Giorni» mostra solo da quando hai iniziato a seguire il titolo; gli altri allargano lo storico del prezzo.")
+            sel = TPER[tsel]
+            fig = go.Figure()
+            x_min = None
+            last_dt = None
+            price_note = ""
+            if sel == "track":
+                # «Giorni» = da quando segui il titolo: prezzo E convenienza dai NOSTRI snapshot
+                # (registrati ~ogni ora con il prezzo live), così condividono la stessa griglia
+                # temporale e la linea del prezzo non è un punto isolato del daily.
+                try:
+                    start = pd.to_datetime(entry.get("added")) if entry.get("added") else None
+                except Exception:
+                    start = None
+                pp = [(pd.to_datetime(s["date"]), s["price"]) for s in snaps
+                      if s.get("price") is not None
+                      and (start is None or pd.to_datetime(s["date"]) >= start)]
+                if pp:
+                    fig.add_trace(go.Scatter(x=[d for d, _ in pp], y=[v for _, v in pp], name="Prezzo",
+                                             mode="lines+markers", line=dict(color="#0969da", width=2)))
+                    x_min, last_dt = pp[0][0], pp[-1][0]
+                    price_note = " (snapshot del monitoraggio, ~1/ora)"
+                has_price = bool(pp)
+            else:
+                # periodi più ampi: storico di mercato (settimana → intraday ~1 ora; altri → daily)
+                hc = chart_history(tk, sel)
+                if not hc.empty and getattr(hc.index, "tz", None) is not None:
+                    hc = hc.copy()
+                    hc.index = hc.index.tz_localize(None)
+                if not hc.empty:
+                    fig.add_trace(go.Scatter(x=hc.index, y=hc["Close"], name="Prezzo",
+                                             line=dict(color="#0969da", width=2)))
+                    x_min, last_dt = hc.index.min(), hc.index[-1]
+                    price_note = " (intraday ~1 ora)" if hc.attrs.get("intraday") else " (chiusura giornaliera)"
+                has_price = not hc.empty
+            # punti di convenienza: solo quelli dentro la finestra mostrata
+            cs = [(pd.to_datetime(s["date"]), s["convenienza"]) for s in snaps
+                  if s.get("convenienza") is not None
+                  and (x_min is None or pd.to_datetime(s["date"]) >= x_min)]
+            if cs:
+                fig.add_trace(go.Scatter(
+                    x=[d for d, _ in cs], y=[v for _, v in cs],
+                    name="Convenienza", yaxis="y2", mode="lines+markers",
+                    line=dict(color="#8250df", width=2), marker=dict(size=8)))
+            tgt, stp = last.get("target"), last.get("stop")
+            if tgt:
+                fig.add_hline(y=tgt, line=dict(color="#1a7f37", dash="dash", width=1),
+                              annotation_text="🎯 bersaglio", annotation_position="top left")
+            if stp:
+                fig.add_hline(y=stp, line=dict(color="#cf222e", dash="dash", width=1),
+                              annotation_text="🛑 stop", annotation_position="bottom left")
+            if entry.get("my_target_price"):
+                fig.add_hline(y=entry["my_target_price"], line=dict(color="#8250df", dash="dot", width=1.4),
+                              annotation_text="🔔 mia soglia", annotation_position="top right")
+            fig.update_layout(
+                height=300, margin=dict(t=10, b=10, l=10, r=10),
+                legend=dict(orientation="h"), hovermode="x unified",
+                yaxis=dict(title="Prezzo"),
+                yaxis2=dict(title="Convenienza", overlaying="y", side="right",
+                            range=[0, 100], showgrid=False))
+            if not has_price and not cs:
+                st.caption("Ancora nessun dato per il periodo scelto: la storia si costruisce man mano "
+                           "(un punto circa ogni ora mentre la borsa è aperta).")
+            else:
+                show_chart(fig, use_container_width=True)
+                if last_dt is not None:
+                    st.caption(f"📅 Ultimo prezzo: {last_dt.strftime('%d/%m/%Y %H:%M')}{price_note}")
+            st.caption("👀 **Linea blu** = prezzo del titolo nel periodo scelto qui sopra. **Linea viola** = la convenienza "
+                       "registrata mentre il sistema osserva il titolo (sale = il segnale migliora). "
+                       "Verde = bersaglio, rossa = stop.")
+
+            # Nota personale + scorciatoia all'analisi
+            nc1, nc2 = st.columns([4, 1])
+            note = nc1.text_input("📝 Nota personale", value=entry.get("note", ""),
+                                  key=f"note_{tk}", placeholder="es. aspetto RSI sotto 30 / attendo trimestrale")
+            if note != entry.get("note", ""):
+                fu.set_tracking_note(tk, note)
+            if nc2.button("📊 Analizza", key=f"goto_{tk}", use_container_width=True):
+                st.session_state["ticker"] = tk
+                st.session_state["_goto_section"] = "Analisi di un titolo"
+                st.rerun()
+
+    # Ordine (richiesta utente): prima le PIÙ CONVENIENTI (ultima convenienza nota, decrescente),
+    # a parità di convenienza per affidabilità (🟢 prima di 🟡 prima di 🔴), poi per anzianità.
+    def _mon_sort_key(item):
+        tk, e = item
+        snaps = e.get("snapshots") or []
+        conv = next((s.get("convenienza") for s in reversed(snaps)
+                     if s.get("convenienza") is not None), None)
+        rel = (snaps[-1].get("reliab") if snaps else "") or ""
+        rel_rank = 0 if "Alta" in rel else (1 if "Media" in rel else 2)
+        return (-(conv if conv is not None else -1), rel_rank,
+                str(e.get("added") or "9999-99-99"), tk)
+
+    # Gli avvisi si ricalcolano dal vivo (senza chiamate di rete) per mostrarli aggiornati. ATTENZIONE:
+    # il job RIMUOVE davvero le occasioni auto-promosse quando l'avviso persiste (subito, se il motivo
+    # è lo stop), quindi questa vista non è solo informativa: è il preavviso di una rimozione.
+    for _tk, _e in tracked.items():
+        _w = fu.monitoring_warn(_e, _tk)      # col ticker: usa il calendario di Borsa GIUSTO (es. Milano)
+        if _w:
+            _e["warn"] = _w
+        else:
+            _e.pop("warn", None)
+        _p = fu.presa_profitto(_e, _tk)       # lato GUADAGNO: ha già dato quello che doveva dare?
+        if _p:
+            _e["incasso"] = _p
+        else:
+            _e.pop("incasso", None)
+    exit_items = sorted([(tk, e) for tk, e in tracked.items() if e.get("warn")], key=_mon_sort_key)
+    profit_items = sorted([(tk, e) for tk, e in tracked.items()
+                           if e.get("incasso") and not e.get("warn")], key=_mon_sort_key)
+    _in_salute = [(tk, e) for tk, e in tracked.items() if not e.get("warn")]
+    short_items = sorted([(tk, e) for tk, e in _in_salute if e.get("kind") == "short"], key=_mon_sort_key)
+    long_items = sorted([(tk, e) for tk, e in _in_salute if e.get("kind") != "short"], key=_mon_sort_key)
+
+    def _warn_breve(w, entry, price):
+        """Avviso in forma CORTA per la tabella (il testo completo resta nella scheda).
+        Copre entrambi i lati: prima i motivi di PERDITA, poi quelli di INCASSO."""
+        if w:
+            wl = w.lower()
+            if "crollo" in wl:
+                return "⚠️ crollo"
+            if "dati" in wl:
+                return "⚠️ dati fermi"
+            if "stop" in wl:
+                return "⚠️ sotto lo stop"
+            if "perdita" in wl:
+                num = next((p for p in w.split() if p.isdigit()), None)
+                return f"⚠️ in perdita da {num} gg" if num else "⚠️ in perdita"
+            return "⚠️ " + w[:26]
+        inc = entry.get("incasso") or {}
+        if inc:
+            giu = inc.get("giu_dal_max")
+            return {"soglia": "🎯 soglia tua raggiunta",
+                    "bersaglio": "🎯 bersaglio raggiunto",
+                    "sgonfia": f"💰 giù {abs(giu):.0f}% dal massimo" if giu is not None else "💰 si sgonfia",
+                    "ipercomprato": "🌡️ ipercomprato"}.get(inc.get("tipo"), "💰 da incassare")
+        mt = entry.get("my_target_price")
+        if mt and price and price >= mt:
+            return "🎯 soglia raggiunta"
+        return "—"
+
+    def _riga_tabella(tk, entry):
+        """Una riga della tabella riassuntiva del Monitoraggio. Usa gli stessi valori della scheda
+        (ultimo controllo + valori d'ingresso congelati) così tabella e scheda non mostrano mai
+        numeri diversi."""
+        snaps = entry.get("snapshots", []) or []
+        last = snaps[-1] if snaps else {}
+        ing = fu._ingresso(entry)
+        price, base = last.get("price"), ing.get("price")
+        conv = next((s.get("convenienza") for s in reversed(snaps)
+                     if s.get("convenienza") is not None), None)
+        trend = fu.tracking_trend(snaps, ing.get("conv"), ing.get("price"))
+        if trend:
+            verso = ("📈 più conveniente" if trend["dconv"] >= 6 else
+                     "📉 meno conveniente" if trend["dconv"] <= -6 else "➡️ stabile")
+            tend = f"{verso} ({trend['dconv']:+.0f} punti)"
+        else:
+            tend = "in attesa (servono 2 giorni)"
+        nome = entry.get("name") or last.get("name") or tk
+        etichetta = f"{nome} · {tk}" if str(nome).upper() != str(tk).upper() else str(tk)
+        return {
+            "Titolo": etichetta + (" 🤖" if entry.get("auto") else ""),
+            "🏅 Convenienza": conv,
+            "Affidabilità": last.get("reliab") or "—",
+            "📈 Salita": last.get("prob_gain"),
+            "📉 Perdita": last.get("prob_loss"),
+            "Prezzo": ((price / base - 1) * 100) if (price and base) else None,
+            "Convenienza: come va": tend,
+            "Avvisi": _warn_breve(entry.get("warn"), entry, price),
+        }
+
+    # I VALORI delle opzioni sono chiavi stabili ("short"/"long"/"exit"/"profit") e i contatori stanno
+    # solo nell'etichetta: se un conteggio cambia, la vista scelta NON si resetta. Di partenza si apre
+    # la prima vista che ha qualcosa dentro (chi segue solo titoli di lungo non trova una pagina vuota).
+    _VISTE = ["short", "long", "exit", "profit"]
+    _ITEMS = {"short": short_items, "long": long_items, "exit": exit_items, "profit": profit_items}
+    _LBL = {"short": f"⚡ Breve periodo ({len(short_items)})",
+            "long": f"🏛️ Lungo periodo ({len(long_items)})",
+            "exit": f"🚪 Candidate all'uscita ({len(exit_items)})",
+            "profit": f"💰 Da incassare ({len(profit_items)})"}
+    _def_view = next((k for k in _VISTE if _ITEMS[k]), "short")
+    _vkey = st.segmented_control(
+        "Quali occasioni vedere", _VISTE, default=_def_view,
+        format_func=lambda k: _LBL[k], required=True, key="mon_view",
+        help="Quattro viste sulle stesse occasioni seguite: rimbalzo di breve periodo, qualità in "
+             "saldo di lungo periodo, quelle che stanno dando segnali di indebolimento, e quelle che "
+             "hanno già dato quello che dovevano dare (da valutare per l'incasso).") or _def_view
+    _fqm = filtri_qualita("mon", "Si applicano ai valori dell'ultimo controllo registrato.")
+
+    def _qual_di(entry):
+        """Ultimi valori di qualità di un'occasione seguita (dall'ultimo scatto)."""
+        _sn = entry.get("snapshots") or []
+        _lt = _sn[-1] if _sn else {}
+        _cv = next((s.get("convenienza") for s in reversed(_sn)
+                    if s.get("convenienza") is not None), None)
+        return _lt.get("reliab"), _lt.get("prob_gain"), _lt.get("prob_loss"), _cv
+
+    _items_tutti = _ITEMS[_vkey]
+
+    # Nelle viste «uscita» e «incasso» il tipo NON è dato dalla vista: serve un sotto-filtro dedicato.
+    if _vkey in ("exit", "profit") and _items_tutti:
+        _ne_s = sum(1 for _, e in _items_tutti if e.get("kind") == "short")
+        _ne_l = len(_items_tutti) - _ne_s
+        _ef_lbl = {"tutte": f"Tutte ({len(_items_tutti)})",
+                   "short": f"⚡ Breve ({_ne_s})", "long": f"🏛️ Lungo ({_ne_l})"}
+        _ef = st.segmented_control("Di che tipo", ["tutte", "short", "long"], default="tutte",
+                                   format_func=lambda k: _ef_lbl[k], required=True, key="exit_kind",
+                                   help="Le candidate all'uscita arrivano da entrambi i comparti: "
+                                        "qui scegli se vederle tutte insieme o divise per tipo.") or "tutte"
+        if _ef != "tutte":
+            _items_tutti = [(tk, e) for tk, e in _items_tutti
+                            if (e.get("kind") == "short") == (_ef == "short")]
+
+    _items = [(tk, e) for tk, e in _items_tutti if passa_qualita(*_qual_di(e), _fqm)]
+    _esclusi = len(_items_tutti) - len(_items)
+    _incompleti = sum(1 for _, e in _items if qualita_incompleta(*_qual_di(e), _fqm))
+
+    if _vkey == "exit":
+        st.caption("Occasioni che stanno **smettendo di esserlo** (sotto lo stop, in perdita da troppo, "
+                   "o dati fermi/possibile delisting). **Compaiono solo qui**: sono state tolte dalle "
+                   "tabelle Breve e Lungo, così là restano soltanto quelle in salute. Il sistema le rimuove "
+                   "da solo **soltanto** se aggiunte automaticamente (🤖): per la perdita prolungata e i "
+                   "dati fermi serve che il segnale persista alcuni giorni (~4 breve / ~10 lungo), mentre "
+                   "**sotto lo stop e sopra il 90% di perdita la rimozione è immediata** — un livello di "
+                   "prezzo è già la sua conferma, e aspettare farebbe uscire molto più in basso. Quelle "
+                   "scelte da te restano finché non premi 🗑️ Smetti nella scheda.")
+    elif _vkey == "profit":
+        st.caption("Occasioni che **hanno già dato quello che dovevano dare**: bersaglio raggiunto, la "
+                   "tua soglia personale raggiunta, oppure un guadagno che si sta sgonfiando dal massimo "
+                   "toccato (oltre 8% giù per il breve, 15% per il lungo). **Il sistema non vende e non "
+                   "le rimuove**: non sa quanto hai comprato davvero, quindi la decisione resta tua. "
+                   "Serviva perché prima esistevano quattro modi di segnalare una perdita e nessuno di "
+                   "segnalare che era il momento di incassare: sui titoli seguiti il guadagno massimo "
+                   "toccato è stato in media 3,6 punti più alto di quello attuale.")
+    else:
+        st.caption("Ordinate dalla **più conveniente** alla meno. Qui ci sono **solo le occasioni in "
+                   "salute**: quelle con un avviso sono raccolte in «🚪 Candidate all'uscita»."
+                   + (f" (ora sono **{len(exit_items)}**)" if exit_items else "")
+                   + " Ricorda: «più conveniente» riguarda il **punteggio**, non il prezzo — un titolo può "
+                     "diventare più conveniente proprio perché il prezzo scende.")
+    if _esclusi or _incompleti:
+        st.caption((f"🎚️ **{_esclusi}** nascoste dai filtri di qualità. " if _esclusi else "")
+                   + (f"⚠️ {_incompleti} mostrate senza tutti i dati dei filtri (non ancora registrati)."
+                      if _incompleti else ""))
+
+    if not _items:
+        if _vkey == "exit":
+            if exit_items:
+                st.info("Nessuna candidata all'uscita di questo tipo (o con questi filtri di qualità). "
+                        "Prova «Tutte» qui sopra.")
+            else:
+                st.success("✅ Nessuna al momento: tutte le occasioni che segui sono in salute.")
+        else:
+            st.info("Nessuna occasione di questo tipo. Ne trovi di nuove in «💎 Occasioni di mercato».")
+    else:
+        _df_mon = pd.DataFrame([_riga_tabella(tk, e) for tk, e in _items])
+        _tickers = [tk for tk, _ in _items]
+        # La chiave contiene i titoli NELL'ORDINE mostrato: se l'ordine cambia la selezione decade,
+        # così la riga selezionata non punta mai al titolo sbagliato. La scheda aperta resta comunque
+        # visibile perché ricordiamo il TICKER scelto (sotto), non il numero di riga.
+        # Il contatore serve a chiudere la scheda: vedi la nota nella sezione «In anticipo».
+        _nmon = st.session_state.get(f"mon_nonce_{_vkey}", 0)
+        _ev = st.dataframe(
+            _df_mon, use_container_width=True, hide_index=True,
+            on_select="rerun", selection_mode="single-row",
+            key=f"montab_{_vkey}_{_nmon}_{'|'.join(_tickers)}",
+            column_config={
+                "Titolo": st.column_config.TextColumn(
+                    "Titolo", width="medium",
+                    help="Clicca la riga per aprire la scheda completa. 🤖 = aggiunta dal sistema."),
+                "🏅 Convenienza": st.column_config.ProgressColumn(
+                    "🏅 Convenienza", format="%d", min_value=0, max_value=100, width="small",
+                    help="Punteggio 0-100 di quanto il titolo è a sconto rispetto alla PROPRIA storia "
+                         "(sconto, ipervenduto, qualità). Non è confrontabile con la colonna Convenienza "
+                         "della pagina «Occasioni», che confronta i titoli fra loro."),
+                "Affidabilità": st.column_config.TextColumn(
+                    "Affidabilità", width="small",
+                    help="Quanto è solida la stima: 🟢 Alta / 🟡 Media / 🔴 Bassa "
+                         "(dipende da volatilità e lunghezza dello storico disponibile)."),
+                "📈 Salita": st.column_config.NumberColumn(
+                    "📈 Salita", format="%d%%", width="small",
+                    help="Probabilità stimata che il prezzo sia più alto tra circa un mese (occasioni di "
+                         "breve) o tra circa un anno (occasioni di lungo). Stima statistica, non una previsione."),
+                "📉 Perdita": st.column_config.NumberColumn(
+                    "📉 Perdita", format="%d%%", width="small",
+                    help="Probabilità stimata di una perdita rilevante (oltre il 15%) sullo stesso periodo."),
+                "Prezzo": st.column_config.NumberColumn(
+                    "Prezzo", format="%+.1f%%", width="small",
+                    help="Variazione del PREZZO dal giorno in cui l'occasione è entrata nel "
+                         "Monitoraggio a oggi. Il prezzo d'ingresso viene conservato a parte, quindi "
+                         "resta corretto anche per le occasioni seguite da mesi. Non è un tuo "
+                         "guadagno: non hai comprato."),
+                "Convenienza: come va": st.column_config.TextColumn(
+                    "Convenienza: come va", width="medium",
+                    help="Come sta cambiando il PUNTEGGIO di convenienza da quando la segui (tra parentesi "
+                         "i punti guadagnati o persi). NON è il prezzo: un titolo può diventare più "
+                         "conveniente proprio perché il prezzo scende."),
+                "Avvisi": st.column_config.TextColumn(
+                    "Avvisi", width="medium",
+                    help="«🎯 soglia raggiunta» = il prezzo ha toccato la tua soglia personale. I segnali "
+                         "di indebolimento (⚠️) si vedono nella vista «🚪 Candidate all'uscita»."),
+            })
+        _righe_sel = []
+        try:
+            _sel_state = _ev["selection"] if isinstance(_ev, dict) else getattr(_ev, "selection", {})
+            _righe_sel = list((_sel_state or {}).get("rows", []) or [])
+        except Exception:
+            _righe_sel = []
+        # Memorizziamo il TICKER: la scelta sopravvive a un riordino (la chiave dipende dall'ordine,
+        # quindi quando l'indice è leggibile è per forza riferito all'ordine corrente = sempre corretto).
+        _selkey = f"mon_sel_{_vkey}"
+        if _righe_sel and _righe_sel[0] < len(_tickers):
+            st.session_state[_selkey] = _tickers[_righe_sel[0]]
+        _tk_sel = st.session_state.get(_selkey)
+        if _tk_sel and _tk_sel in tracked and _tk_sel in _tickers:
+            st.markdown("---")
+            # `on_click`: vedi la nota nella sezione «In anticipo» — chiude al primo clic.
+            def _chiudi_mon(_k=_selkey, _n=_nmon, _v=_vkey):
+                st.session_state.pop(_k, None)
+                st.session_state[f"mon_nonce_{_v}"] = _n + 1   # tabella nuova = niente selezione
+            st.button("✖️ Chiudi la scheda", key=f"closecard_{_vkey}", on_click=_chiudi_mon)
+            render_tracked(_tk_sel, tracked[_tk_sel])
+        else:
+            st.session_state.pop(_selkey, None)
+            st.caption("👆 **Clicca una riga** della tabella per aprire la scheda completa del titolo "
+                       "(grafico, soglia personale, nota e comandi).")
+    st.stop()
+
+# ===========================================================================
+# SEZIONE: PORTAFOGLIO — acquisti reali con guadagno/perdita
+# ===========================================================================
+if section.startswith("Portafoglio"):
+    page_header("Il mio portafoglio",
+                "I tuoi acquisti reali: guadagno/perdita in tempo reale e consigli su quando vendere.")
+    st.caption("Registra gli acquisti che hai fatto davvero (titolo, quantità, prezzo) e vedi in tempo reale "
+               "il guadagno/perdita. Puoi impostare un **bersaglio** e uno **stop**: l'app ti avvisa quando vengono toccati.")
+    st.caption("Strumento di monitoraggio personale, non collegato a nessun conto o broker: "
+               "i dati li inserisci tu a mano.")
+
+    with st.expander("➕ Aggiungi un acquisto", expanded=not fu.load_portfolio()):
+        st.caption("Inserisci **quanti soldi** hai investito: il sistema ricava da solo prezzo attuale e quantità, "
+                   "e registra **data e ora**. 👉 Inseriscilo **subito dopo l'acquisto**, così il prezzo coincide col tuo.")
+        with st.form("add_pos", clear_on_submit=True):
+            pf1, pf2, pf3 = st.columns([2, 2, 2])
+            p_tk = pf1.text_input("Titolo / marchio (ticker)", placeholder="es. AAPL, ENI.MI").strip().upper()
+            p_amt = pf2.number_input("Soldi investiti (€)", min_value=0.0, step=50.0, value=0.0, format="%.2f",
+                                     help="Quanti EURO hai messo su questo titolo. Per i titoli in dollari/altra "
+                                          "valuta la quantità di azioni viene calcolata convertendo l'importo al cambio.")
+            p_hor = pf3.radio("Orizzonte", ["⚡ Breve termine", "🏛️ Lungo termine"], index=1,
+                              help="«Breve» = scommessa di rimbalzo (incassare presto). «Lungo» = investimento da tenere; "
+                                   "il consulente di vendita è più paziente.")
+            pf4, pf5, pf6 = st.columns(3)
+            p_tgt = pf4.number_input("Vendi a +% (opzionale)", min_value=0.0, step=1.0, value=0.0, format="%.0f",
+                                     help="Bersaglio di guadagno: es. 20 = avvisami a +20%.")
+            p_stp = pf5.number_input("Stop a −% (opzionale)", min_value=0.0, step=1.0, value=0.0, format="%.0f",
+                                     help="Limite di perdita: es. 10 = avvisami a −10%.")
+            p_note = pf6.text_input("Nota (opzionale)", placeholder="es. rimbalzo, dividendo")
+            submitted = st.form_submit_button("➕ Aggiungi al portafoglio", use_container_width=True)
+            if submitted:
+                if p_tk and p_amt > 0:
+                    pos = fu.add_position_by_amount(
+                        p_tk, p_amt, target_pct=(p_tgt or None), stop_pct=(p_stp or None),
+                        note=p_note, horizon=("breve" if p_hor.endswith("Breve termine") else "lungo"))
+                    if pos:
+                        st.success(f"Aggiunto: **{p_amt:,.2f}** di **{p_tk}** a {pos['buy_price']:.2f} "
+                                   f"(≈ {pos['qty']:.4f} quote) il {pos['datetime']}.")
+                        st.rerun()
+                    else:
+                        st.error(f"Non riesco a recuperare il prezzo attuale di **{p_tk}**. "
+                                 "Controlla il ticker (Milano: aggiungi `.MI`) e riprova tra poco.")
+                else:
+                    st.error("Inserisci almeno **titolo** e **soldi investiti** (maggiore di zero).")
+
+    pf_fee = st.number_input("Commissioni per operazione (€)", min_value=0.0, value=1.0, step=0.5, key="pf_fee",
+                             help="Costo di compravendita sottratto dal guadagno netto, oltre alla tassa del 26% "
+                                  "sulla plusvalenza. Imposta quello del tuo broker.")
+    with st.spinner("Calcolo il valore attuale…"):
+        rows, totals = fu.portfolio_view(fee=pf_fee)
+
+    if not rows:
+        st.info("Portafoglio vuoto. Aggiungi il tuo primo acquisto qui sopra.")
+        st.stop()
+
+    # --- Totali (convertiti in EUR, valuta base) — lordo e NETTO (tassa 26% + commissioni) ---
+    mt1, mt2, mt3, mt4 = st.columns(4)
+    mt1.metric("Investito (€)", f"{totals['cost']:,.2f}")
+    mt2.metric("Valore attuale (€)", f"{totals['value']:,.2f}")
+    d_gross = f"{totals['pnl_pct']:+.1f}%" if totals.get("pnl_pct") is not None else None
+    mt3.metric("G/P lordo (€)", f"{totals['pnl']:+,.2f}", d_gross)
+    d_net = f"{totals['net_pnl_pct']:+.1f}%" if totals.get("net_pnl_pct") is not None else None
+    mt4.metric("G/P netto (€)", f"{totals['net_pnl']:+,.2f}", d_net,
+               help="Quanto ti resterebbe vendendo ora: dopo la tassa del 26% sulla plusvalenza e le commissioni.")
+    st.caption(f"💰 **Netto** = lordo − **€ {totals['tax']:,.2f}** di tassa (26% sulla plusvalenza, solo se in utile) "
+               f"− **€ {totals['fee_total']:,.2f}** di commissioni → vendendo ora incasseresti **€ {totals['net_value']:,.2f}**. "
+               "Stima: la tassa è calcolata per singola posizione (non compensa le minusvalenze).")
+    ccys = totals.get("currencies", [])
+    if len(ccys) > 1:
+        st.caption("💱 Totali convertiti in **EUR** (valuta base) — posizioni in: "
+                   + ", ".join(ccys) + ". Cambi aggiornati ~1 volta l'ora. "
+                   "I valori per riga restano nella valuta del titolo (vedi colonna «Valuta»).")
+    else:
+        st.caption(f"Totali in **EUR**. Tutte le posizioni sono in {ccys[0] if ccys else 'EUR'}.")
+    if not totals.get("complete", True):
+        st.caption("ℹ️ Alcune posizioni sono escluse dal totale: manca il prezzo aggiornato o il "
+                   "tasso di cambio (per Londra `.L` i prezzi sono spesso in pence — verifica a mano).")
+
+    # --- Avvisi target/stop ---
+    alerts = [r for r in rows if r["status"]]
+    for r in alerts:
+        if "target" in r["status"]:
+            st.success(f"🎯 **{r['ticker']}** ha raggiunto il bersaglio ({r['target']:.2f}) — prezzo {r['price']:.2f}. Valuta se vendere.")
+        else:
+            st.error(f"🛑 **{r['ticker']}** ha toccato lo stop ({r['stop']:.2f}) — prezzo {r['price']:.2f}. Valuta se uscire.")
+
+    # --- Tabella posizioni ---
+    dfp = pd.DataFrame([{
+        "Ticker": r["ticker"], "Orizz.": "⚡" if r["horizon"] == "breve" else "🏛️",
+        "Valuta": r.get("ccy", ""),
+        "Investito": r["amount"], "Quando": r["datetime"], "Prezzo acq.": r["buy_price"],
+        "Q.tà": r["qty"], "Prezzo ora": r["price"], "Valore": r["value"],
+        "G/P": r["pnl"], "G/P %": r["pnl_pct"],
+        "Tassa 26%": r.get("tax_eur"), "G/P netto": r.get("net_eur"), "Netto %": r.get("net_pct"),
+        "Stato": r["status"] or "—",
+    } for r in rows]).set_index("Ticker")
+    st.dataframe(dfp, use_container_width=True, column_config={
+        "Orizz.": st.column_config.TextColumn("Orizz.", help="⚡ breve termine · 🏛️ lungo termine"),
+        "Valuta": st.column_config.TextColumn("Valuta", help="Valuta di quotazione del titolo. Tassa e netto sono in EUR."),
+        "Investito": st.column_config.NumberColumn("Investito (nativo)", format="%.2f"),
+        "Quando": st.column_config.TextColumn("Acquisto (data e ora)"),
+        "Prezzo acq.": st.column_config.NumberColumn("Prezzo acq.", format="%.2f"),
+        "Q.tà": st.column_config.NumberColumn("Q.tà", format="%.4f"),
+        "Prezzo ora": st.column_config.NumberColumn("Prezzo ora", format="%.2f"),
+        "Valore": st.column_config.NumberColumn("Valore", format="%.2f"),
+        "G/P": st.column_config.NumberColumn("G/P lordo", format="%+.2f"),
+        "G/P %": st.column_config.NumberColumn("G/P % lordo", format="%+.1f%%"),
+        "Tassa 26%": st.column_config.NumberColumn("Tassa 26% (€)", format="%.2f",
+            help="26% sulla plusvalenza (solo se in utile), in EUR."),
+        "G/P netto": st.column_config.NumberColumn("G/P netto (€)", format="%+.2f",
+            help="Guadagno dopo tassa del 26% e commissioni — quanto incassi vendendo ora."),
+        "Netto %": st.column_config.NumberColumn("Netto %", format="%+.1f%%"),
+    })
+
+    # --- 🔔 Consigli di vendita ---
+    st.markdown("### Consigli di vendita")
+    st.caption("Per ogni titolo il sistema valuta **se conviene incassare ora**, in base a bersaglio, stop, "
+               "trailing stop (calo dal massimo toccato), ipercomprato e trend. **Non prevede il futuro** e non "
+               "garantisce il massimo guadagno: è un aiuto a non farsi scappare un buon momento e a tagliare le perdite.")
+    if fu.cloud_mode():
+        st.caption("📲 Quando un titolo passa a «🔔 Valuta la vendita», ricevi anche una **notifica Telegram** (il sistema "
+                   "controlla ogni ~15 minuti, anche a PC spento).")
+    with st.spinner("Valuto i titoli…"):
+        positions = fu.load_portfolio()
+        advices = [(p, fu.sell_advice(p)) for p in positions]
+    order = {"sell": 0, "watch": 1, "hold": 2}
+    for p, adv in sorted(advices, key=lambda x: order.get(x[1]["verdict"], 3)):
+        colore = {"sell": "#cf222e", "watch": "#9a6700", "hold": "#1a7f37"}[adv["verdict"]]
+        gp = f"{adv['gain_pct']:+.1f}%" if adv["gain_pct"] is not None else "n/d"
+        hor = "⚡ breve" if str(p.get("horizon", "lungo")).startswith("breve") else "🏛️ lungo"
+        st.markdown(
+            f"<div style='padding:8px 12px;border-radius:8px;background:{colore}14;"
+            f"border-left:5px solid {colore};margin-bottom:6px'>"
+            f"<b style='color:{colore}'>{adv['emoji']} {p.get('ticker')} — {adv['label']}</b> "
+            f"<span style='color:#a9b1ba'>· {hor} · guadagno attuale {gp}</span></div>",
+            unsafe_allow_html=True)
+        for motivo in adv["reasons"]:
+            st.markdown(f"<div style='margin-left:14px;color:#c9d1d9;font-size:0.9em'>↳ {motivo}</div>",
+                        unsafe_allow_html=True)
+    st.caption("⚠️ Spunti automatici, non consigli di investimento. La decisione finale è sempre tua.")
+
+    # --- Rimozione posizioni ---
+    st.markdown("###### Gestisci le posizioni")
+    for r in rows:
+        rc1, rc2 = st.columns([5, 1])
+        gp = f"{r['pnl']:+,.2f} ({r['pnl_pct']:+.1f}%)" if r["pnl_pct"] is not None else "n/d"
+        rc1.markdown(f"**{r['ticker']}** · {r['amount']:,.2f} investiti il {r['datetime']} "
+                     f"(≈ {r['qty']:.4f} quote a {r['buy_price']:.2f}) · G/P: {gp}")
+        if rc2.button("🗑️ Togli", key=f"rmpos_{r['index']}", use_container_width=True):
+            fu.remove_position(r["index"])
+            st.rerun()
+    st.stop()
+
+# ===========================================================================
+# SEZIONE: SCENARI — quanto avrei guadagnato e quale timing rende di più
+# ===========================================================================
+if section.startswith("Scenari"):
+    page_header("Scenari",
+                "Quanto avresti guadagnato con le occasioni reali, e quale momento di acquisto/vendita rende di più.")
+    st.caption("Tutti gli strumenti di **misura** del sistema in un posto solo. In alto le due scelte "
+               "che valgono per tutte le schede (tipo di occasione e filtri), poi la scheda da aprire.")
+    if not fu.cloud_mode():
+        try:
+            fu.update_track_record()    # in locale aggiorna i rendimenti reali (sul cloud lo fa il job)
+            fu.resolve_forecasts()      # previsioni mature (per la calibrazione)
+            fu.resolve_scenarios()      # celle mature degli scenari
+            fu.completa_passaggi()      # i valori veri di ogni cambio di sezione
+        except Exception:
+            pass
+
+    # =======================================================================
+    # SCELTE COMUNI A TUTTE LE SCHEDE — prima il tipo di occasione, subito sotto i filtri.
+    # Stanno qui fuori di proposito: cambiare scheda non deve far ripartire da capo la selezione,
+    # e due schede che mostrano gli stessi dati con filtri diversi sarebbero un modo perfetto per
+    # farsi ingannare da soli.
+    # =======================================================================
+    _sc1, _sc2 = st.columns([1, 1.3])
+    with _sc1:
+        _skind = st.segmented_control(
+            "Tipo di occasione", ["short", "long"], default="short",
+            format_func=lambda k: "⚡ Breve periodo" if k == "short" else "🏛️ Lungo periodo",
+            required=True, key="scen_kind",
+            help="Cambia anche gli orizzonti di vendita: il breve si valuta a 1 settimana e 1 mese, "
+                 "il lungo a 1 mese e 1 anno.") or "short"
+    with _sc2:
+        # SCENARIO IN PIÙ: «e se il +2% non esistesse?». Non sostituisce niente, cambia SOLO quali
+        # candidate entrano nel conto: la matrice resta la stessa, con tutti i momenti d'acquisto.
+        _svar = st.segmented_control(
+            "Quali candidate contare", list(fu.SCENARIO_VARIANTI.keys()), default="reale",
+            format_func=lambda k: fu.SCENARIO_VARIANTI[k], required=True, key="scen_variante",
+            help="La regola attuale compra solo se il prezzo è già risalito del 2% dall'inizio "
+                 "dell'osservazione. «Come se il +2% non esistesse» aggiunge al conto anche le candidate "
+                 "che avevano superato tutti gli altri controlli ma non quel rimbalzo: così si vede se "
+                 "aspettare quel 2% aiuta o fa perdere la parte migliore del movimento. "
+                 "Le scartate vengono registrate da oggi, quindi questo confronto si popola col tempo.") or "reale"
+
+    _minrel, _minpg, _maxpl, _mincv = filtri_qualita(
+        "scen", "Applicati alla qualità del segnale **al momento dell'acquisto**: risponde a "
+                "«e se avessi comprato solo le occasioni migliori?». Valgono per tutte le schede "
+                "qui sotto — tranne «🎯 Quali indicatori funzionano», che per misurarli deve "
+                "guardarle tutte.")
+
+    # --- 💶 I miei importi: il guadagno in euro di ogni scenario si aggiorna DA SOLO ---
+    with st.container(border=True):
+        mi1, mi2, mi3 = st.columns([1, 1, 2.2])
+        sim_amt = mi1.number_input("💶 Investo per occasione (€)", min_value=1.0, value=30.0, step=10.0,
+                                   key="sim_amt",
+                                   help="Quanto metteresti su OGNI occasione: il guadagno in euro di "
+                                        "ogni casella si ricalcola subito, senza premere niente.")
+        sim_fee = mi2.number_input("Commissione per ordine (€)", min_value=0.0, value=1.0, step=0.5,
+                                   key="sim_fee",
+                                   help="Quanto costa UN ordine. Comprare e vendere sono due ordini, "
+                                        "e il conto li considera entrambi.")
+        _pareggio = fu.pareggio_pct(sim_amt, sim_fee)
+        mi3.markdown(f"<div style='padding-top:28px'>⚖️ Con questi numeri il <b>pareggio</b> è a "
+                     f"<b>+{_pareggio:.1f}%</b> a operazione (€{sim_fee * 2:,.2f} di commissioni fra "
+                     f"acquisto e vendita) — sotto questa soglia, in euro ci rimetti anche con un "
+                     f"rendimento positivo.</div>", unsafe_allow_html=True)
+
+    # =======================================================================
+    # LE SCHEDE, una di fianco all'altra
+    # =======================================================================
+    # LE SCHEDE, nell'ordine in cui si guardano: prima il riepilogo di tutti gli scenari, poi una
+    # sezione per ciascun momento d'acquisto (le regole di vendita a confronto a parità d'acquisto),
+    # poi il calendario e gli strumenti di misura. Le due scelte in cima alla pagina (tipo di
+    # occasione e filtri) valgono per tutte, e sono UNA sola impostazione: così passando da una
+    # sezione all'altra si confrontano sempre gli stessi insiemi di occasioni.
+    _TABS = {"riepilogo": "📋 Riepilogo",
+             "m_osservazione": "👀 Compro in osservazione",
+             "m_anticipo": "🔭 Compro in anticipo",
+             "m_promozione": "📌 Compro in monitoraggio",
+             "m_conferma": "⏳ Compro dopo la verifica",
+             "calendario": "📅 Calendario",
+             "confronti": "⚖️ Effetto dei filtri",
+             "indicatori": "🎯 Quali indicatori funzionano",
+             "voti": "📊 Scheda voti", "lettera": "🎬 Seguendo il sistema"}
+    _stab = st.segmented_control("Che cosa vuoi guardare", list(_TABS.keys()), default="riepilogo",
+                                 format_func=lambda k: _TABS[k], required=True,
+                                 key="scen_tab") or "riepilogo"
+    st.markdown("---")
+
+    _sells = fu.SCENARIO_SELLS_PER_TIPO[_skind]
+    _et = fu.SCENARIO_ETICHETTE
+    _COL_BUY = {"osservazione": "#8b5cd6", "anticipo": "#3987e5",
+                "promozione": "#d95926", "conferma": "#199e70"}
+    _COL_SELL = {"bersaglio": "#c2185b", "7g": "#0277bd", "30g": "#ef6c00", "365g": "#5e35b1"}
+
+    # =======================================================================
+    # UNA SOTTO-SEZIONE PER MOMENTO D'ACQUISTO
+    # Perché una funzione sola e quattro schede: le quattro sezioni devono rispondere alla stessa
+    # domanda («comprando in QUESTO momento, quale regola di vendita rende di più?») con gli stessi
+    # numeri calcolati allo stesso modo. Scritte quattro volte a mano diventerebbero quattro
+    # versioni leggermente diverse, ed è il modo più semplice di ritrovarsi con due schede che si
+    # contraddicono.
+    # I FILTRI sono quelli condivisi in cima alla pagina, ma applicati AI NUMERI DI QUESTO MOMENTO
+    # (vedi valori_momento nel motore): filtrare «compro a inizio osservazione» con la probabilità
+    # di salita misurata alla promozione userebbe un'informazione che quel giorno non c'era.
+    # =======================================================================
+    _SPIEGA_MOMENTO = {
+        "osservazione": ("👀 Compro appena entra in osservazione",
+                         "Il primo giorno in cui il sistema mette il titolo sotto osservazione, "
+                         "molto prima di qualunque conferma. È il momento più anticipato di tutti."),
+        "anticipo": ("🔭 Compro appena entra in «In anticipo»",
+                     "Quando il sistema riconosce il pre-segnale solido, cioè quando l'occasione "
+                     "compare nella sezione «In anticipo». Arriva dopo l'inizio dell'osservazione, "
+                     "non prima."),
+        "promozione": ("📌 Compro quando entra in Monitoraggio",
+                       "La regola attuale del sistema: si compra alla promozione, quando tutti i "
+                       "controlli sono passati e il prezzo è già risalito del 2%."),
+        "conferma": ("⏳ Compro dopo i giorni di verifica",
+                     "Si aspetta che il periodo di verifica dentro il monitoraggio sia concluso "
+                     "(5 giorni di Borsa per il breve, 10 per il lungo) e si compra dopo."),
+    }
+
+    def _rendi_momento(_bk):
+        _tit, _spieg = _SPIEGA_MOMENTO[_bk]
+        st.markdown(f"## {_tit}")
+        st.caption(_spieg + "  Qui sotto le **tre regole di vendita** a confronto, con lo stesso "
+                            "momento d'acquisto per tutte.")
+
+        # i filtri di QUESTO momento: è la differenza che rende onesto il confronto
+        _rep_m = fu.scenario_report(_skind, _minrel, _minpg, _maxpl, _mincv, _svar, momento=_bk)
+        _att_m = fu.scenari_attesa(_skind, _minrel, _minpg, _maxpl, _mincv, _svar, momento=_bk)
+        _filtri_on = bool(_minpg or _maxpl < 100 or _mincv)
+
+        if _bk in ("osservazione", "anticipo"):
+            st.warning("⚠️ **Non è una strategia che avresti potuto eseguire.** Il prezzo di questo "
+                       "momento viene messo a verbale **solo** per le occasioni che il sistema ha "
+                       "poi promosso: quel giorno non sapevi quali lo sarebbero state, e qui dentro "
+                       "non può esistere un caso partito male e mai promosso. Il risultato è quindi "
+                       "**più bello del vero**."
+                       + (" La versione eseguibile, che conta anche le candidate mai promosse, è "
+                          "nel blocco qui sotto." if _bk == "anticipo" else ""))
+
+        st.caption(f"**{_rep_m['n_casi']}** occasioni su {_rep_m['n_tot']} passano i filtri."
+                   + (f"  ℹ️ Escluse **{_rep_m['n_senza_dato']}** che non hanno i numeri di qualità "
+                      f"**di questo momento** a verbale: senza il dato non si può dire che fossero "
+                      f"fra le migliori." if (_filtri_on and _rep_m["n_senza_dato"]) else ""))
+
+        # --- le tre regole di vendita, una accanto all'altra ---
+        _cols = st.columns(len(_sells))
+        for _i, _sk in enumerate(_sells):
+            _k = f"{_bk}|{_sk}"
+            _cel = _rep_m["celle"].get(_k)
+            with _cols[_i]:
+                with st.container(border=True):
+                    st.markdown(f"**{_et[_sk]}**")
+                    if (_skind, _bk, _sk) in fu._SCENARI_ESCLUSI:
+                        st.caption("✖️ Non esiste: con questo momento d'acquisto si comprerebbe e "
+                                   "si venderebbe lo stesso giorno.")
+                        continue
+                    if not _cel:
+                        _a = _att_m.get(_k) or {}
+                        if _a.get("attesa"):
+                            st.caption(f"⏳ **{_a['attesa']}** in attesa"
+                                       + (f", la prima il **{data_it(_a['prima'])}**"
+                                          if _a.get("prima") else "")
+                                       + (f"  \n({_a['mai']} senza il prezzo d'acquisto)"
+                                          if _a.get("mai") else ""))
+                        elif _a.get("mai"):
+                            st.caption(f"⊘ Non calcolabile per **{_a['mai']}** occasioni: manca il "
+                                       f"prezzo di questo momento.")
+                        else:
+                            st.caption("— Nessuna occasione registrata.")
+                        continue
+                    _casi_m = _rep_m["casi"].get(_k) or []
+                    _eu_m = euro_cella(_casi_m, sim_amt, sim_fee)
+                    _sol_m, _ = solidita_campione(_cel["n"], len({p["date"] for p in _casi_m}))
+                    st.metric("Caso tipico", f"{_cel['med']:+.2f}%",
+                              help="Mediana: metà ha fatto meglio, metà peggio.")
+                    if _eu_m:
+                        _c_eu = "#1a7f37" if _eu_m["medio"] > 0 else "#cf222e"
+                        st.markdown(f"<div style='color:{_c_eu};font-weight:600;font-size:1.05rem'>"
+                                    f"{_eu_m['medio']:+.2f} € in tasca</div>",
+                                    unsafe_allow_html=True)
+                        st.caption(f"per operazione · in tutto **{_eu_m['totale']:+.2f} €**  \n"
+                                   f"{_cel['hit']}% sono salite · in utile "
+                                   f"**{_eu_m['in_utile']} su {_eu_m['n']}**  \n{_sol_m}")
+                    else:
+                        st.caption(f"{_cel['hit']}% sono salite · ({_cel['n']})  \n{_sol_m}")
+
+        # --- il grafico: le regole di VENDITA a confronto, a parità di momento d'acquisto ---
+        _serie = [(_sk, _rep_m["casi"].get(f"{_bk}|{_sk}") or []) for _sk in _sells]
+        _serie = [(s, p) for s, p in _serie if p]
+        if _serie:
+            st.markdown("##### 📈 Il guadagno accumulato, regola per regola")
+            _fig_m = go.Figure()
+            for _sk, _pts in _serie:
+                _cum, _xs, _ys, _tx = 0.0, [], [], []
+                for p in sorted(_pts, key=lambda x: x["date"]):
+                    _n = fu.net_eur(p["ret"], sim_amt, sim_fee)
+                    if _n is None:
+                        continue
+                    _cum += _n
+                    _xs.append(p["date"])
+                    _ys.append(round(_cum, 2))
+                    _tx.append(f"{p['ticker']}: {p['ret']:+.2f}% → {_n:+.2f} €")
+                _fig_m.add_trace(go.Scatter(x=_xs, y=_ys, mode="lines+markers", name=_et[_sk],
+                                            text=_tx,
+                                            hovertemplate="%{text}<br>in tasca: %{y:+.2f} €"
+                                                          "<extra></extra>",
+                                            line=dict(color=_COL_SELL.get(_sk), width=2.5)))
+            _fig_m.add_hline(y=0, line=dict(color="gray", width=1, dash="dash"))
+            _fig_m.update_layout(height=340, margin=dict(t=10, b=10, l=10, r=10),
+                                 legend=dict(orientation="h"), hovermode="x unified",
+                                 yaxis_title="Quanto ti resta in tasca (€)")
+            show_chart(_fig_m, use_container_width=True)
+            st.caption(f"Ogni linea somma, operazione dopo operazione, quello che ti sarebbe rimasto "
+                       f"in tasca con €{sim_amt:,.0f} per occasione, comprando sempre in questo "
+                       f"momento e cambiando solo **quando vendi**. Commissioni e tassa del 26% sono "
+                       f"già dentro: il pareggio è a +{_pareggio:.1f}%.")
+
+            # --- il dettaglio della regola di vendita scelta ---
+            _sk_sel = st.selectbox("Quale vendita vuoi vedere nel dettaglio",
+                                   [s for s, _ in _serie], key=f"dett_{_bk}",
+                                   format_func=lambda k: _et[k])
+            _casi_sel = _rep_m["casi"].get(f"{_bk}|{_sk_sel}") or []
+            _cel_sel = _rep_m["celle"][f"{_bk}|{_sk_sel}"]
+            _eu_sel = euro_cella(_casi_sel, sim_amt, sim_fee) or {"totale": 0.0}
+            st.caption(f"Comprandole tutte e {_cel_sel['n']} "
+                       f"(**€{_cel_sel['n'] * sim_amt:,.0f}** impiegati) ti resterebbero "
+                       f"**{_eu_sel['totale']:+.2f} €** in tasca. Media {_cel_sel['avg']:+.2f}% · "
+                       f"migliore {_cel_sel['best']:+.1f}% · peggiore {_cel_sel['worst']:+.1f}%.")
+            _n_qual = sum(1 for p in _casi_sel if p.get("conv") is not None
+                          or p.get("prob_gain") is not None)
+            st.dataframe(pd.DataFrame([{
+                "Titolo": p["ticker"],
+                "Comprata il": (str(p.get("data_acquisto"))[:10] if p.get("data_acquisto")
+                                else "—"),
+                "Promossa il": p["date"],
+                "Prezzo": p.get("prezzo"),
+                "Conv.": p.get("conv"), "Salita": p.get("prob_gain"), "Perdita": p.get("prob_loss"),
+                "Rendimento": p["ret"],
+                f"Su €{sim_amt:,.0f}": fu.net_eur(p["ret"], sim_amt, sim_fee),
+            } for p in sorted(_casi_sel, key=lambda p: -p["ret"])]).set_index("Titolo"),
+                use_container_width=True, column_config={
+                    "Comprata il": st.column_config.TextColumn("Comprata il",
+                        help="Il giorno di QUESTO momento d'acquisto: è la data a cui si "
+                             "riferiscono convenienza, salita e perdita di questa riga."),
+                    "Promossa il": st.column_config.TextColumn("Promossa il",
+                        help="Quando l'occasione è entrata in Monitoraggio. Serve a capire quanti "
+                             "giorni sono passati fra l'acquisto e la promozione."),
+                    "Prezzo": st.column_config.NumberColumn("Prezzo per azione", format="%.2f"),
+                    "Conv.": st.column_config.NumberColumn(format="%d"),
+                    "Salita": st.column_config.NumberColumn("📈 Salita", format="%d%%"),
+                    "Perdita": st.column_config.NumberColumn("📉 Perdita", format="%d%%"),
+                    "Rendimento": st.column_config.NumberColumn(format="%+.2f%%"),
+                    f"Su €{sim_amt:,.0f}": st.column_config.NumberColumn(
+                        f"Su €{sim_amt:,.0f} (netti)", format="%+.2f €")})
+            st.caption(f"Convenienza, salita e perdita sono i valori **di questo momento**, non "
+                       f"quelli della promozione: sono a verbale su **{_n_qual}** delle "
+                       f"{len(_casi_sel)} occasioni in tabella. Dove mancano, l'occasione è più "
+                       f"vecchia della registrazione di quel dato, e con i filtri attivi resta "
+                       f"fuori dal conto invece di essere giudicata coi numeri di un altro giorno.")
+            _oltre_m = sum(1 for p in _casi_sel if p.get("prezzo") and float(p["prezzo"]) > sim_amt)
+            if _oltre_m:
+                st.caption(f"⚠️ {_oltre_m} di queste occasioni costano più di €{sim_amt:,.0f} per "
+                           f"azione: con questo importo non ne compreresti nemmeno una.")
+        else:
+            st.info("⏳ Con questo momento d'acquisto non c'è ancora nessun risultato maturo: i "
+                    "riquadri qui sopra dicono quante occasioni stanno maturando e da quando.")
+
+    # =======================================================================
+    # SCHEDA 1 — 🧭 QUALE MOMENTO D'ACQUISTO RENDE DI PIÙ (la matrice)
+    # =======================================================================
+    if _stab == "riepilogo":
+        st.markdown("## 📋 Tutti gli scenari a confronto")
+        st.caption("Da ogni promozione il sistema registra i prezzi chiave e, man mano che i giorni maturano, "
+                   "calcola **da solo** che cosa sarebbe successo comprando in **tre momenti diversi** e "
+                   "vendendo con **tre regole diverse**. Le vendite partono tutte dalla data di promozione, "
+                   "così i momenti d'acquisto si confrontano ad armi pari.")
+        _sub_buy = {"osservazione": "il primo giorno che il sistema la guarda",
+                    "anticipo": "pre-segnale, rimbalzo NON confermato",
+                    "promozione": "alla promozione (regola attuale)",
+                    "conferma": f"{5 if _skind == 'short' else 10} giorni di Borsa dopo"}
+        # Niente anni scritti a mano: l'anno andava aggiornato ogni gennaio, e la data vera della
+        # prima casella la dice ora la casella stessa («la prima il 27 luglio 2027»).
+        _sub_sell = {"bersaglio": "o a 30 giorni se non la tocca", "7g": "", "30g": "",
+                     "365g": "un anno dopo l'ingresso"}
+
+        _rep = fu.scenario_report(_skind, _minrel, _minpg, _maxpl, _mincv, _svar)
+        if _svar == "senza_soglia":
+            if _rep.get("n_scartate"):
+                st.info(f"🔍 Nel conto ci sono anche **{_rep['n_scartate']}** candidate che il +2% ha "
+                        f"scartato. La colonna «alla soglia» resta però calcolata solo sulle promosse "
+                        f"(le scartate non hanno un bersaglio): guarda le colonne a giorni fissi.")
+            else:
+                st.warning("⏳ Nessuna candidata scartata ancora registrata: la raccolta parte da adesso. "
+                           "Fra qualche settimana questo confronto avrà dei numeri; per ora i due "
+                           "interruttori mostrano gli stessi dati.")
+
+        st.caption(f"**{_rep['n_casi']}** promozioni su {_rep['n_tot']} passano i filtri."
+                   + ("  ⚠️ Troppo poche per fidarsi dei numeri." if 0 < _rep["n_casi"] < 5 else ""))
+        if _rep.get("n_senza_dato"):
+            # Qui un dato mancante ESCLUDE (a differenza delle sezioni vive): serve a rispondere a
+            # «e se avessi comprato solo le migliori?». Detto, non fatto in silenzio.
+            st.caption(f"ℹ️ Di quelle escluse, **{_rep['n_senza_dato']}** non hanno il numero che "
+                       f"stai chiedendo (righe registrate prima che quel campo esistesse): qui una "
+                       f"riga senza il dato resta fuori, perché non si può dire che fosse fra le "
+                       f"migliori.")
+
+        if not _rep["celle"]:
+            # TABELLA VUOTA: prima si dava sempre la colpa al tempo («nessun risultato maturo»), anche
+            # quando erano i filtri a escludere tutto — e dall'interno dell'app non c'era modo di
+            # capirlo. Ora si dice quale delle due cose sta succedendo, e quale filtro sta bloccando.
+            _perche = fu.scenari_perche_vuoto(_skind, _minrel, _minpg, _maxpl, _mincv, _svar)
+            if _perche["causa"] == "filtri":
+                st.warning("🎚️ **La tabella è vuota per colpa dei filtri, non del tempo.** "
+                           + _perche["testo"])
+                _d = _perche.get("distribuzione") or {}
+                _righe = []
+                for _campo, _etc in (("prob_gain", "Probabilità di salita"),
+                                     ("prob_loss", "Rischio di perdita"),
+                                     ("conv", "Convenienza")):
+                    _x = _d.get(_campo)
+                    if _x:
+                        _righe.append(f"**{_etc}**: va da {_x['min']:.0f} a {_x['max']:.0f}, "
+                                      f"valore tipico {_x['med']:.0f} ({_x['n']} occasioni)")
+                if _righe:
+                    st.caption("Com'è fatta la realtà, per capire quanto chiedere:")
+                    for _r in _righe:
+                        st.caption("• " + _r)
+                    st.caption("Chiedere più del massimo registrato non lascia passare nulla: "
+                               "il pulsante «↺ Tutte» riporta tutto come prima.")
+            else:
+                st.info("⏳ **La tabella è ancora vuota, ma non per i filtri.** " + _perche["testo"]
+                        + " Le prime caselle compaiono **~7 giorni dopo una promozione**, il quadro a "
+                          "1 mese dopo 30 giorni, quello a 1 anno nel 2027. Si riempie da solo: appena "
+                          "ci sono risultati, qui vedrai per ogni combinazione il rendimento **e il "
+                          "guadagno in euro** con gli importi che hai messo qui sopra.")
+        else:
+            # intestazioni
+            _hc = st.columns([1.7, 1, 1, 1])
+            _hc[0].markdown("**Compro…**")
+            for _i, _sk in enumerate(_sells):
+                _hc[_i + 1].markdown(f"**{_et[_sk]}**  \n<span style='color:#8b949e;font-size:.8rem'>"
+                                     f"{_sub_sell.get(_sk, '') or '&nbsp;'}</span>", unsafe_allow_html=True)
+            # righe
+            # Le caselle senza risultati non dicono più solo «nessun caso ancora maturo», che non
+            # distingue «manca un giorno» da «manca un anno»: `scenari_attesa` conta quante occasioni
+            # la stanno maturando e quando compare la prima (data d'ingresso + i giorni della colonna).
+            _att = fu.scenari_attesa(_skind, _minrel, _minpg, _maxpl, _mincv, _svar)
+            for _bk in fu.SCENARIO_BUYS_UI:
+                _rc = st.columns([1.7, 1, 1, 1])
+                _rc[0].markdown(f"**{_et[_bk]}**  \n<span style='color:#8b949e;font-size:.8rem'>"
+                                f"{_sub_buy[_bk]}</span>", unsafe_allow_html=True)
+                for _i, _sk in enumerate(_sells):
+                    _ck = f"{_bk}|{_sk}"
+                    _cell = _rep["celle"].get(_ck)
+                    with _rc[_i + 1]:
+                        if _cell:
+                            _casi_c = _rep["casi"].get(_ck) or []
+                            _gg_c = len({p["date"] for p in _casi_c})
+                            _sol_c, _ = solidita_campione(_cell["n"], _gg_c)
+                            _eu_c = euro_cella(_casi_c, sim_amt, sim_fee)
+                            # Sul pulsante c'è la MEDIANA, non la media: su pochi casi la media la
+                            # sposta un solo titolo fortunato, e il numero grande sarebbe il meno
+                            # affidabile dei due. La media resta nel suggerimento e nel dettaglio.
+                            if st.button(f"{_cell['med']:+.1f}%", key=f"cell_{_bk}_{_sk}",
+                                         use_container_width=True,
+                                         help=f"Caso tipico {_cell['med']:+.2f}% · media "
+                                              f"{_cell['avg']:+.2f}% · {_cell['hit']}% in positivo "
+                                              f"· {_cell['n']} casi · clicca per il dettaglio"):
+                                st.session_state["scen_cella"] = _ck
+                            if _eu_c:
+                                # L'EURO subito sotto la percentuale, e non solo nel dettaglio: è il
+                                # numero che decide, e con importi piccoli ha spesso il segno OPPOSTO
+                                # alla percentuale (commissione fissa pagata due volte).
+                                _col_eu = "#1a7f37" if _eu_c["medio"] > 0 else "#cf222e"
+                                st.markdown(
+                                    f"<div style='color:{_col_eu};font-weight:600;"
+                                    f"font-size:.95rem;margin:-4px 0 2px'>{_eu_c['medio']:+.2f} € "
+                                    f"in tasca</div>", unsafe_allow_html=True)
+                                st.caption(f"{_cell['hit']}% sono salite · in utile "
+                                           f"**{_eu_c['in_utile']} su {_eu_c['n']}**  \n{_sol_c}")
+                            else:
+                                st.caption(f"{_cell['hit']}% sono salite · ({_cell['n']})  \n{_sol_c}")
+                        else:
+                            _a = _att.get(_ck) or {}
+                            if _a.get("attesa"):
+                                st.caption(f"⏳ **{_a['attesa']}** in attesa"
+                                           + (f"  \nla prima il **{data_it(_a['prima'])}**"
+                                              if _a.get("prima") else "")
+                                           + (f"  \n({_a['mai']} senza il prezzo d'acquisto)"
+                                              if _a.get("mai") else ""))
+                            elif _a.get("mai"):
+                                # Diverso da «non ancora maturo»: qui non arriverà mai, perché quelle
+                                # righe non hanno a verbale il prezzo di quel momento d'acquisto.
+                                st.caption(f"⊘ non calcolabile  \nper **{_a['mai']}** occasioni: "
+                                           f"manca il prezzo di quel momento")
+                            else:
+                                st.caption("— nessuna occasione  \nregistrata")
+            st.caption("In ogni casella, dall'alto in basso: il **caso tipico** (metà è andata "
+                       "meglio, metà peggio) · **quanto ti resterebbe in tasca** per ogni "
+                       "operazione · quante sono salite e quante ti avrebbero dato un utile vero · "
+                       "e quanto fidarsi del campione. In percentuale e in euro il segno può essere "
+                       "**opposto**: è la commissione fissa, pagata due volte. Clicca una casella "
+                       "per il dettaglio.")
+
+            # --- RISPETTO A COSA? Il termine di confronto che mancava --------------------------
+            # Senza un riferimento, un +4% non si può giudicare: potrebbe essere tutto mercato. Il
+            # registro della convenienza contiene anche i titoli SCARTATI, quindi è il paragone giusto:
+            # «e se avessi pescato a caso fra quelli che il sistema ha guardato quel giorno?».
+            _bm_or = "5g" if _skind == "short" else "21g"
+            _bm = fu.universo_benchmark(_skind, _bm_or)
+            if _bm.get("n"):
+                _bm_net = fu.net_eur(_bm["med"], sim_amt, sim_fee)
+                _et_or = "una settimana" if _bm_or == "5g" else "un mese"
+                st.info(f"⚖️ **Rispetto a cosa?** Nello stesso periodo, i **{_bm['n']:,}** titoli che il "
+                        f"sistema ha semplicemente *guardato* (compresi quelli scartati, su {_bm['titoli']:,} "
+                        f"titoli diversi e {_bm['giorni']} giornate) hanno reso, come valore tipico, "
+                        f"**{_bm['med']:+.2f}%** dopo {_et_or}, in positivo il **{_bm['hit']}%** delle volte "
+                        f"— che su €{sim_amt:,.0f} vale **{_bm_net:+.2f} €** netti. "
+                        f"È l'asticella: una casella qui sopra aggiunge valore solo se la supera.")
+            else:
+                st.caption("⚖️ Il termine di confronto (come sono andati i titoli semplicemente guardati) "
+                           "si popolerà appena il registro della convenienza avrà esiti maturi.")
+
+            # --- dettaglio della casella scelta ---
+            _sel = st.session_state.get("scen_cella")
+            if _sel not in _rep["celle"]:
+                # Per difetto si apre la strategia ESEGUIBILE (compro quando entra in monitoraggio),
+                # non la prima casella dell'elenco: da quando «a inizio osservazione» è la prima riga,
+                # la scheda si apriva sulla riga col senno del poi — cioè sul numero più bello e meno
+                # vero della tabella.
+                _sel = next((f"promozione|{_sk2}" for _sk2 in _sells
+                             if f"promozione|{_sk2}" in _rep["celle"]),
+                            list(_rep["celle"].keys())[0])
+            _c = _rep["celle"][_sel]
+            _casi = _rep["casi"][_sel]
+            _bk, _sk = _sel.split("|")
+            st.markdown(f"### {_et[_bk]} → {_et[_sk]}")
+            if _bk == "osservazione":
+                st.warning("⚠️ **Questa riga non è una strategia che avresti potuto eseguire.** Il "
+                           "prezzo di inizio osservazione viene messo a verbale **solo** per le "
+                           "occasioni che il sistema ha poi promosso: il giorno in cui un titolo "
+                           "entra in osservazione non sai quali lo saranno, e qui dentro non può "
+                           "esistere un caso partito male e mai promosso. Il risultato è quindi più "
+                           "bello del vero, e in più la promozione richiede che il prezzo sia già "
+                           "risalito del 2%, cioè una parte di questo guadagno è la regola "
+                           "d'ammissione e non un momento d'acquisto migliore. Serve per **capire "
+                           "quanto vale aspettare la conferma**, non come strategia. La versione "
+                           "eseguibile è nella scheda «🔭 Comprando in anticipo».")
+            elif _bk == "anticipo":
+                st.warning("⚠️ **Questa riga non è una strategia che avresti potuto eseguire**, per "
+                           "due motivi. **Primo:** il prezzo d'ingresso «In anticipo» viene "
+                           "registrato **solo** per le occasioni che poi sono state promosse, e il "
+                           "giorno in cui entravano in osservazione non potevi sapere quali lo "
+                           "sarebbero state — qui dentro non può esistere un caso partito male e "
+                           "mai promosso, quindi il risultato è più bello del vero. **Secondo:** il "
+                           "prezzo è quello del giorno in cui è entrata in osservazione, ma "
+                           "affidabilità, salita e perdita sono quelle del **giorno della "
+                           "promozione**, cioè di qualche giorno dopo: se filtri questa riga per "
+                           "«probabilità di salita ≥60%» stai usando un numero che al momento "
+                           "dell'acquisto non avevi. **La versione eseguibile di questa riga è "
+                           "nella scheda «🔭 Comprando in anticipo»**, che parte dalle candidate "
+                           "registrate quando compaiono e le conta tutte, promosse o no.")
+            _eu = euro_cella(_casi, sim_amt, sim_fee) or {"medio": 0.0, "totale": 0.0,
+                                                          "in_utile": 0, "n": _c["n"]}
+            # Quante giornate d'ingresso diverse: se i casi fossero tutti dello stesso giorno
+            # misurerebbero quel giorno di mercato, non il sistema. Il giudizio sulla solidità sta
+            # nella casella qui sopra (vedi solidita_campione), qui basta il numero.
+            _gg_sel = len({p["date"] for p in _casi})
+            # NIENTE RIQUADRI RIASSUNTIVI QUI: caso tipico, euro per operazione, quante in utile e
+            # quanto fidarsi sono già nella casella cliccata, poche righe più in su. Ripeterli in
+            # grande faceva leggere due volte la stessa cosa e allungava la pagina di uno schermo.
+            # Resta una riga sola con quello che nella casella NON c'è: il totale se le compri
+            # tutte, il capitale impiegato, e gli estremi.
+            st.caption(f"Comprandole tutte e {_c['n']} (**€{_c['n'] * sim_amt:,.0f}** impiegati) "
+                       f"ti resterebbero **{_eu['totale']:+.2f} €** in tasca. "
+                       f"Media {_c['avg']:+.2f}% · migliore {_c['best']:+.1f}% · "
+                       f"peggiore {_c['worst']:+.1f}% · casi distribuiti su **{_gg_sel}** giornate "
+                       f"d'ingresso diverse.")
+            with st.expander(f"📄 I casi dietro questo numero ({_c['n']})", expanded=False):
+                # QUANDO sono state misurate salita e perdita: è la domanda che la tabella non
+                # rispondeva. Sono i valori del giorno della PROMOZIONE (il primo scatto del
+                # monitoraggio), non quelli del giorno in cui l'occasione è entrata «In anticipo»:
+                # a quel momento quei due numeri non vengono nemmeno registrati.
+                st.caption("📈 Salita e 📉 Perdita sono le stime del **giorno della promozione** "
+                           "(la data nella colonna accanto), non di quando l'occasione era in "
+                           "osservazione: sono i numeri che il sistema aveva in mano nel momento "
+                           "in cui l'ha promossa, e sono quelli su cui agiscono i filtri.")
+                st.dataframe(pd.DataFrame([{
+                    "Titolo": p["ticker"], "Promossa il": p["date"],
+                    "Prezzo": p.get("prezzo"),
+                    "Affidabilità": p.get("reliab") or "—",
+                    "Salita": p.get("prob_gain"), "Perdita": p.get("prob_loss"),
+                    "Rendimento": p["ret"], f"Su €{sim_amt:,.0f}": fu.net_eur(p["ret"], sim_amt, sim_fee),
+                } for p in sorted(_casi, key=lambda p: p["ret"], reverse=True)]).set_index("Titolo"),
+                    use_container_width=True, column_config={
+                        "Promossa il": st.column_config.TextColumn("Promossa il",
+                            help="Giorno in cui l'occasione è entrata nel Monitoraggio. È anche il "
+                                 "giorno a cui si riferiscono affidabilità, salita e perdita."),
+                        "Prezzo": st.column_config.NumberColumn("Prezzo per azione", format="%.2f",
+                            help="Prezzo di UNA azione al momento dell'acquisto simulato. Se è più "
+                                 "alto dell'importo che hai messo, quell'operazione non l'avresti "
+                                 "potuta fare: il conto in euro la include comunque."),
+                        "Salita": st.column_config.NumberColumn("📈 Salita", format="%d%%",
+                            help="Probabilità di salita stimata IL GIORNO DELLA PROMOZIONE."),
+                        "Perdita": st.column_config.NumberColumn("📉 Perdita", format="%d%%",
+                            help="Rischio di una perdita oltre il 15%, stimato IL GIORNO DELLA "
+                                 "PROMOZIONE."),
+                        "Rendimento": st.column_config.NumberColumn("Rendimento", format="%+.2f%%"),
+                        f"Su €{sim_amt:,.0f}": st.column_config.NumberColumn(
+                            f"Su €{sim_amt:,.0f} (netti)", format="%+.2f €")})
+                _oltre = sum(1 for p in _casi
+                             if p.get("prezzo") and float(p["prezzo"]) > sim_amt)
+                if _oltre:
+                    st.warning(f"⚠️ **{_oltre} di queste {_c['n']} occasioni costano più di "
+                               f"€{sim_amt:,.0f} per azione**, quindi con questo importo non ne "
+                               f"compreresti nemmeno una: il conto in euro le include comunque, "
+                               f"perché ragiona in percentuale. Alza l'importo qui sopra per una "
+                               f"simulazione che potresti davvero eseguire.")
+
+            # --- grafico: i momenti d'acquisto a confronto nel tempo ---
+            st.markdown(f"### 📈 I momenti d'acquisto a confronto — vendendo {_et[_sk].lower()}")
+            figsc = go.Figure()
+            for _b2 in fu.SCENARIO_BUYS_UI:
+                _pts = _rep["casi"].get(f"{_b2}|{_sk}") or []
+                if not _pts:
+                    continue
+                # In EURO NETTI, non in somma di percentuali: sommare percentuali dà un numero che
+                # non esiste in nessun conto (ogni punto è calcolato su un capitale diverso), e
+                # soprattutto NASCONDE le commissioni — che su importi piccoli sono la voce che
+                # decide. Una linea in euro sotto lo zero dice «questa strategia ti è costata».
+                _cum, _xs, _ys, _tx = 0.0, [], [], []
+                for p in _pts:
+                    _n = fu.net_eur(p["ret"], sim_amt, sim_fee)
+                    if _n is None:
+                        continue
+                    _cum += _n
+                    _xs.append(p["date"])
+                    _ys.append(round(_cum, 2))
+                    _tx.append(f"{p['ticker']}: {p['ret']:+.2f}% → {_n:+.2f} €")
+                figsc.add_trace(go.Scatter(x=_xs, y=_ys, mode="lines+markers", name=_et[_b2],
+                                           text=_tx,
+                                           hovertemplate="%{text}<br>in tasca: %{y:+.2f} €"
+                                                         "<extra></extra>",
+                                           line=dict(color=_COL_BUY[_b2], width=2.5)))
+            if figsc.data:
+                figsc.add_hline(y=0, line=dict(color="gray", width=1, dash="dash"))
+                figsc.update_layout(height=380, margin=dict(t=10, b=10, l=10, r=10),
+                                    legend=dict(orientation="h"), hovermode="x unified",
+                                    yaxis_title="Quanto ti resta in tasca (€)")
+                show_chart(figsc, use_container_width=True)
+                st.caption(f"👀 Ogni linea somma, operazione dopo operazione, quello che ti sarebbe "
+                           f"**rimasto in tasca** mettendo €{sim_amt:,.0f} su ognuna: **la linea più "
+                           f"in alto è quella che avrebbe reso di più**, e sopra lo zero sei in "
+                           f"guadagno. Commissioni e tassa del 26% sono già dentro, quindi una linea "
+                           f"che scende è una strategia che ti sta costando soldi anche se le "
+                           f"percentuali sembrano positive.")
+            else:
+                st.caption("Per il grafico servono almeno due casi maturi con questi filtri.")
+
+    # =======================================================================
+    # LE SOTTO-SEZIONI PER MOMENTO D'ACQUISTO (osservazione, monitoraggio, dopo la verifica).
+    # «In anticipo» ha una sezione sua più sotto, perché aggiunge la versione ESEGUIBILE.
+    # =======================================================================
+    elif _stab in ("m_osservazione", "m_promozione", "m_conferma"):
+        _rendi_momento(_stab[2:])
+
+    # =======================================================================
+    # SCHEDA — ⚖️ EFFETTO DEI FILTRI: le stesse strategie su tre insiemi di occasioni
+    # =======================================================================
+    # Perché una scheda a parte e non due interruttori: i filtri di qualità e la variante del +2%
+    # erano scelte GLOBALI in cima alla pagina, quindi per confrontare «tutte» con «solo le migliori»
+    # bisognava cambiare l'interruttore, ricordarsi i numeri di prima e rifare il confronto a memoria
+    # — che è il modo più sicuro di ingannarsi. Qui i tre insiemi stanno uno accanto all'altro.
+    elif _stab == "confronti":
+        st.markdown("## ⚖️ E se avessi comprato solo le migliori, o senza la regola del rimbalzo?")
+        st.caption("Le stesse strategie della prima scheda, misurate su **tre insiemi di occasioni "
+                   "diversi**. Questa scheda ignora di proposito i filtri in cima alla pagina: "
+                   "li applica lei, uno per colonna, altrimenti confronterebbe una cosa con se stessa.")
+
+        _MIGL = (0, 60, 25, 65)          # gli stessi valori del pulsante «⭐ Solo le migliori»
+        _r_tutte = fu.scenario_report(_skind, 0, 0, 100, 0, "reale")
+        _r_migl = fu.scenario_report(_skind, *_MIGL, "reale")
+        _r_senza = fu.scenario_report(_skind, 0, 0, 100, 0, "senza_soglia")
+
+        _c1, _c2, _c3 = st.columns(3)
+        with _c1:
+            with st.container(border=True):
+                st.markdown("**🎯 Tutte le occasioni promosse**")
+                st.markdown(f"### {_r_tutte['n_casi']}")
+                st.caption("Tutto quello che il sistema ha fatto entrare in monitoraggio. "
+                           "È il termine di paragone.")
+        with _c2:
+            with st.container(border=True):
+                st.markdown("**⭐ Solo le migliori**")
+                st.markdown(f"### {_r_migl['n_casi']}")
+                st.caption("Passano solo con probabilità di salita almeno 60, rischio di perdita "
+                           "non oltre 25 e convenienza almeno 65."
+                           + (f" Escluse anche **{_r_migl['n_senza_dato']}** occasioni che non "
+                              f"hanno quei numeri a verbale: senza il dato non si può dire che "
+                              f"fossero fra le migliori." if _r_migl["n_senza_dato"] else ""))
+        with _c3:
+            with st.container(border=True):
+                st.markdown("**🚫 Senza la regola del 2%**")
+                st.markdown(f"### {_r_senza['n_scartate']}")
+                st.caption("Candidate che avevano superato ogni controllo TRANNE il rimbalzo minimo "
+                           "del 2%, messe a verbale per rispondere a «e se quella regola non ci "
+                           "fosse?»." if _r_senza["n_scartate"] else
+                           "**Nessuna candidata scartata registrata finora**, quindi questa colonna "
+                           "mostrerebbe gli stessi numeri della prima. Si popola da sola con le "
+                           "prossime scansioni.")
+
+        if not _r_senza["n_scartate"]:
+            st.info("ℹ️ La terza colonna della tabella resta **vuota di proposito** finché non c'è "
+                    "almeno una candidata scartata a verbale: ripetere i numeri della prima colonna "
+                    "farebbe credere che il confronto sia stato fatto.")
+
+        # TUTTE le combinazioni in tabella, comprese quelle ancora senza risultati: prima le righe
+        # vuote venivano omesse, e così le vendite «alla soglia» e «dopo un mese» — che oggi non
+        # hanno ancora nessun esito — sparivano dalla scheda, dando l'impressione che il confronto
+        # riguardasse solo la vendita a una settimana. Ora la riga c'è e dice quando si riempirà.
+        _at_t = fu.scenari_attesa(_skind, 0, 0, 100, 0, "reale")
+        _at_m = fu.scenari_attesa(_skind, *_MIGL, "reale")
+        _at_s = fu.scenari_attesa(_skind, 0, 0, 100, 0, "senza_soglia")
+
+        def _txt_cmp(_cx, _rep_x, _att_x, _key):
+            """Il contenuto di una casella della tabella: il risultato se c'è, altrimenti perché no."""
+            if _cx:
+                _e = euro_cella(_rep_x["casi"].get(_key) or [], sim_amt, sim_fee)
+                return (f"{_cx['med']:+.2f}%  ·  {_e['medio']:+.2f} €  ({_cx['n']})"
+                        if _e else f"{_cx['med']:+.2f}%  ({_cx['n']})")
+            _a = _att_x.get(_key) or {}
+            if _a.get("attesa"):
+                return (f"⏳ {_a['attesa']} in attesa"
+                        + (f", la prima il {data_it(_a['prima'])}" if _a.get("prima") else ""))
+            if _a.get("mai"):
+                return f"⊘ manca il prezzo d'acquisto ({_a['mai']})"
+            return "— nessuna occasione"
+
+        _righe_cmp = []
+        for _bk in fu.SCENARIO_BUYS_UI:
+            for _sk in _sells:
+                _k = f"{_bk}|{_sk}"
+                if (_skind, _bk, _sk) in fu._SCENARI_ESCLUSI:
+                    _righe_cmp.append({
+                        "Compro": _et[_bk], "Vendo": _et[_sk],
+                        "Tutte": "✖️ non esiste: si comprerebbe e si venderebbe lo stesso giorno",
+                        "Solo le migliori": "", "Senza il 2%": ""})
+                    continue
+                _righe_cmp.append({
+                    "Compro": _et[_bk], "Vendo": _et[_sk],
+                    "Tutte": _txt_cmp(_r_tutte["celle"].get(_k), _r_tutte, _at_t, _k),
+                    "Solo le migliori": _txt_cmp(_r_migl["celle"].get(_k), _r_migl, _at_m, _k),
+                    "Senza il 2%": (_txt_cmp(_r_senza["celle"].get(_k), _r_senza, _at_s, _k)
+                                    if _r_senza["n_scartate"] else "—"),
+                })
+        if not _righe_cmp:
+            st.info("⏳ Nessuna strategia ha ancora risultati maturi: questa scheda si riempie "
+                    "insieme alla prima.")
+        else:
+            st.dataframe(pd.DataFrame(_righe_cmp), use_container_width=True, hide_index=True)
+            st.caption(f"In ogni casella con dei risultati: **caso tipico** in percentuale · "
+                       f"**quanto ti resta in tasca** per operazione con €{sim_amt:,.0f} e "
+                       f"€{sim_fee:,.2f} di commissione · (quante occasioni). Dove il risultato "
+                       f"non c'è ancora, la casella dice **quante occasioni lo stanno maturando e "
+                       f"da quando**: le vendite «alla soglia» e «dopo un mese» hanno bisogno di "
+                       f"trenta giorni dall'ingresso, quindi si popolano più tardi di quella a una "
+                       f"settimana. Il pareggio è a "
+                       f"**+{_pareggio:.1f}%**: sotto quella soglia la percentuale è positiva e "
+                       f"l'euro no.")
+
+        # L'AVVERTENZA CHE CONTA: con pochissime occasioni la differenza fra le colonne non misura
+        # il filtro, misura solo quanto ha tolto. Va detta qui, dove il confronto si legge.
+        if _r_migl["n_casi"] and _r_tutte["n_casi"]:
+            _pc_resta = 100 * _r_migl["n_casi"] / _r_tutte["n_casi"]
+            if _r_migl["n_casi"] < 8:
+                st.warning(f"⚠️ **Attenzione a come si legge questa tabella.** Il filtro delle "
+                           f"migliori lascia passare **{_r_migl['n_casi']} occasioni su "
+                           f"{_r_tutte['n_casi']}** ({_pc_resta:.0f}%): con così pochi casi la "
+                           f"differenza fra le colonne **non dice se il filtro funziona**, dice "
+                           f"solo che ha tolto quasi tutto. Serve almeno un paio di mesi di "
+                           f"promozioni prima che questo confronto valga qualcosa. La misura fatta "
+                           f"come si deve, indicatore per indicatore, è nella scheda «🎯 Quali "
+                           f"indicatori funzionano».")
+            else:
+                st.caption(f"Il filtro delle migliori tiene {_r_migl['n_casi']} occasioni su "
+                           f"{_r_tutte['n_casi']} ({_pc_resta:.0f}%).")
+
+    # =======================================================================
+    # SCHEDA 3 — 🔭 COMPRANDO APPENA ENTRA IN «IN ANTICIPO» (la versione eseguibile)
+    # =======================================================================
+    # Perché è una scheda a parte e non una riga della matrice: la matrice nasce dalle PROMOZIONI,
+    # quindi la sua riga «All'ingresso in In anticipo» contiene solo le candidate poi promosse —
+    # una selezione fatta col senno del poi. Qui si parte dal registro delle candidate: il prezzo
+    # del giorno in cui sono comparse è a verbale per TUTTE, promosse o no.
+    elif _stab == "m_anticipo":
+        # prima il momento d'acquisto come le altre sezioni (dal registro degli scenari)…
+        _rendi_momento("anticipo")
+        st.markdown("---")
+        # …poi la versione ESEGUIBILE, che parte dal registro delle candidate e conta anche quelle
+        # mai promosse: è l'unica riga onesta di questo momento d'acquisto, e per questo sta qui
+        # dentro invece di essere una scheda separata.
+        st.markdown("## 🔭 La versione eseguibile: comprando TUTTE le candidate")
+        st.caption("Ogni volta che un'occasione entra nella sezione «In anticipo», il sistema mette "
+                   "a verbale il **prezzo di quel giorno**. Qui si guarda come sono andate **tutte** "
+                   "quelle candidate nei giorni successivi — comprese quelle che poi non sono mai "
+                   "state promosse. È la strategia che avresti potuto eseguire davvero: compro "
+                   "tutto quello che compare lì, senza sapere quali verranno promosse.")
+        _an = fu.scenari_anticipo(_skind, _minpg, _maxpl, _mincv, sim_amt, sim_fee)
+        if not _an["n"]:
+            if _an["filtri_attivi"] and _an["n_registrate"]:
+                st.warning(f"🎚️ Con questi filtri non passa nessuna candidata. "
+                           f"Registrate in tutto: **{_an['n_registrate']}**.")
+                _cp = _an["copertura"]
+                st.caption(f"Nota: la probabilità di salita è registrata su {_cp['prob_gain']} "
+                           f"candidate su {_an['n_registrate']}, il rischio di perdita su "
+                           f"{_cp['prob_loss']}, la convenienza su {_cp['conv']}. Quei due numeri "
+                           f"vengono messi a verbale solo dalle candidate nuove, quindi filtrare su "
+                           f"di essi lascia fuori tutte quelle registrate prima.")
+            else:
+                st.info("⏳ Nessuna candidata registrata per questo tipo: la sezione si popola da "
+                        "sola man mano che le occasioni entrano in «In anticipo».")
+        else:
+            st.caption(f"**{_an['n']}** candidate registrate dal {_an['dal']} al {_an['al']}."
+                       + (f"  ⚠️ {_an['n_senza_dato']} escluse dai filtri perché non hanno ancora "
+                          f"quei numeri a verbale." if _an["n_senza_dato"] else ""))
+            _ORIZZ = {"7g": "Dopo 1 settimana", "30g": "Dopo 1 mese"}
+            _GRUPPI = (("tutte", "🎯 TUTTE — la strategia eseguibile",
+                        "Compro ogni candidata che compare in «In anticipo». È l'unica riga "
+                        "onesta: il giorno dell'acquisto non sai quali verranno promosse."),
+                       ("poi_promosse", "✅ Solo quelle poi promosse",
+                        "Le stesse che vedi nella matrice. Non è eseguibile: per scegliere solo "
+                        "queste dovresti sapere in anticipo quali il sistema promuoverà."),
+                       ("mai_promosse", "❌ Solo quelle mai promosse",
+                        "Le candidate che il sistema ha scartato. È la parte che la matrice non "
+                        "può mostrare, ed è quella che ti sarebbe costata."))
+            _oriz = st.segmented_control(
+                "Quando vendo", list(_ORIZZ.keys()), default="7g",
+                format_func=lambda k: f"📅 {_ORIZZ[k]}", required=True, key="ant_oriz") or "7g"
+            _cel = _an["celle"][_oriz]
+            if not _cel["tutte"].get("n"):
+                st.info(f"⏳ Nessuna candidata ha ancora un risultato a questo orizzonte: il primo "
+                        f"quadro «{_ORIZZ[_oriz].lower()}» compare quando le candidate registrate "
+                        f"avranno quei giorni di vita.")
+            else:
+                for _g, _tit, _spieg in _GRUPPI:
+                    _c = _cel.get(_g) or {}
+                    with st.container(border=True):
+                        st.markdown(f"**{_tit}**")
+                        st.caption(_spieg)
+                        if not _c.get("n"):
+                            st.caption("Nessun caso maturo in questo gruppo.")
+                            continue
+                        _a1, _a2, _a3, _a4 = st.columns(4)
+                        _a1.metric("Il caso tipico", f"{_c['med']:+.2f}%",
+                                   help="Mediana: metà ha fatto meglio, metà peggio.")
+                        _a2.metric("In euro, per operazione", f"{_c['netto_medio']:+.2f} €",
+                                   help="Media dei risultati veri uno per uno, dopo due "
+                                        "commissioni e la tassa sui guadagni.")
+                        _a3.metric("Quante sono salite", f"{_c['hit']}%")
+                        _a4.metric("Quante ti avrebbero dato un utile",
+                                   f"{_c['in_utile']} su {_c['n']}")
+                        st.caption(f"{_c['n']} candidate · media {_c['avg']:+.2f}% · migliore "
+                                   f"{_c['best']:+.1f}% / peggiore {_c['worst']:+.1f}% · "
+                                   f"comprandole tutte: **{_c['netto_totale']:+.2f} €** "
+                                   f"(€{_c['n'] * sim_amt:,.0f} impiegati)")
+                _t, _p, _m = _cel["tutte"], _cel["poi_promosse"], _cel["mai_promosse"]
+                if _p.get("n") and _m.get("n"):
+                    st.warning(f"⚖️ **Ecco quanto vale il senno del poi.** Le candidate poi "
+                               f"promosse hanno fatto **{_p['med']:+.2f}%** (caso tipico), quelle "
+                               f"mai promosse **{_m['med']:+.2f}%**. La matrice, nella riga "
+                               f"«All'ingresso in In anticipo», mostra **solo le prime**: per "
+                               f"questo lì il numero è più bello. Comprando tutto quello che "
+                               f"compare — l'unica cosa che potevi fare davvero — il caso tipico è "
+                               f"**{_t['med']:+.2f}%**, che in euro fa "
+                               f"**{_t['netto_medio']:+.2f} €** per operazione.")
+                if _t.get("netto_medio") is not None and _t["netto_medio"] <= 0 < _t.get("med", 0):
+                    st.caption(f"Il caso tipico è positivo in percentuale ma non in euro: con "
+                               f"€{sim_amt:,.0f} e €{sim_fee:,.2f} per ordine il pareggio è a "
+                               f"**+{_an['pareggio_pct']:.1f}%**.")
+                st.caption("La vendita «alla soglia» non c'è in questa scheda: bersaglio e stop "
+                           "vengono calcolati al momento della promozione, quindi per le candidate "
+                           "mai promosse non esistono. Restano i due orizzonti a giorni fissi, che "
+                           "sono anche quelli che si confrontano meglio fra loro.")
+                with st.expander(f"📄 Le candidate dietro questi numeri ({_cel['tutte']['n']})",
+                                 expanded=False):
+                    _campo = "ret_7d" if _oriz == "7g" else "ret_30d"
+                    _rows_an = [{
+                        "Titolo": x.get("ticker"), "Comparsa il": x.get("date"),
+                        "Poi promossa": ("✅ " + str(x.get("data_promozione"))
+                                         if x.get("promossa") else "❌ no"),
+                        "Convenienza": x.get("conv"),
+                        "Salita": x.get("prob_gain"), "Perdita": x.get("prob_loss"),
+                        "Rendimento": x.get(_campo),
+                        f"Netto su €{sim_amt:,.0f}": fu.net_eur(x.get(_campo), sim_amt, sim_fee),
+                    } for x in _an["casi"]["tutte"] if x.get(_campo) is not None]
+                    st.dataframe(
+                        pd.DataFrame(sorted(_rows_an, key=lambda r: -(r["Rendimento"] or 0)))
+                        .set_index("Titolo"), use_container_width=True, column_config={
+                            "Comparsa il": st.column_config.TextColumn("Comparsa il",
+                                help="Giorno in cui è entrata in «In anticipo»: è il giorno "
+                                     "dell'acquisto, e quello a cui si riferiscono i numeri di "
+                                     "qualità qui accanto."),
+                            "Poi promossa": st.column_config.TextColumn("Poi promossa",
+                                help="Se il sistema l'ha poi fatta entrare in Monitoraggio. "
+                                     "Il giorno dell'acquisto questo non si sapeva."),
+                            "Convenienza": st.column_config.NumberColumn(format="%d"),
+                            "Salita": st.column_config.NumberColumn("📈 Salita", format="%d%%",
+                                help="Registrata solo per le candidate nuove: «—» per quelle "
+                                     "messe a verbale prima."),
+                            "Perdita": st.column_config.NumberColumn("📉 Perdita", format="%d%%"),
+                            "Rendimento": st.column_config.NumberColumn(format="%+.2f%%"),
+                            f"Netto su €{sim_amt:,.0f}": st.column_config.NumberColumn(
+                                format="%+.2f €"),
+                        })
+
+    # =======================================================================
+    # SCHEDA 3 — 📅 CALENDARIO: gli stessi risultati, divisi per periodo
+    # =======================================================================
+    # La matrice mette tutto insieme e dice «quale momento d'acquisto rende di più». Non dice «sta
+    # migliorando o peggiorando?»: una media buona può essere costruita in una sola settimana
+    # fortunata. Qui ogni riga è un periodo, così l'andamento nel tempo si vede.
+    elif _stab == "calendario":
+        st.markdown("## 📅 Calendario dei risultati")
+        st.caption("Gli stessi scenari, ma **divisi per periodo**: così vedi se il sistema sta migliorando "
+                   "o peggiorando, invece di un solo numero che mescola tutto. I periodi sono quelli in cui "
+                   "l'occasione è **entrata** (la data che il registro conserva con certezza): la sua resa "
+                   "matura nei giorni successivi.")
+        _cg1, _cg2 = st.columns([1, 2])
+        _gran = _cg1.segmented_control(
+            "Raggruppa per", ["settimana", "mese"], default="settimana",
+            format_func=lambda k: "📆 Settimana" if k == "settimana" else "🗓️ Mese",
+            required=True, key="scen_gran") or "settimana"
+        _cal = fu.scenari_calendario(_skind, _gran, _minrel, _minpg, _maxpl, _mincv, _svar,
+                                     sim_amt, sim_fee)
+        if _cal.get("n_senza_dato"):
+            st.caption(f"ℹ️ **{_cal['n_senza_dato']}** occasioni non hanno il numero che stai "
+                       f"chiedendo nei filtri (righe registrate prima che quel campo esistesse) e "
+                       f"restano fuori dal conto.")
+        _combo = sorted({k for p in _cal["periodi"] for k in p["celle"]})
+        if not _combo:
+            st.info("⏳ Nessun risultato maturo con questi filtri: il calendario si riempie insieme "
+                    "alla scheda «🧭 Momento d'acquisto».")
+        else:
+            _scelta = _cg2.selectbox(
+                "Quale scenario seguire nel tempo", _combo, key="scen_cal_combo",
+                format_func=lambda k: f"{_et.get(k.split('|')[0], k)} → {_et.get(k.split('|')[1], k)}",
+                help="La tabella qui sotto mostra questo scenario periodo per periodo.")
+            _righe_cal = []
+            for p in _cal["periodi"]:
+                c = p["celle"].get(_scelta)
+                _righe_cal.append({
+                    "Periodo": p["etichetta"],
+                    "Occasioni entrate": p["n_occasioni"],
+                    "Casi maturi": (c["n"] if c else 0),
+                    "Resa tipica": (c["med"] if c else None),
+                    "Media": (c["avg"] if c else None),
+                    "In positivo": (c["hit"] if c else None),
+                    f"Netto su €{sim_amt:,.0f}": (c["netto_medio"] if c else None),
+                    "In tasca in tutto": (c.get("netto_totale") if c else None),
+                    "In utile dopo i costi": (f"{c['in_utile']}/{c['n']}" if c else "—"),
+                })
+            # RIGA DI TOTALE: senza questa il calendario dice come è andata ogni settimana ma non
+            # come è andato l'insieme, che è la domanda finale («in tutto, ci ho guadagnato?»).
+            _tot_n = sum(r["Casi maturi"] for r in _righe_cal)
+            _tot_eu = sum((r["In tasca in tutto"] or 0) for r in _righe_cal)
+            _righe_cal.append({
+                "Periodo": "▸ TUTTI I PERIODI",
+                "Occasioni entrate": sum(r["Occasioni entrate"] for r in _righe_cal),
+                "Casi maturi": _tot_n,
+                "Resa tipica": None, "Media": None, "In positivo": None,
+                f"Netto su €{sim_amt:,.0f}": (round(_tot_eu / _tot_n, 2) if _tot_n else None),
+                "In tasca in tutto": round(_tot_eu, 2),
+                "In utile dopo i costi": "—",
+            })
+            # Tabella SELEZIONABILE: si clicca la riga del periodo e sotto compaiono il dettaglio e il
+            # grafico di quel periodo. Il contatore nella chiave serve a chiudere la selezione.
+            _ncal = st.session_state.get("cal_nonce", 0)
+            _evcal = st.dataframe(
+                pd.DataFrame(_righe_cal), use_container_width=True, hide_index=True,
+                on_select="rerun", selection_mode="single-row",
+                key=f"caltab_{_gran}_{_skind}_{_scelta}_{_ncal}",
+                column_config={
+                    "Periodo": st.column_config.TextColumn("Periodo", width="medium",
+                        help="Clicca la riga per vedere le occasioni di quel periodo e il grafico."),
+                    "Occasioni entrate": st.column_config.NumberColumn(format="%d",
+                        help="Quante occasioni sono entrate in Monitoraggio in quel periodo."),
+                    "Casi maturi": st.column_config.NumberColumn(format="%d",
+                        help="Di quelle, quante hanno già un risultato per questo scenario. "
+                             "Le altre stanno ancora maturando."),
+                    "Resa tipica": st.column_config.NumberColumn(format="%+.2f%%",
+                        help="La MEDIANA: metà è andata meglio, metà peggio. È il numero da "
+                             "guardare, perché su pochi casi la media la sposta un solo caso estremo."),
+                    "Media": st.column_config.NumberColumn(format="%+.2f%%"),
+                    "In positivo": st.column_config.NumberColumn(format="%d%%"),
+                    f"Netto su €{sim_amt:,.0f}": st.column_config.NumberColumn(format="%+.2f €",
+                        help="Quanto ti sarebbe rimasto in tasca, in media, per ogni operazione di "
+                             "quel periodo: dopo due commissioni e la tassa del 26% sui guadagni. "
+                             f"Il pareggio è a +{_cal['pareggio_pct']:.1f}%."),
+                    "In tasca in tutto": st.column_config.NumberColumn(format="%+.2f €",
+                        help="Somma dei risultati netti di tutte le operazioni di quel periodo: "
+                             "quello che ti resterebbe in tasca alla fine, non la media."),
+                })
+            st.caption(f"⚖️ Con €{sim_amt:,.0f} e €{sim_fee:,.2f} per ordine il **pareggio** è a "
+                       f"**+{_cal['pareggio_pct']:.1f}%**: le righe sotto quella soglia sono in perdita "
+                       "anche quando la resa è positiva. Un periodo con pochi casi maturi non è un "
+                       "giudizio sul sistema: è solo un periodo giovane.")
+
+            _pers = [p for p in _cal["periodi"] if p["celle"].get(_scelta)]
+            _selc = []
+            try:
+                _ssc = _evcal["selection"] if isinstance(_evcal, dict) else getattr(_evcal, "selection", {})
+                _selc = list((_ssc or {}).get("rows", []) or [])
+            except Exception:
+                _selc = []
+            if _selc and _selc[0] < len(_cal["periodi"]):
+                st.session_state["scen_cal_per"] = _cal["periodi"][_selc[0]]["chiave"]
+            _pk = st.session_state.get("scen_cal_per")
+            _p = next((p for p in _pers if p["chiave"] == _pk), None)
+            if _p is None and _pers:
+                _p = _pers[0]                     # per difetto il periodo più recente con dati
+            if _p is None:
+                st.info("Nessun periodo ha ancora risultati maturi per questo scenario: "
+                        "scegline un altro nell'elenco qui sopra.")
+            else:
+                st.markdown("---")
+                st.markdown(f"### {_p['etichetta']} — dal {_p['dal']} al {_p['al']}")
+
+                def _chiudi_cal(_n=_ncal):
+                    st.session_state.pop("scen_cal_per", None)
+                    st.session_state["cal_nonce"] = _n + 1     # tabella nuova = niente selezione
+
+                if _pk:
+                    st.button("✖️ Torna a tutti i periodi", key="cal_close", on_click=_chiudi_cal)
+                else:
+                    st.caption("👆 **Clicca una riga** della tabella per aprire un altro periodo.")
+                _cc = _p["celle"][_scelta]
+                _q1, _q2, _q3 = st.columns(3)
+                _q1.metric("Il caso tipico del periodo", f"{_cc['med']:+.2f}%",
+                           help="Mediana: metà meglio, metà peggio.")
+                _q1.caption(f"in euro, per operazione: **{_cc['netto_medio']:+.2f} €** · in utile "
+                            f"**{_cc['in_utile']} su {_cc['n']}**")
+                _q2.metric("Occasioni con un risultato", f"{_cc['n']} su {_p['n_occasioni']}")
+                _q2.caption("Le altre stanno ancora maturando.")
+                _q3.metric("Se le avessi comprate tutte", f"{_cc['netto_totale']:+.2f} €")
+                _q3.caption(f"€{_cc['n'] * sim_amt:,.0f} impiegati in totale, netti in tasca alla fine")
+
+                # --- GRAFICO: i momenti d'acquisto a confronto DENTRO il periodo scelto ---------
+                # Stessa lettura del grafico della matrice, ma su una settimana/mese sola: qui si
+                # vede se in quel periodo conveniva entrare prima o aspettare la conferma.
+                _sk_cal = _scelta.split("|")[1]
+                st.markdown(f"##### 📈 I momenti d'acquisto in questo periodo — vendendo "
+                            f"{_et.get(_sk_cal, _sk_cal).lower()}")
+                figcal = go.Figure()
+                for _b2 in fu.SCENARIO_BUYS_UI:
+                    _pts = sorted(_p["casi"].get(f"{_b2}|{_sk_cal}") or [], key=lambda x: x["date"])
+                    if not _pts:
+                        continue
+                    _cum, _xs, _ys, _txt = 0.0, [], [], []
+                    for x in _pts:
+                        _cum += x["ret"]
+                        _xs.append(x["date"])
+                        _ys.append(round(_cum, 2))
+                        _txt.append(f"{x['ticker']}: {x['ret']:+.2f}%")
+                    figcal.add_trace(go.Scatter(
+                        x=_xs, y=_ys, mode="lines+markers", name=_et[_b2], text=_txt,
+                        hovertemplate="%{text}<br>somma: %{y:+.2f}%<extra></extra>",
+                        line=dict(color=_COL_BUY[_b2], width=2.5)))
+                if figcal.data:
+                    figcal.add_hline(y=0, line=dict(color="gray", width=1, dash="dash"))
+                    figcal.update_layout(height=340, margin=dict(t=10, b=10, l=10, r=10),
+                                         legend=dict(orientation="h"), hovermode="x unified",
+                                         yaxis_title="Somma dei rendimenti (%)")
+                    show_chart(figcal, use_container_width=True)
+                    st.caption("Ogni linea somma i rendimenti delle occasioni **di questo periodo**, "
+                               "una dopo l'altra: la linea più in alto è il momento d'acquisto che in "
+                               "questo periodo avrebbe reso di più. Con pochi punti è un aneddoto, "
+                               "non una misura.")
+                else:
+                    st.caption("In questo periodo c'è un solo momento d'acquisto con risultati: "
+                               "per il confronto a linee servono almeno due punti.")
+
+                st.dataframe(pd.DataFrame([{
+                    "Titolo": x["ticker"], "Entrata il": x["date"],
+                    "Affidabilità": x.get("reliab") or "—",
+                    "Salita": x.get("prob_gain"), "Perdita": x.get("prob_loss"),
+                    "Rendimento": x["ret"],
+                    f"Netto su €{sim_amt:,.0f}": fu.net_eur(x["ret"], sim_amt, sim_fee),
+                } for x in sorted(_p["casi"][_scelta], key=lambda x: -x["ret"])]).set_index("Titolo"),
+                    use_container_width=True, column_config={
+                        "Entrata il": st.column_config.TextColumn("Entrata il",
+                            help="Giorno in cui è entrata nel Monitoraggio: è anche il giorno a cui "
+                                 "si riferiscono affidabilità, salita e perdita."),
+                        "Salita": st.column_config.NumberColumn(format="%d%%",
+                            help="Probabilità di salita stimata QUEL GIORNO."),
+                        "Perdita": st.column_config.NumberColumn(format="%d%%",
+                            help="Rischio di perdita oltre il 15% stimato QUEL GIORNO."),
+                        "Rendimento": st.column_config.NumberColumn(format="%+.2f%%"),
+                        f"Netto su €{sim_amt:,.0f}": st.column_config.NumberColumn(format="%+.2f €"),
+                    })
+
+    # =======================================================================
+    # SCHEDA 4 — 🎯 QUALI INDICATORI FUNZIONANO DAVVERO
+    # =======================================================================
+    elif _stab == "indicatori":
+        st.markdown("## 🎯 Quali indicatori funzionano davvero")
+        st.caption("Le occasioni portano quattro numeri di qualità. Questa scheda li mette alla prova "
+                   "**sugli stessi casi**: quale di essi ha davvero separato le occasioni andate bene "
+                   "da quelle andate male? È la scheda che dice se fidarsi dei filtri qui sopra.")
+        st.info("ℹ️ **L'affidabilità non è più un filtro** (agosto 2026), e questa scheda è il "
+                "motivo. Non giudicava l'occasione, giudicava **il dato**: è calcolata solo da "
+                "quanto è volatile il titolo e da quante giornate di storico esistono (🟢 Alta = "
+                "volatilità annua sotto il 35% e almeno 180 giornate di prezzi; 🟡 Media = sotto il "
+                "60% e almeno 120). Non guarda il prezzo, l'azienda o i conti, e non dice quanto "
+                "potrebbe salire — quindi come requisito d'acquisto scartava i titoli che si "
+                "muovono, non quelli che perdono. Era anche **già dentro la convenienza** in forma "
+                "continua (smorza il punteggio verso 50 quando la stima è incerta), quindi "
+                "chiederle entrambe contava due volte la stessa cosa. Resta come **colonna** nelle "
+                "tabelle: sapere quanto è solida una stima è utile, farci una selezione no. "
+                "Qui sotto è misurata insieme alle altre tre, così la scelta resta verificabile.")
+
+        _irep = fu.indicatori_report(_skind, st.session_state.get("scen_ind_combo"), _svar)
+        if not _irep.get("combo"):
+            st.warning("⏳ " + _irep["verdetto"])
+        else:
+            _disp = _irep.get("combo_disponibili") or [_irep["combo"]]
+            # La casella scelta prima può non esistere più (per esempio cambiando tipo di
+            # occasione): in quel caso si riparte da quella scelta dal motore.
+            if st.session_state.get("scen_ind_combo") not in _disp:
+                st.session_state["scen_ind_combo"] = _irep["combo"]
+            _cscelto = st.selectbox(
+                "Su quale scenario misurarli", _disp, key="scen_ind_combo",
+                format_func=lambda k: f"{_et.get(k.split('|')[0], k)} → "
+                                      f"{_et.get(k.split('|')[1], k)}",
+                help="Un indicatore può funzionare su un orizzonte e non su un altro: "
+                     "conviene guardarne più di uno prima di trarre conclusioni.")
+            if _cscelto != _irep["combo"]:
+                _irep = fu.indicatori_report(_skind, _cscelto, _svar)
+            st.caption(f"Campione: **{_irep['n']}** casi maturi in **{_irep['giornate']}** giornate "
+                       f"di promozione. Misurato su **tutte** le occasioni di questo tipo, senza i "
+                       f"filtri di qualità: filtrarle prima toglierebbe proprio la parte di scala su "
+                       f"cui la differenza va cercata.")
+            if _irep["abbastanza"]:
+                st.info("Campione sufficiente per una prima lettura (almeno 30 casi in 20 giornate).")
+            else:
+                st.warning(f"⚠️ **Campione ancora piccolo** ({_irep['n']} casi in "
+                           f"{_irep['giornate']} giornate): serve almeno un paio di mesi di "
+                           f"promozioni prima che questi confronti valgano qualcosa. Fino a lì, "
+                           f"leggili come indizi.")
+
+            for _v in _irep["indicatori"]:
+                with st.container(border=True):
+                    _tt = ("✅" if _v["utile"] is True else
+                           ("⚠️" if (_v["utile"] is False and (_v["p"] or 1) < 0.05) else "➖"))
+                    st.markdown(f"**{_tt} {_v['nome']}** — {_v['spiega']}")
+                    if _v["fasce"]:
+                        _fc = st.columns(len(_v["fasce"]))
+                        for _col, _f in zip(_fc, _v["fasce"]):
+                            _col.metric(_f["fascia"],
+                                        f"{_f['med']:+.2f}%" if _f["med"] is not None else "—")
+                            _col.caption(f"{_f['n']} casi"
+                                         + (f" · {_f['hit']}% in positivo" if _f["hit"] is not None else ""))
+                    _dett = []
+                    if _v["ic"] is not None:
+                        _dett.append(f"correlazione con la resa, confrontando i titoli dello stesso "
+                                     f"giorno: **{_v['ic']:+.3f}** (su {_v['giornate_ic']} giornate)")
+                    if _v["p"] is not None:
+                        _dett.append(f"probabilità che sia solo il caso: **{_v['p'] * 100:.0f}%**")
+                    if _dett:
+                        st.caption(" · ".join(_dett))
+                    st.caption(_v["verdetto"])
+            st.markdown(f"**In sintesi:** {_irep['verdetto']}")
+            st.caption("Come si legge: la «correlazione dentro la giornata» confronta fra loro i titoli "
+                       "promossi lo **stesso giorno**. Serve perché mescolando i giorni si misurerebbe "
+                       "il mercato (in una settimana di rialzo sale tutto) invece dell'indicatore. "
+                       "La «probabilità che sia solo il caso» rimescola le rese fra le fasce migliaia "
+                       "di volte e conta quante volte il caso produce una differenza grande come "
+                       "quella osservata: sopra il 5% non è una scoperta.")
+
+        st.markdown("---")
+        # --- Calibrazione: la convenienza alta rende più della bassa? (sulle promozioni) ---
+        cal = fu.track_record_calibration()
+        st.markdown("### La convenienza funziona? Resa reale per fascia")
+        st.caption("Stessa domanda, campione diverso: qui le promozioni sono divise per fascia di "
+                   "convenienza e seguite a 7 e 30 giorni.")
+        band_rows = [{
+            "Fascia": fa["banda"], "Promozioni": fa["count"],
+            "Resa 7g": (fa["d7"]["avg"] if fa["d7"] else None),
+            "Resa 30g": (fa["d30"]["avg"] if fa["d30"] else None),
+            "In positivo 30g": (fa["d30"]["hit"] if fa["d30"] else None),
+        } for fa in cal["fasce"]]
+        st.dataframe(pd.DataFrame(band_rows).set_index("Fascia"), use_container_width=True,
+                     column_config={
+                         "Promozioni": st.column_config.NumberColumn("Promozioni", format="%d"),
+                         "Resa 7g": st.column_config.NumberColumn("Resa media 7g", format="%+.1f%%"),
+                         "Resa 30g": st.column_config.NumberColumn("Resa media 30g", format="%+.1f%%"),
+                         "In positivo 30g": st.column_config.NumberColumn("In positivo 30g", format="%d%%"),
+                     })
+        if cal["ok"] is True:
+            st.success(cal["verdetto"])
+        elif cal["ok"] is False:
+            st.info(cal["verdetto"])
+        else:
+            st.caption("ℹ️ " + cal["verdetto"])
+
+        st.markdown("---")
+        # --- 🎯 Calibrazione delle probabilità (Brier score) ---
+        crep = fu.calibration_report()
+        if crep is not None:
+            st.markdown(f"### Quanto sono oneste le probabilità — {crep['n_resolved']} previsioni verificate")
+            st.caption("Degli eventi a cui diamo **~70%**, quanti si avverano davvero? Questa scheda confronta la "
+                       "**probabilità di salita predetta** con quella **realizzata**. Non serve a indovinare il prezzo, "
+                       "ma a misurare se le nostre percentuali sono affidabili. Si popola nel tempo.")
+            if crep["n_resolved"] == 0:
+                st.info(f"Nessuna previsione ancora verificata (servono ~1 mese per il breve, ~1 anno per il lungo). "
+                        f"Registrate finora: {crep['n_total']}. Torna più avanti.")
+            else:
+                if crep["brier"] is not None:
+                    bs = crep["brier"]
+                    tone = st.success if bs <= 0.20 else st.warning if bs <= 0.25 else st.error
+                    tone(f"**Brier score: {bs:.3f}** (più basso = meglio; 0,25 = come tirare a caso, "
+                         "<0,20 = previsioni utili).")
+                if crep["buckets"]:
+                    st.dataframe(pd.DataFrame(crep["buckets"]).set_index("range"),
+                                 use_container_width=True, column_config={
+                        "n": st.column_config.NumberColumn("Casi", format="%d"),
+                        "predetto": st.column_config.NumberColumn("Prob. predetta", format="%d%%"),
+                        "realizzato": st.column_config.NumberColumn("Salite reali", format="%d%%",
+                            help="Se 'predetta' e 'realizzato' sono vicine, le probabilità sono ben calibrate."),
+                    })
+
+    # =======================================================================
+    # SCHEDA 5 — 📊 SCHEDA VOTI (track record delle promozioni automatiche)
+    # =======================================================================
+    elif _stab == "voti":
+        rstats = fu.track_record_stats()
+        st.markdown(f"## 📊 Scheda voti del sistema — {rstats['total']} promozioni automatiche finora")
+        if not rstats["total"]:
+            st.info("⏳ Nessuna promozione automatica registrata finora: questa scheda si popola da "
+                    "sola appena il sistema promuove la prima occasione.")
+        else:
+            st.caption("Quanto hanno **reso davvero** le occasioni promosse dal sistema: una misura onesta dell'efficacia. "
+                       "Non è una garanzia sul futuro, ma ti dice quanto fidarti dei segnali.")
+            rc1, rc2, rc3 = st.columns(3)
+            for col, key, label in [(rc1, "now", "Ad oggi"), (rc2, "d7", "Dopo 7 giorni"),
+                                    (rc3, "d30", "Dopo 30 giorni")]:
+                s = rstats[key]
+                with col:
+                    if s:
+                        # Si mostra la MEDIANA come numero principale: la media basta che un solo
+                        # titolo decuplichi per raccontare una storia che non è mai capitata.
+                        st.metric(f"{label} — caso tipico", f"{s.get('med', s['avg']):+.1f}%",
+                                  help="È la mediana: metà delle promozioni ha fatto meglio, metà "
+                                       "peggio. La media è qui sotto — se le due sono molto diverse, "
+                                       "vuol dire che il risultato dipende da pochi casi estremi.")
+                        st.caption(f"🎯 In positivo **{s['hit']}%** ({s['n']} casi) · "
+                                   f"media {s['avg']:+.1f}% · "
+                                   f"migliore {s['best']:+.1f}% · peggiore {s['worst']:+.1f}%")
+                    else:
+                        st.metric(f"{label} — caso tipico", "—")
+                        st.caption("Servono più giorni di dati.")
+
+            recs = fu.load_track_record()
+            if recs:
+                dfr = pd.DataFrame([{
+                    "Ticker": r.get("ticker"), "Tipo": "⚡ Breve" if r.get("kind") == "short" else "🏛️ Lungo",
+                    "Promossa il": r.get("date"), "Conv. iniziale": r.get("conv"),
+                    "Oggi": r.get("ret_now"), "Dopo 7g": r.get("ret_7d"), "Dopo 30g": r.get("ret_30d"),
+                } for r in reversed(recs)]).set_index("Ticker")
+                st.dataframe(dfr, use_container_width=True, column_config={
+                    "Conv. iniziale": st.column_config.NumberColumn("Conv. iniziale", format="%d"),
+                    "Oggi": st.column_config.NumberColumn("Oggi", format="%+.1f%%",
+                        help="Rendimento dal prezzo di promozione a oggi."),
+                    "Dopo 7g": st.column_config.NumberColumn("Dopo 7g", format="%+.1f%%"),
+                    "Dopo 30g": st.column_config.NumberColumn("Dopo 30g", format="%+.1f%%"),
+                })
+            st.caption("Le occasioni promosse vengono registrate col prezzo di partenza; il rendimento a 7 e 30 giorni "
+                       "si fissa al raggiungimento di quei traguardi. Stima sui dati reali, non una promessa.")
+            # Confronto fra i due momenti d'ingresso — CON L'AVVERTENZA CHE SERVE.
+            _cmp = fu.track_record_entry_comparison()
+            if _cmp.get("n", 0) >= 3:
+                st.caption(f"🔭 **Entrare prima conviene?** Sulle ultime {_cmp['n']} promozioni: comprando a "
+                           f"**inizio osservazione** saresti a **{_cmp['avg_obs']:+.1f}%** in media, comprando "
+                           f"**alla promozione** a **{_cmp['avg_promo']:+.1f}%**. Il rimbalzo medio già avvenuto "
+                           f"aspettando la conferma è **{_cmp['avg_head_start']:+.1f}%**.")
+                st.warning("⚠️ **Questo confronto non è eseguibile, e va letto sapendolo.** Il prezzo di "
+                           "inizio osservazione viene registrato **solo per i titoli poi promossi**, e la "
+                           "promozione richiede che il prezzo sia già risalito del 2%: quindi in questo "
+                           "elenco non può esistere un caso partito male. Il giorno in cui l'osservazione "
+                           "comincia non sai quali saranno promossi, quindi quel guadagno più alto "
+                           "**nessuno avrebbe potuto ottenerlo**. È in gran parte la regola d'ammissione, "
+                           "non un momento d'acquisto migliore. Il confronto onesto sulla soglia è nella "
+                           "scheda «🧭 Momento d'acquisto», con l'interruttore «come se il +2% non esistesse».")
+            else:
+                st.caption("🔭 Il confronto «ingresso a inizio osservazione vs alla promozione» si popolerà "
+                           "da solo con le prossime promozioni.")
+
+    # =======================================================================
+    # SCHEDA 6 — 🎬 SEGUENDO IL SISTEMA ALLA LETTERA (l'unica strategia eseguibile)
+    # =======================================================================
+    elif _stab == "lettera":
+        _rr = fu.resa_regole_sistema(sim_amt, sim_fee)
+        st.markdown("## 🎬 E se avessi seguito il sistema alla lettera?")
+        st.caption("Compro alla promozione, vendo quando il sistema toglie l'occasione. "
+                   "È l'unica strategia che avresti potuto **davvero** eseguire, e nessun'altra "
+                   "scheda la misura: la scheda voti continua a seguire anche i titoli che il "
+                   "sistema ha già tolto (e così le perdite sembrano più piccole), mentre la matrice "
+                   "vende a giorni fissi o al bersaglio — regole che il sistema non applica. "
+                   f"Qui invece si vende quando è stato tolto davvero. Con €{sim_amt:,.0f} per "
+                   f"operazione e €{sim_fee:,.2f} di commissione per ordine, il **pareggio** è a "
+                   f"+{_rr['pareggio_pct']:.1f}%.")
+        _ch, _ap = _rr["chiuse"], _rr["aperte"]
+        _c1, _c2 = st.columns(2)
+        if _ch.get("n"):
+            _c1.metric(f"Operazioni CHIUSE dal sistema ({_ch['n']})", f"{_ch['med']:+.1f}%",
+                       help="Mediana: metà è andata meglio, metà peggio. È il risultato vero, "
+                            "perché queste posizioni sono state chiuse per davvero.")
+            _c1.caption(f"in positivo **{_ch['hit']}%** · media {_ch['avg']:+.1f}% · "
+                        f"in utile dopo i costi **{_ch['in_utile']}/{_ch['n']}** · "
+                        f"netto medio **{_ch['netto_medio']:+.2f} €** "
+                        f"(totale {_ch['netto_totale']:+.2f} €)")
+        else:
+            _c1.metric("Operazioni chiuse dal sistema", "—")
+            _c1.caption("Nessuna uscita registrata con i prezzi necessari.")
+        if _ap.get("n"):
+            _c2.metric(f"Posizioni ANCORA APERTE ({_ap['n']})", f"{_ap['med']:+.1f}%",
+                       help="Non è un risultato: è una scommessa in corso, valutata al prezzo di "
+                            "oggi. Tenute separate di proposito, perché mescolarle con le chiuse "
+                            "è il modo più comune di farsi sembrare bravi.")
+            _c2.caption(f"in positivo **{_ap['hit']}%** · media {_ap['avg']:+.1f}% · "
+                        f"netto medio se vendessi ora **{_ap['netto_medio']:+.2f} €**")
+        if _rr.get("per_motivo"):
+            st.markdown("###### Perché il sistema ha chiuso, e con quale risultato")
+            st.dataframe(pd.DataFrame([{
+                "Motivo": k, "Casi": v["n"], "Resa tipica": v["med"],
+                "In positivo": v["hit"], "Netto medio (€)": v["netto_medio"],
+            } for k, v in _rr["per_motivo"].items()]).set_index("Motivo"),
+                use_container_width=True, column_config={
+                    "Casi": st.column_config.NumberColumn("Casi", format="%d"),
+                    "Resa tipica": st.column_config.NumberColumn("Resa tipica", format="%+.1f%%"),
+                    "In positivo": st.column_config.NumberColumn("In positivo", format="%d%%"),
+                    "Netto medio (€)": st.column_config.NumberColumn("Netto medio", format="%+.2f €"),
+                })
+            st.caption("Se una riga ha pochi casi, la sua «resa tipica» è un aneddoto, non una "
+                       "misura. Le uscite di questo elenco sono per costruzione **tutte** motivi "
+                       "di perdita: fino a oggi il sistema non aveva nessuna regola per chiudere "
+                       "in guadagno, ed è la ragione per cui è nata la vista «💰 Da incassare».")
+        elif not _ch.get("n"):
+            st.info("⏳ Il sistema non ha ancora chiuso nessuna posizione con i prezzi necessari: "
+                    "questa scheda si popola alla prima uscita.")
+    st.stop()
+
+# ===========================================================================
+# SEZIONE: ATTUALITÀ — notizie recenti divise per azienda/ETF
+# ===========================================================================
+if section.startswith("Attualità"):
+    page_header("Attualità",
+                "Le notizie più recenti dei mercati, divise per azienda ed ETF.")
+    st.caption("Le notizie più recenti, divise per azienda/ETF. Una scheda per ciascun titolo più una per il mercato generale. "
+               "Aggiungi i titoli che vuoi seguire; la traduzione in italiano segue l'interruttore nella barra laterale.")
+
+    default_focus = watchlist if watchlist else ["AAPL", "MSFT", "NVDA"]
+    foc_raw = st.text_input("Aziende/ETF da seguire (ticker separati da virgola)",
+                            value=", ".join(default_focus), key="news_focus")
+    focus = [t.strip().upper() for t in foc_raw.replace(";", ",").split(",") if t.strip()][:15]
+
+    # --- Filtro per giorno ---
+    fc1, fc2 = st.columns([1, 2])
+    filtra_giorno = fc1.checkbox("📅 Filtra per giorno", value=False,
+                                 help="Mostra solo le notizie pubblicate in una data specifica.")
+    giorno = None
+    if filtra_giorno:
+        giorno = fc2.date_input("Giorno", value=datetime.date.today(),
+                                max_value=datetime.date.today(), key="news_day")
+        st.caption("ℹ️ Le fonti gratuite forniscono solo le notizie degli **ultimi giorni**: "
+                   "date più lontane nel tempo potrebbero non avere risultati.")
+
+    def render_news(src, header, n=8, day=None):
+        st.markdown(f"#### {header}")
+        news = fu.get_news(src, count=20 if day else n,
+                           day=day.isoformat() if day else None)
+        if not news:
+            st.caption("Nessuna notizia per il giorno scelto." if day
+                       else "Nessuna notizia disponibile per questo titolo.")
+            return
+        for it in news:
+            title = it["title"]
+            brief = fu.summarize_text(it["summary"], max_sentences=2)
+            if translate_news:
+                title = fu.translate_text(title)
+                brief = fu.translate_text(brief)
+            meta = " · ".join([x for x in (it["publisher"], it["date"]) if x])
+            if it["url"]:
+                st.markdown(f"**[{title}]({it['url']})**")
+            else:
+                st.markdown(f"**{title}**")
+            if meta:
+                st.caption(meta)
+            if brief:
+                st.markdown(f"📝 **In breve:** {brief}")
+            else:
+                st.caption("Riassunto non disponibile — apri l'articolo per i dettagli.")
+            st.markdown("<hr style='margin:4px 0;border:none;border-top:1px solid rgba(255,255,255,0.12)'>", unsafe_allow_html=True)
+
+    labels = ["🌍 Mercato generale"] + focus
+    news_tabs = st.tabs(labels)
+    with news_tabs[0]:
+        st.markdown("#### Le aziende del momento")
+        st.caption(
+            "Classifiche aggiornate del mercato USA: chi sale, chi scende e chi viene più scambiato oggi. "
+            "Clicca un ticker e incollalo nella ricerca per analizzarlo in dettaglio."
+        )
+
+        def show_screen(name, vmin_color):
+            df = fu.get_screen(name, count=12)
+            if df.empty:
+                st.info("Classifica non disponibile al momento.")
+                return
+            df = df.set_index("Ticker")
+            fmt = {"Prezzo": "{:,.2f}", "Var %": "{:+.2f}%", "Volume": "{:,.0f}", "Cap.": "{:,.0f}"}
+            sty = df.style.format(fmt, na_rep="n/d")
+            try:
+                sty = sty.background_gradient(subset=["Var %"], cmap="RdYlGn", vmin=-vmin_color, vmax=vmin_color)
+            except Exception:
+                pass
+            st.dataframe(sty, use_container_width=True)
+
+        g1, g2, g3 = st.tabs(["🚀 In crescita oggi", "📉 In perdita oggi", "🔥 Più scambiati"])
+        with g1:
+            st.markdown("**Maggiori rialzi della giornata** (day gainers)")
+            show_screen("day_gainers", 15)
+        with g2:
+            st.markdown("**Maggiori ribassi della giornata** (day losers)")
+            show_screen("day_losers", 15)
+        with g3:
+            st.markdown("**Titoli più scambiati** per volume (most actives)")
+            st.caption("Sono i titoli con il **maggior numero di scambi** oggi (volume più alto): tanti compratori "
+                       "e venditori, quindi molto **movimento e attenzione** del momento — spesso per una notizia. "
+                       "«Più scambiato» **non** vuol dire buono o cattivo: indica solo che oggi se ne parla e si muove molto.")
+            show_screen("most_actives", 8)
+
+        st.markdown("---")
+        render_news("^GSPC", "S&P 500 — notizie generali di mercato", 10, day=giorno)
+    for i, t in enumerate(focus, start=1):
+        with news_tabs[i]:
+            info_t = fu.get_info(t)
+            nm = info_t.get("shortName") or info_t.get("longName") or t
+            render_news(t, f"{nm} ({t})", 8, day=giorno)
+    st.stop()
+
+# ---------------------------------------------------------------------------
+# CARICAMENTO DATI
+# ---------------------------------------------------------------------------
+if not ticker:
+    st.markdown(
+        "<div class='hero'><h2>Analisi Finanziaria</h2>"
+        "<p>Capisci un'azienda, un ETF o un indice e valutane la convenienza, con spiegazioni in parole "
+        "semplici. Cerca un nome nella barra a sinistra, oppure parti da uno dei suggerimenti qui sotto.</p></div>",
+        unsafe_allow_html=True,
+    )
+
+    def suggestion_grid(title, items):
+        st.markdown(f"#### {title}")
+        cols = st.columns(len(items))
+        for col, (sym, label) in zip(cols, items):
+            if col.button(label, key=f"sugg_{sym}", use_container_width=True):
+                st.session_state["ticker"] = sym
+                st.rerun()
+
+    suggestion_grid("Azioni famose", [
+        ("AAPL", "Apple"), ("MSFT", "Microsoft"),
+        ("NVDA", "Nvidia"), ("ENI.MI", "Eni"), ("ISP.MI", "Intesa Sanpaolo"),
+    ])
+    suggestion_grid("ETF popolari", [
+        ("VWCE.DE", "Vanguard All-World"), ("CSSPX.MI", "S&P 500"),
+        ("SWDA.MI", "MSCI World"), ("EIMI.MI", "Mercati Emergenti"),
+    ])
+    suggestion_grid("Indici di mercato", [
+        ("^GSPC", "S&P 500"), ("^FTSEMIB.MI", "FTSE MIB"),
+        ("^IXIC", "Nasdaq"), ("^STOXX50E", "Euro Stoxx 50"),
+    ])
+    st.markdown("---")
+    st.caption("⚠️ Strumento a scopo informativo. **Non è consulenza finanziaria.**")
+    st.stop()
+
+with st.spinner(f"Scarico i dati di {ticker}…"):
+    hist = fu.get_history(ticker, period=period)
+    info = fu.get_info(ticker, merge=True)   # combina tutte le fonti → meno campi «n/d»
+
+if hist.empty:
+    st.error(
+        f"Nessun dato trovato per **{ticker}**. "
+        "Controlla il simbolo (per Milano aggiungi `.MI`, per gli indici usa `^`)."
+    )
+    st.stop()
+
+hist = fu.add_indicators(hist)
+name = info.get("longName") or info.get("shortName") or ticker
+currency = info.get("currency", "")
+fund = fu.is_fund(info) or fu.is_known_etf(ticker)
+fdata = fu.get_fund_data(ticker, info) if fund else None
+
+# ---------------------------------------------------------------------------
+# INTESTAZIONE
+# ---------------------------------------------------------------------------
+_exch = info.get("exchange", "") or ""
+page_header(name, f"<b>{ticker}</b>"
+            + (f" · {_exch}" if _exch else "")
+            + (f" · Valuta: {currency}" if currency else ""))
+
+last_close = hist["Close"].iloc[-1]
+prev_close = hist["Close"].iloc[-2] if len(hist) > 1 else last_close
+delta = last_close - prev_close
+delta_pct = (delta / prev_close * 100) if prev_close else 0
+
+c1, c2, c3, c4 = st.columns(4)
+c1.metric("Ultimo prezzo", f"{last_close:,.2f} {currency}", f"{delta:+,.2f} ({delta_pct:+.2f}%)",
+          help="Ultima quotazione disponibile e variazione rispetto alla chiusura precedente.")
+perf = (hist["Close"].iloc[-1] / hist["Close"].iloc[0] - 1) * 100
+c2.metric(f"Performance ({period_label})", f"{perf:+.2f}%",
+          help="Variazione percentuale del prezzo sull'intero periodo selezionato.")
+c3.metric("Volatilità annua", f"{fu.annualized_volatility(hist['Close']) * 100:.1f}%",
+          help=fu.help_for("Volatilità annua"))
+if fund:
+    aum = info.get("totalAssets") or (fdata or {}).get("total_assets")
+    c4.metric("Patrimonio (AUM)", fu._fmt_big(aum), help=fu.help_for("Patrimonio (AUM)"))
+else:
+    c4.metric("Capitalizzazione", fu._fmt_big(info.get("marketCap")),
+              help=fu.help_for("Capitalizzazione"))
+
+# --- Trasparenza dati: fonte dei fondamentali, data ultimo prezzo, stato FMP ---
+st.caption(fu.data_status_line(info, hist)
+           + "  ·  _i dati gratuiti possono avere ritardo (chiusura del giorno) o ripiegare su altre fonti._")
+
+# --- Semaforo / verdetto sintetico ---
+verdict = fu.overall_verdict(info, hist, fund, fdata)
+vcol1, vcol2 = st.columns([1, 2.4])
+with vcol1:
+    if verdict["score"] is not None:
+        gauge = go.Figure(go.Indicator(
+            mode="gauge+number",
+            value=verdict["score"],
+            number={"suffix": "/100", "font": {"size": 26}},
+            gauge={
+                "axis": {"range": [0, 100], "tickwidth": 1},
+                "bar": {"color": verdict["color"]},
+                "steps": [
+                    {"range": [0, 40], "color": "#ffe3e0"},
+                    {"range": [40, 66], "color": "#fff3cd"},
+                    {"range": [66, 100], "color": "#d8f5e0"},
+                ],
+            },
+        ))
+        gauge.update_layout(height=180, margin=dict(t=10, b=10, l=20, r=20))
+        show_chart(gauge, use_container_width=True)
+    else:
+        st.markdown(f"<div style='font-size:2.4em;text-align:center'>{verdict['emoji']}</div>",
+                    unsafe_allow_html=True)
+with vcol2:
+    st.markdown(
+        f"<div style='padding:14px 16px;border-radius:10px;background:{verdict['color']}14;"
+        f"border-left:6px solid {verdict['color']}'>"
+        f"<div style='font-size:1.25em;font-weight:700;color:{verdict['color']}'>"
+        f"{verdict['emoji']} {verdict['label']}</div>"
+        f"<div style='margin-top:6px;color:#c9d1d9'>{verdict['line']}</div></div>",
+        unsafe_allow_html=True,
+    )
+    st.caption("Verdetto sintetico calcolato dai segnali analizzati. **Non è un consiglio di investimento.**")
+
+# --- Sintesi automatica in linguaggio naturale ---
+with st.expander("🧠 Sintesi automatica — leggi il titolo a parole", expanded=True):
+    if fund:
+        st.markdown(fu.fund_commentary(ticker, fdata, info, hist, period_label))
+    else:
+        st.markdown(fu.generate_commentary(ticker, info, hist, period_label))
+    st.caption(
+        "Commento generato automaticamente dai dati (regole quantitative, nessun consiglio di acquisto). "
+        "Verifica sempre con altre fonti prima di investire."
+    )
+
+# ---------------------------------------------------------------------------
+# TAB
+# ---------------------------------------------------------------------------
+fund_tab_label = "🧺 Composizione ETF" if fund else "💰 Analisi Fondamentale"
+tab_over, tab_fund, tab_tech, tab_sim, tab_cmp, tab_news = st.tabs(
+    ["📊 Panoramica", fund_tab_label, "📈 Analisi Tecnica", "💶 Simulatore",
+     "⚖️ Confronto / Screener", "📰 Notizie"]
+)
+
+# ============================ PANORAMICA ===================================
+with tab_over:
+    st.subheader("Andamento del prezzo")
+
+    # Selettore del periodo, direttamente sul grafico
+    CHART_PERIODS = {"1 giorno": "1d", "1 settimana": "5d", "1 mese": "1mo", "6 mesi": "6mo",
+                     "1 anno": "1y", "5 anni": "5y", "Tutto": "max"}
+    cp_label = st.radio("Periodo del grafico", list(CHART_PERIODS.keys()),
+                        index=4, horizontal=True, key="chart_period")
+    # Periodi brevi (giorno/settimana) → prezzo intraday ~15 min; periodi lunghi → un valore al giorno
+    hist_c = chart_history(ticker, CHART_PERIODS[cp_label])
+    _intraday_c = bool(hist_c.attrs.get("intraday"))
+
+    st.caption("👀 La linea mostra l'andamento del prezzo nel periodo scelto: **verde** se in rialzo, "
+               "**rossa** se in calo. Cambia periodo qui sopra. "
+               + ("Nei periodi brevi il prezzo è **intraday** (giorno ~15 min · settimana ~1 ora); "
+                  "negli altri è un valore al giorno (chiusura). I dati esistono solo nelle ore di "
+                  "apertura della borsa: a mercato chiuso non ci sono scambi." if _intraday_c
+                  else "In questo periodo è un valore al giorno (chiusura)."))
+    if hist_c.empty:
+        st.info("Nessun dato per il periodo scelto.")
+    else:
+        closes = hist_c["Close"]
+        up = closes.iloc[-1] >= closes.iloc[0]
+        line_color = "#1a7f37" if up else "#cf222e"
+        fill_color = "rgba(26,127,55,0.12)" if up else "rgba(207,34,46,0.12)"
+        ymin, ymax = float(closes.min()), float(closes.max())
+        pad = (ymax - ymin) * 0.12 or (ymax * 0.02) or 1.0
+        _htfmt = "%d %b %H:%M" if _intraday_c else "%d %b %Y"
+        fig = go.Figure(go.Scatter(
+            x=hist_c.index, y=closes, mode="lines",
+            line=dict(color=line_color, width=2), fill="tozeroy", fillcolor=fill_color,
+            hovertemplate="%{x|" + _htfmt + "} · %{y:.2f} " + str(currency) + "<extra></extra>",
+        ))
+        fig.update_layout(
+            height=420, margin=dict(t=10, b=10, l=10, r=10),
+            xaxis_rangeslider_visible=False, hovermode="x unified", showlegend=False,
+            plot_bgcolor="rgba(0,0,0,0)",
+            yaxis=dict(range=[ymin - pad, ymax + pad], showgrid=True, gridcolor="rgba(128,128,128,0.15)"),
+            xaxis=dict(showgrid=False),
+        )
+        show_chart(fig, use_container_width=True)
+        perf_c = (closes.iloc[-1] / closes.iloc[0] - 1) * 100
+        _last_lbl = hist_c.index[-1].strftime("%d/%m/%Y %H:%M" if _intraday_c else "%d/%m/%Y")
+        st.caption(f"Variazione nel periodo «{cp_label}»: **{perf_c:+.1f}%** · 📅 ultimo dato: {_last_lbl}")
+
+    colA, colB = st.columns([1, 1])
+    with colA:
+        st.subheader("Scheda azienda")
+        for k, v in fu.overview_metrics(info, hist).items():
+            st.markdown(f"**{k}:** {v}")
+    with colB:
+        st.subheader("Descrizione")
+        summary = info.get("longBusinessSummary")
+        if summary:
+            if translate_news:
+                summary = fu.translate_text(summary)
+            st.write(summary)
+        else:
+            st.write("Descrizione non disponibile per questo strumento.")
+
+# ======================== ANALISI FONDAMENTALE =============================
+with tab_fund:
+  if fund:
+    # ---------------- VISTA ETF / FONDO ----------------
+    st.subheader("Composizione e caratteristiche dell'ETF")
+    st.caption("Per un fondo contano costi, diversificazione, asset e settori — non i bilanci di una singola azienda.")
+
+    m1, m2, m3, m4 = st.columns(4)
+    m1.metric("Categoria", fdata.get("category") or "n/d")
+    m2.metric("Gestore", (fdata.get("family") or "n/d"))
+    ter = fdata.get("expense_ratio")
+    m3.metric("TER (costo annuo)", f"{ter*100:.2f}%" if ter else "n/d", help=fu.help_for("TER (costo annuo)"))
+    m4.metric("Patrimonio (AUM)", fu._fmt_big(fdata.get("total_assets")), help=fu.help_for("Patrimonio (AUM)"))
+
+    if ter and fdata.get("expense_ratio_source") == "tabella interna":
+        st.caption("ℹ️ TER da tabella interna (yfinance non lo fornisce per questo ETF UCITS): valore indicativo, "
+                   "verificalo sul KID dell'emittente.")
+    elif not ter:
+        st.caption("ℹ️ TER non disponibile: cercalo sul sito dell'emittente — è il fattore di costo più importante.")
+
+    if not expert:
+        st.info("👀 **Cosa guardare:** un ETF è un paniere di tanti titoli. Conta che i **costi (TER)** siano bassi, "
+                "che sia **diversificato** (nessun titolo troppo grande) e ampio come patrimonio.")
+
+    colL, colR = st.columns(2)
+
+    # Asset allocation (torta)
+    with colL:
+        st.markdown("#### Asset allocation")
+        st.caption("👀 Come sono divisi i soldi del fondo tra azioni, obbligazioni e liquidità: definisce rischio e rendimento attesi.")
+        ac = fdata.get("asset_classes") or {}
+        if ac:
+            labels = [fu.ASSET_IT.get(k, k) for k in ac]
+            vals = [v * 100 for v in ac.values()]
+            figa = go.Figure(go.Pie(labels=labels, values=vals, hole=0.45, sort=True))
+            figa.update_traces(textinfo="label+percent")
+            figa.update_layout(height=320, margin=dict(t=10, b=10), showlegend=False)
+            show_chart(figa, use_container_width=True)
+        else:
+            st.caption("Dati di composizione non disponibili.")
+
+    # Settori (barre)
+    with colR:
+        st.markdown("#### Esposizione settoriale")
+        st.caption("👀 A quali settori dell'economia sei più esposto. Le barre più lunghe = settori dove il fondo investe di più.")
+        sw = fdata.get("sector_weightings") or {}
+        if sw:
+            items = sorted(sw.items(), key=lambda kv: kv[1])
+            figs = go.Figure(go.Bar(
+                x=[v * 100 for _, v in items],
+                y=[fu.SECTOR_IT.get(k, k) for k, _ in items],
+                orientation="h", marker_color="#0969da",
+            ))
+            figs.update_layout(height=320, margin=dict(t=10, b=10), xaxis_title="%")
+            show_chart(figs, use_container_width=True)
+        else:
+            st.caption("Ripartizione settoriale non disponibile.")
+
+    # Top holdings
+    st.markdown("#### Principali titoli in portafoglio")
+    st.caption("👀 Le aziende più presenti nel fondo. Se i primi 10 pesano poco (<25%) il fondo è ben diversificato.")
+    th = fdata.get("top_holdings") or []
+    if th:
+        df_th = pd.DataFrame(
+            [(s, n, p * 100) for s, n, p in th],
+            columns=["Ticker", "Nome", "Peso %"],
+        ).set_index("Ticker")
+        conc = df_th["Peso %"].sum()
+        st.dataframe(
+            df_th.style.format({"Peso %": "{:.2f}%"})
+            .background_gradient(subset=["Peso %"], cmap="Blues"),
+            use_container_width=True,
+        )
+        st.caption(f"I primi {len(df_th)} titoli pesano circa il {conc:.1f}% del fondo "
+                   f"({'concentrazione elevata' if conc > 50 else 'buona diversificazione'}).")
+
+        # --- Andamento dei titoli che compongono l'ETF (un grafico per titolo) ---
+        st.markdown("#### Andamento dei titoli che lo compongono")
+        st.caption("👀 Un grafico per ciascun titolo principale del fondo, ognuno con la propria scala, "
+                   "con la performance nel periodo scelto.")
+        HPER = {"1 mese": "1mo", "6 mesi": "6mo", "1 anno": "1y", "Tutto": "max"}
+        hsel = st.radio("Periodo", list(HPER.keys()), index=2, horizontal=True, key="etf_holdings_period")
+        with st.spinner("Scarico l'andamento dei titoli…"):
+            hdata = []
+            for s, n, p in th[:10]:
+                if not s:
+                    continue
+                hh = fu.get_history(s, period=HPER[hsel])
+                if hh.empty:
+                    continue
+                cc = hh["Close"].dropna()
+                if cc.empty or float(cc.iloc[0]) == 0:
+                    continue
+                perf = (float(cc.iloc[-1]) / float(cc.iloc[0]) - 1) * 100
+                hdata.append((s, n, p, cc, perf))
+        if hdata:
+            hcols = st.columns(2)
+            for i, (s, n, p, cc, perf) in enumerate(hdata):
+                with hcols[i % 2]:
+                    col = "#1a7f37" if perf >= 0 else "#cf222e"
+                    nm = (n or "")[:26].replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+                    st.markdown(
+                        f"<b>{s}</b> <span style='color:#8b94a3;font-size:0.85em'>{nm}</span><br>"
+                        f"<span style='color:#8b94a3;font-size:0.85em'>peso {p*100:.1f}%</span> · "
+                        f"<span style='color:{col};font-weight:600'>{perf:+.1f}%</span>",
+                        unsafe_allow_html=True)
+                    fg = go.Figure(go.Scatter(x=cc.index, y=cc, mode="lines",
+                                              line=dict(color=col, width=1.8)))
+                    fg.update_layout(height=170, margin=dict(t=6, b=6, l=6, r=6), showlegend=False,
+                                     yaxis_title=None, xaxis_title=None,
+                                     plot_bgcolor="rgba(0,0,0,0)")
+                    show_chart(fg)
+            st.caption("Performance dal primo giorno del periodo. Per l'analisi dettagliata di un titolo, "
+                       "cercane il ticker nella barra a sinistra.")
+        else:
+            st.caption("Andamento dei titoli non disponibile al momento (dati non recuperabili).")
+    else:
+        st.caption("Elenco titoli non disponibile.")
+
+    # Descrizione
+    desc = fdata.get("description") or info.get("longBusinessSummary") or ""
+    if desc:
+        if translate_news:
+            desc = fu.translate_text(desc)
+        st.markdown("#### Descrizione")
+        st.write(desc)
+
+    with st.expander("📖 Glossario — capire un ETF"):
+        for key in ["ETF", "TER (costo annuo)", "Patrimonio (AUM)", "Asset allocation",
+                    "Diversificazione", "Top holdings", "Settori"]:
+            st.markdown(f"**{key}** — {fu.GLOSSARY.get(key, '')}")
+
+  else:
+    # ---------------- VISTA AZIENDA ----------------
+    st.subheader("Analisi fondamentale")
+    st.caption(
+        "Misura la qualità e il valore dell'azienda dai suoi bilanci. "
+        "🟢 favorevole · 🟡 neutro · 🔴 sfavorevole (soglie indicative generali)."
+    )
+
+    blocks = fu.fundamental_blocks(info)
+    if not expert:
+        st.info("👀 **Cosa guardare:** se prevalgono i 🟢, l'azienda è solida e a un prezzo ragionevole. "
+                "I 🔴 sono i punti deboli. Attiva la modalità *Esperto* per vedere tutti gli indicatori.")
+        keep = ["Valutazione (è caro o conveniente?)", "Redditività (quanto guadagna bene?)"]
+        view_blocks = {k: v for k, v in blocks.items() if k in keep}
+    else:
+        view_blocks = blocks
+
+    cols = st.columns(2)
+    for i, (block_name, rows) in enumerate(view_blocks.items()):
+        with cols[i % 2]:
+            st.markdown(f"#### {block_name}")
+            for row in rows:
+                label, value, judgement = row[0], row[1], row[2]
+                reason = row[3] if len(row) > 3 else ""
+                badge(label, value, judgement, fu.help_for(label), reason)
+            st.write("")
+
+    # Sintesi conteggio segnali (sempre su tutti i blocchi)
+    all_rows = [r for rows in blocks.values() for r in rows]
+    pos = sum(1 for r in all_rows if r[2] == "positivo")
+    neg = sum(1 for r in all_rows if r[2] == "negativo")
+    neu = sum(1 for r in all_rows if r[2] == "neutro")
+    st.markdown("---")
+    st.markdown(
+        f"**Bilancio dei segnali fondamentali:** "
+        f"🟢 {pos} favorevoli · 🟡 {neu} neutri · 🔴 {neg} sfavorevoli"
+    )
+    if pos + neg + neu == 0:
+        st.info("Dati fondamentali non disponibili per questo strumento.")
+
+    # (Rimosso il confronto con i bilanci SEC: metteva a confronto dati TTM con dati annuali,
+    # quindi mostrava sempre valori "differiti" e talvolta numeri incoerenti. I valori mostrati
+    # restano quelli delle fonti indicate nell'indicatore «📡 dati» in cima alla pagina.)
+
+    with st.expander("📖 Glossario — cosa significano questi indicatori"):
+        for label, *_ in all_rows:
+            txt = fu.help_for(label)
+            if txt:
+                st.markdown(f"**{label}** — {txt}")
+
+# =========================== ANALISI TECNICA ===============================
+with tab_tech:
+    st.subheader("Analisi tecnica")
+    st.caption("Studia l'andamento di prezzo e volumi per valutare trend e momentum (utile per il timing).")
+
+    # Selettore di periodo (come nella Panoramica)
+    CHART_PERIODS_T = {"1 settimana": "5d", "1 mese": "1mo", "6 mesi": "6mo",
+                       "1 anno": "1y", "5 anni": "5y", "Tutto": "max"}
+    cpt_label = st.radio("Periodo del grafico", list(CHART_PERIODS_T.keys()),
+                         index=3, horizontal=True, key="tech_period")
+    hist_t = fu.add_indicators(fu.get_history(ticker, period=CHART_PERIODS_T[cpt_label]))
+
+    if hist_t.empty:
+        st.info("Nessun dato per il periodo scelto.")
+    elif not expert:
+        # Modalità Principiante: solo prezzo + medie mobili, con spiegazione
+        st.info("👀 **Cosa guardare:** la linea blu è il prezzo. Quando sta **sopra** la media a 50 giorni "
+                "(verde) il trend è positivo, quando sta **sotto** è negativo.")
+        figp = go.Figure()
+        figp.add_trace(go.Scatter(x=hist_t.index, y=hist_t["Close"], name="Prezzo", line=dict(color="#0969da")))
+        if hist_t["SMA50"].notna().any():
+            figp.add_trace(go.Scatter(x=hist_t.index, y=hist_t["SMA50"], name="Media 50 giorni", line=dict(color="#1a7f37", width=1.4)))
+        if hist_t["SMA200"].notna().any():
+            figp.add_trace(go.Scatter(x=hist_t.index, y=hist_t["SMA200"], name="Media 200 giorni", line=dict(color="#d29922", width=1.4)))
+        figp.update_layout(height=420, margin=dict(t=10, b=10), legend=dict(orientation="h"))
+        show_chart(figp, use_container_width=True)
+        st.caption("Su periodi brevi (1 settimana/1 mese) le medie mobili possono non comparire: servono più dati.")
+    else:
+        # Modalità Esperto: prezzo + Bollinger + RSI + MACD
+        figp = make_subplots(
+            rows=3, cols=1, shared_xaxes=True, vertical_spacing=0.04,
+            row_heights=[0.55, 0.22, 0.23],
+            subplot_titles=("Prezzo + Medie mobili + Bande di Bollinger", "RSI (14)", "MACD"),
+        )
+        figp.add_trace(go.Scatter(x=hist_t.index, y=hist_t["Close"], name="Prezzo", line=dict(color="#0969da")), row=1, col=1)
+        figp.add_trace(go.Scatter(x=hist_t.index, y=hist_t["SMA20"], name="SMA 20", line=dict(width=1)), row=1, col=1)
+        figp.add_trace(go.Scatter(x=hist_t.index, y=hist_t["SMA50"], name="SMA 50", line=dict(width=1)), row=1, col=1)
+        figp.add_trace(go.Scatter(x=hist_t.index, y=hist_t["BB_up"], name="Bollinger sup", line=dict(width=0.5, dash="dot", color="gray")), row=1, col=1)
+        figp.add_trace(go.Scatter(x=hist_t.index, y=hist_t["BB_low"], name="Bollinger inf", line=dict(width=0.5, dash="dot", color="gray"), fill="tonexty", fillcolor="rgba(150,150,150,0.08)"), row=1, col=1)
+        figp.add_trace(go.Scatter(x=hist_t.index, y=hist_t["RSI"], name="RSI", line=dict(color="#8250df")), row=2, col=1)
+        figp.add_hline(y=70, line=dict(color="red", width=0.7, dash="dash"), row=2, col=1)
+        figp.add_hline(y=30, line=dict(color="green", width=0.7, dash="dash"), row=2, col=1)
+        figp.add_trace(go.Bar(x=hist_t.index, y=hist_t["MACD_hist"], name="Istogramma", marker_color="#bbb"), row=3, col=1)
+        figp.add_trace(go.Scatter(x=hist_t.index, y=hist_t["MACD"], name="MACD", line=dict(color="#0969da")), row=3, col=1)
+        figp.add_trace(go.Scatter(x=hist_t.index, y=hist_t["MACD_signal"], name="Signal", line=dict(color="#cf222e")), row=3, col=1)
+        figp.update_layout(height=720, margin=dict(t=30, b=10), legend=dict(orientation="h"))
+        show_chart(figp, use_container_width=True)
+        st.markdown(
+            "**Cosa mostra ogni grafico (in parole semplici):**\n\n"
+            "- **📈 Prezzo + medie + Bollinger** *(grafico in alto)*: la linea blu è il **prezzo**; le medie mobili "
+            "(20 e 50 giorni) indicano la **direzione del trend**; le due linee grigie tratteggiate (bande di "
+            "Bollinger) sono la fascia «normale» — quando il prezzo le **tocca o le sfora** è a un estremo "
+            "(insolitamente alto o basso).\n"
+            "- **📊 RSI** *(grafico centrale, 0-100)*: misura la **foga** di acquisti/vendite. **Sopra 70** = "
+            "ipercomprato (caro, può correggere); **sotto 30** = ipervenduto (sceso molto, può rimbalzare); "
+            "in mezzo = neutro.\n"
+            "- **📉 MACD** *(grafico in basso)*: misura lo **slancio** (momentum). Quando la **linea blu supera la "
+            "rossa** lo slancio diventa positivo (possibile rialzo); quando le scende sotto, negativo. "
+            "Le barre grigie mostrano quanto è forte lo slancio."
+        )
+
+    st.markdown("#### Segnali tecnici attuali")
+    tsum = fu.technical_summary(hist)
+    if tsum:
+        st.markdown(
+            f"<div style='padding:10px 14px;border-radius:10px;background:{tsum['color']}14;"
+            f"border-left:6px solid {tsum['color']};margin-bottom:6px'>"
+            f"<span style='font-size:1.15em;font-weight:700;color:{tsum['color']}'>"
+            f"{tsum['emoji']} {tsum['label']}</span></div>",
+            unsafe_allow_html=True,
+        )
+        st.markdown("👉 " + tsum["line"])
+        st.caption("Sintesi dei singoli segnali qui sotto. Indicazione tecnica, **non un consiglio**.")
+
+    signals = fu.technical_signals(hist)
+    if signals:
+        st.write("")
+        scols = st.columns(2)
+        for i, (label, value, judgement) in enumerate(signals):
+            with scols[i % 2]:
+                badge(label, value, judgement, fu.help_for(label))
+    else:
+        st.info("Storico insufficiente per calcolare i segnali (servono più dati).")
+
+    with st.expander("📖 Glossario — gli strumenti dell'analisi tecnica"):
+        for key in ["SMA", "EMA", "Bande di Bollinger", "RSI (14)", "MACD",
+                    "Golden cross", "Death cross", "Volatilità annua"]:
+            st.markdown(f"**{key}** — {fu.GLOSSARY.get(key, '')}")
+
+# ============================= SIMULATORE ==================================
+with tab_sim:
+    st.subheader("Simulatore: quanto avresti guadagnato?")
+    st.caption("Scopri quanto varrebbe oggi un investimento fatto in passato, confrontato col mercato.")
+
+    hsim = fu.get_history(ticker, period="max")
+    if hsim.empty or len(hsim) < 2:
+        st.info("Storico insufficiente per la simulazione.")
+    else:
+        dmin = hsim.index[0].date()
+        dmax = hsim.index[-1].date()
+        default_start = max(dmin, dmax - datetime.timedelta(days=365 * 5))
+
+        ic1, ic2, ic3 = st.columns(3)
+        amount = ic1.number_input("Importo investito (€)", min_value=10.0, value=1000.0, step=100.0)
+        start = ic2.date_input("Data dell'investimento", value=default_start,
+                               min_value=dmin, max_value=dmax)
+        bench_choice = ic3.selectbox(
+            "Confronta con", ["Automatico", "S&P 500", "FTSE MIB", "Nasdaq", "Nessuno"],
+            help="Il benchmark è il mercato di riferimento: serve a capire se l'investimento ha fatto meglio o peggio della media.",
+        )
+        bench_map = {"Automatico": fu.default_benchmark(ticker), "S&P 500": "^GSPC",
+                     "FTSE MIB": "^FTSEMIB.MI", "Nasdaq": "^IXIC", "Nessuno": None}
+        benchmark = bench_map[bench_choice]
+
+        res = fu.simulate_investment(ticker, amount, start, benchmark)
+        if not res:
+            st.info("Nessun dato disponibile per la data scelta. Prova una data più recente.")
+        else:
+            r1, r2, r3, r4 = st.columns(4)
+            r1.metric("Valore oggi", f"{res['final']:,.0f} {currency}")
+            r2.metric("Guadagno/Perdita", f"{res['gain']:+,.0f} {currency}", f"{res['gain_pct']:+.1f}%")
+            r3.metric("Rendimento annuo medio", f"{res['cagr']:+.1f}%",
+                      help="CAGR: il tasso di crescita annuo composto equivalente nel periodo.")
+            r4.metric("Quote acquistate", f"{res['shares']:,.2f}")
+
+            figv = go.Figure()
+            figv.add_trace(go.Scatter(x=res["df"].index, y=res["df"]["Titolo"],
+                                      name=ticker, line=dict(color="#0969da", width=2), fill="tozeroy",
+                                      fillcolor="rgba(9,105,218,0.08)"))
+            if "Benchmark" in res["df"]:
+                figv.add_trace(go.Scatter(x=res["df"].index, y=res["df"]["Benchmark"],
+                                          name=f"Benchmark ({benchmark})", line=dict(color="#9a6700", dash="dot")))
+            figv.add_hline(y=amount, line=dict(color="gray", width=1, dash="dash"),
+                           annotation_text="Capitale iniziale")
+            figv.update_layout(height=420, margin=dict(t=10, b=10), legend=dict(orientation="h"),
+                               yaxis_title=f"Valore ({currency})")
+            show_chart(figv, use_container_width=True)
+
+            # Sintesi a parole + confronto col mercato
+            verb = "guadagnato" if res["gain"] >= 0 else "perso"
+            msg = (f"Investendo **{amount:,.0f} {currency}** in **{name}** il {start.strftime('%d/%m/%Y')}, "
+                   f"oggi avresti **{res['final']:,.0f} {currency}**: hai {verb} "
+                   f"**{abs(res['gain']):,.0f} {currency}** ({res['gain_pct']:+.1f}%) "
+                   f"in {res['years']:.1f} anni.")
+            if res.get("bench_final") is not None:
+                diff = res["final"] - res["bench_final"]
+                if diff >= 0:
+                    msg += (f" Lo stesso importo sul mercato di riferimento varrebbe "
+                            f"{res['bench_final']:,.0f} {currency}: hai fatto **meglio del mercato** "
+                            f"di {diff:,.0f} {currency}.")
+                else:
+                    msg += (f" Lo stesso importo sul mercato di riferimento varrebbe "
+                            f"{res['bench_final']:,.0f} {currency}: hai fatto **peggio del mercato** "
+                            f"di {abs(diff):,.0f} {currency}.")
+            st.success(msg)
+            st.caption("👀 **Cosa guardare:** l'area blu è il valore del tuo investimento nel tempo; "
+                       "la linea tratteggiata è il capitale di partenza. Sopra = sei in guadagno. "
+                       "Rendimenti passati non garantiscono rendimenti futuri.")
+
+    # ---------------- PROIEZIONE FUTURA (scenari ipotetici) ----------------
+    st.markdown("---")
+    st.markdown("### 🔮 Proiezione futura — scenari ipotetici")
+    st.caption("Scenari ipotetici costruiti dai dati storici del titolo: danno un'idea degli ordini di grandezza, "
+               "non sono una previsione del prezzo.")
+
+    base_hist = hsim if not hsim.empty else hist
+    ann_ret_hist, vol_hist = fu.hist_return_vol(base_hist)
+    # Volatilità EWMA (più reattiva: cattura il volatility clustering) — usata per la fascia
+    try:
+        _lr = np.log(base_hist["Close"] / base_hist["Close"].shift(1)).dropna().values
+        ewma_v = fu.ewma_vol(_lr)
+    except Exception:
+        ewma_v = None
+    if ann_ret_hist is None:
+        st.info("Storico insufficiente per una proiezione.")
+    else:
+        vol_used = ewma_v if ewma_v else vol_hist
+        default_ret = float(np.clip(ann_ret_hist * 100, -15.0, 25.0))
+        # Rendimento atteso "automatico": per le azioni dai fondamentali (earnings yield + crescita),
+        # per ETF/indici dallo storico. Clampato per prudenza.
+        _fdr = fu.fundamental_drift(info) if not fund else None
+        auto_ret = float(np.clip((_fdr * 100) if _fdr is not None else default_ret, -15.0, 25.0))
+        auto_src = "fondamentali (earnings yield + crescita)" if _fdr is not None else "storico"
+        pc1, pc2, pc3, pc4 = st.columns(4)
+        f_initial = pc1.number_input("Capitale iniziale (€)", min_value=0.0, value=1000.0, step=100.0, key="proj_init")
+        f_monthly = pc2.number_input("Versamento mensile (€)", min_value=0.0, value=0.0, step=50.0, key="proj_month",
+                                     help="PAC: quanto aggiungi ogni mese. Lascia 0 per un investimento una tantum.")
+        f_years = pc3.slider("Orizzonte (anni)", 1, 30, 10, key="proj_years")
+        with pc4:
+            auto_on = st.checkbox("🤖 Rendimento automatico", value=True, key="proj_auto",
+                                  help="Stima da sola il rendimento annuo atteso: dai fondamentali per le azioni, "
+                                       "dallo storico per ETF/indici. Togli la spunta per impostarlo a mano.")
+            if auto_on:
+                f_ret = auto_ret
+                st.metric("Rendimento annuo atteso", f"{f_ret:.1f}%")
+                st.caption(f"calcolato da: {auto_src}")
+            else:
+                f_ret = st.slider("Rendimento annuo atteso (%)", -10.0, 30.0, round(default_ret, 1), 0.5,
+                                  key="proj_ret",
+                                  help=f"Storico annuo: {ann_ret_hist*100:.1f}%. Decide solo il *centro* del ventaglio, non la sua forma.")
+
+        method_label = st.radio(
+            "Modello di incertezza", ["Bootstrap reale (consigliato)", "t-Student (code grasse)", "Normale (gaussiana)"],
+            horizontal=True, key="proj_method",
+            help="Come viene disegnata la FORMA dell'incertezza (non la direzione). Il **bootstrap dei rendimenti reali** "
+                 "ricampiona la storia vera del titolo → cattura code grasse e periodi turbolenti, dando probabilità più "
+                 "oneste. La normale sottostima gli estremi.")
+        method = {"Bootstrap reale (consigliato)": "bootstrap", "t-Student (code grasse)": "tstudent",
+                  "Normale (gaussiana)": "normale"}[method_label]
+        with st.expander("ℹ️ Cosa sono i modelli di incertezza?"):
+            st.markdown(
+                "Tutti e tre partono dallo **stesso rendimento atteso** (il centro del ventaglio): cambia solo "
+                "**come disegnano l'incertezza** attorno, cioè quanto considerano probabili gli scenari estremi.\n\n"
+                "- **Bootstrap reale (consigliato):** ricampiona a caso pezzi della **storia vera** del titolo. "
+                "Riproduce code grasse e periodi turbolenti come sono successi davvero → probabilità più oneste, "
+                "soprattutto sul rischio di forti perdite.\n"
+                "- **t-Student (code grasse):** una campana con le **code più spesse** della normale → dà più peso "
+                "agli estremi (crolli e balzi), ma senza usare la storia specifica del titolo.\n"
+                "- **Normale (gaussiana):** la classica campana. Semplice, ma **sottostima gli eventi estremi** "
+                "(nella realtà i crolli capitano più spesso) → la fascia può sembrare troppo stretta.")
+        mlr = fu.monthly_logrets(base_hist)
+        if method == "bootstrap" and mlr is None:
+            st.caption("ℹ️ Storico mensile insufficiente per il bootstrap: uso il modello normale.")
+
+        proj = fu.project_future(f_initial, f_monthly, f_years, f_ret / 100.0, vol_used,
+                                 method=method, month_logrets=mlr)
+        tot = proj["total_invested"]
+        # Scenari coerenti col ventaglio Monte Carlo: prudente=10°, base=mediana, ottimistico=90°
+        end_pru, end_base, end_opt = proj["p10"][-1], proj["p50"][-1], proj["p90"][-1]
+
+        q1, q2, q3, q4 = st.columns(4)
+        q1.metric("💶 Totale versato", f"{tot:,.0f} {currency}")
+        q2.metric("🟡 Scenario base (mediana)", f"{end_base:,.0f} {currency}",
+                  f"{(end_base/tot-1)*100:+.0f}%" if tot else None)
+        q3.metric("🔴 Prudente (10%)", f"{end_pru:,.0f} {currency}",
+                  f"{(end_pru/tot-1)*100:+.0f}%" if tot else None)
+        q4.metric("🟢 Ottimistico (10%)", f"{end_opt:,.0f} {currency}",
+                  f"{(end_opt/tot-1)*100:+.0f}%" if tot else None)
+
+        pb = proj.get("p_below_invested")
+        if pb is not None:
+            tone = st.success if pb <= 20 else st.warning if pb <= 40 else st.error
+            tone(f"📉 **Probabilità di finire SOTTO il totale versato a {f_years} anni: ~{pb}%** "
+                 f"_(modello: {proj['method_label']})_. Più alta = più rischio di chiudere in perdita.")
+
+        x = proj["x_years"]
+        figf = go.Figure()
+        figf.add_trace(go.Scatter(x=x, y=proj["p90"], name="Ottimistico (90°)",
+                                  line=dict(color="#1a7f37", dash="dot", width=1)))
+        figf.add_trace(go.Scatter(x=x, y=proj["p10"], name="Fascia probabile (80% degli scenari)", fill="tonexty",
+                                  fillcolor="rgba(9,105,218,0.10)", line=dict(color="#cf222e", dash="dot", width=1)))
+        figf.add_trace(go.Scatter(x=x, y=proj["p50"], name="Andamento mediano", line=dict(color="#0969da", width=2.5)))
+        figf.add_trace(go.Scatter(x=x, y=proj["invested"], name="Totale versato", line=dict(color="gray", dash="dash")))
+        figf.update_layout(height=440, margin=dict(t=10, b=10), legend=dict(orientation="h"),
+                           xaxis_title="Anni da oggi", yaxis_title=f"Valore ({currency})")
+        show_chart(figf, use_container_width=True)
+        st.caption("👀 **Cosa guardare:** la linea blu è l'andamento **mediano** simulato; la **fascia azzurra** "
+                   "racchiude l'80% degli scenari possibili (tra il bordo rosso = prudente e quello verde = ottimistico). "
+                   "La linea grigia è quanto hai versato in totale: dove la fascia ci sta sopra, sei in guadagno. "
+                   "**Più la fascia è ampia, maggiore è l'incertezza** (titoli volatili = fascia larga).")
+
+# ========================= CONFRONTO / SCREENER ============================
+with tab_cmp:
+    st.subheader("Confronto tra titoli (Screener)")
+    st.caption(
+        "Confronta più aziende sulle metriche chiave e ottieni un **punteggio sintetico (0-100)** "
+        "che premia valutazioni convenienti, buona redditività e basso debito."
+    )
+
+    default_list = f"{ticker}, MSFT, GOOGL"
+    raw = st.text_area("Ticker da confrontare (separati da virgola)", value=default_list, height=70)
+    tickers = [t.strip().upper() for t in raw.replace(";", ",").split(",") if t.strip()]
+
+    if st.button("Confronta", type="primary") and tickers:
+        with st.spinner("Scarico e confronto i dati…"):
+            rows = []
+            errors = []
+            for t in tickers[:15]:  # limite di sicurezza
+                try:
+                    rows.append(fu.screener_row(t))
+                except Exception as e:
+                    errors.append(f"{t}: {e}")
+        if errors:
+            st.caption("Alcuni ticker non sono stati caricati: " + " · ".join(errors))
+        if rows:
+            df_cmp = pd.DataFrame(rows).set_index("Ticker")
+            df_cmp = df_cmp.sort_values("Punteggio", ascending=False, na_position="last")
+
+            # Tabella display: percentuali in numero ×100
+            disp = df_cmp.copy()
+            for c in ["ROE", "Margine", "Div%", "Cresc.ricavi", "Perf.1A", "Volatilità"]:
+                disp[c] = disp[c] * 100
+            # Medaglie nella colonna Ticker (bloccata a sinistra → la classifica resta sempre visibile)
+            _medals = {0: "🥇", 1: "🥈", 2: "🥉"}
+            disp.index = [f"{_medals.get(i, '')} {t}".strip() for i, t in enumerate(disp.index)]
+
+            # Legenda sempre visibile delle colonne
+            with st.expander("📖 Cosa significano le colonne (leggimi)", expanded=True):
+                st.markdown(
+                    "- **Azienda** — nome del titolo.\n"
+                    "- **⭐ Punteggio (0-100)** — voto sintetico complessivo: più alto e più verde = meglio. "
+                    "Premia prezzo conveniente, buona redditività e basso debito.\n"
+                    "- **Prezzo** — ultima quotazione.\n"
+                    "- **P/E** (prezzo/utili) — quante volte gli utili annui paghi il titolo. **Più basso = più conveniente.**\n"
+                    "- **P/B** (prezzo/patrimonio) — prezzo rispetto al valore di libro. Sotto 1 = paghi meno del patrimonio.\n"
+                    "- **ROE** — rendimento del capitale proprio. **Più alto = azienda più redditizia** (>15% è buono).\n"
+                    "- **Margine netto** — quanta parte dei ricavi diventa utile. Più alto = meglio.\n"
+                    "- **Debito/Equity** — quanto debito ha rispetto al capitale. **Più basso = meno rischio.**\n"
+                    "- **Dividendo** — quanto rende in cedole all'anno (in %).\n"
+                    "- **Crescita ricavi** — di quanto sono cresciuti i ricavi nell'ultimo anno.\n"
+                    "- **Performance 1 anno** — variazione del prezzo negli ultimi 12 mesi.\n"
+                    "- **Volatilità** — quanto oscilla il prezzo in un anno. **Più alta = più rischio.**"
+                )
+
+            show_all = st.checkbox(
+                "Mostra tutte le metriche", value=False,
+                help="Disattivata mostra solo le colonne essenziali (entrano nello schermo). Attivala per vedere anche P/B, margine, debito, crescita, volatilità.",
+            )
+            essential = ["Nome", "Punteggio", "Prezzo", "P/E", "ROE", "Div%", "Perf.1A"]
+            full = ["Nome", "Punteggio", "Prezzo", "P/E", "P/B", "ROE", "Margine",
+                    "Deb/Eq", "Div%", "Cresc.ricavi", "Perf.1A", "Volatilità"]
+            col_order = full if show_all else essential
+
+            st.caption("👀 Ordinate dal **punteggio più alto** (barra verde) al più basso. "
+                       "Passa il mouse sull'intestazione per un promemoria.")
+            st.dataframe(
+                disp,
+                use_container_width=True,
+                column_order=col_order,
+                height=min(60 + 38 * len(disp), 460),
+                column_config={
+                    "Ticker": st.column_config.TextColumn("Ticker", width="small"),
+                    "Nome": st.column_config.TextColumn("Azienda", width="large"),
+                    "Punteggio": st.column_config.ProgressColumn(
+                        "⭐ Punteggio", min_value=0, max_value=100, format="%.0f",
+                        help=fu.help_for("Punteggio sintetico")),
+                    "Prezzo": st.column_config.NumberColumn("Prezzo", format="%.2f"),
+                    "P/E": st.column_config.NumberColumn("P/E", format="%.1f",
+                        help="Prezzo/Utili: quante volte gli utili paghi il titolo. Più basso = più conveniente."),
+                    "P/B": st.column_config.NumberColumn("P/B", format="%.2f",
+                        help="Prezzo/Patrimonio. Sotto 1 = paghi meno del valore di libro."),
+                    "ROE": st.column_config.NumberColumn("ROE", format="%.1f%%",
+                        help="Rendimento del capitale proprio. Più alto = più redditizia."),
+                    "Margine": st.column_config.NumberColumn("Margine netto", format="%.1f%%",
+                        help="Percentuale di ricavi che resta come utile."),
+                    "Deb/Eq": st.column_config.NumberColumn("Debito/Equity", format="%.0f",
+                        help="Debito rispetto al capitale proprio. Più basso = meno rischio."),
+                    "Div%": st.column_config.NumberColumn("Dividendo", format="%.2f%%",
+                        help="Rendimento da dividendo annuo."),
+                    "Cresc.ricavi": st.column_config.NumberColumn("Crescita ricavi", format="%.1f%%",
+                        help="Crescita dei ricavi sull'anno."),
+                    "Perf.1A": st.column_config.NumberColumn("Performance 1 anno", format="%.1f%%",
+                        help="Variazione del prezzo negli ultimi 12 mesi."),
+                    "Volatilità": st.column_config.NumberColumn("Volatilità", format="%.1f%%",
+                        help="Oscillazione annua del prezzo. Più alta = più rischio."),
+                },
+            )
+            podio = []
+            for med, t in zip(["🥇", "🥈", "🥉"], df_cmp.index[:3]):
+                nm = df_cmp.loc[t, "Nome"]
+                sc = df_cmp.loc[t, "Punteggio"]
+                podio.append(f"{med} **{t}** ({nm}) — {sc:.0f}/100" if pd.notna(sc) else f"{med} **{t}** ({nm})")
+            st.success("🏆 **Classifica per punteggio sintetico:**  \n" + "  \n".join(podio)
+                       + "  \n\n_Sintesi quantitativa indicativa, non un consiglio di acquisto._")
+
+            # Grafico performance normalizzata
+            st.markdown("#### Andamento a confronto (base 100)")
+            st.caption("👀 **Cosa guardare:** tutti partono da 100. La linea che sale di più ha reso di più "
+                       "nel periodo (a parità di punto di partenza).")
+            figc = go.Figure()
+            for t in df_cmp.index:
+                h = fu.get_history(t, period=period)
+                if not h.empty:
+                    norm = h["Close"] / h["Close"].iloc[0] * 100
+                    figc.add_trace(go.Scatter(x=h.index, y=norm, name=t))
+            figc.update_layout(height=420, margin=dict(t=10, b=10), yaxis_title="Base 100", legend=dict(orientation="h"))
+            show_chart(figc, use_container_width=True)
+
+# =============================== NOTIZIE ===================================
+with tab_news:
+    st.subheader(f"📰 Notizie su {name}")
+    st.caption(
+        "Le notizie più recenti che riguardano questo titolo. "
+        "Le classifiche di mercato (chi sale, chi scende, i più scambiati) e le notizie generali "
+        "le trovi nella sezione **📰 Attualità** (barra laterale a sinistra)."
+    )
+
+    nfc1, nfc2 = st.columns([1, 2])
+    filtra_g = nfc1.checkbox("📅 Filtra per giorno", value=False, key="ticker_news_filter")
+    giorno_t = None
+    if filtra_g:
+        giorno_t = nfc2.date_input("Giorno", value=datetime.date.today(),
+                                   max_value=datetime.date.today(), key="ticker_news_day")
+        st.caption("ℹ️ Le fonti gratuite coprono solo gli **ultimi giorni**: date più lontane potrebbero non avere risultati.")
+
+    def show_news(source_ticker):
+        news = fu.get_news(source_ticker, count=20 if giorno_t else 10,
+                           day=giorno_t.isoformat() if giorno_t else None)
+        if not news:
+            st.caption("Nessuna notizia per il giorno scelto." if giorno_t
+                       else "Nessuna notizia disponibile per questo titolo.")
+            return
+        for n in news:
+            title = n["title"]
+            brief = fu.summarize_text(n["summary"], max_sentences=2)
+            if translate_news:
+                title = fu.translate_text(title)
+                brief = fu.translate_text(brief)
+            url = n["url"]
+            meta = " · ".join([x for x in (n["publisher"], n["date"]) if x])
+            if url:
+                st.markdown(f"**[{title}]({url})**")
+            else:
+                st.markdown(f"**{title}**")
+            if meta:
+                st.caption(meta)
+            if brief:
+                st.markdown(f"📝 **In breve:** {brief}")
+            else:
+                st.caption("Riassunto non disponibile — apri l'articolo per i dettagli.")
+            st.markdown("<hr style='margin:4px 0;border:none;border-top:1px solid rgba(255,255,255,0.12)'>", unsafe_allow_html=True)
+
+    show_news(ticker)
+
+st.markdown("---")
+st.caption(
+    "Dati: Yahoo Finance via yfinance · App a scopo informativo/didattico. "
+    "Le decisioni di investimento comportano rischi: nessuna parte di questa app costituisce consulenza finanziaria."
+)
