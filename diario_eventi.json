@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:AEO:2026-08-28",
-"ticker": "AEO",
-"kind": "long",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-09 00:54",
-"data": "2026-09-09 00:53",
-"prezzo": 17.22,
-"conv": 65,
-"prob_gain": 53,
-"prob_loss": 36,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-09",
-"soglie": {
-"media50": null,
-"media20": null,
-"quattro_atr": 19.9231,
-"meta_caduta": 18.005,
-"bollinger": 17.5891,
-"consigliata": 19.9231
-},
-"stop": 15.8685,
-"atr": 0.6758,
-"res": {
-"7g": -12.43,
-"30g": 4.59
-}
-},
-{
 "episodio": "long:HMY:2026-08-28",
 "ticker": "HMY",
 "kind": "long",
@@ -32012,5 +31981,32 @@
 },
 "stop": 41.4876,
 "atr": 0.7212
+},
+{
+"episodio": "long:BCE:2026-10-10",
+"ticker": "BCE",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-20 02:02",
+"data": "2026-10-20 01:57",
+"prezzo": 19.82,
+"conv": 58,
+"prob_gain": 81,
+"prob_loss": 7,
+"reliab": "🟢 Alta",
+"mkt": -0.9526,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-20",
+"soglie": {
+"media50": 22.0164,
+"media20": 20.13,
+"quattro_atr": 21.8162,
+"meta_caduta": 21.835,
+"bollinger": 21.7084,
+"consigliata": 21.8162
+},
+"stop": 18.8219,
+"atr": 0.4991
 }
 ]
