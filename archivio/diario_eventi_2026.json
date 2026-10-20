@@ -18327,5 +18327,64 @@
 "7g": -3.81,
 "30g": -17.05
 }
+},
+{
+"episodio": "short:ENI.MI:2026-08-28",
+"ticker": "ENI.MI",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-09-09 00:54",
+"data": "2026-09-09 00:54",
+"prezzo": 23.075,
+"conv": 59,
+"prob_gain": 54,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-09-09",
+"soglie": {
+"media50": null,
+"media20": 23.616,
+"quattro_atr": 25.2293,
+"meta_caduta": 23.8125,
+"bollinger": 24.5511,
+"consigliata": 25.2293
+},
+"stop": 21.9978,
+"atr": 0.5386,
+"res": {
+"7g": 5.79,
+"30g": 9.1,
+"soglia": 9.1
+},
+"res_soglia": {
+"media20": {
+"ret": 2.34,
+"toccato": true,
+"giorni": 1
+},
+"quattro_atr": {
+"ret": 9.1,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": 3.2,
+"toccato": true,
+"giorni": 1
+},
+"bollinger": {
+"ret": 6.4,
+"toccato": true,
+"giorni": 19
+},
+"consigliata": {
+"ret": 9.1,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
