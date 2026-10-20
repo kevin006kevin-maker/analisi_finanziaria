@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:INTR:2026-08-16",
-"ticker": "INTR",
-"kind": "long",
-"evento": "fine_verifica",
-"scritto_il": "2026-09-09 00:54",
-"data": "2026-09-09 00:54",
-"prezzo": 5.62,
-"conv": 71,
-"prob_gain": 66,
-"prob_loss": 20,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 10 giorni di Borsa dalla promozione",
-"dovuto_il": "2026-09-09",
-"soglie": {
-"media50": null,
-"media20": null,
-"quattro_atr": 6.6796,
-"meta_caduta": 5.75,
-"bollinger": 5.8855,
-"consigliata": 6.6796
-},
-"stop": 5.0902,
-"atr": 0.2649,
-"res": {
-"7g": -4.42,
-"30g": 31.58
-}
-},
-{
 "episodio": "long:AEO:2026-08-28",
 "ticker": "AEO",
 "kind": "long",
@@ -32016,5 +31985,32 @@
 },
 "stop": 47.7488,
 "atr": 1.3181
+},
+{
+"episodio": "short:G.MI:2026-10-02",
+"ticker": "G.MI",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-20 02:02",
+"data": "2026-10-20 01:59",
+"prezzo": 42.93,
+"conv": 58,
+"prob_gain": 49,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-20",
+"soglie": {
+"media50": 43.6606,
+"media20": null,
+"quattro_atr": 45.8148,
+"meta_caduta": 44.56,
+"bollinger": 44.889,
+"consigliata": 43.6606
+},
+"stop": 41.4876,
+"atr": 0.7212
 }
 ]
