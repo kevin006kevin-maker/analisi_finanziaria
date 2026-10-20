@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:TSN:2026-09-03",
-"ticker": "TSN",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-09 00:54",
-"data": "2026-09-09 00:52",
-"prezzo": 52.28,
-"conv": 70,
-"prob_gain": 58,
-"prob_loss": 2,
-"reliab": "🟢 Alta",
-"mkt": -1.0266,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-09",
-"soglie": {
-"media50": 57.4774,
-"media20": 56.132,
-"quattro_atr": 58.2825,
-"meta_caduta": 56.73,
-"bollinger": 60.5881,
-"consigliata": 57.4774
-},
-"stop": 49.2788,
-"atr": 1.5006,
-"res": {
-"7g": 0.88,
-"30g": 0.4,
-"soglia": 0.4
-},
-"res_soglia": {
-"media50": {
-"ret": 0.4,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 0.4,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 0.4,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 0.4,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 0.4,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 0.4,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:MXL:2026-09-03",
 "ticker": "MXL",
 "kind": "short",
@@ -32029,5 +31965,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:NESR:2026-09-29",
+"ticker": "NESR",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-21 00:41",
+"data": "2026-10-21 00:41",
+"prezzo": 21.09,
+"conv": 77,
+"prob_gain": 52,
+"prob_loss": 20,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 30.142,
+"media20": 24.3373,
+"quattro_atr": 26.8047,
+"meta_caduta": 28.7,
+"bollinger": 33.3703,
+"consigliata": 26.8047
+},
+"stop": 18.2326,
+"atr": 1.4287
 }
 ]
