@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:PYPL:2026-08-28",
-"ticker": "PYPL",
-"kind": "long",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-09 00:54",
-"data": "2026-09-09 00:52",
-"prezzo": 53.18,
-"conv": 55,
-"prob_gain": 71,
-"prob_loss": 18,
-"reliab": "🟡 Media",
-"mkt": -1.0266,
-"fonte": "osservazione",
-"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-09",
-"soglie": {
-"media50": 55.2013,
-"media20": 58.6018,
-"quattro_atr": 61.2644,
-"meta_caduta": 57.74,
-"bollinger": 65.8697,
-"consigliata": 55.2013
-},
-"stop": 49.1378,
-"atr": 2.0211,
-"res": {
-"7g": 0.34,
-"30g": 4.27
-}
-},
-{
 "episodio": "long:GAP:2026-08-29",
 "ticker": "GAP",
 "kind": "long",
@@ -32023,5 +31992,25 @@
 },
 "stop": 269.0984,
 "atr": 3.8758
+},
+{
+"episodio": "short:ARGX:2026-10-09",
+"ticker": "ARGX",
+"kind": "short",
+"evento": "salita_2pct",
+"scritto_il": "2026-10-20 17:08",
+"data": "2026-10-20 17:01",
+"prezzo": 877.54,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "prezzo salito di almeno il 2% da 818.63",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
