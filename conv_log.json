@@ -1,69 +1,6 @@
 [
 {
 "date": "2026-10-12",
-"ticker": "AIR",
-"kind": "short",
-"price": 100.43,
-"conv": 63,
-"factors": {
-"discount": 34.6627,
-"histcheap": 0.52,
-"riskadj": 0.72,
-"ddpen": -10.99,
-"momentum": 2.0291,
-"prob": 42,
-"oversold": -32.3616,
-"rebound": 25.8098,
-"trend": -1.0,
-"relstrength": -3.1792
-},
-"ret_5d": -2.49,
-"ret_21d": null
-},
-{
-"date": "2026-10-12",
-"ticker": "QURE",
-"kind": "short",
-"price": 22.59,
-"conv": 33,
-"factors": {
-"discount": 67.9983,
-"histcheap": 0.64,
-"riskadj": -0.78,
-"ddpen": -58.77,
-"momentum": 3.7084,
-"prob": 35,
-"oversold": -17.6068,
-"rebound": 83.923,
-"trend": -1.0,
-"relstrength": -4.8585
-},
-"ret_5d": -2.52,
-"ret_21d": null
-},
-{
-"date": "2026-10-12",
-"ticker": "JLHL",
-"kind": "short",
-"price": 4.39,
-"conv": 36,
-"factors": {
-"discount": 90.2009,
-"histcheap": 0.54,
-"riskadj": 0.02,
-"ddpen": -48.26,
-"momentum": -10.0251,
-"prob": 25,
-"oversold": -38.7671,
-"rebound": 38.9909,
-"trend": -1.0,
-"relstrength": 8.8749
-},
-"ret_5d": 5.58,
-"ret_21d": null
-},
-{
-"date": "2026-10-12",
 "ticker": "DCX",
 "kind": "short",
 "price": 2.727,
@@ -38843,6 +38780,26 @@
 "rebound": 2.2026,
 "trend": 1.0,
 "relstrength": 5.514
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-21",
+"ticker": "PBR-A",
+"kind": "long",
+"price": 23.1,
+"conv": 69,
+"factors": {
+"discount": 0.8584,
+"histcheap": -2.33,
+"riskadj": 3.43,
+"ddpen": -11.25,
+"momentum": -2.1672,
+"prob": 36,
+"quality": 70.9,
+"valcheap": 0.6582,
+"trappen": 3
 },
 "ret_5d": null,
 "ret_21d": null
