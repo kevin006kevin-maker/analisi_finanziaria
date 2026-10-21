@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:ADTN:2026-09-09",
-"ticker": "ADTN",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-09 03:01",
-"data": "2026-09-09 03:01",
-"prezzo": 7.1,
-"conv": 75,
-"prob_gain": 55,
-"prob_loss": 20,
-"reliab": "🔴 Bassa",
-"mkt": -1.0266,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 9.7636,
-"media20": 7.828,
-"quattro_atr": 8.8253,
-"meta_caduta": 11.34,
-"bollinger": 8.5725,
-"consigliata": 8.8253
-},
-"stop": 6.2373,
-"atr": 0.4313,
-"res": {
-"7g": 1.69,
-"30g": 5.35,
-"soglia": 5.35
-},
-"res_soglia": {
-"media50": {
-"ret": 5.35,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 5.35,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 5.35,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 5.35,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 5.35,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 5.35,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:FLNC:2026-09-08",
 "ticker": "FLNC",
 "kind": "short",
@@ -31831,5 +31767,32 @@
 },
 "stop": 212.5422,
 "atr": 12.4214
+},
+{
+"episodio": "short:HESM:2026-10-07",
+"ticker": "HESM",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-21 19:09",
+"data": "2026-10-21 19:09",
+"prezzo": 31.295,
+"conv": 84,
+"prob_gain": 57,
+"prob_loss": 6,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 37.6961,
+"media20": 34.5042,
+"quattro_atr": 35.6269,
+"meta_caduta": 36.1325,
+"bollinger": 41.4682,
+"consigliata": 35.6269
+},
+"stop": 29.1291,
+"atr": 1.083
 }
 ]
