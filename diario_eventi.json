@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:CASY:2026-09-09",
-"ticker": "CASY",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-09 17:00",
-"data": "2026-09-09 17:00",
-"prezzo": 624.865,
-"conv": 87,
-"prob_gain": 61,
-"prob_loss": 4,
-"reliab": "🟡 Media",
-"mkt": -0.983,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 822.7123,
-"media20": 795.7608,
-"quattro_atr": 762.7744,
-"meta_caduta": 750.0575,
-"bollinger": 916.0672,
-"consigliata": 762.7744
-},
-"stop": 555.9103,
-"atr": 34.4774,
-"res": {
-"7g": -4.26,
-"30g": 2.26,
-"soglia": 2.26
-},
-"res_soglia": {
-"media50": {
-"ret": 2.26,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 2.26,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 2.26,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 2.26,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 2.26,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 2.26,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:TBBK:2026-09-09",
 "ticker": "TBBK",
 "kind": "short",
@@ -32212,6 +32148,26 @@
 "mkt": null,
 "fonte": "monitoraggio",
 "note": "in perdita da 16 giorni di Borsa: valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:ERAS:2026-09-23",
+"ticker": "ERAS",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-10-22 01:40",
+"data": "2026-10-22 01:40",
+"prezzo": 14.49,
+"conv": 62,
+"prob_gain": 50,
+"prob_loss": 24,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "in perdita da 14 giorni di Borsa: valuta l'uscita",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
