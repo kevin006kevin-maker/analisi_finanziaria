@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:RARE:2026-09-03",
-"ticker": "RARE",
-"kind": "short",
-"evento": "promozione",
-"scritto_il": "2026-09-09 03:02",
-"data": "2026-09-09 03:02",
-"prezzo": 15.3,
-"conv": 75,
-"prob_gain": 66,
-"prob_loss": 12,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": 27.7107,
-"media20": 25.0345,
-"quattro_atr": 23.4899,
-"meta_caduta": 25.585,
-"bollinger": 31.9219,
-"consigliata": 23.4899
-},
-"stop": 11.2051,
-"atr": 2.0475,
-"res": {
-"7g": -15.16,
-"30g": 1.14,
-"soglia": 1.14
-},
-"res_soglia": {
-"media50": {
-"ret": 1.14,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 1.14,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 1.14,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 1.14,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 1.14,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 1.14,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:NVS:2026-09-08",
 "ticker": "NVS",
 "kind": "short",
@@ -32260,5 +32196,25 @@
 },
 "stop": 32.5658,
 "atr": 1.6921
+},
+{
+"episodio": "short:SANM:2026-10-22",
+"ticker": "SANM",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-10-22 01:40",
+"data": "2026-10-22 01:40",
+"prezzo": 172.07,
+"conv": 70,
+"prob_gain": 51,
+"prob_loss": 17,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "in perdita da 57 giorni di Borsa: valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
