@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:MXL:2026-09-03",
-"ticker": "MXL",
-"kind": "short",
-"evento": "promozione",
-"scritto_il": "2026-09-09 03:02",
-"data": "2026-09-09 03:02",
-"prezzo": 62.74,
-"conv": 61,
-"prob_gain": 41,
-"prob_loss": 34,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": 76.6852,
-"media20": 67.3035,
-"quattro_atr": 86.1071,
-"meta_caduta": 95.385,
-"bollinger": 82.9062,
-"consigliata": 76.6852
-},
-"stop": 51.0565,
-"atr": 5.8418,
-"res": {
-"7g": 11.92,
-"30g": 51.79,
-"soglia": 22.23
-},
-"res_soglia": {
-"media50": {
-"ret": 22.23,
-"toccato": true,
-"giorni": 9
-},
-"media20": {
-"ret": 7.27,
-"toccato": true,
-"giorni": 1
-},
-"quattro_atr": {
-"ret": 37.24,
-"toccato": true,
-"giorni": 13
-},
-"meta_caduta": {
-"ret": 52.03,
-"toccato": true,
-"giorni": 23
-},
-"bollinger": {
-"ret": 32.14,
-"toccato": true,
-"giorni": 12
-},
-"consigliata": {
-"ret": 22.23,
-"toccato": true,
-"giorni": 9
-}
-}
-},
-{
 "episodio": "short:RARE:2026-09-03",
 "ticker": "RARE",
 "kind": "short",
@@ -32297,5 +32233,32 @@
 },
 "stop": 105.4155,
 "atr": 4.3123
+},
+{
+"episodio": "short:XENE:2026-10-22",
+"ticker": "XENE",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-22 01:39",
+"data": "2026-10-22 01:39",
+"prezzo": 35.95,
+"conv": 75,
+"prob_gain": 54,
+"prob_loss": 7,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 49.0376,
+"media20": 36.2755,
+"quattro_atr": 42.7184,
+"meta_caduta": 50.605,
+"bollinger": 39.1738,
+"consigliata": 42.7184
+},
+"stop": 32.5658,
+"atr": 1.6921
 }
 ]
