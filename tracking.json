@@ -11801,7 +11801,7 @@
 "max_date": "2026-10-15 23:22",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-20",
+"entry_check": "2026-10-21",
 "warn_since": "2026-10-19",
 "warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
 },
@@ -11934,7 +11934,7 @@
 "max_date": "2026-10-21 00:43",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-20"
+"entry_check": "2026-10-21"
 },
 "G.MI": {
 "kind": "short",
@@ -12081,7 +12081,7 @@
 "max_date": "2026-10-16 20:24",
 "auto": true,
 "notified": false,
-"entry_check": "2026-10-20",
+"entry_check": "2026-10-21",
 "warn_since": "2026-10-20",
 "warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
 },
@@ -12230,7 +12230,7 @@
 "max_date": "2026-10-20 17:06",
 "auto": true,
 "notified": false,
-"entry_check": "2026-10-20"
+"entry_check": "2026-10-21"
 },
 "TIGO": {
 "kind": "short",
@@ -12377,7 +12377,7 @@
 "max_date": "2026-10-18 08:36",
 "auto": true,
 "notified": false,
-"entry_check": "2026-10-20"
+"entry_check": "2026-10-21"
 },
 "SPHR": {
 "kind": "short",
@@ -12524,7 +12524,7 @@
 "max_date": "2026-10-21 00:43",
 "auto": true,
 "notified": false,
-"entry_check": "2026-10-20"
+"entry_check": "2026-10-21"
 },
 "IWM": {
 "kind": "short",
@@ -12623,7 +12623,7 @@
 "max_date": "2026-10-20 17:05",
 "auto": true,
 "notified": false,
-"entry_check": "2026-10-20"
+"entry_check": "2026-10-21"
 },
 "NESR": {
 "kind": "short",
@@ -12689,7 +12689,8 @@
 "max_price": 21.09,
 "max_date": "2026-10-21 00:41",
 "auto": true,
-"notified": false
+"notified": false,
+"entry_check": "2026-10-21"
 },
 "MRP": {
 "kind": "short",
@@ -12755,6 +12756,7 @@
 "max_price": 23.46,
 "max_date": "2026-10-21 00:41",
 "auto": true,
-"notified": false
+"notified": false,
+"entry_check": "2026-10-21"
 }
 }
