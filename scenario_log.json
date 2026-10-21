@@ -16985,5 +16985,62 @@
 "mkt": null
 }
 }
+},
+{
+"ticker": "HESM",
+"kind": "short",
+"date": "2026-10-21",
+"promo_price": 31.295,
+"obs_price": 32.1459,
+"obs_date": "2026-10-07",
+"pre_price": 32.1459,
+"pre_date": "2026-10-08",
+"conf_price": null,
+"conf_date": null,
+"target": 37.6961,
+"stop": 29.1291,
+"reliab": "🟢 Alta",
+"prob_gain": 57,
+"prob_loss": 6,
+"conv": 84,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-07 16:45",
+"prezzo": 32.1459,
+"conv": 74,
+"prob_gain": 63,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": 1.7011
+},
+"anticipo": {
+"data": "2026-10-08",
+"prezzo": 32.1459,
+"conv": 74,
+"prob_gain": 63,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-21 19:09",
+"prezzo": 31.295,
+"conv": 84,
+"prob_gain": 57,
+"prob_loss": 6,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
