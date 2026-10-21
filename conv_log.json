@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-10-12",
-"ticker": "KNF",
-"kind": "short",
-"price": 49.84,
-"conv": 54,
-"factors": {
-"discount": 46.9618,
-"histcheap": 2.4,
-"riskadj": -0.96,
-"ddpen": -19.11,
-"momentum": 0.9736,
-"prob": 37,
-"oversold": -35.2479,
-"rebound": 21.3274,
-"trend": -1.0,
-"relstrength": -2.1237
-},
-"ret_5d": 0.39,
-"ret_21d": null
-},
-{
-"date": "2026-10-12",
 "ticker": "ITG",
 "kind": "short",
 "price": 7.57,
@@ -38865,6 +38844,26 @@
 "rebound": 33.4196,
 "trend": -1.0,
 "relstrength": -7.3815
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-21",
+"ticker": "M",
+"kind": "long",
+"price": 23.6,
+"conv": 49,
+"factors": {
+"discount": 9.958,
+"histcheap": -0.97,
+"riskadj": 1.0,
+"ddpen": -13.92,
+"momentum": -2.6533,
+"prob": 23,
+"quality": 55.3,
+"valcheap": 0.6745,
+"trappen": 2
 },
 "ret_5d": null,
 "ret_21d": null
