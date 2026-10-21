@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:LULU:2026-09-04",
-"ticker": "LULU",
-"kind": "long",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-09 03:02",
-"data": "2026-09-09 03:02",
-"prezzo": 100.61,
-"conv": 78,
-"prob_gain": 80,
-"prob_loss": 11,
-"reliab": "🟡 Media",
-"mkt": -1.0266,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 118.4018,
-"media20": 118.9165,
-"quattro_atr": 124.1843,
-"meta_caduta": 114.595,
-"bollinger": 129.5966,
-"consigliata": 118.4018
-},
-"stop": 88.8229,
-"atr": 5.8936,
-"res": {
-"7g": -2.74,
-"30g": -7.38
-}
-},
-{
 "episodio": "short:MXL:2026-09-03",
 "ticker": "MXL",
 "kind": "short",
@@ -32301,5 +32270,32 @@
 },
 "stop": 52.8235,
 "atr": 4.3683
+},
+{
+"episodio": "short:MHO:2026-10-22",
+"ticker": "MHO",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-22 01:37",
+"data": "2026-10-22 01:37",
+"prezzo": 114.04,
+"conv": 70,
+"prob_gain": 54,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": 0.6636,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 139.898,
+"media20": 129.6935,
+"quattro_atr": 131.289,
+"meta_caduta": 134.32,
+"bollinger": 142.6072,
+"consigliata": 131.289
+},
+"stop": 105.4155,
+"atr": 4.3123
 }
 ]
