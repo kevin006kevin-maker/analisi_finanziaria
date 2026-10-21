@@ -1,48 +1,6 @@
 [
 {
 "date": "2026-10-12",
-"ticker": "IMVT",
-"kind": "short",
-"price": 30.47,
-"conv": 69,
-"factors": {
-"discount": 32.2286,
-"histcheap": -0.07,
-"riskadj": 2.17,
-"ddpen": -9.26,
-"momentum": 9.3694,
-"prob": 38,
-"oversold": -20.5382,
-"rebound": 26.0276,
-"trend": -1.0,
-"relstrength": -10.5195
-},
-"ret_5d": -11.17,
-"ret_21d": null
-},
-{
-"date": "2026-10-12",
-"ticker": "PAYX",
-"kind": "short",
-"price": 103.98,
-"conv": 42,
-"factors": {
-"discount": 19.1383,
-"histcheap": 0.18,
-"riskadj": -1.0,
-"ddpen": -19.63,
-"momentum": -5.094,
-"prob": 47,
-"oversold": -40.5772,
-"rebound": 11.116,
-"trend": 1.0,
-"relstrength": 3.9439
-},
-"ret_5d": 5.59,
-"ret_21d": null
-},
-{
-"date": "2026-10-12",
 "ticker": "KNF",
 "kind": "short",
 "price": 49.84,
@@ -38865,6 +38823,48 @@
 "quality": 64.5,
 "valcheap": 0.8335,
 "trappen": 2
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-21",
+"ticker": "NFLX",
+"kind": "short",
+"price": 69.85,
+"conv": 33,
+"factors": {
+"discount": 43.7306,
+"histcheap": 1.35,
+"riskadj": -2.2,
+"ddpen": -31.54,
+"momentum": 1.0763,
+"prob": 47,
+"oversold": -43.62,
+"rebound": 7.3815,
+"trend": -1.0,
+"relstrength": 0.1136
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-21",
+"ticker": "NUVB",
+"kind": "short",
+"price": 4.48,
+"conv": 40,
+"factors": {
+"discount": 53.0398,
+"histcheap": 1.02,
+"riskadj": 0.06,
+"ddpen": -38.62,
+"momentum": 8.5714,
+"prob": 28,
+"oversold": -25.4818,
+"rebound": 33.4196,
+"trend": -1.0,
+"relstrength": -7.3815
 },
 "ret_5d": null,
 "ret_21d": null
