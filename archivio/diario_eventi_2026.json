@@ -19013,5 +19013,69 @@
 "7g": -2.74,
 "30g": -7.38
 }
+},
+{
+"episodio": "short:MXL:2026-09-03",
+"ticker": "MXL",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-09-09 03:02",
+"data": "2026-09-09 03:02",
+"prezzo": 62.74,
+"conv": 61,
+"prob_gain": 41,
+"prob_loss": 34,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 76.6852,
+"media20": 67.3035,
+"quattro_atr": 86.1071,
+"meta_caduta": 95.385,
+"bollinger": 82.9062,
+"consigliata": 76.6852
+},
+"stop": 51.0565,
+"atr": 5.8418,
+"res": {
+"7g": 11.92,
+"30g": 51.79,
+"soglia": 22.23
+},
+"res_soglia": {
+"media50": {
+"ret": 22.23,
+"toccato": true,
+"giorni": 9
+},
+"media20": {
+"ret": 7.27,
+"toccato": true,
+"giorni": 1
+},
+"quattro_atr": {
+"ret": 37.24,
+"toccato": true,
+"giorni": 13
+},
+"meta_caduta": {
+"ret": 52.03,
+"toccato": true,
+"giorni": 23
+},
+"bollinger": {
+"ret": 32.14,
+"toccato": true,
+"giorni": 12
+},
+"consigliata": {
+"ret": 22.23,
+"toccato": true,
+"giorni": 9
+}
+}
 }
 ]
