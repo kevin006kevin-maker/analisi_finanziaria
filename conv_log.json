@@ -1,90 +1,6 @@
 [
 {
 "date": "2026-10-13",
-"ticker": "FLEX",
-"kind": "short",
-"price": 107.575,
-"conv": 54,
-"factors": {
-"discount": 33.6244,
-"histcheap": -0.43,
-"riskadj": 1.48,
-"ddpen": -16.74,
-"momentum": 11.3734,
-"prob": 35,
-"oversold": -42.3231,
-"rebound": 6.4893,
-"trend": 1.0,
-"relstrength": -11.1212
-},
-"ret_5d": -17.96,
-"ret_21d": null
-},
-{
-"date": "2026-10-13",
-"ticker": "SMMT",
-"kind": "short",
-"price": 15.83,
-"conv": 33,
-"factors": {
-"discount": 39.9924,
-"histcheap": 0.38,
-"riskadj": -0.73,
-"ddpen": -33.6,
-"momentum": 8.55,
-"prob": 35,
-"oversold": -44.6756,
-"rebound": -1.451,
-"trend": -1.0,
-"relstrength": -8.2978
-},
-"ret_5d": -0.06,
-"ret_21d": null
-},
-{
-"date": "2026-10-13",
-"ticker": "PDFS",
-"kind": "short",
-"price": 48.38,
-"conv": 50,
-"factors": {
-"discount": 31.657,
-"histcheap": -0.7,
-"riskadj": 1.24,
-"ddpen": -18.27,
-"momentum": 11.1315,
-"prob": 38,
-"oversold": -46.0093,
-"rebound": -0.7941,
-"trend": 1.0,
-"relstrength": -10.8793
-},
-"ret_5d": -14.39,
-"ret_21d": null
-},
-{
-"date": "2026-10-13",
-"ticker": "AMAT",
-"kind": "short",
-"price": 461.06,
-"conv": 55,
-"factors": {
-"discount": 36.2296,
-"histcheap": -0.55,
-"riskadj": 1.81,
-"ddpen": -17.09,
-"momentum": 13.0518,
-"prob": 38,
-"oversold": -39.8126,
-"rebound": 5.9725,
-"trend": 1.0,
-"relstrength": -12.7996
-},
-"ret_5d": -11.87,
-"ret_21d": null
-},
-{
-"date": "2026-10-13",
 "ticker": "DPC",
 "kind": "short",
 "price": 33.315,
@@ -38985,6 +38901,86 @@
 "rebound": 29.4891,
 "trend": -1.0,
 "relstrength": -1.4601
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-22",
+"ticker": "AEG",
+"kind": "long",
+"price": 8.185,
+"conv": 39,
+"factors": {
+"discount": 14.1133,
+"histcheap": -0.04,
+"riskadj": 0.41,
+"ddpen": -5.98,
+"momentum": 1.0278,
+"prob": 41,
+"quality": 43.0,
+"valcheap": 0.4752,
+"trappen": -1
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-22",
+"ticker": "UAL",
+"kind": "long",
+"price": 101.75,
+"conv": 54,
+"factors": {
+"discount": 25.2443,
+"histcheap": 0.47,
+"riskadj": 0.1,
+"ddpen": -14.1,
+"momentum": -0.4343,
+"prob": 45,
+"quality": 60.4,
+"valcheap": 0.3925,
+"trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-22",
+"ticker": "MS",
+"kind": "long",
+"price": 183.335,
+"conv": 54,
+"factors": {
+"discount": 19.7834,
+"histcheap": 0.3,
+"riskadj": 0.6,
+"ddpen": -8.48,
+"momentum": -0.6782,
+"prob": 67,
+"quality": 62.3,
+"valcheap": -1.3685,
+"trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-22",
+"ticker": "TAL",
+"kind": "long",
+"price": 10.465,
+"conv": 66,
+"factors": {
+"discount": 18.9388,
+"histcheap": 0.84,
+"riskadj": -0.74,
+"ddpen": -14.87,
+"momentum": 16.547,
+"prob": 75,
+"quality": 92.4,
+"valcheap": 0.5035,
+"trappen": 3
 },
 "ret_5d": null,
 "ret_21d": null
