@@ -17257,5 +17257,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "HTO",
+"kind": "short",
+"date": "2026-10-22",
+"promo_price": 58.28,
+"obs_price": 55.36,
+"obs_date": "2026-10-19",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": 61.532,
+"stop": 55.3538,
+"reliab": "🟢 Alta",
+"prob_gain": 54,
+"prob_loss": 0,
+"conv": 63,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-19 16:37",
+"prezzo": 55.36,
+"conv": 64,
+"prob_gain": 53,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -0.796
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-22 20:14",
+"prezzo": 58.28,
+"conv": 63,
+"prob_gain": 54,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
