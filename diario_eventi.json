@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:LDO.MI:2026-09-09",
-"ticker": "LDO.MI",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-09 17:01",
-"data": "2026-09-09 17:00",
-"prezzo": 48.89,
-"conv": 64,
-"prob_gain": 48,
-"prob_loss": 6,
-"reliab": "🟡 Media",
-"mkt": -0.983,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 53.9283,
-"media20": 54.795,
-"quattro_atr": 55.0578,
-"meta_caduta": 54.395,
-"bollinger": 62.2425,
-"consigliata": 53.9283
-},
-"stop": 45.8061,
-"atr": 1.5419,
-"res": {
-"7g": 1.49,
-"30g": -4.79,
-"soglia": -4.79
-},
-"res_soglia": {
-"media50": {
-"ret": -4.79,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -4.79,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -4.79,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -4.79,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -4.79,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -4.79,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:GRAB:2026-09-09",
 "ticker": "GRAB",
 "kind": "short",
@@ -32065,5 +32001,32 @@
 },
 "stop": 249.0435,
 "atr": 18.7632
+},
+{
+"episodio": "short:EEM:2026-10-22",
+"ticker": "EEM",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-22 20:10",
+"data": "2026-10-22 20:10",
+"prezzo": 61.65,
+"conv": 61,
+"prob_gain": 52,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -0.7116,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 66.614,
+"media20": 65.803,
+"quattro_atr": 66.1507,
+"meta_caduta": 65.375,
+"bollinger": 69.9518,
+"consigliata": 66.1507
+},
+"stop": 59.3997,
+"atr": 1.1252
 }
 ]
