@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:NAMS:2026-09-09",
-"ticker": "NAMS",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-09 20:29",
-"data": "2026-09-09 20:29",
-"prezzo": 23.16,
-"conv": 70,
-"prob_gain": 49,
-"prob_loss": 14,
-"reliab": "🟡 Media",
-"mkt": -1.0946,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 29.28,
-"media20": 26.499,
-"quattro_atr": 28.6232,
-"meta_caduta": 30.075,
-"bollinger": 29.0406,
-"consigliata": 28.6232
-},
-"stop": 20.4284,
-"atr": 1.3658,
-"res": {
-"7g": -6.61,
-"30g": -7.56,
-"soglia": -7.56
-},
-"res_soglia": {
-"media50": {
-"ret": -7.56,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -7.56,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -7.56,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -7.56,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -7.56,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -7.56,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:RXT:2026-09-03",
 "ticker": "RXT",
 "kind": "short",
@@ -31998,5 +31934,32 @@
 },
 "stop": 15.7108,
 "atr": 1.7421
+},
+{
+"episodio": "short:HTO:2026-10-19",
+"ticker": "HTO",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-22 20:14",
+"data": "2026-10-22 20:14",
+"prezzo": 58.28,
+"conv": 63,
+"prob_gain": 54,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 61.532,
+"media20": 58.752,
+"quattro_atr": 64.1324,
+"meta_caduta": 61.545,
+"bollinger": 62.4659,
+"consigliata": 61.532
+},
+"stop": 55.3538,
+"atr": 1.4631
 }
 ]
