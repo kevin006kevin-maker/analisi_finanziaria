@@ -19561,5 +19561,69 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:GRAB:2026-09-09",
+"ticker": "GRAB",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-09 17:01",
+"data": "2026-09-09 17:00",
+"prezzo": 3.0899,
+"conv": 63,
+"prob_gain": 46,
+"prob_loss": 5,
+"reliab": "🟡 Media",
+"mkt": -0.983,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 3.5992,
+"media20": 3.507,
+"quattro_atr": 3.6135,
+"meta_caduta": 3.515,
+"bollinger": 3.7864,
+"consigliata": 3.5992
+},
+"stop": 2.8281,
+"atr": 0.1309,
+"res": {
+"7g": -4.21,
+"30g": 2.92,
+"soglia": 2.92
+},
+"res_soglia": {
+"media50": {
+"ret": 2.92,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": 2.92,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": 2.92,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": 2.92,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": 2.92,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": 2.92,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
