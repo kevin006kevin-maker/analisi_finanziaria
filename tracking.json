@@ -843,7 +843,9 @@
 "entry_src": "storico",
 "max_price": 33.48,
 "max_date": "2026-08-25 23:02",
-"exit_notified": false
+"exit_notified": false,
+"warn_since": "2026-10-22",
+"warn": "in perdita da 73 giorni di Borsa: valuta l'uscita"
 },
 "T": {
 "kind": "long",
@@ -2096,7 +2098,9 @@
 "motivo": "scesa 39% dal massimo (97.57) restando in guadagno (+12.0%): il guadagno si sta sgonfiando",
 "urgenza": "incassa",
 "tipo": "sgonfia"
-}
+},
+"warn_since": "2026-10-22",
+"warn": "in perdita da 63 giorni di Borsa: valuta l'uscita"
 },
 "NEM": {
 "kind": "long",
@@ -2742,7 +2746,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-10-22",
 "max_price": 357.05,
-"max_date": "2026-09-21 16:35"
+"max_date": "2026-09-21 16:35",
+"warn_since": "2026-10-22",
+"warn": "in perdita da 61 giorni di Borsa: valuta l'uscita"
 },
 "SMCI": {
 "kind": "long",
@@ -3216,7 +3222,9 @@
 "urgenza": "incassa",
 "tipo": "sgonfia"
 },
-"incasso_notified": true
+"incasso_notified": true,
+"warn_since": "2026-10-22",
+"warn": "in perdita da 58 giorni di Borsa: valuta l'uscita"
 },
 "MTDR": {
 "kind": "short",
@@ -3611,7 +3619,9 @@
 "urgenza": "incassa",
 "tipo": "sgonfia"
 },
-"incasso_notified": true
+"incasso_notified": true,
+"warn_since": "2026-10-22",
+"warn": "in perdita da 58 giorni di Borsa: valuta l'uscita"
 },
 "REPL": {
 "kind": "short",
@@ -4195,7 +4205,9 @@
 "motivo": "scesa 12% dal massimo (635.02) restando in guadagno (+5.0%): il guadagno si sta sgonfiando",
 "urgenza": "incassa",
 "tipo": "sgonfia"
-}
+},
+"warn_since": "2026-10-22",
+"warn": "in perdita da 57 giorni di Borsa: valuta l'uscita"
 },
 "DIS": {
 "kind": "long",
@@ -6252,9 +6264,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-10-22",
 "max_price": 37.94,
-"max_date": "2026-09-08 22:03",
-"warn_since": "2026-10-21",
-"warn": "in perdita da 50 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-09-08 22:03"
 },
 "CAPR": {
 "kind": "short",
@@ -7615,7 +7625,9 @@
 "max_date": "2026-10-03 00:13",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-22"
+"entry_check": "2026-10-22",
+"warn_since": "2026-10-22",
+"warn": "in perdita da 40 giorni di Borsa: valuta l'uscita"
 },
 "SEDG": {
 "kind": "short",
@@ -7794,7 +7806,9 @@
 "max_date": "2026-09-08 19:06",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-22"
+"entry_check": "2026-10-22",
+"warn_since": "2026-10-22",
+"warn": "in perdita da 40 giorni di Borsa: valuta l'uscita"
 },
 "INTC": {
 "kind": "short",
@@ -7990,7 +8004,9 @@
 "auto": true,
 "notified": true,
 "entry_check": "2026-10-22",
-"exit_notified": false
+"exit_notified": false,
+"warn_since": "2026-10-22",
+"warn": "in perdita da 38 giorni di Borsa: valuta l'uscita"
 },
 "ENI.MI": {
 "kind": "short",
@@ -10722,9 +10738,7 @@
 "max_date": "2026-10-19 22:14",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-22",
-"warn_since": "2026-10-21",
-"warn": "in perdita da 19 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-22"
 },
 "RELY": {
 "kind": "short",
@@ -12055,7 +12069,9 @@
 "max_date": "2026-10-08 21:57",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-22"
+"entry_check": "2026-10-22",
+"warn_since": "2026-10-22",
+"warn": "in perdita da 14 giorni di Borsa: valuta l'uscita"
 },
 "SAH": {
 "kind": "short",
@@ -12234,9 +12250,7 @@
 "max_date": "2026-10-16 16:16",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-22",
-"warn_since": "2026-10-21",
-"warn": "in perdita da 13 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-22"
 },
 "ENLT": {
 "kind": "short",
@@ -12952,9 +12966,7 @@
 "max_date": "2026-10-16 23:44",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-22",
-"warn_since": "2026-10-21",
-"warn": "in perdita da 11 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-22"
 },
 "AVBP": {
 "kind": "short",
@@ -13492,7 +13504,7 @@
 "max_price": 9.39,
 "max_date": "2026-10-22 20:15",
 "auto": true,
-"notified": false,
+"notified": true,
 "entry_check": "2026-10-22"
 },
 "JBHT": {
@@ -14256,7 +14268,7 @@
 "max_price": 269.0601,
 "max_date": "2026-10-22 20:15",
 "auto": true,
-"notified": false,
+"notified": true,
 "entry_check": "2026-10-22"
 },
 "TIGO": {
