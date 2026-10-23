@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:TBBK:2026-09-09",
-"ticker": "TBBK",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-09 20:32",
-"data": "2026-09-09 20:29",
-"prezzo": 50.465,
-"conv": 80,
-"prob_gain": 64,
-"prob_loss": 6,
-"reliab": "🟡 Media",
-"mkt": -1.0946,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 49.16",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:BBOT:2026-09-09",
 "ticker": "BBOT",
 "kind": "short",
@@ -32706,5 +32686,32 @@
 },
 "stop": 105.4119,
 "atr": 4.314
+},
+{
+"episodio": "short:TIGO:2026-10-09",
+"ticker": "TIGO",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-23 02:41",
+"data": "2026-10-23 02:39",
+"prezzo": 81.65,
+"conv": 70,
+"prob_gain": 53,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-23",
+"soglie": {
+"media50": 90.6987,
+"media20": 85.5927,
+"quattro_atr": 94.0197,
+"meta_caduta": 92.98,
+"bollinger": 95.5392,
+"consigliata": 90.6987
+},
+"stop": 75.4652,
+"atr": 3.0924
 }
 ]
