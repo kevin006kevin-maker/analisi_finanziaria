@@ -20226,5 +20226,69 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:KRMN:2026-09-09",
+"ticker": "KRMN",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-10 01:28",
+"data": "2026-09-10 01:25",
+"prezzo": 35.22,
+"conv": 73,
+"prob_gain": 53,
+"prob_loss": 24,
+"reliab": "🔴 Bassa",
+"mkt": -1.1884,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 50.3144,
+"media20": 49.595,
+"quattro_atr": 47.3913,
+"meta_caduta": 48.69,
+"bollinger": 67.4203,
+"consigliata": 47.3913
+},
+"stop": 29.1343,
+"atr": 3.0428,
+"res": {
+"7g": 1.79,
+"30g": -11.27,
+"soglia": -11.27
+},
+"res_soglia": {
+"media50": {
+"ret": -11.27,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -11.27,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -11.27,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -11.27,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -11.27,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -11.27,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
