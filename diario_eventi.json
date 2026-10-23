@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:LDO.MI:2026-09-09",
-"ticker": "LDO.MI",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-10 01:28",
-"data": "2026-09-09 23:06",
-"prezzo": 48.645,
-"conv": 68,
-"prob_gain": 52,
-"prob_loss": 6,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 53.9234,
-"media20": 54.7827,
-"quattro_atr": 54.8285,
-"meta_caduta": 54.2725,
-"bollinger": 62.2718,
-"consigliata": 53.9234
-},
-"stop": 45.5533,
-"atr": 1.5459,
-"soglie_contaminate": {
-"media50": 53.889,
-"media20": 55.2955,
-"quattro_atr": 54.6811,
-"meta_caduta": 54.2725,
-"bollinger": 62.4101,
-"consigliata": 53.889
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": 2.0,
-"30g": -4.31,
-"soglia": -4.31
-},
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": -4.31,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -4.31,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -4.31,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -4.31,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -4.31,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -4.31,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:EYPT:2026-09-10",
 "ticker": "EYPT",
 "kind": "short",
@@ -33432,5 +33357,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:T:2026-10-23",
+"ticker": "T",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-23 21:32",
+"data": "2026-10-23 21:32",
+"prezzo": 21.015,
+"conv": 60,
+"prob_gain": 51,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": -1.4695,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 24.7523,
+"media20": 23.5093,
+"quattro_atr": 24.1598,
+"meta_caduta": 23.8675,
+"bollinger": 25.6617,
+"consigliata": 24.1598
+},
+"stop": 19.4426,
+"atr": 0.7862
 }
 ]
