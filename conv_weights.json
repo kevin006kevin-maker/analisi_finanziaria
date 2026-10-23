@@ -2,7 +2,7 @@
 "_audit": {
 "short": {
 "versione": 2,
-"data": "2026-10-23",
+"data": "2026-10-24",
 "adottati": true,
 "righe": 4291,
 "giorni": 35,
@@ -23,17 +23,17 @@
 },
 "long": {
 "versione": 2,
-"data": "2026-10-23",
+"data": "2026-10-24",
 "adottati": true,
-"righe": 2233,
+"righe": 2232,
 "giorni": 35,
-"scartate_frazionamenti": 36,
+"scartate_frazionamenti": 37,
 "confine": "2026-09-14",
 "righe_train": 1479,
-"righe_verifica": 754,
-"ordina_meglio_appresi": 0.2818,
-"ordina_meglio_a_mano": 0.2583,
-"asticella": 0.2683,
+"righe_verifica": 753,
+"ordina_meglio_appresi": 0.2853,
+"ordina_meglio_a_mano": 0.262,
+"asticella": 0.272,
 "esito": "adottati: ordinano meglio dei pesi a mano",
 "quota_appresa": 0.6,
 "fattori_spenti": [
@@ -54,14 +54,14 @@
 "relstrength": 0.0
 },
 "long": {
-"quality": 0.784,
-"valcheap": 0.467,
-"discount": 0.242,
-"histcheap": 1.029,
-"riskadj": 0.815,
-"ddpen": 0.821,
-"momentum": 0.178,
+"quality": 0.776,
+"valcheap": 0.463,
+"discount": 0.198,
+"histcheap": 1.036,
+"riskadj": 0.807,
+"ddpen": 0.791,
+"momentum": 0.192,
 "prob": 0.0,
-"trappen": 0.385
+"trappen": 0.38
 }
 }
