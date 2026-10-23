@@ -2370,9 +2370,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-10-23",
 "max_price": 97.57,
-"max_date": "2026-08-17 19:56",
-"warn_since": "2026-10-23",
-"warn": "in perdita da 64 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-08-17 19:56"
 },
 "NEM": {
 "kind": "long",
@@ -3596,9 +3594,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-10-23",
 "max_price": 1097.76,
-"max_date": "2026-09-25 15:43",
-"warn_since": "2026-10-23",
-"warn": "in perdita da 59 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-09-25 15:43"
 },
 "MTDR": {
 "kind": "short",
@@ -11547,7 +11543,9 @@
 "max_date": "2026-10-09 21:47",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-23"
+"entry_check": "2026-10-23",
+"warn_since": "2026-10-23",
+"warn": "in perdita da 20 giorni di Borsa: valuta l'uscita"
 },
 "CASY": {
 "kind": "short",
@@ -12631,7 +12629,9 @@
 "max_date": "2026-10-08 21:57",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-23"
+"entry_check": "2026-10-23",
+"warn_since": "2026-10-23",
+"warn": "in perdita da 16 giorni di Borsa: valuta l'uscita"
 },
 "NU": {
 "kind": "short",
@@ -13967,7 +13967,9 @@
 "max_date": "2026-10-16 16:16",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-23"
+"entry_check": "2026-10-23",
+"warn_since": "2026-10-23",
+"warn": "in perdita da 14 giorni di Borsa: valuta l'uscita"
 },
 "ENLT": {
 "kind": "short",
@@ -14811,7 +14813,9 @@
 "max_date": "2026-10-16 23:44",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-23"
+"entry_check": "2026-10-23",
+"warn_since": "2026-10-23",
+"warn": "in perdita da 12 giorni di Borsa: valuta l'uscita"
 },
 "AVBP": {
 "kind": "short",
@@ -15673,7 +15677,9 @@
 "max_date": "2026-10-15 23:22",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-23"
+"entry_check": "2026-10-23",
+"warn_since": "2026-10-23",
+"warn": "in perdita da 9 giorni di Borsa: valuta l'uscita"
 },
 "LQDA": {
 "kind": "short",
