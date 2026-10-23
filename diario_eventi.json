@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:TTAN:2026-09-09",
-"ticker": "TTAN",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-10 01:28",
-"data": "2026-09-10 01:25",
-"prezzo": 57.12,
-"conv": 74,
-"prob_gain": 57,
-"prob_loss": 13,
-"reliab": "🔴 Bassa",
-"mkt": -1.1884,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 83.896,
-"media20": 91.1843,
-"quattro_atr": 82.573,
-"meta_caduta": 78.88,
-"bollinger": 109.3355,
-"consigliata": 82.573
-},
-"stop": 44.3935,
-"atr": 6.3632,
-"res": {
-"7g": 0.07,
-"30g": 27.17,
-"soglia": 27.17
-},
-"res_soglia": {
-"media50": {
-"ret": 27.17,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 27.17,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 27.17,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 27.17,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 27.17,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 27.17,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:KRMN:2026-09-09",
 "ticker": "KRMN",
 "kind": "short",
@@ -32612,5 +32548,32 @@
 },
 "stop": 9.7937,
 "atr": 0.3507
+},
+{
+"episodio": "short:CRS:2026-10-22",
+"ticker": "CRS",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-23 17:29",
+"data": "2026-10-23 17:27",
+"prezzo": 285.7,
+"conv": 72,
+"prob_gain": 52,
+"prob_loss": 6,
+"reliab": "🟡 Media",
+"mkt": -1.0892,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 424.523,
+"media20": 374.111,
+"quattro_atr": 359.4178,
+"meta_caduta": 428.18,
+"bollinger": 434.0155,
+"consigliata": 359.4178
+},
+"stop": 248.8411,
+"atr": 18.4295
 }
 ]
