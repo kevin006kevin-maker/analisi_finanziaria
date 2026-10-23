@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:TBBK:2026-09-09",
-"ticker": "TBBK",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-10 01:28",
-"data": "2026-09-10 01:25",
-"prezzo": 50.03,
-"conv": 82,
-"prob_gain": 59,
-"prob_loss": 6,
-"reliab": "🟡 Media",
-"mkt": -1.1884,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 66.8638,
-"media20": 66.1995,
-"quattro_atr": 61.9114,
-"meta_caduta": 61.04,
-"bollinger": 74.3885,
-"consigliata": 61.9114
-},
-"stop": 44.0893,
-"atr": 2.9704,
-"res": {
-"7g": 0.4,
-"30g": -1.88,
-"soglia": -1.88
-},
-"res_soglia": {
-"media50": {
-"ret": -1.88,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -1.88,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -1.88,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -1.88,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -1.88,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -1.88,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:SYK:2026-09-09",
 "ticker": "SYK",
 "kind": "short",
@@ -32628,6 +32564,26 @@
 "mkt": null,
 "fonte": "osservazione",
 "note": "prezzo salito di almeno il 2% da 61.65",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:CRS:2026-10-22",
+"ticker": "CRS",
+"kind": "short",
+"evento": "salita_2pct",
+"scritto_il": "2026-10-23 02:41",
+"data": "2026-10-23 02:37",
+"prezzo": 368.16,
+"conv": 63,
+"prob_gain": 48,
+"prob_loss": 7,
+"reliab": "🟡 Media",
+"mkt": -0.5283,
+"fonte": "osservazione",
+"note": "prezzo salito di almeno il 2% da 286.57",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
