@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:BBOT:2026-09-09",
-"ticker": "BBOT",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-09 23:06",
-"data": "2026-09-09 23:06",
-"prezzo": 6.755,
-"conv": 73,
-"prob_gain": 57,
-"prob_loss": 8,
-"reliab": "🔴 Bassa",
-"mkt": -1.171,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 8.737,
-"media20": 8.9577,
-"quattro_atr": 9.2322,
-"meta_caduta": 8.1775,
-"bollinger": 10.0866,
-"consigliata": 8.737
-},
-"stop": 5.5164,
-"atr": 0.6193,
-"res": {
-"7g": -26.87,
-"30g": -48.85,
-"soglia": -48.85
-},
-"res_soglia": {
-"media50": {
-"ret": -48.85,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -48.85,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -48.85,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -48.85,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -48.85,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -48.85,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:CASY:2026-09-09",
 "ticker": "CASY",
 "kind": "short",
@@ -32713,5 +32649,32 @@
 },
 "stop": 75.4652,
 "atr": 3.0924
+},
+{
+"episodio": "short:JNJ:2026-10-13",
+"ticker": "JNJ",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-23 02:41",
+"data": "2026-10-23 02:39",
+"prezzo": 257.78,
+"conv": 60,
+"prob_gain": 50,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-23",
+"soglie": {
+"media50": 265.0322,
+"media20": 259.5475,
+"quattro_atr": 281.8601,
+"meta_caduta": 268.105,
+"bollinger": 272.9999,
+"consigliata": 265.0322
+},
+"stop": 245.7399,
+"atr": 6.02
 }
 ]
