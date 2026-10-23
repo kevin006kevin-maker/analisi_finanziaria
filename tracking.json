@@ -875,7 +875,9 @@
 "entry_src": "storico",
 "max_price": 33.48,
 "max_date": "2026-08-25 23:02",
-"exit_notified": false
+"exit_notified": false,
+"warn_since": "2026-10-23",
+"warn": "in perdita da 74 giorni di Borsa: valuta l'uscita"
 },
 "T": {
 "kind": "long",
@@ -2209,7 +2211,9 @@
 "urgenza": "incassa",
 "tipo": "sgonfia"
 },
-"incasso_notified": true
+"incasso_notified": true,
+"warn_since": "2026-10-23",
+"warn": "in perdita da 64 giorni di Borsa: valuta l'uscita"
 },
 "NEM": {
 "kind": "long",
@@ -2887,7 +2891,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-10-23",
 "max_price": 357.05,
-"max_date": "2026-09-21 16:35"
+"max_date": "2026-09-21 16:35",
+"warn_since": "2026-10-23",
+"warn": "in perdita da 62 giorni di Borsa: valuta l'uscita"
 },
 "SMCI": {
 "kind": "long",
@@ -3361,7 +3367,9 @@
 "urgenza": "incassa",
 "tipo": "sgonfia"
 },
-"incasso_notified": true
+"incasso_notified": true,
+"warn_since": "2026-10-23",
+"warn": "in perdita da 59 giorni di Borsa: valuta l'uscita"
 },
 "MTDR": {
 "kind": "short",
@@ -4420,7 +4428,9 @@
 "urgenza": "incassa",
 "tipo": "sgonfia"
 },
-"incasso_notified": true
+"incasso_notified": true,
+"warn_since": "2026-10-23",
+"warn": "in perdita da 58 giorni di Borsa: valuta l'uscita"
 },
 "DIS": {
 "kind": "long",
@@ -6623,9 +6633,7 @@
 "entry_check": "2026-10-23",
 "max_price": 37.94,
 "max_date": "2026-09-08 22:03",
-"incasso_notified": true,
-"warn_since": "2026-10-23",
-"warn": "in perdita da 51 giorni di Borsa: valuta l'uscita"
+"incasso_notified": true
 },
 "CAPR": {
 "kind": "short",
@@ -8050,7 +8058,9 @@
 "max_date": "2026-10-03 00:13",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-23"
+"entry_check": "2026-10-23",
+"warn_since": "2026-10-23",
+"warn": "in perdita da 41 giorni di Borsa: valuta l'uscita"
 },
 "SEDG": {
 "kind": "short",
@@ -8441,7 +8451,9 @@
 "auto": true,
 "notified": true,
 "entry_check": "2026-10-23",
-"exit_notified": false
+"exit_notified": false,
+"warn_since": "2026-10-23",
+"warn": "in perdita da 39 giorni di Borsa: valuta l'uscita"
 },
 "ENI.MI": {
 "kind": "short",
@@ -11335,9 +11347,7 @@
 "auto": true,
 "notified": true,
 "entry_check": "2026-10-22",
-"incasso_notified": true,
-"warn_since": "2026-10-23",
-"warn": "in perdita da 20 giorni di Borsa: valuta l'uscita"
+"incasso_notified": true
 },
 "RELY": {
 "kind": "short",
@@ -12780,7 +12790,9 @@
 "max_date": "2026-10-08 21:57",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-22"
+"entry_check": "2026-10-22",
+"warn_since": "2026-10-23",
+"warn": "in perdita da 15 giorni di Borsa: valuta l'uscita"
 },
 "SAH": {
 "kind": "short",
@@ -12975,9 +12987,7 @@
 "max_date": "2026-10-16 16:16",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-22",
-"warn_since": "2026-10-23",
-"warn": "in perdita da 14 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-22"
 },
 "ENLT": {
 "kind": "short",
@@ -13757,9 +13767,7 @@
 "max_date": "2026-10-16 23:44",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-22",
-"warn_since": "2026-10-23",
-"warn": "in perdita da 12 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-22"
 },
 "AVBP": {
 "kind": "short",
