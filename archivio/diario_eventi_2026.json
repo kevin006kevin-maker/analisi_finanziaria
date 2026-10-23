@@ -20162,5 +20162,69 @@
 "atr": 0.6193,
 "res": {},
 "bad_data": "salto di prezzo oltre il 25%: probabile raggruppamento di azioni"
+},
+{
+"episodio": "short:TTAN:2026-09-09",
+"ticker": "TTAN",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-10 01:28",
+"data": "2026-09-10 01:25",
+"prezzo": 57.12,
+"conv": 74,
+"prob_gain": 57,
+"prob_loss": 13,
+"reliab": "🔴 Bassa",
+"mkt": -1.1884,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 83.896,
+"media20": 91.1843,
+"quattro_atr": 82.573,
+"meta_caduta": 78.88,
+"bollinger": 109.3355,
+"consigliata": 82.573
+},
+"stop": 44.3935,
+"atr": 6.3632,
+"res": {
+"7g": 0.07,
+"30g": 27.17,
+"soglia": 27.17
+},
+"res_soglia": {
+"media50": {
+"ret": 27.17,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": 27.17,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": 27.17,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": 27.17,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": 27.17,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": 27.17,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
