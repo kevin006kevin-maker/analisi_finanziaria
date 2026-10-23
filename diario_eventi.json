@@ -1,34 +1,5 @@
 [
 {
-"episodio": "short:BBOT:2026-09-09",
-"ticker": "BBOT",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-10 01:28",
-"data": "2026-09-10 01:25",
-"prezzo": 6.755,
-"conv": 75,
-"prob_gain": 57,
-"prob_loss": 8,
-"reliab": "🔴 Bassa",
-"mkt": -1.1884,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 8.737,
-"media20": 8.9577,
-"quattro_atr": 9.2322,
-"meta_caduta": 8.1775,
-"bollinger": 10.0866,
-"consigliata": 8.737
-},
-"stop": 5.5164,
-"atr": 0.6193,
-"res": {},
-"bad_data": "salto di prezzo oltre il 25%: probabile raggruppamento di azioni"
-},
-{
 "episodio": "short:TTAN:2026-09-09",
 "ticker": "TTAN",
 "kind": "short",
@@ -32614,5 +32585,32 @@
 "stop": 9.6183,
 "atr": 0.4208,
 "res": {}
+},
+{
+"episodio": "short:FLG:2026-10-23",
+"ticker": "FLG",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-23 17:27",
+"data": "2026-10-23 17:27",
+"prezzo": 10.495,
+"conv": 70,
+"prob_gain": 53,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": -1.0892,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 12.4617,
+"media20": 11.3542,
+"quattro_atr": 11.8976,
+"meta_caduta": 12.3975,
+"bollinger": 12.0556,
+"consigliata": 11.8976
+},
+"stop": 9.7937,
+"atr": 0.3507
 }
 ]
