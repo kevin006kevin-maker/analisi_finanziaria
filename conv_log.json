@@ -1,46 +1,6 @@
 [
 {
 "date": "2026-10-15",
-"ticker": "SAH",
-"kind": "long",
-"price": 60.05,
-"conv": 41,
-"factors": {
-"discount": 46.698,
-"histcheap": 1.03,
-"riskadj": -0.68,
-"ddpen": -21.3,
-"momentum": 0.7766,
-"prob": 58,
-"quality": 43.7,
-"valcheap": 0.4734,
-"trappen": 3
-},
-"ret_5d": 5.58,
-"ret_21d": null
-},
-{
-"date": "2026-10-15",
-"ticker": "NU",
-"kind": "long",
-"price": 14.93,
-"conv": 33,
-"factors": {
-"discount": 20.4158,
-"histcheap": 0.03,
-"riskadj": -0.16,
-"ddpen": -20.94,
-"momentum": 4.172,
-"prob": 49,
-"quality": 58.9,
-"valcheap": -2.7533,
-"trappen": 3
-},
-"ret_5d": -1.44,
-"ret_21d": null
-},
-{
-"date": "2026-10-15",
 "ticker": "PLNT",
 "kind": "long",
 "price": 46.95,
@@ -39231,6 +39191,27 @@
 "quality": 37.6,
 "valcheap": -3.0,
 "trappen": -1
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-24",
+"ticker": "THRM",
+"kind": "short",
+"price": 28.6,
+"conv": 55,
+"factors": {
+"discount": 37.2945,
+"histcheap": 1.45,
+"riskadj": -1.1,
+"ddpen": -17.51,
+"momentum": 1.5152,
+"prob": 39,
+"oversold": -37.6714,
+"rebound": 24.6126,
+"trend": -1.0,
+"relstrength": -1.0483
 },
 "ret_5d": null,
 "ret_21d": null
