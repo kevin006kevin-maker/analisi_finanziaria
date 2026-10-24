@@ -1,26 +1,6 @@
 [
 {
 "date": "2026-10-15",
-"ticker": "GFI",
-"kind": "long",
-"price": 35.55,
-"conv": 60,
-"factors": {
-"discount": 42.2045,
-"histcheap": 1.14,
-"riskadj": -0.51,
-"ddpen": -28.26,
-"momentum": -1.4265,
-"prob": 45,
-"quality": 89.5,
-"valcheap": -0.5289,
-"trappen": 3
-},
-"ret_5d": -1.38,
-"ret_21d": null
-},
-{
-"date": "2026-10-15",
 "ticker": "NESR",
 "kind": "long",
 "price": 19.58,
@@ -39212,6 +39192,27 @@
 "quality": 62.4,
 "valcheap": -1.115,
 "trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-24",
+"ticker": "BLND",
+"kind": "short",
+"price": 1.17,
+"conv": 28,
+"factors": {
+"discount": 67.1348,
+"histcheap": 1.11,
+"riskadj": -2.14,
+"ddpen": -49.08,
+"momentum": -30.0,
+"prob": 38,
+"oversold": -55.2471,
+"rebound": 7.1692,
+"trend": -1.0,
+"relstrength": 30.4669
 },
 "ret_5d": null,
 "ret_21d": null
