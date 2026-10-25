@@ -1074,6 +1074,16 @@
 "prob_gain": 76,
 "prob_loss": 15,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-10-25 02:31",
+"conv": 48,
+"price": 26.11,
+"mkt": -1.5462,
+"occ": 64,
+"prob_gain": 76,
+"prob_loss": 15,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -1627,6 +1637,16 @@
 {
 "date": "2026-10-25 00:27",
 "conv": 61,
+"price": 13.45,
+"mkt": -1.5462,
+"occ": 97,
+"prob_gain": 79,
+"prob_loss": 14,
+"reliab": "🔴 Bassa"
+},
+{
+"date": "2026-10-25 02:31",
+"conv": 62,
 "price": 13.45,
 "mkt": -1.5462,
 "occ": 97,
@@ -3708,24 +3728,27 @@
 "name": "Newmont Corporation",
 "obs": [
 {
-"date": "2026-08-29 03:25",
-"conv": null,
-"price": 127.98,
-"stale": true
-},
-{
-"date": "2026-08-29 10:04",
-"conv": null,
-"price": 132.29,
-"stale": true
-},
-{
-"date": "2026-08-29 21:59",
-"conv": null,
-"price": 127.98,
-"stale": true
+"date": "2026-10-25 02:31",
+"conv": 69,
+"price": 108.87,
+"mkt": -1.5462,
+"occ": 81,
+"prob_gain": 76,
+"prob_loss": 13,
+"reliab": "🟡 Media"
 }
-]
+],
+"ripartita": "2026-10-25",
+"primo": {
+"date": "2026-10-25 02:31",
+"conv": 69,
+"price": 108.87,
+"mkt": -1.5462,
+"occ": 81,
+"prob_gain": 76,
+"prob_loss": 13,
+"reliab": "🟡 Media"
+}
 },
 "short:SEDG": {
 "ticker": "SEDG",
@@ -5383,6 +5406,16 @@
 {
 "date": "2026-10-25 00:27",
 "conv": 48,
+"price": 48.46,
+"mkt": -1.5462,
+"occ": 61,
+"prob_gain": 67,
+"prob_loss": 18,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-10-25 02:31",
+"conv": 47,
 "price": 48.46,
 "mkt": -1.5462,
 "occ": 61,
@@ -8912,6 +8945,16 @@
 {
 "date": "2026-10-25 00:27",
 "conv": 47,
+"price": 32.51,
+"mkt": -1.5462,
+"occ": 89,
+"prob_gain": 73,
+"prob_loss": 16,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-10-25 02:31",
+"conv": 46,
 "price": 32.51,
 "mkt": -1.5462,
 "occ": 89,
@@ -18377,7 +18420,7 @@
 "long:WDC": {
 "ticker": "WDC",
 "kind": "long",
-"name": "WESTERN DIGITAL CORPORATION",
+"name": "Western Digital Corp",
 "obs": [
 {
 "date": "2026-10-19 01:07",
@@ -18672,6 +18715,16 @@
 "conv": null,
 "price": 343.67,
 "stale": true
+},
+{
+"date": "2026-10-25 02:31",
+"conv": 55,
+"price": 343.67,
+"mkt": -1.5462,
+"occ": 88,
+"prob_gain": 64,
+"prob_loss": 30,
+"reliab": "🔴 Bassa"
 }
 ],
 "primo": {
