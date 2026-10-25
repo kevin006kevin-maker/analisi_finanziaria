@@ -1,47 +1,5 @@
 [
 {
-"episodio": "long:EIX:2026-08-31",
-"ticker": "EIX",
-"kind": "long",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-10 01:30",
-"data": "2026-09-09 23:07",
-"prezzo": 57.44,
-"conv": 78,
-"prob_gain": 60,
-"prob_loss": 7,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-10",
-"soglie": {
-"media50": 71.864,
-"media20": 67.0545,
-"quattro_atr": 71.5308,
-"meta_caduta": 68.91,
-"bollinger": 82.8755,
-"consigliata": 71.5308
-},
-"stop": 50.3946,
-"atr": 3.5227,
-"soglie_contaminate": {
-"media50": 71.864,
-"media20": 67.0545,
-"quattro_atr": 71.5308,
-"meta_caduta": 68.91,
-"bollinger": 82.8755,
-"consigliata": 71.5308
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": -3.73,
-"30g": -5.08
-},
-"taglio_corretto": true
-},
-{
 "episodio": "long:PCG:2026-08-31",
 "ticker": "PCG",
 "kind": "long",
@@ -33251,5 +33209,32 @@
 },
 "stop": 9.3902,
 "atr": 0.3449
+},
+{
+"episodio": "short:ADXN:2026-10-26",
+"ticker": "ADXN",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-26 00:15",
+"data": "2026-08-27 02:02",
+"prezzo": 4.23,
+"conv": 75,
+"prob_gain": 52,
+"prob_loss": 9,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 5.676,
+"media20": 5.2885,
+"quattro_atr": 6.1061,
+"meta_caduta": 5.465,
+"bollinger": 6.7996,
+"consigliata": 5.676
+},
+"stop": 3.292,
+"atr": 0.469
 }
 ]
