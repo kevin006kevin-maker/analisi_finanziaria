@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:LULG:2026-09-04",
-"ticker": "LULG",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-10 01:30",
-"data": "2026-09-09 23:06",
-"prezzo": 4.18,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-10",
-"soglie": {
-"media50": 6.2982,
-"media20": 6.0268,
-"quattro_atr": 6.5096,
-"meta_caduta": 5.8375,
-"bollinger": 7.5776,
-"consigliata": 6.2982
-},
-"stop": 3.0152,
-"atr": 0.5824,
-"soglie_contaminate": {
-"media50": 6.2982,
-"media20": 6.0268,
-"quattro_atr": 6.5096,
-"meta_caduta": 5.8375,
-"bollinger": 7.5776,
-"consigliata": 6.2982
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": -4.33,
-"30g": -15.07,
-"soglia": -15.07
-},
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": -15.07,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -15.07,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -15.07,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -15.07,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -15.07,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -15.07,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:YSS:2026-09-05",
 "ticker": "YSS",
 "kind": "short",
@@ -33136,5 +33061,32 @@
 },
 "stop": 15.1718,
 "atr": 1.6841
+},
+{
+"episodio": "short:DY:2026-10-21",
+"ticker": "DY",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-26 00:19",
+"data": "2026-10-26 00:12",
+"prezzo": 224.56,
+"conv": 58,
+"prob_gain": 58,
+"prob_loss": 11,
+"reliab": "🟡 Media",
+"mkt": -1.5462,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-26",
+"soglie": {
+"media50": 297.0512,
+"media20": 262.195,
+"quattro_atr": 275.01,
+"meta_caduta": 328.725,
+"bollinger": 296.7843,
+"consigliata": 275.01
+},
+"stop": 199.335,
+"atr": 12.6125
 }
 ]
