@@ -17466,5 +17466,62 @@
 "mkt": null
 }
 }
+},
+{
+"ticker": "BKD",
+"kind": "short",
+"date": "2026-10-25",
+"promo_price": 10.08,
+"obs_price": 10.12,
+"obs_date": "2026-10-11",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": 11.2862,
+"stop": 9.3902,
+"reliab": "🟡 Media",
+"prob_gain": 48,
+"prob_loss": 10,
+"conv": 83,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-11 08:25",
+"prezzo": 10.12,
+"conv": 61,
+"prob_gain": 47,
+"prob_loss": 9,
+"reliab": "🟡 Media",
+"mkt": 2.0186
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-25 06:18",
+"prezzo": 10.08,
+"conv": 83,
+"prob_gain": 48,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
