@@ -1,47 +1,5 @@
 [
 {
-"episodio": "long:PCG:2026-08-31",
-"ticker": "PCG",
-"kind": "long",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-10 01:30",
-"data": "2026-09-09 23:07",
-"prezzo": 14.19,
-"conv": 80,
-"prob_gain": 55,
-"prob_loss": 4,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-10",
-"soglie": {
-"media50": 16.9788,
-"media20": 16.419,
-"quattro_atr": 17.7683,
-"meta_caduta": 16.275,
-"bollinger": 20.1964,
-"consigliata": 16.9788
-},
-"stop": 12.4009,
-"atr": 0.8946,
-"soglie_contaminate": {
-"media50": 16.9788,
-"media20": 16.419,
-"quattro_atr": 17.7691,
-"meta_caduta": 16.275,
-"bollinger": 20.1964,
-"consigliata": 16.9788
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": -6.03,
-"30g": -10.82
-},
-"taglio_corretto": true
-},
-{
 "episodio": "short:MOMO:2026-09-04",
 "ticker": "MOMO",
 "kind": "short",
@@ -33236,5 +33194,32 @@
 },
 "stop": 3.292,
 "atr": 0.469
+},
+{
+"episodio": "short:FLG:2026-10-23",
+"ticker": "FLG",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-26 00:15",
+"data": "2026-10-26 00:12",
+"prezzo": 10.38,
+"conv": 68,
+"prob_gain": 52,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": -1.5462,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 12.4594,
+"media20": 11.3485,
+"quattro_atr": 11.7812,
+"meta_caduta": 12.34,
+"bollinger": 12.0807,
+"consigliata": 11.7812
+},
+"stop": 9.6794,
+"atr": 0.3503
 }
 ]
