@@ -1,26 +1,6 @@
 [
 {
 "date": "2026-10-16",
-"ticker": "SAH",
-"kind": "long",
-"price": 63.51,
-"conv": 34,
-"factors": {
-"discount": 43.6268,
-"histcheap": 0.71,
-"riskadj": -0.5,
-"ddpen": -21.47,
-"momentum": -3.2515,
-"prob": 40,
-"quality": 28.8,
-"valcheap": -0.247,
-"trappen": 1
-},
-"ret_5d": -4.7,
-"ret_21d": null
-},
-{
-"date": "2026-10-16",
 "ticker": "NU",
 "kind": "long",
 "price": 14.73,
@@ -39368,6 +39348,27 @@
 "rebound": 4.3324,
 "trend": 1.0,
 "relstrength": 2.5643
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-25",
+"ticker": "CRWV",
+"kind": "short",
+"price": 54.235,
+"conv": 45,
+"factors": {
+"discount": 61.2413,
+"histcheap": 2.23,
+"riskadj": -1.58,
+"ddpen": -36.72,
+"momentum": 11.655,
+"prob": 26,
+"oversold": -25.7525,
+"rebound": 53.5309,
+"trend": -1.0,
+"relstrength": -11.1881
 },
 "ret_5d": null,
 "ret_21d": null
