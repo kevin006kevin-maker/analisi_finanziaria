@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:MOMO:2026-09-04",
-"ticker": "MOMO",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-10 01:30",
-"data": "2026-09-09 23:06",
-"prezzo": 5.18,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-10",
-"soglie": {
-"media50": 5.8123,
-"media20": 5.6035,
-"quattro_atr": 5.8411,
-"meta_caduta": 5.695,
-"bollinger": 6.0478,
-"consigliata": 5.8123
-},
-"stop": 4.8494,
-"atr": 0.1653,
-"soglie_contaminate": {
-"media50": 5.8123,
-"media20": 5.6035,
-"quattro_atr": 5.8411,
-"meta_caduta": 5.695,
-"bollinger": 6.0478,
-"consigliata": 5.8123
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": -3.76,
-"30g": -7.82,
-"soglia": -7.82
-},
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": -7.82,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -7.82,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -7.82,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -7.82,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -7.82,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -7.82,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:FGL:2026-09-04",
 "ticker": "FGL",
 "kind": "short",
@@ -33221,5 +33146,32 @@
 },
 "stop": 9.6794,
 "atr": 0.3503
+},
+{
+"episodio": "short:SPHR:2026-10-05",
+"ticker": "SPHR",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-26 00:19",
+"data": "2026-10-24 07:46",
+"prezzo": 108.94,
+"conv": 77,
+"prob_gain": 53,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-26",
+"soglie": {
+"media50": 134.207,
+"media20": 113.782,
+"quattro_atr": 134.4243,
+"meta_caduta": 142.66,
+"bollinger": 137.6366,
+"consigliata": 134.207
+},
+"stop": 96.1979,
+"atr": 6.3711
 }
 ]
