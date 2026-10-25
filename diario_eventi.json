@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:UMC:2026-08-17",
-"ticker": "UMC",
-"kind": "long",
-"evento": "fine_verifica",
-"scritto_il": "2026-09-10 01:30",
-"data": "2026-09-10 01:29",
-"prezzo": 22.69,
-"conv": 53,
-"prob_gain": 45,
-"prob_loss": 46,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 10 giorni di Borsa dalla promozione",
-"dovuto_il": "2026-09-10",
-"soglie": {
-"media50": null,
-"media20": null,
-"quattro_atr": 26.7723,
-"meta_caduta": 25.35,
-"bollinger": null,
-"consigliata": 26.7723
-},
-"stop": 20.6488,
-"atr": 1.0206,
-"res": {
-"7g": 6.65,
-"30g": -0.64
-}
-},
-{
 "episodio": "short:VISN:2026-08-29",
 "ticker": "VISN",
 "kind": "short",
@@ -33303,5 +33272,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "long:NEM:2026-10-25",
+"ticker": "NEM",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-25 02:31",
+"data": "2026-10-25 02:31",
+"prezzo": 108.87,
+"conv": 69,
+"prob_gain": 76,
+"prob_loss": 13,
+"reliab": "🟡 Media",
+"mkt": -1.5462,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 121.6654,
+"media20": 115.576,
+"quattro_atr": 124.7206,
+"meta_caduta": 122.005,
+"bollinger": 120.1257,
+"consigliata": 121.6654
+},
+"stop": 100.9447,
+"atr": 3.9627
 }
 ]
