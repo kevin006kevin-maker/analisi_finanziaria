@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:LULG:2026-09-04",
-"ticker": "LULG",
-"kind": "short",
-"evento": "promozione",
-"scritto_il": "2026-09-10 03:18",
-"data": "2026-09-10 03:18",
-"prezzo": 4.47,
-"conv": 66,
-"prob_gain": 59,
-"prob_loss": 20,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": 6.3365,
-"media20": 6.174,
-"quattro_atr": 6.8342,
-"meta_caduta": 5.9825,
-"bollinger": 7.5336,
-"consigliata": 6.3365
-},
-"stop": 3.2879,
-"atr": 0.5911,
-"res": {
-"7g": -14.32,
-"30g": -19.02,
-"soglia": -19.02
-},
-"res_soglia": {
-"media50": {
-"ret": -19.02,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -19.02,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -19.02,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -19.02,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -19.02,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -19.02,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:CASY:2026-09-09",
 "ticker": "CASY",
 "kind": "short",
@@ -34572,6 +34508,26 @@
 "mkt": null,
 "fonte": "monitoraggio",
 "note": "prezzo salito di almeno il 2% da 21.64",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "long:PBR-A:2026-10-26",
+"ticker": "PBR-A",
+"kind": "long",
+"evento": "salita_2pct",
+"scritto_il": "2026-10-26 21:32",
+"data": "2026-10-26 21:30",
+"prezzo": 19.9,
+"conv": 60,
+"prob_gain": 89,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "prezzo salito di almeno il 2% da 18.995",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
