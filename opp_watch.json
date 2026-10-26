@@ -263,7 +263,7 @@
 "long:KGC": {
 "ticker": "KGC",
 "kind": "long",
-"name": "Kinross Gold Corporation",
+"name": "Kinross Gold Corp",
 "obs": [
 {
 "date": "2026-10-21 00:40",
@@ -516,6 +516,16 @@
 "prob_gain": 70,
 "prob_loss": 21,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-10-26 16:11",
+"conv": 67,
+"price": 22.425,
+"mkt": 0.145,
+"occ": 100,
+"prob_gain": 65,
+"prob_loss": 22,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -535,46 +545,27 @@
 "name": "Petroleo Brasileiro SA Petrobras",
 "obs": [
 {
-"date": "2026-09-01 02:22",
-"conv": 55,
-"price": 19.35,
-"mkt": 1.1268,
-"occ": 55,
-"prob_gain": 62,
-"prob_loss": 24,
-"reliab": "🟢 Alta"
-},
-{
-"date": "2026-09-01 07:26",
-"conv": 62,
-"price": 19.35,
-"mkt": 2.6225,
-"occ": 55,
-"prob_gain": 59,
-"prob_loss": 24,
-"reliab": "🟢 Alta"
-},
-{
-"date": "2026-09-01 12:21",
-"conv": 59,
-"price": 19.35,
-"mkt": 2.6225,
-"occ": 55,
-"prob_gain": 62,
-"prob_loss": 24,
-"reliab": "🟢 Alta"
+"date": "2026-10-26 16:11",
+"conv": 69,
+"price": 21.64,
+"mkt": 0.145,
+"occ": 65,
+"prob_gain": 76,
+"prob_loss": 13,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
-"date": "2026-08-16 21:44",
-"conv": 72,
-"price": 17.88,
-"mkt": 4.3991,
-"occ": 63,
-"prob_gain": 69,
-"prob_loss": 18,
-"reliab": "🟢 Alta"
-}
+"date": "2026-10-26 16:11",
+"conv": 69,
+"price": 21.64,
+"mkt": 0.145,
+"occ": 65,
+"prob_gain": 76,
+"prob_loss": 13,
+"reliab": "🟡 Media"
+},
+"ripartita": "2026-10-26"
 },
 "long:DDS": {
 "ticker": "DDS",
@@ -920,6 +911,16 @@
 "prob_gain": 76,
 "prob_loss": 15,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-10-26 16:11",
+"conv": 44,
+"price": 26.765,
+"mkt": 0.145,
+"occ": 62,
+"prob_gain": 72,
+"prob_loss": 18,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -986,42 +987,27 @@
 "name": "Petroleo Brasileiro SA Petrobras",
 "obs": [
 {
-"date": "2026-08-26 20:16",
-"conv": 84,
-"price": 16.205,
-"mkt": 4.8691,
-"occ": 78,
+"date": "2026-10-26 16:11",
+"conv": 68,
+"price": 18.995,
+"mkt": 0.145,
+"occ": 67,
 "prob_gain": 80,
 "prob_loss": 10,
-"reliab": "🟢 Alta"
-},
-{
-"date": "2026-08-26 22:31",
-"conv": null,
-"price": 16.02,
-"stale": true
-},
-{
-"date": "2026-08-28 07:05",
-"conv": 64,
-"price": 16.54,
-"mkt": 3.9443,
-"occ": 61,
-"prob_gain": 70,
-"prob_loss": 18,
-"reliab": "🟢 Alta"
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
-"date": "2026-08-17 05:28",
-"conv": 70,
-"price": 16.07,
-"mkt": 4.3991,
-"occ": 63,
-"prob_gain": 67,
-"prob_loss": 17,
-"reliab": "🟢 Alta"
-}
+"date": "2026-10-26 16:11",
+"conv": 68,
+"price": 18.995,
+"mkt": 0.145,
+"occ": 67,
+"prob_gain": 80,
+"prob_loss": 10,
+"reliab": "🟡 Media"
+},
+"ripartita": "2026-10-26"
 },
 "short:STMMI.MI": {
 "ticker": "STMMI.MI",
@@ -1738,6 +1724,16 @@
 "prob_gain": 69,
 "prob_loss": 22,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-10-26 16:11",
+"conv": 46,
+"price": 40.13,
+"mkt": 0.145,
+"occ": 81,
+"prob_gain": 68,
+"prob_loss": 22,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -2019,6 +2015,16 @@
 "prob_gain": 57,
 "prob_loss": 34,
 "reliab": "🔴 Bassa"
+},
+{
+"date": "2026-10-26 16:11",
+"conv": 54,
+"price": 19.185,
+"mkt": 0.145,
+"occ": 76,
+"prob_gain": 57,
+"prob_loss": 36,
+"reliab": "🔴 Bassa"
 }
 ],
 "primo": {
@@ -2052,7 +2058,7 @@
 "long:T": {
 "ticker": "T",
 "kind": "long",
-"name": "AT&T INC.",
+"name": "AT&T Inc",
 "obs": [
 {
 "date": "2026-10-21 00:40",
@@ -2342,6 +2348,16 @@
 "occ": 66,
 "prob_gain": 82,
 "prob_loss": 7,
+"reliab": "🟢 Alta"
+},
+{
+"date": "2026-10-26 16:11",
+"conv": 52,
+"price": 21.0724,
+"mkt": 0.145,
+"occ": 62,
+"prob_gain": 67,
+"prob_loss": 17,
 "reliab": "🟢 Alta"
 }
 ],
@@ -3378,6 +3394,16 @@
 "prob_gain": 76,
 "prob_loss": 13,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-10-26 16:11",
+"conv": 66,
+"price": 109.32,
+"mkt": 0.145,
+"occ": 81,
+"prob_gain": 69,
+"prob_loss": 21,
+"reliab": "🟡 Media"
 }
 ],
 "ripartita": "2026-10-25",
@@ -3656,6 +3682,16 @@
 "conv": null,
 "price": 16.26,
 "stale": true
+},
+{
+"date": "2026-10-26 16:11",
+"conv": 65,
+"price": 16.31,
+"mkt": 0.145,
+"occ": 93,
+"prob_gain": 69,
+"prob_loss": 23,
+"reliab": "🔴 Bassa"
 }
 ],
 "primo": {
@@ -5028,6 +5064,16 @@
 "prob_gain": 67,
 "prob_loss": 18,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-10-26 16:11",
+"conv": 40,
+"price": 49.255,
+"mkt": 0.145,
+"occ": 60,
+"prob_gain": 68,
+"prob_loss": 17,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -5092,7 +5138,7 @@
 "long:DY": {
 "ticker": "DY",
 "kind": "long",
-"name": "DYCOM INDUSTRIES, INC.",
+"name": "Dycom Industries Inc",
 "obs": [
 {
 "date": "2026-10-21 00:40",
@@ -5352,6 +5398,16 @@
 "occ": 85,
 "prob_gain": 77,
 "prob_loss": 15,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-10-26 16:11",
+"conv": 51,
+"price": 231.13,
+"mkt": 0.145,
+"occ": 80,
+"prob_gain": 70,
+"prob_loss": 21,
 "reliab": "🟡 Media"
 }
 ],
@@ -5710,6 +5766,16 @@
 "conv": null,
 "price": 17.91,
 "stale": true
+},
+{
+"date": "2026-10-26 16:11",
+"conv": 48,
+"price": 18.655,
+"mkt": 0.145,
+"occ": 84,
+"prob_gain": 63,
+"prob_loss": 26,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -5726,7 +5792,7 @@
 "long:HMY": {
 "ticker": "HMY",
 "kind": "long",
-"name": "Harmony Gold Mining Company Lim",
+"name": "Harmony Gold Mining Company Ltd",
 "obs": [
 {
 "date": "2026-10-21 00:40",
@@ -5982,6 +6048,16 @@
 "occ": 99,
 "prob_gain": 72,
 "prob_loss": 18,
+"reliab": "🔴 Bassa"
+},
+{
+"date": "2026-10-26 16:11",
+"conv": 61,
+"price": 15.93,
+"mkt": 0.145,
+"occ": 99,
+"prob_gain": 70,
+"prob_loss": 23,
 "reliab": "🔴 Bassa"
 }
 ],
@@ -6334,6 +6410,16 @@
 "conv": null,
 "price": 57.02,
 "stale": true
+},
+{
+"date": "2026-10-26 16:11",
+"conv": 41,
+"price": 55.32,
+"mkt": 0.145,
+"occ": 74,
+"prob_gain": 66,
+"prob_loss": 22,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -6428,7 +6514,7 @@
 "long:GAP": {
 "ticker": "GAP",
 "kind": "long",
-"name": "GAP, INC",
+"name": "Gap Inc",
 "obs": [
 {
 "date": "2026-10-21 00:40",
@@ -6667,6 +6753,16 @@
 "prob_gain": 68,
 "prob_loss": 18,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-10-26 16:11",
+"conv": 54,
+"price": 22.595,
+"mkt": 0.145,
+"occ": 72,
+"prob_gain": 75,
+"prob_loss": 13,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -6861,7 +6957,7 @@
 "long:EIX": {
 "ticker": "EIX",
 "kind": "long",
-"name": "EDISON INTERNATIONAL",
+"name": "Edison International",
 "obs": [
 {
 "date": "2026-10-21 00:40",
@@ -7146,6 +7242,16 @@
 "prob_gain": 72,
 "prob_loss": 16,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-10-26 16:11",
+"conv": 58,
+"price": 57.48,
+"mkt": 0.145,
+"occ": 69,
+"prob_gain": 71,
+"prob_loss": 16,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -7365,6 +7471,16 @@
 "conv": null,
 "price": 12.63,
 "stale": true
+},
+{
+"date": "2026-10-26 16:11",
+"conv": 55,
+"price": 12.705,
+"mkt": 0.145,
+"occ": 66,
+"prob_gain": 75,
+"prob_loss": 14,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -8306,6 +8422,16 @@
 "occ": 89,
 "prob_gain": 73,
 "prob_loss": 16,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-10-26 16:11",
+"conv": 41,
+"price": 32.875,
+"mkt": 0.145,
+"occ": 88,
+"prob_gain": 74,
+"prob_loss": 15,
 "reliab": "🟡 Media"
 }
 ],
@@ -10224,7 +10350,7 @@
 "long:ENVA": {
 "ticker": "ENVA",
 "kind": "long",
-"name": "Enova International Inc",
+"name": "Enova International, Inc.",
 "obs": [
 {
 "date": "2026-10-21 00:40",
@@ -10462,6 +10588,16 @@
 "occ": 91,
 "prob_gain": 74,
 "prob_loss": 18,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-10-26 16:11",
+"conv": 48,
+"price": 172.49,
+"mkt": 0.145,
+"occ": 70,
+"prob_gain": 67,
+"prob_loss": 22,
 "reliab": "🟡 Media"
 }
 ],
@@ -10774,6 +10910,16 @@
 "occ": 69,
 "prob_gain": 76,
 "prob_loss": 8,
+"reliab": "🟢 Alta"
+},
+{
+"date": "2026-10-26 16:11",
+"conv": 68,
+"price": 18.38,
+"mkt": 0.145,
+"occ": 69,
+"prob_gain": 74,
+"prob_loss": 7,
 "reliab": "🟢 Alta"
 }
 ],
@@ -12187,6 +12333,16 @@
 "prob_gain": 69,
 "prob_loss": 18,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-10-26 16:11",
+"conv": 56,
+"price": 12.1999,
+"mkt": 0.145,
+"occ": 90,
+"prob_gain": 87,
+"prob_loss": 6,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -13250,7 +13406,7 @@
 "long:DAVE": {
 "ticker": "DAVE",
 "kind": "long",
-"name": "Dave Inc",
+"name": "Dave Inc./DE",
 "obs": [
 {
 "date": "2026-10-21 00:40",
@@ -13460,6 +13616,16 @@
 "occ": 76,
 "prob_gain": 65,
 "prob_loss": 28,
+"reliab": "🔴 Bassa"
+},
+{
+"date": "2026-10-26 16:11",
+"conv": 53,
+"price": 328.09,
+"mkt": 0.145,
+"occ": 84,
+"prob_gain": 69,
+"prob_loss": 23,
 "reliab": "🔴 Bassa"
 }
 ],
@@ -13870,7 +14036,7 @@
 "long:ACAD": {
 "ticker": "ACAD",
 "kind": "long",
-"name": "ACADIA Pharmaceuticals Inc",
+"name": "ACADIA PHARMACEUTICALS INC.",
 "obs": [
 {
 "date": "2026-10-21 00:40",
@@ -14140,6 +14306,16 @@
 "occ": 91,
 "prob_gain": 62,
 "prob_loss": 25,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-10-26 16:11",
+"conv": 61,
+"price": 19.62,
+"mkt": 0.145,
+"occ": 95,
+"prob_gain": 70,
+"prob_loss": 20,
 "reliab": "🟡 Media"
 }
 ],
@@ -14842,7 +15018,7 @@
 "long:NESR": {
 "ticker": "NESR",
 "kind": "long",
-"name": "National Energy Services Reunited ",
+"name": "NATIONAL ENERGY SERVICES REUNITED ",
 "obs": [
 {
 "date": "2026-10-21 00:40",
@@ -15070,6 +15246,16 @@
 "occ": 76,
 "prob_gain": 61,
 "prob_loss": 28,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-10-26 16:11",
+"conv": 45,
+"price": 20.6183,
+"mkt": 0.145,
+"occ": 65,
+"prob_gain": 53,
+"prob_loss": 38,
 "reliab": "🟡 Media"
 }
 ],
@@ -17081,6 +17267,16 @@
 "prob_gain": 64,
 "prob_loss": 30,
 "reliab": "🔴 Bassa"
+},
+{
+"date": "2026-10-26 16:11",
+"conv": 54,
+"price": 354.105,
+"mkt": 0.145,
+"occ": 88,
+"prob_gain": 55,
+"prob_loss": 36,
+"reliab": "🔴 Bassa"
 }
 ],
 "primo": {
@@ -17837,6 +18033,16 @@
 "occ": 85,
 "prob_gain": 65,
 "prob_loss": 25,
+"reliab": "🔴 Bassa"
+},
+{
+"date": "2026-10-26 16:11",
+"conv": 62,
+"price": 906.08,
+"mkt": 0.145,
+"occ": 83,
+"prob_gain": 61,
+"prob_loss": 30,
 "reliab": "🔴 Bassa"
 }
 ],
@@ -18927,6 +19133,16 @@
 "price": 20.4,
 "mkt": -1.5462,
 "occ": 66,
+"prob_gain": 81,
+"prob_loss": 6,
+"reliab": "🟢 Alta"
+},
+{
+"date": "2026-10-26 16:11",
+"conv": 57,
+"price": 20.23,
+"mkt": 0.145,
+"occ": 67,
 "prob_gain": 81,
 "prob_loss": 6,
 "reliab": "🟢 Alta"
@@ -20320,6 +20536,16 @@
 "occ": 83,
 "prob_gain": 88,
 "prob_loss": 5,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-10-26 16:11",
+"conv": 70,
+"price": 10.17,
+"mkt": 0.145,
+"occ": 83,
+"prob_gain": 85,
+"prob_loss": 8,
 "reliab": "🟡 Media"
 }
 ],
