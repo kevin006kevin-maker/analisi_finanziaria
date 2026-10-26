@@ -21198,5 +21198,69 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:ENOV:2026-09-09",
+"ticker": "ENOV",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-10 03:17",
+"data": "2026-09-10 03:17",
+"prezzo": 19.98,
+"conv": 74,
+"prob_gain": 52,
+"prob_loss": 11,
+"reliab": "🔴 Bassa",
+"mkt": -1.1884,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 25.435,
+"media20": 23.958,
+"quattro_atr": 25.818,
+"meta_caduta": 25.7,
+"bollinger": 29.1297,
+"consigliata": 25.435
+},
+"stop": 17.061,
+"atr": 1.4595,
+"res": {
+"7g": -9.16,
+"30g": -9.41,
+"soglia": -9.41
+},
+"res_soglia": {
+"media50": {
+"ret": -9.41,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -9.41,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -9.41,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -9.41,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -9.41,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -9.41,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
