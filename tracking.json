@@ -3244,7 +3244,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-10-26",
 "max_price": 1892.6801,
-"max_date": "2026-09-22 19:49"
+"max_date": "2026-09-22 19:49",
+"warn_since": "2026-10-26",
+"warn": "in perdita da 60 giorni di Borsa: valuta l'uscita"
 },
 "REPL": {
 "kind": "short",
@@ -6654,7 +6656,9 @@
 "auto": true,
 "notified": true,
 "entry_check": "2026-10-26",
-"incasso_notified": true
+"incasso_notified": true,
+"warn_since": "2026-10-26",
+"warn": "in perdita da 42 giorni di Borsa: valuta l'uscita"
 },
 "INTC": {
 "kind": "short",
@@ -10177,7 +10181,9 @@
 "max_date": "2026-10-16 16:16",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-26"
+"entry_check": "2026-10-26",
+"warn_since": "2026-10-26",
+"warn": "in perdita da 15 giorni di Borsa: valuta l'uscita"
 },
 "ENLT": {
 "kind": "short",
