@@ -21326,5 +21326,80 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:GRAB:2026-09-09",
+"ticker": "GRAB",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-10 03:18",
+"data": "2026-09-09 23:06",
+"prezzo": 3.04,
+"conv": 67,
+"prob_gain": 48,
+"prob_loss": 6,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 3.5982,
+"media20": 3.5045,
+"quattro_atr": 3.5836,
+"meta_caduta": 3.49,
+"bollinger": 3.8,
+"consigliata": 3.5836
+},
+"stop": 2.7682,
+"atr": 0.1359,
+"soglie_contaminate": {
+"media50": 3.6122,
+"media20": 3.5395,
+"quattro_atr": 3.5485,
+"meta_caduta": 3.49,
+"bollinger": 3.7595,
+"consigliata": 3.5485
+},
+"soglie_ricalcolate_il": "2026-09-14 21:39",
+"soglie_ritardo_giorni": 1,
+"res": {
+"7g": -2.64,
+"30g": 4.61,
+"soglia": 4.61
+},
+"taglio_corretto": true,
+"res_soglia": {
+"media50": {
+"ret": 4.61,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": 4.61,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": 4.61,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": 4.61,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": 4.61,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": 4.61,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
