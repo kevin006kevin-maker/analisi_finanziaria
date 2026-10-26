@@ -1,34 +1,5 @@
 [
 {
-"episodio": "short:BAND:2026-09-10",
-"ticker": "BAND",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-10 03:17",
-"data": "2026-09-10 03:17",
-"prezzo": 43.62,
-"conv": 72,
-"prob_gain": 43,
-"prob_loss": 30,
-"reliab": "🔴 Bassa",
-"mkt": -1.1884,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 55.5979,
-"media20": 49.3657,
-"quattro_atr": 58.9617,
-"meta_caduta": 61.03,
-"bollinger": 55.8168,
-"consigliata": 55.5979
-},
-"stop": 35.9491,
-"atr": 3.8354,
-"res": {},
-"bad_data": "salto di prezzo oltre il 25%: probabile raggruppamento di azioni"
-},
-{
 "episodio": "short:DYN:2026-09-09",
 "ticker": "DYN",
 "kind": "short",
@@ -33148,5 +33119,25 @@
 },
 "stop": 17.1259,
 "atr": 0.9346
+},
+{
+"episodio": "long:INTR:2026-08-16",
+"ticker": "INTR",
+"kind": "long",
+"evento": "uscita",
+"scritto_il": "2026-10-26 16:13",
+"data": "2026-10-26 16:13",
+"prezzo": 4.445,
+"conv": 70,
+"prob_gain": 91,
+"prob_loss": 4,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
