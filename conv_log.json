@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-10-18",
-"ticker": "SITC",
-"kind": "short",
-"price": 3.43,
-"conv": 20,
-"factors": {
-"discount": 61.5039,
-"histcheap": 1.23,
-"riskadj": -2.01,
-"ddpen": -43.77,
-"momentum": -10.6452,
-"prob": 41,
-"oversold": -63.7264,
-"rebound": -11.5335,
-"trend": -1.0,
-"relstrength": 12.5923
-},
-"ret_5d": 10.2,
-"ret_21d": null
-},
-{
-"date": "2026-10-18",
 "ticker": "ALXO",
 "kind": "short",
 "price": 1.06,
@@ -38620,6 +38599,26 @@
 "rebound": 122.7237,
 "trend": -1.0,
 "relstrength": -23.7971
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-26",
+"ticker": "XXII",
+"kind": "long",
+"price": 0.0884,
+"conv": 29,
+"factors": {
+"discount": 99.9817,
+"histcheap": 0.77,
+"riskadj": -5.37,
+"ddpen": -83.86,
+"momentum": 70.0339,
+"prob": 56,
+"quality": null,
+"valcheap": null,
+"trappen": 0
 },
 "ret_5d": null,
 "ret_21d": null
