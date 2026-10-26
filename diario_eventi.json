@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:LDO.MI:2026-09-09",
-"ticker": "LDO.MI",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-10 01:30",
-"data": "2026-09-10 01:25",
-"prezzo": 50.67,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 48.89",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:BAND:2026-09-10",
 "ticker": "BAND",
 "kind": "short",
@@ -33141,5 +33121,32 @@
 },
 "stop": 19.6215,
 "atr": 1.0093
+},
+{
+"episodio": "long:PBR-A:2026-10-26",
+"ticker": "PBR-A",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-26 16:12",
+"data": "2026-10-26 16:11",
+"prezzo": 18.995,
+"conv": 68,
+"prob_gain": 80,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": 0.145,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 19.5343,
+"media20": 21.7578,
+"quattro_atr": 22.7333,
+"meta_caduta": 21.2625,
+"bollinger": 25.0644,
+"consigliata": 19.5343
+},
+"stop": 17.1259,
+"atr": 0.9346
 }
 ]
