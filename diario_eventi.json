@@ -33035,7 +33035,8 @@
 "atr": 0.469,
 "res": {
 "7g": -12.29,
-"30g": -33.57
+"30g": -33.57,
+"soglia": -33.57
 },
 "soglie_contaminate": {
 "media50": 5.676,
@@ -33047,7 +33048,39 @@
 },
 "soglie_ricalcolate_il": "2026-10-26 00:20",
 "taglio_corretto": true,
-"soglie_ritardo_giorni": 60
+"soglie_ritardo_giorni": 60,
+"res_soglia": {
+"media50": {
+"ret": -33.57,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -33.57,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -33.57,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -33.57,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -33.57,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -33.57,
+"toccato": false,
+"giorni": null
+}
+}
 },
 {
 "episodio": "short:FLG:2026-10-23",
