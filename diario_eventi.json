@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:ADTN:2026-09-09",
-"ticker": "ADTN",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-10 03:18",
-"data": "2026-09-10 03:17",
-"prezzo": 7.58,
-"conv": 69,
-"prob_gain": 54,
-"prob_loss": 19,
-"reliab": "🔴 Bassa",
-"mkt": -1.1884,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 9.6448,
-"media20": 7.8255,
-"quattro_atr": 9.3364,
-"meta_caduta": 11.58,
-"bollinger": 8.5731,
-"consigliata": 9.3364
-},
-"stop": 6.7018,
-"atr": 0.4391,
-"res": {
-"7g": -5.41,
-"30g": -7.26,
-"soglia": -7.26
-},
-"res_soglia": {
-"media50": {
-"ret": -7.26,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -7.26,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -7.26,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -7.26,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -7.26,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -7.26,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:GRAB:2026-09-09",
 "ticker": "GRAB",
 "kind": "short",
@@ -33047,6 +32983,26 @@
 "mkt": null,
 "fonte": "monitoraggio",
 "note": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:ENEL.MI:2026-09-02",
+"ticker": "ENEL.MI",
+"kind": "short",
+"evento": "salita_2pct",
+"scritto_il": "2026-10-26 16:17",
+"data": "2026-10-26 16:09",
+"prezzo": 9.261,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "prezzo salito di almeno il 2% da 9.067",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
