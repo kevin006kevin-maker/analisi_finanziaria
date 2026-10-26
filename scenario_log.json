@@ -9552,7 +9552,10 @@
 "conv": 56,
 "res": {
 "osservazione|7g": -3.74,
-"promozione|7g": -3.51
+"promozione|7g": -3.51,
+"osservazione|30g": 21.86,
+"promozione|30g": 22.15,
+"conferma|30g": 26.6
 },
 "passaggi": {
 "osservazione": {
@@ -9614,7 +9617,10 @@
 "conv": 64,
 "res": {
 "osservazione|7g": -1.81,
-"promozione|7g": 0.82
+"promozione|7g": 0.82,
+"osservazione|30g": 5.77,
+"promozione|30g": 8.61,
+"conferma|30g": 7.72
 },
 "passaggi": {
 "osservazione": {
@@ -9676,7 +9682,10 @@
 "conv": 57,
 "res": {
 "osservazione|7g": -6.46,
-"promozione|7g": -3.6
+"promozione|7g": -3.6,
+"osservazione|30g": -1.95,
+"promozione|30g": 1.05,
+"conferma|30g": 4.82
 },
 "passaggi": {
 "osservazione": {
@@ -9738,7 +9747,10 @@
 "conv": 69,
 "res": {
 "osservazione|7g": -0.25,
-"promozione|7g": 3.68
+"promozione|7g": 3.68,
+"osservazione|30g": 23.59,
+"promozione|30g": 28.46,
+"conferma|30g": 23.9
 },
 "passaggi": {
 "osservazione": {
@@ -9800,7 +9812,10 @@
 "conv": 61,
 "res": {
 "osservazione|7g": 1.55,
-"promozione|7g": 4.02
+"promozione|7g": 4.02,
+"osservazione|30g": 4.35,
+"promozione|30g": 6.88,
+"conferma|30g": 2.75
 },
 "passaggi": {
 "osservazione": {
@@ -9862,7 +9877,10 @@
 "conv": 64,
 "res": {
 "osservazione|7g": 1.44,
-"promozione|7g": 7.48
+"promozione|7g": 7.48,
+"osservazione|30g": -6.98,
+"promozione|30g": -1.45,
+"conferma|30g": -8.31
 },
 "passaggi": {
 "osservazione": {
@@ -9924,7 +9942,10 @@
 "conv": 59,
 "res": {
 "osservazione|7g": -5.35,
-"promozione|7g": 0.72
+"promozione|7g": 0.72,
+"osservazione|30g": -13.36,
+"promozione|30g": -7.8,
+"conferma|30g": -8.46
 },
 "passaggi": {
 "osservazione": {
@@ -9986,7 +10007,10 @@
 "conv": 73,
 "res": {
 "osservazione|7g": 0.41,
-"promozione|7g": 0.28
+"promozione|7g": 0.28,
+"osservazione|30g": 2.9,
+"promozione|30g": 2.77,
+"conferma|30g": 2.49
 },
 "passaggi": {
 "osservazione": {
@@ -10085,7 +10109,15 @@
 "res": {
 "anticipo|7g": 2.41,
 "osservazione|7g": 1.55,
-"promozione|7g": -0.6
+"promozione|7g": -0.6,
+"anticipo|30g": 5.23,
+"osservazione|30g": 4.35,
+"promozione|30g": 2.13,
+"conferma|30g": 2.75,
+"anticipo|bersaglio": 5.23,
+"osservazione|bersaglio": 4.35,
+"promozione|bersaglio": 2.13,
+"conferma|bersaglio": 2.75
 }
 },
 {
@@ -16678,7 +16710,10 @@
 "prob_gain": 52,
 "prob_loss": 17,
 "conv": 64,
-"res": {},
+"res": {
+"osservazione|7g": -6.04,
+"promozione|7g": 0.44
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-09-11 03:19",
@@ -16737,7 +16772,10 @@
 "prob_gain": 52,
 "prob_loss": 8,
 "conv": 56,
-"res": {},
+"res": {
+"osservazione|7g": 2.43,
+"promozione|7g": 0.86
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-09-11 20:57",
@@ -16832,7 +16870,11 @@
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": -1.76,
+"osservazione|7g": -5.93,
+"promozione|7g": -5.77
+}
 },
 {
 "ticker": "SPHR",
@@ -16843,8 +16885,8 @@
 "obs_date": "2026-10-05",
 "pre_price": 109.805,
 "pre_date": "2026-10-11",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 109.94999694824219,
+"conf_date": "2026-10-26",
 "target": 138.833,
 "stop": 92.473,
 "reliab": "🟡 Media",
@@ -16880,16 +16922,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-10-26",
+"prezzo": 109.94999694824219,
+"conv": 77,
+"prob_gain": 53,
+"prob_loss": 12,
+"reliab": "🟡 Media",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": 0.13,
+"osservazione|7g": -4.1,
+"promozione|7g": 4.4
+}
 },
 {
 "ticker": "IWM",
