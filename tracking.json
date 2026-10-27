@@ -358,7 +358,7 @@
 ],
 "auto": true,
 "notified": true,
-"exit_notified": true,
+"exit_notified": false,
 "entry_check": "2026-10-27",
 "entry_price": 54.64,
 "entry_target": 56.7535,
@@ -7211,7 +7211,7 @@
 "auto": true,
 "notified": true,
 "entry_check": "2026-10-26",
-"exit_notified": false,
+"exit_notified": true,
 "incasso": {
 "gain": 16.5,
 "max": 27.66,
@@ -7600,7 +7600,7 @@
 "urgenza": "incassa",
 "tipo": "bersaglio"
 },
-"exit_notified": false
+"exit_notified": true
 },
 "RVLV": {
 "kind": "short",
