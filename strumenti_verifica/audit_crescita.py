@@ -45,7 +45,9 @@ for nome in sorted(fu._REGISTRI_APPEND_ONLY):
     vivo = gs(nome) or []
     byte_vivo = FILES.get(nome, 0)
     bpr = byte_vivo / len(vivo) if vivo else 0
-    tetto = TETTI.get(nome)
+    # il tetto vero e' quello che usa _archivia_e_pota: scende se le righe pesano piu' del previsto
+    tetto_nominale = TETTI.get(nome)
+    tetto = fu._tetto_vivo_effettivo(vivo, tetto_nominale) if tetto_nominale else None
     vivo_max = (tetto * fu._MARGINE_TETTO * bpr) if tetto else None
     base = nome[:-5]
     arc = []
@@ -63,8 +65,11 @@ for nome in sorted(fu._REGISTRI_APPEND_ONLY):
         note.append("VIVO OLTRE 900 KB")
     if pezzi_anno > fu._ARCHIVIO_MAX_PEZZI * 0.8:
         note.append("PEZZI ANNUALI OLTRE IL TETTO (%d)" % fu._ARCHIVIO_MAX_PEZZI)
+    giudizio = ", ".join(note) or "ok"
+    if tetto and tetto < tetto_nominale:
+        giudizio += " (tetto abbassato da %d)" % tetto_nominale
     print("%-20s %6d %8d %6.0f %7s | %8.0fK | %8.1f %8.1f | %s" % (
-        nome, len(vivo), byte_vivo, bpr, tetto, (vivo_max or 0) / 1000, rpg, pezzi_anno, ", ".join(note) or "ok"))
+        nome, len(vivo), byte_vivo, bpr, tetto, (vivo_max or 0) / 1000, rpg, pezzi_anno, giudizio))
 
 print()
 idx = gs("archivio/indice_archivio.json") or {}
