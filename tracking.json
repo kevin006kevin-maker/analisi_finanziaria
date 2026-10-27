@@ -1559,9 +1559,7 @@
 "entry_check": "2026-10-27",
 "max_price": 97.57,
 "max_date": "2026-08-17 19:56",
-"incasso_notified": true,
-"warn_since": "2026-10-27",
-"warn": "in perdita da 66 giorni di Borsa: valuta l'uscita"
+"incasso_notified": true
 },
 "NEM": {
 "kind": "long",
@@ -2990,9 +2988,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-10-27",
 "max_price": 635.02,
-"max_date": "2026-10-06 18:18",
-"warn_since": "2026-10-27",
-"warn": "in perdita da 60 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-10-06 18:18"
 },
 "DIS": {
 "kind": "long",
@@ -5256,7 +5252,9 @@
 "urgenza": "incassa",
 "tipo": "sgonfia"
 },
-"incasso_notified": true
+"incasso_notified": true,
+"warn_since": "2026-10-27",
+"warn": "in perdita da 43 giorni di Borsa: valuta l'uscita"
 },
 "INTC": {
 "kind": "short",
@@ -6594,9 +6592,7 @@
 "max_date": "2026-10-09 21:47",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-27",
-"warn_since": "2026-10-27",
-"warn": "in perdita da 22 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-27"
 },
 "CASY": {
 "kind": "short",
@@ -7414,7 +7410,9 @@
 "urgenza": "incassa",
 "tipo": "bersaglio"
 },
-"incasso_notified": true
+"incasso_notified": true,
+"warn_since": "2026-10-27",
+"warn": "in perdita da 18 giorni di Borsa: valuta l'uscita"
 },
 "FICO": {
 "kind": "short",
@@ -8608,7 +8606,9 @@
 "max_date": "2026-10-16 23:44",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-26"
+"entry_check": "2026-10-26",
+"warn_since": "2026-10-27",
+"warn": "in perdita da 14 giorni di Borsa: valuta l'uscita"
 },
 "AVBP": {
 "kind": "short",
@@ -8739,7 +8739,9 @@
 "max_date": "2026-10-24 00:40",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-26"
+"entry_check": "2026-10-26",
+"warn_since": "2026-10-27",
+"warn": "in perdita da 12 giorni di Borsa: valuta l'uscita"
 },
 "XRAY": {
 "kind": "short",
@@ -9762,9 +9764,7 @@
 "max_date": "2026-10-26 16:13",
 "auto": true,
 "notified": false,
-"entry_check": "2026-10-26",
-"warn_since": "2026-10-27",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-26"
 },
 "NESR": {
 "kind": "short",
