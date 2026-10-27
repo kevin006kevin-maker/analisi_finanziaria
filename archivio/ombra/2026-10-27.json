@@ -278,5 +278,33 @@
 "retroattiva": false,
 "atr_pct": 7.4469,
 "ora": "2026-10-27 05:04"
+},
+{
+"id": "2026-10-27:short:BAMI.MI:sistema_corretto",
+"giorno": "2026-10-27",
+"metodo": "sistema_corretto",
+"kind": "short",
+"ticker": "BAMI.MI",
+"nome": "BAMI.MI",
+"prezzo": 13.255000114440918,
+"profilo": "2026-10-27:short:BAMI.MI:punteggio_basso",
+"origine_viva": "scartata:punteggio_basso",
+"retroattiva": false,
+"atr_pct": 2.9811,
+"ora": "2026-10-27 10:35"
+},
+{
+"id": "2026-10-27:short:OII:ombra_trend",
+"giorno": "2026-10-27",
+"metodo": "ombra_trend",
+"kind": "short",
+"ticker": "OII",
+"nome": "Oceaneering International Inc",
+"prezzo": 40.24,
+"profilo": "2026-10-27:short:OII:ingresso_anticipo",
+"origine_viva": "comprata:ingresso_anticipo",
+"retroattiva": false,
+"atr_pct": 5.3976,
+"ora": "2026-10-27 10:35"
 }
 ]
