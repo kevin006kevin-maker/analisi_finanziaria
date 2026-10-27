@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:AEO:2026-09-10",
-"ticker": "AEO",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-10 23:25",
-"data": "2026-09-10 23:22",
-"prezzo": 14.53,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 14.21",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:COO:2026-09-10",
 "ticker": "COO",
 "kind": "short",
@@ -34397,5 +34377,32 @@
 },
 "stop": 11.0844,
 "atr": 0.3653
+},
+{
+"episodio": "short:BAMI.MI:2026-10-27",
+"ticker": "BAMI.MI",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-27 17:04",
+"data": "2026-10-27 17:04",
+"prezzo": 13.66,
+"conv": 70,
+"prob_gain": 51,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 15.4383,
+"media20": 14.2955,
+"quattro_atr": 15.3277,
+"meta_caduta": 15.42,
+"bollinger": 16.1149,
+"consigliata": 15.3277
+},
+"stop": 12.8261,
+"atr": 0.4169
 }
 ]
