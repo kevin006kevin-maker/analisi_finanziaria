@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:BAND:2026-09-10",
-"ticker": "BAND",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-10 08:19",
-"data": "2026-09-10 08:18",
-"prezzo": 48.83,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 43.62",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:MONC.MI:2026-09-10",
 "ticker": "MONC.MI",
 "kind": "short",
@@ -34553,5 +34533,32 @@
 },
 "stop": 268.4002,
 "atr": 3.6749
+},
+{
+"episodio": "short:MHO:2026-10-22",
+"ticker": "MHO",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-27 01:11",
+"data": "2026-10-27 01:07",
+"prezzo": 123.97,
+"conv": 73,
+"prob_gain": 53,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-27",
+"soglie": {
+"media50": 138.7368,
+"media20": 128.2315,
+"quattro_atr": 142.875,
+"meta_caduta": 139.285,
+"bollinger": 140.1605,
+"consigliata": 138.7368
+},
+"stop": 114.5175,
+"atr": 4.7262
 }
 ]
