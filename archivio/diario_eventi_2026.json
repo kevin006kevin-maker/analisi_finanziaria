@@ -21709,5 +21709,69 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:COO:2026-09-10",
+"ticker": "COO",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-10 20:55",
+"data": "2026-09-10 20:55",
+"prezzo": 55.24,
+"conv": 91,
+"prob_gain": 64,
+"prob_loss": 3,
+"reliab": "🟢 Alta",
+"mkt": -2.0112,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 72.091,
+"media20": 71.6065,
+"quattro_atr": 65.7715,
+"meta_caduta": 66.03,
+"bollinger": 82.1732,
+"consigliata": 65.7715
+},
+"stop": 49.9742,
+"atr": 2.6329,
+"res": {
+"7g": -3.83,
+"30g": 0.81,
+"soglia": 0.81
+},
+"res_soglia": {
+"media50": {
+"ret": 0.81,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": 0.81,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": 0.81,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": 0.81,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": 0.81,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": 0.81,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
