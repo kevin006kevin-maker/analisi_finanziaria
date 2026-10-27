@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:TTAN:2026-09-09",
-"ticker": "TTAN",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-10 03:19",
-"data": "2026-09-10 03:17",
-"prezzo": 81.58,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 56.71",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:KRMN:2026-09-09",
 "ticker": "KRMN",
 "kind": "short",
@@ -34539,5 +34519,32 @@
 },
 "stop": 983.5261,
 "atr": 88.6669
+},
+{
+"episodio": "short:MHO:2026-10-22",
+"ticker": "MHO",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-27 01:07",
+"data": "2026-10-27 01:07",
+"prezzo": 123.97,
+"conv": 73,
+"prob_gain": 53,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 138.7368,
+"media20": 128.2315,
+"quattro_atr": 142.875,
+"meta_caduta": 139.285,
+"bollinger": 140.1605,
+"consigliata": 138.7368
+},
+"stop": 114.5175,
+"atr": 4.7262
 }
 ]
