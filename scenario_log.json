@@ -17803,5 +17803,62 @@
 "mkt": null
 }
 }
+},
+{
+"ticker": "BAMI.MI",
+"kind": "short",
+"date": "2026-10-27",
+"promo_price": 13.66,
+"obs_price": 14.885,
+"obs_date": "2026-10-02",
+"pre_price": 14.885,
+"pre_date": "2026-10-05",
+"conf_price": null,
+"conf_date": null,
+"target": 15.4383,
+"stop": 12.8261,
+"reliab": "🟢 Alta",
+"prob_gain": 51,
+"prob_loss": 2,
+"conv": 70,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-02 14:31",
+"prezzo": 14.885,
+"conv": 72,
+"prob_gain": 53,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -0.002
+},
+"anticipo": {
+"data": "2026-10-05",
+"prezzo": 14.885,
+"conv": 72,
+"prob_gain": 53,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-27 17:04",
+"prezzo": 13.66,
+"conv": 70,
+"prob_gain": 51,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
