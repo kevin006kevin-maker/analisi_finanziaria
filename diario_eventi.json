@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:RVLV:2026-09-10",
-"ticker": "RVLV",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-10 20:55",
-"data": "2026-09-10 20:55",
-"prezzo": 20.51,
-"conv": 63,
-"prob_gain": 57,
-"prob_loss": 11,
-"reliab": "🟡 Media",
-"mkt": -2.0112,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 23.784,
-"media20": 22.57,
-"quattro_atr": 24.2762,
-"meta_caduta": 23.67,
-"bollinger": 25.332,
-"consigliata": 23.784
-},
-"stop": 18.6269,
-"atr": 0.9416,
-"res": {
-"7g": 1.17,
-"30g": 6.8,
-"soglia": 6.8
-},
-"res_soglia": {
-"media50": {
-"ret": 6.8,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 6.8,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 6.8,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 6.8,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 6.8,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 6.8,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:AEO:2026-09-10",
 "ticker": "AEO",
 "kind": "short",
@@ -34434,5 +34370,32 @@
 },
 "stop": 158.548,
 "atr": 6.021
+},
+{
+"episodio": "short:VALE:2026-10-26",
+"ticker": "VALE",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-27 17:04",
+"data": "2026-10-27 17:01",
+"prezzo": 11.815,
+"conv": 67,
+"prob_gain": 48,
+"prob_loss": 3,
+"reliab": "🟢 Alta",
+"mkt": 0.8294,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 14.0267,
+"media20": 13.1462,
+"quattro_atr": 13.2763,
+"meta_caduta": 13.7725,
+"bollinger": 14.4362,
+"consigliata": 13.2763
+},
+"stop": 11.0844,
+"atr": 0.3653
 }
 ]
