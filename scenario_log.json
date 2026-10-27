@@ -17687,5 +17687,62 @@
 "mkt": null
 }
 }
+},
+{
+"ticker": "MHO",
+"kind": "short",
+"date": "2026-10-27",
+"promo_price": 123.97,
+"obs_price": 114.04,
+"obs_date": "2026-10-22",
+"pre_price": 114.04,
+"pre_date": "2026-10-23",
+"conf_price": null,
+"conf_date": null,
+"target": 138.7368,
+"stop": 114.5175,
+"reliab": "🟢 Alta",
+"prob_gain": 53,
+"prob_loss": 2,
+"conv": 73,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-22 01:37",
+"prezzo": 114.04,
+"conv": 70,
+"prob_gain": 54,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": 0.6636
+},
+"anticipo": {
+"data": "2026-10-23",
+"prezzo": 114.04,
+"conv": 74,
+"prob_gain": 56,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-27 01:07",
+"prezzo": 123.97,
+"conv": 73,
+"prob_gain": 53,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
