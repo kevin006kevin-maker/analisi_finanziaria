@@ -1,25 +1,5 @@
 [
 {
-"episodio": "long:AGNC:2026-09-01",
-"ticker": "AGNC",
-"kind": "long",
-"evento": "uscita",
-"scritto_il": "2026-09-10 17:48",
-"data": "2026-09-10 17:48",
-"prezzo": 10.29,
-"conv": 70,
-"prob_gain": 92,
-"prob_loss": 1,
-"reliab": "🟢 Alta",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "long:AEO:2026-08-28",
 "ticker": "AEO",
 "kind": "long",
@@ -34523,5 +34503,32 @@
 },
 "stop": 59.8479,
 "atr": 1.0811
+},
+{
+"episodio": "short:CRS:2026-10-22",
+"ticker": "CRS",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-27 01:11",
+"data": "2026-10-27 01:04",
+"prezzo": 284.66,
+"conv": 71,
+"prob_gain": 54,
+"prob_loss": 6,
+"reliab": "🟡 Media",
+"mkt": -0.0901,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-27",
+"soglie": {
+"media50": 424.5022,
+"media20": 374.059,
+"quattro_atr": 358.3764,
+"meta_caduta": 427.66,
+"bollinger": 434.2876,
+"consigliata": 358.3764
+},
+"stop": 247.8018,
+"atr": 18.4291
 }
 ]
