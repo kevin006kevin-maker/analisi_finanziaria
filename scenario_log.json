@@ -10178,7 +10178,15 @@
 "res": {
 "anticipo|7g": -8.53,
 "osservazione|7g": -8.53,
-"promozione|7g": -1.0
+"promozione|7g": -1.0,
+"anticipo|30g": 6.73,
+"osservazione|30g": 6.73,
+"promozione|30g": 15.52,
+"conferma|30g": 17.79,
+"anticipo|bersaglio": 6.73,
+"osservazione|bersaglio": 6.73,
+"promozione|bersaglio": 15.52,
+"conferma|bersaglio": 17.79
 }
 },
 {
@@ -10239,7 +10247,15 @@
 "res": {
 "anticipo|7g": -2.67,
 "osservazione|7g": -2.02,
-"promozione|7g": 2.31
+"promozione|7g": 2.31,
+"anticipo|30g": 9.41,
+"osservazione|30g": 10.14,
+"promozione|30g": 15.0,
+"conferma|30g": 11.42,
+"anticipo|bersaglio": 9.41,
+"osservazione|bersaglio": 10.14,
+"promozione|bersaglio": 15.0,
+"conferma|bersaglio": 11.42
 }
 },
 {
@@ -10300,7 +10316,15 @@
 "res": {
 "anticipo|7g": 3.65,
 "osservazione|7g": 1.64,
-"promozione|7g": 1.38
+"promozione|7g": 1.38,
+"anticipo|30g": 10.15,
+"osservazione|30g": 8.02,
+"promozione|30g": 7.75,
+"conferma|30g": 3.92,
+"anticipo|bersaglio": 10.15,
+"osservazione|bersaglio": 8.02,
+"promozione|bersaglio": 7.75,
+"conferma|bersaglio": 3.92
 }
 },
 {
@@ -10361,7 +10385,15 @@
 "res": {
 "anticipo|7g": 2.01,
 "osservazione|7g": -14.02,
-"promozione|7g": -5.41
+"promozione|7g": -5.41,
+"anticipo|30g": 20.62,
+"osservazione|30g": 1.66,
+"promozione|30g": 11.84,
+"conferma|30g": 12.11,
+"anticipo|bersaglio": 20.62,
+"osservazione|bersaglio": 1.66,
+"promozione|bersaglio": 11.84,
+"conferma|bersaglio": 12.11
 }
 },
 {
@@ -16946,8 +16978,8 @@
 "obs_date": "2026-09-28",
 "pre_price": 279.01,
 "pre_date": "2026-10-01",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 280.0050048828125,
+"conf_date": "2026-10-27",
 "target": 288.0016,
 "stop": 269.0984,
 "reliab": "🟢 Alta",
@@ -16983,16 +17015,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-10-27",
+"prezzo": 280.0050048828125,
+"conv": 62,
+"prob_gain": 47,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": 0.36,
+"osservazione|7g": 0.3,
+"promozione|7g": 1.14
+}
 },
 {
 "ticker": "NESR",
