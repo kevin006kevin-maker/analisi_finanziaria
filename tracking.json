@@ -3064,8 +3064,6 @@
 "entry_check": "2026-10-27",
 "max_price": 1892.6801,
 "max_date": "2026-09-22 19:49",
-"warn_since": "2026-10-26",
-"warn": "in perdita da 61 giorni di Borsa: valuta l'uscita",
 "incasso": {
 "gain": 3.6,
 "max": 1892.6801,
@@ -6505,9 +6503,7 @@
 "auto": true,
 "notified": true,
 "entry_check": "2026-10-27",
-"exit_notified": false,
-"warn_since": "2026-10-23",
-"warn": "in perdita da 41 giorni di Borsa: valuta l'uscita"
+"exit_notified": false
 },
 "ENI.MI": {
 "kind": "short",
@@ -9854,9 +9850,7 @@
 "max_date": "2026-10-16 16:16",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-27",
-"warn_since": "2026-10-26",
-"warn": "in perdita da 16 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-27"
 },
 "ENLT": {
 "kind": "short",
@@ -11001,9 +10995,7 @@
 "max_date": "2026-10-15 23:22",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-27",
-"warn_since": "2026-10-23",
-"warn": "in perdita da 11 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-27"
 },
 "LQDA": {
 "kind": "short",
@@ -12302,7 +12294,7 @@
 "max_price": 24.59,
 "max_date": "2026-10-27 17:05",
 "auto": true,
-"notified": false,
+"notified": true,
 "entry_check": "2026-10-27"
 },
 "HESM": {
@@ -12954,7 +12946,7 @@
 "max_price": 61.04,
 "max_date": "2026-10-27 21:42",
 "auto": true,
-"notified": false,
+"notified": true,
 "entry_check": "2026-10-27"
 },
 "BKD": {
