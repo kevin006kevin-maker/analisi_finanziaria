@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-10-19",
-"ticker": "VEA",
-"kind": "short",
-"price": 69.49,
-"conv": 62,
-"factors": {
-"discount": 5.8274,
-"histcheap": -0.45,
-"riskadj": 0.89,
-"ddpen": -3.39,
-"momentum": 1.2225,
-"prob": 54,
-"oversold": -38.9114,
-"rebound": 3.5867,
-"trend": 1.0,
-"relstrength": 0.7247
-},
-"ret_5d": 0.06,
-"ret_21d": null
-},
-{
-"date": "2026-10-19",
 "ticker": "VWO",
 "kind": "short",
 "price": 58.03,
@@ -38464,6 +38443,26 @@
 "rebound": 302.2622,
 "trend": -1.0,
 "relstrength": -68.0146
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-27",
+"ticker": "AR",
+"kind": "long",
+"price": 41.47,
+"conv": 38,
+"factors": {
+"discount": 8.1506,
+"histcheap": -1.98,
+"riskadj": 0.84,
+"ddpen": -15.45,
+"momentum": -6.7989,
+"prob": 9,
+"quality": 65.3,
+"valcheap": -0.0129,
+"trappen": 3
 },
 "ret_5d": null,
 "ret_21d": null
