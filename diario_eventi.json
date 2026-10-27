@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:KRMN:2026-09-09",
-"ticker": "KRMN",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-10 03:19",
-"data": "2026-09-10 03:17",
-"prezzo": 39.69,
-"conv": 74,
-"prob_gain": 52,
-"prob_loss": 24,
-"reliab": "🔴 Bassa",
-"mkt": -1.1884,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 36.66",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:GRAB:2026-09-09",
 "ticker": "GRAB",
 "kind": "short",
@@ -34546,5 +34526,25 @@
 },
 "stop": 114.5175,
 "atr": 4.7262
+},
+{
+"episodio": "short:NFLX:2026-10-27",
+"ticker": "NFLX",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-10-27 01:09",
+"data": "2026-10-27 01:09",
+"prezzo": 65.85,
+"conv": 76,
+"prob_gain": 45,
+"prob_loss": 5,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "in perdita da 68 giorni di Borsa: valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
