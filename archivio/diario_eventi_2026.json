@@ -21837,5 +21837,69 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:AEO:2026-09-10",
+"ticker": "AEO",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-10 20:55",
+"data": "2026-09-10 20:55",
+"prezzo": 14.21,
+"conv": 68,
+"prob_gain": 54,
+"prob_loss": 14,
+"reliab": "🟡 Media",
+"mkt": -2.0112,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 16.9632,
+"media20": 16.5675,
+"quattro_atr": 17.513,
+"meta_caduta": 16.355,
+"bollinger": 17.9484,
+"consigliata": 16.9632
+},
+"stop": 12.5585,
+"atr": 0.8257,
+"res": {
+"7g": 5.45,
+"30g": 27.97,
+"soglia": 19.38
+},
+"res_soglia": {
+"media50": {
+"ret": 19.38,
+"toccato": true,
+"giorni": 18
+},
+"media20": {
+"ret": 16.59,
+"toccato": true,
+"giorni": 15
+},
+"quattro_atr": {
+"ret": 23.24,
+"toccato": true,
+"giorni": 19
+},
+"meta_caduta": {
+"ret": 15.1,
+"toccato": true,
+"giorni": 15
+},
+"bollinger": {
+"ret": 26.31,
+"toccato": true,
+"giorni": 19
+},
+"consigliata": {
+"ret": 19.38,
+"toccato": true,
+"giorni": 18
+}
+}
 }
 ]
