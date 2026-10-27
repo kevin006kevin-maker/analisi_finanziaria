@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:CASY:2026-09-09",
-"ticker": "CASY",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-10 03:19",
-"data": "2026-09-10 03:17",
-"prezzo": 733.49,
-"conv": 84,
-"prob_gain": 57,
-"prob_loss": 3,
-"reliab": "🟢 Alta",
-"mkt": -1.1884,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 624.865",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:TTAN:2026-09-09",
 "ticker": "TTAN",
 "kind": "short",
@@ -34532,5 +34512,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:FIX:2026-10-24",
+"ticker": "FIX",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-27 01:07",
+"data": "2026-10-27 01:04",
+"prezzo": 1160.86,
+"conv": 67,
+"prob_gain": 57,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": -0.0901,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 1608.1726,
+"media20": 1575.729,
+"quattro_atr": 1515.5278,
+"meta_caduta": 1521.02,
+"bollinger": 1921.4569,
+"consigliata": 1515.5278
+},
+"stop": 983.5261,
+"atr": 88.6669
 }
 ]
