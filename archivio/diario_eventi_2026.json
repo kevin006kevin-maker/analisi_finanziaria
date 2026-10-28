@@ -22475,5 +22475,80 @@
 "7g": 23.02,
 "30g": -6.09
 }
+},
+{
+"episodio": "short:NVS:2026-09-08",
+"ticker": "NVS",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-11 01:25",
+"data": "2026-09-10 23:22",
+"prezzo": 137.48,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-11",
+"soglie": {
+"media50": 154.4828,
+"media20": 154.002,
+"quattro_atr": 155.1865,
+"meta_caduta": 150.285,
+"bollinger": 169.9667,
+"consigliata": 154.4828
+},
+"stop": 128.6267,
+"atr": 4.4266,
+"res": {
+"7g": 2.46,
+"30g": 4.59,
+"soglia": 4.59
+},
+"soglie_contaminate": {
+"media50": 154.4828,
+"media20": 154.002,
+"quattro_atr": 155.1837,
+"meta_caduta": 150.285,
+"bollinger": 169.9667,
+"consigliata": 154.4828
+},
+"soglie_ricalcolate_il": "2026-09-14 21:39",
+"soglie_ritardo_giorni": 1,
+"taglio_corretto": true,
+"res_soglia": {
+"media50": {
+"ret": 4.59,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": 4.59,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": 4.59,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": 4.59,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": 4.59,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": 4.59,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
