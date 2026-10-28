@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-10-20",
-"ticker": "ANNX",
-"kind": "short",
-"price": 4.01,
-"conv": 47,
-"factors": {
-"discount": 42.3851,
-"histcheap": 1.12,
-"riskadj": 0.57,
-"ddpen": -23.21,
-"momentum": -1.2626,
-"prob": 22,
-"oversold": -48.5711,
-"rebound": 11.2768,
-"trend": -1.0,
-"relstrength": 2.755
-},
-"ret_5d": -5.11,
-"ret_21d": null
-},
-{
-"date": "2026-10-20",
 "ticker": "CDNL",
 "kind": "short",
 "price": 15.87,
@@ -38671,6 +38650,26 @@
 "rebound": 43.6175,
 "trend": -1.0,
 "relstrength": -22.6893
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-28",
+"ticker": "GM",
+"kind": "long",
+"price": 80.54,
+"conv": 38,
+"factors": {
+"discount": 10.8084,
+"histcheap": -0.2,
+"riskadj": 0.55,
+"ddpen": -8.16,
+"momentum": -4.4753,
+"prob": 29,
+"quality": 34.4,
+"valcheap": 0.4944,
+"trappen": 1
 },
 "ret_5d": null,
 "ret_21d": null
