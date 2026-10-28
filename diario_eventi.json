@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:NAVN:2026-09-10",
-"ticker": "NAVN",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-11 03:20",
-"data": "2026-09-11 03:19",
-"prezzo": 25.89,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 20.095",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "long:RELY:2026-09-11",
 "ticker": "RELY",
 "kind": "long",
@@ -34074,5 +34054,32 @@
 },
 "stop": 276.167,
 "atr": 10.7065
+},
+{
+"episodio": "short:EEFT:2026-10-28",
+"ticker": "EEFT",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-28 07:16",
+"data": "2026-10-28 07:15",
+"prezzo": 59.01,
+"conv": 65,
+"prob_gain": 56,
+"prob_loss": 2,
+"reliab": "🟡 Media",
+"mkt": 0.6748,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 67.069,
+"media20": 64.1675,
+"quattro_atr": 67.8047,
+"meta_caduta": 67.955,
+"bollinger": 67.5177,
+"consigliata": 67.069
+},
+"stop": 54.6126,
+"atr": 2.1987
 }
 ]
