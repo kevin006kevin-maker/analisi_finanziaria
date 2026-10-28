@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:QLYS:2026-09-13",
-"ticker": "QLYS",
-"kind": "long",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-13 00:29",
-"data": "2026-09-13 00:29",
-"prezzo": 150.28,
-"conv": 63,
-"prob_gain": 71,
-"prob_loss": 20,
-"reliab": "🟡 Media",
-"mkt": -1.8209,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 165.8818,
-"media20": 177.362,
-"quattro_atr": 185.5628,
-"meta_caduta": 173.08,
-"bollinger": 196.961,
-"consigliata": 165.8818
-},
-"stop": 132.6386,
-"atr": 8.8207,
-"res": {
-"7g": 19.26,
-"30g": 33.13
-}
-},
-{
 "episodio": "short:KAI:2026-09-11",
 "ticker": "KAI",
 "kind": "short",
@@ -34788,5 +34757,32 @@
 },
 "stop": 115.9945,
 "atr": 5.8028
+},
+{
+"episodio": "short:EDU:2026-10-29",
+"ticker": "EDU",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-29 00:10",
+"data": "2026-10-29 00:10",
+"prezzo": 50.72,
+"conv": 61,
+"prob_gain": 54,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": 1.2081,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 57.1316,
+"media20": 57.947,
+"quattro_atr": 58.2004,
+"meta_caduta": 55.935,
+"bollinger": 62.6207,
+"consigliata": 57.1316
+},
+"stop": 46.9798,
+"atr": 1.8701
 }
 ]
