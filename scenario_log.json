@@ -18088,5 +18088,62 @@
 "prob_loss": 0,
 "conv": 71,
 "res": {}
+},
+{
+"ticker": "FIX",
+"kind": "short",
+"date": "2026-10-28",
+"promo_price": 1244.1899,
+"obs_price": 1160.86,
+"obs_date": "2026-10-24",
+"pre_price": 1160.86,
+"pre_date": "2026-10-27",
+"conf_price": null,
+"conf_date": null,
+"target": 1597.5752,
+"stop": 1064.5313,
+"reliab": "🟡 Media",
+"prob_gain": 54,
+"prob_loss": 8,
+"conv": 78,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-24 00:37",
+"prezzo": 1160.86,
+"conv": 66,
+"prob_gain": 60,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": -1.5462
+},
+"anticipo": {
+"data": "2026-10-27",
+"prezzo": 1160.86,
+"conv": 67,
+"prob_gain": 57,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-28 01:31",
+"prezzo": 1244.1899,
+"conv": 78,
+"prob_gain": 54,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
