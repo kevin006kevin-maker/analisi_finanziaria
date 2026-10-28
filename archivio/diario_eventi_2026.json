@@ -22049,5 +22049,69 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:NAVN:2026-09-10",
+"ticker": "NAVN",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-11 01:22",
+"data": "2026-09-11 01:20",
+"prezzo": 20.26,
+"conv": 72,
+"prob_gain": 55,
+"prob_loss": 18,
+"reliab": "🔴 Bassa",
+"mkt": -2.0236,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 27.0717,
+"media20": 28.1197,
+"quattro_atr": 27.152,
+"meta_caduta": 25.42,
+"bollinger": 32.4862,
+"consigliata": 27.0717
+},
+"stop": 16.814,
+"atr": 1.723,
+"res": {
+"7g": 5.87,
+"30g": 16.09,
+"soglia": 16.09
+},
+"res_soglia": {
+"media50": {
+"ret": 16.09,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": 16.09,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": 16.09,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": 16.09,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": 16.09,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": 16.09,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
