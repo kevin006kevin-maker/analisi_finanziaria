@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:ENOV:2026-09-09",
-"ticker": "ENOV",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-14 00:38",
-"data": "2026-09-14 00:32",
-"prezzo": 19.28,
-"conv": 69,
-"prob_gain": 53,
-"prob_loss": 12,
-"reliab": "🔴 Bassa",
-"mkt": -1.8209,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-14",
-"soglie": {
-"media50": 25.3142,
-"media20": 23.0465,
-"quattro_atr": 24.8779,
-"meta_caduta": 25.35,
-"bollinger": 29.2625,
-"consigliata": 24.8779
-},
-"stop": 16.481,
-"atr": 1.3995,
-"res": {
-"7g": -7.49,
-"30g": -3.84,
-"soglia": -3.84
-},
-"res_soglia": {
-"media50": {
-"ret": -3.84,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -3.84,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -3.84,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -3.84,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -3.84,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -3.84,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:ADTN:2026-09-09",
 "ticker": "ADTN",
 "kind": "short",
@@ -34441,5 +34377,32 @@
 },
 "stop": 33.3568,
 "atr": 1.4916
+},
+{
+"episodio": "short:VALE:2026-10-26",
+"ticker": "VALE",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-29 00:16",
+"data": "2026-10-29 00:10",
+"prezzo": 11.47,
+"conv": 71,
+"prob_gain": 51,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": 1.2081,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-29",
+"soglie": {
+"media50": 13.983,
+"media20": 13.0505,
+"quattro_atr": 12.9859,
+"meta_caduta": 13.6,
+"bollinger": 14.5299,
+"consigliata": 12.9859
+},
+"stop": 10.7121,
+"atr": 0.379
 }
 ]
