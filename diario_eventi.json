@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:MONC.MI:2026-09-10",
-"ticker": "MONC.MI",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-11 01:22",
-"data": "2026-09-10 23:22",
-"prezzo": 43.6,
-"conv": 68,
-"prob_gain": 46,
-"prob_loss": 1,
-"reliab": "🟢 Alta",
-"mkt": null,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 48.8804,
-"media20": 46.917,
-"quattro_atr": 48.5079,
-"meta_caduta": 48.69,
-"bollinger": 49.4245,
-"consigliata": 48.5079
-},
-"stop": 41.1461,
-"atr": 1.227,
-"res": {
-"7g": 3.53,
-"30g": -0.21,
-"soglia": -0.21
-},
-"soglie_contaminate": {
-"media50": 49.0364,
-"media20": 47.219,
-"quattro_atr": 48.3962,
-"meta_caduta": 48.69,
-"bollinger": 49.488,
-"consigliata": 48.3962
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": -0.21,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -0.21,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -0.21,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -0.21,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -0.21,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -0.21,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:EIX:2026-08-31",
 "ticker": "EIX",
 "kind": "short",
@@ -34449,5 +34374,32 @@
 },
 "stop": 11.7091,
 "atr": 0.3304
+},
+{
+"episodio": "short:RSI:2026-10-28",
+"ticker": "RSI",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-28 01:31",
+"data": "2026-10-28 01:31",
+"prezzo": 16.3,
+"conv": 81,
+"prob_gain": 59,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 22.4252,
+"media20": 18.7985,
+"quattro_atr": 20.4483,
+"meta_caduta": 22.345,
+"bollinger": 21.8558,
+"consigliata": 20.4483
+},
+"stop": 14.2259,
+"atr": 1.0371
 }
 ]
