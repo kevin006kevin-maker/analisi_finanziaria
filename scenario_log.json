@@ -17896,5 +17896,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "RSI",
+"kind": "short",
+"date": "2026-10-28",
+"promo_price": 16.3,
+"obs_price": 23.3,
+"obs_date": "2026-09-19",
+"pre_price": 23.3,
+"pre_date": "2026-09-21",
+"conf_price": null,
+"conf_date": null,
+"target": 22.4252,
+"stop": 14.2259,
+"reliab": "🟡 Media",
+"prob_gain": 59,
+"prob_loss": 12,
+"conv": 81,
+"passaggi": {
+"osservazione": {
+"data": "2026-09-19 01:34",
+"prezzo": 23.3,
+"conv": 70,
+"prob_gain": 56,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": 0.1222
+},
+"anticipo": {
+"data": "2026-09-21",
+"prezzo": 23.3,
+"conv": 74,
+"prob_gain": 56,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-28 01:31",
+"prezzo": 16.3,
+"conv": 81,
+"prob_gain": 59,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
