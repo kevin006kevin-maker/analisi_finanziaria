@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:GPCR:2026-09-08",
-"ticker": "GPCR",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-11 01:25",
-"data": "2026-09-11 01:20",
-"prezzo": 39.55,
-"conv": 69,
-"prob_gain": 46,
-"prob_loss": 27,
-"reliab": "🔴 Bassa",
-"mkt": -2.0236,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-11",
-"soglie": {
-"media50": 50.0145,
-"media20": 48.5895,
-"quattro_atr": 50.3458,
-"meta_caduta": 48.09,
-"bollinger": 57.5213,
-"consigliata": 50.0145
-},
-"stop": 34.1521,
-"atr": 2.6989,
-"res": {
-"7g": -12.01,
-"30g": -38.86,
-"soglia": -38.86
-},
-"res_soglia": {
-"media50": {
-"ret": -38.86,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -38.86,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -38.86,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -38.86,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -38.86,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -38.86,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:FLNC:2026-09-08",
 "ticker": "FLNC",
 "kind": "short",
@@ -34249,5 +34185,32 @@
 },
 "stop": 22.04,
 "atr": 0.935
+},
+{
+"episodio": "short:HESM:2026-10-07",
+"ticker": "HESM",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-28 01:33",
+"data": "2026-10-28 01:32",
+"prezzo": 31.18,
+"conv": 82,
+"prob_gain": 56,
+"prob_loss": 7,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-28",
+"soglie": {
+"media50": 37.1204,
+"media20": 33.3245,
+"quattro_atr": 35.6326,
+"meta_caduta": 36.075,
+"bollinger": 39.8875,
+"consigliata": 35.6326
+},
+"stop": 28.9537,
+"atr": 1.1131
 }
 ]
