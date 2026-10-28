@@ -1,0 +1,49 @@
+name: Richieste dal telefono
+
+# L'app «Occasioni» sul telefono non scrive mai direttamente nei dati: mette una richiesta in
+# `richieste/` sul ramo auto-data (segui, smetti, soglia, nota, analizza un titolo) e chiede a
+# GitHub di far partire questo lavoro. Il lavoro applica le richieste con lo STESSO motore Python
+# del PC, quindi con le stesse protezioni anti-cancellazione, e riscrive il riepilogo del telefono.
+# Dura un minuto o due. Se GitHub non lo facesse partire, le richieste le applica comunque il
+# lavoro automatico al giro successivo: arrivano sempre, al massimo più tardi.
+on:
+  repository_dispatch:
+    types: [richiesta_telefono]
+  workflow_dispatch:
+
+permissions:
+  contents: write              # serve per scrivere i dati sul branch auto-data
+
+# STESSO GRUPPO del lavoro automatico: i due non girano mai insieme, altrimenti uno potrebbe
+# riscrivere il Monitoraggio con una copia vecchia e far sparire la modifica dell'altro.
+concurrency:
+  group: auto-watch
+  cancel-in-progress: false
+
+jobs:
+  applica:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Scarica il codice
+        uses: actions/checkout@v4
+
+      - name: Prepara Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Installa le dipendenze
+        run: pip install -r requirements.txt
+
+      - name: Applica le richieste del telefono
+        env:
+          FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
+          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+          DATA_REPO: ${{ github.repository }}
+          DATA_BRANCH: auto-data
+          DATA_LOCAL_FIRST: "1"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SOLO_RICHIESTE: "1"
+        run: python auto_watch.py

@@ -25,6 +25,7 @@ import html
 import datetime
 
 import finance_utils as fu
+import telefono
 
 
 def log(msg):
@@ -166,13 +167,31 @@ def main():
                   [], "di prova")
         return 0
 
+    # LE RICHIESTE DEL TELEFONO (segui, smetti, soglia, nota, analizza) si applicano PRIMA di tutto:
+    # così il giro lavora già sul Monitoraggio aggiornato. Le applica di solito il lavoro piccolo
+    # «Richieste dal telefono» appena arrivano; qui si raccolgono quelle che fosse rimasto indietro.
+    try:
+        fatte = telefono.applica_richieste(log)
+        if fatte:
+            log(f"Richieste dal telefono applicate: {len(fatte)}")
+    except Exception as e:
+        log(f"Errore richieste dal telefono: {e!r}")
+    if os.environ.get("SOLO_RICHIESTE") == "1":
+        try:
+            log(f"Riepilogo per il telefono: {telefono.scrivi_riepilogo_base()}")
+        except Exception as e:
+            log(f"Errore riepilogo per il telefono: {e!r}")
+        return 0
+
     total = 0
+    scansioni = {}      # la scansione di ogni tipo, per la scheda Mercato del telefono
     for kind in ("short", "long"):
         try:
             # Universo COMPLETO della sezione Occasioni (standard + EU/ETF + extra/watchlist
             # dell'utente, dalla config salvata dall'app): osserva TUTTE le occasioni della sezione.
             universe = fu.opportunity_universe(kind)
             df = fu.scan_opportunities(universe, kind)
+            scansioni[kind] = df
             n = 0 if df is None or df.empty else len(df)
             total += n
             fu.record_observations(df, kind)
@@ -617,12 +636,13 @@ def main():
     # Il riepilogo per l'app del telefono («In osservazione» e «Monitoraggio» già calcolati), alla
     # fine del giro così riporta lo stato dopo promozioni, scatti e avvisi.
     try:
-        rt = fu.riepilogo_telefono()
-        ok = fu.write_data_json(fu.TELEFONO_NAME, rt) and fu.TELEFONO_NAME not in fu._SALVATAGGI_FALLITI
-        log(f"Riepilogo per il telefono: {len(rt['osservazione'])} in osservazione, "
-            f"{len(rt['monitoraggio'])} nel monitoraggio" + ("" if ok else " — NON salvato sul ramo dati"))
+        log(f"Riepilogo per il telefono: {telefono.scrivi_riepilogo_base()}")
     except Exception as e:
         log(f"Errore riepilogo per il telefono: {e!r}")
+    try:
+        log(f"Altri riepiloghi per il telefono: {telefono.scrivi_riepiloghi_completi(scansioni)}")
+    except Exception as e:
+        log(f"Errore riepiloghi per il telefono: {e!r}")
 
     log(f"Fatto. Totale occasioni viste: {total}.")
     return 0

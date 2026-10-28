@@ -90,3 +90,15 @@ notifica gli avvisi dei motivi lasciati accesi nelle sue Impostazioni.
 - Per provare: GitHub → **Actions** → **Run workflow** → spunta «Scrive solo una notifica di prova»
   → la notifica arriva sul telefono al controllo successivo (o subito con «Controlla adesso»).
 - I Secret `TELEGRAM_BOT_TOKEN` e `TELEGRAM_CHAT_ID` non servono più e si possono cancellare.
+
+### Dal 28/10/2026: tutte le sezioni sul telefono e modifiche dal telefono
+- `telefono.py` prepara anche `telefono_mercato.json` (la scansione del giro), `telefono_risultati.json`
+  (Metodi, Scenari, Archivio, Diario in riepilogo), `telefono_attualita.json` (ogni 3 ore) e, a richiesta,
+  `analisi/<TITOLO>.json`. Sono file di stato: si riscrivono a ogni giro.
+- Il telefono non scrive mai nei dati: lascia una richiesta in `richieste/` e fa partire il lavoro
+  «Richieste dal telefono» (`.github/workflows/richieste_telefono.yml`), che la applica con il motore
+  (stesse protezioni) in un minuto o due. Ogni esito va in `archivio/richieste/<giorno>.json` e in
+  `richieste_esiti.json`; solo dopo si toglie il file della richiesta. Se il lavoro piccolo non parte,
+  le applica il lavoro automatico all'inizio del giro successivo. I due lavori stanno nello stesso
+  gruppo, quindi non girano mai insieme.
+- Sul telefono serve un token fine-grained con solo `analisi_finanziaria` e «Contents: Read and write».
