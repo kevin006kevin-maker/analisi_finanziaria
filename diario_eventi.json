@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:FLNC:2026-09-08",
-"ticker": "FLNC",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-11 01:25",
-"data": "2026-09-11 01:20",
-"prezzo": 9.69,
-"conv": 67,
-"prob_gain": 46,
-"prob_loss": 34,
-"reliab": "🔴 Bassa",
-"mkt": -2.0236,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-11",
-"soglie": {
-"media50": 13.2759,
-"media20": 11.211,
-"quattro_atr": 12.9735,
-"meta_caduta": 17.44,
-"bollinger": 13.1388,
-"consigliata": 12.9735
-},
-"stop": 8.0483,
-"atr": 0.8209,
-"res": {
-"7g": -25.95,
-"30g": -26.99,
-"soglia": -26.99
-},
-"res_soglia": {
-"media50": {
-"ret": -26.99,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -26.99,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -26.99,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -26.99,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -26.99,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -26.99,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:MONC.MI:2026-09-10",
 "ticker": "MONC.MI",
 "kind": "short",
@@ -34212,5 +34148,32 @@
 },
 "stop": 28.9537,
 "atr": 1.1131
+},
+{
+"episodio": "short:CELC:2026-10-08",
+"ticker": "CELC",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-28 01:33",
+"data": "2026-10-28 01:32",
+"prezzo": 65.8,
+"conv": 72,
+"prob_gain": 56,
+"prob_loss": 18,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-28",
+"soglie": {
+"media50": 79.5464,
+"media20": 66.5855,
+"quattro_atr": 82.8573,
+"meta_caduta": 81.115,
+"bollinger": 79.7297,
+"consigliata": 79.5464
+},
+"stop": 57.2713,
+"atr": 4.2643
 }
 ]
