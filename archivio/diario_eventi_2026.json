@@ -22188,5 +22188,80 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:MONC.MI:2026-09-10",
+"ticker": "MONC.MI",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-11 01:22",
+"data": "2026-09-10 23:22",
+"prezzo": 43.6,
+"conv": 68,
+"prob_gain": 46,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 48.8804,
+"media20": 46.917,
+"quattro_atr": 48.5079,
+"meta_caduta": 48.69,
+"bollinger": 49.4245,
+"consigliata": 48.5079
+},
+"stop": 41.1461,
+"atr": 1.227,
+"res": {
+"7g": 3.53,
+"30g": -0.21,
+"soglia": -0.21
+},
+"soglie_contaminate": {
+"media50": 49.0364,
+"media20": 47.219,
+"quattro_atr": 48.3962,
+"meta_caduta": 48.69,
+"bollinger": 49.488,
+"consigliata": 48.3962
+},
+"soglie_ricalcolate_il": "2026-09-14 21:39",
+"soglie_ritardo_giorni": 1,
+"taglio_corretto": true,
+"res_soglia": {
+"media50": {
+"ret": -0.21,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -0.21,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -0.21,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -0.21,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -0.21,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -0.21,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
