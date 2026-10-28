@@ -18183,5 +18183,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "MB.MI",
+"kind": "short",
+"date": "2026-10-28",
+"promo_price": 25.75,
+"obs_price": 26.0,
+"obs_date": "2026-10-05",
+"pre_price": 26.0,
+"pre_date": "2026-10-06",
+"conf_price": null,
+"conf_date": null,
+"target": 27.2374,
+"stop": 24.483,
+"reliab": "🟢 Alta",
+"prob_gain": 55,
+"prob_loss": 6,
+"conv": 62,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-05 17:57",
+"prezzo": 26.0,
+"conv": 74,
+"prob_gain": 59,
+"prob_loss": 4,
+"reliab": "🟢 Alta",
+"mkt": 0.5555
+},
+"anticipo": {
+"data": "2026-10-06",
+"prezzo": 26.0,
+"conv": 74,
+"prob_gain": 59,
+"prob_loss": 4,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-28 14:32",
+"prezzo": 25.75,
+"conv": 62,
+"prob_gain": 55,
+"prob_loss": 6,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
