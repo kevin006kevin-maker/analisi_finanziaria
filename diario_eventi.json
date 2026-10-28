@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:RVLV:2026-09-10",
-"ticker": "RVLV",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-11 17:48",
-"data": "2026-09-11 17:46",
-"prezzo": 21.055,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 20.51",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:KAI:2026-09-11",
 "ticker": "KAI",
 "kind": "short",
@@ -34822,5 +34802,32 @@
 },
 "stop": 324.5116,
 "atr": 20.5092
+},
+{
+"episodio": "short:LSTR:2026-10-29",
+"ticker": "LSTR",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-29 00:10",
+"data": "2026-10-29 00:10",
+"prezzo": 138.8,
+"conv": 71,
+"prob_gain": 58,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": 1.2081,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 171.7064,
+"media20": 167.8045,
+"quattro_atr": 163.5266,
+"meta_caduta": 166.09,
+"bollinger": 182.0851,
+"consigliata": 163.5266
+},
+"stop": 126.4367,
+"atr": 6.1816
 }
 ]
