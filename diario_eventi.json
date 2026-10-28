@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:TYRA:2026-09-11",
-"ticker": "TYRA",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-11 03:19",
-"data": "2026-09-11 03:19",
-"prezzo": 22.01,
-"conv": 72,
-"prob_gain": 59,
-"prob_loss": 14,
-"reliab": "🔴 Bassa",
-"mkt": -2.0236,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 28.7413,
-"media20": 25.71,
-"quattro_atr": 30.5459,
-"meta_caduta": 27.535,
-"bollinger": 28.2111,
-"consigliata": 28.7413
-},
-"stop": 17.7421,
-"atr": 2.134,
-"res": {
-"7g": 14.81,
-"30g": -11.2,
-"soglia": -11.2
-},
-"res_soglia": {
-"media50": {
-"ret": -11.2,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 16.81,
-"toccato": true,
-"giorni": 7
-},
-"quattro_atr": {
-"ret": -11.2,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -11.2,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -11.2,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -11.2,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:MYGN:2026-09-11",
 "ticker": "MYGN",
 "kind": "short",
@@ -34182,5 +34118,32 @@
 },
 "stop": 35.896,
 "atr": 2.172
+},
+{
+"episodio": "short:FLG:2026-10-23",
+"ticker": "FLG",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-28 01:34",
+"data": "2026-10-28 01:28",
+"prezzo": 10.22,
+"conv": 71,
+"prob_gain": 57,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": 0.6748,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-28",
+"soglie": {
+"media50": 12.3788,
+"media20": 11.2575,
+"quattro_atr": 11.6183,
+"meta_caduta": 12.26,
+"bollinger": 12.0752,
+"consigliata": 11.6183
+},
+"stop": 9.5209,
+"atr": 0.3496
 }
 ]
