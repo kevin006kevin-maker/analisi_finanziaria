@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:NVS:2026-09-08",
-"ticker": "NVS",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-11 01:25",
-"data": "2026-09-10 23:22",
-"prezzo": 137.48,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-11",
-"soglie": {
-"media50": 154.4828,
-"media20": 154.002,
-"quattro_atr": 155.1865,
-"meta_caduta": 150.285,
-"bollinger": 169.9667,
-"consigliata": 154.4828
-},
-"stop": 128.6267,
-"atr": 4.4266,
-"res": {
-"7g": 2.46,
-"30g": 4.59,
-"soglia": 4.59
-},
-"soglie_contaminate": {
-"media50": 154.4828,
-"media20": 154.002,
-"quattro_atr": 155.1837,
-"meta_caduta": 150.285,
-"bollinger": 169.9667,
-"consigliata": 154.4828
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": 4.59,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 4.59,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 4.59,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 4.59,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 4.59,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 4.59,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:GPCR:2026-09-08",
 "ticker": "GPCR",
 "kind": "short",
@@ -34297,5 +34222,32 @@
 },
 "stop": 17.268,
 "atr": 1.506
+},
+{
+"episodio": "short:MRP:2026-10-05",
+"ticker": "MRP",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-28 01:33",
+"data": "2026-10-28 01:32",
+"prezzo": 23.91,
+"conv": 72,
+"prob_gain": 56,
+"prob_loss": 5,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-28",
+"soglie": {
+"media50": 27.1554,
+"media20": null,
+"quattro_atr": 27.6501,
+"meta_caduta": 27.965,
+"bollinger": 26.081,
+"consigliata": 27.1554
+},
+"stop": 22.04,
+"atr": 0.935
 }
 ]
