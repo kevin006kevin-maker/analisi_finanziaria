@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:TBBK:2026-09-09",
-"ticker": "TBBK",
-"kind": "short",
-"evento": "promozione",
-"scritto_il": "2026-09-14 00:35",
-"data": "2026-09-14 00:35",
-"prezzo": 50.63,
-"conv": 80,
-"prob_gain": 61,
-"prob_loss": 8,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": 66.3388,
-"media20": 64.314,
-"quattro_atr": 61.7269,
-"meta_caduta": 61.34,
-"bollinger": 76.6522,
-"consigliata": 61.7269
-},
-"stop": 45.0816,
-"atr": 2.7742,
-"res": {
-"7g": -0.68,
-"30g": -4.14,
-"soglia": -4.14
-},
-"res_soglia": {
-"media50": {
-"ret": -4.14,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -4.14,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -4.14,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -4.14,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -4.14,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -4.14,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:ROAD:2026-09-14",
 "ticker": "ROAD",
 "kind": "short",
@@ -34710,5 +34646,32 @@
 },
 "stop": 54.3953,
 "atr": 2.3074
+},
+{
+"episodio": "short:AIT:2026-10-28",
+"ticker": "AIT",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-29 00:13",
+"data": "2026-10-28 07:15",
+"prezzo": 297.58,
+"conv": 66,
+"prob_gain": 56,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 329.137,
+"media20": 330.147,
+"quattro_atr": 339.0385,
+"meta_caduta": 329.765,
+"bollinger": 356.3824,
+"consigliata": 329.137
+},
+"stop": 276.8508,
+"atr": 10.3646
 }
 ]
