@@ -13245,5 +13245,37 @@
 "max_date": "2026-10-28 01:31",
 "auto": true,
 "notified": false
+},
+"CW": {
+"kind": "short",
+"added": "2026-10-28",
+"note": "🤖 Promossa il 2026-10-28: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.5% e la convenienza (62) regge.",
+"name": "CW",
+"snapshots": [
+{
+"name": "CW",
+"price": 476.54,
+"rsi": 27.9359,
+"dd_high": -39.8892,
+"occasione": 75,
+"convenienza": 86,
+"prob_gain": 51,
+"prob_loss": 4,
+"exp_ret": 0.2,
+"gain": 16.726,
+"reliab": "🟡 Media",
+"target": 556.2462,
+"stop": 444.6669,
+"date": "2026-10-28 01:31"
+}
+],
+"entry_price": 476.54,
+"entry_target": 556.2462,
+"entry_stop": 444.6669,
+"entry_conv": 86,
+"entry_date": "2026-10-28 01:31",
+"entry_src": "scatto",
+"max_price": 476.54,
+"max_date": "2026-10-28 01:31"
 }
 }
