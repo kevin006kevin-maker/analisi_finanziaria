@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:KAI:2026-09-11",
-"ticker": "KAI",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-11 20:57",
-"data": "2026-09-11 20:57",
-"prezzo": 271.06,
-"conv": 72,
-"prob_gain": 54,
-"prob_loss": 5,
-"reliab": "🟡 Media",
-"mkt": -1.7043,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 309.875,
-"media20": 303.798,
-"quattro_atr": 314.242,
-"meta_caduta": 304.695,
-"bollinger": 332.3637,
-"consigliata": 309.875
-},
-"stop": 249.469,
-"atr": 10.7955,
-"res": {
-"7g": -1.8,
-"30g": -3.42,
-"soglia": -3.42
-},
-"res_soglia": {
-"media50": {
-"ret": -3.42,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -3.42,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -3.42,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -3.42,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -3.42,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -3.42,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "long:LDO.MI:2026-08-25",
 "ticker": "LDO.MI",
 "kind": "long",
@@ -34829,5 +34765,32 @@
 },
 "stop": 126.4367,
 "atr": 6.1816
+},
+{
+"episodio": "short:LPLA:2026-10-29",
+"ticker": "LPLA",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-29 00:10",
+"data": "2026-10-29 00:10",
+"prezzo": 269.19,
+"conv": 67,
+"prob_gain": 55,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": 1.2081,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 333.2512,
+"media20": 320.094,
+"quattro_atr": 318.5742,
+"meta_caduta": 322.935,
+"bollinger": 346.9109,
+"consigliata": 318.5742
+},
+"stop": 244.4979,
+"atr": 12.3461
 }
 ]
