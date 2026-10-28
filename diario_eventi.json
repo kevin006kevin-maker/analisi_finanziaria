@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:ADTN:2026-09-09",
-"ticker": "ADTN",
-"kind": "short",
-"evento": "promozione",
-"scritto_il": "2026-09-14 00:35",
-"data": "2026-09-14 00:35",
-"prezzo": 7.54,
-"conv": 67,
-"prob_gain": 53,
-"prob_loss": 18,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": 9.2574,
-"media20": 7.722,
-"quattro_atr": 9.2683,
-"meta_caduta": 11.56,
-"bollinger": 8.5369,
-"consigliata": 9.2574
-},
-"stop": 6.6759,
-"atr": 0.4321,
-"res": {
-"7g": -3.85,
-"30g": -9.95,
-"soglia": -9.95
-},
-"res_soglia": {
-"media50": {
-"ret": -9.95,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 2.41,
-"toccato": true,
-"giorni": 23
-},
-"quattro_atr": {
-"ret": -9.95,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -9.95,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -9.95,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -9.95,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:TBBK:2026-09-09",
 "ticker": "TBBK",
 "kind": "short",
@@ -34747,5 +34683,32 @@
 },
 "stop": 324.5116,
 "atr": 20.5092
+},
+{
+"episodio": "short:EEFT:2026-10-28",
+"ticker": "EEFT",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-29 00:13",
+"data": "2026-10-28 14:31",
+"prezzo": 59.01,
+"conv": 66,
+"prob_gain": 56,
+"prob_loss": 2,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 66.9078,
+"media20": 64.0815,
+"quattro_atr": 68.2394,
+"meta_caduta": 66.64,
+"bollinger": 67.653,
+"consigliata": 66.9078
+},
+"stop": 54.3953,
+"atr": 2.3074
 }
 ]
