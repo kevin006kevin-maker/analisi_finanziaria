@@ -34144,7 +34144,18 @@
 "consigliata": 66.9078
 },
 "stop": 54.3953,
-"atr": 2.3074
+"atr": 2.3074,
+"soglie_contaminate": {
+"media50": 66.9078,
+"media20": 64.0815,
+"quattro_atr": 68.2394,
+"meta_caduta": 66.64,
+"bollinger": 67.653,
+"consigliata": 66.9078
+},
+"soglie_ricalcolate_il": "2026-10-29 00:17",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "short:AIT:2026-10-28",
@@ -34171,7 +34182,18 @@
 "consigliata": 329.137
 },
 "stop": 276.8508,
-"atr": 10.3646
+"atr": 10.3646,
+"soglie_contaminate": {
+"media50": 329.137,
+"media20": 330.147,
+"quattro_atr": 339.0385,
+"meta_caduta": 329.765,
+"bollinger": 356.3824,
+"consigliata": 329.137
+},
+"soglie_ricalcolate_il": "2026-10-29 00:17",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "short:GOOGL:2026-10-29",
