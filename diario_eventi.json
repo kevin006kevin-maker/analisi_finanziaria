@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:RELY:2026-09-11",
-"ticker": "RELY",
-"kind": "long",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-11 08:22",
-"data": "2026-09-11 08:22",
-"prezzo": 21.93,
-"conv": 73,
-"prob_gain": 78,
-"prob_loss": 14,
-"reliab": "🟡 Media",
-"mkt": -2.0236,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 24.5421,
-"media20": 25.7192,
-"quattro_atr": 26.845,
-"meta_caduta": 24.425,
-"bollinger": 28.0883,
-"consigliata": 24.5421
-},
-"stop": 19.4725,
-"atr": 1.2288,
-"res": {
-"7g": 0.36,
-"30g": 8.71
-}
-},
-{
 "episodio": "short:TYRA:2026-09-11",
 "ticker": "TYRA",
 "kind": "short",
@@ -34081,5 +34050,32 @@
 },
 "stop": 54.6126,
 "atr": 2.1987
+},
+{
+"episodio": "short:MB.MI:2026-10-05",
+"ticker": "MB.MI",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-28 14:32",
+"data": "2026-10-28 14:32",
+"prezzo": 25.75,
+"conv": 62,
+"prob_gain": 55,
+"prob_loss": 6,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 27.2374,
+"media20": null,
+"quattro_atr": 28.284,
+"meta_caduta": 27.4,
+"bollinger": 27.0425,
+"consigliata": 27.2374
+},
+"stop": 24.483,
+"atr": 0.6335
 }
 ]
