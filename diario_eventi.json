@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:RVLV:2026-09-10",
-"ticker": "RVLV",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-11 03:19",
-"data": "2026-09-11 03:19",
-"prezzo": 19.49,
-"conv": 74,
-"prob_gain": 58,
-"prob_loss": 12,
-"reliab": "🟡 Media",
-"mkt": -2.0236,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 23.8316,
-"media20": 22.7335,
-"quattro_atr": 23.1582,
-"meta_caduta": 23.16,
-"bollinger": 25.3662,
-"consigliata": 23.1582
-},
-"stop": 17.6559,
-"atr": 0.9171,
-"res": {
-"7g": 6.05,
-"30g": 12.39,
-"soglia": 12.39
-},
-"res_soglia": {
-"media50": {
-"ret": 12.39,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 12.39,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 12.39,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 12.39,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 12.39,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 12.39,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:BAND:2026-09-10",
 "ticker": "BAND",
 "kind": "short",
@@ -34113,5 +34049,32 @@
 },
 "stop": 19.295,
 "atr": 0.7775
+},
+{
+"episodio": "short:FIX:2026-10-24",
+"ticker": "FIX",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-28 01:34",
+"data": "2026-10-28 01:31",
+"prezzo": 1244.1899,
+"conv": 78,
+"prob_gain": 54,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-28",
+"soglie": {
+"media50": 1597.5752,
+"media20": 1555.0235,
+"quattro_atr": 1603.5071,
+"meta_caduta": 1562.685,
+"bollinger": 1928.424,
+"consigliata": 1597.5752
+},
+"stop": 1064.5313,
+"atr": 89.8293
 }
 ]
