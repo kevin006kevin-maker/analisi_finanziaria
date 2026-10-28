@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:EIX:2026-08-31",
-"ticker": "EIX",
-"kind": "short",
-"evento": "fine_verifica",
-"scritto_il": "2026-09-11 01:25",
-"data": "2026-09-10 23:25",
-"prezzo": 56.75,
-"conv": 79,
-"prob_gain": 60,
-"prob_loss": 7,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 5 giorni di Borsa dalla promozione",
-"dovuto_il": "2026-09-11",
-"soglie": {
-"media50": 71.51,
-"media20": 66.422,
-"quattro_atr": 70.5172,
-"meta_caduta": 68.565,
-"bollinger": 82.848,
-"consigliata": 70.5172
-},
-"stop": 49.8664,
-"atr": 3.4418,
-"res": {
-"7g": -2.33,
-"30g": -2.06,
-"soglia": -2.06
-},
-"soglie_contaminate": {
-"media50": 71.51,
-"media20": 66.422,
-"quattro_atr": 70.5158,
-"meta_caduta": 68.565,
-"bollinger": 82.848,
-"consigliata": 70.5158
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": -2.06,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -2.06,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -2.06,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -2.06,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -2.06,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -2.06,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:HWM:2026-08-31",
 "ticker": "HWM",
 "kind": "short",
@@ -34401,5 +34326,32 @@
 },
 "stop": 14.2259,
 "atr": 1.0371
+},
+{
+"episodio": "short:CW:2026-10-07",
+"ticker": "CW",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-28 01:31",
+"data": "2026-10-28 01:31",
+"prezzo": 476.54,
+"conv": 86,
+"prob_gain": 51,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 556.2462,
+"media20": 510.2095,
+"quattro_atr": 540.2861,
+"meta_caduta": 616.925,
+"bollinger": 561.3518,
+"consigliata": 540.2861
+},
+"stop": 444.6669,
+"atr": 15.9365
 }
 ]
