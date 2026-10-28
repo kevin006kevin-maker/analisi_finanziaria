@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:MYGN:2026-09-11",
-"ticker": "MYGN",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-11 08:23",
-"data": "2026-09-11 08:21",
-"prezzo": 3.36,
-"conv": 55,
-"prob_gain": 54,
-"prob_loss": 20,
-"reliab": "🔴 Bassa",
-"mkt": -2.0236,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 3.19",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:RVLV:2026-09-10",
 "ticker": "RVLV",
 "kind": "short",
@@ -34815,5 +34795,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:FFIV:2026-10-29",
+"ticker": "FFIV",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-29 00:10",
+"data": "2026-10-29 00:10",
+"prezzo": 365.53,
+"conv": 77,
+"prob_gain": 64,
+"prob_loss": 1,
+"reliab": "🟡 Media",
+"mkt": 1.2081,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 429.804,
+"media20": 454.8935,
+"quattro_atr": 447.5668,
+"meta_caduta": 422.68,
+"bollinger": 501.3484,
+"consigliata": 429.804
+},
+"stop": 324.5116,
+"atr": 20.5092
 }
 ]
