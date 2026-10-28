@@ -2937,8 +2937,6 @@
 "max_price": 1892.6801,
 "max_date": "2026-09-22 19:49",
 "incasso_notified": true,
-"warn_since": "2026-10-28",
-"warn": "in perdita da 62 giorni di Borsa: valuta l'uscita",
 "incasso": {
 "gain": 3.8,
 "max": 1892.6801,
@@ -6280,9 +6278,7 @@
 "auto": true,
 "notified": true,
 "entry_check": "2026-10-28",
-"exit_notified": false,
-"warn_since": "2026-10-28",
-"warn": "in perdita da 42 giorni di Borsa: valuta l'uscita"
+"exit_notified": false
 },
 "ENI.MI": {
 "kind": "short",
@@ -7653,169 +7649,6 @@
 "tipo": "bersaglio"
 },
 "exit_notified": false
-},
-"LPLA": {
-"kind": "short",
-"added": "2026-09-25",
-"note": "🤖 Promossa il 2026-09-25: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.2% e la convenienza (63) regge.",
-"name": "LPLA",
-"snapshots": [
-{
-"name": "LPLA",
-"price": 323.29,
-"rsi": 48.6053,
-"dd_high": -17.7902,
-"occasione": 27,
-"convenienza": 60,
-"prob_gain": 50,
-"prob_loss": 6,
-"exp_ret": -0.1,
-"gain": 4.0478,
-"reliab": "🟡 Media",
-"target": 336.376,
-"stop": 304.2031,
-"date": "2026-10-26 16:13"
-},
-{
-"name": "LPLA",
-"price": 317.23,
-"rsi": 43.3245,
-"dd_high": -19.3312,
-"occasione": 34,
-"convenienza": 64,
-"prob_gain": 50,
-"prob_loss": 6,
-"exp_ret": -0.2,
-"gain": 5.9972,
-"reliab": "🟡 Media",
-"target": 336.2548,
-"stop": 298.1274,
-"date": "2026-10-26 21:30"
-},
-{
-"name": "LPLA",
-"price": 315.61,
-"rsi": 41.7237,
-"dd_high": -19.7432,
-"occasione": 8,
-"convenienza": 65,
-"prob_gain": 53,
-"prob_loss": 6,
-"exp_ret": 0.9,
-"gain": 6.8799,
-"reliab": "🟡 Media",
-"target": 337.3236,
-"stop": 296.2657,
-"date": "2026-10-27 01:08"
-},
-{
-"name": "LPLA",
-"price": 317.23,
-"rsi": 43.3245,
-"dd_high": -19.3312,
-"occasione": 34,
-"convenienza": 64,
-"prob_gain": 50,
-"prob_loss": 6,
-"exp_ret": -0.2,
-"gain": 5.9972,
-"reliab": "🟡 Media",
-"target": 336.2548,
-"stop": 298.1274,
-"date": "2026-10-27 05:59"
-},
-{
-"name": "LPLA",
-"price": 317.19,
-"rsi": 43.2929,
-"dd_high": -19.3414,
-"occasione": 5,
-"convenienza": 64,
-"prob_gain": 48,
-"prob_loss": 7,
-"exp_ret": -0.8,
-"gain": 5.6889,
-"reliab": "🟡 Media",
-"target": 335.2346,
-"stop": 298.1562,
-"date": "2026-10-27 17:05"
-},
-{
-"name": "LPLA",
-"price": 317.56,
-"rsi": 43.664,
-"dd_high": -19.2473,
-"occasione": 37,
-"convenienza": 63,
-"prob_gain": 46,
-"prob_loss": 7,
-"exp_ret": -1.1,
-"gain": 5.5681,
-"reliab": "🟡 Media",
-"target": 335.242,
-"stop": 298.5262,
-"date": "2026-10-27 21:42"
-},
-{
-"name": "LPLA",
-"price": 317.23,
-"rsi": 43.3245,
-"dd_high": -19.3312,
-"occasione": 37,
-"convenienza": 64,
-"prob_gain": 47,
-"prob_loss": 6,
-"exp_ret": -0.9,
-"gain": 5.9972,
-"reliab": "🟡 Media",
-"target": 336.2548,
-"stop": 298.1274,
-"date": "2026-10-28 01:32"
-},
-{
-"name": "LPLA",
-"price": 317.56,
-"rsi": 43.664,
-"dd_high": -19.2473,
-"occasione": 42,
-"convenienza": 63,
-"prob_gain": 46,
-"prob_loss": 7,
-"exp_ret": -1.1,
-"gain": 5.5681,
-"reliab": "🟡 Media",
-"target": 335.242,
-"stop": 298.5262,
-"date": "2026-10-28 07:19"
-},
-{
-"name": "LPLA",
-"price": 289.98,
-"rsi": 28.3698,
-"dd_high": -26.2606,
-"occasione": 49,
-"convenienza": 76,
-"prob_gain": 52,
-"prob_loss": 6,
-"exp_ret": 0.7,
-"gain": 15.0655,
-"reliab": "🟡 Media",
-"target": 333.667,
-"stop": 267.6715,
-"date": "2026-10-28 14:33"
-}
-],
-"entry_price": 316.83,
-"entry_target": 348.0122,
-"entry_stop": 292.4321,
-"entry_conv": 67,
-"entry_date": "2026-09-25 20:33",
-"entry_src": "scatto",
-"max_price": 332.65,
-"max_date": "2026-10-09 21:47",
-"auto": true,
-"notified": true,
-"entry_check": "2026-10-28"
 },
 "CASY": {
 "kind": "short",
@@ -9638,9 +9471,7 @@
 "max_date": "2026-10-16 16:16",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-28",
-"warn_since": "2026-10-28",
-"warn": "in perdita da 17 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-28"
 },
 "ENLT": {
 "kind": "short",
@@ -10769,9 +10600,7 @@
 "max_date": "2026-10-15 23:22",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-28",
-"warn_since": "2026-10-28",
-"warn": "in perdita da 12 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-28"
 },
 "LQDA": {
 "kind": "short",
@@ -11908,9 +11737,7 @@
 "max_date": "2026-10-21 19:10",
 "auto": true,
 "notified": false,
-"entry_check": "2026-10-28",
-"warn_since": "2026-10-28",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-28"
 },
 "MRP": {
 "kind": "short",
@@ -12236,9 +12063,7 @@
 "max_date": "2026-10-28 14:33",
 "auto": true,
 "notified": false,
-"entry_check": "2026-10-28",
-"warn_since": "2026-10-28",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-10-28"
 },
 "CELC": {
 "kind": "short",
