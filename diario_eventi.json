@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:SYK:2026-09-09",
-"ticker": "SYK",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-14 00:38",
-"data": "2026-09-14 00:32",
-"prezzo": 275.56,
-"conv": 78,
-"prob_gain": 54,
-"prob_loss": 3,
-"reliab": "🟢 Alta",
-"mkt": -1.8209,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-14",
-"soglie": {
-"media50": 325.0274,
-"media20": 315.1085,
-"quattro_atr": 318.2989,
-"meta_caduta": 313.905,
-"bollinger": 360.9061,
-"consigliata": 318.2989
-},
-"stop": 254.1906,
-"atr": 10.6847,
-"res": {
-"7g": 0.04,
-"30g": 1.59,
-"soglia": 1.59
-},
-"res_soglia": {
-"media50": {
-"ret": 1.59,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 1.59,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 1.59,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 1.59,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 1.59,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 1.59,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:DYN:2026-09-09",
 "ticker": "DYN",
 "kind": "short",
@@ -34515,5 +34451,32 @@
 },
 "stop": 58.7684,
 "atr": 1.5158
+},
+{
+"episodio": "long:AA:2026-10-20",
+"ticker": "AA",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-10-29 00:16",
+"data": "2026-10-29 00:11",
+"prezzo": 40.21,
+"conv": 58,
+"prob_gain": 63,
+"prob_loss": 27,
+"reliab": "🟡 Media",
+"mkt": 1.2081,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-10-29",
+"soglie": {
+"media50": 45.1194,
+"media20": 41.0965,
+"quattro_atr": 46.2786,
+"meta_caduta": 47.145,
+"bollinger": 44.1492,
+"consigliata": 45.1194
+},
+"stop": 37.1757,
+"atr": 1.5172
 }
 ]
