@@ -18087,7 +18087,45 @@
 "prob_gain": 57,
 "prob_loss": 0,
 "conv": 71,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-10-23 17:27",
+"prezzo": 10.495,
+"conv": 70,
+"prob_gain": 53,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": -1.0892
+},
+"anticipo": {
+"data": "2026-10-26",
+"prezzo": 10.38,
+"conv": 68,
+"prob_gain": 52,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-28",
+"prezzo": 10.22,
+"conv": 71,
+"prob_gain": 57,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "FIX",
