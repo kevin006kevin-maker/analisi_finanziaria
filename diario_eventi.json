@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:PURR:2026-09-01",
-"ticker": "PURR",
-"kind": "long",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-11 01:25",
-"data": "2026-09-11 01:21",
-"prezzo": 11.01,
-"conv": 56,
-"prob_gain": 70,
-"prob_loss": 25,
-"reliab": "🔴 Bassa",
-"mkt": -2.0236,
-"fonte": "osservazione",
-"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-11",
-"soglie": {
-"media50": null,
-"media20": null,
-"quattro_atr": 15.2932,
-"meta_caduta": 11.92,
-"bollinger": 14.6242,
-"consigliata": 15.2932
-},
-"stop": 8.8684,
-"atr": 1.0708,
-"res": {
-"7g": 23.02,
-"30g": -6.09
-}
-},
-{
 "episodio": "short:NVS:2026-09-08",
 "ticker": "NVS",
 "kind": "short",
@@ -34301,5 +34270,32 @@
 },
 "stop": 1064.5313,
 "atr": 89.8293
+},
+{
+"episodio": "short:NESR:2026-09-29",
+"ticker": "NESR",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-28 01:33",
+"data": "2026-10-28 01:32",
+"prezzo": 20.28,
+"conv": 77,
+"prob_gain": 58,
+"prob_loss": 16,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-28",
+"soglie": {
+"media50": 28.922,
+"media20": 22.0632,
+"quattro_atr": 26.3039,
+"meta_caduta": 28.295,
+"bollinger": 26.9067,
+"consigliata": 26.3039
+},
+"stop": 17.268,
+"atr": 1.506
 }
 ]
