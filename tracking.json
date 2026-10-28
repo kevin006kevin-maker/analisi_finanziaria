@@ -13279,5 +13279,37 @@
 "max_date": "2026-10-28 01:31",
 "auto": true,
 "notified": false
+},
+"OII": {
+"kind": "short",
+"added": "2026-10-28",
+"note": "🤖 Promossa il 2026-10-28: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +9.9% e la convenienza (67) regge.",
+"name": "OII",
+"snapshots": [
+{
+"name": "OII",
+"price": 40.24,
+"rsi": 38.4209,
+"dd_high": -25.633,
+"occasione": 67,
+"convenienza": 70,
+"prob_gain": 53,
+"prob_loss": 5,
+"exp_ret": 0.9,
+"gain": 17.0403,
+"reliab": "🟡 Media",
+"target": 47.097,
+"stop": 35.896,
+"date": "2026-10-28 01:31"
+}
+],
+"entry_price": 40.24,
+"entry_target": 47.097,
+"entry_stop": 35.896,
+"entry_conv": 70,
+"entry_date": "2026-10-28 01:31",
+"entry_src": "scatto",
+"max_price": 40.24,
+"max_date": "2026-10-28 01:31"
 }
 }
