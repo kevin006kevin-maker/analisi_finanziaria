@@ -22113,5 +22113,80 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:CDNL:2026-09-11",
+"ticker": "CDNL",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-11 01:22",
+"data": "2026-08-23 22:48",
+"prezzo": 43.5,
+"conv": 70,
+"prob_gain": 56,
+"prob_loss": 24,
+"reliab": "🔴 Bassa",
+"mkt": 3.5401,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 66.0711,
+"media20": 52.2895,
+"quattro_atr": 64.5681,
+"meta_caduta": 68.905,
+"bollinger": 75.3521,
+"consigliata": 64.5681
+},
+"stop": 32.966,
+"atr": 5.267,
+"res": {
+"7g": -14.99,
+"30g": -30.67,
+"soglia": -30.67
+},
+"soglie_contaminate": {
+"media50": 65.5899,
+"media20": 51.188,
+"quattro_atr": 63.8604,
+"meta_caduta": 68.905,
+"bollinger": 74.1486,
+"consigliata": 63.8604
+},
+"soglie_ricalcolate_il": "2026-09-14 21:39",
+"soglie_ritardo_giorni": 19,
+"taglio_corretto": true,
+"res_soglia": {
+"media50": {
+"ret": -30.67,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -30.67,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -30.67,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -30.67,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -30.67,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -30.67,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
