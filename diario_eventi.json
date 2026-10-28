@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:AON:2026-09-01",
-"ticker": "AON",
-"kind": "short",
-"evento": "fine_verifica",
-"scritto_il": "2026-09-14 00:38",
-"data": "2026-09-05 06:46",
-"prezzo": 323.09,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "passati 5 giorni di Borsa dalla promozione",
-"dovuto_il": "2026-09-14",
-"soglie": {
-"media50": 353.1438,
-"media20": 346.3125,
-"quattro_atr": 362.3944,
-"meta_caduta": 352.175,
-"bollinger": 372.0119,
-"consigliata": 353.1438
-},
-"stop": 303.4378,
-"atr": 9.8261,
-"soglie_contaminate": {
-"media50": 353.1438,
-"media20": 346.3125,
-"quattro_atr": 362.3944,
-"meta_caduta": 352.175,
-"bollinger": 372.0119,
-"consigliata": 353.1438
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 9,
-"res": {
-"7g": -4.44,
-"30g": -15.98,
-"soglia": -15.98
-},
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": -15.98,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -15.98,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -15.98,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -15.98,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -15.98,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -15.98,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:PCG:2026-09-01",
 "ticker": "PCG",
 "kind": "short",
@@ -34669,6 +34594,26 @@
 "mkt": null,
 "fonte": "monitoraggio",
 "note": "in perdita da 66 giorni di Borsa: valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:PTRN:2026-09-24",
+"ticker": "PTRN",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-10-29 00:14",
+"data": "2026-10-29 00:14",
+"prezzo": 16.71,
+"conv": 63,
+"prob_gain": 50,
+"prob_loss": 22,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "in perdita da 19 giorni di Borsa: valuta l'uscita",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
