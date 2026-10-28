@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:PCG:2026-09-01",
-"ticker": "PCG",
-"kind": "short",
-"evento": "fine_verifica",
-"scritto_il": "2026-09-14 00:38",
-"data": "2026-09-11 23:34",
-"prezzo": 13.8,
-"conv": 81,
-"prob_gain": 55,
-"prob_loss": 5,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 5 giorni di Borsa dalla promozione",
-"dovuto_il": "2026-09-14",
-"soglie": {
-"media50": 16.8676,
-"media20": 16.0685,
-"quattro_atr": 17.1582,
-"meta_caduta": 16.08,
-"bollinger": 20.0653,
-"consigliata": 16.8676
-},
-"stop": 12.1209,
-"atr": 0.8396,
-"soglie_contaminate": {
-"media50": 16.8676,
-"media20": 16.0685,
-"quattro_atr": 17.1582,
-"meta_caduta": 16.08,
-"bollinger": 20.0653,
-"consigliata": 16.8676
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 3,
-"res": {
-"7g": -4.31,
-"30g": -4.78,
-"soglia": -4.78
-},
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": -4.78,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -4.78,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -4.78,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -4.78,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -4.78,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -4.78,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:ALMS:2026-09-01",
 "ticker": "ALMS",
 "kind": "short",
@@ -34614,6 +34539,26 @@
 "mkt": null,
 "fonte": "monitoraggio",
 "note": "in perdita da 19 giorni di Borsa: valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:TIGO:2026-10-09",
+"ticker": "TIGO",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-10-29 00:14",
+"data": "2026-10-29 00:14",
+"prezzo": 79.66,
+"conv": 72,
+"prob_gain": 52,
+"prob_loss": 5,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "in perdita da 9 giorni di Borsa: valuta l'uscita",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
