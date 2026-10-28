@@ -22762,5 +22762,64 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:MYGN:2026-09-11",
+"ticker": "MYGN",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-11 03:19",
+"data": "2026-09-11 03:19",
+"prezzo": 3.19,
+"conv": 63,
+"prob_gain": 57,
+"prob_loss": 18,
+"reliab": "🔴 Bassa",
+"mkt": -2.0236,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 4.3228,
+"media20": null,
+"quattro_atr": 4.0227,
+"meta_caduta": 4.75,
+"bollinger": 3.3343,
+"consigliata": 4.0227
+},
+"stop": 2.7737,
+"atr": 0.2082,
+"res": {
+"7g": 24.45,
+"30g": 34.64,
+"soglia": 26.1
+},
+"res_soglia": {
+"media50": {
+"ret": 35.51,
+"toccato": true,
+"giorni": 21
+},
+"quattro_atr": {
+"ret": 26.1,
+"toccato": true,
+"giorni": 6
+},
+"meta_caduta": {
+"ret": 34.64,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": 4.52,
+"toccato": true,
+"giorni": 3
+},
+"consigliata": {
+"ret": 26.1,
+"toccato": true,
+"giorni": 6
+}
+}
 }
 ]
