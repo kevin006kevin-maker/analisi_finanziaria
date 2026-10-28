@@ -22338,5 +22338,80 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:HWM:2026-08-31",
+"ticker": "HWM",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-09-11 01:25",
+"data": "2026-09-09 12:41",
+"prezzo": 231.53,
+"conv": 76,
+"prob_gain": 53,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": -1.0266,
+"fonte": "osservazione",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-09-11",
+"soglie": {
+"media50": 273.8834,
+"media20": 266.504,
+"quattro_atr": 274.0381,
+"meta_caduta": 262.09,
+"bollinger": 301.5721,
+"consigliata": 273.8834
+},
+"stop": 210.276,
+"atr": 10.627,
+"res": {
+"7g": -1.9,
+"30g": -2.57,
+"soglia": -2.57
+},
+"soglie_contaminate": {
+"media50": 273.0644,
+"media20": 263.818,
+"quattro_atr": 272.4218,
+"meta_caduta": 262.09,
+"bollinger": 302.0907,
+"consigliata": 272.4218
+},
+"soglie_ricalcolate_il": "2026-09-14 21:39",
+"soglie_ritardo_giorni": 2,
+"taglio_corretto": true,
+"res_soglia": {
+"media50": {
+"ret": -2.57,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -2.57,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -2.57,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -2.57,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -2.57,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -2.57,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
