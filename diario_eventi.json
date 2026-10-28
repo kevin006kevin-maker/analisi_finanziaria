@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:TYRA:2026-09-11",
-"ticker": "TYRA",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-11 08:23",
-"data": "2026-09-11 08:21",
-"prezzo": 23.54,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 22.01",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:MYGN:2026-09-11",
 "ticker": "MYGN",
 "kind": "short",
@@ -34077,5 +34057,25 @@
 },
 "stop": 24.483,
 "atr": 0.6335
+},
+{
+"episodio": "short:LPLA:2026-09-22",
+"ticker": "LPLA",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-10-28 14:34",
+"data": "2026-10-28 14:34",
+"prezzo": 289.98,
+"conv": 76,
+"prob_gain": 52,
+"prob_loss": 6,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
