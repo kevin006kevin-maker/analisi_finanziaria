@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:LDO.MI:2026-08-25",
-"ticker": "LDO.MI",
-"kind": "long",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-11 23:34",
-"data": "2026-09-11 23:34",
-"prezzo": 50.0,
-"conv": 70,
-"prob_gain": 70,
-"prob_loss": 17,
-"reliab": "🟡 Media",
-"mkt": -1.8399,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 53.91,
-"media20": 53.8322,
-"quattro_atr": 55.9753,
-"meta_caduta": 54.95,
-"bollinger": 61.0699,
-"consigliata": 53.91
-},
-"stop": 47.0124,
-"atr": 1.4938,
-"res": {
-"7g": 1.52,
-"30g": -5.44
-}
-},
-{
 "episodio": "long:QLYS:2026-09-13",
 "ticker": "QLYS",
 "kind": "long",
@@ -34792,5 +34761,32 @@
 },
 "stop": 244.4979,
 "atr": 12.3461
+},
+{
+"episodio": "short:CHRW:2026-10-29",
+"ticker": "CHRW",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-29 00:10",
+"data": "2026-10-29 00:10",
+"prezzo": 127.6,
+"conv": 62,
+"prob_gain": 55,
+"prob_loss": 11,
+"reliab": "🟡 Media",
+"mkt": 1.2081,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 146.002,
+"media20": 141.051,
+"quattro_atr": 150.811,
+"meta_caduta": 142.66,
+"bollinger": 153.3205,
+"consigliata": 146.002
+},
+"stop": 115.9945,
+"atr": 5.8028
 }
 ]
