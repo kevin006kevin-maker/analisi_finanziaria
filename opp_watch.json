@@ -13520,34 +13520,27 @@
 "name": "LPLA",
 "obs": [
 {
-"date": "2026-09-30 23:26",
-"conv": null,
-"price": 305.8,
-"stale": true
-},
-{
-"date": "2026-10-04 10:45",
-"conv": null,
-"price": 316.44,
-"stale": true
-},
-{
-"date": "2026-10-05 17:58",
-"conv": null,
-"price": 327.89,
-"stale": true
-}
-],
-"primo": {
-"date": "2026-09-22 19:46",
-"conv": 66,
-"price": 310.1,
-"mkt": 1.477,
-"occ": 49,
+"date": "2026-10-29 00:10",
+"conv": 67,
+"price": 269.19,
+"mkt": 1.2081,
+"occ": 35,
 "prob_gain": 55,
 "prob_loss": 4,
 "reliab": "🟡 Media"
 }
+],
+"primo": {
+"date": "2026-10-29 00:10",
+"conv": 67,
+"price": 269.19,
+"mkt": 1.2081,
+"occ": 35,
+"prob_gain": 55,
+"prob_loss": 4,
+"reliab": "🟡 Media"
+},
+"ripartita": "2026-10-29"
 },
 "short:CAR": {
 "ticker": "CAR",
@@ -17475,6 +17468,16 @@
 "prob_gain": 49,
 "prob_loss": 2,
 "reliab": "🟢 Alta"
+},
+{
+"date": "2026-10-29 00:10",
+"conv": 62,
+"price": 13.63,
+"mkt": 1.2081,
+"occ": 49,
+"prob_gain": 49,
+"prob_loss": 2,
+"reliab": "🟢 Alta"
 }
 ],
 "primo": {
@@ -17839,6 +17842,16 @@
 "price": 74.56,
 "mkt": 1.1334,
 "occ": 38,
+"prob_gain": 49,
+"prob_loss": 2,
+"reliab": "🟢 Alta"
+},
+{
+"date": "2026-10-29 00:10",
+"conv": 57,
+"price": 74.34,
+"mkt": 1.2081,
+"occ": 40,
 "prob_gain": 49,
 "prob_loss": 2,
 "reliab": "🟢 Alta"
@@ -23038,6 +23051,16 @@
 "prob_gain": 52,
 "prob_loss": 6,
 "reliab": "🟢 Alta"
+},
+{
+"date": "2026-10-29 00:10",
+"conv": 71,
+"price": 11.47,
+"mkt": 1.2081,
+"occ": 59,
+"prob_gain": 51,
+"prob_loss": 2,
+"reliab": "🟢 Alta"
 }
 ],
 "primo": {
@@ -23190,6 +23213,16 @@
 "prob_gain": 55,
 "prob_loss": 2,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-10-29 00:10",
+"conv": 72,
+"price": 167.14,
+"mkt": 1.2081,
+"occ": 58,
+"prob_gain": 56,
+"prob_loss": 2,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -23276,6 +23309,114 @@
 "occ": 45,
 "prob_gain": 56,
 "prob_loss": 2,
+"reliab": "🟡 Media"
+}
+},
+"short:FFIV": {
+"ticker": "FFIV",
+"kind": "short",
+"name": "FFIV",
+"obs": [
+{
+"date": "2026-10-29 00:10",
+"conv": 77,
+"price": 365.53,
+"mkt": 1.2081,
+"occ": 41,
+"prob_gain": 64,
+"prob_loss": 1,
+"reliab": "🟡 Media"
+}
+],
+"primo": {
+"date": "2026-10-29 00:10",
+"conv": 77,
+"price": 365.53,
+"mkt": 1.2081,
+"occ": 41,
+"prob_gain": 64,
+"prob_loss": 1,
+"reliab": "🟡 Media"
+}
+},
+"short:LSTR": {
+"ticker": "LSTR",
+"kind": "short",
+"name": "LSTR",
+"obs": [
+{
+"date": "2026-10-29 00:10",
+"conv": 71,
+"price": 138.8,
+"mkt": 1.2081,
+"occ": 38,
+"prob_gain": 58,
+"prob_loss": 4,
+"reliab": "🟡 Media"
+}
+],
+"primo": {
+"date": "2026-10-29 00:10",
+"conv": 71,
+"price": 138.8,
+"mkt": 1.2081,
+"occ": 38,
+"prob_gain": 58,
+"prob_loss": 4,
+"reliab": "🟡 Media"
+}
+},
+"short:CHRW": {
+"ticker": "CHRW",
+"kind": "short",
+"name": "CHRW",
+"obs": [
+{
+"date": "2026-10-29 00:10",
+"conv": 62,
+"price": 127.6,
+"mkt": 1.2081,
+"occ": 44,
+"prob_gain": 55,
+"prob_loss": 11,
+"reliab": "🟡 Media"
+}
+],
+"primo": {
+"date": "2026-10-29 00:10",
+"conv": 62,
+"price": 127.6,
+"mkt": 1.2081,
+"occ": 44,
+"prob_gain": 55,
+"prob_loss": 11,
+"reliab": "🟡 Media"
+}
+},
+"short:EDU": {
+"ticker": "EDU",
+"kind": "short",
+"name": "EDU",
+"obs": [
+{
+"date": "2026-10-29 00:10",
+"conv": 61,
+"price": 50.72,
+"mkt": 1.2081,
+"occ": 46,
+"prob_gain": 54,
+"prob_loss": 4,
+"reliab": "🟡 Media"
+}
+],
+"primo": {
+"date": "2026-10-29 00:10",
+"conv": 61,
+"price": 50.72,
+"mkt": 1.2081,
+"occ": 46,
+"prob_gain": 54,
+"prob_loss": 4,
 "reliab": "🟡 Media"
 }
 }
