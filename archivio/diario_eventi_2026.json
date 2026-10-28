@@ -23544,5 +23544,80 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:ALMS:2026-09-01",
+"ticker": "ALMS",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-09-14 00:38",
+"data": "2026-09-11 23:34",
+"prezzo": 9.18,
+"conv": 75,
+"prob_gain": 52,
+"prob_loss": 21,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-09-14",
+"soglie": {
+"media50": 23.9476,
+"media20": 18.323,
+"quattro_atr": 16.5253,
+"meta_caduta": 19.74,
+"bollinger": 32.0453,
+"consigliata": 16.5253
+},
+"stop": 5.5073,
+"atr": 1.8363,
+"soglie_contaminate": {
+"media50": 23.9476,
+"media20": 18.323,
+"quattro_atr": 16.5253,
+"meta_caduta": 19.74,
+"bollinger": 32.0453,
+"consigliata": 16.5253
+},
+"soglie_ricalcolate_il": "2026-09-14 21:39",
+"soglie_ritardo_giorni": 3,
+"res": {
+"7g": -16.34,
+"30g": -23.15,
+"soglia": -23.15
+},
+"taglio_corretto": true,
+"res_soglia": {
+"media50": {
+"ret": -23.15,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -23.15,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -23.15,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -23.15,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -23.15,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -23.15,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
