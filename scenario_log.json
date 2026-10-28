@@ -18010,5 +18010,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "OII",
+"kind": "short",
+"date": "2026-10-28",
+"promo_price": 40.24,
+"obs_price": 36.62,
+"obs_date": "2026-10-23",
+"pre_price": 40.24,
+"pre_date": "2026-10-27",
+"conf_price": null,
+"conf_date": null,
+"target": 47.097,
+"stop": 35.896,
+"reliab": "🟡 Media",
+"prob_gain": 53,
+"prob_loss": 5,
+"conv": 70,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-23 07:22",
+"prezzo": 36.62,
+"conv": 67,
+"prob_gain": 59,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": -0.5283
+},
+"anticipo": {
+"data": "2026-10-27",
+"prezzo": 40.24,
+"conv": 67,
+"prob_gain": 54,
+"prob_loss": 6,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-28 01:31",
+"prezzo": 40.24,
+"conv": 70,
+"prob_gain": 53,
+"prob_loss": 5,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
