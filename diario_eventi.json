@@ -1,45 +1,5 @@
 [
 {
-"episodio": "short:BAND:2026-09-10",
-"ticker": "BAND",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-11 03:19",
-"data": "2026-09-10 03:17",
-"prezzo": 43.62,
-"conv": 72,
-"prob_gain": 43,
-"prob_loss": 30,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 55.1231,
-"media20": 49.2087,
-"quattro_atr": 60.1126,
-"meta_caduta": 61.03,
-"bollinger": 55.5448,
-"consigliata": 55.1231
-},
-"stop": 35.3737,
-"atr": 4.1232,
-"soglie_contaminate": {
-"media50": 55.3567,
-"media20": 49.2263,
-"quattro_atr": 59.6059,
-"meta_caduta": 61.03,
-"bollinger": 55.5922,
-"consigliata": 55.3567
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 1,
-"res": {},
-"taglio_corretto": true,
-"bad_data": "salto di prezzo oltre il 25%: probabile raggruppamento di azioni"
-},
-{
 "episodio": "short:COO:2026-09-10",
 "ticker": "COO",
 "kind": "short",
@@ -34076,5 +34036,25 @@
 },
 "stop": 1064.5313,
 "atr": 89.8293
+},
+{
+"episodio": "short:BA:2026-10-27",
+"ticker": "BA",
+"kind": "short",
+"evento": "salita_2pct",
+"scritto_il": "2026-10-28 01:34",
+"data": "2026-10-28 01:28",
+"prezzo": 188.31,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "prezzo salito di almeno il 2% da 170.59",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
