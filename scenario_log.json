@@ -18355,7 +18355,45 @@
 "prob_gain": 49,
 "prob_loss": 10,
 "conv": 68,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-09-23 16:59",
+"prezzo": 34.15,
+"conv": 72,
+"prob_gain": 48,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": 1.0225
+},
+"anticipo": {
+"data": "2026-09-24",
+"prezzo": 34.54,
+"conv": 74,
+"prob_gain": 50,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-29",
+"prezzo": 28.88,
+"conv": 68,
+"prob_gain": 49,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "CLDX",
@@ -18376,7 +18414,45 @@
 "prob_gain": 48,
 "prob_loss": 12,
 "conv": 60,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-09-23 21:02",
+"prezzo": 30.74,
+"conv": 72,
+"prob_gain": 50,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": 0.7643
+},
+"anticipo": {
+"data": "2026-09-24",
+"prezzo": 30.74,
+"conv": 72,
+"prob_gain": 50,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-29",
+"prezzo": 32.07,
+"conv": 60,
+"prob_gain": 48,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "EEM",
@@ -18397,7 +18473,45 @@
 "prob_gain": null,
 "prob_loss": null,
 "conv": 58,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-10-22 20:10",
+"prezzo": 61.65,
+"conv": 61,
+"prob_gain": 52,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -0.7116
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-29",
+"prezzo": 63.42,
+"conv": 58,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "VALE",
@@ -18418,6 +18532,44 @@
 "prob_gain": 51,
 "prob_loss": 2,
 "conv": 71,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-10-26 16:09",
+"prezzo": 12.0,
+"conv": 60,
+"prob_gain": 52,
+"prob_loss": 3,
+"reliab": "🟢 Alta",
+"mkt": 0.145
+},
+"anticipo": {
+"data": "2026-10-27",
+"prezzo": 11.815,
+"conv": 67,
+"prob_gain": 48,
+"prob_loss": 3,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-29",
+"prezzo": 11.47,
+"conv": 71,
+"prob_gain": 51,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 }
 ]
