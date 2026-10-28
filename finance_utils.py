@@ -2264,6 +2264,7 @@ def _commit_to_github(name: str, content_str: str, force: bool = False) -> bool:
 _REGISTRI_APPEND_ONLY = frozenset({
     "track_record.json", "forecast_log.json", "conv_log.json",
     "exit_history.json", "scenario_log.json", "presignal_log.json", "diario_eventi.json",
+    "notifiche.json",
 })
 
 # File di STATO VIVO: contengono la situazione corrente (titoli seguiti con la loro storia,
@@ -2862,50 +2863,145 @@ def load_registro_completo(name: str, vivo=None) -> list:
 
 
 # ---------------------------------------------------------------------------
-# NOTIFICHE — Telegram (gratis, push istantaneo sul telefono).
-# Token e chat_id in st.secrets o env: telegram_bot_token / telegram_chat_id
-# (TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID). Usato dal job autonomo per avvisare
-# quando un'occasione viene promossa automaticamente.
+# NOTIFICHE — un registro letto dall'app «Occasioni» sul telefono.
+# Ogni avviso del lavoro automatico diventa una riga di `notifiche.json` sul ramo dati. L'app sul
+# telefono lo controlla da sola ogni 15-30 minuti e mostra come notifica le righe nuove dei motivi
+# che l'utente ha lasciato accesi nelle sue Impostazioni. Prima gli avvisi andavano a Telegram,
+# spento il 28/10/2026 su richiesta dell'utente. È un registro storico come gli altri: non si
+# cancella niente, quello che esce dal tetto va negli archivi annuali.
 # ---------------------------------------------------------------------------
 
-def _telegram_cfg():
-    return (_cfg("telegram_bot_token", "TELEGRAM_BOT_TOKEN", ""),
-            _cfg("telegram_chat_id", "TELEGRAM_CHAT_ID", ""))
+NOTIFICHE_NAME = "notifiche.json"
+_NOTIFICHE_MAX = 1500        # ~400 byte/riga → ~600 KB; se pesano di più il tetto scende da solo
+
+# I motivi di una notifica. La chiave è quella che l'app del telefono usa per i pulsanti sì/no:
+# una chiave nuova si aggiunge anche lì, una vecchia non si rinomina mai.
+MOTIVI_NOTIFICA = {
+    "promozione": "Occasione entrata nel Monitoraggio",
+    "conferma": "Occasione confermata dopo il monitoraggio",
+    "uscita": "Tesi esaurita: valuta l'uscita",
+    "incasso": "Da valutare per l'incasso",
+    "soglia": "Soglia personale raggiunta",
+    "vendita": "Vendita nel Portafoglio",
+    "prova": "Notifica di prova",
+}
 
 
-def send_telegram_verbose(text: str):
-    """Invia un messaggio Telegram. Ritorna (ok, dettaglio) per la diagnosi.
-    Il dettaglio NON contiene mai il token (sicuro da scrivere nei log)."""
-    token, chat_id = _telegram_cfg()
-    if not token:
-        return False, "token mancante (Secret TELEGRAM_BOT_TOKEN non impostato)"
-    if not chat_id:
-        return False, "chat_id mancante (Secret TELEGRAM_CHAT_ID non impostato)"
-    import requests
+def _testo_semplice(s) -> str:
+    """Il testo senza i segni HTML: le notifiche del telefono mostrano solo testo."""
+    import html as _html
+    import re
+    return _html.unescape(re.sub(r"<[^>]+>", "", str(s or ""))).strip()
+
+
+def registra_notifica(motivo: str, titolo: str, righe, tickers=()) -> bool:
+    """Mette a verbale una notifica per il telefono. Ritorna True se la riga è stata scritta
+    (controllare anche _SALVATAGGI_FALLITI: write_data_json dice True anche col solo locale)."""
+    if motivo not in MOTIVI_NOTIFICA:
+        raise ValueError(f"motivo di notifica sconosciuto: {motivo}")
+    import re
+    registro = read_data_json(NOTIFICHE_NAME, [])
+    if not isinstance(registro, list):
+        registro = []
+    ora = datetime.datetime.utcnow()
+    # L'ID DEVE CRESCERE SEMPRE: il telefono mostra le righe con un id maggiore dell'ultimo visto.
+    # Su Windows l'orologio avanza a scatti di ~15 ms e due notifiche dello stesso giro avrebbero lo
+    # stesso istante; si va allora un microsecondo oltre l'ultima riga scritta.
     try:
-        r = requests.post(
-            f"https://api.telegram.org/bot{token}/sendMessage",
-            json={"chat_id": chat_id, "text": text, "parse_mode": "HTML",
-                  "disable_web_page_preview": True},
-            timeout=12,
-        )
+        prima = datetime.datetime.strptime(str(registro[-1].get("id", ""))[:21], "%Y%m%dT%H%M%S%f")
+        if ora <= prima:
+            ora = prima + datetime.timedelta(microseconds=1)
+    except (IndexError, AttributeError, ValueError):
+        pass
+    testo = "\n".join(_testo_semplice(r) for r in (righe or []))
+    riga = {"id": ora.strftime("%Y%m%dT%H%M%S%f") + "-" + motivo,
+            "date": _today_iso(),
+            "ora": ora.strftime("%Y-%m-%dT%H:%M:%SZ"),       # UTC, come gli orari di GitHub
+            "motivo": motivo,
+            "titolo": _testo_semplice(titolo),
+            "testo": re.sub(r"\n{3,}", "\n\n", testo).strip(),
+            "tickers": [str(t) for t in (tickers or []) if t]}
+    registro.append(riga)
+    return salva_registro(NOTIFICHE_NAME, registro, _NOTIFICHE_MAX)
+
+
+def avviso_breve(w, entry: dict, price) -> str:
+    """L'avviso di un titolo seguito in forma CORTA (tabella del Monitoraggio e app del telefono).
+    Copre entrambi i lati: prima i motivi di PERDITA, poi quelli di INCASSO."""
+    if w:
+        wl = w.lower()
+        if "crollo" in wl:
+            return "⚠️ crollo"
+        if "dati" in wl:
+            return "⚠️ dati fermi"
+        if "stop" in wl:
+            return "⚠️ sotto lo stop"
+        if "perdita" in wl:
+            num = next((p for p in w.split() if p.isdigit()), None)
+            return f"⚠️ in perdita da {num} gg" if num else "⚠️ in perdita"
+        return "⚠️ " + w[:26]
+    inc = entry.get("incasso") or {}
+    if inc:
+        giu = inc.get("giu_dal_max")
+        return {"soglia": "🎯 soglia tua raggiunta",
+                "bersaglio": "🎯 bersaglio raggiunto",
+                "sgonfia": f"💰 giù {abs(giu):.0f}% dal massimo" if giu is not None else "💰 si sgonfia",
+                "ipercomprato": "🌡️ ipercomprato"}.get(inc.get("tipo"), "💰 da incassare")
+    mt = entry.get("my_target_price")
+    if mt and price and price >= mt:
+        return "🎯 soglia raggiunta"
+    return "—"
+
+
+TELEFONO_NAME = "telefono.json"
+
+
+def riepilogo_telefono() -> dict:
+    """Quello che l'app del telefono mostra in «In osservazione» e «Monitoraggio», già calcolato.
+    Si usano le STESSE funzioni delle due pagine dell'app sul PC, così i numeri coincidono e non
+    esiste un secondo motore. È un file di stato: si riscrive a ogni giro, non è storia."""
+    def _r(x, dec=1):
         try:
-            j = r.json()
-        except Exception:
-            j = {}
-        if r.status_code == 200 and j.get("ok"):
-            return True, "inviato correttamente"
-        return False, f"HTTP {r.status_code}: {j.get('description', (r.text or '')[:140])}"
-    except Exception as e:
-        # MAI il testo grezzo: l'indirizzo chiamato contiene il token, e requests lo mette dentro
-        # il messaggio dell'eccezione. Il docstring qui sopra promette che non accade: ora e' vero.
-        return False, f"eccezione di rete: {type(e).__name__}"
+            return round(float(x), dec)
+        except (TypeError, ValueError):
+            return None
 
-
-def send_telegram(text: str) -> bool:
-    """Invia un messaggio Telegram. Ritorna True se inviato. No-op se non configurato."""
-    ok, _ = send_telegram_verbose(text)
-    return ok
+    tracked = load_tracking()
+    oss = []
+    for s in observation_status():
+        if s.get("ticker") in tracked:
+            continue
+        oss.append({"t": s.get("ticker"), "nome": s.get("name") or "", "tipo": s.get("kind"),
+                    "giorni": s.get("days", 0), "rend": _r(s.get("ret")),
+                    "conv": _r(s.get("last_conv"), 0), "dconv": _r(s.get("dconv"), 0),
+                    "run": s.get("run", 0), "mancano": s.get("remaining", 0),
+                    "affid": s.get("reliab") or ""})
+    mon = []
+    for tk, e in tracked.items():
+        snaps = e.get("snapshots") or []
+        last = snaps[-1] if snaps else {}
+        ing = _ingresso(e)
+        price, base = last.get("price"), ing.get("price")
+        conv = next((s.get("convenienza") for s in reversed(snaps)
+                     if s.get("convenienza") is not None), None)
+        trend = tracking_trend(snaps, ing.get("conv"), ing.get("price"))
+        w = monitoring_warn(e, tk)
+        inc = presa_profitto(e, tk)
+        voce = dict(e, incasso=inc) if inc else {k: v for k, v in e.items() if k != "incasso"}
+        mon.append({"t": tk, "nome": e.get("name") or last.get("name") or tk,
+                    "tipo": e.get("kind", "short"), "auto": bool(e.get("auto")),
+                    "aggiunta": e.get("added"), "conv": _r(conv, 0),
+                    "affid": last.get("reliab") or "",
+                    "salita": _r(last.get("prob_gain"), 2), "perdita": _r(last.get("prob_loss"), 2),
+                    "prezzo": _r(price, 4), "ingresso": _r(base, 4),
+                    "rend": _r((price / base - 1) * 100) if (price and base) else None,
+                    "dconv": _r(trend["dconv"], 0) if trend else None,
+                    "bersaglio": _r(ing.get("target") or last.get("target"), 4),
+                    "stop": _r(ing.get("stop") or last.get("stop"), 4),
+                    "uscita": w or "", "incasso": (inc or {}).get("motivo") or "",
+                    "avviso": avviso_breve(w, voce, price)})
+    return {"aggiornato": _now_iso(), "osservazione": oss, "monitoraggio": mon,
+            "motivi": MOTIVI_NOTIFICA}
 
 
 # ---------------------------------------------------------------------------

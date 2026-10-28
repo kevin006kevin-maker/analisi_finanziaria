@@ -76,31 +76,17 @@ solo le scelte manuali fatte sul telefono potrebbero azzerarsi al riavvio dell'a
 
 ---
 
-## 🔔 Notifiche su Telegram (occasioni promosse)
+## 🔔 Notifiche sul telefono (app «Occasioni»)
 
-Quando un'occasione viene promossa automaticamente (in salita da 3 giorni), il sistema
-ti manda un **messaggio Telegram** sul telefono. Gratis. Configurazione una tantum:
+Dal 28/10/2026 le notifiche non passano più da Telegram. Il lavoro automatico scrive ogni avviso
+in `notifiche.json` sul ramo `auto-data`, e un riepilogo di «In osservazione» e «Monitoraggio» in
+`telefono.json`. L'app Android **Occasioni** li legge da sola ogni 15 minuti circa e mostra come
+notifica gli avvisi dei motivi lasciati accesi nelle sue Impostazioni.
 
-### 1) Crea il bot
-- Sul telefono apri **Telegram** → cerca **@BotFather** → avvia la chat.
-- Scrivi `/newbot` e segui le istruzioni (nome a piacere; lo *username* deve finire con `bot`).
-- BotFather ti dà un **token** tipo `123456789:AAH...` → copialo.
-
-### 2) Trova il tuo chat_id
-- Su Telegram cerca **@userinfobot** → avvia → ti risponde con **Id: 123456789**.
-  Quel numero è il tuo **chat_id**.
-- ⚠️ Importante: apri anche la chat con **il TUO bot** (quello creato al punto 1) e premi
-  **Avvia/Start**, altrimenti il bot non può scriverti.
-
-### 3) Metti i due valori nei Secret del repo
-GitHub → repo → **Settings → Secrets and variables → Actions → New repository secret**:
-- `TELEGRAM_BOT_TOKEN` = il token del punto 1
-- `TELEGRAM_CHAT_ID` = il numero del punto 2
-
-### 4) Prova che funzioni
-GitHub → **Actions** → workflow **«Aggiornamento autonomo occasioni»** → **Run workflow** →
-spunta la casella **«Invia solo una notifica Telegram di prova»** → **Run workflow**.
-Dopo pochi secondi dovresti ricevere su Telegram il messaggio di prova ✅.
-
-Fatto questo, riceverai una notifica ogni volta che un titolo viene promosso automaticamente.
-Senza questi Secret, il sistema funziona comunque: semplicemente non invia notifiche.
+- L'app, i suoi sorgenti e la guida d'installazione stanno nella cartella `occasioni-app`, accanto a
+  questa (`Documents\programmainanza\occasioni-app`), fuori dal repository: contiene la chiave di firma.
+- I motivi sono sei: entrata nel Monitoraggio, conferma, uscita, incasso, soglia personale, vendita
+  nel Portafoglio. Le chiavi stanno in `MOTIVI_NOTIFICA` in `finance_utils.py` e nell'app.
+- Per provare: GitHub → **Actions** → **Run workflow** → spunta «Scrive solo una notifica di prova»
+  → la notifica arriva sul telefono al controllo successivo (o subito con «Controlla adesso»).
+- I Secret `TELEGRAM_BOT_TOKEN` e `TELEGRAM_CHAT_ID` non servono più e si possono cancellare.

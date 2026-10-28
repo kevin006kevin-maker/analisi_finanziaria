@@ -36,3 +36,7 @@ __pycache__/
 # Copie di sicurezza dei file con le credenziali (le crea imposta_token.py):
 # contengono il token VECCHIO, non devono mai finire su GitHub.
 *.bak
+
+# Registro delle notifiche e riepilogo per l app del telefono: dati, vivono sul branch auto-data.
+notifiche.json
+telefono.json

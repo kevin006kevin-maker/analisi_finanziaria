@@ -32,6 +32,15 @@ def log(msg):
     print(f"[{ts}Z] {msg}", flush=True)
 
 
+def _notifica(motivo, righe, tickers, cosa):
+    """Mette a verbale la notifica per l'app del telefono: la prima riga è il titolo, le altre il
+    testo. Prima andava a Telegram, spento il 28/10/2026 su richiesta dell'utente."""
+    ok = (fu.registra_notifica(motivo, righe[0], righe[1:], tickers)
+          and fu.NOTIFICHE_NAME not in fu._SALVATAGGI_FALLITI)
+    log(f"Notifica {cosa} registrata per il telefono." if ok
+        else f"Notifica {cosa} NON registrata sul ramo dati (vedi gli avvisi di salvataggio).")
+
+
 def notify_promotions(tickers):
     """Notifica quando una o più occasioni vengono INSERITE nel Monitoraggio (promozione automatica)."""
     tr = fu.load_tracking()
@@ -46,9 +55,7 @@ def notify_promotions(tickers):
         righe.append(f"📌 <b>{html.escape(str(tk))}</b> — {nm} ({term}){extra}")
     righe += ["", "Inserite in automatico dopo la fase di osservazione. Apri l'app → Monitoraggio.",
               "(Strumento informativo, non è un consiglio.)"]
-    ok = fu.send_telegram("\n".join(righe))
-    log("Notifica inserimento inviata." if ok
-        else "Notifica inserimento NON inviata (Telegram non configurato o errore).")
+    _notifica("promozione", righe, tickers, "inserimento")
 
 
 def notify_monitoring(items):
@@ -64,9 +71,7 @@ def notify_monitoring(items):
         righe.append(f"   {term} · +{it.get('ret', 0):.1f}% in {it.get('days', 0)} giorni di monitoraggio")
     righe += ["", "Possibile opportunità di investimento — apri l'app → Monitoraggio.",
               "(Strumento informativo, non è un consiglio.)"]
-    ok = fu.send_telegram("\n".join(righe))
-    log("Notifica opportunità inviata." if ok
-        else "Notifica opportunità NON inviata (Telegram non configurato o errore).")
+    _notifica("conferma", righe, [it.get("ticker") for it in items], "opportunità")
 
 
 def notify_exit(items):
@@ -80,9 +85,7 @@ def notify_exit(items):
             righe.append("• " + html.escape(str(motivo)))
         righe.append("")
     righe.append("Apri l'app → Monitoraggio. (Strumento informativo, non è un consiglio di vendita.)")
-    ok = fu.send_telegram("\n".join(righe))
-    log("Notifica uscita inviata." if ok
-        else "Notifica uscita NON inviata (Telegram non configurato o errore).")
+    _notifica("uscita", righe, [it.get("ticker") for it in items], "uscita")
 
 
 def notify_my_target(items):
@@ -97,16 +100,14 @@ def notify_my_target(items):
         righe.append("• commissioni e guadagno netto desiderato coperti: valuta l'incasso")
         righe.append("")
     righe.append("Apri l'app → Monitoraggio. (Strumento informativo, non è un consiglio di vendita.)")
-    ok = fu.send_telegram("\n".join(righe))
-    log("Notifica soglia personale inviata." if ok
-        else "Notifica soglia personale NON inviata (Telegram non configurato o errore).")
+    _notifica("soglia", righe, [it.get("ticker") for it in items], "soglia personale")
 
 
 def notify_profit(items):
     """Notifica quando un'occasione seguita ha già dato quello che doveva dare: bersaglio raggiunto,
     soglia personale raggiunta, oppure guadagno che si sta sgonfiando dal massimo. È l'unico avviso
     sul lato GUADAGNO: prima il sistema sapeva segnalare solo le perdite."""
-    # Telegram taglia i messaggi oltre ~4000 caratteri: al primo giro le segnalazioni sono molte
+    # Una notifica troppo lunga non si legge: al primo giro le segnalazioni sono molte
     # (l'arretrato di tutte le occasioni che hanno già raggiunto il bersaglio), quindi si elencano
     # le più rilevanti — quelle col guadagno più alto — e si dice quante restano.
     MAX_IN_MESSAGGIO = 12
@@ -128,13 +129,11 @@ def notify_profit(items):
         righe.append("")
     righe.append("Apri l'app → Monitoraggio → «Da incassare». "
                  "(Strumento informativo, non è un consiglio di vendita.)")
-    ok = fu.send_telegram("\n".join(righe))
-    log("Notifica incasso inviata." if ok
-        else "Notifica incasso NON inviata (Telegram non configurato o errore).")
+    _notifica("incasso", righe, [it.get("ticker") for it in ordinati], "incasso")
 
 
 def notify_sales(fired):
-    """Notifica Telegram quando conviene valutare la vendita di un titolo del portafoglio."""
+    """Notifica quando conviene valutare la vendita di un titolo del portafoglio."""
     righe = ["💰 <b>Consiglio di vendita</b>", ""]
     for f in fired:
         p, adv = f["position"], f["advice"]
@@ -145,9 +144,7 @@ def notify_sales(fired):
             righe.append("• " + html.escape(motivo))
         righe.append("")
     righe.append("Apri l'app → 💰 Portafoglio per i dettagli. (Non è un consiglio di investimento.)")
-    ok = fu.send_telegram("\n".join(righe))
-    log("Notifica di vendita inviata." if ok
-        else "Notifica di vendita NON inviata (Telegram non configurato o errore).")
+    _notifica("vendita", righe, [f["position"].get("ticker") for f in fired], "di vendita")
 
 
 def main():
@@ -161,17 +158,12 @@ def main():
         log(f"Persistenza cloud → repo: {'SI' if repo_ok else 'NO'} · token: {'SI' if token_ok else 'NO'}"
             + ("" if (repo_ok and token_ok) else "  ⚠️ DATI NON SALVATI: controlla DATA_REPO/GITHUB_TOKEN nel workflow."))
 
-    # Percorso di prova: avvio manuale con "test_notifica" → manda solo un messaggio di verifica
+    # Percorso di prova: avvio manuale con "test_notifica" → scrive solo una notifica di prova nel
+    # registro, che l'app del telefono mostra al controllo successivo
     if os.environ.get("TEST_NOTIFICA") == "true":
-        tok, cid = fu._telegram_cfg()
-        log(f"Diagnostica notifiche → token impostato: {'SI' if tok else 'NO'} · "
-            f"chat_id impostato: {'SI' if cid else 'NO'}"
-            + (f" (chat_id di {len(str(cid))} cifre)" if cid else ""))
-        ok, dettaglio = fu.send_telegram_verbose(
-            "✅ Notifica di prova dal sistema Occasioni.\n"
-            "Se leggi questo messaggio, le notifiche funzionano correttamente!")
-        log(f"Risposta Telegram: {dettaglio}")
-        log("Test notifica: " + ("inviata ✓" if ok else "NON inviata"))
+        _notifica("prova", ["✅ Notifica di prova dal sistema Occasioni",
+                            "Se leggi questo messaggio sul telefono, le notifiche funzionano."],
+                  [], "di prova")
         return 0
 
     total = 0
@@ -621,6 +613,16 @@ def main():
     # storico. Si sono svuotati esattamente i due registri che quel giro non aveva scritto in
     # locale (presignal_log, scritto durante il giro, si è salvato). Ora write_data_json ha
     # comunque una protezione anti-cancellazione come seconda rete di sicurezza.
+
+    # Il riepilogo per l'app del telefono («In osservazione» e «Monitoraggio» già calcolati), alla
+    # fine del giro così riporta lo stato dopo promozioni, scatti e avvisi.
+    try:
+        rt = fu.riepilogo_telefono()
+        ok = fu.write_data_json(fu.TELEFONO_NAME, rt) and fu.TELEFONO_NAME not in fu._SALVATAGGI_FALLITI
+        log(f"Riepilogo per il telefono: {len(rt['osservazione'])} in osservazione, "
+            f"{len(rt['monitoraggio'])} nel monitoraggio" + ("" if ok else " — NON salvato sul ramo dati"))
+    except Exception as e:
+        log(f"Errore riepilogo per il telefono: {e!r}")
 
     log(f"Fatto. Totale occasioni viste: {total}.")
     return 0

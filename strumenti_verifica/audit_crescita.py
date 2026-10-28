@@ -39,7 +39,8 @@ print()
 TETTI = {"conv_log.json": fu._CONV_LOG_MAX, "forecast_log.json": fu._FORECAST_MAX,
          "exit_history.json": fu._EXIT_HISTORY_MAX_LIVE, "scenario_log.json": fu._SCENARIO_MAX_LIVE,
          "presignal_log.json": fu._PRESIGNAL_MAX_LIVE, "track_record.json": fu._TRACK_RECORD_MAX,
-         "diario_eventi.json": getattr(fu, "_DIARIO_MAX", None)}
+         "diario_eventi.json": getattr(fu, "_DIARIO_MAX", None),
+         "notifiche.json": getattr(fu, "_NOTIFICHE_MAX", None)}
 print("%-20s %6s %8s %6s %7s | %9s | %8s %8s | %s" % ("registro", "righe", "byte", "B/riga", "tetto", "vivo max", "righe/g", "pezzi/a", "giudizio"))
 for nome in sorted(fu._REGISTRI_APPEND_ONLY):
     vivo = gs(nome) or []

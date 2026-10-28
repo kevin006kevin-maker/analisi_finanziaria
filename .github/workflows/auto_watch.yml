@@ -26,7 +26,7 @@ on:
   workflow_dispatch:           # avvio manuale dalla scheda "Actions"
     inputs:
       test_notifica:
-        description: "Invia solo una notifica Telegram di prova (per verificare la configurazione)"
+        description: "Scrive solo una notifica di prova per l'app del telefono (per verificare che arrivi)"
         type: boolean
         default: false
 
@@ -69,8 +69,6 @@ jobs:
           # l'app), in modo affidabile. Sostituisce il vecchio git-push (che falliva → le
           # promozioni venivano notificate ma mai salvate, causando notifiche duplicate).
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           TEST_NOTIFICA: ${{ inputs.test_notifica }}
         run: python auto_watch.py
 

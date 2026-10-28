@@ -1816,13 +1816,13 @@ if section.startswith("Monitoraggio"):
                     sb1, sb2 = st.columns([1, 3])
                     if lv.get("target") and sb1.button("🔔 Avvisami a questa soglia", key=f"savetgt_{tk}",
                                                        use_container_width=True,
-                                                       help="Salva la soglia: il sistema ti manda un Telegram "
-                                                            "quando il prezzo la raggiunge."):
+                                                       help="Salva la soglia: il sistema ti manda una notifica sul "
+                                                            "telefono quando il prezzo la raggiunge."):
                         fu.set_my_target(tk, lv["target"])
                         st.rerun()
                     if entry.get("my_target_price"):
                         sb2.caption(f"🔔 Soglia salvata: **{entry['my_target_price']:,.2f}** "
-                                    f"(dal {entry.get('my_target_set', '?')}) — Telegram ti avvisa al raggiungimento.")
+                                    f"(dal {entry.get('my_target_set', '?')}) — una notifica sul telefono ti avvisa al raggiungimento.")
                         if sb2.button("Rimuovi soglia", key=f"deltgt_{tk}"):
                             fu.set_my_target(tk, None)
                             st.rerun()
@@ -1955,32 +1955,8 @@ if section.startswith("Monitoraggio"):
     short_items = sorted([(tk, e) for tk, e in _in_salute if e.get("kind") == "short"], key=_mon_sort_key)
     long_items = sorted([(tk, e) for tk, e in _in_salute if e.get("kind") != "short"], key=_mon_sort_key)
 
-    def _warn_breve(w, entry, price):
-        """Avviso in forma CORTA per la tabella (il testo completo resta nella scheda).
-        Copre entrambi i lati: prima i motivi di PERDITA, poi quelli di INCASSO."""
-        if w:
-            wl = w.lower()
-            if "crollo" in wl:
-                return "⚠️ crollo"
-            if "dati" in wl:
-                return "⚠️ dati fermi"
-            if "stop" in wl:
-                return "⚠️ sotto lo stop"
-            if "perdita" in wl:
-                num = next((p for p in w.split() if p.isdigit()), None)
-                return f"⚠️ in perdita da {num} gg" if num else "⚠️ in perdita"
-            return "⚠️ " + w[:26]
-        inc = entry.get("incasso") or {}
-        if inc:
-            giu = inc.get("giu_dal_max")
-            return {"soglia": "🎯 soglia tua raggiunta",
-                    "bersaglio": "🎯 bersaglio raggiunto",
-                    "sgonfia": f"💰 giù {abs(giu):.0f}% dal massimo" if giu is not None else "💰 si sgonfia",
-                    "ipercomprato": "🌡️ ipercomprato"}.get(inc.get("tipo"), "💰 da incassare")
-        mt = entry.get("my_target_price")
-        if mt and price and price >= mt:
-            return "🎯 soglia raggiunta"
-        return "—"
+    # l'avviso in forma corta sta nel motore: lo stesso testo esce anche nell'app del telefono
+    _warn_breve = fu.avviso_breve
 
     def _riga_tabella(tk, entry):
         """Una riga della tabella riassuntiva del Monitoraggio. Usa gli stessi valori della scheda
@@ -2289,8 +2265,8 @@ if section.startswith("Portafoglio"):
                "trailing stop (calo dal massimo toccato), ipercomprato e trend. **Non prevede il futuro** e non "
                "garantisce il massimo guadagno: è un aiuto a non farsi scappare un buon momento e a tagliare le perdite.")
     if fu.cloud_mode():
-        st.caption("📲 Quando un titolo passa a «🔔 Valuta la vendita», ricevi anche una **notifica Telegram** (il sistema "
-                   "controlla ogni ~15 minuti, anche a PC spento).")
+        st.caption("📲 Quando un titolo passa a «🔔 Valuta la vendita», ricevi anche una **notifica sul telefono** (il sistema "
+                   "controlla alcune volte al giorno, anche a PC spento).")
     with st.spinner("Valuto i titoli…"):
         positions = fu.load_portfolio()
         advices = [(p, fu.sell_advice(p)) for p in positions]
