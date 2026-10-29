@@ -1,5 +1,5 @@
 {
-"aggiornato": "2026-10-29 18:04",
+"aggiornato": "2026-10-29 22:55",
 "metodi": {
 "short": {
 "vendite": [
@@ -65,7 +65,7 @@
 "chiave": "sistema_corretto",
 "nome": "Sistema corretto",
 "riferimento": false,
-"scelte": 60,
+"scelte": 61,
 "vendite": {
 "soglia": {
 "n": 0,
@@ -152,10 +152,10 @@
 "eccesso": null
 },
 "7g": {
-"n": 103,
-"med": -2.38,
-"hit": 36.0,
-"eccesso": -1.57
+"n": 105,
+"med": -2.29,
+"hit": 37.0,
+"eccesso": -1.27
 },
 "30g": {
 "n": 0,
@@ -308,10 +308,10 @@
 "eccesso": null
 },
 "7g": {
-"n": 68,
-"med": -1.66,
-"hit": 41.0,
-"eccesso": 0.21
+"n": 69,
+"med": -1.62,
+"hit": 42.0,
+"eccesso": 0.68
 },
 "30g": {
 "n": 0,
@@ -330,7 +330,7 @@
 "scelte": 227,
 "vendite": {
 "soglia": {
-"n": 152,
+"n": 154,
 "med": -4.29,
 "hit": 34.0,
 "eccesso": null
@@ -342,7 +342,7 @@
 "eccesso": 0.17
 },
 "30g": {
-"n": 152,
+"n": 154,
 "med": -4.5,
 "hit": 32.0,
 "eccesso": -0.33
@@ -356,7 +356,7 @@
 "scelte": 236,
 "vendite": {
 "soglia": {
-"n": 152,
+"n": 154,
 "med": -4.29,
 "hit": 34.0,
 "eccesso": null
@@ -368,7 +368,7 @@
 "eccesso": 0.07
 },
 "30g": {
-"n": 152,
+"n": 154,
 "med": -4.5,
 "hit": 32.0,
 "eccesso": -0.33
@@ -379,7 +379,7 @@
 "chiave": "sistema_corretto",
 "nome": "Sistema corretto",
 "riferimento": false,
-"scelte": 264,
+"scelte": 265,
 "vendite": {
 "soglia": {
 "n": 175,
@@ -408,9 +408,9 @@
 "scelte": 50,
 "vendite": {
 "soglia": {
-"n": 27,
-"med": 0.47,
-"hit": 52.0,
+"n": 28,
+"med": 0.07,
+"hit": 50.0,
 "eccesso": null
 },
 "7g": {
@@ -420,10 +420,10 @@
 "eccesso": 0.92
 },
 "30g": {
-"n": 27,
-"med": -0.32,
-"hit": 48.0,
-"eccesso": 2.57
+"n": 28,
+"med": -1.16,
+"hit": 46.0,
+"eccesso": 1.62
 }
 }
 },
@@ -466,10 +466,10 @@
 "eccesso": null
 },
 "7g": {
-"n": 363,
-"med": -0.75,
+"n": 365,
+"med": -0.73,
 "hit": 45.0,
-"eccesso": -0.25
+"eccesso": -0.11
 },
 "30g": {
 "n": 234,
@@ -486,9 +486,9 @@
 "scelte": 230,
 "vendite": {
 "soglia": {
-"n": 144,
+"n": 145,
 "med": -1.67,
-"hit": 40.0,
+"hit": 39.0,
 "eccesso": null
 },
 "7g": {
@@ -498,10 +498,10 @@
 "eccesso": -0.26
 },
 "30g": {
-"n": 144,
+"n": 145,
 "med": -1.67,
 "hit": 39.0,
-"eccesso": 1.68
+"eccesso": 1.66
 }
 }
 },
@@ -553,7 +553,7 @@
 "n": 106,
 "med": -2.13,
 "hit": 28.0,
-"eccesso": 1.27
+"eccesso": 1.25
 }
 }
 },
@@ -622,10 +622,10 @@
 "eccesso": null
 },
 "7g": {
-"n": 195,
+"n": 196,
 "med": -0.66,
 "hit": 44.0,
-"eccesso": 0.13
+"eccesso": 0.14
 },
 "30g": {
 "n": 106,
@@ -683,7 +683,7 @@
 "testo": "⏳ Ancora presto per decidere: nella prova vera ci sono 0 occasioni misurate a 30 giorni (ne servono almeno 30) e 0 giornate con entrambi (ne servono 15)."
 }
 },
-"aggiornato": "2026-10-29 17:02",
+"aggiornato": "2026-10-29 21:54",
 "decide": {
 "orizzonte": "30g",
 "casi": 30,
@@ -988,7 +988,7 @@
 "chiave": "rimbalzo_grandi",
 "nome": "Rimbalzo solo sui titoli grandi",
 "riferimento": false,
-"scelte": 34,
+"scelte": 36,
 "vendite": {
 "soglia": {
 "n": 0,
@@ -1302,7 +1302,7 @@
 "chiave": "rimbalzo_grandi",
 "nome": "Rimbalzo solo sui titoli grandi",
 "riferimento": false,
-"scelte": 92,
+"scelte": 94,
 "vendite": {
 "soglia": {
 "n": 0,
@@ -1372,7 +1372,7 @@
 "testo": "⏳ Ancora presto per decidere: nella prova vera ci sono 0 occasioni misurate a 30 giorni (ne servono almeno 30) e 0 giornate con entrambi (ne servono 15)."
 }
 },
-"aggiornato": "2026-10-29 17:02",
+"aggiornato": "2026-10-29 21:54",
 "decide": {
 "orizzonte": "30g",
 "casi": 30,
@@ -1837,24 +1837,24 @@
 "archivio/scatti": 21540,
 "archivio/mondo": 72,
 "archivio/settori": 792,
-"archivio/profili": 17578,
-"archivio/notizie": 3034,
-"archivio/esiti": 31161,
+"archivio/profili": 17622,
+"archivio/notizie": 3037,
+"archivio/esiti": 31315,
 "archivio/osservazioni": 17293,
 "archivio/regole": 39,
-"archivio/ombra": 4345,
+"archivio/ombra": 4348,
 "archivio/metodi_avvii": 12
 }
 },
 "diario": {
 "riepilogo": {
-"righe": 1430,
+"righe": 1432,
 "episodi": 367,
 "per_evento": {
 "ingresso_osservazione": 297,
 "ingresso_anticipo": 212,
 "fine_osservazione": 279,
-"salita_2pct": 228,
+"salita_2pct": 230,
 "promozione": 141,
 "fine_verifica": 131,
 "uscita": 142
@@ -1863,6 +1863,22 @@
 "al": "2026-10-29"
 },
 "ultimi": [
+{
+"t": "SCI",
+"tipo": "short",
+"evento": "salita_2pct",
+"data": "2026-10-29 22:46",
+"prezzo": 75.17,
+"conv": null
+},
+{
+"t": "FTNT",
+"tipo": "short",
+"evento": "salita_2pct",
+"data": "2026-10-29 22:46",
+"prezzo": 139.1,
+"conv": 71.0
+},
 {
 "t": "LPLA",
 "tipo": "short",
@@ -2165,22 +2181,6 @@
 "evento": "fine_verifica",
 "data": "2026-10-28 01:32",
 "prezzo": 65.8,
-"conv": 72.0
-},
-{
-"t": "HESM",
-"tipo": "short",
-"evento": "fine_verifica",
-"data": "2026-10-28 01:32",
-"prezzo": 31.18,
-"conv": 82.0
-},
-{
-"t": "MRP",
-"tipo": "short",
-"evento": "fine_verifica",
-"data": "2026-10-28 01:32",
-"prezzo": 23.91,
 "conv": 72.0
 }
 ]
