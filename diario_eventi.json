@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:CASY:2026-09-09",
-"ticker": "CASY",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-14 00:38",
-"data": "2026-09-14 00:32",
-"prezzo": 615.47,
-"conv": 89,
-"prob_gain": 62,
-"prob_loss": 5,
-"reliab": "🟡 Media",
-"mkt": -1.8209,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-14",
-"soglie": {
-"media50": 816.0764,
-"media20": 773.484,
-"quattro_atr": 748.3403,
-"meta_caduta": 745.36,
-"bollinger": 927.6878,
-"consigliata": 748.3403
-},
-"stop": 549.0349,
-"atr": 33.2176,
-"res": {
-"7g": -3.74,
-"30g": 5.08,
-"soglia": 5.08
-},
-"res_soglia": {
-"media50": {
-"ret": 5.08,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 5.08,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 5.08,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 5.08,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 5.08,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 5.08,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:TBBK:2026-09-09",
 "ticker": "TBBK",
 "kind": "short",
@@ -34382,5 +34318,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:UCG.MI:2026-10-29",
+"ticker": "UCG.MI",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-10-29 10:52",
+"data": "2026-10-29 10:52",
+"prezzo": 74.34,
+"conv": 66,
+"prob_gain": 50,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 4 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 80.46,
+"media20": 75.7005,
+"quattro_atr": 82.0666,
+"meta_caduta": 80.245,
+"bollinger": 80.5104,
+"consigliata": 80.46
+},
+"stop": 70.4767,
+"atr": 1.9316
 }
 ]
