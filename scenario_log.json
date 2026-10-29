@@ -11389,7 +11389,15 @@
 "res": {
 "anticipo|7g": 0.43,
 "osservazione|7g": 0.46,
-"promozione|7g": -3.44
+"promozione|7g": -3.44,
+"anticipo|30g": -1.32,
+"osservazione|30g": -1.28,
+"promozione|30g": -5.11,
+"conferma|30g": -1.74,
+"anticipo|bersaglio": -1.32,
+"osservazione|bersaglio": -1.28,
+"promozione|bersaglio": -5.11,
+"conferma|bersaglio": -1.74
 }
 },
 {
@@ -11413,7 +11421,10 @@
 "conv": 86,
 "res": {
 "osservazione|7g": -8.53,
-"promozione|7g": -2.89
+"promozione|7g": -2.89,
+"osservazione|30g": -17.43,
+"promozione|30g": -12.34,
+"conferma|30g": -9.73
 },
 "passaggi": {
 "osservazione": {
@@ -11475,7 +11486,10 @@
 "conv": 67,
 "res": {
 "osservazione|7g": -2.08,
-"promozione|7g": 5.34
+"promozione|7g": 5.34,
+"osservazione|30g": -7.98,
+"promozione|30g": -1.01,
+"conferma|30g": -6.03
 },
 "passaggi": {
 "osservazione": {
@@ -11537,7 +11551,10 @@
 "conv": 65,
 "res": {
 "osservazione|7g": 1.34,
-"promozione|7g": 3.87
+"promozione|7g": 3.87,
+"osservazione|30g": 0.21,
+"promozione|30g": 2.72,
+"conferma|30g": -1.11
 },
 "passaggi": {
 "osservazione": {
@@ -11599,7 +11616,10 @@
 "conv": 71,
 "res": {
 "osservazione|7g": -15.43,
-"promozione|7g": -4.36
+"promozione|7g": -4.36,
+"osservazione|30g": -24.38,
+"promozione|30g": -14.49,
+"conferma|30g": -10.59
 },
 "passaggi": {
 "osservazione": {
@@ -11661,7 +11681,10 @@
 "conv": 65,
 "res": {
 "osservazione|7g": -0.12,
-"promozione|7g": 1.19
+"promozione|7g": 1.19,
+"osservazione|30g": 7.04,
+"promozione|30g": 8.44,
+"conferma|30g": 7.17
 },
 "passaggi": {
 "osservazione": {
@@ -17480,8 +17503,8 @@
 "obs_date": "2026-09-18",
 "pre_price": 39.75,
 "pre_date": "2026-09-21",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 37.290000915527344,
+"conf_date": "2026-10-29",
 "target": 49.0376,
 "stop": 32.5658,
 "reliab": "🔴 Bassa",
@@ -17517,16 +17540,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-10-29",
+"prezzo": 37.290000915527344,
+"conv": 73,
+"prob_gain": 52,
+"prob_loss": 11,
+"reliab": "🔴 Bassa",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": -6.19,
+"osservazione|7g": -7.35,
+"promozione|7g": 3.73
+}
 },
 {
 "ticker": "HTO",
@@ -17537,8 +17564,8 @@
 "obs_date": "2026-10-19",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 56.4900016784668,
+"conf_date": "2026-10-29",
 "target": 61.532,
 "stop": 55.3538,
 "reliab": "🟢 Alta",
@@ -17574,16 +17601,19 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-10-29",
+"prezzo": 56.4900016784668,
+"conv": 53,
+"prob_gain": 50,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"osservazione|7g": 2.04,
+"promozione|7g": -3.07
+}
 },
 {
 "ticker": "NVST",
