@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:RWT:2026-09-14",
-"ticker": "RWT",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-15 00:47",
-"data": "2026-09-15 00:45",
-"prezzo": 3.83,
-"conv": 85,
-"prob_gain": 52,
-"prob_loss": 2,
-"reliab": "🟡 Media",
-"mkt": -2.1293,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 4.6872,
-"media20": 4.4725,
-"quattro_atr": 4.6515,
-"meta_caduta": 4.52,
-"bollinger": 5.2326,
-"consigliata": 4.6515
-},
-"stop": 3.4192,
-"atr": 0.2054,
-"res": {
-"7g": 6.79,
-"30g": -18.54,
-"soglia": -18.54
-},
-"res_soglia": {
-"media50": {
-"ret": -18.54,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -18.54,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -18.54,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -18.54,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -18.54,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -18.54,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:WSO:2026-08-25",
 "ticker": "WSO",
 "kind": "short",
@@ -34644,6 +34580,26 @@
 "mkt": 0.6998,
 "fonte": "osservazione",
 "note": "prezzo salito di almeno il 2% da 135.71",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:SCI:2026-10-29",
+"ticker": "SCI",
+"kind": "short",
+"evento": "salita_2pct",
+"scritto_il": "2026-10-29 22:51",
+"data": "2026-10-29 22:46",
+"prezzo": 75.17,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "prezzo salito di almeno il 2% da 72.77",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
