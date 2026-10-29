@@ -23875,5 +23875,69 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:CASY:2026-09-09",
+"ticker": "CASY",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-14 00:38",
+"data": "2026-09-14 00:32",
+"prezzo": 615.47,
+"conv": 89,
+"prob_gain": 62,
+"prob_loss": 5,
+"reliab": "🟡 Media",
+"mkt": -1.8209,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-14",
+"soglie": {
+"media50": 816.0764,
+"media20": 773.484,
+"quattro_atr": 748.3403,
+"meta_caduta": 745.36,
+"bollinger": 927.6878,
+"consigliata": 748.3403
+},
+"stop": 549.0349,
+"atr": 33.2176,
+"res": {
+"7g": -3.74,
+"30g": 5.08,
+"soglia": 5.08
+},
+"res_soglia": {
+"media50": {
+"ret": 5.08,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": 5.08,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": 5.08,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": 5.08,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": 5.08,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": 5.08,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
