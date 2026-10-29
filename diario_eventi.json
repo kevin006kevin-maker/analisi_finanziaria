@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:SYK:2026-09-09",
-"ticker": "SYK",
-"kind": "short",
-"evento": "promozione",
-"scritto_il": "2026-09-14 21:37",
-"data": "2026-09-14 21:37",
-"prezzo": 282.47,
-"conv": 78,
-"prob_gain": 56,
-"prob_loss": 3,
-"reliab": "🟢 Alta",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": 324.146,
-"media20": 312.2715,
-"quattro_atr": 325.4718,
-"meta_caduta": 317.36,
-"bollinger": 358.8065,
-"consigliata": 324.146
-},
-"stop": 260.9691,
-"atr": 10.7505,
-"res": {
-"7g": -2.41,
-"30g": -0.9,
-"soglia": -0.9
-},
-"res_soglia": {
-"media50": {
-"ret": -0.9,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -0.9,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -0.9,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -0.9,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -0.9,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -0.9,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:TTAN:2026-09-09",
 "ticker": "TTAN",
 "kind": "short",
@@ -34050,6 +33986,26 @@
 "mkt": null,
 "fonte": "monitoraggio",
 "note": "prezzo salito di almeno il 2% da 10.12",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:AIT:2026-10-28",
+"ticker": "AIT",
+"kind": "short",
+"evento": "salita_2pct",
+"scritto_il": "2026-10-29 18:00",
+"data": "2026-10-29 17:54",
+"prezzo": 305.04,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "prezzo salito di almeno il 2% da 297.58",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
