@@ -8277,7 +8277,9 @@
 "notified": true,
 "entry_check": "2026-10-29",
 "exit_notified": false,
-"incasso_notified": true
+"incasso_notified": true,
+"warn_since": "2026-10-29",
+"warn": "in perdita da 43 giorni di Borsa: valuta l'uscita"
 },
 "ENI.MI": {
 "kind": "short",
@@ -11506,7 +11508,9 @@
 "max_date": "2026-10-08 21:57",
 "auto": true,
 "notified": true,
-"entry_check": "2026-10-29"
+"entry_check": "2026-10-29",
+"warn_since": "2026-10-29",
+"warn": "in perdita da 20 giorni di Borsa: valuta l'uscita"
 },
 "NU": {
 "kind": "short",
@@ -16392,7 +16396,7 @@
 "max_price": 32.25,
 "max_date": "2026-10-29 22:49",
 "auto": true,
-"notified": false,
+"notified": true,
 "entry_check": "2026-10-29"
 },
 "CELC": {
@@ -17123,9 +17127,7 @@
 "auto": true,
 "notified": true,
 "entry_check": "2026-10-29",
-"incasso_notified": true,
-"warn_since": "2026-10-29",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"incasso_notified": true
 },
 "BKD": {
 "kind": "short",
