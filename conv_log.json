@@ -1,48 +1,6 @@
 [
 {
 "date": "2026-10-21",
-"ticker": "GPRO",
-"kind": "short",
-"price": 1.1,
-"conv": 31,
-"factors": {
-"discount": 52.381,
-"histcheap": 0.11,
-"riskadj": -1.13,
-"ddpen": -53.31,
-"momentum": 6.7797,
-"prob": 4,
-"oversold": -42.9296,
-"rebound": -0.2927,
-"trend": 1.0,
-"relstrength": -5.5897
-},
-"ret_5d": -7.73,
-"ret_21d": null
-},
-{
-"date": "2026-10-21",
-"ticker": "PACB",
-"kind": "short",
-"price": 1.96,
-"conv": 31,
-"factors": {
-"discount": 31.7073,
-"histcheap": -0.71,
-"riskadj": 0.0,
-"ddpen": -39.15,
-"momentum": 4.3902,
-"prob": 18,
-"oversold": -50.8655,
-"rebound": -16.7551,
-"trend": 1.0,
-"relstrength": -3.2003
-},
-"ret_5d": 44.64,
-"ret_21d": null
-},
-{
-"date": "2026-10-21",
 "ticker": "RUN",
 "kind": "short",
 "price": 7.57,
@@ -38914,6 +38872,46 @@
 "rebound": 94.0421,
 "trend": -1.0,
 "relstrength": -6.118
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-29",
+"ticker": "NOWL",
+"kind": "long",
+"price": 3.98,
+"conv": 37,
+"factors": {
+"discount": 82.3894,
+"histcheap": 0.97,
+"riskadj": -1.3,
+"ddpen": -65.93,
+"momentum": 58.0169,
+"prob": 50,
+"quality": null,
+"valcheap": null,
+"trappen": null
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-29",
+"ticker": "LVWR",
+"kind": "long",
+"price": 0.9001,
+"conv": 33,
+"factors": {
+"discount": 83.5748,
+"histcheap": 0.99,
+"riskadj": -1.72,
+"ddpen": -64.98,
+"momentum": 45.7771,
+"prob": 17,
+"quality": null,
+"valcheap": null,
+"trappen": 0
 },
 "ret_5d": null,
 "ret_21d": null
