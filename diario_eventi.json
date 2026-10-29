@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:TYRA:2026-09-11",
-"ticker": "TYRA",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-14 21:36",
-"data": "2026-09-11 03:19",
-"prezzo": 22.01,
-"conv": 72,
-"prob_gain": 59,
-"prob_loss": 14,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 28.4257,
-"media20": 25.4725,
-"quattro_atr": 30.5977,
-"meta_caduta": 27.535,
-"bollinger": 28.5909,
-"consigliata": 28.4257
-},
-"stop": 17.7161,
-"atr": 2.1469,
-"res": {
-"7g": 14.81,
-"30g": -11.2,
-"soglia": -11.2
-},
-"soglie_contaminate": {
-"media50": 28.4257,
-"media20": 25.4725,
-"quattro_atr": 30.5977,
-"meta_caduta": 27.535,
-"bollinger": 28.5909,
-"consigliata": 28.4257
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"taglio_corretto": true,
-"soglie_ritardo_giorni": 3,
-"res_soglia": {
-"media50": {
-"ret": -11.2,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 15.73,
-"toccato": true,
-"giorni": 7
-},
-"quattro_atr": {
-"ret": -11.2,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -11.2,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -11.2,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -11.2,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:SYK:2026-09-09",
 "ticker": "SYK",
 "kind": "short",
@@ -34105,6 +34030,26 @@
 "mkt": 0.6515,
 "fonte": "osservazione",
 "note": "prezzo salito di almeno il 2% da 28.12",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:BKD:2026-10-11",
+"ticker": "BKD",
+"kind": "short",
+"evento": "salita_2pct",
+"scritto_il": "2026-10-29 18:00",
+"data": "2026-10-29 17:57",
+"prezzo": 10.325,
+"conv": 77,
+"prob_gain": 48,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "prezzo salito di almeno il 2% da 10.12",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
