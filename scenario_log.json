@@ -18628,5 +18628,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "EEM",
+"kind": "short",
+"date": "2026-10-29",
+"promo_price": 63.42,
+"obs_price": 61.65,
+"obs_date": "2026-10-22",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": 66.2938,
+"stop": 61.4058,
+"reliab": "🟢 Alta",
+"prob_gain": 50,
+"prob_loss": 0,
+"conv": 62,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-22 20:10",
+"prezzo": 61.65,
+"conv": 61,
+"prob_gain": 52,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -0.7116
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-10-29 10:52",
+"prezzo": 63.42,
+"conv": 62,
+"prob_gain": 50,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
