@@ -1,5 +1,5 @@
 {
-"aggiornato": "2026-10-29 03:58",
+"aggiornato": "2026-10-29 10:55",
 "osservazione": [
 {
 "t": "CABO",
@@ -62,6 +62,30 @@
 "affid": ""
 },
 {
+"t": "STLAM.MI",
+"nome": "STELLANTIS",
+"tipo": "long",
+"giorni": 4,
+"rend": 9.7,
+"conv": null,
+"dconv": 0.0,
+"run": 0,
+"mancano": 3,
+"affid": ""
+},
+{
+"t": "STMMI.MI",
+"nome": "STMICROELECTRONICS",
+"tipo": "long",
+"giorni": 4,
+"rend": 9.2,
+"conv": 45.0,
+"dconv": -2.0,
+"run": 6,
+"mancano": 3,
+"affid": "🟡 Media"
+},
+{
 "t": "ENVA",
 "nome": "Enova International, Inc.",
 "tipo": "long",
@@ -70,18 +94,6 @@
 "conv": 58.0,
 "dconv": -2.0,
 "run": 1,
-"mancano": 3,
-"affid": "🟡 Media"
-},
-{
-"t": "STMMI.MI",
-"nome": "STMICROELECTRONICS",
-"tipo": "long",
-"giorni": 4,
-"rend": 8.7,
-"conv": 45.0,
-"dconv": -1.0,
-"run": 6,
 "mancano": 3,
 "affid": "🟡 Media"
 },
@@ -127,7 +139,7 @@
 "tipo": "long",
 "giorni": 4,
 "rend": 7.5,
-"conv": 43.0,
+"conv": 46.0,
 "dconv": -2.0,
 "run": 6,
 "mancano": 3,
@@ -139,8 +151,8 @@
 "tipo": "long",
 "giorni": 4,
 "rend": 7.2,
-"conv": 57.0,
-"dconv": -4.0,
+"conv": 59.0,
+"dconv": -2.0,
 "run": 6,
 "mancano": 3,
 "affid": "🔴 Bassa"
@@ -199,8 +211,8 @@
 "tipo": "long",
 "giorni": 4,
 "rend": 6.1,
-"conv": 57.0,
-"dconv": -2.0,
+"conv": 58.0,
+"dconv": -1.0,
 "run": 6,
 "mancano": 3,
 "affid": "🟡 Media"
@@ -228,6 +240,18 @@
 "run": 0,
 "mancano": 0,
 "affid": ""
+},
+{
+"t": "LDO.MI",
+"nome": "LEONARDO",
+"tipo": "long",
+"giorni": 4,
+"rend": 5.3,
+"conv": 42.0,
+"dconv": -2.0,
+"run": 4,
+"mancano": 3,
+"affid": "🟡 Media"
 },
 {
 "t": "HVII",
@@ -398,18 +422,6 @@
 "affid": "🟢 Alta"
 },
 {
-"t": "LDO.MI",
-"nome": "LEONARDO",
-"tipo": "long",
-"giorni": 4,
-"rend": 3.4,
-"conv": 41.0,
-"dconv": -2.0,
-"run": 4,
-"mancano": 3,
-"affid": "🟡 Media"
-},
-{
 "t": "AGNC",
 "nome": "AGNC",
 "tipo": "short",
@@ -470,18 +482,6 @@
 "affid": ""
 },
 {
-"t": "UCG.MI",
-"nome": "UCG.MI",
-"tipo": "short",
-"giorni": 4,
-"rend": 3.2,
-"conv": 57.0,
-"dconv": 0.0,
-"run": 6,
-"mancano": 0,
-"affid": "🟢 Alta"
-},
-{
 "t": "QLYS",
 "nome": "Qualys Inc",
 "tipo": "long",
@@ -495,7 +495,7 @@
 },
 {
 "t": "ACAD",
-"nome": "Acadia Pharmaceuticals Inc.",
+"nome": "ACADIA PHARMACEUTICALS INC.",
 "tipo": "long",
 "giorni": 4,
 "rend": 3.0,
@@ -602,18 +602,6 @@
 "affid": ""
 },
 {
-"t": "EEM",
-"nome": "EEM",
-"tipo": "short",
-"giorni": 3,
-"rend": 2.3,
-"conv": 58.0,
-"dconv": 0.0,
-"run": 5,
-"mancano": 0,
-"affid": "🟢 Alta"
-},
-{
 "t": "HST",
 "nome": "HOST HOTELS & RESORTS, INC.",
 "tipo": "long",
@@ -691,8 +679,8 @@
 "tipo": "long",
 "giorni": 4,
 "rend": 2.1,
-"conv": 59.0,
-"dconv": 0.0,
+"conv": 61.0,
+"dconv": 1.0,
 "run": 6,
 "mancano": 3,
 "affid": "🔴 Bassa"
@@ -1255,7 +1243,7 @@
 "tipo": "short",
 "giorni": 0,
 "rend": 0.0,
-"conv": 71.0,
+"conv": 72.0,
 "dconv": 0.0,
 "run": 1,
 "mancano": 3,
@@ -1291,7 +1279,7 @@
 "tipo": "long",
 "giorni": 0,
 "rend": 0.0,
-"conv": 66.0,
+"conv": 61.0,
 "dconv": 0.0,
 "run": 1,
 "mancano": 7,
@@ -1615,8 +1603,8 @@
 "tipo": "long",
 "giorni": 4,
 "rend": -1.1,
-"conv": 71.0,
-"dconv": -0.0,
+"conv": 73.0,
+"dconv": 2.0,
 "run": 2,
 "mancano": 3,
 "affid": "🟡 Media"
@@ -1771,8 +1759,8 @@
 "tipo": "long",
 "giorni": 4,
 "rend": -1.8,
-"conv": 47.0,
-"dconv": 1.0,
+"conv": 49.0,
+"dconv": 2.0,
 "run": 6,
 "mancano": 3,
 "affid": "🟡 Media"
@@ -1803,12 +1791,12 @@
 },
 {
 "t": "BCE",
-"nome": "BCE Inc",
+"nome": "BCE, Inc.",
 "tipo": "long",
 "giorni": 4,
 "rend": -1.9,
-"conv": 58.0,
-"dconv": 1.0,
+"conv": 51.0,
+"dconv": -2.0,
 "run": 2,
 "mancano": 3,
 "affid": "🟢 Alta"
@@ -1859,18 +1847,6 @@
 "dconv": 0.0,
 "run": 0,
 "mancano": 0,
-"affid": ""
-},
-{
-"t": "STLAM.MI",
-"nome": "STELLANTIS",
-"tipo": "long",
-"giorni": 4,
-"rend": -2.2,
-"conv": null,
-"dconv": 0.0,
-"run": 0,
-"mancano": 3,
 "affid": ""
 },
 {
@@ -3099,14 +3075,14 @@
 "tipo": "long",
 "auto": true,
 "aggiunta": "2026-08-26",
-"conv": 69.0,
+"conv": 68.0,
 "affid": "🔴 Bassa",
 "salita": 64.0,
 "perdita": 28.0,
 "prezzo": 18.82,
 "ingresso": 19.6,
 "rend": -4.0,
-"dconv": 3.0,
+"dconv": 2.0,
 "bersaglio": 21.7416,
 "stop": 17.4196,
 "uscita": "in perdita da 45 giorni di Borsa: valuta l'uscita",
@@ -3168,22 +3144,22 @@
 "tipo": "short",
 "auto": true,
 "aggiunta": "2026-09-02",
-"conv": 48.0,
+"conv": 47.0,
 "affid": "🟢 Alta",
-"salita": 53.0,
+"salita": 49.0,
 "perdita": 2.0,
-"prezzo": 26.455,
+"prezzo": 26.805,
 "ingresso": 23.305,
-"rend": 13.5,
-"dconv": -8.0,
-"bersaglio": 24.4567,
+"rend": 15.0,
+"dconv": -9.0,
+"bersaglio": 24.5602,
 "stop": 22.256,
 "uscita": "",
 "incasso": "",
 "avviso": "—",
 "nota": "🤖 Promossa il 2026-09-02: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.3% e la convenienza (56) regge.",
 "mia_soglia": null,
-"soglia_suggerita": 30.602
+"soglia_suggerita": 31.0069
 },
 {
 "t": "MXL",
@@ -3766,14 +3742,14 @@
 "tipo": "short",
 "auto": true,
 "aggiunta": "2026-10-13",
-"conv": 57.0,
+"conv": 59.0,
 "affid": "🟢 Alta",
-"salita": 51.0,
+"salita": 50.0,
 "perdita": 0.0,
-"prezzo": 42.99,
+"prezzo": 42.62,
 "ingresso": 42.3,
-"rend": 1.6,
-"dconv": -4.0,
+"rend": 0.8,
+"dconv": -2.0,
 "bersaglio": 43.8488,
 "stop": 40.6482,
 "uscita": "",
@@ -3781,7 +3757,7 @@
 "avviso": "—",
 "nota": "🤖 Promossa il 2026-10-13: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +3.1% e la convenienza (67) regge.",
 "mia_soglia": null,
-"soglia_suggerita": 49.729
+"soglia_suggerita": 49.301
 },
 {
 "t": "JNJ",
@@ -4046,7 +4022,7 @@
 "affid": "🟢 Alta",
 "salita": 49.0,
 "perdita": 2.0,
-"prezzo": 13.63,
+"prezzo": 13.625,
 "ingresso": 13.645,
 "rend": -0.1,
 "dconv": 0.0,
@@ -4057,7 +4033,7 @@
 "avviso": "—",
 "nota": "🤖 Promossa il 2026-10-27: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +4.2% e la convenienza (59) regge.",
 "mia_soglia": null,
-"soglia_suggerita": 15.7666
+"soglia_suggerita": 15.7608
 },
 {
 "t": "RSI",
@@ -4157,14 +4133,14 @@
 "tipo": "short",
 "auto": true,
 "aggiunta": "2026-10-28",
-"conv": 61.0,
+"conv": 64.0,
 "affid": "🟢 Alta",
-"salita": 51.0,
+"salita": 50.0,
 "perdita": 8.0,
-"prezzo": 25.93,
+"prezzo": 25.53,
 "ingresso": 25.76,
-"rend": 0.7,
-"dconv": -1.0,
+"rend": -0.9,
+"dconv": 2.0,
 "bersaglio": 27.2374,
 "stop": 24.483,
 "uscita": "",
@@ -4172,7 +4148,53 @@
 "avviso": "—",
 "nota": "🤖 Promossa il 2026-10-28: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.7% e la convenienza (64) regge.",
 "mia_soglia": null,
-"soglia_suggerita": 29.9947
+"soglia_suggerita": 29.532
+},
+{
+"t": "UCG.MI",
+"nome": "UCG.MI",
+"tipo": "short",
+"auto": true,
+"aggiunta": "2026-10-29",
+"conv": 66.0,
+"affid": "🟢 Alta",
+"salita": 50.0,
+"perdita": 2.0,
+"prezzo": 73.88,
+"ingresso": 73.88,
+"rend": 0.0,
+"dconv": 0.0,
+"bersaglio": 80.46,
+"stop": 69.9967,
+"uscita": "",
+"incasso": "",
+"avviso": "—",
+"nota": "🤖 Promossa il 2026-10-29: dopo 4 giorni di Borsa di osservazione il prezzo è risalito di +3.2% e la convenienza (57) regge.",
+"mia_soglia": null,
+"soglia_suggerita": 85.4612
+},
+{
+"t": "EEM",
+"nome": "EEM",
+"tipo": "short",
+"auto": true,
+"aggiunta": "2026-10-29",
+"conv": 62.0,
+"affid": "🟢 Alta",
+"salita": 50.0,
+"perdita": 0.0,
+"prezzo": 63.52,
+"ingresso": 63.52,
+"rend": 0.0,
+"dconv": 0.0,
+"bersaglio": 66.2938,
+"stop": 61.4058,
+"uscita": "",
+"incasso": "",
+"avviso": "—",
+"nota": "🤖 Promossa il 2026-10-29: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.3% e la convenienza (58) regge.",
+"mia_soglia": null,
+"soglia_suggerita": 73.4772
 }
 ],
 "motivi": {
@@ -4258,6 +4280,18 @@
 "affid": "🟢 Alta"
 },
 {
+"t": "TAL",
+"nome": "TAL Education Group",
+"tipo": "long",
+"conv": 73.0,
+"dconv": 2.0,
+"giorni": 4,
+"rend": -1.1,
+"salita": 79.0,
+"perdita": 11.0,
+"affid": "🟡 Media"
+},
+{
 "t": "SAN",
 "nome": "Banco Santander SA",
 "tipo": "long",
@@ -4284,5 +4318,5 @@
 ],
 "portafoglio": [],
 "richieste": [],
-"giro": "2026-10-29 03:58"
+"giro": "2026-10-29 10:55"
 }
