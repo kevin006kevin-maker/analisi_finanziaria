@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-10-20",
-"ticker": "BMEA",
-"kind": "short",
-"price": 0.8999,
-"conv": 45,
-"factors": {
-"discount": 59.2805,
-"histcheap": 2.07,
-"riskadj": -0.83,
-"ddpen": -30.47,
-"momentum": 28.5794,
-"prob": 28,
-"oversold": -31.6242,
-"rebound": 63.5846,
-"trend": -1.0,
-"relstrength": -27.7818
-},
-"ret_5d": -27.78,
-"ret_21d": null
-},
-{
-"date": "2026-10-20",
 "ticker": "SE",
 "kind": "long",
 "price": 82.55,
@@ -39273,6 +39252,46 @@
 "rebound": -19.7698,
 "trend": 1.0,
 "relstrength": 37.8749
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-29",
+"ticker": "AMKR",
+"kind": "long",
+"price": 42.21,
+"conv": 51,
+"factors": {
+"discount": 54.8797,
+"histcheap": 0.84,
+"riskadj": 0.38,
+"ddpen": -27.15,
+"momentum": 3.4759,
+"prob": 4,
+"quality": 55.0,
+"valcheap": -0.0724,
+"trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-29",
+"ticker": "ENPH",
+"kind": "long",
+"price": 24.99,
+"conv": 28,
+"factors": {
+"discount": 65.45,
+"histcheap": 1.59,
+"riskadj": -0.51,
+"ddpen": -32.75,
+"momentum": 21.8818,
+"prob": 25,
+"quality": 27.8,
+"valcheap": -1.5531,
+"trappen": -3
 },
 "ret_5d": null,
 "ret_21d": null
