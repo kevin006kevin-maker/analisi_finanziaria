@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:TTAN:2026-09-09",
-"ticker": "TTAN",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-14 00:38",
-"data": "2026-09-14 00:32",
-"prezzo": 54.68,
-"conv": 76,
-"prob_gain": 56,
-"prob_loss": 13,
-"reliab": "🔴 Bassa",
-"mkt": -1.8209,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-14",
-"soglie": {
-"media50": 83.2149,
-"media20": 87.4338,
-"quattro_atr": 77.7492,
-"meta_caduta": 77.66,
-"bollinger": 115.8904,
-"consigliata": 77.7492
-},
-"stop": 43.1454,
-"atr": 5.7673,
-"res": {
-"7g": 0.69,
-"30g": 30.18,
-"soglia": 30.18
-},
-"res_soglia": {
-"media50": {
-"ret": 30.18,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 30.18,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 30.18,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 30.18,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 30.18,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 30.18,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:KRMN:2026-09-09",
 "ticker": "KRMN",
 "kind": "short",
@@ -34411,5 +34347,32 @@
 "stop": 61.3058,
 "atr": 1.0571,
 "res": {}
+},
+{
+"episodio": "short:FTNT:2026-10-29",
+"ticker": "FTNT",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-29 17:54",
+"data": "2026-10-29 17:54",
+"prezzo": 135.71,
+"conv": 73,
+"prob_gain": 53,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": 0.6515,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 171.5712,
+"media20": 179.792,
+"quattro_atr": 175.6004,
+"meta_caduta": 165.23,
+"bollinger": 205.8444,
+"consigliata": 171.5712
+},
+"stop": 115.7648,
+"atr": 9.9726
 }
 ]
