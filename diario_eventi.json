@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:NAMS:2026-09-09",
-"ticker": "NAMS",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-14 00:38",
-"data": "2026-09-14 00:32",
-"prezzo": 22.8,
-"conv": 74,
-"prob_gain": 48,
-"prob_loss": 17,
-"reliab": "🟡 Media",
-"mkt": -1.8209,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-14",
-"soglie": {
-"media50": 28.7846,
-"media20": 25.9885,
-"quattro_atr": 28.521,
-"meta_caduta": 29.895,
-"bollinger": 29.5862,
-"consigliata": 28.521
-},
-"stop": 19.9395,
-"atr": 1.4302,
-"res": {
-"7g": -0.18,
-"30g": -11.45,
-"soglia": -11.45
-},
-"res_soglia": {
-"media50": {
-"ret": -11.45,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -11.45,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -11.45,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -11.45,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -11.45,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -11.45,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:BBOT:2026-09-09",
 "ticker": "BBOT",
 "kind": "short",
@@ -34252,5 +34188,25 @@
 },
 "stop": 67.9792,
 "atr": 2.3954
+},
+{
+"episodio": "short:ALNY:2026-10-29",
+"ticker": "ALNY",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-10-29 17:57",
+"data": "2026-10-29 17:57",
+"prezzo": 179.425,
+"conv": 77,
+"prob_gain": 63,
+"prob_loss": 7,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
