@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:LDO.MI:2026-09-09",
-"ticker": "LDO.MI",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-14 00:38",
-"data": "2026-09-12 13:56",
-"prezzo": 50.0,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-14",
-"soglie": {
-"media50": 53.91,
-"media20": 53.8322,
-"quattro_atr": 55.9753,
-"meta_caduta": 54.95,
-"bollinger": 61.0699,
-"consigliata": 53.91
-},
-"stop": 47.0124,
-"atr": 1.4938,
-"soglie_contaminate": {
-"media50": 53.91,
-"media20": 53.8322,
-"quattro_atr": 55.9753,
-"meta_caduta": 54.95,
-"bollinger": 61.0699,
-"consigliata": 53.91
-},
-"soglie_ricalcolate_il": "2026-09-14 21:39",
-"soglie_ritardo_giorni": 2,
-"res": {
-"7g": 0.76,
-"30g": -5.44,
-"soglia": -5.44
-},
-"taglio_corretto": true,
-"res_soglia": {
-"media50": {
-"ret": -5.44,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -5.44,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -5.44,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -5.44,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -5.44,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -5.44,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:GRAB:2026-09-09",
 "ticker": "GRAB",
 "kind": "short",
@@ -34337,5 +34262,32 @@
 },
 "stop": 261.5668,
 "atr": 10.4666
+},
+{
+"episodio": "short:GOOGL:2026-10-29",
+"ticker": "GOOGL",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-29 17:54",
+"data": "2026-10-29 17:54",
+"prezzo": 284.715,
+"conv": 68,
+"prob_gain": 52,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": 0.6515,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 340.3063,
+"media20": 337.1342,
+"quattro_atr": 327.4191,
+"meta_caduta": 321.2325,
+"bollinger": 371.6076,
+"consigliata": 327.4191
+},
+"stop": 263.363,
+"atr": 10.676
 }
 ]
