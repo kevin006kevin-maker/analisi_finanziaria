@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:WSO:2026-08-25",
-"ticker": "WSO",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-15 00:47",
-"data": "2026-08-27 12:06",
-"prezzo": 314.39,
-"conv": 72,
-"prob_gain": 49,
-"prob_loss": 4,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 356.5218,
-"media20": 316.919,
-"quattro_atr": 359.1593,
-"meta_caduta": 365.56,
-"bollinger": 334.0163,
-"consigliata": 356.5218
-},
-"stop": 292.0054,
-"atr": 11.1923,
-"res": {
-"7g": 0.31,
-"30g": -0.85,
-"soglia": -0.85
-},
-"soglie_contaminate": {
-"media50": 356.5218,
-"media20": 316.919,
-"quattro_atr": 359.1593,
-"meta_caduta": 365.56,
-"bollinger": 334.0163,
-"consigliata": 356.5218
-},
-"soglie_ricalcolate_il": "2026-09-15 00:51",
-"taglio_corretto": true,
-"soglie_ritardo_giorni": 19,
-"res_soglia": {
-"media50": {
-"ret": -0.85,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 0.8,
-"toccato": true,
-"giorni": 25
-},
-"quattro_atr": {
-"ret": -0.85,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -0.85,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -0.85,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -0.85,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "long:BBD:2026-08-16",
 "ticker": "BBD",
 "kind": "long",
@@ -34604,5 +34529,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:FFIV:2026-10-29",
+"ticker": "FFIV",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-30 02:56",
+"data": "2026-10-30 02:55",
+"prezzo": 363.46,
+"conv": 76,
+"prob_gain": 63,
+"prob_loss": 1,
+"reliab": "🟡 Media",
+"mkt": 0.7036,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 429.4206,
+"media20": 450.8825,
+"quattro_atr": 445.7999,
+"meta_caduta": 421.645,
+"bollinger": 512.7199,
+"consigliata": 429.4206
+},
+"stop": 322.29,
+"atr": 20.585
 }
 ]
