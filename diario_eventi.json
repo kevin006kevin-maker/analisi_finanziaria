@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:ITUB:2026-08-16",
-"ticker": "ITUB",
-"kind": "long",
-"evento": "promozione",
-"scritto_il": "2026-09-15 00:47",
-"data": "2026-09-15 00:47",
-"prezzo": 8.23,
-"conv": 65,
-"prob_gain": 68,
-"prob_loss": 14,
-"reliab": "🟢 Alta",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 13 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": null,
-"media20": null,
-"quattro_atr": 9.1795,
-"meta_caduta": 8.425,
-"bollinger": 8.5575,
-"consigliata": 9.1795
-},
-"stop": 7.7552,
-"atr": 0.2374,
-"res": {
-"7g": 1.64,
-"30g": 16.65
-}
-},
-{
 "episodio": "short:NAVN:2026-09-10",
 "ticker": "NAVN",
 "kind": "short",
@@ -34552,5 +34521,32 @@
 },
 "stop": 119.1548,
 "atr": 9.9726
+},
+{
+"episodio": "short:GOOG:2026-10-29",
+"ticker": "GOOG",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-30 02:56",
+"data": "2026-10-30 02:55",
+"prezzo": 282.32,
+"conv": 70,
+"prob_gain": 55,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": 0.7036,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 336.9294,
+"media20": 333.68,
+"quattro_atr": 324.1887,
+"meta_caduta": 319.47,
+"bollinger": 367.5031,
+"consigliata": 324.1887
+},
+"stop": 261.3856,
+"atr": 10.4672
 }
 ]
