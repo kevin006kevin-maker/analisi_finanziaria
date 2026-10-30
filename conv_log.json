@@ -1,48 +1,6 @@
 [
 {
 "date": "2026-10-21",
-"ticker": "CMCT",
-"kind": "short",
-"price": 4.1,
-"conv": 29,
-"factors": {
-"discount": 99.6817,
-"histcheap": 0.67,
-"riskadj": -2.25,
-"ddpen": -88.53,
-"momentum": 11.0629,
-"prob": 40,
-"oversold": -51.7864,
-"rebound": -9.4293,
-"trend": -1.0,
-"relstrength": -11.567
-},
-"ret_5d": -18.05,
-"ret_21d": null
-},
-{
-"date": "2026-10-21",
-"ticker": "GTBP",
-"kind": "short",
-"price": 5.41,
-"conv": 37,
-"factors": {
-"discount": 53.4824,
-"histcheap": -1.71,
-"riskadj": 0.24,
-"ddpen": -51.49,
-"momentum": 12.8825,
-"prob": -35,
-"oversold": -45.752,
-"rebound": -15.2858,
-"trend": 1.0,
-"relstrength": -13.3865
-},
-"ret_5d": -0.77,
-"ret_21d": null
-},
-{
-"date": "2026-10-21",
 "ticker": "IGACR",
 "kind": "short",
 "price": 0.16,
@@ -39049,6 +39007,46 @@
 "rebound": 3.8915,
 "trend": -1.0,
 "relstrength": 5.2884
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-30",
+"ticker": "INTC",
+"kind": "long",
+"price": 66.205,
+"conv": 30,
+"factors": {
+"discount": 53.0261,
+"histcheap": 0.33,
+"riskadj": 0.76,
+"ddpen": -19.61,
+"momentum": 23.8673,
+"prob": 53,
+"quality": 21.4,
+"valcheap": -3.0,
+"trappen": 0
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-30",
+"ticker": "RDDT",
+"kind": "long",
+"price": 94.2699,
+"conv": 48,
+"factors": {
+"discount": 63.5925,
+"histcheap": 2.41,
+"riskadj": -1.25,
+"ddpen": -35.07,
+"momentum": 34.6483,
+"prob": 71,
+"quality": 78.3,
+"valcheap": -2.6948,
+"trappen": 3
 },
 "ret_5d": null,
 "ret_21d": null
