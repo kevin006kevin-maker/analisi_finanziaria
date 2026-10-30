@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:COO:2026-09-10",
-"ticker": "COO",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-15 00:50",
-"data": "2026-09-15 00:45",
-"prezzo": 54.22,
-"conv": 93,
-"prob_gain": 64,
-"prob_loss": 4,
-"reliab": "🟢 Alta",
-"mkt": -2.1293,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-15",
-"soglie": {
-"media50": 71.3092,
-"media20": 69.321,
-"quattro_atr": 64.3653,
-"meta_caduta": 65.52,
-"bollinger": 84.0591,
-"consigliata": 64.3653
-},
-"stop": 49.1474,
-"atr": 2.5363,
-"res": {
-"7g": 1.71,
-"30g": 5.68,
-"soglia": 5.68
-},
-"res_soglia": {
-"media50": {
-"ret": 5.68,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 5.68,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 5.68,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 5.68,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 5.68,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 5.68,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:NAVN:2026-09-10",
 "ticker": "NAVN",
 "kind": "short",
@@ -34510,5 +34446,32 @@
 },
 "stop": 164.2215,
 "atr": 18.2368
+},
+{
+"episodio": "short:SCI:2026-10-29",
+"ticker": "SCI",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-30 16:22",
+"data": "2026-10-29 17:54",
+"prezzo": 72.77,
+"conv": 67,
+"prob_gain": 53,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 80.1318,
+"media20": 79.582,
+"quattro_atr": 82.3516,
+"meta_caduta": 79.075,
+"bollinger": 85.0686,
+"consigliata": 80.1318
+},
+"stop": 67.9792,
+"atr": 2.3954
 }
 ]
