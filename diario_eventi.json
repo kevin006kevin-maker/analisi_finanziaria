@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:PSN:2026-09-15",
-"ticker": "PSN",
-"kind": "short",
-"evento": "uscita",
-"scritto_il": "2026-09-15 00:49",
-"data": "2026-09-15 00:49",
-"prezzo": 46.94,
-"conv": 66,
-"prob_gain": 51,
-"prob_loss": 17,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "in perdita da 30 giorni di Borsa: valuta l'uscita",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:TU:2026-09-15",
 "ticker": "TU",
 "kind": "short",
@@ -34504,5 +34484,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:BKD:2026-10-11",
+"ticker": "BKD",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-10-30 02:58",
+"data": "2026-10-29 22:49",
+"prezzo": 10.27,
+"conv": 77,
+"prob_gain": 44,
+"prob_loss": 7,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-10-30",
+"soglie": {
+"media50": 11.0928,
+"media20": null,
+"quattro_atr": 11.7424,
+"meta_caduta": 12.315,
+"bollinger": 10.9844,
+"consigliata": 11.0928
+},
+"stop": 9.5338,
+"atr": 0.3681
 }
 ]
