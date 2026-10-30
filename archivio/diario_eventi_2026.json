@@ -25650,5 +25650,69 @@
 "7g": -9.77,
 "30g": 4.66
 }
+},
+{
+"episodio": "short:RVLV:2026-09-10",
+"ticker": "RVLV",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-09-15 03:26",
+"data": "2026-09-15 03:26",
+"prezzo": 21.13,
+"conv": 70,
+"prob_gain": 55,
+"prob_loss": 13,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 23.7408,
+"media20": 22.417,
+"quattro_atr": 24.84,
+"meta_caduta": 23.98,
+"bollinger": 25.1484,
+"consigliata": 23.7408
+},
+"stop": 19.275,
+"atr": 0.9275,
+"res": {
+"7g": 0.09,
+"30g": 10.7,
+"soglia": 10.7
+},
+"res_soglia": {
+"media50": {
+"ret": 10.7,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": 6.09,
+"toccato": true,
+"giorni": 30
+},
+"quattro_atr": {
+"ret": 10.7,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": 10.7,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": 10.7,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": 10.7,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
