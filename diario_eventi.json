@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:BAND:2026-09-10",
-"ticker": "BAND",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-15 00:50",
-"data": "2026-09-15 00:45",
-"prezzo": 48.97,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-15",
-"soglie": {
-"media50": 54.7321,
-"media20": 49.0992,
-"quattro_atr": 67.2225,
-"meta_caduta": 63.705,
-"bollinger": 55.6366,
-"consigliata": 54.7321
-},
-"stop": 39.8437,
-"atr": 4.5631,
-"res": {
-"7g": 15.08,
-"30g": -1.83,
-"soglia": 11.77
-},
-"res_soglia": {
-"media50": {
-"ret": 11.77,
-"toccato": true,
-"giorni": 7
-},
-"media20": {
-"ret": 0.26,
-"toccato": true,
-"giorni": 2
-},
-"quattro_atr": {
-"ret": -1.83,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 30.09,
-"toccato": true,
-"giorni": 17
-},
-"bollinger": {
-"ret": 13.61,
-"toccato": true,
-"giorni": 7
-},
-"consigliata": {
-"ret": 11.77,
-"toccato": true,
-"giorni": 7
-}
-}
-},
-{
 "episodio": "short:MONC.MI:2026-09-10",
 "ticker": "MONC.MI",
 "kind": "short",
@@ -34584,5 +34520,32 @@
 },
 "stop": 85.4161,
 "atr": 4.4619
+},
+{
+"episodio": "short:CACC:2026-10-30",
+"ticker": "CACC",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-30 16:19",
+"data": "2026-10-30 16:19",
+"prezzo": 466.0001,
+"conv": 64,
+"prob_gain": 54,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": -1.4459,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 564.324,
+"media20": 539.6135,
+"quattro_atr": 560.8462,
+"meta_caduta": 536.8851,
+"bollinger": 579.8191,
+"consigliata": 560.8462
+},
+"stop": 418.5771,
+"atr": 23.7115
 }
 ]
