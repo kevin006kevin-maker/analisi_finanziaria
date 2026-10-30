@@ -11785,7 +11785,13 @@
 },
 "res": {
 "osservazione|7g": 11.99,
-"promozione|7g": -0.65
+"promozione|7g": -0.65,
+"osservazione|30g": 18.47,
+"promozione|30g": 5.09,
+"conferma|30g": 5.78,
+"osservazione|bersaglio": 18.47,
+"promozione|bersaglio": 5.09,
+"conferma|bersaglio": 5.78
 }
 },
 {
@@ -11809,7 +11815,10 @@
 "conv": 55,
 "res": {
 "osservazione|7g": -7.64,
-"promozione|7g": -2.17
+"promozione|7g": -2.17,
+"osservazione|30g": 41.63,
+"promozione|30g": 50.0,
+"conferma|30g": 53.33
 },
 "passaggi": {
 "osservazione": {
@@ -11871,7 +11880,10 @@
 "conv": 81,
 "res": {
 "osservazione|7g": -4.35,
-"promozione|7g": -2.23
+"promozione|7g": -2.23,
+"osservazione|30g": 0.1,
+"promozione|30g": 2.32,
+"conferma|30g": 4.65
 },
 "passaggi": {
 "osservazione": {
@@ -11970,7 +11982,15 @@
 "res": {
 "anticipo|7g": 31.44,
 "osservazione|7g": 31.44,
-"promozione|7g": -2.18
+"promozione|7g": -2.18,
+"anticipo|30g": 39.49,
+"osservazione|30g": 39.49,
+"promozione|30g": 3.81,
+"conferma|30g": 6.12,
+"anticipo|bersaglio": 39.49,
+"osservazione|bersaglio": 39.49,
+"promozione|bersaglio": 3.81,
+"conferma|bersaglio": 6.12
 }
 },
 {
@@ -12031,7 +12051,15 @@
 "res": {
 "anticipo|7g": 5.45,
 "osservazione|7g": 1.58,
-"promozione|7g": 4.34
+"promozione|7g": 4.34,
+"anticipo|30g": 0.71,
+"osservazione|30g": -2.99,
+"promozione|30g": -0.35,
+"conferma|30g": -4.5,
+"anticipo|bersaglio": 0.71,
+"osservazione|bersaglio": -2.99,
+"promozione|bersaglio": -0.35,
+"conferma|bersaglio": -4.5
 }
 },
 {
@@ -12092,7 +12120,15 @@
 "res": {
 "anticipo|7g": -0.62,
 "osservazione|7g": -0.39,
-"promozione|7g": -0.19
+"promozione|7g": -0.19,
+"anticipo|30g": -3.02,
+"osservazione|30g": -2.79,
+"promozione|30g": -2.59,
+"conferma|30g": -2.41,
+"anticipo|bersaglio": -3.02,
+"osservazione|bersaglio": -2.79,
+"promozione|bersaglio": -2.59,
+"conferma|bersaglio": -2.41
 }
 },
 {
@@ -12153,7 +12189,15 @@
 "res": {
 "anticipo|7g": -5.97,
 "osservazione|7g": -15.94,
-"promozione|7g": -7.82
+"promozione|7g": -7.82,
+"anticipo|30g": -23.11,
+"osservazione|30g": -31.27,
+"promozione|30g": -24.62,
+"conferma|30g": -18.23,
+"anticipo|bersaglio": -23.11,
+"osservazione|bersaglio": -31.27,
+"promozione|bersaglio": -24.62,
+"conferma|bersaglio": -18.23
 }
 },
 {
@@ -12214,7 +12258,15 @@
 "res": {
 "anticipo|7g": -47.89,
 "osservazione|7g": -47.89,
-"promozione|7g": -14.15
+"promozione|7g": -14.15,
+"anticipo|30g": -60.47,
+"osservazione|30g": -60.47,
+"promozione|30g": -34.88,
+"conferma|30g": -24.15,
+"anticipo|bersaglio": -60.47,
+"osservazione|bersaglio": -60.47,
+"promozione|bersaglio": -34.88,
+"conferma|bersaglio": -24.15
 }
 },
 {
@@ -12275,7 +12327,15 @@
 "res": {
 "anticipo|7g": -13.18,
 "osservazione|7g": -13.18,
-"promozione|7g": -0.49
+"promozione|7g": -0.49,
+"anticipo|30g": -45.3,
+"osservazione|30g": -45.3,
+"promozione|30g": -37.31,
+"conferma|30g": -37.0,
+"anticipo|bersaglio": -45.3,
+"osservazione|bersaglio": -45.3,
+"promozione|bersaglio": -37.31,
+"conferma|bersaglio": -37.0
 }
 },
 {
@@ -17629,15 +17689,18 @@
 "obs_date": "2026-09-23",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 23.700000762939453,
+"conf_date": "2026-10-30",
 "target": null,
 "stop": null,
 "reliab": null,
 "prob_gain": null,
 "prob_loss": null,
 "conv": 58,
-"res": {},
+"res": {
+"osservazione|7g": -0.73,
+"promozione|7g": -0.13
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-09-17 17:18",
@@ -17667,8 +17730,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-10-30",
+"prezzo": 23.700000762939453,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -17686,8 +17749,8 @@
 "obs_date": "2026-10-11",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 10.40999984741211,
+"conf_date": "2026-10-30",
 "target": 11.2862,
 "stop": 9.3902,
 "reliab": "🟡 Media",
@@ -17723,12 +17786,12 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-10-30",
+"prezzo": 10.40999984741211,
+"conv": 77,
+"prob_gain": 44,
+"prob_loss": 7,
+"reliab": "🟡 Media",
 "mkt": null
 }
 },
