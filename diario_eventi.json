@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:RVLV:2026-09-10",
-"ticker": "RVLV",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-15 00:50",
-"data": "2026-09-15 00:45",
-"prezzo": 20.49,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-15",
-"soglie": {
-"media50": 23.6982,
-"media20": 22.257,
-"quattro_atr": 24.2578,
-"meta_caduta": 23.66,
-"bollinger": 25.0487,
-"consigliata": 23.6982
-},
-"stop": 18.6061,
-"atr": 0.942,
-"res": {
-"7g": 3.22,
-"30g": 14.15,
-"soglia": 14.15
-},
-"res_soglia": {
-"media50": {
-"ret": 14.15,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 8.62,
-"toccato": true,
-"giorni": 30
-},
-"quattro_atr": {
-"ret": 14.15,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 14.15,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 14.15,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 14.15,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:TDOC:2026-09-15",
 "ticker": "TDOC",
 "kind": "short",
@@ -34377,6 +34313,26 @@
 "conv": 70,
 "prob_gain": 61,
 "prob_loss": 32,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:INTC:2026-08-25",
+"ticker": "INTC",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-10-30 16:24",
+"data": "2026-10-30 16:24",
+"prezzo": 66.165,
+"conv": 71,
+"prob_gain": 52,
+"prob_loss": 21,
 "reliab": "🔴 Bassa",
 "mkt": null,
 "fonte": "monitoraggio",
