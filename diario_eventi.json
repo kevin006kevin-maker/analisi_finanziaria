@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:INIO:2026-09-15",
-"ticker": "INIO",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-15 03:24",
-"data": "2026-09-15 03:24",
-"prezzo": 20.35,
-"conv": 62,
-"prob_gain": 44,
-"prob_loss": 29,
-"reliab": "🔴 Bassa",
-"mkt": -2.1293,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 26.1818,
-"media20": 22.3545,
-"quattro_atr": 26.8741,
-"meta_caduta": 30.74,
-"bollinger": 27.4743,
-"consigliata": 26.1818
-},
-"stop": 17.0879,
-"atr": 1.631,
-"res": {
-"7g": -4.91,
-"30g": -19.48,
-"soglia": -19.48
-},
-"res_soglia": {
-"media50": {
-"ret": -19.48,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -19.48,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -19.48,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -19.48,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -19.48,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -19.48,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:HWM:2026-09-15",
 "ticker": "HWM",
 "kind": "short",
@@ -34290,6 +34226,26 @@
 "prob_gain": 52,
 "prob_loss": 6,
 "reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:EEM:2026-10-30",
+"ticker": "EEM",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-10-30 16:24",
+"data": "2026-10-30 16:24",
+"prezzo": 61.18,
+"conv": 70,
+"prob_gain": 49,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
 "mkt": null,
 "fonte": "monitoraggio",
 "note": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
