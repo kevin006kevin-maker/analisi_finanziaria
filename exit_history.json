@@ -25761,5 +25761,86 @@
 "date": "2026-10-30 16:23"
 }
 ]
+},
+{
+"ticker": "EEM",
+"kind": "short",
+"added": "2026-10-29",
+"removed": "2026-10-30",
+"reason": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
+"auto": true,
+"first_price": 63.52,
+"last_price": 61.18,
+"first_target": 66.2938,
+"first_stop": 61.4058,
+"first_src": "scatto",
+"first_sicuro": true,
+"my_target_price": null,
+"snapshots": [
+{
+"name": "EEM",
+"price": 63.52,
+"rsi": 43.2641,
+"dd_high": -10.799,
+"occasione": 34,
+"convenienza": 62,
+"prob_gain": 50,
+"prob_loss": 0,
+"exp_ret": -0.0,
+"gain": 4.3668,
+"reliab": "🟢 Alta",
+"target": 66.2938,
+"stop": 61.4058,
+"date": "2026-10-29 10:52"
+},
+{
+"name": "EEM",
+"price": 62.595,
+"rsi": 39.1609,
+"dd_high": -12.1261,
+"occasione": 10,
+"convenienza": 65,
+"prob_gain": 52,
+"prob_loss": 0,
+"exp_ret": 0.3,
+"gain": 5.83,
+"reliab": "🟢 Alta",
+"target": 66.2231,
+"stop": 60.4368,
+"date": "2026-10-29 17:57"
+},
+{
+"name": "EEM",
+"price": 62.72,
+"rsi": 39.7392,
+"dd_high": -11.9225,
+"occasione": 9,
+"convenienza": 65,
+"prob_gain": 52,
+"prob_loss": 0,
+"exp_ret": 0.2,
+"gain": 5.5899,
+"reliab": "🟢 Alta",
+"target": 66.226,
+"stop": 60.5811,
+"date": "2026-10-29 22:49"
+},
+{
+"name": "EEM",
+"price": 61.18,
+"rsi": 34.1895,
+"dd_high": -14.0008,
+"occasione": 18,
+"convenienza": 70,
+"prob_gain": 49,
+"prob_loss": 0,
+"exp_ret": -0.1,
+"gain": 7.966,
+"reliab": "🟢 Alta",
+"target": 66.1184,
+"stop": 59.0089,
+"date": "2026-10-30 16:23"
+}
+]
 }
 ]
