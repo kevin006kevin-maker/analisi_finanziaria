@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:MONC.MI:2026-09-10",
-"ticker": "MONC.MI",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-15 00:50",
-"data": "2026-09-15 00:45",
-"prezzo": 44.69,
-"conv": 69,
-"prob_gain": 48,
-"prob_loss": 1,
-"reliab": "🟢 Alta",
-"mkt": -2.1293,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-15",
-"soglie": {
-"media50": 48.7478,
-"media20": 46.698,
-"quattro_atr": 49.7416,
-"meta_caduta": 48.765,
-"bollinger": 49.1787,
-"consigliata": 48.7478
-},
-"stop": 42.1642,
-"atr": 1.2629,
-"res": {
-"7g": -2.13,
-"30g": 0.56,
-"soglia": 0.56
-},
-"res_soglia": {
-"media50": {
-"ret": 0.56,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 0.56,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 0.56,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 0.56,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 0.56,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 0.56,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:COO:2026-09-10",
 "ticker": "COO",
 "kind": "short",
@@ -34547,5 +34483,32 @@
 },
 "stop": 418.5771,
 "atr": 23.7115
+},
+{
+"episodio": "short:TWLO:2026-10-30",
+"ticker": "TWLO",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-30 16:19",
+"data": "2026-10-30 16:19",
+"prezzo": 200.695,
+"conv": 64,
+"prob_gain": 50,
+"prob_loss": 16,
+"reliab": "🔴 Bassa",
+"mkt": -1.4459,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 256.5333,
+"media20": 264.2677,
+"quattro_atr": 273.642,
+"meta_caduta": 250.9825,
+"bollinger": 306.7266,
+"consigliata": 256.5333
+},
+"stop": 164.2215,
+"atr": 18.2368
 }
 ]
