@@ -1,48 +1,6 @@
 [
 {
 "date": "2026-10-22",
-"ticker": "INTC",
-"kind": "short",
-"price": 92.96,
-"conv": 55,
-"factors": {
-"discount": 34.0429,
-"histcheap": -0.52,
-"riskadj": 1.99,
-"ddpen": -18.69,
-"momentum": 5.2589,
-"prob": 19,
-"oversold": -36.4046,
-"rebound": 10.5508,
-"trend": 1.0,
-"relstrength": -5.7541
-},
-"ret_5d": -1.1,
-"ret_21d": null
-},
-{
-"date": "2026-10-22",
-"ticker": "NU",
-"kind": "short",
-"price": 15.05,
-"conv": 43,
-"factors": {
-"discount": 19.7761,
-"histcheap": -0.05,
-"riskadj": -0.13,
-"ddpen": -21.15,
-"momentum": -0.8038,
-"prob": 41,
-"oversold": -54.2866,
-"rebound": -3.5056,
-"trend": 1.0,
-"relstrength": 0.3085
-},
-"ret_5d": -19.93,
-"ret_21d": null
-},
-{
-"date": "2026-10-22",
 "ticker": "IREN",
 "kind": "short",
 "price": 27.84,
@@ -38732,6 +38690,46 @@
 "rebound": 10.8599,
 "trend": -1.0,
 "relstrength": 21.4282
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-30",
+"ticker": "ABOS",
+"kind": "long",
+"price": 0.2103,
+"conv": 67,
+"factors": {
+"discount": 93.7596,
+"histcheap": 5.03,
+"riskadj": -0.7,
+"ddpen": -24.6,
+"momentum": 89.3788,
+"prob": 100,
+"quality": null,
+"valcheap": null,
+"trappen": 0
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-30",
+"ticker": "NYSX",
+"kind": "long",
+"price": 23.92,
+"conv": 71,
+"factors": {
+"discount": 82.2867,
+"histcheap": 8.29,
+"riskadj": -0.73,
+"ddpen": -8.08,
+"momentum": 80.6379,
+"prob": 100,
+"quality": null,
+"valcheap": null,
+"trappen": null
 },
 "ret_5d": null,
 "ret_21d": null
