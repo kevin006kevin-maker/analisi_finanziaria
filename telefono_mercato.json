@@ -1,10 +1,10 @@
 {
-"aggiornato": "2026-10-30 03:00",
+"aggiornato": "2026-10-30 09:38",
 "short": [
 {
 "t": "FFIV",
 "nome": "FFIV",
-"conv": 76.0,
+"conv": 75.0,
 "prezzo": 363.46,
 "dal_max": -24.3,
 "perf": -18.1,
@@ -18,7 +18,7 @@
 {
 "t": "FTNT",
 "nome": "FTNT",
-"conv": 74.0,
+"conv": 73.0,
 "prezzo": 139.1,
 "dal_max": -28.6,
 "perf": -22.2,
@@ -46,7 +46,7 @@
 {
 "t": "GOOGL",
 "nome": "GOOGL",
-"conv": 70.0,
+"conv": 69.0,
 "prezzo": 283.82,
 "dal_max": -29.5,
 "perf": -16.1,
@@ -60,7 +60,7 @@
 {
 "t": "LSTR",
 "nome": "LSTR",
-"conv": 66.0,
+"conv": 65.0,
 "prezzo": 141.37,
 "dal_max": -37.3,
 "perf": -16.9,
@@ -88,7 +88,7 @@
 {
 "t": "CHRW",
 "nome": "CHRW",
-"conv": 60.0,
+"conv": 59.0,
 "prezzo": 127.43,
 "dal_max": -39.2,
 "perf": -16.8,
@@ -100,23 +100,9 @@
 "stato": "in osservazione"
 },
 {
-"t": "BAMI.MI",
-"nome": "BAMI.MI",
-"conv": 58.0,
-"prezzo": 13.8,
-"dal_max": -19.7,
-"perf": -13.3,
-"salita": 50.0,
-"perdita": 2.0,
-"affid": "🟢 Alta",
-"settore": "",
-"perche": "RSI 40 (zona bassa) · sceso 20% dai massimi dell'anno · ✅ inversione confermata (giorno verde + RSI in risalita / rientro in Bollinger) · rapporto rischio/rendimento ~1.9 · ⚠️ trend di fondo debole (più rischioso)",
-"stato": "seguita"
-},
-{
 "t": "LPLA",
 "nome": "LPLA",
-"conv": 58.0,
+"conv": 57.0,
 "prezzo": 279.54,
 "dal_max": -28.9,
 "perf": -10.4,
@@ -128,23 +114,9 @@
 "stato": "in osservazione"
 },
 {
-"t": "UCG.MI",
-"nome": "UCG.MI",
-"conv": 55.0,
-"prezzo": 74.56,
-"dal_max": -13.5,
-"perf": -10.1,
-"salita": 50.0,
-"perdita": 3.0,
-"affid": "🟢 Alta",
-"settore": "",
-"perche": "RSI 42 (zona bassa) · sceso 13% dai massimi dell'anno · ✅ inversione confermata (giorno verde + RSI in risalita / rientro in Bollinger) · rapporto rischio/rendimento ~1.5 · ⚠️ trend di fondo debole (più rischioso)",
-"stato": "seguita"
-},
-{
 "t": "NU",
 "nome": "NU",
-"conv": 54.0,
+"conv": 53.0,
 "prezzo": 12.05,
 "dal_max": -35.8,
 "perf": -9.3,
@@ -154,27 +126,13 @@
 "settore": "",
 "perche": "ipervenduto (RSI 33) · sceso 36% dai massimi dell'anno · ✅ inversione confermata (giorno verde + RSI in risalita / rientro in Bollinger) · rapporto rischio/rendimento ~1.6 · ⚠️ trend di fondo debole (più rischioso)",
 "stato": "seguita"
-},
-{
-"t": "NCLH",
-"nome": "NCLH",
-"conv": 28.0,
-"prezzo": 18.22,
-"dal_max": -27.2,
-"perf": 24.5,
-"salita": 48.0,
-"perdita": 14.0,
-"affid": "🟡 Media",
-"settore": "",
-"perche": "RSI 74 (zona bassa) · sceso 27% dai massimi dell'anno · ✅ inversione confermata (giorno verde + RSI in risalita / rientro in Bollinger) · volume 3.1× la media (ripartenza con scambi sopra la norma) · ⚠️ trend di fondo d…",
-"stato": ""
 }
 ],
 "long": [
 {
 "t": "SAN",
 "nome": "Banco Santander SA",
-"conv": 73.0,
+"conv": 72.0,
 "prezzo": 11.75,
 "dal_max": -21.9,
 "perf": 14.7,
@@ -184,20 +142,6 @@
 "settore": "Banking",
 "perche": "qualità del business 69/100 · ✅ conti che tengono · ROIC 5% · in saldo: 22% sotto il massimo dell'anno · ricavi 3 anni +8%/anno",
 "stato": "in osservazione"
-},
-{
-"t": "KGC",
-"nome": "Kinross Gold Corporation",
-"conv": 72.0,
-"prezzo": 21.6,
-"dal_max": -43.3,
-"perf": -9.4,
-"salita": 68.0,
-"perdita": 21.0,
-"affid": "🟡 Media",
-"settore": "Basic Materials",
-"perche": "qualità del business 95/100 · ✅ conti che tengono · in saldo: 43% sotto il massimo dell'anno · ultimo anno -9%",
-"stato": "seguita"
 },
 {
 "t": "PBR",
@@ -214,9 +158,23 @@
 "stato": "seguita"
 },
 {
+"t": "KGC",
+"nome": "Kinross Gold Corporation",
+"conv": 71.0,
+"prezzo": 21.6,
+"dal_max": -43.3,
+"perf": -9.4,
+"salita": 68.0,
+"perdita": 21.0,
+"affid": "🟡 Media",
+"settore": "Basic Materials",
+"perche": "qualità del business 95/100 · ✅ conti che tengono · in saldo: 43% sotto il massimo dell'anno · ultimo anno -9%",
+"stato": "seguita"
+},
+{
 "t": "PBR-A",
 "nome": "Petroleo Brasileiro SA Petrobras",
-"conv": 70.0,
+"conv": 69.0,
 "prezzo": 19.42,
 "dal_max": -17.5,
 "perf": 75.4,
@@ -230,7 +188,7 @@
 {
 "t": "TAL",
 "nome": "TAL Education Group",
-"conv": 66.0,
+"conv": 64.0,
 "prezzo": 10.14,
 "dal_max": -21.5,
 "perf": -21.5,
@@ -239,20 +197,6 @@
 "affid": "🟡 Media",
 "settore": "nan",
 "perche": "qualità del business 100/100 · ⚠️ trend incerto · in saldo: 21% sotto il massimo dell'anno · ultimo anno -21%",
-"stato": "in osservazione"
-},
-{
-"t": "ACAD",
-"nome": "ACADIA PHARMACEUTICALS INC.",
-"conv": 64.0,
-"prezzo": 20.76,
-"dal_max": -32.1,
-"perf": -8.7,
-"salita": 65.0,
-"perdita": 23.0,
-"affid": "🟡 Media",
-"settore": "nan",
-"perche": "qualità del business 86/100 · ✅ conti che tengono · in saldo: 32% sotto il massimo dell'anno · ultimo anno -9%",
 "stato": "in osservazione"
 },
 {
@@ -270,9 +214,23 @@
 "stato": "seguita"
 },
 {
+"t": "ACAD",
+"nome": "ACADIA PHARMACEUTICALS INC.",
+"conv": 63.0,
+"prezzo": 20.76,
+"dal_max": -32.1,
+"perf": -8.7,
+"salita": 65.0,
+"perdita": 23.0,
+"affid": "🟡 Media",
+"settore": "nan",
+"perche": "qualità del business 86/100 · ✅ conti che tengono · in saldo: 32% sotto il massimo dell'anno · ultimo anno -9%",
+"stato": "in osservazione"
+},
+{
 "t": "HMY",
 "nome": "Harmony Gold Mining Company Lim",
-"conv": 63.0,
+"conv": 62.0,
 "prezzo": 15.73,
 "dal_max": -39.6,
 "perf": -5.5,
@@ -286,7 +244,7 @@
 {
 "t": "T",
 "nome": "AT&T INC.",
-"conv": 63.0,
+"conv": 61.0,
 "prezzo": 20.92,
 "dal_max": -28.1,
 "perf": -15.2,
@@ -300,7 +258,7 @@
 {
 "t": "CDE",
 "nome": "Coeur Mining, Inc.",
-"conv": 61.0,
+"conv": 60.0,
 "prezzo": 14.04,
 "dal_max": -48.3,
 "perf": -20.7,
@@ -342,7 +300,7 @@
 {
 "t": "BCE",
 "nome": "BCE, Inc.",
-"conv": 55.0,
+"conv": 54.0,
 "prezzo": 20.06,
 "dal_max": -24.2,
 "perf": -13.2,
@@ -356,7 +314,7 @@
 {
 "t": "NU",
 "nome": "Nu Holdings Ltd.",
-"conv": 54.0,
+"conv": 53.0,
 "prezzo": 12.05,
 "dal_max": -35.8,
 "perf": -25.0,
@@ -370,7 +328,7 @@
 {
 "t": "HL",
 "nome": "Hecla Mining Co",
-"conv": 51.0,
+"conv": 50.0,
 "prezzo": 14.45,
 "dal_max": -54.6,
 "perf": 12.0,
@@ -384,7 +342,7 @@
 {
 "t": "ONON",
 "nome": "On Holding AG",
-"conv": 50.0,
+"conv": 49.0,
 "prezzo": 32.8,
 "dal_max": -35.2,
 "perf": -11.9,
@@ -399,28 +357,14 @@
 "t": "STMMI.MI",
 "nome": "STMICROELECTRONICS",
 "conv": 47.0,
-"prezzo": 43.385,
-"dal_max": -37.4,
-"perf": 101.9,
-"salita": 61.0,
-"perdita": 29.0,
+"prezzo": 42.455,
+"dal_max": -38.8,
+"perf": 98.5,
+"salita": 63.0,
+"perdita": 28.0,
 "affid": "🟡 Media",
 "settore": "Technology",
-"perche": "qualità nella media 58/100 · ✅ conti che tengono · in saldo: 37% sotto il massimo dell'anno · ultimo anno +102%",
-"stato": "in osservazione"
-},
-{
-"t": "LDO.MI",
-"nome": "LEONARDO",
-"conv": 46.0,
-"prezzo": 49.855,
-"dal_max": -22.4,
-"perf": -2.4,
-"salita": 69.0,
-"perdita": 19.0,
-"affid": "🟡 Media",
-"settore": "Industrials",
-"perche": "qualità nella media 53/100 · ✅ conti che tengono · in saldo: 22% sotto il massimo dell'anno · ultimo anno -2%",
+"perche": "qualità nella media 58/100 · ✅ conti che tengono · in saldo: 39% sotto il massimo dell'anno · ultimo anno +99%",
 "stato": "in osservazione"
 },
 {
@@ -438,9 +382,23 @@
 "stato": "in osservazione"
 },
 {
+"t": "LDO.MI",
+"nome": "LEONARDO",
+"conv": 43.0,
+"prezzo": 51.05,
+"dal_max": -20.6,
+"perf": 1.0,
+"salita": 63.0,
+"perdita": 22.0,
+"affid": "🟡 Media",
+"settore": "Industrials",
+"perche": "qualità nella media 53/100 · ✅ conti che tengono · in saldo: 21% sotto il massimo dell'anno · ultimo anno +1%",
+"stato": "in osservazione"
+},
+{
 "t": "VG",
 "nome": "Venture Global, Inc.",
-"conv": 43.0,
+"conv": 42.0,
 "prezzo": 14.77,
 "dal_max": -15.7,
 "perf": 72.1,
