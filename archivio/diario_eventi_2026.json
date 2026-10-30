@@ -25416,5 +25416,69 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:TDOC:2026-09-15",
+"ticker": "TDOC",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-15 03:24",
+"data": "2026-09-15 03:24",
+"prezzo": 6.16,
+"conv": 67,
+"prob_gain": 57,
+"prob_loss": 17,
+"reliab": "🔴 Bassa",
+"mkt": -2.1293,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 7.5722,
+"media20": 6.368,
+"quattro_atr": 7.2863,
+"meta_caduta": 7.94,
+"bollinger": 6.7402,
+"consigliata": 7.2863
+},
+"stop": 5.5968,
+"atr": 0.2816,
+"res": {
+"7g": 1.54,
+"30g": -4.3,
+"soglia": -4.3
+},
+"res_soglia": {
+"media50": {
+"ret": -4.3,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": 3.38,
+"toccato": true,
+"giorni": 1
+},
+"quattro_atr": {
+"ret": -4.3,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -4.3,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -4.3,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -4.3,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
