@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:NAVN:2026-09-10",
-"ticker": "NAVN",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-15 00:50",
-"data": "2026-09-15 00:47",
-"prezzo": 21.37,
-"conv": 61,
-"prob_gain": 57,
-"prob_loss": 20,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-15",
-"soglie": {
-"media50": 26.9211,
-"media20": 27.291,
-"quattro_atr": 27.8929,
-"meta_caduta": 25.975,
-"bollinger": 33.2554,
-"consigliata": 26.9211
-},
-"stop": 18.1085,
-"atr": 1.6307,
-"res": {
-"7g": -1.87,
-"30g": 18.3,
-"soglia": 18.3
-},
-"res_soglia": {
-"media50": {
-"ret": 18.3,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 18.3,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 18.3,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 18.3,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 18.3,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 18.3,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:AEO:2026-09-10",
 "ticker": "AEO",
 "kind": "short",
@@ -34473,5 +34409,25 @@
 },
 "stop": 67.9792,
 "atr": 2.3954
+},
+{
+"episodio": "long:KGC:2026-08-16",
+"ticker": "KGC",
+"kind": "long",
+"evento": "uscita",
+"scritto_il": "2026-10-30 16:23",
+"data": "2026-10-30 16:23",
+"prezzo": 19.895,
+"conv": 81,
+"prob_gain": 77,
+"prob_loss": 14,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
