@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:NAVN:2026-09-10",
-"ticker": "NAVN",
-"kind": "short",
-"evento": "promozione",
-"scritto_il": "2026-09-15 00:47",
-"data": "2026-09-15 00:47",
-"prezzo": 21.37,
-"conv": 61,
-"prob_gain": 57,
-"prob_loss": 20,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": 26.9211,
-"media20": 27.291,
-"quattro_atr": 27.8929,
-"meta_caduta": 25.975,
-"bollinger": 33.2554,
-"consigliata": 26.9211
-},
-"stop": 18.1085,
-"atr": 1.6307,
-"res": {
-"7g": -1.87,
-"30g": 18.3,
-"soglia": 18.3
-},
-"res_soglia": {
-"media50": {
-"ret": 18.3,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 18.3,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 18.3,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 18.3,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 18.3,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 18.3,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:PSN:2026-09-15",
 "ticker": "PSN",
 "kind": "short",
@@ -34548,5 +34484,25 @@
 },
 "stop": 261.3856,
 "atr": 10.4672
+},
+{
+"episodio": "long:DUOL:2026-08-16",
+"ticker": "DUOL",
+"kind": "long",
+"evento": "uscita",
+"scritto_il": "2026-10-30 02:57",
+"data": "2026-10-30 02:57",
+"prezzo": 136.39,
+"conv": 66,
+"prob_gain": 74,
+"prob_loss": 17,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "in perdita da 47 giorni di Borsa: valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
