@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:IAG:2026-08-20",
-"ticker": "IAG",
-"kind": "long",
-"evento": "fine_verifica",
-"scritto_il": "2026-09-15 00:50",
-"data": "2026-09-15 00:49",
-"prezzo": 19.79,
-"conv": 63,
-"prob_gain": 65,
-"prob_loss": 25,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 10 giorni di Borsa dalla promozione",
-"dovuto_il": "2026-09-15",
-"soglie": {
-"media50": null,
-"media20": 20.4195,
-"quattro_atr": 23.2684,
-"meta_caduta": 20.98,
-"bollinger": 22.345,
-"consigliata": 23.2684
-},
-"stop": 18.0508,
-"atr": 0.8696,
-"res": {
-"7g": 3.39,
-"30g": -11.09
-}
-},
-{
 "episodio": "short:BAND:2026-09-10",
 "ticker": "BAND",
 "kind": "short",
@@ -34588,5 +34557,32 @@
 "stop": 160.3881,
 "atr": 6.1309,
 "res": {}
+},
+{
+"episodio": "short:TFII:2026-10-30",
+"ticker": "TFII",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-10-30 16:19",
+"data": "2026-10-30 16:19",
+"prezzo": 94.34,
+"conv": 65,
+"prob_gain": 55,
+"prob_loss": 6,
+"reliab": "🟡 Media",
+"mkt": -1.4459,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 122.3092,
+"media20": 112.288,
+"quattro_atr": 112.1878,
+"meta_caduta": 120.74,
+"bollinger": 121.0584,
+"consigliata": 112.1878
+},
+"stop": 85.4161,
+"atr": 4.4619
 }
 ]
