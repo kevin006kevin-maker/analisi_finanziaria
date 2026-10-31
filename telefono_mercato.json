@@ -1,5 +1,5 @@
 {
-"aggiornato": "2026-10-31 12:19",
+"aggiornato": "2026-10-31 17:26",
 "short": [
 {
 "t": "FTNT",
@@ -58,20 +58,6 @@
 "stato": "in osservazione"
 },
 {
-"t": "CACC",
-"nome": "CACC",
-"conv": 64.0,
-"prezzo": 464.89,
-"dal_max": -29.3,
-"perf": -11.9,
-"salita": 59.0,
-"perdita": 2.0,
-"affid": "🟡 Media",
-"settore": "",
-"perche": "ipervenduto (RSI 32) · sceso 29% dai massimi dell'anno · prezzo a un estremo (sotto la banda di Bollinger) · ⏳ ancora in calo: nessuna conferma di rimbalzo · rapporto rischio/rendimento ~2.0 · ⚠️ trend di fondo debole (…",
-"stato": "in osservazione"
-},
-{
 "t": "AIT",
 "nome": "AIT",
 "conv": 64.0,
@@ -83,6 +69,20 @@
 "affid": "🟢 Alta",
 "settore": "",
 "perche": "ipervenduto (RSI 32) · sceso 19% dai massimi dell'anno · prezzo a un estremo (sotto la banda di Bollinger) · ⏳ ancora in calo: nessuna conferma di rimbalzo · rapporto rischio/rendimento ~1.6 · ⚠️ trend di fondo debole (…",
+"stato": "in osservazione"
+},
+{
+"t": "CACC",
+"nome": "CACC",
+"conv": 64.0,
+"prezzo": 464.89,
+"dal_max": -29.3,
+"perf": -11.9,
+"salita": 59.0,
+"perdita": 2.0,
+"affid": "🟡 Media",
+"settore": "",
+"perche": "ipervenduto (RSI 32) · sceso 29% dai massimi dell'anno · prezzo a un estremo (sotto la banda di Bollinger) · ⏳ ancora in calo: nessuna conferma di rimbalzo · rapporto rischio/rendimento ~2.0 · ⚠️ trend di fondo debole (…",
 "stato": "in osservazione"
 },
 {
@@ -116,7 +116,7 @@
 {
 "t": "CHRW",
 "nome": "CHRW",
-"conv": 55.0,
+"conv": 56.0,
 "prezzo": 124.61,
 "dal_max": -40.5,
 "perf": -21.0,
@@ -158,7 +158,7 @@
 {
 "t": "RIVN",
 "nome": "RIVN",
-"conv": 36.0,
+"conv": 37.0,
 "prezzo": 12.16,
 "dal_max": -45.8,
 "perf": -15.0,
@@ -182,6 +182,20 @@
 "settore": "",
 "perche": "RSI 72 (zona bassa) · sceso 29% dai massimi dell'anno · ✅ inversione confermata (giorno verde + RSI in risalita / rientro in Bollinger) · volume 2.6× la media (ripartenza con scambi sopra la norma) · trend di fondo anco…",
 "stato": ""
+},
+{
+"t": "CPRI",
+"nome": "CPRI",
+"conv": 18.0,
+"prezzo": 18.68,
+"dal_max": -32.5,
+"perf": 29.4,
+"salita": 48.0,
+"perdita": 12.0,
+"affid": "🟡 Media",
+"settore": "",
+"perche": "RSI 73 (zona bassa) · sceso 32% dai massimi dell'anno · ✅ inversione confermata (giorno verde + RSI in risalita / rientro in Bollinger) · volume 2.9× la media (ripartenza con scambi sopra la norma) · trend di fondo anco…",
+"stato": ""
 }
 ],
 "long": [
@@ -202,7 +216,7 @@
 {
 "t": "KGC",
 "nome": "Kinross Gold Corp",
-"conv": 70.0,
+"conv": 71.0,
 "prezzo": 20.13,
 "dal_max": -47.1,
 "perf": -13.4,
@@ -270,6 +284,20 @@
 "stato": "seguita"
 },
 {
+"t": "ENVA",
+"nome": "Enova International, Inc.",
+"conv": 62.0,
+"prezzo": 174.09,
+"dal_max": -34.4,
+"perf": 45.6,
+"salita": 66.0,
+"perdita": 25.0,
+"affid": "🟡 Media",
+"settore": "Financial Services",
+"perche": "qualità del business 78/100 · ✅ conti che tengono · ROIC 6% · in saldo: 34% sotto il massimo dell'anno · ricavi 3 anni +18%/anno",
+"stato": "in osservazione"
+},
+{
 "t": "GFI",
 "nome": "Gold Fields Ltd",
 "conv": 61.0,
@@ -281,20 +309,6 @@
 "affid": "🔴 Bassa",
 "settore": "Metals & Mining",
 "perche": "qualità del business 90/100 · ✅ conti che tengono · ROIC 35% · in saldo: 46% sotto il massimo dell'anno · ricavi 3 anni +27%/anno",
-"stato": "in osservazione"
-},
-{
-"t": "ENVA",
-"nome": "Enova International, Inc.",
-"conv": 61.0,
-"prezzo": 174.09,
-"dal_max": -34.4,
-"perf": 45.6,
-"salita": 66.0,
-"perdita": 25.0,
-"affid": "🟡 Media",
-"settore": "Financial Services",
-"perche": "qualità del business 78/100 · ✅ conti che tengono · ROIC 6% · in saldo: 34% sotto il massimo dell'anno · ricavi 3 anni +18%/anno",
 "stato": "in osservazione"
 },
 {
@@ -314,7 +328,7 @@
 {
 "t": "ACAD",
 "nome": "Acadia Pharmaceuticals Inc.",
-"conv": 59.0,
+"conv": 60.0,
 "prezzo": 20.59,
 "dal_max": -32.6,
 "perf": -9.3,
@@ -424,20 +438,6 @@
 "stato": "seguita"
 },
 {
-"t": "CACC",
-"nome": "Credit Acceptance Corp",
-"conv": 51.0,
-"prezzo": 464.89,
-"dal_max": -29.3,
-"perf": 3.9,
-"salita": 76.0,
-"perdita": 12.0,
-"affid": "🟡 Media",
-"settore": "Financial Services",
-"perche": "qualità nella media 60/100 · ⚠️ trend incerto · ROIC 6% · in saldo: 29% sotto il massimo dell'anno · ricavi 3 anni +8%/anno",
-"stato": ""
-},
-{
 "t": "EIX",
 "nome": "EDISON INTERNATIONAL",
 "conv": 51.0,
@@ -452,9 +452,23 @@
 "stato": "in osservazione"
 },
 {
+"t": "CACC",
+"nome": "Credit Acceptance Corp",
+"conv": 51.0,
+"prezzo": 464.89,
+"dal_max": -29.3,
+"perf": 3.9,
+"salita": 76.0,
+"perdita": 12.0,
+"affid": "🟡 Media",
+"settore": "Financial Services",
+"perche": "qualità nella media 60/100 · ⚠️ trend incerto · ROIC 6% · in saldo: 29% sotto il massimo dell'anno · ricavi 3 anni +8%/anno",
+"stato": ""
+},
+{
 "t": "T",
 "nome": "AT&T INC.",
-"conv": 50.0,
+"conv": 51.0,
 "prezzo": 21.41,
 "dal_max": -26.4,
 "perf": -13.5,
@@ -468,7 +482,7 @@
 {
 "t": "DAVE",
 "nome": "Dave Inc.",
-"conv": 50.0,
+"conv": 51.0,
 "prezzo": 316.79,
 "dal_max": -28.4,
 "perf": 32.4,
@@ -482,7 +496,7 @@
 {
 "t": "STMMI.MI",
 "nome": "STMICROELECTRONICS",
-"conv": 48.0,
+"conv": 49.0,
 "prezzo": 41.865,
 "dal_max": -39.6,
 "perf": 95.8,
@@ -508,6 +522,20 @@
 "stato": "in osservazione"
 },
 {
+"t": "ONON",
+"nome": "On Holding AG",
+"conv": 46.0,
+"prezzo": 33.78,
+"dal_max": -33.3,
+"perf": -9.1,
+"salita": 66.0,
+"perdita": 23.0,
+"affid": "🟡 Media",
+"settore": "Textiles, Apparel & Luxury Goods",
+"perche": "qualità del business 75/100 · ✅ conti che tengono · ROIC 18% · in saldo: 33% sotto il massimo dell'anno · ricavi 3 anni +35%/anno",
+"stato": "in osservazione"
+},
+{
 "t": "VG",
 "nome": "Venture Global, Inc.",
 "conv": 42.0,
@@ -524,7 +552,7 @@
 {
 "t": "PATH",
 "nome": "UiPath Inc",
-"conv": 40.0,
+"conv": 41.0,
 "prezzo": 13.73,
 "dal_max": -28.8,
 "perf": -13.4,
@@ -533,20 +561,6 @@
 "affid": "🔴 Bassa",
 "settore": "Technology",
 "perche": "qualità del business 72/100 · ✅ conti che tengono · ROIC 18% · in saldo: 29% sotto il massimo dell'anno · ricavi 3 anni +15%/anno",
-"stato": "in osservazione"
-},
-{
-"t": "ONON",
-"nome": "On Holding AG",
-"conv": 40.0,
-"prezzo": 33.78,
-"dal_max": -33.3,
-"perf": -9.1,
-"salita": 65.0,
-"perdita": 24.0,
-"affid": "🟡 Media",
-"settore": "Consumer Cyclical",
-"perche": "qualità del business 76/100 · ✅ conti che tengono · in saldo: 33% sotto il massimo dell'anno · ultimo anno -9%",
 "stato": "in osservazione"
 },
 {
@@ -580,7 +594,7 @@
 {
 "t": "NCLH",
 "nome": "Norwegian Cruise Line Holdings Ltd",
-"conv": 33.0,
+"conv": 34.0,
 "prezzo": 17.57,
 "dal_max": -29.8,
 "perf": -21.6,
