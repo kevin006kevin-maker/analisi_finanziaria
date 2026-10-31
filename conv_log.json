@@ -1,48 +1,6 @@
 [
 {
 "date": "2026-10-22",
-"ticker": "RIG",
-"kind": "short",
-"price": 6.0495,
-"conv": 41,
-"factors": {
-"discount": 20.1913,
-"histcheap": -0.66,
-"riskadj": 1.71,
-"ddpen": -18.01,
-"momentum": -9.7913,
-"prob": 39,
-"oversold": -64.8108,
-"rebound": -6.4288,
-"trend": 1.0,
-"relstrength": 11.0148
-},
-"ret_5d": 10.11,
-"ret_21d": null
-},
-{
-"date": "2026-10-22",
-"ticker": "SES",
-"kind": "short",
-"price": 0.6836,
-"conv": 31,
-"factors": {
-"discount": 73.4008,
-"histcheap": 0.97,
-"riskadj": -1.66,
-"ddpen": -55.46,
-"momentum": 22.6697,
-"prob": 19,
-"oversold": -48.6483,
-"rebound": -8.9011,
-"trend": -1.0,
-"relstrength": -21.4462
-},
-"ret_5d": 32.65,
-"ret_21d": null
-},
-{
-"date": "2026-10-22",
 "ticker": "LCID",
 "kind": "short",
 "price": 3.4477,
@@ -39209,6 +39167,46 @@
 "rebound": -20.4291,
 "trend": 1.0,
 "relstrength": 20.9221
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-31",
+"ticker": "NCLH",
+"kind": "long",
+"price": 17.57,
+"conv": 34,
+"factors": {
+"discount": 29.7762,
+"histcheap": 0.56,
+"riskadj": -0.75,
+"ddpen": -25.09,
+"momentum": -16.3576,
+"prob": 55,
+"quality": 46.0,
+"valcheap": 0.0527,
+"trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-31",
+"ticker": "CACC",
+"kind": "long",
+"price": 464.89,
+"conv": 51,
+"factors": {
+"discount": 29.262,
+"histcheap": 0.9,
+"riskadj": 0.02,
+"ddpen": -9.14,
+"momentum": 14.7053,
+"prob": 64,
+"quality": 59.6,
+"valcheap": -0.1708,
+"trappen": 0
 },
 "ret_5d": null,
 "ret_21d": null
