@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-10-22",
-"ticker": "TSLA",
-"kind": "short",
-"price": 378.07,
-"conv": 37,
-"factors": {
-"discount": 22.824,
-"histcheap": 0.52,
-"riskadj": -0.56,
-"ddpen": -20.03,
-"momentum": -4.3124,
-"prob": 42,
-"oversold": -54.6739,
-"rebound": -3.935,
-"trend": -1.0,
-"relstrength": 5.536
-},
-"ret_5d": 6.98,
-"ret_21d": null
-},
-{
-"date": "2026-10-22",
 "ticker": "RIG",
 "kind": "short",
 "price": 6.0495,
@@ -39209,6 +39188,27 @@
 "quality": 61.5,
 "valcheap": -0.9213,
 "trappen": 1
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-10-31",
+"ticker": "ACCO",
+"kind": "short",
+"price": 5.5,
+"conv": 28,
+"factors": {
+"discount": -0.0,
+"histcheap": -3.67,
+"riskadj": 1.64,
+"ddpen": -11.28,
+"momentum": -20.3501,
+"prob": 40,
+"oversold": -77.7051,
+"rebound": -20.4291,
+"trend": 1.0,
+"relstrength": 20.9221
 },
 "ret_5d": null,
 "ret_21d": null
