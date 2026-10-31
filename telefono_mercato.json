@@ -1,10 +1,10 @@
 {
-"aggiornato": "2026-10-31 06:36",
+"aggiornato": "2026-10-31 12:19",
 "short": [
 {
 "t": "FTNT",
 "nome": "FTNT",
-"conv": 72.0,
+"conv": 73.0,
 "prezzo": 136.08,
 "dal_max": -30.1,
 "perf": -24.8,
@@ -158,7 +158,7 @@
 {
 "t": "RIVN",
 "nome": "RIVN",
-"conv": 37.0,
+"conv": 36.0,
 "prezzo": 12.16,
 "dal_max": -45.8,
 "perf": -15.0,
@@ -314,7 +314,7 @@
 {
 "t": "ACAD",
 "nome": "Acadia Pharmaceuticals Inc.",
-"conv": 60.0,
+"conv": 59.0,
 "prezzo": 20.59,
 "dal_max": -32.6,
 "perf": -9.3,
@@ -354,18 +354,18 @@
 "stato": "in osservazione"
 },
 {
-"t": "NEM",
-"nome": "NEWMONT CORPORATION",
+"t": "CDE",
+"nome": "Coeur Mining, Inc.",
 "conv": 56.0,
-"prezzo": 106.61,
-"dal_max": -21.1,
-"perf": 31.7,
-"salita": 71.0,
-"perdita": 19.0,
-"affid": "🟡 Media",
-"settore": "nan",
-"perche": "qualità del business 86/100 · ✅ conti che tengono · in saldo: 21% sotto il massimo dell'anno · ultimo anno +32%",
-"stato": "seguita"
+"prezzo": 13.1,
+"dal_max": -51.7,
+"perf": -23.7,
+"salita": 76.0,
+"perdita": 17.0,
+"affid": "🔴 Bassa",
+"settore": "Metals & Mining",
+"perche": "qualità del business 84/100 · ✅ conti che tengono · ROIC 12% · in saldo: 52% sotto il massimo dell'anno · ricavi 3 anni +38%/anno",
+"stato": "in osservazione"
 },
 {
 "t": "AA",
@@ -379,20 +379,6 @@
 "affid": "🟡 Media",
 "settore": "Metals & Mining",
 "perche": "qualità del business 64/100 · ✅ conti che tengono · ROIC 15% · in saldo: 53% sotto il massimo dell'anno · ricavi 3 anni +1%/anno",
-"stato": "in osservazione"
-},
-{
-"t": "CDE",
-"nome": "Coeur Mining, Inc.",
-"conv": 56.0,
-"prezzo": 13.1,
-"dal_max": -51.7,
-"perf": -23.7,
-"salita": 76.0,
-"perdita": 17.0,
-"affid": "🔴 Bassa",
-"settore": "Metals & Mining",
-"perche": "qualità del business 84/100 · ✅ conti che tengono · ROIC 12% · in saldo: 52% sotto il massimo dell'anno · ricavi 3 anni +38%/anno",
 "stato": "in osservazione"
 },
 {
@@ -410,6 +396,20 @@
 "stato": "in osservazione"
 },
 {
+"t": "NEM",
+"nome": "NEWMONT CORPORATION",
+"conv": 55.0,
+"prezzo": 106.61,
+"dal_max": -21.1,
+"perf": 31.7,
+"salita": 71.0,
+"perdita": 19.0,
+"affid": "🟡 Media",
+"settore": "nan",
+"perche": "qualità del business 86/100 · ✅ conti che tengono · in saldo: 21% sotto il massimo dell'anno · ultimo anno +32%",
+"stato": "seguita"
+},
+{
 "t": "NESR",
 "nome": "National Energy Services Reunited ",
 "conv": 52.0,
@@ -422,20 +422,6 @@
 "settore": "Energy",
 "perche": "qualità nella media 50/100 · ✅ conti che tengono · ROIC 7% · in saldo: 41% sotto il massimo dell'anno · ricavi 3 anni +13%/anno",
 "stato": "seguita"
-},
-{
-"t": "EIX",
-"nome": "EDISON INTERNATIONAL",
-"conv": 51.0,
-"prezzo": 58.79,
-"dal_max": -26.9,
-"perf": 6.2,
-"salita": 70.0,
-"perdita": 18.0,
-"affid": "🟡 Media",
-"settore": "nan",
-"perche": "qualità nella media 59/100 · ✅ conti che tengono · in saldo: 27% sotto il massimo dell'anno · ultimo anno +6%",
-"stato": "in osservazione"
 },
 {
 "t": "CACC",
@@ -452,9 +438,23 @@
 "stato": ""
 },
 {
+"t": "EIX",
+"nome": "EDISON INTERNATIONAL",
+"conv": 51.0,
+"prezzo": 58.79,
+"dal_max": -26.9,
+"perf": 6.2,
+"salita": 70.0,
+"perdita": 18.0,
+"affid": "🟡 Media",
+"settore": "nan",
+"perche": "qualità nella media 59/100 · ✅ conti che tengono · in saldo: 27% sotto il massimo dell'anno · ultimo anno +6%",
+"stato": "in osservazione"
+},
+{
 "t": "T",
 "nome": "AT&T INC.",
-"conv": 51.0,
+"conv": 50.0,
 "prezzo": 21.41,
 "dal_max": -26.4,
 "perf": -13.5,
@@ -480,6 +480,20 @@
 "stato": "in osservazione"
 },
 {
+"t": "STMMI.MI",
+"nome": "STMICROELECTRONICS",
+"conv": 48.0,
+"prezzo": 41.865,
+"dal_max": -39.6,
+"perf": 95.8,
+"salita": 64.0,
+"perdita": 26.0,
+"affid": "🟡 Media",
+"settore": "Technology",
+"perche": "qualità nella media 60/100 · ✅ conti che tengono · in saldo: 40% sotto il massimo dell'anno · ultimo anno +96%",
+"stato": "in osservazione"
+},
+{
 "t": "NU",
 "nome": "Nu Holdings Ltd.",
 "conv": 47.0,
@@ -491,20 +505,6 @@
 "affid": "🟡 Media",
 "settore": "Banking",
 "perche": "qualità del business 63/100 · ✅ conti che tengono · ROIC 6% · in saldo: 38% sotto il massimo dell'anno · ricavi 3 anni +49%/anno",
-"stato": "in osservazione"
-},
-{
-"t": "STMMI.MI",
-"nome": "STMICROELECTRONICS",
-"conv": 47.0,
-"prezzo": 44.195,
-"dal_max": -36.3,
-"perf": 106.7,
-"salita": 59.0,
-"perdita": 30.0,
-"affid": "🟡 Media",
-"settore": "Technology",
-"perche": "qualità nella media 59/100 · ✅ conti che tengono · in saldo: 36% sotto il massimo dell'anno · ultimo anno +107%",
 "stato": "in osservazione"
 },
 {
@@ -524,7 +524,7 @@
 {
 "t": "PATH",
 "nome": "UiPath Inc",
-"conv": 41.0,
+"conv": 40.0,
 "prezzo": 13.73,
 "dal_max": -28.8,
 "perf": -13.4,
@@ -538,7 +538,7 @@
 {
 "t": "ONON",
 "nome": "On Holding AG",
-"conv": 41.0,
+"conv": 40.0,
 "prezzo": 33.78,
 "dal_max": -33.3,
 "perf": -9.1,
@@ -567,20 +567,20 @@
 "t": "LDO.MI",
 "nome": "LEONARDO",
 "conv": 36.0,
-"prezzo": 51.81,
-"dal_max": -19.4,
-"perf": 2.6,
+"prezzo": 51.76,
+"dal_max": -19.5,
+"perf": 2.5,
 "salita": 64.0,
-"perdita": 21.0,
+"perdita": 22.0,
 "affid": "🟡 Media",
 "settore": "Industrials",
-"perche": "qualità nella media 53/100 · ✅ conti che tengono · in saldo: 19% sotto il massimo dell'anno · ultimo anno +3%",
+"perche": "qualità nella media 53/100 · ✅ conti che tengono · in saldo: 19% sotto il massimo dell'anno · ultimo anno +2%",
 "stato": "in osservazione"
 },
 {
 "t": "NCLH",
 "nome": "Norwegian Cruise Line Holdings Ltd",
-"conv": 34.0,
+"conv": 33.0,
 "prezzo": 17.57,
 "dal_max": -29.8,
 "perf": -21.6,
