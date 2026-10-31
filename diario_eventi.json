@@ -1,25 +1,5 @@
 [
 {
-"episodio": "long:ASO:2026-08-25",
-"ticker": "ASO",
-"kind": "long",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-15 03:28",
-"data": "2026-09-15 03:26",
-"prezzo": 55.36,
-"conv": 50,
-"prob_gain": 39,
-"prob_loss": 44,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "prezzo salito di almeno il 2% da 43.76",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:TDOC:2026-09-15",
 "ticker": "TDOC",
 "kind": "short",
@@ -34875,5 +34855,32 @@
 },
 "stop": 74.9296,
 "atr": 3.7002
+},
+{
+"episodio": "long:FFIV:2026-10-29",
+"ticker": "FFIV",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-10-31 06:31",
+"data": "2026-10-31 06:30",
+"prezzo": 338.34,
+"conv": 66,
+"prob_gain": 96,
+"prob_loss": 1,
+"reliab": "🟡 Media",
+"mkt": -1.8472,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 428.6316,
+"media20": 445.0975,
+"quattro_atr": 423.2128,
+"meta_caduta": 409.085,
+"bollinger": 524.7677,
+"consigliata": 423.2128
+},
+"stop": 295.9036,
+"atr": 21.2182
 }
 ]
