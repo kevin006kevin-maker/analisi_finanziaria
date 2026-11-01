@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:TDOC:2026-09-15",
-"ticker": "TDOC",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-15 08:44",
-"data": "2026-09-15 08:40",
-"prezzo": 6.5,
-"conv": 44,
-"prob_gain": 55,
-"prob_loss": 17,
-"reliab": "🔴 Bassa",
-"mkt": -2.1293,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 6.16",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:ENVA:2026-09-15",
 "ticker": "ENVA",
 "kind": "short",
@@ -34882,5 +34862,32 @@
 },
 "stop": 295.9036,
 "atr": 21.2182
+},
+{
+"episodio": "short:RCUS:2026-10-21",
+"ticker": "RCUS",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-11-01 14:14",
+"data": "2026-11-01 14:14",
+"prezzo": 18.19,
+"conv": 78,
+"prob_gain": 51,
+"prob_loss": 14,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 24.9762,
+"media20": 21.504,
+"quattro_atr": 23.9675,
+"meta_caduta": 24.88,
+"bollinger": 26.7825,
+"consigliata": 23.9675
+},
+"stop": 15.3013,
+"atr": 1.4444
 }
 ]
