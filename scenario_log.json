@@ -18840,5 +18840,62 @@
 "mkt": null
 }
 }
+},
+{
+"ticker": "RCUS",
+"kind": "short",
+"date": "2026-11-01",
+"promo_price": 18.19,
+"obs_price": 20.575,
+"obs_date": "2026-10-21",
+"pre_price": 19.195,
+"pre_date": "2026-10-22",
+"conf_price": null,
+"conf_date": null,
+"target": 24.9762,
+"stop": 15.3013,
+"reliab": "🔴 Bassa",
+"prob_gain": 51,
+"prob_loss": 14,
+"conv": 78,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-21 19:07",
+"prezzo": 20.575,
+"conv": 64,
+"prob_gain": 50,
+"prob_loss": 13,
+"reliab": "🔴 Bassa",
+"mkt": 0.7298
+},
+"anticipo": {
+"data": "2026-10-22",
+"prezzo": 19.195,
+"conv": 65,
+"prob_gain": 50,
+"prob_loss": 16,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-01 14:14",
+"prezzo": 18.19,
+"conv": 78,
+"prob_gain": 51,
+"prob_loss": 14,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
