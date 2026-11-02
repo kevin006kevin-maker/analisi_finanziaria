@@ -1,25 +1,5 @@
 [
 {
-"episodio": "long:GAP:2026-08-29",
-"ticker": "GAP",
-"kind": "long",
-"evento": "uscita",
-"scritto_il": "2026-09-15 19:44",
-"data": "2026-09-15 19:44",
-"prezzo": 20.525,
-"conv": 73,
-"prob_gain": 78,
-"prob_loss": 12,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:RWT:2026-09-14",
 "ticker": "RWT",
 "kind": "short",
@@ -34671,5 +34651,32 @@
 },
 "stop": 416.0134,
 "atr": 24.4383
+},
+{
+"episodio": "short:FLG:2026-10-23",
+"ticker": "FLG",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-11-02 10:25",
+"data": "2026-11-02 10:25",
+"prezzo": 10.51,
+"conv": 84,
+"prob_gain": 47,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 12.1044,
+"media20": 10.9765,
+"quattro_atr": 11.803,
+"meta_caduta": 12.39,
+"bollinger": 11.932,
+"consigliata": 11.803
+},
+"stop": 9.8635,
+"atr": 0.3232
 }
 ]
