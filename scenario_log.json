@@ -19132,5 +19132,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "EEFT",
+"kind": "short",
+"date": "2026-11-02",
+"promo_price": 65.74,
+"obs_price": 59.01,
+"obs_date": "2026-10-28",
+"pre_price": 59.01,
+"pre_date": "2026-10-29",
+"conf_price": null,
+"conf_date": null,
+"target": 66.571,
+"stop": 60.9956,
+"reliab": "🟡 Media",
+"prob_gain": 52,
+"prob_loss": 3,
+"conv": 65,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-28 07:15",
+"prezzo": 59.01,
+"conv": 65,
+"prob_gain": 56,
+"prob_loss": 2,
+"reliab": "🟡 Media",
+"mkt": 0.6748
+},
+"anticipo": {
+"data": "2026-10-29",
+"prezzo": 59.01,
+"conv": 66,
+"prob_gain": 56,
+"prob_loss": 2,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-02 20:50",
+"prezzo": 65.74,
+"conv": 65,
+"prob_gain": 52,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
