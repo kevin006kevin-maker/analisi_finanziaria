@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:AXON:2026-09-15",
-"ticker": "AXON",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-15 19:40",
-"data": "2026-09-15 19:40",
-"prezzo": 436.985,
-"conv": 64,
-"prob_gain": 54,
-"prob_loss": 18,
-"reliab": "🔴 Bassa",
-"mkt": -2.099,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 557.4551,
-"media20": 553.2142,
-"quattro_atr": 557.319,
-"meta_caduta": 541.3525,
-"bollinger": 679.9879,
-"consigliata": 557.319
-},
-"stop": 376.818,
-"atr": 30.0835,
-"res": {
-"7g": 4.72,
-"30g": -6.11,
-"soglia": -6.11
-},
-"res_soglia": {
-"media50": {
-"ret": -6.11,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -6.11,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -6.11,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -6.11,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -6.11,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -6.11,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:XLU:2026-09-15",
 "ticker": "XLU",
 "kind": "short",
@@ -34764,5 +34700,32 @@
 },
 "stop": 9.0306,
 "atr": 0.4197
+},
+{
+"episodio": "short:AIT:2026-10-28",
+"ticker": "AIT",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-11-02 02:54",
+"data": "2026-11-02 02:47",
+"prezzo": 294.12,
+"conv": 64,
+"prob_gain": 57,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": -1.8472,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-11-02",
+"soglie": {
+"media50": 327.3374,
+"media20": 325.8325,
+"quattro_atr": 334.9836,
+"meta_caduta": 328.035,
+"bollinger": 357.2914,
+"consigliata": 327.3374
+},
+"stop": 273.6882,
+"atr": 10.2159
 }
 ]
