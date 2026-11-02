@@ -3685,7 +3685,7 @@
 "urgenza": "incassa",
 "tipo": "bersaglio"
 },
-"exit_notified": true
+"exit_notified": false
 },
 "WING": {
 "kind": "short",
@@ -4652,7 +4652,8 @@
 "motivo": "bersaglio 50.12 raggiunto (sei a +26.3%): valuta di incassare",
 "urgenza": "incassa",
 "tipo": "bersaglio"
-}
+},
+"exit_notified": true
 },
 "SAH": {
 "kind": "short",
