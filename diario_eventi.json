@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:ENVA:2026-09-15",
-"ticker": "ENVA",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-15 19:40",
-"data": "2026-09-15 19:40",
-"prezzo": 172.9031,
-"conv": 83,
-"prob_gain": 54,
-"prob_loss": 8,
-"reliab": "🟡 Media",
-"mkt": -2.099,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 239.4125,
-"media20": 231.4437,
-"quattro_atr": 216.7749,
-"meta_caduta": 219.1766,
-"bollinger": 266.7419,
-"consigliata": 216.7749
-},
-"stop": 150.9672,
-"atr": 10.9679,
-"res": {
-"7g": -2.19,
-"30g": 2.69,
-"soglia": 2.69
-},
-"res_soglia": {
-"media50": {
-"ret": 2.69,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 2.69,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 2.69,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 2.69,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 2.69,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 2.69,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:IONS:2026-09-15",
 "ticker": "IONS",
 "kind": "short",
@@ -34889,5 +34825,25 @@
 },
 "stop": 15.3013,
 "atr": 1.4444
+},
+{
+"episodio": "short:SEDG:2026-08-19",
+"ticker": "SEDG",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-11-02 02:52",
+"data": "2026-11-02 02:52",
+"prezzo": 30.05,
+"conv": 65,
+"prob_gain": 49,
+"prob_loss": 25,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "in perdita da 47 giorni di Borsa: valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
