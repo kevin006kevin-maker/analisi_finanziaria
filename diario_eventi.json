@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:IONS:2026-09-15",
-"ticker": "IONS",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-16 01:43",
-"data": "2026-09-16 01:41",
-"prezzo": 47.25,
-"conv": 86,
-"prob_gain": 64,
-"prob_loss": 8,
-"reliab": "🟡 Media",
-"mkt": -2.0572,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 57.955,
-"media20": 58.522,
-"quattro_atr": 57.1094,
-"meta_caduta": 66.79,
-"bollinger": 66.703,
-"consigliata": 57.1094
-},
-"stop": 42.3203,
-"atr": 2.4648,
-"res": {
-"7g": -7.87,
-"30g": -7.75,
-"soglia": -7.75
-},
-"res_soglia": {
-"media50": {
-"ret": -7.75,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -7.75,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -7.75,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -7.75,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -7.75,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -7.75,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:ENVA:2026-09-15",
 "ticker": "ENVA",
 "kind": "short",
@@ -35027,6 +34963,26 @@
 "mkt": -2.7169,
 "fonte": "osservazione",
 "note": "prezzo salito di almeno il 2% da 94.34",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:CACC:2026-10-30",
+"ticker": "CACC",
+"kind": "short",
+"evento": "salita_2pct",
+"scritto_il": "2026-11-02 20:54",
+"data": "2026-11-02 20:46",
+"prezzo": 482.22,
+"conv": 61,
+"prob_gain": 53,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": -2.7169,
+"fonte": "osservazione",
+"note": "prezzo salito di almeno il 2% da 466.0001",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
