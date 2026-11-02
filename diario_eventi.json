@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:XLU:2026-09-15",
-"ticker": "XLU",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-15 19:40",
-"data": "2026-09-15 19:40",
-"prezzo": 41.475,
-"conv": 63,
-"prob_gain": 50,
-"prob_loss": 0,
-"reliab": "🟢 Alta",
-"mkt": -2.099,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 44.0641,
-"media20": 42.9347,
-"quattro_atr": 44.0714,
-"meta_caduta": 43.8825,
-"bollinger": 44.2788,
-"consigliata": 44.0641
-},
-"stop": 40.1768,
-"atr": 0.6491,
-"res": {
-"7g": -1.99,
-"30g": 0.51,
-"soglia": 0.51
-},
-"res_soglia": {
-"media50": {
-"ret": 0.51,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 0.51,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 0.51,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 0.51,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 0.51,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 0.51,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "long:ENVA:2026-09-15",
 "ticker": "ENVA",
 "kind": "long",
@@ -34727,5 +34663,32 @@
 },
 "stop": 273.6882,
 "atr": 10.2159
+},
+{
+"episodio": "short:EEFT:2026-10-28",
+"ticker": "EEFT",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-11-02 02:54",
+"data": "2026-10-31 00:44",
+"prezzo": 63.15,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-11-02",
+"soglie": {
+"media50": 66.6576,
+"media20": 63.999,
+"quattro_atr": 72.3118,
+"meta_caduta": 68.69,
+"bollinger": 67.6645,
+"consigliata": 66.6576
+},
+"stop": 58.5691,
+"atr": 2.2904
 }
 ]
