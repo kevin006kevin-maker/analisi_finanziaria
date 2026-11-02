@@ -19015,5 +19015,62 @@
 "mkt": null
 }
 }
+},
+{
+"ticker": "FLG",
+"kind": "short",
+"date": "2026-11-02",
+"promo_price": 10.51,
+"obs_price": 10.495,
+"obs_date": "2026-10-23",
+"pre_price": 10.38,
+"pre_date": "2026-10-26",
+"conf_price": null,
+"conf_date": null,
+"target": 12.1044,
+"stop": 9.8635,
+"reliab": "🟢 Alta",
+"prob_gain": 47,
+"prob_loss": 1,
+"conv": 84,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-23 17:27",
+"prezzo": 10.495,
+"conv": 70,
+"prob_gain": 53,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": -1.0892
+},
+"anticipo": {
+"data": "2026-10-26",
+"prezzo": 10.38,
+"conv": 68,
+"prob_gain": 52,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-02 10:25",
+"prezzo": 10.51,
+"conv": 84,
+"prob_gain": 47,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
