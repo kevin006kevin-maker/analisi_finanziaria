@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:WING:2026-09-16",
-"ticker": "WING",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-16 01:41",
-"data": "2026-09-16 01:41",
-"prezzo": 100.84,
-"conv": 66,
-"prob_gain": 51,
-"prob_loss": 20,
-"reliab": "🔴 Bassa",
-"mkt": -2.0572,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 125.6429,
-"media20": 112.276,
-"quattro_atr": 130.3226,
-"meta_caduta": 139.415,
-"bollinger": 120.4657,
-"consigliata": 125.6429
-},
-"stop": 86.0987,
-"atr": 7.3706,
-"res": {
-"7g": -1.38,
-"30g": 32.28,
-"soglia": 24.6
-},
-"res_soglia": {
-"media50": {
-"ret": 24.6,
-"toccato": true,
-"giorni": 26
-},
-"media20": {
-"ret": 11.34,
-"toccato": true,
-"giorni": 21
-},
-"quattro_atr": {
-"ret": 29.24,
-"toccato": true,
-"giorni": 29
-},
-"meta_caduta": {
-"ret": 32.28,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 19.46,
-"toccato": true,
-"giorni": 23
-},
-"consigliata": {
-"ret": 24.6,
-"toccato": true,
-"giorni": 26
-}
-}
-},
-{
 "episodio": "long:NLY:2026-09-16",
 "ticker": "NLY",
 "kind": "long",
@@ -35079,5 +35015,32 @@
 },
 "stop": 253.2353,
 "atr": 18.8075
+},
+{
+"episodio": "short:EEFT:2026-10-28",
+"ticker": "EEFT",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-11-02 20:50",
+"data": "2026-11-02 20:50",
+"prezzo": 65.74,
+"conv": 65,
+"prob_gain": 52,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 66.571,
+"media20": null,
+"quattro_atr": 75.2288,
+"meta_caduta": 69.985,
+"bollinger": 67.8201,
+"consigliata": 66.571
+},
+"stop": 60.9956,
+"atr": 2.3722
 }
 ]
