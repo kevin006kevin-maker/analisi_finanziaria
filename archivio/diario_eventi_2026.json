@@ -26105,5 +26105,69 @@
 "7g": -2.19,
 "30g": 2.69
 }
+},
+{
+"episodio": "short:KRMN:2026-09-09",
+"ticker": "KRMN",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-09-15 19:42",
+"data": "2026-09-15 19:42",
+"prezzo": 37.5,
+"conv": 68,
+"prob_gain": 49,
+"prob_loss": 28,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 48.861,
+"media20": 44.3805,
+"quattro_atr": 48.8571,
+"meta_caduta": 49.83,
+"bollinger": 60.2439,
+"consigliata": 48.8571
+},
+"stop": 31.8214,
+"atr": 2.8393,
+"res": {
+"7g": -10.75,
+"30g": -11.36,
+"soglia": -11.36
+},
+"res_soglia": {
+"media50": {
+"ret": -11.36,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -11.36,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -11.36,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -11.36,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -11.36,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -11.36,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
