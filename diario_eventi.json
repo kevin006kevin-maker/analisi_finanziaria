@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:ALHC:2026-09-15",
-"ticker": "ALHC",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-15 23:18",
-"data": "2026-09-15 23:16",
-"prezzo": 10.37,
-"conv": 76,
-"prob_gain": 51,
-"prob_loss": 17,
-"reliab": "🔴 Bassa",
-"mkt": -2.06,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 10.075",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:WING:2026-09-16",
 "ticker": "WING",
 "kind": "short",
@@ -35072,5 +35052,32 @@
 },
 "stop": 263.3476,
 "atr": 12.9812
+},
+{
+"episodio": "short:CRS:2026-10-22",
+"ticker": "CRS",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-11-02 20:50",
+"data": "2026-11-02 20:50",
+"prezzo": 290.8503,
+"conv": 81,
+"prob_gain": 53,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 396.9076,
+"media20": 344.079,
+"quattro_atr": 366.0803,
+"meta_caduta": 425.4151,
+"bollinger": 438.2991,
+"consigliata": 366.0803
+},
+"stop": 253.2353,
+"atr": 18.8075
 }
 ]
