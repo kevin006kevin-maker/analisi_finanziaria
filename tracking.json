@@ -538,9 +538,7 @@
 "entry_date": "2026-07-15",
 "entry_src": "storico",
 "max_price": 26.815,
-"max_date": "2026-09-15 19:42",
-"warn_since": "2026-10-23",
-"warn": "in perdita da 77 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-09-15 19:42"
 },
 "CNQ": {
 "kind": "long",
@@ -1011,7 +1009,9 @@
 "urgenza": "incassa",
 "tipo": "sgonfia"
 },
-"incasso_notified": true
+"incasso_notified": true,
+"warn_since": "2026-11-02",
+"warn": "in perdita da 70 giorni di Borsa: valuta l'uscita"
 },
 "NEM": {
 "kind": "long",
@@ -1537,7 +1537,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-11-02",
 "max_price": 1097.76,
-"max_date": "2026-09-25 15:43"
+"max_date": "2026-09-25 15:43",
+"warn_since": "2026-11-02",
+"warn": "in perdita da 65 giorni di Borsa: valuta l'uscita"
 },
 "MTDR": {
 "kind": "short",
@@ -2315,7 +2317,9 @@
 "entry_check": "2026-11-02",
 "max_price": 202.4401,
 "max_date": "2026-10-06 18:18",
-"exit_notified": false
+"exit_notified": false,
+"warn_since": "2026-11-02",
+"warn": "in perdita da 64 giorni di Borsa: valuta l'uscita"
 },
 "FSM": {
 "kind": "long",
@@ -2495,9 +2499,7 @@
 "entry_src": "scatto",
 "entry_check": "2026-11-02",
 "max_price": 12.81,
-"max_date": "2026-08-27 22:41",
-"warn_since": "2026-10-30",
-"warn": "in perdita da 63 giorni di Borsa: valuta l'uscita"
+"max_date": "2026-08-27 22:41"
 },
 "TSLL": {
 "kind": "short",
@@ -3410,7 +3412,9 @@
 "motivo": "scesa 39% dal massimo (111.29) restando in guadagno (+7.5%): il guadagno si sta sgonfiando",
 "urgenza": "incassa",
 "tipo": "sgonfia"
-}
+},
+"warn_since": "2026-11-02",
+"warn": "in perdita da 38 giorni di Borsa: valuta l'uscita"
 },
 "TTAN": {
 "kind": "short",
@@ -5682,7 +5686,9 @@
 "max_date": "2026-10-21 19:10",
 "auto": true,
 "notified": true,
-"entry_check": "2026-11-02"
+"entry_check": "2026-11-02",
+"warn_since": "2026-11-02",
+"warn": "in perdita da 10 giorni di Borsa: valuta l'uscita"
 },
 "IWM": {
 "kind": "short",
