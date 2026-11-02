@@ -6085,5 +6085,37 @@
 "max_date": "2026-11-02 10:24",
 "auto": true,
 "notified": false
+},
+"CRS": {
+"kind": "short",
+"added": "2026-11-02",
+"note": "🤖 Promossa il 2026-11-02: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +4.0% e la convenienza (60) regge.",
+"name": "CRS",
+"snapshots": [
+{
+"name": "CRS",
+"price": 290.09,
+"rsi": 26.9975,
+"dd_high": -53.0318,
+"occasione": 74,
+"convenienza": 81,
+"prob_gain": 53,
+"prob_loss": 10,
+"exp_ret": 1.0,
+"gain": 36.4646,
+"reliab": "🟡 Media",
+"target": 396.9076,
+"stop": 253.2353,
+"date": "2026-11-02 20:49"
+}
+],
+"entry_price": 290.09,
+"entry_target": 396.9076,
+"entry_stop": 253.2353,
+"entry_conv": 81,
+"entry_date": "2026-11-02 20:49",
+"entry_src": "scatto",
+"max_price": 290.09,
+"max_date": "2026-11-02 20:49"
 }
 }
