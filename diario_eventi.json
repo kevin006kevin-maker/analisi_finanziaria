@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:IONS:2026-09-15",
-"ticker": "IONS",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-15 19:40",
-"data": "2026-09-15 19:40",
-"prezzo": 47.34,
-"conv": 80,
-"prob_gain": 68,
-"prob_loss": 8,
-"reliab": "🟡 Media",
-"mkt": -2.099,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 57.9568,
-"media20": 58.5265,
-"quattro_atr": 57.0579,
-"meta_caduta": 66.835,
-"bollinger": 66.6814,
-"consigliata": 57.0579
-},
-"stop": 42.481,
-"atr": 2.4295,
-"res": {
-"7g": -4.2,
-"30g": -7.16,
-"soglia": -7.16
-},
-"res_soglia": {
-"media50": {
-"ret": -7.16,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -7.16,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -7.16,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -7.16,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -7.16,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -7.16,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:ALHC:2026-09-15",
 "ticker": "ALHC",
 "kind": "short",
@@ -34841,6 +34777,26 @@
 "mkt": null,
 "fonte": "monitoraggio",
 "note": "in perdita da 47 giorni di Borsa: valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:AVBP:2026-10-06",
+"ticker": "AVBP",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-11-02 02:52",
+"data": "2026-11-02 02:52",
+"prezzo": 14.87,
+"conv": 75,
+"prob_gain": 59,
+"prob_loss": 13,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "in perdita da 16 giorni di Borsa: valuta l'uscita",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
