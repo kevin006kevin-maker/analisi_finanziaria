@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:ENVA:2026-09-15",
-"ticker": "ENVA",
-"kind": "long",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-15 19:42",
-"data": "2026-09-15 19:42",
-"prezzo": 172.9031,
-"conv": 75,
-"prob_gain": 82,
-"prob_loss": 11,
-"reliab": "🟡 Media",
-"mkt": -2.099,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 239.4125,
-"media20": 231.4437,
-"quattro_atr": 216.7749,
-"meta_caduta": 219.1766,
-"bollinger": 266.7419,
-"consigliata": 216.7749
-},
-"stop": 150.9672,
-"atr": 10.9679,
-"res": {
-"7g": -2.19,
-"30g": 2.69
-}
-},
-{
 "episodio": "short:KRMN:2026-09-09",
 "ticker": "KRMN",
 "kind": "short",
@@ -34712,5 +34681,32 @@
 "soglie_ricalcolate_il": "2026-11-02 02:55",
 "taglio_corretto": true,
 "soglie_ritardo_giorni": 2
+},
+{
+"episodio": "short:TFII:2026-10-30",
+"ticker": "TFII",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-11-02 10:24",
+"data": "2026-11-02 10:23",
+"prezzo": 93.32,
+"conv": 67,
+"prob_gain": 57,
+"prob_loss": 6,
+"reliab": "🟡 Media",
+"mkt": -1.8472,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 122.2888,
+"media20": 112.237,
+"quattro_atr": 111.592,
+"meta_caduta": 120.23,
+"bollinger": 121.4477,
+"consigliata": 111.592
+},
+"stop": 84.184,
+"atr": 4.568
 }
 ]
