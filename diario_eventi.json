@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:ALHC:2026-09-15",
-"ticker": "ALHC",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-15 19:40",
-"data": "2026-09-15 19:40",
-"prezzo": 10.075,
-"conv": 79,
-"prob_gain": 53,
-"prob_loss": 17,
-"reliab": "🔴 Bassa",
-"mkt": -2.099,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 15.8672,
-"media20": 13.137,
-"quattro_atr": 13.4747,
-"meta_caduta": 17.3175,
-"bollinger": 14.7412,
-"consigliata": 13.4747
-},
-"stop": 8.3752,
-"atr": 0.8499,
-"res": {
-"7g": -20.35,
-"30g": -18.83,
-"soglia": -18.83
-},
-"res_soglia": {
-"media50": {
-"ret": -18.83,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -18.83,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -18.83,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -18.83,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -18.83,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -18.83,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:AXON:2026-09-15",
 "ticker": "AXON",
 "kind": "short",
@@ -34801,5 +34737,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "long:TAL:2026-10-22",
+"ticker": "TAL",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-11-02 02:54",
+"data": "2026-10-31 00:46",
+"prezzo": 9.87,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-11-02",
+"soglie": {
+"media50": 11.721,
+"media20": 11.53,
+"quattro_atr": 11.5487,
+"meta_caduta": 11.365,
+"bollinger": 13.831,
+"consigliata": 11.5487
+},
+"stop": 9.0306,
+"atr": 0.4197
 }
 ]
