@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:RWT:2026-09-14",
-"ticker": "RWT",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-15 19:45",
-"data": "2026-09-15 19:40",
-"prezzo": 3.925,
-"conv": 68,
-"prob_gain": 50,
-"prob_loss": 4,
-"reliab": "🟡 Media",
-"mkt": -2.099,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 3.79",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "long:ASO:2026-08-25",
 "ticker": "ASO",
 "kind": "long",
@@ -35058,5 +35038,32 @@
 "stop": 9.8635,
 "atr": 0.3232,
 "res": {}
+},
+{
+"episodio": "short:VWO:2026-11-02",
+"ticker": "VWO",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-11-02 20:46",
+"data": "2026-11-02 20:46",
+"prezzo": 55.865,
+"conv": 66,
+"prob_gain": 52,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -2.7169,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 59.3787,
+"media20": 58.0467,
+"quattro_atr": 58.6897,
+"meta_caduta": 58.6525,
+"bollinger": 61.0154,
+"consigliata": 58.6897
+},
+"stop": 54.4527,
+"atr": 0.7062
 }
 ]
