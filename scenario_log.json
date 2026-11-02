@@ -19075,5 +19075,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "CRS",
+"kind": "short",
+"date": "2026-11-02",
+"promo_price": 290.8503,
+"obs_price": 286.57,
+"obs_date": "2026-10-22",
+"pre_price": 285.7,
+"pre_date": "2026-10-23",
+"conf_price": null,
+"conf_date": null,
+"target": 396.9076,
+"stop": 253.2353,
+"reliab": "🟡 Media",
+"prob_gain": 53,
+"prob_loss": 10,
+"conv": 81,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-22 20:10",
+"prezzo": 286.57,
+"conv": 70,
+"prob_gain": 49,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": -0.7116
+},
+"anticipo": {
+"data": "2026-10-23",
+"prezzo": 285.7,
+"conv": 72,
+"prob_gain": 52,
+"prob_loss": 6,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-02 20:50",
+"prezzo": 290.8503,
+"conv": 81,
+"prob_gain": 53,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
