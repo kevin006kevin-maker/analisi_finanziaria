@@ -3,7 +3,104 @@
 "mese": "2026-11",
 "versione": 1,
 "metodi": {
+"bassa_volatilita": [
+[
+"2026-11-01",
+"EIX",
+"EDISON INTERNATIONAL",
+58.79,
+"scartata:troppi_dello_stesso_settore",
+0,
+null,
+null,
+null,
+null,
+10.3
+]
+],
+"forza_relativa": [
+[
+"2026-11-01",
+"CTVA",
+"Corteva, Inc.",
+11.64,
+"scartata:punteggio_basso",
+0,
+null,
+null,
+null,
+null,
+18.42
+],
+[
+"2026-11-01",
+"WDC",
+"WESTERN DIGITAL CORPORATION",
+366.11,
+"scartata:troppi_dello_stesso_settore",
+0,
+null,
+null,
+null,
+null,
+27.27
+]
+],
 "qualita": [
+[
+"2026-11-01",
+"WDC",
+"WESTERN DIGITAL CORPORATION",
+366.11,
+"scartata:troppi_dello_stesso_settore",
+0,
+null,
+null,
+null,
+null,
+27.27
+],
+[
+"2026-11-02",
+"ILMN",
+"Illumina Inc",
+235.99,
+"scartata:convenienza_sotto_cancello",
+0,
+null,
+null,
+null,
+null,
+28.82
+],
+[
+"2026-11-02",
+"RBLX",
+"Roblox Corporation",
+42.99,
+"scartata:crollato_nell_anno",
+0,
+null,
+null,
+null,
+null,
+29.15
+]
+],
+"qualita_forza": [
+[
+"2026-11-01",
+"CTVA",
+"Corteva, Inc.",
+11.64,
+"scartata:punteggio_basso",
+0,
+null,
+null,
+null,
+null,
+18.42
+],
 [
 "2026-11-01",
 "WDC",
@@ -20,5 +117,5 @@ null,
 ]
 },
 "universo": {},
-"aggiornato": "2026-11-01 13:16"
+"aggiornato": "2026-11-02 01:56"
 }
