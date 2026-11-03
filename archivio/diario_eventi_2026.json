@@ -27626,5 +27626,64 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:TYRA:2026-09-11",
+"ticker": "TYRA",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-09-16 16:56",
+"data": "2026-09-16 16:56",
+"prezzo": 25.41,
+"conv": 67,
+"prob_gain": 48,
+"prob_loss": 17,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 28.0755,
+"media20": null,
+"quattro_atr": 34.1065,
+"meta_caduta": 29.235,
+"bollinger": 28.4791,
+"consigliata": 28.0755
+},
+"stop": 21.0617,
+"atr": 2.1741,
+"res": {
+"7g": -7.12,
+"30g": -27.23,
+"soglia": -27.23
+},
+"res_soglia": {
+"media50": {
+"ret": -27.23,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -27.23,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -27.23,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -27.23,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -27.23,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
