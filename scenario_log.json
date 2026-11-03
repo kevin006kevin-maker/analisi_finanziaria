@@ -19496,5 +19496,62 @@
 "prob_loss": 2,
 "conv": 66,
 "res": {}
+},
+{
+"ticker": "SCI",
+"kind": "short",
+"date": "2026-11-03",
+"promo_price": 76.37,
+"obs_price": 72.77,
+"obs_date": "2026-10-29",
+"pre_price": 72.77,
+"pre_date": "2026-10-30",
+"conf_price": null,
+"conf_date": null,
+"target": 79.9918,
+"stop": 71.3714,
+"reliab": "🟢 Alta",
+"prob_gain": 54,
+"prob_loss": 1,
+"conv": 68,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-29 17:54",
+"prezzo": 72.77,
+"conv": 67,
+"prob_gain": 53,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": 0.6515
+},
+"anticipo": {
+"data": "2026-10-30",
+"prezzo": 72.77,
+"conv": 67,
+"prob_gain": 53,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-03 03:17",
+"prezzo": 76.37,
+"conv": 68,
+"prob_gain": 54,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
