@@ -570,7 +570,9 @@
 "entry_date": "2026-07-15",
 "entry_src": "storico",
 "max_price": 26.815,
-"max_date": "2026-09-15 19:42"
+"max_date": "2026-09-15 19:42",
+"warn_since": "2026-11-03",
+"warn": "in perdita da 78 giorni di Borsa: valuta l'uscita"
 },
 "CNQ": {
 "kind": "long",
@@ -2516,9 +2518,7 @@
 "entry_check": "2026-11-03",
 "max_price": 202.4401,
 "max_date": "2026-10-06 18:18",
-"exit_notified": false,
-"warn_since": "2026-11-03",
-"warn": "in perdita da 65 giorni di Borsa: valuta l'uscita"
+"exit_notified": false
 },
 "FSM": {
 "kind": "long",
@@ -2698,7 +2698,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-11-03",
 "max_price": 12.81,
-"max_date": "2026-08-27 22:41"
+"max_date": "2026-08-27 22:41",
+"warn_since": "2026-11-03",
+"warn": "in perdita da 64 giorni di Borsa: valuta l'uscita"
 },
 "TSLL": {
 "kind": "short",
@@ -3714,9 +3716,7 @@
 "notified": true,
 "entry_check": "2026-11-03",
 "exit_notified": false,
-"incasso_notified": true,
-"warn_since": "2026-11-03",
-"warn": "in perdita da 39 giorni di Borsa: valuta l'uscita"
+"incasso_notified": true
 },
 "TTAN": {
 "kind": "short",
@@ -4228,9 +4228,7 @@
 "max_date": "2026-10-06 23:17",
 "auto": true,
 "notified": true,
-"entry_check": "2026-11-03",
-"warn_since": "2026-11-03",
-"warn": "in perdita da 31 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-11-03"
 },
 "SYNA": {
 "kind": "short",
@@ -5651,7 +5649,9 @@
 "max_date": "2026-10-16 23:44",
 "auto": true,
 "notified": true,
-"entry_check": "2026-11-03"
+"entry_check": "2026-11-03",
+"warn_since": "2026-11-03",
+"warn": "in perdita da 19 giorni di Borsa: valuta l'uscita"
 },
 "XRAY": {
 "kind": "short",
@@ -6198,9 +6198,7 @@
 "max_date": "2026-10-21 19:10",
 "auto": true,
 "notified": true,
-"entry_check": "2026-11-03",
-"warn_since": "2026-11-03",
-"warn": "in perdita da 11 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-11-03"
 },
 "IWM": {
 "kind": "short",
@@ -7292,7 +7290,7 @@
 "max_price": 500.115,
 "max_date": "2026-11-03 18:51",
 "auto": true,
-"notified": false,
+"notified": true,
 "entry_check": "2026-11-03"
 },
 "OII": {
