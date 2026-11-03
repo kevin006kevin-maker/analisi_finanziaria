@@ -1,59 +1,5 @@
 [
 {
-"episodio": "short:MYGN:2026-09-11",
-"ticker": "MYGN",
-"kind": "short",
-"evento": "promozione",
-"scritto_il": "2026-09-16 16:56",
-"data": "2026-09-16 16:56",
-"prezzo": 3.866,
-"conv": 60,
-"prob_gain": 51,
-"prob_loss": 22,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": 4.0973,
-"media20": null,
-"quattro_atr": 4.8007,
-"meta_caduta": 5.088,
-"bollinger": null,
-"consigliata": 4.0973
-},
-"stop": 3.3986,
-"atr": 0.2337,
-"res": {
-"7g": 3.98,
-"30g": 9.93,
-"soglia": 5.98
-},
-"res_soglia": {
-"media50": {
-"ret": 5.98,
-"toccato": true,
-"giorni": 1
-},
-"quattro_atr": {
-"ret": 9.93,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 9.93,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 5.98,
-"toccato": true,
-"giorni": 1
-}
-}
-},
-{
 "episodio": "short:AXON:2026-09-15",
 "ticker": "AXON",
 "kind": "short",
@@ -36834,5 +36780,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "long:BCE:2026-10-10",
+"ticker": "BCE",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-11-04 00:18",
+"data": "2026-11-04 00:17",
+"prezzo": 20.54,
+"conv": 67,
+"prob_gain": 73,
+"prob_loss": 9,
+"reliab": "🟢 Alta",
+"mkt": -3.1975,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 21.3302,
+"media20": null,
+"quattro_atr": 22.3365,
+"meta_caduta": 22.195,
+"bollinger": 21.0498,
+"consigliata": 21.3302
+},
+"stop": 19.6418,
+"atr": 0.4491
 }
 ]
