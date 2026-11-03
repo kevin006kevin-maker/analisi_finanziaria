@@ -19991,5 +19991,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "CACC",
+"kind": "short",
+"date": "2026-11-04",
+"promo_price": 480.65,
+"obs_price": 466.0001,
+"obs_date": "2026-10-30",
+"pre_price": 464.89,
+"pre_date": "2026-11-02",
+"conf_price": null,
+"conf_date": null,
+"target": 559.5276,
+"stop": 431.7885,
+"reliab": "🟡 Media",
+"prob_gain": 51,
+"prob_loss": 5,
+"conv": 73,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-30 16:19",
+"prezzo": 466.0001,
+"conv": 64,
+"prob_gain": 54,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": -1.4459
+},
+"anticipo": {
+"data": "2026-11-02",
+"prezzo": 464.89,
+"conv": 65,
+"prob_gain": 59,
+"prob_loss": 2,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-04 00:18",
+"prezzo": 480.65,
+"conv": 73,
+"prob_gain": 51,
+"prob_loss": 5,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
