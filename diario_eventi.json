@@ -24286,7 +24286,8 @@
 "atr": 0.3281,
 "res": {
 "7g": -0.14
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:XENE:2026-09-18",
@@ -24316,7 +24317,8 @@
 "atr": 2.3882,
 "res": {
 "7g": -6.18
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:PLNT:2026-09-22",
@@ -24346,7 +24348,8 @@
 "atr": 1.997,
 "res": {
 "7g": 12.95
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:ERAS:2026-09-23",
@@ -24376,7 +24379,8 @@
 "atr": 0.9874,
 "res": {
 "7g": 5.29
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:PTRN:2026-09-24",
@@ -24406,7 +24410,8 @@
 "atr": 0.974,
 "res": {
 "7g": 0.06
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:MTZ:2026-09-17",
@@ -24987,7 +24992,8 @@
 },
 "soglie_ricalcolate_il": "2026-10-05 00:04",
 "taglio_corretto": true,
-"soglie_ritardo_giorni": 1
+"soglie_ritardo_giorni": 1,
+"res_soglia": {}
 },
 {
 "episodio": "short:DKNG:2026-09-30",
@@ -25103,7 +25109,8 @@
 },
 "soglie_ricalcolate_il": "2026-10-05 00:04",
 "taglio_corretto": true,
-"soglie_ritardo_giorni": 1
+"soglie_ritardo_giorni": 1,
+"res_soglia": {}
 },
 {
 "episodio": "short:MTG:2026-09-30",
@@ -25144,7 +25151,8 @@
 },
 "soglie_ricalcolate_il": "2026-10-05 00:04",
 "taglio_corretto": true,
-"soglie_ritardo_giorni": 1
+"soglie_ritardo_giorni": 1,
+"res_soglia": {}
 },
 {
 "episodio": "short:LQDA:2026-09-30",
@@ -25185,7 +25193,8 @@
 },
 "soglie_ricalcolate_il": "2026-10-05 00:04",
 "taglio_corretto": true,
-"soglie_ritardo_giorni": 1
+"soglie_ritardo_giorni": 1,
+"res_soglia": {}
 },
 {
 "episodio": "short:AXGN:2026-10-02",
@@ -33856,7 +33865,9 @@
 },
 "stop": 12.8261,
 "atr": 0.4169,
-"res": {}
+"res": {
+"7g": -2.6
+}
 },
 {
 "episodio": "long:NEM:2026-10-25",
@@ -36096,7 +36107,8 @@
 "consigliata": 21.8099
 },
 "stop": 19.8076,
-"atr": 0.3337
+"atr": 0.3337,
+"res": {}
 },
 {
 "episodio": "short:LSTR:2026-10-29",
@@ -36123,7 +36135,8 @@
 "consigliata": 166.5767
 },
 "stop": 130.7616,
-"atr": 5.9692
+"atr": 5.9692,
+"res": {}
 },
 {
 "episodio": "short:SCI:2026-10-29",
@@ -36150,7 +36163,8 @@
 "consigliata": 79.9918
 },
 "stop": 71.3714,
-"atr": 2.4993
+"atr": 2.4993,
+"res": {}
 },
 {
 "episodio": "short:JBHT:2026-09-16",
@@ -36197,7 +36211,8 @@
 "consigliata": 136.2272
 },
 "stop": 118.9854,
-"atr": 4.6473
+"atr": 4.6473,
+"res": {}
 },
 {
 "episodio": "long:NEM:2026-10-25",
@@ -36224,7 +36239,8 @@
 "consigliata": 120.6368
 },
 "stop": 98.5653,
-"atr": 4.0224
+"atr": 4.0224,
+"res": {}
 },
 {
 "episodio": "short:BAMI.MI:2026-10-27",
@@ -36251,7 +36267,8 @@
 "consigliata": 15.184
 },
 "stop": 12.8755,
-"atr": 0.3848
+"atr": 0.3848,
+"res": {}
 },
 {
 "episodio": "short:FFIV:2026-10-29",
@@ -36278,7 +36295,8 @@
 "consigliata": 423.2128
 },
 "stop": 295.9036,
-"atr": 21.2182
+"atr": 21.2182,
+"res": {}
 },
 {
 "episodio": "short:LSTR:2026-10-29",
@@ -36305,7 +36323,8 @@
 "consigliata": 166.5767
 },
 "stop": 130.7616,
-"atr": 5.9692
+"atr": 5.9692,
+"res": {}
 },
 {
 "episodio": "short:LPLA:2026-10-29",
@@ -36332,7 +36351,8 @@
 "consigliata": 330.2518
 },
 "stop": 258.6561,
-"atr": 12.542
+"atr": 12.542,
+"res": {}
 },
 {
 "episodio": "short:CHRW:2026-10-29",
@@ -36359,7 +36379,8 @@
 "consigliata": 145.2758
 },
 "stop": 112.9826,
-"atr": 5.8137
+"atr": 5.8137,
+"res": {}
 },
 {
 "episodio": "short:EDU:2026-10-29",
@@ -36386,7 +36407,8 @@
 "consigliata": 56.2571
 },
 "stop": 44.8915,
-"atr": 1.8943
+"atr": 1.8943,
+"res": {}
 },
 {
 "episodio": "short:GOOGL:2026-10-29",
@@ -36413,7 +36435,8 @@
 "consigliata": 319.9825
 },
 "stop": 258.4937,
-"atr": 10.2481
+"atr": 10.2481,
+"res": {}
 },
 {
 "episodio": "short:FTNT:2026-10-29",
@@ -36440,7 +36463,8 @@
 "consigliata": 171.3448
 },
 "stop": 116.888,
-"atr": 9.596
+"atr": 9.596,
+"res": {}
 },
 {
 "episodio": "short:GOOG:2026-10-29",
@@ -36467,7 +36491,8 @@
 "consigliata": 319.0895
 },
 "stop": 257.7852,
-"atr": 10.2174
+"atr": 10.2174,
+"res": {}
 },
 {
 "episodio": "short:SCI:2026-10-29",
@@ -36494,7 +36519,8 @@
 "consigliata": 79.9918
 },
 "stop": 71.3714,
-"atr": 2.4993
+"atr": 2.4993,
+"res": {}
 },
 {
 "episodio": "short:KRYS:2026-11-02",
@@ -36541,7 +36567,8 @@
 "consigliata": 724.3538
 },
 "stop": 654.7502,
-"atr": 13.1699
+"atr": 13.1699,
+"res": {}
 },
 {
 "episodio": "short:XLK:2026-11-03",
@@ -36568,7 +36595,8 @@
 "consigliata": 189.508
 },
 "stop": 165.2472,
-"atr": 4.4864
+"atr": 4.4864,
+"res": {}
 },
 {
 "episodio": "short:BA:2026-10-27",
@@ -36595,6 +36623,7 @@
 "consigliata": 195.3486
 },
 "stop": 163.5382,
-"atr": 5.9309
+"atr": 5.9309,
+"res": {}
 }
 ]
