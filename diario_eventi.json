@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:FICO:2026-09-06",
-"ticker": "FICO",
-"kind": "long",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-16 01:46",
-"data": "2026-09-16 01:43",
-"prezzo": 985.96,
-"conv": 43,
-"prob_gain": 70,
-"prob_loss": 20,
-"reliab": "🟡 Media",
-"mkt": -2.0572,
-"fonte": "osservazione",
-"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-16",
-"soglie": {
-"media50": 1138.2006,
-"media20": 1078.077,
-"quattro_atr": 1203.7647,
-"meta_caduta": 1179.52,
-"bollinger": 1251.5202,
-"consigliata": 1138.2006
-},
-"stop": 877.0577,
-"atr": 54.4512,
-"res": {
-"7g": -10.23,
-"30g": -21.94
-}
-},
-{
 "episodio": "short:TYRA:2026-09-11",
 "ticker": "TYRA",
 "kind": "short",
@@ -36762,5 +36731,32 @@
 },
 "stop": 257.7852,
 "atr": 10.2174
+},
+{
+"episodio": "short:SCI:2026-10-29",
+"ticker": "SCI",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-11-03 03:19",
+"data": "2026-11-03 03:16",
+"prezzo": 76.37,
+"conv": 68,
+"prob_gain": 54,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-11-03",
+"soglie": {
+"media50": 79.9918,
+"media20": 79.5435,
+"quattro_atr": 86.3672,
+"meta_caduta": 80.875,
+"bollinger": 85.1125,
+"consigliata": 79.9918
+},
+"stop": 71.3714,
+"atr": 2.4993
 }
 ]
