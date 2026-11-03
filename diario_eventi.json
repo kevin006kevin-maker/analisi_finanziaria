@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:BYND:2026-09-17",
-"ticker": "BYND",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-17 02:28",
-"data": "2026-09-17 02:28",
-"prezzo": 9.99,
-"conv": 66,
-"prob_gain": 50,
-"prob_loss": 29,
-"reliab": "🔴 Bassa",
-"mkt": -1.8195,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 15.18,
-"media20": 12.4985,
-"quattro_atr": 13.7698,
-"meta_caduta": 16.245,
-"bollinger": 15.8281,
-"consigliata": 13.7698
-},
-"stop": 8.1001,
-"atr": 0.945,
-"res": {
-"7g": -6.66,
-"30g": -31.08,
-"soglia": -31.08
-},
-"res_soglia": {
-"media50": {
-"ret": -31.08,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -31.08,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -31.08,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -31.08,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -31.08,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -31.08,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:WING:2026-09-16",
 "ticker": "WING",
 "kind": "short",
@@ -36536,5 +36472,32 @@
 },
 "stop": 10.2996,
 "atr": 1.1152
+},
+{
+"episodio": "short:TFII:2026-10-30",
+"ticker": "TFII",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-11-04 00:20",
+"data": "2026-11-04 00:18",
+"prezzo": 96.26,
+"conv": 85,
+"prob_gain": 54,
+"prob_loss": 6,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-11-04",
+"soglie": {
+"media50": 120.5886,
+"media20": 110.408,
+"quattro_atr": 114.3072,
+"meta_caduta": 121.7,
+"bollinger": 123.7754,
+"consigliata": 114.3072
+},
+"stop": 87.2364,
+"atr": 4.5118
 }
 ]
