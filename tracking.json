@@ -6034,5 +6034,37 @@
 "max_date": "2026-11-03 03:16",
 "auto": true,
 "notified": false
+},
+"BA": {
+"kind": "short",
+"added": "2026-11-03",
+"note": "🤖 Promossa il 2026-11-03: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +4.9% e la convenienza (58) regge.",
+"name": "BA",
+"snapshots": [
+{
+"name": "BA",
+"price": 175.4,
+"rsi": 37.7987,
+"dd_high": -30.4382,
+"occasione": 47,
+"convenienza": 79,
+"prob_gain": 51,
+"prob_loss": 3,
+"exp_ret": 0.3,
+"gain": 11.3732,
+"reliab": "🟡 Media",
+"target": 195.3486,
+"stop": 163.5382,
+"date": "2026-11-03 11:02"
+}
+],
+"entry_price": 175.4,
+"entry_target": 195.3486,
+"entry_stop": 163.5382,
+"entry_conv": 79,
+"entry_date": "2026-11-03 11:02",
+"entry_src": "scatto",
+"max_price": 175.4,
+"max_date": "2026-11-03 11:02"
 }
 }
