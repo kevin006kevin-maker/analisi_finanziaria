@@ -8423,5 +8423,37 @@
 "max_date": "2026-11-03 18:50",
 "auto": true,
 "notified": false
+},
+"TFII": {
+"kind": "short",
+"added": "2026-11-04",
+"note": "🤖 Promossa il 2026-11-04: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.0% e la convenienza (63) regge.",
+"name": "TFII",
+"snapshots": [
+{
+"name": "TFII",
+"price": 96.26,
+"rsi": 26.6487,
+"dd_high": -41.0749,
+"occasione": 81,
+"convenienza": 85,
+"prob_gain": 54,
+"prob_loss": 6,
+"exp_ret": 1.5,
+"gain": 25.2738,
+"reliab": "🟡 Media",
+"target": 120.5886,
+"stop": 87.2364,
+"date": "2026-11-04 00:18"
+}
+],
+"entry_price": 96.26,
+"entry_target": 120.5886,
+"entry_stop": 87.2364,
+"entry_conv": 85,
+"entry_date": "2026-11-04 00:18",
+"entry_src": "scatto",
+"max_price": 96.26,
+"max_date": "2026-11-04 00:18"
 }
 }
