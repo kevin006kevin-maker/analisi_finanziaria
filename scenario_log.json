@@ -18131,8 +18131,8 @@
 "obs_date": "2026-10-02",
 "pre_price": 14.885,
 "pre_date": "2026-10-05",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 13.305000305175781,
+"conf_date": "2026-11-03",
 "target": 15.4383,
 "stop": 12.8261,
 "reliab": "🟢 Alta",
@@ -18168,16 +18168,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-11-03",
+"prezzo": 13.305000305175781,
+"conv": 70,
+"prob_gain": 51,
+"prob_loss": 4,
+"reliab": "🟢 Alta",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": -10.61,
+"osservazione|7g": -10.61,
+"promozione|7g": -2.6
+}
 },
 {
 "ticker": "RSI",
