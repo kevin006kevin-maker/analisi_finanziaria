@@ -27014,5 +27014,80 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:PSNY:2026-09-03",
+"ticker": "PSNY",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-09-16 01:46",
+"data": "2026-09-15 23:18",
+"prezzo": 7.32,
+"conv": 72,
+"prob_gain": 55,
+"prob_loss": 26,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-09-16",
+"soglie": {
+"media50": 13.4366,
+"media20": 10.9795,
+"quattro_atr": 10.8753,
+"meta_caduta": 13.88,
+"bollinger": 15.9497,
+"consigliata": 10.8753
+},
+"stop": 5.5424,
+"atr": 0.8888,
+"soglie_contaminate": {
+"media50": 13.4366,
+"media20": 10.9795,
+"quattro_atr": 10.8753,
+"meta_caduta": 13.88,
+"bollinger": 15.9497,
+"consigliata": 10.8753
+},
+"soglie_ricalcolate_il": "2026-09-16 01:47",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 1,
+"res": {
+"7g": 3.14,
+"30g": -42.42,
+"soglia": -42.42
+},
+"res_soglia": {
+"media50": {
+"ret": -42.42,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -42.42,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -42.42,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -42.42,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -42.42,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -42.42,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
