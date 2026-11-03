@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:PST.MI:2026-09-07",
-"ticker": "PST.MI",
-"kind": "short",
-"evento": "fine_verifica",
-"scritto_il": "2026-09-17 00:12",
-"data": "2026-09-17 00:11",
-"prezzo": 25.94,
-"conv": 65,
-"prob_gain": 49,
-"prob_loss": 1,
-"reliab": "🟢 Alta",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 5 giorni di Borsa dalla promozione",
-"dovuto_il": "2026-09-17",
-"soglie": {
-"media50": 27.1704,
-"media20": 26.8525,
-"quattro_atr": 28.0413,
-"meta_caduta": 27.555,
-"bollinger": 28.3268,
-"consigliata": 27.1704
-},
-"stop": 24.8893,
-"atr": 0.5253,
-"res": {
-"7g": -0.85,
-"30g": -7.63,
-"soglia": -7.63
-},
-"res_soglia": {
-"media50": {
-"ret": -7.63,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 3.52,
-"toccato": true,
-"giorni": 1
-},
-"quattro_atr": {
-"ret": -7.63,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -7.63,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -7.63,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -7.63,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:EYPT:2026-09-10",
 "ticker": "EYPT",
 "kind": "short",
@@ -36647,5 +36583,32 @@
 },
 "stop": 1113.7548,
 "atr": 85.6876
+},
+{
+"episodio": "long:PBR:2026-10-26",
+"ticker": "PBR",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-11-04 00:20",
+"data": "2026-11-04 00:18",
+"prezzo": 21.08,
+"conv": 64,
+"prob_gain": 79,
+"prob_loss": 11,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-11-04",
+"soglie": {
+"media50": 22.0762,
+"media20": 24.193,
+"quattro_atr": 24.7428,
+"meta_caduta": 23.62,
+"bollinger": 27.8733,
+"consigliata": 22.0762
+},
+"stop": 19.2486,
+"atr": 0.9157
 }
 ]
