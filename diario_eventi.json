@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:YSS:2026-09-05",
-"ticker": "YSS",
-"kind": "short",
-"evento": "promozione",
-"scritto_il": "2026-09-16 16:56",
-"data": "2026-09-16 16:56",
-"prezzo": 8.12,
-"conv": 64,
-"prob_gain": 45,
-"prob_loss": 33,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": 12.8562,
-"media20": 8.7525,
-"quattro_atr": 11.5237,
-"meta_caduta": 18.34,
-"bollinger": 10.1971,
-"consigliata": 11.5237
-},
-"stop": 6.4182,
-"atr": 0.8509,
-"res": {
-"7g": 21.55,
-"30g": -27.22,
-"soglia": -27.22
-},
-"res_soglia": {
-"media50": {
-"ret": -27.22,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 7.79,
-"toccato": true,
-"giorni": 1
-},
-"quattro_atr": {
-"ret": -27.22,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -27.22,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -27.22,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -27.22,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:TYRA:2026-09-11",
 "ticker": "TYRA",
 "kind": "short",
@@ -36588,5 +36524,32 @@
 },
 "stop": 11.7717,
 "atr": 0.7817
+},
+{
+"episodio": "short:CHRW:2026-10-29",
+"ticker": "CHRW",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-11-03 18:50",
+"data": "2026-11-03 18:50",
+"prezzo": 130.695,
+"conv": 79,
+"prob_gain": 54,
+"prob_loss": 13,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 144.7741,
+"media20": 137.2973,
+"quattro_atr": 153.02,
+"meta_caduta": 144.2075,
+"bollinger": 149.3361,
+"consigliata": 144.7741
+},
+"stop": 119.5325,
+"atr": 5.5813
 }
 ]
