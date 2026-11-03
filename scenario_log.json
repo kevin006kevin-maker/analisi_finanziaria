@@ -19355,5 +19355,62 @@
 "prob_loss": null,
 "conv": 75,
 "res": {}
+},
+{
+"ticker": "LSTR",
+"kind": "short",
+"date": "2026-11-03",
+"promo_price": 142.7,
+"obs_price": 138.8,
+"obs_date": "2026-10-29",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": 170.039,
+"stop": 130.7616,
+"reliab": "🟡 Media",
+"prob_gain": 56,
+"prob_loss": 6,
+"conv": 83,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-29 00:10",
+"prezzo": 138.8,
+"conv": 71,
+"prob_gain": 58,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": 1.2081
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-03 03:16",
+"prezzo": 142.7,
+"conv": 83,
+"prob_gain": 56,
+"prob_loss": 6,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
