@@ -1,47 +1,5 @@
 [
 {
-"episodio": "long:FIS:2026-09-04",
-"ticker": "FIS",
-"kind": "long",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-16 01:46",
-"data": "2026-09-15 23:17",
-"prezzo": 37.34,
-"conv": 80,
-"prob_gain": 83,
-"prob_loss": 7,
-"reliab": "🟢 Alta",
-"mkt": -2.06,
-"fonte": "osservazione",
-"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-16",
-"soglie": {
-"media50": 41.6998,
-"media20": 40.267,
-"quattro_atr": 42.9797,
-"meta_caduta": 42.075,
-"bollinger": 43.1927,
-"consigliata": 41.6998
-},
-"stop": 34.5202,
-"atr": 1.4099,
-"soglie_contaminate": {
-"media50": 41.6998,
-"media20": 40.267,
-"quattro_atr": 42.9797,
-"meta_caduta": 42.075,
-"bollinger": 43.1927,
-"consigliata": 41.6998
-},
-"soglie_ricalcolate_il": "2026-09-16 01:47",
-"taglio_corretto": true,
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": -6.06,
-"30g": -2.76
-}
-},
-{
 "episodio": "long:LULU:2026-09-04",
 "ticker": "LULU",
 "kind": "long",
@@ -36781,5 +36739,32 @@
 },
 "stop": 258.4937,
 "atr": 10.2481
+},
+{
+"episodio": "short:FTNT:2026-10-29",
+"ticker": "FTNT",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-11-03 03:19",
+"data": "2026-11-03 03:14",
+"prezzo": 136.08,
+"conv": 68,
+"prob_gain": 52,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": -2.9914,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-11-03",
+"soglie": {
+"media50": 171.3448,
+"media20": 177.718,
+"quattro_atr": 174.464,
+"meta_caduta": 165.415,
+"bollinger": 209.3739,
+"consigliata": 171.3448
+},
+"stop": 116.888,
+"atr": 9.596
 }
 ]
