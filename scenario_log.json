@@ -19743,5 +19743,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "BA",
+"kind": "short",
+"date": "2026-11-03",
+"promo_price": 175.4,
+"obs_price": 170.59,
+"obs_date": "2026-10-27",
+"pre_price": 168.18,
+"pre_date": "2026-10-28",
+"conf_price": null,
+"conf_date": null,
+"target": 195.3486,
+"stop": 163.5382,
+"reliab": "🟡 Media",
+"prob_gain": 51,
+"prob_loss": 3,
+"conv": 79,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-27 17:01",
+"prezzo": 170.59,
+"conv": 67,
+"prob_gain": 56,
+"prob_loss": 2,
+"reliab": "🟡 Media",
+"mkt": 0.8294
+},
+"anticipo": {
+"data": "2026-10-28",
+"prezzo": 168.18,
+"conv": 65,
+"prob_gain": 51,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-03 11:02",
+"prezzo": 175.4,
+"conv": 79,
+"prob_gain": 51,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
