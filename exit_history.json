@@ -26068,5 +26068,86 @@
 "date": "2026-10-31 00:48"
 }
 ]
+},
+{
+"ticker": "JBHT",
+"kind": "short",
+"added": "2026-10-12",
+"removed": "2026-11-03",
+"reason": "in perdita da 16 giorni di Borsa: valuta l'uscita",
+"auto": true,
+"first_price": 228.42,
+"last_price": 221.08,
+"first_target": 254.7251,
+"first_stop": 214.9815,
+"first_src": "scatto",
+"first_sicuro": true,
+"my_target_price": null,
+"snapshots": [
+{
+"name": "JBHT",
+"price": 218.345,
+"rsi": 37.9264,
+"dd_high": -26.8305,
+"occasione": 28,
+"convenienza": 76,
+"prob_gain": 54,
+"prob_loss": 5,
+"exp_ret": 1.1,
+"gain": 10.7663,
+"reliab": "🟢 Alta",
+"target": 241.8527,
+"stop": 203.9949,
+"date": "2026-10-30 16:23"
+},
+{
+"name": "JBHT",
+"price": 221.08,
+"rsi": 39.8776,
+"dd_high": -25.914,
+"occasione": 13,
+"convenienza": 74,
+"prob_gain": 53,
+"prob_loss": 4,
+"exp_ret": 0.6,
+"gain": 9.4208,
+"reliab": "🟢 Alta",
+"target": 241.9074,
+"stop": 206.7299,
+"date": "2026-10-30 21:08"
+},
+{
+"name": "JBHT",
+"price": 224.02,
+"rsi": 43.2571,
+"dd_high": -24.9288,
+"occasione": 36,
+"convenienza": 72,
+"prob_gain": 52,
+"prob_loss": 5,
+"exp_ret": 0.4,
+"gain": 7.5256,
+"reliab": "🟢 Alta",
+"target": 240.8788,
+"stop": 209.8992,
+"date": "2026-11-02 20:51"
+},
+{
+"name": "JBHT",
+"price": 221.08,
+"rsi": 39.8776,
+"dd_high": -25.914,
+"occasione": 13,
+"convenienza": 74,
+"prob_gain": 54,
+"prob_loss": 6,
+"exp_ret": 1.0,
+"gain": 9.4208,
+"reliab": "🟢 Alta",
+"target": 241.9074,
+"stop": 206.7299,
+"date": "2026-11-03 03:17"
+}
+]
 }
 ]
