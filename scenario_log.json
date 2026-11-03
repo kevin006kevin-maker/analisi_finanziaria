@@ -19934,5 +19934,62 @@
 "prob_loss": 37,
 "conv": 71,
 "res": {}
+},
+{
+"ticker": "TFII",
+"kind": "short",
+"date": "2026-11-04",
+"promo_price": 96.26,
+"obs_price": 94.34,
+"obs_date": "2026-10-30",
+"pre_price": 93.32,
+"pre_date": "2026-11-02",
+"conf_price": null,
+"conf_date": null,
+"target": 120.5886,
+"stop": 87.2364,
+"reliab": "🟡 Media",
+"prob_gain": 54,
+"prob_loss": 6,
+"conv": 85,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-30 16:19",
+"prezzo": 94.34,
+"conv": 65,
+"prob_gain": 55,
+"prob_loss": 6,
+"reliab": "🟡 Media",
+"mkt": -1.4459
+},
+"anticipo": {
+"data": "2026-11-02",
+"prezzo": 93.32,
+"conv": 67,
+"prob_gain": 57,
+"prob_loss": 6,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-04 00:18",
+"prezzo": 96.26,
+"conv": 85,
+"prob_gain": 54,
+"prob_loss": 6,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
