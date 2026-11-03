@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:WING:2026-09-16",
-"ticker": "WING",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-17 02:30",
-"data": "2026-09-17 02:28",
-"prezzo": 100.84,
-"conv": 65,
-"prob_gain": 53,
-"prob_loss": 19,
-"reliab": "🔴 Bassa",
-"mkt": -1.8195,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 125.6429,
-"media20": 112.276,
-"quattro_atr": 130.3229,
-"meta_caduta": 139.415,
-"bollinger": 120.4657,
-"consigliata": 125.6429
-},
-"stop": 86.0986,
-"atr": 7.3707,
-"res": {
-"7g": -2.8,
-"30g": 30.82,
-"soglia": 24.6
-},
-"res_soglia": {
-"media50": {
-"ret": 24.6,
-"toccato": true,
-"giorni": 25
-},
-"media20": {
-"ret": 11.34,
-"toccato": true,
-"giorni": 20
-},
-"quattro_atr": {
-"ret": 29.24,
-"toccato": true,
-"giorni": 28
-},
-"meta_caduta": {
-"ret": 30.82,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 19.46,
-"toccato": true,
-"giorni": 22
-},
-"consigliata": {
-"ret": 24.6,
-"toccato": true,
-"giorni": 25
-}
-}
-},
-{
 "episodio": "short:RWT:2026-09-14",
 "ticker": "RWT",
 "kind": "short",
@@ -36499,5 +36435,32 @@
 },
 "stop": 87.2364,
 "atr": 4.5118
+},
+{
+"episodio": "short:CACC:2026-10-30",
+"ticker": "CACC",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-11-04 00:20",
+"data": "2026-11-04 00:18",
+"prezzo": 480.65,
+"conv": 73,
+"prob_gain": 51,
+"prob_loss": 5,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-11-04",
+"soglie": {
+"media50": 559.5276,
+"media20": 534.432,
+"quattro_atr": 578.3729,
+"meta_caduta": 544.21,
+"bollinger": 588.1646,
+"consigliata": 559.5276
+},
+"stop": 431.7885,
+"atr": 24.4307
 }
 ]
