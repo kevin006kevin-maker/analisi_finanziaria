@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:ALHC:2026-09-15",
-"ticker": "ALHC",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-16 01:44",
-"data": "2026-09-16 01:41",
-"prezzo": 10.37,
-"conv": 78,
-"prob_gain": 51,
-"prob_loss": 17,
-"reliab": "🔴 Bassa",
-"mkt": -2.0572,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 15.8731,
-"media20": 13.1517,
-"quattro_atr": 13.7797,
-"meta_caduta": 17.465,
-"bollinger": 14.6385,
-"consigliata": 13.7797
-},
-"stop": 8.6652,
-"atr": 0.8524,
-"res": {
-"7g": -23.29,
-"30g": -20.88,
-"soglia": -20.88
-},
-"res_soglia": {
-"media50": {
-"ret": -20.88,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -20.88,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -20.88,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -20.88,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -20.88,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -20.88,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:XLU:2026-09-15",
 "ticker": "XLU",
 "kind": "short",
@@ -37123,5 +37059,32 @@
 },
 "stop": 19.8076,
 "atr": 0.3337
+},
+{
+"episodio": "short:LSTR:2026-10-29",
+"ticker": "LSTR",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-11-03 03:16",
+"data": "2026-11-03 03:16",
+"prezzo": 142.7,
+"conv": 83,
+"prob_gain": 56,
+"prob_loss": 6,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 170.039,
+"media20": 164.827,
+"quattro_atr": 166.5767,
+"meta_caduta": 168.04,
+"bollinger": 185.7667,
+"consigliata": 166.5767
+},
+"stop": 130.7616,
+"atr": 5.9692
 }
 ]
