@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:AXON:2026-09-15",
-"ticker": "AXON",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-16 16:57",
-"data": "2026-09-16 16:54",
-"prezzo": 454.4624,
-"conv": 53,
-"prob_gain": 55,
-"prob_loss": 20,
-"reliab": "🔴 Bassa",
-"mkt": -1.0814,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 436.985",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:ON:2026-09-16",
 "ticker": "ON",
 "kind": "short",
@@ -36807,5 +36787,32 @@
 },
 "stop": 19.6418,
 "atr": 0.4491
+},
+{
+"episodio": "short:TFII:2026-10-30",
+"ticker": "TFII",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-11-04 00:18",
+"data": "2026-11-04 00:18",
+"prezzo": 96.26,
+"conv": 85,
+"prob_gain": 54,
+"prob_loss": 6,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 120.5886,
+"media20": 110.408,
+"quattro_atr": 114.3072,
+"meta_caduta": 121.7,
+"bollinger": 123.7754,
+"consigliata": 114.3072
+},
+"stop": 87.2364,
+"atr": 4.5118
 }
 ]
