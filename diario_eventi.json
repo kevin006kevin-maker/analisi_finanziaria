@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:STLAM.MI:2026-08-17",
-"ticker": "STLAM.MI",
-"kind": "long",
-"evento": "fine_verifica",
-"scritto_il": "2026-09-17 00:12",
-"data": "2026-09-17 00:11",
-"prezzo": 4.487,
-"conv": 68,
-"prob_gain": 64,
-"prob_loss": 25,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 10 giorni di Borsa dalla promozione",
-"dovuto_il": "2026-09-17",
-"soglie": {
-"media50": 4.7861,
-"media20": 4.5821,
-"quattro_atr": 5.1963,
-"meta_caduta": 4.888,
-"bollinger": 4.8078,
-"consigliata": 4.7861
-},
-"stop": 4.1324,
-"atr": 0.1773,
-"res": {
-"7g": -9.61,
-"30g": -15.12
-}
-},
-{
 "episodio": "short:LULG:2026-09-04",
 "ticker": "LULG",
 "kind": "short",
@@ -36688,5 +36657,32 @@
 },
 "stop": 465.2558,
 "atr": 16.2521
+},
+{
+"episodio": "short:OII:2026-10-23",
+"ticker": "OII",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-11-04 00:20",
+"data": "2026-11-04 00:19",
+"prezzo": 38.17,
+"conv": 74,
+"prob_gain": 53,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-11-04",
+"soglie": {
+"media50": 45.6184,
+"media20": 42.166,
+"quattro_atr": 46.0799,
+"meta_caduta": 46.14,
+"bollinger": 47.2342,
+"consigliata": 45.6184
+},
+"stop": 34.215,
+"atr": 1.9775
 }
 ]
