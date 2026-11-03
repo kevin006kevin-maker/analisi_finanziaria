@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:LULU:2026-09-04",
-"ticker": "LULU",
-"kind": "long",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-16 01:46",
-"data": "2026-09-16 01:43",
-"prezzo": 98.37,
-"conv": 59,
-"prob_gain": 68,
-"prob_loss": 20,
-"reliab": "🟡 Media",
-"mkt": -2.0572,
-"fonte": "osservazione",
-"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-16",
-"soglie": {
-"media50": 116.4202,
-"media20": 112.3315,
-"quattro_atr": 118.7034,
-"meta_caduta": 113.475,
-"bollinger": 131.8205,
-"consigliata": 116.4202
-},
-"stop": 88.2033,
-"atr": 5.0834,
-"res": {
-"7g": 4.24,
-"30g": 1.21
-}
-},
-{
 "episodio": "long:FICO:2026-09-06",
 "ticker": "FICO",
 "kind": "long",
@@ -36766,5 +36735,32 @@
 },
 "stop": 116.888,
 "atr": 9.596
+},
+{
+"episodio": "short:GOOG:2026-10-29",
+"ticker": "GOOG",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-11-03 03:19",
+"data": "2026-11-03 03:14",
+"prezzo": 278.22,
+"conv": 66,
+"prob_gain": 54,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": -2.9914,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-11-03",
+"soglie": {
+"media50": 335.7298,
+"media20": 330.5735,
+"quattro_atr": 319.0895,
+"meta_caduta": 317.03,
+"bollinger": 372.3053,
+"consigliata": 319.0895
+},
+"stop": 257.7852,
+"atr": 10.2174
 }
 ]
