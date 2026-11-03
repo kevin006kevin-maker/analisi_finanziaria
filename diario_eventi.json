@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:RWT:2026-09-14",
-"ticker": "RWT",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-17 00:12",
-"data": "2026-09-17 00:07",
-"prezzo": 3.89,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-17",
-"soglie": {
-"media50": 4.6578,
-"media20": 4.386,
-"quattro_atr": 4.6843,
-"meta_caduta": 4.55,
-"bollinger": 5.1908,
-"consigliata": 4.6578
-},
-"stop": 3.4929,
-"atr": 0.1986,
-"res": {
-"7g": -5.27,
-"30g": -24.55,
-"soglia": -24.55
-},
-"res_soglia": {
-"media50": {
-"ret": -24.55,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -24.55,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -24.55,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -24.55,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -24.55,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -24.55,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:BYND:2026-09-17",
 "ticker": "BYND",
 "kind": "short",
@@ -36573,5 +36509,32 @@
 },
 "stop": 16.7506,
 "atr": 0.8247
+},
+{
+"episodio": "short:RSI:2026-10-28",
+"ticker": "RSI",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-11-04 00:20",
+"data": "2026-11-04 00:15",
+"prezzo": 12.53,
+"conv": 66,
+"prob_gain": 57,
+"prob_loss": 16,
+"reliab": "🟡 Media",
+"mkt": -3.1975,
+"fonte": "osservazione",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-11-04",
+"soglie": {
+"media50": 20.9584,
+"media20": 16.734,
+"quattro_atr": 16.9908,
+"meta_caduta": 19.775,
+"bollinger": 22.0801,
+"consigliata": 16.9908
+},
+"stop": 10.2996,
+"atr": 1.1152
 }
 ]
