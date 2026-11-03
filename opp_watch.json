@@ -185,7 +185,7 @@
 "long:KGC": {
 "ticker": "KGC",
 "kind": "long",
-"name": "Kinross Gold Corp",
+"name": "Kinross Gold Corporation",
 "obs": [
 {
 "date": "2026-10-29 00:11",
@@ -354,6 +354,16 @@
 "conv": null,
 "price": 20.13,
 "stale": true
+},
+{
+"date": "2026-11-03 11:02",
+"conv": 57,
+"price": 20.56,
+"mkt": -2.9914,
+"occ": 86,
+"prob_gain": 66,
+"prob_loss": 23,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -531,6 +541,16 @@
 "conv": null,
 "price": 22.05,
 "stale": true
+},
+{
+"date": "2026-11-03 11:02",
+"conv": 62,
+"price": 21.16,
+"mkt": -2.9914,
+"occ": 67,
+"prob_gain": 69,
+"prob_loss": 19,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -854,7 +874,7 @@
 "long:PBR-A": {
 "ticker": "PBR-A",
 "kind": "long",
-"name": "Petroleo Brasileiro SA Petrobras",
+"name": "PETROBRAS - PETROLEO BRASILEIRO SA",
 "obs": [
 {
 "date": "2026-10-29 00:11",
@@ -1026,6 +1046,16 @@
 "occ": 65,
 "prob_gain": 70,
 "prob_loss": 18,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-11-03 11:02",
+"conv": 71,
+"price": 18.74,
+"mkt": -2.9914,
+"occ": 80,
+"prob_gain": 84,
+"prob_loss": 7,
 "reliab": "🟡 Media"
 }
 ],
@@ -1325,6 +1355,16 @@
 "conv": null,
 "price": 13.1,
 "stale": true
+},
+{
+"date": "2026-11-03 11:02",
+"conv": 60,
+"price": 13.32,
+"mkt": -2.9914,
+"occ": 97,
+"prob_gain": 68,
+"prob_loss": 25,
+"reliab": "🔴 Bassa"
 }
 ],
 "primo": {
@@ -1532,6 +1572,16 @@
 "prob_gain": 66,
 "prob_loss": 24,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-11-03 11:02",
+"conv": 47,
+"price": 42.345,
+"mkt": -2.9914,
+"occ": 81,
+"prob_gain": 66,
+"prob_loss": 24,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -1703,6 +1753,16 @@
 "conv": null,
 "price": 16.68,
 "stale": true
+},
+{
+"date": "2026-11-03 11:02",
+"conv": 54,
+"price": 16.39,
+"mkt": -2.9914,
+"occ": 86,
+"prob_gain": 65,
+"prob_loss": 28,
+"reliab": "🔴 Bassa"
 }
 ],
 "primo": {
@@ -1736,7 +1796,7 @@
 "long:T": {
 "ticker": "T",
 "kind": "long",
-"name": "AT&T Inc.",
+"name": "AT&T INC.",
 "obs": [
 {
 "date": "2026-10-29 00:11",
@@ -1928,6 +1988,16 @@
 "occ": 61,
 "prob_gain": 53,
 "prob_loss": 24,
+"reliab": "🟢 Alta"
+},
+{
+"date": "2026-11-03 11:02",
+"conv": 55,
+"price": 21.44,
+"mkt": -2.9914,
+"occ": 64,
+"prob_gain": 69,
+"prob_loss": 14,
 "reliab": "🟢 Alta"
 }
 ],
@@ -2733,7 +2803,7 @@
 "long:NEM": {
 "ticker": "NEM",
 "kind": "long",
-"name": "Newmont Corporation",
+"name": "NEWMONT CORPORATION",
 "obs": [
 {
 "date": "2026-10-29 00:11",
@@ -2933,6 +3003,16 @@
 "occ": 83,
 "prob_gain": 69,
 "prob_loss": 20,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-11-03 11:02",
+"conv": 54,
+"price": 109.09,
+"mkt": -2.9914,
+"occ": 76,
+"prob_gain": 68,
+"prob_loss": 21,
 "reliab": "🟡 Media"
 }
 ],
@@ -4216,6 +4296,16 @@
 "prob_gain": 67,
 "prob_loss": 20,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-11-03 11:02",
+"conv": 38,
+"price": 51.42,
+"mkt": -2.9914,
+"occ": 56,
+"prob_gain": 69,
+"prob_loss": 16,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -4676,7 +4766,7 @@
 "long:HMY": {
 "ticker": "HMY",
 "kind": "long",
-"name": "Harmony Gold Mining Company Ltd",
+"name": "Harmony Gold Mining Company Lim",
 "obs": [
 {
 "date": "2026-10-29 00:11",
@@ -4855,6 +4945,16 @@
 "mkt": -2.9914,
 "occ": 100,
 "prob_gain": 68,
+"prob_loss": 23,
+"reliab": "🔴 Bassa"
+},
+{
+"date": "2026-11-03 11:02",
+"conv": 59,
+"price": 15.2,
+"mkt": -2.9914,
+"occ": 100,
+"prob_gain": 66,
 "prob_loss": 23,
 "reliab": "🔴 Bassa"
 }
@@ -5559,7 +5659,7 @@
 "long:EIX": {
 "ticker": "EIX",
 "kind": "long",
-"name": "Edison International",
+"name": "EDISON INTERNATIONAL",
 "obs": [
 {
 "date": "2026-10-29 00:11",
@@ -5734,6 +5834,16 @@
 "prob_gain": 65,
 "prob_loss": 22,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-11-03 11:02",
+"conv": 52,
+"price": 59.71,
+"mkt": -2.9914,
+"occ": 66,
+"prob_gain": 65,
+"prob_loss": 22,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -5876,6 +5986,16 @@
 "occ": 62,
 "prob_gain": 67,
 "prob_loss": 18,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-11-03 11:02",
+"conv": 52,
+"price": 13.28,
+"mkt": -2.9914,
+"occ": 62,
+"prob_gain": 66,
+"prob_loss": 20,
 "reliab": "🟡 Media"
 }
 ],
@@ -6724,6 +6844,16 @@
 "occ": 84,
 "prob_gain": 63,
 "prob_loss": 25,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-11-03 11:02",
+"conv": 45,
+"price": 35.52,
+"mkt": -2.9914,
+"occ": 80,
+"prob_gain": 59,
+"prob_loss": 29,
 "reliab": "🟡 Media"
 }
 ],
@@ -8433,6 +8563,16 @@
 "prob_gain": 63,
 "prob_loss": 26,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-11-03 11:02",
+"conv": 60,
+"price": 173.94,
+"mkt": -2.9914,
+"occ": 88,
+"prob_gain": 65,
+"prob_loss": 24,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -9649,6 +9789,16 @@
 "conv": null,
 "price": 11.61,
 "stale": true
+},
+{
+"date": "2026-11-03 11:02",
+"conv": 48,
+"price": 11.62,
+"mkt": -2.9914,
+"occ": 82,
+"prob_gain": 81,
+"prob_loss": 10,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -9766,6 +9916,16 @@
 "conv": null,
 "price": 13.73,
 "stale": true
+},
+{
+"date": "2026-11-03 11:02",
+"conv": 41,
+"price": 13.34,
+"mkt": -2.9914,
+"occ": 81,
+"prob_gain": 69,
+"prob_loss": 23,
+"reliab": "🔴 Bassa"
 }
 ],
 "primo": {
@@ -10613,7 +10773,7 @@
 "long:DAVE": {
 "ticker": "DAVE",
 "kind": "long",
-"name": "Dave Inc./DE",
+"name": "Dave Inc.",
 "obs": [
 {
 "date": "2026-10-29 00:12",
@@ -10768,6 +10928,16 @@
 "conv": null,
 "price": 316.79,
 "stale": true
+},
+{
+"date": "2026-11-03 11:02",
+"conv": 49,
+"price": 321.88,
+"mkt": -2.9914,
+"occ": 86,
+"prob_gain": 66,
+"prob_loss": 27,
+"reliab": "🔴 Bassa"
 }
 ],
 "primo": {
@@ -11177,7 +11347,7 @@
 "long:ACAD": {
 "ticker": "ACAD",
 "kind": "long",
-"name": "ACADIA PHARMACEUTICALS INC.",
+"name": "Acadia Pharmaceuticals Inc.",
 "obs": [
 {
 "date": "2026-10-29 00:11",
@@ -11377,6 +11547,16 @@
 "occ": 91,
 "prob_gain": 65,
 "prob_loss": 25,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-11-03 11:02",
+"conv": 64,
+"price": 20.47,
+"mkt": -2.9914,
+"occ": 88,
+"prob_gain": 69,
+"prob_loss": 20,
 "reliab": "🟡 Media"
 }
 ],
@@ -11633,6 +11813,16 @@
 "conv": null,
 "price": 32.92,
 "stale": true
+},
+{
+"date": "2026-11-03 11:02",
+"conv": 60,
+"price": 34.77,
+"mkt": -2.9914,
+"occ": 100,
+"prob_gain": 59,
+"prob_loss": 30,
+"reliab": "🔴 Bassa"
 }
 ],
 "primo": {
@@ -12008,6 +12198,16 @@
 "conv": null,
 "price": 21.31,
 "stale": true
+},
+{
+"date": "2026-11-03 11:02",
+"conv": 52,
+"price": 20.97,
+"mkt": -2.9914,
+"occ": 76,
+"prob_gain": 63,
+"prob_loss": 27,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -13269,7 +13469,7 @@
 "long:WDC": {
 "ticker": "WDC",
 "kind": "long",
-"name": "WESTERN DIGITAL CORPORATION",
+"name": "Western Digital Corp",
 "obs": [
 {
 "date": "2026-10-29 00:11",
@@ -13409,6 +13609,16 @@
 "occ": 96,
 "prob_gain": 62,
 "prob_loss": 31,
+"reliab": "🔴 Bassa"
+},
+{
+"date": "2026-11-03 11:02",
+"conv": 55,
+"price": 338.59,
+"mkt": -2.9914,
+"occ": 88,
+"prob_gain": 66,
+"prob_loss": 25,
 "reliab": "🔴 Bassa"
 }
 ],
@@ -13807,6 +14017,16 @@
 "conv": null,
 "price": 884.74,
 "stale": true
+},
+{
+"date": "2026-11-03 11:02",
+"conv": 61,
+"price": 833.59,
+"mkt": -2.9914,
+"occ": 89,
+"prob_gain": 69,
+"prob_loss": 23,
+"reliab": "🔴 Bassa"
 }
 ],
 "primo": {
@@ -14188,7 +14408,7 @@
 "long:BCE": {
 "ticker": "BCE",
 "kind": "long",
-"name": "BCE, Inc.",
+"name": "BCE Inc",
 "obs": [
 {
 "date": "2026-10-29 00:11",
@@ -14379,6 +14599,16 @@
 "prob_gain": 79,
 "prob_loss": 6,
 "reliab": "🟢 Alta"
+},
+{
+"date": "2026-11-03 11:02",
+"conv": 63,
+"price": 20.67,
+"mkt": -2.9914,
+"occ": 65,
+"prob_gain": 78,
+"prob_loss": 6,
+"reliab": "🟢 Alta"
 }
 ],
 "primo": {
@@ -14504,7 +14734,7 @@
 "long:AA": {
 "ticker": "AA",
 "kind": "long",
-"name": "ALCOA CORP",
+"name": "Alcoa Corp",
 "obs": [
 {
 "date": "2026-10-29 00:11",
@@ -14678,6 +14908,16 @@
 "occ": 90,
 "prob_gain": 65,
 "prob_loss": 24,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-11-03 11:02",
+"conv": 56,
+"price": 39.9,
+"mkt": -2.9914,
+"occ": 85,
+"prob_gain": 62,
+"prob_loss": 28,
 "reliab": "🟡 Media"
 }
 ],
@@ -15038,6 +15278,16 @@
 "conv": null,
 "price": 9.87,
 "stale": true
+},
+{
+"date": "2026-11-03 11:02",
+"conv": 72,
+"price": 10.1,
+"mkt": -2.9914,
+"occ": 83,
+"prob_gain": 74,
+"prob_loss": 17,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -15538,6 +15788,16 @@
 "conv": null,
 "price": 11.19,
 "stale": true
+},
+{
+"date": "2026-11-03 11:02",
+"conv": 70,
+"price": 11.46,
+"mkt": -2.9914,
+"occ": 70,
+"prob_gain": 81,
+"prob_loss": 7,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -16409,7 +16669,7 @@
 "long:FFIV": {
 "ticker": "FFIV",
 "kind": "long",
-"name": "F5, INC.",
+"name": "F5, Inc.",
 "obs": [
 {
 "date": "2026-10-29 00:11",
@@ -16580,6 +16840,16 @@
 "mkt": -2.9914,
 "occ": 72,
 "prob_gain": 93,
+"prob_loss": 2,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-11-03 11:02",
+"conv": 69,
+"price": 324.55,
+"mkt": -2.9914,
+"occ": 81,
+"prob_gain": 95,
 "prob_loss": 2,
 "reliab": "🟡 Media"
 }
