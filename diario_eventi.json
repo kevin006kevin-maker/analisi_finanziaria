@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:WOLF:2026-09-16",
-"ticker": "WOLF",
-"kind": "short",
-"evento": "uscita",
-"scritto_il": "2026-09-16 01:45",
-"data": "2026-09-16 01:45",
-"prezzo": 24.02,
-"conv": 63,
-"prob_gain": 49,
-"prob_loss": 32,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "in perdita da 30 giorni di Borsa: valuta l'uscita",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:FRVO:2026-08-24",
 "ticker": "FRVO",
 "kind": "short",
@@ -36964,5 +36944,32 @@
 },
 "stop": 98.5653,
 "atr": 4.0224
+},
+{
+"episodio": "short:BAMI.MI:2026-10-27",
+"ticker": "BAMI.MI",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-11-03 03:18",
+"data": "2026-11-03 03:17",
+"prezzo": 13.645,
+"conv": 69,
+"prob_gain": 46,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-11-03",
+"soglie": {
+"media50": 15.2601,
+"media20": 14.0295,
+"quattro_atr": 15.184,
+"meta_caduta": 15.375,
+"bollinger": 15.5318,
+"consigliata": 15.184
+},
+"stop": 12.8755,
+"atr": 0.3848
 }
 ]
