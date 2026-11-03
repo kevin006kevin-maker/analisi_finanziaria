@@ -20048,5 +20048,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "TWLO",
+"kind": "short",
+"date": "2026-11-04",
+"promo_price": 213.77,
+"obs_price": 200.695,
+"obs_date": "2026-10-30",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": 256.0896,
+"stop": 178.729,
+"reliab": "🔴 Bassa",
+"prob_gain": 49,
+"prob_loss": 17,
+"conv": 66,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-30 16:19",
+"prezzo": 200.695,
+"conv": 64,
+"prob_gain": 50,
+"prob_loss": 16,
+"reliab": "🔴 Bassa",
+"mkt": -1.4459
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-04 00:18",
+"prezzo": 213.77,
+"conv": 66,
+"prob_gain": 49,
+"prob_loss": 17,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
