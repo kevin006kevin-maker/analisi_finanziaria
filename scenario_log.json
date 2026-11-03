@@ -13426,7 +13426,10 @@
 "conv": 76,
 "res": {
 "osservazione|7g": -14.93,
-"promozione|7g": -4.25
+"promozione|7g": -4.25,
+"osservazione|30g": -14.1,
+"promozione|30g": -3.32,
+"conferma|30g": -0.78
 },
 "passaggi": {
 "osservazione": {
@@ -13488,7 +13491,10 @@
 "conv": 71,
 "res": {
 "osservazione|7g": -30.59,
-"promozione|7g": -29.37
+"promozione|7g": -29.37,
+"osservazione|30g": -40.55,
+"promozione|30g": -39.51,
+"conferma|30g": -22.54
 },
 "passaggi": {
 "osservazione": {
@@ -13587,7 +13593,14 @@
 "res": {
 "anticipo|7g": -7.26,
 "osservazione|7g": -0.99,
-"promozione|7g": -0.14
+"promozione|7g": -0.14,
+"anticipo|30g": -27.77,
+"osservazione|30g": -22.89,
+"promozione|30g": -22.23,
+"conferma|30g": -26.81,
+"anticipo|bersaglio": 1.87,
+"osservazione|bersaglio": 8.75,
+"promozione|bersaglio": 9.68
 }
 },
 {
@@ -13648,7 +13661,15 @@
 "res": {
 "anticipo|7g": -10.26,
 "osservazione|7g": -11.38,
-"promozione|7g": -6.18
+"promozione|7g": -6.18,
+"anticipo|30g": -3.66,
+"osservazione|30g": -4.86,
+"promozione|30g": 0.72,
+"conferma|30g": 5.55,
+"anticipo|bersaglio": -3.66,
+"osservazione|bersaglio": -4.86,
+"promozione|bersaglio": 0.72,
+"conferma|bersaglio": 5.55
 }
 },
 {
@@ -13709,7 +13730,15 @@
 "res": {
 "anticipo|7g": 12.44,
 "osservazione|7g": 13.17,
-"promozione|7g": 12.95
+"promozione|7g": 12.95,
+"anticipo|30g": 30.0,
+"osservazione|30g": 30.84,
+"promozione|30g": 30.58,
+"conferma|30g": 17.88,
+"anticipo|bersaglio": 17.66,
+"osservazione|bersaglio": 18.42,
+"promozione|bersaglio": 18.18,
+"conferma|bersaglio": 6.69
 }
 },
 {
@@ -13770,7 +13799,15 @@
 "res": {
 "anticipo|7g": 11.29,
 "osservazione|7g": 10.19,
-"promozione|7g": 5.29
+"promozione|7g": 5.29,
+"anticipo|30g": 5.77,
+"osservazione|30g": 4.72,
+"promozione|30g": 0.07,
+"conferma|30g": -7.26,
+"anticipo|bersaglio": 5.77,
+"osservazione|bersaglio": 4.72,
+"promozione|bersaglio": 0.07,
+"conferma|bersaglio": -7.26
 }
 },
 {
@@ -13831,7 +13868,15 @@
 "res": {
 "anticipo|7g": 1.88,
 "osservazione|7g": -3.88,
-"promozione|7g": 0.06
+"promozione|7g": 0.06,
+"anticipo|30g": -1.65,
+"osservazione|30g": -7.21,
+"promozione|30g": -3.4,
+"conferma|30g": -9.22,
+"anticipo|bersaglio": -1.65,
+"osservazione|bersaglio": -7.21,
+"promozione|bersaglio": -3.4,
+"conferma|bersaglio": -9.22
 }
 },
 {
@@ -18015,8 +18060,8 @@
 "obs_date": "2026-10-22",
 "pre_price": 114.04,
 "pre_date": "2026-10-23",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 129.96499633789062,
+"conf_date": "2026-11-03",
 "target": 138.7368,
 "stop": 114.5175,
 "reliab": "🟢 Alta",
@@ -18052,16 +18097,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-11-03",
+"prezzo": 129.96499633789062,
+"conv": 63,
+"prob_gain": 44,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": 13.96,
+"osservazione|7g": 13.96,
+"promozione|7g": 4.84
+}
 },
 {
 "ticker": "CRS",
@@ -18074,15 +18123,18 @@
 "obs_date": "2026-10-22",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 296.94000244140625,
+"conf_date": "2026-11-03",
 "target": null,
 "stop": null,
 "reliab": "🟡 Media",
 "prob_gain": 54,
 "prob_loss": 6,
 "conv": 71,
-"res": {},
+"res": {
+"osservazione|7g": 3.62,
+"promozione|7g": 4.31
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-10-22 20:10",
@@ -18112,12 +18164,12 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-11-03",
+"prezzo": 296.94000244140625,
+"conv": 81,
+"prob_gain": 53,
+"prob_loss": 10,
+"reliab": "🟡 Media",
 "mkt": null
 }
 }
