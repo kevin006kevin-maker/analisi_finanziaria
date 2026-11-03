@@ -27370,5 +27370,69 @@
 "giorni": 2
 }
 }
+},
+{
+"episodio": "short:KAI:2026-09-11",
+"ticker": "KAI",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-16 01:46",
+"data": "2026-09-16 01:41",
+"prezzo": 265.56,
+"conv": 78,
+"prob_gain": 52,
+"prob_loss": 6,
+"reliab": "🟡 Media",
+"mkt": -2.0572,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-16",
+"soglie": {
+"media50": 307.9838,
+"media20": 297.006,
+"quattro_atr": 309.5031,
+"meta_caduta": 301.945,
+"bollinger": 327.7323,
+"consigliata": 307.9838
+},
+"stop": 243.5884,
+"atr": 10.9858,
+"res": {
+"7g": 3.45,
+"30g": -1.15,
+"soglia": -1.15
+},
+"res_soglia": {
+"media50": {
+"ret": -1.15,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -1.15,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -1.15,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -1.15,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -1.15,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -1.15,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
