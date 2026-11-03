@@ -19804,5 +19804,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "CHRW",
+"kind": "short",
+"date": "2026-11-03",
+"promo_price": 130.695,
+"obs_price": 127.6,
+"obs_date": "2026-10-29",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": 144.7741,
+"stop": 119.5325,
+"reliab": "🟡 Media",
+"prob_gain": 54,
+"prob_loss": 13,
+"conv": 79,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-29 00:10",
+"prezzo": 127.6,
+"conv": 62,
+"prob_gain": 55,
+"prob_loss": 11,
+"reliab": "🟡 Media",
+"mkt": 1.2081
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-03 18:50",
+"prezzo": 130.695,
+"conv": 79,
+"prob_gain": 54,
+"prob_loss": 13,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
