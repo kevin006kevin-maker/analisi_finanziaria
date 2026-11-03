@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:JBHT:2026-09-16",
-"ticker": "JBHT",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-16 16:54",
-"data": "2026-09-16 16:54",
-"prezzo": 238.581,
-"conv": 66,
-"prob_gain": 53,
-"prob_loss": 3,
-"reliab": "🟡 Media",
-"mkt": -1.0814,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 273.95,
-"media20": 266.1081,
-"quattro_atr": 277.5409,
-"meta_caduta": 268.4955,
-"bollinger": 283.6504,
-"consigliata": 273.95
-},
-"stop": 219.1011,
-"atr": 9.74,
-"res": {
-"7g": -0.85,
-"30g": -3.5,
-"soglia": -3.5
-},
-"res_soglia": {
-"media50": {
-"ret": -3.5,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -3.5,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -3.5,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -3.5,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -3.5,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -3.5,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:YSS:2026-09-05",
 "ticker": "YSS",
 "kind": "short",
@@ -36625,5 +36561,32 @@
 "stop": 163.5382,
 "atr": 5.9309,
 "res": {}
+},
+{
+"episodio": "long:CDE:2026-11-03",
+"ticker": "CDE",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-11-03 18:50",
+"data": "2026-11-03 18:50",
+"prezzo": 13.335,
+"conv": 66,
+"prob_gain": 67,
+"prob_loss": 24,
+"reliab": "🔴 Bassa",
+"mkt": -3.1018,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 17.8271,
+"media20": 14.9183,
+"quattro_atr": 16.4617,
+"meta_caduta": 17.7725,
+"bollinger": 17.5122,
+"consigliata": 16.4617
+},
+"stop": 11.7717,
+"atr": 0.7817
 }
 ]
