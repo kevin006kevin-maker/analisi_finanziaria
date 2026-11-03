@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:JBHT:2026-09-16",
-"ticker": "JBHT",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-17 02:32",
-"data": "2026-09-17 02:28",
-"prezzo": 273.05,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 238.581",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:ON:2026-09-16",
 "ticker": "ON",
 "kind": "short",
@@ -36425,5 +36405,32 @@
 },
 "stop": 178.729,
 "atr": 17.5205
+},
+{
+"episodio": "short:SKYW:2026-10-31",
+"ticker": "SKYW",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-11-04 00:20",
+"data": "2026-11-04 00:15",
+"prezzo": 77.7,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-11-04",
+"soglie": {
+"media50": 95.5894,
+"media20": 92.287,
+"quattro_atr": 93.3397,
+"meta_caduta": 93.03,
+"bollinger": 103.1108,
+"consigliata": 93.3397
+},
+"stop": 69.8802,
+"atr": 3.9099
 }
 ]
