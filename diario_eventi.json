@@ -1,47 +1,5 @@
 [
 {
-"episodio": "long:ONON:2026-09-04",
-"ticker": "ONON",
-"kind": "long",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-16 01:46",
-"data": "2026-09-15 23:17",
-"prezzo": 26.76,
-"conv": 68,
-"prob_gain": 69,
-"prob_loss": 19,
-"reliab": "🟡 Media",
-"mkt": -2.06,
-"fonte": "osservazione",
-"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-16",
-"soglie": {
-"media50": 33.205,
-"media20": 28.528,
-"quattro_atr": 30.8356,
-"meta_caduta": 32.77,
-"bollinger": 31.1991,
-"consigliata": 30.8356
-},
-"stop": 24.7222,
-"atr": 1.0189,
-"soglie_contaminate": {
-"media50": 33.205,
-"media20": 28.528,
-"quattro_atr": 30.8356,
-"meta_caduta": 32.77,
-"bollinger": 31.1991,
-"consigliata": 30.8356
-},
-"soglie_ricalcolate_il": "2026-09-16 01:47",
-"taglio_corretto": true,
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": 10.84,
-"30g": 33.59
-}
-},
-{
 "episodio": "long:FIS:2026-09-04",
 "ticker": "FIS",
 "kind": "long",
@@ -36796,5 +36754,32 @@
 },
 "stop": 44.8915,
 "atr": 1.8943
+},
+{
+"episodio": "short:GOOGL:2026-10-29",
+"ticker": "GOOGL",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-11-03 03:19",
+"data": "2026-11-03 03:14",
+"prezzo": 278.99,
+"conv": 65,
+"prob_gain": 51,
+"prob_loss": 3,
+"reliab": "🟢 Alta",
+"mkt": -2.9914,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-11-03",
+"soglie": {
+"media50": 337.7552,
+"media20": 330.5325,
+"quattro_atr": 319.9825,
+"meta_caduta": 318.255,
+"bollinger": 379.5301,
+"consigliata": 319.9825
+},
+"stop": 258.4937,
+"atr": 10.2481
 }
 ]
