@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:XLI:2026-09-16",
-"ticker": "XLI",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-16 20:52",
-"data": "2026-09-16 20:52",
-"prezzo": 168.95,
-"conv": 63,
-"prob_gain": 51,
-"prob_loss": 0,
-"reliab": "🟢 Alta",
-"mkt": -1.4977,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 179.438,
-"media20": 175.149,
-"quattro_atr": 178.7169,
-"meta_caduta": 177.73,
-"bollinger": 183.3712,
-"consigliata": 178.7169
-},
-"stop": 164.0665,
-"atr": 2.4417,
-"res": {
-"7g": 0.95,
-"30g": 0.1,
-"soglia": 0.1
-},
-"res_soglia": {
-"media50": {
-"ret": 0.1,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 0.1,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 0.1,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 0.1,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 0.1,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 0.1,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:HBAN:2026-09-16",
 "ticker": "HBAN",
 "kind": "short",
@@ -36777,5 +36713,32 @@
 },
 "stop": 431.7885,
 "atr": 24.4307
+},
+{
+"episodio": "short:TWLO:2026-10-30",
+"ticker": "TWLO",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-11-04 00:18",
+"data": "2026-11-04 00:18",
+"prezzo": 213.77,
+"conv": 66,
+"prob_gain": 49,
+"prob_loss": 17,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 256.0896,
+"media20": 256.487,
+"quattro_atr": 283.8521,
+"meta_caduta": 257.52,
+"bollinger": 304.5614,
+"consigliata": 256.0896
+},
+"stop": 178.729,
+"atr": 17.5205
 }
 ]
