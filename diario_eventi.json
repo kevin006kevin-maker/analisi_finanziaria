@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:LULG:2026-09-04",
-"ticker": "LULG",
-"kind": "short",
-"evento": "fine_verifica",
-"scritto_il": "2026-09-17 00:12",
-"data": "2026-09-17 00:11",
-"prezzo": 3.8435,
-"conv": 66,
-"prob_gain": 53,
-"prob_loss": 23,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 5 giorni di Borsa dalla promozione",
-"dovuto_il": "2026-09-17",
-"soglie": {
-"media50": 6.0751,
-"media20": 5.4405,
-"quattro_atr": 5.7786,
-"meta_caduta": 5.6692,
-"bollinger": 7.688,
-"consigliata": 5.7786
-},
-"stop": 2.876,
-"atr": 0.4838,
-"res": {
-"7g": 9.28,
-"30g": -1.39,
-"soglia": -1.39
-},
-"res_soglia": {
-"media50": {
-"ret": -1.39,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -1.39,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -1.39,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -1.39,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -1.39,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -1.39,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:PST.MI:2026-09-07",
 "ticker": "PST.MI",
 "kind": "short",
@@ -36684,5 +36620,32 @@
 },
 "stop": 34.215,
 "atr": 1.9775
+},
+{
+"episodio": "short:FIX:2026-10-24",
+"ticker": "FIX",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-11-04 00:20",
+"data": "2026-11-04 00:19",
+"prezzo": 1285.13,
+"conv": 73,
+"prob_gain": 54,
+"prob_loss": 11,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-11-04",
+"soglie": {
+"media50": 1546.0548,
+"media20": 1425.777,
+"quattro_atr": 1627.8804,
+"meta_caduta": 1583.155,
+"bollinger": 1791.4269,
+"consigliata": 1546.0548
+},
+"stop": 1113.7548,
+"atr": 85.6876
 }
 ]
