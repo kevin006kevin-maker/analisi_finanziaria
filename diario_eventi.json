@@ -1,75 +1,5 @@
 [
 {
-"episodio": "short:MXL:2026-09-03",
-"ticker": "MXL",
-"kind": "short",
-"evento": "fine_verifica",
-"scritto_il": "2026-09-16 01:46",
-"data": "2026-09-15 23:18",
-"prezzo": 67.12,
-"conv": 58,
-"prob_gain": 38,
-"prob_loss": 38,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 5 giorni di Borsa dalla promozione",
-"dovuto_il": "2026-09-16",
-"soglie": {
-"media50": 72.276,
-"media20": null,
-"quattro_atr": 90.7806,
-"meta_caduta": 97.575,
-"bollinger": 74.1199,
-"consigliata": 72.276
-},
-"stop": 55.2897,
-"atr": 5.9152,
-"soglie_contaminate": {
-"media50": 72.276,
-"media20": null,
-"quattro_atr": 90.7806,
-"meta_caduta": 97.575,
-"bollinger": 74.1199,
-"consigliata": 72.276
-},
-"soglie_ricalcolate_il": "2026-09-16 01:47",
-"taglio_corretto": true,
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": 26.94,
-"30g": 11.55,
-"soglia": 7.68
-},
-"res_soglia": {
-"media50": {
-"ret": 7.68,
-"toccato": true,
-"giorni": 2
-},
-"quattro_atr": {
-"ret": 35.25,
-"toccato": true,
-"giorni": 10
-},
-"meta_caduta": {
-"ret": 45.37,
-"toccato": true,
-"giorni": 17
-},
-"bollinger": {
-"ret": 10.43,
-"toccato": true,
-"giorni": 2
-},
-"consigliata": {
-"ret": 7.68,
-"toccato": true,
-"giorni": 2
-}
-}
-},
-{
 "episodio": "short:RXT:2026-09-03",
 "ticker": "RXT",
 "kind": "short",
@@ -36978,5 +36908,32 @@
 },
 "stop": 295.9036,
 "atr": 21.2182
+},
+{
+"episodio": "short:LSTR:2026-10-29",
+"ticker": "LSTR",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-11-03 03:18",
+"data": "2026-11-03 03:16",
+"prezzo": 142.7,
+"conv": 83,
+"prob_gain": 56,
+"prob_loss": 6,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-11-03",
+"soglie": {
+"media50": 170.039,
+"media20": 164.827,
+"quattro_atr": 166.5767,
+"meta_caduta": 168.04,
+"bollinger": 185.7667,
+"consigliata": 166.5767
+},
+"stop": 130.7616,
+"atr": 5.9692
 }
 ]
