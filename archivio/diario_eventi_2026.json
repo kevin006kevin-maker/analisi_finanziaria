@@ -27498,5 +27498,69 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:JBHT:2026-09-16",
+"ticker": "JBHT",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-16 16:54",
+"data": "2026-09-16 16:54",
+"prezzo": 238.581,
+"conv": 66,
+"prob_gain": 53,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": -1.0814,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 273.95,
+"media20": 266.1081,
+"quattro_atr": 277.5409,
+"meta_caduta": 268.4955,
+"bollinger": 283.6504,
+"consigliata": 273.95
+},
+"stop": 219.1011,
+"atr": 9.74,
+"res": {
+"7g": -0.85,
+"30g": -3.5,
+"soglia": -3.5
+},
+"res_soglia": {
+"media50": {
+"ret": -3.5,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -3.5,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -3.5,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -3.5,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -3.5,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -3.5,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
