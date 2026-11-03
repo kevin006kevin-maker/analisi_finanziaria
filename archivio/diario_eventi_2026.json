@@ -28300,5 +28300,69 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:BYND:2026-09-17",
+"ticker": "BYND",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-17 02:28",
+"data": "2026-09-17 02:28",
+"prezzo": 9.99,
+"conv": 66,
+"prob_gain": 50,
+"prob_loss": 29,
+"reliab": "🔴 Bassa",
+"mkt": -1.8195,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 15.18,
+"media20": 12.4985,
+"quattro_atr": 13.7698,
+"meta_caduta": 16.245,
+"bollinger": 15.8281,
+"consigliata": 13.7698
+},
+"stop": 8.1001,
+"atr": 0.945,
+"res": {
+"7g": -6.66,
+"30g": -31.08,
+"soglia": -31.08
+},
+"res_soglia": {
+"media50": {
+"ret": -31.08,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -31.08,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -31.08,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -31.08,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -31.08,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -31.08,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
