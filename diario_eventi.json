@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:WING:2026-09-16",
-"ticker": "WING",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-16 20:55",
-"data": "2026-09-16 20:52",
-"prezzo": 103.81,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 100.84",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "long:NLY:2026-09-16",
 "ticker": "NLY",
 "kind": "long",
@@ -36696,5 +36676,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:MB.MI:2026-10-05",
+"ticker": "MB.MI",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-11-04 00:20",
+"data": "2026-11-04 00:19",
+"prezzo": 25.61,
+"conv": 63,
+"prob_gain": 50,
+"prob_loss": 6,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-11-04",
+"soglie": {
+"media50": 27.1012,
+"media20": null,
+"quattro_atr": 28.0096,
+"meta_caduta": 27.33,
+"bollinger": 26.1389,
+"consigliata": 27.1012
+},
+"stop": 24.4102,
+"atr": 0.5999
 }
 ]
