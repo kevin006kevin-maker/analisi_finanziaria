@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:RWT:2026-09-14",
-"ticker": "RWT",
-"kind": "short",
-"evento": "promozione",
-"scritto_il": "2026-09-17 02:30",
-"data": "2026-09-17 02:30",
-"prezzo": 3.91,
-"conv": 79,
-"prob_gain": 52,
-"prob_loss": 3,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": 4.6744,
-"media20": 4.428,
-"quattro_atr": 4.73,
-"meta_caduta": 4.56,
-"bollinger": 5.2112,
-"consigliata": 4.6744
-},
-"stop": 3.5,
-"atr": 0.205,
-"res": {
-"7g": -5.75,
-"30g": -24.94,
-"soglia": -24.94
-},
-"res_soglia": {
-"media50": {
-"ret": -24.94,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -24.94,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -24.94,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -24.94,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -24.94,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -24.94,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:JBHT:2026-09-16",
 "ticker": "JBHT",
 "kind": "short",
@@ -36462,5 +36398,32 @@
 },
 "stop": 431.7885,
 "atr": 24.4307
+},
+{
+"episodio": "short:TWLO:2026-10-30",
+"ticker": "TWLO",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-11-04 00:20",
+"data": "2026-11-04 00:18",
+"prezzo": 213.77,
+"conv": 66,
+"prob_gain": 49,
+"prob_loss": 17,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-11-04",
+"soglie": {
+"media50": 256.0896,
+"media20": 256.487,
+"quattro_atr": 283.8521,
+"meta_caduta": 257.52,
+"bollinger": 304.5614,
+"consigliata": 256.0896
+},
+"stop": 178.729,
+"atr": 17.5205
 }
 ]
