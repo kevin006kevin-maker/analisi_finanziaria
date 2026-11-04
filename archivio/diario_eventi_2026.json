@@ -28744,5 +28744,69 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:KAI:2026-09-11",
+"ticker": "KAI",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-09-17 07:20",
+"data": "2026-09-17 07:20",
+"prezzo": 272.49,
+"conv": 78,
+"prob_gain": 52,
+"prob_loss": 6,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 307.3244,
+"media20": 295.024,
+"quattro_atr": 316.1011,
+"meta_caduta": 305.41,
+"bollinger": 327.3892,
+"consigliata": 307.3244
+},
+"stop": 250.6845,
+"atr": 10.9028,
+"res": {
+"7g": -0.07,
+"30g": -3.88,
+"soglia": -3.88
+},
+"res_soglia": {
+"media50": {
+"ret": -3.88,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -3.88,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -3.88,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -3.88,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -3.88,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -3.88,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
