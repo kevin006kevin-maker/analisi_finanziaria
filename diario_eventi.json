@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:ON:2026-09-16",
-"ticker": "ON",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-17 02:32",
-"data": "2026-09-17 02:28",
-"prezzo": 73.2,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 67.01",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:HBAN:2026-09-16",
 "ticker": "HBAN",
 "kind": "short",
@@ -36432,5 +36412,32 @@
 },
 "stop": 69.8802,
 "atr": 3.9099
+},
+{
+"episodio": "short:DT:2026-11-04",
+"ticker": "DT",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-11-04 04:13",
+"data": "2026-11-04 04:13",
+"prezzo": 47.03,
+"conv": 64,
+"prob_gain": 61,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": -3.1975,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 57.6602,
+"media20": 61.576,
+"quattro_atr": 58.2106,
+"meta_caduta": 56.14,
+"bollinger": 70.0769,
+"consigliata": 57.6602
+},
+"stop": 41.4397,
+"atr": 2.7952
 }
 ]
