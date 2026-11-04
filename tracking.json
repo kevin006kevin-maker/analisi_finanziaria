@@ -2505,7 +2505,8 @@
 },
 "incasso_notified": true,
 "max_price": 119.355,
-"max_date": "2026-11-04 19:53"
+"max_date": "2026-11-04 19:53",
+"exit_notified": true
 },
 "QQQ": {
 "kind": "short",
@@ -5308,7 +5309,8 @@
 "motivo": "bersaglio 23.99 raggiunto (sei a +16.9%): valuta di incassare",
 "urgenza": "incassa",
 "tipo": "bersaglio"
-}
+},
+"exit_notified": true
 },
 "FICO": {
 "kind": "short",
@@ -5558,7 +5560,8 @@
 "urgenza": "incassa",
 "tipo": "bersaglio"
 },
-"incasso_notified": true
+"incasso_notified": true,
+"exit_notified": true
 },
 "PLNT": {
 "kind": "short",
@@ -5684,7 +5687,7 @@
 "urgenza": "incassa",
 "tipo": "bersaglio"
 },
-"exit_notified": false
+"exit_notified": true
 },
 "SAH": {
 "kind": "short",
@@ -6039,7 +6042,8 @@
 "motivo": "bersaglio 56.71 raggiunto (sei a +5.7%): valuta di incassare",
 "urgenza": "incassa",
 "tipo": "bersaglio"
-}
+},
+"exit_notified": true
 },
 "TDOC": {
 "kind": "short",
