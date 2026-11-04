@@ -20259,5 +20259,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "EDU",
+"kind": "short",
+"date": "2026-11-04",
+"promo_price": 50.33,
+"obs_price": 50.72,
+"obs_date": "2026-10-29",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": 56.6018,
+"stop": 46.658,
+"reliab": "🟡 Media",
+"prob_gain": 55,
+"prob_loss": 5,
+"conv": 70,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-29 00:10",
+"prezzo": 50.72,
+"conv": 61,
+"prob_gain": 54,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": 1.2081
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-04 12:34",
+"prezzo": 50.33,
+"conv": 70,
+"prob_gain": 55,
+"prob_loss": 5,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
