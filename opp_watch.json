@@ -4444,6 +4444,16 @@
 "prob_gain": 51,
 "prob_loss": 15,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-11-04 04:13",
+"conv": 51,
+"price": 228.21,
+"mkt": -3.1975,
+"occ": 63,
+"prob_gain": 51,
+"prob_loss": 15,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -10410,6 +10420,16 @@
 "prob_gain": 57,
 "prob_loss": 16,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-11-04 04:13",
+"conv": 67,
+"price": 12.53,
+"mkt": -3.1975,
+"occ": 89,
+"prob_gain": 57,
+"prob_loss": 16,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -14003,26 +14023,7 @@
 "ticker": "RKT",
 "kind": "short",
 "name": "RKT",
-"obs": [
-{
-"date": "2026-10-07 22:36",
-"conv": null,
-"price": 11.44,
-"stale": true
-},
-{
-"date": "2026-10-11 08:25",
-"conv": null,
-"price": 11.48,
-"stale": true
-},
-{
-"date": "2026-10-12 21:00",
-"conv": null,
-"price": 11.015,
-"stale": true
-}
-],
+"obs": [],
 "primo": {
 "date": "2026-10-02 02:11",
 "conv": 63,
@@ -14032,7 +14033,8 @@
 "prob_gain": 52,
 "prob_loss": 8,
 "reliab": "🟡 Media"
-}
+},
+"ripartita": "2026-11-04"
 },
 "short:PPC": {
 "ticker": "PPC",
@@ -16206,6 +16208,16 @@
 "prob_gain": 47,
 "prob_loss": 17,
 "reliab": "🔴 Bassa"
+},
+{
+"date": "2026-11-04 04:13",
+"conv": 57,
+"price": 18.91,
+"mkt": -3.1975,
+"occ": 53,
+"prob_gain": 47,
+"prob_loss": 17,
+"reliab": "🔴 Bassa"
 }
 ],
 "primo": {
@@ -16332,6 +16344,16 @@
 {
 "date": "2026-11-04 00:15",
 "conv": 57,
+"price": 296.72,
+"mkt": -3.1975,
+"occ": 68,
+"prob_gain": 52,
+"prob_loss": 11,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-11-04 04:13",
+"conv": 59,
 "price": 296.72,
 "mkt": -3.1975,
 "occ": 68,
@@ -18987,6 +19009,16 @@
 "prob_gain": 54,
 "prob_loss": 6,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-11-04 04:13",
+"conv": 66,
+"price": 96.26,
+"mkt": -3.1975,
+"occ": 81,
+"prob_gain": 54,
+"prob_loss": 6,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -19491,6 +19523,16 @@
 "prob_gain": 51,
 "prob_loss": 0,
 "reliab": "🟢 Alta"
+},
+{
+"date": "2026-11-04 04:13",
+"conv": 72,
+"price": 685.28,
+"mkt": -3.1975,
+"occ": 57,
+"prob_gain": 51,
+"prob_loss": 0,
+"reliab": "🟢 Alta"
 }
 ],
 "primo": {
@@ -19541,6 +19583,33 @@
 "prob_gain": 52,
 "prob_loss": 0,
 "reliab": "🟢 Alta"
+}
+},
+"short:DT": {
+"ticker": "DT",
+"kind": "short",
+"name": "DT",
+"obs": [
+{
+"date": "2026-11-04 04:13",
+"conv": 64,
+"price": 47.03,
+"mkt": -3.1975,
+"occ": 42,
+"prob_gain": 61,
+"prob_loss": 4,
+"reliab": "🟡 Media"
+}
+],
+"primo": {
+"date": "2026-11-04 04:13",
+"conv": 64,
+"price": 47.03,
+"mkt": -3.1975,
+"occ": 42,
+"prob_gain": 61,
+"prob_loss": 4,
+"reliab": "🟡 Media"
 }
 }
 }
