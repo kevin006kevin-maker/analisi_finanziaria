@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:HBAN:2026-09-16",
-"ticker": "HBAN",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-17 07:20",
-"data": "2026-09-17 07:19",
-"prezzo": 15.82,
-"conv": 69,
-"prob_gain": 51,
-"prob_loss": 1,
-"reliab": "🟢 Alta",
-"mkt": -1.8195,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 17.337,
-"media20": 16.821,
-"quattro_atr": 17.3577,
-"meta_caduta": 17.19,
-"bollinger": 17.4134,
-"consigliata": 17.337
-},
-"stop": 15.0512,
-"atr": 0.3844,
-"res": {
-"7g": -3.07,
-"30g": -3.41,
-"soglia": -3.41
-},
-"res_soglia": {
-"media50": {
-"ret": -3.41,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -3.41,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -3.41,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -3.41,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -3.41,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -3.41,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:KAI:2026-09-11",
 "ticker": "KAI",
 "kind": "short",
@@ -36541,5 +36477,32 @@
 },
 "stop": 62.1126,
 "atr": 8.4837
+},
+{
+"episodio": "short:GOOG:2026-10-29",
+"ticker": "GOOG",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-11-04 19:53",
+"data": "2026-11-04 19:53",
+"prezzo": 288.92,
+"conv": 82,
+"prob_gain": 49,
+"prob_loss": 4,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 332.0408,
+"media20": 321.0455,
+"quattro_atr": 330.2941,
+"meta_caduta": 319.895,
+"bollinger": 373.4263,
+"consigliata": 330.2941
+},
+"stop": 268.233,
+"atr": 10.3435
 }
 ]
