@@ -28680,5 +28680,69 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:HBAN:2026-09-16",
+"ticker": "HBAN",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-17 07:20",
+"data": "2026-09-17 07:19",
+"prezzo": 15.82,
+"conv": 69,
+"prob_gain": 51,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": -1.8195,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 17.337,
+"media20": 16.821,
+"quattro_atr": 17.3577,
+"meta_caduta": 17.19,
+"bollinger": 17.4134,
+"consigliata": 17.337
+},
+"stop": 15.0512,
+"atr": 0.3844,
+"res": {
+"7g": -3.07,
+"30g": -3.41,
+"soglia": -3.41
+},
+"res_soglia": {
+"media50": {
+"ret": -3.41,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -3.41,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -3.41,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -3.41,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -3.41,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -3.41,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
