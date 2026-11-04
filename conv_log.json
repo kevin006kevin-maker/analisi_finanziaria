@@ -1,69 +1,6 @@
 [
 {
 "date": "2026-10-27",
-"ticker": "ISP.MI",
-"kind": "short",
-"price": 5.86,
-"conv": 63,
-"factors": {
-"discount": 15.2812,
-"histcheap": 0.24,
-"riskadj": 0.13,
-"ddpen": -6.82,
-"momentum": 4.6844,
-"prob": 53,
-"oversold": -30.8255,
-"rebound": 11.7618,
-"trend": -1.0,
-"relstrength": -4.5029
-},
-"ret_5d": 1.19,
-"ret_21d": null
-},
-{
-"date": "2026-10-27",
-"ticker": "UCG.MI",
-"kind": "short",
-"price": 72.04,
-"conv": 60,
-"factors": {
-"discount": 16.3784,
-"histcheap": 0.18,
-"riskadj": 0.55,
-"ddpen": -8.79,
-"momentum": 5.4469,
-"prob": 49,
-"oversold": -32.1337,
-"rebound": 12.7177,
-"trend": -1.0,
-"relstrength": -5.2654
-},
-"ret_5d": 2.28,
-"ret_21d": null
-},
-{
-"date": "2026-10-27",
-"ticker": "ENEL.MI",
-"kind": "short",
-"price": 9.218,
-"conv": 53,
-"factors": {
-"discount": 10.3307,
-"histcheap": 0.38,
-"riskadj": 0.29,
-"ddpen": -6.6,
-"momentum": -0.3374,
-"prob": 47,
-"oversold": -59.615,
-"rebound": -1.7711,
-"trend": -1.0,
-"relstrength": 0.519
-},
-"ret_5d": 1.33,
-"ret_21d": null
-},
-{
-"date": "2026-10-27",
 "ticker": "STLAM.MI",
 "kind": "short",
 "price": 3.555,
@@ -38976,6 +38913,66 @@
 "rebound": 25.5047,
 "trend": -1.0,
 "relstrength": -4.456
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-04",
+"ticker": "STVN",
+"kind": "long",
+"price": 14.1,
+"conv": 37,
+"factors": {
+"discount": 43.6,
+"histcheap": 1.73,
+"riskadj": -1.12,
+"ddpen": -26.98,
+"momentum": 28.2077,
+"prob": 72,
+"quality": 43.6,
+"valcheap": -0.8426,
+"trappen": 1
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-04",
+"ticker": "DT",
+"kind": "long",
+"price": 47.03,
+"conv": 24,
+"factors": {
+"discount": 27.9234,
+"histcheap": -0.31,
+"riskadj": -0.22,
+"ddpen": -17.1,
+"momentum": 26.2275,
+"prob": 89,
+"quality": 39.1,
+"valcheap": -0.9316,
+"trappen": -1
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-04",
+"ticker": "IT",
+"kind": "long",
+"price": 204.22,
+"conv": 21,
+"factors": {
+"discount": 19.7848,
+"histcheap": -0.58,
+"riskadj": -0.3,
+"ddpen": -31.45,
+"momentum": 7.5635,
+"prob": 32,
+"quality": 53.8,
+"valcheap": -0.6865,
+"trappen": -2
 },
 "ret_5d": null,
 "ret_21d": null
