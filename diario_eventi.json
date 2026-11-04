@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:SYNA:2026-09-17",
-"ticker": "SYNA",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-17 07:19",
-"data": "2026-09-17 07:19",
-"prezzo": 89.24,
-"conv": 64,
-"prob_gain": 48,
-"prob_loss": 13,
-"reliab": "🟡 Media",
-"mkt": -1.8195,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 106.0128,
-"media20": 96.144,
-"quattro_atr": 108.9894,
-"meta_caduta": 111.825,
-"bollinger": 101.5765,
-"consigliata": 106.0128
-},
-"stop": 79.3653,
-"atr": 4.9373,
-"res": {
-"7g": 7.59,
-"30g": 31.59,
-"soglia": 18.8
-},
-"res_soglia": {
-"media50": {
-"ret": 18.8,
-"toccato": true,
-"giorni": 14
-},
-"media20": {
-"ret": 7.74,
-"toccato": true,
-"giorni": 5
-},
-"quattro_atr": {
-"ret": 22.13,
-"toccato": true,
-"giorni": 15
-},
-"meta_caduta": {
-"ret": 25.31,
-"toccato": true,
-"giorni": 15
-},
-"bollinger": {
-"ret": 13.82,
-"toccato": true,
-"giorni": 8
-},
-"consigliata": {
-"ret": 18.8,
-"toccato": true,
-"giorni": 14
-}
-}
-},
-{
 "episodio": "short:JBHT:2026-09-16",
 "ticker": "JBHT",
 "kind": "short",
@@ -36446,5 +36382,32 @@
 },
 "stop": 285.0287,
 "atr": 10.0607
+},
+{
+"episodio": "short:EDU:2026-10-29",
+"ticker": "EDU",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-11-04 12:34",
+"data": "2026-11-04 12:34",
+"prezzo": 50.33,
+"conv": 70,
+"prob_gain": 55,
+"prob_loss": 5,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 56.6018,
+"media20": 56.5965,
+"quattro_atr": 57.6741,
+"meta_caduta": 55.74,
+"bollinger": 65.1556,
+"consigliata": 56.6018
+},
+"stop": 46.6579,
+"atr": 1.836
 }
 ]
