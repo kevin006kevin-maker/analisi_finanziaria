@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:HBAN:2026-09-16",
-"ticker": "HBAN",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-17 02:32",
-"data": "2026-09-17 02:28",
-"prezzo": 16.75,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 16.01",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:SYNA:2026-09-17",
 "ticker": "SYNA",
 "kind": "short",
@@ -36439,5 +36419,32 @@
 },
 "stop": 41.4397,
 "atr": 2.7952
+},
+{
+"episodio": "short:AIT:2026-10-28",
+"ticker": "AIT",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-11-04 12:34",
+"data": "2026-11-04 12:34",
+"prezzo": 305.15,
+"conv": 67,
+"prob_gain": 57,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 325.803,
+"media20": 321.476,
+"quattro_atr": 345.3926,
+"meta_caduta": 333.55,
+"bollinger": 353.0349,
+"consigliata": 325.803
+},
+"stop": 285.0287,
+"atr": 10.0607
 }
 ]
