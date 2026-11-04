@@ -5870,7 +5870,7 @@
 "max_price": 43.58,
 "max_date": "2026-11-04 12:35",
 "auto": true,
-"notified": false,
+"notified": true,
 "entry_check": "2026-11-04"
 },
 "JNJ": {
@@ -7137,9 +7137,7 @@
 "max_date": "2026-11-04 12:35",
 "auto": true,
 "notified": false,
-"entry_check": "2026-11-04",
-"warn_since": "2026-11-03",
-"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-11-04"
 },
 "CW": {
 "kind": "short",
@@ -7568,10 +7566,8 @@
 "max_price": 26.56,
 "max_date": "2026-11-04 12:35",
 "auto": true,
-"notified": false,
-"entry_check": "2026-11-04",
-"warn_since": "2026-11-04",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"notified": true,
+"entry_check": "2026-11-04"
 },
 "UCG.MI": {
 "kind": "short",
@@ -7701,7 +7697,7 @@
 "max_price": 78.02,
 "max_date": "2026-11-04 12:35",
 "auto": true,
-"notified": false,
+"notified": true,
 "entry_check": "2026-11-04"
 },
 "RCUS": {
