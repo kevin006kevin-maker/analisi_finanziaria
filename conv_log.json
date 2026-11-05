@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-10-28",
-"ticker": "XENE",
-"kind": "short",
-"price": 35.77,
-"conv": 54,
-"factors": {
-"discount": 49.5913,
-"histcheap": 1.52,
-"riskadj": -0.39,
-"ddpen": -18.63,
-"momentum": -1.9669,
-"prob": 45,
-"oversold": -35.8841,
-"rebound": 32.3819,
-"trend": -1.0,
-"relstrength": 1.8369
-},
-"ret_5d": 9.34,
-"ret_21d": null
-},
-{
-"date": "2026-10-28",
 "ticker": "RSI",
 "kind": "short",
 "price": 16.3,
@@ -38604,6 +38583,26 @@
 "rebound": -8.4682,
 "trend": -1.0,
 "relstrength": 24.8715
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-05",
+"ticker": "FSLY",
+"kind": "long",
+"price": 15.8799,
+"conv": 41,
+"factors": {
+"discount": 52.5973,
+"histcheap": 0.53,
+"riskadj": 0.71,
+"ddpen": -28.36,
+"momentum": 38.0659,
+"prob": 29,
+"quality": 46.5,
+"valcheap": 0.5345,
+"trappen": 2
 },
 "ret_5d": null,
 "ret_21d": null
