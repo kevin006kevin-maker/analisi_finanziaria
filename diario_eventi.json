@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:MTZ:2026-09-17",
-"ticker": "MTZ",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-17 17:18",
-"data": "2026-09-17 17:18",
-"prezzo": 209.77,
-"conv": 82,
-"prob_gain": 51,
-"prob_loss": 12,
-"reliab": "🟡 Media",
-"mkt": -1.0791,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 283.5448,
-"media20": 240.4385,
-"quattro_atr": 266.4129,
-"meta_caduta": 319.43,
-"bollinger": 269.2759,
-"consigliata": 266.4129
-},
-"stop": 181.4485,
-"atr": 14.1607,
-"res": {
-"7g": 2.86,
-"30g": -8.98,
-"soglia": -8.98
-},
-"res_soglia": {
-"media50": {
-"ret": -8.98,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -8.98,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -8.98,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -8.98,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -8.98,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -8.98,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:RARE:2026-09-17",
 "ticker": "RARE",
 "kind": "short",
@@ -36882,5 +36818,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:NRIX:2026-11-05",
+"ticker": "NRIX",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-11-05 01:21",
+"data": "2026-11-05 01:21",
+"prezzo": 15.95,
+"conv": 61,
+"prob_gain": 55,
+"prob_loss": 6,
+"reliab": "🔴 Bassa",
+"mkt": -1.4503,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 24.7308,
+"media20": 24.5345,
+"quattro_atr": 23.5391,
+"meta_caduta": 21.87,
+"bollinger": 29.7783,
+"consigliata": 23.5391
+},
+"stop": 12.1554,
+"atr": 1.8973
 }
 ]
