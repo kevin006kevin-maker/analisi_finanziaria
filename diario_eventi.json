@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:SAH:2026-09-18",
-"ticker": "SAH",
-"kind": "long",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-18 00:28",
-"data": "2026-09-18 00:28",
-"prezzo": 65.95,
-"conv": 62,
-"prob_gain": 82,
-"prob_loss": 11,
-"reliab": "🟡 Media",
-"mkt": -0.911,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 85.6614,
-"media20": 76.6895,
-"quattro_atr": 79.0783,
-"meta_caduta": 89.305,
-"bollinger": 83.0219,
-"consigliata": 79.0783
-},
-"stop": 59.3858,
-"atr": 3.2821,
-"res": {
-"7g": -4.78,
-"30g": -3.0
-}
-},
-{
 "episodio": "short:MTZ:2026-09-17",
 "ticker": "MTZ",
 "kind": "short",
@@ -36637,5 +36606,32 @@
 },
 "stop": 284.9565,
 "atr": 12.9418
+},
+{
+"episodio": "short:NVDA:2026-11-05",
+"ticker": "NVDA",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-11-05 16:48",
+"data": "2026-11-05 16:48",
+"prezzo": 184.65,
+"conv": 68,
+"prob_gain": 52,
+"prob_loss": 1,
+"reliab": "🟡 Media",
+"mkt": -4.1052,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 220.701,
+"media20": 213.8315,
+"quattro_atr": 213.3524,
+"meta_caduta": 211.945,
+"bollinger": 234.907,
+"consigliata": 213.3524
+},
+"stop": 170.2988,
+"atr": 7.1756
 }
 ]
