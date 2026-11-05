@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:ENVA:2026-09-15",
-"ticker": "ENVA",
-"kind": "short",
-"evento": "promozione",
-"scritto_il": "2026-09-18 00:29",
-"data": "2026-09-18 00:29",
-"prezzo": 179.06,
-"conv": 75,
-"prob_gain": 57,
-"prob_loss": 8,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": 237.2126,
-"media20": 223.22,
-"quattro_atr": 220.8611,
-"meta_caduta": 222.255,
-"bollinger": 267.4317,
-"consigliata": 220.8611
-},
-"stop": 158.1595,
-"atr": 10.4503,
-"res": {
-"7g": -3.41,
-"30g": -1.26,
-"soglia": -1.26
-},
-"res_soglia": {
-"media50": {
-"ret": -1.26,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -1.26,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -1.26,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -1.26,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -1.26,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -1.26,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:AXON:2026-09-15",
 "ticker": "AXON",
 "kind": "short",
@@ -36444,6 +36380,26 @@
 "prob_gain": 48,
 "prob_loss": 31,
 "reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:OII:2026-10-23",
+"ticker": "OII",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-11-05 16:52",
+"data": "2026-11-05 16:52",
+"prezzo": 35.55,
+"conv": 78,
+"prob_gain": 57,
+"prob_loss": 6,
+"reliab": "🟡 Media",
 "mkt": null,
 "fonte": "monitoraggio",
 "note": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
