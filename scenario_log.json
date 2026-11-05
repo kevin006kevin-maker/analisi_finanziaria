@@ -14680,7 +14680,15 @@
 "res": {
 "anticipo|7g": 7.39,
 "osservazione|7g": 7.39,
-"promozione|7g": -3.19
+"promozione|7g": -3.19,
+"anticipo|30g": -20.02,
+"osservazione|30g": -20.02,
+"promozione|30g": -27.9,
+"conferma|30g": -25.52,
+"anticipo|bersaglio": -20.02,
+"osservazione|bersaglio": -20.02,
+"promozione|bersaglio": -27.9,
+"conferma|bersaglio": -25.52
 }
 },
 {
@@ -14704,7 +14712,10 @@
 "conv": 64,
 "res": {
 "osservazione|7g": 2.18,
-"promozione|7g": 0.63
+"promozione|7g": 0.63,
+"osservazione|30g": -8.62,
+"promozione|30g": -10.0,
+"conferma|30g": -10.56
 },
 "passaggi": {
 "osservazione": {
@@ -14766,7 +14777,10 @@
 "conv": 66,
 "res": {
 "osservazione|7g": 3.77,
-"promozione|7g": 2.05
+"promozione|7g": 2.05,
+"osservazione|30g": 9.98,
+"promozione|30g": 8.17,
+"conferma|30g": 5.99
 },
 "passaggi": {
 "osservazione": {
@@ -14828,7 +14842,10 @@
 "conv": 73,
 "res": {
 "osservazione|7g": 8.79,
-"promozione|7g": 8.35
+"promozione|7g": 8.35,
+"osservazione|30g": 0.77,
+"promozione|30g": 0.36,
+"conferma|30g": -7.37
 },
 "passaggi": {
 "osservazione": {
@@ -14927,7 +14944,15 @@
 "res": {
 "anticipo|7g": 6.8,
 "osservazione|7g": 8.79,
-"promozione|7g": -3.56
+"promozione|7g": -3.56,
+"anticipo|30g": -1.07,
+"osservazione|30g": 0.77,
+"promozione|30g": -10.67,
+"conferma|30g": -7.37,
+"anticipo|bersaglio": -1.07,
+"osservazione|bersaglio": 0.77,
+"promozione|bersaglio": -10.67,
+"conferma|bersaglio": -7.37
 }
 },
 {
@@ -14988,7 +15013,15 @@
 "res": {
 "anticipo|7g": 7.92,
 "osservazione|7g": 8.79,
-"promozione|7g": 4.02
+"promozione|7g": 4.02,
+"anticipo|30g": -3.42,
+"osservazione|30g": -2.64,
+"promozione|30g": -6.91,
+"conferma|30g": -10.51,
+"anticipo|bersaglio": -3.42,
+"osservazione|bersaglio": -2.64,
+"promozione|bersaglio": -6.91,
+"conferma|bersaglio": -10.51
 }
 },
 {
@@ -15048,7 +15081,13 @@
 },
 "res": {
 "osservazione|7g": 2.18,
-"promozione|7g": -0.93
+"promozione|7g": -0.93,
+"osservazione|30g": -8.62,
+"promozione|30g": -11.39,
+"conferma|30g": -10.56,
+"osservazione|bersaglio": -8.62,
+"promozione|bersaglio": -11.39,
+"conferma|bersaglio": -10.56
 }
 },
 {
@@ -15109,7 +15148,15 @@
 "res": {
 "anticipo|7g": 2.97,
 "osservazione|7g": 3.77,
-"promozione|7g": 1.55
+"promozione|7g": 1.55,
+"anticipo|30g": 9.14,
+"osservazione|30g": 9.98,
+"promozione|30g": 7.64,
+"conferma|30g": 5.99,
+"anticipo|bersaglio": 6.19,
+"osservazione|bersaglio": 7.02,
+"promozione|bersaglio": 4.73,
+"conferma|bersaglio": 3.13
 }
 },
 {
@@ -18681,15 +18728,18 @@
 "obs_date": "2026-10-07",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 28.25,
+"conf_date": "2026-11-05",
 "target": null,
 "stop": null,
 "reliab": "🟡 Media",
 "prob_gain": 49,
 "prob_loss": 10,
 "conv": 68,
-"res": {},
+"res": {
+"osservazione|7g": -11.83,
+"promozione|7g": -2.18
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-09-23 16:59",
@@ -18719,8 +18769,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-11-05",
+"prezzo": 28.25,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -18740,15 +18790,18 @@
 "obs_date": "2026-09-30",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 28.860000610351562,
+"conf_date": "2026-11-05",
 "target": null,
 "stop": null,
 "reliab": "🟡 Media",
 "prob_gain": 48,
 "prob_loss": 12,
 "conv": 60,
-"res": {},
+"res": {
+"osservazione|7g": -10.95,
+"promozione|7g": -10.01
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-09-23 21:02",
@@ -18778,8 +18831,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-11-05",
+"prezzo": 28.860000610351562,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -18799,15 +18852,18 @@
 "obs_date": "2026-10-23",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 58.45500183105469,
+"conf_date": "2026-11-05",
 "target": null,
 "stop": null,
 "reliab": null,
 "prob_gain": null,
 "prob_loss": null,
 "conv": 58,
-"res": {},
+"res": {
+"osservazione|7g": -8.05,
+"promozione|7g": -7.83
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-10-22 20:10",
@@ -18837,8 +18893,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-11-05",
+"prezzo": 58.45500183105469,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -18858,15 +18914,18 @@
 "obs_date": "2026-10-26",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 11.34000015258789,
+"conf_date": "2026-11-05",
 "target": null,
 "stop": null,
 "reliab": "🟢 Alta",
 "prob_gain": 51,
 "prob_loss": 2,
 "conv": 71,
-"res": {},
+"res": {
+"osservazione|7g": -5.5,
+"promozione|7g": -1.13
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-10-26 16:09",
@@ -18896,8 +18955,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-11-05",
+"prezzo": 11.34000015258789,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -18915,8 +18974,8 @@
 "obs_date": "2026-10-02",
 "pre_price": 77.15,
 "pre_date": "2026-10-05",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 77.44000244140625,
+"conf_date": "2026-11-05",
 "target": 80.46,
 "stop": 69.9967,
 "reliab": "🟢 Alta",
@@ -18952,16 +19011,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-11-05",
+"prezzo": 77.44000244140625,
+"conv": 55,
+"prob_gain": 42,
+"prob_loss": 3,
+"reliab": "🟢 Alta",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": 0.38,
+"osservazione|7g": 0.38,
+"promozione|7g": 4.17
+}
 },
 {
 "ticker": "EEM",
@@ -18972,8 +19035,8 @@
 "obs_date": "2026-10-22",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 58.45500183105469,
+"conf_date": "2026-11-05",
 "target": 66.2938,
 "stop": 61.4058,
 "reliab": "🟢 Alta",
@@ -19009,8 +19072,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-11-05",
+"prezzo": 58.45500183105469,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -19018,7 +19081,10 @@
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"osservazione|7g": -5.18,
+"promozione|7g": -7.83
+}
 },
 {
 "ticker": "BA",
