@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:NVST:2026-09-17",
-"ticker": "NVST",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-18 00:29",
-"data": "2026-09-18 00:26",
-"prezzo": 23.69,
-"conv": 74,
-"prob_gain": 52,
-"prob_loss": 5,
-"reliab": "🟡 Media",
-"mkt": -0.911,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 26.9844,
-"media20": 26.559,
-"quattro_atr": 27.2826,
-"meta_caduta": 26.2,
-"bollinger": 28.784,
-"consigliata": 26.9844
-},
-"stop": 21.8937,
-"atr": 0.8981,
-"res": {
-"7g": 0.89,
-"30g": -4.47,
-"soglia": -4.47
-},
-"res_soglia": {
-"media50": {
-"ret": -4.47,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -4.47,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -4.47,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -4.47,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -4.47,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -4.47,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:SYNA:2026-09-17",
 "ticker": "SYNA",
 "kind": "short",
@@ -36582,6 +36518,26 @@
 "prob_gain": 73,
 "prob_loss": 20,
 "reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:QQQ:2026-11-03",
+"ticker": "QQQ",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-11-05 16:51",
+"data": "2026-11-05 16:51",
+"prezzo": 652.18,
+"conv": 72,
+"prob_gain": 54,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
 "mkt": null,
 "fonte": "monitoraggio",
 "note": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
