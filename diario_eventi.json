@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:AXON:2026-09-15",
-"ticker": "AXON",
-"kind": "short",
-"evento": "promozione",
-"scritto_il": "2026-09-18 00:30",
-"data": "2026-09-18 00:30",
-"prezzo": 453.5,
-"conv": 66,
-"prob_gain": 52,
-"prob_loss": 22,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": 551.1902,
-"media20": 536.2865,
-"quattro_atr": 573.5218,
-"meta_caduta": 549.61,
-"bollinger": 660.7525,
-"consigliata": 551.1902
-},
-"stop": 393.4891,
-"atr": 30.0055,
-"res": {
-"7g": -1.37,
-"30g": -16.45,
-"soglia": -16.45
-},
-"res_soglia": {
-"media50": {
-"ret": -16.45,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -16.45,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -16.45,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -16.45,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -16.45,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -16.45,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:PCG:2026-09-01",
 "ticker": "PCG",
 "kind": "short",
@@ -36400,6 +36336,26 @@
 "prob_gain": 57,
 "prob_loss": 6,
 "reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:FIX:2026-10-24",
+"ticker": "FIX",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-11-05 16:52",
+"data": "2026-11-05 16:52",
+"prezzo": 955.675,
+"conv": 79,
+"prob_gain": 61,
+"prob_loss": 11,
+"reliab": "🔴 Bassa",
 "mkt": null,
 "fonte": "monitoraggio",
 "note": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
