@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:SYNA:2026-09-17",
-"ticker": "SYNA",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-18 00:29",
-"data": "2026-09-17 12:24",
-"prezzo": 89.24,
-"conv": 65,
-"prob_gain": 48,
-"prob_loss": 13,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 105.3678,
-"media20": 95.651,
-"quattro_atr": 108.9729,
-"meta_caduta": 109.675,
-"bollinger": 101.0249,
-"consigliata": 105.3678
-},
-"stop": 79.3735,
-"atr": 4.9332,
-"soglie_contaminate": {
-"media50": 105.3678,
-"media20": 95.651,
-"quattro_atr": 108.9729,
-"meta_caduta": 109.675,
-"bollinger": 101.0249,
-"consigliata": 105.3678
-},
-"soglie_ricalcolate_il": "2026-09-18 00:33",
-"taglio_corretto": true,
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": 7.59,
-"30g": 31.59,
-"soglia": 18.07
-},
-"res_soglia": {
-"media50": {
-"ret": 18.07,
-"toccato": true,
-"giorni": 14
-},
-"media20": {
-"ret": 7.18,
-"toccato": true,
-"giorni": 5
-},
-"quattro_atr": {
-"ret": 22.11,
-"toccato": true,
-"giorni": 15
-},
-"meta_caduta": {
-"ret": 22.9,
-"toccato": true,
-"giorni": 15
-},
-"bollinger": {
-"ret": 13.21,
-"toccato": true,
-"giorni": 8
-},
-"consigliata": {
-"ret": 18.07,
-"toccato": true,
-"giorni": 14
-}
-}
-},
-{
 "episodio": "short:INIO:2026-09-15",
 "ticker": "INIO",
 "kind": "short",
@@ -36536,6 +36461,26 @@
 "prezzo": 652.18,
 "conv": 72,
 "prob_gain": 54,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:XLK:2026-11-03",
+"ticker": "XLK",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-11-05 16:51",
+"data": "2026-11-05 16:51",
+"prezzo": 164.13,
+"conv": 74,
+"prob_gain": 55,
 "prob_loss": 0,
 "reliab": "🟢 Alta",
 "mkt": null,
