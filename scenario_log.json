@@ -20584,5 +20584,62 @@
 "prob_loss": 0,
 "conv": 60,
 "res": {}
+},
+{
+"ticker": "KRYS",
+"kind": "short",
+"date": "2026-11-05",
+"promo_price": 310.84,
+"obs_price": 289.31,
+"obs_date": "2026-11-02",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": 334.809,
+"stop": 284.9565,
+"reliab": "🟡 Media",
+"prob_gain": 50,
+"prob_loss": 4,
+"conv": 67,
+"passaggi": {
+"osservazione": {
+"data": "2026-11-02 20:46",
+"prezzo": 289.31,
+"conv": 60,
+"prob_gain": 50,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": -2.7169
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-05 01:24",
+"prezzo": 310.84,
+"conv": 67,
+"prob_gain": 50,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
