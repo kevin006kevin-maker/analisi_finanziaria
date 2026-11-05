@@ -1,25 +1,5 @@
 [
 {
-"episodio": "long:ENVA:2026-09-15",
-"ticker": "ENVA",
-"kind": "long",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-17 17:20",
-"data": "2026-09-17 17:19",
-"prezzo": 178.045,
-"conv": 78,
-"prob_gain": 82,
-"prob_loss": 11,
-"reliab": "🟡 Media",
-"mkt": -1.0791,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 172.9031",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:SYNA:2026-09-17",
 "ticker": "SYNA",
 "kind": "short",
@@ -36690,5 +36670,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "long:SAN:2026-10-27",
+"ticker": "SAN",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-11-05 01:28",
+"data": "2026-11-05 01:22",
+"prezzo": 12.07,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-11-05",
+"soglie": {
+"media50": 13.7158,
+"media20": 12.6845,
+"quattro_atr": 13.6305,
+"meta_caduta": 13.56,
+"bollinger": 14.3289,
+"consigliata": 13.6305
+},
+"stop": 11.2897,
+"atr": 0.3901
 }
 ]
