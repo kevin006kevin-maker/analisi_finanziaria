@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:XLI:2026-09-16",
-"ticker": "XLI",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-17 17:19",
-"data": "2026-09-17 17:18",
-"prezzo": 169.01,
-"conv": 67,
-"prob_gain": 51,
-"prob_loss": 0,
-"reliab": "🟢 Alta",
-"mkt": -1.0791,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 179.205,
-"media20": 174.49,
-"quattro_atr": 179.2571,
-"meta_caduta": 177.76,
-"bollinger": 182.5281,
-"consigliata": 179.205
-},
-"stop": 163.8865,
-"atr": 2.5618,
-"res": {
-"7g": 0.36,
-"30g": -1.36,
-"soglia": -1.36
-},
-"res_soglia": {
-"media50": {
-"ret": -1.36,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -1.36,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -1.36,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -1.36,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -1.36,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -1.36,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:ON:2026-09-16",
 "ticker": "ON",
 "kind": "short",
@@ -36771,5 +36707,32 @@
 },
 "stop": 269.9548,
 "atr": 10.3051
+},
+{
+"episodio": "short:KRYS:2026-11-02",
+"ticker": "KRYS",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-11-05 01:24",
+"data": "2026-11-05 01:24",
+"prezzo": 310.84,
+"conv": 67,
+"prob_gain": 50,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 334.809,
+"media20": 320.6575,
+"quattro_atr": 362.607,
+"meta_caduta": 341.155,
+"bollinger": 339.9173,
+"consigliata": 334.809
+},
+"stop": 284.9565,
+"atr": 12.9418
 }
 ]
