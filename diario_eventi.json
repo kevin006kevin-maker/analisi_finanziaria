@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:SYNA:2026-09-17",
-"ticker": "SYNA",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-17 17:20",
-"data": "2026-09-17 17:18",
-"prezzo": 91.29,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 89.24",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:RARE:2026-09-17",
 "ticker": "RARE",
 "kind": "short",
@@ -36697,5 +36677,32 @@
 },
 "stop": 11.2897,
 "atr": 0.3901
+},
+{
+"episodio": "short:UCG.MI:2026-10-29",
+"ticker": "UCG.MI",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-11-05 01:28",
+"data": "2026-11-05 01:25",
+"prezzo": 74.26,
+"conv": 65,
+"prob_gain": 47,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-11-05",
+"soglie": {
+"media50": 79.8776,
+"media20": 74.831,
+"quattro_atr": 82.0896,
+"meta_caduta": 80.205,
+"bollinger": 77.9959,
+"consigliata": 79.8776
+},
+"stop": 70.3452,
+"atr": 1.9574
 }
 ]
