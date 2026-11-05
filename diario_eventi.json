@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:PCG:2026-09-01",
-"ticker": "PCG",
-"kind": "short",
-"evento": "uscita",
-"scritto_il": "2026-09-18 00:31",
-"data": "2026-09-18 00:31",
-"prezzo": 13.38,
-"conv": 82,
-"prob_gain": 57,
-"prob_loss": 8,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "in perdita da 9 giorni di Borsa: valuta l'uscita",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:ALMS:2026-09-01",
 "ticker": "ALMS",
 "kind": "short",
@@ -37151,5 +37131,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "long:ECG:2026-11-04",
+"ticker": "ECG",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-11-05 22:58",
+"data": "2026-11-05 22:58",
+"prezzo": 72.44,
+"conv": 72,
+"prob_gain": 86,
+"prob_loss": 8,
+"reliab": "🔴 Bassa",
+"mkt": -5.2737,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 112.3806,
+"media20": 104.6265,
+"quattro_atr": 106.5995,
+"meta_caduta": 107.92,
+"bollinger": 129.1811,
+"consigliata": 106.5995
+},
+"stop": 55.3602,
+"atr": 8.5399
 }
 ]
