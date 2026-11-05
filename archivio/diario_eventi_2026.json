@@ -29148,5 +29148,69 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:ON:2026-09-16",
+"ticker": "ON",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-17 17:19",
+"data": "2026-09-17 17:18",
+"prezzo": 68.24,
+"conv": 65,
+"prob_gain": 48,
+"prob_loss": 14,
+"reliab": "🔴 Bassa",
+"mkt": -1.0791,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 80.1038,
+"media20": 72.458,
+"quattro_atr": 83.6086,
+"meta_caduta": 93.49,
+"bollinger": 77.0124,
+"consigliata": 80.1038
+},
+"stop": 60.5557,
+"atr": 3.8421,
+"res": {
+"7g": 6.64,
+"30g": 5.77,
+"soglia": 17.39
+},
+"res_soglia": {
+"media50": {
+"ret": 17.39,
+"toccato": true,
+"giorni": 15
+},
+"media20": {
+"ret": 6.18,
+"toccato": true,
+"giorni": 5
+},
+"quattro_atr": {
+"ret": 22.52,
+"toccato": true,
+"giorni": 15
+},
+"meta_caduta": {
+"ret": 5.77,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": 12.86,
+"toccato": true,
+"giorni": 8
+},
+"consigliata": {
+"ret": 17.39,
+"toccato": true,
+"giorni": 15
+}
+}
 }
 ]
