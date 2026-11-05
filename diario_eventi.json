@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:RARE:2026-09-17",
-"ticker": "RARE",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-17 21:17",
-"data": "2026-09-17 21:16",
-"prezzo": 14.31,
-"conv": 74,
-"prob_gain": 59,
-"prob_loss": 20,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "prezzo salito di almeno il 2% da 13.59",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:SAH:2026-09-18",
 "ticker": "SAH",
 "kind": "short",
@@ -36704,5 +36684,32 @@
 },
 "stop": 70.3452,
 "atr": 1.9574
+},
+{
+"episodio": "short:EEM:2026-10-29",
+"ticker": "EEM",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-11-05 01:28",
+"data": "2026-11-05 01:21",
+"prezzo": 61.62,
+"conv": 57,
+"prob_gain": 51,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -1.4503,
+"fonte": "osservazione",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-11-05",
+"soglie": {
+"media50": 65.7814,
+"media20": 63.2685,
+"quattro_atr": 66.0872,
+"meta_caduta": 65.36,
+"bollinger": 66.8508,
+"consigliata": 65.7814
+},
+"stop": 59.3864,
+"atr": 1.1168
 }
 ]
