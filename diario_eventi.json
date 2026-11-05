@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:TDOC:2026-09-15",
-"ticker": "TDOC",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-18 00:32",
-"data": "2026-09-18 00:26",
-"prezzo": 6.28,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-18",
-"soglie": {
-"media50": 7.3464,
-"media20": 6.3335,
-"quattro_atr": 7.4204,
-"meta_caduta": 8.0,
-"bollinger": 6.6191,
-"consigliata": 7.3464
-},
-"stop": 5.7098,
-"atr": 0.2851,
-"res": {
-"7g": -4.14,
-"30g": -9.24,
-"soglia": -9.24
-},
-"res_soglia": {
-"media50": {
-"ret": -9.24,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 0.85,
-"toccato": true,
-"giorni": 4
-},
-"quattro_atr": {
-"ret": -9.24,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -9.24,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -9.24,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -9.24,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:INIO:2026-09-15",
 "ticker": "INIO",
 "kind": "short",
@@ -37146,6 +37082,26 @@
 "conv": 78,
 "prob_gain": 56,
 "prob_loss": 13,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:CW:2026-10-07",
+"ticker": "CW",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-11-05 22:59",
+"data": "2026-11-05 22:59",
+"prezzo": 433.87,
+"conv": 84,
+"prob_gain": 51,
+"prob_loss": 4,
 "reliab": "🟡 Media",
 "mkt": null,
 "fonte": "monitoraggio",
