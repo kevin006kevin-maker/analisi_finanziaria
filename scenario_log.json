@@ -20506,5 +20506,62 @@
 "prob_loss": 1,
 "conv": 60,
 "res": {}
+},
+{
+"ticker": "GOOGL",
+"kind": "short",
+"date": "2026-11-05",
+"promo_price": 290.565,
+"obs_price": 284.715,
+"obs_date": "2026-10-29",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": 335.234,
+"stop": 268.3198,
+"reliab": "🟢 Alta",
+"prob_gain": 53,
+"prob_loss": 4,
+"conv": 82,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-29 17:54",
+"prezzo": 284.715,
+"conv": 68,
+"prob_gain": 52,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": 0.6515
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-05 01:24",
+"prezzo": 290.565,
+"conv": 82,
+"prob_gain": 53,
+"prob_loss": 4,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
