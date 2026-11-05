@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:LCID:2026-09-18",
-"ticker": "LCID",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-18 00:26",
-"data": "2026-09-18 00:26",
-"prezzo": 4.28,
-"conv": 60,
-"prob_gain": 45,
-"prob_loss": 24,
-"reliab": "🔴 Bassa",
-"mkt": -0.911,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 5.8709,
-"media20": 4.6913,
-"quattro_atr": 5.8087,
-"meta_caduta": 6.2,
-"bollinger": 5.6397,
-"consigliata": 5.8087
-},
-"stop": 3.5156,
-"atr": 0.3822,
-"res": {
-"7g": -2.57,
-"30g": -27.22,
-"soglia": -27.22
-},
-"res_soglia": {
-"media50": {
-"ret": -27.22,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -27.22,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -27.22,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -27.22,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -27.22,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -27.22,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "long:SAH:2026-09-18",
 "ticker": "SAH",
 "kind": "long",
@@ -36674,5 +36610,32 @@
 },
 "stop": 54.8343,
 "atr": 0.7228
+},
+{
+"episodio": "short:KRYS:2026-11-02",
+"ticker": "KRYS",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-11-05 01:28",
+"data": "2026-11-05 01:24",
+"prezzo": 310.84,
+"conv": 67,
+"prob_gain": 50,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-11-05",
+"soglie": {
+"media50": 334.809,
+"media20": 320.6575,
+"quattro_atr": 362.607,
+"meta_caduta": 341.155,
+"bollinger": 339.9173,
+"consigliata": 334.809
+},
+"stop": 284.9565,
+"atr": 12.9418
 }
 ]
