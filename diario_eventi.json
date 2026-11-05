@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:ALMS:2026-09-01",
-"ticker": "ALMS",
-"kind": "short",
-"evento": "uscita",
-"scritto_il": "2026-09-18 00:31",
-"data": "2026-09-18 00:31",
-"prezzo": 7.82,
-"conv": 75,
-"prob_gain": 50,
-"prob_loss": 21,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "in perdita da 9 giorni di Borsa: valuta l'uscita",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "long:DKS:2026-08-25",
 "ticker": "DKS",
 "kind": "long",
@@ -37158,5 +37138,32 @@
 },
 "stop": 55.3602,
 "atr": 8.5399
+},
+{
+"episodio": "long:AA:2026-10-20",
+"ticker": "AA",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-11-05 22:58",
+"data": "2026-11-05 22:58",
+"prezzo": 38.42,
+"conv": 65,
+"prob_gain": 63,
+"prob_loss": 28,
+"reliab": "🟡 Media",
+"mkt": -5.2737,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 43.7822,
+"media20": 40.171,
+"quattro_atr": 44.7596,
+"meta_caduta": 45.135,
+"bollinger": 42.558,
+"consigliata": 43.7822
+},
+"stop": 35.2502,
+"atr": 1.5849
 }
 ]
