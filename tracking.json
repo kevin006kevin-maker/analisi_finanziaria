@@ -4039,7 +4039,16 @@
 "notified": true,
 "entry_check": "2026-11-06",
 "exit_notified": false,
-"incasso_notified": true
+"incasso_notified": true,
+"incasso": {
+"gain": 7.0,
+"max": 27.66,
+"max_date": "2026-10-23 17:30",
+"giu_dal_max": -9.9,
+"motivo": "scesa 10% dal massimo (27.66) restando in guadagno (+7.0%): il guadagno si sta sgonfiando",
+"urgenza": "incassa",
+"tipo": "sgonfia"
+}
 },
 "TTAN": {
 "kind": "short",
@@ -7197,15 +7206,6 @@
 "auto": true,
 "notified": true,
 "entry_check": "2026-11-06",
-"incasso": {
-"gain": 4.1,
-"max": 44.56,
-"max_date": "2026-11-05 22:58",
-"giu_dal_max": -1.2,
-"motivo": "bersaglio 43.85 raggiunto (sei a +4.1%): valuta di incassare",
-"urgenza": "incassa",
-"tipo": "bersaglio"
-},
 "incasso_notified": true
 },
 "JNJ": {
