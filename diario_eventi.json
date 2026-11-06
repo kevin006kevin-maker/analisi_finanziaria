@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:MWA:2026-09-17",
-"ticker": "MWA",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-18 02:49",
-"data": "2026-09-18 02:46",
-"prezzo": 22.74,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 21.87",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:MTZ:2026-09-17",
 "ticker": "MTZ",
 "kind": "short",
@@ -36908,5 +36888,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:EEM:2026-11-06",
+"ticker": "EEM",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-11-06 10:52",
+"data": "2026-11-06 10:50",
+"prezzo": 58.05,
+"conv": 66,
+"prob_gain": 52,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -5.3008,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 65.599,
+"media20": 62.866,
+"quattro_atr": 63.235,
+"meta_caduta": 63.575,
+"bollinger": 66.8904,
+"consigliata": 63.235
+},
+"stop": 55.4575,
+"atr": 1.2963
 }
 ]
