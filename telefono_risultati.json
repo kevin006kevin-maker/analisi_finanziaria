@@ -1,5 +1,5 @@
 {
-"aggiornato": "2026-11-05 23:01",
+"aggiornato": "2026-11-06 03:33",
 "metodi": {
 "short": {
 "vendite": [
@@ -22,10 +22,10 @@
 "eccesso": null
 },
 "7g": {
-"n": 44,
-"med": 1.59,
-"hit": 57.0,
-"eccesso": 1.6
+"n": 45,
+"med": 1.7,
+"hit": 58.0,
+"eccesso": 1.61
 },
 "30g": {
 "n": 4,
@@ -48,10 +48,10 @@
 "eccesso": null
 },
 "7g": {
-"n": 47,
-"med": 1.57,
-"hit": 55.0,
-"eccesso": 1.61
+"n": 48,
+"med": 1.64,
+"hit": 56.0,
+"eccesso": 1.71
 },
 "30g": {
 "n": 0,
@@ -74,10 +74,10 @@
 "eccesso": null
 },
 "7g": {
-"n": 57,
-"med": 0.02,
-"hit": 51.0,
-"eccesso": 0.82
+"n": 58,
+"med": 0.04,
+"hit": 52.0,
+"eccesso": 0.85
 },
 "30g": {
 "n": 0,
@@ -117,25 +117,25 @@
 "chiave": "ombra_regole_nuove",
 "nome": "Regole nuove: qualità e trend",
 "riferimento": false,
-"scelte": 166,
+"scelte": 169,
 "vendite": {
 "soglia": {
-"n": 8,
-"med": -12.66,
-"hit": 12.0,
+"n": 12,
+"med": -15.19,
+"hit": 17.0,
 "eccesso": null
 },
 "7g": {
 "n": 138,
-"med": -1.58,
-"hit": 40.0,
-"eccesso": -1.59
+"med": -1.7,
+"hit": 39.0,
+"eccesso": -1.62
 },
 "30g": {
-"n": 9,
+"n": 13,
 "med": -20.28,
-"hit": 11.0,
-"eccesso": -18.28
+"hit": 15.0,
+"eccesso": -11.71
 }
 }
 },
@@ -143,25 +143,25 @@
 "chiave": "forza_relativa",
 "nome": "Forza relativa 12-1",
 "riferimento": false,
-"scelte": 157,
+"scelte": 162,
 "vendite": {
 "soglia": {
-"n": 6,
-"med": -15.54,
+"n": 9,
+"med": -20.48,
 "hit": 0.0,
 "eccesso": null
 },
 "7g": {
-"n": 133,
-"med": -1.48,
-"hit": 41.0,
+"n": 134,
+"med": -1.58,
+"hit": 40.0,
 "eccesso": -1.26
 },
 "30g": {
-"n": 6,
-"med": -15.54,
+"n": 9,
+"med": -20.48,
 "hit": 0.0,
-"eccesso": -11.33
+"eccesso": -11.71
 }
 }
 },
@@ -169,11 +169,11 @@
 "chiave": "vicino_massimi",
 "nome": "Vicino ai massimi dell'anno",
 "riferimento": false,
-"scelte": 72,
+"scelte": 76,
 "vendite": {
 "soglia": {
-"n": 2,
-"med": -21.36,
+"n": 3,
+"med": -20.48,
 "hit": 0.0,
 "eccesso": null
 },
@@ -184,10 +184,10 @@
 "eccesso": -0.27
 },
 "30g": {
-"n": 2,
-"med": -21.36,
+"n": 3,
+"med": -20.48,
 "hit": 0.0,
-"eccesso": -17.14
+"eccesso": -16.27
 }
 }
 },
@@ -195,12 +195,12 @@
 "chiave": "trend_template",
 "nome": "Trend template semplificato",
 "riferimento": false,
-"scelte": 86,
+"scelte": 89,
 "vendite": {
 "soglia": {
-"n": 6,
-"med": -13.64,
-"hit": 17.0,
+"n": 7,
+"med": -10.09,
+"hit": 14.0,
 "eccesso": null
 },
 "7g": {
@@ -210,10 +210,10 @@
 "eccesso": -3.42
 },
 "30g": {
-"n": 6,
-"med": -13.64,
-"hit": 17.0,
-"eccesso": -9.43
+"n": 7,
+"med": -10.09,
+"hit": 14.0,
+"eccesso": -0.84
 }
 }
 },
@@ -256,10 +256,10 @@
 "eccesso": null
 },
 "7g": {
-"n": 39,
-"med": 1.88,
-"hit": 59.0,
-"eccesso": 1.81
+"n": 40,
+"med": 2.21,
+"hit": 60.0,
+"eccesso": 2.12
 },
 "30g": {
 "n": 1,
@@ -273,7 +273,7 @@
 "chiave": "qualita_forza",
 "nome": "Qualità e forza relativa",
 "riferimento": false,
-"scelte": 24,
+"scelte": 27,
 "vendite": {
 "soglia": {
 "n": 1,
@@ -308,10 +308,10 @@
 "eccesso": null
 },
 "7g": {
-"n": 101,
-"med": -0.17,
+"n": 102,
+"med": -0.04,
 "hit": 50.0,
-"eccesso": 0.72
+"eccesso": 0.77
 },
 "30g": {
 "n": 3,
@@ -336,8 +336,8 @@
 "eccesso": null
 },
 "7g": {
-"n": 226,
-"med": -0.41,
+"n": 227,
+"med": -0.36,
 "hit": 46.0,
 "eccesso": 0.56
 },
@@ -362,10 +362,10 @@
 "eccesso": null
 },
 "7g": {
-"n": 234,
-"med": -0.41,
+"n": 235,
+"med": -0.36,
 "hit": 46.0,
-"eccesso": 0.46
+"eccesso": 0.55
 },
 "30g": {
 "n": 186,
@@ -388,10 +388,10 @@
 "eccesso": null
 },
 "7g": {
-"n": 257,
-"med": -0.09,
+"n": 258,
+"med": -0.08,
 "hit": 49.0,
-"eccesso": 0.61
+"eccesso": 0.7
 },
 "30g": {
 "n": 196,
@@ -431,23 +431,23 @@
 "chiave": "ombra_regole_nuove",
 "nome": "Regole nuove: qualità e trend",
 "riferimento": false,
-"scelte": 471,
+"scelte": 474,
 "vendite": {
 "soglia": {
-"n": 306,
-"med": -3.12,
-"hit": 39.0,
+"n": 310,
+"med": -3.34,
+"hit": 38.0,
 "eccesso": null
 },
 "7g": {
 "n": 439,
-"med": -0.96,
+"med": -0.97,
 "hit": 44.0,
-"eccesso": -0.52
+"eccesso": -0.54
 },
 "30g": {
-"n": 307,
-"med": -3.4,
+"n": 311,
+"med": -3.5,
 "hit": 37.0,
 "eccesso": -0.05
 }
@@ -457,25 +457,25 @@
 "chiave": "forza_relativa",
 "nome": "Forza relativa 12-1",
 "riferimento": false,
-"scelte": 419,
+"scelte": 424,
 "vendite": {
 "soglia": {
-"n": 262,
-"med": -2.42,
-"hit": 42.0,
+"n": 265,
+"med": -2.67,
+"hit": 41.0,
 "eccesso": null
 },
 "7g": {
-"n": 393,
-"med": -0.78,
+"n": 394,
+"med": -0.81,
 "hit": 45.0,
-"eccesso": -0.11
+"eccesso": -0.15
 },
 "30g": {
-"n": 262,
-"med": -2.75,
-"hit": 41.0,
-"eccesso": 0.17
+"n": 265,
+"med": -3.2,
+"hit": 40.0,
+"eccesso": 0.07
 }
 }
 },
@@ -483,12 +483,12 @@
 "chiave": "vicino_massimi",
 "nome": "Vicino ai massimi dell'anno",
 "riferimento": false,
-"scelte": 240,
+"scelte": 244,
 "vendite": {
 "soglia": {
-"n": 162,
-"med": -1.72,
-"hit": 40.0,
+"n": 163,
+"med": -1.75,
+"hit": 39.0,
 "eccesso": null
 },
 "7g": {
@@ -498,10 +498,10 @@
 "eccesso": -0.23
 },
 "30g": {
-"n": 162,
-"med": -1.72,
+"n": 163,
+"med": -1.75,
 "hit": 39.0,
-"eccesso": 1.5
+"eccesso": 1.39
 }
 }
 },
@@ -509,11 +509,11 @@
 "chiave": "trend_template",
 "nome": "Trend template semplificato",
 "riferimento": false,
-"scelte": 270,
+"scelte": 273,
 "vendite": {
 "soglia": {
-"n": 182,
-"med": -3.29,
+"n": 183,
+"med": -3.58,
 "hit": 36.0,
 "eccesso": null
 },
@@ -524,8 +524,8 @@
 "eccesso": -0.42
 },
 "30g": {
-"n": 182,
-"med": -3.6,
+"n": 183,
+"med": -3.62,
 "hit": 35.0,
 "eccesso": 0.0
 }
@@ -570,10 +570,10 @@
 "eccesso": null
 },
 "7g": {
-"n": 160,
-"med": -0.28,
+"n": 161,
+"med": -0.26,
 "hit": 47.0,
-"eccesso": 0.59
+"eccesso": 0.62
 },
 "30g": {
 "n": 121,
@@ -587,7 +587,7 @@
 "chiave": "qualita_forza",
 "nome": "Qualità e forza relativa",
 "riferimento": false,
-"scelte": 76,
+"scelte": 79,
 "vendite": {
 "soglia": {
 "n": 52,
@@ -622,10 +622,10 @@
 "eccesso": null
 },
 "7g": {
-"n": 228,
-"med": -0.39,
+"n": 229,
+"med": -0.36,
 "hit": 45.0,
-"eccesso": 0.14
+"eccesso": 0.16
 },
 "30g": {
 "n": 129,
@@ -652,19 +652,19 @@
 },
 "ombra_regole_nuove": {
 "stato": "presto",
-"testo": "⏳ Ancora presto per decidere: nella prova vera ci sono 9 occasioni misurate a 30 giorni (ne servono almeno 30) e 2 giornate con entrambi (ne servono 15)."
+"testo": "⏳ Ancora presto per decidere: nella prova vera ci sono 13 occasioni misurate a 30 giorni (ne servono almeno 30) e 2 giornate con entrambi (ne servono 15)."
 },
 "forza_relativa": {
 "stato": "presto",
-"testo": "⏳ Ancora presto per decidere: nella prova vera ci sono 6 occasioni misurate a 30 giorni (ne servono almeno 30) e 1 giornate con entrambi (ne servono 15)."
+"testo": "⏳ Ancora presto per decidere: nella prova vera ci sono 9 occasioni misurate a 30 giorni (ne servono almeno 30) e 1 giornate con entrambi (ne servono 15)."
 },
 "vicino_massimi": {
 "stato": "presto",
-"testo": "⏳ Ancora presto per decidere: nella prova vera ci sono 2 occasioni misurate a 30 giorni (ne servono almeno 30) e 1 giornate con entrambi (ne servono 15)."
+"testo": "⏳ Ancora presto per decidere: nella prova vera ci sono 3 occasioni misurate a 30 giorni (ne servono almeno 30) e 1 giornate con entrambi (ne servono 15)."
 },
 "trend_template": {
 "stato": "presto",
-"testo": "⏳ Ancora presto per decidere: nella prova vera ci sono 6 occasioni misurate a 30 giorni (ne servono almeno 30) e 1 giornate con entrambi (ne servono 15)."
+"testo": "⏳ Ancora presto per decidere: nella prova vera ci sono 7 occasioni misurate a 30 giorni (ne servono almeno 30) e 1 giornate con entrambi (ne servono 15)."
 },
 "bassa_volatilita": {
 "stato": "presto",
@@ -683,7 +683,7 @@
 "testo": "⏳ Ancora presto per decidere: nella prova vera ci sono 3 occasioni misurate a 30 giorni (ne servono almeno 30) e 1 giornate con entrambi (ne servono 15)."
 }
 },
-"aggiornato": "2026-11-05 22:01",
+"aggiornato": "2026-11-06 02:31",
 "decide": {
 "orizzonte": "30g",
 "casi": 30,
@@ -702,7 +702,7 @@
 "chiave": "sistema_vero",
 "nome": "Il sistema vero",
 "riferimento": true,
-"scelte": 12,
+"scelte": 13,
 "vendite": {
 "soglia": {
 "n": 0,
@@ -728,7 +728,7 @@
 "chiave": "sistema_di_prima",
 "nome": "Il sistema di prima",
 "riferimento": false,
-"scelte": 17,
+"scelte": 20,
 "vendite": {
 "soglia": {
 "n": 0,
@@ -737,10 +737,10 @@
 "eccesso": null
 },
 "30g": {
-"n": 0,
-"med": null,
-"hit": null,
-"eccesso": null
+"n": 1,
+"med": 3.76,
+"hit": 100.0,
+"eccesso": 7.71
 },
 "365g": {
 "n": 0,
@@ -754,7 +754,7 @@
 "chiave": "sistema_corretto",
 "nome": "Sistema corretto",
 "riferimento": false,
-"scelte": 14,
+"scelte": 15,
 "vendite": {
 "soglia": {
 "n": 0,
@@ -832,7 +832,7 @@
 "chiave": "forza_relativa",
 "nome": "Forza relativa 12-1",
 "riferimento": false,
-"scelte": 51,
+"scelte": 54,
 "vendite": {
 "soglia": {
 "n": 0,
@@ -884,7 +884,7 @@
 "chiave": "trend_template",
 "nome": "Trend template semplificato",
 "riferimento": false,
-"scelte": 42,
+"scelte": 43,
 "vendite": {
 "soglia": {
 "n": 0,
@@ -910,7 +910,7 @@
 "chiave": "bassa_volatilita",
 "nome": "Bassa volatilità",
 "riferimento": false,
-"scelte": 28,
+"scelte": 29,
 "vendite": {
 "soglia": {
 "n": 0,
@@ -936,7 +936,7 @@
 "chiave": "qualita",
 "nome": "Qualità dei conti",
 "riferimento": false,
-"scelte": 116,
+"scelte": 119,
 "vendite": {
 "soglia": {
 "n": 0,
@@ -945,10 +945,10 @@
 "eccesso": null
 },
 "30g": {
-"n": 2,
-"med": 2.58,
-"hit": 50.0,
-"eccesso": 2.94
+"n": 3,
+"med": -11.66,
+"hit": 33.0,
+"eccesso": -7.71
 },
 "365g": {
 "n": 0,
@@ -962,7 +962,7 @@
 "chiave": "qualita_forza",
 "nome": "Qualità e forza relativa",
 "riferimento": false,
-"scelte": 46,
+"scelte": 49,
 "vendite": {
 "soglia": {
 "n": 0,
@@ -971,10 +971,10 @@
 "eccesso": null
 },
 "30g": {
-"n": 1,
-"med": -13.6,
+"n": 2,
+"med": -12.63,
 "hit": 0.0,
-"eccesso": -13.25
+"eccesso": -10.48
 },
 "365g": {
 "n": 0,
@@ -988,7 +988,7 @@
 "chiave": "rimbalzo_grandi",
 "nome": "Rimbalzo solo sui titoli grandi",
 "riferimento": false,
-"scelte": 54,
+"scelte": 56,
 "vendite": {
 "soglia": {
 "n": 0,
@@ -997,10 +997,10 @@
 "eccesso": null
 },
 "30g": {
-"n": 1,
-"med": 18.77,
-"hit": 100.0,
-"eccesso": 19.12
+"n": 2,
+"med": 3.72,
+"hit": 50.0,
+"eccesso": 5.87
 },
 "365g": {
 "n": 0,
@@ -1016,7 +1016,7 @@
 "chiave": "sistema_vero",
 "nome": "Il sistema vero",
 "riferimento": true,
-"scelte": 79,
+"scelte": 80,
 "vendite": {
 "soglia": {
 "n": 0,
@@ -1042,7 +1042,7 @@
 "chiave": "sistema_di_prima",
 "nome": "Il sistema di prima",
 "riferimento": false,
-"scelte": 86,
+"scelte": 89,
 "vendite": {
 "soglia": {
 "n": 0,
@@ -1051,10 +1051,10 @@
 "eccesso": null
 },
 "30g": {
-"n": 69,
-"med": -1.24,
-"hit": 42.0,
-"eccesso": 0.0
+"n": 70,
+"med": -0.98,
+"hit": 43.0,
+"eccesso": 0.78
 },
 "365g": {
 "n": 0,
@@ -1068,7 +1068,7 @@
 "chiave": "sistema_corretto",
 "nome": "Sistema corretto",
 "riferimento": false,
-"scelte": 58,
+"scelte": 59,
 "vendite": {
 "soglia": {
 "n": 0,
@@ -1146,7 +1146,7 @@
 "chiave": "forza_relativa",
 "nome": "Forza relativa 12-1",
 "riferimento": false,
-"scelte": 149,
+"scelte": 152,
 "vendite": {
 "soglia": {
 "n": 0,
@@ -1198,7 +1198,7 @@
 "chiave": "trend_template",
 "nome": "Trend template semplificato",
 "riferimento": false,
-"scelte": 123,
+"scelte": 124,
 "vendite": {
 "soglia": {
 "n": 0,
@@ -1224,7 +1224,7 @@
 "chiave": "bassa_volatilita",
 "nome": "Bassa volatilità",
 "riferimento": false,
-"scelte": 67,
+"scelte": 68,
 "vendite": {
 "soglia": {
 "n": 0,
@@ -1250,7 +1250,7 @@
 "chiave": "qualita",
 "nome": "Qualità dei conti",
 "riferimento": false,
-"scelte": 303,
+"scelte": 306,
 "vendite": {
 "soglia": {
 "n": 0,
@@ -1259,10 +1259,10 @@
 "eccesso": null
 },
 "30g": {
-"n": 186,
-"med": -2.14,
+"n": 187,
+"med": -2.2,
 "hit": 39.0,
-"eccesso": -0.93
+"eccesso": -0.98
 },
 "365g": {
 "n": 0,
@@ -1276,7 +1276,7 @@
 "chiave": "qualita_forza",
 "nome": "Qualità e forza relativa",
 "riferimento": false,
-"scelte": 136,
+"scelte": 139,
 "vendite": {
 "soglia": {
 "n": 0,
@@ -1285,10 +1285,10 @@
 "eccesso": null
 },
 "30g": {
-"n": 88,
-"med": -2.11,
+"n": 89,
+"med": -2.2,
 "hit": 42.0,
-"eccesso": -0.15
+"eccesso": -0.46
 },
 "365g": {
 "n": 0,
@@ -1302,7 +1302,7 @@
 "chiave": "rimbalzo_grandi",
 "nome": "Rimbalzo solo sui titoli grandi",
 "riferimento": false,
-"scelte": 112,
+"scelte": 114,
 "vendite": {
 "soglia": {
 "n": 0,
@@ -1311,10 +1311,10 @@
 "eccesso": null
 },
 "30g": {
-"n": 58,
-"med": -0.53,
-"hit": 48.0,
-"eccesso": 1.34
+"n": 59,
+"med": -0.73,
+"hit": 47.0,
+"eccesso": 1.17
 },
 "365g": {
 "n": 0,
@@ -1329,7 +1329,7 @@
 "verdetti": {
 "sistema_di_prima": {
 "stato": "presto",
-"testo": "⏳ Ancora presto per decidere: nella prova vera ci sono 0 occasioni misurate a 30 giorni (ne servono almeno 30) e 0 giornate con entrambi (ne servono 15)."
+"testo": "⏳ Ancora presto per decidere: nella prova vera ci sono 1 occasioni misurate a 30 giorni (ne servono almeno 30) e 0 giornate con entrambi (ne servono 15)."
 },
 "sistema_corretto": {
 "stato": "presto",
@@ -1361,18 +1361,18 @@
 },
 "qualita": {
 "stato": "presto",
-"testo": "⏳ Ancora presto per decidere: nella prova vera ci sono 2 occasioni misurate a 30 giorni (ne servono almeno 30) e 1 giornate con entrambi (ne servono 15)."
+"testo": "⏳ Ancora presto per decidere: nella prova vera ci sono 3 occasioni misurate a 30 giorni (ne servono almeno 30) e 1 giornate con entrambi (ne servono 15)."
 },
 "qualita_forza": {
 "stato": "presto",
-"testo": "⏳ Ancora presto per decidere: nella prova vera ci sono 1 occasioni misurate a 30 giorni (ne servono almeno 30) e 1 giornate con entrambi (ne servono 15)."
+"testo": "⏳ Ancora presto per decidere: nella prova vera ci sono 2 occasioni misurate a 30 giorni (ne servono almeno 30) e 1 giornate con entrambi (ne servono 15)."
 },
 "rimbalzo_grandi": {
 "stato": "presto",
-"testo": "⏳ Ancora presto per decidere: nella prova vera ci sono 1 occasioni misurate a 30 giorni (ne servono almeno 30) e 1 giornate con entrambi (ne servono 15)."
+"testo": "⏳ Ancora presto per decidere: nella prova vera ci sono 2 occasioni misurate a 30 giorni (ne servono almeno 30) e 1 giornate con entrambi (ne servono 15)."
 }
 },
-"aggiornato": "2026-11-05 22:01",
+"aggiornato": "2026-11-06 02:31",
 "decide": {
 "orizzonte": "30g",
 "casi": 30,
@@ -1421,7 +1421,7 @@
 {
 "chiave": "s2_anticipo",
 "nome": "Appena entra in «In anticipo»",
-"quante": 169,
+"quante": 170,
 "celle": {
 "soglia": {
 "n": 145,
@@ -1446,7 +1446,7 @@
 {
 "chiave": "s3_fine_osservazione",
 "nome": "Alla fine dei giorni di osservazione",
-"quante": 228,
+"quante": 230,
 "celle": {
 "soglia": {
 "n": 174,
@@ -1496,7 +1496,7 @@
 {
 "chiave": "s5_fine_verifica",
 "nome": "Dopo la verifica nel monitoraggio",
-"quante": 130,
+"quante": 131,
 "celle": {
 "soglia": {
 "n": 68,
@@ -1527,13 +1527,13 @@
 },
 {
 "nome": "Appena entra in «In anticipo»",
-"quante": 174,
-"passa": 74.0
+"quante": 175,
+"passa": 75.0
 },
 {
 "nome": "Alla fine dei giorni di osservazione",
-"quante": 229,
-"passa": 98.0
+"quante": 231,
+"passa": 99.0
 },
 {
 "nome": "Appena entra in monitoraggio",
@@ -1542,7 +1542,7 @@
 },
 {
 "nome": "Dopo la verifica nel monitoraggio",
-"quante": 130,
+"quante": 131,
 "passa": 56.0
 }
 ]
@@ -1575,7 +1575,7 @@
 {
 "chiave": "s2_anticipo",
 "nome": "Appena entra in «In anticipo»",
-"quante": 50,
+"quante": 51,
 "celle": {
 "30g": {
 "n": 41,
@@ -1633,8 +1633,8 @@
 },
 {
 "nome": "Appena entra in «In anticipo»",
-"quante": 50,
-"passa": 67.0
+"quante": 51,
+"passa": 68.0
 },
 {
 "nome": "Alla fine dei giorni di osservazione",
@@ -1834,35 +1834,83 @@
 "calcolata_il": "2026-11-05 15:57"
 },
 "righe": {
-"archivio/scatti": 22752,
-"archivio/mondo": 79,
-"archivio/settori": 869,
-"archivio/profili": 19366,
-"archivio/notizie": 3326,
-"archivio/esiti": 35776,
-"archivio/osservazioni": 19310,
-"archivio/regole": 46,
-"archivio/ombra": 4641,
+"archivio/scatti": 22826,
+"archivio/mondo": 80,
+"archivio/settori": 880,
+"archivio/profili": 19511,
+"archivio/notizie": 3336,
+"archivio/esiti": 35911,
+"archivio/osservazioni": 19468,
+"archivio/regole": 47,
+"archivio/ombra": 4677,
 "archivio/metodi_avvii": 12
 }
 },
 "diario": {
 "riepilogo": {
-"righe": 1536,
-"episodi": 385,
+"righe": 1542,
+"episodi": 386,
 "per_evento": {
 "ingresso_osservazione": 309,
-"ingresso_anticipo": 224,
-"fine_osservazione": 302,
-"salita_2pct": 239,
+"ingresso_anticipo": 226,
+"fine_osservazione": 304,
+"salita_2pct": 240,
 "promozione": 158,
-"fine_verifica": 141,
+"fine_verifica": 142,
 "uscita": 163
 },
 "dal": "2026-08-21",
-"al": "2026-11-05"
+"al": "2026-11-06"
 },
 "ultimi": [
+{
+"t": "NVDA",
+"tipo": "short",
+"evento": "salita_2pct",
+"data": "2026-11-06 03:21",
+"prezzo": 200.13,
+"conv": null
+},
+{
+"t": "XLK",
+"tipo": "short",
+"evento": "fine_osservazione",
+"data": "2026-11-06 03:21",
+"prezzo": 176.5,
+"conv": null
+},
+{
+"t": "QQQ",
+"tipo": "short",
+"evento": "fine_osservazione",
+"data": "2026-11-06 03:21",
+"prezzo": 691.95,
+"conv": null
+},
+{
+"t": "RCUS",
+"tipo": "short",
+"evento": "fine_verifica",
+"data": "2026-11-05 22:58",
+"prezzo": 17.69,
+"conv": 77.0
+},
+{
+"t": "KGC",
+"tipo": "long",
+"evento": "ingresso_anticipo",
+"data": "2026-11-06 03:23",
+"prezzo": 21.42,
+"conv": 77.0
+},
+{
+"t": "NVDA",
+"tipo": "short",
+"evento": "ingresso_anticipo",
+"data": "2026-11-05 16:48",
+"prezzo": 184.65,
+"conv": 68.0
+},
 {
 "t": "AIT",
 "tipo": "short",
@@ -2134,54 +2182,6 @@
 "data": "2026-11-04 00:18",
 "prezzo": 480.65,
 "conv": 73.0
-},
-{
-"t": "TFII",
-"tipo": "short",
-"evento": "fine_osservazione",
-"data": "2026-11-04 00:18",
-"prezzo": 96.26,
-"conv": 85.0
-},
-{
-"t": "RSI",
-"tipo": "short",
-"evento": "fine_verifica",
-"data": "2026-11-04 00:15",
-"prezzo": 12.53,
-"conv": 66.0
-},
-{
-"t": "PBR-A",
-"tipo": "long",
-"evento": "fine_osservazione",
-"data": "2026-11-04 00:18",
-"prezzo": 18.4,
-"conv": 70.0
-},
-{
-"t": "PBR",
-"tipo": "long",
-"evento": "fine_osservazione",
-"data": "2026-11-04 00:18",
-"prezzo": 21.08,
-"conv": 64.0
-},
-{
-"t": "FIX",
-"tipo": "short",
-"evento": "fine_verifica",
-"data": "2026-11-04 00:19",
-"prezzo": 1285.13,
-"conv": 73.0
-},
-{
-"t": "OII",
-"tipo": "short",
-"evento": "fine_verifica",
-"data": "2026-11-04 00:19",
-"prezzo": 38.17,
-"conv": 74.0
 }
 ]
 }
