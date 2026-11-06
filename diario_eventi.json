@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:AXON:2026-09-15",
-"ticker": "AXON",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-18 00:33",
-"data": "2026-09-18 00:29",
-"prezzo": 453.5,
-"conv": 66,
-"prob_gain": 52,
-"prob_loss": 22,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-18",
-"soglie": {
-"media50": 551.1902,
-"media20": 536.2865,
-"quattro_atr": 573.5218,
-"meta_caduta": 549.61,
-"bollinger": 660.7525,
-"consigliata": 551.1902
-},
-"stop": 393.4891,
-"atr": 30.0055,
-"res": {
-"7g": -1.37,
-"30g": -16.45,
-"soglia": -16.45
-},
-"res_soglia": {
-"media50": {
-"ret": -16.45,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -16.45,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -16.45,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -16.45,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -16.45,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -16.45,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:XLU:2026-09-15",
 "ticker": "XLU",
 "kind": "short",
@@ -36967,5 +36903,32 @@
 },
 "stop": 665.9205,
 "atr": 13.0148
+},
+{
+"episodio": "short:XLK:2026-11-03",
+"ticker": "XLK",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-11-06 03:28",
+"data": "2026-11-06 03:21",
+"prezzo": 176.5,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-11-06",
+"soglie": {
+"media50": 189.3324,
+"media20": 187.0045,
+"quattro_atr": 194.1098,
+"meta_caduta": 189.25,
+"bollinger": 201.2575,
+"consigliata": 189.3324
+},
+"stop": 167.6951,
+"atr": 4.4025
 }
 ]
