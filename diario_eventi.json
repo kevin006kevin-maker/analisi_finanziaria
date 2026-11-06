@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:INIO:2026-09-15",
-"ticker": "INIO",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-18 00:32",
-"data": "2026-09-18 00:29",
-"prezzo": 20.96,
-"conv": 58,
-"prob_gain": 37,
-"prob_loss": 34,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "prezzo salito di almeno il 2% da 20.35",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:ENVA:2026-09-15",
 "ticker": "ENVA",
 "kind": "short",
@@ -37071,5 +37051,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:NVDA:2026-11-05",
+"ticker": "NVDA",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-11-06 03:25",
+"data": "2026-11-05 16:48",
+"prezzo": 184.65,
+"conv": 68,
+"prob_gain": 52,
+"prob_loss": 1,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 221.2012,
+"media20": 216.123,
+"quattro_atr": 210.5418,
+"meta_caduta": 211.945,
+"bollinger": 233.4764,
+"consigliata": 210.5418
+},
+"stop": 171.7041,
+"atr": 6.473
 }
 ]
