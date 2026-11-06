@@ -1593,7 +1593,7 @@
 "max_price": 97.57,
 "max_date": "2026-08-17 19:56",
 "warn_since": "2026-11-03",
-"warn": "in perdita da 73 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 74 giorni di Borsa: valuta l'uscita"
 },
 "NEM": {
 "kind": "long",
@@ -3173,7 +3173,7 @@
 "max_price": 11.69,
 "max_date": "2026-10-28 14:33",
 "warn_since": "2026-11-05",
-"warn": "in perdita da 66 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 67 giorni di Borsa: valuta l'uscita"
 },
 "RBLX": {
 "kind": "short",
@@ -3859,7 +3859,7 @@
 "max_price": 37.94,
 "max_date": "2026-09-08 22:03",
 "warn_since": "2026-11-05",
-"warn": "in perdita da 60 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 61 giorni di Borsa: valuta l'uscita"
 },
 "TDC": {
 "kind": "long",
@@ -5111,7 +5111,7 @@
 "notified": true,
 "entry_check": "2026-11-05",
 "warn_since": "2026-11-05",
-"warn": "in perdita da 33 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 34 giorni di Borsa: valuta l'uscita"
 },
 "SYNA": {
 "kind": "short",
@@ -5956,7 +5956,7 @@
 "entry_check": "2026-11-05",
 "exit_notified": false,
 "warn_since": "2026-11-05",
-"warn": "in perdita da 28 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 29 giorni di Borsa: valuta l'uscita"
 },
 "FICO": {
 "kind": "short",
@@ -6805,7 +6805,7 @@
 "notified": true,
 "entry_check": "2026-11-05",
 "warn_since": "2026-11-05",
-"warn": "in perdita da 22 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 23 giorni di Borsa: valuta l'uscita"
 },
 "XLF": {
 "kind": "short",
@@ -8423,7 +8423,7 @@
 "notified": false,
 "entry_check": "2026-11-05",
 "warn_since": "2026-11-05",
-"warn": "in perdita da 12 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 13 giorni di Borsa: valuta l'uscita"
 },
 "NESR": {
 "kind": "short",
@@ -8588,7 +8588,7 @@
 "notified": true,
 "entry_check": "2026-11-05",
 "warn_since": "2026-11-05",
-"warn": "in perdita da 11 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 12 giorni di Borsa: valuta l'uscita"
 },
 "MRP": {
 "kind": "short",
@@ -8916,7 +8916,7 @@
 "notified": true,
 "entry_check": "2026-11-05",
 "warn_since": "2026-11-05",
-"warn": "in perdita da 11 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 12 giorni di Borsa: valuta l'uscita"
 },
 "CELC": {
 "kind": "short",
@@ -10531,7 +10531,9 @@
 "max_date": "2026-11-05 01:25",
 "auto": true,
 "notified": true,
-"entry_check": "2026-11-05"
+"entry_check": "2026-11-05",
+"warn_since": "2026-11-06",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "FLG": {
 "kind": "short",
@@ -11176,7 +11178,7 @@
 "max_price": 20.875,
 "max_date": "2026-11-05 16:51",
 "auto": true,
-"notified": false,
+"notified": true,
 "entry_check": "2026-11-05",
 "incasso": {
 "gain": 3.1,
