@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:NVST:2026-09-17",
-"ticker": "NVST",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-18 02:49",
-"data": "2026-09-18 02:46",
-"prezzo": 24.97,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 24.055",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:SAH:2026-09-18",
 "ticker": "SAH",
 "kind": "short",
@@ -37218,5 +37198,32 @@
 },
 "stop": 33.5164,
 "atr": 1.6018
+},
+{
+"episodio": "short:MCHP:2026-11-06",
+"ticker": "MCHP",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-11-06 18:27",
+"data": "2026-11-06 18:27",
+"prezzo": 56.275,
+"conv": 61,
+"prob_gain": 56,
+"prob_loss": 6,
+"reliab": "🟡 Media",
+"mkt": -5.0231,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 74.8065,
+"media20": 74.3993,
+"quattro_atr": 74.3596,
+"meta_caduta": 68.8825,
+"bollinger": 85.3816,
+"consigliata": 74.3596
+},
+"stop": 47.2327,
+"atr": 4.5212
 }
 ]
