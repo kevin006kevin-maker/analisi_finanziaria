@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:SAH:2026-09-18",
-"ticker": "SAH",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-18 02:49",
-"data": "2026-09-18 02:46",
-"prezzo": 72.69,
-"conv": 68,
-"prob_gain": 57,
-"prob_loss": 7,
-"reliab": "🟡 Media",
-"mkt": -0.911,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 65.95",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "long:SAH:2026-09-18",
 "ticker": "SAH",
 "kind": "long",
@@ -37225,5 +37205,25 @@
 },
 "stop": 47.2327,
 "atr": 4.5212
+},
+{
+"episodio": "short:BKD:2026-10-11",
+"ticker": "BKD",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-11-06 18:31",
+"data": "2026-11-06 18:31",
+"prezzo": 9.275,
+"conv": 82,
+"prob_gain": 46,
+"prob_loss": 9,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
