@@ -30183,5 +30183,69 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:ALHC:2026-09-15",
+"ticker": "ALHC",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-18 00:33",
+"data": "2026-09-18 00:26",
+"prezzo": 8.7,
+"conv": 80,
+"prob_gain": 54,
+"prob_loss": 14,
+"reliab": "🔴 Bassa",
+"mkt": -0.911,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-18",
+"soglie": {
+"media50": 15.3397,
+"media20": 12.7217,
+"quattro_atr": 12.5075,
+"meta_caduta": 16.63,
+"bollinger": 15.8406,
+"consigliata": 12.5075
+},
+"stop": 6.7962,
+"atr": 0.9519,
+"res": {
+"7g": -10.75,
+"30g": -4.2,
+"soglia": -4.2
+},
+"res_soglia": {
+"media50": {
+"ret": -4.2,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -4.2,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -4.2,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -4.2,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -4.2,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -4.2,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
