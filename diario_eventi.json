@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:MTZ:2026-09-17",
-"ticker": "MTZ",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-18 02:49",
-"data": "2026-09-18 02:46",
-"prezzo": 225.62,
-"conv": 74,
-"prob_gain": 50,
-"prob_loss": 14,
-"reliab": "🟡 Media",
-"mkt": -0.911,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 209.77",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:NVST:2026-09-17",
 "ticker": "NVST",
 "kind": "short",
@@ -37211,5 +37191,32 @@
 "stop": 55.4575,
 "atr": 1.2963,
 "res": {}
+},
+{
+"episodio": "short:NMIH:2026-11-06",
+"ticker": "NMIH",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-11-06 18:27",
+"data": "2026-11-06 18:27",
+"prezzo": 36.72,
+"conv": 64,
+"prob_gain": 59,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": -5.0231,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 41.9769,
+"media20": 41.5985,
+"quattro_atr": 43.1272,
+"meta_caduta": 41.215,
+"bollinger": 45.3479,
+"consigliata": 41.9769
+},
+"stop": 33.5164,
+"atr": 1.6018
 }
 ]
