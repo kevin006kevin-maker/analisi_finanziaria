@@ -1,48 +1,6 @@
 [
 {
 "date": "2026-10-29",
-"ticker": "MONC.MI",
-"kind": "short",
-"price": 42.12,
-"conv": 61,
-"factors": {
-"discount": 28.0738,
-"histcheap": 2.15,
-"riskadj": -1.36,
-"ddpen": -14.2,
-"momentum": 0.6135,
-"prob": 45,
-"oversold": -39.9757,
-"rebound": 6.0128,
-"trend": -1.0,
-"relstrength": -0.4435
-},
-"ret_5d": 8.81,
-"ret_21d": null
-},
-{
-"date": "2026-10-29",
-"ticker": "PST.MI",
-"kind": "short",
-"price": 24.46,
-"conv": 57,
-"factors": {
-"discount": 16.3189,
-"histcheap": -0.18,
-"riskadj": 0.73,
-"ddpen": -7.37,
-"momentum": -1.7894,
-"prob": 49,
-"oversold": -46.1425,
-"rebound": 4.928,
-"trend": -1.0,
-"relstrength": 1.9595
-},
-"ret_5d": 1.59,
-"ret_21d": null
-},
-{
-"date": "2026-10-29",
 "ticker": "SPY",
 "kind": "short",
 "price": 772.31,
@@ -38711,6 +38669,46 @@
 "rebound": 370.1751,
 "trend": -1.0,
 "relstrength": -79.7485
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-06",
+"ticker": "IRTC",
+"kind": "long",
+"price": 88.235,
+"conv": 36,
+"factors": {
+"discount": 53.3765,
+"histcheap": 1.77,
+"riskadj": -1.25,
+"ddpen": -32.76,
+"momentum": 28.4794,
+"prob": 90,
+"quality": 36.7,
+"valcheap": -2.5479,
+"trappen": 2
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-06",
+"ticker": "DKNG",
+"kind": "long",
+"price": 17.085,
+"conv": 38,
+"factors": {
+"discount": 52.856,
+"histcheap": 1.98,
+"riskadj": -0.93,
+"ddpen": -30.84,
+"momentum": 18.2927,
+"prob": 60,
+"quality": 34.8,
+"valcheap": -1.4841,
+"trappen": 2
 },
 "ret_5d": null,
 "ret_21d": null
