@@ -2230,7 +2230,6 @@
 "entry_date": "2026-07-31 17:04",
 "entry_src": "scatto",
 "entry_check": "2026-11-06",
-"incasso_notified": true,
 "max_price": 63.59,
 "max_date": "2026-09-15 19:43",
 "exit_notified": false
@@ -4424,15 +4423,6 @@
 "notified": true,
 "entry_check": "2026-11-06",
 "exit_notified": false,
-"incasso": {
-"gain": 8.8,
-"max": 27.66,
-"max_date": "2026-10-23 17:30",
-"giu_dal_max": -8.3,
-"motivo": "scesa 8% dal massimo (27.66) restando in guadagno (+8.8%): il guadagno si sta sgonfiando",
-"urgenza": "incassa",
-"tipo": "sgonfia"
-},
 "incasso_notified": true
 },
 "TTAN": {
@@ -4597,8 +4587,7 @@
 "auto": true,
 "notified": true,
 "entry_check": "2026-11-06",
-"exit_notified": false,
-"incasso_notified": true
+"exit_notified": false
 },
 "MYGN": {
 "kind": "short",
@@ -7332,8 +7321,7 @@
 "max_date": "2026-10-16 23:44",
 "auto": true,
 "notified": true,
-"entry_check": "2026-11-05",
-"incasso_notified": true
+"entry_check": "2026-11-05"
 },
 "XRAY": {
 "kind": "short",
@@ -7882,11 +7870,11 @@
 "notified": true,
 "entry_check": "2026-11-05",
 "incasso": {
-"gain": 5.3,
+"gain": 4.1,
 "max": 44.56,
 "max_date": "2026-11-05 22:58",
-"giu_dal_max": 0.0,
-"motivo": "bersaglio 43.85 raggiunto (sei a +5.3%): valuta di incassare",
+"giu_dal_max": -1.2,
+"motivo": "bersaglio 43.85 raggiunto (sei a +4.1%): valuta di incassare",
 "urgenza": "incassa",
 "tipo": "bersaglio"
 },
