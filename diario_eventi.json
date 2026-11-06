@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:IONS:2026-09-15",
-"ticker": "IONS",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-18 00:32",
-"data": "2026-09-18 00:26",
-"prezzo": 46.75,
-"conv": 81,
-"prob_gain": 66,
-"prob_loss": 10,
-"reliab": "🟡 Media",
-"mkt": -0.911,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-18",
-"soglie": {
-"media50": 56.371,
-"media20": 57.0805,
-"quattro_atr": 56.7644,
-"meta_caduta": 66.54,
-"bollinger": 68.2795,
-"consigliata": 56.371
-},
-"stop": 41.7428,
-"atr": 2.5036,
-"res": {
-"7g": -5.88,
-"30g": -6.87,
-"soglia": -6.87
-},
-"res_soglia": {
-"media50": {
-"ret": -6.87,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -6.87,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -6.87,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -6.87,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -6.87,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -6.87,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:ALHC:2026-09-15",
 "ticker": "ALHC",
 "kind": "short",
@@ -37041,5 +36977,32 @@
 },
 "stop": 19.3121,
 "atr": 1.0539
+},
+{
+"episodio": "short:RCUS:2026-10-21",
+"ticker": "RCUS",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-11-06 03:28",
+"data": "2026-11-05 22:58",
+"prezzo": 17.69,
+"conv": 77,
+"prob_gain": 47,
+"prob_loss": 16,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-11-06",
+"soglie": {
+"media50": 23.9956,
+"media20": 20.3235,
+"quattro_atr": 23.2526,
+"meta_caduta": 24.63,
+"bollinger": 25.1626,
+"consigliata": 23.2526
+},
+"stop": 14.9087,
+"atr": 1.3906
 }
 ]
