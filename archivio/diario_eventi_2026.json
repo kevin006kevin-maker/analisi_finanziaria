@@ -30247,5 +30247,69 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:AXON:2026-09-15",
+"ticker": "AXON",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-18 00:33",
+"data": "2026-09-18 00:29",
+"prezzo": 453.5,
+"conv": 66,
+"prob_gain": 52,
+"prob_loss": 22,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-18",
+"soglie": {
+"media50": 551.1902,
+"media20": 536.2865,
+"quattro_atr": 573.5218,
+"meta_caduta": 549.61,
+"bollinger": 660.7525,
+"consigliata": 551.1902
+},
+"stop": 393.4891,
+"atr": 30.0055,
+"res": {
+"7g": -1.37,
+"30g": -16.45,
+"soglia": -16.45
+},
+"res_soglia": {
+"media50": {
+"ret": -16.45,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -16.45,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -16.45,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -16.45,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -16.45,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -16.45,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
