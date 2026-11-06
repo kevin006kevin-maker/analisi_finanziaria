@@ -4160,7 +4160,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-11-06",
 "max_price": 37.94,
-"max_date": "2026-09-08 22:03"
+"max_date": "2026-09-08 22:03",
+"warn_since": "2026-11-06",
+"warn": "in perdita da 61 giorni di Borsa: valuta l'uscita"
 },
 "TDC": {
 "kind": "long",
@@ -7984,9 +7986,7 @@
 "max_date": "2026-10-16 23:44",
 "auto": true,
 "notified": true,
-"entry_check": "2026-11-06",
-"warn_since": "2026-11-06",
-"warn": "in perdita da 22 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-11-06"
 },
 "XRAY": {
 "kind": "short",
@@ -11213,9 +11213,7 @@
 "max_date": "2026-11-05 01:25",
 "auto": true,
 "notified": true,
-"entry_check": "2026-11-06",
-"warn_since": "2026-11-06",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-11-06"
 },
 "FLG": {
 "kind": "short",
