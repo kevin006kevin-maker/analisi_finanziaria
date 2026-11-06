@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:NXH:2026-09-18",
-"ticker": "NXH",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-18 16:59",
-"data": "2026-09-18 16:59",
-"prezzo": 3.535,
-"conv": 61,
-"prob_gain": 48,
-"prob_loss": 22,
-"reliab": "🔴 Bassa",
-"mkt": -0.1712,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 4.4117,
-"media20": 3.7663,
-"quattro_atr": 4.488,
-"meta_caduta": 4.9225,
-"bollinger": 4.2472,
-"consigliata": 4.4117
-},
-"stop": 3.0585,
-"atr": 0.2382,
-"res": {
-"7g": -4.38,
-"30g": -57.43,
-"soglia": -57.43
-},
-"res_soglia": {
-"media50": {
-"ret": -57.43,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -57.43,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -57.43,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -57.43,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -57.43,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -57.43,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "long:STLAM.MI:2026-08-17",
 "ticker": "STLAM.MI",
 "kind": "long",
@@ -37685,6 +37621,26 @@
 "mkt": null,
 "fonte": "osservazione",
 "note": "prezzo salito di almeno il 2% da 36.72",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:MCHP:2026-11-06",
+"ticker": "MCHP",
+"kind": "short",
+"evento": "salita_2pct",
+"scritto_il": "2026-11-06 23:24",
+"data": "2026-11-06 23:22",
+"prezzo": 58.35,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "prezzo salito di almeno il 2% da 56.275",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
