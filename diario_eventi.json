@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:ENVA:2026-09-15",
-"ticker": "ENVA",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-18 00:32",
-"data": "2026-09-18 00:29",
-"prezzo": 179.06,
-"conv": 75,
-"prob_gain": 57,
-"prob_loss": 8,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-18",
-"soglie": {
-"media50": 237.2126,
-"media20": 223.22,
-"quattro_atr": 220.8611,
-"meta_caduta": 222.255,
-"bollinger": 267.4317,
-"consigliata": 220.8611
-},
-"stop": 158.1595,
-"atr": 10.4503,
-"res": {
-"7g": -3.41,
-"30g": -1.26,
-"soglia": -1.26
-},
-"res_soglia": {
-"media50": {
-"ret": -1.26,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -1.26,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -1.26,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -1.26,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -1.26,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -1.26,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:IONS:2026-09-15",
 "ticker": "IONS",
 "kind": "short",
@@ -37078,5 +37014,32 @@
 },
 "stop": 171.7041,
 "atr": 6.473
+},
+{
+"episodio": "long:KGC:2026-11-06",
+"ticker": "KGC",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-11-06 03:25",
+"data": "2026-11-06 03:23",
+"prezzo": 21.42,
+"conv": 77,
+"prob_gain": 63,
+"prob_loss": 27,
+"reliab": "🟡 Media",
+"mkt": -5.3008,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 25.7018,
+"media20": 22.6165,
+"quattro_atr": 25.6357,
+"meta_caduta": 27.45,
+"bollinger": 25.1725,
+"consigliata": 25.6357
+},
+"stop": 19.3121,
+"atr": 1.0539
 }
 ]
