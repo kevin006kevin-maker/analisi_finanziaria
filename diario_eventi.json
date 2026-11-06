@@ -36757,7 +36757,18 @@
 "consigliata": 210.5418
 },
 "stop": 171.7041,
-"atr": 6.473
+"atr": 6.473,
+"soglie_contaminate": {
+"media50": 221.2012,
+"media20": 216.123,
+"quattro_atr": 210.5418,
+"meta_caduta": 211.945,
+"bollinger": 233.4764,
+"consigliata": 210.5418
+},
+"soglie_ricalcolate_il": "2026-11-06 03:29",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "long:KGC:2026-11-06",
@@ -36811,7 +36822,18 @@
 "consigliata": 23.2526
 },
 "stop": 14.9087,
-"atr": 1.3906
+"atr": 1.3906,
+"soglie_contaminate": {
+"media50": 23.9956,
+"media20": 20.3235,
+"quattro_atr": 23.2526,
+"meta_caduta": 24.63,
+"bollinger": 25.1626,
+"consigliata": 23.2526
+},
+"soglie_ricalcolate_il": "2026-11-06 03:29",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "short:QQQ:2026-11-03",
