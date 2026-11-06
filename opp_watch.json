@@ -6396,30 +6396,7 @@
 "ticker": "MXL",
 "kind": "short",
 "name": "MXL",
-"obs": [
-{
-"date": "2026-09-09 20:29",
-"conv": null,
-"price": 71.16,
-"stale": true
-},
-{
-"date": "2026-09-09 23:06",
-"conv": null,
-"price": 71.51,
-"stale": true
-},
-{
-"date": "2026-09-15 03:24",
-"conv": 38,
-"price": 74.57,
-"mkt": -2.1293,
-"occ": 44,
-"prob_gain": 39,
-"prob_loss": 35,
-"reliab": "🔴 Bassa"
-}
-],
+"obs": [],
 "primo": {
 "date": "2026-09-03 15:45",
 "conv": 70,
@@ -6429,7 +6406,8 @@
 "prob_gain": 40,
 "prob_loss": 29,
 "reliab": "🔴 Bassa"
-}
+},
+"ripartita": "2026-11-06"
 },
 "short:PL": {
 "ticker": "PL",
@@ -7356,30 +7334,7 @@
 "ticker": "ENOV",
 "kind": "short",
 "name": "ENOV",
-"obs": [
-{
-"date": "2026-09-30 19:02",
-"conv": null,
-"price": 18.27,
-"stale": true
-},
-{
-"date": "2026-10-04 10:45",
-"conv": null,
-"price": 17.77,
-"stale": true
-},
-{
-"date": "2026-10-05 17:57",
-"conv": 54,
-"price": 18.42,
-"mkt": 0.5555,
-"occ": 52,
-"prob_gain": 46,
-"prob_loss": 16,
-"reliab": "🔴 Bassa"
-}
-],
+"obs": [],
 "primo": {
 "date": "2026-09-09 00:52",
 "conv": 72,
@@ -7389,7 +7344,8 @@
 "prob_gain": 54,
 "prob_loss": 11,
 "reliab": "🔴 Bassa"
-}
+},
+"ripartita": "2026-11-06"
 },
 "short:ADTN": {
 "ticker": "ADTN",
@@ -15343,6 +15299,16 @@
 "prob_gain": 52,
 "prob_loss": 0,
 "reliab": "🟢 Alta"
+},
+{
+"date": "2026-11-06 10:50",
+"conv": 66,
+"price": 58.05,
+"mkt": -5.3008,
+"occ": 44,
+"prob_gain": 52,
+"prob_loss": 0,
+"reliab": "🟢 Alta"
 }
 ],
 "primo": {
@@ -17787,6 +17753,16 @@
 "conv": null,
 "price": 691.95,
 "stale": true
+},
+{
+"date": "2026-11-06 10:50",
+"conv": 65,
+"price": 647.05,
+"mkt": -5.3008,
+"occ": 42,
+"prob_gain": 53,
+"prob_loss": 0,
+"reliab": "🟢 Alta"
 }
 ],
 "primo": {
@@ -17860,6 +17836,16 @@
 "conv": null,
 "price": 176.5,
 "stale": true
+},
+{
+"date": "2026-11-06 10:50",
+"conv": 63,
+"price": 162.38,
+"mkt": -5.3008,
+"occ": 46,
+"prob_gain": 53,
+"prob_loss": 0,
+"reliab": "🟢 Alta"
 }
 ],
 "primo": {
@@ -18065,6 +18051,16 @@
 "conv": null,
 "price": 15.95,
 "stale": true
+},
+{
+"date": "2026-11-06 10:50",
+"conv": 61,
+"price": 14.84,
+"mkt": -5.3008,
+"occ": 37,
+"prob_gain": 54,
+"prob_loss": 6,
+"reliab": "🔴 Bassa"
 }
 ],
 "primo": {
