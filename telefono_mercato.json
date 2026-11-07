@@ -1,5 +1,5 @@
 {
-"aggiornato": "2026-11-07 10:21",
+"aggiornato": "2026-11-07 17:01",
 "short": [
 {
 "t": "VWO",
@@ -160,7 +160,7 @@
 {
 "t": "TAL",
 "nome": "TAL Education Group",
-"conv": 74.0,
+"conv": 73.0,
 "prezzo": 10.16,
 "dal_max": -21.0,
 "perf": -13.5,
@@ -174,7 +174,7 @@
 {
 "t": "FFIV",
 "nome": "F5, Inc.",
-"conv": 74.0,
+"conv": 73.0,
 "prezzo": 310.84,
 "dal_max": -35.2,
 "perf": 26.5,
@@ -186,17 +186,17 @@
 "stato": "in osservazione"
 },
 {
-"t": "ENVA",
-"nome": "Enova International, Inc.",
+"t": "ECG",
+"nome": "Everus Construction Group, Inc.",
 "conv": 69.0,
-"prezzo": 172.48,
-"dal_max": -35.0,
-"perf": 38.1,
-"salita": 65.0,
-"perdita": 25.0,
-"affid": "🟡 Media",
-"settore": "Financial Services",
-"perche": "qualità del business 79/100 · ✅ conti che tengono · ROIC 6% · in saldo: 35% sotto il massimo dell'anno · ricavi 3 anni +18%/anno",
+"prezzo": 76.6,
+"dal_max": -54.7,
+"perf": -21.7,
+"salita": 84.0,
+"perdita": 10.0,
+"affid": "🔴 Bassa",
+"settore": "Construction",
+"perche": "qualità del business 72/100 · ✅ conti che tengono · ROIC 27% · in saldo: 55% sotto il massimo dell'anno · ricavi 3 anni +12%/anno",
 "stato": "in osservazione"
 },
 {
@@ -228,17 +228,17 @@
 "stato": "in osservazione"
 },
 {
-"t": "ECG",
-"nome": "Everus Construction Group, Inc.",
-"conv": 69.0,
-"prezzo": 76.6,
-"dal_max": -54.7,
-"perf": -21.7,
-"salita": 84.0,
-"perdita": 10.0,
-"affid": "🔴 Bassa",
-"settore": "Construction",
-"perche": "qualità del business 72/100 · ✅ conti che tengono · ROIC 27% · in saldo: 55% sotto il massimo dell'anno · ricavi 3 anni +12%/anno",
+"t": "ENVA",
+"nome": "Enova International, Inc.",
+"conv": 68.0,
+"prezzo": 172.48,
+"dal_max": -35.0,
+"perf": 38.1,
+"salita": 65.0,
+"perdita": 25.0,
+"affid": "🟡 Media",
+"settore": "Financial Services",
+"perche": "qualità del business 79/100 · ✅ conti che tengono · ROIC 6% · in saldo: 35% sotto il massimo dell'anno · ricavi 3 anni +18%/anno",
 "stato": "in osservazione"
 },
 {
@@ -272,7 +272,7 @@
 {
 "t": "SAN",
 "nome": "Banco Santander SA",
-"conv": 65.0,
+"conv": 64.0,
 "prezzo": 11.74,
 "dal_max": -22.0,
 "perf": 13.4,
@@ -312,20 +312,6 @@
 "stato": "seguita"
 },
 {
-"t": "ACAD",
-"nome": "Acadia Pharmaceuticals Inc.",
-"conv": 59.0,
-"prezzo": 21.23,
-"dal_max": -30.6,
-"perf": -5.9,
-"salita": 61.0,
-"perdita": 27.0,
-"affid": "🟡 Media",
-"settore": "Biotechnology",
-"perche": "qualità del business 80/100 · ✅ conti che tengono · ROIC 32% · in saldo: 31% sotto il massimo dell'anno · ricavi 3 anni +14%/anno",
-"stato": "in osservazione"
-},
-{
 "t": "OXY",
 "nome": "Occidental Petroleum Corp",
 "conv": 59.0,
@@ -351,6 +337,20 @@
 "affid": "🟢 Alta",
 "settore": "Telecommunication",
 "perche": "qualità del business 64/100 · ✅ conti che tengono · ROIC 10% · in saldo: 18% sotto il massimo dell'anno · ricavi 3 anni +0%/anno",
+"stato": "in osservazione"
+},
+{
+"t": "ACAD",
+"nome": "Acadia Pharmaceuticals Inc.",
+"conv": 58.0,
+"prezzo": 21.23,
+"dal_max": -30.6,
+"perf": -5.9,
+"salita": 61.0,
+"perdita": 27.0,
+"affid": "🟡 Media",
+"settore": "Biotechnology",
+"perche": "qualità del business 80/100 · ✅ conti che tengono · ROIC 32% · in saldo: 31% sotto il massimo dell'anno · ricavi 3 anni +14%/anno",
 "stato": "in osservazione"
 },
 {
@@ -396,9 +396,23 @@
 "stato": "in osservazione"
 },
 {
+"t": "PR",
+"nome": "Permian Resources Corporation",
+"conv": 53.0,
+"prezzo": 21.75,
+"dal_max": -16.4,
+"perf": 64.0,
+"salita": 66.0,
+"perdita": 17.0,
+"affid": "🟢 Alta",
+"settore": "Energy",
+"perche": "qualità del business 64/100 · ✅ conti che tengono · ROIC 9% · in saldo: 16% sotto il massimo dell'anno · ricavi 3 anni +33%/anno",
+"stato": "in osservazione"
+},
+{
 "t": "HMY",
 "nome": "Harmony Gold Mining Company Lim",
-"conv": 54.0,
+"conv": 53.0,
 "prezzo": 17.17,
 "dal_max": -34.1,
 "perf": 4.6,
@@ -422,20 +436,6 @@
 "settore": "Health Care",
 "perche": "qualità nella media 46/100 · ✅ conti che tengono · ROIC 8% · in saldo: 24% sotto il massimo dell'anno · ricavi 3 anni +8%/anno",
 "stato": ""
-},
-{
-"t": "PR",
-"nome": "Permian Resources Corporation",
-"conv": 53.0,
-"prezzo": 21.75,
-"dal_max": -16.4,
-"perf": 64.0,
-"salita": 66.0,
-"perdita": 17.0,
-"affid": "🟢 Alta",
-"settore": "Energy",
-"perche": "qualità del business 64/100 · ✅ conti che tengono · ROIC 9% · in saldo: 16% sotto il massimo dell'anno · ricavi 3 anni +33%/anno",
-"stato": "in osservazione"
 },
 {
 "t": "GFI",
@@ -466,20 +466,6 @@
 "stato": "in osservazione"
 },
 {
-"t": "CDE",
-"nome": "Coeur Mining, Inc.",
-"conv": 49.0,
-"prezzo": 15.47,
-"dal_max": -43.0,
-"perf": 5.3,
-"salita": 56.0,
-"perdita": 36.0,
-"affid": "🔴 Bassa",
-"settore": "Metals & Mining",
-"perche": "qualità del business 82/100 · ✅ conti che tengono · ROIC 12% · in saldo: 43% sotto il massimo dell'anno · ricavi 3 anni +38%/anno",
-"stato": "in osservazione"
-},
-{
 "t": "EIX",
 "nome": "EDISON INTERNATIONAL",
 "conv": 49.0,
@@ -491,6 +477,20 @@
 "affid": "🟡 Media",
 "settore": "nan",
 "perche": "qualità nella media 59/100 · ✅ conti che tengono · in saldo: 26% sotto il massimo dell'anno · ultimo anno +4%",
+"stato": "in osservazione"
+},
+{
+"t": "CDE",
+"nome": "Coeur Mining, Inc.",
+"conv": 48.0,
+"prezzo": 15.47,
+"dal_max": -43.0,
+"perf": 5.3,
+"salita": 56.0,
+"perdita": 36.0,
+"affid": "🔴 Bassa",
+"settore": "Metals & Mining",
+"perche": "qualità del business 82/100 · ✅ conti che tengono · ROIC 12% · in saldo: 43% sotto il massimo dell'anno · ricavi 3 anni +38%/anno",
 "stato": "in osservazione"
 },
 {
@@ -538,7 +538,7 @@
 {
 "t": "CCL",
 "nome": "Carnival Corporation Ltd",
-"conv": 39.0,
+"conv": 40.0,
 "prezzo": 29.58,
 "dal_max": -13.0,
 "perf": 10.7,
@@ -566,7 +566,7 @@
 {
 "t": "LDO.MI",
 "nome": "LEONARDO",
-"conv": 38.0,
+"conv": 37.0,
 "prezzo": 48.07,
 "dal_max": -25.2,
 "perf": -3.1,
@@ -574,7 +574,7 @@
 "perdita": 17.0,
 "affid": "🟡 Media",
 "settore": "Industrials",
-"perche": "qualità nella media 55/100 · ✅ conti che tengono · in saldo: 25% sotto il massimo dell'anno · ultimo anno -3%",
+"perche": "qualità nella media 54/100 · ✅ conti che tengono · in saldo: 25% sotto il massimo dell'anno · ultimo anno -3%",
 "stato": "in osservazione"
 },
 {
