@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-10-30",
-"ticker": "MRVL",
-"kind": "short",
-"price": 218.34,
-"conv": 51,
-"factors": {
-"discount": 30.999,
-"histcheap": -0.73,
-"riskadj": 1.67,
-"ddpen": -19.28,
-"momentum": 2.2956,
-"prob": 27,
-"oversold": -39.765,
-"rebound": 11.6169,
-"trend": 1.0,
-"relstrength": -3.0389
-},
-"ret_5d": -37.02,
-"ret_21d": null
-},
-{
-"date": "2026-10-30",
 "ticker": "GOOGL",
 "kind": "short",
 "price": 283.82,
@@ -39234,6 +39213,46 @@
 "rebound": 4.7536,
 "trend": -1.0,
 "relstrength": -9.7001
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-07",
+"ticker": "CVE",
+"kind": "long",
+"price": 27.45,
+"conv": 68,
+"factors": {
+"discount": 19.0743,
+"histcheap": -0.33,
+"riskadj": 1.69,
+"ddpen": -8.18,
+"momentum": 16.132,
+"prob": 50,
+"quality": 68.1,
+"valcheap": -0.1703,
+"trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-07",
+"ticker": "CVS",
+"kind": "long",
+"price": 83.85,
+"conv": 53,
+"factors": {
+"discount": 24.1863,
+"histcheap": 0.29,
+"riskadj": 0.1,
+"ddpen": -10.6,
+"momentum": 7.0914,
+"prob": 51,
+"quality": 45.5,
+"valcheap": 0.7323,
+"trappen": 3
 },
 "ret_5d": null,
 "ret_21d": null
