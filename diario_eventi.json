@@ -1,25 +1,5 @@
 [
 {
-"episodio": "long:STLAM.MI:2026-08-17",
-"ticker": "STLAM.MI",
-"kind": "long",
-"evento": "uscita",
-"scritto_il": "2026-09-18 17:02",
-"data": "2026-09-18 17:02",
-"prezzo": 4.1995,
-"conv": 69,
-"prob_gain": 72,
-"prob_loss": 18,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:ALKS:2026-09-18",
 "ticker": "ALKS",
 "kind": "short",
@@ -37645,5 +37625,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "long:CVE:2026-11-07",
+"ticker": "CVE",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-11-07 10:15",
+"data": "2026-11-07 10:15",
+"prezzo": 27.45,
+"conv": 68,
+"prob_gain": 68,
+"prob_loss": 18,
+"reliab": "🟡 Media",
+"mkt": -5.5646,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 31.9254,
+"media20": 31.675,
+"quattro_atr": 32.1055,
+"meta_caduta": 30.685,
+"bollinger": 35.3249,
+"consigliata": 31.9254
+},
+"stop": 25.1223,
+"atr": 1.1639
 }
 ]
