@@ -3618,7 +3618,9 @@
 "urgenza": "incassa",
 "tipo": "sgonfia"
 },
-"incasso_notified": true
+"incasso_notified": true,
+"warn_since": "2026-11-07",
+"warn": "in perdita da 67 giorni di Borsa: valuta l'uscita"
 },
 "RBLX": {
 "kind": "short",
@@ -6800,7 +6802,9 @@
 "notified": true,
 "entry_check": "2026-11-06",
 "exit_notified": false,
-"incasso_notified": true
+"incasso_notified": true,
+"warn_since": "2026-11-07",
+"warn": "in perdita da 29 giorni di Borsa: valuta l'uscita"
 },
 "FICO": {
 "kind": "short",
@@ -7775,7 +7779,9 @@
 "max_date": "2026-10-27 21:42",
 "auto": true,
 "notified": true,
-"entry_check": "2026-11-06"
+"entry_check": "2026-11-06",
+"warn_since": "2026-11-07",
+"warn": "in perdita da 23 giorni di Borsa: valuta l'uscita"
 },
 "XLF": {
 "kind": "short",
@@ -11174,9 +11180,7 @@
 "max_date": "2026-11-04 12:35",
 "auto": true,
 "notified": false,
-"entry_check": "2026-11-06",
-"warn_since": "2026-11-06",
-"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-11-06"
 },
 "MB.MI": {
 "kind": "short",
@@ -11809,7 +11813,9 @@
 "max_date": "2026-11-05 01:25",
 "auto": true,
 "notified": true,
-"entry_check": "2026-11-06"
+"entry_check": "2026-11-06",
+"warn_since": "2026-11-07",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "FLG": {
 "kind": "short",
