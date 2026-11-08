@@ -30815,5 +30815,69 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:SMST:2026-09-18",
+"ticker": "SMST",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-18 23:14",
+"data": "2026-09-18 23:14",
+"prezzo": 13.84,
+"conv": 71,
+"prob_gain": 55,
+"prob_loss": 31,
+"reliab": "🔴 Bassa",
+"mkt": 0.0639,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 43.3078,
+"media20": 23.4147,
+"quattro_atr": 31.7425,
+"meta_caduta": 54.36,
+"bollinger": 32.8697,
+"consigliata": 31.7425
+},
+"stop": 4.8887,
+"atr": 4.4756,
+"res": {
+"7g": -10.19,
+"30g": 8.38,
+"soglia": 8.38
+},
+"res_soglia": {
+"media50": {
+"ret": 8.38,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": 8.38,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": 8.38,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": 8.38,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": 8.38,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": 8.38,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
