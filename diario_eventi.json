@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:SMST:2026-09-18",
-"ticker": "SMST",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-18 23:14",
-"data": "2026-09-18 23:14",
-"prezzo": 13.84,
-"conv": 71,
-"prob_gain": 55,
-"prob_loss": 31,
-"reliab": "🔴 Bassa",
-"mkt": 0.0639,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 43.3078,
-"media20": 23.4147,
-"quattro_atr": 31.7425,
-"meta_caduta": 54.36,
-"bollinger": 32.8697,
-"consigliata": 31.7425
-},
-"stop": 4.8887,
-"atr": 4.4756,
-"res": {
-"7g": -10.19,
-"30g": 8.38,
-"soglia": 8.38
-},
-"res_soglia": {
-"media50": {
-"ret": 8.38,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 8.38,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 8.38,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 8.38,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 8.38,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 8.38,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:NCT:2026-09-18",
 "ticker": "NCT",
 "kind": "short",
@@ -37578,5 +37514,32 @@
 },
 "stop": 10.8168,
 "atr": 0.3866
+},
+{
+"episodio": "long:EIX:2026-08-31",
+"ticker": "EIX",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-11-08 23:29",
+"data": "2026-11-08 23:29",
+"prezzo": 59.37,
+"conv": 68,
+"prob_gain": 71,
+"prob_loss": 16,
+"reliab": "🟡 Media",
+"mkt": -5.5646,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": null,
+"media20": null,
+"quattro_atr": 65.8337,
+"meta_caduta": 67.075,
+"bollinger": 61.6118,
+"consigliata": 65.8337
+},
+"stop": 56.1382,
+"atr": 1.6159
 }
 ]
