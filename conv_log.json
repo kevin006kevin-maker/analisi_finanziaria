@@ -1,69 +1,6 @@
 [
 {
 "date": "2026-10-31",
-"ticker": "HUN",
-"kind": "short",
-"price": 9.64,
-"conv": 30,
-"factors": {
-"discount": 39.3329,
-"histcheap": 0.81,
-"riskadj": 0.27,
-"ddpen": -24.01,
-"momentum": -9.5455,
-"prob": 33,
-"oversold": -65.7364,
-"rebound": -6.666,
-"trend": -1.0,
-"relstrength": 10.1175
-},
-"ret_5d": null,
-"ret_21d": null
-},
-{
-"date": "2026-10-31",
-"ticker": "BOOM",
-"kind": "short",
-"price": 9.35,
-"conv": 23,
-"factors": {
-"discount": -0.0,
-"histcheap": -2.67,
-"riskadj": 0.19,
-"ddpen": -27.93,
-"momentum": -70.3097,
-"prob": 20,
-"oversold": -83.9699,
-"rebound": -33.5102,
-"trend": 1.0,
-"relstrength": 70.8817
-},
-"ret_5d": null,
-"ret_21d": null
-},
-{
-"date": "2026-10-31",
-"ticker": "PWP",
-"kind": "short",
-"price": 14.73,
-"conv": 27,
-"factors": {
-"discount": 39.4823,
-"histcheap": 1.15,
-"riskadj": -0.64,
-"ddpen": -27.3,
-"momentum": -18.9822,
-"prob": 38,
-"oversold": -56.3323,
-"rebound": 0.26,
-"trend": -1.0,
-"relstrength": 19.5543
-},
-"ret_5d": null,
-"ret_21d": null
-},
-{
-"date": "2026-10-31",
 "ticker": "ACH",
 "kind": "short",
 "price": 0.2542,
@@ -39079,6 +39016,66 @@
 "rebound": -3.8756,
 "trend": -1.0,
 "relstrength": 5.4715
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-08",
+"ticker": "SITC",
+"kind": "long",
+"price": 0.668,
+"conv": 69,
+"factors": {
+"discount": 90.9608,
+"histcheap": 3.1,
+"riskadj": -1.01,
+"ddpen": -37.04,
+"momentum": 82.0912,
+"prob": 100,
+"quality": null,
+"valcheap": null,
+"trappen": 0
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-08",
+"ticker": "AIRS",
+"kind": "long",
+"price": 0.534,
+"conv": 60,
+"factors": {
+"discount": 91.5773,
+"histcheap": 2.03,
+"riskadj": -1.54,
+"ddpen": -54.84,
+"momentum": 69.1329,
+"prob": 58,
+"quality": null,
+"valcheap": null,
+"trappen": 0
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-08",
+"ticker": "BDSX",
+"kind": "long",
+"price": 8.53,
+"conv": 67,
+"factors": {
+"discount": 72.1242,
+"histcheap": 1.16,
+"riskadj": 0.06,
+"ddpen": -19.18,
+"momentum": 63.3197,
+"prob": 80,
+"quality": null,
+"valcheap": null,
+"trappen": 0
 },
 "ret_5d": null,
 "ret_21d": null
