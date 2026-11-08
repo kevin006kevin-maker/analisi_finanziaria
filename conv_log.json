@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-10-30",
-"ticker": "ACH",
-"kind": "short",
-"price": 0.2445,
-"conv": 37,
-"factors": {
-"discount": 93.8413,
-"histcheap": 2.14,
-"riskadj": -2.41,
-"ddpen": -47.76,
-"momentum": -11.1364,
-"prob": 35,
-"oversold": -25.0466,
-"rebound": 190.2618,
-"trend": -1.0,
-"relstrength": 11.9627
-},
-"ret_5d": -12.39,
-"ret_21d": null
-},
-{
-"date": "2026-10-30",
 "ticker": "ANVS",
 "kind": "short",
 "price": 1.1401,
@@ -39269,6 +39248,26 @@
 "rebound": 10.5049,
 "trend": -1.0,
 "relstrength": -6.7717
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-08",
+"ticker": "AG",
+"kind": "long",
+"price": 15.16,
+"conv": 54,
+"factors": {
+"discount": 52.6398,
+"histcheap": 1.03,
+"riskadj": 0.53,
+"ddpen": -34.72,
+"momentum": -6.3114,
+"prob": 25,
+"quality": 72.3,
+"valcheap": -0.943,
+"trappen": 3
 },
 "ret_5d": null,
 "ret_21d": null
