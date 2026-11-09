@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:STLAM.MI:2026-09-18",
-"ticker": "STLAM.MI",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-19 01:40",
-"data": "2026-09-19 01:35",
-"prezzo": 4.3375,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 4.213",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:XENE:2026-09-18",
 "ticker": "XENE",
 "kind": "short",
@@ -37386,5 +37366,32 @@
 },
 "stop": 240.2952,
 "atr": 19.0074
+},
+{
+"episodio": "short:FLG:2026-10-23",
+"ticker": "FLG",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-11-09 03:03",
+"data": "2026-11-06 23:23",
+"prezzo": 10.52,
+"conv": 82,
+"prob_gain": 47,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-11-09",
+"soglie": {
+"media50": 11.824,
+"media20": 10.79,
+"quattro_atr": 11.8907,
+"meta_caduta": 12.385,
+"bollinger": 11.6081,
+"consigliata": 11.824
+},
+"stop": 9.8347,
+"atr": 0.3427
 }
 ]
