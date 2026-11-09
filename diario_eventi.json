@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:NCT:2026-09-18",
-"ticker": "NCT",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-19 03:37",
-"data": "2026-09-19 03:34",
-"prezzo": 8.575,
-"conv": 68,
-"prob_gain": 68,
-"prob_loss": 22,
-"reliab": "🔴 Bassa",
-"mkt": 0.1222,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 6.13",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:RSI:2026-09-19",
 "ticker": "RSI",
 "kind": "short",
@@ -37458,5 +37438,32 @@
 "soglie_ricalcolate_il": "2026-11-09 03:05",
 "taglio_corretto": true,
 "soglie_ritardo_giorni": 2
+},
+{
+"episodio": "long:BKR:2026-11-09",
+"ticker": "BKR",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-11-09 10:42",
+"data": "2026-11-09 10:42",
+"prezzo": 47.87,
+"conv": 63,
+"prob_gain": 72,
+"prob_loss": 17,
+"reliab": "🟡 Media",
+"mkt": -5.5646,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 56.92,
+"media20": 54.2115,
+"quattro_atr": 56.5758,
+"meta_caduta": 56.385,
+"bollinger": 60.3241,
+"consigliata": 56.5758
+},
+"stop": 43.5171,
+"atr": 2.1765
 }
 ]
