@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:NU:2026-09-19",
-"ticker": "NU",
-"kind": "long",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-19 08:35",
-"data": "2026-09-19 08:35",
-"prezzo": 13.65,
-"conv": 62,
-"prob_gain": 80,
-"prob_loss": 9,
-"reliab": "🟡 Media",
-"mkt": 0.1222,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 14.3886,
-"media20": 14.708,
-"quattro_atr": 15.7966,
-"meta_caduta": 14.665,
-"bollinger": 15.8484,
-"consigliata": 14.3886
-},
-"stop": 12.5767,
-"atr": 0.5366,
-"res": {
-"7g": -8.68,
-"30g": 6.7
-}
-},
-{
 "episodio": "long:AGNC:2026-09-20",
 "ticker": "AGNC",
 "kind": "long",
@@ -37553,5 +37522,32 @@
 "stop": 11.7734,
 "atr": 1.0383,
 "res": {}
+},
+{
+"episodio": "short:SKYW:2026-10-31",
+"ticker": "SKYW",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-11-09 21:43",
+"data": "2026-11-09 21:43",
+"prezzo": 83.26,
+"conv": 75,
+"prob_gain": 56,
+"prob_loss": 7,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 94.045,
+"media20": 89.2895,
+"quattro_atr": 99.3763,
+"meta_caduta": 94.43,
+"bollinger": 102.3604,
+"consigliata": 94.045
+},
+"stop": 75.2019,
+"atr": 4.0291
 }
 ]
