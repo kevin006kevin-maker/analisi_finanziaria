@@ -16015,7 +16015,15 @@
 "res": {
 "anticipo|7g": 2.27,
 "osservazione|7g": 2.69,
-"promozione|7g": -3.57
+"promozione|7g": -3.57,
+"anticipo|30g": -2.77,
+"osservazione|30g": -2.37,
+"promozione|30g": -8.32,
+"conferma|30g": -4.93,
+"anticipo|bersaglio": -2.77,
+"osservazione|bersaglio": -2.37,
+"promozione|bersaglio": -8.32,
+"conferma|bersaglio": -4.93
 }
 },
 {
@@ -16039,7 +16047,10 @@
 "conv": 74,
 "res": {
 "osservazione|7g": -4.79,
-"promozione|7g": 3.59
+"promozione|7g": 3.59,
+"osservazione|30g": 5.84,
+"promozione|30g": 15.15,
+"conferma|30g": 11.16
 },
 "passaggi": {
 "osservazione": {
@@ -16166,7 +16177,10 @@
 "conv": 59,
 "res": {
 "osservazione|7g": 3.19,
-"promozione|7g": 1.34
+"promozione|7g": 1.34,
+"osservazione|30g": -0.53,
+"promozione|30g": -2.31,
+"conferma|30g": -3.61
 },
 "passaggi": {
 "osservazione": {
@@ -16265,7 +16279,15 @@
 "res": {
 "anticipo|7g": 10.0,
 "osservazione|7g": 10.0,
-"promozione|7g": 5.51
+"promozione|7g": 5.51,
+"anticipo|30g": -4.03,
+"osservazione|30g": -4.03,
+"promozione|30g": -7.95,
+"conferma|30g": -12.76,
+"anticipo|bersaglio": -4.03,
+"osservazione|bersaglio": -4.03,
+"promozione|bersaglio": -7.95,
+"conferma|bersaglio": -12.76
 }
 },
 {
@@ -16326,7 +16348,15 @@
 "res": {
 "anticipo|7g": 12.79,
 "osservazione|7g": 12.79,
-"promozione|7g": 0.77
+"promozione|7g": 0.77,
+"anticipo|30g": -4.61,
+"osservazione|30g": -4.61,
+"promozione|30g": -14.77,
+"conferma|30g": -15.42,
+"anticipo|bersaglio": -4.61,
+"osservazione|bersaglio": -4.61,
+"promozione|bersaglio": -14.77,
+"conferma|bersaglio": -15.42
 }
 },
 {
@@ -19268,7 +19298,11 @@
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": -0.86,
+"osservazione|7g": -7.51,
+"promozione|7g": 4.62
+}
 },
 {
 "ticker": "AIR",
@@ -19281,15 +19315,18 @@
 "obs_date": "2026-10-07",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 116.69000244140625,
+"conf_date": "2026-11-09",
 "target": null,
 "stop": null,
 "reliab": "🟡 Media",
 "prob_gain": 49,
 "prob_loss": 10,
 "conv": 61,
-"res": {},
+"res": {
+"osservazione|7g": 17.14,
+"promozione|7g": 15.94
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-09-29 17:05",
@@ -19319,8 +19356,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-11-09",
+"prezzo": 116.69000244140625,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -19340,15 +19377,18 @@
 "obs_date": "2026-10-28",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 298.45001220703125,
+"conf_date": "2026-11-09",
 "target": null,
 "stop": null,
 "reliab": "🟢 Alta",
 "prob_gain": 57,
 "prob_loss": 1,
 "conv": 64,
-"res": {},
+"res": {
+"osservazione|7g": 0.29,
+"promozione|7g": 1.47
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-10-28 07:15",
@@ -19378,12 +19418,12 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-11-09",
+"prezzo": 298.45001220703125,
+"conv": 77,
+"prob_gain": 61,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
 "mkt": null
 }
 }
@@ -19397,8 +19437,8 @@
 "obs_date": "2026-10-23",
 "pre_price": 10.38,
 "pre_date": "2026-10-26",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 10.585000038146973,
+"conf_date": "2026-11-09",
 "target": 12.1044,
 "stop": 9.8635,
 "reliab": "🟢 Alta",
@@ -19434,16 +19474,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-11-09",
+"prezzo": 10.585000038146973,
+"conv": 82,
+"prob_gain": 47,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": 1.97,
+"osservazione|7g": 0.86,
+"promozione|7g": 0.71
+}
 },
 {
 "ticker": "CRS",
@@ -19454,8 +19498,8 @@
 "obs_date": "2026-10-22",
 "pre_price": 285.7,
 "pre_date": "2026-10-23",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 306.385009765625,
+"conf_date": "2026-11-09",
 "target": 396.9076,
 "stop": 253.2353,
 "reliab": "🟡 Media",
@@ -19491,16 +19535,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-11-09",
+"prezzo": 306.385009765625,
+"conv": 81,
+"prob_gain": 51,
+"prob_loss": 13,
+"reliab": "🟡 Media",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": 7.24,
+"osservazione|7g": 6.91,
+"promozione|7g": 5.34
+}
 },
 {
 "ticker": "EEFT",
@@ -19511,8 +19559,8 @@
 "obs_date": "2026-10-28",
 "pre_price": 59.01,
 "pre_date": "2026-10-29",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 71.23999786376953,
+"conf_date": "2026-11-09",
 "target": 66.571,
 "stop": 60.9956,
 "reliab": "🟡 Media",
@@ -19548,16 +19596,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-11-09",
+"prezzo": 71.23999786376953,
+"conv": 54,
+"prob_gain": 46,
+"prob_loss": 3,
+"reliab": "🟡 Media",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": 20.73,
+"osservazione|7g": 20.73,
+"promozione|7g": 8.37
+}
 },
 {
 "ticker": "ZTO",
