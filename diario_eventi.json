@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:SMST:2026-09-18",
-"ticker": "SMST",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-19 03:37",
-"data": "2026-09-19 03:34",
-"prezzo": 20.52,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 13.84",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:NCT:2026-09-18",
 "ticker": "NCT",
 "kind": "short",
@@ -37407,5 +37387,32 @@
 },
 "stop": 273.0024,
 "atr": 18.9188
+},
+{
+"episodio": "short:DT:2026-11-04",
+"ticker": "DT",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-11-09 03:04",
+"data": "2026-11-07 10:13",
+"prezzo": 43.44,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-11-09",
+"soglie": {
+"media50": 57.2366,
+"media20": 59.0505,
+"quattro_atr": 54.3554,
+"meta_caduta": 54.345,
+"bollinger": 74.1017,
+"consigliata": 54.3554
+},
+"stop": 37.9823,
+"atr": 2.7289
 }
 ]
