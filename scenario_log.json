@@ -21180,5 +21180,62 @@
 "mkt": null
 }
 }
+},
+{
+"ticker": "SKYW",
+"kind": "short",
+"date": "2026-11-09",
+"promo_price": 83.26,
+"obs_price": 82.33,
+"obs_date": "2026-10-31",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": 94.045,
+"stop": 75.2019,
+"reliab": "🟡 Media",
+"prob_gain": 56,
+"prob_loss": 7,
+"conv": 75,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-31 00:44",
+"prezzo": 82.33,
+"conv": 60,
+"prob_gain": 56,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": -1.8472
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-09 21:43",
+"prezzo": 83.26,
+"conv": 75,
+"prob_gain": 56,
+"prob_loss": 7,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
