@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:RSI:2026-09-19",
-"ticker": "RSI",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-19 03:37",
-"data": "2026-09-19 03:34",
-"prezzo": 25.25,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 23.3",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "long:NU:2026-09-19",
 "ticker": "NU",
 "kind": "long",
@@ -37465,5 +37445,32 @@
 },
 "stop": 43.5171,
 "atr": 2.1765
+},
+{
+"episodio": "long:UMC:2026-11-09",
+"ticker": "UMC",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-11-09 10:42",
+"data": "2026-11-09 10:42",
+"prezzo": 13.85,
+"conv": 66,
+"prob_gain": 67,
+"prob_loss": 26,
+"reliab": "🔴 Bassa",
+"mkt": -5.5646,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 21.2496,
+"media20": 18.616,
+"quattro_atr": 18.0033,
+"meta_caduta": 20.06,
+"bollinger": 23.6564,
+"consigliata": 18.0033
+},
+"stop": 11.7734,
+"atr": 1.0383
 }
 ]
