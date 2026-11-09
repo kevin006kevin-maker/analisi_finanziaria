@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:STMMI.MI:2026-09-20",
-"ticker": "STMMI.MI",
-"kind": "short",
-"evento": "promozione",
-"scritto_il": "2026-09-20 07:24",
-"data": "2026-09-20 07:24",
-"prezzo": 43.43,
-"conv": 68,
-"prob_gain": 52,
-"prob_loss": 15,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": 47.301,
-"media20": 43.453,
-"quattro_atr": 50.4434,
-"meta_caduta": 53.975,
-"bollinger": 45.9139,
-"consigliata": 47.301
-},
-"stop": 39.9233,
-"atr": 1.7534,
-"res": {
-"7g": 3.58,
-"30g": -7.87,
-"soglia": 8.91
-},
-"res_soglia": {
-"media50": {
-"ret": 8.91,
-"toccato": true,
-"giorni": 12
-},
-"media20": {
-"ret": 0.05,
-"toccato": true,
-"giorni": 1
-},
-"quattro_atr": {
-"ret": 16.15,
-"toccato": true,
-"giorni": 15
-},
-"meta_caduta": {
-"ret": -7.87,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 5.72,
-"toccato": true,
-"giorni": 2
-},
-"consigliata": {
-"ret": 8.91,
-"toccato": true,
-"giorni": 12
-}
-}
-},
-{
 "episodio": "long:IAG:2026-09-20",
 "ticker": "IAG",
 "kind": "long",
@@ -37530,6 +37466,26 @@
 "mkt": -3.0651,
 "fonte": "osservazione",
 "note": "prezzo salito di almeno il 2% da 79.08",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "long:BKR:2026-11-09",
+"ticker": "BKR",
+"kind": "long",
+"evento": "salita_2pct",
+"scritto_il": "2026-11-09 21:47",
+"data": "2026-11-09 21:42",
+"prezzo": 48.85,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "prezzo salito di almeno il 2% da 47.87",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
