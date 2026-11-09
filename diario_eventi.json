@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:AGNC:2026-09-18",
-"ticker": "AGNC",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-18 23:14",
-"data": "2026-09-18 23:14",
-"prezzo": 9.87,
-"conv": 67,
-"prob_gain": 51,
-"prob_loss": 0,
-"reliab": "🟢 Alta",
-"mkt": 0.0639,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 10.7336,
-"media20": 10.4965,
-"quattro_atr": 10.6713,
-"meta_caduta": 10.65,
-"bollinger": 11.2867,
-"consigliata": 10.6713
-},
-"stop": 9.4693,
-"atr": 0.2003,
-"res": {
-"7g": -2.53,
-"30g": -13.87,
-"soglia": -13.87
-},
-"res_soglia": {
-"media50": {
-"ret": -13.87,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -13.87,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -13.87,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -13.87,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -13.87,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -13.87,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:FIP:2026-09-18",
 "ticker": "FIP",
 "kind": "short",
@@ -37504,5 +37440,32 @@
 },
 "stop": 18.2668,
 "atr": 0.8266
+},
+{
+"episodio": "long:CVE:2026-11-07",
+"ticker": "CVE",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-11-09 03:00",
+"data": "2026-11-09 02:59",
+"prezzo": 27.45,
+"conv": 68,
+"prob_gain": 69,
+"prob_loss": 18,
+"reliab": "🟡 Media",
+"mkt": -5.5646,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 31.9254,
+"media20": 31.675,
+"quattro_atr": 32.1055,
+"meta_caduta": 30.685,
+"bollinger": 35.3249,
+"consigliata": 31.9254
+},
+"stop": 25.1223,
+"atr": 1.1639
 }
 ]
