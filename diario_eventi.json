@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:PATH:2026-09-20",
-"ticker": "PATH",
-"kind": "long",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-20 02:24",
-"data": "2026-09-20 02:24",
-"prezzo": 13.39,
-"conv": 63,
-"prob_gain": 62,
-"prob_loss": 30,
-"reliab": "🔴 Bassa",
-"mkt": 0.1222,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 14.3512,
-"media20": 15.797,
-"quattro_atr": 17.0164,
-"meta_caduta": 16.03,
-"bollinger": 19.7389,
-"consigliata": 14.3512
-},
-"stop": 11.5768,
-"atr": 0.9066,
-"res": {
-"7g": -8.7,
-"30g": 0.11
-}
-},
-{
 "episodio": "short:STMMI.MI:2026-09-20",
 "ticker": "STMMI.MI",
 "kind": "short",
@@ -37545,5 +37514,25 @@
 },
 "stop": 54.9109,
 "atr": 0.902
+},
+{
+"episodio": "long:ECG:2026-11-04",
+"ticker": "ECG",
+"kind": "long",
+"evento": "salita_2pct",
+"scritto_il": "2026-11-09 21:47",
+"data": "2026-11-09 21:42",
+"prezzo": 84.67,
+"conv": 62,
+"prob_gain": 82,
+"prob_loss": 11,
+"reliab": "🔴 Bassa",
+"mkt": -3.0651,
+"fonte": "osservazione",
+"note": "prezzo salito di almeno il 2% da 79.08",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
