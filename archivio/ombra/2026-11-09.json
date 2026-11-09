@@ -82,5 +82,61 @@
 "retroattiva": false,
 "atr_pct": 7.4968,
 "ora": "2026-11-09 09:45"
+},
+{
+"id": "2026-11-09:short:BAMI.MI:ombra_regole_nuove",
+"giorno": "2026-11-09",
+"metodo": "ombra_regole_nuove",
+"kind": "short",
+"ticker": "BAMI.MI",
+"nome": "BAMI.MI",
+"prezzo": 14.880000114440918,
+"profilo": "2026-11-09:short:BAMI.MI:rischio_rendimento",
+"origine_viva": "scartata:rischio_rendimento",
+"retroattiva": false,
+"atr_pct": 3.2894,
+"ora": "2026-11-09 20:49"
+},
+{
+"id": "2026-11-09:short:UCG.MI:trend_template",
+"giorno": "2026-11-09",
+"metodo": "trend_template",
+"kind": "short",
+"ticker": "UCG.MI",
+"nome": "UCG.MI",
+"prezzo": 81.62000274658203,
+"profilo": "2026-11-09:short:UCG.MI:sconto_insufficiente",
+"origine_viva": "scartata:sconto_insufficiente",
+"retroattiva": false,
+"atr_pct": 2.9014,
+"ora": "2026-11-09 20:49"
+},
+{
+"id": "2026-11-09:long:RELY:trend_template",
+"giorno": "2026-11-09",
+"metodo": "trend_template",
+"kind": "long",
+"ticker": "RELY",
+"nome": "Remitly Global, Inc.",
+"prezzo": 23.969999313354492,
+"profilo": "2026-11-09:long:RELY:punteggio_basso",
+"origine_viva": "scartata:punteggio_basso",
+"retroattiva": false,
+"atr_pct": 6.002,
+"ora": "2026-11-09 20:49"
+},
+{
+"id": "2026-11-09:long:AA:qualita",
+"giorno": "2026-11-09",
+"metodo": "qualita",
+"kind": "long",
+"ticker": "AA",
+"nome": "ALCOA CORP",
+"prezzo": 41.95500183105469,
+"profilo": "2026-11-09:long:AA:troppi_dello_stesso_settore",
+"origine_viva": "scartata:troppi_dello_stesso_settore",
+"retroattiva": false,
+"atr_pct": 3.9181,
+"ora": "2026-11-09 20:49"
 }
 ]
