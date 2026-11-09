@@ -2450,11 +2450,11 @@
 "exit_notified": false,
 "incasso_notified": true,
 "incasso": {
-"gain": 7.5,
+"gain": 7.1,
 "max": 27.66,
 "max_date": "2026-10-23 17:30",
-"giu_dal_max": -9.4,
-"motivo": "scesa 9% dal massimo (27.66) restando in guadagno (+7.5%): il guadagno si sta sgonfiando",
+"giu_dal_max": -9.8,
+"motivo": "scesa 10% dal massimo (27.66) restando in guadagno (+7.1%): il guadagno si sta sgonfiando",
 "urgenza": "incassa",
 "tipo": "sgonfia"
 }
@@ -5301,7 +5301,17 @@
 "max_date": "2026-11-09 10:43",
 "auto": true,
 "notified": true,
-"entry_check": "2026-11-08"
+"entry_check": "2026-11-08",
+"incasso": {
+"gain": 9.0,
+"max": 80.52,
+"max_date": "2026-11-09 10:43",
+"giu_dal_max": 0.0,
+"motivo": "bersaglio 80.46 raggiunto (sei a +9.0%): valuta di incassare",
+"urgenza": "incassa",
+"tipo": "bersaglio"
+},
+"incasso_notified": true
 },
 "RCUS": {
 "kind": "short",
