@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:LFTO:2026-09-18",
-"ticker": "LFTO",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-21 01:15",
-"data": "2026-09-21 01:12",
-"prezzo": 16.39,
-"conv": 68,
-"prob_gain": 63,
-"prob_loss": 11,
-"reliab": "🔴 Bassa",
-"mkt": 0.1222,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 20.9844,
-"media20": 18.3815,
-"quattro_atr": 21.002,
-"meta_caduta": 21.89,
-"bollinger": 19.7013,
-"consigliata": 20.9844
-},
-"stop": 14.084,
-"atr": 1.153,
-"res": {
-"7g": -3.94,
-"30g": 2.32,
-"soglia": 2.32
-},
-"res_soglia": {
-"media50": {
-"ret": 2.32,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 2.32,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 2.32,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 2.32,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 2.32,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 2.32,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:XLY:2026-09-21",
 "ticker": "XLY",
 "kind": "short",
@@ -38318,5 +38254,32 @@
 },
 "stop": 19.9176,
 "atr": 0.3712
+},
+{
+"episodio": "short:NRIX:2026-11-05",
+"ticker": "NRIX",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-11-10 04:35",
+"data": "2026-11-10 04:29",
+"prezzo": 16.14,
+"conv": 60,
+"prob_gain": 52,
+"prob_loss": 10,
+"reliab": "🔴 Bassa",
+"mkt": -3.2957,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-11-10",
+"soglie": {
+"media50": 24.0605,
+"media20": 23.5125,
+"quattro_atr": 23.2416,
+"meta_caduta": 21.965,
+"bollinger": 32.0181,
+"consigliata": 23.2416
+},
+"stop": 12.5892,
+"atr": 1.7754
 }
 ]
