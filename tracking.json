@@ -7384,5 +7384,37 @@
 "max_date": "2026-11-09 21:43",
 "auto": true,
 "notified": false
+},
+"JBHT": {
+"kind": "short",
+"added": "2026-11-10",
+"note": "🤖 Promossa il 2026-11-10: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.6% e la convenienza (61) regge.",
+"name": "JBHT",
+"snapshots": [
+{
+"name": "JBHT",
+"price": 224.32,
+"rsi": 46.2818,
+"dd_high": -24.8283,
+"occasione": 31,
+"convenienza": 71,
+"prob_gain": 56,
+"prob_loss": 7,
+"exp_ret": 1.3,
+"gain": 5.6184,
+"reliab": "🟢 Alta",
+"target": 236.9232,
+"stop": 210.0877,
+"date": "2026-11-10 04:33"
+}
+],
+"entry_price": 224.32,
+"entry_target": 236.9232,
+"entry_stop": 210.0877,
+"entry_conv": 71,
+"entry_date": "2026-11-10 04:33",
+"entry_src": "scatto",
+"max_price": 224.32,
+"max_date": "2026-11-10 04:33"
 }
 }
