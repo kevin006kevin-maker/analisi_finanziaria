@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:SAH:2026-09-18",
-"ticker": "SAH",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-21 01:14",
-"data": "2026-09-21 01:12",
-"prezzo": 63.66,
-"conv": 84,
-"prob_gain": 60,
-"prob_loss": 7,
-"reliab": "🟡 Media",
-"mkt": 0.1222,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 85.0284,
-"media20": 75.9835,
-"quattro_atr": 76.9201,
-"meta_caduta": 88.16,
-"bollinger": 84.5562,
-"consigliata": 76.9201
-},
-"stop": 57.03,
-"atr": 3.315,
-"res": {
-"7g": -0.49,
-"30g": -3.64,
-"soglia": -3.64
-},
-"res_soglia": {
-"media50": {
-"ret": -3.64,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -3.64,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -3.64,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -3.64,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -3.64,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -3.64,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:XENE:2026-09-18",
 "ticker": "XENE",
 "kind": "short",
@@ -38577,5 +38513,32 @@
 },
 "stop": 14.3081,
 "atr": 1.096
+},
+{
+"episodio": "short:ARWR:2026-11-10",
+"ticker": "ARWR",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-11-10 04:29",
+"data": "2026-11-10 04:29",
+"prezzo": 49.24,
+"conv": 65,
+"prob_gain": 48,
+"prob_loss": 11,
+"reliab": "🔴 Bassa",
+"mkt": -3.2957,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 66.197,
+"media20": 58.3245,
+"quattro_atr": 61.9565,
+"meta_caduta": 69.325,
+"bollinger": 63.285,
+"consigliata": 61.9565
+},
+"stop": 42.8818,
+"atr": 3.1791
 }
 ]
