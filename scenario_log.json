@@ -21482,7 +21482,45 @@
 "prob_gain": 52,
 "prob_loss": 10,
 "conv": 60,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-11-05 01:21",
+"prezzo": 15.95,
+"conv": 61,
+"prob_gain": 55,
+"prob_loss": 6,
+"reliab": "🔴 Bassa",
+"mkt": -1.4503
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-10",
+"prezzo": 16.14,
+"conv": 60,
+"prob_gain": 52,
+"prob_loss": 10,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "NVDA",
@@ -21503,6 +21541,44 @@
 "prob_gain": 56,
 "prob_loss": 1,
 "conv": 69,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-11-05 16:48",
+"prezzo": 184.65,
+"conv": 68,
+"prob_gain": 52,
+"prob_loss": 1,
+"reliab": "🟡 Media",
+"mkt": -4.1052
+},
+"anticipo": {
+"data": "2026-11-06",
+"prezzo": 184.65,
+"conv": 68,
+"prob_gain": 52,
+"prob_loss": 1,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-10",
+"prezzo": 178.67,
+"conv": 69,
+"prob_gain": 56,
+"prob_loss": 1,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 }
 ]
