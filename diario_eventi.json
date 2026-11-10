@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:FIP:2026-09-18",
-"ticker": "FIP",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-21 01:15",
-"data": "2026-09-21 01:12",
-"prezzo": 3.0,
-"conv": 71,
-"prob_gain": 50,
-"prob_loss": 20,
-"reliab": "🔴 Bassa",
-"mkt": 0.1222,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 3.8333,
-"media20": 3.3605,
-"quattro_atr": 3.8707,
-"meta_caduta": 3.975,
-"bollinger": 3.9876,
-"consigliata": 3.8333
-},
-"stop": 2.5647,
-"atr": 0.2177,
-"res": {
-"7g": -3.17,
-"30g": -19.17,
-"soglia": -19.17
-},
-"res_soglia": {
-"media50": {
-"ret": -19.17,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -19.17,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -19.17,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -19.17,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -19.17,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -19.17,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:LFTO:2026-09-18",
 "ticker": "LFTO",
 "kind": "short",
@@ -38355,5 +38291,32 @@
 },
 "stop": 68.1107,
 "atr": 2.5296
+},
+{
+"episodio": "short:ZTO:2026-11-03",
+"ticker": "ZTO",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-11-10 04:35",
+"data": "2026-11-10 04:33",
+"prezzo": 20.66,
+"conv": 66,
+"prob_gain": 47,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-11-10",
+"soglie": {
+"media50": null,
+"media20": null,
+"quattro_atr": 22.1448,
+"meta_caduta": 21.895,
+"bollinger": 20.8688,
+"consigliata": 22.1448
+},
+"stop": 19.9176,
+"atr": 0.3712
 }
 ]
