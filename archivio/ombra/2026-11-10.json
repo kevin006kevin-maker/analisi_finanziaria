@@ -362,5 +362,61 @@
 "retroattiva": false,
 "atr_pct": 6.4564,
 "ora": "2026-11-10 03:37"
+},
+{
+"id": "2026-11-10:long:UCG.MI:vicino_massimi",
+"giorno": "2026-11-10",
+"metodo": "vicino_massimi",
+"kind": "long",
+"ticker": "UCG.MI",
+"nome": "UNICREDIT",
+"prezzo": 84.44000244140625,
+"profilo": "2026-11-10:long:UCG.MI:sconto_insufficiente",
+"origine_viva": "scartata:sconto_insufficiente",
+"retroattiva": false,
+"atr_pct": 2.8554,
+"ora": "2026-11-10 11:48"
+},
+{
+"id": "2026-11-10:long:UCG.MI:trend_template",
+"giorno": "2026-11-10",
+"metodo": "trend_template",
+"kind": "long",
+"ticker": "UCG.MI",
+"nome": "UNICREDIT",
+"prezzo": 84.44000244140625,
+"profilo": "2026-11-10:long:UCG.MI:sconto_insufficiente",
+"origine_viva": "scartata:sconto_insufficiente",
+"retroattiva": false,
+"atr_pct": 2.8554,
+"ora": "2026-11-10 11:48"
+},
+{
+"id": "2026-11-10:long:AEO:trend_template",
+"giorno": "2026-11-10",
+"metodo": "trend_template",
+"kind": "long",
+"ticker": "AEO",
+"nome": "American Eagle Outfitters, Inc.",
+"prezzo": 21.75,
+"profilo": "2026-11-10:long:AEO:troppi_dello_stesso_settore",
+"origine_viva": "scartata:troppi_dello_stesso_settore",
+"retroattiva": false,
+"atr_pct": 4.1694,
+"ora": "2026-11-10 11:48"
+},
+{
+"id": "2026-11-10:long:UCG.MI:qualita",
+"giorno": "2026-11-10",
+"metodo": "qualita",
+"kind": "long",
+"ticker": "UCG.MI",
+"nome": "UNICREDIT",
+"prezzo": 84.44000244140625,
+"profilo": "2026-11-10:long:UCG.MI:sconto_insufficiente",
+"origine_viva": "scartata:sconto_insufficiente",
+"retroattiva": false,
+"atr_pct": 2.8554,
+"ora": "2026-11-10 11:48"
 }
 ]
