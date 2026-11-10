@@ -1,5 +1,5 @@
 {
-"aggiornato": "2026-11-10 04:39",
+"aggiornato": "2026-11-10 12:49",
 "metodi": {
 "short": {
 "vendite": [
@@ -126,10 +126,10 @@
 "eccesso": null
 },
 "7g": {
-"n": 149,
-"med": -1.53,
+"n": 150,
+"med": -1.6,
 "hit": 40.0,
-"eccesso": -1.26
+"eccesso": -1.38
 },
 "30g": {
 "n": 46,
@@ -146,9 +146,9 @@
 "scelte": 173,
 "vendite": {
 "soglia": {
-"n": 33,
-"med": -14.97,
-"hit": 21.0,
+"n": 35,
+"med": -14.48,
+"hit": 20.0,
 "eccesso": null
 },
 "7g": {
@@ -158,10 +158,10 @@
 "eccesso": -1.59
 },
 "30g": {
-"n": 33,
-"med": -14.97,
-"hit": 21.0,
-"eccesso": -11.57
+"n": 35,
+"med": -14.48,
+"hit": 20.0,
+"eccesso": -11.26
 }
 }
 },
@@ -308,10 +308,10 @@
 "eccesso": null
 },
 "7g": {
-"n": 115,
-"med": -0.24,
-"hit": 49.0,
-"eccesso": 0.51
+"n": 116,
+"med": -0.27,
+"hit": 48.0,
+"eccesso": 0.46
 },
 "30g": {
 "n": 18,
@@ -440,10 +440,10 @@
 "eccesso": null
 },
 "7g": {
-"n": 450,
-"med": -0.95,
+"n": 451,
+"med": -0.96,
 "hit": 44.0,
-"eccesso": -0.51
+"eccesso": -0.52
 },
 "30g": {
 "n": 345,
@@ -460,9 +460,9 @@
 "scelte": 435,
 "vendite": {
 "soglia": {
-"n": 292,
-"med": -3.86,
-"hit": 40.0,
+"n": 294,
+"med": -3.99,
+"hit": 39.0,
 "eccesso": null
 },
 "7g": {
@@ -472,10 +472,10 @@
 "eccesso": -0.36
 },
 "30g": {
-"n": 292,
-"med": -4.11,
+"n": 294,
+"med": -4.35,
 "hit": 39.0,
-"eccesso": -0.59
+"eccesso": -0.8
 }
 }
 },
@@ -622,8 +622,8 @@
 "eccesso": null
 },
 "7g": {
-"n": 242,
-"med": -0.46,
+"n": 243,
+"med": -0.49,
 "hit": 45.0,
 "eccesso": 0.13
 },
@@ -656,7 +656,7 @@
 },
 "forza_relativa": {
 "stato": "presto",
-"testo": "⏳ Ancora presto per decidere: nella prova vera ci sono 33 occasioni misurate a 30 giorni (ne servono almeno 30) e 5 giornate con entrambi (ne servono 15)."
+"testo": "⏳ Ancora presto per decidere: nella prova vera ci sono 35 occasioni misurate a 30 giorni (ne servono almeno 30) e 6 giornate con entrambi (ne servono 15)."
 },
 "vicino_massimi": {
 "stato": "presto",
@@ -683,7 +683,7 @@
 "testo": "⏳ Ancora presto per decidere: nella prova vera ci sono 18 occasioni misurate a 30 giorni (ne servono almeno 30) e 6 giornate con entrambi (ne servono 15)."
 }
 },
-"aggiornato": "2026-11-10 03:38",
+"aggiornato": "2026-11-10 11:48",
 "decide": {
 "orizzonte": "30g",
 "casi": 30,
@@ -858,7 +858,7 @@
 "chiave": "vicino_massimi",
 "nome": "Vicino ai massimi dell'anno",
 "riferimento": false,
-"scelte": 40,
+"scelte": 41,
 "vendite": {
 "soglia": {
 "n": 0,
@@ -884,7 +884,7 @@
 "chiave": "trend_template",
 "nome": "Trend template semplificato",
 "riferimento": false,
-"scelte": 45,
+"scelte": 47,
 "vendite": {
 "soglia": {
 "n": 0,
@@ -936,7 +936,7 @@
 "chiave": "qualita",
 "nome": "Qualità dei conti",
 "riferimento": false,
-"scelte": 131,
+"scelte": 132,
 "vendite": {
 "soglia": {
 "n": 0,
@@ -1172,7 +1172,7 @@
 "chiave": "vicino_massimi",
 "nome": "Vicino ai massimi dell'anno",
 "riferimento": false,
-"scelte": 114,
+"scelte": 115,
 "vendite": {
 "soglia": {
 "n": 0,
@@ -1198,7 +1198,7 @@
 "chiave": "trend_template",
 "nome": "Trend template semplificato",
 "riferimento": false,
-"scelte": 126,
+"scelte": 128,
 "vendite": {
 "soglia": {
 "n": 0,
@@ -1250,7 +1250,7 @@
 "chiave": "qualita",
 "nome": "Qualità dei conti",
 "riferimento": false,
-"scelte": 318,
+"scelte": 319,
 "vendite": {
 "soglia": {
 "n": 0,
@@ -1372,7 +1372,7 @@
 "testo": "⏳ Ancora presto per decidere: nella prova vera ci sono 5 occasioni misurate a 30 giorni (ne servono almeno 30) e 2 giornate con entrambi (ne servono 15)."
 }
 },
-"aggiornato": "2026-11-10 03:38",
+"aggiornato": "2026-11-10 11:48",
 "decide": {
 "orizzonte": "30g",
 "casi": 30,
@@ -1505,10 +1505,10 @@
 "netto": -3.66
 },
 "7g": {
-"n": 121,
-"med": -0.48,
-"hit": 46.0,
-"netto": -2.12
+"n": 122,
+"med": -0.45,
+"hit": 47.0,
+"netto": -2.09
 },
 "30g": {
 "n": 90,
@@ -1837,12 +1837,12 @@
 "archivio/scatti": 23522,
 "archivio/mondo": 84,
 "archivio/settori": 924,
-"archivio/profili": 20427,
-"archivio/notizie": 3480,
-"archivio/esiti": 39138,
+"archivio/profili": 20451,
+"archivio/notizie": 3485,
+"archivio/esiti": 39276,
 "archivio/osservazioni": 20334,
 "archivio/regole": 51,
-"archivio/ombra": 4810,
+"archivio/ombra": 4814,
 "archivio/metodi_avvii": 12
 }
 },
