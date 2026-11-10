@@ -2231,11 +2231,11 @@
 "exit_notified": false,
 "incasso_notified": true,
 "incasso": {
-"gain": 7.5,
+"gain": 5.9,
 "max": 27.66,
 "max_date": "2026-10-23 17:30",
-"giu_dal_max": -9.4,
-"motivo": "scesa 9% dal massimo (27.66) restando in guadagno (+7.5%): il guadagno si sta sgonfiando",
+"giu_dal_max": -10.7,
+"motivo": "scesa 11% dal massimo (27.66) restando in guadagno (+5.9%): il guadagno si sta sgonfiando",
 "urgenza": "incassa",
 "tipo": "sgonfia"
 }
@@ -3876,7 +3876,16 @@
 "auto": true,
 "notified": true,
 "entry_check": "2026-11-10",
-"incasso_notified": true
+"incasso_notified": true,
+"incasso": {
+"gain": 6.2,
+"max": 44.91,
+"max_date": "2026-11-10 12:45",
+"giu_dal_max": 0.0,
+"motivo": "bersaglio 43.85 raggiunto (sei a +6.2%): valuta di incassare",
+"urgenza": "incassa",
+"tipo": "bersaglio"
+}
 },
 "JNJ": {
 "kind": "short",
@@ -5012,7 +5021,16 @@
 "auto": true,
 "notified": true,
 "entry_check": "2026-11-09",
-"incasso_notified": true
+"incasso_notified": true,
+"incasso": {
+"gain": 14.2,
+"max": 84.35,
+"max_date": "2026-11-10 12:45",
+"giu_dal_max": 0.0,
+"motivo": "bersaglio 80.46 raggiunto (sei a +14.2%): valuta di incassare",
+"urgenza": "incassa",
+"tipo": "bersaglio"
+}
 },
 "RCUS": {
 "kind": "short",
