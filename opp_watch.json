@@ -12325,34 +12325,27 @@
 "name": "ACAD",
 "obs": [
 {
-"date": "2026-09-30 23:26",
-"conv": null,
-"price": 20.15,
-"stale": true
-},
-{
-"date": "2026-10-04 10:45",
-"conv": null,
-"price": 19.95,
-"stale": true
-},
-{
-"date": "2026-10-05 17:58",
-"conv": null,
-"price": 19.72,
-"stale": true
+"date": "2026-11-10 04:29",
+"conv": 68,
+"price": 16.5,
+"mkt": -3.2957,
+"occ": 36,
+"prob_gain": 60,
+"prob_loss": 10,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
-"date": "2026-09-25 20:32",
-"conv": 87,
-"price": 20.67,
-"mkt": 0.15,
-"occ": 35,
+"date": "2026-11-10 04:29",
+"conv": 68,
+"price": 16.5,
+"mkt": -3.2957,
+"occ": 36,
 "prob_gain": 60,
-"prob_loss": 4,
+"prob_loss": 10,
 "reliab": "🟡 Media"
-}
+},
+"ripartita": "2026-11-10"
 },
 "short:WYY": {
 "ticker": "WYY",
@@ -18469,6 +18462,16 @@
 "prob_gain": 49,
 "prob_loss": 0,
 "reliab": "🟢 Alta"
+},
+{
+"date": "2026-11-10 04:29",
+"conv": 69,
+"price": 170.88,
+"mkt": -3.2957,
+"occ": 58,
+"prob_gain": 55,
+"prob_loss": 1,
+"reliab": "🟢 Alta"
 }
 ],
 "primo": {
@@ -18944,6 +18947,16 @@
 "prob_gain": 53,
 "prob_loss": 9,
 "reliab": "🔴 Bassa"
+},
+{
+"date": "2026-11-10 04:29",
+"conv": 60,
+"price": 16.14,
+"mkt": -3.2957,
+"occ": 80,
+"prob_gain": 52,
+"prob_loss": 10,
+"reliab": "🔴 Bassa"
 }
 ],
 "primo": {
@@ -19087,6 +19100,16 @@
 "mkt": -3.0651,
 "occ": 46,
 "prob_gain": 55,
+"prob_loss": 1,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-11-10 04:29",
+"conv": 69,
+"price": 178.67,
+"mkt": -3.2957,
+"occ": 45,
+"prob_gain": 56,
 "prob_loss": 1,
 "reliab": "🟡 Media"
 }
@@ -19263,6 +19286,33 @@
 "prob_gain": 72,
 "prob_loss": 17,
 "reliab": "🟡 Media"
+}
+},
+"short:ARWR": {
+"ticker": "ARWR",
+"kind": "short",
+"name": "ARWR",
+"obs": [
+{
+"date": "2026-11-10 04:29",
+"conv": 65,
+"price": 49.24,
+"mkt": -3.2957,
+"occ": 36,
+"prob_gain": 48,
+"prob_loss": 11,
+"reliab": "🔴 Bassa"
+}
+],
+"primo": {
+"date": "2026-11-10 04:29",
+"conv": 65,
+"price": 49.24,
+"mkt": -3.2957,
+"occ": 36,
+"prob_gain": 48,
+"prob_loss": 11,
+"reliab": "🔴 Bassa"
 }
 }
 }
