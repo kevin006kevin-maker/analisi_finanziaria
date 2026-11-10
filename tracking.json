@@ -3524,7 +3524,7 @@
 "notified": true,
 "entry_check": "2026-11-09",
 "warn_since": "2026-11-05",
-"warn": "in perdita da 35 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 36 giorni di Borsa: valuta l'uscita"
 },
 "SYNA": {
 "kind": "short",
@@ -5735,7 +5735,7 @@
 "notified": true,
 "entry_check": "2026-11-09",
 "warn_since": "2026-11-05",
-"warn": "in perdita da 13 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 14 giorni di Borsa: valuta l'uscita"
 },
 "MRP": {
 "kind": "short",
@@ -5967,7 +5967,7 @@
 "notified": true,
 "entry_check": "2026-11-09",
 "warn_since": "2026-11-05",
-"warn": "in perdita da 13 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 14 giorni di Borsa: valuta l'uscita"
 },
 "CELC": {
 "kind": "short",
@@ -6520,7 +6520,9 @@
 "max_date": "2026-11-09 21:44",
 "auto": true,
 "notified": true,
-"entry_check": "2026-11-09"
+"entry_check": "2026-11-09",
+"warn_since": "2026-11-10",
+"warn": "in perdita da 10 giorni di Borsa: valuta l'uscita"
 },
 "MB.MI": {
 "kind": "short",
@@ -7489,7 +7491,9 @@
 "max_date": "2026-11-03 11:03",
 "auto": true,
 "notified": false,
-"entry_check": "2026-11-09"
+"entry_check": "2026-11-09",
+"warn_since": "2026-11-10",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "BA": {
 "kind": "short",
@@ -7572,7 +7576,9 @@
 "max_date": "2026-11-05 01:25",
 "auto": true,
 "notified": false,
-"entry_check": "2026-11-09"
+"entry_check": "2026-11-09",
+"warn_since": "2026-11-10",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "CHRW": {
 "kind": "short",
@@ -7655,7 +7661,9 @@
 "max_date": "2026-11-05 01:25",
 "auto": true,
 "notified": false,
-"entry_check": "2026-11-09"
+"entry_check": "2026-11-09",
+"warn_since": "2026-11-10",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "TFII": {
 "kind": "short",
