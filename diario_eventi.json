@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:ALKS:2026-09-18",
-"ticker": "ALKS",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-21 01:15",
-"data": "2026-09-21 01:12",
-"prezzo": 43.39,
-"conv": 77,
-"prob_gain": 47,
-"prob_loss": 7,
-"reliab": "🟡 Media",
-"mkt": 0.1222,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 49.094,
-"media20": 46.8885,
-"quattro_atr": 49.63,
-"meta_caduta": 49.305,
-"bollinger": 49.8872,
-"consigliata": 49.094
-},
-"stop": 40.27,
-"atr": 1.56,
-"res": {
-"7g": -7.26,
-"30g": 0.85,
-"soglia": 0.85
-},
-"res_soglia": {
-"media50": {
-"ret": 0.85,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 0.85,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 0.85,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 0.85,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 0.85,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 0.85,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:RSI:2026-09-19",
 "ticker": "RSI",
 "kind": "short",
@@ -38503,5 +38439,32 @@
 },
 "stop": 214.1627,
 "atr": 7.1162
+},
+{
+"episodio": "short:BA:2026-10-27",
+"ticker": "BA",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-11-10 04:35",
+"data": "2026-11-10 04:34",
+"prezzo": 172.38,
+"conv": 80,
+"prob_gain": 50,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-11-10",
+"soglie": {
+"media50": 191.6536,
+"media20": 180.599,
+"quattro_atr": 196.3784,
+"meta_caduta": 199.165,
+"bollinger": 198.2925,
+"consigliata": 191.6536
+},
+"stop": 160.3808,
+"atr": 5.9996
 }
 ]
