@@ -138,5 +138,47 @@
 "retroattiva": false,
 "atr_pct": 3.9181,
 "ora": "2026-11-09 20:49"
+},
+{
+"id": "2026-11-09:short:FTH:forza_relativa",
+"giorno": "2026-11-09",
+"metodo": "forza_relativa",
+"kind": "short",
+"ticker": "FTH",
+"nome": "FTH",
+"prezzo": 11.960100173950195,
+"profilo": "2026-11-09:short:FTH:poco_scambiato",
+"origine_viva": "scartata:poco_scambiato",
+"retroattiva": false,
+"atr_pct": 23.5938,
+"ora": "2026-11-10 03:37"
+},
+{
+"id": "2026-11-09:short:QQQ:forza_relativa",
+"giorno": "2026-11-09",
+"metodo": "forza_relativa",
+"kind": "short",
+"ticker": "QQQ",
+"nome": "QQQ",
+"prezzo": 680.530029296875,
+"profilo": "2026-11-09:short:QQQ:punteggio_basso",
+"origine_viva": "scartata:punteggio_basso",
+"retroattiva": false,
+"atr_pct": 2.3765,
+"ora": "2026-11-10 03:37"
+},
+{
+"id": "2026-11-09:long:UMC:qualita_forza",
+"giorno": "2026-11-09",
+"metodo": "qualita_forza",
+"kind": "long",
+"ticker": "UMC",
+"nome": "United Microelectronics Corp",
+"prezzo": 13.85,
+"profilo": "2026-11-09:long:UMC:ingresso_anticipo",
+"origine_viva": "comprata:ingresso_anticipo",
+"retroattiva": false,
+"atr_pct": 7.4968,
+"ora": "2026-11-10 03:37"
 }
 ]
