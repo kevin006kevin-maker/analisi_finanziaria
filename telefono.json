@@ -1,5 +1,5 @@
 {
-"aggiornato": "2026-11-10 04:39",
+"aggiornato": "2026-11-10 12:49",
 "osservazione": [
 {
 "t": "CABO",
@@ -43,8 +43,8 @@
 "tipo": "long",
 "giorni": 3,
 "rend": 12.8,
-"conv": 41.0,
-"dconv": -16.0,
+"conv": 44.0,
+"dconv": -14.0,
 "run": 1,
 "mancano": 4,
 "affid": "🔴 Bassa"
@@ -110,13 +110,37 @@
 "affid": ""
 },
 {
+"t": "STMMI.MI",
+"nome": "STMMI.MI",
+"tipo": "short",
+"giorni": 2,
+"rend": 7.5,
+"conv": null,
+"dconv": 0.0,
+"run": 0,
+"mancano": 1,
+"affid": ""
+},
+{
+"t": "LDO.MI",
+"nome": "LDO.MI",
+"tipo": "short",
+"giorni": 2,
+"rend": 7.4,
+"conv": null,
+"dconv": 0.0,
+"run": 0,
+"mancano": 1,
+"affid": ""
+},
+{
 "t": "HMY",
 "nome": "Harmony Gold Mining Company Lim",
 "tipo": "long",
 "giorni": 3,
 "rend": 7.3,
-"conv": 52.0,
-"dconv": -8.0,
+"conv": 54.0,
+"dconv": -7.0,
 "run": 4,
 "mancano": 4,
 "affid": "🔴 Bassa"
@@ -151,9 +175,9 @@
 "tipo": "long",
 "giorni": 3,
 "rend": 6.7,
-"conv": 46.0,
-"dconv": -24.0,
-"run": 1,
+"conv": 48.0,
+"dconv": -23.0,
+"run": 4,
 "mancano": 4,
 "affid": "🟡 Media"
 },
@@ -161,12 +185,12 @@
 "t": "DY",
 "nome": "DY",
 "tipo": "short",
-"giorni": 1,
-"rend": 5.9,
-"conv": 49.0,
-"dconv": -2.0,
-"run": 2,
-"mancano": 2,
+"giorni": 2,
+"rend": 6.0,
+"conv": 45.0,
+"dconv": -6.0,
+"run": 1,
+"mancano": 1,
 "affid": "🟡 Media"
 },
 {
@@ -187,8 +211,8 @@
 "tipo": "long",
 "giorni": 3,
 "rend": 5.9,
-"conv": 68.0,
-"dconv": 6.0,
+"conv": 64.0,
+"dconv": 4.0,
 "run": 2,
 "mancano": 4,
 "affid": "🔴 Bassa"
@@ -218,30 +242,6 @@
 "affid": ""
 },
 {
-"t": "AIT",
-"nome": "AIT",
-"tipo": "short",
-"giorni": 1,
-"rend": 5.6,
-"conv": 62.0,
-"dconv": 1.0,
-"run": 2,
-"mancano": 2,
-"affid": "🟢 Alta"
-},
-{
-"t": "STMMI.MI",
-"nome": "STMMI.MI",
-"tipo": "short",
-"giorni": 1,
-"rend": 5.3,
-"conv": null,
-"dconv": 0.0,
-"run": 0,
-"mancano": 2,
-"affid": ""
-},
-{
 "t": "ASO",
 "nome": "Academy Sports and Outdoors, Inc.",
 "tipo": "long",
@@ -254,16 +254,28 @@
 "affid": ""
 },
 {
-"t": "LDO.MI",
-"nome": "LDO.MI",
+"t": "ISP.MI",
+"nome": "ISP.MI",
 "tipo": "short",
-"giorni": 1,
+"giorni": 2,
 "rend": 4.9,
 "conv": null,
 "dconv": 0.0,
 "run": 0,
-"mancano": 2,
+"mancano": 1,
 "affid": ""
+},
+{
+"t": "AIT",
+"nome": "AIT",
+"tipo": "short",
+"giorni": 2,
+"rend": 4.9,
+"conv": 62.0,
+"dconv": 1.0,
+"run": 2,
+"mancano": 1,
+"affid": "🟢 Alta"
 },
 {
 "t": "HVII",
@@ -299,6 +311,18 @@
 "dconv": 0.0,
 "run": 0,
 "mancano": 0,
+"affid": ""
+},
+{
+"t": "PST.MI",
+"nome": "PST.MI",
+"tipo": "short",
+"giorni": 2,
+"rend": 4.6,
+"conv": null,
+"dconv": 0.0,
+"run": 0,
+"mancano": 1,
 "affid": ""
 },
 {
@@ -451,9 +475,9 @@
 "tipo": "long",
 "giorni": 3,
 "rend": 3.1,
-"conv": 30.0,
-"dconv": -26.0,
-"run": 1,
+"conv": 47.0,
+"dconv": -18.0,
+"run": 5,
 "mancano": 4,
 "affid": "🟡 Media"
 },
@@ -470,27 +494,15 @@
 "affid": "🟡 Media"
 },
 {
-"t": "FFIV",
-"nome": "FFIV",
-"tipo": "short",
-"giorni": 1,
-"rend": 3.0,
-"conv": 63.0,
-"dconv": -2.0,
-"run": 2,
-"mancano": 2,
-"affid": "🟡 Media"
-},
-{
 "t": "FTNT",
 "nome": "FTNT",
 "tipo": "short",
-"giorni": 1,
-"rend": 3.0,
-"conv": 59.0,
-"dconv": -2.0,
-"run": 2,
-"mancano": 2,
+"giorni": 2,
+"rend": 3.1,
+"conv": 62.0,
+"dconv": -1.0,
+"run": 3,
+"mancano": 1,
 "affid": "🟡 Media"
 },
 {
@@ -516,18 +528,6 @@
 "run": 1,
 "mancano": 0,
 "affid": "🔴 Bassa"
-},
-{
-"t": "ISP.MI",
-"nome": "ISP.MI",
-"tipo": "short",
-"giorni": 1,
-"rend": 2.8,
-"conv": null,
-"dconv": 0.0,
-"run": 0,
-"mancano": 2,
-"affid": ""
 },
 {
 "t": "TAL",
@@ -590,18 +590,6 @@
 "affid": ""
 },
 {
-"t": "PST.MI",
-"nome": "PST.MI",
-"tipo": "short",
-"giorni": 1,
-"rend": 2.3,
-"conv": null,
-"dconv": 0.0,
-"run": 0,
-"mancano": 2,
-"affid": ""
-},
-{
 "t": "AXGN",
 "nome": "AXGN",
 "tipo": "short",
@@ -659,6 +647,30 @@
 "dconv": 0.0,
 "run": 0,
 "mancano": 0,
+"affid": ""
+},
+{
+"t": "FFIV",
+"nome": "FFIV",
+"tipo": "short",
+"giorni": 2,
+"rend": 2.2,
+"conv": 66.0,
+"dconv": -0.0,
+"run": 3,
+"mancano": 1,
+"affid": "🟡 Media"
+},
+{
+"t": "ENEL.MI",
+"nome": "ENEL.MI",
+"tipo": "short",
+"giorni": 2,
+"rend": 2.1,
+"conv": null,
+"dconv": 0.0,
+"run": 0,
+"mancano": 1,
 "affid": ""
 },
 {
@@ -758,18 +770,6 @@
 "affid": "🟢 Alta"
 },
 {
-"t": "ENEL.MI",
-"nome": "ENEL.MI",
-"tipo": "short",
-"giorni": 1,
-"rend": 1.7,
-"conv": null,
-"dconv": 0.0,
-"run": 0,
-"mancano": 2,
-"affid": ""
-},
-{
 "t": "AXON",
 "nome": "AXON",
 "tipo": "short",
@@ -859,8 +859,8 @@
 "tipo": "short",
 "giorni": 3,
 "rend": 1.2,
-"conv": 60.0,
-"dconv": -2.0,
+"conv": 56.0,
+"dconv": -4.0,
 "run": 6,
 "mancano": 0,
 "affid": "🔴 Bassa"
@@ -998,18 +998,6 @@
 "affid": ""
 },
 {
-"t": "TIT.MI",
-"nome": "TIT.MI",
-"tipo": "short",
-"giorni": 1,
-"rend": 0.7,
-"conv": null,
-"dconv": 0.0,
-"run": 0,
-"mancano": 2,
-"affid": ""
-},
-{
 "t": "XLI",
 "nome": "XLI",
 "tipo": "short",
@@ -1019,6 +1007,18 @@
 "dconv": 0.0,
 "run": 0,
 "mancano": 0,
+"affid": ""
+},
+{
+"t": "TIT.MI",
+"nome": "TIT.MI",
+"tipo": "short",
+"giorni": 2,
+"rend": 0.5,
+"conv": null,
+"dconv": 0.0,
+"run": 0,
+"mancano": 1,
 "affid": ""
 },
 {
@@ -1190,6 +1190,18 @@
 "affid": ""
 },
 {
+"t": "LDO.MI",
+"nome": "LEONARDO",
+"tipo": "long",
+"giorni": 3,
+"rend": -0.0,
+"conv": 42.0,
+"dconv": 3.0,
+"run": 6,
+"mancano": 4,
+"affid": "🟡 Media"
+},
+{
 "t": "TKC",
 "nome": "TKC",
 "tipo": "short",
@@ -1255,7 +1267,7 @@
 "tipo": "short",
 "giorni": 0,
 "rend": 0.0,
-"conv": 68.0,
+"conv": 63.0,
 "dconv": 0.0,
 "run": 1,
 "mancano": 3,
@@ -1279,7 +1291,7 @@
 "tipo": "short",
 "giorni": 0,
 "rend": 0.0,
-"conv": 65.0,
+"conv": 61.0,
 "dconv": 0.0,
 "run": 1,
 "mancano": 3,
@@ -1478,18 +1490,6 @@
 "affid": "🔴 Bassa"
 },
 {
-"t": "EEM",
-"nome": "EEM",
-"tipo": "short",
-"giorni": 2,
-"rend": -0.7,
-"conv": 61.0,
-"dconv": -0.0,
-"run": 5,
-"mancano": 1,
-"affid": "🟢 Alta"
-},
-{
 "t": "CLM",
 "nome": "CLM",
 "tipo": "short",
@@ -1574,6 +1574,18 @@
 "affid": "🟡 Media"
 },
 {
+"t": "EEM",
+"nome": "EEM",
+"tipo": "short",
+"giorni": 3,
+"rend": -1.0,
+"conv": 61.0,
+"dconv": -0.0,
+"run": 5,
+"mancano": 0,
+"affid": "🟢 Alta"
+},
+{
 "t": "FN",
 "nome": "Fabrinet",
 "tipo": "long",
@@ -1619,18 +1631,6 @@
 "dconv": 0.0,
 "run": 0,
 "mancano": 0,
-"affid": ""
-},
-{
-"t": "STLAM.MI",
-"nome": "STELLANTIS",
-"tipo": "long",
-"giorni": 3,
-"rend": -1.3,
-"conv": null,
-"dconv": 0.0,
-"run": 0,
-"mancano": 4,
 "affid": ""
 },
 {
@@ -1697,12 +1697,12 @@
 "t": "STLAM.MI",
 "nome": "STLAM.MI",
 "tipo": "short",
-"giorni": 1,
-"rend": -1.6,
+"giorni": 2,
+"rend": -1.5,
 "conv": null,
 "dconv": 0.0,
 "run": 0,
-"mancano": 2,
+"mancano": 1,
 "affid": ""
 },
 {
@@ -1769,12 +1769,12 @@
 "t": "QQQ",
 "nome": "QQQ",
 "tipo": "short",
-"giorni": 2,
-"rend": -1.7,
+"giorni": 3,
+"rend": -1.8,
 "conv": 62.0,
 "dconv": -6.0,
 "run": 4,
-"mancano": 1,
+"mancano": 0,
 "affid": "🟢 Alta"
 },
 {
@@ -1903,11 +1903,23 @@
 "tipo": "long",
 "giorni": 3,
 "rend": -2.8,
-"conv": 37.0,
-"dconv": -4.0,
+"conv": 30.0,
+"dconv": -8.0,
 "run": 4,
 "mancano": 4,
 "affid": "🟡 Media"
+},
+{
+"t": "STLAM.MI",
+"nome": "STELLANTIS",
+"tipo": "long",
+"giorni": 3,
+"rend": -2.9,
+"conv": null,
+"dconv": 0.0,
+"run": 0,
+"mancano": 4,
+"affid": ""
 },
 {
 "t": "ALKS",
@@ -1999,8 +2011,8 @@
 "tipo": "short",
 "giorni": 3,
 "rend": -3.2,
-"conv": 69.0,
-"dconv": 1.0,
+"conv": 66.0,
+"dconv": -0.0,
 "run": 5,
 "mancano": 0,
 "affid": "🟡 Media"
@@ -2059,8 +2071,8 @@
 "tipo": "long",
 "giorni": 3,
 "rend": -3.9,
-"conv": 56.0,
-"dconv": 15.0,
+"conv": 52.0,
+"dconv": 13.0,
 "run": 6,
 "mancano": 4,
 "affid": "🔴 Bassa"
@@ -2083,9 +2095,9 @@
 "tipo": "long",
 "giorni": 3,
 "rend": -4.1,
-"conv": 56.0,
-"dconv": 6.0,
-"run": 1,
+"conv": 68.0,
+"dconv": 12.0,
+"run": 6,
 "mancano": 4,
 "affid": "🟢 Alta"
 },
@@ -2174,18 +2186,6 @@
 "affid": ""
 },
 {
-"t": "DT",
-"nome": "DT",
-"tipo": "short",
-"giorni": 2,
-"rend": -5.2,
-"conv": 55.0,
-"dconv": -12.0,
-"run": 1,
-"mancano": 1,
-"affid": "🟡 Media"
-},
-{
 "t": "YSS",
 "nome": "YSS",
 "tipo": "short",
@@ -2246,6 +2246,30 @@
 "affid": ""
 },
 {
+"t": "DT",
+"nome": "DT",
+"tipo": "short",
+"giorni": 3,
+"rend": -6.0,
+"conv": 57.0,
+"dconv": -10.0,
+"run": 2,
+"mancano": 0,
+"affid": "🟡 Media"
+},
+{
+"t": "STMMI.MI",
+"nome": "STMICROELECTRONICS",
+"tipo": "long",
+"giorni": 3,
+"rend": -6.2,
+"conv": 51.0,
+"dconv": 3.0,
+"run": 6,
+"mancano": 4,
+"affid": "🟡 Media"
+},
+{
 "t": "QURE",
 "nome": "QURE",
 "tipo": "short",
@@ -2282,18 +2306,6 @@
 "affid": "🔴 Bassa"
 },
 {
-"t": "LDO.MI",
-"nome": "LEONARDO",
-"tipo": "long",
-"giorni": 3,
-"rend": -6.9,
-"conv": 48.0,
-"dconv": 6.0,
-"run": 6,
-"mancano": 4,
-"affid": "🟡 Media"
-},
-{
 "t": "ENVA",
 "nome": "Enova International, Inc.",
 "tipo": "long",
@@ -2311,9 +2323,9 @@
 "tipo": "long",
 "giorni": 3,
 "rend": -7.3,
-"conv": 59.0,
-"dconv": 6.0,
-"run": 1,
+"conv": 62.0,
+"dconv": 8.0,
+"run": 6,
 "mancano": 4,
 "affid": "🔴 Bassa"
 },
@@ -2335,7 +2347,7 @@
 "tipo": "long",
 "giorni": 3,
 "rend": -7.8,
-"conv": 67.0,
+"conv": 68.0,
 "dconv": 6.0,
 "run": 6,
 "mancano": 4,
@@ -2451,12 +2463,12 @@
 },
 {
 "t": "WDC",
-"nome": "Western Digital Corp",
+"nome": "WESTERN DIGITAL CORPORATION",
 "tipo": "long",
 "giorni": 3,
 "rend": -10.5,
-"conv": 67.0,
-"dconv": 12.0,
+"conv": 62.0,
+"dconv": 10.0,
 "run": 6,
 "mancano": 4,
 "affid": "🔴 Bassa"
@@ -2474,18 +2486,6 @@
 "affid": ""
 },
 {
-"t": "STMMI.MI",
-"nome": "STMICROELECTRONICS",
-"tipo": "long",
-"giorni": 3,
-"rend": -12.7,
-"conv": 49.0,
-"dconv": 4.0,
-"run": 5,
-"mancano": 4,
-"affid": "🟡 Media"
-},
-{
 "t": "AVBP",
 "nome": "AVBP",
 "tipo": "short",
@@ -2499,12 +2499,12 @@
 },
 {
 "t": "DAVE",
-"nome": "Dave Inc.",
+"nome": "Dave Inc./DE",
 "tipo": "long",
 "giorni": 3,
 "rend": -15.9,
-"conv": 58.0,
-"dconv": 6.0,
+"conv": 63.0,
+"dconv": 8.0,
 "run": 2,
 "mancano": 4,
 "affid": "🔴 Bassa"
@@ -2527,8 +2527,8 @@
 "tipo": "long",
 "giorni": 3,
 "rend": -23.1,
-"conv": 79.0,
-"dconv": 17.0,
+"conv": 82.0,
+"dconv": 18.0,
 "run": 6,
 "mancano": 4,
 "affid": "🟡 Media"
@@ -3048,22 +3048,22 @@
 "tipo": "short",
 "auto": true,
 "aggiunta": "2026-09-02",
-"conv": 61.0,
+"conv": 63.0,
 "affid": "🟢 Alta",
-"salita": 58.0,
+"salita": 52.0,
 "perdita": 2.0,
-"prezzo": 25.05,
+"prezzo": 24.69,
 "ingresso": 23.305,
-"rend": 7.5,
-"dconv": 5.0,
-"bersaglio": 24.886,
+"rend": 5.9,
+"dconv": 7.0,
+"bersaglio": 24.9401,
 "stop": 22.256,
 "uscita": "",
-"incasso": "scesa 9% dal massimo (27.66) restando in guadagno (+7.5%): il guadagno si sta sgonfiando",
-"avviso": "💰 giù 9% dal massimo",
+"incasso": "scesa 11% dal massimo (27.66) restando in guadagno (+5.9%): il guadagno si sta sgonfiando",
+"avviso": "💰 giù 11% dal massimo",
 "nota": "🤖 Promossa il 2026-09-02: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.3% e la convenienza (56) regge.",
 "mia_soglia": null,
-"soglia_suggerita": 28.9768
+"soglia_suggerita": 28.5603
 },
 {
 "t": "TTAN",
@@ -3508,22 +3508,22 @@
 "tipo": "short",
 "auto": true,
 "aggiunta": "2026-10-13",
-"conv": 54.0,
+"conv": 48.0,
 "affid": "🟢 Alta",
-"salita": 46.0,
+"salita": 51.0,
 "perdita": 0.0,
-"prezzo": 43.73,
+"prezzo": 44.91,
 "ingresso": 42.3,
-"rend": 3.4,
-"dconv": -7.0,
+"rend": 6.2,
+"dconv": -13.0,
 "bersaglio": 43.8488,
 "stop": 40.6482,
 "uscita": "",
-"incasso": "",
-"avviso": "—",
+"incasso": "bersaglio 43.85 raggiunto (sei a +6.2%): valuta di incassare",
+"avviso": "🎯 bersaglio raggiunto",
 "nota": "🤖 Promossa il 2026-10-13: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +3.1% e la convenienza (67) regge.",
 "mia_soglia": null,
-"soglia_suggerita": 50.585
+"soglia_suggerita": 51.9499
 },
 {
 "t": "JNJ",
@@ -3761,22 +3761,22 @@
 "tipo": "short",
 "auto": true,
 "aggiunta": "2026-10-27",
-"conv": 69.0,
+"conv": 51.0,
 "affid": "🟢 Alta",
-"salita": 50.0,
-"perdita": 3.0,
-"prezzo": 13.445,
+"salita": 46.0,
+"perdita": 2.0,
+"prezzo": 15.285,
 "ingresso": 13.645,
-"rend": -1.5,
-"dconv": -1.0,
+"rend": 12.0,
+"dconv": -19.0,
 "bersaglio": 15.4383,
 "stop": 12.8261,
-"uscita": "in perdita da 10 giorni di Borsa: valuta l'uscita",
+"uscita": "",
 "incasso": "",
-"avviso": "⚠️ in perdita da 10 gg",
+"avviso": "—",
 "nota": "🤖 Promossa il 2026-10-27: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +4.2% e la convenienza (59) regge.",
 "mia_soglia": null,
-"soglia_suggerita": 15.5526
+"soglia_suggerita": 17.681
 },
 {
 "t": "MB.MI",
@@ -3784,14 +3784,14 @@
 "tipo": "short",
 "auto": true,
 "aggiunta": "2026-10-28",
-"conv": 59.0,
+"conv": 52.0,
 "affid": "🟢 Alta",
 "salita": 52.0,
-"perdita": 6.0,
-"prezzo": 26.18,
+"perdita": 7.0,
+"prezzo": 27.18,
 "ingresso": 25.76,
-"rend": 1.6,
-"dconv": -3.0,
+"rend": 5.5,
+"dconv": -10.0,
 "bersaglio": 27.2374,
 "stop": 24.483,
 "uscita": "",
@@ -3799,7 +3799,7 @@
 "avviso": "—",
 "nota": "🤖 Promossa il 2026-10-28: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.7% e la convenienza (64) regge.",
 "mia_soglia": null,
-"soglia_suggerita": 30.2839
+"soglia_suggerita": 31.4406
 },
 {
 "t": "UCG.MI",
@@ -3807,22 +3807,22 @@
 "tipo": "short",
 "auto": true,
 "aggiunta": "2026-10-29",
-"conv": 58.0,
+"conv": 43.0,
 "affid": "🟢 Alta",
-"salita": 51.0,
-"perdita": 2.0,
-"prezzo": 76.8,
+"salita": 47.0,
+"perdita": 3.0,
+"prezzo": 84.35,
 "ingresso": 73.88,
-"rend": 4.0,
-"dconv": -8.0,
+"rend": 14.2,
+"dconv": -23.0,
 "bersaglio": 80.46,
 "stop": 69.9967,
 "uscita": "",
-"incasso": "",
-"avviso": "—",
+"incasso": "bersaglio 80.46 raggiunto (sei a +14.2%): valuta di incassare",
+"avviso": "🎯 bersaglio raggiunto",
 "nota": "🤖 Promossa il 2026-10-29: dopo 4 giorni di Borsa di osservazione il prezzo è risalito di +3.2% e la convenienza (57) regge.",
 "mia_soglia": null,
-"soglia_suggerita": 88.8389
+"soglia_suggerita": 97.5724
 },
 {
 "t": "RCUS",
@@ -4391,31 +4391,19 @@
 "affid": "🟡 Media"
 },
 {
-"t": "ECG",
-"nome": "Everus Construction Group, Inc.",
+"t": "PR",
+"nome": "Permian Resources Corporation",
 "tipo": "long",
 "conv": 68.0,
-"dconv": 6.0,
-"giorni": 3,
-"rend": 5.9,
-"salita": 81.0,
-"perdita": 11.0,
-"affid": "🔴 Bassa"
-},
-{
-"t": "WDC",
-"nome": "Western Digital Corp",
-"tipo": "long",
-"conv": 67.0,
 "dconv": 12.0,
 "giorni": 3,
-"rend": -10.5,
-"salita": 76.0,
-"perdita": 16.0,
-"affid": "🔴 Bassa"
+"rend": -4.1,
+"salita": 67.0,
+"perdita": 17.0,
+"affid": "🟢 Alta"
 }
 ],
 "portafoglio": [],
 "richieste": [],
-"giro": "2026-11-10 04:39"
+"giro": "2026-11-10 12:49"
 }
