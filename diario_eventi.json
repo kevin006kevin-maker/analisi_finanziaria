@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:RSI:2026-09-19",
-"ticker": "RSI",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-21 01:15",
-"data": "2026-09-21 01:12",
-"prezzo": 23.3,
-"conv": 74,
-"prob_gain": 56,
-"prob_loss": 12,
-"reliab": "🟡 Media",
-"mkt": 0.1222,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 27.759,
-"media20": 26.0825,
-"quattro_atr": 27.9599,
-"meta_caduta": 28.91,
-"bollinger": 27.6338,
-"consigliata": 27.759
-},
-"stop": 20.9701,
-"atr": 1.165,
-"res": {
-"7g": -16.63,
-"30g": -26.63,
-"soglia": -26.63
-},
-"res_soglia": {
-"media50": {
-"ret": -26.63,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -26.63,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -26.63,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -26.63,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -26.63,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -26.63,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:AGNC:2026-09-18",
 "ticker": "AGNC",
 "kind": "short",
@@ -38466,5 +38402,32 @@
 },
 "stop": 160.3808,
 "atr": 5.9996
+},
+{
+"episodio": "short:LSTR:2026-10-29",
+"ticker": "LSTR",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-11-10 04:35",
+"data": "2026-11-10 04:33",
+"prezzo": 146.47,
+"conv": 78,
+"prob_gain": 57,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-11-10",
+"soglie": {
+"media50": 165.976,
+"media20": 158.3615,
+"quattro_atr": 169.7209,
+"meta_caduta": 169.925,
+"bollinger": 183.3573,
+"consigliata": 165.976
+},
+"stop": 134.8446,
+"atr": 5.8127
 }
 ]
