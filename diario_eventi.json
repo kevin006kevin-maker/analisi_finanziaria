@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:VRTL:2026-09-21",
-"ticker": "VRTL",
-"kind": "short",
-"evento": "uscita",
-"scritto_il": "2026-09-21 01:16",
-"data": "2026-09-21 01:16",
-"prezzo": 24.5,
-"conv": 64,
-"prob_gain": 49,
-"prob_loss": 30,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "in perdita da 34 giorni di Borsa: valuta l'uscita",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:RPT:2026-09-21",
 "ticker": "RPT",
 "kind": "short",
@@ -38303,5 +38283,25 @@
 "stop": 161.8979,
 "atr": 8.386,
 "res": {}
+},
+{
+"episodio": "short:ACAD:2026-11-10",
+"ticker": "ACAD",
+"kind": "short",
+"evento": "salita_2pct",
+"scritto_il": "2026-11-10 20:43",
+"data": "2026-11-10 20:40",
+"prezzo": 18.205,
+"conv": 57,
+"prob_gain": 53,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": -3.8623,
+"fonte": "osservazione",
+"note": "prezzo salito di almeno il 2% da 16.5",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
