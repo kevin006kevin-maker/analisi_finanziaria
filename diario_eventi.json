@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:RPT:2026-09-21",
-"ticker": "RPT",
-"kind": "short",
-"evento": "uscita",
-"scritto_il": "2026-09-21 01:16",
-"data": "2026-09-21 01:16",
-"prezzo": 11.39,
-"conv": 81,
-"prob_gain": 59,
-"prob_loss": 6,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "in perdita da 28 giorni di Borsa: valuta l'uscita",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:POST:2026-09-21",
 "ticker": "POST",
 "kind": "short",
@@ -38435,5 +38415,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:NMIH:2026-11-06",
+"ticker": "NMIH",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-11-11 01:42",
+"data": "2026-11-11 01:42",
+"prezzo": 38.73,
+"conv": 70,
+"prob_gain": 52,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 41.7919,
+"media20": 41.6465,
+"quattro_atr": 45.1133,
+"meta_caduta": 42.195,
+"bollinger": 45.0852,
+"consigliata": 41.7919
+},
+"stop": 35.5384,
+"atr": 1.5958
 }
 ]
