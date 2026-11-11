@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:WING:2026-09-16",
-"ticker": "WING",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-21 01:17",
-"data": "2026-09-19 08:34",
-"prezzo": 104.08,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-21",
-"soglie": {
-"media50": 122.0929,
-"media20": 110.2855,
-"quattro_atr": 130.8283,
-"meta_caduta": 141.035,
-"bollinger": 119.7968,
-"consigliata": 122.0929
-},
-"stop": 90.7059,
-"atr": 6.6871,
-"soglie_contaminate": {
-"media50": 122.0929,
-"media20": 110.2855,
-"quattro_atr": 130.8283,
-"meta_caduta": 141.035,
-"bollinger": 119.7968,
-"consigliata": 122.0929
-},
-"soglie_ricalcolate_il": "2026-09-21 01:18",
-"taglio_corretto": true,
-"soglie_ritardo_giorni": 2,
-"res": {
-"7g": -3.15,
-"30g": 26.75,
-"soglia": 17.31
-},
-"res_soglia": {
-"media50": {
-"ret": 17.31,
-"toccato": true,
-"giorni": 20
-},
-"media20": {
-"ret": 5.96,
-"toccato": true,
-"giorni": 17
-},
-"quattro_atr": {
-"ret": 25.7,
-"toccato": true,
-"giorni": 26
-},
-"meta_caduta": {
-"ret": 26.75,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 15.1,
-"toccato": true,
-"giorni": 20
-},
-"consigliata": {
-"ret": 17.31,
-"toccato": true,
-"giorni": 20
-}
-}
-},
-{
 "episodio": "short:JBHT:2026-09-16",
 "ticker": "JBHT",
 "kind": "short",
@@ -38236,6 +38161,26 @@
 "prob_gain": 56,
 "prob_loss": 15,
 "reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "in perdita da 15 giorni di Borsa: valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:HESM:2026-10-07",
+"ticker": "HESM",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-11-11 01:44",
+"data": "2026-11-11 01:44",
+"prezzo": 30.46,
+"conv": 81,
+"prob_gain": 59,
+"prob_loss": 5,
+"reliab": "🟢 Alta",
 "mkt": null,
 "fonte": "monitoraggio",
 "note": "in perdita da 15 giorni di Borsa: valuta l'uscita",
