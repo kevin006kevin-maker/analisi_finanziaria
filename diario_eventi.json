@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:WING:2026-09-16",
-"ticker": "WING",
-"kind": "short",
-"evento": "promozione",
-"scritto_il": "2026-09-21 16:35",
-"data": "2026-09-21 16:35",
-"prezzo": 104.645,
-"conv": 69,
-"prob_gain": 55,
-"prob_loss": 18,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": 121.12,
-"media20": 109.7462,
-"quattro_atr": 130.2084,
-"meta_caduta": 141.3175,
-"bollinger": 119.2524,
-"consigliata": 121.12
-},
-"stop": 91.8633,
-"atr": 6.3908,
-"res": {
-"7g": -3.67,
-"30g": 15.69,
-"soglia": 15.74
-},
-"res_soglia": {
-"media50": {
-"ret": 15.74,
-"toccato": true,
-"giorni": 18
-},
-"media20": {
-"ret": 4.87,
-"toccato": true,
-"giorni": 15
-},
-"quattro_atr": {
-"ret": 24.43,
-"toccato": true,
-"giorni": 24
-},
-"meta_caduta": {
-"ret": 15.69,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 13.96,
-"toccato": true,
-"giorni": 18
-},
-"consigliata": {
-"ret": 15.74,
-"toccato": true,
-"giorni": 18
-}
-}
-},
-{
 "episodio": "short:ON:2026-09-16",
 "ticker": "ON",
 "kind": "short",
@@ -37914,5 +37850,32 @@
 },
 "stop": 51.3787,
 "atr": 4.4757
+},
+{
+"episodio": "short:EEM:2026-11-11",
+"ticker": "EEM",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-11-11 08:10",
+"data": "2026-11-11 08:10",
+"prezzo": 60.57,
+"conv": 68,
+"prob_gain": 51,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 65.1822,
+"media20": 61.978,
+"quattro_atr": 65.9235,
+"meta_caduta": 64.835,
+"bollinger": 65.1498,
+"consigliata": 65.1822
+},
+"stop": 57.8932,
+"atr": 1.3384
 }
 ]
