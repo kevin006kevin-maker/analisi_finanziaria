@@ -1,48 +1,6 @@
 [
 {
 "date": "2026-11-03",
-"ticker": "GOOG",
-"kind": "short",
-"price": 278.22,
-"conv": 66,
-"factors": {
-"discount": 30.2777,
-"histcheap": 1.96,
-"riskadj": -0.21,
-"ddpen": -10.8,
-"momentum": 12.3109,
-"prob": 52,
-"oversold": -21.0794,
-"rebound": 20.6706,
-"trend": -1.0,
-"relstrength": -10.5475
-},
-"ret_5d": 2.38,
-"ret_21d": null
-},
-{
-"date": "2026-11-03",
-"ticker": "GOOGL",
-"kind": "short",
-"price": 278.99,
-"conv": 65,
-"factors": {
-"discount": 30.7064,
-"histcheap": 1.8,
-"riskadj": 0.02,
-"ddpen": -10.82,
-"momentum": 11.935,
-"prob": 48,
-"oversold": -21.1711,
-"rebound": 21.0636,
-"trend": -1.0,
-"relstrength": -10.1716
-},
-"ret_5d": 2.97,
-"ret_21d": null
-},
-{
-"date": "2026-11-03",
 "ticker": "SCI",
 "kind": "short",
 "price": 76.37,
@@ -38457,6 +38415,46 @@
 "rebound": 17.8206,
 "trend": -1.0,
 "relstrength": -25.8441
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-11",
+"ticker": "ENGS",
+"kind": "long",
+"price": 0.6869,
+"conv": 68,
+"factors": {
+"discount": 86.1512,
+"histcheap": 1.15,
+"riskadj": -0.22,
+"ddpen": -33.1,
+"momentum": 84.8366,
+"prob": 91,
+"quality": null,
+"valcheap": null,
+"trappen": 0
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-11",
+"ticker": "CHSN",
+"kind": "long",
+"price": 0.683,
+"conv": 54,
+"factors": {
+"discount": 99.7645,
+"histcheap": 0.89,
+"riskadj": -1.36,
+"ddpen": -75.14,
+"momentum": 79.6726,
+"prob": 24,
+"quality": null,
+"valcheap": null,
+"trappen": 0
 },
 "ret_5d": null,
 "ret_21d": null
