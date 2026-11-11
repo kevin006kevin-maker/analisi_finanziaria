@@ -21632,5 +21632,62 @@
 "mkt": null
 }
 }
+},
+{
+"ticker": "NMIH",
+"kind": "short",
+"date": "2026-11-11",
+"promo_price": 38.73,
+"obs_price": 36.72,
+"obs_date": "2026-11-06",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": 41.7919,
+"stop": 35.5384,
+"reliab": "🟢 Alta",
+"prob_gain": 52,
+"prob_loss": 2,
+"conv": 70,
+"passaggi": {
+"osservazione": {
+"data": "2026-11-06 18:27",
+"prezzo": 36.72,
+"conv": 64,
+"prob_gain": 59,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": -5.0231
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-11 01:42",
+"prezzo": 38.73,
+"conv": 70,
+"prob_gain": 52,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
