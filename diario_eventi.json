@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:POST:2026-09-21",
-"ticker": "POST",
-"kind": "short",
-"evento": "uscita",
-"scritto_il": "2026-09-21 01:16",
-"data": "2026-09-21 01:16",
-"prezzo": 76.57,
-"conv": 79,
-"prob_gain": 54,
-"prob_loss": 2,
-"reliab": "🟢 Alta",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "in perdita da 27 giorni di Borsa: valuta l'uscita",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:SYK:2026-09-09",
 "ticker": "SYK",
 "kind": "short",
@@ -38442,5 +38422,32 @@
 },
 "stop": 35.5384,
 "atr": 1.5958
+},
+{
+"episodio": "short:FFIV:2026-10-29",
+"ticker": "FFIV",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-11-11 01:42",
+"data": "2026-11-11 01:42",
+"prezzo": 317.31,
+"conv": 81,
+"prob_gain": 64,
+"prob_loss": 7,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 418.3408,
+"media20": 392.941,
+"quattro_atr": 388.2329,
+"meta_caduta": 398.57,
+"bollinger": 523.0556,
+"consigliata": 388.2329
+},
+"stop": 281.8486,
+"atr": 17.7307
 }
 ]
