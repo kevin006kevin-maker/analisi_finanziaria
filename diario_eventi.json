@@ -1,25 +1,5 @@
 [
 {
-"episodio": "long:NU:2026-09-19",
-"ticker": "NU",
-"kind": "long",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-21 21:49",
-"data": "2026-09-21 21:46",
-"prezzo": 14.055,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 13.65",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:ZTO:2026-09-22",
 "ticker": "ZTO",
 "kind": "short",
@@ -38105,5 +38085,25 @@
 },
 "stop": 13.0172,
 "atr": 1.6564
+},
+{
+"episodio": "short:NRIX:2026-11-05",
+"ticker": "NRIX",
+"kind": "short",
+"evento": "salita_2pct",
+"scritto_il": "2026-11-11 22:59",
+"data": "2026-11-11 22:57",
+"prezzo": 16.33,
+"conv": 72,
+"prob_gain": 48,
+"prob_loss": 12,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "prezzo salito di almeno il 2% da 15.95",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
