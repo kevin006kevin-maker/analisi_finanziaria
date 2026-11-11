@@ -4039,7 +4039,9 @@
 "max_date": "2026-10-16 16:16",
 "auto": true,
 "notified": true,
-"entry_check": "2026-11-11"
+"entry_check": "2026-11-11",
+"warn_since": "2026-11-11",
+"warn": "in perdita da 27 giorni di Borsa: valuta l'uscita"
 },
 "ENLT": {
 "kind": "short",
@@ -4457,7 +4459,9 @@
 "max_date": "2026-11-10 04:33",
 "auto": true,
 "notified": true,
-"entry_check": "2026-11-11"
+"entry_check": "2026-11-11",
+"warn_since": "2026-11-11",
+"warn": "in perdita da 25 giorni di Borsa: valuta l'uscita"
 },
 "XRAY": {
 "kind": "short",
@@ -7238,7 +7242,7 @@
 "max_price": 221.57,
 "max_date": "2026-11-11 16:10",
 "auto": true,
-"notified": false,
+"notified": true,
 "entry_check": "2026-11-11"
 },
 "EDU": {
