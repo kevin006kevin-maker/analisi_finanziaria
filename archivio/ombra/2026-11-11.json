@@ -68,5 +68,47 @@
 "retroattiva": false,
 "atr_pct": 2.4674,
 "ora": "2026-11-11 00:50"
+},
+{
+"id": "2026-11-11:short:CRSP:sistema_corretto",
+"giorno": "2026-11-11",
+"metodo": "sistema_corretto",
+"kind": "short",
+"ticker": "CRSP",
+"nome": "CRSP",
+"prezzo": 45.150001525878906,
+"profilo": "2026-11-11:short:CRSP:punteggio_basso",
+"origine_viva": "scartata:punteggio_basso",
+"retroattiva": false,
+"atr_pct": 6.2689,
+"ora": "2026-11-11 07:15"
+},
+{
+"id": "2026-11-11:short:HIMS:rimbalzo_grandi",
+"giorno": "2026-11-11",
+"metodo": "rimbalzo_grandi",
+"kind": "short",
+"ticker": "HIMS",
+"nome": "HIMS",
+"prezzo": 19.1299991607666,
+"profilo": "2026-11-11:short:HIMS:crollato_nell_anno",
+"origine_viva": "scartata:crollato_nell_anno",
+"retroattiva": false,
+"atr_pct": 12.1717,
+"ora": "2026-11-11 07:15"
+},
+{
+"id": "2026-11-11:short:IREN:rimbalzo_grandi",
+"giorno": "2026-11-11",
+"metodo": "rimbalzo_grandi",
+"kind": "short",
+"ticker": "IREN",
+"nome": "IREN",
+"prezzo": 19.729999542236328,
+"profilo": "2026-11-11:short:IREN:crollato_nell_anno",
+"origine_viva": "scartata:crollato_nell_anno",
+"retroattiva": false,
+"atr_pct": 14.5752,
+"ora": "2026-11-11 07:15"
 }
 ]
