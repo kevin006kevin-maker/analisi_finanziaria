@@ -844,7 +844,9 @@
 "entry_src": "storico",
 "max_price": 23.575,
 "max_date": "2026-10-23 21:34",
-"exit_notified": false
+"exit_notified": false,
+"warn_since": "2026-11-11",
+"warn": "in perdita da 81 giorni di Borsa: valuta l'uscita"
 },
 "SNPS": {
 "kind": "short",
@@ -2508,7 +2510,7 @@
 "max_price": 37.94,
 "max_date": "2026-09-08 22:03",
 "warn_since": "2026-11-10",
-"warn": "in perdita da 63 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 64 giorni di Borsa: valuta l'uscita"
 },
 "TDC": {
 "kind": "long",
@@ -3227,91 +3229,6 @@
 },
 "incasso_notified": true,
 "exit_notified": true
-},
-"ON": {
-"kind": "short",
-"added": "2026-09-21",
-"note": "🤖 Promossa il 2026-09-21: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +4.8% e la convenienza (62) regge.",
-"name": "ON",
-"snapshots": [
-{
-"name": "ON",
-"price": 69.55,
-"rsi": 45.1789,
-"dd_high": -48.0699,
-"occasione": 41,
-"convenienza": 66,
-"prob_gain": 49,
-"prob_loss": 18,
-"exp_ret": -0.3,
-"gain": 6.6321,
-"reliab": "🔴 Bassa",
-"target": 74.1626,
-"stop": 60.7358,
-"date": "2026-11-09 21:44"
-},
-{
-"name": "ON",
-"price": 69.11,
-"rsi": 44.524,
-"dd_high": -48.3984,
-"occasione": 42,
-"convenienza": 67,
-"prob_gain": 50,
-"prob_loss": 15,
-"exp_ret": 0.1,
-"gain": 7.2982,
-"reliab": "🔴 Bassa",
-"target": 74.1538,
-"stop": 60.2958,
-"date": "2026-11-10 04:33"
-},
-{
-"name": "ON",
-"price": 69.12,
-"rsi": 44.5402,
-"dd_high": -48.3909,
-"occasione": 42,
-"convenienza": 67,
-"prob_gain": 51,
-"prob_loss": 20,
-"exp_ret": 0.4,
-"gain": 7.1389,
-"reliab": "🔴 Bassa",
-"target": 74.0544,
-"stop": 60.5868,
-"date": "2026-11-10 20:41"
-},
-{
-"name": "ON",
-"price": 69.61,
-"rsi": 45.3233,
-"dd_high": -48.0251,
-"occasione": 41,
-"convenienza": 67,
-"prob_gain": 50,
-"prob_loss": 16,
-"exp_ret": 0.1,
-"gain": 6.3988,
-"reliab": "🔴 Bassa",
-"target": 74.0642,
-"stop": 61.0225,
-"date": "2026-11-11 01:43"
-}
-],
-"entry_price": 70.155,
-"entry_target": 79.0327,
-"entry_stop": 62.8695,
-"entry_conv": 67,
-"entry_date": "2026-09-21 16:35",
-"entry_src": "scatto",
-"max_price": 86.31,
-"max_date": "2026-10-06 23:17",
-"auto": true,
-"notified": true,
-"entry_check": "2026-11-10",
-"warn_since": "2026-11-05",
-"warn": "in perdita da 36 giorni di Borsa: valuta l'uscita"
 },
 "SYNA": {
 "kind": "short",
@@ -5301,123 +5218,6 @@
 "notified": false,
 "entry_check": "2026-11-10"
 },
-"NESR": {
-"kind": "short",
-"added": "2026-10-21",
-"note": "🤖 Promossa il 2026-10-21: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +12.6% e la convenienza (59) regge.",
-"name": "NESR",
-"snapshots": [
-{
-"name": "NESR",
-"price": 19.2,
-"rsi": 34.015,
-"dd_high": -47.122,
-"occasione": 31,
-"convenienza": 77,
-"prob_gain": 54,
-"prob_loss": 18,
-"exp_ret": 1.0,
-"gain": 39.9151,
-"reliab": "🟡 Media",
-"target": 26.8637,
-"stop": 16.2398,
-"date": "2026-11-07 03:25"
-},
-{
-"name": "NESR",
-"price": 19.96,
-"rsi": 38.4843,
-"dd_high": -45.0289,
-"occasione": 51,
-"convenienza": 75,
-"prob_gain": 52,
-"prob_loss": 18,
-"exp_ret": 0.9,
-"gain": 33.0777,
-"reliab": "🟡 Media",
-"target": 26.5623,
-"stop": 17.0541,
-"date": "2026-11-07 10:16"
-},
-{
-"name": "NESR",
-"price": 20.21,
-"rsi": 39.9258,
-"dd_high": -44.3404,
-"occasione": 49,
-"convenienza": 74,
-"prob_gain": 55,
-"prob_loss": 18,
-"exp_ret": 2.4,
-"gain": 30.0233,
-"reliab": "🟡 Media",
-"target": 26.2777,
-"stop": 17.1885,
-"date": "2026-11-09 21:44"
-},
-{
-"name": "NESR",
-"price": 19.55,
-"rsi": 37.0273,
-"dd_high": -46.1581,
-"occasione": 26,
-"convenienza": 76,
-"prob_gain": 56,
-"prob_loss": 16,
-"exp_ret": 2.3,
-"gain": 34.3453,
-"reliab": "🟡 Media",
-"target": 26.2645,
-"stop": 16.5285,
-"date": "2026-11-10 04:33"
-},
-{
-"name": "NESR",
-"price": 20.42,
-"rsi": 42.0418,
-"dd_high": -43.7621,
-"occasione": 45,
-"convenienza": 73,
-"prob_gain": 52,
-"prob_loss": 17,
-"exp_ret": 0.5,
-"gain": 27.1827,
-"reliab": "🟡 Media",
-"target": 25.9707,
-"stop": 17.3672,
-"date": "2026-11-10 20:41"
-},
-{
-"name": "NESR",
-"price": 20.38,
-"rsi": 41.8288,
-"dd_high": -43.8722,
-"occasione": 45,
-"convenienza": 74,
-"prob_gain": 56,
-"prob_loss": 15,
-"exp_ret": 2.6,
-"gain": 27.4284,
-"reliab": "🟡 Media",
-"target": 25.9699,
-"stop": 17.3272,
-"date": "2026-11-11 01:43"
-}
-],
-"entry_price": 21.09,
-"entry_target": 30.142,
-"entry_stop": 18.2326,
-"entry_conv": 77,
-"entry_date": "2026-10-21 00:41",
-"entry_src": "scatto",
-"max_price": 21.925,
-"max_date": "2026-10-21 19:10",
-"auto": true,
-"notified": true,
-"entry_check": "2026-11-10",
-"warn_since": "2026-11-05",
-"warn": "in perdita da 14 giorni di Borsa: valuta l'uscita"
-},
 "MRP": {
 "kind": "short",
 "added": "2026-10-21",
@@ -5532,123 +5332,6 @@
 "auto": true,
 "notified": true,
 "entry_check": "2026-11-10"
-},
-"HESM": {
-"kind": "short",
-"added": "2026-10-21",
-"note": "🤖 Promossa il 2026-10-21: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.1% e la convenienza (70) regge.",
-"name": "HESM",
-"snapshots": [
-{
-"name": "HESM",
-"price": 30.3,
-"rsi": 33.6011,
-"dd_high": -26.0435,
-"occasione": 24,
-"convenienza": 82,
-"prob_gain": 61,
-"prob_loss": 5,
-"exp_ret": 1.5,
-"gain": 18.5281,
-"reliab": "🟢 Alta",
-"target": 35.914,
-"stop": 28.1843,
-"date": "2026-11-07 03:25"
-},
-{
-"name": "HESM",
-"price": 29.96,
-"rsi": 32.2707,
-"dd_high": -26.8733,
-"occasione": 26,
-"convenienza": 83,
-"prob_gain": 63,
-"prob_loss": 4,
-"exp_ret": 1.9,
-"gain": 19.2143,
-"reliab": "🟢 Alta",
-"target": 35.7166,
-"stop": 27.9254,
-"date": "2026-11-07 10:16"
-},
-{
-"name": "HESM",
-"price": 30.441,
-"rsi": 36.1239,
-"dd_high": -25.6993,
-"occasione": 48,
-"convenienza": 81,
-"prob_gain": 62,
-"prob_loss": 5,
-"exp_ret": 1.8,
-"gain": 16.7314,
-"reliab": "🟢 Alta",
-"target": 35.5342,
-"stop": 28.3842,
-"date": "2026-11-09 21:44"
-},
-{
-"name": "HESM",
-"price": 30.46,
-"rsi": 36.2672,
-"dd_high": -25.6529,
-"occasione": 48,
-"convenienza": 81,
-"prob_gain": 60,
-"prob_loss": 5,
-"exp_ret": 1.4,
-"gain": 16.6599,
-"reliab": "🟢 Alta",
-"target": 35.5346,
-"stop": 28.4014,
-"date": "2026-11-10 04:33"
-},
-{
-"name": "HESM",
-"price": 30.3812,
-"rsi": 35.9076,
-"dd_high": -25.8453,
-"occasione": 20,
-"convenienza": 81,
-"prob_gain": 63,
-"prob_loss": 5,
-"exp_ret": 1.9,
-"gain": 16.3154,
-"reliab": "🟢 Alta",
-"target": 35.338,
-"stop": 28.374,
-"date": "2026-11-10 20:41"
-},
-{
-"name": "HESM",
-"price": 30.46,
-"rsi": 36.2672,
-"dd_high": -25.6529,
-"occasione": 19,
-"convenienza": 81,
-"prob_gain": 59,
-"prob_loss": 5,
-"exp_ret": 1.6,
-"gain": 16.0197,
-"reliab": "🟢 Alta",
-"target": 35.3396,
-"stop": 28.4528,
-"date": "2026-11-11 01:43"
-}
-],
-"entry_price": 31.29,
-"entry_target": 37.6961,
-"entry_stop": 29.1291,
-"entry_conv": 84,
-"entry_date": "2026-10-21 19:09",
-"entry_src": "scatto",
-"max_price": 32.91,
-"max_date": "2026-10-30 16:23",
-"auto": true,
-"notified": true,
-"entry_check": "2026-11-10",
-"warn_since": "2026-11-05",
-"warn": "in perdita da 14 giorni di Borsa: valuta l'uscita"
 },
 "CELC": {
 "kind": "short",
@@ -6703,7 +6386,9 @@
 "max_date": "2026-11-04 19:53",
 "auto": true,
 "notified": true,
-"entry_check": "2026-11-10"
+"entry_check": "2026-11-10",
+"warn_since": "2026-11-11",
+"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
 },
 "CRS": {
 "kind": "short",
@@ -7172,7 +6857,7 @@
 "notified": false,
 "entry_check": "2026-11-10",
 "warn_since": "2026-11-10",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
 },
 "BA": {
 "kind": "short",
@@ -7257,7 +6942,7 @@
 "notified": false,
 "entry_check": "2026-11-10",
 "warn_since": "2026-11-10",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
 },
 "CHRW": {
 "kind": "short",
@@ -7342,7 +7027,7 @@
 "notified": false,
 "entry_check": "2026-11-10",
 "warn_since": "2026-11-10",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
 },
 "TFII": {
 "kind": "short",
@@ -7425,7 +7110,9 @@
 "max_date": "2026-11-05 01:25",
 "auto": true,
 "notified": false,
-"entry_check": "2026-11-10"
+"entry_check": "2026-11-10",
+"warn_since": "2026-11-11",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "CACC": {
 "kind": "short",
@@ -7821,7 +7508,9 @@
 "max_date": "2026-11-04 19:53",
 "auto": true,
 "notified": false,
-"entry_check": "2026-11-10"
+"entry_check": "2026-11-10",
+"warn_since": "2026-11-11",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "GOOGL": {
 "kind": "short",
