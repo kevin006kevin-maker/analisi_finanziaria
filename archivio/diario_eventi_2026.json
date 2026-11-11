@@ -32474,5 +32474,80 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:ON:2026-09-16",
+"ticker": "ON",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-21 01:17",
+"data": "2026-09-18 23:14",
+"prezzo": 69.98,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-21",
+"soglie": {
+"media50": 79.5472,
+"media20": 72.2245,
+"quattro_atr": 84.9735,
+"meta_caduta": 94.36,
+"bollinger": 76.7668,
+"consigliata": 79.5472
+},
+"stop": 62.4833,
+"atr": 3.7484,
+"soglie_contaminate": {
+"media50": 79.5472,
+"media20": 72.2245,
+"quattro_atr": 84.9735,
+"meta_caduta": 94.36,
+"bollinger": 76.7668,
+"consigliata": 79.5472
+},
+"soglie_ricalcolate_il": "2026-09-21 01:18",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 3,
+"res": {
+"7g": 7.95,
+"30g": 3.14,
+"soglia": 13.67
+},
+"res_soglia": {
+"media50": {
+"ret": 13.67,
+"toccato": true,
+"giorni": 13
+},
+"media20": {
+"ret": 3.21,
+"toccato": true,
+"giorni": 4
+},
+"quattro_atr": {
+"ret": 21.43,
+"toccato": true,
+"giorni": 17
+},
+"meta_caduta": {
+"ret": 3.14,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": 9.7,
+"toccato": true,
+"giorni": 7
+},
+"consigliata": {
+"ret": 13.67,
+"toccato": true,
+"giorni": 13
+}
+}
 }
 ]
