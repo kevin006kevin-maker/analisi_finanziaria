@@ -32110,5 +32110,80 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:ADTN:2026-09-09",
+"ticker": "ADTN",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-09-21 01:17",
+"data": "2026-09-18 23:17",
+"prezzo": 7.2,
+"conv": 68,
+"prob_gain": 50,
+"prob_loss": 20,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-09-21",
+"soglie": {
+"media50": 8.6766,
+"media20": 7.446,
+"quattro_atr": 8.7495,
+"meta_caduta": 10.62,
+"bollinger": 8.092,
+"consigliata": 8.6766
+},
+"stop": 6.4252,
+"atr": 0.3874,
+"soglie_contaminate": {
+"media50": 8.6766,
+"media20": 7.446,
+"quattro_atr": 8.7495,
+"meta_caduta": 10.62,
+"bollinger": 8.092,
+"consigliata": 8.6766
+},
+"soglie_ricalcolate_il": "2026-09-21 01:18",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 3,
+"res": {
+"7g": -3.4,
+"30g": -11.11,
+"soglia": -11.11
+},
+"res_soglia": {
+"media50": {
+"ret": -11.11,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": 3.42,
+"toccato": true,
+"giorni": 18
+},
+"quattro_atr": {
+"ret": -11.11,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -11.11,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -11.11,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -11.11,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
