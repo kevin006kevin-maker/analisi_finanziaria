@@ -21746,5 +21746,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "FTNT",
+"kind": "short",
+"date": "2026-11-11",
+"promo_price": 123.57,
+"obs_price": 135.71,
+"obs_date": "2026-10-29",
+"pre_price": 139.1,
+"pre_date": "2026-10-30",
+"conf_price": null,
+"conf_date": null,
+"target": 166.2386,
+"stop": 106.9459,
+"reliab": "🟡 Media",
+"prob_gain": 53,
+"prob_loss": 9,
+"conv": 77,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-29 17:54",
+"prezzo": 135.71,
+"conv": 73,
+"prob_gain": 53,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": 0.6515
+},
+"anticipo": {
+"data": "2026-10-30",
+"prezzo": 139.1,
+"conv": 74,
+"prob_gain": 53,
+"prob_loss": 3,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-11 01:42",
+"prezzo": 123.57,
+"conv": 77,
+"prob_gain": 53,
+"prob_loss": 9,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
