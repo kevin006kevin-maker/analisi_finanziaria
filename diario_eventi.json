@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:ESRT:2026-09-21",
-"ticker": "ESRT",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-21 21:44",
-"data": "2026-09-21 21:44",
-"prezzo": 4.14,
-"conv": 60,
-"prob_gain": 52,
-"prob_loss": 3,
-"reliab": "🟡 Media",
-"mkt": 1.3523,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 4.8524,
-"media20": 4.386,
-"quattro_atr": 4.7861,
-"meta_caduta": 4.97,
-"bollinger": 4.8503,
-"consigliata": 4.7861
-},
-"stop": 3.817,
-"atr": 0.1615,
-"res": {
-"7g": -2.17,
-"30g": 13.29,
-"soglia": 15.61
-},
-"res_soglia": {
-"media50": {
-"ret": 17.21,
-"toccato": true,
-"giorni": 22
-},
-"media20": {
-"ret": 5.94,
-"toccato": true,
-"giorni": 15
-},
-"quattro_atr": {
-"ret": 15.61,
-"toccato": true,
-"giorni": 22
-},
-"meta_caduta": {
-"ret": 13.29,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 17.16,
-"toccato": true,
-"giorni": 22
-},
-"consigliata": {
-"ret": 15.61,
-"toccato": true,
-"giorni": 22
-}
-}
-},
-{
 "episodio": "short:FIP:2026-09-18",
 "ticker": "FIP",
 "kind": "short",
@@ -37843,6 +37779,26 @@
 "mkt": null,
 "fonte": "monitoraggio",
 "note": "prezzo salito di almeno il 2% da 55.865",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "long:CVE:2026-11-07",
+"ticker": "CVE",
+"kind": "long",
+"evento": "salita_2pct",
+"scritto_il": "2026-11-11 16:12",
+"data": "2026-11-11 16:10",
+"prezzo": 28.26,
+"conv": 55,
+"prob_gain": 65,
+"prob_loss": 21,
+"reliab": "🟡 Media",
+"mkt": -1.7208,
+"fonte": "osservazione",
+"note": "prezzo salito di almeno il 2% da 27.45",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
