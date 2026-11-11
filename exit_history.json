@@ -26525,5 +26525,86 @@
 "date": "2026-11-06 23:23"
 }
 ]
+},
+{
+"ticker": "ON",
+"kind": "short",
+"added": "2026-09-21",
+"removed": "2026-11-11",
+"reason": "in perdita da 37 giorni di Borsa: valuta l'uscita",
+"auto": true,
+"first_price": 70.155,
+"last_price": 69.61,
+"first_target": 79.0327,
+"first_stop": 62.8695,
+"first_src": "scatto",
+"first_sicuro": true,
+"my_target_price": null,
+"snapshots": [
+{
+"name": "ON",
+"price": 69.55,
+"rsi": 45.1789,
+"dd_high": -48.0699,
+"occasione": 41,
+"convenienza": 66,
+"prob_gain": 49,
+"prob_loss": 18,
+"exp_ret": -0.3,
+"gain": 6.6321,
+"reliab": "🔴 Bassa",
+"target": 74.1626,
+"stop": 60.7358,
+"date": "2026-11-09 21:44"
+},
+{
+"name": "ON",
+"price": 69.11,
+"rsi": 44.524,
+"dd_high": -48.3984,
+"occasione": 42,
+"convenienza": 67,
+"prob_gain": 50,
+"prob_loss": 15,
+"exp_ret": 0.1,
+"gain": 7.2982,
+"reliab": "🔴 Bassa",
+"target": 74.1538,
+"stop": 60.2958,
+"date": "2026-11-10 04:33"
+},
+{
+"name": "ON",
+"price": 69.12,
+"rsi": 44.5402,
+"dd_high": -48.3909,
+"occasione": 42,
+"convenienza": 67,
+"prob_gain": 51,
+"prob_loss": 20,
+"exp_ret": 0.4,
+"gain": 7.1389,
+"reliab": "🔴 Bassa",
+"target": 74.0544,
+"stop": 60.5868,
+"date": "2026-11-10 20:41"
+},
+{
+"name": "ON",
+"price": 69.61,
+"rsi": 45.3233,
+"dd_high": -48.0251,
+"occasione": 41,
+"convenienza": 67,
+"prob_gain": 50,
+"prob_loss": 16,
+"exp_ret": 0.1,
+"gain": 6.3988,
+"reliab": "🔴 Bassa",
+"target": 74.0642,
+"stop": 61.0225,
+"date": "2026-11-11 01:43"
+}
+]
 }
 ]
