@@ -32677,5 +32677,69 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:FGL:2026-09-04",
+"ticker": "FGL",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-09-21 09:12",
+"data": "2026-09-21 09:12",
+"prezzo": 4.6,
+"conv": 66,
+"prob_gain": 56,
+"prob_loss": 33,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 57.1815,
+"media20": 12.2987,
+"quattro_atr": 25.6922,
+"meta_caduta": 76.8,
+"bollinger": 27.6531,
+"consigliata": 25.6922
+},
+"stop": null,
+"atr": 5.273,
+"res": {
+"7g": -4.57,
+"30g": -42.07,
+"soglia": -42.07
+},
+"res_soglia": {
+"media50": {
+"ret": -42.07,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -42.07,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -42.07,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -42.07,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -42.07,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -42.07,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
