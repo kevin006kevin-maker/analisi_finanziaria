@@ -16583,7 +16583,10 @@
 "conv": 69,
 "res": {
 "osservazione|7g": -5.46,
-"promozione|7g": -5.8
+"promozione|7g": -5.8,
+"osservazione|30g": -4.72,
+"promozione|30g": -5.05,
+"conferma|30g": 0.79
 },
 "passaggi": {
 "osservazione": {
@@ -16645,7 +16648,10 @@
 "conv": 56,
 "res": {
 "osservazione|7g": -3.02,
-"promozione|7g": -3.45
+"promozione|7g": -3.45,
+"osservazione|30g": -5.76,
+"promozione|30g": -6.17,
+"conferma|30g": -2.82
 },
 "passaggi": {
 "osservazione": {
@@ -16707,7 +16713,10 @@
 "conv": 55,
 "res": {
 "osservazione|7g": -22.22,
-"promozione|7g": -11.14
+"promozione|7g": -11.14,
+"osservazione|30g": -22.33,
+"promozione|30g": -11.26,
+"conferma|30g": -0.14
 },
 "passaggi": {
 "osservazione": {
@@ -16806,7 +16815,15 @@
 "res": {
 "anticipo|7g": -4.44,
 "osservazione|7g": -5.19,
-"promozione|7g": -0.96
+"promozione|7g": -0.96,
+"anticipo|30g": -4.02,
+"osservazione|30g": -4.76,
+"promozione|30g": -0.51,
+"conferma|30g": 0.45,
+"anticipo|bersaglio": -4.02,
+"osservazione|bersaglio": -4.76,
+"promozione|bersaglio": -0.51,
+"conferma|bersaglio": 0.45
 }
 },
 {
@@ -16867,7 +16884,15 @@
 "res": {
 "anticipo|7g": 13.24,
 "osservazione|7g": 13.24,
-"promozione|7g": 23.75
+"promozione|7g": 23.75,
+"anticipo|30g": 76.87,
+"osservazione|30g": 76.87,
+"promozione|30g": 93.28,
+"conferma|30g": 56.19,
+"anticipo|bersaglio": 76.87,
+"osservazione|bersaglio": 76.87,
+"promozione|bersaglio": 93.28,
+"conferma|bersaglio": 56.19
 }
 },
 {
@@ -20312,8 +20337,8 @@
 "obs_date": "2026-10-30",
 "pre_price": 93.32,
 "pre_date": "2026-11-02",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 95.62000274658203,
+"conf_date": "2026-11-11",
 "target": 120.5886,
 "stop": 87.2364,
 "reliab": "🟡 Media",
@@ -20349,16 +20374,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-11-11",
+"prezzo": 95.62000274658203,
+"conv": 85,
+"prob_gain": 49,
+"prob_loss": 10,
+"reliab": "🟡 Media",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": 2.46,
+"osservazione|7g": 1.36,
+"promozione|7g": -0.66
+}
 },
 {
 "ticker": "CACC",
@@ -20369,8 +20398,8 @@
 "obs_date": "2026-10-30",
 "pre_price": 464.89,
 "pre_date": "2026-11-02",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 512.010009765625,
+"conf_date": "2026-11-11",
 "target": 559.5276,
 "stop": 431.7885,
 "reliab": "🟡 Media",
@@ -20406,16 +20435,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-11-11",
+"prezzo": 512.010009765625,
+"conv": 66,
+"prob_gain": 52,
+"prob_loss": 4,
+"reliab": "🟡 Media",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": 10.14,
+"osservazione|7g": 9.87,
+"promozione|7g": 6.52
+}
 },
 {
 "ticker": "TWLO",
@@ -20426,8 +20459,8 @@
 "obs_date": "2026-10-30",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 221.35009765625,
+"conf_date": "2026-11-11",
 "target": 256.0896,
 "stop": 178.729,
 "reliab": "🔴 Bassa",
@@ -20463,16 +20496,19 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-11-11",
+"prezzo": 221.35009765625,
+"conv": 65,
+"prob_gain": 48,
+"prob_loss": 17,
+"reliab": "🔴 Bassa",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"osservazione|7g": 10.29,
+"promozione|7g": 3.55
+}
 },
 {
 "ticker": "SKYW",
@@ -20485,15 +20521,18 @@
 "obs_date": "2026-10-31",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 84.54499816894531,
+"conf_date": "2026-11-11",
 "target": null,
 "stop": null,
 "reliab": null,
 "prob_gain": null,
 "prob_loss": null,
 "conv": 62,
-"res": {},
+"res": {
+"osservazione|7g": 2.69,
+"promozione|7g": 8.81
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-10-31 00:44",
@@ -20523,12 +20562,12 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-11-11",
+"prezzo": 84.54499816894531,
+"conv": 74,
+"prob_gain": 52,
+"prob_loss": 6,
+"reliab": "🟡 Media",
 "mkt": null
 }
 }
@@ -20542,8 +20581,8 @@
 "obs_date": "2026-10-28",
 "pre_price": 297.58,
 "pre_date": "2026-10-29",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 300.67999267578125,
+"conf_date": "2026-11-11",
 "target": 325.803,
 "stop": 285.0287,
 "reliab": "🟢 Alta",
@@ -20579,8 +20618,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-11-11",
+"prezzo": 300.67999267578125,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -20588,7 +20627,11 @@
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": 1.04,
+"osservazione|7g": 1.04,
+"promozione|7g": -1.46
+}
 },
 {
 "ticker": "EDU",
@@ -20599,8 +20642,8 @@
 "obs_date": "2026-10-29",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 53.599998474121094,
+"conf_date": "2026-11-11",
 "target": 56.6018,
 "stop": 46.658,
 "reliab": "🟡 Media",
@@ -20636,16 +20679,19 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-11-11",
+"prezzo": 53.599998474121094,
+"conv": 62,
+"prob_gain": 50,
+"prob_loss": 7,
+"reliab": "🟡 Media",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"osservazione|7g": 5.68,
+"promozione|7g": 6.5
+}
 },
 {
 "ticker": "GOOG",
@@ -20656,8 +20702,8 @@
 "obs_date": "2026-10-29",
 "pre_price": 282.32,
 "pre_date": "2026-10-30",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 288.1401062011719,
+"conf_date": "2026-11-11",
 "target": 332.0408,
 "stop": 268.233,
 "reliab": "🟢 Alta",
@@ -20693,16 +20739,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-11-11",
+"prezzo": 288.1401062011719,
+"conv": 82,
+"prob_gain": 50,
+"prob_loss": 6,
+"reliab": "🟢 Alta",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": 2.06,
+"osservazione|7g": 2.0,
+"promozione|7g": -0.27
+}
 },
 {
 "ticker": "ALKS",
