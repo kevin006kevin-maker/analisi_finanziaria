@@ -7302,5 +7302,37 @@
 "max_date": "2026-11-11 01:42",
 "auto": true,
 "notified": false
+},
+"FTNT": {
+"kind": "short",
+"added": "2026-11-11",
+"note": "🤖 Promossa il 2026-11-11: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +4.0% e la convenienza (58) regge.",
+"name": "FTNT",
+"snapshots": [
+{
+"name": "FTNT",
+"price": 123.57,
+"rsi": 27.9566,
+"dd_high": -36.5494,
+"occasione": 66,
+"convenienza": 77,
+"prob_gain": 53,
+"prob_loss": 9,
+"exp_ret": 0.8,
+"gain": 34.5299,
+"reliab": "🟡 Media",
+"target": 166.2386,
+"stop": 106.9459,
+"date": "2026-11-11 01:42"
+}
+],
+"entry_price": 123.57,
+"entry_target": 166.2386,
+"entry_stop": 106.9459,
+"entry_conv": 77,
+"entry_date": "2026-11-11 01:42",
+"entry_src": "scatto",
+"max_price": 123.57,
+"max_date": "2026-11-11 01:42"
 }
 }
