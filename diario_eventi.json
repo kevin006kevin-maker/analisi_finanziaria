@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:SMST:2026-09-18",
-"ticker": "SMST",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-21 16:35",
-"data": "2026-09-21 16:33",
-"prezzo": 11.665,
-"conv": 72,
-"prob_gain": 57,
-"prob_loss": 29,
-"reliab": "🔴 Bassa",
-"mkt": 0.6264,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 42.2709,
-"media20": 22.3875,
-"quattro_atr": 29.0745,
-"meta_caduta": 53.2725,
-"bollinger": 32.2735,
-"consigliata": 29.0745
-},
-"stop": 2.9602,
-"atr": 4.3524,
-"res": {
-"7g": 10.24,
-"30g": 1.16,
-"soglia": 1.16
-},
-"res_soglia": {
-"media50": {
-"ret": 1.16,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 1.16,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 1.16,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 1.16,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 1.16,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 1.16,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:ENEL.MI:2026-09-02",
 "ticker": "ENEL.MI",
 "kind": "short",
@@ -37988,5 +37924,32 @@
 },
 "stop": 181.9706,
 "atr": 16.1197
+},
+{
+"episodio": "short:NMIH:2026-11-06",
+"ticker": "NMIH",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-11-11 01:47",
+"data": "2026-11-11 01:41",
+"prezzo": 38.73,
+"conv": 70,
+"prob_gain": 52,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-11-11",
+"soglie": {
+"media50": 41.7919,
+"media20": 41.6465,
+"quattro_atr": 45.1133,
+"meta_caduta": 42.195,
+"bollinger": 45.0852,
+"consigliata": 41.7919
+},
+"stop": 35.5384,
+"atr": 1.5958
 }
 ]
