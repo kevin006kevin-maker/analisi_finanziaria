@@ -31925,5 +31925,47 @@
 },
 "ret_5d": -9.48,
 "ret_21d": null
+},
+{
+"date": "2026-11-02",
+"ticker": "KRYS",
+"kind": "long",
+"price": 289.31,
+"conv": 53,
+"factors": {
+"discount": 23.4933,
+"histcheap": 0.08,
+"riskadj": 1.14,
+"ddpen": -8.39,
+"momentum": 7.7632,
+"prob": 72,
+"quality": 66.6,
+"valcheap": -3.0,
+"trappen": 2
+},
+"ret_5d": 4.34,
+"ret_21d": null
+},
+{
+"date": "2026-11-03",
+"ticker": "KPTI",
+"kind": "short",
+"price": 0.662,
+"conv": 38,
+"factors": {
+"discount": 93.7957,
+"histcheap": 1.76,
+"riskadj": -1.13,
+"ddpen": -47.06,
+"momentum": -27.7992,
+"prob": 36,
+"oversold": -42.9938,
+"rebound": 84.5982,
+"trend": -1.0,
+"relstrength": 29.5626
+},
+"ret_5d": null,
+"ret_21d": null,
+"bad_data": true
 }
 ]
