@@ -1,47 +1,5 @@
 [
 {
-"date": "2026-11-02",
-"ticker": "KRYS",
-"kind": "long",
-"price": 289.31,
-"conv": 53,
-"factors": {
-"discount": 23.4933,
-"histcheap": 0.08,
-"riskadj": 1.14,
-"ddpen": -8.39,
-"momentum": 7.7632,
-"prob": 72,
-"quality": 66.6,
-"valcheap": -3.0,
-"trappen": 2
-},
-"ret_5d": 4.34,
-"ret_21d": null
-},
-{
-"date": "2026-11-03",
-"ticker": "KPTI",
-"kind": "short",
-"price": 0.662,
-"conv": 38,
-"factors": {
-"discount": 93.7957,
-"histcheap": 1.76,
-"riskadj": -1.13,
-"ddpen": -47.06,
-"momentum": -27.7992,
-"prob": 36,
-"oversold": -42.9938,
-"rebound": 84.5982,
-"trend": -1.0,
-"relstrength": 29.5626
-},
-"ret_5d": null,
-"ret_21d": null,
-"bad_data": true
-},
-{
 "date": "2026-11-03",
 "ticker": "WHLR",
 "kind": "short",
@@ -39062,6 +39020,46 @@
 "rebound": 50.2676,
 "trend": -1.0,
 "relstrength": -37.8633
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-11",
+"ticker": "CVS",
+"kind": "long",
+"price": 89.01,
+"conv": 42,
+"factors": {
+"discount": 19.5208,
+"histcheap": -0.2,
+"riskadj": 0.26,
+"ddpen": -10.76,
+"momentum": 2.6255,
+"prob": 31,
+"quality": 45.5,
+"valcheap": 0.711,
+"trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-11",
+"ticker": "HIMS",
+"kind": "long",
+"price": 19.13,
+"conv": 40,
+"factors": {
+"discount": 52.1989,
+"histcheap": 1.59,
+"riskadj": -1.31,
+"ddpen": -32.28,
+"momentum": 25.5642,
+"prob": 52,
+"quality": 44.0,
+"valcheap": -1.455,
+"trappen": 2
 },
 "ret_5d": null,
 "ret_21d": null
