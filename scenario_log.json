@@ -21968,5 +21968,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "NRIX",
+"kind": "short",
+"date": "2026-11-11",
+"promo_price": 16.33,
+"obs_price": 15.95,
+"obs_date": "2026-11-05",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": 23.6683,
+"stop": 13.0172,
+"reliab": "🔴 Bassa",
+"prob_gain": 48,
+"prob_loss": 12,
+"conv": 72,
+"passaggi": {
+"osservazione": {
+"data": "2026-11-05 01:21",
+"prezzo": 15.95,
+"conv": 61,
+"prob_gain": 55,
+"prob_loss": 6,
+"reliab": "🔴 Bassa",
+"mkt": -1.4503
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-11 22:57",
+"prezzo": 16.33,
+"conv": 72,
+"prob_gain": 48,
+"prob_loss": 12,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
