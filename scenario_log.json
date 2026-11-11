@@ -21803,5 +21803,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "MCHP",
+"kind": "short",
+"date": "2026-11-11",
+"promo_price": 60.33,
+"obs_price": 56.275,
+"obs_date": "2026-11-06",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": 74.357,
+"stop": 51.3787,
+"reliab": "🟡 Media",
+"prob_gain": 49,
+"prob_loss": 10,
+"conv": 80,
+"passaggi": {
+"osservazione": {
+"data": "2026-11-06 18:27",
+"prezzo": 56.275,
+"conv": 61,
+"prob_gain": 56,
+"prob_loss": 6,
+"reliab": "🟡 Media",
+"mkt": -5.0231
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-11 01:42",
+"prezzo": 60.33,
+"conv": 80,
+"prob_gain": 49,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
