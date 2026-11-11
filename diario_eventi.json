@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:TMUS:2026-09-21",
-"ticker": "TMUS",
-"kind": "short",
-"evento": "uscita",
-"scritto_il": "2026-09-21 16:37",
-"data": "2026-09-21 16:37",
-"prezzo": 164.89,
-"conv": 78,
-"prob_gain": 49,
-"prob_loss": 1,
-"reliab": "🟢 Alta",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:YSS:2026-09-05",
 "ticker": "YSS",
 "kind": "short",
@@ -37840,5 +37820,32 @@
 },
 "stop": 23.8653,
 "atr": 0.6198
+},
+{
+"episodio": "short:ARWR:2026-11-10",
+"ticker": "ARWR",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-11-11 16:10",
+"data": "2026-11-11 16:08",
+"prezzo": 48.08,
+"conv": 68,
+"prob_gain": 50,
+"prob_loss": 15,
+"reliab": "🔴 Bassa",
+"mkt": -1.7208,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 64.836,
+"media20": 57.3535,
+"quattro_atr": 60.2617,
+"meta_caduta": 68.745,
+"bollinger": 65.1655,
+"consigliata": 60.2617
+},
+"stop": 41.9892,
+"atr": 3.0454
 }
 ]
