@@ -21689,5 +21689,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "FFIV",
+"kind": "short",
+"date": "2026-11-11",
+"promo_price": 317.31,
+"obs_price": 365.53,
+"obs_date": "2026-10-29",
+"pre_price": 363.46,
+"pre_date": "2026-10-30",
+"conf_price": null,
+"conf_date": null,
+"target": 418.3408,
+"stop": 281.8486,
+"reliab": "🟡 Media",
+"prob_gain": 64,
+"prob_loss": 7,
+"conv": 81,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-29 00:10",
+"prezzo": 365.53,
+"conv": 77,
+"prob_gain": 64,
+"prob_loss": 1,
+"reliab": "🟡 Media",
+"mkt": 1.2081
+},
+"anticipo": {
+"data": "2026-10-30",
+"prezzo": 363.46,
+"conv": 76,
+"prob_gain": 63,
+"prob_loss": 1,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-11 01:42",
+"prezzo": 317.31,
+"conv": 81,
+"prob_gain": 64,
+"prob_loss": 7,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
