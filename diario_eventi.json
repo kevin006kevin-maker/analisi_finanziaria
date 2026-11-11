@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:JBHT:2026-09-16",
-"ticker": "JBHT",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-21 01:17",
-"data": "2026-09-21 01:12",
-"prezzo": 234.25,
-"conv": 79,
-"prob_gain": 51,
-"prob_loss": 5,
-"reliab": "🟡 Media",
-"mkt": 0.1222,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-21",
-"soglie": {
-"media50": 272.1528,
-"media20": 262.2235,
-"quattro_atr": 271.2279,
-"meta_caduta": 266.33,
-"bollinger": 287.4776,
-"consigliata": 271.2279
-},
-"stop": 215.761,
-"atr": 9.2445,
-"res": {
-"7g": -3.48,
-"30g": -2.41,
-"soglia": -2.41
-},
-"res_soglia": {
-"media50": {
-"ret": -2.41,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -2.41,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -2.41,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -2.41,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -2.41,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -2.41,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:ON:2026-09-16",
 "ticker": "ON",
 "kind": "short",
@@ -38188,5 +38124,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:AIT:2026-10-28",
+"ticker": "AIT",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-11-11 01:46",
+"data": "2026-11-11 01:38",
+"prezzo": 298.92,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-11-11",
+"soglie": {
+"media50": 321.726,
+"media20": 310.98,
+"quattro_atr": 342.032,
+"meta_caduta": 326.635,
+"bollinger": 347.9566,
+"consigliata": 321.726
+},
+"stop": 277.364,
+"atr": 10.778
 }
 ]
