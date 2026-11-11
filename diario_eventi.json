@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:ENEL.MI:2026-09-02",
-"ticker": "ENEL.MI",
-"kind": "short",
-"evento": "promozione",
-"scritto_il": "2026-09-21 16:35",
-"data": "2026-09-21 16:35",
-"prezzo": 8.92,
-"conv": 72,
-"prob_gain": 50,
-"prob_loss": 0,
-"reliab": "🟢 Alta",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": 9.531,
-"media20": 9.0796,
-"quattro_atr": 9.554,
-"meta_caduta": 9.6,
-"bollinger": 9.5859,
-"consigliata": 9.531
-},
-"stop": 8.603,
-"atr": 0.1585,
-"res": {
-"7g": -0.09,
-"30g": 2.83,
-"soglia": 2.83
-},
-"res_soglia": {
-"media50": {
-"ret": 2.83,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 1.79,
-"toccato": true,
-"giorni": 24
-},
-"quattro_atr": {
-"ret": 2.83,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 2.83,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 2.83,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 2.83,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:WING:2026-09-16",
 "ticker": "WING",
 "kind": "short",
@@ -37951,5 +37887,32 @@
 },
 "stop": 35.5384,
 "atr": 1.5958
+},
+{
+"episodio": "short:MCHP:2026-11-06",
+"ticker": "MCHP",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-11-11 01:47",
+"data": "2026-11-11 01:42",
+"prezzo": 60.33,
+"conv": 80,
+"prob_gain": 49,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-11-11",
+"soglie": {
+"media50": 74.357,
+"media20": 73.195,
+"quattro_atr": 78.2327,
+"meta_caduta": 70.91,
+"bollinger": 86.469,
+"consigliata": 74.357
+},
+"stop": 51.3787,
+"atr": 4.4757
 }
 ]
