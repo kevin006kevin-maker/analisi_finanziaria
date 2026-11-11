@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:FIP:2026-09-18",
-"ticker": "FIP",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-21 21:49",
-"data": "2026-09-21 21:44",
-"prezzo": 3.075,
-"conv": 60,
-"prob_gain": 48,
-"prob_loss": 18,
-"reliab": "🔴 Bassa",
-"mkt": 1.3523,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 3.0",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "long:NU:2026-09-19",
 "ticker": "NU",
 "kind": "long",
@@ -38098,5 +38078,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:NRIX:2026-11-05",
+"ticker": "NRIX",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-11-11 22:57",
+"data": "2026-11-11 22:57",
+"prezzo": 16.33,
+"conv": 72,
+"prob_gain": 48,
+"prob_loss": 12,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 23.6683,
+"media20": 22.833,
+"quattro_atr": 22.9556,
+"meta_caduta": 22.06,
+"bollinger": 32.4828,
+"consigliata": 22.9556
+},
+"stop": 13.0172,
+"atr": 1.6564
 }
 ]
