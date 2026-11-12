@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:MTZ:2026-09-17",
-"ticker": "MTZ",
-"kind": "short",
-"evento": "promozione",
-"scritto_il": "2026-09-22 01:19",
-"data": "2026-09-22 01:19",
-"prezzo": 222.9,
-"conv": 74,
-"prob_gain": 51,
-"prob_loss": 14,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": 277.0978,
-"media20": 235.2955,
-"quattro_atr": 277.9486,
-"meta_caduta": 325.995,
-"bollinger": 259.926,
-"consigliata": 277.0978
-},
-"stop": 195.3757,
-"atr": 13.7621,
-"res": {
-"7g": -5.13,
-"30g": -22.84,
-"soglia": -22.84
-},
-"res_soglia": {
-"media50": {
-"ret": -22.84,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -22.84,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -22.84,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -22.84,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -22.84,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -22.84,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:PSNY:2026-09-03",
 "ticker": "PSNY",
 "kind": "short",
@@ -37954,5 +37890,32 @@
 },
 "stop": 284.9016,
 "atr": 11.9542
+},
+{
+"episodio": "short:GOOGL:2026-11-05",
+"ticker": "GOOGL",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-11-12 04:02",
+"data": "2026-11-11 22:57",
+"prezzo": 293.45,
+"conv": 78,
+"prob_gain": 49,
+"prob_loss": 5,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-11-12",
+"soglie": {
+"media50": 329.8884,
+"media20": 308.1835,
+"quattro_atr": 334.5709,
+"meta_caduta": 324.21,
+"bollinger": 359.1587,
+"consigliata": 329.8884
+},
+"stop": 272.8895,
+"atr": 10.2802
 }
 ]
