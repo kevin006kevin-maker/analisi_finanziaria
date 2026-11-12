@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:PSNY:2026-09-03",
-"ticker": "PSNY",
-"kind": "short",
-"evento": "uscita",
-"scritto_il": "2026-09-22 01:21",
-"data": "2026-09-22 01:21",
-"prezzo": 7.81,
-"conv": 70,
-"prob_gain": 53,
-"prob_loss": 27,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "in perdita da 9 giorni di Borsa: valuta l'uscita",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:RARE:2026-09-17",
 "ticker": "RARE",
 "kind": "short",
@@ -37950,5 +37930,32 @@
 "soglie_ricalcolate_il": "2026-11-12 04:02",
 "taglio_corretto": true,
 "soglie_ritardo_giorni": 1
+},
+{
+"episodio": "short:QQQ:2026-11-12",
+"ticker": "QQQ",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-11-12 11:59",
+"data": "2026-11-12 11:59",
+"prezzo": 690.38,
+"conv": 60,
+"prob_gain": 47,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 719.0442,
+"media20": 698.9355,
+"quattro_atr": 755.9859,
+"meta_caduta": 725.02,
+"bollinger": 745.474,
+"consigliata": 719.0442
+},
+"stop": 657.577,
+"atr": 16.4015
 }
 ]
