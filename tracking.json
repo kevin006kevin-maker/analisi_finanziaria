@@ -9712,5 +9712,37 @@
 "auto": true,
 "notified": false,
 "entry_check": "2026-11-11"
+},
+"PST.MI": {
+"kind": "short",
+"added": "2026-11-12",
+"note": "🤖 Promossa il 2026-11-12: dopo 4 giorni di Borsa di osservazione il prezzo è risalito di +3.2% e la convenienza (61) regge.",
+"name": "PST.MI",
+"snapshots": [
+{
+"name": "PST.MI",
+"price": 25.3,
+"rsi": 58.5248,
+"dd_high": -13.4451,
+"occasione": 38,
+"convenienza": 58,
+"prob_gain": 52,
+"prob_loss": 1,
+"exp_ret": 0.3,
+"gain": -0.8126,
+"reliab": "🟢 Alta",
+"target": 25.0944,
+"stop": 24.2686,
+"date": "2026-11-12 03:58"
+}
+],
+"entry_price": 25.3,
+"entry_target": 25.0944,
+"entry_stop": 24.2686,
+"entry_conv": 58,
+"entry_date": "2026-11-12 03:58",
+"entry_src": "scatto",
+"max_price": 25.3,
+"max_date": "2026-11-12 03:58"
 }
 }
