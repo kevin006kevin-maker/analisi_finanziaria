@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:ZTO:2026-09-22",
-"ticker": "ZTO",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-22 01:15",
-"data": "2026-09-22 01:15",
-"prezzo": 19.45,
-"conv": 77,
-"prob_gain": 54,
-"prob_loss": 0,
-"reliab": "🟢 Alta",
-"mkt": 1.177,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 22.4964,
-"media20": 20.878,
-"quattro_atr": 21.5978,
-"meta_caduta": 22.035,
-"bollinger": 21.801,
-"consigliata": 21.5978
-},
-"stop": 18.3761,
-"atr": 0.537,
-"res": {
-"7g": -0.41,
-"30g": 2.88,
-"soglia": 2.88
-},
-"res_soglia": {
-"media50": {
-"ret": 2.88,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 2.88,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 2.88,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 2.88,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 2.88,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 2.88,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:BBT:2026-09-22",
 "ticker": "BBT",
 "kind": "short",
@@ -38105,5 +38041,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:XLK:2026-11-12",
+"ticker": "XLK",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-11-12 03:58",
+"data": "2026-11-10 04:29",
+"prezzo": 170.88,
+"conv": 69,
+"prob_gain": 55,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 187.7978,
+"media20": 180.89,
+"quattro_atr": 191.934,
+"meta_caduta": 186.44,
+"bollinger": 198.5318,
+"consigliata": 187.7978
+},
+"stop": 160.353,
+"atr": 5.2635
 }
 ]
