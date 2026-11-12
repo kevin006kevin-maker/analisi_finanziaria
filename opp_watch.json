@@ -6903,6 +6903,16 @@
 "prob_gain": 52,
 "prob_loss": 1,
 "reliab": "🟢 Alta"
+},
+{
+"date": "2026-11-12 19:52",
+"conv": 57,
+"price": 25.63,
+"mkt": -1.7868,
+"occ": 37,
+"prob_gain": 52,
+"prob_loss": 1,
+"reliab": "🟢 Alta"
 }
 ],
 "primo": {
@@ -18003,6 +18013,16 @@
 "prob_gain": 53,
 "prob_loss": 3,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-11-12 19:52",
+"conv": 78,
+"price": 164.42,
+"mkt": -1.7868,
+"occ": 44,
+"prob_gain": 57,
+"prob_loss": 2,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -18395,6 +18415,16 @@
 "prob_gain": 51,
 "prob_loss": 12,
 "reliab": "🔴 Bassa"
+},
+{
+"date": "2026-11-12 19:52",
+"conv": 68,
+"price": 47.605,
+"mkt": -1.7868,
+"occ": 42,
+"prob_gain": 47,
+"prob_loss": 14,
+"reliab": "🔴 Bassa"
 }
 ],
 "primo": {
@@ -18406,6 +18436,60 @@
 "prob_gain": 48,
 "prob_loss": 11,
 "reliab": "🔴 Bassa"
+}
+},
+"short:HWC": {
+"ticker": "HWC",
+"kind": "short",
+"name": "HWC",
+"obs": [
+{
+"date": "2026-11-12 19:52",
+"conv": 72,
+"price": 64.89,
+"mkt": -1.7868,
+"occ": 47,
+"prob_gain": 60,
+"prob_loss": 0,
+"reliab": "🟢 Alta"
+}
+],
+"primo": {
+"date": "2026-11-12 19:52",
+"conv": 72,
+"price": 64.89,
+"mkt": -1.7868,
+"occ": 47,
+"prob_gain": 60,
+"prob_loss": 0,
+"reliab": "🟢 Alta"
+}
+},
+"short:DGII": {
+"ticker": "DGII",
+"kind": "short",
+"name": "DGII",
+"obs": [
+{
+"date": "2026-11-12 19:52",
+"conv": 67,
+"price": 57.44,
+"mkt": -1.7868,
+"occ": 46,
+"prob_gain": 54,
+"prob_loss": 6,
+"reliab": "🟡 Media"
+}
+],
+"primo": {
+"date": "2026-11-12 19:52",
+"conv": 67,
+"price": 57.44,
+"mkt": -1.7868,
+"occ": 46,
+"prob_gain": 54,
+"prob_loss": 6,
+"reliab": "🟡 Media"
 }
 }
 }
