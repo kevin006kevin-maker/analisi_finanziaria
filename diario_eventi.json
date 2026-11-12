@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:RARE:2026-09-17",
-"ticker": "RARE",
-"kind": "short",
-"evento": "uscita",
-"scritto_il": "2026-09-22 01:21",
-"data": "2026-09-22 01:21",
-"prezzo": 14.65,
-"conv": 73,
-"prob_gain": 59,
-"prob_loss": 20,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "in perdita da 9 giorni di Borsa: valuta l'uscita",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:KRMN:2026-09-09",
 "ticker": "KRMN",
 "kind": "short",
@@ -37957,5 +37937,32 @@
 },
 "stop": 657.577,
 "atr": 16.4015
+},
+{
+"episodio": "short:XLK:2026-11-12",
+"ticker": "XLK",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-11-12 11:59",
+"data": "2026-11-12 11:59",
+"prezzo": 174.36,
+"conv": 64,
+"prob_gain": 49,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 187.6122,
+"media20": 180.0865,
+"quattro_atr": 196.0759,
+"meta_caduta": 188.18,
+"bollinger": 197.3588,
+"consigliata": 187.6122
+},
+"stop": 163.5021,
+"atr": 5.429
 }
 ]
