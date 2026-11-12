@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:KRMN:2026-09-09",
-"ticker": "KRMN",
-"kind": "short",
-"evento": "fine_verifica",
-"scritto_il": "2026-09-22 01:23",
-"data": "2026-09-22 01:21",
-"prezzo": 35.21,
-"conv": 69,
-"prob_gain": 49,
-"prob_loss": 26,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 5 giorni di Borsa dalla promozione",
-"dovuto_il": "2026-09-22",
-"soglie": {
-"media50": 47.6936,
-"media20": 40.267,
-"quattro_atr": 46.3305,
-"meta_caduta": 48.685,
-"bollinger": 51.0883,
-"consigliata": 46.3305
-},
-"stop": 29.6497,
-"atr": 2.7801,
-"res": {
-"7g": -4.2,
-"30g": -2.22,
-"soglia": -2.22
-},
-"res_soglia": {
-"media50": {
-"ret": -2.22,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -2.22,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -2.22,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -2.22,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -2.22,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -2.22,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:NAVN:2026-09-10",
 "ticker": "NAVN",
 "kind": "short",
@@ -38019,5 +37955,32 @@
 "stop": 163.5021,
 "atr": 5.429,
 "res": {}
+},
+{
+"episodio": "short:HWC:2026-11-12",
+"ticker": "HWC",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-11-12 19:52",
+"data": "2026-11-12 19:52",
+"prezzo": 64.89,
+"conv": 72,
+"prob_gain": 60,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -1.7868,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 73.0912,
+"media20": 72.3375,
+"quattro_atr": 74.2682,
+"meta_caduta": 70.41,
+"bollinger": 76.1234,
+"consigliata": 73.0912
+},
+"stop": 60.2009,
+"atr": 2.3445
 }
 ]
