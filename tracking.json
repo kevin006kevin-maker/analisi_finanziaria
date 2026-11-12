@@ -3063,16 +3063,7 @@
 "notified": true,
 "entry_check": "2026-11-12",
 "exit_notified": false,
-"incasso_notified": true,
-"incasso": {
-"gain": 6.2,
-"max": 27.66,
-"max_date": "2026-10-23 17:30",
-"giu_dal_max": -10.5,
-"motivo": "scesa 11% dal massimo (27.66) restando in guadagno (+6.2%): il guadagno si sta sgonfiando",
-"urgenza": "incassa",
-"tipo": "sgonfia"
-}
+"incasso_notified": true
 },
 "TTAN": {
 "kind": "short",
@@ -5421,11 +5412,11 @@
 "entry_check": "2026-11-12",
 "incasso_notified": true,
 "incasso": {
-"gain": 6.0,
-"max": 44.91,
-"max_date": "2026-11-10 12:45",
-"giu_dal_max": -0.2,
-"motivo": "bersaglio 43.85 raggiunto (sei a +6.0%): valuta di incassare",
+"gain": 6.3,
+"max": 44.95,
+"max_date": "2026-11-12 12:00",
+"giu_dal_max": 0.0,
+"motivo": "bersaglio 43.85 raggiunto (sei a +6.3%): valuta di incassare",
 "urgenza": "incassa",
 "tipo": "bersaglio"
 }
@@ -6727,7 +6718,16 @@
 "auto": true,
 "notified": true,
 "entry_check": "2026-11-11",
-"incasso_notified": true
+"incasso_notified": true,
+"incasso": {
+"gain": 6.4,
+"max": 27.42,
+"max_date": "2026-11-11 22:57",
+"giu_dal_max": -0.1,
+"motivo": "bersaglio 27.24 raggiunto (sei a +6.4%): valuta di incassare",
+"urgenza": "incassa",
+"tipo": "bersaglio"
+}
 },
 "UCG.MI": {
 "kind": "short",
@@ -6909,11 +6909,11 @@
 "entry_check": "2026-11-11",
 "incasso_notified": true,
 "incasso": {
-"gain": 13.1,
-"max": 84.35,
-"max_date": "2026-11-10 12:45",
-"giu_dal_max": -0.9,
-"motivo": "bersaglio 80.46 raggiunto (sei a +13.1%): valuta di incassare",
+"gain": 14.4,
+"max": 84.5,
+"max_date": "2026-11-12 12:00",
+"giu_dal_max": 0.0,
+"motivo": "bersaglio 80.46 raggiunto (sei a +14.4%): valuta di incassare",
 "urgenza": "incassa",
 "tipo": "bersaglio"
 }
