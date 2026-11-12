@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-11-04",
-"ticker": "SOXL",
-"kind": "short",
-"price": 73.12,
-"conv": 48,
-"factors": {
-"discount": 75.6891,
-"histcheap": 0.56,
-"riskadj": 0.46,
-"ddpen": -36.33,
-"momentum": 27.6613,
-"prob": 23,
-"oversold": -34.5217,
-"rebound": 63.0974,
-"trend": -1.0,
-"relstrength": -25.6713
-},
-"ret_5d": -13.41,
-"ret_21d": null
-},
-{
-"date": "2026-11-04",
 "ticker": "PARA",
 "kind": "short",
 "price": 2.72,
@@ -38737,6 +38716,26 @@
 "rebound": 5.3681,
 "trend": 1.0,
 "relstrength": -12.5866
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-12",
+"ticker": "BZ",
+"kind": "long",
+"price": 12.955,
+"conv": 65,
+"factors": {
+"discount": 41.9058,
+"histcheap": 1.27,
+"riskadj": -1.3,
+"ddpen": -29.44,
+"momentum": 27.0552,
+"prob": 85,
+"quality": 93.1,
+"valcheap": -0.768,
+"trappen": 3
 },
 "ret_5d": null,
 "ret_21d": null
