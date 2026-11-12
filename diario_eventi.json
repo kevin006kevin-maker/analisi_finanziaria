@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:NAVN:2026-09-10",
-"ticker": "NAVN",
-"kind": "short",
-"evento": "fine_verifica",
-"scritto_il": "2026-09-22 01:23",
-"data": "2026-09-22 01:21",
-"prezzo": 21.53,
-"conv": 59,
-"prob_gain": 52,
-"prob_loss": 22,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 5 giorni di Borsa dalla promozione",
-"dovuto_il": "2026-09-22",
-"soglie": {
-"media50": 26.5081,
-"media20": 25.5485,
-"quattro_atr": 27.3002,
-"meta_caduta": 26.055,
-"bollinger": 32.5865,
-"consigliata": 26.5081
-},
-"stop": 18.6449,
-"atr": 1.4426,
-"res": {
-"7g": -5.06,
-"30g": 23.69,
-"soglia": 23.12
-},
-"res_soglia": {
-"media50": {
-"ret": 23.12,
-"toccato": true,
-"giorni": 29
-},
-"media20": {
-"ret": 18.66,
-"toccato": true,
-"giorni": 27
-},
-"quattro_atr": {
-"ret": 23.69,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 21.02,
-"toccato": true,
-"giorni": 28
-},
-"bollinger": {
-"ret": 23.69,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 23.12,
-"toccato": true,
-"giorni": 29
-}
-}
-},
-{
 "episodio": "short:RVLV:2026-09-10",
 "ticker": "RVLV",
 "kind": "short",
@@ -37982,5 +37918,32 @@
 },
 "stop": 60.2009,
 "atr": 2.3445
+},
+{
+"episodio": "short:DGII:2026-11-12",
+"ticker": "DGII",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-11-12 19:52",
+"data": "2026-11-12 19:52",
+"prezzo": 57.44,
+"conv": 67,
+"prob_gain": 54,
+"prob_loss": 6,
+"reliab": "🟡 Media",
+"mkt": -1.7868,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 72.2928,
+"media20": 71.162,
+"quattro_atr": 74.9357,
+"meta_caduta": 68.145,
+"bollinger": 82.74,
+"consigliata": 72.2928
+},
+"stop": 48.6922,
+"atr": 4.3739
 }
 ]
