@@ -1,111 +1,6 @@
 [
 {
 "date": "2026-11-03",
-"ticker": "CVI",
-"kind": "short",
-"price": 49.7,
-"conv": 47,
-"factors": {
-"discount": 21.2611,
-"histcheap": -1.44,
-"riskadj": 0.74,
-"ddpen": -19.64,
-"momentum": 13.4599,
-"prob": 38,
-"oversold": -36.5361,
-"rebound": 6.3726,
-"trend": 1.0,
-"relstrength": -11.5667
-},
-"ret_5d": -22.52,
-"ret_21d": null
-},
-{
-"date": "2026-11-03",
-"ticker": "DT",
-"kind": "short",
-"price": 49.12,
-"conv": 59,
-"factors": {
-"discount": 24.7203,
-"histcheap": -0.57,
-"riskadj": -0.17,
-"ddpen": -18.09,
-"momentum": 22.949,
-"prob": 56,
-"oversold": -25.409,
-"rebound": 17.4715,
-"trend": 1.0,
-"relstrength": -21.0559
-},
-"ret_5d": -12.68,
-"ret_21d": null
-},
-{
-"date": "2026-11-03",
-"ticker": "PAY",
-"kind": "short",
-"price": 31.38,
-"conv": 40,
-"factors": {
-"discount": 29.6413,
-"histcheap": -0.32,
-"riskadj": 0.15,
-"ddpen": -27.36,
-"momentum": 1.5375,
-"prob": 23,
-"oversold": -45.1182,
-"rebound": 6.6654,
-"trend": 1.0,
-"relstrength": 0.3556
-},
-"ret_5d": 7.62,
-"ret_21d": null
-},
-{
-"date": "2026-11-03",
-"ticker": "LIND",
-"kind": "short",
-"price": 33.295,
-"conv": 52,
-"factors": {
-"discount": 10.9283,
-"histcheap": -1.51,
-"riskadj": 3.18,
-"ddpen": -9.79,
-"momentum": 5.1154,
-"prob": 37,
-"oversold": -45.5655,
-"rebound": -5.6252,
-"trend": 1.0,
-"relstrength": -3.2223
-},
-"ret_5d": 5.89,
-"ret_21d": null
-},
-{
-"date": "2026-11-03",
-"ticker": "SYY",
-"kind": "short",
-"price": 74.435,
-"conv": 60,
-"factors": {
-"discount": 18.3469,
-"histcheap": 0.99,
-"riskadj": -0.03,
-"ddpen": -11.17,
-"momentum": 9.5565,
-"prob": 55,
-"oversold": -31.3331,
-"rebound": 7.8908,
-"trend": -1.0,
-"relstrength": -7.6634
-},
-"ret_5d": 4.92,
-"ret_21d": null
-},
-{
-"date": "2026-11-03",
 "ticker": "RYTM",
 "kind": "short",
 "price": 85.16,
@@ -39092,6 +38987,69 @@
 "quality": 76.1,
 "valcheap": 0.439,
 "trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-12",
+"ticker": "NRGV",
+"kind": "short",
+"price": 3.87,
+"conv": 40,
+"factors": {
+"discount": 40.3698,
+"histcheap": 0.13,
+"riskadj": 0.13,
+"ddpen": -36.96,
+"momentum": -21.6981,
+"prob": 20,
+"oversold": -61.4363,
+"rebound": -7.1783,
+"trend": 1.0,
+"relstrength": 22.5987
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-12",
+"ticker": "VNET",
+"kind": "short",
+"price": 3.49,
+"conv": 53,
+"factors": {
+"discount": 75.1247,
+"histcheap": 2.19,
+"riskadj": -1.92,
+"ddpen": -40.92,
+"momentum": 0.8523,
+"prob": 26,
+"oversold": -41.9162,
+"rebound": 44.2292,
+"trend": -1.0,
+"relstrength": 0.0483
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-12",
+"ticker": "MCHP",
+"kind": "short",
+"price": 62.13,
+"conv": 65,
+"factors": {
+"discount": 39.6327,
+"histcheap": 1.24,
+"riskadj": 0.24,
+"ddpen": -17.7,
+"momentum": 17.5338,
+"prob": 47,
+"oversold": -35.3448,
+"rebound": 19.381,
+"trend": -1.0,
+"relstrength": -16.6333
 },
 "ret_5d": null,
 "ret_21d": null
