@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:PATH:2026-09-20",
-"ticker": "PATH",
-"kind": "long",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-22 01:19",
-"data": "2026-09-22 01:18",
-"prezzo": 13.59,
-"conv": 65,
-"prob_gain": 64,
-"prob_loss": 28,
-"reliab": "🔴 Bassa",
-"mkt": 1.177,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 14.3894,
-"media20": 15.657,
-"quattro_atr": 17.0716,
-"meta_caduta": 16.13,
-"bollinger": 19.7077,
-"consigliata": 14.3894
-},
-"stop": 11.8492,
-"atr": 0.8704,
-"res": {
-"7g": -10.63,
-"30g": 2.21
-}
-},
-{
 "episodio": "long:OXY:2026-09-21",
 "ticker": "OXY",
 "kind": "long",
@@ -37994,5 +37963,32 @@
 },
 "stop": 24.2686,
 "atr": 0.5157
+},
+{
+"episodio": "short:CW:2026-11-12",
+"ticker": "CW",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-11-12 03:58",
+"data": "2026-11-12 03:58",
+"prezzo": 486.995,
+"conv": 77,
+"prob_gain": 52,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 519.1062,
+"media20": null,
+"quattro_atr": 568.261,
+"meta_caduta": 580.1675,
+"bollinger": 515.1071,
+"consigliata": 519.1062
+},
+"stop": 446.362,
+"atr": 20.3165
 }
 ]
