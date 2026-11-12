@@ -22139,5 +22139,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "AIT",
+"kind": "short",
+"date": "2026-11-12",
+"promo_price": 301.48,
+"obs_price": 297.58,
+"obs_date": "2026-10-28",
+"pre_price": 297.58,
+"pre_date": "2026-10-29",
+"conf_price": null,
+"conf_date": null,
+"target": 321.3734,
+"stop": 280.5872,
+"reliab": "🟢 Alta",
+"prob_gain": 52,
+"prob_loss": 2,
+"conv": 66,
+"passaggi": {
+"osservazione": {
+"data": "2026-10-28 07:15",
+"prezzo": 297.58,
+"conv": 66,
+"prob_gain": 56,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": 0.6748
+},
+"anticipo": {
+"data": "2026-10-29",
+"prezzo": 297.58,
+"conv": 66,
+"prob_gain": 56,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-12 03:58",
+"prezzo": 301.48,
+"conv": 66,
+"prob_gain": 52,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
