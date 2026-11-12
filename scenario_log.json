@@ -22314,5 +22314,62 @@
 "mkt": null
 }
 }
+},
+{
+"ticker": "QQQ",
+"kind": "short",
+"date": "2026-11-12",
+"promo_price": 690.38,
+"obs_price": 681.09,
+"obs_date": "2026-11-03",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": 719.0442,
+"stop": 657.577,
+"reliab": "🟢 Alta",
+"prob_gain": 47,
+"prob_loss": 0,
+"conv": 60,
+"passaggi": {
+"osservazione": {
+"data": "2026-11-03 11:00",
+"prezzo": 681.09,
+"conv": 71,
+"prob_gain": 52,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -2.9914
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-12 11:59",
+"prezzo": 690.38,
+"conv": 60,
+"prob_gain": 47,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
