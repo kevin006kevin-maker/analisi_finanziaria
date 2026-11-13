@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:PLNT:2026-09-22",
-"ticker": "PLNT",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-22 19:46",
-"data": "2026-09-22 19:46",
-"prezzo": 42.325,
-"conv": 73,
-"prob_gain": 56,
-"prob_loss": 7,
-"reliab": "🟡 Media",
-"mkt": 1.477,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 52.0135,
-"media20": 50.4118,
-"quattro_atr": 50.8012,
-"meta_caduta": 49.4575,
-"bollinger": 55.1567,
-"consigliata": 50.8012
-},
-"stop": 38.0869,
-"atr": 2.119,
-"res": {
-"7g": -4.62,
-"30g": 27.43,
-"soglia": 20.03
-},
-"res_soglia": {
-"media50": {
-"ret": 22.89,
-"toccato": true,
-"giorni": 27
-},
-"media20": {
-"ret": 19.11,
-"toccato": true,
-"giorni": 24
-},
-"quattro_atr": {
-"ret": 20.03,
-"toccato": true,
-"giorni": 24
-},
-"meta_caduta": {
-"ret": 16.85,
-"toccato": true,
-"giorni": 24
-},
-"bollinger": {
-"ret": 27.43,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 20.03,
-"toccato": true,
-"giorni": 24
-}
-}
-},
-{
 "episodio": "short:LPLA:2026-09-22",
 "ticker": "LPLA",
 "kind": "short",
@@ -37984,5 +37920,32 @@
 },
 "stop": 12.2995,
 "atr": 0.8452
+},
+{
+"episodio": "long:HL:2026-11-13",
+"ticker": "HL",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-11-13 16:42",
+"data": "2026-11-13 16:42",
+"prezzo": 13.145,
+"conv": 60,
+"prob_gain": 68,
+"prob_loss": 25,
+"reliab": "🔴 Bassa",
+"mkt": -1.7505,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 16.4257,
+"media20": 14.2937,
+"quattro_atr": 16.4542,
+"meta_caduta": 17.2875,
+"bollinger": 15.6805,
+"consigliata": 16.4257
+},
+"stop": 11.4904,
+"atr": 0.8273
 }
 ]
