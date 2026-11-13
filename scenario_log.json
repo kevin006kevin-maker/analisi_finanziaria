@@ -22536,7 +22536,45 @@
 "prob_gain": null,
 "prob_loss": null,
 "conv": 59,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-10-02 02:11",
+"prezzo": 54.43,
+"conv": 72,
+"prob_gain": 51,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": -0.002
+},
+"anticipo": {
+"data": "2026-10-05",
+"prezzo": 53.75,
+"conv": 74,
+"prob_gain": 55,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-13",
+"prezzo": 49.755,
+"conv": 59,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "ARWR",
@@ -22557,6 +22595,44 @@
 "prob_gain": 51,
 "prob_loss": 14,
 "conv": 68,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-11-10 04:29",
+"prezzo": 49.24,
+"conv": 65,
+"prob_gain": 48,
+"prob_loss": 11,
+"reliab": "🔴 Bassa",
+"mkt": -3.2957
+},
+"anticipo": {
+"data": "2026-11-11",
+"prezzo": 48.08,
+"conv": 68,
+"prob_gain": 50,
+"prob_loss": 15,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-13",
+"prezzo": 47.15,
+"conv": 68,
+"prob_gain": 51,
+"prob_loss": 14,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 }
 ]
