@@ -33927,5 +33927,64 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:SYNA:2026-09-17",
+"ticker": "SYNA",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-22 01:23",
+"data": "2026-09-22 01:19",
+"prezzo": 95.36,
+"conv": 65,
+"prob_gain": 47,
+"prob_loss": 14,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-22",
+"soglie": {
+"media50": 104.012,
+"media20": null,
+"quattro_atr": 114.5947,
+"meta_caduta": 112.43,
+"bollinger": 100.5547,
+"consigliata": 104.012
+},
+"stop": 85.7427,
+"atr": 4.8087,
+"res": {
+"7g": 5.62,
+"30g": 23.1,
+"soglia": 9.07
+},
+"res_soglia": {
+"media50": {
+"ret": 9.07,
+"toccato": true,
+"giorni": 9
+},
+"quattro_atr": {
+"ret": 20.17,
+"toccato": true,
+"giorni": 10
+},
+"meta_caduta": {
+"ret": 17.9,
+"toccato": true,
+"giorni": 10
+},
+"bollinger": {
+"ret": 5.45,
+"toccato": true,
+"giorni": 3
+},
+"consigliata": {
+"ret": 9.07,
+"toccato": true,
+"giorni": 9
+}
+}
 }
 ]
