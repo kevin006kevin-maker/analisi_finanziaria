@@ -1064,7 +1064,7 @@
 "max_date": "2026-10-23 21:34",
 "exit_notified": false,
 "warn_since": "2026-11-11",
-"warn": "in perdita da 82 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 83 giorni di Borsa: valuta l'uscita"
 },
 "SNPS": {
 "kind": "short",
@@ -3103,155 +3103,6 @@
 "incasso_notified": true,
 "exit_notified": false
 },
-"TDS": {
-"kind": "short",
-"added": "2026-08-12",
-"note": "🤖 Promossa il 2026-08-12: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +3.3% e la convenienza (66) regge.",
-"name": "TDS",
-"snapshots": [
-{
-"name": "TDS",
-"price": 34.135,
-"rsi": 47.8574,
-"dd_high": -28.2728,
-"occasione": 29,
-"convenienza": 70,
-"prob_gain": 51,
-"prob_loss": 2,
-"exp_ret": 0.2,
-"gain": 3.4712,
-"reliab": "🟢 Alta",
-"target": 35.3199,
-"stop": 30.4102,
-"date": "2026-11-09 21:43"
-},
-{
-"name": "TDS",
-"price": 33.86,
-"rsi": 46.6402,
-"dd_high": -28.8506,
-"occasione": 36,
-"convenienza": 71,
-"prob_gain": 50,
-"prob_loss": 2,
-"exp_ret": -0.1,
-"gain": 4.2953,
-"reliab": "🟢 Alta",
-"target": 35.3144,
-"stop": 30.1216,
-"date": "2026-11-10 04:33"
-},
-{
-"name": "TDS",
-"price": 32.76,
-"rsi": 42.3789,
-"dd_high": -31.162,
-"occasione": 11,
-"convenienza": 74,
-"prob_gain": 53,
-"prob_loss": 2,
-"exp_ret": 0.8,
-"gain": 7.7412,
-"reliab": "🟢 Alta",
-"target": 35.296,
-"stop": 29.0479,
-"date": "2026-11-10 20:41"
-},
-{
-"name": "TDS",
-"price": 32.77,
-"rsi": 42.4141,
-"dd_high": -31.141,
-"occasione": 11,
-"convenienza": 74,
-"prob_gain": 50,
-"prob_loss": 2,
-"exp_ret": 0.0,
-"gain": 7.7089,
-"reliab": "🟢 Alta",
-"target": 35.2962,
-"stop": 29.0579,
-"date": "2026-11-11 01:43"
-},
-{
-"name": "TDS",
-"price": 31.96,
-"rsi": 39.5464,
-"dd_high": -32.843,
-"occasione": 16,
-"convenienza": 77,
-"prob_gain": 55,
-"prob_loss": 1,
-"exp_ret": 0.7,
-"gain": 10.3348,
-"reliab": "🟢 Alta",
-"target": 35.263,
-"stop": 28.3311,
-"date": "2026-11-11 16:10"
-},
-{
-"name": "TDS",
-"price": 31.78,
-"rsi": 38.961,
-"dd_high": -33.2213,
-"occasione": 19,
-"convenienza": 77,
-"prob_gain": 52,
-"prob_loss": 2,
-"exp_ret": 0.3,
-"gain": 10.9484,
-"reliab": "🟢 Alta",
-"target": 35.2594,
-"stop": 28.1454,
-"date": "2026-11-11 22:57"
-},
-{
-"name": "TDS",
-"price": 31.13,
-"rsi": 36.8403,
-"dd_high": -34.5871,
-"occasione": 36,
-"convenienza": 79,
-"prob_gain": 55,
-"prob_loss": 2,
-"exp_ret": 0.8,
-"gain": 12.9605,
-"reliab": "🟢 Alta",
-"target": 35.1646,
-"stop": 27.5756,
-"date": "2026-11-12 19:54"
-},
-{
-"name": "TDS",
-"price": 30.73,
-"rsi": 35.6463,
-"dd_high": -35.4276,
-"occasione": 35,
-"convenienza": 80,
-"prob_gain": 50,
-"prob_loss": 2,
-"exp_ret": -0.1,
-"gain": 14.4048,
-"reliab": "🟢 Alta",
-"target": 35.1566,
-"stop": 27.1448,
-"date": "2026-11-13 01:19"
-}
-],
-"auto": true,
-"notified": true,
-"entry_price": 33.5,
-"entry_target": 36.2442,
-"entry_stop": 31.106,
-"entry_conv": 78,
-"entry_date": "2026-08-12 16:23",
-"entry_src": "scatto",
-"entry_check": "2026-11-13",
-"max_price": 37.94,
-"max_date": "2026-09-08 22:03",
-"warn_since": "2026-11-10",
-"warn": "in perdita da 65 giorni di Borsa: valuta l'uscita"
-},
 "TDC": {
 "kind": "long",
 "added": "2026-08-14",
@@ -3554,7 +3405,9 @@
 "max_date": "2026-11-09 21:43",
 "auto": true,
 "notified": true,
-"entry_check": "2026-11-13"
+"entry_check": "2026-11-13",
+"warn_since": "2026-11-13",
+"warn": "in perdita da 60 giorni di Borsa: valuta l'uscita"
 },
 "ENI.MI": {
 "kind": "short",
@@ -5593,7 +5446,7 @@
 "notified": true,
 "entry_check": "2026-11-12",
 "warn_since": "2026-11-11",
-"warn": "in perdita da 28 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 29 giorni di Borsa: valuta l'uscita"
 },
 "ENLT": {
 "kind": "short",
@@ -5742,7 +5595,7 @@
 "notified": true,
 "entry_check": "2026-11-12",
 "warn_since": "2026-11-12",
-"warn": "in perdita da 27 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 28 giorni di Borsa: valuta l'uscita"
 },
 "XLF": {
 "kind": "short",
@@ -6207,7 +6060,7 @@
 "notified": true,
 "entry_check": "2026-11-12",
 "warn_since": "2026-11-11",
-"warn": "in perdita da 26 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 27 giorni di Borsa: valuta l'uscita"
 },
 "XRAY": {
 "kind": "short",
@@ -8712,7 +8565,9 @@
 "max_date": "2026-11-05 01:25",
 "auto": true,
 "notified": true,
-"entry_check": "2026-11-12"
+"entry_check": "2026-11-12",
+"warn_since": "2026-11-13",
+"warn": "in perdita da 10 giorni di Borsa: valuta l'uscita"
 },
 "FLG": {
 "kind": "short",
@@ -8861,7 +8716,7 @@
 "notified": true,
 "entry_check": "2026-11-12",
 "warn_since": "2026-11-11",
-"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 9 giorni di Borsa: valuta l'uscita"
 },
 "CRS": {
 "kind": "short",
@@ -9315,7 +9170,7 @@
 "entry_check": "2026-11-12",
 "incasso_notified": true,
 "warn_since": "2026-11-12",
-"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "LSTR": {
 "kind": "short",
@@ -9611,7 +9466,7 @@
 "notified": false,
 "entry_check": "2026-11-12",
 "warn_since": "2026-11-10",
-"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "BA": {
 "kind": "short",
@@ -9760,7 +9615,7 @@
 "notified": false,
 "entry_check": "2026-11-12",
 "warn_since": "2026-11-10",
-"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "CHRW": {
 "kind": "short",
@@ -10054,7 +9909,9 @@
 "max_date": "2026-11-05 01:25",
 "auto": true,
 "notified": false,
-"entry_check": "2026-11-12"
+"entry_check": "2026-11-12",
+"warn_since": "2026-11-13",
+"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
 },
 "CACC": {
 "kind": "short",
@@ -10348,7 +10205,9 @@
 "max_date": "2026-11-11 16:10",
 "auto": true,
 "notified": true,
-"entry_check": "2026-11-12"
+"entry_check": "2026-11-12",
+"warn_since": "2026-11-13",
+"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
 },
 "EDU": {
 "kind": "short",
@@ -10938,7 +10797,7 @@
 "notified": false,
 "entry_check": "2026-11-12",
 "warn_since": "2026-11-12",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
 },
 "RSI": {
 "kind": "short",
@@ -11085,7 +10944,9 @@
 "max_date": "2026-11-11 16:10",
 "auto": true,
 "notified": false,
-"entry_check": "2026-11-12"
+"entry_check": "2026-11-12",
+"warn_since": "2026-11-13",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "VALE": {
 "kind": "short",
@@ -11232,7 +11093,9 @@
 "max_date": "2026-11-10 04:34",
 "auto": true,
 "notified": false,
-"entry_check": "2026-11-12"
+"entry_check": "2026-11-12",
+"warn_since": "2026-11-13",
+"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
 },
 "SKYW": {
 "kind": "short",
