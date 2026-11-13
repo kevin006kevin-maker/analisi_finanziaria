@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-11-04",
-"ticker": "CVI",
-"kind": "short",
-"price": 48.6,
-"conv": 50,
-"factors": {
-"discount": 23.0038,
-"histcheap": -1.33,
-"riskadj": 0.68,
-"ddpen": -19.69,
-"momentum": 15.3752,
-"prob": 38,
-"oversold": -35.06,
-"rebound": 8.735,
-"trend": 1.0,
-"relstrength": -13.3852
-},
-"ret_5d": -17.79,
-"ret_21d": null
-},
-{
-"date": "2026-11-04",
 "ticker": "PAY",
 "kind": "short",
 "price": 31.02,
@@ -39346,6 +39325,46 @@
 "rebound": -19.9798,
 "trend": -1.0,
 "relstrength": 27.8803
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-13",
+"ticker": "CVS",
+"kind": "long",
+"price": 89.79,
+"conv": 39,
+"factors": {
+"discount": 18.8155,
+"histcheap": -0.27,
+"riskadj": 0.32,
+"ddpen": -10.89,
+"momentum": -10.4021,
+"prob": 28,
+"quality": 45.3,
+"valcheap": 0.7477,
+"trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-13",
+"ticker": "BZ",
+"kind": "long",
+"price": 12.49,
+"conv": 78,
+"factors": {
+"discount": 43.991,
+"histcheap": 1.45,
+"riskadj": -1.21,
+"ddpen": -29.51,
+"momentum": 29.6734,
+"prob": 89,
+"quality": 93.0,
+"valcheap": -0.5414,
+"trappen": 3
 },
 "ret_5d": null,
 "ret_21d": null
