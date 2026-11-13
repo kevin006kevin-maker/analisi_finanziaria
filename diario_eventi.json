@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:RARE:2026-09-17",
-"ticker": "RARE",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-22 01:23",
-"data": "2026-09-22 01:15",
-"prezzo": 14.65,
-"conv": 68,
-"prob_gain": 59,
-"prob_loss": 20,
-"reliab": "🔴 Bassa",
-"mkt": 1.177,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-22",
-"soglie": {
-"media50": 23.8657,
-"media20": 18.965,
-"quattro_atr": 20.3122,
-"meta_caduta": 25.26,
-"bollinger": 30.8266,
-"consigliata": 20.3122
-},
-"stop": 11.8189,
-"atr": 1.4155,
-"res": {
-"7g": -2.29,
-"30g": 9.01,
-"soglia": 9.01
-},
-"res_soglia": {
-"media50": {
-"ret": 9.01,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 9.01,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 9.01,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 9.01,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 9.01,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 9.01,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:NVST:2026-09-17",
 "ticker": "NVST",
 "kind": "short",
@@ -38058,5 +37994,32 @@
 },
 "stop": 15.9851,
 "atr": 1.0775
+},
+{
+"episodio": "short:ARWR:2026-11-10",
+"ticker": "ARWR",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-11-13 01:23",
+"data": "2026-11-13 01:14",
+"prezzo": 47.15,
+"conv": 68,
+"prob_gain": 51,
+"prob_loss": 14,
+"reliab": "🔴 Bassa",
+"mkt": -1.9584,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-11-13",
+"soglie": {
+"media50": 64.0972,
+"media20": 56.85,
+"quattro_atr": 59.2211,
+"meta_caduta": 68.135,
+"bollinger": 65.622,
+"consigliata": 59.2211
+},
+"stop": 41.1144,
+"atr": 3.0178
 }
 ]
