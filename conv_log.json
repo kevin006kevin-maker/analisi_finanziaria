@@ -1,48 +1,6 @@
 [
 {
 "date": "2026-11-04",
-"ticker": "FIS",
-"kind": "short",
-"price": 29.67,
-"conv": 42,
-"factors": {
-"discount": 56.0705,
-"histcheap": 1.74,
-"riskadj": -1.85,
-"ddpen": -32.9,
-"momentum": 18.6678,
-"prob": 54,
-"oversold": -31.7382,
-"rebound": 23.6724,
-"trend": -1.0,
-"relstrength": -18.0985
-},
-"ret_5d": -2.02,
-"ret_21d": null
-},
-{
-"date": "2026-11-04",
-"ticker": "HUT",
-"kind": "short",
-"price": 49.54,
-"conv": 56,
-"factors": {
-"discount": 62.7575,
-"histcheap": 0.98,
-"riskadj": -0.0,
-"ddpen": -23.76,
-"momentum": 28.6784,
-"prob": 28,
-"oversold": -32.6515,
-"rebound": 66.3734,
-"trend": -1.0,
-"relstrength": -28.1092
-},
-"ret_5d": 17.99,
-"ret_21d": null
-},
-{
-"date": "2026-11-04",
 "ticker": "STRL",
 "kind": "short",
 "price": 282.995,
@@ -39115,6 +39073,46 @@
 "rebound": -14.5347,
 "trend": 1.0,
 "relstrength": 26.5229
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-13",
+"ticker": "HTFL",
+"kind": "long",
+"price": 49.815,
+"conv": 22,
+"factors": {
+"discount": 17.702,
+"histcheap": -1.48,
+"riskadj": 0.78,
+"ddpen": -20.64,
+"momentum": 4.9332,
+"prob": 52,
+"quality": 26.5,
+"valcheap": -3.0,
+"trappen": -1
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-13",
+"ticker": "NBIS",
+"kind": "long",
+"price": 110.66,
+"conv": 27,
+"factors": {
+"discount": 61.4008,
+"histcheap": 0.84,
+"riskadj": 0.28,
+"ddpen": -21.72,
+"momentum": 14.5417,
+"prob": 18,
+"quality": 30.2,
+"valcheap": -3.0,
+"trappen": -1
 },
 "ret_5d": null,
 "ret_21d": null
