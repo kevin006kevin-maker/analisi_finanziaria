@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:LPLA:2026-09-22",
-"ticker": "LPLA",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-22 19:46",
-"data": "2026-09-22 19:46",
-"prezzo": 310.1,
-"conv": 66,
-"prob_gain": 55,
-"prob_loss": 4,
-"reliab": "🟡 Media",
-"mkt": 1.477,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 349.2478,
-"media20": 348.919,
-"quattro_atr": 357.1526,
-"meta_caduta": 343.39,
-"bollinger": 380.203,
-"consigliata": 349.2478
-},
-"stop": 286.5737,
-"atr": 11.7631,
-"res": {
-"7g": -1.11,
-"30g": 2.7,
-"soglia": 2.7
-},
-"res_soglia": {
-"media50": {
-"ret": 2.7,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 2.7,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 2.7,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 2.7,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 2.7,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 2.7,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:CAR:2026-09-22",
 "ticker": "CAR",
 "kind": "short",
@@ -37947,5 +37883,25 @@
 },
 "stop": 11.4904,
 "atr": 0.8273
+},
+{
+"episodio": "short:ENI.MI:2026-11-11",
+"ticker": "ENI.MI",
+"kind": "short",
+"evento": "salita_2pct",
+"scritto_il": "2026-11-13 16:44",
+"data": "2026-11-13 16:42",
+"prezzo": 25.965,
+"conv": 53,
+"prob_gain": 56,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "prezzo salito di almeno il 2% da 25.105",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
