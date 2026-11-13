@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:RELY:2026-09-11",
-"ticker": "RELY",
-"kind": "long",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-22 01:23",
-"data": "2026-09-22 01:18",
-"prezzo": 21.59,
-"conv": 58,
-"prob_gain": 72,
-"prob_loss": 20,
-"reliab": "🟡 Media",
-"mkt": 1.177,
-"fonte": "osservazione",
-"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-22",
-"soglie": {
-"media50": 24.3017,
-"media20": 24.3877,
-"quattro_atr": 25.7716,
-"meta_caduta": 24.255,
-"bollinger": 28.7215,
-"consigliata": 24.3017
-},
-"stop": 19.4992,
-"atr": 1.0454,
-"res": {
-"7g": -0.23,
-"30g": 16.81
-}
-},
-{
 "episodio": "long:QLYS:2026-09-13",
 "ticker": "QLYS",
 "kind": "long",
@@ -38216,5 +38185,32 @@
 },
 "stop": 15.1663,
 "atr": 0.9869
+},
+{
+"episodio": "short:ACAD:2026-11-10",
+"ticker": "ACAD",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-11-13 01:18",
+"data": "2026-11-13 01:18",
+"prezzo": 18.14,
+"conv": 79,
+"prob_gain": 56,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 21.968,
+"media20": 19.872,
+"quattro_atr": 22.4498,
+"meta_caduta": 24.355,
+"bollinger": 22.3468,
+"consigliata": 21.968
+},
+"stop": 15.9851,
+"atr": 1.0775
 }
 ]
