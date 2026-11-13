@@ -7690,9 +7690,7 @@
 "max_date": "2026-10-29 17:56",
 "auto": true,
 "notified": false,
-"entry_check": "2026-11-13",
-"warn_since": "2026-11-13",
-"warn": "in perdita da 18 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-11-13"
 },
 "MRP": {
 "kind": "short",
@@ -9638,9 +9636,7 @@
 "max_date": "2026-11-10 04:33",
 "auto": true,
 "notified": true,
-"entry_check": "2026-11-13",
-"warn_since": "2026-11-13",
-"warn": "in perdita da 9 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-11-13"
 },
 "EEFT": {
 "kind": "short",
@@ -12613,7 +12609,7 @@
 "max_price": 232.85,
 "max_date": "2026-11-13 23:00",
 "auto": true,
-"notified": false,
+"notified": true,
 "entry_check": "2026-11-13"
 },
 "NMIH": {
