@@ -22459,5 +22459,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "ACAD",
+"kind": "short",
+"date": "2026-11-13",
+"promo_price": 18.14,
+"obs_price": 16.5,
+"obs_date": "2026-11-10",
+"pre_price": 18.37,
+"pre_date": "2026-11-12",
+"conf_price": null,
+"conf_date": null,
+"target": 21.968,
+"stop": 15.9851,
+"reliab": "🟡 Media",
+"prob_gain": 56,
+"prob_loss": 12,
+"conv": 79,
+"passaggi": {
+"osservazione": {
+"data": "2026-11-10 04:29",
+"prezzo": 16.5,
+"conv": 68,
+"prob_gain": 60,
+"prob_loss": 10,
+"reliab": "🟡 Media",
+"mkt": -3.2957
+},
+"anticipo": {
+"data": "2026-11-12",
+"prezzo": 18.37,
+"conv": 66,
+"prob_gain": 57,
+"prob_loss": 11,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-13 01:18",
+"prezzo": 18.14,
+"conv": 79,
+"prob_gain": 56,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
