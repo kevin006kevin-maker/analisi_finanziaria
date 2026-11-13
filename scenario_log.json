@@ -17054,7 +17054,10 @@
 "conv": 60,
 "res": {
 "osservazione|7g": 8.23,
-"promozione|7g": 9.07
+"promozione|7g": 9.07,
+"osservazione|30g": 18.89,
+"promozione|30g": 19.82,
+"conferma|30g": 9.85
 },
 "passaggi": {
 "osservazione": {
@@ -17116,7 +17119,10 @@
 "conv": 66,
 "res": {
 "osservazione|7g": -2.1,
-"promozione|7g": 1.23
+"promozione|7g": 1.23,
+"osservazione|30g": -4.99,
+"promozione|30g": -1.76,
+"conferma|30g": -2.96
 },
 "passaggi": {
 "osservazione": {
@@ -17178,7 +17184,10 @@
 "conv": 62,
 "res": {
 "osservazione|7g": 0.5,
-"promozione|7g": 1.61
+"promozione|7g": 1.61,
+"osservazione|30g": 7.64,
+"promozione|30g": 8.84,
+"conferma|30g": 7.11
 },
 "passaggi": {
 "osservazione": {
@@ -21087,15 +21096,18 @@
 "obs_date": "2026-10-07",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 15.770000457763672,
+"conf_date": "2026-11-13",
 "target": null,
 "stop": null,
 "reliab": "🟢 Alta",
 "prob_gain": 52,
 "prob_loss": 2,
 "conv": 57,
-"res": {},
+"res": {
+"osservazione|7g": -8.58,
+"promozione|7g": -8.55
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-10-01 16:46",
@@ -21125,8 +21137,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-11-13",
+"prezzo": 15.770000457763672,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -21146,8 +21158,8 @@
 "obs_date": "2026-10-07",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 168.55999755859375,
+"conf_date": "2026-11-13",
 "target": null,
 "stop": null,
 "reliab": null,
@@ -21184,8 +21196,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-11-13",
+"prezzo": 168.55999755859375,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -21203,8 +21215,8 @@
 "obs_date": "2026-09-19",
 "pre_price": 23.3,
 "pre_date": "2026-09-21",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 11.949999809265137,
+"conf_date": "2026-11-13",
 "target": 20.1164,
 "stop": 10.132,
 "reliab": "🟡 Media",
@@ -21240,12 +21252,12 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-11-13",
+"prezzo": 11.949999809265137,
+"conv": 78,
+"prob_gain": 52,
+"prob_loss": 21,
+"reliab": "🟡 Media",
 "mkt": null
 }
 },
@@ -21260,8 +21272,8 @@
 "obs_date": "2026-10-26",
 "pre_price": 11.815,
 "pre_date": "2026-10-27",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 11.204999923706055,
+"conf_date": "2026-11-13",
 "target": 13.499,
 "stop": 10.8168,
 "reliab": "🟢 Alta",
@@ -21297,12 +21309,12 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-11-13",
+"prezzo": 11.204999923706055,
+"conv": 83,
+"prob_gain": 47,
+"prob_loss": 6,
+"reliab": "🟢 Alta",
 "mkt": null
 }
 },
