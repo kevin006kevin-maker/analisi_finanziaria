@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:MTZ:2026-09-17",
-"ticker": "MTZ",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-22 01:23",
-"data": "2026-09-22 01:19",
-"prezzo": 222.9,
-"conv": 74,
-"prob_gain": 51,
-"prob_loss": 14,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-22",
-"soglie": {
-"media50": 277.0978,
-"media20": 235.2955,
-"quattro_atr": 277.9486,
-"meta_caduta": 325.995,
-"bollinger": 259.926,
-"consigliata": 277.0978
-},
-"stop": 195.3757,
-"atr": 13.7621,
-"res": {
-"7g": -5.13,
-"30g": -22.84,
-"soglia": -22.84
-},
-"res_soglia": {
-"media50": {
-"ret": -22.84,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -22.84,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -22.84,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -22.84,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -22.84,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -22.84,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:RARE:2026-09-17",
 "ticker": "RARE",
 "kind": "short",
@@ -38095,5 +38031,32 @@
 },
 "stop": 9.8864,
 "atr": 0.9568
+},
+{
+"episodio": "short:ACAD:2026-11-10",
+"ticker": "ACAD",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-11-13 01:23",
+"data": "2026-11-13 01:18",
+"prezzo": 18.14,
+"conv": 79,
+"prob_gain": 56,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-11-13",
+"soglie": {
+"media50": 21.968,
+"media20": 19.872,
+"quattro_atr": 22.4498,
+"meta_caduta": 24.355,
+"bollinger": 22.3468,
+"consigliata": 21.968
+},
+"stop": 15.9851,
+"atr": 1.0775
 }
 ]
