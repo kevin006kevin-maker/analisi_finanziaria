@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:CAR:2026-09-22",
-"ticker": "CAR",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-22 19:46",
-"data": "2026-09-22 19:46",
-"prezzo": 109.7,
-"conv": 66,
-"prob_gain": 46,
-"prob_loss": 23,
-"reliab": "🔴 Bassa",
-"mkt": 1.477,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 141.327,
-"media20": 129.953,
-"quattro_atr": 133.9234,
-"meta_caduta": 138.01,
-"bollinger": 153.7259,
-"consigliata": 133.9234
-},
-"stop": 97.5883,
-"atr": 6.0558,
-"res": {
-"7g": -2.83,
-"30g": -8.26,
-"soglia": -8.26
-},
-"res_soglia": {
-"media50": {
-"ret": -8.26,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -8.26,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -8.26,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -8.26,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -8.26,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -8.26,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "long:PLNT:2026-09-22",
 "ticker": "PLNT",
 "kind": "long",
@@ -38267,5 +38203,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:HWC:2026-11-12",
+"ticker": "HWC",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-11-14 03:24",
+"data": "2026-11-14 03:20",
+"prezzo": 65.28,
+"conv": 73,
+"prob_gain": 58,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -1.2765,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 72.887,
+"media20": 71.9555,
+"quattro_atr": 74.5311,
+"meta_caduta": 70.605,
+"bollinger": 76.8301,
+"consigliata": 72.887
+},
+"stop": 60.6544,
+"atr": 2.3128
 }
 ]
