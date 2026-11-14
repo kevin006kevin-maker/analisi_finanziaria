@@ -3908,7 +3908,9 @@
 "auto": true,
 "notified": true,
 "entry_check": "2026-11-14",
-"incasso_notified": true
+"incasso_notified": true,
+"warn_since": "2026-11-14",
+"warn": "in perdita da 60 giorni di Borsa: valuta l'uscita"
 },
 "ENI.MI": {
 "kind": "short",
@@ -10493,7 +10495,9 @@
 "urgenza": "incassa",
 "tipo": "bersaglio"
 },
-"incasso_notified": true
+"incasso_notified": true,
+"warn_since": "2026-11-14",
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "LSTR": {
 "kind": "short",
