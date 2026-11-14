@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-11-05",
-"ticker": "AMZN",
-"kind": "short",
-"price": 266.03,
-"conv": 49,
-"factors": {
-"discount": 6.3341,
-"histcheap": -1.24,
-"riskadj": 0.17,
-"ddpen": -10.51,
-"momentum": -4.4894,
-"prob": 44,
-"oversold": -59.8733,
-"rebound": -4.5631,
-"trend": 1.0,
-"relstrength": 5.2043
-},
-"ret_5d": 1.19,
-"ret_21d": null
-},
-{
-"date": "2026-11-05",
 "ticker": "AAPL",
 "kind": "short",
 "price": 349.51,
@@ -39062,6 +39041,26 @@
 "rebound": 5.343,
 "trend": -1.0,
 "relstrength": 3.6486
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-14",
+"ticker": "VG",
+"kind": "long",
+"price": 13.14,
+"conv": 39,
+"factors": {
+"discount": 25.0428,
+"histcheap": -0.51,
+"riskadj": 1.04,
+"ddpen": -21.68,
+"momentum": -13.9636,
+"prob": 37,
+"quality": 70.3,
+"valcheap": -0.1554,
+"trappen": 2
 },
 "ret_5d": null,
 "ret_21d": null
