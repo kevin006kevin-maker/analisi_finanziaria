@@ -1,5 +1,5 @@
 {
-"aggiornato": "2026-11-15 02:13",
+"aggiornato": "2026-11-15 08:51",
 "osservazione": [
 {
 "t": "CABO",
@@ -31,9 +31,9 @@
 "tipo": "long",
 "giorni": 3,
 "rend": 11.4,
-"conv": 38.0,
-"dconv": -13.0,
-"run": 2,
+"conv": 35.0,
+"dconv": -16.0,
+"run": 3,
 "mancano": 4,
 "affid": "🟡 Media"
 },
@@ -127,8 +127,8 @@
 "tipo": "long",
 "giorni": 3,
 "rend": 7.0,
-"conv": 18.0,
-"dconv": -29.0,
+"conv": 25.0,
+"dconv": -26.0,
 "run": 2,
 "mancano": 4,
 "affid": "🟡 Media"
@@ -139,8 +139,8 @@
 "tipo": "long",
 "giorni": 3,
 "rend": 6.2,
-"conv": 48.0,
-"dconv": -20.0,
+"conv": 52.0,
+"dconv": -18.0,
 "run": 4,
 "mancano": 4,
 "affid": "🔴 Bassa"
@@ -254,25 +254,13 @@
 "affid": ""
 },
 {
-"t": "STMMI.MI",
-"nome": "STMMI.MI",
-"tipo": "short",
-"giorni": 1,
-"rend": 4.3,
-"conv": null,
-"dconv": 0.0,
-"run": 0,
-"mancano": 2,
-"affid": ""
-},
-{
 "t": "LDO.MI",
 "nome": "LEONARDO",
 "tipo": "long",
 "giorni": 3,
 "rend": 4.2,
-"conv": 32.0,
-"dconv": -12.0,
+"conv": 43.0,
+"dconv": -6.0,
 "run": 2,
 "mancano": 4,
 "affid": "🟡 Media"
@@ -314,16 +302,16 @@
 "affid": ""
 },
 {
-"t": "DY",
-"nome": "DY",
+"t": "STMMI.MI",
+"nome": "STMMI.MI",
 "tipo": "short",
-"giorni": 1,
-"rend": 3.7,
-"conv": 45.0,
+"giorni": 3,
+"rend": 3.6,
+"conv": null,
 "dconv": 0.0,
-"run": 1,
-"mancano": 2,
-"affid": "🟡 Media"
+"run": 0,
+"mancano": 0,
+"affid": ""
 },
 {
 "t": "PYPL",
@@ -343,8 +331,8 @@
 "tipo": "long",
 "giorni": 3,
 "rend": 3.4,
-"conv": 36.0,
-"dconv": -25.0,
+"conv": 42.0,
+"dconv": -22.0,
 "run": 2,
 "mancano": 4,
 "affid": "🔴 Bassa"
@@ -408,18 +396,6 @@
 "run": 2,
 "mancano": 0,
 "affid": "🟢 Alta"
-},
-{
-"t": "TIT.MI",
-"nome": "TIT.MI",
-"tipo": "short",
-"giorni": 1,
-"rend": 2.9,
-"conv": null,
-"dconv": 0.0,
-"run": 0,
-"mancano": 2,
-"affid": ""
 },
 {
 "t": "VRDN",
@@ -511,8 +487,8 @@
 "tipo": "long",
 "giorni": 3,
 "rend": 2.2,
-"conv": 50.0,
-"dconv": -4.0,
+"conv": 46.0,
+"dconv": -6.0,
 "run": 4,
 "mancano": 4,
 "affid": "🔴 Bassa"
@@ -520,6 +496,18 @@
 {
 "t": "ESRT",
 "nome": "ESRT",
+"tipo": "short",
+"giorni": 3,
+"rend": 2.2,
+"conv": null,
+"dconv": 0.0,
+"run": 0,
+"mancano": 0,
+"affid": ""
+},
+{
+"t": "TIT.MI",
+"nome": "TIT.MI",
 "tipo": "short",
 "giorni": 3,
 "rend": 2.2,
@@ -607,9 +595,9 @@
 "tipo": "long",
 "giorni": 3,
 "rend": 2.0,
-"conv": 34.0,
-"dconv": -18.0,
-"run": 1,
+"conv": 38.0,
+"dconv": -14.0,
+"run": 2,
 "mancano": 4,
 "affid": "🟡 Media"
 },
@@ -648,6 +636,18 @@
 "run": 1,
 "mancano": 0,
 "affid": "🟢 Alta"
+},
+{
+"t": "DT",
+"nome": "DT",
+"tipo": "short",
+"giorni": 3,
+"rend": 1.9,
+"conv": 68.0,
+"dconv": 10.0,
+"run": 3,
+"mancano": 0,
+"affid": "🟡 Media"
 },
 {
 "t": "AXON",
@@ -891,6 +891,18 @@
 },
 {
 "t": "DY",
+"nome": "DY",
+"tipo": "short",
+"giorni": 3,
+"rend": 0.7,
+"conv": 45.0,
+"dconv": 0.0,
+"run": 1,
+"mancano": 0,
+"affid": "🟡 Media"
+},
+{
+"t": "DY",
 "nome": "Dycom Industries Inc",
 "tipo": "long",
 "giorni": 3,
@@ -914,6 +926,18 @@
 "affid": ""
 },
 {
+"t": "ENEL.MI",
+"nome": "ENEL.MI",
+"tipo": "short",
+"giorni": 3,
+"rend": 0.6,
+"conv": null,
+"dconv": 0.0,
+"run": 0,
+"mancano": 0,
+"affid": ""
+},
+{
 "t": "XLI",
 "nome": "XLI",
 "tipo": "short",
@@ -926,25 +950,13 @@
 "affid": ""
 },
 {
-"t": "DT",
-"nome": "DT",
-"tipo": "short",
-"giorni": 1,
-"rend": 0.6,
-"conv": 59.0,
-"dconv": 2.0,
-"run": 2,
-"mancano": 2,
-"affid": "🟡 Media"
-},
-{
 "t": "HWC",
 "nome": "HWC",
 "tipo": "short",
 "giorni": 1,
 "rend": 0.6,
-"conv": 74.0,
-"dconv": 2.0,
+"conv": 71.0,
+"dconv": 0.0,
 "run": 4,
 "mancano": 2,
 "affid": "🟢 Alta"
@@ -1159,8 +1171,8 @@
 "tipo": "short",
 "giorni": 0,
 "rend": 0.0,
-"conv": 66.0,
-"dconv": 1.0,
+"conv": 64.0,
+"dconv": 0.0,
 "run": 2,
 "mancano": 3,
 "affid": "🔴 Bassa"
@@ -1255,9 +1267,9 @@
 "tipo": "long",
 "giorni": 0,
 "rend": -0.3,
-"conv": 60.0,
-"dconv": 0.0,
-"run": 1,
+"conv": 62.0,
+"dconv": 2.0,
+"run": 2,
 "mancano": 7,
 "affid": "🔴 Bassa"
 },
@@ -1283,18 +1295,6 @@
 "dconv": 0.0,
 "run": 0,
 "mancano": 3,
-"affid": ""
-},
-{
-"t": "ENEL.MI",
-"nome": "ENEL.MI",
-"tipo": "short",
-"giorni": 1,
-"rend": -0.5,
-"conv": null,
-"dconv": 0.0,
-"run": 0,
-"mancano": 2,
 "affid": ""
 },
 {
@@ -1670,25 +1670,13 @@
 "affid": ""
 },
 {
-"t": "LDO.MI",
-"nome": "LDO.MI",
-"tipo": "short",
-"giorni": 1,
-"rend": -2.0,
-"conv": null,
-"dconv": 0.0,
-"run": 0,
-"mancano": 2,
-"affid": ""
-},
-{
 "t": "DAVE",
-"nome": "Dave Inc.",
+"nome": "Dave Inc./DE",
 "tipo": "long",
 "giorni": 3,
 "rend": -2.0,
-"conv": 47.0,
-"dconv": -16.0,
+"conv": 61.0,
+"dconv": -9.0,
 "run": 2,
 "mancano": 4,
 "affid": "🔴 Bassa"
@@ -1802,15 +1790,15 @@
 "affid": ""
 },
 {
-"t": "ISP.MI",
-"nome": "ISP.MI",
+"t": "LDO.MI",
+"nome": "LDO.MI",
 "tipo": "short",
-"giorni": 1,
-"rend": -2.8,
+"giorni": 3,
+"rend": -3.0,
 "conv": null,
 "dconv": 0.0,
 "run": 0,
-"mancano": 2,
+"mancano": 0,
 "affid": ""
 },
 {
@@ -1831,8 +1819,8 @@
 "tipo": "short",
 "giorni": 3,
 "rend": -3.0,
-"conv": 70.0,
-"dconv": 6.0,
+"conv": 67.0,
+"dconv": 4.0,
 "run": 6,
 "mancano": 0,
 "affid": "🔴 Bassa"
@@ -1898,6 +1886,18 @@
 "affid": ""
 },
 {
+"t": "ISP.MI",
+"nome": "ISP.MI",
+"tipo": "short",
+"giorni": 3,
+"rend": -3.4,
+"conv": null,
+"dconv": 0.0,
+"run": 0,
+"mancano": 0,
+"affid": ""
+},
+{
 "t": "ENVA",
 "nome": "ENVA",
 "tipo": "short",
@@ -1915,8 +1915,8 @@
 "tipo": "short",
 "giorni": 1,
 "rend": -3.5,
-"conv": 71.0,
-"dconv": 4.0,
+"conv": 68.0,
+"dconv": 2.0,
 "run": 4,
 "mancano": 2,
 "affid": "🟡 Media"
@@ -2019,12 +2019,12 @@
 },
 {
 "t": "AA",
-"nome": "Alcoa Corp",
+"nome": "ALCOA CORP",
 "tipo": "long",
 "giorni": 3,
 "rend": -5.0,
-"conv": 66.0,
-"dconv": 6.0,
+"conv": 61.0,
+"dconv": 4.0,
 "run": 6,
 "mancano": 4,
 "affid": "🟡 Media"
@@ -2035,8 +2035,8 @@
 "tipo": "long",
 "giorni": 3,
 "rend": -5.1,
-"conv": 45.0,
-"dconv": 10.0,
+"conv": 54.0,
+"dconv": 14.0,
 "run": 4,
 "mancano": 4,
 "affid": "🟡 Media"
@@ -2111,18 +2111,6 @@
 "dconv": 0.0,
 "run": 0,
 "mancano": 0,
-"affid": ""
-},
-{
-"t": "STLAM.MI",
-"nome": "STLAM.MI",
-"tipo": "short",
-"giorni": 1,
-"rend": -6.1,
-"conv": null,
-"dconv": 0.0,
-"run": 0,
-"mancano": 2,
 "affid": ""
 },
 {
@@ -2263,8 +2251,8 @@
 "tipo": "short",
 "giorni": 3,
 "rend": -8.9,
-"conv": 81.0,
-"dconv": 14.0,
+"conv": 78.0,
+"dconv": 12.0,
 "run": 6,
 "mancano": 0,
 "affid": "🟡 Media"
@@ -2287,8 +2275,8 @@
 "tipo": "long",
 "giorni": 3,
 "rend": -9.1,
-"conv": 59.0,
-"dconv": 11.0,
+"conv": 64.0,
+"dconv": 14.0,
 "run": 2,
 "mancano": 4,
 "affid": "🟡 Media"
@@ -2347,11 +2335,23 @@
 "tipo": "long",
 "giorni": 3,
 "rend": -10.4,
-"conv": 60.0,
-"dconv": 23.0,
-"run": 6,
+"conv": 36.0,
+"dconv": 11.0,
+"run": 1,
 "mancano": 4,
 "affid": "🟡 Media"
+},
+{
+"t": "STLAM.MI",
+"nome": "STLAM.MI",
+"tipo": "short",
+"giorni": 3,
+"rend": -11.1,
+"conv": null,
+"dconv": 0.0,
+"run": 0,
+"mancano": 0,
+"affid": ""
 },
 {
 "t": "FIX",
@@ -2419,8 +2419,8 @@
 "tipo": "long",
 "giorni": 3,
 "rend": -14.3,
-"conv": 72.0,
-"dconv": 18.0,
+"conv": 74.0,
+"dconv": 19.0,
 "run": 6,
 "mancano": 4,
 "affid": "🔴 Bassa"
@@ -2781,14 +2781,14 @@
 "tipo": "long",
 "auto": true,
 "aggiunta": "2026-08-03",
-"conv": 46.0,
+"conv": 48.0,
 "affid": "🟢 Alta",
-"salita": 81.0,
-"perdita": 4.0,
+"salita": 65.0,
+"perdita": 11.0,
 "prezzo": 118.97,
 "ingresso": 98.58,
 "rend": 20.7,
-"dconv": -21.0,
+"dconv": -19.0,
 "bersaglio": 99.0404,
 "stop": 93.8805,
 "uscita": "",
@@ -4446,8 +4446,8 @@
 "t": "NVDA",
 "nome": "NVDA",
 "tipo": "short",
-"conv": 81.0,
-"dconv": 14.0,
+"conv": 78.0,
+"dconv": 12.0,
 "giorni": 3,
 "rend": -8.9,
 "salita": 59.0,
@@ -4470,8 +4470,8 @@
 "t": "HWC",
 "nome": "HWC",
 "tipo": "short",
-"conv": 74.0,
-"dconv": 2.0,
+"conv": 71.0,
+"dconv": 0.0,
 "giorni": 1,
 "rend": 0.6,
 "salita": 58.0,
@@ -4491,11 +4491,23 @@
 "affid": "🔴 Bassa"
 },
 {
+"t": "DT",
+"nome": "DT",
+"tipo": "short",
+"conv": 68.0,
+"dconv": 10.0,
+"giorni": 3,
+"rend": 1.9,
+"salita": 58.0,
+"perdita": 9.0,
+"affid": "🟡 Media"
+},
+{
 "t": "DGII",
 "nome": "DGII",
 "tipo": "short",
-"conv": 71.0,
-"dconv": 4.0,
+"conv": 68.0,
+"dconv": 2.0,
 "giorni": 1,
 "rend": -3.5,
 "salita": 58.0,
@@ -4506,8 +4518,8 @@
 "t": "ARWR",
 "nome": "ARWR",
 "tipo": "short",
-"conv": 70.0,
-"dconv": 6.0,
+"conv": 67.0,
+"dconv": 4.0,
 "giorni": 3,
 "rend": -3.0,
 "salita": 45.0,
@@ -4542,8 +4554,8 @@
 "t": "HMY",
 "nome": "Harmony Gold Mining Company Lim",
 "tipo": "long",
-"conv": 72.0,
-"dconv": 18.0,
+"conv": 74.0,
+"dconv": 19.0,
 "giorni": 3,
 "rend": -14.3,
 "salita": 66.0,
@@ -4585,21 +4597,9 @@
 "salita": 64.0,
 "perdita": 27.0,
 "affid": "🔴 Bassa"
-},
-{
-"t": "AA",
-"nome": "Alcoa Corp",
-"tipo": "long",
-"conv": 66.0,
-"dconv": 6.0,
-"giorni": 3,
-"rend": -5.0,
-"salita": 61.0,
-"perdita": 28.0,
-"affid": "🟡 Media"
 }
 ],
 "portafoglio": [],
 "richieste": [],
-"giro": "2026-11-15 02:13"
+"giro": "2026-11-15 08:51"
 }
