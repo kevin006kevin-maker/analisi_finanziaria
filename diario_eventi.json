@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:AGNC:2026-09-18",
-"ticker": "AGNC",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-22 23:19",
-"data": "2026-09-22 23:15",
-"prezzo": 10.09,
-"conv": 54,
-"prob_gain": 50,
-"prob_loss": 0,
-"reliab": "🟢 Alta",
-"mkt": 1.4558,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 9.87",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "long:IAG:2026-09-20",
 "ticker": "IAG",
 "kind": "long",
@@ -38189,5 +38169,32 @@
 },
 "stop": 272.811,
 "atr": 35.8595
+},
+{
+"episodio": "long:PAAS:2026-11-15",
+"ticker": "PAAS",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-11-15 16:40",
+"data": "2026-11-15 16:40",
+"prezzo": 37.5,
+"conv": 75,
+"prob_gain": 67,
+"prob_loss": 23,
+"reliab": "🟡 Media",
+"mkt": -1.2765,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 44.6572,
+"media20": 40.6755,
+"quattro_atr": 44.9458,
+"meta_caduta": 46.195,
+"bollinger": 44.784,
+"consigliata": 44.6572
+},
+"stop": 33.7771,
+"atr": 1.8615
 }
 ]
