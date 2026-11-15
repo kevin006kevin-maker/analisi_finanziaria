@@ -1,5 +1,5 @@
 {
-"aggiornato": "2026-11-15 02:13",
+"aggiornato": "2026-11-15 08:52",
 "metodi": {
 "short": {
 "vendite": [
@@ -120,22 +120,22 @@
 "scelte": 207,
 "vendite": {
 "soglia": {
-"n": 66,
-"med": -16.51,
-"hit": 23.0,
+"n": 67,
+"med": -16.0,
+"hit": 24.0,
 "eccesso": null
 },
 "7g": {
 "n": 173,
 "med": -1.67,
 "hit": 39.0,
-"eccesso": -1.72
+"eccesso": -1.57
 },
 "30g": {
-"n": 67,
-"med": -17.02,
-"hit": 22.0,
-"eccesso": -11.26
+"n": 68,
+"med": -16.51,
+"hit": 24.0,
+"eccesso": -10.8
 }
 }
 },
@@ -146,9 +146,9 @@
 "scelte": 201,
 "vendite": {
 "soglia": {
-"n": 66,
-"med": -14.72,
-"hit": 18.0,
+"n": 67,
+"med": -14.48,
+"hit": 19.0,
 "eccesso": null
 },
 "7g": {
@@ -158,10 +158,10 @@
 "eccesso": -1.42
 },
 "30g": {
-"n": 66,
-"med": -14.72,
-"hit": 18.0,
-"eccesso": -9.83
+"n": 67,
+"med": -14.48,
+"hit": 19.0,
+"eccesso": -9.32
 }
 }
 },
@@ -308,10 +308,10 @@
 "eccesso": null
 },
 "7g": {
-"n": 148,
-"med": 0.19,
-"hit": 51.0,
-"eccesso": 0.66
+"n": 149,
+"med": 0.1,
+"hit": 50.0,
+"eccesso": 0.64
 },
 "30g": {
 "n": 41,
@@ -434,9 +434,9 @@
 "scelte": 512,
 "vendite": {
 "soglia": {
-"n": 365,
-"med": -4.49,
-"hit": 36.0,
+"n": 366,
+"med": -4.43,
+"hit": 37.0,
 "eccesso": null
 },
 "7g": {
@@ -446,10 +446,10 @@
 "eccesso": -0.6
 },
 "30g": {
-"n": 366,
-"med": -4.54,
+"n": 367,
+"med": -4.51,
 "hit": 36.0,
-"eccesso": -0.94
+"eccesso": -0.9
 }
 }
 },
@@ -460,8 +460,8 @@
 "scelte": 463,
 "vendite": {
 "soglia": {
-"n": 325,
-"med": -5.05,
+"n": 326,
+"med": -5.03,
 "hit": 37.0,
 "eccesso": null
 },
@@ -472,10 +472,10 @@
 "eccesso": -0.35
 },
 "30g": {
-"n": 325,
-"med": -5.06,
+"n": 326,
+"med": -5.05,
 "hit": 37.0,
-"eccesso": -1.35
+"eccesso": -1.33
 }
 }
 },
@@ -622,10 +622,10 @@
 "eccesso": null
 },
 "7g": {
-"n": 275,
-"med": -0.32,
-"hit": 47.0,
-"eccesso": 0.3
+"n": 276,
+"med": -0.34,
+"hit": 46.0,
+"eccesso": 0.24
 },
 "30g": {
 "n": 168,
@@ -652,11 +652,11 @@
 },
 "ombra_regole_nuove": {
 "stato": "presto",
-"testo": "⏳ Ancora presto per decidere: nella prova vera ci sono 67 occasioni misurate a 30 giorni (ne servono almeno 30) e 9 giornate con entrambi (ne servono 15)."
+"testo": "⏳ Ancora presto per decidere: nella prova vera ci sono 68 occasioni misurate a 30 giorni (ne servono almeno 30) e 9 giornate con entrambi (ne servono 15)."
 },
 "forza_relativa": {
 "stato": "presto",
-"testo": "⏳ Ancora presto per decidere: nella prova vera ci sono 66 occasioni misurate a 30 giorni (ne servono almeno 30) e 8 giornate con entrambi (ne servono 15)."
+"testo": "⏳ Ancora presto per decidere: nella prova vera ci sono 67 occasioni misurate a 30 giorni (ne servono almeno 30) e 8 giornate con entrambi (ne servono 15)."
 },
 "vicino_massimi": {
 "stato": "presto",
@@ -683,7 +683,7 @@
 "testo": "⏳ Ancora presto per decidere: nella prova vera ci sono 41 occasioni misurate a 30 giorni (ne servono almeno 30) e 8 giornate con entrambi (ne servono 15)."
 }
 },
-"aggiornato": "2026-11-15 01:12",
+"aggiornato": "2026-11-15 07:51",
 "decide": {
 "orizzonte": "30g",
 "casi": 30,
@@ -936,7 +936,7 @@
 "chiave": "qualita",
 "nome": "Qualità dei conti",
 "riferimento": false,
-"scelte": 141,
+"scelte": 142,
 "vendite": {
 "soglia": {
 "n": 0,
@@ -1250,7 +1250,7 @@
 "chiave": "qualita",
 "nome": "Qualità dei conti",
 "riferimento": false,
-"scelte": 328,
+"scelte": 329,
 "vendite": {
 "soglia": {
 "n": 0,
@@ -1372,7 +1372,7 @@
 "testo": "⏳ Ancora presto per decidere: nella prova vera ci sono 9 occasioni misurate a 30 giorni (ne servono almeno 30) e 2 giornate con entrambi (ne servono 15)."
 }
 },
-"aggiornato": "2026-11-15 01:12",
+"aggiornato": "2026-11-15 07:51",
 "decide": {
 "orizzonte": "30g",
 "casi": 30,
@@ -1837,12 +1837,12 @@
 "archivio/scatti": 24111,
 "archivio/mondo": 89,
 "archivio/settori": 979,
-"archivio/profili": 21637,
-"archivio/notizie": 3670,
-"archivio/esiti": 42389,
+"archivio/profili": 21666,
+"archivio/notizie": 3684,
+"archivio/esiti": 42539,
 "archivio/osservazioni": 21318,
 "archivio/regole": 56,
-"archivio/ombra": 5006,
+"archivio/ombra": 5007,
 "archivio/metodi_avvii": 12
 }
 },
