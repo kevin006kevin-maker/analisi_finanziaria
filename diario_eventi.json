@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:PR:2026-09-23",
-"ticker": "PR",
-"kind": "long",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-23 01:49",
-"data": "2026-09-23 01:49",
-"prezzo": 21.29,
-"conv": 67,
-"prob_gain": 74,
-"prob_loss": 14,
-"reliab": "🟢 Alta",
-"mkt": 1.4606,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 21.997,
-"media20": 23.255,
-"quattro_atr": 24.2155,
-"meta_caduta": 22.89,
-"bollinger": 24.6929,
-"consigliata": 21.997
-},
-"stop": 19.8273,
-"atr": 0.7314,
-"res": {
-"7g": 0.19,
-"30g": 20.27
-}
-},
-{
 "episodio": "short:PLNT:2026-09-22",
 "ticker": "PLNT",
 "kind": "short",
@@ -38210,5 +38179,32 @@
 },
 "stop": 33.7771,
 "atr": 1.8615
+},
+{
+"episodio": "long:AG:2026-11-13",
+"ticker": "AG",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-11-16 01:25",
+"data": "2026-11-15 21:37",
+"prezzo": 13.65,
+"conv": 70,
+"prob_gain": 63,
+"prob_loss": 29,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 17.0144,
+"media20": 15.0455,
+"quattro_atr": 16.9494,
+"meta_caduta": 17.695,
+"bollinger": 16.4965,
+"consigliata": 16.9494
+},
+"stop": 12.0003,
+"atr": 0.8249
 }
 ]
