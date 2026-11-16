@@ -37929,7 +37929,18 @@
 "consigliata": 16.9494
 },
 "stop": 12.0003,
-"atr": 0.8249
+"atr": 0.8249,
+"soglie_contaminate": {
+"media50": 17.0144,
+"media20": 15.0455,
+"quattro_atr": 16.9494,
+"meta_caduta": 17.695,
+"bollinger": 16.4965,
+"consigliata": 16.9494
+},
+"soglie_ricalcolate_il": "2026-11-16 01:30",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 1
 },
 {
 "episodio": "short:SCI:2026-10-29",
@@ -37996,7 +38007,18 @@
 "consigliata": 93.1464
 },
 "stop": 74.924,
-"atr": 3.708
+"atr": 3.708,
+"soglie_contaminate": {
+"media50": 93.1464,
+"media20": 87.417,
+"quattro_atr": 97.172,
+"meta_caduta": 92.925,
+"bollinger": 100.5595,
+"consigliata": 93.1464
+},
+"soglie_ricalcolate_il": "2026-11-16 01:30",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 3
 },
 {
 "episodio": "short:VWO:2026-11-02",
@@ -38023,7 +38045,18 @@
 "consigliata": 58.5404
 },
 "stop": 54.6259,
-"atr": 0.8771
+"atr": 0.8771,
+"soglie_contaminate": {
+"media50": 58.5404,
+"media20": 56.5295,
+"quattro_atr": 59.8883,
+"meta_caduta": 58.91,
+"bollinger": 58.528,
+"consigliata": 58.5404
+},
+"soglie_ricalcolate_il": "2026-11-16 01:30",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 3
 },
 {
 "episodio": "short:ENI.MI:2026-11-11",
@@ -38050,6 +38083,17 @@
 "consigliata": 28.4062
 },
 "stop": 24.7594,
-"atr": 0.6078
+"atr": 0.6078,
+"soglie_contaminate": {
+"media50": null,
+"media20": 26.083,
+"quattro_atr": 28.4062,
+"meta_caduta": 26.8125,
+"bollinger": 27.7057,
+"consigliata": 28.4062
+},
+"soglie_ricalcolate_il": "2026-11-16 01:30",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 2
 }
 ]
