@@ -26448,5 +26448,86 @@
 "date": "2026-11-16 18:28"
 }
 ]
+},
+{
+"ticker": "VALE",
+"kind": "short",
+"added": "2026-11-08",
+"removed": "2026-11-16",
+"reason": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
+"auto": true,
+"first_price": 11.59,
+"last_price": 10.615,
+"first_target": 13.499,
+"first_stop": 10.8168,
+"first_src": "scatto",
+"first_sicuro": true,
+"my_target_price": null,
+"snapshots": [
+{
+"name": "VALE",
+"price": 11.28,
+"rsi": 34.9298,
+"dd_high": -36.7003,
+"occasione": 26,
+"convenienza": 83,
+"prob_gain": 52,
+"prob_loss": 4,
+"exp_ret": 0.5,
+"gain": 17.0904,
+"reliab": "🟢 Alta",
+"target": 13.2078,
+"stop": 10.5131,
+"date": "2026-11-13 01:20"
+},
+{
+"name": "VALE",
+"price": 11.205,
+"rsi": 34.0817,
+"dd_high": -37.1212,
+"occasione": 27,
+"convenienza": 84,
+"prob_gain": 55,
+"prob_loss": 4,
+"exp_ret": 1.1,
+"gain": 17.1415,
+"reliab": "🟢 Alta",
+"target": 13.1257,
+"stop": 10.4771,
+"date": "2026-11-13 16:42"
+},
+{
+"name": "VALE",
+"price": 11.22,
+"rsi": 34.248,
+"dd_high": -37.037,
+"occasione": 27,
+"convenienza": 84,
+"prob_gain": 50,
+"prob_loss": 6,
+"exp_ret": -0.1,
+"gain": 16.9875,
+"reliab": "🟢 Alta",
+"target": 13.126,
+"stop": 10.4907,
+"date": "2026-11-13 23:00"
+},
+{
+"name": "VALE",
+"price": 10.615,
+"rsi": 28.2177,
+"dd_high": -40.4602,
+"occasione": 38,
+"convenienza": 87,
+"prob_gain": 50,
+"prob_loss": 5,
+"exp_ret": 0.1,
+"gain": 22.8351,
+"reliab": "🟡 Media",
+"target": 13.0328,
+"stop": 9.8442,
+"date": "2026-11-16 18:28"
+}
+]
 }
 ]
