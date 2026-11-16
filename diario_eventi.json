@@ -1,25 +1,5 @@
 [
 {
-"episodio": "long:IAG:2026-09-20",
-"ticker": "IAG",
-"kind": "long",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-22 23:19",
-"data": "2026-09-22 23:18",
-"prezzo": 20.89,
-"conv": 58,
-"prob_gain": 56,
-"prob_loss": 33,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "prezzo salito di almeno il 2% da 20.35",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:ZTO:2026-09-22",
 "ticker": "ZTO",
 "kind": "short",
@@ -38196,5 +38176,32 @@
 },
 "stop": 33.7771,
 "atr": 1.8615
+},
+{
+"episodio": "short:DELL:2026-11-14",
+"ticker": "DELL",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-11-16 01:25",
+"data": "2026-11-16 01:22",
+"prezzo": 344.53,
+"conv": 65,
+"prob_gain": 53,
+"prob_loss": 18,
+"reliab": "🔴 Bassa",
+"mkt": -1.2765,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 493.5002,
+"media20": 413.1985,
+"quattro_atr": 487.968,
+"meta_caduta": 466.465,
+"bollinger": 535.8169,
+"consigliata": 487.968
+},
+"stop": 272.811,
+"atr": 35.8595
 }
 ]
