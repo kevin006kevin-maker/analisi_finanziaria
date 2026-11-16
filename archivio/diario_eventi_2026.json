@@ -34684,5 +34684,69 @@
 "giorni": 26
 }
 }
+},
+{
+"episodio": "short:BBT:2026-09-22",
+"ticker": "BBT",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-23 01:50",
+"data": "2026-09-23 01:48",
+"prezzo": 28.42,
+"conv": 71,
+"prob_gain": 60,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": 1.4606,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 31.1146,
+"media20": 31.005,
+"quattro_atr": 31.3577,
+"meta_caduta": 30.515,
+"bollinger": 32.7825,
+"consigliata": 31.1146
+},
+"stop": 26.9512,
+"atr": 0.7344,
+"res": {
+"7g": -1.62,
+"30g": 5.63,
+"soglia": 5.63
+},
+"res_soglia": {
+"media50": {
+"ret": 5.63,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": 5.63,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": 5.63,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": 5.63,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": 5.63,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": 5.63,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
