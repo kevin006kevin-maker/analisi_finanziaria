@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:LPLA:2026-09-22",
-"ticker": "LPLA",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-23 01:50",
-"data": "2026-09-23 01:48",
-"prezzo": 307.5,
-"conv": 68,
-"prob_gain": 55,
-"prob_loss": 4,
-"reliab": "🟡 Media",
-"mkt": 1.4606,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 349.1958,
-"media20": 348.789,
-"quattro_atr": 354.5526,
-"meta_caduta": 342.09,
-"bollinger": 380.7661,
-"consigliata": 349.1958
-},
-"stop": 283.9737,
-"atr": 11.7631,
-"res": {
-"7g": -0.63,
-"30g": 2.78,
-"soglia": 2.78
-},
-"res_soglia": {
-"media50": {
-"ret": 2.78,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 2.78,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 2.78,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 2.78,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 2.78,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 2.78,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:AGNC:2026-09-18",
 "ticker": "AGNC",
 "kind": "short",
@@ -38118,5 +38054,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:SKYW:2026-10-31",
+"ticker": "SKYW",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-11-16 01:29",
+"data": "2026-11-13 23:00",
+"prezzo": 82.34,
+"conv": 75,
+"prob_gain": 51,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-11-16",
+"soglie": {
+"media50": 93.1464,
+"media20": 87.417,
+"quattro_atr": 97.172,
+"meta_caduta": 92.925,
+"bollinger": 100.5595,
+"consigliata": 93.1464
+},
+"stop": 74.924,
+"atr": 3.708
 }
 ]
