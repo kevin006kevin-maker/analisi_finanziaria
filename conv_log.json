@@ -1,406 +1,6 @@
 [
 {
 "date": "2026-11-07",
-"ticker": "RACE.MI",
-"kind": "long",
-"price": 377.3,
-"conv": 12,
-"factors": {
-"discount": 1.3724,
-"histcheap": -2.01,
-"riskadj": 0.2,
-"ddpen": -14.54,
-"momentum": -5.6271,
-"prob": 45,
-"quality": 64.7,
-"valcheap": -3.0,
-"trappen": 2
-},
-"ret_5d": null,
-"ret_21d": null
-},
-{
-"date": "2026-11-07",
-"ticker": "G.MI",
-"kind": "long",
-"price": 44.56,
-"conv": 41,
-"factors": {
-"discount": 3.5289,
-"histcheap": -1.4,
-"riskadj": 2.12,
-"ddpen": -4.09,
-"momentum": -4.9953,
-"prob": 79,
-"quality": 51.6,
-"valcheap": 0.0379,
-"trappen": 2
-},
-"ret_5d": null,
-"ret_21d": null
-},
-{
-"date": "2026-11-07",
-"ticker": "STMMI.MI",
-"kind": "long",
-"price": 37.095,
-"conv": 55,
-"factors": {
-"discount": 46.5105,
-"histcheap": 0.17,
-"riskadj": 1.37,
-"ddpen": -20.21,
-"momentum": 16.0652,
-"prob": 57,
-"quality": 60.4,
-"valcheap": -1.2937,
-"trappen": 2
-},
-"ret_5d": null,
-"ret_21d": null
-},
-{
-"date": "2026-11-07",
-"ticker": "TIT.MI",
-"kind": "long",
-"price": 5.761,
-"conv": 24,
-"factors": {
-"discount": 29.2173,
-"histcheap": 0.74,
-"riskadj": 0.77,
-"ddpen": -10.47,
-"momentum": -0.0869,
-"prob": 39,
-"quality": 30.8,
-"valcheap": -0.4882,
-"trappen": 1
-},
-"ret_5d": null,
-"ret_21d": null
-},
-{
-"date": "2026-11-07",
-"ticker": "LDO.MI",
-"kind": "long",
-"price": 49.355,
-"conv": 38,
-"factors": {
-"discount": 23.1948,
-"histcheap": 0.84,
-"riskadj": -0.14,
-"ddpen": -15.67,
-"momentum": 4.7385,
-"prob": 57,
-"quality": 54.9,
-"valcheap": -0.6878,
-"trappen": 1
-},
-"ret_5d": null,
-"ret_21d": null
-},
-{
-"date": "2026-11-07",
-"ticker": "SPY",
-"kind": "long",
-"price": 735.29,
-"conv": 53,
-"factors": {
-"discount": 5.6219,
-"histcheap": -0.37,
-"riskadj": 0.61,
-"ddpen": -2.28,
-"momentum": 2.7034,
-"prob": 88,
-"quality": null,
-"valcheap": null,
-"trappen": null
-},
-"ret_5d": null,
-"ret_21d": null
-},
-{
-"date": "2026-11-07",
-"ticker": "QQQ",
-"kind": "long",
-"price": 656.1,
-"conv": 55,
-"factors": {
-"discount": 13.6324,
-"histcheap": 0.21,
-"riskadj": 0.27,
-"ddpen": -4.34,
-"momentum": 4.9805,
-"prob": 73,
-"quality": null,
-"valcheap": null,
-"trappen": null
-},
-"ret_5d": null,
-"ret_21d": null
-},
-{
-"date": "2026-11-07",
-"ticker": "VOO",
-"kind": "long",
-"price": 675.99,
-"conv": 53,
-"factors": {
-"discount": 5.6144,
-"histcheap": -0.37,
-"riskadj": 0.61,
-"ddpen": -2.26,
-"momentum": 2.7087,
-"prob": 84,
-"quality": null,
-"valcheap": null,
-"trappen": null
-},
-"ret_5d": null,
-"ret_21d": null
-},
-{
-"date": "2026-11-07",
-"ticker": "VTI",
-"kind": "long",
-"price": 361.93,
-"conv": 53,
-"factors": {
-"discount": 5.821,
-"histcheap": -0.35,
-"riskadj": 0.61,
-"ddpen": -2.3,
-"momentum": 2.5944,
-"prob": 88,
-"quality": null,
-"valcheap": null,
-"trappen": null
-},
-"ret_5d": null,
-"ret_21d": null
-},
-{
-"date": "2026-11-07",
-"ticker": "IWM",
-"kind": "long",
-"price": 273.67,
-"conv": 56,
-"factors": {
-"discount": 10.2986,
-"histcheap": -0.03,
-"riskadj": 0.78,
-"ddpen": -4.57,
-"momentum": 2.0263,
-"prob": 84,
-"quality": null,
-"valcheap": null,
-"trappen": null
-},
-"ret_5d": null,
-"ret_21d": null
-},
-{
-"date": "2026-11-07",
-"ticker": "DIA",
-"kind": "long",
-"price": 512.22,
-"conv": 51,
-"factors": {
-"discount": 5.6355,
-"histcheap": -0.49,
-"riskadj": 0.64,
-"ddpen": -3.27,
-"momentum": 0.9495,
-"prob": 83,
-"quality": null,
-"valcheap": null,
-"trappen": null
-},
-"ret_5d": null,
-"ret_21d": null
-},
-{
-"date": "2026-11-07",
-"ticker": "VEA",
-"kind": "long",
-"price": 67.9,
-"conv": 55,
-"factors": {
-"discount": 7.9821,
-"histcheap": 0.06,
-"riskadj": 0.67,
-"ddpen": -3.67,
-"momentum": 2.2177,
-"prob": 82,
-"quality": null,
-"valcheap": null,
-"trappen": null
-},
-"ret_5d": null,
-"ret_21d": null
-},
-{
-"date": "2026-11-07",
-"ticker": "VWO",
-"kind": "long",
-"price": 55.29,
-"conv": 48,
-"factors": {
-"discount": 10.0098,
-"histcheap": 0.92,
-"riskadj": -0.13,
-"ddpen": -4.06,
-"momentum": 0.3963,
-"prob": 46,
-"quality": null,
-"valcheap": null,
-"trappen": null
-},
-"ret_5d": null,
-"ret_21d": null
-},
-{
-"date": "2026-11-07",
-"ticker": "EFA",
-"kind": "long",
-"price": 101.89,
-"conv": 51,
-"factors": {
-"discount": 6.3597,
-"histcheap": -0.0,
-"riskadj": 0.45,
-"ddpen": -3.53,
-"momentum": 1.4318,
-"prob": 74,
-"quality": null,
-"valcheap": null,
-"trappen": null
-},
-"ret_5d": null,
-"ret_21d": null
-},
-{
-"date": "2026-11-07",
-"ticker": "EEM",
-"kind": "long",
-"price": 59.33,
-"conv": 55,
-"factors": {
-"discount": 16.683,
-"histcheap": 0.57,
-"riskadj": 0.27,
-"ddpen": -6.4,
-"momentum": 2.8014,
-"prob": 65,
-"quality": null,
-"valcheap": null,
-"trappen": null
-},
-"ret_5d": null,
-"ret_21d": null
-},
-{
-"date": "2026-11-07",
-"ticker": "XLK",
-"kind": "long",
-"price": 164.74,
-"conv": 46,
-"factors": {
-"discount": 18.4455,
-"histcheap": 0.01,
-"riskadj": 0.5,
-"ddpen": -6.25,
-"momentum": 8.2279,
-"prob": 77,
-"quality": null,
-"valcheap": -1.6008,
-"trappen": null
-},
-"ret_5d": null,
-"ret_21d": null
-},
-{
-"date": "2026-11-07",
-"ticker": "XLF",
-"kind": "long",
-"price": 57.16,
-"conv": 43,
-"factors": {
-"discount": 3.4459,
-"histcheap": -1.31,
-"riskadj": 0.5,
-"ddpen": -6.32,
-"momentum": -1.1502,
-"prob": 67,
-"quality": null,
-"valcheap": 0.0721,
-"trappen": null
-},
-"ret_5d": null,
-"ret_21d": null
-},
-{
-"date": "2026-11-07",
-"ticker": "XLE",
-"kind": "long",
-"price": 61.62,
-"conv": 69,
-"factors": {
-"discount": 11.9966,
-"histcheap": -0.77,
-"riskadj": 1.8,
-"ddpen": -5.88,
-"momentum": 11.9966,
-"prob": 96,
-"quality": null,
-"valcheap": 0.2686,
-"trappen": null
-},
-"ret_5d": null,
-"ret_21d": null
-},
-{
-"date": "2026-11-07",
-"ticker": "XLV",
-"kind": "long",
-"price": 184.8,
-"conv": 35,
-"factors": {
-"discount": 2.5625,
-"histcheap": -2.57,
-"riskadj": 2.42,
-"ddpen": -4.75,
-"momentum": 0.0379,
-"prob": 89,
-"quality": null,
-"valcheap": -1.725,
-"trappen": null
-},
-"ret_5d": null,
-"ret_21d": null
-},
-{
-"date": "2026-11-07",
-"ticker": "KGC",
-"kind": "long",
-"price": 22.24,
-"conv": 48,
-"factors": {
-"discount": 41.5813,
-"histcheap": 1.53,
-"riskadj": -0.3,
-"ddpen": -24.73,
-"momentum": -10.4819,
-"prob": 21,
-"quality": 75.8,
-"valcheap": 0.2972,
-"trappen": 0
-},
-"ret_5d": null,
-"ret_21d": null
-},
-{
-"date": "2026-11-07",
 "ticker": "PBR-A",
 "kind": "long",
 "price": 16.4,
@@ -39286,6 +38886,363 @@
 "quality": 75.3,
 "valcheap": -0.2478,
 "trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-16",
+"ticker": "DY",
+"kind": "short",
+"price": 221.54,
+"conv": 49,
+"factors": {
+"discount": 58.6061,
+"histcheap": 2.03,
+"riskadj": -0.85,
+"ddpen": -27.0,
+"momentum": -6.756,
+"prob": 32,
+"oversold": -41.9973,
+"rebound": 16.5315,
+"trend": -1.0,
+"relstrength": 4.2507
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-16",
+"ticker": "ACAD",
+"kind": "short",
+"price": 18.75,
+"conv": 57,
+"factors": {
+"discount": 38.6654,
+"histcheap": 1.71,
+"riskadj": -0.66,
+"ddpen": -19.58,
+"momentum": 11.6816,
+"prob": 44,
+"oversold": -42.0376,
+"rebound": 16.1909,
+"trend": -1.0,
+"relstrength": -14.1868
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-16",
+"ticker": "NMIH",
+"kind": "short",
+"price": 38.65,
+"conv": 65,
+"factors": {
+"discount": 15.4452,
+"histcheap": 0.55,
+"riskadj": -0.01,
+"ddpen": -7.67,
+"momentum": 0.9736,
+"prob": 53,
+"oversold": -36.6405,
+"rebound": 7.2158,
+"trend": -1.0,
+"relstrength": -3.4789
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-16",
+"ticker": "CRS",
+"kind": "short",
+"price": 291.57,
+"conv": 57,
+"factors": {
+"discount": 52.9156,
+"histcheap": 1.38,
+"riskadj": -0.4,
+"ddpen": -20.13,
+"momentum": -4.7645,
+"prob": 44,
+"oversold": -37.242,
+"rebound": 24.8302,
+"trend": -1.0,
+"relstrength": 2.2592
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-16",
+"ticker": "BA",
+"kind": "short",
+"price": 171.5,
+"conv": 65,
+"factors": {
+"discount": 31.9849,
+"histcheap": 2.19,
+"riskadj": -0.68,
+"ddpen": -15.26,
+"momentum": 1.0957,
+"prob": 45,
+"oversold": -37.7738,
+"rebound": 10.0971,
+"trend": -1.0,
+"relstrength": -3.601
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-16",
+"ticker": "AIT",
+"kind": "short",
+"price": 297.6,
+"conv": 60,
+"factors": {
+"discount": 17.7787,
+"histcheap": 0.1,
+"riskadj": 0.64,
+"ddpen": -6.9,
+"momentum": -5.0143,
+"prob": 50,
+"oversold": -42.4478,
+"rebound": 7.6893,
+"trend": -1.0,
+"relstrength": 2.509
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-16",
+"ticker": "FFIV",
+"kind": "short",
+"price": 309.14,
+"conv": 71,
+"factors": {
+"discount": 35.573,
+"histcheap": 0.48,
+"riskadj": 0.64,
+"ddpen": -8.42,
+"momentum": 0.5469,
+"prob": 55,
+"oversold": -24.1025,
+"rebound": 33.8221,
+"trend": -1.0,
+"relstrength": -3.0522
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-16",
+"ticker": "FTNT",
+"kind": "short",
+"price": 127.22,
+"conv": 62,
+"factors": {
+"discount": 34.6752,
+"histcheap": -0.17,
+"riskadj": 1.02,
+"ddpen": -9.69,
+"momentum": -7.0515,
+"prob": 42,
+"oversold": -32.7949,
+"rebound": 29.2885,
+"trend": -1.0,
+"relstrength": 4.5462
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-16",
+"ticker": "GOOG",
+"kind": "short",
+"price": 292.52,
+"conv": 63,
+"factors": {
+"discount": 26.6941,
+"histcheap": 1.44,
+"riskadj": 0.1,
+"ddpen": -12.16,
+"momentum": -3.0254,
+"prob": 38,
+"oversold": -39.4584,
+"rebound": 11.1413,
+"trend": -1.0,
+"relstrength": 0.5201
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-16",
+"ticker": "GOOGL",
+"kind": "short",
+"price": 295.77,
+"conv": 62,
+"factors": {
+"discount": 26.5387,
+"histcheap": 1.33,
+"riskadj": 0.15,
+"ddpen": -12.16,
+"momentum": -3.8591,
+"prob": 36,
+"oversold": -40.5806,
+"rebound": 10.9598,
+"trend": -1.0,
+"relstrength": 1.3538
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-16",
+"ticker": "TFII",
+"kind": "short",
+"price": 95.99,
+"conv": 62,
+"factors": {
+"discount": 41.2402,
+"histcheap": 1.39,
+"riskadj": 0.24,
+"ddpen": -15.9,
+"momentum": -1.106,
+"prob": 38,
+"oversold": -33.6052,
+"rebound": 19.5231,
+"trend": -1.0,
+"relstrength": -1.3993
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-16",
+"ticker": "TWLO",
+"kind": "short",
+"price": 211.21,
+"conv": 60,
+"factors": {
+"discount": 29.8934,
+"histcheap": -0.57,
+"riskadj": 1.2,
+"ddpen": -13.2,
+"momentum": -4.5491,
+"prob": 30,
+"oversold": -38.6102,
+"rebound": 19.5175,
+"trend": 1.0,
+"relstrength": 2.0438
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-16",
+"ticker": "KRYS",
+"kind": "short",
+"price": 305.23,
+"conv": 55,
+"factors": {
+"discount": 19.2833,
+"histcheap": -0.2,
+"riskadj": 1.25,
+"ddpen": -9.13,
+"momentum": -1.4458,
+"prob": 43,
+"oversold": -43.0325,
+"rebound": 7.0555,
+"trend": -1.0,
+"relstrength": -1.0595
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-16",
+"ticker": "DT",
+"kind": "short",
+"price": 44.8,
+"conv": 68,
+"factors": {
+"discount": 31.341,
+"histcheap": -0.04,
+"riskadj": -0.2,
+"ddpen": -14.72,
+"momentum": -3.1308,
+"prob": 49,
+"oversold": -26.6788,
+"rebound": 25.825,
+"trend": 1.0,
+"relstrength": 0.6255
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-16",
+"ticker": "NRIX",
+"kind": "short",
+"price": 15.48,
+"conv": 62,
+"factors": {
+"discount": 44.2965,
+"histcheap": 1.02,
+"riskadj": 0.22,
+"ddpen": -18.94,
+"momentum": -1.1765,
+"prob": 40,
+"oversold": -26.7667,
+"rebound": 50.3043,
+"trend": -1.0,
+"relstrength": -1.3288
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-16",
+"ticker": "MCHP",
+"kind": "short",
+"price": 61.68,
+"conv": 58,
+"factors": {
+"discount": 40.07,
+"histcheap": 1.29,
+"riskadj": 0.33,
+"ddpen": -18.01,
+"momentum": -5.7069,
+"prob": 40,
+"oversold": -34.84,
+"rebound": 19.535,
+"trend": -1.0,
+"relstrength": 3.2017
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-16",
+"ticker": "ARWR",
+"kind": "short",
+"price": 47.78,
+"conv": 67,
+"factors": {
+"discount": 46.6682,
+"histcheap": 1.93,
+"riskadj": 0.29,
+"ddpen": -16.2,
+"momentum": 17.8473,
+"prob": 29,
+"oversold": -25.9418,
+"rebound": 32.5304,
+"trend": -1.0,
+"relstrength": -20.3526
 },
 "ret_5d": null,
 "ret_21d": null
