@@ -1,5 +1,5 @@
 {
-"aggiornato": "2026-11-15 21:44",
+"aggiornato": "2026-11-16 01:33",
 "osservazione": [
 {
 "t": "CABO",
@@ -26,18 +26,6 @@
 "affid": ""
 },
 {
-"t": "STMMI.MI",
-"nome": "STMICROELECTRONICS",
-"tipo": "long",
-"giorni": 3,
-"rend": 11.4,
-"conv": 32.0,
-"dconv": -18.0,
-"run": 1,
-"mancano": 4,
-"affid": "🟡 Media"
-},
-{
 "t": "CAR",
 "nome": "CAR",
 "tipo": "short",
@@ -48,6 +36,18 @@
 "run": 0,
 "mancano": 0,
 "affid": ""
+},
+{
+"t": "NU",
+"nome": "Nu Holdings Ltd.",
+"tipo": "long",
+"giorni": 3,
+"rend": 9.4,
+"conv": 19.0,
+"dconv": -16.0,
+"run": 3,
+"mancano": 4,
+"affid": "🟡 Media"
 },
 {
 "t": "MIAX",
@@ -62,18 +62,6 @@
 "affid": ""
 },
 {
-"t": "NESR",
-"nome": "National Energy Services Reunited ",
-"tipo": "long",
-"giorni": 3,
-"rend": 8.4,
-"conv": 34.0,
-"dconv": -6.0,
-"run": 3,
-"mancano": 4,
-"affid": "🟡 Media"
-},
-{
 "t": "GENI",
 "nome": "GENI",
 "tipo": "short",
@@ -84,6 +72,18 @@
 "run": 0,
 "mancano": 0,
 "affid": ""
+},
+{
+"t": "MU",
+"nome": "Micron Technology, Inc.",
+"tipo": "long",
+"giorni": 3,
+"rend": 7.3,
+"conv": 49.0,
+"dconv": -14.0,
+"run": 5,
+"mancano": 4,
+"affid": "🔴 Bassa"
 },
 {
 "t": "CXM",
@@ -113,37 +113,37 @@
 "t": "PR",
 "nome": "Permian Resources Corporation",
 "tipo": "long",
-"giorni": 3,
-"rend": 7.1,
+"giorni": 2,
+"rend": 6.1,
 "conv": 33.0,
-"dconv": -23.0,
+"dconv": -12.0,
 "run": 1,
-"mancano": 4,
+"mancano": 5,
 "affid": "🟢 Alta"
 },
 {
-"t": "NU",
-"nome": "Nu Holdings Ltd.",
-"tipo": "long",
-"giorni": 3,
-"rend": 7.0,
-"conv": 19.0,
-"dconv": -28.0,
-"run": 2,
-"mancano": 4,
-"affid": "🟡 Media"
+"t": "STMMI.MI",
+"nome": "STMMI.MI",
+"tipo": "short",
+"giorni": 2,
+"rend": 5.8,
+"conv": null,
+"dconv": 0.0,
+"run": 0,
+"mancano": 1,
+"affid": ""
 },
 {
-"t": "MU",
-"nome": "Micron Technology, Inc.",
+"t": "STMMI.MI",
+"nome": "STMICROELECTRONICS",
 "tipo": "long",
 "giorni": 3,
-"rend": 6.2,
-"conv": 49.0,
-"dconv": -19.0,
-"run": 4,
+"rend": 5.8,
+"conv": 32.0,
+"dconv": -12.0,
+"run": 1,
 "mancano": 4,
-"affid": "🔴 Bassa"
+"affid": "🟡 Media"
 },
 {
 "t": "INIO",
@@ -170,26 +170,14 @@
 "affid": ""
 },
 {
-"t": "OXY",
-"nome": "Occidental Petroleum Corp",
-"tipo": "long",
-"giorni": 3,
-"rend": 5.4,
-"conv": 62.0,
-"dconv": 2.0,
-"run": 3,
-"mancano": 4,
-"affid": "🟡 Media"
-},
-{
 "t": "CVE",
 "nome": "Cenovus Energy Incorporation",
 "tipo": "long",
 "giorni": 3,
-"rend": 5.4,
+"rend": 5.1,
 "conv": 52.0,
-"dconv": -12.0,
-"run": 3,
+"dconv": -7.0,
+"run": 4,
 "mancano": 4,
 "affid": "🟡 Media"
 },
@@ -254,27 +242,15 @@
 "affid": ""
 },
 {
-"t": "LDO.MI",
-"nome": "LEONARDO",
-"tipo": "long",
-"giorni": 3,
-"rend": 4.2,
-"conv": 43.0,
-"dconv": -6.0,
-"run": 2,
-"mancano": 4,
-"affid": "🟡 Media"
-},
-{
 "t": "FIS",
 "nome": "Fidelity National Information Serv",
 "tipo": "long",
-"giorni": 3,
-"rend": 4.2,
+"giorni": 2,
+"rend": 4.3,
 "conv": null,
 "dconv": 0.0,
 "run": 0,
-"mancano": 4,
+"mancano": 5,
 "affid": ""
 },
 {
@@ -290,23 +266,23 @@
 "affid": "🔴 Bassa"
 },
 {
+"t": "NESR",
+"nome": "National Energy Services Reunited ",
+"tipo": "long",
+"giorni": 3,
+"rend": 4.0,
+"conv": 34.0,
+"dconv": -7.0,
+"run": 4,
+"mancano": 4,
+"affid": "🟡 Media"
+},
+{
 "t": "ADTN",
 "nome": "ADTN",
 "tipo": "short",
 "giorni": 3,
 "rend": 3.9,
-"conv": null,
-"dconv": 0.0,
-"run": 0,
-"mancano": 0,
-"affid": ""
-},
-{
-"t": "STMMI.MI",
-"nome": "STMMI.MI",
-"tipo": "short",
-"giorni": 3,
-"rend": 3.6,
 "conv": null,
 "dconv": 0.0,
 "run": 0,
@@ -326,16 +302,16 @@
 "affid": ""
 },
 {
-"t": "UMC",
-"nome": "United Microelectronics Corp",
+"t": "BKR",
+"nome": "Baker Hughes Company",
 "tipo": "long",
 "giorni": 3,
-"rend": 3.4,
-"conv": 37.0,
-"dconv": -24.0,
-"run": 2,
+"rend": 3.5,
+"conv": 27.0,
+"dconv": -17.0,
+"run": 1,
 "mancano": 4,
-"affid": "🔴 Bassa"
+"affid": "🟡 Media"
 },
 {
 "t": "AGNC",
@@ -348,6 +324,18 @@
 "run": 0,
 "mancano": 0,
 "affid": ""
+},
+{
+"t": "PATH",
+"nome": "UiPath Inc",
+"tipo": "long",
+"giorni": 3,
+"rend": 3.4,
+"conv": 50.0,
+"dconv": -2.0,
+"run": 5,
+"mancano": 4,
+"affid": "🔴 Bassa"
 },
 {
 "t": "TRIP",
@@ -374,6 +362,18 @@
 "affid": ""
 },
 {
+"t": "OXY",
+"nome": "Occidental Petroleum Corp",
+"tipo": "long",
+"giorni": 2,
+"rend": 3.3,
+"conv": 62.0,
+"dconv": 2.0,
+"run": 2,
+"mancano": 5,
+"affid": "🟡 Media"
+},
+{
 "t": "PAYX",
 "nome": "PAYX",
 "tipo": "short",
@@ -384,6 +384,18 @@
 "run": 2,
 "mancano": 0,
 "affid": "🟢 Alta"
+},
+{
+"t": "DT",
+"nome": "DT",
+"tipo": "short",
+"giorni": 2,
+"rend": 3.0,
+"conv": 64.0,
+"dconv": 5.0,
+"run": 2,
+"mancano": 1,
+"affid": "🟡 Media"
 },
 {
 "t": "MWA",
@@ -446,6 +458,18 @@
 "affid": "🟢 Alta"
 },
 {
+"t": "UMC",
+"nome": "United Microelectronics Corp",
+"tipo": "long",
+"giorni": 3,
+"rend": 2.4,
+"conv": 37.0,
+"dconv": -13.0,
+"run": 3,
+"mancano": 4,
+"affid": "🔴 Bassa"
+},
+{
 "t": "AXGN",
 "nome": "AXGN",
 "tipo": "short",
@@ -482,32 +506,8 @@
 "affid": "🔴 Bassa"
 },
 {
-"t": "PATH",
-"nome": "UiPath Inc",
-"tipo": "long",
-"giorni": 3,
-"rend": 2.2,
-"conv": 50.0,
-"dconv": -4.0,
-"run": 4,
-"mancano": 4,
-"affid": "🔴 Bassa"
-},
-{
 "t": "ESRT",
 "nome": "ESRT",
-"tipo": "short",
-"giorni": 3,
-"rend": 2.2,
-"conv": null,
-"dconv": 0.0,
-"run": 0,
-"mancano": 0,
-"affid": ""
-},
-{
-"t": "TIT.MI",
-"nome": "TIT.MI",
 "tipo": "short",
 "giorni": 3,
 "rend": 2.2,
@@ -528,6 +528,18 @@
 "run": 0,
 "mancano": 0,
 "affid": ""
+},
+{
+"t": "WDC",
+"nome": "Western Digital Corp",
+"tipo": "long",
+"giorni": 2,
+"rend": 2.2,
+"conv": 48.0,
+"dconv": -12.0,
+"run": 1,
+"mancano": 5,
+"affid": "🔴 Bassa"
 },
 {
 "t": "EIX",
@@ -554,28 +566,16 @@
 "affid": ""
 },
 {
-"t": "BMY",
-"nome": "Bristol-Myers Squibb Co",
-"tipo": "long",
-"giorni": 3,
-"rend": 2.1,
+"t": "TIT.MI",
+"nome": "TIT.MI",
+"tipo": "short",
+"giorni": 2,
+"rend": 2.0,
 "conv": null,
 "dconv": 0.0,
 "run": 0,
-"mancano": 4,
+"mancano": 1,
 "affid": ""
-},
-{
-"t": "WDC",
-"nome": "Western Digital Corp",
-"tipo": "long",
-"giorni": 3,
-"rend": 2.0,
-"conv": 48.0,
-"dconv": -16.0,
-"run": 1,
-"mancano": 4,
-"affid": "🔴 Bassa"
 },
 {
 "t": "MMYT",
@@ -590,16 +590,28 @@
 "affid": ""
 },
 {
-"t": "BKR",
-"nome": "Baker Hughes Company",
+"t": "TAL",
+"nome": "TAL Education Group",
 "tipo": "long",
 "giorni": 3,
 "rend": 2.0,
-"conv": 27.0,
-"dconv": -20.0,
-"run": 2,
+"conv": 73.0,
+"dconv": 0.0,
+"run": 4,
 "mancano": 4,
 "affid": "🟡 Media"
+},
+{
+"t": "ITUB",
+"nome": "Itau Unibanco Holding SA",
+"tipo": "long",
+"giorni": 2,
+"rend": 1.9,
+"conv": null,
+"dconv": 0.0,
+"run": 0,
+"mancano": 5,
+"affid": ""
 },
 {
 "t": "STUB",
@@ -636,18 +648,6 @@
 "run": 1,
 "mancano": 0,
 "affid": "🟢 Alta"
-},
-{
-"t": "DT",
-"nome": "DT",
-"tipo": "short",
-"giorni": 3,
-"rend": 1.9,
-"conv": 64.0,
-"dconv": 8.0,
-"run": 3,
-"mancano": 0,
-"affid": "🟡 Media"
 },
 {
 "t": "AXON",
@@ -710,18 +710,6 @@
 "affid": "🟢 Alta"
 },
 {
-"t": "DKS",
-"nome": "DICK'S Sporting Goods Inc",
-"tipo": "long",
-"giorni": 3,
-"rend": 1.4,
-"conv": null,
-"dconv": 0.0,
-"run": 0,
-"mancano": 4,
-"affid": ""
-},
-{
 "t": "AXTI",
 "nome": "AXTI",
 "tipo": "short",
@@ -734,6 +722,30 @@
 "affid": ""
 },
 {
+"t": "DY",
+"nome": "DY",
+"tipo": "short",
+"giorni": 2,
+"rend": 1.3,
+"conv": null,
+"dconv": 0.0,
+"run": 0,
+"mancano": 1,
+"affid": ""
+},
+{
+"t": "DY",
+"nome": "Dycom Industries Inc",
+"tipo": "long",
+"giorni": 3,
+"rend": 1.3,
+"conv": 45.0,
+"dconv": -1.0,
+"run": 3,
+"mancano": 4,
+"affid": "🟡 Media"
+},
+{
 "t": "FUN",
 "nome": "FUN",
 "tipo": "short",
@@ -743,6 +755,42 @@
 "dconv": 0.0,
 "run": 0,
 "mancano": 0,
+"affid": ""
+},
+{
+"t": "DAVE",
+"nome": "Dave Inc.",
+"tipo": "long",
+"giorni": 3,
+"rend": 1.2,
+"conv": 48.0,
+"dconv": -16.0,
+"run": 1,
+"mancano": 4,
+"affid": "🔴 Bassa"
+},
+{
+"t": "AEO",
+"nome": "American Eagle Outfitters, Inc.",
+"tipo": "long",
+"giorni": 3,
+"rend": 1.1,
+"conv": 50.0,
+"dconv": -2.0,
+"run": 4,
+"mancano": 4,
+"affid": "🟡 Media"
+},
+{
+"t": "ENEL.MI",
+"nome": "ENEL.MI",
+"tipo": "short",
+"giorni": 2,
+"rend": 1.0,
+"conv": null,
+"dconv": 0.0,
+"run": 0,
+"mancano": 1,
 "affid": ""
 },
 {
@@ -770,16 +818,16 @@
 "affid": "🟡 Media"
 },
 {
-"t": "ECG",
-"nome": "Everus Construction Group, Inc.",
+"t": "BMY",
+"nome": "Bristol-Myers Squibb Co",
 "tipo": "long",
-"giorni": 3,
+"giorni": 2,
 "rend": 1.0,
-"conv": 46.0,
-"dconv": -18.0,
-"run": 4,
-"mancano": 4,
-"affid": "🔴 Bassa"
+"conv": null,
+"dconv": 0.0,
+"run": 0,
+"mancano": 5,
+"affid": ""
 },
 {
 "t": "MNSO",
@@ -794,27 +842,15 @@
 "affid": "🟡 Media"
 },
 {
-"t": "HST",
-"nome": "HOST HOTELS & RESORTS, INC.",
+"t": "PYPL",
+"nome": "PayPal Holdings, Inc.",
 "tipo": "long",
-"giorni": 3,
+"giorni": 2,
 "rend": 0.9,
-"conv": null,
-"dconv": 0.0,
-"run": 0,
-"mancano": 4,
-"affid": ""
-},
-{
-"t": "ENVA",
-"nome": "Enova International, Inc.",
-"tipo": "long",
-"giorni": 3,
-"rend": 0.9,
-"conv": 66.0,
-"dconv": -3.0,
-"run": 6,
-"mancano": 4,
+"conv": 36.0,
+"dconv": -17.0,
+"run": 1,
+"mancano": 5,
 "affid": "🟡 Media"
 },
 {
@@ -828,18 +864,6 @@
 "run": 0,
 "mancano": 0,
 "affid": ""
-},
-{
-"t": "TAL",
-"nome": "TAL Education Group",
-"tipo": "long",
-"giorni": 3,
-"rend": 0.9,
-"conv": 58.0,
-"dconv": -1.0,
-"run": 3,
-"mancano": 4,
-"affid": "🟡 Media"
 },
 {
 "t": "DUOL",
@@ -866,18 +890,6 @@
 "affid": ""
 },
 {
-"t": "PCG",
-"nome": "PG&E Corp",
-"tipo": "long",
-"giorni": 3,
-"rend": 0.8,
-"conv": 58.0,
-"dconv": -2.0,
-"run": 2,
-"mancano": 4,
-"affid": "🟡 Media"
-},
-{
 "t": "MTG",
 "nome": "MTG",
 "tipo": "short",
@@ -890,28 +902,16 @@
 "affid": ""
 },
 {
-"t": "DY",
-"nome": "DY",
-"tipo": "short",
-"giorni": 3,
-"rend": 0.7,
-"conv": 45.0,
-"dconv": 0.0,
-"run": 1,
-"mancano": 0,
-"affid": "🟡 Media"
-},
-{
-"t": "DY",
-"nome": "Dycom Industries Inc",
+"t": "LYG",
+"nome": "Lloyds Banking Group PLC",
 "tipo": "long",
-"giorni": 3,
-"rend": 0.7,
-"conv": 45.0,
-"dconv": -5.0,
-"run": 3,
-"mancano": 4,
-"affid": "🟡 Media"
+"giorni": 2,
+"rend": 0.8,
+"conv": null,
+"dconv": 0.0,
+"run": 0,
+"mancano": 5,
+"affid": ""
 },
 {
 "t": "NVO",
@@ -926,16 +926,16 @@
 "affid": ""
 },
 {
-"t": "ENEL.MI",
-"nome": "ENEL.MI",
-"tipo": "short",
+"t": "ENVA",
+"nome": "Enova International, Inc.",
+"tipo": "long",
 "giorni": 3,
 "rend": 0.6,
-"conv": null,
-"dconv": 0.0,
-"run": 0,
-"mancano": 0,
-"affid": ""
+"conv": 66.0,
+"dconv": -4.0,
+"run": 6,
+"mancano": 4,
+"affid": "🟡 Media"
 },
 {
 "t": "XLI",
@@ -953,12 +953,12 @@
 "t": "HWC",
 "nome": "HWC",
 "tipo": "short",
-"giorni": 1,
+"giorni": 2,
 "rend": 0.6,
-"conv": 66.0,
-"dconv": -1.0,
-"run": 4,
-"mancano": 2,
+"conv": 74.0,
+"dconv": 2.0,
+"run": 5,
+"mancano": 1,
 "affid": "🟢 Alta"
 },
 {
@@ -1034,16 +1034,28 @@
 "affid": ""
 },
 {
-"t": "EIX",
-"nome": "Edison International",
+"t": "PCG",
+"nome": "PG&E Corp",
 "tipo": "long",
 "giorni": 3,
-"rend": 0.1,
-"conv": 62.0,
-"dconv": -7.0,
+"rend": 0.2,
+"conv": 58.0,
+"dconv": -8.0,
 "run": 2,
 "mancano": 4,
 "affid": "🟡 Media"
+},
+{
+"t": "BBD",
+"nome": "Banco Bradesco SA",
+"tipo": "long",
+"giorni": 2,
+"rend": 0.0,
+"conv": null,
+"dconv": 0.0,
+"run": 0,
+"mancano": 5,
+"affid": ""
 },
 {
 "t": "HBM",
@@ -1104,6 +1116,18 @@
 "run": 1,
 "mancano": 3,
 "affid": "🟢 Alta"
+},
+{
+"t": "EIX",
+"nome": "EDISON INTERNATIONAL",
+"tipo": "long",
+"giorni": 3,
+"rend": -0.0,
+"conv": 48.0,
+"dconv": -11.0,
+"run": 3,
+"mancano": 4,
+"affid": "🟡 Media"
 },
 {
 "t": "AON",
@@ -1169,24 +1193,24 @@
 "t": "DELL",
 "nome": "DELL",
 "tipo": "short",
-"giorni": 0,
+"giorni": 1,
 "rend": 0.0,
-"conv": 60.0,
-"dconv": -1.0,
-"run": 2,
-"mancano": 3,
+"conv": 65.0,
+"dconv": 0.0,
+"run": 3,
+"mancano": 2,
 "affid": "🔴 Bassa"
 },
 {
 "t": "PAAS",
 "nome": "Pan American Silver Corp",
 "tipo": "long",
-"giorni": 0,
+"giorni": 1,
 "rend": 0.0,
 "conv": 75.0,
 "dconv": 0.0,
-"run": 1,
-"mancano": 7,
+"run": 2,
+"mancano": 6,
 "affid": "🟡 Media"
 },
 {
@@ -1214,16 +1238,16 @@
 "affid": "🟢 Alta"
 },
 {
-"t": "AEO",
-"nome": "American Eagle Outfitters, Inc.",
+"t": "DKS",
+"nome": "DICK'S Sporting Goods Inc",
 "tipo": "long",
-"giorni": 3,
+"giorni": 2,
 "rend": -0.2,
-"conv": 50.0,
-"dconv": 24.0,
-"run": 4,
-"mancano": 4,
-"affid": "🟡 Media"
+"conv": null,
+"dconv": 0.0,
+"run": 0,
+"mancano": 5,
+"affid": ""
 },
 {
 "t": "MOMO",
@@ -1262,18 +1286,6 @@
 "affid": ""
 },
 {
-"t": "BCE",
-"nome": "BCE Inc",
-"tipo": "long",
-"giorni": 3,
-"rend": -0.3,
-"conv": 57.0,
-"dconv": -1.0,
-"run": 2,
-"mancano": 4,
-"affid": "🟢 Alta"
-},
-{
 "t": "HL",
 "nome": "Hecla Mining Co",
 "tipo": "long",
@@ -1284,18 +1296,6 @@
 "run": 2,
 "mancano": 7,
 "affid": "🔴 Bassa"
-},
-{
-"t": "ITUB",
-"nome": "Itau Unibanco Holding SA",
-"tipo": "long",
-"giorni": 3,
-"rend": -0.4,
-"conv": null,
-"dconv": 0.0,
-"run": 0,
-"mancano": 4,
-"affid": ""
 },
 {
 "t": "WMT",
@@ -1334,6 +1334,18 @@
 "affid": "🔴 Bassa"
 },
 {
+"t": "PURR",
+"nome": "Hyperliquid Strategies Inc",
+"tipo": "long",
+"giorni": 2,
+"rend": -0.6,
+"conv": null,
+"dconv": 0.0,
+"run": 0,
+"mancano": 5,
+"affid": ""
+},
+{
 "t": "DYN",
 "nome": "DYN",
 "tipo": "short",
@@ -1370,6 +1382,30 @@
 "affid": "🟡 Media"
 },
 {
+"t": "AA",
+"nome": "Alcoa Corp",
+"tipo": "long",
+"giorni": 3,
+"rend": -0.6,
+"conv": 66.0,
+"dconv": 3.0,
+"run": 6,
+"mancano": 4,
+"affid": "🟡 Media"
+},
+{
+"t": "ECG",
+"nome": "Everus Construction Group, Inc.",
+"tipo": "long",
+"giorni": 3,
+"rend": -0.6,
+"conv": 46.0,
+"dconv": -18.0,
+"run": 5,
+"mancano": 4,
+"affid": "🔴 Bassa"
+},
+{
 "t": "DKS",
 "nome": "DKS",
 "tipo": "short",
@@ -1380,6 +1416,30 @@
 "run": 1,
 "mancano": 3,
 "affid": "🟡 Media"
+},
+{
+"t": "LDO.MI",
+"nome": "LEONARDO",
+"tipo": "long",
+"giorni": 3,
+"rend": -0.7,
+"conv": 33.0,
+"dconv": -10.0,
+"run": 1,
+"mancano": 4,
+"affid": "🟡 Media"
+},
+{
+"t": "LDO.MI",
+"nome": "LDO.MI",
+"tipo": "short",
+"giorni": 2,
+"rend": -0.7,
+"conv": null,
+"dconv": 0.0,
+"run": 0,
+"mancano": 1,
+"affid": ""
 },
 {
 "t": "TSN",
@@ -1490,16 +1550,28 @@
 "affid": "🟡 Media"
 },
 {
-"t": "LYG",
-"nome": "Lloyds Banking Group PLC",
+"t": "BCE",
+"nome": "BCE Inc",
 "tipo": "long",
-"giorni": 3,
+"giorni": 2,
 "rend": -1.0,
-"conv": null,
+"conv": 57.0,
 "dconv": 0.0,
-"run": 0,
-"mancano": 4,
-"affid": ""
+"run": 1,
+"mancano": 5,
+"affid": "🟢 Alta"
+},
+{
+"t": "BA",
+"nome": "BA",
+"tipo": "short",
+"giorni": 2,
+"rend": -1.1,
+"conv": 62.0,
+"dconv": 0.0,
+"run": 1,
+"mancano": 1,
+"affid": "🟡 Media"
 },
 {
 "t": "FN",
@@ -1512,6 +1584,18 @@
 "run": 1,
 "mancano": 7,
 "affid": "🔴 Bassa"
+},
+{
+"t": "QLYS",
+"nome": "Qualys, Inc.",
+"tipo": "long",
+"giorni": 3,
+"rend": -1.2,
+"conv": 56.0,
+"dconv": -2.0,
+"run": 6,
+"mancano": 4,
+"affid": "🟡 Media"
 },
 {
 "t": "F",
@@ -1562,18 +1646,6 @@
 "affid": "🟡 Media"
 },
 {
-"t": "PYPL",
-"nome": "PayPal Holdings, Inc.",
-"tipo": "long",
-"giorni": 3,
-"rend": -1.3,
-"conv": 36.0,
-"dconv": -17.0,
-"run": 1,
-"mancano": 4,
-"affid": "🟡 Media"
-},
-{
 "t": "MGM",
 "nome": "MGM",
 "tipo": "short",
@@ -1607,6 +1679,18 @@
 "dconv": 0.0,
 "run": 0,
 "mancano": 0,
+"affid": ""
+},
+{
+"t": "ISP.MI",
+"nome": "ISP.MI",
+"tipo": "short",
+"giorni": 2,
+"rend": -1.4,
+"conv": null,
+"dconv": 0.0,
+"run": 0,
+"mancano": 1,
 "affid": ""
 },
 {
@@ -1646,6 +1730,18 @@
 "affid": ""
 },
 {
+"t": "HST",
+"nome": "HOST HOTELS & RESORTS, INC.",
+"tipo": "long",
+"giorni": 2,
+"rend": -1.7,
+"conv": null,
+"dconv": 0.0,
+"run": 0,
+"mancano": 5,
+"affid": ""
+},
+{
 "t": "BW",
 "nome": "BW",
 "tipo": "short",
@@ -1682,30 +1778,6 @@
 "affid": ""
 },
 {
-"t": "DAVE",
-"nome": "Dave Inc./DE",
-"tipo": "long",
-"giorni": 3,
-"rend": -2.0,
-"conv": 62.0,
-"dconv": -8.0,
-"run": 2,
-"mancano": 4,
-"affid": "🔴 Bassa"
-},
-{
-"t": "SAN",
-"nome": "Banco Santander SA",
-"tipo": "long",
-"giorni": 3,
-"rend": -2.0,
-"conv": 59.0,
-"dconv": 1.0,
-"run": 5,
-"mancano": 4,
-"affid": "🟡 Media"
-},
-{
 "t": "BAC",
 "nome": "BAC",
 "tipo": "short",
@@ -1730,18 +1802,6 @@
 "affid": ""
 },
 {
-"t": "BBD",
-"nome": "Banco Bradesco SA",
-"tipo": "long",
-"giorni": 3,
-"rend": -2.3,
-"conv": null,
-"dconv": 0.0,
-"run": 0,
-"mancano": 4,
-"affid": ""
-},
-{
 "t": "PSNY",
 "nome": "PSNY",
 "tipo": "short",
@@ -1754,27 +1814,27 @@
 "affid": "🔴 Bassa"
 },
 {
-"t": "PURR",
-"nome": "Hyperliquid Strategies Inc",
-"tipo": "long",
-"giorni": 3,
-"rend": -2.4,
-"conv": null,
-"dconv": 0.0,
-"run": 0,
-"mancano": 4,
-"affid": ""
-},
-{
 "t": "AG",
 "nome": "First Majestic Silver Corp.",
 "tipo": "long",
-"giorni": 0,
+"giorni": 1,
 "rend": -2.4,
 "conv": 70.0,
 "dconv": 6.0,
 "run": 3,
-"mancano": 7,
+"mancano": 6,
+"affid": "🔴 Bassa"
+},
+{
+"t": "ARWR",
+"nome": "ARWR",
+"tipo": "short",
+"giorni": 2,
+"rend": -2.5,
+"conv": 64.0,
+"dconv": 3.0,
+"run": 5,
+"mancano": 1,
 "affid": "🔴 Bassa"
 },
 {
@@ -1802,16 +1862,16 @@
 "affid": ""
 },
 {
-"t": "LDO.MI",
-"nome": "LDO.MI",
-"tipo": "short",
+"t": "SAN",
+"nome": "Banco Santander SA",
+"tipo": "long",
 "giorni": 3,
-"rend": -3.0,
-"conv": null,
-"dconv": 0.0,
-"run": 0,
-"mancano": 0,
-"affid": ""
+"rend": -2.8,
+"conv": 59.0,
+"dconv": 2.0,
+"run": 5,
+"mancano": 4,
+"affid": "🟡 Media"
 },
 {
 "t": "ALKS",
@@ -1826,16 +1886,16 @@
 "affid": "🟡 Media"
 },
 {
-"t": "ARWR",
-"nome": "ARWR",
-"tipo": "short",
+"t": "ONON",
+"nome": "On Holding AG",
+"tipo": "long",
 "giorni": 3,
-"rend": -3.0,
-"conv": 64.0,
-"dconv": 3.0,
+"rend": -3.1,
+"conv": 61.0,
+"dconv": 15.0,
 "run": 6,
-"mancano": 0,
-"affid": "🔴 Bassa"
+"mancano": 4,
+"affid": "🟡 Media"
 },
 {
 "t": "NESR",
@@ -1898,18 +1958,6 @@
 "affid": ""
 },
 {
-"t": "ISP.MI",
-"nome": "ISP.MI",
-"tipo": "short",
-"giorni": 3,
-"rend": -3.4,
-"conv": null,
-"dconv": 0.0,
-"run": 0,
-"mancano": 0,
-"affid": ""
-},
-{
 "t": "ENVA",
 "nome": "ENVA",
 "tipo": "short",
@@ -1925,12 +1973,36 @@
 "t": "DGII",
 "nome": "DGII",
 "tipo": "short",
-"giorni": 1,
+"giorni": 2,
 "rend": -3.5,
-"conv": 63.0,
-"dconv": 1.0,
-"run": 4,
-"mancano": 2,
+"conv": 72.0,
+"dconv": 5.0,
+"run": 5,
+"mancano": 1,
+"affid": "🟡 Media"
+},
+{
+"t": "KGC",
+"nome": "Kinross Gold Corporation",
+"tipo": "long",
+"giorni": 3,
+"rend": -3.6,
+"conv": 58.0,
+"dconv": -0.0,
+"run": 3,
+"mancano": 4,
+"affid": "🟡 Media"
+},
+{
+"t": "NVDA",
+"nome": "NVDA",
+"tipo": "short",
+"giorni": 3,
+"rend": -3.6,
+"conv": 81.0,
+"dconv": 10.0,
+"run": 6,
+"mancano": 0,
 "affid": "🟡 Media"
 },
 {
@@ -1943,6 +2015,42 @@
 "dconv": 0.0,
 "run": 0,
 "mancano": 2,
+"affid": ""
+},
+{
+"t": "ASO",
+"nome": "Academy Sports and Outdoors, Inc.",
+"tipo": "long",
+"giorni": 2,
+"rend": -4.0,
+"conv": null,
+"dconv": 0.0,
+"run": 0,
+"mancano": 5,
+"affid": ""
+},
+{
+"t": "GAP",
+"nome": "GAP, INC",
+"tipo": "long",
+"giorni": 3,
+"rend": -4.1,
+"conv": 45.0,
+"dconv": -14.0,
+"run": 2,
+"mancano": 4,
+"affid": "🟡 Media"
+},
+{
+"t": "LULU",
+"nome": "Lululemon Athletica Inc",
+"tipo": "long",
+"giorni": 2,
+"rend": -4.3,
+"conv": null,
+"dconv": 0.0,
+"run": 0,
+"mancano": 5,
 "affid": ""
 },
 {
@@ -2006,6 +2114,18 @@
 "affid": ""
 },
 {
+"t": "ORC",
+"nome": "Orchid Island Capital Inc",
+"tipo": "long",
+"giorni": 2,
+"rend": -4.5,
+"conv": null,
+"dconv": 0.0,
+"run": 0,
+"mancano": 5,
+"affid": ""
+},
+{
 "t": "STLA",
 "nome": "STLA",
 "tipo": "short",
@@ -2018,52 +2138,28 @@
 "affid": ""
 },
 {
-"t": "ASO",
-"nome": "Academy Sports and Outdoors, Inc.",
+"t": "CCL",
+"nome": "Carnival Corporation Ltd",
 "tipo": "long",
 "giorni": 3,
-"rend": -5.0,
+"rend": -4.9,
+"conv": 46.0,
+"dconv": 11.0,
+"run": 5,
+"mancano": 4,
+"affid": "🟡 Media"
+},
+{
+"t": "SCI",
+"nome": "SCI",
+"tipo": "short",
+"giorni": 3,
+"rend": -5.1,
 "conv": null,
 "dconv": 0.0,
 "run": 0,
-"mancano": 4,
+"mancano": 0,
 "affid": ""
-},
-{
-"t": "AA",
-"nome": "ALCOA CORP",
-"tipo": "long",
-"giorni": 3,
-"rend": -5.0,
-"conv": 64.0,
-"dconv": 5.0,
-"run": 6,
-"mancano": 4,
-"affid": "🟡 Media"
-},
-{
-"t": "CCL",
-"nome": "Carnival Corporation & plc",
-"tipo": "long",
-"giorni": 3,
-"rend": -5.1,
-"conv": 48.0,
-"dconv": 12.0,
-"run": 4,
-"mancano": 4,
-"affid": "🟡 Media"
-},
-{
-"t": "GAP",
-"nome": "The Gap, Inc.",
-"tipo": "long",
-"giorni": 3,
-"rend": -5.2,
-"conv": 68.0,
-"dconv": -14.0,
-"run": 1,
-"mancano": 4,
-"affid": "🟡 Media"
 },
 {
 "t": "YSS",
@@ -2090,6 +2186,18 @@
 "affid": ""
 },
 {
+"t": "NLY",
+"nome": "ANNALY CAPITAL MANAGEMENT INC",
+"tipo": "long",
+"giorni": 2,
+"rend": -5.7,
+"conv": 71.0,
+"dconv": 0.0,
+"run": 1,
+"mancano": 5,
+"affid": "🟢 Alta"
+},
+{
 "t": "TRT",
 "nome": "TRT",
 "tipo": "short",
@@ -2099,6 +2207,18 @@
 "dconv": 0.0,
 "run": 0,
 "mancano": 0,
+"affid": ""
+},
+{
+"t": "AGNC",
+"nome": "AGNC Investment Corp",
+"tipo": "long",
+"giorni": 2,
+"rend": -5.8,
+"conv": null,
+"dconv": 0.0,
+"run": 0,
+"mancano": 5,
 "affid": ""
 },
 {
@@ -2126,18 +2246,6 @@
 "affid": ""
 },
 {
-"t": "LULU",
-"nome": "Lululemon Athletica Inc",
-"tipo": "long",
-"giorni": 3,
-"rend": -6.1,
-"conv": null,
-"dconv": 0.0,
-"run": 0,
-"mancano": 4,
-"affid": ""
-},
-{
 "t": "QURE",
 "nome": "QURE",
 "tipo": "short",
@@ -2148,6 +2256,18 @@
 "run": 0,
 "mancano": 0,
 "affid": ""
+},
+{
+"t": "GFI",
+"nome": "Gold Fields Ltd",
+"tipo": "long",
+"giorni": 3,
+"rend": -6.3,
+"conv": 73.0,
+"dconv": 15.0,
+"run": 5,
+"mancano": 4,
+"affid": "🔴 Bassa"
 },
 {
 "t": "TYRA",
@@ -2162,28 +2282,16 @@
 "affid": "🔴 Bassa"
 },
 {
-"t": "ORC",
-"nome": "Orchid Island Capital Inc",
+"t": "IAG",
+"nome": "IAMGOLD Corp",
 "tipo": "long",
 "giorni": 3,
-"rend": -6.6,
-"conv": null,
-"dconv": 0.0,
-"run": 0,
-"mancano": 4,
-"affid": ""
-},
-{
-"t": "NLY",
-"nome": "ANNALY CAPITAL MANAGEMENT INC",
-"tipo": "long",
-"giorni": 3,
-"rend": -6.9,
+"rend": -6.5,
 "conv": 71.0,
-"dconv": 0.0,
-"run": 1,
+"dconv": 14.0,
+"run": 4,
 "mancano": 4,
-"affid": "🟢 Alta"
+"affid": "🔴 Bassa"
 },
 {
 "t": "NAMS",
@@ -2210,16 +2318,16 @@
 "affid": ""
 },
 {
-"t": "AGNC",
-"nome": "AGNC Investment Corp",
+"t": "HMY",
+"nome": "Harmony Gold Mining Company Lim",
 "tipo": "long",
 "giorni": 3,
 "rend": -7.8,
-"conv": null,
-"dconv": 0.0,
-"run": 0,
+"conv": 72.0,
+"dconv": 9.0,
+"run": 6,
 "mancano": 4,
-"affid": ""
+"affid": "🔴 Bassa"
 },
 {
 "t": "RWT",
@@ -2258,16 +2366,16 @@
 "affid": ""
 },
 {
-"t": "NVDA",
-"nome": "NVDA",
-"tipo": "short",
+"t": "CDE",
+"nome": "Coeur Mining, Inc.",
+"tipo": "long",
 "giorni": 3,
-"rend": -8.9,
-"conv": 73.0,
-"dconv": 10.0,
+"rend": -8.6,
+"conv": 66.0,
+"dconv": 15.0,
 "run": 6,
-"mancano": 0,
-"affid": "🟡 Media"
+"mancano": 4,
+"affid": "🔴 Bassa"
 },
 {
 "t": "ADXN",
@@ -2280,18 +2388,6 @@
 "run": 2,
 "mancano": 2,
 "affid": "🔴 Bassa"
-},
-{
-"t": "KGC",
-"nome": "Kinross Gold Corp",
-"tipo": "long",
-"giorni": 3,
-"rend": -9.1,
-"conv": 76.0,
-"dconv": 14.0,
-"run": 2,
-"mancano": 4,
-"affid": "🟡 Media"
 },
 {
 "t": "CVRX",
@@ -2342,27 +2438,27 @@
 "affid": ""
 },
 {
-"t": "ONON",
-"nome": "On Holding AG",
-"tipo": "long",
-"giorni": 3,
-"rend": -10.4,
-"conv": 66.0,
-"dconv": 24.0,
-"run": 6,
-"mancano": 4,
-"affid": "🟡 Media"
-},
-{
 "t": "STLAM.MI",
 "nome": "STLAM.MI",
 "tipo": "short",
-"giorni": 3,
+"giorni": 2,
 "rend": -11.1,
 "conv": null,
 "dconv": 0.0,
 "run": 0,
-"mancano": 0,
+"mancano": 1,
+"affid": ""
+},
+{
+"t": "STLAM.MI",
+"nome": "STELLANTIS",
+"tipo": "long",
+"giorni": 2,
+"rend": -11.1,
+"conv": null,
+"dconv": 0.0,
+"run": 0,
+"mancano": 5,
 "affid": ""
 },
 {
@@ -2378,42 +2474,6 @@
 "affid": ""
 },
 {
-"t": "STLAM.MI",
-"nome": "STELLANTIS",
-"tipo": "long",
-"giorni": 3,
-"rend": -12.5,
-"conv": null,
-"dconv": 0.0,
-"run": 0,
-"mancano": 4,
-"affid": ""
-},
-{
-"t": "IAG",
-"nome": "IAMGOLD Corp",
-"tipo": "long",
-"giorni": 3,
-"rend": -12.7,
-"conv": 71.0,
-"dconv": 14.0,
-"run": 4,
-"mancano": 4,
-"affid": "🔴 Bassa"
-},
-{
-"t": "GFI",
-"nome": "Gold Fields Ltd",
-"tipo": "long",
-"giorni": 3,
-"rend": -12.9,
-"conv": 73.0,
-"dconv": 24.0,
-"run": 5,
-"mancano": 4,
-"affid": "🔴 Bassa"
-},
-{
 "t": "AVBP",
 "nome": "AVBP",
 "tipo": "short",
@@ -2423,42 +2483,6 @@
 "dconv": 2.0,
 "run": 2,
 "mancano": 0,
-"affid": "🔴 Bassa"
-},
-{
-"t": "HMY",
-"nome": "Harmony Gold Mining Company Ltd",
-"tipo": "long",
-"giorni": 3,
-"rend": -14.3,
-"conv": 77.0,
-"dconv": 19.0,
-"run": 6,
-"mancano": 4,
-"affid": "🔴 Bassa"
-},
-{
-"t": "QLYS",
-"nome": "Qualys, Inc.",
-"tipo": "long",
-"giorni": 3,
-"rend": -14.6,
-"conv": 56.0,
-"dconv": -3.0,
-"run": 5,
-"mancano": 4,
-"affid": "🟡 Media"
-},
-{
-"t": "CDE",
-"nome": "Coeur Mining, Inc.",
-"tipo": "long",
-"giorni": 3,
-"rend": -15.0,
-"conv": 66.0,
-"dconv": 22.0,
-"run": 6,
-"mancano": 4,
 "affid": "🔴 Bassa"
 },
 {
@@ -2477,12 +2501,12 @@
 "t": "CTVA",
 "nome": "Corteva, Inc.",
 "tipo": "long",
-"giorni": 3,
-"rend": -22.1,
+"giorni": 2,
+"rend": -22.5,
 "conv": null,
 "dconv": 0.0,
 "run": 0,
-"mancano": 4,
+"mancano": 5,
 "affid": ""
 },
 {
@@ -2563,14 +2587,14 @@
 "tipo": "long",
 "auto": true,
 "aggiunta": "2026-07-09",
-"conv": 70.0,
+"conv": 75.0,
 "affid": "🟡 Media",
-"salita": 79.0,
-"perdita": 12.0,
+"salita": 72.0,
+"perdita": 17.0,
 "prezzo": 18.34,
 "ingresso": 17.03,
 "rend": 7.7,
-"dconv": 6.0,
+"dconv": 11.0,
 "bersaglio": 18.0156,
 "stop": 16.1299,
 "uscita": "",
@@ -2586,14 +2610,14 @@
 "tipo": "long",
 "auto": true,
 "aggiunta": "2026-07-15",
-"conv": 67.0,
+"conv": 72.0,
 "affid": "🟢 Alta",
-"salita": 54.0,
-"perdita": 27.0,
+"salita": 68.0,
+"perdita": 17.0,
 "prezzo": 22.18,
 "ingresso": 21.43,
 "rend": 3.5,
-"dconv": 1.0,
+"dconv": 6.0,
 "bersaglio": 22.9092,
 "stop": 19.9226,
 "uscita": "",
@@ -2632,19 +2656,19 @@
 "tipo": "long",
 "auto": true,
 "aggiunta": "2026-07-20",
-"conv": 76.0,
+"conv": 81.0,
 "affid": "🟡 Media",
-"salita": 71.0,
-"perdita": 18.0,
+"salita": 76.0,
+"perdita": 13.0,
 "prezzo": 16.03,
 "ingresso": 16.22,
 "rend": -1.2,
-"dconv": 11.0,
+"dconv": 16.0,
 "bersaglio": 19.6936,
 "stop": 15.5051,
-"uscita": "in perdita da 83 giorni di Borsa: valuta l'uscita",
+"uscita": "in perdita da 84 giorni di Borsa: valuta l'uscita",
 "incasso": "",
-"avviso": "⚠️ in perdita da 83 gg",
+"avviso": "⚠️ in perdita da 84 gg",
 "nota": "🤖 Promossa il 2026-07-20: dopo 7 giorni di Borsa di osservazione il prezzo è risalito di +3.6% e la convenienza (79) regge.",
 "mia_soglia": null,
 "soglia_suggerita": 18.5428
@@ -2678,14 +2702,14 @@
 "tipo": "long",
 "auto": true,
 "aggiunta": "2026-07-28",
-"conv": 68.0,
+"conv": 67.0,
 "affid": "🟡 Media",
 "salita": 73.0,
 "perdita": 19.0,
 "prezzo": 113.14,
 "ingresso": 93.47,
 "rend": 21.0,
-"dconv": -9.0,
+"dconv": -10.0,
 "bersaglio": 100.1594,
 "stop": 86.448,
 "uscita": "",
@@ -2701,14 +2725,14 @@
 "tipo": "long",
 "auto": true,
 "aggiunta": "2026-07-30",
-"conv": 61.0,
+"conv": 70.0,
 "affid": "🔴 Bassa",
-"salita": 46.0,
-"perdita": 47.0,
+"salita": 67.0,
+"perdita": 27.0,
 "prezzo": 26.87,
 "ingresso": 25.7,
 "rend": 4.6,
-"dconv": -5.0,
+"dconv": 4.0,
 "bersaglio": 32.494,
 "stop": 20.7668,
 "uscita": "",
@@ -2816,14 +2840,14 @@
 "tipo": "long",
 "auto": true,
 "aggiunta": "2026-08-04",
-"conv": 74.0,
+"conv": 70.0,
 "affid": "🟡 Media",
-"salita": 65.0,
-"perdita": 23.0,
+"salita": 54.0,
+"perdita": 33.0,
 "prezzo": 9.03,
 "ingresso": 8.93,
 "rend": 1.1,
-"dconv": 0.0,
+"dconv": -4.0,
 "bersaglio": 10.6364,
 "stop": 8.1766,
 "uscita": "",
@@ -3263,9 +3287,9 @@
 "dconv": -1.0,
 "bersaglio": 77.3896,
 "stop": 55.2138,
-"uscita": "in perdita da 29 giorni di Borsa: valuta l'uscita",
+"uscita": "in perdita da 30 giorni di Borsa: valuta l'uscita",
 "incasso": "",
-"avviso": "⚠️ in perdita da 29 gg",
+"avviso": "⚠️ in perdita da 30 gg",
 "nota": "🤖 Promossa il 2026-10-05: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +3.1% e la convenienza (66) regge.",
 "mia_soglia": null,
 "soglia_suggerita": 68.8039
@@ -3286,9 +3310,9 @@
 "dconv": -1.0,
 "bersaglio": 77.4088,
 "stop": 62.5649,
-"uscita": "in perdita da 28 giorni di Borsa: valuta l'uscita",
+"uscita": "in perdita da 29 giorni di Borsa: valuta l'uscita",
 "incasso": "",
-"avviso": "⚠️ in perdita da 28 gg",
+"avviso": "⚠️ in perdita da 29 gg",
 "nota": "🤖 Promossa il 2026-10-06: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +4.6% e la convenienza (61) regge.",
 "mia_soglia": null,
 "soglia_suggerita": 76.4269
@@ -3700,9 +3724,9 @@
 "dconv": -2.0,
 "bersaglio": 24.9762,
 "stop": 15.3013,
-"uscita": "in perdita da 10 giorni di Borsa: valuta l'uscita",
+"uscita": "in perdita da 11 giorni di Borsa: valuta l'uscita",
 "incasso": "",
-"avviso": "⚠️ in perdita da 10 gg",
+"avviso": "⚠️ in perdita da 11 gg",
 "nota": "🤖 Promossa il 2026-11-01: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.4% e la convenienza (60) regge.",
 "mia_soglia": null,
 "soglia_suggerita": 20.1623
@@ -3723,9 +3747,9 @@
 "dconv": -3.0,
 "bersaglio": 12.1044,
 "stop": 9.8635,
-"uscita": "in perdita da 9 giorni di Borsa: valuta l'uscita",
+"uscita": "in perdita da 10 giorni di Borsa: valuta l'uscita",
 "incasso": "",
-"avviso": "⚠️ in perdita da 9 gg",
+"avviso": "⚠️ in perdita da 10 gg",
 "nota": "🤖 Promossa il 2026-11-02: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.8% e la convenienza (63) regge.",
 "mia_soglia": null,
 "soglia_suggerita": 12.1228
@@ -3823,52 +3847,6 @@
 "soglia_suggerita": 173.1434
 },
 {
-"t": "SCI",
-"nome": "SCI",
-"tipo": "short",
-"auto": true,
-"aggiunta": "2026-11-03",
-"conv": 70.0,
-"affid": "🟢 Alta",
-"salita": 52.0,
-"perdita": 1.0,
-"prezzo": 74.98,
-"ingresso": 76.37,
-"rend": -1.8,
-"dconv": 2.0,
-"bersaglio": 79.9918,
-"stop": 71.3714,
-"uscita": "in perdita da 8 giorni di Borsa: valuta l'uscita",
-"incasso": "",
-"avviso": "⚠️ in perdita da 8 gg",
-"nota": "🤖 Promossa il 2026-11-03: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +4.9% e la convenienza (67) regge.",
-"mia_soglia": null,
-"soglia_suggerita": 86.7336
-},
-{
-"t": "BA",
-"nome": "BA",
-"tipo": "short",
-"auto": true,
-"aggiunta": "2026-11-03",
-"conv": 80.0,
-"affid": "🟡 Media",
-"salita": 49.0,
-"perdita": 4.0,
-"prezzo": 171.5,
-"ingresso": 175.4,
-"rend": -2.2,
-"dconv": 1.0,
-"bersaglio": 195.3486,
-"stop": 163.5382,
-"uscita": "in perdita da 8 giorni di Borsa: valuta l'uscita",
-"incasso": "",
-"avviso": "⚠️ in perdita da 8 gg",
-"nota": "🤖 Promossa il 2026-11-03: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +4.9% e la convenienza (58) regge.",
-"mia_soglia": null,
-"soglia_suggerita": 198.3838
-},
-{
 "t": "CHRW",
 "nome": "CHRW",
 "tipo": "short",
@@ -3907,9 +3885,9 @@
 "dconv": -2.0,
 "bersaglio": 120.5886,
 "stop": 87.2364,
-"uscita": "in perdita da 7 giorni di Borsa: valuta l'uscita",
+"uscita": "in perdita da 8 giorni di Borsa: valuta l'uscita",
 "incasso": "",
-"avviso": "⚠️ in perdita da 7 gg",
+"avviso": "⚠️ in perdita da 8 gg",
 "nota": "🤖 Promossa il 2026-11-04: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.0% e la convenienza (63) regge.",
 "mia_soglia": null,
 "soglia_suggerita": 111.0371
@@ -3953,9 +3931,9 @@
 "dconv": -1.0,
 "bersaglio": 256.0896,
 "stop": 178.729,
-"uscita": "in perdita da 7 giorni di Borsa: valuta l'uscita",
+"uscita": "in perdita da 8 giorni di Borsa: valuta l'uscita",
 "incasso": "",
-"avviso": "⚠️ in perdita da 7 gg",
+"avviso": "⚠️ in perdita da 8 gg",
 "nota": "🤖 Promossa il 2026-11-04: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +6.5% e la convenienza (64) regge.",
 "mia_soglia": null,
 "soglia_suggerita": 244.3186
@@ -4045,9 +4023,9 @@
 "dconv": 1.0,
 "bersaglio": 334.809,
 "stop": 284.9565,
-"uscita": "in perdita da 6 giorni di Borsa: valuta l'uscita",
+"uscita": "in perdita da 7 giorni di Borsa: valuta l'uscita",
 "incasso": "",
-"avviso": "⚠️ in perdita da 6 gg",
+"avviso": "⚠️ in perdita da 7 gg",
 "nota": "🤖 Promossa il 2026-11-05: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +7.4% e la convenienza (60) regge.",
 "mia_soglia": null,
 "soglia_suggerita": 353.0769
@@ -4068,9 +4046,9 @@
 "dconv": -2.0,
 "bersaglio": 20.1164,
 "stop": 10.132,
-"uscita": "in perdita da 5 giorni di Borsa: valuta l'uscita",
+"uscita": "in perdita da 6 giorni di Borsa: valuta l'uscita",
 "incasso": "",
-"avviso": "⚠️ in perdita da 5 gg",
+"avviso": "⚠️ in perdita da 6 gg",
 "nota": "🤖 Promossa il 2026-11-08: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +7.7% e la convenienza (60) regge.",
 "mia_soglia": null,
 "soglia_suggerita": 13.7191
@@ -4091,9 +4069,9 @@
 "dconv": 1.0,
 "bersaglio": 13.499,
 "stop": 10.8168,
-"uscita": "in perdita da 5 giorni di Borsa: valuta l'uscita",
+"uscita": "in perdita da 6 giorni di Borsa: valuta l'uscita",
 "incasso": "",
-"avviso": "⚠️ in perdita da 5 gg",
+"avviso": "⚠️ in perdita da 6 gg",
 "nota": "🤖 Promossa il 2026-11-08: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.2% e la convenienza (58) regge.",
 "mia_soglia": null,
 "soglia_suggerita": 12.9788
@@ -4114,9 +4092,9 @@
 "dconv": 0.0,
 "bersaglio": 94.045,
 "stop": 75.2019,
-"uscita": "",
+"uscita": "in perdita da 5 giorni di Borsa: valuta l'uscita",
 "incasso": "",
-"avviso": "—",
+"avviso": "⚠️ in perdita da 5 gg",
 "nota": "🤖 Promossa il 2026-11-09: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +7.2% e la convenienza (60) regge.",
 "mia_soglia": null,
 "soglia_suggerita": 95.2474
@@ -4137,9 +4115,9 @@
 "dconv": 1.0,
 "bersaglio": 58.8713,
 "stop": 54.9109,
-"uscita": "",
+"uscita": "in perdita da 5 giorni di Borsa: valuta l'uscita",
 "incasso": "",
-"avviso": "—",
+"avviso": "⚠️ in perdita da 5 gg",
 "nota": "🤖 Promossa il 2026-11-09: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.5% e la convenienza (64) regge.",
 "mia_soglia": null,
 "soglia_suggerita": 65.2179
@@ -4455,6 +4433,18 @@
 },
 "anticipo": [
 {
+"t": "NVDA",
+"nome": "NVDA",
+"tipo": "short",
+"conv": 81.0,
+"dconv": 10.0,
+"giorni": 3,
+"rend": -3.6,
+"salita": 59.0,
+"perdita": 3.0,
+"affid": "🟡 Media"
+},
+{
 "t": "ADXN",
 "nome": "ADXN",
 "tipo": "short",
@@ -4467,15 +4457,27 @@
 "affid": "🔴 Bassa"
 },
 {
-"t": "NVDA",
-"nome": "NVDA",
+"t": "HWC",
+"nome": "HWC",
 "tipo": "short",
-"conv": 73.0,
-"dconv": 10.0,
-"giorni": 3,
-"rend": -8.9,
-"salita": 57.0,
-"perdita": 3.0,
+"conv": 74.0,
+"dconv": 2.0,
+"giorni": 2,
+"rend": 0.6,
+"salita": 58.0,
+"perdita": 0.0,
+"affid": "🟢 Alta"
+},
+{
+"t": "DGII",
+"nome": "DGII",
+"tipo": "short",
+"conv": 72.0,
+"dconv": 5.0,
+"giorni": 2,
+"rend": -3.5,
+"salita": 58.0,
+"perdita": 6.0,
 "affid": "🟡 Media"
 },
 {
@@ -4491,27 +4493,39 @@
 "affid": "🔴 Bassa"
 },
 {
-"t": "HMY",
-"nome": "Harmony Gold Mining Company Ltd",
-"tipo": "long",
-"conv": 77.0,
-"dconv": 19.0,
-"giorni": 3,
-"rend": -14.3,
-"salita": 66.0,
-"perdita": 24.0,
+"t": "DELL",
+"nome": "DELL",
+"tipo": "short",
+"conv": 65.0,
+"dconv": 0.0,
+"giorni": 1,
+"rend": 0.0,
+"salita": 53.0,
+"perdita": 18.0,
 "affid": "🔴 Bassa"
 },
 {
-"t": "KGC",
-"nome": "Kinross Gold Corp",
+"t": "PAAS",
+"nome": "Pan American Silver Corp",
 "tipo": "long",
-"conv": 76.0,
-"dconv": 14.0,
-"giorni": 3,
-"rend": -9.1,
+"conv": 75.0,
+"dconv": 0.0,
+"giorni": 1,
+"rend": 0.0,
 "salita": 67.0,
-"perdita": 22.0,
+"perdita": 23.0,
+"affid": "🟡 Media"
+},
+{
+"t": "TAL",
+"nome": "TAL Education Group",
+"tipo": "long",
+"conv": 73.0,
+"dconv": 0.0,
+"giorni": 3,
+"rend": 2.0,
+"salita": 68.0,
+"perdita": 19.0,
 "affid": "🟡 Media"
 },
 {
@@ -4519,11 +4533,23 @@
 "nome": "Gold Fields Ltd",
 "tipo": "long",
 "conv": 73.0,
-"dconv": 24.0,
+"dconv": 15.0,
 "giorni": 3,
-"rend": -12.9,
+"rend": -6.3,
 "salita": 67.0,
 "perdita": 23.0,
+"affid": "🔴 Bassa"
+},
+{
+"t": "HMY",
+"nome": "Harmony Gold Mining Company Lim",
+"tipo": "long",
+"conv": 72.0,
+"dconv": 9.0,
+"giorni": 3,
+"rend": -7.8,
+"salita": 66.0,
+"perdita": 24.0,
 "affid": "🔴 Bassa"
 },
 {
@@ -4532,8 +4558,8 @@
 "tipo": "long",
 "conv": 71.0,
 "dconv": 0.0,
-"giorni": 3,
-"rend": -6.9,
+"giorni": 2,
+"rend": -5.7,
 "salita": 83.0,
 "perdita": 4.0,
 "affid": "🟢 Alta"
@@ -4545,21 +4571,33 @@
 "conv": 71.0,
 "dconv": 14.0,
 "giorni": 3,
-"rend": -12.7,
+"rend": -6.5,
 "salita": 64.0,
 "perdita": 27.0,
 "affid": "🔴 Bassa"
 },
 {
-"t": "ONON",
-"nome": "On Holding AG",
+"t": "AG",
+"nome": "First Majestic Silver Corp.",
+"tipo": "long",
+"conv": 70.0,
+"dconv": 6.0,
+"giorni": 1,
+"rend": -2.4,
+"salita": 63.0,
+"perdita": 29.0,
+"affid": "🔴 Bassa"
+},
+{
+"t": "AA",
+"nome": "Alcoa Corp",
 "tipo": "long",
 "conv": 66.0,
-"dconv": 24.0,
+"dconv": 3.0,
 "giorni": 3,
-"rend": -10.4,
-"salita": 72.0,
-"perdita": 16.0,
+"rend": -0.6,
+"salita": 61.0,
+"perdita": 28.0,
 "affid": "🟡 Media"
 },
 {
@@ -4567,9 +4605,9 @@
 "nome": "Coeur Mining, Inc.",
 "tipo": "long",
 "conv": 66.0,
-"dconv": 22.0,
+"dconv": 15.0,
 "giorni": 3,
-"rend": -15.0,
+"rend": -8.6,
 "salita": 64.0,
 "perdita": 27.0,
 "affid": "🔴 Bassa"
@@ -4577,5 +4615,5 @@
 ],
 "portafoglio": [],
 "richieste": [],
-"giro": "2026-11-15 21:44"
+"giro": "2026-11-16 01:33"
 }
