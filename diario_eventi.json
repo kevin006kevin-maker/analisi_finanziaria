@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:LULG:2026-09-04",
-"ticker": "LULG",
-"kind": "short",
-"evento": "uscita",
-"scritto_il": "2026-09-23 01:51",
-"data": "2026-09-23 01:51",
-"prezzo": 4.47,
-"conv": 61,
-"prob_gain": 49,
-"prob_loss": 31,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "in perdita da 9 giorni di Borsa: valuta l'uscita",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "long:AEO:2026-08-28",
 "ticker": "AEO",
 "kind": "long",
@@ -38095,5 +38075,32 @@
 "soglie_ricalcolate_il": "2026-11-16 01:30",
 "taglio_corretto": true,
 "soglie_ritardo_giorni": 2
+},
+{
+"episodio": "short:DT:2026-11-04",
+"ticker": "DT",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-11-16 08:16",
+"data": "2026-11-16 08:16",
+"prezzo": 44.8,
+"conv": 72,
+"prob_gain": 58,
+"prob_loss": 9,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 56.3696,
+"media20": 54.2135,
+"quattro_atr": 54.6408,
+"meta_caduta": 55.025,
+"bollinger": 72.4856,
+"consigliata": 54.6408
+},
+"stop": 39.8796,
+"atr": 2.4602
 }
 ]
