@@ -82,5 +82,47 @@
 "retroattiva": false,
 "atr_pct": 4.9639,
 "ora": "2026-11-15 15:45"
+},
+{
+"id": "2026-11-15:short:NBIS:forza_relativa",
+"giorno": "2026-11-15",
+"metodo": "forza_relativa",
+"kind": "short",
+"ticker": "NBIS",
+"nome": "NBIS",
+"prezzo": 115.87999725341797,
+"profilo": "2026-11-15:short:NBIS:punteggio_basso",
+"origine_viva": "scartata:punteggio_basso",
+"retroattiva": false,
+"atr_pct": 15.9115,
+"ora": "2026-11-16 00:31"
+},
+{
+"id": "2026-11-15:long:ENVA:forza_relativa",
+"giorno": "2026-11-15",
+"metodo": "forza_relativa",
+"kind": "long",
+"ticker": "ENVA",
+"nome": "Enova International, Inc.",
+"prezzo": 169.85000610351562,
+"profilo": "2026-11-15:long:ENVA:troppi_dello_stesso_settore",
+"origine_viva": "scartata:troppi_dello_stesso_settore",
+"retroattiva": false,
+"atr_pct": 4.1132,
+"ora": "2026-11-16 00:31"
+},
+{
+"id": "2026-11-15:long:ENVA:qualita_forza",
+"giorno": "2026-11-15",
+"metodo": "qualita_forza",
+"kind": "long",
+"ticker": "ENVA",
+"nome": "Enova International, Inc.",
+"prezzo": 169.85000610351562,
+"profilo": "2026-11-15:long:ENVA:troppi_dello_stesso_settore",
+"origine_viva": "scartata:troppi_dello_stesso_settore",
+"retroattiva": false,
+"atr_pct": 4.1132,
+"ora": "2026-11-16 00:31"
 }
 ]
