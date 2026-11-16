@@ -22647,5 +22647,62 @@
 "mkt": null
 }
 }
+},
+{
+"ticker": "DT",
+"kind": "short",
+"date": "2026-11-16",
+"promo_price": 44.8,
+"obs_price": 47.03,
+"obs_date": "2026-11-04",
+"pre_price": 46.78,
+"pre_date": "2026-11-05",
+"conf_price": null,
+"conf_date": null,
+"target": 56.3696,
+"stop": 39.8796,
+"reliab": "🟡 Media",
+"prob_gain": 58,
+"prob_loss": 9,
+"conv": 72,
+"passaggi": {
+"osservazione": {
+"data": "2026-11-04 04:13",
+"prezzo": 47.03,
+"conv": 64,
+"prob_gain": 61,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": -3.1975
+},
+"anticipo": {
+"data": "2026-11-05",
+"prezzo": 46.78,
+"conv": 66,
+"prob_gain": 58,
+"prob_loss": 5,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-16 08:16",
+"prezzo": 44.8,
+"conv": 72,
+"prob_gain": 58,
+"prob_loss": 9,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
