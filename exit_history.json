@@ -26527,5 +26527,86 @@
 "date": "2026-11-13 01:19"
 }
 ]
+},
+{
+"ticker": "SCI",
+"kind": "short",
+"added": "2026-11-03",
+"removed": "2026-11-16",
+"reason": "in perdita da 9 giorni di Borsa: valuta l'uscita",
+"auto": true,
+"first_price": 76.37,
+"last_price": 74.98,
+"first_target": 79.9918,
+"first_stop": 71.3714,
+"first_src": "scatto",
+"first_sicuro": true,
+"my_target_price": null,
+"snapshots": [
+{
+"name": "SCI",
+"price": 75.375,
+"rsi": 43.3476,
+"dd_high": -14.083,
+"occasione": 3,
+"convenienza": 68,
+"prob_gain": 52,
+"prob_loss": 1,
+"exp_ret": 0.5,
+"gain": 4.2453,
+"reliab": "🟢 Alta",
+"target": 78.5749,
+"stop": 70.6297,
+"date": "2026-11-12 19:55"
+},
+{
+"name": "SCI",
+"price": 74.97,
+"rsi": 42.3595,
+"dd_high": -14.5446,
+"occasione": 5,
+"convenienza": 70,
+"prob_gain": 51,
+"prob_loss": 2,
+"exp_ret": 0.3,
+"gain": 4.7977,
+"reliab": "🟢 Alta",
+"target": 78.5668,
+"stop": 70.1804,
+"date": "2026-11-13 01:20"
+},
+{
+"name": "SCI",
+"price": 75.85,
+"rsi": 45.2784,
+"dd_high": -13.5416,
+"occasione": 28,
+"convenienza": 67,
+"prob_gain": 54,
+"prob_loss": 2,
+"exp_ret": 0.8,
+"gain": 3.3991,
+"reliab": "🟢 Alta",
+"target": 78.4282,
+"stop": 71.2411,
+"date": "2026-11-13 16:42"
+},
+{
+"name": "SCI",
+"price": 74.98,
+"rsi": 42.3944,
+"dd_high": -14.5332,
+"occasione": 33,
+"convenienza": 70,
+"prob_gain": 52,
+"prob_loss": 1,
+"exp_ret": 0.2,
+"gain": 4.5756,
+"reliab": "🟢 Alta",
+"target": 78.4108,
+"stop": 70.3518,
+"date": "2026-11-13 23:00"
+}
+]
 }
 ]
