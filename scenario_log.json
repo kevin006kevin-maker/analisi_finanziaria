@@ -17383,7 +17383,10 @@
 "conv": 56,
 "res": {
 "osservazione|7g": 2.43,
-"promozione|7g": 0.86
+"promozione|7g": 0.86,
+"osservazione|30g": 12.62,
+"promozione|30g": 10.9,
+"conferma|30g": 9.52
 },
 "passaggi": {
 "osservazione": {
@@ -17482,7 +17485,15 @@
 "res": {
 "anticipo|7g": -1.76,
 "osservazione|7g": -5.93,
-"promozione|7g": -5.77
+"promozione|7g": -5.77,
+"anticipo|30g": 3.21,
+"osservazione|30g": -1.18,
+"promozione|30g": -1.01,
+"conferma|30g": 4.83,
+"anticipo|bersaglio": 3.21,
+"osservazione|bersaglio": -1.18,
+"promozione|bersaglio": -1.01,
+"conferma|bersaglio": 4.83
 }
 },
 {
@@ -21595,8 +21606,8 @@
 "obs_date": "2026-09-16",
 "pre_price": 236.73,
 "pre_date": "2026-09-17",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 225.61000061035156,
+"conf_date": "2026-11-17",
 "target": 236.9232,
 "stop": 210.0877,
 "reliab": "🟢 Alta",
@@ -21632,16 +21643,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-11-17",
+"prezzo": 225.61000061035156,
+"conv": 66,
+"prob_gain": 49,
+"prob_loss": 7,
+"reliab": "🟢 Alta",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": -4.7,
+"osservazione|7g": -5.44,
+"promozione|7g": -1.22
+}
 },
 {
 "ticker": "NRIX",
@@ -21654,15 +21669,18 @@
 "obs_date": "2026-11-05",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 14.300000190734863,
+"conf_date": "2026-11-17",
 "target": null,
 "stop": null,
 "reliab": "🔴 Bassa",
 "prob_gain": 52,
 "prob_loss": 10,
 "conv": 60,
-"res": {},
+"res": {
+"osservazione|7g": -10.34,
+"promozione|7g": -11.4
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-11-05 01:21",
@@ -21692,12 +21710,12 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-11-17",
+"prezzo": 14.300000190734863,
+"conv": 74,
+"prob_gain": 53,
+"prob_loss": 11,
+"reliab": "🔴 Bassa",
 "mkt": null
 }
 }
@@ -21713,15 +21731,18 @@
 "obs_date": "2026-11-05",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 153.58999633789062,
+"conf_date": "2026-11-17",
 "target": null,
 "stop": null,
 "reliab": "🟡 Media",
 "prob_gain": 56,
 "prob_loss": 1,
 "conv": 69,
-"res": {},
+"res": {
+"osservazione|7g": -16.82,
+"promozione|7g": -14.04
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-11-05 16:48",
@@ -21751,8 +21772,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-11-17",
+"prezzo": 153.58999633789062,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
