@@ -26433,5 +26433,102 @@
 "date": "2026-11-17 02:07"
 }
 ]
+},
+{
+"ticker": "FLG",
+"kind": "short",
+"added": "2026-11-02",
+"removed": "2026-11-17",
+"reason": "in perdita da 11 giorni di Borsa: valuta l'uscita",
+"auto": true,
+"first_price": 10.51,
+"last_price": 10.48,
+"first_target": 12.1044,
+"first_stop": 9.8635,
+"first_src": "scatto",
+"first_sicuro": true,
+"my_target_price": null,
+"snapshots": [
+{
+"name": "FLG",
+"price": 10.34,
+"rsi": 37.0963,
+"dd_high": -32.6823,
+"occasione": 20,
+"convenienza": 83,
+"prob_gain": 47,
+"prob_loss": 2,
+"exp_ret": -0.7,
+"gain": 12.1412,
+"reliab": "🟢 Alta",
+"target": 11.5954,
+"stop": 9.7079,
+"date": "2026-11-13 01:19"
+},
+{
+"name": "FLG",
+"price": 10.43,
+"rsi": 39.5823,
+"dd_high": -32.0964,
+"occasione": 45,
+"convenienza": 82,
+"prob_gain": 50,
+"prob_loss": 1,
+"exp_ret": 0.1,
+"gain": 10.5887,
+"reliab": "🟢 Alta",
+"target": 11.5344,
+"stop": 9.8138,
+"date": "2026-11-13 16:42"
+},
+{
+"name": "FLG",
+"price": 10.48,
+"rsi": 40.8804,
+"dd_high": -31.7708,
+"occasione": 42,
+"convenienza": 81,
+"prob_gain": 43,
+"prob_loss": 2,
+"exp_ret": -1.5,
+"gain": 10.0706,
+"reliab": "🟢 Alta",
+"target": 11.5354,
+"stop": 9.8638,
+"date": "2026-11-13 23:00"
+},
+{
+"name": "FLG",
+"price": 10.305,
+"rsi": 37.8179,
+"dd_high": -32.9102,
+"occasione": 19,
+"convenienza": 83,
+"prob_gain": 47,
+"prob_loss": 2,
+"exp_ret": -0.6,
+"gain": 11.3159,
+"reliab": "🟢 Alta",
+"target": 11.4711,
+"stop": 9.7029,
+"date": "2026-11-16 18:28"
+},
+{
+"name": "FLG",
+"price": 10.48,
+"rsi": 40.8804,
+"dd_high": -31.7708,
+"occasione": 42,
+"convenienza": 82,
+"prob_gain": 44,
+"prob_loss": 1,
+"exp_ret": -1.2,
+"gain": 10.0706,
+"reliab": "🟢 Alta",
+"target": 11.5354,
+"stop": 9.8624,
+"date": "2026-11-17 02:07"
+}
+]
 }
 ]
