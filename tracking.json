@@ -1003,7 +1003,9 @@
 "motivo": "scesa 40% dal massimo (44.94) restando in guadagno (+4.6%): il guadagno si sta sgonfiando",
 "urgenza": "incassa",
 "tipo": "sgonfia"
-}
+},
+"warn_since": "2026-11-17",
+"warn": "in perdita da 77 giorni di Borsa: valuta l'uscita"
 },
 "MTDR": {
 "kind": "short",
@@ -1622,7 +1624,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-11-17",
 "max_price": 12.81,
-"max_date": "2026-08-27 22:41"
+"max_date": "2026-08-27 22:41",
+"warn_since": "2026-11-17",
+"warn": "in perdita da 74 giorni di Borsa: valuta l'uscita"
 },
 "TSLL": {
 "kind": "short",
@@ -2253,7 +2257,9 @@
 "max_date": "2026-11-09 21:43",
 "auto": true,
 "notified": true,
-"entry_check": "2026-11-17"
+"entry_check": "2026-11-17",
+"warn_since": "2026-11-17",
+"warn": "in perdita da 62 giorni di Borsa: valuta l'uscita"
 },
 "ENI.MI": {
 "kind": "short",
@@ -4415,7 +4421,9 @@
 "max_date": "2026-10-29 17:56",
 "auto": true,
 "notified": false,
-"entry_check": "2026-11-17"
+"entry_check": "2026-11-17",
+"warn_since": "2026-11-17",
+"warn": "in perdita da 20 giorni di Borsa: valuta l'uscita"
 },
 "MRP": {
 "kind": "short",
@@ -4623,7 +4631,9 @@
 "motivo": "scesa 9% dal massimo (70.63) restando in guadagno (+4.6%): il guadagno si sta sgonfiando",
 "urgenza": "incassa",
 "tipo": "sgonfia"
-}
+},
+"warn_since": "2026-11-17",
+"warn": "in perdita da 19 giorni di Borsa: valuta l'uscita"
 },
 "XENE": {
 "kind": "short",
@@ -5389,7 +5399,9 @@
 "max_date": "2026-11-10 04:33",
 "auto": true,
 "notified": true,
-"entry_check": "2026-11-16"
+"entry_check": "2026-11-16",
+"warn_since": "2026-11-17",
+"warn": "in perdita da 11 giorni di Borsa: valuta l'uscita"
 },
 "EEFT": {
 "kind": "short",
@@ -6208,7 +6220,9 @@
 "max_date": "2026-11-12 19:55",
 "auto": true,
 "notified": true,
-"entry_check": "2026-11-16"
+"entry_check": "2026-11-16",
+"warn_since": "2026-11-17",
+"warn": "in perdita da 9 giorni di Borsa: valuta l'uscita"
 },
 "GOOGL": {
 "kind": "short",
@@ -6291,7 +6305,9 @@
 "max_date": "2026-11-12 19:55",
 "auto": true,
 "notified": true,
-"entry_check": "2026-11-16"
+"entry_check": "2026-11-16",
+"warn_since": "2026-11-17",
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "KRYS": {
 "kind": "short",
@@ -6573,91 +6589,6 @@
 "entry_date": "2026-11-09 21:43",
 "entry_src": "scatto",
 "max_price": 85.41,
-"max_date": "2026-11-11 22:58",
-"auto": true,
-"notified": false,
-"entry_check": "2026-11-16",
-"warn_since": "2026-11-16",
-"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
-},
-"VWO": {
-"kind": "short",
-"added": "2026-11-09",
-"note": "🤖 Promossa il 2026-11-09: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +2.5% e la convenienza (64) regge.",
-"name": "VWO",
-"snapshots": [
-{
-"name": "VWO",
-"price": 56.38,
-"rsi": 45.2827,
-"dd_high": -8.2357,
-"occasione": 0,
-"convenienza": 63,
-"prob_gain": 46,
-"prob_loss": 0,
-"exp_ret": -0.4,
-"gain": 3.8319,
-"reliab": "🟢 Alta",
-"target": 58.5404,
-"stop": 54.6259,
-"date": "2026-11-13 23:00"
-},
-{
-"name": "VWO",
-"price": 55.105,
-"rsi": 38.8344,
-"dd_high": -10.319,
-"occasione": 9,
-"convenienza": 70,
-"prob_gain": 50,
-"prob_loss": 0,
-"exp_ret": 0.0,
-"gain": 6.0138,
-"reliab": "🟢 Alta",
-"target": 58.4136,
-"stop": 53.2583,
-"date": "2026-11-16 18:28"
-},
-{
-"name": "VWO",
-"price": 56.38,
-"rsi": 37.8245,
-"dd_high": -10.7096,
-"occasione": 11,
-"convenienza": 70,
-"prob_gain": 51,
-"prob_loss": 0,
-"exp_ret": 0.1,
-"gain": 6.4688,
-"reliab": "🟢 Alta",
-"target": 58.4088,
-"stop": 53.0083,
-"date": "2026-11-17 02:08"
-},
-{
-"name": "VWO",
-"price": 54.86,
-"rsi": 37.8245,
-"dd_high": -10.7096,
-"occasione": 11,
-"convenienza": 71,
-"prob_gain": 50,
-"prob_loss": 0,
-"exp_ret": 0.0,
-"gain": 6.4688,
-"reliab": "🟢 Alta",
-"target": 58.4088,
-"stop": 53.0083,
-"date": "2026-11-17 10:13"
-}
-],
-"entry_price": 56.7,
-"entry_target": 58.8713,
-"entry_stop": 54.9109,
-"entry_conv": 62,
-"entry_date": "2026-11-09 21:43",
-"entry_src": "scatto",
-"max_price": 57.22,
 "max_date": "2026-11-11 22:58",
 "auto": true,
 "notified": false,
