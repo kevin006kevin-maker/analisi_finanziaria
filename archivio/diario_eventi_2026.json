@@ -34978,5 +34978,75 @@
 "7g": 8.39,
 "30g": 4.43
 }
+},
+{
+"episodio": "short:YSS:2026-09-05",
+"ticker": "YSS",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-09-23 01:52",
+"data": "2026-09-22 23:18",
+"prezzo": 9.91,
+"conv": 60,
+"prob_gain": 46,
+"prob_loss": 29,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-09-23",
+"soglie": {
+"media50": 11.986,
+"media20": null,
+"quattro_atr": 13.4659,
+"meta_caduta": 17.405,
+"bollinger": 10.0227,
+"consigliata": 11.986
+},
+"stop": 8.132,
+"atr": 0.889,
+"soglie_contaminate": {
+"media50": 11.986,
+"media20": null,
+"quattro_atr": 13.4659,
+"meta_caduta": 17.405,
+"bollinger": 10.0227,
+"consigliata": 11.986
+},
+"soglie_ricalcolate_il": "2026-09-23 01:53",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 1,
+"res": {
+"7g": -7.92,
+"30g": -39.66,
+"soglia": -39.66
+},
+"res_soglia": {
+"media50": {
+"ret": -39.66,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -39.66,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -39.66,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -39.66,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -39.66,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
