@@ -26419,5 +26419,86 @@
 "date": "2026-11-17 19:36"
 }
 ]
+},
+{
+"ticker": "XLK",
+"kind": "short",
+"added": "2026-11-12",
+"removed": "2026-11-17",
+"reason": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
+"auto": true,
+"first_price": 174.36,
+"last_price": 162.28,
+"first_target": 187.6122,
+"first_stop": 163.5021,
+"first_src": "scatto",
+"first_sicuro": true,
+"my_target_price": null,
+"snapshots": [
+{
+"name": "XLK",
+"price": 165.65,
+"rsi": 35.8277,
+"dd_high": -17.9604,
+"occasione": 17,
+"convenienza": 71,
+"prob_gain": 50,
+"prob_loss": 1,
+"exp_ret": -0.1,
+"gain": 12.6422,
+"reliab": "🟢 Alta",
+"target": 186.6706,
+"stop": 154.6847,
+"date": "2026-11-16 18:28"
+},
+{
+"name": "XLK",
+"price": 170.28,
+"rsi": 39.4507,
+"dd_high": -15.703,
+"occasione": 10,
+"convenienza": 67,
+"prob_gain": 52,
+"prob_loss": 1,
+"exp_ret": 0.5,
+"gain": 9.8789,
+"reliab": "🟢 Alta",
+"target": 187.1018,
+"stop": 159.2159,
+"date": "2026-11-17 02:08"
+},
+{
+"name": "XLK",
+"price": 164.76,
+"rsi": 35.1482,
+"dd_high": -18.4356,
+"occasione": 18,
+"convenienza": 71,
+"prob_gain": 48,
+"prob_loss": 1,
+"exp_ret": -0.3,
+"gain": 13.2868,
+"reliab": "🟢 Alta",
+"target": 186.6514,
+"stop": 153.6119,
+"date": "2026-11-17 10:13"
+},
+{
+"name": "XLK",
+"price": 162.28,
+"rsi": 33.5424,
+"dd_high": -19.5495,
+"occasione": 22,
+"convenienza": 73,
+"prob_gain": 54,
+"prob_loss": 0,
+"exp_ret": 0.8,
+"gain": 14.5432,
+"reliab": "🟢 Alta",
+"target": 186.1442,
+"stop": 151.331,
+"date": "2026-11-17 19:36"
+}
+]
 }
 ]
