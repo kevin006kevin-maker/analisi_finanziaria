@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:LDO.MI:2026-09-09",
-"ticker": "LDO.MI",
-"kind": "short",
-"evento": "fine_verifica",
-"scritto_il": "2026-09-23 01:52",
-"data": "2026-09-23 01:51",
-"prezzo": 50.61,
-"conv": 67,
-"prob_gain": 47,
-"prob_loss": 8,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 5 giorni di Borsa dalla promozione",
-"dovuto_il": "2026-09-23",
-"soglie": {
-"media50": 53.5424,
-"media20": 51.1292,
-"quattro_atr": 56.1266,
-"meta_caduta": 55.255,
-"bollinger": 54.5435,
-"consigliata": 53.5424
-},
-"stop": 47.8517,
-"atr": 1.3792,
-"res": {
-"7g": -2.52,
-"30g": -4.34,
-"soglia": -4.34
-},
-"res_soglia": {
-"media50": {
-"ret": -4.34,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -4.34,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -4.34,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -4.34,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -4.34,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -4.34,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:TYRA:2026-09-11",
 "ticker": "TYRA",
 "kind": "short",
@@ -38364,6 +38300,26 @@
 "mkt": null,
 "fonte": "monitoraggio",
 "note": "in perdita da 31 giorni di Borsa: valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:FLG:2026-10-23",
+"ticker": "FLG",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-11-17 02:08",
+"data": "2026-11-17 02:08",
+"prezzo": 10.48,
+"conv": 82,
+"prob_gain": 44,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "in perdita da 11 giorni di Borsa: valuta l'uscita",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
