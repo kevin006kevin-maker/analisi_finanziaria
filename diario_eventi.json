@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:LCID:2026-09-18",
-"ticker": "LCID",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-23 01:52",
-"data": "2026-09-23 01:48",
-"prezzo": 4.32,
-"conv": 51,
-"prob_gain": 47,
-"prob_loss": 23,
-"reliab": "🔴 Bassa",
-"mkt": 1.4606,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-23",
-"soglie": {
-"media50": 5.7873,
-"media20": 4.5155,
-"quattro_atr": 5.7429,
-"meta_caduta": 6.22,
-"bollinger": 5.2562,
-"consigliata": 5.7429
-},
-"stop": 3.6085,
-"atr": 0.3557,
-"res": {
-"7g": -4.98,
-"30g": -19.79,
-"soglia": -19.79
-},
-"res_soglia": {
-"media50": {
-"ret": -19.79,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -19.79,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -19.79,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -19.79,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -19.79,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -19.79,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:XENE:2026-09-18",
 "ticker": "XENE",
 "kind": "short",
@@ -38206,5 +38142,32 @@
 },
 "stop": 60.6544,
 "atr": 2.3128
+},
+{
+"episodio": "short:DGII:2026-11-12",
+"ticker": "DGII",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-11-17 02:10",
+"data": "2026-11-17 02:03",
+"prezzo": 55.43,
+"conv": 62,
+"prob_gain": 54,
+"prob_loss": 7,
+"reliab": "🟡 Media",
+"mkt": -3.5646,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-11-17",
+"soglie": {
+"media50": 72.0158,
+"media20": 70.4885,
+"quattro_atr": 72.9417,
+"meta_caduta": 67.14,
+"bollinger": 83.843,
+"consigliata": 72.0158
+},
+"stop": 46.6742,
+"atr": 4.3779
 }
 ]
