@@ -152,5 +152,61 @@
 "retroattiva": false,
 "atr_pct": 2.811,
 "ora": "2026-11-17 01:13"
+},
+{
+"id": "2026-11-17:short:SMMT:rimbalzo_grandi",
+"giorno": "2026-11-17",
+"metodo": "rimbalzo_grandi",
+"kind": "short",
+"ticker": "SMMT",
+"nome": "SMMT",
+"prezzo": 11.819999694824219,
+"profilo": "2026-11-17:short:SMMT:crollato_nell_anno",
+"origine_viva": "scartata:crollato_nell_anno",
+"retroattiva": false,
+"atr_pct": 11.3259,
+"ora": "2026-11-17 09:18"
+},
+{
+"id": "2026-11-17:short:ASTS:rimbalzo_grandi",
+"giorno": "2026-11-17",
+"metodo": "rimbalzo_grandi",
+"kind": "short",
+"ticker": "ASTS",
+"nome": "ASTS",
+"prezzo": 28.579999923706055,
+"profilo": "2026-11-17:short:ASTS:crollato_nell_anno",
+"origine_viva": "scartata:crollato_nell_anno",
+"retroattiva": false,
+"atr_pct": 14.2662,
+"ora": "2026-11-17 09:18"
+},
+{
+"id": "2026-11-17:long:HL:rimbalzo_grandi",
+"giorno": "2026-11-17",
+"metodo": "rimbalzo_grandi",
+"kind": "long",
+"ticker": "HL",
+"nome": "Hecla Mining Co",
+"prezzo": 12.220000267028809,
+"profilo": "2026-11-17:long:HL:troppi_dello_stesso_settore",
+"origine_viva": "scartata:troppi_dello_stesso_settore",
+"retroattiva": false,
+"atr_pct": 6.8402,
+"ora": "2026-11-17 09:18"
+},
+{
+"id": "2026-11-17:long:AG:rimbalzo_grandi",
+"giorno": "2026-11-17",
+"metodo": "rimbalzo_grandi",
+"kind": "long",
+"ticker": "AG",
+"nome": "First Majestic Silver Corp",
+"prezzo": 12.670000076293945,
+"profilo": "2026-11-17:long:AG:troppi_dello_stesso_settore",
+"origine_viva": "scartata:troppi_dello_stesso_settore",
+"retroattiva": false,
+"atr_pct": 6.6485,
+"ora": "2026-11-17 09:18"
 }
 ]
