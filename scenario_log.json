@@ -17554,7 +17554,15 @@
 "res": {
 "anticipo|7g": 0.13,
 "osservazione|7g": -4.1,
-"promozione|7g": 4.4
+"promozione|7g": 4.4,
+"anticipo|30g": 15.87,
+"osservazione|30g": 10.98,
+"promozione|30g": 20.81,
+"conferma|30g": 15.72,
+"anticipo|bersaglio": 15.87,
+"osservazione|bersaglio": 10.98,
+"promozione|bersaglio": 20.81,
+"conferma|bersaglio": 15.72
 }
 },
 {
@@ -21791,8 +21799,8 @@
 "obs_date": "2026-11-06",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 38.689998626708984,
+"conf_date": "2026-11-18",
 "target": 41.7919,
 "stop": 35.5384,
 "reliab": "🟢 Alta",
@@ -21828,16 +21836,19 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-11-18",
+"prezzo": 38.689998626708984,
+"conv": 69,
+"prob_gain": 53,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"osservazione|7g": 5.36,
+"promozione|7g": -0.1
+}
 },
 {
 "ticker": "FFIV",
@@ -21848,8 +21859,8 @@
 "obs_date": "2026-10-29",
 "pre_price": 363.46,
 "pre_date": "2026-10-30",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 318.5799865722656,
+"conf_date": "2026-11-18",
 "target": 418.3408,
 "stop": 281.8486,
 "reliab": "🟡 Media",
@@ -21885,16 +21896,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-11-18",
+"prezzo": 318.5799865722656,
+"conv": 84,
+"prob_gain": 57,
+"prob_loss": 10,
+"reliab": "🟡 Media",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": -12.35,
+"osservazione|7g": -12.84,
+"promozione|7g": 0.4
+}
 },
 {
 "ticker": "FTNT",
@@ -21905,8 +21920,8 @@
 "obs_date": "2026-10-29",
 "pre_price": 139.1,
 "pre_date": "2026-10-30",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 131.75,
+"conf_date": "2026-11-18",
 "target": 166.2386,
 "stop": 106.9459,
 "reliab": "🟡 Media",
@@ -21942,16 +21957,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-11-18",
+"prezzo": 131.75,
+"conv": 76,
+"prob_gain": 54,
+"prob_loss": 11,
+"reliab": "🟡 Media",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": -5.28,
+"osservazione|7g": -2.92,
+"promozione|7g": 6.62
+}
 },
 {
 "ticker": "MCHP",
@@ -21962,8 +21981,8 @@
 "obs_date": "2026-11-06",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 59.349998474121094,
+"conf_date": "2026-11-18",
 "target": 74.357,
 "stop": 51.3787,
 "reliab": "🟡 Media",
@@ -21999,16 +22018,19 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-11-18",
+"prezzo": 59.349998474121094,
+"conv": 79,
+"prob_gain": 52,
+"prob_loss": 13,
+"reliab": "🟡 Media",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"osservazione|7g": 5.46,
+"promozione|7g": -1.62
+}
 },
 {
 "ticker": "EEM",
@@ -22019,8 +22041,8 @@
 "obs_date": "2026-10-22",
 "pre_price": 58.05,
 "pre_date": "2026-11-06",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 57.939998626708984,
+"conf_date": "2026-11-18",
 "target": 65.1822,
 "stop": 57.8932,
 "reliab": "🟢 Alta",
@@ -22056,16 +22078,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-11-18",
+"prezzo": 57.939998626708984,
+"conv": 74,
+"prob_gain": 52,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": -0.19,
+"osservazione|7g": -6.02,
+"promozione|7g": -4.34
+}
 },
 {
 "ticker": "NRIX",
@@ -22076,8 +22102,8 @@
 "obs_date": "2026-11-05",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 13.819999694824219,
+"conf_date": "2026-11-18",
 "target": 23.6683,
 "stop": 13.0172,
 "reliab": "🔴 Bassa",
@@ -22113,16 +22139,19 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-11-18",
+"prezzo": 13.819999694824219,
+"conv": 75,
+"prob_gain": 51,
+"prob_loss": 13,
+"reliab": "🔴 Bassa",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"osservazione|7g": -13.35,
+"promozione|7g": -15.37
+}
 },
 {
 "ticker": "PST.MI",
