@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:FIP:2026-09-18",
-"ticker": "FIP",
-"kind": "short",
-"evento": "promozione",
-"scritto_il": "2026-09-23 06:42",
-"data": "2026-09-23 06:42",
-"prezzo": 3.07,
-"conv": 70,
-"prob_gain": 51,
-"prob_loss": 20,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": 3.8039,
-"media20": 3.323,
-"quattro_atr": 3.9256,
-"meta_caduta": 4.01,
-"bollinger": 3.9235,
-"consigliata": 3.8039
-},
-"stop": 2.6422,
-"atr": 0.2139,
-"res": {
-"7g": -9.28,
-"30g": -17.43,
-"soglia": -17.43
-},
-"res_soglia": {
-"media50": {
-"ret": -17.43,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -17.43,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -17.43,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -17.43,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -17.43,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -17.43,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:PLNT:2026-09-22",
 "ticker": "PLNT",
 "kind": "short",
@@ -37618,5 +37554,25 @@
 },
 "stop": 250.1681,
 "atr": 35.191
+},
+{
+"episodio": "short:IDYA:2026-11-17",
+"ticker": "IDYA",
+"kind": "short",
+"evento": "salita_2pct",
+"scritto_il": "2026-11-18 02:27",
+"data": "2026-11-18 02:18",
+"prezzo": 30.36,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "prezzo salito di almeno il 2% da 27.81",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
