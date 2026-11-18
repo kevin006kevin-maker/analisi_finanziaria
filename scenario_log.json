@@ -22955,7 +22955,45 @@
 "prob_gain": 52,
 "prob_loss": 8,
 "conv": 56,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-09-11 20:57",
+"prezzo": 271.06,
+"conv": 72,
+"prob_gain": 54,
+"prob_loss": 5,
+"reliab": "🟡 Media",
+"mkt": -1.7043
+},
+"anticipo": {
+"data": "2026-09-14",
+"prezzo": 266.3,
+"conv": 77,
+"prob_gain": 55,
+"prob_loss": 5,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-18",
+"prezzo": 261.86,
+"conv": 56,
+"prob_gain": 52,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 },
 {
 "ticker": "DELL",
@@ -22976,6 +23014,44 @@
 "prob_gain": null,
 "prob_loss": null,
 "conv": 60,
-"res": {}
+"res": {},
+"passaggi": {
+"osservazione": {
+"data": "2026-11-14 10:23",
+"prezzo": 344.53,
+"conv": 65,
+"prob_gain": 53,
+"prob_loss": 18,
+"reliab": "🔴 Bassa",
+"mkt": -1.2765
+},
+"anticipo": {
+"data": "2026-11-16",
+"prezzo": 344.53,
+"conv": 65,
+"prob_gain": 53,
+"prob_loss": 18,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-18",
+"prezzo": 320.55,
+"conv": 60,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+}
 }
 ]
