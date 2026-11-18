@@ -1051,5 +1051,69 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:GT:2026-09-23",
+"ticker": "GT",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-23 06:40",
+"data": "2026-09-23 06:40",
+"prezzo": 5.02,
+"conv": 70,
+"prob_gain": 55,
+"prob_loss": 11,
+"reliab": "🟡 Media",
+"mkt": 1.177,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 6.3254,
+"media20": 5.7625,
+"quattro_atr": 6.0321,
+"meta_caduta": 6.235,
+"bollinger": 6.7168,
+"consigliata": 6.0321
+},
+"stop": 4.5139,
+"atr": 0.253,
+"res": {
+"7g": -1.49,
+"30g": -15.04,
+"soglia": -15.04
+},
+"res_soglia": {
+"media50": {
+"ret": -15.04,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -15.04,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -15.04,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -15.04,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -15.04,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -15.04,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
