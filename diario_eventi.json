@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:GENI:2026-09-23",
-"ticker": "GENI",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-23 06:40",
-"data": "2026-09-23 06:40",
-"prezzo": 5.76,
-"conv": 60,
-"prob_gain": 53,
-"prob_loss": 19,
-"reliab": "🔴 Bassa",
-"mkt": 1.177,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 7.202,
-"media20": 7.121,
-"quattro_atr": 7.5206,
-"meta_caduta": 7.07,
-"bollinger": 8.5128,
-"consigliata": 7.202
-},
-"stop": 4.8797,
-"atr": 0.4402,
-"res": {
-"7g": 4.03,
-"30g": 9.81,
-"soglia": 9.81
-},
-"res_soglia": {
-"media50": {
-"ret": 9.81,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 9.81,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 9.81,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 9.81,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 9.81,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 9.81,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:LFTO:2026-09-18",
 "ticker": "LFTO",
 "kind": "short",
@@ -37692,5 +37628,32 @@
 },
 "stop": 43.9269,
 "atr": 2.0065
+},
+{
+"episodio": "short:EEM:2026-11-11",
+"ticker": "EEM",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-11-18 02:27",
+"data": "2026-11-18 02:24",
+"prezzo": 58.89,
+"conv": 73,
+"prob_gain": 52,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-11-18",
+"soglie": {
+"media50": 64.6402,
+"media20": 61.402,
+"quattro_atr": 64.5217,
+"meta_caduta": 63.995,
+"bollinger": 64.3122,
+"consigliata": 64.5217
+},
+"stop": 56.0741,
+"atr": 1.4079
 }
 ]
