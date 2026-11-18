@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:MBC:2026-09-23",
-"ticker": "MBC",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-23 06:40",
-"data": "2026-09-23 06:40",
-"prezzo": 6.82,
-"conv": 62,
-"prob_gain": 51,
-"prob_loss": 17,
-"reliab": "🟡 Media",
-"mkt": 1.177,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 8.473,
-"media20": 7.8545,
-"quattro_atr": 8.5176,
-"meta_caduta": 8.555,
-"bollinger": 9.5794,
-"consigliata": 8.473
-},
-"stop": 5.9712,
-"atr": 0.4244,
-"res": {
-"7g": 0.81,
-"30g": 6.01,
-"soglia": 6.01
-},
-"res_soglia": {
-"media50": {
-"ret": 6.01,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 6.01,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 6.01,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 6.01,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 6.01,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 6.01,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:GENI:2026-09-23",
 "ticker": "GENI",
 "kind": "short",
@@ -37729,5 +37665,32 @@
 },
 "stop": 50.3249,
 "atr": 4.1575
+},
+{
+"episodio": "long:BKR:2026-11-09",
+"ticker": "BKR",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-11-18 02:27",
+"data": "2026-11-18 02:21",
+"prezzo": 47.94,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-11-18",
+"soglie": {
+"media50": 55.1296,
+"media20": 52.1095,
+"quattro_atr": 55.9661,
+"meta_caduta": 56.285,
+"bollinger": 59.5442,
+"consigliata": 55.1296
+},
+"stop": 43.9269,
+"atr": 2.0065
 }
 ]
