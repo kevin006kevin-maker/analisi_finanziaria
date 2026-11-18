@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:GT:2026-09-23",
-"ticker": "GT",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-23 06:40",
-"data": "2026-09-23 06:40",
-"prezzo": 5.02,
-"conv": 70,
-"prob_gain": 55,
-"prob_loss": 11,
-"reliab": "🟡 Media",
-"mkt": 1.177,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 6.3254,
-"media20": 5.7625,
-"quattro_atr": 6.0321,
-"meta_caduta": 6.235,
-"bollinger": 6.7168,
-"consigliata": 6.0321
-},
-"stop": 4.5139,
-"atr": 0.253,
-"res": {
-"7g": -1.49,
-"30g": -15.04,
-"soglia": -15.04
-},
-"res_soglia": {
-"media50": {
-"ret": -15.04,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -15.04,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -15.04,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -15.04,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -15.04,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -15.04,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:MBC:2026-09-23",
 "ticker": "MBC",
 "kind": "short",
@@ -37766,5 +37702,32 @@
 },
 "stop": 36.1275,
 "atr": 1.3713
+},
+{
+"episodio": "short:MCHP:2026-11-06",
+"ticker": "MCHP",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-11-18 02:26",
+"data": "2026-11-18 02:24",
+"prezzo": 58.64,
+"conv": 80,
+"prob_gain": 49,
+"prob_loss": 13,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-11-18",
+"soglie": {
+"media50": 73.4186,
+"media20": 70.732,
+"quattro_atr": 75.2701,
+"meta_caduta": 70.065,
+"bollinger": 87.2701,
+"consigliata": 73.4186
+},
+"stop": 50.3249,
+"atr": 4.1575
 }
 ]
