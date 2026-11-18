@@ -445,7 +445,9 @@
 "entry_src": "storico",
 "max_price": 26.175,
 "max_date": "2026-10-23 21:34",
-"exit_notified": false
+"exit_notified": false,
+"warn_since": "2026-11-18",
+"warn": "in perdita da 93 giorni di Borsa: valuta l'uscita"
 },
 "T": {
 "kind": "long",
@@ -8764,9 +8766,7 @@
 "max_date": "2026-11-16 18:28",
 "auto": true,
 "notified": true,
-"entry_check": "2026-11-18",
-"warn_since": "2026-11-18",
-"warn": "in perdita da 6 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-11-18"
 },
 "NMIH": {
 "kind": "short",
@@ -9030,9 +9030,7 @@
 "max_date": "2026-11-11 16:11",
 "auto": true,
 "notified": false,
-"entry_check": "2026-11-18",
-"warn_since": "2026-11-18",
-"warn": "in perdita da 5 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-11-18"
 },
 "FTNT": {
 "kind": "short",
@@ -9162,7 +9160,7 @@
 "max_price": 131.59,
 "max_date": "2026-11-18 19:01",
 "auto": true,
-"notified": false,
+"notified": true,
 "entry_check": "2026-11-18"
 },
 "MCHP": {
