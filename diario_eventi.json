@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:LFTO:2026-09-18",
-"ticker": "LFTO",
-"kind": "short",
-"evento": "fine_osservazione",
-"scritto_il": "2026-09-23 01:52",
-"data": "2026-09-23 01:48",
-"prezzo": 16.35,
-"conv": 61,
-"prob_gain": 65,
-"prob_loss": 13,
-"reliab": "🔴 Bassa",
-"mkt": 1.4606,
-"fonte": "osservazione",
-"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
-"dovuto_il": "2026-09-23",
-"soglie": {
-"media50": 20.6884,
-"media20": 18.175,
-"quattro_atr": 21.2805,
-"meta_caduta": 21.04,
-"bollinger": 19.7058,
-"consigliata": 20.6884
-},
-"stop": 13.8847,
-"atr": 1.2326,
-"res": {
-"7g": -1.9,
-"30g": -0.93,
-"soglia": -0.93
-},
-"res_soglia": {
-"media50": {
-"ret": -0.93,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -0.93,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -0.93,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -0.93,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -0.93,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -0.93,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:SMST:2026-09-18",
 "ticker": "SMST",
 "kind": "short",
@@ -38050,5 +37986,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:IDYA:2026-11-17",
+"ticker": "IDYA",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-11-18 02:22",
+"data": "2026-11-17 19:33",
+"prezzo": 27.81,
+"conv": 66,
+"prob_gain": 49,
+"prob_loss": 5,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 35.2771,
+"media20": 32.7122,
+"quattro_atr": 33.8566,
+"meta_caduta": 35.145,
+"bollinger": 36.0153,
+"consigliata": 33.8566
+},
+"stop": 24.7867,
+"atr": 1.5117
 }
 ]
