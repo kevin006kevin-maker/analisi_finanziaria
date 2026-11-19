@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:FLNC:2026-09-08",
-"ticker": "FLNC",
-"kind": "short",
-"evento": "promozione",
-"scritto_il": "2026-09-23 17:01",
-"data": "2026-09-23 17:01",
-"prezzo": 7.59,
-"conv": 71,
-"prob_gain": 46,
-"prob_loss": 32,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "promozione",
-"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
-"dovuto_il": null,
-"soglie": {
-"media50": 11.9733,
-"media20": 9.7735,
-"quattro_atr": 10.5913,
-"meta_caduta": 13.735,
-"bollinger": 12.4498,
-"consigliata": 10.5913
-},
-"stop": 6.0894,
-"atr": 0.7503,
-"res": {
-"7g": 1.32,
-"30g": -26.81,
-"soglia": -26.81
-},
-"res_soglia": {
-"media50": {
-"ret": -26.81,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -26.81,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -26.81,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -26.81,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -26.81,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -26.81,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:XRAY:2026-09-23",
 "ticker": "XRAY",
 "kind": "short",
@@ -37613,5 +37549,25 @@
 },
 "stop": 627.3471,
 "atr": 16.0815
+},
+{
+"episodio": "long:FSM:2026-10-01",
+"ticker": "FSM",
+"kind": "long",
+"evento": "uscita",
+"scritto_il": "2026-11-19 18:21",
+"data": "2026-11-19 18:21",
+"prezzo": 8.0767,
+"conv": 76,
+"prob_gain": 59,
+"prob_loss": 31,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
