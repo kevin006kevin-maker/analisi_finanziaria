@@ -1599,5 +1599,69 @@
 "giorni": 22
 }
 }
+},
+{
+"episodio": "short:PAYX:2026-09-23",
+"ticker": "PAYX",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-23 16:59",
+"data": "2026-09-23 16:59",
+"prezzo": 106.855,
+"conv": 66,
+"prob_gain": 55,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": 1.0225,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 118.7529,
+"media20": 119.8933,
+"quattro_atr": 120.0237,
+"meta_caduta": 117.0975,
+"bollinger": 131.0283,
+"consigliata": 118.7529
+},
+"stop": 100.2707,
+"atr": 3.2922,
+"res": {
+"7g": -7.35,
+"30g": 10.51,
+"soglia": 11.13
+},
+"res_soglia": {
+"media50": {
+"ret": 11.13,
+"toccato": true,
+"giorni": 29
+},
+"media20": {
+"ret": 10.51,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": 10.51,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": 9.59,
+"toccato": true,
+"giorni": 29
+},
+"bollinger": {
+"ret": 10.51,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": 11.13,
+"toccato": true,
+"giorni": 29
+}
+}
 }
 ]
