@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:PAYX:2026-09-23",
-"ticker": "PAYX",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-23 16:59",
-"data": "2026-09-23 16:59",
-"prezzo": 106.855,
-"conv": 66,
-"prob_gain": 55,
-"prob_loss": 2,
-"reliab": "🟢 Alta",
-"mkt": 1.0225,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 118.7529,
-"media20": 119.8933,
-"quattro_atr": 120.0237,
-"meta_caduta": 117.0975,
-"bollinger": 131.0283,
-"consigliata": 118.7529
-},
-"stop": 100.2707,
-"atr": 3.2922,
-"res": {
-"7g": -7.35,
-"30g": 10.51,
-"soglia": 11.13
-},
-"res_soglia": {
-"media50": {
-"ret": 11.13,
-"toccato": true,
-"giorni": 29
-},
-"media20": {
-"ret": 10.51,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 10.51,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 9.59,
-"toccato": true,
-"giorni": 29
-},
-"bollinger": {
-"ret": 10.51,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 11.13,
-"toccato": true,
-"giorni": 29
-}
-}
-},
-{
 "episodio": "long:DAVE:2026-09-23",
 "ticker": "DAVE",
 "kind": "long",
@@ -37658,5 +37594,32 @@
 },
 "stop": 23.7475,
 "atr": 0.4962
+},
+{
+"episodio": "short:CW:2026-11-12",
+"ticker": "CW",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-11-19 01:24",
+"data": "2026-11-19 01:22",
+"prezzo": 456.53,
+"conv": 81,
+"prob_gain": 49,
+"prob_loss": 4,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-11-19",
+"soglie": {
+"media50": 508.7,
+"media20": 471.4185,
+"quattro_atr": 531.8566,
+"meta_caduta": 537.995,
+"bollinger": 502.3547,
+"consigliata": 508.7
+},
+"stop": 418.8667,
+"atr": 18.8316
 }
 ]
