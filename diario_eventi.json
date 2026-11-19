@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:RELY:2026-09-11",
-"ticker": "RELY",
-"kind": "long",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-23 17:01",
-"data": "2026-09-23 17:01",
-"prezzo": 19.75,
-"conv": 67,
-"prob_gain": 75,
-"prob_loss": 18,
-"reliab": "🟡 Media",
-"mkt": 1.0225,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 24.2231,
-"media20": 24.0457,
-"quattro_atr": 24.2229,
-"meta_caduta": 23.335,
-"bollinger": 28.7144,
-"consigliata": 24.2229
-},
-"stop": 17.5135,
-"atr": 1.1182,
-"res": {
-"7g": 8.38,
-"30g": 27.06
-}
-},
-{
 "episodio": "short:FLNC:2026-09-08",
 "ticker": "FLNC",
 "kind": "short",
@@ -37617,5 +37586,32 @@
 },
 "stop": 271.3214,
 "atr": 9.3393
+},
+{
+"episodio": "short:QQQ:2026-11-12",
+"ticker": "QQQ",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-11-19 01:25",
+"data": "2026-11-19 01:17",
+"prezzo": 659.51,
+"conv": 54,
+"prob_gain": 48,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -5.5889,
+"fonte": "osservazione",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-11-19",
+"soglie": {
+"media50": 714.3588,
+"media20": 686.2995,
+"quattro_atr": 723.8358,
+"meta_caduta": 709.585,
+"bollinger": 731.9376,
+"consigliata": 714.3588
+},
+"stop": 627.3471,
+"atr": 16.0815
 }
 ]
