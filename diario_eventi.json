@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:RELY:2026-09-23",
-"ticker": "RELY",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-23 16:59",
-"data": "2026-09-23 16:59",
-"prezzo": 19.75,
-"conv": 69,
-"prob_gain": 56,
-"prob_loss": 12,
-"reliab": "🟡 Media",
-"mkt": 1.0225,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 24.2231,
-"media20": 24.0457,
-"quattro_atr": 24.2229,
-"meta_caduta": 23.335,
-"bollinger": 28.7144,
-"consigliata": 24.2229
-},
-"stop": 17.5135,
-"atr": 1.1182,
-"res": {
-"7g": 8.38,
-"30g": 27.06,
-"soglia": 22.65
-},
-"res_soglia": {
-"media50": {
-"ret": 22.65,
-"toccato": true,
-"giorni": 22
-},
-"media20": {
-"ret": 21.75,
-"toccato": true,
-"giorni": 16
-},
-"quattro_atr": {
-"ret": 22.65,
-"toccato": true,
-"giorni": 22
-},
-"meta_caduta": {
-"ret": 18.15,
-"toccato": true,
-"giorni": 15
-},
-"bollinger": {
-"ret": 27.06,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 22.65,
-"toccato": true,
-"giorni": 22
-}
-}
-},
-{
 "episodio": "short:PAYX:2026-09-23",
 "ticker": "PAYX",
 "kind": "short",
@@ -37695,5 +37631,32 @@
 },
 "stop": 152.8828,
 "atr": 5.4636
+},
+{
+"episodio": "short:PST.MI:2026-11-12",
+"ticker": "PST.MI",
+"kind": "short",
+"evento": "fine_verifica",
+"scritto_il": "2026-11-19 01:24",
+"data": "2026-11-19 01:22",
+"prezzo": 24.74,
+"conv": 64,
+"prob_gain": 54,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 5 giorni di Borsa dalla promozione",
+"dovuto_il": "2026-11-19",
+"soglie": {
+"media50": 24.9782,
+"media20": null,
+"quattro_atr": 26.7249,
+"meta_caduta": 26.31,
+"bollinger": 25.8567,
+"consigliata": 24.9782
+},
+"stop": 23.7475,
+"atr": 0.4962
 }
 ]
