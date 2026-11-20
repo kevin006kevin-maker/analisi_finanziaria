@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:CLDX:2026-09-23",
-"ticker": "CLDX",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-23 21:02",
-"data": "2026-09-23 21:02",
-"prezzo": 30.74,
-"conv": 72,
-"prob_gain": 50,
-"prob_loss": 8,
-"reliab": "🟡 Media",
-"mkt": 0.7643,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 38.9418,
-"media20": 38.696,
-"quattro_atr": 39.19,
-"meta_caduta": 37.805,
-"bollinger": 42.9176,
-"consigliata": 38.9418
-},
-"stop": 26.515,
-"atr": 2.1125,
-"res": {
-"7g": 5.22,
-"30g": -6.08,
-"soglia": -6.08
-},
-"res_soglia": {
-"media50": {
-"ret": -6.08,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -6.08,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -6.08,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -6.08,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -6.08,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -6.08,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:ERAS:2026-09-23",
 "ticker": "ERAS",
 "kind": "short",
@@ -37625,5 +37561,32 @@
 },
 "stop": 22.6703,
 "atr": 1.7499
+},
+{
+"episodio": "long:NVDA:2026-11-20",
+"ticker": "NVDA",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-11-20 08:05",
+"data": "2026-11-20 08:05",
+"prezzo": 145.98,
+"conv": 78,
+"prob_gain": 82,
+"prob_loss": 9,
+"reliab": "🟡 Media",
+"mkt": -6.3627,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 208.8556,
+"media20": 185.7285,
+"quattro_atr": 185.4885,
+"meta_caduta": 192.61,
+"bollinger": 234.9368,
+"consigliata": 185.4885
+},
+"stop": 126.2258,
+"atr": 9.8771
 }
 ]
