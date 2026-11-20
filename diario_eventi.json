@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:ERAS:2026-09-23",
-"ticker": "ERAS",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-23 21:02",
-"data": "2026-09-23 21:02",
-"prezzo": 14.085,
-"conv": 67,
-"prob_gain": 49,
-"prob_loss": 25,
-"reliab": "🔴 Bassa",
-"mkt": 0.7643,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 17.7001,
-"media20": 16.4393,
-"quattro_atr": 18.5482,
-"meta_caduta": 17.6725,
-"bollinger": 19.2315,
-"consigliata": 17.7001
-},
-"stop": 11.8534,
-"atr": 1.1158,
-"res": {
-"7g": 4.22,
-"30g": -1.74,
-"soglia": -1.74
-},
-"res_soglia": {
-"media50": {
-"ret": -1.74,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -1.74,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -1.74,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -1.74,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -1.74,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -1.74,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:KAI:2026-09-11",
 "ticker": "KAI",
 "kind": "short",
@@ -37851,5 +37787,25 @@
 "stop": 126.2258,
 "atr": 9.8771,
 "res": {}
+},
+{
+"episodio": "long:PBR:2026-10-26",
+"ticker": "PBR",
+"kind": "long",
+"evento": "uscita",
+"scritto_il": "2026-11-20 23:42",
+"data": "2026-11-20 23:42",
+"prezzo": 16.01,
+"conv": 76,
+"prob_gain": 79,
+"prob_loss": 14,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
