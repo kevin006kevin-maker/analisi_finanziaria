@@ -2166,7 +2166,9 @@
 "entry_src": "scatto",
 "entry_check": "2026-11-20",
 "max_price": 24.365,
-"max_date": "2026-09-03 15:46"
+"max_date": "2026-09-03 15:46",
+"warn_since": "2026-11-20",
+"warn": "in perdita da 78 giorni di Borsa: valuta l'uscita"
 },
 "DIS": {
 "kind": "long",
@@ -2915,7 +2917,9 @@
 "entry_check": "2026-11-20",
 "max_price": 11.94,
 "max_date": "2026-10-15 01:13",
-"exit_notified": false
+"exit_notified": false,
+"warn_since": "2026-11-20",
+"warn": "in perdita da 73 giorni di Borsa: valuta l'uscita"
 },
 "CELH": {
 "kind": "short",
@@ -3473,7 +3477,9 @@
 "max_date": "2026-11-09 21:43",
 "auto": true,
 "notified": true,
-"entry_check": "2026-11-20"
+"entry_check": "2026-11-20",
+"warn_since": "2026-11-20",
+"warn": "in perdita da 65 giorni di Borsa: valuta l'uscita"
 },
 "ENI.MI": {
 "kind": "short",
@@ -8079,9 +8085,7 @@
 "max_date": "2026-11-04 19:53",
 "auto": true,
 "notified": true,
-"entry_check": "2026-11-20",
-"warn_since": "2026-11-18",
-"warn": "in perdita da 18 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-11-20"
 },
 "BAMI.MI": {
 "kind": "short",
@@ -10609,7 +10613,9 @@
 "max_date": "2026-11-16 18:28",
 "auto": true,
 "notified": true,
-"entry_check": "2026-11-20"
+"entry_check": "2026-11-20",
+"warn_since": "2026-11-20",
+"warn": "in perdita da 8 giorni di Borsa: valuta l'uscita"
 },
 "NMIH": {
 "kind": "short",
@@ -10788,9 +10794,7 @@
 "max_date": "2026-11-11 22:58",
 "auto": true,
 "notified": false,
-"entry_check": "2026-11-20",
-"warn_since": "2026-11-18",
-"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
+"entry_check": "2026-11-20"
 },
 "FFIV": {
 "kind": "short",
@@ -10969,7 +10973,9 @@
 "max_date": "2026-11-19 18:21",
 "auto": true,
 "notified": false,
-"entry_check": "2026-11-20"
+"entry_check": "2026-11-20",
+"warn_since": "2026-11-20",
+"warn": "in perdita da 7 giorni di Borsa: valuta l'uscita"
 },
 "FTNT": {
 "kind": "short",
