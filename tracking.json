@@ -1301,7 +1301,6 @@
 "entry_date": "2026-07-28 13:05",
 "entry_src": "scatto",
 "entry_check": "2026-11-21",
-"incasso_notified": true,
 "max_price": 135.14,
 "max_date": "2026-08-25 23:02"
 },
@@ -2551,7 +2550,6 @@
 "entry_check": "2026-11-21",
 "max_price": 11.69,
 "max_date": "2026-10-28 14:33",
-"incasso_notified": true,
 "warn_since": "2026-11-20",
 "warn": "in perdita da 77 giorni di Borsa: valuta l'uscita"
 },
@@ -3779,11 +3777,11 @@
 "entry_check": "2026-11-21",
 "exit_notified": false,
 "incasso": {
-"gain": 3.6,
+"gain": 6.0,
 "max": 27.66,
 "max_date": "2026-10-23 17:30",
-"giu_dal_max": -12.7,
-"motivo": "scesa 13% dal massimo (27.66) restando in guadagno (+3.6%): il guadagno si sta sgonfiando",
+"giu_dal_max": -10.7,
+"motivo": "scesa 11% dal massimo (27.66) restando in guadagno (+6.0%): il guadagno si sta sgonfiando",
 "urgenza": "incassa",
 "tipo": "sgonfia"
 },
@@ -9849,8 +9847,7 @@
 "max_date": "2026-11-05 16:51",
 "auto": true,
 "notified": true,
-"entry_check": "2026-11-20",
-"incasso_notified": true
+"entry_check": "2026-11-20"
 },
 "LSTR": {
 "kind": "short",
