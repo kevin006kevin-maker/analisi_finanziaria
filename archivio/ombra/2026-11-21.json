@@ -250,5 +250,61 @@
 "retroattiva": false,
 "atr_pct": 3.264,
 "ora": "2026-11-21 04:04"
+},
+{
+"id": "2026-11-21:long:IREN:qualita",
+"giorno": "2026-11-21",
+"metodo": "qualita",
+"kind": "long",
+"ticker": "IREN",
+"nome": "IREN Limited",
+"prezzo": 11.819999694824219,
+"profilo": "2026-11-21:long:IREN:crollato_nell_anno",
+"origine_viva": "scartata:crollato_nell_anno",
+"retroattiva": false,
+"atr_pct": 21.3264,
+"ora": "2026-11-21 19:48"
+},
+{
+"id": "2026-11-21:long:OXY:qualita",
+"giorno": "2026-11-21",
+"metodo": "qualita",
+"kind": "long",
+"ticker": "OXY",
+"nome": "OCCIDENTAL PETROLEUM CORPORATION",
+"prezzo": 53.900001525878906,
+"profilo": "2026-11-21:long:OXY:punteggio_basso",
+"origine_viva": "scartata:punteggio_basso",
+"retroattiva": false,
+"atr_pct": 3.2061,
+"ora": "2026-11-21 19:48"
+},
+{
+"id": "2026-11-21:long:IREN:rimbalzo_grandi",
+"giorno": "2026-11-21",
+"metodo": "rimbalzo_grandi",
+"kind": "long",
+"ticker": "IREN",
+"nome": "IREN Limited",
+"prezzo": 11.819999694824219,
+"profilo": "2026-11-21:long:IREN:crollato_nell_anno",
+"origine_viva": "scartata:crollato_nell_anno",
+"retroattiva": false,
+"atr_pct": 21.3264,
+"ora": "2026-11-21 19:48"
+},
+{
+"id": "2026-11-21:long:RELY:rimbalzo_grandi",
+"giorno": "2026-11-21",
+"metodo": "rimbalzo_grandi",
+"kind": "long",
+"ticker": "RELY",
+"nome": "Remitly Global, Inc.",
+"prezzo": 19.829999923706055,
+"profilo": "2026-11-21:long:RELY:troppi_dello_stesso_settore",
+"origine_viva": "scartata:troppi_dello_stesso_settore",
+"retroattiva": false,
+"atr_pct": 6.0266,
+"ora": "2026-11-21 19:48"
 }
 ]
