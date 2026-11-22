@@ -15060,5 +15060,87 @@
 "settore_1m": -0.57,
 "settore_forza_1m": 8.79
 }
+},
+{
+"v": 3,
+"id": "2026-11-22:long:VWAV:prezzo_basso",
+"giorno": "2026-11-22",
+"ora": "2026-11-22 21:44",
+"ticker": "VWAV",
+"nome": "VisionWave Holdings, Inc.",
+"kind": "long",
+"momento": null,
+"episodio": null,
+"scartata": true,
+"motivo": "prezzo_basso",
+"motivo_dettaglio": 0.18199999630451202,
+"origine": "maggiori ribassi",
+"notizie_di": "2026-11-22:VWAV",
+"prezzo": 0.18199999630451202,
+"titolo": {
+"price": 0.18199999630451202,
+"rsi": 23.38918329828897,
+"dd_high": -99.935825108467,
+"perf_5d": -54.95049753278827,
+"perf_1m": -95.10752701868913,
+"perf_1y": -99.90835851424413,
+"below_bb": false,
+"above_sma200": false,
+"rebound_pot": 1934.549501126307,
+"sharpe": -3.35,
+"sortino": -3.48,
+"ulcer": 68.71,
+"maxdd": -99.9,
+"hist_z": -1.34,
+"atr": 0.5159380050430906,
+"atr_pct": 283.4824261094229,
+"rr": 3.41,
+"rvol": 14.31,
+"avg_dollar_vol": 2195769.895415157,
+"green_day": false,
+"rsi_rising": false,
+"back_in_bb": false,
+"reversal_confirmed": false,
+"vertical_crash": true,
+"target_price": 3.7028800168633462,
+"stop_price": -0.8498760137816692,
+"etf": false,
+"sector": "Industrials"
+},
+"punteggi": {
+"prob_gain": 74,
+"prob_loss": 23,
+"exp_ret": 205.5,
+"reliab": "🔴 Bassa",
+"reliab_factor": 0.65
+},
+"convenienza": 37,
+"occasione": null,
+"fattori": {
+"discount": 99.9358,
+"histcheap": 1.34,
+"riskadj": -3.48,
+"ddpen": -68.71,
+"momentum": 54.9505,
+"prob": 51,
+"trappen": 0
+},
+"trappola": {
+"etichetta": "⚠️ trend incerto",
+"conclamata": false,
+"segnali": 0
+},
+"settore": "Industrials",
+"settore_gruppo": "Industrials",
+"mondo": {
+"paura": 35.89,
+"regime": "🔴 turbolento (crash)",
+"sp500_1m": -9.36,
+"curva_tassi": 0.79,
+"titoli_in_salita_pct": 7.0,
+"settore_1m": -5.01,
+"settore_forza_1m": 4.35
+},
+"catena_di_prima": "prezzo_basso"
 }
 ]
