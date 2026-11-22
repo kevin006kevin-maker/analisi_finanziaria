@@ -652,7 +652,7 @@
 "long:CCL": {
 "ticker": "CCL",
 "kind": "long",
-"name": "Carnival Corporation Ltd",
+"name": "Carnival Corporation & plc",
 "obs": [
 {
 "date": "2026-11-16 01:23",
@@ -823,6 +823,16 @@
 "prob_gain": 78,
 "prob_loss": 14,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-11-22 01:20",
+"conv": 38,
+"price": 26.59,
+"mkt": -9.3562,
+"occ": 62,
+"prob_gain": 73,
+"prob_loss": 16,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -886,7 +896,7 @@
 "long:PBR-A": {
 "ticker": "PBR-A",
 "kind": "long",
-"name": "PETROBRAS - PETROLEO BRASILEIRO SA",
+"name": "Petroleo Brasileiro SA Petrobras",
 "obs": [
 {
 "date": "2026-11-16 01:23",
@@ -1045,6 +1055,16 @@
 "mkt": -9.3562,
 "occ": 100,
 "prob_gain": 68,
+"prob_loss": 20,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-11-22 01:20",
+"conv": 53,
+"price": 14.06,
+"mkt": -9.3562,
+"occ": 91,
+"prob_gain": 71,
 "prob_loss": 20,
 "reliab": "🟡 Media"
 }
@@ -1516,6 +1536,16 @@
 "prob_gain": 64,
 "prob_loss": 25,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-11-22 01:20",
+"conv": 36,
+"price": 36.715,
+"mkt": -9.3562,
+"occ": 82,
+"prob_gain": 64,
+"prob_loss": 25,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -1730,7 +1760,7 @@
 "long:T": {
 "ticker": "T",
 "kind": "long",
-"name": "AT&T INC.",
+"name": "AT&T Inc.",
 "obs": [
 {
 "date": "2026-11-16 01:23",
@@ -1896,6 +1926,16 @@
 "occ": 61,
 "prob_gain": 68,
 "prob_loss": 15,
+"reliab": "🟢 Alta"
+},
+{
+"date": "2026-11-22 01:20",
+"conv": 45,
+"price": 22.31,
+"mkt": -9.3562,
+"occ": 58,
+"prob_gain": 54,
+"prob_loss": 26,
 "reliab": "🟢 Alta"
 }
 ],
@@ -3198,6 +3238,16 @@
 "conv": null,
 "price": 14.44,
 "stale": true
+},
+{
+"date": "2026-11-22 01:20",
+"conv": 55,
+"price": 14.44,
+"mkt": -9.3562,
+"occ": 100,
+"prob_gain": 66,
+"prob_loss": 24,
+"reliab": "🔴 Bassa"
 }
 ],
 "primo": {
@@ -4226,6 +4276,16 @@
 "prob_gain": 79,
 "prob_loss": 11,
 "reliab": "🟡 Media"
+},
+{
+"date": "2026-11-22 01:20",
+"conv": 50,
+"price": 47.83,
+"mkt": -9.3562,
+"occ": 65,
+"prob_gain": 79,
+"prob_loss": 11,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -4642,6 +4702,16 @@
 "conv": null,
 "price": 21.39,
 "stale": true
+},
+{
+"date": "2026-11-22 01:20",
+"conv": 29,
+"price": 21.39,
+"mkt": -9.3562,
+"occ": 73,
+"prob_gain": 54,
+"prob_loss": 36,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -4658,7 +4728,7 @@
 "long:HMY": {
 "ticker": "HMY",
 "kind": "long",
-"name": "Harmony Gold Mining Company Lim",
+"name": "Harmony Gold Mining Company Ltd",
 "obs": [
 {
 "date": "2026-11-16 01:23",
@@ -4813,6 +4883,16 @@
 {
 "date": "2026-11-21 20:46",
 "conv": 58,
+"price": 12.82,
+"mkt": -9.3562,
+"occ": 100,
+"prob_gain": 68,
+"prob_loss": 23,
+"reliab": "🔴 Bassa"
+},
+{
+"date": "2026-11-22 01:20",
+"conv": 57,
 "price": 12.82,
 "mkt": -9.3562,
 "occ": 100,
@@ -5075,6 +5155,16 @@
 "conv": null,
 "price": 53.29,
 "stale": true
+},
+{
+"date": "2026-11-22 01:20",
+"conv": 39,
+"price": 53.29,
+"mkt": -9.3562,
+"occ": 63,
+"prob_gain": 71,
+"prob_loss": 19,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -5524,7 +5614,7 @@
 "long:EIX": {
 "ticker": "EIX",
 "kind": "long",
-"name": "EDISON INTERNATIONAL",
+"name": "Edison International",
 "obs": [
 {
 "date": "2026-11-16 01:23",
@@ -5673,6 +5763,16 @@
 "conv": null,
 "price": 62.24,
 "stale": true
+},
+{
+"date": "2026-11-22 01:20",
+"conv": 46,
+"price": 62.24,
+"mkt": -9.3562,
+"occ": 62,
+"prob_gain": 69,
+"prob_loss": 17,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -5814,6 +5914,16 @@
 "conv": null,
 "price": 13.78,
 "stale": true
+},
+{
+"date": "2026-11-22 01:20",
+"conv": 48,
+"price": 13.78,
+"mkt": -9.3562,
+"occ": 59,
+"prob_gain": 67,
+"prob_loss": 19,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -6605,6 +6715,16 @@
 "occ": 80,
 "prob_gain": 56,
 "prob_loss": 33,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-11-22 01:20",
+"conv": 48,
+"price": 29.97,
+"mkt": -9.3562,
+"occ": 94,
+"prob_gain": 69,
+"prob_loss": 19,
 "reliab": "🟡 Media"
 }
 ],
@@ -7988,6 +8108,16 @@
 "conv": null,
 "price": 19.83,
 "stale": true
+},
+{
+"date": "2026-11-22 01:20",
+"conv": 45,
+"price": 19.83,
+"mkt": -9.3562,
+"occ": 83,
+"prob_gain": 67,
+"prob_loss": 23,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -8182,6 +8312,16 @@
 "conv": null,
 "price": 185.92,
 "stale": true
+},
+{
+"date": "2026-11-22 01:20",
+"conv": 29,
+"price": 185.92,
+"mkt": -9.3562,
+"occ": 69,
+"prob_gain": 60,
+"prob_loss": 31,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -8616,6 +8756,16 @@
 "conv": null,
 "price": 163.82,
 "stale": true
+},
+{
+"date": "2026-11-22 01:20",
+"conv": 46,
+"price": 163.82,
+"mkt": -9.3562,
+"occ": 93,
+"prob_gain": 64,
+"prob_loss": 25,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -10094,6 +10244,16 @@
 "conv": null,
 "price": 53.9,
 "stale": true
+},
+{
+"date": "2026-11-22 01:20",
+"conv": 48,
+"price": 53.9,
+"mkt": -9.3562,
+"occ": 69,
+"prob_gain": 67,
+"prob_loss": 18,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -10501,6 +10661,16 @@
 "conv": null,
 "price": 21.15,
 "stale": true
+},
+{
+"date": "2026-11-22 01:20",
+"conv": 35,
+"price": 21.15,
+"mkt": -9.3562,
+"occ": 62,
+"prob_gain": 54,
+"prob_loss": 29,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -10786,7 +10956,7 @@
 "long:DAVE": {
 "ticker": "DAVE",
 "kind": "long",
-"name": "Dave Inc.",
+"name": "Dave Inc./DE",
 "obs": [
 {
 "date": "2026-11-16 01:23",
@@ -10961,6 +11131,16 @@
 "conv": null,
 "price": 228.39,
 "stale": true
+},
+{
+"date": "2026-11-22 01:20",
+"conv": 50,
+"price": 228.39,
+"mkt": -9.3562,
+"occ": 100,
+"prob_gain": 66,
+"prob_loss": 27,
+"reliab": "🔴 Bassa"
 }
 ],
 "primo": {
@@ -11525,6 +11705,16 @@
 {
 "date": "2026-11-21 20:46",
 "conv": 64,
+"price": 17.11,
+"mkt": -9.3562,
+"occ": 100,
+"prob_gain": 66,
+"prob_loss": 22,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-11-22 01:20",
+"conv": 63,
 "price": 17.11,
 "mkt": -9.3562,
 "occ": 100,
@@ -14684,6 +14874,16 @@
 "conv": null,
 "price": 33.42,
 "stale": true
+},
+{
+"date": "2026-11-22 01:20",
+"conv": 51,
+"price": 33.42,
+"mkt": -9.3562,
+"occ": 90,
+"prob_gain": 63,
+"prob_loss": 27,
+"reliab": "🟡 Media"
 }
 ],
 "primo": {
@@ -16557,6 +16757,16 @@
 "prob_gain": 66,
 "prob_loss": 23,
 "reliab": "🔴 Bassa"
+},
+{
+"date": "2026-11-22 01:20",
+"conv": 53,
+"price": 76.59,
+"mkt": -9.3562,
+"occ": 89,
+"prob_gain": 66,
+"prob_loss": 23,
+"reliab": "🔴 Bassa"
 }
 ],
 "primo": {
@@ -17927,6 +18137,16 @@
 {
 "date": "2026-11-21 20:46",
 "conv": 66,
+"price": 30.6,
+"mkt": -9.3562,
+"occ": 100,
+"prob_gain": 69,
+"prob_loss": 22,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-11-22 01:20",
+"conv": 60,
 "price": 30.6,
 "mkt": -9.3562,
 "occ": 100,
