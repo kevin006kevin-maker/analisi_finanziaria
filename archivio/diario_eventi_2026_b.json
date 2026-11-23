@@ -2969,5 +2969,69 @@
 "7g": -1.05,
 "30g": 2.64
 }
+},
+{
+"episodio": "short:ESRT:2026-09-21",
+"ticker": "ESRT",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-09-24 00:21",
+"data": "2026-09-24 00:15",
+"prezzo": 4.13,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-09-24",
+"soglie": {
+"media50": 4.8242,
+"media20": 4.356,
+"quattro_atr": 4.7721,
+"meta_caduta": 4.965,
+"bollinger": 4.8039,
+"consigliata": 4.7721
+},
+"stop": 3.809,
+"atr": 0.1605,
+"res": {
+"7g": -3.51,
+"30g": 22.15,
+"soglia": 15.55
+},
+"res_soglia": {
+"media50": {
+"ret": 16.81,
+"toccato": true,
+"giorni": 19
+},
+"media20": {
+"ret": 5.47,
+"toccato": true,
+"giorni": 12
+},
+"quattro_atr": {
+"ret": 15.55,
+"toccato": true,
+"giorni": 19
+},
+"meta_caduta": {
+"ret": 20.22,
+"toccato": true,
+"giorni": 29
+},
+"bollinger": {
+"ret": 16.32,
+"toccato": true,
+"giorni": 19
+},
+"consigliata": {
+"ret": 15.55,
+"toccato": true,
+"giorni": 19
+}
+}
 }
 ]
