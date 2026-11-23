@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:XRAY:2026-09-23",
-"ticker": "XRAY",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-24 00:18",
-"data": "2026-09-24 00:15",
-"prezzo": 9.78,
-"conv": 65,
-"prob_gain": 52,
-"prob_loss": 11,
-"reliab": "🟡 Media",
-"mkt": 0.3745,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 11.8068,
-"media20": 10.5625,
-"quattro_atr": 11.6382,
-"meta_caduta": 12.025,
-"bollinger": 11.899,
-"consigliata": 11.6382
-},
-"stop": 8.8509,
-"atr": 0.4645,
-"res": {
-"7g": -11.45,
-"30g": -3.83,
-"soglia": -3.83
-},
-"res_soglia": {
-"media50": {
-"ret": -3.83,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -3.83,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -3.83,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -3.83,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -3.83,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -3.83,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "long:PR:2026-09-23",
 "ticker": "PR",
 "kind": "long",
@@ -37481,5 +37417,32 @@
 },
 "stop": 326.9687,
 "atr": 6.5257
+},
+{
+"episodio": "short:VOO:2026-11-23",
+"ticker": "VOO",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-11-23 12:17",
+"data": "2026-11-23 12:17",
+"prezzo": 635.54,
+"conv": 62,
+"prob_gain": 52,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -9.3562,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 699.0162,
+"media20": 687.4985,
+"quattro_atr": 684.7964,
+"meta_caduta": 675.87,
+"bollinger": 724.7844,
+"consigliata": 684.7964
+},
+"stop": 610.9118,
+"atr": 12.3141
 }
 ]
