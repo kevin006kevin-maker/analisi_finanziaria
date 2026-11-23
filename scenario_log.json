@@ -18095,7 +18095,15 @@
 "res": {
 "anticipo|7g": -6.19,
 "osservazione|7g": -7.35,
-"promozione|7g": 3.73
+"promozione|7g": 3.73,
+"anticipo|30g": -3.07,
+"osservazione|30g": -4.27,
+"promozione|30g": 7.18,
+"conferma|30g": 3.33,
+"anticipo|bersaglio": -3.07,
+"osservazione|bersaglio": -4.27,
+"promozione|bersaglio": 7.18,
+"conferma|bersaglio": 3.33
 }
 },
 {
@@ -18155,7 +18163,12 @@
 },
 "res": {
 "osservazione|7g": 2.04,
-"promozione|7g": -3.07
+"promozione|7g": -3.07,
+"osservazione|30g": 4.03,
+"promozione|30g": -1.18,
+"conferma|30g": 1.95,
+"osservazione|bersaglio": 11.15,
+"promozione|bersaglio": 5.58
 }
 },
 {
@@ -18179,7 +18192,10 @@
 "conv": 58,
 "res": {
 "osservazione|7g": -0.73,
-"promozione|7g": -0.13
+"promozione|7g": -0.13,
+"osservazione|30g": 1.86,
+"promozione|30g": 2.49,
+"conferma|30g": 2.62
 },
 "passaggi": {
 "osservazione": {
@@ -22819,8 +22835,8 @@
 "obs_date": "2026-11-04",
 "pre_price": 46.78,
 "pre_date": "2026-11-05",
-"conf_price": null,
-"conf_date": null,
+"conf_price": 46.18000030517578,
+"conf_date": "2026-11-23",
 "target": 56.3696,
 "stop": 39.8796,
 "reliab": "🟡 Media",
@@ -22856,16 +22872,20 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
+"data": "2026-11-23",
+"prezzo": 46.18000030517578,
+"conv": 73,
+"prob_gain": 56,
+"prob_loss": 10,
+"reliab": "🟡 Media",
 "mkt": null
 }
 },
-"res": {}
+"res": {
+"anticipo|7g": -1.28,
+"osservazione|7g": -1.81,
+"promozione|7g": 3.08
+}
 },
 {
 "ticker": "TYRA",
