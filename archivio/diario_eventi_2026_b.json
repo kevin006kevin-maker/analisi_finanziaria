@@ -2589,5 +2589,69 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:CAR:2026-09-22",
+"ticker": "CAR",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-24 00:18",
+"data": "2026-09-24 00:15",
+"prezzo": 105.67,
+"conv": 68,
+"prob_gain": 46,
+"prob_loss": 24,
+"reliab": "🔴 Bassa",
+"mkt": 0.3745,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 141.2464,
+"media20": 129.7515,
+"quattro_atr": 130.5191,
+"meta_caduta": 135.995,
+"bollinger": 154.3028,
+"consigliata": 130.5191
+},
+"stop": 93.2454,
+"atr": 6.2123,
+"res": {
+"7g": -1.1,
+"30g": -3.44,
+"soglia": -3.44
+},
+"res_soglia": {
+"media50": {
+"ret": -3.44,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -3.44,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -3.44,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -3.44,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -3.44,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -3.44,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
