@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:QS:2026-09-24",
-"ticker": "QS",
-"kind": "short",
-"evento": "uscita",
-"scritto_il": "2026-09-24 00:19",
-"data": "2026-09-24 00:19",
-"prezzo": 4.91,
-"conv": 65,
-"prob_gain": 51,
-"prob_loss": 18,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "in perdita da 41 giorni di Borsa: valuta l'uscita",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:KAI:2026-09-11",
 "ticker": "KAI",
 "kind": "short",
@@ -37449,5 +37429,32 @@
 },
 "stop": 9.5705,
 "atr": 0.8447
+},
+{
+"episodio": "long:HL:2026-11-13",
+"ticker": "HL",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-11-24 00:02",
+"data": "2026-11-23 23:57",
+"prezzo": 11.2,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-11-24",
+"soglie": {
+"media50": 15.3978,
+"media20": 13.397,
+"quattro_atr": 14.6082,
+"meta_caduta": 16.205,
+"bollinger": 16.2664,
+"consigliata": 14.6082
+},
+"stop": 9.4959,
+"atr": 0.8521
 }
 ]
