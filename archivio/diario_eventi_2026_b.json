@@ -2397,5 +2397,69 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:RELY:2026-09-23",
+"ticker": "RELY",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-24 00:18",
+"data": "2026-09-24 00:15",
+"prezzo": 20.19,
+"conv": 71,
+"prob_gain": 56,
+"prob_loss": 16,
+"reliab": "🟡 Media",
+"mkt": 0.3745,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 24.2319,
+"media20": 24.0677,
+"quattro_atr": 24.6629,
+"meta_caduta": 23.555,
+"bollinger": 28.6546,
+"consigliata": 24.2319
+},
+"stop": 17.9535,
+"atr": 1.1182,
+"res": {
+"7g": 4.41,
+"30g": 22.54,
+"soglia": 20.02
+},
+"res_soglia": {
+"media50": {
+"ret": 20.02,
+"toccato": true,
+"giorni": 21
+},
+"media20": {
+"ret": 19.21,
+"toccato": true,
+"giorni": 15
+},
+"quattro_atr": {
+"ret": 22.15,
+"toccato": true,
+"giorni": 27
+},
+"meta_caduta": {
+"ret": 16.67,
+"toccato": true,
+"giorni": 15
+},
+"bollinger": {
+"ret": 22.54,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": 20.02,
+"toccato": true,
+"giorni": 21
+}
+}
 }
 ]
