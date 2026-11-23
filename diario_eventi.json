@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:KAI:2026-09-11",
-"ticker": "KAI",
-"kind": "short",
-"evento": "fine_verifica",
-"scritto_il": "2026-09-24 00:21",
-"data": "2026-09-24 00:19",
-"prezzo": 278.35,
-"conv": 70,
-"prob_gain": 48,
-"prob_loss": 6,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 5 giorni di Borsa dalla promozione",
-"dovuto_il": "2026-09-24",
-"soglie": {
-"media50": 305.459,
-"media20": 286.147,
-"quattro_atr": 320.0016,
-"meta_caduta": 308.34,
-"bollinger": 317.9145,
-"consigliata": 305.459
-},
-"stop": 257.5242,
-"atr": 10.4129,
-"res": {
-"7g": -7.15,
-"30g": -5.11,
-"soglia": -5.11
-},
-"res_soglia": {
-"media50": {
-"ret": -5.11,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -5.11,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -5.11,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -5.11,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -5.11,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -5.11,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:RWT:2026-09-14",
 "ticker": "RWT",
 "kind": "short",
@@ -37456,5 +37392,32 @@
 },
 "stop": 9.4959,
 "atr": 0.8521
+},
+{
+"episodio": "long:PAAS:2026-11-15",
+"ticker": "PAAS",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-11-24 00:02",
+"data": "2026-11-23 23:57",
+"prezzo": 32.32,
+"conv": 62,
+"prob_gain": 66,
+"prob_loss": 26,
+"reliab": "🟡 Media",
+"mkt": -5.7193,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-11-24",
+"soglie": {
+"media50": 42.564,
+"media20": 37.9905,
+"quattro_atr": 40.0938,
+"meta_caduta": 42.61,
+"bollinger": 45.0949,
+"consigliata": 40.0938
+},
+"stop": 28.4331,
+"atr": 1.9434
 }
 ]
