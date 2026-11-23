@@ -68,5 +68,47 @@
 "retroattiva": false,
 "atr_pct": 14.9465,
 "ora": "2026-11-22 07:34"
+},
+{
+"id": "2026-11-22:long:UMC:forza_relativa",
+"giorno": "2026-11-22",
+"metodo": "forza_relativa",
+"kind": "long",
+"ticker": "UMC",
+"nome": "United Microelectronics Corporatio",
+"prezzo": 12.039999961853027,
+"profilo": "2026-11-22:long:UMC:punteggio_basso",
+"origine_viva": "scartata:punteggio_basso",
+"retroattiva": false,
+"atr_pct": 8.1394,
+"ora": "2026-11-23 02:48"
+},
+{
+"id": "2026-11-22:short:BE:forza_relativa",
+"giorno": "2026-11-22",
+"metodo": "forza_relativa",
+"kind": "short",
+"ticker": "BE",
+"nome": "BE",
+"prezzo": 142.38999938964844,
+"profilo": "2026-11-22:short:BE:punteggio_basso",
+"origine_viva": "scartata:punteggio_basso",
+"retroattiva": false,
+"atr_pct": 14.8369,
+"ora": "2026-11-23 02:48"
+},
+{
+"id": "2026-11-22:long:EEM:bassa_volatilita",
+"giorno": "2026-11-22",
+"metodo": "bassa_volatilita",
+"kind": "long",
+"ticker": "EEM",
+"nome": "iShares MSCI Emerging Markets ETF",
+"prezzo": 53.84000015258789,
+"profilo": "2026-11-22:long:EEM:punteggio_basso",
+"origine_viva": "scartata:punteggio_basso",
+"retroattiva": false,
+"atr_pct": 2.7975,
+"ora": "2026-11-23 02:48"
 }
 ]
