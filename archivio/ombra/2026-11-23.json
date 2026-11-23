@@ -180,5 +180,47 @@
 "retroattiva": false,
 "atr_pct": 1.9376,
 "ora": "2026-11-23 11:24"
+},
+{
+"id": "2026-11-23:short:NVDL:sistema_di_prima",
+"giorno": "2026-11-23",
+"metodo": "sistema_di_prima",
+"kind": "short",
+"ticker": "NVDL",
+"nome": "NVDL",
+"prezzo": 16.700000762939453,
+"profilo": "2026-11-23:short:NVDL:crollato_nell_anno",
+"origine_viva": "scartata:crollato_nell_anno",
+"retroattiva": false,
+"atr_pct": 17.5649,
+"ora": "2026-11-23 23:06"
+},
+{
+"id": "2026-11-23:long:ENI.MI:rimbalzo_grandi",
+"giorno": "2026-11-23",
+"metodo": "rimbalzo_grandi",
+"kind": "long",
+"ticker": "ENI.MI",
+"nome": "ENI",
+"prezzo": 23.84000015258789,
+"profilo": "2026-11-23:long:ENI.MI:convenienza_sotto_cancello",
+"origine_viva": "scartata:convenienza_sotto_cancello",
+"retroattiva": false,
+"atr_pct": 2.3785,
+"ora": "2026-11-23 23:06"
+},
+{
+"id": "2026-11-23:long:PAAS:rimbalzo_grandi",
+"giorno": "2026-11-23",
+"metodo": "rimbalzo_grandi",
+"kind": "long",
+"ticker": "PAAS",
+"nome": "Pan American Silver Corp.",
+"prezzo": 32.32,
+"profilo": "2026-11-23:long:PAAS:fine_osservazione",
+"origine_viva": "comprata:fine_osservazione",
+"retroattiva": false,
+"atr_pct": 6.0131,
+"ora": "2026-11-23 23:06"
 }
 ]
