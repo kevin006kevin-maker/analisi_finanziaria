@@ -26449,5 +26449,102 @@
 "date": "2026-11-20 23:42"
 }
 ]
+},
+{
+"ticker": "TFII",
+"kind": "short",
+"added": "2026-11-04",
+"removed": "2026-11-23",
+"reason": "in perdita da 13 giorni di Borsa: valuta l'uscita",
+"auto": true,
+"first_price": 96.26,
+"last_price": 88.44,
+"first_target": 120.5886,
+"first_stop": 87.2364,
+"first_src": "scatto",
+"first_sicuro": true,
+"my_target_price": null,
+"snapshots": [
+{
+"name": "TFII",
+"price": 93.99,
+"rsi": 31.128,
+"dd_high": -42.4645,
+"occasione": 34,
+"convenienza": 84,
+"prob_gain": 49,
+"prob_loss": 13,
+"exp_ret": -0.7,
+"gain": 19.5421,
+"reliab": "🟡 Media",
+"target": 112.3576,
+"stop": 86.735,
+"date": "2026-11-19 01:21"
+},
+{
+"name": "TFII",
+"price": 93.74,
+"rsi": 30.8071,
+"dd_high": -42.6175,
+"occasione": 29,
+"convenienza": 85,
+"prob_gain": 50,
+"prob_loss": 11,
+"exp_ret": -0.0,
+"gain": 19.0632,
+"reliab": "🟡 Media",
+"target": 111.6098,
+"stop": 86.7575,
+"date": "2026-11-19 18:21"
+},
+{
+"name": "TFII",
+"price": 93.07,
+"rsi": 29.9789,
+"dd_high": -43.0277,
+"occasione": 30,
+"convenienza": 85,
+"prob_gain": 48,
+"prob_loss": 12,
+"exp_ret": -0.6,
+"gain": 19.9059,
+"reliab": "🟡 Media",
+"target": 111.5964,
+"stop": 86.0397,
+"date": "2026-11-20 00:51"
+},
+{
+"name": "TFII",
+"price": 92.0,
+"rsi": 28.654,
+"dd_high": -43.6827,
+"occasione": 32,
+"convenienza": 86,
+"prob_gain": 50,
+"prob_loss": 11,
+"exp_ret": -0.1,
+"gain": 20.4474,
+"reliab": "🟡 Media",
+"target": 110.8116,
+"stop": 85.156,
+"date": "2026-11-20 17:07"
+},
+{
+"name": "TFII",
+"price": 88.44,
+"rsi": 24.9809,
+"dd_high": -45.8619,
+"occasione": 28,
+"convenienza": 87,
+"prob_gain": 50,
+"prob_loss": 10,
+"exp_ret": -0.1,
+"gain": 25.2153,
+"reliab": "🟡 Media",
+"target": 110.7404,
+"stop": 81.0245,
+"date": "2026-11-20 23:42"
+}
+]
 }
 ]
