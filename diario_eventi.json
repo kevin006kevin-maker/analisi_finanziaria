@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:RWT:2026-09-14",
-"ticker": "RWT",
-"kind": "short",
-"evento": "fine_verifica",
-"scritto_il": "2026-09-24 00:21",
-"data": "2026-09-24 00:19",
-"prezzo": 3.72,
-"conv": 79,
-"prob_gain": 50,
-"prob_loss": 5,
-"reliab": "🟡 Media",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 5 giorni di Borsa dalla promozione",
-"dovuto_il": "2026-09-24",
-"soglie": {
-"media50": 4.5706,
-"media20": 4.211,
-"quattro_atr": 4.5324,
-"meta_caduta": 4.465,
-"bollinger": 4.9766,
-"consigliata": 4.5324
-},
-"stop": 3.3138,
-"atr": 0.2031,
-"res": {
-"7g": -0.13,
-"30g": -13.31,
-"soglia": -13.31
-},
-"res_soglia": {
-"media50": {
-"ret": -13.31,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -13.31,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -13.31,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -13.31,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -13.31,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -13.31,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "long:ENVA:2026-09-15",
 "ticker": "ENVA",
 "kind": "long",
@@ -37419,5 +37355,25 @@
 },
 "stop": 28.4331,
 "atr": 1.9434
+},
+{
+"episodio": "long:NVDA:2026-11-20",
+"ticker": "NVDA",
+"kind": "long",
+"evento": "salita_2pct",
+"scritto_il": "2026-11-24 00:02",
+"data": "2026-11-23 23:57",
+"prezzo": 165.05,
+"conv": 69,
+"prob_gain": 69,
+"prob_loss": 19,
+"reliab": "🟡 Media",
+"mkt": -5.7193,
+"fonte": "osservazione",
+"note": "prezzo salito di almeno il 2% da 145.98",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
