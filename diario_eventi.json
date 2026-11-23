@@ -1,47 +1,5 @@
 [
 {
-"episodio": "long:PR:2026-09-23",
-"ticker": "PR",
-"kind": "long",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-24 00:18",
-"data": "2026-09-23 01:49",
-"prezzo": 21.29,
-"conv": 67,
-"prob_gain": 74,
-"prob_loss": 14,
-"reliab": "🟢 Alta",
-"mkt": null,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 22.0048,
-"media20": 23.2745,
-"quattro_atr": 24.1869,
-"meta_caduta": 22.89,
-"bollinger": 24.6069,
-"consigliata": 22.0048
-},
-"stop": 19.8415,
-"atr": 0.7242,
-"soglie_contaminate": {
-"media50": 22.0048,
-"media20": 23.2745,
-"quattro_atr": 24.1869,
-"meta_caduta": 22.89,
-"bollinger": 24.6069,
-"consigliata": 22.0048
-},
-"soglie_ricalcolate_il": "2026-09-24 00:21",
-"taglio_corretto": true,
-"soglie_ritardo_giorni": 1,
-"res": {
-"7g": 0.19,
-"30g": 20.27
-}
-},
-{
 "episodio": "long:SAH:2026-09-18",
 "ticker": "SAH",
 "kind": "long",
@@ -37468,5 +37426,32 @@
 "stop": 610.9118,
 "atr": 12.3141,
 "res": {}
+},
+{
+"episodio": "short:ARWR:2026-11-10",
+"ticker": "ARWR",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-11-23 23:58",
+"data": "2026-11-23 23:58",
+"prezzo": 44.04,
+"conv": 78,
+"prob_gain": 46,
+"prob_loss": 17,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 58.5032,
+"media20": 51.895,
+"quattro_atr": 55.9839,
+"meta_caduta": 65.265,
+"bollinger": 66.8185,
+"consigliata": 55.9839
+},
+"stop": 38.0681,
+"atr": 2.986
 }
 ]
