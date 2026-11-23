@@ -2130,5 +2130,69 @@
 "atr": 1.5636,
 "res": {},
 "bad_data": "salto di prezzo oltre il 25%: probabile raggruppamento di azioni"
+},
+{
+"episodio": "short:KNF:2026-09-23",
+"ticker": "KNF",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-24 00:18",
+"data": "2026-09-24 00:15",
+"prezzo": 51.43,
+"conv": 78,
+"prob_gain": 48,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": 0.3745,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 67.4418,
+"media20": 59.587,
+"quattro_atr": 61.3745,
+"meta_caduta": 68.71,
+"bollinger": 68.4908,
+"consigliata": 61.3745
+},
+"stop": 46.4578,
+"atr": 2.4861,
+"res": {
+"7g": -1.76,
+"30g": 2.86,
+"soglia": 2.86
+},
+"res_soglia": {
+"media50": {
+"ret": 2.86,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": 2.86,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": 2.86,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": 2.86,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": 2.86,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": 2.86,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
