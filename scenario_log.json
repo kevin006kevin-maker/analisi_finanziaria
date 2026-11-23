@@ -23338,5 +23338,62 @@
 "mkt": null
 }
 }
+},
+{
+"ticker": "ARWR",
+"kind": "short",
+"date": "2026-11-23",
+"promo_price": 44.04,
+"obs_price": 49.24,
+"obs_date": "2026-11-10",
+"pre_price": 48.08,
+"pre_date": "2026-11-11",
+"conf_price": null,
+"conf_date": null,
+"target": 58.5032,
+"stop": 38.0681,
+"reliab": "🔴 Bassa",
+"prob_gain": 46,
+"prob_loss": 17,
+"conv": 78,
+"passaggi": {
+"osservazione": {
+"data": "2026-11-10 04:29",
+"prezzo": 49.24,
+"conv": 65,
+"prob_gain": 48,
+"prob_loss": 11,
+"reliab": "🔴 Bassa",
+"mkt": -3.2957
+},
+"anticipo": {
+"data": "2026-11-11",
+"prezzo": 48.08,
+"conv": 68,
+"prob_gain": 50,
+"prob_loss": 15,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-23 23:57",
+"prezzo": 44.04,
+"conv": 78,
+"prob_gain": 46,
+"prob_loss": 17,
+"reliab": "🔴 Bassa",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
