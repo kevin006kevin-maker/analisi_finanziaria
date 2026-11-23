@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:SAH:2026-09-18",
-"ticker": "SAH",
-"kind": "long",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-24 00:18",
-"data": "2026-09-24 00:17",
-"prezzo": 62.37,
-"conv": 66,
-"prob_gain": 83,
-"prob_loss": 10,
-"reliab": "🟡 Media",
-"mkt": 0.3745,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 83.8932,
-"media20": 74.7595,
-"quattro_atr": 75.8696,
-"meta_caduta": 87.515,
-"bollinger": 86.0278,
-"consigliata": 75.8696
-},
-"stop": 55.6202,
-"atr": 3.3749,
-"res": {
-"7g": -2.32,
-"30g": -1.15
-}
-},
-{
 "episodio": "short:QS:2026-09-24",
 "ticker": "QS",
 "kind": "short",
@@ -37453,5 +37422,32 @@
 },
 "stop": 38.0681,
 "atr": 2.986
+},
+{
+"episodio": "long:AG:2026-11-13",
+"ticker": "AG",
+"kind": "long",
+"evento": "fine_osservazione",
+"scritto_il": "2026-11-24 00:02",
+"data": "2026-11-23 23:57",
+"prezzo": 11.26,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 7 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-11-24",
+"soglie": {
+"media50": 16.0032,
+"media20": 13.948,
+"quattro_atr": 14.6389,
+"meta_caduta": 16.325,
+"bollinger": 17.1545,
+"consigliata": 14.6389
+},
+"stop": 9.5705,
+"atr": 0.8447
 }
 ]
