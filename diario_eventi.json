@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:KNF:2026-09-23",
-"ticker": "KNF",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-24 00:18",
-"data": "2026-09-24 00:15",
-"prezzo": 51.43,
-"conv": 78,
-"prob_gain": 48,
-"prob_loss": 12,
-"reliab": "🟡 Media",
-"mkt": 0.3745,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 67.4418,
-"media20": 59.587,
-"quattro_atr": 61.3745,
-"meta_caduta": 68.71,
-"bollinger": 68.4908,
-"consigliata": 61.3745
-},
-"stop": 46.4578,
-"atr": 2.4861,
-"res": {
-"7g": -1.76,
-"30g": 2.86,
-"soglia": 2.86
-},
-"res_soglia": {
-"media50": {
-"ret": 2.86,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 2.86,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 2.86,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 2.86,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 2.86,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 2.86,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:PAYX:2026-09-23",
 "ticker": "PAYX",
 "kind": "short",
@@ -37798,5 +37734,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "long:NVDA:2026-11-20",
+"ticker": "NVDA",
+"kind": "long",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-11-23 03:42",
+"data": "2026-11-23 03:40",
+"prezzo": 125.53,
+"conv": 81,
+"prob_gain": 88,
+"prob_loss": 5,
+"reliab": "🟡 Media",
+"mkt": -9.3562,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 207.0004,
+"media20": 181.457,
+"quattro_atr": 168.3536,
+"meta_caduta": 182.385,
+"bollinger": 235.9871,
+"consigliata": 168.3536
+},
+"stop": 104.1182,
+"atr": 10.7059
 }
 ]
