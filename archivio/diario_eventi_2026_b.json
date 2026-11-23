@@ -3033,5 +3033,69 @@
 "giorni": 19
 }
 }
+},
+{
+"episodio": "short:ZTO:2026-09-22",
+"ticker": "ZTO",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-24 02:54",
+"data": "2026-09-24 02:52",
+"prezzo": 19.45,
+"conv": 80,
+"prob_gain": 52,
+"prob_loss": 2,
+"reliab": "🟢 Alta",
+"mkt": 0.6948,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 22.4964,
+"media20": 20.878,
+"quattro_atr": 21.5979,
+"meta_caduta": 22.035,
+"bollinger": 21.801,
+"consigliata": 21.5979
+},
+"stop": 18.3761,
+"atr": 0.537,
+"res": {
+"7g": 0.08,
+"30g": 2.9,
+"soglia": 2.9
+},
+"res_soglia": {
+"media50": {
+"ret": 2.9,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": 2.9,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": 2.9,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": 2.9,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": 2.9,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": 2.9,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
