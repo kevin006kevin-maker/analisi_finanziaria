@@ -2653,5 +2653,69 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:XRAY:2026-09-23",
+"ticker": "XRAY",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-24 00:18",
+"data": "2026-09-24 00:15",
+"prezzo": 9.78,
+"conv": 65,
+"prob_gain": 52,
+"prob_loss": 11,
+"reliab": "🟡 Media",
+"mkt": 0.3745,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 11.8068,
+"media20": 10.5625,
+"quattro_atr": 11.6382,
+"meta_caduta": 12.025,
+"bollinger": 11.899,
+"consigliata": 11.6382
+},
+"stop": 8.8509,
+"atr": 0.4645,
+"res": {
+"7g": -11.45,
+"30g": -3.83,
+"soglia": -3.83
+},
+"res_soglia": {
+"media50": {
+"ret": -3.83,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -3.83,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -3.83,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -3.83,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -3.83,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -3.83,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
