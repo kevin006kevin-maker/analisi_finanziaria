@@ -2322,5 +2322,80 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:CLDX:2026-09-23",
+"ticker": "CLDX",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-09-24 00:18",
+"data": "2026-09-23 21:02",
+"prezzo": 30.74,
+"conv": 72,
+"prob_gain": 50,
+"prob_loss": 8,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 38.8562,
+"media20": 38.3295,
+"quattro_atr": 39.6331,
+"meta_caduta": 37.805,
+"bollinger": 42.8389,
+"consigliata": 38.8562
+},
+"stop": 26.2935,
+"atr": 2.2233,
+"soglie_contaminate": {
+"media50": 38.8562,
+"media20": 38.3295,
+"quattro_atr": 39.6331,
+"meta_caduta": 37.805,
+"bollinger": 42.8389,
+"consigliata": 38.8562
+},
+"soglie_ricalcolate_il": "2026-09-24 00:21",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 1,
+"res": {
+"7g": 5.22,
+"30g": -6.08,
+"soglia": -6.08
+},
+"res_soglia": {
+"media50": {
+"ret": -6.08,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -6.08,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -6.08,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -6.08,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -6.08,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -6.08,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
