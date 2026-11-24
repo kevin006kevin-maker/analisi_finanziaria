@@ -37630,7 +37630,44 @@
 "consigliata": 73.0802
 },
 "stop": 53.9849,
-"atr": 3.1825
+"atr": 3.1825,
+"res": {
+"7g": 0.28,
+"30g": 4.77,
+"soglia": 4.77
+},
+"res_soglia": {
+"media50": {
+"ret": 4.77,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": 4.77,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": 4.77,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": 4.77,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": 4.77,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": 4.77,
+"toccato": false,
+"giorni": null
+}
+}
 },
 {
 "episodio": "short:SAH:2026-11-24",
@@ -37657,7 +37694,8 @@
 "consigliata": 62.523
 },
 "stop": 56.1534,
-"atr": 2.7683
+"atr": 2.7683,
+"res": {}
 },
 {
 "episodio": "short:RELY:2026-09-23",
