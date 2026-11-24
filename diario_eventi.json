@@ -37633,41 +37633,19 @@
 "atr": 3.1825,
 "res": {
 "7g": 0.28,
-"30g": 4.77,
-"soglia": 4.77
+"30g": 4.77
 },
-"res_soglia": {
-"media50": {
-"ret": 4.77,
-"toccato": false,
-"giorni": null
+"soglie_contaminate": {
+"media50": 79.6202,
+"media20": 70.0025,
+"quattro_atr": 73.0802,
+"meta_caduta": 86.505,
+"bollinger": 84.3826,
+"consigliata": 73.0802
 },
-"media20": {
-"ret": 4.77,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 4.77,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 4.77,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 4.77,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 4.77,
-"toccato": false,
-"giorni": null
-}
-}
+"soglie_ricalcolate_il": "2026-11-24 08:06",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 55
 },
 {
 "episodio": "short:SAH:2026-11-24",
