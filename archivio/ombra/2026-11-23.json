@@ -222,5 +222,33 @@
 "retroattiva": false,
 "atr_pct": 6.0131,
 "ora": "2026-11-23 23:06"
+},
+{
+"id": "2026-11-23:long:HST:bassa_volatilita",
+"giorno": "2026-11-23",
+"metodo": "bassa_volatilita",
+"kind": "long",
+"ticker": "HST",
+"nome": "HOST HOTELS & RESORTS, INC.",
+"prezzo": 24.100000381469727,
+"profilo": "2026-11-23:long:HST:punteggio_basso",
+"origine_viva": "scartata:punteggio_basso",
+"retroattiva": false,
+"atr_pct": 2.4908,
+"ora": "2026-11-24 07:07"
+},
+{
+"id": "2026-11-23:long:XLE:bassa_volatilita",
+"giorno": "2026-11-23",
+"metodo": "bassa_volatilita",
+"kind": "long",
+"ticker": "XLE",
+"nome": "State Street Energy Select Sect",
+"prezzo": 60.5099983215332,
+"profilo": "2026-11-23:long:XLE:convenienza_sotto_cancello",
+"origine_viva": "scartata:convenienza_sotto_cancello",
+"retroattiva": false,
+"atr_pct": 2.5599,
+"ora": "2026-11-24 07:07"
 }
 ]
