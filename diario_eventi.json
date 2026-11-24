@@ -27855,7 +27855,8 @@
 "stop": 100.9447,
 "atr": 3.9627,
 "res": {
-"7g": 0.38
+"7g": 0.38,
+"30g": -8.27
 }
 },
 {
@@ -27885,9 +27886,42 @@
 "stop": 9.3902,
 "atr": 0.3449,
 "res": {
-"7g": 4.22
+"7g": 4.22,
+"30g": -9.47,
+"soglia": -9.47
 },
-"res_soglia": {}
+"res_soglia": {
+"media50": {
+"ret": -9.47,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": 3.52,
+"toccato": true,
+"giorni": 8
+},
+"quattro_atr": {
+"ret": -9.47,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -9.47,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -9.47,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -9.47,
+"toccato": false,
+"giorni": null
+}
+}
 },
 {
 "episodio": "short:ADXN:2026-10-26",
@@ -36120,7 +36154,9 @@
 },
 "stop": 26.9868,
 "atr": 1.0466,
-"res": {}
+"res": {
+"7g": -7.03
+}
 },
 {
 "episodio": "short:JBHT:2026-11-10",
@@ -36148,7 +36184,9 @@
 },
 "stop": 219.7592,
 "atr": 6.5454,
-"res": {}
+"res": {
+"7g": -4.92
+}
 },
 {
 "episodio": "short:HWC:2026-11-12",
@@ -36176,7 +36214,9 @@
 },
 "stop": 60.6544,
 "atr": 2.3128,
-"res": {}
+"res": {
+"7g": -8.41
+}
 },
 {
 "episodio": "short:DGII:2026-11-12",
@@ -36204,7 +36244,9 @@
 },
 "stop": 46.6742,
 "atr": 4.3779,
-"res": {}
+"res": {
+"7g": -2.61
+}
 },
 {
 "episodio": "short:VWO:2026-11-02",
@@ -36252,7 +36294,9 @@
 },
 "stop": 24.2655,
 "atr": 1.7722,
-"res": {}
+"res": {
+"7g": 4.14
+}
 },
 {
 "episodio": "short:QQQ:2026-11-17",
@@ -36331,7 +36375,9 @@
 "soglie_ricalcolate_il": "2026-11-18 02:27",
 "taglio_corretto": true,
 "soglie_ritardo_giorni": 1,
-"res": {}
+"res": {
+"7g": 4.14
+}
 },
 {
 "episodio": "short:ENLT:2026-10-01",
@@ -37613,7 +37659,8 @@
 "atr": 3.1825,
 "res": {
 "7g": 0.28,
-"30g": 4.77
+"30g": 4.77,
+"soglia": 4.77
 },
 "soglie_contaminate": {
 "media50": 79.6202,
@@ -37625,7 +37672,39 @@
 },
 "soglie_ricalcolate_il": "2026-11-24 08:06",
 "taglio_corretto": true,
-"soglie_ritardo_giorni": 55
+"soglie_ritardo_giorni": 55,
+"res_soglia": {
+"media50": {
+"ret": 4.77,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": 4.77,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": 4.77,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": 4.77,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": 4.77,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": 4.77,
+"toccato": false,
+"giorni": null
+}
+}
 },
 {
 "episodio": "short:SAH:2026-11-24",
