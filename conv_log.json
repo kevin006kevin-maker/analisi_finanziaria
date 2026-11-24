@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-11-15",
-"ticker": "XLV",
-"kind": "short",
-"price": 188.85,
-"conv": 43,
-"factors": {
-"discount": 0.4271,
-"histcheap": -2.69,
-"riskadj": 2.23,
-"ddpen": -4.75,
-"momentum": -2.1916,
-"prob": 50,
-"oversold": -66.797,
-"rebound": -7.3097,
-"trend": 1.0,
-"relstrength": -0.3137
-},
-"ret_5d": -4.99,
-"ret_21d": null
-},
-{
-"date": "2026-11-15",
 "ticker": "XLY",
 "kind": "short",
 "price": 119.98,
@@ -39116,6 +39095,26 @@
 "rebound": 16.2043,
 "trend": -1.0,
 "relstrength": 8.6032
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-24",
+"ticker": "ADI",
+"kind": "long",
+"price": 314.155,
+"conv": 43,
+"factors": {
+"discount": 29.4794,
+"histcheap": 0.96,
+"riskadj": 0.61,
+"ddpen": -10.27,
+"momentum": 18.1184,
+"prob": 40,
+"quality": 56.0,
+"valcheap": -2.8106,
+"trappen": 3
 },
 "ret_5d": null,
 "ret_21d": null
