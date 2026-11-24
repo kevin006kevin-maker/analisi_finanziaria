@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:GENI:2026-09-23",
-"ticker": "GENI",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-24 02:54",
-"data": "2026-09-24 02:52",
-"prezzo": 5.76,
-"conv": 69,
-"prob_gain": 57,
-"prob_loss": 16,
-"reliab": "🔴 Bassa",
-"mkt": 0.6948,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 7.202,
-"media20": 7.121,
-"quattro_atr": 7.5206,
-"meta_caduta": 7.07,
-"bollinger": 8.5128,
-"consigliata": 7.202
-},
-"stop": 4.8797,
-"atr": 0.4402,
-"res": {
-"7g": -3.73,
-"30g": 10.5,
-"soglia": 10.5
-},
-"res_soglia": {
-"media50": {
-"ret": 10.5,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 10.5,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": 10.5,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": 10.5,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": 10.5,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": 10.5,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:IMVT:2026-09-23",
 "ticker": "IMVT",
 "kind": "short",
@@ -37742,5 +37678,25 @@
 },
 "stop": 56.1534,
 "atr": 2.7683
+},
+{
+"episodio": "short:RELY:2026-09-23",
+"ticker": "RELY",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-11-24 08:03",
+"data": "2026-11-24 08:03",
+"prezzo": 21.7,
+"conv": 62,
+"prob_gain": 50,
+"prob_loss": 15,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "in perdita da 41 giorni di Borsa: valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
