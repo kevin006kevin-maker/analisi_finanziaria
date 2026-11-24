@@ -18293,7 +18293,13 @@
 },
 "res": {
 "osservazione|7g": 3.8,
-"promozione|7g": 4.22
+"promozione|7g": 4.22,
+"osservazione|30g": -9.83,
+"promozione|30g": -9.47,
+"conferma|30g": -12.34,
+"osservazione|bersaglio": -9.83,
+"promozione|bersaglio": -9.47,
+"conferma|bersaglio": -12.34
 }
 },
 {
@@ -22898,15 +22904,18 @@
 "obs_date": "2026-09-30",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 22.229999542236328,
+"conf_date": "2026-11-24",
 "target": null,
 "stop": null,
 "reliab": "🔴 Bassa",
 "prob_gain": 52,
 "prob_loss": 17,
 "conv": 64,
-"res": {},
+"res": {
+"osservazione|7g": 1.65,
+"promozione|7g": 8.65
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-09-11 03:19",
@@ -22936,8 +22945,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-11-24",
+"prezzo": 22.229999542236328,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -22957,15 +22966,18 @@
 "obs_date": "2026-11-12",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 59.790000915527344,
+"conf_date": "2026-11-24",
 "target": null,
 "stop": null,
 "reliab": "🟢 Alta",
 "prob_gain": 53,
 "prob_loss": 1,
 "conv": 66,
-"res": {},
+"res": {
+"osservazione|7g": -7.86,
+"promozione|7g": -8.41
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-11-12 19:52",
@@ -22995,8 +23007,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-11-24",
+"prezzo": 59.790000915527344,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -23016,15 +23028,18 @@
 "obs_date": "2026-11-12",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 53.98500061035156,
+"conf_date": "2026-11-24",
 "target": null,
 "stop": null,
 "reliab": "🟡 Media",
 "prob_gain": 54,
 "prob_loss": 7,
 "conv": 62,
-"res": {},
+"res": {
+"osservazione|7g": -6.01,
+"promozione|7g": -2.61
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-11-12 19:52",
@@ -23054,8 +23069,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-11-24",
+"prezzo": 53.98500061035156,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
