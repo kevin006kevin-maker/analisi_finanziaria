@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:ESRT:2026-09-21",
-"ticker": "ESRT",
-"kind": "short",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-24 02:54",
-"data": "2026-09-24 02:52",
-"prezzo": 4.14,
-"conv": 69,
-"prob_gain": 52,
-"prob_loss": 3,
-"reliab": "🟡 Media",
-"mkt": 0.6948,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 4.8524,
-"media20": 4.386,
-"quattro_atr": 4.7961,
-"meta_caduta": 4.97,
-"bollinger": 4.8503,
-"consigliata": 4.7961
-},
-"stop": 3.812,
-"atr": 0.164,
-"res": {
-"7g": -3.74,
-"30g": 21.86,
-"soglia": 15.85
-},
-"res_soglia": {
-"media50": {
-"ret": 17.21,
-"toccato": true,
-"giorni": 19
-},
-"media20": {
-"ret": 5.94,
-"toccato": true,
-"giorni": 12
-},
-"quattro_atr": {
-"ret": 15.85,
-"toccato": true,
-"giorni": 19
-},
-"meta_caduta": {
-"ret": 20.05,
-"toccato": true,
-"giorni": 29
-},
-"bollinger": {
-"ret": 17.16,
-"toccato": true,
-"giorni": 19
-},
-"consigliata": {
-"ret": 15.85,
-"toccato": true,
-"giorni": 19
-}
-}
-},
-{
 "episodio": "short:GENI:2026-09-23",
 "ticker": "GENI",
 "kind": "short",
@@ -37779,5 +37715,32 @@
 },
 "stop": 53.9849,
 "atr": 3.1825
+},
+{
+"episodio": "short:SAH:2026-11-24",
+"ticker": "SAH",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-11-24 08:01",
+"data": "2026-11-24 08:01",
+"prezzo": 61.69,
+"conv": 72,
+"prob_gain": 49,
+"prob_loss": 11,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 62.523,
+"media20": null,
+"quattro_atr": 72.7633,
+"meta_caduta": 71.345,
+"bollinger": 65.4919,
+"consigliata": 62.523
+},
+"stop": 56.1534,
+"atr": 2.7683
 }
 ]
