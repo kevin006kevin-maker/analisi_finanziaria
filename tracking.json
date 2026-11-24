@@ -537,7 +537,6 @@
 "entry_conv": 59,
 "entry_date": "2026-07-16",
 "entry_src": "storico",
-"incasso_notified": true,
 "max_price": 56.11,
 "max_date": "2026-10-31 00:47"
 },
@@ -2198,7 +2197,17 @@
 "auto": true,
 "notified": true,
 "entry_check": "2026-11-24",
-"exit_notified": false
+"exit_notified": false,
+"incasso": {
+"gain": 3.6,
+"max": 27.66,
+"max_date": "2026-10-23 17:30",
+"giu_dal_max": -12.7,
+"motivo": "scesa 13% dal massimo (27.66) restando in guadagno (+3.6%): il guadagno si sta sgonfiando",
+"urgenza": "incassa",
+"tipo": "sgonfia"
+},
+"incasso_notified": true
 },
 "TTAN": {
 "kind": "short",
@@ -2740,8 +2749,7 @@
 "max_date": "2026-11-04 19:53",
 "auto": true,
 "notified": true,
-"entry_check": "2026-11-24",
-"incasso_notified": true
+"entry_check": "2026-11-24"
 },
 "SMST": {
 "kind": "short",
@@ -3751,8 +3759,7 @@
 "max_date": "2026-11-19 18:21",
 "auto": true,
 "notified": true,
-"entry_check": "2026-11-23",
-"incasso_notified": true
+"entry_check": "2026-11-23"
 },
 "MRP": {
 "kind": "short",
@@ -3835,8 +3842,7 @@
 "max_date": "2026-11-05 01:25",
 "auto": true,
 "notified": true,
-"entry_check": "2026-11-23",
-"incasso_notified": true
+"entry_check": "2026-11-23"
 },
 "XENE": {
 "kind": "short",
@@ -4539,15 +4545,6 @@
 "auto": true,
 "notified": true,
 "entry_check": "2026-11-23",
-"incasso": {
-"gain": 4.0,
-"max": 84.5,
-"max_date": "2026-11-12 12:00",
-"giu_dal_max": -9.1,
-"motivo": "scesa 9% dal massimo (84.50) restando in guadagno (+4.0%): il guadagno si sta sgonfiando",
-"urgenza": "incassa",
-"tipo": "sgonfia"
-},
 "incasso_notified": true
 },
 "EEFT": {
