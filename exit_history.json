@@ -26450,5 +26450,86 @@
 "date": "2026-11-23 23:58"
 }
 ]
+},
+{
+"ticker": "XRAY",
+"kind": "short",
+"added": "2026-10-11",
+"removed": "2026-11-24",
+"reason": "in perdita da 32 giorni di Borsa: valuta l'uscita",
+"auto": true,
+"first_price": 8.83,
+"last_price": 8.72,
+"first_target": 10.6482,
+"first_stop": 8.1164,
+"first_src": "scatto",
+"first_sicuro": true,
+"my_target_price": null,
+"snapshots": [
+{
+"name": "XRAY",
+"price": 8.49,
+"rsi": 37.4346,
+"dd_high": -42.1662,
+"occasione": 19,
+"convenienza": 78,
+"prob_gain": 52,
+"prob_loss": 11,
+"exp_ret": 0.4,
+"gain": 8.98,
+"reliab": "🟡 Media",
+"target": 9.2524,
+"stop": 7.5528,
+"date": "2026-11-20 00:51"
+},
+{
+"name": "XRAY",
+"price": 8.575,
+"rsi": 39.1179,
+"dd_high": -41.5872,
+"occasione": 41,
+"convenienza": 76,
+"prob_gain": 47,
+"prob_loss": 12,
+"exp_ret": -0.9,
+"gain": 7.4601,
+"reliab": "🟡 Media",
+"target": 9.2147,
+"stop": 7.662,
+"date": "2026-11-20 17:07"
+},
+{
+"name": "XRAY",
+"price": 8.29,
+"rsi": 35.1479,
+"dd_high": -43.5286,
+"occasione": 17,
+"convenienza": 78,
+"prob_gain": 51,
+"prob_loss": 11,
+"exp_ret": 0.3,
+"gain": 11.0856,
+"reliab": "🟡 Media",
+"target": 9.209,
+"stop": 7.3477,
+"date": "2026-11-20 23:42"
+},
+{
+"name": "XRAY",
+"price": 8.72,
+"rsi": 43.1836,
+"dd_high": -40.5995,
+"occasione": 35,
+"convenienza": 74,
+"prob_gain": 52,
+"prob_loss": 10,
+"exp_ret": 1.0,
+"gain": 5.2271,
+"reliab": "🟡 Media",
+"target": 9.1758,
+"stop": 7.7793,
+"date": "2026-11-23 23:58"
+}
+]
 }
 ]
