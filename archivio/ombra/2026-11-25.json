@@ -1,0 +1,58 @@
+[
+{
+"id": "2026-11-25:long:ISP.MI:sistema_di_prima",
+"giorno": "2026-11-25",
+"metodo": "sistema_di_prima",
+"kind": "long",
+"ticker": "ISP.MI",
+"nome": "INTESA SANPAOLO",
+"prezzo": 5.8379998207092285,
+"profilo": "2026-11-25:long:ISP.MI:prezzo_basso",
+"origine_viva": "scartata:prezzo_basso",
+"retroattiva": false,
+"atr_pct": 2.5151,
+"ora": "2026-11-25 03:10"
+},
+{
+"id": "2026-11-25:long:XLF:trend_template",
+"giorno": "2026-11-25",
+"metodo": "trend_template",
+"kind": "long",
+"ticker": "XLF",
+"nome": "State Street Financial Select Sect",
+"prezzo": 56.11000061035156,
+"profilo": "2026-11-25:long:XLF:punteggio_basso",
+"origine_viva": "scartata:punteggio_basso",
+"retroattiva": false,
+"atr_pct": 1.7947,
+"ora": "2026-11-25 03:10"
+},
+{
+"id": "2026-11-25:short:ENI.MI:rimbalzo_grandi",
+"giorno": "2026-11-25",
+"metodo": "rimbalzo_grandi",
+"kind": "short",
+"ticker": "ENI.MI",
+"nome": "ENI.MI",
+"prezzo": 23.84000015258789,
+"profilo": "2026-11-25:short:ENI.MI:punteggio_basso",
+"origine_viva": "scartata:punteggio_basso",
+"retroattiva": false,
+"atr_pct": 2.3785,
+"ora": "2026-11-25 03:10"
+},
+{
+"id": "2026-11-25:long:DY:rimbalzo_grandi",
+"giorno": "2026-11-25",
+"metodo": "rimbalzo_grandi",
+"kind": "long",
+"ticker": "DY",
+"nome": "Dycom Industries Inc",
+"prezzo": 179.00999450683594,
+"profilo": "2026-11-25:long:DY:crollato_nell_anno",
+"origine_viva": "scartata:crollato_nell_anno",
+"retroattiva": false,
+"atr_pct": 8.4407,
+"ora": "2026-11-25 03:10"
+}
+]
