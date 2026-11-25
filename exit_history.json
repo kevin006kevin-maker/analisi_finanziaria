@@ -26435,5 +26435,86 @@
 "date": "2026-11-24 19:55"
 }
 ]
+},
+{
+"ticker": "CACC",
+"kind": "short",
+"added": "2026-11-04",
+"removed": "2026-11-25",
+"reason": "in perdita da 15 giorni di Borsa: valuta l'uscita",
+"auto": true,
+"first_price": 480.65,
+"last_price": 477.41,
+"first_target": 559.5276,
+"first_stop": 431.7885,
+"first_src": "scatto",
+"first_sicuro": true,
+"my_target_price": null,
+"snapshots": [
+{
+"name": "CACC",
+"price": 464.76,
+"rsi": 34.7589,
+"dd_high": -29.2818,
+"occasione": 14,
+"convenienza": 77,
+"prob_gain": 48,
+"prob_loss": 5,
+"exp_ret": -0.4,
+"gain": 14.9117,
+"reliab": "🟡 Media",
+"target": 534.0634,
+"stop": 422.5991,
+"date": "2026-11-20 23:42"
+},
+{
+"name": "CACC",
+"price": 478.85,
+"rsi": 40.1837,
+"dd_high": -27.1379,
+"occasione": 35,
+"convenienza": 73,
+"prob_gain": 47,
+"prob_loss": 5,
+"exp_ret": -0.6,
+"gain": 11.002,
+"reliab": "🟡 Media",
+"target": 531.5332,
+"stop": 437.5227,
+"date": "2026-11-23 23:58"
+},
+{
+"name": "CACC",
+"price": 475.73,
+"rsi": 39.4024,
+"dd_high": -27.6126,
+"occasione": 12,
+"convenienza": 73,
+"prob_gain": 48,
+"prob_loss": 5,
+"exp_ret": -0.4,
+"gain": 11.2071,
+"reliab": "🟡 Media",
+"target": 529.0456,
+"stop": 435.4218,
+"date": "2026-11-24 19:55"
+},
+{
+"name": "CACC",
+"price": 477.41,
+"rsi": 39.8193,
+"dd_high": -27.357,
+"occasione": 11,
+"convenienza": 73,
+"prob_gain": 49,
+"prob_loss": 6,
+"exp_ret": -0.4,
+"gain": 10.8228,
+"reliab": "🟡 Media",
+"target": 529.0792,
+"stop": 437.1018,
+"date": "2026-11-25 04:05"
+}
+]
 }
 ]
