@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:CLDX:2026-09-23",
-"ticker": "CLDX",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-24 02:55",
-"data": "2026-09-24 02:52",
-"prezzo": 33.51,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 30.74",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:ERAS:2026-09-23",
 "ticker": "ERAS",
 "kind": "short",
@@ -37793,5 +37773,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:QQQ:2026-11-25",
+"ticker": "QQQ",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-11-25 13:44",
+"data": "2026-11-25 13:44",
+"prezzo": 638.1,
+"conv": 70,
+"prob_gain": 47,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 708.4654,
+"media20": 671.3145,
+"quattro_atr": 721.5434,
+"meta_caduta": 698.88,
+"bollinger": 725.9565,
+"consigliata": 708.4654
+},
+"stop": 596.3783,
+"atr": 20.8608
 }
 ]
