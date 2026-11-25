@@ -18323,7 +18323,10 @@
 "conv": 58,
 "res": {
 "osservazione|7g": -7.13,
-"promozione|7g": -1.83
+"promozione|7g": -1.83,
+"osservazione|30g": -25.17,
+"promozione|30g": -20.89,
+"conferma|30g": -19.42
 },
 "passaggi": {
 "osservazione": {
@@ -18385,7 +18388,10 @@
 "conv": 63,
 "res": {
 "osservazione|7g": -12.19,
-"promozione|7g": 1.33
+"promozione|7g": 1.33,
+"osservazione|30g": -13.29,
+"promozione|30g": 0.06,
+"conferma|30g": -1.26
 },
 "passaggi": {
 "osservazione": {
@@ -23090,15 +23096,18 @@
 "obs_date": "2026-10-07",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 278.489990234375,
+"conf_date": "2026-11-25",
 "target": null,
 "stop": null,
 "reliab": "🟡 Media",
 "prob_gain": 52,
 "prob_loss": 8,
 "conv": 56,
-"res": {},
+"res": {
+"osservazione|7g": 8.0,
+"promozione|7g": 6.35
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-09-11 20:57",
@@ -23128,8 +23137,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-11-25",
+"prezzo": 278.489990234375,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
@@ -23149,15 +23158,18 @@
 "obs_date": "2026-11-14",
 "pre_price": null,
 "pre_date": null,
-"conf_price": null,
-"conf_date": null,
+"conf_price": 297.05999755859375,
+"conf_date": "2026-11-25",
 "target": null,
 "stop": null,
 "reliab": null,
 "prob_gain": null,
 "prob_loss": null,
 "conv": 60,
-"res": {},
+"res": {
+"osservazione|7g": -13.78,
+"promozione|7g": -7.33
+},
 "passaggi": {
 "osservazione": {
 "data": "2026-11-14 10:23",
@@ -23187,8 +23199,8 @@
 "mkt": null
 },
 "conferma": {
-"data": null,
-"prezzo": null,
+"data": "2026-11-25",
+"prezzo": 297.05999755859375,
 "conv": null,
 "prob_gain": null,
 "prob_loss": null,
