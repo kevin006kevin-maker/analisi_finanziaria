@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-11-16",
-"ticker": "XLI",
-"kind": "short",
-"price": 168.78,
-"conv": 59,
-"factors": {
-"discount": 9.5062,
-"histcheap": 0.16,
-"riskadj": 0.64,
-"ddpen": -5.33,
-"momentum": -3.7561,
-"prob": 54,
-"oversold": -50.5068,
-"rebound": 0.1055,
-"trend": -1.0,
-"relstrength": 1.2508
-},
-"ret_5d": -3.74,
-"ret_21d": null
-},
-{
-"date": "2026-11-16",
 "ticker": "XLU",
 "kind": "short",
 "price": 44.04,
@@ -39072,6 +39051,26 @@
 "rebound": 4.4959,
 "trend": -1.0,
 "relstrength": 5.2986
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-25",
+"ticker": "HCTI",
+"kind": "long",
+"price": 0.4624,
+"conv": 36,
+"factors": {
+"discount": 99.9848,
+"histcheap": 0.43,
+"riskadj": -3.64,
+"ddpen": -93.12,
+"momentum": 85.3671,
+"prob": 70,
+"quality": null,
+"valcheap": null,
+"trappen": 0
 },
 "ret_5d": null,
 "ret_21d": null
