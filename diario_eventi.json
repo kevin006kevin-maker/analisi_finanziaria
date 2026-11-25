@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:ERAS:2026-09-23",
-"ticker": "ERAS",
-"kind": "short",
-"evento": "salita_2pct",
-"scritto_il": "2026-09-24 02:55",
-"data": "2026-09-24 02:52",
-"prezzo": 15.04,
-"conv": null,
-"prob_gain": null,
-"prob_loss": null,
-"reliab": null,
-"mkt": null,
-"fonte": "osservazione",
-"note": "prezzo salito di almeno il 2% da 14.085",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:HVII:2026-09-24",
 "ticker": "HVII",
 "kind": "short",
@@ -37800,5 +37780,32 @@
 },
 "stop": 596.3783,
 "atr": 20.8608
+},
+{
+"episodio": "short:NVDA:2026-11-05",
+"ticker": "NVDA",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-11-25 13:44",
+"data": "2026-11-25 13:44",
+"prezzo": 155.38,
+"conv": 78,
+"prob_gain": 51,
+"prob_loss": 9,
+"reliab": "🟡 Media",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 204.9464,
+"media20": 175.7815,
+"quattro_atr": 208.6577,
+"meta_caduta": 197.31,
+"bollinger": 225.8446,
+"consigliata": 204.9464
+},
+"stop": 128.7412,
+"atr": 13.3194
 }
 ]
