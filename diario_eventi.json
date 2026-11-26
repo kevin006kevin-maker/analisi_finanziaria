@@ -28450,7 +28450,8 @@
 "atr": 88.6669,
 "res": {
 "7g": 10.06
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:MHO:2026-10-22",
@@ -28480,7 +28481,8 @@
 "atr": 4.7262,
 "res": {
 "7g": 4.84
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:NFLX:2026-10-27",
@@ -28570,7 +28572,8 @@
 "atr": 3.6749,
 "res": {
 "7g": 1.71
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:MHO:2026-10-22",
@@ -28600,7 +28603,8 @@
 "atr": 4.7262,
 "res": {
 "7g": 4.84
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:EEM:2026-10-22",
@@ -28630,7 +28634,8 @@
 "atr": 1.0811,
 "res": {
 "7g": -1.43
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:CRS:2026-10-22",
@@ -28660,7 +28665,8 @@
 "atr": 18.4291,
 "res": {
 "7g": 4.31
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:VALE:2026-10-26",
@@ -28740,7 +28746,8 @@
 "atr": 2.172,
 "res": {
 "7g": -3.95
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:BA:2026-10-27",
@@ -28770,7 +28777,8 @@
 "atr": 6.021,
 "res": {
 "7g": 2.31
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:VALE:2026-10-26",
@@ -28800,7 +28808,8 @@
 "atr": 0.3653,
 "res": {
 "7g": -6.69
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "short:BAMI.MI:2026-10-27",
@@ -28830,7 +28839,8 @@
 "atr": 0.4169,
 "res": {
 "7g": -2.6
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "long:NEM:2026-10-25",
@@ -28891,7 +28901,8 @@
 "soglie_ritardo_giorni": 1,
 "res": {
 "7g": 3.78
-}
+},
+"res_soglia": {}
 },
 {
 "episodio": "long:SAN:2026-10-27",
@@ -37935,6 +37946,43 @@
 "consigliata": 5.676
 },
 "stop": 3.292,
-"atr": 0.469
+"atr": 0.469,
+"res": {
+"7g": -12.29,
+"30g": -33.57,
+"soglia": -33.57
+},
+"res_soglia": {
+"media50": {
+"ret": -33.57,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": -33.57,
+"toccato": false,
+"giorni": null
+},
+"quattro_atr": {
+"ret": -33.57,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": -33.57,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": -33.57,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": -33.57,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
