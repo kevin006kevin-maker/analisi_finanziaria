@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:TRT:2026-09-24",
-"ticker": "TRT",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-24 22:28",
-"data": "2026-09-24 22:28",
-"prezzo": 7.26,
-"conv": 69,
-"prob_gain": 52,
-"prob_loss": 27,
-"reliab": "🔴 Bassa",
-"mkt": 0.3665,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 10.4582,
-"media20": 10.2925,
-"quattro_atr": 11.4585,
-"meta_caduta": 9.79,
-"bollinger": 11.9829,
-"consigliata": 10.4582
-},
-"stop": 5.1607,
-"atr": 1.0496,
-"res": {
-"7g": -12.53,
-"30g": -27.13,
-"soglia": -27.13
-},
-"res_soglia": {
-"media50": {
-"ret": -27.13,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -27.13,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -27.13,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -27.13,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -27.13,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -27.13,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:TRIP:2026-09-24",
 "ticker": "TRIP",
 "kind": "short",
@@ -37868,5 +37804,32 @@
 "soglie": null,
 "stop": null,
 "atr": null
+},
+{
+"episodio": "short:VEA:2026-11-23",
+"ticker": "VEA",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-11-27 00:24",
+"data": "2026-11-27 00:20",
+"prezzo": 65.67,
+"conv": 71,
+"prob_gain": 53,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-11-27",
+"soglie": {
+"media50": 69.5566,
+"media20": 68.1125,
+"quattro_atr": 70.4119,
+"meta_caduta": 69.715,
+"bollinger": 72.1548,
+"consigliata": 69.5566
+},
+"stop": 63.299,
+"atr": 1.1855
 }
 ]
