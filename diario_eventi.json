@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:FSLR:2026-09-24",
-"ticker": "FSLR",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-24 19:05",
-"data": "2026-09-24 19:05",
-"prezzo": 177.29,
-"conv": 67,
-"prob_gain": 50,
-"prob_loss": 10,
-"reliab": "🟡 Media",
-"mkt": 0.4711,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 212.0894,
-"media20": 201.7865,
-"quattro_atr": 219.0241,
-"meta_caduta": 213.67,
-"bollinger": 217.8745,
-"consigliata": 212.0894
-},
-"stop": 156.423,
-"atr": 10.4335,
-"res": {
-"7g": -3.93,
-"30g": -4.61,
-"soglia": -4.61
-},
-"res_soglia": {
-"media50": {
-"ret": -4.61,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -4.61,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -4.61,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -4.61,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -4.61,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -4.61,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:TRT:2026-09-24",
 "ticker": "TRT",
 "kind": "short",
@@ -37908,6 +37844,26 @@
 "mkt": null,
 "fonte": "monitoraggio",
 "note": "in perdita da 83 giorni di Borsa: valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
+},
+{
+"episodio": "short:SUJA:2026-11-27",
+"ticker": "SUJA",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-11-27 00:22",
+"data": "2026-11-27 00:22",
+"prezzo": 4.85,
+"conv": 69,
+"prob_gain": 55,
+"prob_loss": 31,
+"reliab": "🔴 Bassa",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "in perdita da 77 giorni di Borsa: valuta l'uscita",
 "dovuto_il": null,
 "soglie": null,
 "stop": null,
