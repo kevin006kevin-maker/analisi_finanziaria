@@ -1,69 +1,5 @@
 [
 {
-"episodio": "short:GIL:2026-09-24",
-"ticker": "GIL",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-24 19:05",
-"data": "2026-09-24 19:05",
-"prezzo": 40.965,
-"conv": 82,
-"prob_gain": 55,
-"prob_loss": 5,
-"reliab": "🟡 Media",
-"mkt": 0.4711,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 52.6333,
-"media20": 49.3177,
-"quattro_atr": 48.531,
-"meta_caduta": 49.7375,
-"bollinger": 56.3254,
-"consigliata": 48.531
-},
-"stop": 37.182,
-"atr": 1.8915,
-"res": {
-"7g": 1.01,
-"30g": -0.94,
-"soglia": -0.94
-},
-"res_soglia": {
-"media50": {
-"ret": -0.94,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": -0.94,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -0.94,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -0.94,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -0.94,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -0.94,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:MGM:2026-09-24",
 "ticker": "MGM",
 "kind": "short",
@@ -38030,5 +37966,32 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:VALE:2026-11-27",
+"ticker": "VALE",
+"kind": "short",
+"evento": "ingresso_anticipo",
+"scritto_il": "2026-11-27 00:20",
+"data": "2026-11-17 10:09",
+"prezzo": 10.46,
+"conv": 70,
+"prob_gain": 49,
+"prob_loss": 6,
+"reliab": "🟡 Media",
+"mkt": -3.5646,
+"fonte": "osservazione",
+"note": "pre-segnale diventato solido",
+"dovuto_il": null,
+"soglie": {
+"media50": 12.927,
+"media20": 11.524,
+"quattro_atr": 11.9793,
+"meta_caduta": 13.095,
+"bollinger": 12.66,
+"consigliata": 11.9793
+},
+"stop": 9.7003,
+"atr": 0.3798
 }
 ]
