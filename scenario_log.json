@@ -23680,5 +23680,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "VEA",
+"kind": "short",
+"date": "2026-11-27",
+"promo_price": 65.67,
+"obs_price": 63.62,
+"obs_date": "2026-11-23",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": 69.5566,
+"stop": 63.299,
+"reliab": "🟢 Alta",
+"prob_gain": 53,
+"prob_loss": 0,
+"conv": 71,
+"passaggi": {
+"osservazione": {
+"data": "2026-11-23 12:17",
+"prezzo": 63.62,
+"conv": 66,
+"prob_gain": 55,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -9.3562
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-27 00:20",
+"prezzo": 65.67,
+"conv": 71,
+"prob_gain": 53,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
