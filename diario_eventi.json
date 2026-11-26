@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:AGNC:2026-09-18",
-"ticker": "AGNC",
-"kind": "short",
-"evento": "uscita",
-"scritto_il": "2026-09-24 22:29",
-"data": "2026-09-24 22:29",
-"prezzo": 9.62,
-"conv": 83,
-"prob_gain": 53,
-"prob_loss": 0,
-"reliab": "🟢 Alta",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "long:ACAD:2026-09-25",
 "ticker": "ACAD",
 "kind": "long",
@@ -37792,5 +37772,32 @@
 },
 "stop": 338.289,
 "atr": 7.4555
+},
+{
+"episodio": "short:VOO:2026-11-23",
+"ticker": "VOO",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-11-27 00:24",
+"data": "2026-11-25 23:28",
+"prezzo": 658.87,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-11-27",
+"soglie": {
+"media50": 696.9112,
+"media20": 680.6315,
+"quattro_atr": 715.1883,
+"meta_caduta": 687.535,
+"bollinger": 717.9023,
+"consigliata": 696.9112
+},
+"stop": 630.7109,
+"atr": 14.0796
 }
 ]
