@@ -3813,5 +3813,69 @@
 "giorni": null
 }
 }
+},
+{
+"episodio": "short:TRIP:2026-09-24",
+"ticker": "TRIP",
+"kind": "short",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-09-24 22:28",
+"data": "2026-09-24 22:28",
+"prezzo": 8.52,
+"conv": 64,
+"prob_gain": 54,
+"prob_loss": 12,
+"reliab": "🟡 Media",
+"mkt": 0.3665,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 11.1514,
+"media20": 9.141,
+"quattro_atr": 10.2954,
+"meta_caduta": 11.725,
+"bollinger": 10.0764,
+"consigliata": 10.2954
+},
+"stop": 7.6323,
+"atr": 0.4439,
+"res": {
+"7g": -3.05,
+"30g": 9.1,
+"soglia": 9.1
+},
+"res_soglia": {
+"media50": {
+"ret": 9.1,
+"toccato": false,
+"giorni": null
+},
+"media20": {
+"ret": 7.29,
+"toccato": true,
+"giorni": 21
+},
+"quattro_atr": {
+"ret": 9.1,
+"toccato": false,
+"giorni": null
+},
+"meta_caduta": {
+"ret": 9.1,
+"toccato": false,
+"giorni": null
+},
+"bollinger": {
+"ret": 9.1,
+"toccato": false,
+"giorni": null
+},
+"consigliata": {
+"ret": 9.1,
+"toccato": false,
+"giorni": null
+}
+}
 }
 ]
