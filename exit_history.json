@@ -26452,5 +26452,86 @@
 "date": "2026-11-25 04:05"
 }
 ]
+},
+{
+"ticker": "MTDR",
+"kind": "short",
+"added": "2026-07-31",
+"removed": "2026-11-27",
+"reason": "in perdita da 83 giorni di Borsa: valuta l'uscita",
+"auto": true,
+"first_price": 48.845,
+"last_price": 47.94,
+"first_target": 52.2966,
+"first_stop": 45.0021,
+"first_src": "scatto",
+"first_sicuro": true,
+"my_target_price": null,
+"snapshots": [
+{
+"name": "MTDR",
+"price": 47.46,
+"rsi": 31.9195,
+"dd_high": -27.4866,
+"occasione": 23,
+"convenienza": 76,
+"prob_gain": 50,
+"prob_loss": 9,
+"exp_ret": -0.0,
+"gain": 14.1441,
+"reliab": "🟡 Media",
+"target": 54.1728,
+"stop": 43.2527,
+"date": "2026-11-23 23:58"
+},
+{
+"name": "MTDR",
+"price": 48.1368,
+"rsi": 35.0415,
+"dd_high": -26.4526,
+"occasione": 42,
+"convenienza": 74,
+"prob_gain": 51,
+"prob_loss": 10,
+"exp_ret": 0.5,
+"gain": 11.9147,
+"reliab": "🟡 Media",
+"target": 53.8721,
+"stop": 44.0704,
+"date": "2026-11-24 19:54"
+},
+{
+"name": "MTDR",
+"price": 47.79,
+"rsi": 33.4784,
+"dd_high": -26.9824,
+"occasione": 44,
+"convenienza": 75,
+"prob_gain": 50,
+"prob_loss": 9,
+"exp_ret": 0.2,
+"gain": 12.7123,
+"reliab": "🟡 Media",
+"target": 53.8652,
+"stop": 43.7236,
+"date": "2026-11-25 04:04"
+},
+{
+"name": "MTDR",
+"price": 47.94,
+"rsi": 34.2157,
+"dd_high": -26.7532,
+"occasione": 43,
+"convenienza": 74,
+"prob_gain": 50,
+"prob_loss": 10,
+"exp_ret": -0.0,
+"gain": 11.9512,
+"reliab": "🟡 Media",
+"target": 53.6694,
+"stop": 43.9712,
+"date": "2026-11-25 23:30"
+}
+]
 }
 ]
