@@ -3906,5 +3906,25 @@
 "atr": 3.7874,
 "res": {},
 "bad_data": "salto di prezzo oltre il 25%: probabile raggruppamento di azioni"
+},
+{
+"episodio": "short:AGNC:2026-09-18",
+"ticker": "AGNC",
+"kind": "short",
+"evento": "uscita",
+"scritto_il": "2026-09-24 22:29",
+"data": "2026-09-24 22:29",
+"prezzo": 9.62,
+"conv": 83,
+"prob_gain": 53,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "sceso sotto lo stop (−2×ATR): valuta l'uscita",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
