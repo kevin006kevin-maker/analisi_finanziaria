@@ -37949,40 +37949,18 @@
 "atr": 0.469,
 "res": {
 "7g": -12.29,
-"30g": -33.57,
-"soglia": -33.57
+"30g": -33.57
 },
-"res_soglia": {
-"media50": {
-"ret": -33.57,
-"toccato": false,
-"giorni": null
+"soglie_contaminate": {
+"media50": 5.676,
+"media20": 5.2885,
+"quattro_atr": 6.1061,
+"meta_caduta": 5.465,
+"bollinger": 6.7996,
+"consigliata": 5.676
 },
-"media20": {
-"ret": -33.57,
-"toccato": false,
-"giorni": null
-},
-"quattro_atr": {
-"ret": -33.57,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -33.57,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -33.57,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -33.57,
-"toccato": false,
-"giorni": null
-}
-}
+"soglie_ricalcolate_il": "2026-11-26 05:25",
+"taglio_corretto": true,
+"soglie_ritardo_giorni": 91
 }
 ]
