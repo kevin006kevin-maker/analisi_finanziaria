@@ -1,34 +1,5 @@
 [
 {
-"episodio": "short:WHLR:2026-09-24",
-"ticker": "WHLR",
-"kind": "short",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-24 22:28",
-"data": "2026-09-24 22:28",
-"prezzo": 3.74,
-"conv": 60,
-"prob_gain": 54,
-"prob_loss": 36,
-"reliab": "🔴 Bassa",
-"mkt": 0.3665,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 18.3519,
-"media20": 3.8983,
-"quattro_atr": 18.8895,
-"meta_caduta": 94.57,
-"bollinger": 9.1195,
-"consigliata": 18.3519
-},
-"stop": null,
-"atr": 3.7874,
-"res": {},
-"bad_data": "salto di prezzo oltre il 25%: probabile raggruppamento di azioni"
-},
-{
 "episodio": "short:AGNC:2026-09-18",
 "ticker": "AGNC",
 "kind": "short",
@@ -37794,5 +37765,32 @@
 },
 "stop": 685.5496,
 "atr": 15.5752
+},
+{
+"episodio": "short:VTI:2026-11-23",
+"ticker": "VTI",
+"kind": "short",
+"evento": "fine_osservazione",
+"scritto_il": "2026-11-27 00:24",
+"data": "2026-11-25 23:28",
+"prezzo": 353.2,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null,
+"fonte": "osservazione",
+"note": "passati 3 giorni di Borsa dall'ingresso in osservazione",
+"dovuto_il": "2026-11-27",
+"soglie": {
+"media50": 372.5112,
+"media20": 364.3765,
+"quattro_atr": 383.0221,
+"meta_caduta": 367.87,
+"bollinger": 384.257,
+"consigliata": 372.5112
+},
+"stop": 338.289,
+"atr": 7.4555
 }
 ]
