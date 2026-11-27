@@ -1,25 +1,5 @@
 [
 {
-"episodio": "short:SYK:2026-09-09",
-"ticker": "SYK",
-"kind": "short",
-"evento": "uscita",
-"scritto_il": "2026-09-25 01:28",
-"data": "2026-09-25 01:28",
-"prezzo": 269.75,
-"conv": 81,
-"prob_gain": 54,
-"prob_loss": 3,
-"reliab": "🟢 Alta",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "in perdita da 9 giorni di Borsa: valuta l'uscita",
-"dovuto_il": null,
-"soglie": null,
-"stop": null,
-"atr": null
-},
-{
 "episodio": "short:INIO:2026-09-15",
 "ticker": "INIO",
 "kind": "short",
@@ -37815,5 +37795,32 @@
 },
 "stop": 341.8697,
 "atr": 7.2751
+},
+{
+"episodio": "short:VOO:2026-11-23",
+"ticker": "VOO",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-11-27 16:36",
+"data": "2026-11-27 16:36",
+"prezzo": 664.53,
+"conv": 63,
+"prob_gain": 48,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 696.1812,
+"media20": 678.492,
+"quattro_atr": 719.2456,
+"meta_caduta": 690.365,
+"bollinger": 714.1917,
+"consigliata": 696.1812
+},
+"stop": 637.1722,
+"atr": 13.6789
 }
 ]
