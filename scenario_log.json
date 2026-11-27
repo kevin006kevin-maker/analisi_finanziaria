@@ -23794,5 +23794,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "XLK",
+"kind": "short",
+"date": "2026-11-27",
+"promo_price": 157.55,
+"obs_price": 174.22,
+"obs_date": "2026-11-03",
+"pre_price": 170.88,
+"pre_date": "2026-11-12",
+"conf_price": null,
+"conf_date": null,
+"target": 182.2702,
+"stop": 143.9407,
+"reliab": "🟢 Alta",
+"prob_gain": 48,
+"prob_loss": 1,
+"conv": 72,
+"passaggi": {
+"osservazione": {
+"data": "2026-11-03 11:00",
+"prezzo": 174.22,
+"conv": 69,
+"prob_gain": 52,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -2.9914
+},
+"anticipo": {
+"data": "2026-11-12",
+"prezzo": 170.88,
+"conv": 69,
+"prob_gain": 55,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-27 16:36",
+"prezzo": 157.55,
+"conv": 72,
+"prob_gain": 48,
+"prob_loss": 1,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
