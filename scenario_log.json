@@ -23965,5 +23965,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "VOO",
+"kind": "short",
+"date": "2026-11-27",
+"promo_price": 664.53,
+"obs_price": 635.54,
+"obs_date": "2026-11-23",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": 696.1812,
+"stop": 637.1723,
+"reliab": "🟢 Alta",
+"prob_gain": 48,
+"prob_loss": 0,
+"conv": 63,
+"passaggi": {
+"osservazione": {
+"data": "2026-11-23 12:17",
+"prezzo": 635.54,
+"conv": 62,
+"prob_gain": 52,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -9.3562
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-27 16:36",
+"prezzo": 664.53,
+"conv": 63,
+"prob_gain": 48,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
