@@ -1,80 +1,5 @@
 [
 {
-"episodio": "short:INIO:2026-09-15",
-"ticker": "INIO",
-"kind": "short",
-"evento": "fine_verifica",
-"scritto_il": "2026-09-25 01:29",
-"data": "2026-09-24 22:29",
-"prezzo": 19.01,
-"conv": 61,
-"prob_gain": 42,
-"prob_loss": 28,
-"reliab": "🔴 Bassa",
-"mkt": null,
-"fonte": "monitoraggio",
-"note": "passati 5 giorni di Borsa dalla promozione",
-"dovuto_il": "2026-09-25",
-"soglie": {
-"media50": 23.8742,
-"media20": 20.2715,
-"quattro_atr": 25.5416,
-"meta_caduta": 29.28,
-"bollinger": 23.1193,
-"consigliata": 23.8742
-},
-"stop": 15.7442,
-"atr": 1.6329,
-"res": {
-"7g": -5.18,
-"30g": -15.36,
-"soglia": -15.36
-},
-"soglie_contaminate": {
-"media50": 23.8742,
-"media20": 20.2715,
-"quattro_atr": 25.5416,
-"meta_caduta": 29.28,
-"bollinger": 23.1193,
-"consigliata": 23.8742
-},
-"soglie_ricalcolate_il": "2026-09-25 01:30",
-"taglio_corretto": true,
-"soglie_ritardo_giorni": 1,
-"res_soglia": {
-"media50": {
-"ret": -15.36,
-"toccato": false,
-"giorni": null
-},
-"media20": {
-"ret": 6.64,
-"toccato": true,
-"giorni": 12
-},
-"quattro_atr": {
-"ret": -15.36,
-"toccato": false,
-"giorni": null
-},
-"meta_caduta": {
-"ret": -15.36,
-"toccato": false,
-"giorni": null
-},
-"bollinger": {
-"ret": -15.36,
-"toccato": false,
-"giorni": null
-},
-"consigliata": {
-"ret": -15.36,
-"toccato": false,
-"giorni": null
-}
-}
-},
-{
 "episodio": "short:ENVA:2026-09-15",
 "ticker": "ENVA",
 "kind": "short",
@@ -37822,5 +37747,25 @@
 },
 "stop": 637.1722,
 "atr": 13.6789
+},
+{
+"episodio": "long:UCG.MI:2026-11-27",
+"ticker": "UCG.MI",
+"kind": "long",
+"evento": "salita_2pct",
+"scritto_il": "2026-11-27 16:40",
+"data": "2026-11-27 16:37",
+"prezzo": 76.87,
+"conv": 61,
+"prob_gain": 50,
+"prob_loss": 3,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "monitoraggio",
+"note": "prezzo salito di almeno il 2% da 73.21",
+"dovuto_il": null,
+"soglie": null,
+"stop": null,
+"atr": null
 }
 ]
