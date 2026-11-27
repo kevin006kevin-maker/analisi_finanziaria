@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:ACAD:2026-09-25",
-"ticker": "ACAD",
-"kind": "long",
-"evento": "ingresso_osservazione",
-"scritto_il": "2026-09-25 01:27",
-"data": "2026-09-25 01:27",
-"prezzo": 22.18,
-"conv": 83,
-"prob_gain": 88,
-"prob_loss": 6,
-"reliab": "🟡 Media",
-"mkt": 0.3497,
-"fonte": "osservazione",
-"note": null,
-"dovuto_il": null,
-"soglie": {
-"media50": 27.5428,
-"media20": 27.6215,
-"quattro_atr": 26.4968,
-"meta_caduta": 26.375,
-"bollinger": 30.948,
-"consigliata": 26.4968
-},
-"stop": 20.0216,
-"atr": 1.0792,
-"res": {
-"7g": -9.33,
-"30g": -11.19
-}
-},
-{
 "episodio": "short:ADXN:2026-09-25",
 "ticker": "ADXN",
 "kind": "short",
@@ -37868,5 +37837,32 @@
 "soglie_ricalcolate_il": "2026-11-27 00:25",
 "taglio_corretto": true,
 "soglie_ritardo_giorni": 2
+},
+{
+"episodio": "long:UCG.MI:2026-11-27",
+"ticker": "UCG.MI",
+"kind": "long",
+"evento": "ingresso_osservazione",
+"scritto_il": "2026-11-27 06:22",
+"data": "2026-11-27 06:22",
+"prezzo": 73.21,
+"conv": 60,
+"prob_gain": 82,
+"prob_loss": 7,
+"reliab": "🟢 Alta",
+"mkt": -7.2469,
+"fonte": "osservazione",
+"note": null,
+"dovuto_il": null,
+"soglie": {
+"media50": 78.554,
+"media20": 78.7815,
+"quattro_atr": 81.8881,
+"meta_caduta": 79.19,
+"bollinger": 86.6122,
+"consigliata": 78.554
+},
+"stop": 68.871,
+"atr": 2.1695
 }
 ]
