@@ -23737,5 +23737,62 @@
 }
 },
 "res": {}
+},
+{
+"ticker": "VWO",
+"kind": "short",
+"date": "2026-11-27",
+"promo_price": 53.8064,
+"obs_price": 55.865,
+"obs_date": "2026-11-02",
+"pre_price": null,
+"pre_date": null,
+"conf_price": null,
+"conf_date": null,
+"target": 57.2895,
+"stop": 51.3155,
+"reliab": "🟢 Alta",
+"prob_gain": 50,
+"prob_loss": 0,
+"conv": 71,
+"passaggi": {
+"osservazione": {
+"data": "2026-11-02 20:46",
+"prezzo": 55.865,
+"conv": 66,
+"prob_gain": 52,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": -2.7169
+},
+"anticipo": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+},
+"promozione": {
+"data": "2026-11-27 16:35",
+"prezzo": 53.8064,
+"conv": 71,
+"prob_gain": 50,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null
+},
+"conferma": {
+"data": null,
+"prezzo": null,
+"conv": null,
+"prob_gain": null,
+"prob_loss": null,
+"reliab": null,
+"mkt": null
+}
+},
+"res": {}
 }
 ]
