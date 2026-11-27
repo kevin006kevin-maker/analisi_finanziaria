@@ -4754,5 +4754,37 @@
 "max_date": "2026-11-27 16:36",
 "auto": true,
 "notified": false
+},
+"SPY": {
+"kind": "short",
+"added": "2026-11-27",
+"note": "🤖 Promossa il 2026-11-27: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +4.8% e la convenienza (63) regge.",
+"name": "SPY",
+"snapshots": [
+{
+"name": "SPY",
+"price": 724.05,
+"rsi": 42.7388,
+"dd_high": -7.2097,
+"occasione": 25,
+"convenienza": 63,
+"prob_gain": 48,
+"prob_loss": 0,
+"exp_ret": -0.1,
+"gain": 4.7274,
+"reliab": "🟢 Alta",
+"target": 757.0952,
+"stop": 692.6617,
+"date": "2026-11-27 16:36"
+}
+],
+"entry_price": 724.05,
+"entry_target": 757.0952,
+"entry_stop": 692.6617,
+"entry_conv": 63,
+"entry_date": "2026-11-27 16:36",
+"entry_src": "scatto",
+"max_price": 724.05,
+"max_date": "2026-11-27 16:36"
 }
 }
