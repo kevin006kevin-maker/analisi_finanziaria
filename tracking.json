@@ -4686,5 +4686,37 @@
 "max_date": "2026-11-27 00:20",
 "auto": true,
 "notified": false
+},
+"VWO": {
+"kind": "short",
+"added": "2026-11-27",
+"note": "🤖 Promossa il 2026-11-27: dopo 3 giorni di Borsa di osservazione il prezzo è risalito di +6.3% e la convenienza (66) regge.",
+"name": "VWO",
+"snapshots": [
+{
+"name": "VWO",
+"price": 53.8305,
+"rsi": 43.8204,
+"dd_high": -12.4245,
+"occasione": 25,
+"convenienza": 71,
+"prob_gain": 50,
+"prob_loss": 0,
+"exp_ret": 0.1,
+"gain": 6.4734,
+"reliab": "🟢 Alta",
+"target": 57.2895,
+"stop": 51.3155,
+"date": "2026-11-27 16:35"
+}
+],
+"entry_price": 53.8305,
+"entry_target": 57.2895,
+"entry_stop": 51.3155,
+"entry_conv": 71,
+"entry_date": "2026-11-27 16:35",
+"entry_src": "scatto",
+"max_price": 53.8305,
+"max_date": "2026-11-27 16:35"
 }
 }
