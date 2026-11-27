@@ -1,36 +1,5 @@
 [
 {
-"episodio": "long:DAVE:2026-09-23",
-"ticker": "DAVE",
-"kind": "long",
-"evento": "ingresso_anticipo",
-"scritto_il": "2026-09-25 01:28",
-"data": "2026-09-25 01:27",
-"prezzo": 331.455,
-"conv": 69,
-"prob_gain": 68,
-"prob_loss": 23,
-"reliab": "🔴 Bassa",
-"mkt": 0.3497,
-"fonte": "osservazione",
-"note": "pre-segnale diventato solido",
-"dovuto_il": null,
-"soglie": {
-"media50": 371.1829,
-"media20": 361.2812,
-"quattro_atr": 419.572,
-"meta_caduta": 386.9925,
-"bollinger": 396.1413,
-"consigliata": 371.1829
-},
-"stop": 287.3965,
-"atr": 22.0293,
-"res": {
-"7g": 5.87,
-"30g": -0.46
-}
-},
-{
 "episodio": "short:ADTN:2026-09-09",
 "ticker": "ADTN",
 "kind": "short",
@@ -37812,5 +37781,32 @@
 },
 "stop": 143.9407,
 "atr": 6.8047
+},
+{
+"episodio": "short:SPY:2026-11-23",
+"ticker": "SPY",
+"kind": "short",
+"evento": "promozione",
+"scritto_il": "2026-11-27 16:36",
+"data": "2026-11-27 16:36",
+"prezzo": 722.92,
+"conv": 63,
+"prob_gain": 48,
+"prob_loss": 0,
+"reliab": "🟢 Alta",
+"mkt": null,
+"fonte": "promozione",
+"note": "entrata in monitoraggio dopo 3 giorni di Borsa di osservazione",
+"dovuto_il": null,
+"soglie": {
+"media50": 757.0952,
+"media20": 738.007,
+"quattro_atr": 783.4365,
+"meta_caduta": 751.005,
+"bollinger": 777.2484,
+"consigliata": 757.0952
+},
+"stop": 692.6618,
+"atr": 15.1291
 }
 ]
