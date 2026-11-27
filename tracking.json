@@ -4720,5 +4720,37 @@
 "max_date": "2026-11-27 16:35",
 "auto": true,
 "notified": false
+},
+"XLK": {
+"kind": "short",
+"added": "2026-11-27",
+"note": "🤖 Promossa il 2026-11-27: dopo 4 giorni di Borsa di osservazione il prezzo è risalito di +5.7% e la convenienza (58) regge.",
+"name": "XLK",
+"snapshots": [
+{
+"name": "XLK",
+"price": 157.89,
+"rsi": 38.8566,
+"dd_high": -22.0049,
+"occasione": 35,
+"convenienza": 72,
+"prob_gain": 48,
+"prob_loss": 1,
+"exp_ret": -0.2,
+"gain": 15.6904,
+"reliab": "🟢 Alta",
+"target": 182.2702,
+"stop": 143.9407,
+"date": "2026-11-27 16:36"
+}
+],
+"entry_price": 157.89,
+"entry_target": 182.2702,
+"entry_stop": 143.9407,
+"entry_conv": 72,
+"entry_date": "2026-11-27 16:36",
+"entry_src": "scatto",
+"max_price": 157.89,
+"max_date": "2026-11-27 16:36"
 }
 }
