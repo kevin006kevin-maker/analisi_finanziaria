@@ -1,27 +1,6 @@
 [
 {
 "date": "2026-11-18",
-"ticker": "INTC",
-"kind": "short",
-"price": 55.17,
-"conv": 53,
-"factors": {
-"discount": 60.8557,
-"histcheap": 0.72,
-"riskadj": 0.7,
-"ddpen": -23.32,
-"momentum": 5.092,
-"prob": 24,
-"oversold": -29.6941,
-"rebound": 68.8976,
-"trend": -1.0,
-"relstrength": -2.6934
-},
-"ret_5d": -1.27,
-"ret_21d": null
-},
-{
-"date": "2026-11-18",
 "ticker": "NOK",
 "kind": "short",
 "price": 7.59,
@@ -39250,6 +39229,46 @@
 "rebound": 49.0794,
 "trend": -1.0,
 "relstrength": 12.85
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-28",
+"ticker": "NTNX",
+"kind": "long",
+"price": 46.5,
+"conv": 57,
+"factors": {
+"discount": 37.6926,
+"histcheap": 0.54,
+"riskadj": -0.15,
+"ddpen": -16.15,
+"momentum": 18.7631,
+"prob": 72,
+"quality": 68.9,
+"valcheap": -0.0234,
+"trappen": 3
+},
+"ret_5d": null,
+"ret_21d": null
+},
+{
+"date": "2026-11-28",
+"ticker": "INTR",
+"kind": "long",
+"price": 4.66,
+"conv": 42,
+"factors": {
+"discount": 54.3585,
+"histcheap": 1.29,
+"riskadj": -1.06,
+"ddpen": -36.74,
+"momentum": -25.6065,
+"prob": 18,
+"quality": 61.5,
+"valcheap": 0.4658,
+"trappen": 1
 },
 "ret_5d": null,
 "ret_21d": null
