@@ -14907,6 +14907,16 @@
 "prob_gain": 46,
 "prob_loss": 1,
 "reliab": "🟢 Alta"
+},
+{
+"date": "2026-11-28 08:38",
+"conv": 55,
+"price": 160.15,
+"mkt": -5.4777,
+"occ": 37,
+"prob_gain": 46,
+"prob_loss": 1,
+"reliab": "🟢 Alta"
 }
 ],
 "primo": {
@@ -15223,6 +15233,16 @@
 "mkt": -5.4777,
 "occ": 49,
 "prob_gain": 55,
+"prob_loss": 8,
+"reliab": "🟡 Media"
+},
+{
+"date": "2026-11-28 08:38",
+"conv": 72,
+"price": 150.49,
+"mkt": -5.4777,
+"occ": 49,
+"prob_gain": 53,
 "prob_loss": 8,
 "reliab": "🟡 Media"
 }
@@ -16563,6 +16583,33 @@
 "prob_gain": 82,
 "prob_loss": 7,
 "reliab": "🟢 Alta"
+}
+},
+"short:ERO": {
+"ticker": "ERO",
+"kind": "short",
+"name": "ERO",
+"obs": [
+{
+"date": "2026-11-28 08:38",
+"conv": 66,
+"price": 21.6,
+"mkt": -5.4777,
+"occ": 36,
+"prob_gain": 56,
+"prob_loss": 16,
+"reliab": "🔴 Bassa"
+}
+],
+"primo": {
+"date": "2026-11-28 08:38",
+"conv": 66,
+"price": 21.6,
+"mkt": -5.4777,
+"occ": 36,
+"prob_gain": 56,
+"prob_loss": 16,
+"reliab": "🔴 Bassa"
 }
 }
 }
